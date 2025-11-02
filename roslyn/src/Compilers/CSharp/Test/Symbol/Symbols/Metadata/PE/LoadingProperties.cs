@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         public void TestExplicitImplementationSimple()
         {
             var assembly = MetadataTestHelpers.GetSymbolForReference(
-                TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Properties.CSharp);
+                TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Properties.CSharp
+            );
 
             var globalNamespace = assembly.GlobalNamespace;
 
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     Net451.mscorlib,
                     TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Properties.CSharp,
-                });
+                }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
@@ -66,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var substitutedInterface = @class.Interfaces().Single();
             Assert.Equal(@interface, substitutedInterface.ConstructedFrom);
 
-            var substitutedInterfaceProperty = (PropertySymbol)substitutedInterface.GetMembers("Property").Single();
+            var substitutedInterfaceProperty = (PropertySymbol)
+                substitutedInterface.GetMembers("Property").Single();
             Assert.Equal(interfaceProperty, substitutedInterfaceProperty.OriginalDefinition);
 
             var classProperty = (PropertySymbol)@class.GetMembers("IGeneric<S>.Property").Single();
@@ -83,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     Net451.mscorlib,
                     TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Properties.CSharp,
-                });
+                }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
@@ -98,10 +102,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var substitutedInterface = @class.Interfaces().Single();
             Assert.Equal(@interface, substitutedInterface.ConstructedFrom);
 
-            var substitutedInterfaceProperty = (PropertySymbol)substitutedInterface.GetMembers("Property").Single();
+            var substitutedInterfaceProperty = (PropertySymbol)
+                substitutedInterface.GetMembers("Property").Single();
             Assert.Equal(interfaceProperty, substitutedInterfaceProperty.OriginalDefinition);
 
-            var classProperty = (PropertySymbol)@class.GetMembers("IGeneric<System.Int32>.Property").Single();
+            var classProperty = (PropertySymbol)
+                @class.GetMembers("IGeneric<System.Int32>.Property").Single();
 
             var explicitImpl = classProperty.ExplicitInterfaceImplementations.Single();
             Assert.Equal(substitutedInterfaceProperty, explicitImpl);
@@ -119,20 +125,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     Net451.mscorlib,
                     TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Properties.CSharp,
-                });
+                }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
-            var defInterface = (NamedTypeSymbol)globalNamespace.GetTypeMembers("Interface").Single();
+            var defInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("Interface").Single();
             Assert.Equal(TypeKind.Interface, defInterface.TypeKind);
 
             var defInterfaceProperty = (PropertySymbol)defInterface.GetMembers("Property").Single();
 
-            var refInterface = (NamedTypeSymbol)globalNamespace.GetTypeMembers("IGenericInterface").Single();
+            var refInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("IGenericInterface").Single();
             Assert.Equal(TypeKind.Interface, defInterface.TypeKind);
             Assert.True(refInterface.Interfaces().Contains(defInterface));
 
-            var @class = (NamedTypeSymbol)globalNamespace.GetTypeMembers("IndirectImplementation").Single();
+            var @class = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("IndirectImplementation").Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
 
             var classInterfacesConstructedFrom = @class.Interfaces().Select(i => i.ConstructedFrom);
@@ -159,15 +169,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     Net451.mscorlib,
                     TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Properties.CSharp,
-                });
+                }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
-            var outerInterface = (NamedTypeSymbol)globalNamespace.GetTypeMembers("IGeneric2").Single();
+            var outerInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("IGeneric2").Single();
             Assert.Equal(1, outerInterface.Arity);
             Assert.Equal(TypeKind.Interface, outerInterface.TypeKind);
 
-            var outerInterfaceProperty = outerInterface.GetMembers().Single(m => m.Kind == SymbolKind.Property);
+            var outerInterfaceProperty = outerInterface
+                .GetMembers()
+                .Single(m => m.Kind == SymbolKind.Property);
 
             var outerClass = (NamedTypeSymbol)globalNamespace.GetTypeMembers("Outer").Single();
             Assert.Equal(1, outerClass.Arity);
@@ -177,7 +191,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(1, innerInterface.Arity);
             Assert.Equal(TypeKind.Interface, innerInterface.TypeKind);
 
-            var innerInterfaceProperty = innerInterface.GetMembers().Single(m => m.Kind == SymbolKind.Property);
+            var innerInterfaceProperty = innerInterface
+                .GetMembers()
+                .Single(m => m.Kind == SymbolKind.Property);
 
             var innerClass1 = (NamedTypeSymbol)outerClass.GetTypeMembers("Inner1").Single();
             CheckInnerClassHelper(innerClass1, "IGeneric2<A>.Property", outerInterfaceProperty);
@@ -186,13 +202,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             CheckInnerClassHelper(innerClass2, "IGeneric2<T>.Property", outerInterfaceProperty);
 
             var innerClass3 = (NamedTypeSymbol)outerClass.GetTypeMembers("Inner3").Single();
-            CheckInnerClassHelper(innerClass3, "Outer<T>.IInner<C>.Property", innerInterfaceProperty);
+            CheckInnerClassHelper(
+                innerClass3,
+                "Outer<T>.IInner<C>.Property",
+                innerInterfaceProperty
+            );
 
             var innerClass4 = (NamedTypeSymbol)outerClass.GetTypeMembers("Inner4").Single();
-            CheckInnerClassHelper(innerClass4, "Outer<T>.IInner<T>.Property", innerInterfaceProperty);
+            CheckInnerClassHelper(
+                innerClass4,
+                "Outer<T>.IInner<T>.Property",
+                innerInterfaceProperty
+            );
         }
 
-        private static void CheckInnerClassHelper(NamedTypeSymbol innerClass, string methodName, Symbol interfaceProperty)
+        private static void CheckInnerClassHelper(
+            NamedTypeSymbol innerClass,
+            string methodName,
+            Symbol interfaceProperty
+        )
         {
             var @interface = interfaceProperty.ContainingType;
 
@@ -201,7 +229,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(@interface, innerClass.Interfaces().Single().ConstructedFrom);
 
             var innerClassProperty = (PropertySymbol)innerClass.GetMembers(methodName).Single();
-            var innerClassImplementingProperty = innerClassProperty.ExplicitInterfaceImplementations.Single();
+            var innerClassImplementingProperty =
+                innerClassProperty.ExplicitInterfaceImplementations.Single();
             Assert.Equal(interfaceProperty, innerClassImplementingProperty.OriginalDefinition);
             Assert.Equal(@interface, innerClassImplementingProperty.ContainingType.ConstructedFrom);
         }
@@ -222,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     Net451.mscorlib,
                     TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Properties.IL,
-                });
+                }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
@@ -262,26 +292,76 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.NotNull(classProperty2.GetMethod);
             Assert.NotNull(classProperty2.SetMethod);
 
-            var implementedByProperty1 = ImmutableArray.Create<PropertySymbol>(interfaceProperty1, interfaceProperty4, interfaceProperty5);
-            Assert.True(implementedByProperty1.SetEquals(classProperty1.ExplicitInterfaceImplementations, ReferenceEqualityComparer.Instance));
+            var implementedByProperty1 = ImmutableArray.Create<PropertySymbol>(
+                interfaceProperty1,
+                interfaceProperty4,
+                interfaceProperty5
+            );
+            Assert.True(
+                implementedByProperty1.SetEquals(
+                    classProperty1.ExplicitInterfaceImplementations,
+                    ReferenceEqualityComparer.Instance
+                )
+            );
 
             Assert.Equal(0, classProperty2.ExplicitInterfaceImplementations.Length);
 
-            var implementedByGetter1 = ImmutableArray.Create<MethodSymbol>(interfaceProperty1.GetMethod, interfaceProperty2.GetMethod, interfaceProperty4.GetMethod);
-            Assert.True(implementedByGetter1.SetEquals(classProperty1.GetMethod.ExplicitInterfaceImplementations, ReferenceEqualityComparer.Instance));
+            var implementedByGetter1 = ImmutableArray.Create<MethodSymbol>(
+                interfaceProperty1.GetMethod,
+                interfaceProperty2.GetMethod,
+                interfaceProperty4.GetMethod
+            );
+            Assert.True(
+                implementedByGetter1.SetEquals(
+                    classProperty1.GetMethod.ExplicitInterfaceImplementations,
+                    ReferenceEqualityComparer.Instance
+                )
+            );
 
-            var implementedBySetter1 = ImmutableArray.Create<MethodSymbol>(interfaceProperty1.SetMethod, interfaceProperty3.SetMethod, interfaceProperty5.SetMethod);
-            Assert.True(implementedBySetter1.SetEquals(classProperty1.SetMethod.ExplicitInterfaceImplementations, ReferenceEqualityComparer.Instance));
+            var implementedBySetter1 = ImmutableArray.Create<MethodSymbol>(
+                interfaceProperty1.SetMethod,
+                interfaceProperty3.SetMethod,
+                interfaceProperty5.SetMethod
+            );
+            Assert.True(
+                implementedBySetter1.SetEquals(
+                    classProperty1.SetMethod.ExplicitInterfaceImplementations,
+                    ReferenceEqualityComparer.Instance
+                )
+            );
 
-            var implementedByGetter2 = ImmutableArray.Create<MethodSymbol>(interfaceProperty3.GetMethod);
-            Assert.True(implementedByGetter2.SetEquals(classProperty2.GetMethod.ExplicitInterfaceImplementations, ReferenceEqualityComparer.Instance));
+            var implementedByGetter2 = ImmutableArray.Create<MethodSymbol>(
+                interfaceProperty3.GetMethod
+            );
+            Assert.True(
+                implementedByGetter2.SetEquals(
+                    classProperty2.GetMethod.ExplicitInterfaceImplementations,
+                    ReferenceEqualityComparer.Instance
+                )
+            );
 
-            var implementedBySetter2 = ImmutableArray.Create<MethodSymbol>(interfaceProperty2.SetMethod);
-            Assert.True(implementedBySetter2.SetEquals(classProperty2.SetMethod.ExplicitInterfaceImplementations, ReferenceEqualityComparer.Instance));
+            var implementedBySetter2 = ImmutableArray.Create<MethodSymbol>(
+                interfaceProperty2.SetMethod
+            );
+            Assert.True(
+                implementedBySetter2.SetEquals(
+                    classProperty2.SetMethod.ExplicitInterfaceImplementations,
+                    ReferenceEqualityComparer.Instance
+                )
+            );
 
-            Assert.Same(classProperty1, @class.FindImplementationForInterfaceMember(interfaceProperty1));
-            Assert.Same(classProperty1, @class.FindImplementationForInterfaceMember(interfaceProperty4));
-            Assert.Same(classProperty1, @class.FindImplementationForInterfaceMember(interfaceProperty5));
+            Assert.Same(
+                classProperty1,
+                @class.FindImplementationForInterfaceMember(interfaceProperty1)
+            );
+            Assert.Same(
+                classProperty1,
+                @class.FindImplementationForInterfaceMember(interfaceProperty4)
+            );
+            Assert.Same(
+                classProperty1,
+                @class.FindImplementationForInterfaceMember(interfaceProperty5)
+            );
 
             Assert.Null(@class.FindImplementationForInterfaceMember(interfaceProperty2));
             Assert.Null(@class.FindImplementationForInterfaceMember(interfaceProperty3));
@@ -291,7 +371,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         [Fact]
         public void TestMixedAccessorModifiers()
         {
-            var assembly = MetadataTestHelpers.GetSymbolForReference(TestReferences.SymbolsTests.Properties);
+            var assembly = MetadataTestHelpers.GetSymbolForReference(
+                TestReferences.SymbolsTests.Properties
+            );
 
             var globalNamespace = assembly.GlobalNamespace;
 
@@ -358,7 +440,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             {
                 foreach (var mod2 in modList)
                 {
-                    var property = type.GetMember<PropertySymbol>(mod1.ToString() + mod2.ToString());
+                    var property = type.GetMember<PropertySymbol>(
+                        mod1.ToString() + mod2.ToString()
+                    );
                     var getter = property.GetMethod;
                     var setter = property.SetMethod;
 
@@ -369,8 +453,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 }
             }
         }
-        [Flags]
 
+        [Flags]
         private enum VirtualnessModifiers
         {
             None = 0,
@@ -384,11 +468,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         {
             VirtualnessModifiers mods = VirtualnessModifiers.None;
 
-            if (symbol.IsAbstract) mods |= VirtualnessModifiers.Abstract;
-            if (symbol.IsVirtual) mods |= VirtualnessModifiers.Virtual;
+            if (symbol.IsAbstract)
+                mods |= VirtualnessModifiers.Abstract;
+            if (symbol.IsVirtual)
+                mods |= VirtualnessModifiers.Virtual;
 
-            if (symbol.IsSealed) mods |= VirtualnessModifiers.Sealed;
-            else if (symbol.IsOverride) mods |= VirtualnessModifiers.Override;
+            if (symbol.IsSealed)
+                mods |= VirtualnessModifiers.Sealed;
+            else if (symbol.IsOverride)
+                mods |= VirtualnessModifiers.Override;
 
             return mods;
         }

@@ -1,4 +1,3 @@
-
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -7,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,41 +30,51 @@
 using System;
 using System.Collections;
 
-namespace System.Messaging 
+namespace System.Messaging
 {
-	public class AccessControlList: CollectionBase 
-	{
-		[MonoTODO]
-		public AccessControlList()
-		{
-		}
-		[MonoTODO]
-		public int Add(AccessControlEntry entry) {
-			throw new NotImplementedException();	
-		}
-		[MonoTODO]
-		public bool Contains(AccessControlEntry entry) {
-			throw new NotImplementedException();
-		}
-		[MonoTODO]
-		public void CopyTo(AccessControlEntry[] array, int index) {
-			if (array == null) 
-				throw new ArgumentNullException();
-			if (index < 0) 
-				throw new ArgumentOutOfRangeException();
-			throw new NotImplementedException();		
-		}
-		[MonoTODO]
-		public int IndexOf(AccessControlEntry entry) {
-			throw new NotImplementedException();
-		}
-		[MonoTODO]
-		public void Insert(int index, AccessControlEntry entry) {
-			throw new NotImplementedException();		
-		}
-		[MonoTODO]
-		public void Remove(AccessControlEntry entry) {
-			throw new NotImplementedException();
-		}
-	}
+    public class AccessControlList : CollectionBase
+    {
+        [MonoTODO]
+        public AccessControlList() { }
+
+        [MonoTODO]
+        public int Add(AccessControlEntry entry)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public bool Contains(AccessControlEntry entry)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void CopyTo(AccessControlEntry[] array, int index)
+        {
+            if (array == null)
+                throw new ArgumentNullException();
+            if (index < 0)
+                throw new ArgumentOutOfRangeException();
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public int IndexOf(AccessControlEntry entry)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void Insert(int index, AccessControlEntry entry)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void Remove(AccessControlEntry entry)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -10,4 +10,3 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
         PlacedAtEndOfEditor,
     }
 }
-

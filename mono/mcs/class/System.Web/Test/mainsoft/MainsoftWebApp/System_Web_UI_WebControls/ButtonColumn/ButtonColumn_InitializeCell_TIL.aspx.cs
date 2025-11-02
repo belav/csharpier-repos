@@ -30,71 +30,76 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
-{public class ButtonColumn_InitializeCell_TIL
-    : GHTBaseWeb {
- 	protected System.Web.UI.WebControls.DataGrid DataGrid1;
- 	protected GHTWebControls.GHTSubTest GHTSubTest1;
-	 #region Web Form Designer generated code
-	 override protected void OnInit(EventArgs e) {
-		 //
-		 // CODEGEN: This call is required by the ASP.NET Web Form Designer.
-		 //
-		 InitializeComponent();
-		 base.OnInit(e);
-	 }
-		
-	 /// <summary>
-	 /// Required method for Designer support - do not modify
-	 /// the contents of this method with the code editor.
-	 /// </summary>
-	 private void InitializeComponent() {    
-		 this.Load += new System.EventHandler(this.Page_Load);
-		 this.DataGrid1.ItemDataBound += new DataGridItemEventHandler(DataGrid1_ItemDataBound);
+{
+    public class ButtonColumn_InitializeCell_TIL : GHTBaseWeb
+    {
+        protected System.Web.UI.WebControls.DataGrid DataGrid1;
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
 
-	 }
-	 #endregion
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-	 private void Page_Load(object sender, EventArgs e)
-	 {
-		 HtmlForm form1 = (HtmlForm) this.FindControl("Form1");
-		 this.GHTTestBegin(form1);
-		 base.GHTActiveSubTest = this.GHTSubTest1;
-		 try
-		 {
-			 this.DataGrid1.DataSource = GHDataSources.DSDataTable();
-			 ButtonColumn column2 = new ButtonColumn();
-			 ButtonColumn column3 = new ButtonColumn();
-			 ButtonColumn column1 = new ButtonColumn();
-			 column2.DataTextField = "ID";
-			 column3.DataTextField = "Name";
-			 column1.DataTextField = "Company";
-			 this.DataGrid1.Columns.Add(column2);
-			 this.DataGrid1.Columns.Add(column3);
-			 this.DataGrid1.Columns.Add(column1);
-			 this.DataGrid1.DataBind();
-		 }
-		 catch (Exception exception2)
-		 {
-			 Exception exception1 = exception2;
-			 this.GHTSubTestUnexpectedExceptionCaught(exception1);
-		 }
-		 this.GHTTestEnd();
-	 }
-	 private void DataGrid1_ItemDataBound(object sender, DataGridItemEventArgs e)
-	 {
-		 ListItemType type1 = e.Item.ItemType;
-		 if (((type1 != ListItemType.Header) && (type1 != ListItemType.Footer)) && (type1 != ListItemType.Separator))
-		 {
-			 TableCell cell1 = (TableCell) e.Item.Controls[0];
-			 this.DataGrid1.Columns[1].InitializeCell(cell1, 1, ListItemType.Item);
-			 cell1.Attributes.Add("Index", e.Item.ItemIndex.ToString());
-		 }
-	 }
- 
- 
- }
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+            this.DataGrid1.ItemDataBound += new DataGridItemEventHandler(DataGrid1_ItemDataBound);
+        }
+        #endregion
+
+        private void Page_Load(object sender, EventArgs e)
+        {
+            HtmlForm form1 = (HtmlForm)this.FindControl("Form1");
+            this.GHTTestBegin(form1);
+            base.GHTActiveSubTest = this.GHTSubTest1;
+            try
+            {
+                this.DataGrid1.DataSource = GHDataSources.DSDataTable();
+                ButtonColumn column2 = new ButtonColumn();
+                ButtonColumn column3 = new ButtonColumn();
+                ButtonColumn column1 = new ButtonColumn();
+                column2.DataTextField = "ID";
+                column3.DataTextField = "Name";
+                column1.DataTextField = "Company";
+                this.DataGrid1.Columns.Add(column2);
+                this.DataGrid1.Columns.Add(column3);
+                this.DataGrid1.Columns.Add(column1);
+                this.DataGrid1.DataBind();
+            }
+            catch (Exception exception2)
+            {
+                Exception exception1 = exception2;
+                this.GHTSubTestUnexpectedExceptionCaught(exception1);
+            }
+            this.GHTTestEnd();
+        }
+
+        private void DataGrid1_ItemDataBound(object sender, DataGridItemEventArgs e)
+        {
+            ListItemType type1 = e.Item.ItemType;
+            if (
+                ((type1 != ListItemType.Header) && (type1 != ListItemType.Footer))
+                && (type1 != ListItemType.Separator)
+            )
+            {
+                TableCell cell1 = (TableCell)e.Item.Controls[0];
+                this.DataGrid1.Columns[1].InitializeCell(cell1, 1, ListItemType.Item);
+                cell1.Attributes.Add("Index", e.Item.ItemIndex.ToString());
+            }
+        }
+    }
 }

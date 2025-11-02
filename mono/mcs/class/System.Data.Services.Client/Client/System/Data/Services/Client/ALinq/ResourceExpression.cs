@@ -1,14 +1,13 @@
 ﻿//Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
-
 
 namespace System.Data.Services.Client
 {
@@ -26,7 +25,7 @@ namespace System.Data.Services.Client
 
         ValueOnly,
 
-        InlineAll
+        InlineAll,
     }
 
     internal abstract class ResourceExpression : Expression
@@ -47,23 +46,35 @@ namespace System.Data.Services.Client
 
         #endregion Fields.
 
-        internal ResourceExpression(Expression source, ExpressionType nodeType, Type type, List<string> expandPaths, CountOption countOption, Dictionary<ConstantExpression, ConstantExpression> customQueryOptions, ProjectionQueryOptionExpression projection)
+        internal ResourceExpression(
+            Expression source,
+            ExpressionType nodeType,
+            Type type,
+            List<string> expandPaths,
+            CountOption countOption,
+            Dictionary<ConstantExpression, ConstantExpression> customQueryOptions,
+            ProjectionQueryOptionExpression projection
+        )
             : base(nodeType, type)
         {
             this.expandPaths = expandPaths ?? new List<string>();
             this.countOption = countOption;
-            this.customQueryOptions = customQueryOptions ?? new Dictionary<ConstantExpression, ConstantExpression>(ReferenceEqualityComparer<ConstantExpression>.Instance);
+            this.customQueryOptions =
+                customQueryOptions
+                ?? new Dictionary<ConstantExpression, ConstantExpression>(
+                    ReferenceEqualityComparer<ConstantExpression>.Instance
+                );
             this.projection = projection;
             this.source = source;
         }
 
-        abstract internal ResourceExpression CreateCloneWithNewType(Type type);
+        internal abstract ResourceExpression CreateCloneWithNewType(Type type);
 
-        abstract internal bool HasQueryOptions { get; }
+        internal abstract bool HasQueryOptions { get; }
 
         internal abstract Type ResourceType { get; }
 
-        abstract internal bool IsSingleton { get; }
+        internal abstract bool IsSingleton { get; }
 
         internal virtual List<string> ExpandPaths
         {
@@ -91,10 +102,7 @@ namespace System.Data.Services.Client
 
         internal Expression Source
         {
-            get
-            {
-                return this.source;
-            }
+            get { return this.source; }
         }
 
         internal InputReferenceExpression CreateReference()

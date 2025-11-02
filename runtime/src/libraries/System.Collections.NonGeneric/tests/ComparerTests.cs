@@ -41,7 +41,7 @@ namespace System.Collections.Tests
         {
             var cultureNames = Helpers.TestCultureNames;
 
-            var string1 = new string[] { "Apple", "abc", };
+            var string1 = new string[] { "Apple", "abc" };
             var string2 = new string[] { "\u00C6ble", "ABC" };
 
             foreach (string cultureName in cultureNames)
@@ -61,8 +61,14 @@ namespace System.Collections.Tests
                 {
                     Comparer comp = Comparer.DefaultInvariant;
                     /* Comparing in invariant mode compars firstChar - secondChar (A(65) - \u00C6(198) */
-                    Assert.Equal(PlatformDetection.IsInvariantGlobalization ? -1 : 1, Math.Sign(comp.Compare(string1[0], string2[0])));
-                    Assert.Equal(PlatformDetection.IsInvariantGlobalization ? 1 : -1, Math.Sign(comp.Compare(string1[1], string2[1])));
+                    Assert.Equal(
+                        PlatformDetection.IsInvariantGlobalization ? -1 : 1,
+                        Math.Sign(comp.Compare(string1[0], string2[0]))
+                    );
+                    Assert.Equal(
+                        PlatformDetection.IsInvariantGlobalization ? 1 : -1,
+                        Math.Sign(comp.Compare(string1[1], string2[1]))
+                    );
                 }
             }
         }
@@ -73,7 +79,10 @@ namespace System.Collections.Tests
             Comparer comp = Comparer.Default;
             AssertExtensions.Throws<ArgumentException>(null, () => comp.Compare(new object(), 1)); // One object doesn't implement IComparable
             AssertExtensions.Throws<ArgumentException>(null, () => comp.Compare(1, new object())); // One object doesn't implement IComparable
-            AssertExtensions.Throws<ArgumentException>(null, () => comp.Compare(new object(), new object())); // Both objects don't implement IComparable
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => comp.Compare(new object(), new object())
+            ); // Both objects don't implement IComparable
 
             AssertExtensions.Throws<ArgumentException>(null, () => comp.Compare(1, 1L)); // Different types
         }
@@ -82,7 +91,12 @@ namespace System.Collections.Tests
         {
             yield return new object[] { "hello", "hello", 0 };
             yield return new object[] { "HELLO", "HELLO", 0 };
-            yield return new object[] { "hello", "HELLO", PlatformDetection.IsInvariantGlobalization ? 1 : -1 };
+            yield return new object[]
+            {
+                "hello",
+                "HELLO",
+                PlatformDetection.IsInvariantGlobalization ? 1 : -1,
+            };
             yield return new object[] { "hello", "goodbye", 1 };
             yield return new object[] { 1, 2, -1 };
             yield return new object[] { 2, 1, 1 };
@@ -111,7 +125,10 @@ namespace System.Collections.Tests
             Comparer comp = Comparer.Default;
             AssertExtensions.Throws<ArgumentException>(null, () => comp.Compare(new object(), 1)); // One object doesn't implement IComparable
             AssertExtensions.Throws<ArgumentException>(null, () => comp.Compare(1, new object())); // One object doesn't implement IComparable
-            AssertExtensions.Throws<ArgumentException>(null, () => comp.Compare(new object(), new object())); // Both objects don't implement IComparable
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => comp.Compare(new object(), new object())
+            ); // Both objects don't implement IComparable
 
             AssertExtensions.Throws<ArgumentException>(null, () => comp.Compare(1, 1L)); // Different types
         }

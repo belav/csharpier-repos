@@ -16,7 +16,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
             Action retryBlock,
             Action<Exception> exceptionBlock,
             int retryCount = 3,
-            int retryDelayMilliseconds = 0)
+            int retryDelayMilliseconds = 0
+        )
         {
             for (var retry = 0; retry < retryCount; ++retry)
             {

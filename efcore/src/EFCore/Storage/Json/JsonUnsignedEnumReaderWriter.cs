@@ -16,15 +16,20 @@ public sealed class JsonUnsignedEnumReaderWriter<TEnum> : JsonValueReaderWriter<
     /// </summary>
     public static JsonUnsignedEnumReaderWriter<TEnum> Instance { get; } = new();
 
-    private JsonUnsignedEnumReaderWriter()
-    {
-    }
+    private JsonUnsignedEnumReaderWriter() { }
 
     /// <inheritdoc />
-    public override TEnum FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => (TEnum)Convert.ChangeType(manager.CurrentReader.GetUInt64(), typeof(TEnum).GetEnumUnderlyingType());
+    public override TEnum FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) =>
+        (TEnum)
+            Convert.ChangeType(
+                manager.CurrentReader.GetUInt64(),
+                typeof(TEnum).GetEnumUnderlyingType()
+            );
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, TEnum value)
-        => writer.WriteNumberValue((ulong)Convert.ChangeType(value, typeof(ulong))!);
+    public override void ToJsonTyped(Utf8JsonWriter writer, TEnum value) =>
+        writer.WriteNumberValue((ulong)Convert.ChangeType(value, typeof(ulong))!);
 }

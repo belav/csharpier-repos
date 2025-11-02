@@ -32,18 +32,18 @@ public class RowValueExpression : SqlExpression
     }
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => visitor.VisitAndConvert(Values) is var newValues
-            && ReferenceEquals(newValues, Values)
-                ? this
-                : new RowValueExpression(newValues);
+    protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+        visitor.VisitAndConvert(Values) is var newValues && ReferenceEquals(newValues, Values)
+            ? this
+            : new RowValueExpression(newValues);
 
     /// <summary>
     ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
     ///     return this expression.
     /// </summary>
-    public virtual RowValueExpression Update(IReadOnlyList<SqlExpression> values)
-        => values.Count == Values.Count && values.Zip(Values, (x, y) => (x, y)).All(tup => tup.x == tup.y)
+    public virtual RowValueExpression Update(IReadOnlyList<SqlExpression> values) =>
+        values.Count == Values.Count
+        && values.Zip(Values, (x, y) => (x, y)).All(tup => tup.x == tup.y)
             ? this
             : new RowValueExpression(values);
 
@@ -67,8 +67,7 @@ public class RowValueExpression : SqlExpression
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj is RowValueExpression other && Equals(other);
+    public override bool Equals(object? obj) => obj is RowValueExpression other && Equals(other);
 
     private bool Equals(RowValueExpression? other)
     {
@@ -111,11 +110,10 @@ public class RowValueExpression : SqlExpression
         public static RowValueTypeMapping Default { get; } = new(typeof(ValueTuple<object>));
 
         private RowValueTypeMapping(Type clrType)
-            : base("", clrType)
-        {
-        }
+            : base("", clrType) { }
 
-        protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-            => this;
+        protected override RelationalTypeMapping Clone(
+            RelationalTypeMappingParameters parameters
+        ) => this;
     }
 }

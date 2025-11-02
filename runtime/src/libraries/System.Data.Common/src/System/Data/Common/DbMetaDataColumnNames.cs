@@ -7,13 +7,15 @@ namespace System.Data.Common
     {
         public static readonly string CollectionName = "CollectionName";
         public static readonly string ColumnSize = "ColumnSize";
-        public static readonly string CompositeIdentifierSeparatorPattern = "CompositeIdentifierSeparatorPattern";
+        public static readonly string CompositeIdentifierSeparatorPattern =
+            "CompositeIdentifierSeparatorPattern";
         public static readonly string CreateFormat = "CreateFormat";
         public static readonly string CreateParameters = "CreateParameters";
         public static readonly string DataSourceProductName = "DataSourceProductName";
         public static readonly string DataSourceProductVersion = "DataSourceProductVersion";
         public static readonly string DataType = "DataType";
-        public static readonly string DataSourceProductVersionNormalized = "DataSourceProductVersionNormalized";
+        public static readonly string DataSourceProductVersionNormalized =
+            "DataSourceProductVersionNormalized";
         public static readonly string GroupByBehavior = "GroupByBehavior";
         public static readonly string IdentifierCase = "IdentifierCase";
         public static readonly string IdentifierPattern = "IdentifierPattern";

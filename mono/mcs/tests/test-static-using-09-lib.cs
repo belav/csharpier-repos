@@ -2,5 +2,5 @@
 
 public static class Constants
 {
-	public const long One = 1;
+    public const long One = 1;
 }

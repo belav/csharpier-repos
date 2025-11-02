@@ -20,12 +20,16 @@ namespace System.Linq.Expressions.Internal
     {
         internal static Exception UnhandledExpressionType(ExpressionType expressionType)
         {
-            return EntityUtil.NotSupported(System.Data.Entity.Strings.ELinq_UnhandledExpressionType(expressionType));
+            return EntityUtil.NotSupported(
+                System.Data.Entity.Strings.ELinq_UnhandledExpressionType(expressionType)
+            );
         }
-        
+
         internal static Exception UnhandledBindingType(MemberBindingType memberBindingType)
         {
-            return EntityUtil.NotSupported(System.Data.Entity.Strings.ELinq_UnhandledBindingType(memberBindingType));
+            return EntityUtil.NotSupported(
+                System.Data.Entity.Strings.ELinq_UnhandledBindingType(memberBindingType)
+            );
         }
     }
 
@@ -40,6 +44,7 @@ namespace System.Linq.Expressions.Internal
                 return col;
             return new ReadOnlyCollection<T>(sequence.ToArray());
         }
+
         private static class DefaultReadOnlyCollection<T>
         {
             private static ReadOnlyCollection<T> _defaultCollection;

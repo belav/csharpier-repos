@@ -7,21 +7,24 @@ using System.Threading.Tasks;
 
 namespace System.Data.SqlClient
 {
-    sealed internal class SqlSequentialTextReader : System.IO.TextReader
+    internal sealed class SqlSequentialTextReader : System.IO.TextReader
     {
-        private SqlDataReader _reader;  // The SqlDataReader that we are reading data from
-        private int _columnIndex;       // The index of out column in the table
-        private Encoding _encoding;     // Encoding for this character stream
-        private Decoder _decoder;       // Decoder based on the encoding (NOTE: Decoders are stateful as they are designed to process streams of data)
-        private byte[] _leftOverBytes;  // Bytes leftover from the last Read() operation - this can be null if there were no bytes leftover (Possible optimization: re-use the same array?)
-        private int _peekedChar;        // The last character that we peeked at (or -1 if we haven't peeked at anything)
-        private Task _currentTask;      // The current async task
-        private CancellationTokenSource _disposalTokenSource;    // Used to indicate that a cancellation is requested due to disposal
+        private SqlDataReader _reader; // The SqlDataReader that we are reading data from
+        private int _columnIndex; // The index of out column in the table
+        private Encoding _encoding; // Encoding for this character stream
+        private Decoder _decoder; // Decoder based on the encoding (NOTE: Decoders are stateful as they are designed to process streams of data)
+        private byte[] _leftOverBytes; // Bytes leftover from the last Read() operation - this can be null if there were no bytes leftover (Possible optimization: re-use the same array?)
+        private int _peekedChar; // The last character that we peeked at (or -1 if we haven't peeked at anything)
+        private Task _currentTask; // The current async task
+        private CancellationTokenSource _disposalTokenSource; // Used to indicate that a cancellation is requested due to disposal
 
         internal SqlSequentialTextReader(SqlDataReader reader, int columnIndex, Encoding encoding)
         {
             Debug.Assert(reader != null, "Null reader when creating sequential textreader");
-            Debug.Assert(columnIndex >= 0, "Invalid column index when creating sequential textreader");
+            Debug.Assert(
+                columnIndex >= 0,
+                "Invalid column index when creating sequential textreader"
+            );
             Debug.Assert(encoding != null, "Null encoding when creating sequential textreader");
 
             _reader = reader;
@@ -55,7 +58,11 @@ namespace System.Data.SqlClient
                 _peekedChar = Read();
             }
 
-            Debug.Assert(_peekedChar == -1 || ((_peekedChar >= char.MinValue) && (_peekedChar <= char.MaxValue)), string.Format("Bad peeked character: {0}", _peekedChar));
+            Debug.Assert(
+                _peekedChar == -1
+                    || ((_peekedChar >= char.MinValue) && (_peekedChar <= char.MaxValue)),
+                string.Format("Bad peeked character: {0}", _peekedChar)
+            );
             return _peekedChar;
         }
 
@@ -89,7 +96,10 @@ namespace System.Data.SqlClient
                 }
             }
 
-            Debug.Assert(readChar == -1 || ((readChar >= char.MinValue) && (readChar <= char.MaxValue)), string.Format("Bad read character: {0}", readChar));
+            Debug.Assert(
+                readChar == -1 || ((readChar >= char.MinValue) && (readChar <= char.MaxValue)),
+                string.Format("Bad read character: {0}", readChar)
+            );
             return readChar;
         }
 
@@ -111,7 +121,10 @@ namespace System.Data.SqlClient
             // Load in peeked char
             if ((charsNeeded > 0) && (HasPeekedChar))
             {
-                Debug.Assert((_peekedChar >= char.MinValue) && (_peekedChar <= char.MaxValue), string.Format("Bad peeked character: {0}", _peekedChar));
+                Debug.Assert(
+                    (_peekedChar >= char.MinValue) && (_peekedChar <= char.MaxValue),
+                    string.Format("Bad peeked character: {0}", _peekedChar)
+                );
                 buffer[index + charsRead] = (char)_peekedChar;
                 charsRead++;
                 charsNeeded--;
@@ -137,10 +150,16 @@ namespace System.Data.SqlClient
             {
                 try
                 {
-                    Task original = Interlocked.CompareExchange<Task>(ref _currentTask, completion.Task, null);
+                    Task original = Interlocked.CompareExchange<Task>(
+                        ref _currentTask,
+                        completion.Task,
+                        null
+                    );
                     if (original != null)
                     {
-                        completion.SetException(ADP.ExceptionWithStackTrace(ADP.AsyncOperationPending()));
+                        completion.SetException(
+                            ADP.ExceptionWithStackTrace(ADP.AsyncOperationPending())
+                        );
                     }
                     else
                     {
@@ -156,7 +175,11 @@ namespace System.Data.SqlClient
                             int peekedChar = _peekedChar;
                             if (peekedChar >= char.MinValue)
                             {
-                                Debug.Assert((_peekedChar >= char.MinValue) && (_peekedChar <= char.MaxValue), string.Format("Bad peeked character: {0}", _peekedChar));
+                                Debug.Assert(
+                                    (_peekedChar >= char.MinValue)
+                                        && (_peekedChar <= char.MaxValue),
+                                    string.Format("Bad peeked character: {0}", _peekedChar)
+                                );
                                 buffer[adjustedIndex] = (char)peekedChar;
                                 adjustedIndex++;
                                 charsRead++;
@@ -173,73 +196,113 @@ namespace System.Data.SqlClient
                         {
                             int bytesRead;
                             var reader = _reader;
-                            if (reader != null) 
+                            if (reader != null)
                             {
-                                Task<int> getBytesTask = reader.GetBytesAsync(_columnIndex, byteBuffer, byteBufferUsed, byteBuffer.Length - byteBufferUsed, Timeout.Infinite, _disposalTokenSource.Token, out bytesRead);
-                                if (getBytesTask == null) {
+                                Task<int> getBytesTask = reader.GetBytesAsync(
+                                    _columnIndex,
+                                    byteBuffer,
+                                    byteBufferUsed,
+                                    byteBuffer.Length - byteBufferUsed,
+                                    Timeout.Infinite,
+                                    _disposalTokenSource.Token,
+                                    out bytesRead
+                                );
+                                if (getBytesTask == null)
+                                {
                                     byteBufferUsed += bytesRead;
                                 }
-                                else {
+                                else
+                                {
                                     // We need more data - setup the callback, and mark this as not completed sync
                                     completedSynchronously = false;
-                                    getBytesTask.ContinueWith((t) =>
-                                    {
-                                        _currentTask = null;
-                                        // If we completed but the textreader is closed, then report cancellation
-                                        if ((t.Status == TaskStatus.RanToCompletion) && (!IsClosed))
+                                    getBytesTask.ContinueWith(
+                                        (t) =>
                                         {
-                                            try
+                                            _currentTask = null;
+                                            // If we completed but the textreader is closed, then report cancellation
+                                            if (
+                                                (t.Status == TaskStatus.RanToCompletion)
+                                                && (!IsClosed)
+                                            )
                                             {
-                                                int bytesReadFromStream = t.Result;
-                                                byteBufferUsed += bytesReadFromStream;
-                                                if (byteBufferUsed > 0)
+                                                try
                                                 {
-                                                    charsRead += DecodeBytesToChars(byteBuffer, byteBufferUsed, buffer, adjustedIndex, charsNeeded);
+                                                    int bytesReadFromStream = t.Result;
+                                                    byteBufferUsed += bytesReadFromStream;
+                                                    if (byteBufferUsed > 0)
+                                                    {
+                                                        charsRead += DecodeBytesToChars(
+                                                            byteBuffer,
+                                                            byteBufferUsed,
+                                                            buffer,
+                                                            adjustedIndex,
+                                                            charsNeeded
+                                                        );
+                                                    }
+                                                    completion.SetResult(charsRead);
                                                 }
-                                                completion.SetResult(charsRead);
+                                                catch (Exception ex)
+                                                {
+                                                    completion.SetException(ex);
+                                                }
                                             }
-                                            catch (Exception ex)
+                                            else if (IsClosed)
                                             {
-                                                completion.SetException(ex);
+                                                completion.SetException(
+                                                    ADP.ExceptionWithStackTrace(
+                                                        ADP.ObjectDisposed(this)
+                                                    )
+                                                );
                                             }
-                                        }
-                                        else if (IsClosed)
-                                        {
-                                            completion.SetException(ADP.ExceptionWithStackTrace(ADP.ObjectDisposed(this)));
-                                        }
-                                        else if (t.Status == TaskStatus.Faulted)
-                                        {
-                                            if (t.Exception.InnerException is SqlException)
+                                            else if (t.Status == TaskStatus.Faulted)
                                             {
-                                                // ReadAsync can't throw a SqlException, so wrap it in an IOException
-                                                completion.SetException(ADP.ExceptionWithStackTrace(ADP.ErrorReadingFromStream(t.Exception.InnerException)));
+                                                if (t.Exception.InnerException is SqlException)
+                                                {
+                                                    // ReadAsync can't throw a SqlException, so wrap it in an IOException
+                                                    completion.SetException(
+                                                        ADP.ExceptionWithStackTrace(
+                                                            ADP.ErrorReadingFromStream(
+                                                                t.Exception.InnerException
+                                                            )
+                                                        )
+                                                    );
+                                                }
+                                                else
+                                                {
+                                                    completion.SetException(
+                                                        t.Exception.InnerException
+                                                    );
+                                                }
                                             }
                                             else
                                             {
-                                                completion.SetException(t.Exception.InnerException);
+                                                completion.SetCanceled();
                                             }
-                                        }
-                                        else
-                                        {
-                                            completion.SetCanceled();
-                                        }
-                                    }, TaskScheduler.Default);
+                                        },
+                                        TaskScheduler.Default
+                                    );
                                 }
-                            
 
                                 if ((completedSynchronously) && (byteBufferUsed > 0))
                                 {
                                     // No more data needed, decode what we have
-                                    charsRead += DecodeBytesToChars(byteBuffer, byteBufferUsed, buffer, adjustedIndex, charsNeeded);
+                                    charsRead += DecodeBytesToChars(
+                                        byteBuffer,
+                                        byteBufferUsed,
+                                        buffer,
+                                        adjustedIndex,
+                                        charsNeeded
+                                    );
                                 }
                             }
                             else
                             {
                                 // Reader is null, close must of happened in the middle of this read
-                                completion.SetException(ADP.ExceptionWithStackTrace(ADP.ObjectDisposed(this)));
+                                completion.SetException(
+                                    ADP.ExceptionWithStackTrace(ADP.ObjectDisposed(this))
+                                );
                             }
                         }
-                    
 
                         if (completedSynchronously)
                         {
@@ -290,7 +353,7 @@ namespace System.Data.SqlClient
 
             // Wait for pending task
             var currentTask = _currentTask;
-            if (currentTask != null) 
+            if (currentTask != null)
             {
                 ((IAsyncResult)currentTask).AsyncWaitHandle.WaitOne();
             }
@@ -307,19 +370,29 @@ namespace System.Data.SqlClient
         private int InternalRead(char[] buffer, int index, int count)
         {
             Debug.Assert(buffer != null, "Null output buffer");
-            Debug.Assert((index >= 0) && (count >= 0) && (index + count <= buffer.Length), string.Format("Bad count: {0} or index: {1}", count, index));
+            Debug.Assert(
+                (index >= 0) && (count >= 0) && (index + count <= buffer.Length),
+                string.Format("Bad count: {0} or index: {1}", count, index)
+            );
             Debug.Assert(!IsClosed, "Can't read while textreader is closed");
 
             try
             {
                 int byteBufferUsed;
                 byte[] byteBuffer = PrepareByteBuffer(count, out byteBufferUsed);
-                byteBufferUsed += _reader.GetBytesInternalSequential(_columnIndex, byteBuffer, byteBufferUsed, byteBuffer.Length - byteBufferUsed);
+                byteBufferUsed += _reader.GetBytesInternalSequential(
+                    _columnIndex,
+                    byteBuffer,
+                    byteBufferUsed,
+                    byteBuffer.Length - byteBufferUsed
+                );
 
-                if (byteBufferUsed > 0) {
+                if (byteBufferUsed > 0)
+                {
                     return DecodeBytesToChars(byteBuffer, byteBufferUsed, buffer, index, count);
                 }
-                else {
+                else
+                {
                     // Nothing to read, or nothing read
                     return 0;
                 }
@@ -348,7 +421,7 @@ namespace System.Data.SqlClient
                 byteBuffer = new byte[0];
                 byteBufferUsed = 0;
             }
-            else 
+            else
             {
                 int byteBufferSize = _encoding.GetMaxByteCount(numberOfChars);
 
@@ -387,18 +460,47 @@ namespace System.Data.SqlClient
         /// <param name="outBufferOffset">Offset to start writing to outBuffer at</param>
         /// <param name="outBufferCount">Maximum number of characters to decode</param>
         /// <returns>The actual number of characters decoded</returns>
-        private int DecodeBytesToChars(byte[] inBuffer, int inBufferCount, char[] outBuffer, int outBufferOffset, int outBufferCount)
+        private int DecodeBytesToChars(
+            byte[] inBuffer,
+            int inBufferCount,
+            char[] outBuffer,
+            int outBufferOffset,
+            int outBufferCount
+        )
         {
             Debug.Assert(inBuffer != null, "Null input buffer");
-            Debug.Assert((inBufferCount > 0) && (inBufferCount <= inBuffer.Length), string.Format("Bad inBufferCount: {0}", inBufferCount));
+            Debug.Assert(
+                (inBufferCount > 0) && (inBufferCount <= inBuffer.Length),
+                string.Format("Bad inBufferCount: {0}", inBufferCount)
+            );
             Debug.Assert(outBuffer != null, "Null output buffer");
-            Debug.Assert((outBufferOffset >= 0) && (outBufferCount > 0) && (outBufferOffset + outBufferCount <= outBuffer.Length), string.Format("Bad outBufferCount: {0} or outBufferOffset: {1}", outBufferCount, outBufferOffset));
+            Debug.Assert(
+                (outBufferOffset >= 0)
+                    && (outBufferCount > 0)
+                    && (outBufferOffset + outBufferCount <= outBuffer.Length),
+                string.Format(
+                    "Bad outBufferCount: {0} or outBufferOffset: {1}",
+                    outBufferCount,
+                    outBufferOffset
+                )
+            );
 
             int charsRead;
             int bytesUsed;
             bool completed;
-            _decoder.Convert(inBuffer, 0, inBufferCount, outBuffer, outBufferOffset, outBufferCount, false, out bytesUsed, out charsRead, out completed);
-            
+            _decoder.Convert(
+                inBuffer,
+                0,
+                inBufferCount,
+                outBuffer,
+                outBufferOffset,
+                outBufferCount,
+                false,
+                out bytesUsed,
+                out charsRead,
+                out completed
+            );
+
             // completed may be false and there is no spare bytes if the Decoder has stored bytes to use later
             if ((!completed) && (bytesUsed < inBufferCount))
             {
@@ -408,11 +510,22 @@ namespace System.Data.SqlClient
             else
             {
                 // If Convert() sets completed to true, then it must have used all of the bytes we gave it
-                Debug.Assert(bytesUsed >= inBufferCount, "Converted completed, but not all bytes were used");
+                Debug.Assert(
+                    bytesUsed >= inBufferCount,
+                    "Converted completed, but not all bytes were used"
+                );
                 _leftOverBytes = null;
             }
 
-            Debug.Assert(((_reader == null) || (_reader.ColumnDataBytesRemaining() > 0) || (!completed) || (_leftOverBytes == null)), "Stream has run out of data and the decoder finished, but there are leftover bytes");
+            Debug.Assert(
+                (
+                    (_reader == null)
+                    || (_reader.ColumnDataBytesRemaining() > 0)
+                    || (!completed)
+                    || (_leftOverBytes == null)
+                ),
+                "Stream has run out of data and the decoder finished, but there are leftover bytes"
+            );
             Debug.Assert(charsRead > 0, "Converted no chars. Bad encoding?");
 
             return charsRead;
@@ -423,7 +536,7 @@ namespace System.Data.SqlClient
         /// </summary>
         private bool IsClosed
         {
-            get { return (_reader == null); } 
+            get { return (_reader == null); }
         }
 
         /// <summary>
@@ -449,17 +562,17 @@ namespace System.Data.SqlClient
         /// <param name="buffer"></param>
         /// <param name="index"></param>
         /// <param name="count"></param>
-        internal static void ValidateReadParameters(char[] buffer, int index, int count) 
+        internal static void ValidateReadParameters(char[] buffer, int index, int count)
         {
             if (buffer == null)
             {
                 throw ADP.ArgumentNull(ADP.ParameterBuffer);
             }
-			if (index < 0)
+            if (index < 0)
             {
                 throw ADP.ArgumentOutOfRange(ADP.ParameterIndex);
             }
-			if (count < 0)
+            if (count < 0)
             {
                 throw ADP.ArgumentOutOfRange(ADP.ParameterCount);
             }
@@ -478,12 +591,12 @@ namespace System.Data.SqlClient
         }
     }
 
-    sealed internal class SqlUnicodeEncoding : UnicodeEncoding
+    internal sealed class SqlUnicodeEncoding : UnicodeEncoding
     {
         private static SqlUnicodeEncoding _singletonEncoding = new SqlUnicodeEncoding();
 
-        private SqlUnicodeEncoding() : base(bigEndian: false, byteOrderMark: false, throwOnInvalidBytes: false)
-        {}
+        private SqlUnicodeEncoding()
+            : base(bigEndian: false, byteOrderMark: false, throwOnInvalidBytes: false) { }
 
         public override Decoder GetDecoder()
         {
@@ -501,7 +614,7 @@ namespace System.Data.SqlClient
             get { return _singletonEncoding; }
         }
 
-        sealed private class SqlUnicodeDecoder : Decoder
+        private sealed class SqlUnicodeDecoder : Decoder
         {
             public override int GetCharCount(byte[] bytes, int index, int count)
             {
@@ -509,17 +622,45 @@ namespace System.Data.SqlClient
                 return count / 2;
             }
 
-            public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+            public override int GetChars(
+                byte[] bytes,
+                int byteIndex,
+                int byteCount,
+                char[] chars,
+                int charIndex
+            )
             {
                 // This method is required - simply call Convert()
                 int bytesUsed;
                 int charsUsed;
                 bool completed;
-                Convert(bytes, byteIndex, byteCount, chars, charIndex, chars.Length - charIndex, true, out bytesUsed, out charsUsed, out completed);
+                Convert(
+                    bytes,
+                    byteIndex,
+                    byteCount,
+                    chars,
+                    charIndex,
+                    chars.Length - charIndex,
+                    true,
+                    out bytesUsed,
+                    out charsUsed,
+                    out completed
+                );
                 return charsUsed;
             }
 
-            public override void Convert(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex, int charCount, bool flush, out int bytesUsed, out int charsUsed, out bool completed)
+            public override void Convert(
+                byte[] bytes,
+                int byteIndex,
+                int byteCount,
+                char[] chars,
+                int charIndex,
+                int charCount,
+                bool flush,
+                out int bytesUsed,
+                out int charsUsed,
+                out bool completed
+            )
             {
                 // Assume 2 bytes per char and no BOM
                 charsUsed = Math.Min(charCount, byteCount / 2);
@@ -530,5 +671,5 @@ namespace System.Data.SqlClient
                 Buffer.BlockCopy(bytes, byteIndex, chars, charIndex * 2, bytesUsed);
             }
         }
-    }    
+    }
 }

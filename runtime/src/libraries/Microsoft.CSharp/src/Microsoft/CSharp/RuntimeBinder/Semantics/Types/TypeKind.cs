@@ -14,6 +14,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         TK_PointerType,
         TK_ParameterModifierType,
         TK_NullableType,
-        TK_TypeParameterType
+        TK_TypeParameterType,
     }
 }

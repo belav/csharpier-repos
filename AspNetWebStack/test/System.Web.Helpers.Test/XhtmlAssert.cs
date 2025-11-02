@@ -16,8 +16,10 @@ namespace System.Web.Helpers.Test
     // see: http://blogs.msdn.com/xmlteam/archive/2008/08/14/introducing-the-xmlpreloadedresolver.aspx
     public class XhtmlAssert
     {
-        const string Xhtml10Wrapper = "<html xmlns=\"http://www.w3.org/1999/xhtml\"><head></head><body>{0}</body></html>";
-        const string DOCTYPE_XHTML1_1 = "<!DOCTYPE {0} PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"xhtml11-flat.dtd\">\r\n";
+        const string Xhtml10Wrapper =
+            "<html xmlns=\"http://www.w3.org/1999/xhtml\"><head></head><body>{0}</body></html>";
+        const string DOCTYPE_XHTML1_1 =
+            "<!DOCTYPE {0} PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"xhtml11-flat.dtd\">\r\n";
 
         public static void Validate1_0(object result, bool addRoot = false)
         {
@@ -52,7 +54,10 @@ namespace System.Web.Helpers.Test
 
         private static string GetHtml(object result)
         {
-            Assert.True((result is IHtmlString) || (result is HelperResult), "Helpers should return IHTMLString or HelperResult");
+            Assert.True(
+                (result is IHtmlString) || (result is HelperResult),
+                "Helpers should return IHTMLString or HelperResult"
+            );
             return result.ToString();
         }
 
@@ -76,7 +81,12 @@ namespace System.Web.Helpers.Test
 
         private static void Validate1_1(string root, string html)
         {
-            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, ValidationType = ValidationType.DTD, XmlResolver = new AssemblyResourceXmlResolver() };
+            var settings = new XmlReaderSettings
+            {
+                DtdProcessing = DtdProcessing.Parse,
+                ValidationType = ValidationType.DTD,
+                XmlResolver = new AssemblyResourceXmlResolver(),
+            };
 
             string docType = String.Format(DOCTYPE_XHTML1_1, root);
             Validate(settings, docType + html);
@@ -124,7 +134,9 @@ namespace System.Web.Helpers.Test
             public override object GetEntity(Uri absoluteUri, string role, Type ofObjectToReturn)
             {
                 Assembly assembly = typeof(XhtmlAssert).Assembly;
-                return assembly.GetManifestResourceStream("System.Web.Helpers.Test.TestFiles.xhtml11-flat.dtd");
+                return assembly.GetManifestResourceStream(
+                    "System.Web.Helpers.Test.TestFiles.xhtml11-flat.dtd"
+                );
             }
         }
     }

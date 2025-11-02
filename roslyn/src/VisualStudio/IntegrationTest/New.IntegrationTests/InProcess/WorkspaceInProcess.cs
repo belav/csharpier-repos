@@ -45,66 +45,167 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
             s_initializedAsyncSaveListener = true;
             await JoinableTaskFactory.SwitchToMainThreadAsync();
-            var threadingContext = await GetComponentModelServiceAsync<IThreadingContext>(CancellationToken.None);
-            var listenerProvider = await GetComponentModelServiceAsync<IAsynchronousOperationListenerProvider>(CancellationToken.None);
-            var rdtEvents = await GetRequiredGlobalServiceAsync<SVsRunningDocumentTable, IVsRunningDocumentTable>(CancellationToken.None);
-            s_runningDocTableEventListener = new RunningDocumentTableEventListener(threadingContext, listenerProvider.GetListener(FeatureAttribute.Workspace));
-            ErrorHandler.ThrowOnFailure(rdtEvents.AdviseRunningDocTableEvents(s_runningDocTableEventListener, out s_runningDocTableEventListenerCookie));
+            var threadingContext = await GetComponentModelServiceAsync<IThreadingContext>(
+                CancellationToken.None
+            );
+            var listenerProvider =
+                await GetComponentModelServiceAsync<IAsynchronousOperationListenerProvider>(
+                    CancellationToken.None
+                );
+            var rdtEvents = await GetRequiredGlobalServiceAsync<
+                SVsRunningDocumentTable,
+                IVsRunningDocumentTable
+            >(CancellationToken.None);
+            s_runningDocTableEventListener = new RunningDocumentTableEventListener(
+                threadingContext,
+                listenerProvider.GetListener(FeatureAttribute.Workspace)
+            );
+            ErrorHandler.ThrowOnFailure(
+                rdtEvents.AdviseRunningDocTableEvents(
+                    s_runningDocTableEventListener,
+                    out s_runningDocTableEventListenerCookie
+                )
+            );
         }
 
-        public async Task<bool> IsPrettyListingOnAsync(string languageName, CancellationToken cancellationToken)
+        public async Task<bool> IsPrettyListingOnAsync(
+            string languageName,
+            CancellationToken cancellationToken
+        )
         {
-            var globalOptions = await GetComponentModelServiceAsync<IGlobalOptionService>(cancellationToken);
+            var globalOptions = await GetComponentModelServiceAsync<IGlobalOptionService>(
+                cancellationToken
+            );
             return globalOptions.GetOption(LineCommitOptionsStorage.PrettyListing, languageName);
         }
 
-        public async Task SetPrettyListingAsync(string languageName, bool value, CancellationToken cancellationToken)
+        public async Task SetPrettyListingAsync(
+            string languageName,
+            bool value,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var globalOptions = await GetComponentModelServiceAsync<IGlobalOptionService>(cancellationToken);
-            globalOptions.SetGlobalOption(LineCommitOptionsStorage.PrettyListing, languageName, value);
+            var globalOptions = await GetComponentModelServiceAsync<IGlobalOptionService>(
+                cancellationToken
+            );
+            globalOptions.SetGlobalOption(
+                LineCommitOptionsStorage.PrettyListing,
+                languageName,
+                value
+            );
         }
 
-        public async Task SetTriggerCompletionInArgumentListsAsync(string languageName, bool value, CancellationToken cancellationToken)
+        public async Task SetTriggerCompletionInArgumentListsAsync(
+            string languageName,
+            bool value,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var globalOptions = await GetComponentModelServiceAsync<IGlobalOptionService>(cancellationToken);
-            globalOptions.SetGlobalOption(CompletionOptionsStorage.TriggerInArgumentLists, languageName, value);
+            var globalOptions = await GetComponentModelServiceAsync<IGlobalOptionService>(
+                cancellationToken
+            );
+            globalOptions.SetGlobalOption(
+                CompletionOptionsStorage.TriggerInArgumentLists,
+                languageName,
+                value
+            );
         }
 
-        public async Task SetFileScopedNamespaceAsync(bool value, CancellationToken cancellationToken)
+        public async Task SetFileScopedNamespaceAsync(
+            bool value,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            var globalOptions = await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(cancellationToken);
-            globalOptions.SetGlobalOption(Microsoft.CodeAnalysis.CSharp.CodeStyle.CSharpCodeStyleOptions.NamespaceDeclarations,
-                new CodeStyleOption2<NamespaceDeclarationPreference>(value ? NamespaceDeclarationPreference.FileScoped : NamespaceDeclarationPreference.BlockScoped, NotificationOption2.Suggestion));
+            var globalOptions =
+                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+                    cancellationToken
+                );
+            globalOptions.SetGlobalOption(
+                Microsoft
+                    .CodeAnalysis
+                    .CSharp
+                    .CodeStyle
+                    .CSharpCodeStyleOptions
+                    .NamespaceDeclarations,
+                new CodeStyleOption2<NamespaceDeclarationPreference>(
+                    value
+                        ? NamespaceDeclarationPreference.FileScoped
+                        : NamespaceDeclarationPreference.BlockScoped,
+                    NotificationOption2.Suggestion
+                )
+            );
         }
 
         public Task SetFullSolutionAnalysisAsync(bool value, CancellationToken cancellationToken)
         {
-            var analyzerScope = value ? BackgroundAnalysisScope.FullSolution : BackgroundAnalysisScope.Default;
-            var compilerScope = value ? CompilerDiagnosticsScope.FullSolution : CompilerDiagnosticsScope.OpenFiles;
-            return SetBackgroundAnalysisOptionsAsync(analyzerScope, compilerScope, cancellationToken);
+            var analyzerScope = value
+                ? BackgroundAnalysisScope.FullSolution
+                : BackgroundAnalysisScope.Default;
+            var compilerScope = value
+                ? CompilerDiagnosticsScope.FullSolution
+                : CompilerDiagnosticsScope.OpenFiles;
+            return SetBackgroundAnalysisOptionsAsync(
+                analyzerScope,
+                compilerScope,
+                cancellationToken
+            );
         }
 
-        public async Task SetBackgroundAnalysisOptionsAsync(BackgroundAnalysisScope analyzerScope, CompilerDiagnosticsScope compilerScope, CancellationToken cancellationToken)
+        public async Task SetBackgroundAnalysisOptionsAsync(
+            BackgroundAnalysisScope analyzerScope,
+            CompilerDiagnosticsScope compilerScope,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            var globalOptions = await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(cancellationToken);
+            var globalOptions =
+                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+                    cancellationToken
+                );
 
-            globalOptions.SetGlobalOption(SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption, LanguageNames.CSharp, analyzerScope);
-            globalOptions.SetGlobalOption(SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption, LanguageNames.VisualBasic, analyzerScope);
+            globalOptions.SetGlobalOption(
+                SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
+                LanguageNames.CSharp,
+                analyzerScope
+            );
+            globalOptions.SetGlobalOption(
+                SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
+                LanguageNames.VisualBasic,
+                analyzerScope
+            );
 
-            globalOptions.SetGlobalOption(SolutionCrawlerOptionsStorage.CompilerDiagnosticsScopeOption, LanguageNames.CSharp, compilerScope);
-            globalOptions.SetGlobalOption(SolutionCrawlerOptionsStorage.CompilerDiagnosticsScopeOption, LanguageNames.VisualBasic, compilerScope);
+            globalOptions.SetGlobalOption(
+                SolutionCrawlerOptionsStorage.CompilerDiagnosticsScopeOption,
+                LanguageNames.CSharp,
+                compilerScope
+            );
+            globalOptions.SetGlobalOption(
+                SolutionCrawlerOptionsStorage.CompilerDiagnosticsScopeOption,
+                LanguageNames.VisualBasic,
+                compilerScope
+            );
         }
 
-        public Task WaitForAsyncOperationsAsync(string featuresToWaitFor, CancellationToken cancellationToken)
-            => WaitForAsyncOperationsAsync(featuresToWaitFor, waitForWorkspaceFirst: true, cancellationToken);
+        public Task WaitForAsyncOperationsAsync(
+            string featuresToWaitFor,
+            CancellationToken cancellationToken
+        ) =>
+            WaitForAsyncOperationsAsync(
+                featuresToWaitFor,
+                waitForWorkspaceFirst: true,
+                cancellationToken
+            );
 
-        public async Task WaitForAsyncOperationsAsync(string featuresToWaitFor, bool waitForWorkspaceFirst, CancellationToken cancellationToken)
+        public async Task WaitForAsyncOperationsAsync(
+            string featuresToWaitFor,
+            bool waitForWorkspaceFirst,
+            CancellationToken cancellationToken
+        )
         {
             if (waitForWorkspaceFirst || featuresToWaitFor == FeatureAttribute.Workspace)
             {
@@ -113,7 +214,10 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 await TestServices.Editor.WaitForEditorOperationsAsync(cancellationToken);
             }
 
-            var listenerProvider = await GetComponentModelServiceAsync<AsynchronousOperationListenerProvider>(cancellationToken);
+            var listenerProvider =
+                await GetComponentModelServiceAsync<AsynchronousOperationListenerProvider>(
+                    cancellationToken
+                );
 
             if (waitForWorkspaceFirst)
             {
@@ -125,7 +229,10 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             await featureWaiter.ExpeditedWaitAsync().WithCancellation(cancellationToken);
         }
 
-        public async Task WaitForAllAsyncOperationsAsync(string[] featureNames, CancellationToken cancellationToken)
+        public async Task WaitForAllAsyncOperationsAsync(
+            string[] featureNames,
+            CancellationToken cancellationToken
+        )
         {
             if (featureNames.Contains(FeatureAttribute.Workspace))
             {
@@ -134,18 +241,30 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 await TestServices.Editor.WaitForEditorOperationsAsync(cancellationToken);
             }
 
-            var listenerProvider = await GetComponentModelServiceAsync<AsynchronousOperationListenerProvider>(cancellationToken);
-            var workspace = await GetComponentModelServiceAsync<VisualStudioWorkspace>(cancellationToken);
+            var listenerProvider =
+                await GetComponentModelServiceAsync<AsynchronousOperationListenerProvider>(
+                    cancellationToken
+                );
+            var workspace = await GetComponentModelServiceAsync<VisualStudioWorkspace>(
+                cancellationToken
+            );
 
             if (featureNames.Contains(FeatureAttribute.NavigateTo))
             {
-                var statusService = workspace.Services.GetRequiredService<IWorkspaceStatusService>();
+                var statusService =
+                    workspace.Services.GetRequiredService<IWorkspaceStatusService>();
                 Contract.ThrowIfFalse(await statusService.IsFullyLoadedAsync(cancellationToken));
 
                 // Make sure the "priming" operation has started for Nav To
-                var threadingContext = await GetComponentModelServiceAsync<IThreadingContext>(cancellationToken);
+                var threadingContext = await GetComponentModelServiceAsync<IThreadingContext>(
+                    cancellationToken
+                );
                 var asyncListener = listenerProvider.GetListener(FeatureAttribute.NavigateTo);
-                var searchHost = new DefaultNavigateToSearchHost(workspace.CurrentSolution, asyncListener, threadingContext.DisposalToken);
+                var searchHost = new DefaultNavigateToSearchHost(
+                    workspace.CurrentSolution,
+                    asyncListener,
+                    threadingContext.DisposalToken
+                );
 
                 // Calling DefaultNavigateToSearchHost.IsFullyLoadedAsync starts the fire-and-forget asynchronous
                 // operation to populate the remote host. The call to WaitAllAsync below will wait for that operation to
@@ -153,7 +272,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 await searchHost.IsFullyLoadedAsync(cancellationToken);
             }
 
-            await listenerProvider.WaitAllAsync(workspace, featureNames).WithCancellation(cancellationToken);
+            await listenerProvider
+                .WaitAllAsync(workspace, featureNames)
+                .WithCancellation(cancellationToken);
         }
 
         public async Task WaitForRenameAsync(CancellationToken cancellationToken)
@@ -164,50 +285,74 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                     FeatureAttribute.RenameTracking,
                     FeatureAttribute.InlineRenameFlyout,
                 ],
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         /// <summary>
         /// This event listener is an adapter to expose asynchronous file save operations to Roslyn via its standard
         /// workspace event waiters.
         /// </summary>
-        private sealed class RunningDocumentTableEventListener : IVsRunningDocTableEvents, IVsRunningDocTableEvents7
+        private sealed class RunningDocumentTableEventListener
+            : IVsRunningDocTableEvents,
+                IVsRunningDocTableEvents7
         {
             private readonly IThreadingContext _threadingContext;
             private readonly IAsynchronousOperationListener _asynchronousOperationListener;
 
-            public RunningDocumentTableEventListener(IThreadingContext threadingContext, IAsynchronousOperationListener asynchronousOperationListener)
+            public RunningDocumentTableEventListener(
+                IThreadingContext threadingContext,
+                IAsynchronousOperationListener asynchronousOperationListener
+            )
             {
                 _threadingContext = threadingContext;
                 _asynchronousOperationListener = asynchronousOperationListener;
             }
 
-            int IVsRunningDocTableEvents.OnAfterFirstDocumentLock(uint docCookie, uint dwRDTLockType, uint dwReadLocksRemaining, uint dwEditLocksRemaining)
-                => VSConstants.S_OK;
+            int IVsRunningDocTableEvents.OnAfterFirstDocumentLock(
+                uint docCookie,
+                uint dwRDTLockType,
+                uint dwReadLocksRemaining,
+                uint dwEditLocksRemaining
+            ) => VSConstants.S_OK;
 
-            int IVsRunningDocTableEvents.OnBeforeLastDocumentUnlock(uint docCookie, uint dwRDTLockType, uint dwReadLocksRemaining, uint dwEditLocksRemaining)
-                => VSConstants.S_OK;
+            int IVsRunningDocTableEvents.OnBeforeLastDocumentUnlock(
+                uint docCookie,
+                uint dwRDTLockType,
+                uint dwReadLocksRemaining,
+                uint dwEditLocksRemaining
+            ) => VSConstants.S_OK;
 
-            int IVsRunningDocTableEvents.OnAfterSave(uint docCookie)
-                => VSConstants.S_OK;
+            int IVsRunningDocTableEvents.OnAfterSave(uint docCookie) => VSConstants.S_OK;
 
-            int IVsRunningDocTableEvents.OnAfterAttributeChange(uint docCookie, uint grfAttribs)
-                => VSConstants.S_OK;
+            int IVsRunningDocTableEvents.OnAfterAttributeChange(uint docCookie, uint grfAttribs) =>
+                VSConstants.S_OK;
 
-            int IVsRunningDocTableEvents.OnBeforeDocumentWindowShow(uint docCookie, int fFirstShow, IVsWindowFrame pFrame)
-                => VSConstants.S_OK;
+            int IVsRunningDocTableEvents.OnBeforeDocumentWindowShow(
+                uint docCookie,
+                int fFirstShow,
+                IVsWindowFrame pFrame
+            ) => VSConstants.S_OK;
 
-            int IVsRunningDocTableEvents.OnAfterDocumentWindowHide(uint docCookie, IVsWindowFrame pFrame)
-                => VSConstants.S_OK;
+            int IVsRunningDocTableEvents.OnAfterDocumentWindowHide(
+                uint docCookie,
+                IVsWindowFrame pFrame
+            ) => VSConstants.S_OK;
 
-            IVsTask? IVsRunningDocTableEvents7.OnBeforeSaveAsync(uint cookie, uint flags, IVsTask? saveTask)
+            IVsTask? IVsRunningDocTableEvents7.OnBeforeSaveAsync(
+                uint cookie,
+                uint flags,
+                IVsTask? saveTask
+            )
             {
                 if (saveTask is not null)
                 {
                     _ = _threadingContext.JoinableTaskFactory.RunAsync(async () =>
                     {
                         // Track asynchronous save operations via Roslyn's Workspace events
-                        using var _ = _asynchronousOperationListener.BeginAsyncOperation("OnBeforeSaveAsync");
+                        using var _ = _asynchronousOperationListener.BeginAsyncOperation(
+                            "OnBeforeSaveAsync"
+                        );
                         await saveTask;
                     });
                 }

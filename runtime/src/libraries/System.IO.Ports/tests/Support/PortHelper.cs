@@ -17,7 +17,11 @@ namespace Legacy.Support
         private static extern int GetLastError();
 
         [DllImport("kernel32.dll", EntryPoint = "QueryDosDeviceW", CharSet = CharSet.Unicode)]
-        private static extern int QueryDosDevice(string lpDeviceName, IntPtr lpTargetPath, int ucchMax);
+        private static extern int QueryDosDevice(
+            string lpDeviceName,
+            IntPtr lpTargetPath,
+            int ucchMax
+        );
 
         public static string[] GetPorts()
         {
@@ -39,7 +43,11 @@ namespace Legacy.Support
         private static string[] GetCommPortsFromRegistry()
         {
             // See https://msdn.microsoft.com/en-us/library/windows/hardware/ff546502.aspx for more information.
-            using (RegistryKey serialKey = Registry.LocalMachine.OpenSubKey(@"HARDWARE\DEVICEMAP\SERIALCOMM"))
+            using (
+                RegistryKey serialKey = Registry.LocalMachine.OpenSubKey(
+                    @"HARDWARE\DEVICEMAP\SERIALCOMM"
+                )
+            )
             {
                 if (serialKey != null)
                 {
@@ -77,7 +85,7 @@ namespace Legacy.Support
                         {
                             string allDevices = Marshal.PtrToStringUni(mem, returnSize);
                             retval = allDevices.Split('\0');
-                            break;    // not really needed, but makes it more clear...
+                            break; // not really needed, but makes it more clear...
                         }
                         else if (GetLastError() == ERROR_INSUFFICIENT_BUFFER)
                         {

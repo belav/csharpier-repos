@@ -10,7 +10,11 @@ namespace System.Configuration
 
         internal ConfigurationValueFlags ValueFlags;
 
-        internal ConfigurationValue(object value, ConfigurationValueFlags valueFlags, PropertySourceInfo sourceInfo)
+        internal ConfigurationValue(
+            object value,
+            ConfigurationValueFlags valueFlags,
+            PropertySourceInfo sourceInfo
+        )
         {
             Value = value;
             ValueFlags = valueFlags;

@@ -130,12 +130,12 @@ namespace System.Threading.Tests
                 lockScopeCopy.Dispose();
                 Assert.Fail("Expected SynchronizationLockException but did not get an exception.");
             }
-            catch (SynchronizationLockException)
-            {
-            }
+            catch (SynchronizationLockException) { }
             catch (Exception ex)
             {
-                Assert.Fail($"Expected SynchronizationLockException but got a different exception instead: {ex}");
+                Assert.Fail(
+                    $"Expected SynchronizationLockException but got a different exception instead: {ex}"
+                );
             }
 
             b.SignalAndWait();
@@ -149,10 +149,13 @@ namespace System.Threading.Tests
 
             Assert.Throws<ArgumentOutOfRangeException>(() => lockObj.TryEnter(-2));
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout", () => lockObj.TryEnter(TimeSpan.FromMilliseconds(-2)));
+                "timeout",
+                () => lockObj.TryEnter(TimeSpan.FromMilliseconds(-2))
+            );
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "timeout",
-                () => lockObj.TryEnter(TimeSpan.FromMilliseconds((double)int.MaxValue + 1)));
+                () => lockObj.TryEnter(TimeSpan.FromMilliseconds((double)int.MaxValue + 1))
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -176,9 +179,7 @@ namespace System.Threading.Tests
                 backgroundTestDelegates.Add(() =>
                 {
                     readyBarrier.SignalAndWait();
-                    using (lockObj.EnterScope())
-                    {
-                    }
+                    using (lockObj.EnterScope()) { }
                 });
 
                 backgroundTestDelegates.Add(() =>
@@ -191,7 +192,13 @@ namespace System.Threading.Tests
                 backgroundTestDelegates.Add(() =>
                 {
                     readyBarrier.SignalAndWait();
-                    Assert.True(lockObj.TryEnter(TimeSpan.FromMilliseconds(ThreadTestHelpers.UnexpectedTimeoutMilliseconds)));
+                    Assert.True(
+                        lockObj.TryEnter(
+                            TimeSpan.FromMilliseconds(
+                                ThreadTestHelpers.UnexpectedTimeoutMilliseconds
+                            )
+                        )
+                    );
                     lockObj.Exit();
                 });
 
@@ -201,9 +208,10 @@ namespace System.Threading.Tests
                 for (int i = 0; i < backgroundTestDelegates.Count; ++i)
                 {
                     int icopy = i; // for use in delegates
-                    Thread t =
-                        ThreadTestHelpers.CreateGuardedThread(out waitForThreadArray[i],
-                            () => backgroundTestDelegates[icopy]());
+                    Thread t = ThreadTestHelpers.CreateGuardedThread(
+                        out waitForThreadArray[i],
+                        () => backgroundTestDelegates[icopy]()
+                    );
                     t.IsBackground = true;
                     t.Start();
                 }
@@ -232,7 +240,11 @@ namespace System.Threading.Tests
                 backgroundTestDelegates.Add(() =>
                 {
                     readyBarrier.SignalAndWait();
-                    Assert.False(lockObj.TryEnter(TimeSpan.FromMilliseconds(ThreadTestHelpers.ExpectedTimeoutMilliseconds)));
+                    Assert.False(
+                        lockObj.TryEnter(
+                            TimeSpan.FromMilliseconds(ThreadTestHelpers.ExpectedTimeoutMilliseconds)
+                        )
+                    );
                 });
 
                 int testCount = backgroundTestDelegates.Count;
@@ -241,9 +253,10 @@ namespace System.Threading.Tests
                 for (int i = 0; i < backgroundTestDelegates.Count; ++i)
                 {
                     int icopy = i; // for use in delegates
-                    Thread t =
-                        ThreadTestHelpers.CreateGuardedThread(out waitForThreadArray[i],
-                            () => backgroundTestDelegates[icopy]());
+                    Thread t = ThreadTestHelpers.CreateGuardedThread(
+                        out waitForThreadArray[i],
+                        () => backgroundTestDelegates[icopy]()
+                    );
                     t.IsBackground = true;
                     t.Start();
                 }
@@ -266,20 +279,31 @@ namespace System.Threading.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/49521", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
-        [ActiveIssue("https://github.com/dotnet/runtimelab/issues/155", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/49521",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtimelab/issues/155",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         public static void InterruptWaitTest()
         {
             Lock lockObj = new();
             using (lockObj.EnterScope())
             {
                 var threadReady = new AutoResetEvent(false);
-                var t =
-                    ThreadTestHelpers.CreateGuardedThread(out Action waitForThread, () =>
+                var t = ThreadTestHelpers.CreateGuardedThread(
+                    out Action waitForThread,
+                    () =>
                     {
                         threadReady.Set();
                         Assert.Throws<ThreadInterruptedException>(() => lockObj.Enter());
-                    });
+                    }
+                );
                 t.IsBackground = true;
                 t.Start();
                 threadReady.CheckedWait();

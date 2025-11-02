@@ -119,7 +119,9 @@ namespace System.Linq
             }
         }
 
-        private sealed partial class WhereListIterator<TSource> : Iterator<TSource>, IIListProvider<TSource>
+        private sealed partial class WhereListIterator<TSource>
+            : Iterator<TSource>,
+                IIListProvider<TSource>
         {
             public int GetCount(bool onlyIfCheap)
             {
@@ -178,7 +180,8 @@ namespace System.Linq
             }
         }
 
-        private sealed partial class WhereSelectArrayIterator<TSource, TResult> : IIListProvider<TResult>
+        private sealed partial class WhereSelectArrayIterator<TSource, TResult>
+            : IIListProvider<TResult>
         {
             public int GetCount(bool onlyIfCheap)
             {
@@ -238,7 +241,8 @@ namespace System.Linq
             }
         }
 
-        private sealed partial class WhereSelectListIterator<TSource, TResult> : IIListProvider<TResult>
+        private sealed partial class WhereSelectListIterator<TSource, TResult>
+            : IIListProvider<TResult>
         {
             public int GetCount(bool onlyIfCheap)
             {
@@ -301,7 +305,8 @@ namespace System.Linq
             }
         }
 
-        private sealed partial class WhereSelectEnumerableIterator<TSource, TResult> : IIListProvider<TResult>
+        private sealed partial class WhereSelectEnumerableIterator<TSource, TResult>
+            : IIListProvider<TResult>
         {
             public int GetCount(bool onlyIfCheap)
             {

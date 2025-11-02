@@ -19,10 +19,19 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         [MemberData(nameof(GetCompilationHelperFactories))]
         public static void CompilingTheSameSourceResultsInEqualModels(Func<Compilation> factory)
         {
-            JsonSourceGeneratorResult result1 = CompilationHelper.RunJsonSourceGenerator(factory(), disableDiagnosticValidation: true);
-            JsonSourceGeneratorResult result2 = CompilationHelper.RunJsonSourceGenerator(factory(), disableDiagnosticValidation: true);
+            JsonSourceGeneratorResult result1 = CompilationHelper.RunJsonSourceGenerator(
+                factory(),
+                disableDiagnosticValidation: true
+            );
+            JsonSourceGeneratorResult result2 = CompilationHelper.RunJsonSourceGenerator(
+                factory(),
+                disableDiagnosticValidation: true
+            );
 
-            Assert.Equal(result1.ContextGenerationSpecs.Length, result2.ContextGenerationSpecs.Length);
+            Assert.Equal(
+                result1.ContextGenerationSpecs.Length,
+                result2.ContextGenerationSpecs.Length
+            );
 
             for (int i = 0; i < result1.ContextGenerationSpecs.Length; i++)
             {
@@ -42,12 +51,12 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         {
             string source1 = """
                 using System.Text.Json.Serialization;
-                
+
                 namespace Test
                 {
                     [JsonSerializable(typeof(MyPoco))]
                     public partial class JsonContext : JsonSerializerContext { }
-                
+
                     public class MyPoco
                     {
                         public int MyProperty { get; set; } = 42;
@@ -58,7 +67,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             string source2 = """
                 using System;
                 using System.Text.Json.Serialization;
-                
+
                 namespace Test
                 {
                     // Same as above but with different implementation
@@ -77,8 +86,12 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 }
                 """;
 
-            JsonSourceGeneratorResult result1 = CompilationHelper.RunJsonSourceGenerator(CompilationHelper.CreateCompilation(source1));
-            JsonSourceGeneratorResult result2 = CompilationHelper.RunJsonSourceGenerator(CompilationHelper.CreateCompilation(source2));
+            JsonSourceGeneratorResult result1 = CompilationHelper.RunJsonSourceGenerator(
+                CompilationHelper.CreateCompilation(source1)
+            );
+            JsonSourceGeneratorResult result2 = CompilationHelper.RunJsonSourceGenerator(
+                CompilationHelper.CreateCompilation(source2)
+            );
 
             Assert.Equal(1, result1.ContextGenerationSpecs.Length);
             Assert.Equal(1, result2.ContextGenerationSpecs.Length);
@@ -98,12 +111,12 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         {
             string source1 = """
                 using System.Text.Json.Serialization;
-                
+
                 namespace Test
                 {
                     [JsonSerializable(typeof(MyPoco))]
                     public partial class JsonContext : JsonSerializerContext { }
-                
+
                     public class MyPoco
                     {
                         public int MyProperty { get; set; } = 42;
@@ -113,12 +126,12 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             string source2 = """
                 using System.Text.Json.Serialization;
-                
+
                 namespace Test
                 {
                     [JsonSerializable(typeof(MyPoco))]
                     public partial class JsonContext : JsonSerializerContext { }
-                
+
                     public class MyPoco
                     {
                         public int MyProperty { get; } = 42; // same, but missing a getter
@@ -126,8 +139,12 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 }
                 """;
 
-            JsonSourceGeneratorResult result1 = CompilationHelper.RunJsonSourceGenerator(CompilationHelper.CreateCompilation(source1));
-            JsonSourceGeneratorResult result2 = CompilationHelper.RunJsonSourceGenerator(CompilationHelper.CreateCompilation(source2));
+            JsonSourceGeneratorResult result1 = CompilationHelper.RunJsonSourceGenerator(
+                CompilationHelper.CreateCompilation(source1)
+            );
+            JsonSourceGeneratorResult result2 = CompilationHelper.RunJsonSourceGenerator(
+                CompilationHelper.CreateCompilation(source2)
+            );
 
             Assert.Equal(1, result1.ContextGenerationSpecs.Length);
             Assert.Equal(1, result2.ContextGenerationSpecs.Length);
@@ -139,9 +156,14 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         [Theory]
         [MemberData(nameof(GetCompilationHelperFactories))]
-        public static void SourceGenModelDoesNotEncapsulateSymbolsOrCompilationData(Func<Compilation> factory)
+        public static void SourceGenModelDoesNotEncapsulateSymbolsOrCompilationData(
+            Func<Compilation> factory
+        )
         {
-            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(factory(), disableDiagnosticValidation: true);
+            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(
+                factory(),
+                disableDiagnosticValidation: true
+            );
             WalkObjectGraph(result.ContextGenerationSpecs);
             WalkObjectGraph(result.Diagnostics);
 
@@ -175,7 +197,11 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                         return;
                     }
 
-                    foreach (FieldInfo field in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+                    foreach (
+                        FieldInfo field in type.GetFields(
+                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                        )
+                    )
                     {
                         object? fieldValue = field.GetValue(node);
                         Visit(fieldValue);
@@ -187,7 +213,9 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 #if ROSLYN4_4_OR_GREATER
         [Theory]
         [MemberData(nameof(GetCompilationHelperFactories))]
-        public static void IncrementalGenerator_SameInput_DoesNotRegenerate(Func<Compilation> factory)
+        public static void IncrementalGenerator_SameInput_DoesNotRegenerate(
+            Func<Compilation> factory
+        )
         {
             Compilation compilation = factory();
             GeneratorDriver driver = CompilationHelper.CreateJsonSourceGeneratorDriver(compilation);
@@ -198,14 +226,24 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             IncrementalGeneratorRunStep[] runSteps = GetSourceGenRunStep(runResult);
             if (runSteps != null)
             {
-                Assert.Collection(runSteps,
+                Assert.Collection(
+                    runSteps,
                     step =>
                     {
-                        Assert.Collection(step.Inputs,
-                            source => Assert.Equal(IncrementalStepRunReason.New, source.Source.Outputs[source.OutputIndex].Reason));
-                        Assert.Collection(step.Outputs,
-                            output => Assert.Equal(IncrementalStepRunReason.New, output.Reason));
-                    });
+                        Assert.Collection(
+                            step.Inputs,
+                            source =>
+                                Assert.Equal(
+                                    IncrementalStepRunReason.New,
+                                    source.Source.Outputs[source.OutputIndex].Reason
+                                )
+                        );
+                        Assert.Collection(
+                            step.Outputs,
+                            output => Assert.Equal(IncrementalStepRunReason.New, output.Reason)
+                        );
+                    }
+                );
             }
 
             // run the same compilation through again, and confirm the output wasn't called
@@ -215,14 +253,24 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             if (runSteps != null)
             {
-                Assert.Collection(runSteps2,
+                Assert.Collection(
+                    runSteps2,
                     step =>
                     {
-                        Assert.Collection(step.Inputs,
-                            source => Assert.Equal(IncrementalStepRunReason.Cached, source.Source.Outputs[source.OutputIndex].Reason));
-                        Assert.Collection(step.Outputs,
-                            output => Assert.Equal(IncrementalStepRunReason.Cached, output.Reason));
-                    });
+                        Assert.Collection(
+                            step.Inputs,
+                            source =>
+                                Assert.Equal(
+                                    IncrementalStepRunReason.Cached,
+                                    source.Source.Outputs[source.OutputIndex].Reason
+                                )
+                        );
+                        Assert.Collection(
+                            step.Outputs,
+                            output => Assert.Equal(IncrementalStepRunReason.Cached, output.Reason)
+                        );
+                    }
+                );
             }
             else
             {
@@ -231,7 +279,12 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             static IncrementalGeneratorRunStep[]? GetSourceGenRunStep(GeneratorRunResult runResult)
             {
-                if (!runResult.TrackedSteps.TryGetValue(JsonSourceGenerator.SourceGenerationSpecTrackingName, out var runSteps))
+                if (
+                    !runResult.TrackedSteps.TryGetValue(
+                        JsonSourceGenerator.SourceGenerationSpecTrackingName,
+                        out var runSteps
+                    )
+                )
                 {
                     return null;
                 }
@@ -246,12 +299,12 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             string source1 = """
                 using System;
                 using System.Text.Json.Serialization;
-                
+
                 namespace Test
                 {
                     [JsonSerializable(typeof(MyPoco))]
                     public partial class JsonContext : JsonSerializerContext { }
-                
+
                     public class MyPoco
                     {
                         public string MyProperty { get; set; } = 42;
@@ -262,7 +315,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             string source2 = """
                 using System;
                 using System.Text.Json.Serialization;
-                
+
                 namespace Test
                 {
                     // Same as above but with different implementation
@@ -286,27 +339,50 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             driver = driver.RunGenerators(compilation);
             GeneratorRunResult runResult = driver.GetRunResult().Results[0];
-            Assert.Collection(runResult.TrackedSteps[JsonSourceGenerator.SourceGenerationSpecTrackingName],
+            Assert.Collection(
+                runResult.TrackedSteps[JsonSourceGenerator.SourceGenerationSpecTrackingName],
                 step =>
                 {
-                    Assert.Collection(step.Inputs,
-                        source => Assert.Equal(IncrementalStepRunReason.New, source.Source.Outputs[source.OutputIndex].Reason));
-                    Assert.Collection(step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.New, output.Reason));
-                });
+                    Assert.Collection(
+                        step.Inputs,
+                        source =>
+                            Assert.Equal(
+                                IncrementalStepRunReason.New,
+                                source.Source.Outputs[source.OutputIndex].Reason
+                            )
+                    );
+                    Assert.Collection(
+                        step.Outputs,
+                        output => Assert.Equal(IncrementalStepRunReason.New, output.Reason)
+                    );
+                }
+            );
 
             // Update the syntax tree and re-run the compilation
-            compilation = compilation.ReplaceSyntaxTree(compilation.SyntaxTrees.First(), newTree: CompilationHelper.ParseSource(source2));
+            compilation = compilation.ReplaceSyntaxTree(
+                compilation.SyntaxTrees.First(),
+                newTree: CompilationHelper.ParseSource(source2)
+            );
             driver = driver.RunGenerators(compilation);
             runResult = driver.GetRunResult().Results[0];
-            Assert.Collection(runResult.TrackedSteps[JsonSourceGenerator.SourceGenerationSpecTrackingName],
+            Assert.Collection(
+                runResult.TrackedSteps[JsonSourceGenerator.SourceGenerationSpecTrackingName],
                 step =>
                 {
-                    Assert.Collection(step.Inputs,
-                        source => Assert.Equal(IncrementalStepRunReason.Modified, source.Source.Outputs[source.OutputIndex].Reason));
-                    Assert.Collection(step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason));
-                });
+                    Assert.Collection(
+                        step.Inputs,
+                        source =>
+                            Assert.Equal(
+                                IncrementalStepRunReason.Modified,
+                                source.Source.Outputs[source.OutputIndex].Reason
+                            )
+                    );
+                    Assert.Collection(
+                        step.Outputs,
+                        output => Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason)
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -315,12 +391,12 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             string source1 = """
                 using System;
                 using System.Text.Json.Serialization;
-                
+
                 namespace Test
                 {
                     [JsonSerializable(typeof(MyPoco))]
                     public partial class JsonContext : JsonSerializerContext { }
-                
+
                     public class MyPoco
                     {
                         public string MyProperty { get; set; } = 42;
@@ -331,12 +407,12 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             string source2 = """
                 using System;
                 using System.Text.Json.Serialization;
-                
+
                 namespace Test
                 {
                     [JsonSerializable(typeof(MyPoco))]
                     public partial class JsonContext : JsonSerializerContext { }
-                
+
                     public class MyPoco
                     {
                         public string MyProperty { get; } = 42; // same, but missing a getter
@@ -349,34 +425,61 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             driver = driver.RunGenerators(compilation);
             GeneratorRunResult runResult = driver.GetRunResult().Results[0];
-            Assert.Collection(runResult.TrackedSteps[JsonSourceGenerator.SourceGenerationSpecTrackingName],
+            Assert.Collection(
+                runResult.TrackedSteps[JsonSourceGenerator.SourceGenerationSpecTrackingName],
                 step =>
                 {
-                    Assert.Collection(step.Inputs,
-                        source => Assert.Equal(IncrementalStepRunReason.New, source.Source.Outputs[source.OutputIndex].Reason));
-                    Assert.Collection(step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.New, output.Reason));
-                });
+                    Assert.Collection(
+                        step.Inputs,
+                        source =>
+                            Assert.Equal(
+                                IncrementalStepRunReason.New,
+                                source.Source.Outputs[source.OutputIndex].Reason
+                            )
+                    );
+                    Assert.Collection(
+                        step.Outputs,
+                        output => Assert.Equal(IncrementalStepRunReason.New, output.Reason)
+                    );
+                }
+            );
 
             // Update the syntax tree and re-run the compilation
-            compilation = compilation.ReplaceSyntaxTree(compilation.SyntaxTrees.First(), newTree: CompilationHelper.ParseSource(source2));
+            compilation = compilation.ReplaceSyntaxTree(
+                compilation.SyntaxTrees.First(),
+                newTree: CompilationHelper.ParseSource(source2)
+            );
             driver = driver.RunGenerators(compilation);
             runResult = driver.GetRunResult().Results[0];
-            Assert.Collection(runResult.TrackedSteps[JsonSourceGenerator.SourceGenerationSpecTrackingName],
+            Assert.Collection(
+                runResult.TrackedSteps[JsonSourceGenerator.SourceGenerationSpecTrackingName],
                 step =>
                 {
-                    Assert.Collection(step.Inputs,
-                        source => Assert.Equal(IncrementalStepRunReason.Modified, source.Source.Outputs[source.OutputIndex].Reason));
-                    Assert.Collection(step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.Modified, output.Reason));
-                });
+                    Assert.Collection(
+                        step.Inputs,
+                        source =>
+                            Assert.Equal(
+                                IncrementalStepRunReason.Modified,
+                                source.Source.Outputs[source.OutputIndex].Reason
+                            )
+                    );
+                    Assert.Collection(
+                        step.Outputs,
+                        output => Assert.Equal(IncrementalStepRunReason.Modified, output.Reason)
+                    );
+                }
+            );
         }
 #endif
+
         public static IEnumerable<object[]> GetCompilationHelperFactories()
         {
-            return typeof(CompilationHelper).GetMethods(BindingFlags.Static | BindingFlags.Public)
+            return typeof(CompilationHelper)
+                .GetMethods(BindingFlags.Static | BindingFlags.Public)
                 .Where(m => m.ReturnType == typeof(Compilation) && m.GetParameters().Length == 0)
-                .Select(m => new object[] { Delegate.CreateDelegate(typeof(Func<Compilation>), m) });
+                .Select(m =>
+                    new object[] { Delegate.CreateDelegate(typeof(Func<Compilation>), m) }
+                );
         }
     }
 }

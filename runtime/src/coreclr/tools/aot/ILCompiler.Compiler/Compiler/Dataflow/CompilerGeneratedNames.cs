@@ -49,9 +49,11 @@ namespace ILCompiler.Dataflow
             return fieldName.Length > i + 1 && fieldName[i + 1] == '2';
         }
 
-        internal static bool IsStateMachineOrDisplayClass(string name) => IsStateMachineType(name) || IsLambdaDisplayClass(name);
+        internal static bool IsStateMachineOrDisplayClass(string name) =>
+            IsStateMachineType(name) || IsLambdaDisplayClass(name);
 
-        internal static bool IsLambdaOrLocalFunction(string methodName) => IsLambdaMethod(methodName) || IsLocalFunction(methodName);
+        internal static bool IsLambdaOrLocalFunction(string methodName) =>
+            IsLambdaMethod(methodName) || IsLocalFunction(methodName);
 
         // Lambda methods have generated names like "<UserMethod>b__0_1" where "UserMethod" is the name
         // of the original user code that contains the lambda method declaration.

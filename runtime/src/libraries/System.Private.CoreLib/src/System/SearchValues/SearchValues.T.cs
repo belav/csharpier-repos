@@ -17,7 +17,8 @@ namespace System.Buffers
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [DebuggerTypeProxy(typeof(SearchValuesDebugView<>))]
-    public class SearchValues<T> where T : IEquatable<T>?
+    public class SearchValues<T>
+        where T : IEquatable<T>?
     {
         // Only CoreLib can create derived types
         private protected SearchValues() { }
@@ -35,12 +36,19 @@ namespace System.Buffers
         internal virtual bool ContainsCore(T value) => throw new UnreachableException();
 
         internal virtual int IndexOfAny(ReadOnlySpan<T> span) => throw new UnreachableException();
-        internal virtual int IndexOfAnyExcept(ReadOnlySpan<T> span) => throw new UnreachableException();
-        internal virtual int LastIndexOfAny(ReadOnlySpan<T> span) => throw new UnreachableException();
-        internal virtual int LastIndexOfAnyExcept(ReadOnlySpan<T> span) => throw new UnreachableException();
+
+        internal virtual int IndexOfAnyExcept(ReadOnlySpan<T> span) =>
+            throw new UnreachableException();
+
+        internal virtual int LastIndexOfAny(ReadOnlySpan<T> span) =>
+            throw new UnreachableException();
+
+        internal virtual int LastIndexOfAnyExcept(ReadOnlySpan<T> span) =>
+            throw new UnreachableException();
 
         // This is only implemented and used by SearchValues<string>.
-        internal virtual int IndexOfAnyMultiString(ReadOnlySpan<char> span) => throw new UnreachableException();
+        internal virtual int IndexOfAnyMultiString(ReadOnlySpan<char> span) =>
+            throw new UnreachableException();
 
         private string DebuggerDisplay
         {
@@ -52,9 +60,10 @@ namespace System.Buffers
                 if (values.Length > 0)
                 {
                     display += ", Values = ";
-                    display += typeof(T) == typeof(char) ?
-                        "\"" + new string(Unsafe.As<T[], char[]>(ref values)) + "\"" :
-                        string.Join(",", values);
+                    display +=
+                        typeof(T) == typeof(char)
+                            ? "\"" + new string(Unsafe.As<T[], char[]>(ref values)) + "\""
+                            : string.Join(",", values);
                 }
 
                 return display;

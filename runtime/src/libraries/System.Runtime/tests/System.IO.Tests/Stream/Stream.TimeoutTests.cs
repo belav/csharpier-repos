@@ -19,7 +19,6 @@ namespace System.IO.Tests
             get { return false; }
         }
 
-
         public override bool CanWrite
         {
             get { return false; }
@@ -30,7 +29,6 @@ namespace System.IO.Tests
             get { throw new NotSupportedException(); }
         }
 
-
         public override long Position
         {
             get { throw new NotSupportedException(); }
@@ -38,11 +36,23 @@ namespace System.IO.Tests
         }
 
         public override void Flush() { }
-        public override long Seek(long offset, SeekOrigin origin) { throw new NotSupportedException(); }
-        public override void SetLength(long value) { throw new NotSupportedException(); }
-        public override int Read(byte[] buffer, int offset, int count) { return 0; }
-        public override void Write(byte[] buffer, int offset, int count) { }
 
+        public override long Seek(long offset, SeekOrigin origin)
+        {
+            throw new NotSupportedException();
+        }
+
+        public override void SetLength(long value)
+        {
+            throw new NotSupportedException();
+        }
+
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            return 0;
+        }
+
+        public override void Write(byte[] buffer, int offset, int count) { }
     }
 
     public class TimeoutTests
@@ -59,13 +69,13 @@ namespace System.IO.Tests
             TestReadTimeout(new MemoryStream());
         }
 
-
         private static void TestReadTimeout(Stream stream)
         {
             Assert.Throws<InvalidOperationException>(() => stream.ReadTimeout);
 
             Assert.Throws<InvalidOperationException>(() => stream.ReadTimeout = 500);
         }
+
         [Fact]
         public static void TestWriteTimeoutCustomStream()
         {
@@ -101,5 +111,4 @@ namespace System.IO.Tests
             Assert.False(stream.CanTimeout, "Expected CanTimeout to return false");
         }
     }
-
 }

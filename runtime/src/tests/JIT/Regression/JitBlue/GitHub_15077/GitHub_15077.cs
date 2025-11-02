@@ -67,11 +67,11 @@ public class P
         UInt32 r31a = Gx(31);
         UInt32 rm1a = Gx(-1);
 
-        Console.WriteLine($"r64:{r64,0:X8} r64a:{r64a,0:X8}");
-        Console.WriteLine($"r63:{r63,0:X8} r63a:{r63a,0:X8}");
-        Console.WriteLine($"r32:{r32,0:X8} r32a:{r32a,0:X8}");
-        Console.WriteLine($"r31:{r31,0:X8} r31a:{r31a,0:X8}");
-        Console.WriteLine($"rm1:{rm1,0:X8} rm1a:{rm1a,0:X8}");
+        Console.WriteLine($"r64:{r64, 0:X8} r64a:{r64a, 0:X8}");
+        Console.WriteLine($"r63:{r63, 0:X8} r63a:{r63a, 0:X8}");
+        Console.WriteLine($"r32:{r32, 0:X8} r32a:{r32a, 0:X8}");
+        Console.WriteLine($"r31:{r31, 0:X8} r31a:{r31a, 0:X8}");
+        Console.WriteLine($"rm1:{rm1, 0:X8} rm1a:{rm1a, 0:X8}");
 
         bool b64 = (r64 == 0x00000000) && (r64a == r64);
         bool b63 = (r63 == 0xFFFFFFFF) && (r63a == r63);

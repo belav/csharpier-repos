@@ -10,15 +10,15 @@
 //using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
 
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
-// to prevent from simple mistakes during development (e.g. method argument validation 
-// in cases where it was you who created the variables or the variables had already been validated or 
-// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default 
-// "else" block is chosen why the new condition should be treated separately). This kind of asserts are 
-// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in 
-// the shipped product. 
-// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions 
+// to prevent from simple mistakes during development (e.g. method argument validation
+// in cases where it was you who created the variables or the variables had already been validated or
+// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default
+// "else" block is chosen why the new condition should be treated separately). This kind of asserts are
+// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in
+// the shipped product.
+// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions
 // about how the tree was built etc. - in these cases we probably want to throw an exception (this is
-// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct 
+// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct
 // or the tree was built/rewritten not the way we thought it was.
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
@@ -27,13 +27,13 @@
 // The PreProcessor module is responsible for performing any required preprocessing
 // on the tree and gathering information before subsequent phases may be performed.
 // The main responsibilites of the preprocessor are:
-//    
+//
 //   (a) gathering information about all structured types and entitysets referenced in the
 //       query
 //   (b) expanding views, navigate operators, and rewritting other type related operators
 //   (c) gathering information about which subsequent phases may be requried
 //   (d) pulling sort over project, and removing unnecessary sorts
-//   (e) eliminates certain operations by translating them into equivalent subtrees 
+//   (e) eliminates certain operations by translating them into equivalent subtrees
 //              (ElementOp, NewMultisetOp)
 //
 
@@ -53,7 +53,11 @@ namespace System.Data.Query.PlanCompiler
         internal bool IncludesSubTypes;
         internal ExplicitDiscriminatorMap DiscriminatorMap;
 
-        internal DiscriminatorMapInfo(EntityTypeBase rootEntityType, bool includesSubTypes, ExplicitDiscriminatorMap discriminatorMap)
+        internal DiscriminatorMapInfo(
+            EntityTypeBase rootEntityType,
+            bool includesSubTypes,
+            ExplicitDiscriminatorMap discriminatorMap
+        )
         {
             RootEntityType = rootEntityType;
             IncludesSubTypes = includesSubTypes;
@@ -62,18 +66,22 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Merge the discriminatorMap info we just found with what we've already found.
-        /// 
+        ///
         /// In practice, if either the current or the new map is from an OfTypeOnly view, we
         /// have to avoid the optimizations.
-        /// 
+        ///
         /// If we have a new map that is a superset of the current map, then we can just swap
         /// the new map for the current one.
-        /// 
+        ///
         /// If the current map is tha super set of the new one ther's nothing to do.
-        /// 
+        ///
         /// (Of course, if neither has changed, then we really don't need to look)
         /// </summary>
-        internal void Merge(EntityTypeBase neededRootEntityType, bool includesSubtypes, ExplicitDiscriminatorMap discriminatorMap)
+        internal void Merge(
+            EntityTypeBase neededRootEntityType,
+            bool includesSubtypes,
+            ExplicitDiscriminatorMap discriminatorMap
+        )
         {
             // If what we've found doesn't exactly match what we are looking for we have more work to do
             if (RootEntityType != neededRootEntityType || IncludesSubTypes != includesSubtypes)
@@ -83,11 +91,10 @@ namespace System.Data.Query.PlanCompiler
                     // If either the original or the new map is from an of-type-only view we can't
                     // merge, we just have to not optimize this case.
                     DiscriminatorMap = null;
-
                 }
                 if (TypeSemantics.IsSubTypeOf(RootEntityType, neededRootEntityType))
                 {
-                    // we're asking for a super type of existing type, and what we had is a proper 
+                    // we're asking for a super type of existing type, and what we had is a proper
                     // subset of it -we can replace the existing item.
                     RootEntityType = neededRootEntityType;
                     DiscriminatorMap = discriminatorMap;
@@ -116,14 +123,17 @@ namespace System.Data.Query.PlanCompiler
         /// </summary>
         private readonly Stack<EntitySet> m_entityTypeScopes = new Stack<EntitySet>();
 
-        // Track referenced types, entitysets, entitycontainers, free floating entity constructor types 
+        // Track referenced types, entitysets, entitycontainers, free floating entity constructor types
         // and types needing a null sentinel.
-        private readonly HashSet<EntityContainer> m_referencedEntityContainers = new HashSet<EntityContainer>();
+        private readonly HashSet<EntityContainer> m_referencedEntityContainers =
+            new HashSet<EntityContainer>();
         private readonly HashSet<EntitySet> m_referencedEntitySets = new HashSet<EntitySet>();
         private readonly HashSet<TypeUsage> m_referencedTypes = new HashSet<TypeUsage>();
-        private readonly HashSet<EntityType> m_freeFloatingEntityConstructorTypes = new HashSet<EntityType>();
+        private readonly HashSet<EntityType> m_freeFloatingEntityConstructorTypes =
+            new HashSet<EntityType>();
         private readonly HashSet<string> m_typesNeedingNullSentinel = new HashSet<string>();
-        private readonly Dictionary<EdmFunction, EdmProperty[]> m_tvfResultKeys = new Dictionary<EdmFunction, EdmProperty[]>();
+        private readonly Dictionary<EdmFunction, EdmProperty[]> m_tvfResultKeys =
+            new Dictionary<EdmFunction, EdmProperty[]>();
 
         /// <summary>
         /// Helper for rel properties
@@ -132,14 +142,18 @@ namespace System.Data.Query.PlanCompiler
 
         // Track discriminator metadata.
         private bool m_suppressDiscriminatorMaps;
-        private readonly Dictionary<EntitySetBase, DiscriminatorMapInfo> m_discriminatorMaps = new Dictionary<EntitySetBase, DiscriminatorMapInfo>();
+        private readonly Dictionary<EntitySetBase, DiscriminatorMapInfo> m_discriminatorMaps =
+            new Dictionary<EntitySetBase, DiscriminatorMapInfo>();
         #endregion
 
         #region constructors
         private PreProcessor(PlanCompiler planCompilerState)
             : base(planCompilerState)
         {
-            m_relPropertyHelper = new RelPropertyHelper(m_command.MetadataWorkspace, m_command.ReferencedRelProperties);
+            m_relPropertyHelper = new RelPropertyHelper(
+                m_command.MetadataWorkspace,
+                m_command.ReferencedRelProperties
+            );
         }
         #endregion
 
@@ -153,19 +167,22 @@ namespace System.Data.Query.PlanCompiler
         internal static void Process(
             PlanCompiler planCompilerState,
             out StructuredTypeInfo typeInfo,
-            out Dictionary<EdmFunction, EdmProperty[]> tvfResultKeys)
+            out Dictionary<EdmFunction, EdmProperty[]> tvfResultKeys
+        )
         {
             PreProcessor preProcessor = new PreProcessor(planCompilerState);
             preProcessor.Process(out tvfResultKeys);
 
-            StructuredTypeInfo.Process(planCompilerState.Command,
+            StructuredTypeInfo.Process(
+                planCompilerState.Command,
                 preProcessor.m_referencedTypes,
                 preProcessor.m_referencedEntitySets,
                 preProcessor.m_freeFloatingEntityConstructorTypes,
                 preProcessor.m_suppressDiscriminatorMaps ? null : preProcessor.m_discriminatorMaps,
                 preProcessor.m_relPropertyHelper,
                 preProcessor.m_typesNeedingNullSentinel,
-                out typeInfo);
+                out typeInfo
+            );
         }
 
         #endregion
@@ -197,7 +214,10 @@ namespace System.Data.Query.PlanCompiler
                 // ensure that we can handle their nullability.
                 //
                 PhysicalProjectOp ppOp = (PhysicalProjectOp)m_command.Root.Op; // this better be the case or we have other problems.
-                ppOp.ColumnMap.Accept(StructuredTypeNullabilityAnalyzer.Instance, m_typesNeedingNullSentinel);
+                ppOp.ColumnMap.Accept(
+                    StructuredTypeNullabilityAnalyzer.Instance,
+                    m_typesNeedingNullSentinel
+                );
             }
 
             tvfResultKeys = m_tvfResultKeys;
@@ -225,7 +245,11 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="type">type to reference</param>
         private void AddTypeReference(TypeUsage type)
         {
-            if (TypeUtils.IsStructuredType(type) || TypeUtils.IsCollectionType(type) || TypeUtils.IsEnumerationType(type))
+            if (
+                TypeUtils.IsStructuredType(type)
+                || TypeUtils.IsCollectionType(type)
+                || TypeUtils.IsEnumerationType(type)
+            )
             {
                 m_referencedTypes.Add(type);
             }
@@ -233,8 +257,8 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Get the list of relationshipsets that can hold instances of the given relationshiptype
-        /// 
-        /// We identify the list of relationshipsets in the current list of entitycontainers that are 
+        ///
+        /// We identify the list of relationshipsets in the current list of entitycontainers that are
         /// of the given type. Since we don't yet support relationshiptype subtyping, this is a little
         /// easier than the entity version
         /// </summary>
@@ -248,8 +272,7 @@ namespace System.Data.Query.PlanCompiler
                 foreach (EntitySetBase set in entityContainer.BaseEntitySets)
                 {
                     RelationshipSet relSet = set as RelationshipSet;
-                    if (relSet != null &&
-                        relSet.ElementType.Equals(relType))
+                    if (relSet != null && relSet.ElementType.Equals(relType))
                     {
                         relSets.Add(relSet);
                     }
@@ -259,7 +282,7 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Find all entitysets (that are reachable in the current query) that can hold instances that 
+        /// Find all entitysets (that are reachable in the current query) that can hold instances that
         /// are *at least* of type "entityType".
         /// An entityset ES of type T1 can hold instances that are at least of type T2, if one of the following
         /// is true
@@ -277,10 +300,14 @@ namespace System.Data.Query.PlanCompiler
                 foreach (EntitySetBase baseSet in container.BaseEntitySets)
                 {
                     EntitySet set = baseSet as EntitySet;
-                    if (set != null &&
-                        (set.ElementType.Equals(entityType.EdmType) ||
-                         TypeSemantics.IsSubTypeOf(entityType.EdmType, set.ElementType) ||
-                         TypeSemantics.IsSubTypeOf(set.ElementType, entityType.EdmType)))
+                    if (
+                        set != null
+                        && (
+                            set.ElementType.Equals(entityType.EdmType)
+                            || TypeSemantics.IsSubTypeOf(entityType.EdmType, set.ElementType)
+                            || TypeSemantics.IsSubTypeOf(set.ElementType, entityType.EdmType)
+                        )
+                    )
                     {
                         sets.Add(set);
                     }
@@ -299,19 +326,27 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="node">The current node</param>
         /// <param name="scanTableOp">The scanTableOp that references the entity set</param>
         /// <param name="typeFilter">
-        ///     An optional type filter to apply to the generated view. 
+        ///     An optional type filter to apply to the generated view.
         ///     Set to <c>null</c> on return if the generated view renders the type filter superfluous.
         /// </param>
         /// <returns>A node that is the root of the new expanded view</returns>
         private Node ExpandView(Node node, ScanTableOp scanTableOp, ref IsOfOp typeFilter)
         {
             EntitySetBase entitySet = scanTableOp.Table.TableMetadata.Extent;
-            PlanCompiler.Assert(entitySet != null, "The target of a ScanTableOp must reference an EntitySet to be used with ExpandView");
-            PlanCompiler.Assert(entitySet.EntityContainer.DataSpace == DataSpace.CSpace, "Store entity sets cannot have Query Mapping Views and should not be used with ExpandView");
+            PlanCompiler.Assert(
+                entitySet != null,
+                "The target of a ScanTableOp must reference an EntitySet to be used with ExpandView"
+            );
+            PlanCompiler.Assert(
+                entitySet.EntityContainer.DataSpace == DataSpace.CSpace,
+                "Store entity sets cannot have Query Mapping Views and should not be used with ExpandView"
+            );
 
-            if (typeFilter != null &&
-               !typeFilter.IsOfOnly &&
-                TypeSemantics.IsSubTypeOf(entitySet.ElementType, typeFilter.IsOfType.EdmType))
+            if (
+                typeFilter != null
+                && !typeFilter.IsOfOnly
+                && TypeSemantics.IsSubTypeOf(entitySet.ElementType, typeFilter.IsOfType.EdmType)
+            )
             {
                 //
                 // If a type filter is being applied to the ScanTableOp, but that filter is asking
@@ -333,16 +368,23 @@ namespace System.Data.Query.PlanCompiler
             bool includeSubtypes = true;
             if (typeFilter != null)
             {
-                // 
+                //
                 // A type filter is being applied to the ScanTableOp; it may be possible to produce
                 // an optimized expansion of the view based on type-specific views generated for the
-                // C-Space entity set. 
+                // C-Space entity set.
                 // The type for which the view should be tuned is the 'OfType' specified on the type filter.
                 // If the type filter is an 'IsOfOnly' filter then the view should NOT include subtypes of the required type.
                 //
                 requiredType = (EntityTypeBase)typeFilter.IsOfType.EdmType;
                 includeSubtypes = !typeFilter.IsOfOnly;
-                if (m_command.MetadataWorkspace.TryGetGeneratedViewOfType(entitySet, requiredType, includeSubtypes, out definingQuery))
+                if (
+                    m_command.MetadataWorkspace.TryGetGeneratedViewOfType(
+                        entitySet,
+                        requiredType,
+                        includeSubtypes,
+                        out definingQuery
+                    )
+                )
                 {
                     //
                     // At this point a type-specific view was found that satisifies the type filter's
@@ -371,7 +413,10 @@ namespace System.Data.Query.PlanCompiler
             // This implies that the set was not mapped, which should not be allowed, therefore
             // a retail assert is used here instead of a regular exception.
             //
-            PlanCompiler.Assert(definingQuery != null, Strings.ADP_NoQueryMappingView(entitySet.EntityContainer.Name, entitySet.Name));
+            PlanCompiler.Assert(
+                definingQuery != null,
+                Strings.ADP_NoQueryMappingView(entitySet.EntityContainer.Name, entitySet.Name)
+            );
 
             //
             // At this point we're guaranteed to have found a defining query for the view.
@@ -393,20 +438,25 @@ namespace System.Data.Query.PlanCompiler
             return ret;
         }
 
-
         /// <summary>
         /// If the discrminator map we're already tracking for this type (in this entityset)
-        /// isn't already rooted at our required type, then we have to suppress the use of 
+        /// isn't already rooted at our required type, then we have to suppress the use of
         /// the descriminator maps when we constrct the structuredtypes; see SQLBUDT #615744
         /// </summary>
-        private void DetermineDiscriminatorMapUsage(Node viewNode, EntitySetBase entitySet, EntityTypeBase rootEntityType, bool includeSubtypes)
+        private void DetermineDiscriminatorMapUsage(
+            Node viewNode,
+            EntitySetBase entitySet,
+            EntityTypeBase rootEntityType,
+            bool includeSubtypes
+        )
         {
             ExplicitDiscriminatorMap discriminatorMap = null;
 
             // we expect the view to be capped with a project; we're just being careful here.
             if (viewNode.Op.OpType == OpType.Project)
             {
-                DiscriminatedNewEntityOp discriminatedNewEntityOp = viewNode.Child1.Child0.Child0.Op as DiscriminatedNewEntityOp;
+                DiscriminatedNewEntityOp discriminatedNewEntityOp =
+                    viewNode.Child1.Child0.Child0.Op as DiscriminatedNewEntityOp;
 
                 if (null != discriminatedNewEntityOp)
                 {
@@ -422,7 +472,11 @@ namespace System.Data.Query.PlanCompiler
                     rootEntityType = entitySet.ElementType;
                     includeSubtypes = true;
                 }
-                discriminatorMapInfo = new DiscriminatorMapInfo(rootEntityType, includeSubtypes, discriminatorMap);
+                discriminatorMapInfo = new DiscriminatorMapInfo(
+                    rootEntityType,
+                    includeSubtypes,
+                    discriminatorMap
+                );
                 m_discriminatorMaps.Add(entitySet, discriminatorMapInfo);
             }
             else
@@ -443,24 +497,28 @@ namespace System.Data.Query.PlanCompiler
         ///         ...
         ///         SELECT VALUE rN FROM RSN as rN) as r
         ///   WHERE r.FromEnd = sourceRef
-        ///   
+        ///
         ///  RS1, RS2 etc. are the set of all relationshipsets that can hold instances of the specified
-        ///  relationship type. "sourceRef" is the single (ref-type) argument to the NavigateOp that 
+        ///  relationship type. "sourceRef" is the single (ref-type) argument to the NavigateOp that
         ///  represents the from-end of the navigation traversal
         /// If the toEnd is multi-valued, then we stick a Collect(PhysicalProject( over the subquery above
-        /// 
-        /// A couple of special cases. 
-        ///    If no relationship sets can be found, we return a NULL (if the 
+        ///
+        /// A couple of special cases.
+        ///    If no relationship sets can be found, we return a NULL (if the
         /// toEnd is single-valued), or an empty multiset (if the toEnd is multi-valued)
         ///
-        ///    If the toEnd is single-valued, *AND* the input Op is a GetEntityRefOp, then 
+        ///    If the toEnd is single-valued, *AND* the input Op is a GetEntityRefOp, then
         /// we convert the NavigateOp into a RelPropertyOp over the entity.
         /// </summary>
         /// <param name="navigateOpNode">the navigateOp tree</param>
         /// <param name="navigateOp">the navigateOp</param>
         /// <param name="outputVar">the output var produced by the subquery (ONLY if the to-End is single-valued)</param>
         /// <returns>the resulting node</returns>
-        private Node RewriteNavigateOp(Node navigateOpNode, NavigateOp navigateOp, out Var outputVar)
+        private Node RewriteNavigateOp(
+            Node navigateOpNode,
+            NavigateOp navigateOp,
+            out Var outputVar
+        )
         {
             outputVar = null;
 
@@ -477,15 +535,23 @@ namespace System.Data.Query.PlanCompiler
             // is to the 1-end of the relationship, convert this into a RelPropertyOp instead - operating on the
             // input child to the GetEntityRefOp
             //
-            if (navigateOpNode.Child0.Op.OpType == OpType.GetEntityRef &&
-                (navigateOp.ToEnd.RelationshipMultiplicity == RelationshipMultiplicity.ZeroOrOne ||
-                navigateOp.ToEnd.RelationshipMultiplicity == RelationshipMultiplicity.One))
+            if (
+                navigateOpNode.Child0.Op.OpType == OpType.GetEntityRef
+                && (
+                    navigateOp.ToEnd.RelationshipMultiplicity == RelationshipMultiplicity.ZeroOrOne
+                    || navigateOp.ToEnd.RelationshipMultiplicity == RelationshipMultiplicity.One
+                )
+            )
             {
-                PlanCompiler.Assert(m_command.IsRelPropertyReferenced(navigateOp.RelProperty),
-                    "Unreferenced rel property? " + navigateOp.RelProperty);
+                PlanCompiler.Assert(
+                    m_command.IsRelPropertyReferenced(navigateOp.RelProperty),
+                    "Unreferenced rel property? " + navigateOp.RelProperty
+                );
                 Op relPropertyOp = m_command.CreateRelPropertyOp(navigateOp.RelProperty);
-                Node relPropertyNode = m_command.CreateNode(relPropertyOp,
-                    navigateOpNode.Child0.Child0);
+                Node relPropertyNode = m_command.CreateNode(
+                    relPropertyOp,
+                    navigateOpNode.Child0.Child0
+                );
                 return relPropertyNode;
             }
 
@@ -497,7 +563,7 @@ namespace System.Data.Query.PlanCompiler
             //
             if (relationshipSets.Count == 0)
             {
-                // 
+                //
                 // If we're navigating to the 1-end of the relationship, then simply return a null constant
                 //
                 if (navigateOp.ToEnd.RelationshipMultiplicity != RelationshipMultiplicity.Many)
@@ -512,7 +578,7 @@ namespace System.Data.Query.PlanCompiler
 
             //
             // Build up a UNION-ALL ladder over all the relationshipsets
-            // 
+            //
             List<Node> scanTableNodes = new List<Node>();
             List<Var> scanTableVars = new List<Var>();
             foreach (RelationshipSet relSet in relationshipSets)
@@ -527,18 +593,34 @@ namespace System.Data.Query.PlanCompiler
 
             Node unionAllNode = null;
             Var unionAllVar;
-            m_command.BuildUnionAllLadder(scanTableNodes, scanTableVars, out unionAllNode, out unionAllVar);
+            m_command.BuildUnionAllLadder(
+                scanTableNodes,
+                scanTableVars,
+                out unionAllNode,
+                out unionAllVar
+            );
 
             //
             // Now build up the predicate
             //
-            Node targetEnd = m_command.CreateNode(m_command.CreatePropertyOp(navigateOp.ToEnd),
-                m_command.CreateNode(m_command.CreateVarRefOp(unionAllVar)));
-            Node sourceEnd = m_command.CreateNode(m_command.CreatePropertyOp(navigateOp.FromEnd),
-                m_command.CreateNode(m_command.CreateVarRefOp(unionAllVar)));
-            Node predicateNode = m_command.BuildComparison(OpType.EQ, navigateOpNode.Child0, sourceEnd);
-            Node filterNode = m_command.CreateNode(m_command.CreateFilterOp(),
-                unionAllNode, predicateNode);
+            Node targetEnd = m_command.CreateNode(
+                m_command.CreatePropertyOp(navigateOp.ToEnd),
+                m_command.CreateNode(m_command.CreateVarRefOp(unionAllVar))
+            );
+            Node sourceEnd = m_command.CreateNode(
+                m_command.CreatePropertyOp(navigateOp.FromEnd),
+                m_command.CreateNode(m_command.CreateVarRefOp(unionAllVar))
+            );
+            Node predicateNode = m_command.BuildComparison(
+                OpType.EQ,
+                navigateOpNode.Child0,
+                sourceEnd
+            );
+            Node filterNode = m_command.CreateNode(
+                m_command.CreateFilterOp(),
+                unionAllNode,
+                predicateNode
+            );
             Var projectVar;
             Node projectNode = m_command.BuildProject(filterNode, targetEnd, out projectVar);
 
@@ -564,7 +646,7 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Build up a node tree that represents the set of instances from the given table that are at least
         /// of the specified type ("ofType"). If "ofType" is NULL, then all rows are returned
-        /// 
+        ///
         /// Return the outputVar from the nodetree
         /// </summary>
         /// <param name="entitySet">the entityset or relationshipset to scan over</param>
@@ -579,12 +661,19 @@ namespace System.Data.Query.PlanCompiler
             Var tableVar = tableOp.Table.Columns[0];
 
             Node resultNode;
-            // 
+            //
             // Build a logical "oftype" expression - simply a filter predicate
             //
             if ((ofType != null) && !entitySet.ElementType.EdmEquals(ofType.EdmType))
             {
-                m_command.BuildOfTypeTree(tableNode, tableVar, ofType, true, out resultNode, out resultVar);
+                m_command.BuildOfTypeTree(
+                    tableNode,
+                    tableVar,
+                    ofType,
+                    true,
+                    out resultNode,
+                    out resultVar
+                );
             }
             else
             {
@@ -597,7 +686,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Produces a relop tree that "logically" produces the target of the derefop. In essence, this gets rewritten
-        /// into 
+        /// into
         ///      SELECT VALUE e
         ///      FROM (SELECT VALUE e0 FROM OFTYPE(ES0, T) as e0
         ///            UNION ALL
@@ -605,16 +694,16 @@ namespace System.Data.Query.PlanCompiler
         ///            ...
         ///            SELECT VALUE eN from OFTYPE(ESN, T) as eN)) as e
         ///      WHERE REF(e) = myRef
-        ///      
+        ///
         /// "T" is the target type of the Deref, and myRef is the (single) argument to the DerefOp
-        /// 
-        /// ES0, ES1 etc. are all the EntitySets that could hold instances that are at least of type "T". We identify this list of sets 
+        ///
+        /// ES0, ES1 etc. are all the EntitySets that could hold instances that are at least of type "T". We identify this list of sets
         /// by looking at all entitycontainers referenced in the query, and looking at all entitysets in those
         /// containers that are of the right type
         /// An EntitySet ES (of entity type X) can hold instances of T, if one of the following is true
-        ///   - T is a subtype of X 
+        ///   - T is a subtype of X
         ///   - X is equal to T
-        /// Our situation is a little trickier, since we also need to look for cases where X is a subtype of T. 
+        /// Our situation is a little trickier, since we also need to look for cases where X is a subtype of T.
         /// </summary>
         /// <param name="derefOpNode">the derefOp subtree</param>
         /// <param name="derefOp">the derefOp</param>
@@ -643,19 +732,30 @@ namespace System.Data.Query.PlanCompiler
             }
             Node unionAllNode;
             Var unionAllVar;
-            m_command.BuildUnionAllLadder(scanTableNodes, scanTableVars, out unionAllNode, out unionAllVar);
+            m_command.BuildUnionAllLadder(
+                scanTableNodes,
+                scanTableVars,
+                out unionAllNode,
+                out unionAllVar
+            );
 
             //
             // Finally build up the key comparison predicate
             //
             Node entityRefNode = m_command.CreateNode(
                 m_command.CreateGetEntityRefOp(derefOpNode.Child0.Op.Type),
-                m_command.CreateNode(m_command.CreateVarRefOp(unionAllVar)));
-            Node keyComparisonPred = m_command.BuildComparison(OpType.EQ, derefOpNode.Child0, entityRefNode);
+                m_command.CreateNode(m_command.CreateVarRefOp(unionAllVar))
+            );
+            Node keyComparisonPred = m_command.BuildComparison(
+                OpType.EQ,
+                derefOpNode.Child0,
+                entityRefNode
+            );
             Node filterNode = m_command.CreateNode(
                 m_command.CreateFilterOp(),
                 unionAllNode,
-                keyComparisonPred);
+                keyComparisonPred
+            );
 
             outputVar = unionAllVar;
             return filterNode;
@@ -666,13 +766,16 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Find the entityset that corresponds to the specified end of the relationship.
-        /// 
+        ///
         /// We must find one - else we assert.
         /// </summary>
         /// <param name="relationshipSet">the relationshipset</param>
         /// <param name="targetEnd">the destination end of the relationship traversal</param>
         /// <returns>the entityset corresponding to the target end</returns>
-        private static EntitySetBase FindTargetEntitySet(RelationshipSet relationshipSet, RelationshipEndMember targetEnd)
+        private static EntitySetBase FindTargetEntitySet(
+            RelationshipSet relationshipSet,
+            RelationshipEndMember targetEnd
+        )
         {
             EntitySetBase entitySet = null;
 
@@ -687,10 +790,15 @@ namespace System.Data.Query.PlanCompiler
                     break;
                 }
             }
-            PlanCompiler.Assert(entitySet != null, "Could not find entityset for relationshipset " + relationshipSet + ";association end " + targetEnd);
+            PlanCompiler.Assert(
+                entitySet != null,
+                "Could not find entityset for relationshipset "
+                    + relationshipSet
+                    + ";association end "
+                    + targetEnd
+            );
             return entitySet;
         }
-
 
         /// <summary>
         /// Builds up a join between the relationshipset and the entityset corresponding to its toEnd. In essence,
@@ -698,35 +806,54 @@ namespace System.Data.Query.PlanCompiler
         ///    SELECT r, e
         ///    FROM RS as r, OFTYPE(ES, T) as e
         ///    WHERE r.ToEnd = Ref(e)
-        ///    
-        /// "T" is the entity type of the toEnd of the relationship.  
+        ///
+        /// "T" is the entity type of the toEnd of the relationship.
         /// </summary>
         /// <param name="relSet">the relationshipset</param>
         /// <param name="end">the toEnd of the relationship</param>
         /// <param name="rsVar">the var representing the relationship instance ("r") in the output subquery</param>
         /// <param name="esVar">the var representing the entity instance ("e") in the output subquery</param>
         /// <returns>the join subquery described above</returns>
-        private Node BuildJoinForNavProperty(RelationshipSet relSet, RelationshipEndMember end,
-            out Var rsVar, out Var esVar)
+        private Node BuildJoinForNavProperty(
+            RelationshipSet relSet,
+            RelationshipEndMember end,
+            out Var rsVar,
+            out Var esVar
+        )
         {
             EntitySetBase entitySet = FindTargetEntitySet(relSet, end);
 
             //
-            // Build out the ScanTable ops for the relationshipset and the entityset. Add the 
+            // Build out the ScanTable ops for the relationshipset and the entityset. Add the
             //
             Node asTableNode = BuildOfTypeTable(relSet, null, out rsVar);
-            Node esTableNode = BuildOfTypeTable(entitySet, TypeHelpers.GetElementTypeUsage(end.TypeUsage), out esVar);
+            Node esTableNode = BuildOfTypeTable(
+                entitySet,
+                TypeHelpers.GetElementTypeUsage(end.TypeUsage),
+                out esVar
+            );
 
-            // 
+            //
             // Build up a join between the entityset and the associationset; join on the to-end
             //
-            Node joinPredicate = m_command.BuildComparison(OpType.EQ,
-                m_command.CreateNode(m_command.CreateGetEntityRefOp(end.TypeUsage), m_command.CreateNode(m_command.CreateVarRefOp(esVar))),
-                m_command.CreateNode(m_command.CreatePropertyOp(end), m_command.CreateNode(m_command.CreateVarRefOp(rsVar)))
-                );
+            Node joinPredicate = m_command.BuildComparison(
+                OpType.EQ,
+                m_command.CreateNode(
+                    m_command.CreateGetEntityRefOp(end.TypeUsage),
+                    m_command.CreateNode(m_command.CreateVarRefOp(esVar))
+                ),
+                m_command.CreateNode(
+                    m_command.CreatePropertyOp(end),
+                    m_command.CreateNode(m_command.CreateVarRefOp(rsVar))
+                )
+            );
 
-            Node joinNode = m_command.CreateNode(m_command.CreateInnerJoinOp(),
-                asTableNode, esTableNode, joinPredicate);
+            Node joinNode = m_command.CreateNode(
+                m_command.CreateInnerJoinOp(),
+                asTableNode,
+                esTableNode,
+                joinPredicate
+            );
 
             return joinNode;
         }
@@ -734,12 +861,12 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Rewrite a navigation property when the target end has multiplicity
         /// of one (or zero..one) and the source end has multiplicity of many.
-        /// 
-        /// Note that this translation is also valid for a navigation property when the target 
+        ///
+        /// Note that this translation is also valid for a navigation property when the target
         /// end has multiplicity of one (or zero..one) and the source end has multiplicity of one
         /// (or zero..one), but a different translation is used because it yields a simpler query in some cases.
-        /// 
-        /// We simply pick up the corresponding rel property from the input entity, and 
+        ///
+        /// We simply pick up the corresponding rel property from the input entity, and
         /// apply a deref operation
         ///     NavProperty(e, n) => deref(relproperty(e, r))
         /// where e is the entity expression, n is the nav-property, and r is the corresponding
@@ -749,8 +876,11 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="sourceEntityNode">entity instance that we're starting the traversal from</param>
         /// <param name="resultType">type of the target entity</param>
         /// <returns>a rewritten subtree</returns>
-        private Node RewriteManyToOneNavigationProperty(RelProperty relProperty,
-            Node sourceEntityNode, TypeUsage resultType)
+        private Node RewriteManyToOneNavigationProperty(
+            RelProperty relProperty,
+            Node sourceEntityNode,
+            TypeUsage resultType
+        )
         {
             RelPropertyOp relPropertyOp = m_command.CreateRelPropertyOp(relProperty);
             Node relPropertyNode = m_command.CreateNode(relPropertyOp, sourceEntityNode);
@@ -763,7 +893,7 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Rewrite a navigation property when the source end has multiplicity
         /// of one (or zero..one) and the target end has multiplicity of many.
-        /// 
+        ///
         /// <see cref="RewriteFromOneNavigationProperty"/>
         /// We also build out a CollectOp over the subquery above, and return that
         /// </summary>
@@ -771,12 +901,19 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="relationshipSets">the list of relevant relationshipsets</param>
         /// <param name="sourceRefNode">node tree corresponding to the source entity ref</param>
         /// <returns>the rewritten subtree</returns>
-        private Node RewriteOneToManyNavigationProperty(RelProperty relProperty,
+        private Node RewriteOneToManyNavigationProperty(
+            RelProperty relProperty,
             List<RelationshipSet> relationshipSets,
-            Node sourceRefNode)
+            Node sourceRefNode
+        )
         {
             Var outputVar;
-            Node ret = RewriteFromOneNavigationProperty(relProperty, relationshipSets, sourceRefNode, out outputVar);
+            Node ret = RewriteFromOneNavigationProperty(
+                relProperty,
+                relationshipSets,
+                sourceRefNode,
+                out outputVar
+            );
 
             // The return value is a collection, but used as a property, thus it needs to be capped with a collect
             ret = m_command.BuildCollect(ret, outputVar);
@@ -787,7 +924,7 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Rewrite a navigation property when the target end has multiplicity
         /// of one (or zero..one) and the source end has multiplicity of one (or zero..one).
-        /// 
+        ///
         /// <see cref="RewriteFromOneNavigationProperty"/>
         /// We add the translation as a subquery to the parent rel op and return a reference to
         /// the corresponding var
@@ -796,15 +933,22 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="relationshipSets">the list of relevant relationshipsets</param>
         /// <param name="sourceRefNode">node tree corresponding to the source entity ref</param>
         /// <returns>the rewritten subtree</returns>
-        private Node RewriteOneToOneNavigationProperty(RelProperty relProperty,
+        private Node RewriteOneToOneNavigationProperty(
+            RelProperty relProperty,
             List<RelationshipSet> relationshipSets,
-            Node sourceRefNode)
+            Node sourceRefNode
+        )
         {
             Var outputVar;
-            Node ret = RewriteFromOneNavigationProperty(relProperty, relationshipSets, sourceRefNode, out outputVar);
+            Node ret = RewriteFromOneNavigationProperty(
+                relProperty,
+                relationshipSets,
+                sourceRefNode,
+                out outputVar
+            );
 
             ret = VisitNode(ret);
-            ret = AddSubqueryToParentRelOp(outputVar, ret); 
+            ret = AddSubqueryToParentRelOp(outputVar, ret);
 
             return ret;
         }
@@ -813,19 +957,19 @@ namespace System.Data.Query.PlanCompiler
         /// Translation for Navigation Properties with a 0 or 0..1 source end
         /// In essence, we find all the relevant target entitysets, and then compare the
         /// rel-property on the target end with the source ref
-        /// 
+        ///
         /// Converts
         ///   NavigationProperty(e, r)
-        /// into 
+        /// into
         ///   SELECT VALUE t
         ///   FROM (SELECT VALUE e1 FROM ES1 as e1
-        ///         UNION ALL 
+        ///         UNION ALL
         ///         SELECT VALUE e2 FROM ES2 as e2
-        ///         UNION ALL 
+        ///         UNION ALL
         ///         ...
         ///         ) as t
         ///   WHERE RelProperty(t, r') = GetEntityRef(e)
-        ///   
+        ///
         /// r' is the inverse-relproperty for r
         /// </summary>
         /// <param name="relProperty">the rel-property describing the relationship traversal</param>
@@ -833,12 +977,22 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="sourceRefNode">node tree corresponding to the source entity ref</param>
         /// <param name="outputVar">the var representing the output</param>
         /// <returns>the rewritten subtree</returns>
-        private Node RewriteFromOneNavigationProperty(RelProperty relProperty, List<RelationshipSet> relationshipSets, Node sourceRefNode,  out Var outputVar)
+        private Node RewriteFromOneNavigationProperty(
+            RelProperty relProperty,
+            List<RelationshipSet> relationshipSets,
+            Node sourceRefNode,
+            out Var outputVar
+        )
         {
-            PlanCompiler.Assert(relationshipSets.Count > 0, "expected at least one relationshipset here");
-            PlanCompiler.Assert(relProperty.FromEnd.RelationshipMultiplicity != RelationshipMultiplicity.Many,
-                "Expected source end multiplicity to be one. Found 'Many' instead " + relProperty);
- 
+            PlanCompiler.Assert(
+                relationshipSets.Count > 0,
+                "expected at least one relationshipset here"
+            );
+            PlanCompiler.Assert(
+                relProperty.FromEnd.RelationshipMultiplicity != RelationshipMultiplicity.Many,
+                "Expected source end multiplicity to be one. Found 'Many' instead " + relProperty
+            );
+
             TypeUsage entityType = TypeHelpers.GetElementTypeUsage(relProperty.ToEnd.TypeUsage);
             List<Node> scanTableNodes = new List<Node>(relationshipSets.Count);
             List<Var> scanTableVars = new List<Var>(relationshipSets.Count);
@@ -852,25 +1006,44 @@ namespace System.Data.Query.PlanCompiler
                 scanTableVars.Add(tableVar);
             }
 
-            // 
+            //
             // Build the union-all node
             //
             Node unionAllNode;
 
-            m_command.BuildUnionAllLadder(scanTableNodes, scanTableVars, out unionAllNode, out outputVar);
+            m_command.BuildUnionAllLadder(
+                scanTableNodes,
+                scanTableVars,
+                out unionAllNode,
+                out outputVar
+            );
 
             //
             // Now build up the appropriate filter. Select out the relproperty from the other end
             //
-            RelProperty inverseRelProperty = new RelProperty(relProperty.Relationship, relProperty.ToEnd, relProperty.FromEnd);
-            PlanCompiler.Assert(m_command.IsRelPropertyReferenced(inverseRelProperty),
-                "Unreferenced rel property? " + inverseRelProperty);
+            RelProperty inverseRelProperty = new RelProperty(
+                relProperty.Relationship,
+                relProperty.ToEnd,
+                relProperty.FromEnd
+            );
+            PlanCompiler.Assert(
+                m_command.IsRelPropertyReferenced(inverseRelProperty),
+                "Unreferenced rel property? " + inverseRelProperty
+            );
             Node inverseRelPropertyNode = m_command.CreateNode(
                 m_command.CreateRelPropertyOp(inverseRelProperty),
-                m_command.CreateNode(m_command.CreateVarRefOp(outputVar)));
-            Node predicateNode = m_command.BuildComparison(OpType.EQ,
-                sourceRefNode, inverseRelPropertyNode);
-            Node ret = m_command.CreateNode(m_command.CreateFilterOp(), unionAllNode, predicateNode);
+                m_command.CreateNode(m_command.CreateVarRefOp(outputVar))
+            );
+            Node predicateNode = m_command.BuildComparison(
+                OpType.EQ,
+                sourceRefNode,
+                inverseRelPropertyNode
+            );
+            Node ret = m_command.CreateNode(
+                m_command.CreateFilterOp(),
+                unionAllNode,
+                predicateNode
+            );
 
             return ret;
         }
@@ -878,37 +1051,48 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Rewrite a navigation property when the target end has multiplicity
         /// many and the source end has multiplicity of many.
-        /// 
+        ///
         /// Consider this a rewrite of DEREF(NAVIGATE(r)) where "r" is a many-to-many relationship
-        /// 
+        ///
         /// We essentially produce the following subquery
         ///   SELECT VALUE x.e
         ///   FROM (SELECT r1 as r, e1 as e FROM RS1 as r1 INNER JOIN OFTYPE(ES1, T) as e1 on r1.ToEnd = Ref(e1)
         ///         UNION ALL
         ///         SELECT r1 as r, e1 as e FROM RS1 as r1 INNER JOIN OFTYPE(ES1, T) as e1 on r1.ToEnd = Ref(e1)
         ///         ...
-        ///         ) as x 
+        ///         ) as x
         ///   WHERE x.r.FromEnd = sourceRef
-        ///   
+        ///
         /// RS1, RS2 etc. are the relevant relationshipsets
         /// ES1, ES2 etc. are the corresponding entitysets for the toEnd of the relationship
         /// sourceRef is the ref argument
         /// T is the type of the target-end of the relationship
-        /// 
+        ///
         /// We then build a CollectOp over the subquery above
         /// </summary>
         /// <param name="relProperty">the rel property to traverse</param>
         /// <param name="relationshipSets">list of relevant relationshipsets</param>
         /// <param name="sourceRefNode">source ref</param>
         /// <returns></returns>
-        private Node RewriteManyToManyNavigationProperty(RelProperty relProperty,
+        private Node RewriteManyToManyNavigationProperty(
+            RelProperty relProperty,
             List<RelationshipSet> relationshipSets,
-            Node sourceRefNode)
+            Node sourceRefNode
+        )
         {
-            PlanCompiler.Assert(relationshipSets.Count > 0, "expected at least one relationshipset here");
-            PlanCompiler.Assert(relProperty.ToEnd.RelationshipMultiplicity == RelationshipMultiplicity.Many &&
-                relProperty.FromEnd.RelationshipMultiplicity == RelationshipMultiplicity.Many,
-                "Expected target end multiplicity to be 'many'. Found " + relProperty + "; multiplicity = " + relProperty.ToEnd.RelationshipMultiplicity);
+            PlanCompiler.Assert(
+                relationshipSets.Count > 0,
+                "expected at least one relationshipset here"
+            );
+            PlanCompiler.Assert(
+                relProperty.ToEnd.RelationshipMultiplicity == RelationshipMultiplicity.Many
+                    && relProperty.FromEnd.RelationshipMultiplicity
+                        == RelationshipMultiplicity.Many,
+                "Expected target end multiplicity to be 'many'. Found "
+                    + relProperty
+                    + "; multiplicity = "
+                    + relProperty.ToEnd.RelationshipMultiplicity
+            );
 
             Node ret = null;
 
@@ -924,27 +1108,40 @@ namespace System.Data.Query.PlanCompiler
                 outputVars.Add(esVar);
             }
 
-            // 
+            //
             // Build the union-all node
             //
             Node unionAllNode;
             IList<Var> unionAllVars;
-            m_command.BuildUnionAllLadder(joinNodes, outputVars, out unionAllNode, out unionAllVars);
+            m_command.BuildUnionAllLadder(
+                joinNodes,
+                outputVars,
+                out unionAllNode,
+                out unionAllVars
+            );
 
             //
             // Now build out the filterOp over the left-side var
             //
-            Node rsSourceRefNode = m_command.CreateNode(m_command.CreatePropertyOp(relProperty.FromEnd),
-                m_command.CreateNode(m_command.CreateVarRefOp(unionAllVars[0])));
-            Node predicate = m_command.BuildComparison(OpType.EQ,
-                sourceRefNode, rsSourceRefNode);
-            Node filterNode = m_command.CreateNode(m_command.CreateFilterOp(),
-                unionAllNode, predicate);
+            Node rsSourceRefNode = m_command.CreateNode(
+                m_command.CreatePropertyOp(relProperty.FromEnd),
+                m_command.CreateNode(m_command.CreateVarRefOp(unionAllVars[0]))
+            );
+            Node predicate = m_command.BuildComparison(OpType.EQ, sourceRefNode, rsSourceRefNode);
+            Node filterNode = m_command.CreateNode(
+                m_command.CreateFilterOp(),
+                unionAllNode,
+                predicate
+            );
 
             //
             // Finally, build out a project node that only projects out the entity side
             //
-            Node projectNode = m_command.BuildProject(filterNode, new Var[] { unionAllVars[1] }, new Node[] { });
+            Node projectNode = m_command.BuildProject(
+                filterNode,
+                new Var[] { unionAllVars[1] },
+                new Node[] { }
+            );
 
             //
             // Build a collectOp over the project node
@@ -956,31 +1153,49 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Rewrite a NavProperty; more generally, consider this a rewrite of DEREF(NAVIGATE(r))
-        /// 
+        ///
         /// We handle four cases here, depending on the kind of relationship we're
         /// dealing with.
         ///   - 1:1 relationships
         ///   - 1:M relationships
         ///   - N:1 relationships
         ///   - N:M relationships
-        /// 
+        ///
         /// </summary>
         /// <param name="navProperty">the navigation property</param>
         /// <param name="sourceEntityNode">the input ref to start the traversal</param>
         /// <param name="resultType">the result type of the expression</param>
         /// <returns>the rewritten tree</returns>
-        private Node RewriteNavigationProperty(NavigationProperty navProperty,
-            Node sourceEntityNode, TypeUsage resultType)
+        private Node RewriteNavigationProperty(
+            NavigationProperty navProperty,
+            Node sourceEntityNode,
+            TypeUsage resultType
+        )
         {
-            RelProperty relProperty = new RelProperty(navProperty.RelationshipType, navProperty.FromEndMember, navProperty.ToEndMember);
-            PlanCompiler.Assert(m_command.IsRelPropertyReferenced(relProperty) || (relProperty.ToEnd.RelationshipMultiplicity == RelationshipMultiplicity.Many),
-                "Unreferenced rel property? " + relProperty);
+            RelProperty relProperty = new RelProperty(
+                navProperty.RelationshipType,
+                navProperty.FromEndMember,
+                navProperty.ToEndMember
+            );
+            PlanCompiler.Assert(
+                m_command.IsRelPropertyReferenced(relProperty)
+                    || (
+                        relProperty.ToEnd.RelationshipMultiplicity == RelationshipMultiplicity.Many
+                    ),
+                "Unreferenced rel property? " + relProperty
+            );
 
             // Handle N:1
-            if ((relProperty.FromEnd.RelationshipMultiplicity == RelationshipMultiplicity.Many) &&
-                (relProperty.ToEnd.RelationshipMultiplicity != RelationshipMultiplicity.Many))
+            if (
+                (relProperty.FromEnd.RelationshipMultiplicity == RelationshipMultiplicity.Many)
+                && (relProperty.ToEnd.RelationshipMultiplicity != RelationshipMultiplicity.Many)
+            )
             {
-                return RewriteManyToOneNavigationProperty(relProperty, sourceEntityNode, resultType);
+                return RewriteManyToOneNavigationProperty(
+                    relProperty,
+                    sourceEntityNode,
+                    resultType
+                );
             }
 
             //
@@ -998,10 +1213,11 @@ namespace System.Data.Query.PlanCompiler
                 return m_command.CreateNode(m_command.CreateNullOp(resultType));
             }
 
-            // Build out a ref over the source entity 
+            // Build out a ref over the source entity
             Node sourceRefNode = m_command.CreateNode(
                 m_command.CreateGetEntityRefOp(relProperty.FromEnd.TypeUsage),
-                sourceEntityNode);
+                sourceEntityNode
+            );
 
             // Hanlde the 1:M and N:M cases
             if (relProperty.ToEnd.RelationshipMultiplicity == RelationshipMultiplicity.Many)
@@ -1009,14 +1225,22 @@ namespace System.Data.Query.PlanCompiler
                 // Handle N:M
                 if (relProperty.FromEnd.RelationshipMultiplicity == RelationshipMultiplicity.Many)
                 {
-                    return RewriteManyToManyNavigationProperty(relProperty, relationshipSets, sourceRefNode);
+                    return RewriteManyToManyNavigationProperty(
+                        relProperty,
+                        relationshipSets,
+                        sourceRefNode
+                    );
                 }
                 // Handle 1:M
-                return RewriteOneToManyNavigationProperty(relProperty, relationshipSets, sourceRefNode);
+                return RewriteOneToManyNavigationProperty(
+                    relProperty,
+                    relationshipSets,
+                    sourceRefNode
+                );
             }
 
             // Handle 1:1
-            return RewriteOneToOneNavigationProperty(relProperty, relationshipSets,sourceRefNode);
+            return RewriteOneToOneNavigationProperty(relProperty, relationshipSets, sourceRefNode);
         }
 
         #endregion
@@ -1043,18 +1267,18 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Rewrite a DerefOp subtree. We have two cases to consider here. 
-        /// We call RewriteDerefOp to return a subtree (and an optional outputVar). 
-        /// If the outputVar is null, then we simply return the subtree produced by those calls. 
+        /// Rewrite a DerefOp subtree. We have two cases to consider here.
+        /// We call RewriteDerefOp to return a subtree (and an optional outputVar).
+        /// If the outputVar is null, then we simply return the subtree produced by those calls.
         /// Otherwise, we add the subtree to the "parent" relop (to be outer-applied), and then use the outputVar
-        /// in its place. 
-        /// 
-        /// As an example, 
+        /// in its place.
+        ///
+        /// As an example,
         ///    select deref(e) from T
         /// gets rewritten into
         ///    select v from T OuterApply X
         /// where X is the subtree returned from the RewriteXXX calls, and "v" is the output var produced by X
-        /// 
+        ///
         /// </summary>
         /// <param name="op">the derefOp</param>
         /// <param name="n">the deref subtree</param>
@@ -1090,7 +1314,10 @@ namespace System.Data.Query.PlanCompiler
             // get to the subquery...
             Node subQueryRelOp = n.Child0;
             ProjectOp projectOp = (ProjectOp)subQueryRelOp.Op;
-            PlanCompiler.Assert(projectOp.Outputs.Count == 1, "input to ElementOp has more than one output var?");
+            PlanCompiler.Assert(
+                projectOp.Outputs.Count == 1,
+                "input to ElementOp has more than one output var?"
+            );
             Var projectVar = projectOp.Outputs.First;
 
             Node ret = AddSubqueryToParentRelOp(projectVar, subQueryRelOp);
@@ -1120,20 +1347,36 @@ namespace System.Data.Query.PlanCompiler
         {
             if (op.Function.IsFunctionImport)
             {
-                PlanCompiler.Assert(op.Function.IsComposableAttribute, "Cannot process a non-composable function inside query tree composition.");
+                PlanCompiler.Assert(
+                    op.Function.IsComposableAttribute,
+                    "Cannot process a non-composable function inside query tree composition."
+                );
 
                 FunctionImportMapping functionImportMapping = null;
-                if (!m_command.MetadataWorkspace.TryGetFunctionImportMapping(op.Function, out functionImportMapping))
+                if (
+                    !m_command.MetadataWorkspace.TryGetFunctionImportMapping(
+                        op.Function,
+                        out functionImportMapping
+                    )
+                )
                 {
-                    throw EntityUtil.Metadata(System.Data.Entity.Strings.EntityClient_UnmappedFunctionImport(op.Function.FullName));
+                    throw EntityUtil.Metadata(
+                        System.Data.Entity.Strings.EntityClient_UnmappedFunctionImport(
+                            op.Function.FullName
+                        )
+                    );
                 }
-                PlanCompiler.Assert(functionImportMapping is FunctionImportMappingComposable, "Composable function import must have corresponding mapping.");
-                var functionImportMappingComposable = (FunctionImportMappingComposable)functionImportMapping;
+                PlanCompiler.Assert(
+                    functionImportMapping is FunctionImportMappingComposable,
+                    "Composable function import must have corresponding mapping."
+                );
+                var functionImportMappingComposable =
+                    (FunctionImportMappingComposable)functionImportMapping;
 
                 // Visit children (function call arguments) before processing the function view.
                 // Visiting argument trees before the view tree is required because we want to process them first
                 // outside of the context of the view. For example if an argument tree contains a free-floating entity-type constructor
-                // and the function mapping scopes the function results to a particular entity set, we don't want 
+                // and the function mapping scopes the function results to a particular entity set, we don't want
                 // the free-floating constructor to be auto-scoped to this set. So we process the argument first, it will
                 // scope the constructor to the null scope and which guarantees that this constructor will not be rescoped after the argument
                 // tree is embedded into the function view inside the functionMapping.GetInternalTree(...) call.
@@ -1141,19 +1384,28 @@ namespace System.Data.Query.PlanCompiler
 
                 // Get the mapping view of the function.
                 Node ret = functionImportMappingComposable.GetInternalTree(m_command, n.Children);
-                
+
                 // Push the entity type scope, if any, before processing the view.
                 if (op.Function.EntitySet != null)
                 {
                     m_entityTypeScopes.Push(op.Function.EntitySet);
                     AddEntitySetReference(op.Function.EntitySet);
-                    PlanCompiler.Assert(functionImportMappingComposable.TvfKeys != null && functionImportMappingComposable.TvfKeys.Length > 0, "Function imports returning entities must have inferred keys.");
-                    if (!m_tvfResultKeys.ContainsKey(functionImportMappingComposable.TargetFunction))
+                    PlanCompiler.Assert(
+                        functionImportMappingComposable.TvfKeys != null
+                            && functionImportMappingComposable.TvfKeys.Length > 0,
+                        "Function imports returning entities must have inferred keys."
+                    );
+                    if (
+                        !m_tvfResultKeys.ContainsKey(functionImportMappingComposable.TargetFunction)
+                    )
                     {
-                        m_tvfResultKeys.Add(functionImportMappingComposable.TargetFunction, functionImportMappingComposable.TvfKeys);
+                        m_tvfResultKeys.Add(
+                            functionImportMappingComposable.TargetFunction,
+                            functionImportMappingComposable.TvfKeys
+                        );
                     }
                 }
-                
+
                 // Rerun the processor over the resulting subtree.
                 ret = VisitNode(ret);
 
@@ -1161,17 +1413,26 @@ namespace System.Data.Query.PlanCompiler
                 if (op.Function.EntitySet != null)
                 {
                     var scope = m_entityTypeScopes.Pop();
-                    PlanCompiler.Assert(scope == op.Function.EntitySet, "m_entityTypeScopes stack is broken");
+                    PlanCompiler.Assert(
+                        scope == op.Function.EntitySet,
+                        "m_entityTypeScopes stack is broken"
+                    );
                 }
 
                 return ret;
             }
             else
             {
-                PlanCompiler.Assert(op.Function.EntitySet == null, "Entity type scope is not supported on functions that aren't mapped.");
+                PlanCompiler.Assert(
+                    op.Function.EntitySet == null,
+                    "Entity type scope is not supported on functions that aren't mapped."
+                );
 
                 // If this is TVF or a collection aggregate, function NestPullUp and Normalization are needed.
-                if (TypeSemantics.IsCollectionType(op.Type) || PlanCompilerUtil.IsCollectionAggregateFunction(op, n))
+                if (
+                    TypeSemantics.IsCollectionType(op.Type)
+                    || PlanCompilerUtil.IsCollectionAggregateFunction(op, n)
+                )
                 {
                     m_compilerState.MarkPhaseAsNeeded(PlanCompilerPhase.NestPullup);
                     m_compilerState.MarkPhaseAsNeeded(PlanCompilerPhase.Normalization);
@@ -1181,8 +1442,8 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Default processing. 
-        /// In addition, if the case statement is of the shape 
+        /// Default processing.
+        /// In addition, if the case statement is of the shape
         ///     case when X then NULL else Y, or
         ///     case when X then Y else NULL,
         /// where Y is of row type and the types of the input CaseOp, the NULL and Y are the same,
@@ -1225,9 +1486,15 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="n"></param>
         private void ProcessConditionalOp(ConditionalOp op, Node n)
         {
-            if (op.OpType == OpType.IsNull && TypeSemantics.IsRowType(n.Child0.Op.Type) || TypeSemantics.IsComplexType(n.Child0.Op.Type))
+            if (
+                op.OpType == OpType.IsNull && TypeSemantics.IsRowType(n.Child0.Op.Type)
+                || TypeSemantics.IsComplexType(n.Child0.Op.Type)
+            )
             {
-                StructuredTypeNullabilityAnalyzer.MarkAsNeedingNullSentinel(m_typesNeedingNullSentinel, n.Child0.Op.Type);
+                StructuredTypeNullabilityAnalyzer.MarkAsNeedingNullSentinel(
+                    m_typesNeedingNullSentinel,
+                    n.Child0.Op.Type
+                );
             }
         }
 
@@ -1258,7 +1525,8 @@ namespace System.Data.Query.PlanCompiler
             }
             if (!TypeSemantics.IsStructurallyEqualOrPromotableTo(resultType, op.Type))
             {
-                throw EntityUtil.Metadata(System.Data.Entity.Strings.EntityClient_IncompatibleNavigationPropertyResult(
+                throw EntityUtil.Metadata(
+                    System.Data.Entity.Strings.EntityClient_IncompatibleNavigationPropertyResult(
                         navProperty.DeclaringType.FullName,
                         navProperty.Name
                     )
@@ -1278,11 +1546,11 @@ namespace System.Data.Query.PlanCompiler
             ValidateNavPropertyOp(op, n);
 
             //
-            // In this special case we visit the parent before the child to avoid TSQL regressions. 
+            // In this special case we visit the parent before the child to avoid TSQL regressions.
             // In particular, a subquery coming out of the child would need to be attached to the closest rel-op parent
             // and if the parent is already visited that rel op parent would be part of the subtree resulting from the parent.
-            // If the parent is not visited it would be a rel op parent higher in the tree (also valid), and leaves less room 
-            // for join elimination. 
+            // If the parent is not visited it would be a rel op parent higher in the tree (also valid), and leaves less room
+            // for join elimination.
             // The original out-of-order visitation was put in place to work around a bug that has been fixed.
             //
             bool visitChildLater = IsNavigationPropertyOverVarRef(n.Child0);
@@ -1305,11 +1573,14 @@ namespace System.Data.Query.PlanCompiler
         /// <returns></returns>
         private static bool IsNavigationPropertyOverVarRef(Node n)
         {
-            if (n.Op.OpType != OpType.Property || (!Helper.IsNavigationProperty(((PropertyOp)n.Op).PropertyInfo)))
+            if (
+                n.Op.OpType != OpType.Property
+                || (!Helper.IsNavigationProperty(((PropertyOp)n.Op).PropertyInfo))
+            )
             {
                 return false;
             }
-            
+
             Node currentNode = n.Child0;
             if (currentNode.Op.OpType == OpType.SoftCast)
             {
@@ -1319,12 +1590,12 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Rewrite a PropertyOp subtree.  
-        /// 
+        /// Rewrite a PropertyOp subtree.
+        ///
         /// If the PropertyOp represents a simple property (ie) not a navigation property, we simply call
         /// VisitScalarOpDefault() and return. Otherwise, we call VisitNavPropertyOp and return the result from
         /// that function
-        /// 
+        ///
         /// </summary>
         /// <param name="op">the PropertyOp</param>
         /// <param name="n">the PropertyOp subtree</param>
@@ -1346,7 +1617,7 @@ namespace System.Data.Query.PlanCompiler
         #endregion
 
         /// <summary>
-        /// Handler for a RefOp. 
+        /// Handler for a RefOp.
         /// Keeps track of the entityset
         /// </summary>
         /// <param name="op">the RefOp</param>
@@ -1434,18 +1705,27 @@ namespace System.Data.Query.PlanCompiler
 
             // Count sub types
             int subTypeCount = 0;
-            foreach (EdmType subType in MetadataHelper.GetTypeAndSubtypesOf(testType, m_command.MetadataWorkspace, true /*includeAbstractTypes*/))
+            foreach (
+                EdmType subType in MetadataHelper.GetTypeAndSubtypesOf(
+                    testType,
+                    m_command.MetadataWorkspace,
+                    true /*includeAbstractTypes*/
+                )
+            )
             {
                 subTypeCount++;
-                if (2 == subTypeCount) { break; }
+                if (2 == subTypeCount)
+                {
+                    break;
+                }
             }
 
             return 1 == subTypeCount; // no children types
         }
 
-        // Translates 
-        //      'R is of T' 
-        // to 
+        // Translates
+        //      'R is of T'
+        // to
         //      '(case when not (R is null) then True else null end) = True'
         //
         // Input requirements:
@@ -1495,18 +1775,18 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Rewrite a NavigateOp subtree.  
-        /// We call RewriteNavigateOp to return a subtree (and an optional outputVar). 
-        /// If the outputVar is null, then we simply return the subtree produced by those calls. 
+        /// Rewrite a NavigateOp subtree.
+        /// We call RewriteNavigateOp to return a subtree (and an optional outputVar).
+        /// If the outputVar is null, then we simply return the subtree produced by those calls.
         /// Otherwise, we add the subtree to the "parent" relop (to be outer-applied), and then use the outputVar
-        /// in its place. 
-        /// 
-        /// As an example, 
+        /// in its place.
+        ///
+        /// As an example,
         ///    select navigate(e) from T
         /// gets rewritten into
         ///    select v from T OuterApply X
         /// where X is the subtree returned from the RewriteXXX calls, and "v" is the output var produced by X
-        /// 
+        ///
         /// </summary>
         /// <param name="op">the navigateOp</param>
         /// <param name="n">the navigateOp subtree</param>
@@ -1545,14 +1825,20 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="entitySet"></param>
         /// <param name="relProperty"></param>
         /// <returns></returns>
-        private RelationshipSet FindRelationshipSet(EntitySetBase entitySet, RelProperty relProperty)
+        private RelationshipSet FindRelationshipSet(
+            EntitySetBase entitySet,
+            RelProperty relProperty
+        )
         {
             foreach (EntitySetBase es in entitySet.EntityContainer.BaseEntitySets)
             {
                 AssociationSet rs = es as AssociationSet;
-                if (rs != null &&
-                    rs.ElementType.EdmEquals(relProperty.Relationship) &&
-                    rs.AssociationSetEnds[relProperty.FromEnd.Identity].EntitySet.EdmEquals(entitySet))
+                if (
+                    rs != null
+                    && rs.ElementType.EdmEquals(relProperty.Relationship)
+                    && rs.AssociationSetEnds[relProperty.FromEnd.Identity]
+                        .EntitySet.EdmEquals(entitySet)
+                )
                 {
                     return rs;
                 }
@@ -1561,7 +1847,7 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Find the position of a property in a type. 
+        /// Find the position of a property in a type.
         /// Positions start at zero, and a supertype's properties precede the current
         /// type's properties
         /// </summary>
@@ -1579,36 +1865,45 @@ namespace System.Data.Query.PlanCompiler
                 }
                 pos++;
             }
-            PlanCompiler.Assert(false, "Could not find property " + member + " in type " + type.Name);
+            PlanCompiler.Assert(
+                false,
+                "Could not find property " + member + " in type " + type.Name
+            );
             return -1;
         }
 
         /// <summary>
         /// Build out an expression (NewRecord) that corresponds to the key properties
         /// of the passed-in entity constructor
-        /// 
+        ///
         /// This function simply looks up the key properties of the entity type, and then
-        /// identifies the arguments to the constructor corresponding to those 
+        /// identifies the arguments to the constructor corresponding to those
         /// properties, and then slaps on a record wrapper over those expressions.
-        /// 
+        ///
         /// No copies/clones are performed. That's the responsibility of the caller
-        /// 
+        ///
         /// </summary>
         /// <param name="op">the entity constructor op</param>
         /// <param name="n">the corresponding subtree</param>
         /// <returns>the key expression</returns>
         private Node BuildKeyExpressionForNewEntityOp(Op op, Node n)
         {
-            PlanCompiler.Assert(op.OpType == OpType.NewEntity || op.OpType == OpType.DiscriminatedNewEntity,
-                "BuildKeyExpression: Unexpected OpType:" + op.OpType);
+            PlanCompiler.Assert(
+                op.OpType == OpType.NewEntity || op.OpType == OpType.DiscriminatedNewEntity,
+                "BuildKeyExpression: Unexpected OpType:" + op.OpType
+            );
             int offset = (op.OpType == OpType.DiscriminatedNewEntity) ? 1 : 0;
             EntityTypeBase entityType = (EntityTypeBase)op.Type.EdmType;
             List<Node> keyFields = new List<Node>();
-            List<KeyValuePair<string, TypeUsage>> keyFieldTypes = new List<KeyValuePair<string, TypeUsage>>();
+            List<KeyValuePair<string, TypeUsage>> keyFieldTypes =
+                new List<KeyValuePair<string, TypeUsage>>();
             foreach (EdmMember k in entityType.KeyMembers)
             {
                 int pos = FindPosition(entityType, k) + offset;
-                PlanCompiler.Assert(n.Children.Count > pos, "invalid position " + pos + "; total count = " + n.Children.Count);
+                PlanCompiler.Assert(
+                    n.Children.Count > pos,
+                    "invalid position " + pos + "; total count = " + n.Children.Count
+                );
                 keyFields.Add(n.Children[pos]);
                 keyFieldTypes.Add(new KeyValuePair<string, TypeUsage>(k.Name, k.TypeUsage));
             }
@@ -1619,30 +1914,33 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Build out an expression corresponding to the rel-property. 
-        /// 
+        /// Build out an expression corresponding to the rel-property.
+        ///
         /// We create a subquery that looks like
         ///    (select r
         ///     from RS r
         ///     where GetRefKey(r.FromEnd) = myKey)
-        ///  
+        ///
         /// RS is the single relationship set that corresponds to the given entityset/rel-property pair
         /// FromEnd - is the source end of the relationship
         /// myKey - is the key expression of the entity being constructed
-        /// 
+        ///
         /// NOTE: We always clone "myKey" before use.
-        /// 
+        ///
         /// We then convert it into a scalar subquery, and extract out the ToEnd property from
         /// the output var of the subquery. (Should we do this inside the subquery itself?)
-        /// 
+        ///
         /// If no single relationship-set is found, we return a NULL instead.
         /// </summary>
         /// <param name="entitySet">entity set that logically holds instances of the entity we're building</param>
         /// <param name="relProperty">the rel-property we're trying to build up</param>
         /// <param name="keyExpr">the "key" of the entity instance</param>
         /// <returns>the rel-property expression</returns>
-        private Node BuildRelPropertyExpression(EntitySetBase entitySet, RelProperty relProperty,
-            Node keyExpr)
+        private Node BuildRelPropertyExpression(
+            EntitySetBase entitySet,
+            RelProperty relProperty,
+            Node keyExpr
+        )
         {
             //
             // Make a copy of the current key expression
@@ -1659,20 +1957,33 @@ namespace System.Data.Query.PlanCompiler
                 return m_command.CreateNode(m_command.CreateNullOp(relProperty.ToEnd.TypeUsage));
             }
 
-            ScanTableOp scanTableOp = m_command.CreateScanTableOp(Command.CreateTableDefinition(relSet));
-            PlanCompiler.Assert(scanTableOp.Table.Columns.Count == 1,
-                "Unexpected column count for table:" + scanTableOp.Table.TableMetadata.Extent + "=" + scanTableOp.Table.Columns.Count);
+            ScanTableOp scanTableOp = m_command.CreateScanTableOp(
+                Command.CreateTableDefinition(relSet)
+            );
+            PlanCompiler.Assert(
+                scanTableOp.Table.Columns.Count == 1,
+                "Unexpected column count for table:"
+                    + scanTableOp.Table.TableMetadata.Extent
+                    + "="
+                    + scanTableOp.Table.Columns.Count
+            );
             Var scanTableVar = scanTableOp.Table.Columns[0];
             Node scanNode = m_command.CreateNode(scanTableOp);
 
             Node sourceEndNode = m_command.CreateNode(
                 m_command.CreatePropertyOp(relProperty.FromEnd),
-                m_command.CreateNode(m_command.CreateVarRefOp(scanTableVar)));
-            Node predicateNode = m_command.BuildComparison(OpType.EQ,
+                m_command.CreateNode(m_command.CreateVarRefOp(scanTableVar))
+            );
+            Node predicateNode = m_command.BuildComparison(
+                OpType.EQ,
                 keyExpr,
-                m_command.CreateNode(m_command.CreateGetRefKeyOp(keyExpr.Op.Type), sourceEndNode));
-            Node filterNode = m_command.CreateNode(m_command.CreateFilterOp(),
-                scanNode, predicateNode);
+                m_command.CreateNode(m_command.CreateGetRefKeyOp(keyExpr.Op.Type), sourceEndNode)
+            );
+            Node filterNode = m_command.CreateNode(
+                m_command.CreateFilterOp(),
+                scanNode,
+                predicateNode
+            );
 
             //
             // Process the node, and then add this as a subquery to the parent relop
@@ -1683,17 +1994,15 @@ namespace System.Data.Query.PlanCompiler
             //
             // Now extract out the target end property
             //
-            ret = m_command.CreateNode(
-                m_command.CreatePropertyOp(relProperty.ToEnd),
-                ret);
+            ret = m_command.CreateNode(m_command.CreatePropertyOp(relProperty.ToEnd), ret);
 
             return ret;
         }
 
         /// <summary>
         /// Given an entity constructor (NewEntityOp, DiscriminatedNewEntityOp), build up
-        /// the list of rel-property expressions. 
-        /// 
+        /// the list of rel-property expressions.
+        ///
         /// Walks through the list of relevant rel-properties, and builds up expressions
         /// (using BuildRelPropertyExpression) for each rel-property that does not have
         /// an expression already built (preBuiltExpressions)
@@ -1703,10 +2012,12 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="prebuiltExpressions">the prebuilt rel-property expressions</param>
         /// <param name="keyExpr">the key of the entity instance</param>
         /// <returns>a list of rel-property expressions (lines up 1-1 with 'relPropertyList')</returns>
-        private IEnumerable<Node> BuildAllRelPropertyExpressions(EntitySetBase entitySet,
+        private IEnumerable<Node> BuildAllRelPropertyExpressions(
+            EntitySetBase entitySet,
             List<RelProperty> relPropertyList,
             Dictionary<RelProperty, Node> prebuiltExpressions,
-            Node keyExpr)
+            Node keyExpr
+        )
         {
             foreach (RelProperty r in relPropertyList)
             {
@@ -1728,7 +2039,7 @@ namespace System.Data.Query.PlanCompiler
         /// <returns>rewritten tree</returns>
         public override Node Visit(NewEntityOp op, Node n)
         {
-            // If this is not an entity type constructor, or it's been already scoped, 
+            // If this is not an entity type constructor, or it's been already scoped,
             // then just do the default processing.
             if (op.Scoped || op.Type.EdmType.BuiltInTypeKind != BuiltInTypeKind.EntityType)
             {
@@ -1749,9 +2060,10 @@ namespace System.Data.Query.PlanCompiler
                 // If this Entity constructor is not within a view then there should not be any RelProps
                 // specified on the NewEntityOp - the eSQL WITH RELATIONSHIP clauses that would cause such
                 // RelProps to be added is only enabled when parsing in the user or generated view mode.
-                PlanCompiler.Assert(op.RelationshipProperties == null ||
-                                    op.RelationshipProperties.Count == 0,
-                                    "Related Entities cannot be specified for Entity constructors that are not part of the Query Mapping View for an Entity Set.");
+                PlanCompiler.Assert(
+                    op.RelationshipProperties == null || op.RelationshipProperties.Count == 0,
+                    "Related Entities cannot be specified for Entity constructors that are not part of the Query Mapping View for an Entity Set."
+                );
 
                 // Default processing.
                 VisitScalarOpDefault(op, n);
@@ -1766,15 +2078,19 @@ namespace System.Data.Query.PlanCompiler
                 // that may only be used in pre-built rel property expressions that may not be needed.
                 //
 
-                // 
+                //
                 // Find the relationship properties for this entitytype (and entity set)
                 //
-                relProperties = new List<RelProperty>(m_relPropertyHelper.GetRelProperties(entityType));
+                relProperties = new List<RelProperty>(
+                    m_relPropertyHelper.GetRelProperties(entityType)
+                );
 
-                // Remove pre-built rel property expressions that would not be needed to avoid 
+                // Remove pre-built rel property expressions that would not be needed to avoid
                 // unnecessary adding references to types and entity sets during default processing
                 int j = op.RelationshipProperties.Count - 1;
-                List<RelProperty> copiedRelPropList = new List<RelProperty>(op.RelationshipProperties);
+                List<RelProperty> copiedRelPropList = new List<RelProperty>(
+                    op.RelationshipProperties
+                );
                 for (int i = n.Children.Count - 1; i >= entityType.Properties.Count; i--, j--)
                 {
                     if (!relProperties.Contains(op.RelationshipProperties[j]))
@@ -1788,15 +2104,16 @@ namespace System.Data.Query.PlanCompiler
                 VisitScalarOpDefault(op, n);
 
                 //
-                // Ok, now, I have to build out some relationship properties that 
+                // Ok, now, I have to build out some relationship properties that
                 // haven't been specified
                 //
                 Node keyExpr = BuildKeyExpressionForNewEntityOp(op, n);
 
-                // 
+                //
                 // Find the list of rel properties that have already been specified
-                // 
-                Dictionary<RelProperty, Node> prebuiltRelPropertyExprs = new Dictionary<RelProperty, Node>();
+                //
+                Dictionary<RelProperty, Node> prebuiltRelPropertyExprs =
+                    new Dictionary<RelProperty, Node>();
                 j = 0;
                 for (int i = entityType.Properties.Count; i < n.Children.Count; i++, j++)
                 {
@@ -1812,7 +2129,14 @@ namespace System.Data.Query.PlanCompiler
                     newChildren.Add(n.Children[i]);
                 }
 
-                foreach (Node relPropNode in BuildAllRelPropertyExpressions(scope, relProperties, prebuiltRelPropertyExprs, keyExpr))
+                foreach (
+                    Node relPropNode in BuildAllRelPropertyExpressions(
+                        scope,
+                        relProperties,
+                        prebuiltRelPropertyExprs,
+                        keyExpr
+                    )
+                )
                 {
                     newChildren.Add(relPropNode);
                 }
@@ -1842,7 +2166,9 @@ namespace System.Data.Query.PlanCompiler
             {
                 EntityTypeBase entityType = discriminatorTypePair.Value;
                 AddTypeReference(TypeUsage.Create(entityType));
-                foreach (RelProperty relProperty in m_relPropertyHelper.GetRelProperties(entityType))
+                foreach (
+                    RelProperty relProperty in m_relPropertyHelper.GetRelProperties(entityType)
+                )
                 {
                     relPropertyHashSet.Add(relProperty);
                 }
@@ -1863,10 +2189,11 @@ namespace System.Data.Query.PlanCompiler
             {
                 newChildren.Add(n.Children[i]);
             }
-            // 
+            //
             // Find the list of rel properties that have already been specified
-            // 
-            Dictionary<RelProperty, Node> prebuiltRelPropertyExprs = new Dictionary<RelProperty, Node>();
+            //
+            Dictionary<RelProperty, Node> prebuiltRelPropertyExprs =
+                new Dictionary<RelProperty, Node>();
             for (int i = firstRelPropertyNodeOffset, j = 0; i < n.Children.Count; i++, j++)
             {
                 prebuiltRelPropertyExprs[op.RelationshipProperties[j]] = n.Children[i];
@@ -1875,44 +2202,56 @@ namespace System.Data.Query.PlanCompiler
             //
             // Fill in the missing pieces
             //
-            foreach (Node relPropNode in BuildAllRelPropertyExpressions(op.EntitySet, relProperties, prebuiltRelPropertyExprs, keyExpr))
+            foreach (
+                Node relPropNode in BuildAllRelPropertyExpressions(
+                    op.EntitySet,
+                    relProperties,
+                    prebuiltRelPropertyExprs,
+                    keyExpr
+                )
+            )
             {
                 newChildren.Add(relPropNode);
             }
 
-            Op newEntityOp = m_command.CreateDiscriminatedNewEntityOp(op.Type, op.DiscriminatorMap, op.EntitySet, relProperties);
+            Op newEntityOp = m_command.CreateDiscriminatedNewEntityOp(
+                op.Type,
+                op.DiscriminatorMap,
+                op.EntitySet,
+                relProperties
+            );
             Node newNode = m_command.CreateNode(newEntityOp, newChildren);
 
             return newNode;
         }
 
         /// <summary>
-        /// Handles a newMultiset constructor. Converts this into 
+        /// Handles a newMultiset constructor. Converts this into
         ///   select a from dual union all select b from dual union all ...
         /// Handles a NewMultiset constructor, i.e. {x, y, z}
         ///   1. Empty multiset constructors are simply converted into:
-        ///    
+        ///
         ///        select x from singlerowtable as x where false
-        ///   
-        ///   2. Mulltset constructors with only one element or with multiple elements all of 
-        ///   which are constants or nulls are converted into: 
-        ///   
+        ///
+        ///   2. Mulltset constructors with only one element or with multiple elements all of
+        ///   which are constants or nulls are converted into:
+        ///
         ///     select x from dual union all select y from dual union all select z
-        ///     
+        ///
         ///   3. All others are converted into:
-        ///   
+        ///
         ///      select case when d = 0 then x when d = 1 then y else z end
         ///      from (  select 0 as d from single_row_table
-        ///              union all 
+        ///              union all
         ///              select 1 as d from single_row_table
         ///              union all
         ///              select 2 as d  from single_row_table )
-        ///              
-        ///       NOTE: The  translation for 2 is valid for 3 too. We choose different translation 
+        ///
+        ///       NOTE: The  translation for 2 is valid for 3 too. We choose different translation
         ///       in order to avoid correlation inside the union all,
         ///       which would prevent us from removing apply operators
-        /// 
-        /// Do this before processing the children, and then 
+        ///
+        /// Do this before processing the children, and then
         /// call Visit on the result to handle the elements
         /// </summary>
         /// <param name="op">the new instance op</param>
@@ -1925,30 +2264,33 @@ namespace System.Data.Query.PlanCompiler
 
             CollectionType collectionType = TypeHelpers.GetEdmType<CollectionType>(op.Type);
 
-            // 
-            // Empty multiset constructors are simply converted into 
+            //
+            // Empty multiset constructors are simply converted into
             //    Project(Filter(SingleRowTableOp(), false)
-            // 
+            //
             if (!n.HasChild0)
             {
                 Node singleRowTableNode = m_command.CreateNode(m_command.CreateSingleRowTableOp());
-                Node filterNode = m_command.CreateNode(m_command.CreateFilterOp(),
+                Node filterNode = m_command.CreateNode(
+                    m_command.CreateFilterOp(),
                     singleRowTableNode,
-                    m_command.CreateNode(m_command.CreateFalseOp()));
-                Node fakeChild = m_command.CreateNode(m_command.CreateNullOp(collectionType.TypeUsage));
+                    m_command.CreateNode(m_command.CreateFalseOp())
+                );
+                Node fakeChild = m_command.CreateNode(
+                    m_command.CreateNullOp(collectionType.TypeUsage)
+                );
                 Var newVar;
                 Node projectNode = m_command.BuildProject(filterNode, fakeChild, out newVar);
 
                 resultNode = projectNode;
                 resultVar = newVar;
             }
-
             //
-            // Multiset constructors with only one elment or with multiple elments all of 
-            //   which are constants or nulls are converted into: 
-            //    
+            // Multiset constructors with only one elment or with multiple elments all of
+            //   which are constants or nulls are converted into:
+            //
             // UnionAll(Project(SingleRowTable, e1), Project(SingleRowTable, e2), ...)
-            // 
+            //
             // The degenerate case when the collection has only one element does not require an
             // outer unionAll node
             //
@@ -1958,7 +2300,9 @@ namespace System.Data.Query.PlanCompiler
                 List<Var> inputVars = new List<Var>();
                 foreach (Node chi in n.Children)
                 {
-                    Node singleRowTableNode = m_command.CreateNode(m_command.CreateSingleRowTableOp());
+                    Node singleRowTableNode = m_command.CreateNode(
+                        m_command.CreateSingleRowTableOp()
+                    );
                     Var newVar;
                     Node projectNode = m_command.BuildProject(singleRowTableNode, chi, out newVar);
                     inputNodes.Add(projectNode);
@@ -1966,14 +2310,13 @@ namespace System.Data.Query.PlanCompiler
                 }
                 // Build the union-all ladder
                 m_command.BuildUnionAllLadder(inputNodes, inputVars, out resultNode, out resultVar);
-
             }
             //
             //   All other cases:
             //
             //  select case when d = 0 then x when d = 1 then y else z end
             //  from (  select 0 as d from single_row_table
-            //          union all 
+            //          union all
             //          select 1 as d from single_row_table
             //          union all
             //          select 2 as d  from single_row_table )
@@ -1985,11 +2328,19 @@ namespace System.Data.Query.PlanCompiler
                 //Create the union all lather first
                 for (int i = 0; i < n.Children.Count; i++)
                 {
-                    Node singleRowTableNode = m_command.CreateNode(m_command.CreateSingleRowTableOp());
+                    Node singleRowTableNode = m_command.CreateNode(
+                        m_command.CreateSingleRowTableOp()
+                    );
                     // the discriminator for this branch
-                    Node discriminatorNode = m_command.CreateNode(m_command.CreateInternalConstantOp(m_command.IntegerType, i));
+                    Node discriminatorNode = m_command.CreateNode(
+                        m_command.CreateInternalConstantOp(m_command.IntegerType, i)
+                    );
                     Var newVar;
-                    Node projectNode = m_command.BuildProject(singleRowTableNode, discriminatorNode, out newVar);
+                    Node projectNode = m_command.BuildProject(
+                        singleRowTableNode,
+                        discriminatorNode,
+                        out newVar
+                    );
 
                     inputNodes.Add(projectNode);
                     inputVars.Add(newVar);
@@ -2005,10 +2356,13 @@ namespace System.Data.Query.PlanCompiler
                     if (i != (n.Children.Count - 1))
                     {
                         ComparisonOp equalsOp = m_command.CreateComparisonOp(OpType.EQ);
-                        Node whenNode = m_command.CreateNode(equalsOp,
+                        Node whenNode = m_command.CreateNode(
+                            equalsOp,
                             m_command.CreateNode(m_command.CreateVarRefOp(resultVar)),
                             m_command.CreateNode(
-                                m_command.CreateConstantOp(m_command.IntegerType, i)));
+                                m_command.CreateConstantOp(m_command.IntegerType, i)
+                            )
+                        );
                         caseArgNodes.Add(whenNode);
                     }
 
@@ -2017,7 +2371,10 @@ namespace System.Data.Query.PlanCompiler
                 }
 
                 //Create the project
-                Node caseNode = m_command.CreateNode(m_command.CreateCaseOp(collectionType.TypeUsage), caseArgNodes);
+                Node caseNode = m_command.CreateNode(
+                    m_command.CreateCaseOp(collectionType.TypeUsage),
+                    caseArgNodes
+                );
                 resultNode = m_command.BuildProject(resultNode, caseNode, out resultVar);
             }
 
@@ -2050,7 +2407,7 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Default processing for a CollectOp. But make sure that we 
+        /// Default processing for a CollectOp. But make sure that we
         /// go through the NestPullUp phase
         /// </summary>
         /// <param name="op"></param>
@@ -2082,41 +2439,50 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Visits a "table" expression - performs view expansion on the table (if appropriate), 
-        /// and then some additional book-keeping. 
-        /// 
+        /// Visits a "table" expression - performs view expansion on the table (if appropriate),
+        /// and then some additional book-keeping.
+        ///
         /// The "ofType" and "includeSubtypes" parameters are optional hints for view expansion, allowing
         /// for more customized (and hopefully, more optimal) views. The wasOfTypeSatisfied out parameter
         /// tells whether the ofType filter was already handled by the view expansion, or if the caller still
         /// needs to deal with it.
-        /// 
-        /// If the "table" is a C-space entityset, then we produce a ScanViewOp 
+        ///
+        /// If the "table" is a C-space entityset, then we produce a ScanViewOp
         /// tree with the defining query as the only child of the ScanViewOp
-        /// 
+        ///
         /// If the table is an S-space entityset, then we still produce a ScanViewOp, but this
-        /// time, we produce a simple "select * from BaseTable" as the defining 
+        /// time, we produce a simple "select * from BaseTable" as the defining
         /// query
         /// </summary>
         /// <param name="scanTableNode">the scanTable node tree</param>
         /// <param name="scanTableOp">the scanTableOp</param>
         /// <param name="typeFilter">
-        ///     An optional IsOfOp representing a type filter to apply to the scan table; will be set to <c>null</c> 
+        ///     An optional IsOfOp representing a type filter to apply to the scan table; will be set to <c>null</c>
         ///     if the scan target is expanded to a view that renders the type filter superfluous.
         /// </param>
         /// <returns></returns>
-        private Node ProcessScanTable(Node scanTableNode, ScanTableOp scanTableOp, ref IsOfOp typeFilter)
+        private Node ProcessScanTable(
+            Node scanTableNode,
+            ScanTableOp scanTableOp,
+            ref IsOfOp typeFilter
+        )
         {
             HandleTableOpMetadata(scanTableOp);
 
-            PlanCompiler.Assert(scanTableOp.Table.TableMetadata.Extent != null, "ScanTableOp must reference a table with an extent");
+            PlanCompiler.Assert(
+                scanTableOp.Table.TableMetadata.Extent != null,
+                "ScanTableOp must reference a table with an extent"
+            );
 
             Node ret = null;
 
             //
-            // Get simple things out of the way. If we're dealing with an S-space entityset, 
+            // Get simple things out of the way. If we're dealing with an S-space entityset,
             // simply return the node
-            // 
-            if (scanTableOp.Table.TableMetadata.Extent.EntityContainer.DataSpace == DataSpace.SSpace)
+            //
+            if (
+                scanTableOp.Table.TableMetadata.Extent.EntityContainer.DataSpace == DataSpace.SSpace
+            )
             {
                 return scanTableNode;
             }
@@ -2168,7 +2534,10 @@ namespace System.Data.Query.PlanCompiler
             if (entityTypeScopePushed)
             {
                 var scope = m_entityTypeScopes.Pop();
-                PlanCompiler.Assert(scope == op.Table.TableMetadata.Extent, "m_entityTypeScopes stack is broken");
+                PlanCompiler.Assert(
+                    scope == op.Table.TableMetadata.Extent,
+                    "m_entityTypeScopes stack is broken"
+                );
             }
 
             return n;
@@ -2209,11 +2578,11 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Can I eliminate this sort? I can, if the current path is *not* one of the 
+        /// Can I eliminate this sort? I can, if the current path is *not* one of the
         /// following
         ///   TopN(Sort)
         ///   PhysicalProject(Sort)
-        /// 
+        ///
         /// We don't yet handle the TopN variant
         /// </summary>
         /// <returns></returns>
@@ -2231,12 +2600,12 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Visit a SortOp. Eliminate it if the path to this node is not one of 
+        /// Visit a SortOp. Eliminate it if the path to this node is not one of
         /// PhysicalProject(Sort) or
         /// TopN(Sort)
-        /// 
+        ///
         /// Otherwise, simply visit the child RelOp
-        /// 
+        ///
         /// </summary>
         /// <param name="op">Current sortOp</param>
         /// <param name="n">current subtree</param>
@@ -2264,7 +2633,7 @@ namespace System.Data.Query.PlanCompiler
         {
             typeFilter = null;
 
-            // 
+            //
             // Is the predicate an IsOf predicate
             //
             IsOfOp isOfOp = n.Child1.Op as IsOfOp;
@@ -2297,11 +2666,11 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Handler for a FilterOp. Usually delegates to VisitRelOpDefault. 
-        /// 
-        /// There's one special case - where we have an ISOF predicate over a ScanTable. In that case, we attempt 
+        /// Handler for a FilterOp. Usually delegates to VisitRelOpDefault.
+        ///
+        /// There's one special case - where we have an ISOF predicate over a ScanTable. In that case, we attempt
         /// to get a more "optimal" view; and return that optimal view
-        /// 
+        ///
         /// </summary>
         /// <param name="op">the filterOp</param>
         /// <param name="n">the node tree</param>
@@ -2327,10 +2696,10 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Visit a ProjectOp; if the input is a SortOp, we pullup the sort over 
+        /// Visit a ProjectOp; if the input is a SortOp, we pullup the sort over
         /// the ProjectOp to ensure that we don't have nested sorts;
-        /// Note: This transformation cannot be moved in the normalizer, 
-        /// because it needs to happen before any subquery augmentation happens. 
+        /// Note: This transformation cannot be moved in the normalizer,
+        /// because it needs to happen before any subquery augmentation happens.
         /// </summary>
         /// <param name="op"></param>
         /// <param name="n"></param>
@@ -2350,7 +2719,7 @@ namespace System.Data.Query.PlanCompiler
                     IList<Node> sortChildren = new List<Node>();
                     sortChildren.Add(n);
 
-                    //A ConstrainedSort has two other children besides the input and it needs to keep them.  
+                    //A ConstrainedSort has two other children besides the input and it needs to keep them.
                     for (int i = 1; i < n.Child0.Children.Count; i++)
                     {
                         sortChildren.Add(n.Child0.Children[i]);
@@ -2404,7 +2773,8 @@ namespace System.Data.Query.PlanCompiler
     /// </summary>
     internal class StructuredTypeNullabilityAnalyzer : ColumnMapVisitor<HashSet<string>>
     {
-        static internal StructuredTypeNullabilityAnalyzer Instance = new StructuredTypeNullabilityAnalyzer();
+        internal static StructuredTypeNullabilityAnalyzer Instance =
+            new StructuredTypeNullabilityAnalyzer();
 
         /// <summary>
         /// VarRefColumnMap
@@ -2412,7 +2782,10 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="columnMap"></param>
         /// <param name="typesNeedingNullSentinel"></param>
         /// <returns></returns>
-        internal override void Visit(VarRefColumnMap columnMap, HashSet<string> typesNeedingNullSentinel)
+        internal override void Visit(
+            VarRefColumnMap columnMap,
+            HashSet<string> typesNeedingNullSentinel
+        )
         {
             AddTypeNeedingNullSentinel(typesNeedingNullSentinel, columnMap.Type);
             base.Visit(columnMap, typesNeedingNullSentinel);
@@ -2423,11 +2796,17 @@ namespace System.Data.Query.PlanCompiler
         /// </summary>
         /// <param name="typesNeedingNullableSentinel"></param>
         /// <param name="typeUsage"></param>
-        private static void AddTypeNeedingNullSentinel(HashSet<string> typesNeedingNullSentinel, TypeUsage typeUsage)
+        private static void AddTypeNeedingNullSentinel(
+            HashSet<string> typesNeedingNullSentinel,
+            TypeUsage typeUsage
+        )
         {
             if (TypeSemantics.IsCollectionType(typeUsage))
             {
-                AddTypeNeedingNullSentinel(typesNeedingNullSentinel, TypeHelpers.GetElementTypeUsage(typeUsage));
+                AddTypeNeedingNullSentinel(
+                    typesNeedingNullSentinel,
+                    TypeHelpers.GetElementTypeUsage(typeUsage)
+                );
             }
             else
             {
@@ -2443,15 +2822,17 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Marks the given typeUsage as needing a null sentinel. 
+        /// Marks the given typeUsage as needing a null sentinel.
         /// Call this method instead of calling Add over the HashSet directly, to ensure consistency.
         /// </summary>
         /// <param name="typesNeedingNullSentinel"></param>
         /// <param name="typeUsage"></param>
-        internal static void MarkAsNeedingNullSentinel(HashSet<string> typesNeedingNullSentinel, TypeUsage typeUsage)
+        internal static void MarkAsNeedingNullSentinel(
+            HashSet<string> typesNeedingNullSentinel,
+            TypeUsage typeUsage
+        )
         {
             typesNeedingNullSentinel.Add(typeUsage.EdmType.Identity);
         }
     }
-
 }

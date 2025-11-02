@@ -11,9 +11,7 @@ namespace System.ServiceModel.Configuration
     {
         string typeName;
 
-        public ExtensionElement()
-        {
-        }
+        public ExtensionElement() { }
 
         public ExtensionElement(string name)
             : this()
@@ -37,7 +35,10 @@ namespace System.ServiceModel.Configuration
             this.Type = type;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Name, Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Name,
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 1)]
         public string Name
         {
@@ -52,7 +53,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Type, Options = ConfigurationPropertyOptions.IsRequired)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Type,
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
         [StringValidator(MinLength = 1)]
         public string Type
         {

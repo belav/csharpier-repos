@@ -19,7 +19,10 @@ using IOPath = System.IO.Path;
 namespace System.ComponentModel.Composition.Hosting
 {
     [DebuggerTypeProxy(typeof(DirectoryCatalogDebuggerProxy))]
-    public partial class DirectoryCatalog : ComposablePartCatalog, INotifyComposablePartCatalogChanged, ICompositionElement
+    public partial class DirectoryCatalog
+        : ComposablePartCatalog,
+            INotifyComposablePartCatalogChanged,
+            ICompositionElement
     {
         private static bool IsWindows =>
 #if NETCOREAPP_5_0_OR_GREATER
@@ -70,9 +73,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     The caller does not have the required permission.
         /// </exception>
         public DirectoryCatalog(string path)
-            : this(path, "*.dll")
-        {
-        }
+            : this(path, "*.dll") { }
 
         /// <summary>
         ///     Creates a catalog of <see cref="ComposablePartDefinition"/>s based on all the *.dll files
@@ -109,9 +110,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     The caller does not have the required permission.
         /// </exception>
         public DirectoryCatalog(string path, ReflectionContext reflectionContext)
-            : this(path, "*.dll", reflectionContext)
-        {
-        }
+            : this(path, "*.dll", reflectionContext) { }
 
         /// <summary>
         ///     Creates a catalog of <see cref="ComposablePartDefinition"/>s based on all the *.dll files
@@ -147,9 +146,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     The caller does not have the required permission.
         /// </exception>
         public DirectoryCatalog(string path, ICompositionElement definitionOrigin)
-            : this(path, "*.dll", definitionOrigin)
-        {
-        }
+            : this(path, "*.dll", definitionOrigin) { }
 
         /// <summary>
         ///     Creates a catalog of <see cref="ComposablePartDefinition"/>s based on all the given searchPattern
@@ -189,10 +186,12 @@ namespace System.ComponentModel.Composition.Hosting
         /// <exception cref="UnauthorizedAccessException">
         ///     The caller does not have the required permission.
         /// </exception>
-        public DirectoryCatalog(string path, ReflectionContext reflectionContext, ICompositionElement definitionOrigin)
-            : this(path, "*.dll", reflectionContext, definitionOrigin)
-        {
-        }
+        public DirectoryCatalog(
+            string path,
+            ReflectionContext reflectionContext,
+            ICompositionElement definitionOrigin
+        )
+            : this(path, "*.dll", reflectionContext, definitionOrigin) { }
 
         /// <summary>
         ///     Creates a catalog of <see cref="ComposablePartDefinition"/>s based on all the *.dll files
@@ -271,7 +270,11 @@ namespace System.ComponentModel.Composition.Hosting
         /// <exception cref="UnauthorizedAccessException">
         ///     The caller does not have the required permission.
         /// </exception>
-        public DirectoryCatalog(string path, string searchPattern, ICompositionElement definitionOrigin)
+        public DirectoryCatalog(
+            string path,
+            string searchPattern,
+            ICompositionElement definitionOrigin
+        )
         {
             Requires.NotNullOrEmpty(path, nameof(path));
             Requires.NotNullOrEmpty(searchPattern, nameof(searchPattern));
@@ -320,7 +323,11 @@ namespace System.ComponentModel.Composition.Hosting
         /// <exception cref="UnauthorizedAccessException">
         ///     The caller does not have the required permission.
         /// </exception>
-        public DirectoryCatalog(string path, string searchPattern, ReflectionContext reflectionContext)
+        public DirectoryCatalog(
+            string path,
+            string searchPattern,
+            ReflectionContext reflectionContext
+        )
         {
             Requires.NotNullOrEmpty(path, nameof(path));
             Requires.NotNullOrEmpty(searchPattern, nameof(searchPattern));
@@ -374,7 +381,12 @@ namespace System.ComponentModel.Composition.Hosting
         /// <exception cref="UnauthorizedAccessException">
         ///     The caller does not have the required permission.
         /// </exception>
-        public DirectoryCatalog(string path, string searchPattern, ReflectionContext reflectionContext, ICompositionElement definitionOrigin)
+        public DirectoryCatalog(
+            string path,
+            string searchPattern,
+            ReflectionContext reflectionContext,
+            ICompositionElement definitionOrigin
+        )
         {
             Requires.NotNullOrEmpty(path, nameof(path));
             Requires.NotNullOrEmpty(searchPattern, nameof(searchPattern));
@@ -432,10 +444,7 @@ namespace System.ComponentModel.Composition.Hosting
         /// </summary>
         public string SearchPattern
         {
-            get
-            {
-                return _searchPattern;
-            }
+            get { return _searchPattern; }
         }
 
         /// <summary>
@@ -497,7 +506,9 @@ namespace System.ComponentModel.Composition.Hosting
 
         public override IEnumerator<ComposablePartDefinition> GetEnumerator()
         {
-            return _catalogCollection.SelectMany(catalog => catalog as IEnumerable<ComposablePartDefinition>).GetEnumerator();
+            return _catalogCollection
+                .SelectMany(catalog => catalog as IEnumerable<ComposablePartDefinition>)
+                .GetEnumerator();
         }
 
         /// <summary>
@@ -519,7 +530,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <exception cref="ObjectDisposedException">
         ///     The <see cref="DirectoryCatalog"/> has been disposed of.
         /// </exception>
-        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(ImportDefinition definition)
+        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
+            ImportDefinition definition
+        )
         {
             ThrowIfDisposed();
 
@@ -608,7 +621,11 @@ namespace System.ComponentModel.Composition.Hosting
 
                 using (var atomicComposition = new AtomicComposition())
                 {
-                    var changingArgs = new ComposablePartCatalogChangeEventArgs(addedDefinitions, removedDefinitions, atomicComposition);
+                    var changingArgs = new ComposablePartCatalogChangeEventArgs(
+                        addedDefinitions,
+                        removedDefinitions,
+                        atomicComposition
+                    );
                     OnChanging(changingArgs);
 
                     // if the change went through then write the catalog changes
@@ -641,9 +658,13 @@ namespace System.ComponentModel.Composition.Hosting
                         break;
                     } // WriteLock
                 } // AtomicComposition
-            }   // while (true)
+            } // while (true)
 
-            var changedArgs = new ComposablePartCatalogChangeEventArgs(addedDefinitions, removedDefinitions, null);
+            var changedArgs = new ComposablePartCatalogChangeEventArgs(
+                addedDefinitions,
+                removedDefinitions,
+                null
+            );
             OnChanged(changedArgs);
         }
 
@@ -669,19 +690,19 @@ namespace System.ComponentModel.Composition.Hosting
                     : new AssemblyCatalog(assemblyFilePath, this);
             }
             catch (FileNotFoundException ex)
-            {   // Files should always exists but don't blow up here if they don't
+            { // Files should always exists but don't blow up here if they don't
                 exception = ex;
             }
             catch (FileLoadException ex)
-            {   // File was found but could not be loaded
+            { // File was found but could not be loaded
                 exception = ex;
             }
             catch (BadImageFormatException ex)
-            {   // Dlls that contain native code are not loaded, but do not invalidate the Directory
+            { // Dlls that contain native code are not loaded, but do not invalidate the Directory
                 exception = ex;
             }
             catch (ReflectionTypeLoadException ex)
-            {   // Dlls that have missing Managed dependencies are not loaded, but do not invalidate the Directory
+            { // Dlls that have missing Managed dependencies are not loaded, but do not invalidate the Directory
                 exception = ex;
             }
 
@@ -690,9 +711,12 @@ namespace System.ComponentModel.Composition.Hosting
             return null;
         }
 
-        private void DiffChanges(string[] beforeFiles, string[] afterFiles,
+        private void DiffChanges(
+            string[] beforeFiles,
+            string[] afterFiles,
             out List<Tuple<string, AssemblyCatalog>> catalogsToAdd,
-            out List<Tuple<string, AssemblyCatalog>> catalogsToRemove)
+            out List<Tuple<string, AssemblyCatalog>> catalogsToRemove
+        )
         {
             catalogsToAdd = new List<Tuple<string, AssemblyCatalog>>();
             catalogsToRemove = new List<Tuple<string, AssemblyCatalog>>();
@@ -721,8 +745,7 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private string GetDisplayName() =>
-            $"{GetType().Name} (Path=\"{_path}\")";   // NOLOC
+        private string GetDisplayName() => $"{GetType().Name} (Path=\"{_path}\")"; // NOLOC
 
         private string[] GetFiles()
         {

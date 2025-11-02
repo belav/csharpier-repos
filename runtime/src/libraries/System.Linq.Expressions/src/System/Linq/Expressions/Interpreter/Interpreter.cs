@@ -25,7 +25,12 @@ namespace System.Linq.Expressions.Interpreter
         internal readonly RuntimeLabel[] _labels;
         internal readonly DebugInfo[] _debugInfos;
 
-        internal Interpreter(string? name, LocalVariables locals, InstructionArray instructions, DebugInfo[] debugInfos)
+        internal Interpreter(
+            string? name,
+            LocalVariables locals,
+            InstructionArray instructions,
+            DebugInfo[] debugInfos
+        )
         {
             Name = name;
             LocalCount = locals.LocalCount;

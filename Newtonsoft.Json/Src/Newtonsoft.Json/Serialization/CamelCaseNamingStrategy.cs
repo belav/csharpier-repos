@@ -61,7 +61,11 @@ namespace Newtonsoft.Json.Serialization
         /// <param name="processExtensionDataNames">
         /// A flag indicating whether extension data names should be processed.
         /// </param>
-        public CamelCaseNamingStrategy(bool processDictionaryKeys, bool overrideSpecifiedNames, bool processExtensionDataNames)
+        public CamelCaseNamingStrategy(
+            bool processDictionaryKeys,
+            bool overrideSpecifiedNames,
+            bool processExtensionDataNames
+        )
             : this(processDictionaryKeys, overrideSpecifiedNames)
         {
             ProcessExtensionDataNames = processExtensionDataNames;
@@ -70,9 +74,7 @@ namespace Newtonsoft.Json.Serialization
         /// <summary>
         /// Initializes a new instance of the <see cref="CamelCaseNamingStrategy"/> class.
         /// </summary>
-        public CamelCaseNamingStrategy()
-        {
-        }
+        public CamelCaseNamingStrategy() { }
 
         /// <summary>
         /// Resolves the specified property name.

@@ -14,26 +14,21 @@ namespace System.Diagnostics
     {
         // not creatable...
         //
-        private Trace()
-        {
-        }
+        private Trace() { }
 
         private static CorrelationManager? s_correlationManager;
 
         public static CorrelationManager CorrelationManager =>
-            Volatile.Read(ref s_correlationManager) ??
-            Interlocked.CompareExchange(ref s_correlationManager, new CorrelationManager(), null) ??
-            s_correlationManager;
+            Volatile.Read(ref s_correlationManager)
+            ?? Interlocked.CompareExchange(ref s_correlationManager, new CorrelationManager(), null)
+            ?? s_correlationManager;
 
         /// <devdoc>
         ///    <para>Gets the collection of listeners that is monitoring the trace output.</para>
         /// </devdoc>
         public static TraceListenerCollection Listeners
         {
-            get
-            {
-                return TraceInternal.Listeners;
-            }
+            get { return TraceInternal.Listeners; }
         }
 
         /// <devdoc>
@@ -43,26 +38,14 @@ namespace System.Diagnostics
         /// </devdoc>
         public static bool AutoFlush
         {
-            get
-            {
-                return TraceInternal.AutoFlush;
-            }
-            set
-            {
-                TraceInternal.AutoFlush = value;
-            }
+            get { return TraceInternal.AutoFlush; }
+            set { TraceInternal.AutoFlush = value; }
         }
 
         public static bool UseGlobalLock
         {
-            get
-            {
-                return TraceInternal.UseGlobalLock;
-            }
-            set
-            {
-                TraceInternal.UseGlobalLock = value;
-            }
+            get { return TraceInternal.UseGlobalLock; }
+            set { TraceInternal.UseGlobalLock = value; }
         }
 
         /// <devdoc>
@@ -71,10 +54,8 @@ namespace System.Diagnostics
         public static int IndentLevel
         {
             get { return TraceInternal.IndentLevel; }
-
             set { TraceInternal.IndentLevel = value; }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -84,7 +65,6 @@ namespace System.Diagnostics
         public static int IndentSize
         {
             get { return TraceInternal.IndentSize; }
-
             set { TraceInternal.IndentSize = value; }
         }
 
@@ -134,7 +114,11 @@ namespace System.Diagnostics
         ///       is <see langword='false'/>. </para>
         /// </devdoc>
         [Conditional("TRACE")]
-        public static void Assert([DoesNotReturnIf(false)] bool condition, string? message, string? detailMessage)
+        public static void Assert(
+            [DoesNotReturnIf(false)] bool condition,
+            string? message,
+            string? detailMessage
+        )
         {
             TraceInternal.Assert(condition, message, detailMessage);
         }
@@ -184,7 +168,10 @@ namespace System.Diagnostics
         }
 
         [Conditional("TRACE")]
-        public static void TraceInformation([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[]? args)
+        public static void TraceInformation(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            params object?[]? args
+        )
         {
             TraceInternal.TraceEvent(TraceEventType.Information, 0, format, args);
         }
@@ -196,7 +183,10 @@ namespace System.Diagnostics
         }
 
         [Conditional("TRACE")]
-        public static void TraceWarning([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[]? args)
+        public static void TraceWarning(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            params object?[]? args
+        )
         {
             TraceInternal.TraceEvent(TraceEventType.Warning, 0, format, args);
         }
@@ -208,7 +198,10 @@ namespace System.Diagnostics
         }
 
         [Conditional("TRACE")]
-        public static void TraceError([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[]? args)
+        public static void TraceError(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            params object?[]? args
+        )
         {
             TraceInternal.TraceEvent(TraceEventType.Error, 0, format, args);
         }

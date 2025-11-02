@@ -17,28 +17,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
     [ComDefaultInterface(typeof(ICodeElements))]
     public sealed class AttributeArgumentCollection : AbstractCodeElementCollection
     {
-        internal static EnvDTE.CodeElements Create(
-            CodeModelState state,
-            CodeAttribute parent)
+        internal static EnvDTE.CodeElements Create(CodeModelState state, CodeAttribute parent)
         {
             var collection = new AttributeArgumentCollection(state, parent);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }
 
-        private AttributeArgumentCollection(
-            CodeModelState state,
-            CodeAttribute parent)
-            : base(state, parent)
-        {
-        }
+        private AttributeArgumentCollection(CodeModelState state, CodeAttribute parent)
+            : base(state, parent) { }
 
         private CodeAttribute ParentAttribute
         {
             get { return (CodeAttribute)Parent; }
         }
 
-        private SyntaxNode LookupNode()
-            => this.ParentAttribute.LookupNode();
+        private SyntaxNode LookupNode() => this.ParentAttribute.LookupNode();
 
         protected override bool TryGetItemByIndex(int index, out EnvDTE.CodeElement element)
         {
@@ -47,7 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             var attributeArgumentNodes = CodeModelService.GetAttributeArgumentNodes(node);
             if (index >= 0 && index < attributeArgumentNodes.Count())
             {
-                element = (EnvDTE.CodeElement)CodeAttributeArgument.Create(this.State, this.ParentAttribute, index);
+                element = (EnvDTE.CodeElement)
+                    CodeAttributeArgument.Create(this.State, this.ParentAttribute, index);
                 return true;
             }
 
@@ -65,7 +59,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                 var childName = CodeModelService.GetName(child);
                 if (childName == name)
                 {
-                    element = (EnvDTE.CodeElement)CodeAttributeArgument.Create(this.State, this.ParentAttribute, currentIndex);
+                    element = (EnvDTE.CodeElement)
+                        CodeAttributeArgument.Create(
+                            this.State,
+                            this.ParentAttribute,
+                            currentIndex
+                        );
                     return true;
                 }
 

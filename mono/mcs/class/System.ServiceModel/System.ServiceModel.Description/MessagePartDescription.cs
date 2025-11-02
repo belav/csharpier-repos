@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,98 +29,108 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Security;
-using System.Runtime.Serialization;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Xml;
 using System.Xml.Serialization;
 
 namespace System.ServiceModel.Description
 {
-	[DebuggerDisplay ("Name={name}, Namespace={ns}, Type={Type}, Index={index}}")]
-	public class MessagePartDescription
-	{
-		int index;
-		MemberInfo member;
-		bool multiple;
-		Type type;
-		string name, ns;
-		bool has_protection_level;
-		ProtectionLevel protection_level;
+    [DebuggerDisplay("Name={name}, Namespace={ns}, Type={Type}, Index={index}}")]
+    public class MessagePartDescription
+    {
+        int index;
+        MemberInfo member;
+        bool multiple;
+        Type type;
+        string name,
+            ns;
+        bool has_protection_level;
+        ProtectionLevel protection_level;
 
-		private XmlQualifiedName xml_schema_type_name;
-		private XmlTypeMapping xml_type_mapping;
-		
-		public MessagePartDescription (string name, string ns)
-		{
-			this.ns = ns;
-			this.Name = name;
-		}
+        private XmlQualifiedName xml_schema_type_name;
+        private XmlTypeMapping xml_type_mapping;
 
-		public int Index {
-			get { return index; }
-			set { index = value; }
-		}
+        public MessagePartDescription(string name, string ns)
+        {
+            this.ns = ns;
+            this.Name = name;
+        }
 
-		public MemberInfo MemberInfo {
-			get { return member; }
-			set { member = value; }
-		}
+        public int Index
+        {
+            get { return index; }
+            set { index = value; }
+        }
 
-		public string Name {
-			get { return name; }
-			internal set {
-				name = value;
-				XmlName = new XmlName (value);
-			}
-		}
+        public MemberInfo MemberInfo
+        {
+            get { return member; }
+            set { member = value; }
+        }
 
-		public string Namespace {
-			get { return ns; }
-		}
+        public string Name
+        {
+            get { return name; }
+            internal set
+            {
+                name = value;
+                XmlName = new XmlName(value);
+            }
+        }
 
-		public bool HasProtectionLevel {
-			get { return has_protection_level; }
-		}
+        public string Namespace
+        {
+            get { return ns; }
+        }
 
-		public ProtectionLevel ProtectionLevel {
-			get { return protection_level; }
-			set {
-				protection_level = value;
-				has_protection_level = true;
-			}
-		}
+        public bool HasProtectionLevel
+        {
+            get { return has_protection_level; }
+        }
 
-		public bool Multiple {
-			get { return multiple; }
-			set { multiple = value; }
-		}
+        public ProtectionLevel ProtectionLevel
+        {
+            get { return protection_level; }
+            set
+            {
+                protection_level = value;
+                has_protection_level = true;
+            }
+        }
 
-		public Type Type {
-			get { return type; }
-			set { type = value; }
-		}
+        public bool Multiple
+        {
+            get { return multiple; }
+            set { multiple = value; }
+        }
+
+        public Type Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
 
 #if !MOBILE && !XAMMAC_4_5
-		internal XsdDataContractImporter DataContractImporter { get; set; }
-		internal XmlSerializerMessageContractImporterInternal XmlSerializationImporter { get; set; }
-		internal System.CodeDom.CodeTypeReference CodeTypeReference { get; set; }
+        internal XsdDataContractImporter DataContractImporter { get; set; }
+        internal XmlSerializerMessageContractImporterInternal XmlSerializationImporter { get; set; }
+        internal System.CodeDom.CodeTypeReference CodeTypeReference { get; set; }
 #endif
 
-		#region internals required for moonlight compatibility
+        #region internals required for moonlight compatibility
 
-		internal XmlName XmlName {
-			get; private set;
-		}
+        internal XmlName XmlName { get; private set; }
 
-		ICustomAttributeProvider additional_att_provider;
+        ICustomAttributeProvider additional_att_provider;
 
-		internal ICustomAttributeProvider AdditionalAttributesProvider {
-			get { return additional_att_provider ?? MemberInfo; }
-			set { additional_att_provider = value; }
-		}
+        internal ICustomAttributeProvider AdditionalAttributesProvider
+        {
+            get { return additional_att_provider ?? MemberInfo; }
+            set { additional_att_provider = value; }
+        }
 
-		internal int SerializationPosition { get; set; }
+        internal int SerializationPosition { get; set; }
 
-		#endregion
-	}
+        #endregion
+    }
 }

@@ -9,9 +9,7 @@ namespace System.IdentityModel.Selectors
     using System.IO;
     using System.Text;
     using System.Xml;
-
     using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
-
 
     //
     // Summary:
@@ -67,13 +65,26 @@ namespace System.IdentityModel.Selectors
         //  target     - The target of the token being described.
         //  parameters - describes the type of token required by the target.
         //
-        public CardSpacePolicyElement(XmlElement target, XmlElement issuer, Collection<XmlElement> parameters, Uri privacyNoticeLink, int privacyNoticeVersion, bool isManagedIssuer)
+        public CardSpacePolicyElement(
+            XmlElement target,
+            XmlElement issuer,
+            Collection<XmlElement> parameters,
+            Uri privacyNoticeLink,
+            int privacyNoticeVersion,
+            bool isManagedIssuer
+        )
         {
             //
             // Ensure that if a version is specified( value != 0 ), that a valid url is specified.
             //
-            IDT.ThrowInvalidArgumentConditional(0 == privacyNoticeVersion && null != privacyNoticeLink, "privacyNoticeVersion");
-            IDT.ThrowInvalidArgumentConditional(0 != privacyNoticeVersion && null == privacyNoticeLink, "privacyNoticeLink");
+            IDT.ThrowInvalidArgumentConditional(
+                0 == privacyNoticeVersion && null != privacyNoticeLink,
+                "privacyNoticeVersion"
+            );
+            IDT.ThrowInvalidArgumentConditional(
+                0 != privacyNoticeVersion && null == privacyNoticeLink,
+                "privacyNoticeLink"
+            );
 
             m_target = target;
             m_issuer = issuer;

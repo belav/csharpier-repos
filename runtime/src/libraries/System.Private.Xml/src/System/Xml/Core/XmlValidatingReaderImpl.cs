@@ -14,7 +14,10 @@ using System.Xml.Schema;
 
 namespace System.Xml
 {
-    internal sealed partial class XmlValidatingReaderImpl : XmlReader, IXmlLineInfo, IXmlNamespaceResolver
+    internal sealed partial class XmlValidatingReaderImpl
+        : XmlReader,
+            IXmlLineInfo,
+            IXmlNamespaceResolver
     {
         //
         // Private helper types
@@ -51,13 +54,23 @@ namespace System.Xml
                 get { return _eventHandler; }
             }
 
-            void IValidationEventHandling.SendEvent(Exception /*XmlSchemaException*/ exception, XmlSeverityType severity)
+            void IValidationEventHandling.SendEvent(
+                Exception /*XmlSchemaException*/
+                exception,
+                XmlSeverityType severity
+            )
             {
                 if (_eventHandler != null)
                 {
-                    _eventHandler(_reader, new ValidationEventArgs((XmlSchemaException)exception, severity));
+                    _eventHandler(
+                        _reader,
+                        new ValidationEventArgs((XmlSchemaException)exception, severity)
+                    );
                 }
-                else if (_reader._validationType != ValidationType.None && severity == XmlSeverityType.Error)
+                else if (
+                    _reader._validationType != ValidationType.None
+                    && severity == XmlSeverityType.Error
+                )
                 {
                     throw exception;
                 }
@@ -151,7 +164,8 @@ namespace System.Xml
 
             _eventHandling = new ValidationEventHandling(this);
             _coreReaderImpl.ValidationEventHandling = _eventHandling;
-            _coreReaderImpl.OnDefaultAttributeUse = new XmlTextReaderImpl.OnDefaultAttributeUseDelegate(ValidateDefaultAttributeOnUse);
+            _coreReaderImpl.OnDefaultAttributeUse =
+                new XmlTextReaderImpl.OnDefaultAttributeUseDelegate(ValidateDefaultAttributeOnUse);
 
             _validationType = ValidationType.Auto;
             SetupValidation(ValidationType.Auto);
@@ -161,7 +175,11 @@ namespace System.Xml
         // Initializes a new instance of XmlValidatingReaderImpl class for parsing fragments with the specified string, fragment type and parser context
         // This constructor is used when creating XmlValidatingReaderImpl for V1 XmlValidatingReader
         // SxS: This method resolves an Uri but does not expose it to the caller. It's OK to suppress the SxS warning.
-        internal XmlValidatingReaderImpl(string xmlFragment, XmlNodeType fragType, XmlParserContext? context)
+        internal XmlValidatingReaderImpl(
+            string xmlFragment,
+            XmlNodeType fragType,
+            XmlParserContext? context
+        )
             : this(new XmlTextReader(xmlFragment, fragType, context))
         {
             if (_coreReader.BaseURI!.Length > 0)
@@ -179,7 +197,11 @@ namespace System.Xml
         // Initializes a new instance of XmlValidatingReaderImpl class for parsing fragments with the specified stream, fragment type and parser context
         // This constructor is used when creating XmlValidatingReaderImpl for V1 XmlValidatingReader
         // SxS: This method resolves an Uri but does not expose it to the caller. It's OK to suppress the SxS warning.
-        internal XmlValidatingReaderImpl(Stream xmlFragment, XmlNodeType fragType, XmlParserContext? context)
+        internal XmlValidatingReaderImpl(
+            Stream xmlFragment,
+            XmlNodeType fragType,
+            XmlParserContext? context
+        )
             : this(new XmlTextReader(xmlFragment, fragType, context))
         {
             if (_coreReader.BaseURI!.Length > 0)
@@ -196,7 +218,11 @@ namespace System.Xml
 
         // Initializes a new instance of XmlValidatingReaderImpl class with the specified arguments.
         // This constructor is used when creating XmlValidatingReaderImpl reader via "XmlReader.Create(..)"
-        internal XmlValidatingReaderImpl(XmlReader reader, ValidationEventHandler? settingsEventHandler, bool processIdentityConstraints)
+        internal XmlValidatingReaderImpl(
+            XmlReader reader,
+            ValidationEventHandler? settingsEventHandler,
+            bool processIdentityConstraints
+        )
         {
             XmlAsyncCheckReader? asyncCheckReader = reader as XmlAsyncCheckReader;
             if (asyncCheckReader != null)
@@ -239,7 +265,8 @@ namespace System.Xml
                 _eventHandling.AddHandler(settingsEventHandler);
             }
             _coreReaderImpl.ValidationEventHandling = _eventHandling;
-            _coreReaderImpl.OnDefaultAttributeUse = new XmlTextReaderImpl.OnDefaultAttributeUseDelegate(ValidateDefaultAttributeOnUse);
+            _coreReaderImpl.OnDefaultAttributeUse =
+                new XmlTextReaderImpl.OnDefaultAttributeUseDelegate(ValidateDefaultAttributeOnUse);
 
             _validationType = ValidationType.DTD;
             SetupValidation(ValidationType.DTD);
@@ -275,7 +302,8 @@ namespace System.Xml
                 settings.ValidationType = ValidationType.DTD;
                 if (!_processIdentityConstraints)
                 {
-                    settings.ValidationFlags &= ~XmlSchemaValidationFlags.ProcessIdentityConstraints;
+                    settings.ValidationFlags &=
+                        ~XmlSchemaValidationFlags.ProcessIdentityConstraints;
                 }
 
                 settings.ReadOnly = true;
@@ -286,127 +314,85 @@ namespace System.Xml
         // Returns the type of the current node.
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return _coreReader.NodeType;
-            }
+            get { return _coreReader.NodeType; }
         }
 
         // Returns the name of the current node, including prefix.
         public override string Name
         {
-            get
-            {
-                return _coreReader.Name;
-            }
+            get { return _coreReader.Name; }
         }
 
         // Returns local name of the current node (without prefix)
         public override string LocalName
         {
-            get
-            {
-                return _coreReader.LocalName;
-            }
+            get { return _coreReader.LocalName; }
         }
 
         // Returns namespace name of the current node.
         public override string NamespaceURI
         {
-            get
-            {
-                return _coreReader.NamespaceURI;
-            }
+            get { return _coreReader.NamespaceURI; }
         }
 
         // Returns prefix associated with the current node.
         public override string Prefix
         {
-            get
-            {
-                return _coreReader.Prefix;
-            }
+            get { return _coreReader.Prefix; }
         }
 
         // Returns true if the current node can have Value property != string.Empty.
         public override bool HasValue
         {
-            get
-            {
-                return _coreReader.HasValue;
-            }
+            get { return _coreReader.HasValue; }
         }
 
         // Returns the text value of the current node.
         public override string Value
         {
-            get
-            {
-                return _coreReader.Value;
-            }
+            get { return _coreReader.Value; }
         }
 
         // Returns the depth of the current node in the XML element stack
         public override int Depth
         {
-            get
-            {
-                return _coreReader.Depth;
-            }
+            get { return _coreReader.Depth; }
         }
 
         // Returns the base URI of the current node.
         public override string BaseURI
         {
-            get
-            {
-                return _coreReader.BaseURI;
-            }
+            get { return _coreReader.BaseURI; }
         }
 
         // Returns true if the current node is an empty element (for example, <MyElement/>).
         public override bool IsEmptyElement
         {
-            get
-            {
-                return _coreReader.IsEmptyElement;
-            }
+            get { return _coreReader.IsEmptyElement; }
         }
 
         // Returns true of the current node is a default attribute declared in DTD.
         public override bool IsDefault
         {
-            get
-            {
-                return _coreReader.IsDefault;
-            }
+            get { return _coreReader.IsDefault; }
         }
 
         // Returns the quote character used in the current attribute declaration
         public override char QuoteChar
         {
-            get
-            {
-                return _coreReader.QuoteChar;
-            }
+            get { return _coreReader.QuoteChar; }
         }
 
         // Returns the current xml:space scope.
         public override XmlSpace XmlSpace
         {
-            get
-            {
-                return _coreReader.XmlSpace;
-            }
+            get { return _coreReader.XmlSpace; }
         }
 
         // Returns the current xml:lang scope.</para>
         public override string XmlLang
         {
-            get
-            {
-                return _coreReader.XmlLang;
-            }
+            get { return _coreReader.XmlLang; }
         }
 
         // Returns the current read state of the reader
@@ -414,44 +400,34 @@ namespace System.Xml
         {
             get
             {
-                return (_parsingFunction == ParsingFunction.Init) ? ReadState.Initial : _coreReader.ReadState;
+                return (_parsingFunction == ParsingFunction.Init)
+                    ? ReadState.Initial
+                    : _coreReader.ReadState;
             }
         }
 
         // Returns true if the reader reached end of the input data
         public override bool EOF
         {
-            get
-            {
-                return _coreReader.EOF;
-            }
+            get { return _coreReader.EOF; }
         }
 
         // Returns the XmlNameTable associated with this XmlReader
         public override XmlNameTable NameTable
         {
-            get
-            {
-                return _coreReader.NameTable;
-            }
+            get { return _coreReader.NameTable; }
         }
 
         // Returns encoding of the XML document
         internal Encoding? Encoding
         {
-            get
-            {
-                return _coreReaderImpl.Encoding;
-            }
+            get { return _coreReaderImpl.Encoding; }
         }
 
         // Returns the number of attributes on the current node.
         public override int AttributeCount
         {
-            get
-            {
-                return _coreReader.AttributeCount;
-            }
+            get { return _coreReader.AttributeCount; }
         }
 
         // Returns value of an attribute with the specified Name
@@ -613,10 +589,7 @@ namespace System.Xml
 
         public override bool CanReadBinaryContent
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override int ReadContentAsBase64(byte[] buffer, int index, int count)
@@ -629,7 +602,10 @@ namespace System.Xml
             // init ReadChunkHelper if called the first time
             if (_parsingFunction != ParsingFunction.InReadBinaryContent)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, _outerReader);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    _outerReader
+                );
             }
 
             // set parsingFunction to Read state in order to have a normal Read() behavior when called from readBinaryHelper
@@ -653,7 +629,10 @@ namespace System.Xml
             // init ReadChunkHelper when called first time
             if (_parsingFunction != ParsingFunction.InReadBinaryContent)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, _outerReader);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    _outerReader
+                );
             }
 
             // set parsingFunction to Read state in order to have a normal Read() behavior when called from readBinaryHelper
@@ -677,7 +656,10 @@ namespace System.Xml
             // init ReadChunkHelper if called the first time
             if (_parsingFunction != ParsingFunction.InReadBinaryContent)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, _outerReader);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    _outerReader
+                );
             }
 
             // set parsingFunction to Read state in order to have a normal Read() behavior when called from readBinaryHelper
@@ -701,7 +683,10 @@ namespace System.Xml
             // init ReadChunkHelper when called first time
             if (_parsingFunction != ParsingFunction.InReadBinaryContent)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, _outerReader);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    _outerReader
+                );
             }
 
             // set parsingFunction to Read state in order to have a normal Read() behavior when called from readBinaryHelper
@@ -718,10 +703,7 @@ namespace System.Xml
         // Returns true if the XmlReader knows how to resolve general entities
         public override bool CanResolveEntity
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         // Resolves the current entity reference node
@@ -736,10 +718,7 @@ namespace System.Xml
 
         internal XmlReader OuterReader
         {
-            get
-            {
-                return _outerReader;
-            }
+            get { return _outerReader; }
             set
             {
 #pragma warning disable 618
@@ -751,7 +730,10 @@ namespace System.Xml
 
         internal void MoveOffEntityReference()
         {
-            if (_outerReader.NodeType == XmlNodeType.EntityReference && _parsingFunction != ParsingFunction.ResolveEntityInternally)
+            if (
+                _outerReader.NodeType == XmlNodeType.EntityReference
+                && _parsingFunction != ParsingFunction.ResolveEntityInternally
+            )
             {
                 if (!_outerReader.Read())
                 {
@@ -777,25 +759,21 @@ namespace System.Xml
         // Returns the line number of the current node
         public int LineNumber
         {
-            get
-            {
-                return ((IXmlLineInfo)_coreReader).LineNumber;
-            }
+            get { return ((IXmlLineInfo)_coreReader).LineNumber; }
         }
 
         // Returns the line number of the current node
         public int LinePosition
         {
-            get
-            {
-                return ((IXmlLineInfo)_coreReader).LinePosition;
-            }
+            get { return ((IXmlLineInfo)_coreReader).LinePosition; }
         }
 
         //
         // IXmlNamespaceResolver members
         //
-        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(XmlNamespaceScope scope)
+        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
+            XmlNamespaceScope scope
+        )
         {
             return this.GetNamespacesInScope(scope);
         }
@@ -827,14 +805,8 @@ namespace System.Xml
         // Specufies the validation event handler that wil get warnings and errors related to validation
         internal event ValidationEventHandler ValidationEventHandler
         {
-            add
-            {
-                _eventHandling.AddHandler(value);
-            }
-            remove
-            {
-                _eventHandling.RemoveHandler(value);
-            }
+            add { _eventHandling.AddHandler(value); }
+            remove { _eventHandling.RemoveHandler(value); }
         }
 
         // returns the schema type of the current node
@@ -844,8 +816,12 @@ namespace System.Xml
             {
                 if (_validationType != ValidationType.None)
                 {
-                    XmlSchemaType? schemaTypeObj = _coreReaderImpl.InternalSchemaType as XmlSchemaType;
-                    if (schemaTypeObj != null && schemaTypeObj.QualifiedName.Namespace == XmlReservedNs.NsXs)
+                    XmlSchemaType? schemaTypeObj =
+                        _coreReaderImpl.InternalSchemaType as XmlSchemaType;
+                    if (
+                        schemaTypeObj != null
+                        && schemaTypeObj.QualifiedName.Namespace == XmlReservedNs.NsXs
+                    )
                     {
                         return schemaTypeObj.Datatype;
                     }
@@ -860,28 +836,19 @@ namespace System.Xml
         // returns the underlying XmlTextReader or XmlTextReaderImpl
         internal XmlReader Reader
         {
-            get
-            {
-                return (XmlReader)_coreReader;
-            }
+            get { return (XmlReader)_coreReader; }
         }
 
         // returns the underlying XmlTextReaderImpl
         internal XmlTextReaderImpl ReaderImpl
         {
-            get
-            {
-                return _coreReaderImpl;
-            }
+            get { return _coreReaderImpl; }
         }
 
         // specifies the validation type (None, DDT, XSD, XDR, Auto)
         internal ValidationType ValidationType
         {
-            get
-            {
-                return _validationType;
-            }
+            get { return _validationType; }
             set
             {
                 if (ReadState != ReadState.Initial)
@@ -897,24 +864,15 @@ namespace System.Xml
 #pragma warning disable 618
         internal XmlSchemaCollection Schemas
         {
-            get
-            {
-                return _schemaCollection;
-            }
+            get { return _schemaCollection; }
         }
 #pragma warning restore 618
 
         // Spefifies whether general entities should be automatically expanded or not
         internal EntityHandling EntityHandling
         {
-            get
-            {
-                return _coreReaderImpl.EntityHandling;
-            }
-            set
-            {
-                _coreReaderImpl.EntityHandling = value;
-            }
+            get { return _coreReaderImpl.EntityHandling; }
+            set { _coreReaderImpl.EntityHandling = value; }
         }
 
         // Specifies XmlResolver used for opening the XML document and other external references
@@ -931,14 +889,8 @@ namespace System.Xml
         // Disables or enables support of W3C XML 1.0 Namespaces
         internal bool Namespaces
         {
-            get
-            {
-                return _coreReaderImpl.Namespaces;
-            }
-            set
-            {
-                _coreReaderImpl.Namespaces = value;
-            }
+            get { return _coreReaderImpl.Namespaces; }
+            set { _coreReaderImpl.Namespaces = value; }
         }
 
         // Returns typed value of the current node (based on the type specified by schema)
@@ -959,7 +911,10 @@ namespace System.Xml
                         return null;
                     }
 
-                    XmlSchemaDatatype? dtype = (SchemaType is XmlSchemaDatatype) ? (XmlSchemaDatatype)SchemaType : ((XmlSchemaType)SchemaType).Datatype;
+                    XmlSchemaDatatype? dtype =
+                        (SchemaType is XmlSchemaDatatype)
+                            ? (XmlSchemaDatatype)SchemaType
+                            : ((XmlSchemaType)SchemaType).Datatype;
                     if (dtype != null)
                     {
                         if (!_outerReader.IsEmptyElement)
@@ -972,9 +927,14 @@ namespace System.Xml
                                 }
 
                                 XmlNodeType type = _outerReader.NodeType;
-                                if (type != XmlNodeType.CDATA && type != XmlNodeType.Text &&
-                                    type != XmlNodeType.Whitespace && type != XmlNodeType.SignificantWhitespace &&
-                                    type != XmlNodeType.Comment && type != XmlNodeType.ProcessingInstruction)
+                                if (
+                                    type != XmlNodeType.CDATA
+                                    && type != XmlNodeType.Text
+                                    && type != XmlNodeType.Whitespace
+                                    && type != XmlNodeType.SignificantWhitespace
+                                    && type != XmlNodeType.Comment
+                                    && type != XmlNodeType.ProcessingInstruction
+                                )
                                 {
                                     break;
                                 }
@@ -982,7 +942,10 @@ namespace System.Xml
 
                             if (_outerReader.NodeType != XmlNodeType.EndElement)
                             {
-                                throw new XmlException(SR.Xml_InvalidNodeType, _outerReader.NodeType.ToString());
+                                throw new XmlException(
+                                    SR.Xml_InvalidNodeType,
+                                    _outerReader.NodeType.ToString()
+                                );
                             }
                         }
                         return _coreReaderImpl.InternalTypedValue;
@@ -1019,9 +982,17 @@ namespace System.Xml
             }
 
             IDtdParser dtdParser = DtdParser.Create();
-            XmlTextReaderImpl.DtdParserProxy proxy = new XmlTextReaderImpl.DtdParserProxy(_coreReaderImpl);
-            IDtdInfo dtdInfo = dtdParser.ParseFreeFloatingDtd(_parserContext.BaseURI, _parserContext.DocTypeName, _parserContext.PublicId,
-                                                              _parserContext.SystemId, _parserContext.InternalSubset, proxy);
+            XmlTextReaderImpl.DtdParserProxy proxy = new XmlTextReaderImpl.DtdParserProxy(
+                _coreReaderImpl
+            );
+            IDtdInfo dtdInfo = dtdParser.ParseFreeFloatingDtd(
+                _parserContext.BaseURI,
+                _parserContext.DocTypeName,
+                _parserContext.PublicId,
+                _parserContext.SystemId,
+                _parserContext.InternalSubset,
+                proxy
+            );
             _coreReaderImpl.SetDtdInfo(dtdInfo);
 
             ValidateDtd();
@@ -1052,24 +1023,35 @@ namespace System.Xml
             Debug.Assert(_coreReader.NodeType == XmlNodeType.EntityReference);
             int initialDepth = _coreReader.Depth;
             _outerReader.ResolveEntity();
-            while (_outerReader.Read() && _coreReader.Depth > initialDepth) ;
+            while (_outerReader.Read() && _coreReader.Depth > initialDepth)
+                ;
         }
 
         // SxS: This method resolves an Uri but does not expose it to caller. It's OK to suppress the SxS warning.
         [MemberNotNull(nameof(_validator))]
         private void SetupValidation(ValidationType valType)
         {
-            _validator = BaseValidator.CreateInstance(valType, this, _schemaCollection, _eventHandling, _processIdentityConstraints)!;
+            _validator = BaseValidator.CreateInstance(
+                valType,
+                this,
+                _schemaCollection,
+                _eventHandling,
+                _processIdentityConstraints
+            )!;
 
             XmlResolver? resolver = GetResolver();
             _validator.XmlResolver = resolver;
 
             if (_outerReader.BaseURI!.Length > 0)
             {
-                _validator.BaseUri = (resolver == null) ? new Uri(_outerReader.BaseURI, UriKind.RelativeOrAbsolute) : resolver.ResolveUri(null, _outerReader.BaseURI);
+                _validator.BaseUri =
+                    (resolver == null)
+                        ? new Uri(_outerReader.BaseURI, UriKind.RelativeOrAbsolute)
+                        : resolver.ResolveUri(null, _outerReader.BaseURI);
             }
 
-            _coreReaderImpl.ValidationEventHandling = (_validationType == ValidationType.None) ? null : _eventHandling;
+            _coreReaderImpl.ValidationEventHandling =
+                (_validationType == ValidationType.None) ? null : _eventHandling;
         }
 
         private static XmlResolver? s_tempResolver;
@@ -1096,11 +1078,16 @@ namespace System.Xml
             switch (_coreReader.NodeType)
             {
                 case XmlNodeType.Whitespace:
-                    if (_coreReader.Depth > 0 || _coreReaderImpl.FragmentType != XmlNodeType.Document)
+                    if (
+                        _coreReader.Depth > 0
+                        || _coreReaderImpl.FragmentType != XmlNodeType.Document
+                    )
                     {
                         if (_validator.PreserveWhitespace)
                         {
-                            _coreReaderImpl.ChangeCurrentNodeType(XmlNodeType.SignificantWhitespace);
+                            _coreReaderImpl.ChangeCurrentNodeType(
+                                XmlNodeType.SignificantWhitespace
+                            );
                         }
                     }
                     goto default;
@@ -1120,50 +1107,29 @@ namespace System.Xml
 
         internal BaseValidator Validator
         {
-            get
-            {
-                return _validator;
-            }
-            set
-            {
-                _validator = value;
-            }
+            get { return _validator; }
+            set { _validator = value; }
         }
 
         internal override XmlNamespaceManager? NamespaceManager
         {
-            get
-            {
-                return _coreReaderImpl.NamespaceManager;
-            }
+            get { return _coreReaderImpl.NamespaceManager; }
         }
 
         internal bool StandAlone
         {
-            get
-            {
-                return _coreReaderImpl.StandAlone;
-            }
+            get { return _coreReaderImpl.StandAlone; }
         }
 
         internal object? SchemaTypeObject
         {
-            set
-            {
-                _coreReaderImpl.InternalSchemaType = value;
-            }
+            set { _coreReaderImpl.InternalSchemaType = value; }
         }
 
         internal object? TypedValueObject
         {
-            get
-            {
-                return _coreReaderImpl.InternalTypedValue;
-            }
-            set
-            {
-                _coreReaderImpl.InternalTypedValue = value;
-            }
+            get { return _coreReaderImpl.InternalTypedValue; }
+            set { _coreReaderImpl.InternalTypedValue = value; }
         }
 
         internal bool AddDefaultAttribute(SchemaAttDef attdef)
@@ -1176,7 +1142,10 @@ namespace System.Xml
             get { return _coreReaderImpl.DtdInfo; }
         }
 
-        internal void ValidateDefaultAttributeOnUse(IDtdDefaultAttributeInfo defaultAttribute, XmlTextReaderImpl coreReader)
+        internal void ValidateDefaultAttributeOnUse(
+            IDtdDefaultAttributeInfo defaultAttribute,
+            XmlTextReaderImpl coreReader
+        )
         {
             SchemaAttDef? attdef = defaultAttribute as SchemaAttDef;
             if (attdef == null)

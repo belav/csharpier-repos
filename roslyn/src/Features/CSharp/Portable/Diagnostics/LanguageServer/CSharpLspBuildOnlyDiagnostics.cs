@@ -60,14 +60,12 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServer
         "CS9207", // ErrorCode.ERR_InterceptableMethodMustBeOrdinary
         "CS8419", // ErrorCode.ERR_PossibleAsyncIteratorWithoutYield
         "CS8420" // ErrorCode.ERR_PossibleAsyncIteratorWithoutYieldOrAwait
-        )]
+    )]
     [Shared]
     internal sealed class CSharpLspBuildOnlyDiagnostics : ILspBuildOnlyDiagnostics
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpLspBuildOnlyDiagnostics()
-        {
-        }
+        public CSharpLspBuildOnlyDiagnostics() { }
     }
 }

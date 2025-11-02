@@ -24,7 +24,10 @@ namespace System.Runtime.Serialization.Tests
         [InlineData("value")]
         public void ClrNamespace_Set_GetReturnsExpected(string value)
         {
-            var attribute = new ContractNamespaceAttribute("contractNamespace") { ClrNamespace = value };
+            var attribute = new ContractNamespaceAttribute("contractNamespace")
+            {
+                ClrNamespace = value,
+            };
             Assert.Equal(value, attribute.ClrNamespace);
         }
     }

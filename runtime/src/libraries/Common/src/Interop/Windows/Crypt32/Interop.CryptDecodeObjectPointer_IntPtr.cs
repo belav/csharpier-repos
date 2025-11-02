@@ -8,7 +8,12 @@ internal static partial class Interop
 {
     internal static partial class Crypt32
     {
-        [LibraryImport(Libraries.Crypt32, EntryPoint = "CryptDecodeObject",  SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Crypt32,
+            EntryPoint = "CryptDecodeObject",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static unsafe partial bool CryptDecodeObjectPointer(
             CertEncodingType dwCertEncodingType,
@@ -17,9 +22,15 @@ internal static partial class Interop
             int cbEncoded,
             CryptDecodeObjectFlags dwFlags,
             void* pvStructInfo,
-            ref int pcbStructInfo);
+            ref int pcbStructInfo
+        );
 
-        [LibraryImport(Libraries.Crypt32, EntryPoint = "CryptDecodeObject",  SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Crypt32,
+            EntryPoint = "CryptDecodeObject",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static unsafe partial bool CryptDecodeObjectPointer(
             CertEncodingType dwCertEncodingType,
@@ -28,6 +39,7 @@ internal static partial class Interop
             int cbEncoded,
             CryptDecodeObjectFlags dwFlags,
             void* pvStructInfo,
-            ref int pcbStructInfo);
+            ref int pcbStructInfo
+        );
     }
 }

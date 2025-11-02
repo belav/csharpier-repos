@@ -24,7 +24,11 @@ namespace System.Web.Http.Tracing.Tracers
         private readonly HttpRequestMessage _request;
         private readonly ITraceWriter _traceWriter;
 
-        public HttpControllerTracer(HttpRequestMessage request, IHttpController innerController, ITraceWriter traceWriter)
+        public HttpControllerTracer(
+            HttpRequestMessage request,
+            IHttpController innerController,
+            ITraceWriter traceWriter
+        )
         {
             Contract.Assert(innerController != null);
             Contract.Assert(traceWriter != null);
@@ -53,11 +57,15 @@ namespace System.Web.Http.Tracing.Tracers
                     beginTrace: null,
                     execute: disposable.Dispose,
                     endTrace: null,
-                    errorTrace: null);
+                    errorTrace: null
+                );
             }
         }
 
-        Task<HttpResponseMessage> IHttpController.ExecuteAsync(HttpControllerContext controllerContext, CancellationToken cancellationToken)
+        Task<HttpResponseMessage> IHttpController.ExecuteAsync(
+            HttpControllerContext controllerContext,
+            CancellationToken cancellationToken
+        )
         {
             return _traceWriter.TraceBeginEndAsync<HttpResponseMessage>(
                 controllerContext.Request,
@@ -79,10 +87,14 @@ namespace System.Web.Http.Tracing.Tracers
                         tr.Status = response.StatusCode;
                     }
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
         }
 
-        private async Task<HttpResponseMessage> ExecuteAsyncCore(HttpControllerContext controllerContext, CancellationToken cancellationToken)
+        private async Task<HttpResponseMessage> ExecuteAsyncCore(
+            HttpControllerContext controllerContext,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -99,7 +111,12 @@ namespace System.Web.Http.Tracing.Tracers
                     // This currently knows a little too much about how RegisterForDispose works,
                     // but that's unavoidable unless we want to offer UnregisterForDispose.
                     IList<IDisposable> disposables;
-                    if (_request.Properties.TryGetValue(HttpPropertyKeys.DisposableRequestResourcesKey, out disposables))
+                    if (
+                        _request.Properties.TryGetValue(
+                            HttpPropertyKeys.DisposableRequestResourcesKey,
+                            out disposables
+                        )
+                    )
                     {
                         disposables.Remove(disposable);
                         disposables.Add(this);

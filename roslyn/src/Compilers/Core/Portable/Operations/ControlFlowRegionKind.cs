@@ -40,7 +40,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         Catch,
 
         /// <summary>
-        /// Region representing a union of a <see cref="Filter"/> and the corresponding catch <see cref="Catch"/> regions. 
+        /// Region representing a union of a <see cref="Filter"/> and the corresponding catch <see cref="Catch"/> regions.
         /// Doesn't contain any <see cref="BasicBlock"/>s directly.
         /// </summary>
         FilterAndHandler,
@@ -59,8 +59,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         /// <summary>
         /// Region representing a union of a <see cref="Try"/> and corresponding finally <see cref="Finally"/>
         /// region. Doesn't contain any <see cref="BasicBlock"/>s directly.
-        /// 
-        /// An <see cref="ITryOperation"/> that has a set of <see cref="ITryOperation.Catches"/> and a <see cref="ITryOperation.Finally"/> 
+        ///
+        /// An <see cref="ITryOperation"/> that has a set of <see cref="ITryOperation.Catches"/> and a <see cref="ITryOperation.Finally"/>
         /// at the same time is mapped to a <see cref="TryAndFinally"/> region with <see cref="TryAndCatch"/> region inside its <see cref="Try"/> region.
         /// </summary>
         TryAndFinally,

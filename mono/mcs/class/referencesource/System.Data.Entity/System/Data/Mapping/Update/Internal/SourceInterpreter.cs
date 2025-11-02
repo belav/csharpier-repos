@@ -9,9 +9,10 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Data.Objects;
 using System.Data.Metadata.Edm;
+using System.Data.Objects;
+using System.Diagnostics;
+
 namespace System.Data.Mapping.Update.Internal
 {
     /// <summary>
@@ -39,8 +40,11 @@ namespace System.Data.Mapping.Update.Internal
         /// <param name="translator">Translator containing session information.</param>
         /// <param name="sourceTable">Table from which the exception was thrown (must not be null).</param>
         /// <returns>Markup.</returns>
-        internal static ReadOnlyCollection<IEntityStateEntry> GetAllStateEntries(PropagatorResult source, UpdateTranslator translator,
-            EntitySet sourceTable)
+        internal static ReadOnlyCollection<IEntityStateEntry> GetAllStateEntries(
+            PropagatorResult source,
+            UpdateTranslator translator,
+            EntitySet sourceTable
+        )
         {
             Debug.Assert(null != source);
             Debug.Assert(null != translator);
@@ -70,9 +74,14 @@ namespace System.Data.Mapping.Update.Internal
                             // if this is an identifier, it may also be registered with an "owner".
                             // Return the owner as well if the owner is also mapped to this table.
                             PropagatorResult owner;
-                            if (m_translator.KeyManager.TryGetIdentifierOwner(source.Identifier, out owner) &&
-                                null != owner.StateEntry &&
-                                ExtentInScope(owner.StateEntry.EntitySet))
+                            if (
+                                m_translator.KeyManager.TryGetIdentifierOwner(
+                                    source.Identifier,
+                                    out owner
+                                )
+                                && null != owner.StateEntry
+                                && ExtentInScope(owner.StateEntry.EntitySet)
+                            )
                             {
                                 m_stateEntries.Add(owner.StateEntry);
                             }
@@ -80,15 +89,18 @@ namespace System.Data.Mapping.Update.Internal
                             // Check if are any referential constraints. If so, the entity key
                             // implies that the dependent relationship instance is also being
                             // handled in this result.
-                            foreach (IEntityStateEntry stateEntry in m_translator.KeyManager.GetDependentStateEntries(source.Identifier))
+                            foreach (
+                                IEntityStateEntry stateEntry in m_translator.KeyManager.GetDependentStateEntries(
+                                    source.Identifier
+                                )
+                            )
                             {
                                 m_stateEntries.Add(stateEntry);
                             }
                         }
                     }
                     source = source.Next;
-                }
-                while (null != source);
+                } while (null != source);
             }
             else if (!source.IsSimple && !source.IsNull)
             {
@@ -110,7 +122,9 @@ namespace System.Data.Mapping.Update.Internal
                 return false;
             }
             // determine if the extent is mapped to this table
-            return m_translator.ViewLoader.GetAffectedTables(extent, m_translator.MetadataWorkspace).Contains(m_sourceTable);
+            return m_translator
+                .ViewLoader.GetAffectedTables(extent, m_translator.MetadataWorkspace)
+                .Contains(m_sourceTable);
         }
     }
 }

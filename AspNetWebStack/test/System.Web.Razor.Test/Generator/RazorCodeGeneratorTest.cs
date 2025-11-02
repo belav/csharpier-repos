@@ -32,14 +32,16 @@ namespace System.Web.Razor.Test.Generator
             return new RazorEngineHost(new TLanguage());
         }
 
-        protected void RunTest(string name,
-                               string baselineName = null,
-                               bool generatePragmas = true,
-                               bool designTimeMode = false,
-                               IList<GeneratedCodeMapping> expectedDesignTimePragmas = null,
-                               TestSpan[] spans = null,
-                               TabTest tabTest = TabTest.Both,
-                               Action<RazorEngineHost> hostConfig = null)
+        protected void RunTest(
+            string name,
+            string baselineName = null,
+            bool generatePragmas = true,
+            bool designTimeMode = false,
+            IList<GeneratedCodeMapping> expectedDesignTimePragmas = null,
+            TestSpan[] spans = null,
+            TabTest tabTest = TabTest.Both,
+            Action<RazorEngineHost> hostConfig = null
+        )
         {
             bool testRun = false;
 
@@ -56,7 +58,8 @@ namespace System.Web.Razor.Test.Generator
                         expectedDesignTimePragmas: expectedDesignTimePragmas,
                         spans: spans,
                         withTabs: true,
-                        hostConfig: hostConfig);
+                        hostConfig: hostConfig
+                    );
                 }
 
                 testRun = true;
@@ -75,7 +78,8 @@ namespace System.Web.Razor.Test.Generator
                         expectedDesignTimePragmas: expectedDesignTimePragmas,
                         spans: spans,
                         withTabs: false,
-                        hostConfig: hostConfig);
+                        hostConfig: hostConfig
+                    );
                 }
 
                 testRun = true;
@@ -84,14 +88,16 @@ namespace System.Web.Razor.Test.Generator
             Assert.True(testRun, "No test was run because TabTest is not set correctly");
         }
 
-        private void RunTestInternal(string name,
-                               string baselineName,
-                               bool generatePragmas,
-                               bool designTimeMode,
-                               IList<GeneratedCodeMapping> expectedDesignTimePragmas,
-                               TestSpan[] spans,
-                               bool withTabs,
-                               Action<RazorEngineHost> hostConfig)
+        private void RunTestInternal(
+            string name,
+            string baselineName,
+            bool generatePragmas,
+            bool designTimeMode,
+            IList<GeneratedCodeMapping> expectedDesignTimePragmas,
+            TestSpan[] spans,
+            bool withTabs,
+            Action<RazorEngineHost> hostConfig
+        )
         {
             // Load the test files
             if (baselineName == null)
@@ -99,8 +105,26 @@ namespace System.Web.Razor.Test.Generator
                 baselineName = name;
             }
 
-            string source = TestFile.Create(String.Format("CodeGenerator.{1}.Source.{0}.{2}", name, LanguageName, FileExtension)).ReadAllText();
-            string expectedOutput = TestFile.Create(String.Format("CodeGenerator.{1}.Output.{0}.{2}", baselineName, LanguageName, BaselineExtension)).ReadAllText();
+            string source = TestFile
+                .Create(
+                    String.Format(
+                        "CodeGenerator.{1}.Source.{0}.{2}",
+                        name,
+                        LanguageName,
+                        FileExtension
+                    )
+                )
+                .ReadAllText();
+            string expectedOutput = TestFile
+                .Create(
+                    String.Format(
+                        "CodeGenerator.{1}.Output.{0}.{2}",
+                        baselineName,
+                        LanguageName,
+                        BaselineExtension
+                    )
+                )
+                .ReadAllText();
 
             // Set up the host and engine
             RazorEngineHost host = CreateHost();
@@ -110,19 +134,21 @@ namespace System.Web.Razor.Test.Generator
             host.DefaultClassName = name;
 
             // Add support for templates, etc.
-            host.GeneratedClassContext = new GeneratedClassContext(GeneratedClassContext.DefaultExecuteMethodName,
-                                                                   GeneratedClassContext.DefaultWriteMethodName,
-                                                                   GeneratedClassContext.DefaultWriteLiteralMethodName,
-                                                                   "WriteTo",
-                                                                   "WriteLiteralTo",
-                                                                   "Template",
-                                                                   "DefineSection",
-                                                                   "BeginContext",
-                                                                   "EndContext")
-                                                                   {
-                                                                       LayoutPropertyName = "Layout",
-                                                                       ResolveUrlMethodName = "Href"
-                                                                   };
+            host.GeneratedClassContext = new GeneratedClassContext(
+                GeneratedClassContext.DefaultExecuteMethodName,
+                GeneratedClassContext.DefaultWriteMethodName,
+                GeneratedClassContext.DefaultWriteLiteralMethodName,
+                "WriteTo",
+                "WriteLiteralTo",
+                "Template",
+                "DefineSection",
+                "BeginContext",
+                "EndContext"
+            )
+            {
+                LayoutPropertyName = "Layout",
+                ResolveUrlMethodName = "Href",
+            };
             if (hostConfig != null)
             {
                 hostConfig(host);
@@ -136,12 +162,20 @@ namespace System.Web.Razor.Test.Generator
             GeneratorResults results = null;
             using (StringTextBuffer buffer = new StringTextBuffer(source))
             {
-                results = engine.GenerateCode(buffer, className: name, rootNamespace: TestRootNamespaceName, sourceFileName: generatePragmas ? String.Format("{0}.{1}", name, FileExtension) : null);
+                results = engine.GenerateCode(
+                    buffer,
+                    className: name,
+                    rootNamespace: TestRootNamespaceName,
+                    sourceFileName: generatePragmas
+                        ? String.Format("{0}.{1}", name, FileExtension)
+                        : null
+                );
             }
 
             // Generate code
             CodeCompileUnit ccu = results.GeneratedCode;
-            CodeDomProvider codeProvider = (CodeDomProvider)Activator.CreateInstance(host.CodeLanguage.CodeDomProviderType);
+            CodeDomProvider codeProvider = (CodeDomProvider)
+                Activator.CreateInstance(host.CodeLanguage.CodeDomProviderType);
 
             CodeGeneratorOptions options = new CodeGeneratorOptions();
 
@@ -157,7 +191,15 @@ namespace System.Web.Razor.Test.Generator
                 codeProvider.GenerateCodeFromCompileUnit(ccu, writer, options);
             }
 
-            WriteBaseline(String.Format(@"test\System.Web.Razor.Test\TestFiles\CodeGenerator\{0}\Output\{1}.{2}", LanguageName, baselineName, BaselineExtension), MiscUtils.StripRuntimeVersion(output.ToString()));
+            WriteBaseline(
+                String.Format(
+                    @"test\System.Web.Razor.Test\TestFiles\CodeGenerator\{0}\Output\{1}.{2}",
+                    LanguageName,
+                    baselineName,
+                    BaselineExtension
+                ),
+                MiscUtils.StripRuntimeVersion(output.ToString())
+            );
 
 #if !GENERATE_BASELINES
             string textOutput = MiscUtils.StripRuntimeVersion(output.ToString());
@@ -178,21 +220,31 @@ namespace System.Web.Razor.Test.Generator
             {
                 if (spans != null)
                 {
-                    Assert.Equal(spans, generatedSpans.Select(span => new TestSpan(span)).ToArray());
+                    Assert.Equal(
+                        spans,
+                        generatedSpans.Select(span => new TestSpan(span)).ToArray()
+                    );
                 }
 
                 if (expectedDesignTimePragmas != null)
                 {
-                    Assert.True(results.DesignTimeLineMappings != null && results.DesignTimeLineMappings.Count > 0);
+                    Assert.True(
+                        results.DesignTimeLineMappings != null
+                            && results.DesignTimeLineMappings.Count > 0
+                    );
 
-                    Assert.Equal(expectedDesignTimePragmas.Count, results.DesignTimeLineMappings.Count);
+                    Assert.Equal(
+                        expectedDesignTimePragmas.Count,
+                        results.DesignTimeLineMappings.Count
+                    );
 
                     Assert.Equal(
                         expectedDesignTimePragmas.ToArray(),
-                        results.DesignTimeLineMappings
-                               .OrderBy(p => p.Key)
-                               .Select(p => p.Value)
-                               .ToArray());
+                        results
+                            .DesignTimeLineMappings.OrderBy(p => p.Key)
+                            .Select(p => p.Value)
+                            .ToArray()
+                    );
                 }
             }
         }

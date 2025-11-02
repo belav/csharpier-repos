@@ -6,9 +6,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 public class InjectJoinWithSelfExpressionMutator : ExpressionMutator
 {
     public InjectJoinWithSelfExpressionMutator(DbContext context)
-        : base(context)
-    {
-    }
+        : base(context) { }
 
     private ExpressionFinder _expressionFinder;
 
@@ -27,20 +25,28 @@ public class InjectJoinWithSelfExpressionMutator : ExpressionMutator
         var expr = _expressionFinder.FoundExpressions[i];
         var elementType = expr.Type.GetGenericArguments()[0];
 
-        var join = QueryableMethods.Join.MakeGenericMethod(elementType, elementType, elementType, elementType);
+        var join = QueryableMethods.Join.MakeGenericMethod(
+            elementType,
+            elementType,
+            elementType,
+            elementType
+        );
 
         var outerKeySelectorPrm = Expression.Parameter(elementType, "oks");
         var innerKeySelectorPrm = Expression.Parameter(elementType, "iks");
 
         var injector = new ExpressionInjector(
             _expressionFinder.FoundExpressions[i],
-            e => Expression.Call(
-                join,
-                e,
-                e,
-                Expression.Lambda(outerKeySelectorPrm, outerKeySelectorPrm),
-                Expression.Lambda(innerKeySelectorPrm, innerKeySelectorPrm),
-                Expression.Lambda(outerKeySelectorPrm, outerKeySelectorPrm, innerKeySelectorPrm)));
+            e =>
+                Expression.Call(
+                    join,
+                    e,
+                    e,
+                    Expression.Lambda(outerKeySelectorPrm, outerKeySelectorPrm),
+                    Expression.Lambda(innerKeySelectorPrm, innerKeySelectorPrm),
+                    Expression.Lambda(outerKeySelectorPrm, outerKeySelectorPrm, innerKeySelectorPrm)
+                )
+        );
 
         return injector.Visit(expression);
     }
@@ -60,9 +66,12 @@ public class InjectJoinWithSelfExpressionMutator : ExpressionMutator
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
-            if (node?.Method.Name is nameof(Queryable.ThenBy)
-                or nameof(Queryable.ThenByDescending)
-                or nameof(EntityFrameworkQueryableExtensions.ThenInclude))
+            if (
+                node?.Method.Name
+                is nameof(Queryable.ThenBy)
+                    or nameof(Queryable.ThenByDescending)
+                    or nameof(EntityFrameworkQueryableExtensions.ThenInclude)
+            )
             {
                 return node;
             }
@@ -72,10 +81,12 @@ public class InjectJoinWithSelfExpressionMutator : ExpressionMutator
 
         public override Expression Visit(Expression node)
         {
-            if (node != null
+            if (
+                node != null
                 && !_insideThenBy
                 && IsQueryableResult(node)
-                && _mutator.IsEntityType(node.Type.GetGenericArguments()[0]))
+                && _mutator.IsEntityType(node.Type.GetGenericArguments()[0])
+            )
             {
                 FoundExpressions.Add(node);
             }

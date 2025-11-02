@@ -19,11 +19,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FullyQualify
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpFullyQualifyService()
-        {
-        }
+        public CSharpFullyQualifyService() { }
 
-        protected override bool CanFullyQualify(SyntaxNode node, [NotNullWhen(true)] out SimpleNameSyntax? simpleName)
+        protected override bool CanFullyQualify(
+            SyntaxNode node,
+            [NotNullWhen(true)] out SimpleNameSyntax? simpleName
+        )
         {
             simpleName = node as SimpleNameSyntax;
             if (simpleName is null)
@@ -38,12 +39,18 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FullyQualify
             return true;
         }
 
-        protected override async Task<SyntaxNode> ReplaceNodeAsync(SimpleNameSyntax simpleName, string containerName, bool resultingSymbolIsType, CancellationToken cancellationToken)
+        protected override async Task<SyntaxNode> ReplaceNodeAsync(
+            SimpleNameSyntax simpleName,
+            string containerName,
+            bool resultingSymbolIsType,
+            CancellationToken cancellationToken
+        )
         {
             var leadingTrivia = simpleName.GetLeadingTrivia();
             var newName = simpleName.WithLeadingTrivia(SyntaxTriviaList.Empty);
 
-            var qualifiedName = SyntaxFactory.QualifiedName(SyntaxFactory.ParseName(containerName), newName)
+            var qualifiedName = SyntaxFactory
+                .QualifiedName(SyntaxFactory.ParseName(containerName), newName)
                 .WithLeadingTrivia(leadingTrivia);
 
             var syntaxTree = simpleName.SyntaxTree;
@@ -53,8 +60,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FullyQualify
             // instead of just changing to "using System.Math", we can make it "using static System.Math" and avoid the
             // CS0138 that would result from the former.  Don't do this for using aliases though as `static` and using
             // aliases cannot be combined.
-            if (resultingSymbolIsType &&
-                simpleName.Parent is UsingDirectiveSyntax { Alias: null, StaticKeyword.RawKind: 0 } usingDirective)
+            if (
+                resultingSymbolIsType
+                && simpleName.Parent
+                    is UsingDirectiveSyntax { Alias: null, StaticKeyword.RawKind: 0 } usingDirective
+            )
             {
                 var newUsingDirective = usingDirective
                     .WithStaticKeyword(SyntaxFactory.Token(SyntaxKind.StaticKeyword))

@@ -10,7 +10,12 @@ namespace Microsoft.CodeAnalysis.Features.Intents
     /// <summary>
     /// Defines the text changes needed to apply an intent.
     /// </summary>
-    internal readonly struct IntentProcessorResult(Solution solution, ImmutableArray<DocumentId> changedDocuments, string title, string actionName)
+    internal readonly struct IntentProcessorResult(
+        Solution solution,
+        ImmutableArray<DocumentId> changedDocuments,
+        string title,
+        string actionName
+    )
     {
         /// <summary>
         /// The changed solution for this intent result.
@@ -31,6 +36,7 @@ namespace Microsoft.CodeAnalysis.Features.Intents
         /// Contains metadata that can be used to identify the kind of sub-action these edits
         /// apply to for the requested intent.
         /// </summary>
-        public readonly string ActionName = actionName ?? throw new ArgumentNullException(nameof(actionName));
+        public readonly string ActionName =
+            actionName ?? throw new ArgumentNullException(nameof(actionName));
     }
 }

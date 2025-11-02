@@ -38,25 +38,29 @@ namespace System.IdentityModel.Tokens
     {
         /// <summary>
         /// The key identifier value type for SAML 2.0 assertion IDs, as defined
-        /// by the OASIS Web Services Security SAML Token Profile 1.1. 
+        /// by the OASIS Web Services Security SAML Token Profile 1.1.
         /// </summary>
-        public const string TokenProfile11ValueType = "http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLID";
+        public const string TokenProfile11ValueType =
+            "http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLID";
         private const string Actor = "Actor";
         private const string Attribute = "Attribute";
-        private static string[] tokenTypeIdentifiers = new string[] { SecurityTokenTypes.Saml2TokenProfile11, SecurityTokenTypes.OasisWssSaml2TokenProfile11 };
+        private static string[] tokenTypeIdentifiers = new string[]
+        {
+            SecurityTokenTypes.Saml2TokenProfile11,
+            SecurityTokenTypes.OasisWssSaml2TokenProfile11,
+        };
         private SamlSecurityTokenRequirement samlSecurityTokenRequirement;
         private SecurityTokenSerializer keyInfoSerializer;
 
-        const string ClaimType2009Namespace = "http://schemas.xmlsoap.org/ws/2009/09/identity/claims";
+        const string ClaimType2009Namespace =
+            "http://schemas.xmlsoap.org/ws/2009/09/identity/claims";
         object syncObject = new object();
 
         /// <summary>
         /// Creates an instance of <see cref="Saml2SecurityTokenHandler"/>
         /// </summary>
         public Saml2SecurityTokenHandler()
-            : this(new SamlSecurityTokenRequirement())
-        {
-        }
+            : this(new SamlSecurityTokenRequirement()) { }
 
         /// <summary>
         /// Creates an instance of <see cref="Saml2SecurityTokenHandler"/>
@@ -66,7 +70,9 @@ namespace System.IdentityModel.Tokens
         {
             if (samlSecurityTokenRequirement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("samlSecurityTokenRequirement");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "samlSecurityTokenRequirement"
+                );
             }
 
             this.samlSecurityTokenRequirement = samlSecurityTokenRequirement;
@@ -82,7 +88,9 @@ namespace System.IdentityModel.Tokens
         {
             if (customConfigElements == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("customConfigElements");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "customConfigElements"
+                );
             }
 
             List<XmlElement> configNodes = XmlUtil.GetXmlElements(customConfigElements);
@@ -98,7 +106,9 @@ namespace System.IdentityModel.Tokens
 
                 if (foundValidConfig)
                 {
-                    throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID7026, ConfigurationStrings.SamlSecurityTokenRequirement));
+                    throw DiagnosticUtility.ThrowHelperInvalidOperation(
+                        SR.GetString(SR.ID7026, ConfigurationStrings.SamlSecurityTokenRequirement)
+                    );
                 }
 
                 this.samlSecurityTokenRequirement = new SamlSecurityTokenRequirement(configElement);
@@ -130,7 +140,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="X509CertificateValidator"/> that is used by the current instance to validate 
+        /// Gets or sets the <see cref="X509CertificateValidator"/> that is used by the current instance to validate
         /// certificates that have signed the <see cref="Saml2SecurityToken"/>.
         /// </summary>
         public X509CertificateValidator CertificateValidator
@@ -153,38 +163,35 @@ namespace System.IdentityModel.Tokens
                     return this.samlSecurityTokenRequirement.CertificateValidator;
                 }
             }
-
-            set
-            {
-                this.samlSecurityTokenRequirement.CertificateValidator = value;
-            }
+            set { this.samlSecurityTokenRequirement.CertificateValidator = value; }
         }
 
         /// <summary>
         /// Gets or sets a <see cref="SecurityTokenSerializer"/> that will be used to serialize and deserialize
-        /// a <see cref="SecurityKeyIdentifier"/>. For example, SamlSubject SecurityKeyIdentifier or Signature 
+        /// a <see cref="SecurityKeyIdentifier"/>. For example, SamlSubject SecurityKeyIdentifier or Signature
         /// SecurityKeyIdentifier.
         /// </summary>
         public SecurityTokenSerializer KeyInfoSerializer
         {
             get
             {
-                 if ( this.keyInfoSerializer == null )
-                 {
-                    lock ( this.syncObject )
+                if (this.keyInfoSerializer == null)
+                {
+                    lock (this.syncObject)
                     {
-                        if ( this.keyInfoSerializer == null )
+                        if (this.keyInfoSerializer == null)
                         {
-                            SecurityTokenHandlerCollection sthc = ( ContainingCollection != null ) ?
-                                ContainingCollection : SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
+                            SecurityTokenHandlerCollection sthc =
+                                (ContainingCollection != null)
+                                    ? ContainingCollection
+                                    : SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
                             this.keyInfoSerializer = new SecurityTokenSerializerAdapter(sthc);
                         }
                     }
-                 }
+                }
 
                 return this.keyInfoSerializer;
             }
-
             set
             {
                 if (value == null)
@@ -209,11 +216,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public SamlSecurityTokenRequirement SamlSecurityTokenRequirement
         {
-            get
-            {
-                return this.samlSecurityTokenRequirement;
-            }
-
+            get { return this.samlSecurityTokenRequirement; }
             set
             {
                 if (value == null)
@@ -232,7 +235,10 @@ namespace System.IdentityModel.Tokens
         /// <param name="attached">Boolean that indicates if a attached or unattached
         /// reference needs to be created.</param>
         /// <returns>A <see cref="SamlAssertionKeyIdentifierClause"/> instance.</returns>
-        public override SecurityKeyIdentifierClause CreateSecurityTokenReference(SecurityToken token, bool attached)
+        public override SecurityKeyIdentifierClause CreateSecurityTokenReference(
+            SecurityToken token,
+            bool attached
+        )
         {
             if (null == token)
             {
@@ -256,7 +262,9 @@ namespace System.IdentityModel.Tokens
             }
 
             // Assertion/issuer
-            Saml2Assertion assertion = new Saml2Assertion(this.CreateIssuerNameIdentifier(tokenDescriptor));
+            Saml2Assertion assertion = new Saml2Assertion(
+                this.CreateIssuerNameIdentifier(tokenDescriptor)
+            );
 
             // Subject
             assertion.Subject = this.CreateSamlSubject(tokenDescriptor);
@@ -265,7 +273,11 @@ namespace System.IdentityModel.Tokens
             assertion.SigningCredentials = this.GetSigningCredentials(tokenDescriptor);
 
             // Conditions
-            assertion.Conditions = this.CreateConditions(tokenDescriptor.Lifetime, tokenDescriptor.AppliesToAddress, tokenDescriptor);
+            assertion.Conditions = this.CreateConditions(
+                tokenDescriptor.Lifetime,
+                tokenDescriptor.AppliesToAddress,
+                tokenDescriptor
+            );
 
             // Advice
             assertion.Advice = this.CreateAdvice(tokenDescriptor);
@@ -318,7 +330,10 @@ namespace System.IdentityModel.Tokens
             Saml2SecurityToken samlToken = token as Saml2SecurityToken;
             if (samlToken == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("token", SR.GetString(SR.ID4151));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "token",
+                    SR.GetString(SR.ID4151)
+                );
             }
 
             if (this.Configuration == null)
@@ -328,21 +343,37 @@ namespace System.IdentityModel.Tokens
 
             try
             {
-                TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.Diagnostics, SR.GetString(SR.TraceValidateToken), new SecurityTraceRecordHelper.TokenTraceRecord(token), null, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    TraceCode.Diagnostics,
+                    SR.GetString(SR.TraceValidateToken),
+                    new SecurityTraceRecordHelper.TokenTraceRecord(token),
+                    null,
+                    null
+                );
 
                 if (samlToken.IssuerToken == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenValidationException(SR.GetString(SR.ID4152)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenValidationException(SR.GetString(SR.ID4152))
+                    );
                 }
 
                 if (samlToken.Assertion == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("token", SR.GetString(SR.ID1034));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "token",
+                        SR.GetString(SR.ID1034)
+                    );
                 }
 
                 this.ValidateConditions(
                     samlToken.Assertion.Conditions,
-                    SamlSecurityTokenRequirement.ShouldEnforceAudienceRestriction(this.Configuration.AudienceRestriction.AudienceMode, samlToken));
+                    SamlSecurityTokenRequirement.ShouldEnforceAudienceRestriction(
+                        this.Configuration.AudienceRestriction.AudienceMode,
+                        samlToken
+                    )
+                );
 
                 //
                 // We need something like AudienceUriMode and have a setting on Configuration to allow extensibility and custom settings
@@ -353,7 +384,10 @@ namespace System.IdentityModel.Tokens
                     this.DetectReplayedToken(samlToken);
                 }
 
-                Saml2SubjectConfirmation subjectConfirmation = samlToken.Assertion.Subject.SubjectConfirmations[0];
+                Saml2SubjectConfirmation subjectConfirmation = samlToken
+                    .Assertion
+                    .Subject
+                    .SubjectConfirmations[0];
                 if (subjectConfirmation.SubjectConfirmationData != null)
                 {
                     this.ValidateConfirmationData(subjectConfirmation.SubjectConfirmationData);
@@ -420,9 +454,14 @@ namespace System.IdentityModel.Tokens
 
             WindowsIdentity wi = new WindowsIdentity(upn);
 
-            return new WindowsIdentity(wi.Token, AuthenticationTypes.Federation, WindowsAccountType.Normal, true);
+            return new WindowsIdentity(
+                wi.Token,
+                AuthenticationTypes.Federation,
+                WindowsAccountType.Normal,
+                true
+            );
         }
-        
+
         /// <summary>
         /// Writes a Saml2 Token using the XmlWriter.
         /// </summary>
@@ -450,7 +489,10 @@ namespace System.IdentityModel.Tokens
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("token", SR.GetString(SR.ID4160));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "token",
+                    SR.GetString(SR.ID4160)
+                );
             }
         }
 
@@ -467,7 +509,7 @@ namespace System.IdentityModel.Tokens
             }
 
             return reader.IsStartElement(SAML2.Elements.Assertion, SAML2.Namespace)
-               || reader.IsStartElement(SAML2.Elements.EncryptedAssertion, SAML2.Namespace);
+                || reader.IsStartElement(SAML2.Elements.EncryptedAssertion, SAML2.Namespace);
         }
 
         /// <summary>
@@ -487,10 +529,12 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="securityKeyIdentifierClause">SecurityKeyIdentifierClause to be serialized.</param>
         /// <returns>"True' if the given SecurityKeyIdentifierClause can be serialized. 'False' otherwise.</returns>
-        public override bool CanWriteKeyIdentifierClause(SecurityKeyIdentifierClause securityKeyIdentifierClause)
+        public override bool CanWriteKeyIdentifierClause(
+            SecurityKeyIdentifierClause securityKeyIdentifierClause
+        )
         {
-            return (securityKeyIdentifierClause is Saml2AssertionKeyIdentifierClause) ||
-                (securityKeyIdentifierClause is WrappedSaml2AssertionKeyIdentifierClause);
+            return (securityKeyIdentifierClause is Saml2AssertionKeyIdentifierClause)
+                || (securityKeyIdentifierClause is WrappedSaml2AssertionKeyIdentifierClause);
         }
 
         /// <summary>
@@ -514,7 +558,10 @@ namespace System.IdentityModel.Tokens
             // disallow empty
             if (reader.IsEmptyElement)
             {
-                throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID3061, WSSE.Elements.SecurityTokenReference, WSSE.Namespace));
+                throw DiagnosticUtility.ThrowHelperXml(
+                    reader,
+                    SR.GetString(SR.ID3061, WSSE.Elements.SecurityTokenReference, WSSE.Namespace)
+                );
             }
 
             try
@@ -583,7 +630,14 @@ namespace System.IdentityModel.Tokens
                 value = reader.GetAttribute(WSSE.Attributes.ValueType);
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID0001, WSSE.Attributes.ValueType, WSSE.Elements.KeyIdentifier));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(
+                            SR.ID0001,
+                            WSSE.Attributes.ValueType,
+                            WSSE.Elements.KeyIdentifier
+                        )
+                    );
                 }
 
                 if (!StringComparer.Ordinal.Equals(TokenProfile11ValueType, value))
@@ -602,10 +656,12 @@ namespace System.IdentityModel.Tokens
             catch (Exception inner)
             {
                 // Wrap common data-validation exceptions that may have bubbled up
-                if (inner is FormatException
+                if (
+                    inner is FormatException
                     || inner is ArgumentException
                     || inner is InvalidOperationException
-                    || inner is OverflowException)
+                    || inner is OverflowException
+                )
                 {
                     throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4125), inner);
                 }
@@ -641,11 +697,18 @@ namespace System.IdentityModel.Tokens
 
             Saml2Assertion assertion = this.ReadAssertion(reader);
 
-            ReadOnlyCollection<SecurityKey> keys = this.ResolveSecurityKeys(assertion, Configuration.ServiceTokenResolver);
+            ReadOnlyCollection<SecurityKey> keys = this.ResolveSecurityKeys(
+                assertion,
+                Configuration.ServiceTokenResolver
+            );
 
             // Resolve signing token if one is present. It may be deferred and signed by reference.
             SecurityToken issuerToken;
-            this.TryResolveIssuerToken(assertion, Configuration.IssuerTokenResolver, out issuerToken);
+            this.TryResolveIssuerToken(
+                assertion,
+                Configuration.IssuerTokenResolver,
+                out issuerToken
+            );
 
             return new Saml2SecurityToken(assertion, keys, issuerToken);
         }
@@ -656,7 +719,10 @@ namespace System.IdentityModel.Tokens
         /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="SecurityKeyIdentifierClause"/>.</param>
         /// <param name="securityKeyIdentifierClause">The <see cref="SecurityKeyIdentifierClause"/> to be serialized.</param>
         /// <exception cref="ArgumentNullException">Input parameter 'writer' or 'securityKeyIdentifierClause' is null.</exception>
-        public override void WriteKeyIdentifierClause(XmlWriter writer, SecurityKeyIdentifierClause securityKeyIdentifierClause)
+        public override void WriteKeyIdentifierClause(
+            XmlWriter writer,
+            SecurityKeyIdentifierClause securityKeyIdentifierClause
+        )
         {
             if (writer == null)
             {
@@ -665,11 +731,14 @@ namespace System.IdentityModel.Tokens
 
             if (securityKeyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifierClause");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "keyIdentifierClause"
+                );
             }
 
             Saml2AssertionKeyIdentifierClause samlClause = null;
-            WrappedSaml2AssertionKeyIdentifierClause wrappedClause = securityKeyIdentifierClause as WrappedSaml2AssertionKeyIdentifierClause;
+            WrappedSaml2AssertionKeyIdentifierClause wrappedClause =
+                securityKeyIdentifierClause as WrappedSaml2AssertionKeyIdentifierClause;
 
             if (wrappedClause != null)
             {
@@ -682,7 +751,10 @@ namespace System.IdentityModel.Tokens
 
             if (null == samlClause)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("keyIdentifierClause", SR.GetString(SR.ID4162));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "keyIdentifierClause",
+                    SR.GetString(SR.ID4162)
+                );
             }
 
             // <wsse:SecurityTokenReference>
@@ -692,7 +764,11 @@ namespace System.IdentityModel.Tokens
             byte[] nonce = samlClause.GetDerivationNonce();
             if (null != nonce)
             {
-                writer.WriteAttributeString(WSC.Attributes.Nonce, WSC.Namespace, Convert.ToBase64String(nonce));
+                writer.WriteAttributeString(
+                    WSC.Attributes.Nonce,
+                    WSC.Namespace,
+                    Convert.ToBase64String(nonce)
+                );
 
                 int length = samlClause.DerivationLength;
 
@@ -700,12 +776,17 @@ namespace System.IdentityModel.Tokens
                 if (length != 0 && length != WSC.DefaultDerivedKeyLength)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ID4129)));
+                        new InvalidOperationException(SR.GetString(SR.ID4129))
+                    );
                 }
             }
 
             // @wsse11:TokenType
-            writer.WriteAttributeString(WSSE11.Attributes.TokenType, WSSE11.Namespace, SecurityTokenTypes.OasisWssSaml2TokenProfile11);
+            writer.WriteAttributeString(
+                WSSE11.Attributes.TokenType,
+                WSSE11.Namespace,
+                SecurityTokenTypes.OasisWssSaml2TokenProfile11
+            );
 
             // <wsse:KeyIdentifier>
             writer.WriteStartElement(WSSE.Elements.KeyIdentifier, WSSE.Namespace);
@@ -724,11 +805,12 @@ namespace System.IdentityModel.Tokens
         }
 
         internal static XmlDictionaryReader CreatePlaintextReaderFromEncryptedData(
-                        XmlDictionaryReader reader,
-                        SecurityTokenResolver serviceTokenResolver,
-                        SecurityTokenSerializer keyInfoSerializer,
-                        Collection<EncryptedKeyIdentifierClause> clauses,
-                        out EncryptingCredentials encryptingCredentials)
+            XmlDictionaryReader reader,
+            SecurityTokenResolver serviceTokenResolver,
+            SecurityTokenSerializer keyInfoSerializer,
+            Collection<EncryptedKeyIdentifierClause> clauses,
+            out EncryptingCredentials encryptingCredentials
+        )
         {
             if (reader == null)
             {
@@ -739,12 +821,19 @@ namespace System.IdentityModel.Tokens
             if (reader.IsEmptyElement)
             {
 #pragma warning suppress 56504 // bogus - thinks reader.LocalName, reader.NamespaceURI need validation
-                throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID3061, reader.LocalName, reader.NamespaceURI));
+                throw DiagnosticUtility.ThrowHelperXml(
+                    reader,
+                    SR.GetString(SR.ID3061, reader.LocalName, reader.NamespaceURI)
+                );
             }
 
             encryptingCredentials = null;
 
-            XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.EncryptedElementType, Saml2Constants.Namespace);
+            XmlUtil.ValidateXsiType(
+                reader,
+                Saml2Constants.Types.EncryptedElementType,
+                Saml2Constants.Namespace
+            );
 
             reader.ReadStartElement();
             EncryptedDataElement encryptedData = new EncryptedDataElement(keyInfoSerializer);
@@ -754,7 +843,12 @@ namespace System.IdentityModel.Tokens
 
             // <xenc:EncryptedKey> 0-oo
             reader.MoveToContent();
-            while (reader.IsStartElement(XmlEncryptionConstants.Elements.EncryptedKey, XmlEncryptionConstants.Namespace))
+            while (
+                reader.IsStartElement(
+                    XmlEncryptionConstants.Elements.EncryptedKey,
+                    XmlEncryptionConstants.Namespace
+                )
+            )
             {
                 SecurityKeyIdentifierClause skic;
                 if (keyInfoSerializer.CanReadKeyIdentifierClause(reader))
@@ -768,7 +862,8 @@ namespace System.IdentityModel.Tokens
                     skic = encryptedKey.GetClause();
                 }
 
-                EncryptedKeyIdentifierClause encryptedKeyClause = skic as EncryptedKeyIdentifierClause;
+                EncryptedKeyIdentifierClause encryptedKeyClause =
+                    skic as EncryptedKeyIdentifierClause;
                 if (null == encryptedKeyClause)
                 {
                     throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4172));
@@ -779,7 +874,7 @@ namespace System.IdentityModel.Tokens
 
             reader.ReadEndElement();
 
-            // Try to resolve the decryption key from both the embedded 
+            // Try to resolve the decryption key from both the embedded
             // KeyInfo and any external clauses
             SecurityKey decryptionKey = null;
             SecurityKeyIdentifierClause matchingClause = null;
@@ -808,7 +903,8 @@ namespace System.IdentityModel.Tokens
             if (null == decryptionKey)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new EncryptedTokenDecryptionFailedException());
+                    new EncryptedTokenDecryptionFailedException()
+                );
             }
 
             // Need a symmetric key
@@ -816,27 +912,36 @@ namespace System.IdentityModel.Tokens
             if (null == symmetricKey)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.ID4023)));
+                    new SecurityTokenException(SR.GetString(SR.ID4023))
+                );
             }
 
             // Do the actual decryption
-            SymmetricAlgorithm decryptor = symmetricKey.GetSymmetricAlgorithm(encryptedData.Algorithm);
+            SymmetricAlgorithm decryptor = symmetricKey.GetSymmetricAlgorithm(
+                encryptedData.Algorithm
+            );
             byte[] plainText = encryptedData.Decrypt(decryptor);
 
             // Save off the encrypting credentials for roundtrip
-            encryptingCredentials = new ReceivedEncryptingCredentials(decryptionKey, new SecurityKeyIdentifier(matchingClause), encryptedData.Algorithm);
+            encryptingCredentials = new ReceivedEncryptingCredentials(
+                decryptionKey,
+                new SecurityKeyIdentifier(matchingClause),
+                encryptedData.Algorithm
+            );
 
             return XmlDictionaryReader.CreateTextReader(plainText, reader.Quotas);
         }
 
-        // Wraps common data validation exceptions with an XmlException 
+        // Wraps common data validation exceptions with an XmlException
         // associated with the failing reader
         internal static Exception TryWrapReadException(XmlReader reader, Exception inner)
         {
-            if (inner is FormatException
+            if (
+                inner is FormatException
                 || inner is ArgumentException
                 || inner is InvalidOperationException
-                || inner is OverflowException)
+                || inner is OverflowException
+            )
             {
                 return DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4125), inner);
             }
@@ -868,7 +973,7 @@ namespace System.IdentityModel.Tokens
         internal static bool IsSaml2Assertion(XmlReader reader)
         {
             return reader.IsStartElement(SAML2.Elements.Assertion, SAML2.Namespace)
-               || reader.IsStartElement(SAML2.Elements.EncryptedAssertion, SAML2.Namespace);
+                || reader.IsStartElement(SAML2.Elements.EncryptedAssertion, SAML2.Namespace);
         }
 
         // Read an element that must not contain content.
@@ -890,7 +995,10 @@ namespace System.IdentityModel.Tokens
             {
                 if (reader.IsEmptyElement)
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID3061, reader.LocalName, reader.NamespaceURI));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(SR.ID3061, reader.LocalName, reader.NamespaceURI)
+                    );
                 }
 
                 XmlUtil.ValidateXsiType(reader, "NCName", XmlSchema.Namespace);
@@ -904,7 +1012,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -917,7 +1025,7 @@ namespace System.IdentityModel.Tokens
             }
         }
 
-        // Reads an element with simple content anyURI. Since this is SAML, 
+        // Reads an element with simple content anyURI. Since this is SAML,
         // restricts the URI to absolute.
         internal static Uri ReadSimpleUriElement(XmlReader reader)
         {
@@ -931,7 +1039,11 @@ namespace System.IdentityModel.Tokens
         }
 
         // allow lax reading of relative URIs in some instances for interop
-        internal static Uri ReadSimpleUriElement(XmlReader reader, UriKind kind, bool allowLaxReading)
+        internal static Uri ReadSimpleUriElement(
+            XmlReader reader,
+            UriKind kind,
+            bool allowLaxReading
+        )
         {
             Fx.Assert(reader.IsStartElement(), "reader is not on start element");
 
@@ -939,7 +1051,10 @@ namespace System.IdentityModel.Tokens
             {
                 if (reader.IsEmptyElement)
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID3061, reader.LocalName, reader.NamespaceURI));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(SR.ID3061, reader.LocalName, reader.NamespaceURI)
+                    );
                 }
 
                 XmlUtil.ValidateXsiType(reader, "anyURI", XmlSchema.Namespace);
@@ -954,7 +1069,10 @@ namespace System.IdentityModel.Tokens
 
                 if (!allowLaxReading && !UriUtil.CanCreateValidUri(value, kind))
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(kind == UriKind.RelativeOrAbsolute ? SR.ID0019 : SR.ID0013));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(kind == UriKind.RelativeOrAbsolute ? SR.ID0019 : SR.ID0013)
+                    );
                 }
 
                 return new Uri(value, kind);
@@ -963,7 +1081,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -981,9 +1099,9 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <remarks>
         /// <para>
-        /// Generally, conditions should be included in assertions to limit the 
-        /// impact of misuse of the assertion. Specifying the NotBefore and 
-        /// NotOnOrAfter conditions can limit the period of vulnerability in 
+        /// Generally, conditions should be included in assertions to limit the
+        /// impact of misuse of the assertion. Specifying the NotBefore and
+        /// NotOnOrAfter conditions can limit the period of vulnerability in
         /// the case of a compromised assertion. The AudienceRestrictionCondition
         /// can be used to explicitly state the intended relying party or parties
         /// of the assertion, which coupled with appropriate audience restriction
@@ -992,8 +1110,8 @@ namespace System.IdentityModel.Tokens
         /// </para>
         /// <para>
         /// The default implementation creates NotBefore and NotOnOrAfter conditions
-        /// based on the tokenDescriptor.Lifetime. It will also generate an 
-        /// AudienceRestrictionCondition limiting consumption of the assertion to 
+        /// based on the tokenDescriptor.Lifetime. It will also generate an
+        /// AudienceRestrictionCondition limiting consumption of the assertion to
         /// tokenDescriptor.Scope.Address.
         /// </para>
         /// </remarks>
@@ -1002,7 +1120,11 @@ namespace System.IdentityModel.Tokens
         /// is modeled as an AudienceRestriction condition.</param>
         /// <param name="tokenDescriptor">The token descriptor.</param>
         /// <returns>A Saml2Conditions object.</returns>
-        protected virtual Saml2Conditions CreateConditions(Lifetime tokenLifetime, string relyingPartyAddress, SecurityTokenDescriptor tokenDescriptor)
+        protected virtual Saml2Conditions CreateConditions(
+            Lifetime tokenLifetime,
+            string relyingPartyAddress,
+            SecurityTokenDescriptor tokenDescriptor
+        )
         {
             bool hasLifetime = null != tokenLifetime;
             bool hasScope = !string.IsNullOrEmpty(relyingPartyAddress);
@@ -1020,7 +1142,9 @@ namespace System.IdentityModel.Tokens
 
             if (hasScope)
             {
-                conditions.AudienceRestrictions.Add(new Saml2AudienceRestriction(new Uri(relyingPartyAddress)));
+                conditions.AudienceRestrictions.Add(
+                    new Saml2AudienceRestriction(new Uri(relyingPartyAddress))
+                );
             }
 
             return conditions;
@@ -1044,17 +1168,19 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <remarks>
         /// <para>
-        /// SAML2 assertions must contain a name identifier for the issuer. 
+        /// SAML2 assertions must contain a name identifier for the issuer.
         /// This method may not return null.
         /// </para>
         /// <para>
-        /// The default implementation creates a simple name identifier 
-        /// from the tokenDescriptor.Issuer. 
+        /// The default implementation creates a simple name identifier
+        /// from the tokenDescriptor.Issuer.
         /// </para>
         /// </remarks>
         /// <param name="tokenDescriptor">The token descriptor.</param>
         /// <returns>A <see cref="Saml2NameIdentifier"/> from the tokenDescriptor</returns>
-        protected virtual Saml2NameIdentifier CreateIssuerNameIdentifier(SecurityTokenDescriptor tokenDescriptor)
+        protected virtual Saml2NameIdentifier CreateIssuerNameIdentifier(
+            SecurityTokenDescriptor tokenDescriptor
+        )
         {
             if (null == tokenDescriptor)
             {
@@ -1066,7 +1192,9 @@ namespace System.IdentityModel.Tokens
             // Must have an issuer
             if (string.IsNullOrEmpty(issuerName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4138)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID4138))
+                );
             }
 
             return new Saml2NameIdentifier(issuerName);
@@ -1079,7 +1207,10 @@ namespace System.IdentityModel.Tokens
         /// <param name="tokenDescriptor">Contains all the information that is used in token issuance.</param>
         /// <returns>A <see cref="Saml2Attribute"/> based on the claim.</returns>
         /// <exception cref="ArgumentNullException">The parameter 'claim' is null.</exception>
-        protected virtual Saml2Attribute CreateAttribute(Claim claim, SecurityTokenDescriptor tokenDescriptor)
+        protected virtual Saml2Attribute CreateAttribute(
+            Claim claim,
+            SecurityTokenDescriptor tokenDescriptor
+        )
         {
             if (claim == null)
             {
@@ -1099,7 +1230,10 @@ namespace System.IdentityModel.Tokens
                 string nameFormat = claim.Properties[ClaimProperties.SamlAttributeNameFormat];
                 if (!UriUtil.CanCreateValidUri(nameFormat, UriKind.Absolute))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("nameFormat", SR.GetString(SR.ID0013));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "nameFormat",
+                        SR.GetString(SR.ID0013)
+                    );
                 }
 
                 attribute.NameFormat = new Uri(nameFormat);
@@ -1121,7 +1255,10 @@ namespace System.IdentityModel.Tokens
         /// <param name="subject">The <see cref="ClaimsIdentity"/> that contains claims which will be converted to SAML Attributes.</param>
         /// <param name="tokenDescriptor">The <see cref="SecurityTokenDescriptor"/> that contains information on building the <see cref="Saml2AttributeStatement"/>.</param>
         /// <returns>A Saml2AttributeStatement.</returns>
-        protected virtual Saml2AttributeStatement CreateAttributeStatement(ClaimsIdentity subject, SecurityTokenDescriptor tokenDescriptor)
+        protected virtual Saml2AttributeStatement CreateAttributeStatement(
+            ClaimsIdentity subject,
+            SecurityTokenDescriptor tokenDescriptor
+        )
         {
             if (subject == null)
             {
@@ -1152,7 +1289,9 @@ namespace System.IdentityModel.Tokens
 
                 this.AddDelegateToAttributes(subject, attributes, tokenDescriptor);
 
-                ICollection<Saml2Attribute> collectedAttributes = this.CollectAttributeValues(attributes);
+                ICollection<Saml2Attribute> collectedAttributes = this.CollectAttributeValues(
+                    attributes
+                );
                 if (collectedAttributes.Count > 0)
                 {
                     return new Saml2AttributeStatement(collectedAttributes);
@@ -1168,16 +1307,23 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="attributes">List of attributes generated from claims.</param>
         /// <returns>A <see cref="ICollection{T}"/> of <see cref="Saml2Attribute"/> with common attributes collected into value lists.</returns>
-        protected virtual ICollection<Saml2Attribute> CollectAttributeValues(ICollection<Saml2Attribute> attributes)
+        protected virtual ICollection<Saml2Attribute> CollectAttributeValues(
+            ICollection<Saml2Attribute> attributes
+        )
         {
-            Dictionary<SamlAttributeKeyComparer.AttributeKey, Saml2Attribute> distinctAttributes = new Dictionary<SamlAttributeKeyComparer.AttributeKey, Saml2Attribute>(attributes.Count, new SamlAttributeKeyComparer());
+            Dictionary<SamlAttributeKeyComparer.AttributeKey, Saml2Attribute> distinctAttributes =
+                new Dictionary<SamlAttributeKeyComparer.AttributeKey, Saml2Attribute>(
+                    attributes.Count,
+                    new SamlAttributeKeyComparer()
+                );
 
             // Use unique attribute if name, value type, or issuer differ
             foreach (Saml2Attribute saml2Attribute in attributes)
             {
                 if (saml2Attribute != null)
                 {
-                    SamlAttributeKeyComparer.AttributeKey attributeKey = new SamlAttributeKeyComparer.AttributeKey(saml2Attribute);
+                    SamlAttributeKeyComparer.AttributeKey attributeKey =
+                        new SamlAttributeKeyComparer.AttributeKey(saml2Attribute);
 
                     if (distinctAttributes.ContainsKey(attributeKey))
                     {
@@ -1202,7 +1348,11 @@ namespace System.IdentityModel.Tokens
         /// <param name="subject">The delegate of this <see cref="ClaimsIdentity"/> will be serialized into a <see cref="Saml2Attribute"/>.</param>
         /// <param name="attributes">A <see cref="ICollection{T}"/> of <see cref="Saml2Attribute"/>.</param>
         /// <param name="tokenDescriptor">The <see cref="SecurityTokenDescriptor"/> that contains information on building the delegate.</param>
-        protected virtual void AddDelegateToAttributes(ClaimsIdentity subject, ICollection<Saml2Attribute> attributes, SecurityTokenDescriptor tokenDescriptor)
+        protected virtual void AddDelegateToAttributes(
+            ClaimsIdentity subject,
+            ICollection<Saml2Attribute> attributes,
+            SecurityTokenDescriptor tokenDescriptor
+        )
         {
             if (subject == null)
             {
@@ -1231,23 +1381,42 @@ namespace System.IdentityModel.Tokens
 
             this.AddDelegateToAttributes(subject.Actor, actingAsAttributes, tokenDescriptor);
 
-            ICollection<Saml2Attribute> collectedAttributes = this.CollectAttributeValues(actingAsAttributes);
-            attributes.Add(this.CreateAttribute(new Claim(ClaimTypes.Actor, this.CreateXmlStringFromAttributes(collectedAttributes), ClaimValueTypes.String), tokenDescriptor));
+            ICollection<Saml2Attribute> collectedAttributes = this.CollectAttributeValues(
+                actingAsAttributes
+            );
+            attributes.Add(
+                this.CreateAttribute(
+                    new Claim(
+                        ClaimTypes.Actor,
+                        this.CreateXmlStringFromAttributes(collectedAttributes),
+                        ClaimValueTypes.String
+                    ),
+                    tokenDescriptor
+                )
+            );
         }
 
         /// <summary>
-        /// Builds an XML formatted string from a collection of SAML attributes that represent the Actor. 
+        /// Builds an XML formatted string from a collection of SAML attributes that represent the Actor.
         /// </summary>
         /// <param name="attributes">An enumeration of Saml2Attributes.</param>
         /// <returns>A well-formed XML string.</returns>
         /// <remarks>The string is of the form ""&lt;Actor&gt;&lt;Attribute name, ns&gt;&lt;AttributeValue&gt;...&lt;/AttributeValue&gt;, ...&lt;/Attribute&gt;...&lt;/Actor&gt;"</remarks>
-        protected virtual string CreateXmlStringFromAttributes(IEnumerable<Saml2Attribute> attributes)
+        protected virtual string CreateXmlStringFromAttributes(
+            IEnumerable<Saml2Attribute> attributes
+        )
         {
             bool actorElementWritten = false;
 
             using (MemoryStream ms = new MemoryStream())
             {
-                using (XmlDictionaryWriter dicWriter = XmlDictionaryWriter.CreateTextWriter(ms, Encoding.UTF8, false))
+                using (
+                    XmlDictionaryWriter dicWriter = XmlDictionaryWriter.CreateTextWriter(
+                        ms,
+                        Encoding.UTF8,
+                        false
+                    )
+                )
                 {
                     foreach (Saml2Attribute samlAttribute in attributes)
                     {
@@ -1286,7 +1455,9 @@ namespace System.IdentityModel.Tokens
         /// </remarks>
         /// <param name="tokenDescriptor">The <see cref="SecurityTokenDescriptor"/> that contains information on creating the <see cref="Saml2Statement"/>.</param>
         /// <returns>An enumeration of Saml2Statements.</returns>
-        protected virtual IEnumerable<Saml2Statement> CreateStatements(SecurityTokenDescriptor tokenDescriptor)
+        protected virtual IEnumerable<Saml2Statement> CreateStatements(
+            SecurityTokenDescriptor tokenDescriptor
+        )
         {
             if (tokenDescriptor == null)
             {
@@ -1295,13 +1466,20 @@ namespace System.IdentityModel.Tokens
 
             Collection<Saml2Statement> statements = new Collection<Saml2Statement>();
 
-            Saml2AttributeStatement attributeStatement = this.CreateAttributeStatement(tokenDescriptor.Subject, tokenDescriptor);
+            Saml2AttributeStatement attributeStatement = this.CreateAttributeStatement(
+                tokenDescriptor.Subject,
+                tokenDescriptor
+            );
             if (attributeStatement != null)
             {
                 statements.Add(attributeStatement);
             }
 
-            Saml2AuthenticationStatement authenticationStatement = this.CreateAuthenticationStatement(tokenDescriptor.AuthenticationInfo, tokenDescriptor);
+            Saml2AuthenticationStatement authenticationStatement =
+                this.CreateAuthenticationStatement(
+                    tokenDescriptor.AuthenticationInfo,
+                    tokenDescriptor
+                );
             if (authenticationStatement != null)
             {
                 statements.Add(authenticationStatement);
@@ -1323,7 +1501,10 @@ namespace System.IdentityModel.Tokens
         /// The Saml2AuthenticationStatement to add to the assertion being created or null to ignore the AuthenticationInformation
         /// being wrapped as a statement.
         /// </returns>
-        protected virtual Saml2AuthenticationStatement CreateAuthenticationStatement(AuthenticationInformation authInfo, SecurityTokenDescriptor tokenDescriptor)
+        protected virtual Saml2AuthenticationStatement CreateAuthenticationStatement(
+            AuthenticationInformation authInfo,
+            SecurityTokenDescriptor tokenDescriptor
+        )
         {
             if (tokenDescriptor == null)
             {
@@ -1339,16 +1520,22 @@ namespace System.IdentityModel.Tokens
             string authenticationInstant = null;
 
             // Search for an Authentication Claim.
-            IEnumerable<Claim> claimCollection = from c in tokenDescriptor.Subject.Claims where c.Type == ClaimTypes.AuthenticationMethod select c;
+            IEnumerable<Claim> claimCollection =
+                from c in tokenDescriptor.Subject.Claims
+                where c.Type == ClaimTypes.AuthenticationMethod
+                select c;
             if (claimCollection.Count<Claim>() > 0)
             {
                 // We support only one authentication statement and hence we just pick the first authentication type
-                // claim found in the claim collection. Since the spec allows multiple Auth Statements, 
+                // claim found in the claim collection. Since the spec allows multiple Auth Statements,
                 // we do not throw an error.
                 authenticationMethod = claimCollection.First<Claim>().Value;
             }
 
-            claimCollection = from c in tokenDescriptor.Subject.Claims where c.Type == ClaimTypes.AuthenticationInstant select c;
+            claimCollection =
+                from c in tokenDescriptor.Subject.Claims
+                where c.Type == ClaimTypes.AuthenticationInstant
+                select c;
 
             if (claimCollection.Count<Claim>() > 0)
             {
@@ -1361,30 +1548,58 @@ namespace System.IdentityModel.Tokens
             }
             else if (authenticationMethod == null)
             {
-                throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4270, "AuthenticationMethod", "SAML2"));
+                throw DiagnosticUtility.ThrowHelperInvalidOperation(
+                    SR.GetString(SR.ID4270, "AuthenticationMethod", "SAML2")
+                );
             }
             else if (authenticationInstant == null)
             {
-                throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4270, "AuthenticationInstant", "SAML2"));
+                throw DiagnosticUtility.ThrowHelperInvalidOperation(
+                    SR.GetString(SR.ID4270, "AuthenticationInstant", "SAML2")
+                );
             }
 
             Uri saml2AuthenticationClass;
-            if (!UriUtil.TryCreateValidUri(this.DenormalizeAuthenticationType(authenticationMethod), UriKind.Absolute, out saml2AuthenticationClass))
+            if (
+                !UriUtil.TryCreateValidUri(
+                    this.DenormalizeAuthenticationType(authenticationMethod),
+                    UriKind.Absolute,
+                    out saml2AuthenticationClass
+                )
+            )
             {
-                throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4185, authenticationMethod));
+                throw DiagnosticUtility.ThrowHelperInvalidOperation(
+                    SR.GetString(SR.ID4185, authenticationMethod)
+                );
             }
 
-            Saml2AuthenticationContext authCtx = new Saml2AuthenticationContext(saml2AuthenticationClass);
-            DateTime authInstantTime = DateTime.ParseExact(authenticationInstant, DateTimeFormats.Accepted, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None).ToUniversalTime();
-            Saml2AuthenticationStatement authnStatement = new Saml2AuthenticationStatement(authCtx, authInstantTime);
+            Saml2AuthenticationContext authCtx = new Saml2AuthenticationContext(
+                saml2AuthenticationClass
+            );
+            DateTime authInstantTime = DateTime
+                .ParseExact(
+                    authenticationInstant,
+                    DateTimeFormats.Accepted,
+                    DateTimeFormatInfo.InvariantInfo,
+                    DateTimeStyles.None
+                )
+                .ToUniversalTime();
+            Saml2AuthenticationStatement authnStatement = new Saml2AuthenticationStatement(
+                authCtx,
+                authInstantTime
+            );
 
             if (authInfo != null)
             {
-                if (!string.IsNullOrEmpty(authInfo.DnsName)
-                    || !string.IsNullOrEmpty(authInfo.Address))
+                if (
+                    !string.IsNullOrEmpty(authInfo.DnsName)
+                    || !string.IsNullOrEmpty(authInfo.Address)
+                )
                 {
-                    authnStatement.SubjectLocality
-                        = new Saml2SubjectLocality(authInfo.Address, authInfo.DnsName);
+                    authnStatement.SubjectLocality = new Saml2SubjectLocality(
+                        authInfo.Address,
+                        authInfo.DnsName
+                    );
                 }
 
                 if (!string.IsNullOrEmpty(authInfo.Session))
@@ -1429,29 +1644,51 @@ namespace System.IdentityModel.Tokens
                         // Do not allow multiple name identifier claim.
                         if (null != nameIdentifierClaim)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4139)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(SR.GetString(SR.ID4139))
+                            );
                         }
 
                         nameIdentifierClaim = claim.Value;
 
                         if (claim.Properties.ContainsKey(ClaimProperties.SamlNameIdentifierFormat))
                         {
-                            nameIdentifierFormat = claim.Properties[ClaimProperties.SamlNameIdentifierFormat];
+                            nameIdentifierFormat = claim.Properties[
+                                ClaimProperties.SamlNameIdentifierFormat
+                            ];
                         }
 
-                        if (claim.Properties.ContainsKey(ClaimProperties.SamlNameIdentifierNameQualifier))
+                        if (
+                            claim.Properties.ContainsKey(
+                                ClaimProperties.SamlNameIdentifierNameQualifier
+                            )
+                        )
                         {
-                            nameIdentifierNameQualifier = claim.Properties[ClaimProperties.SamlNameIdentifierNameQualifier];
+                            nameIdentifierNameQualifier = claim.Properties[
+                                ClaimProperties.SamlNameIdentifierNameQualifier
+                            ];
                         }
 
-                        if (claim.Properties.ContainsKey(ClaimProperties.SamlNameIdentifierSPNameQualifier))
+                        if (
+                            claim.Properties.ContainsKey(
+                                ClaimProperties.SamlNameIdentifierSPNameQualifier
+                            )
+                        )
                         {
-                            nameIdentifierSpNameQualifier = claim.Properties[ClaimProperties.SamlNameIdentifierSPNameQualifier];
+                            nameIdentifierSpNameQualifier = claim.Properties[
+                                ClaimProperties.SamlNameIdentifierSPNameQualifier
+                            ];
                         }
 
-                        if (claim.Properties.ContainsKey(ClaimProperties.SamlNameIdentifierSPProvidedId))
+                        if (
+                            claim.Properties.ContainsKey(
+                                ClaimProperties.SamlNameIdentifierSPProvidedId
+                            )
+                        )
                         {
-                            nameIdentifierSpProviderId = claim.Properties[ClaimProperties.SamlNameIdentifierSPProvidedId];
+                            nameIdentifierSpProviderId = claim.Properties[
+                                ClaimProperties.SamlNameIdentifierSPProvidedId
+                            ];
                         }
                     }
                 }
@@ -1461,7 +1698,10 @@ namespace System.IdentityModel.Tokens
             {
                 Saml2NameIdentifier nameIdentifier = new Saml2NameIdentifier(nameIdentifierClaim);
 
-                if (nameIdentifierFormat != null && UriUtil.CanCreateValidUri(nameIdentifierFormat, UriKind.Absolute))
+                if (
+                    nameIdentifierFormat != null
+                    && UriUtil.CanCreateValidUri(nameIdentifierFormat, UriKind.Absolute)
+                )
                 {
                     nameIdentifier.Format = new Uri(nameIdentifierFormat);
                 }
@@ -1477,12 +1717,19 @@ namespace System.IdentityModel.Tokens
             Saml2SubjectConfirmation subjectConfirmation;
             if (null == tokenDescriptor.Proof)
             {
-                subjectConfirmation = new Saml2SubjectConfirmation(Saml2Constants.ConfirmationMethods.Bearer);
+                subjectConfirmation = new Saml2SubjectConfirmation(
+                    Saml2Constants.ConfirmationMethods.Bearer
+                );
             }
             else
             {
-                subjectConfirmation = new Saml2SubjectConfirmation(Saml2Constants.ConfirmationMethods.HolderOfKey, new Saml2SubjectConfirmationData());
-                subjectConfirmation.SubjectConfirmationData.KeyIdentifiers.Add(tokenDescriptor.Proof.KeyIdentifier);
+                subjectConfirmation = new Saml2SubjectConfirmation(
+                    Saml2Constants.ConfirmationMethods.HolderOfKey,
+                    new Saml2SubjectConfirmationData()
+                );
+                subjectConfirmation.SubjectConfirmationData.KeyIdentifiers.Add(
+                    tokenDescriptor.Proof.KeyIdentifier
+                );
             }
 
             saml2Subject.SubjectConfirmations.Add(subjectConfirmation);
@@ -1491,12 +1738,14 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Override this method to change the token encrypting credentials. 
+        /// Override this method to change the token encrypting credentials.
         /// </summary>
         /// <param name="tokenDescriptor">Retrieve some scope encrypting credentials from the Scope object</param>
         /// <returns>the token encrypting credentials</returns>
         /// <exception cref="ArgumentNullException">When the given tokenDescriptor is null</exception>
-        protected virtual EncryptingCredentials GetEncryptingCredentials(SecurityTokenDescriptor tokenDescriptor)
+        protected virtual EncryptingCredentials GetEncryptingCredentials(
+            SecurityTokenDescriptor tokenDescriptor
+        )
         {
             if (null == tokenDescriptor)
             {
@@ -1510,7 +1759,9 @@ namespace System.IdentityModel.Tokens
                 encryptingCredentials = tokenDescriptor.EncryptingCredentials;
                 if (encryptingCredentials.SecurityKey is AsymmetricSecurityKey)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4178)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.ID4178))
+                    );
                 }
             }
 
@@ -1525,13 +1776,15 @@ namespace System.IdentityModel.Tokens
         /// SAML2 assertions used as security tokens should be signed.
         /// </para>
         /// <para>
-        /// The default implementation uses the 
+        /// The default implementation uses the
         /// tokenDescriptor.Scope.SigningCredentials.
         /// </para>
         /// </remarks>
         /// <param name="tokenDescriptor">The token descriptor.</param>
         /// <returns>The signing credential.</returns>
-        protected virtual SigningCredentials GetSigningCredentials(SecurityTokenDescriptor tokenDescriptor)
+        protected virtual SigningCredentials GetSigningCredentials(
+            SecurityTokenDescriptor tokenDescriptor
+        )
         {
             if (null == tokenDescriptor)
             {
@@ -1542,61 +1795,94 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Rejects tokens that are not valid. 
+        /// Rejects tokens that are not valid.
         /// </summary>
         /// <remarks>
-        /// The token may not be valid for a number of reasons. For example, the 
-        /// current time may not be within the token's validity period, the 
-        /// token may contain data that is contradictory or not valid, or the token 
+        /// The token may not be valid for a number of reasons. For example, the
+        /// current time may not be within the token's validity period, the
+        /// token may contain data that is contradictory or not valid, or the token
         /// may contain unsupported SAML2 elements.
         /// </remarks>
         /// <param name="conditions">SAML 2.0 condition to be validated.</param>
         /// <param name="enforceAudienceRestriction">True to check for Audience Restriction condition.</param>
-        protected virtual void ValidateConditions(Saml2Conditions conditions, bool enforceAudienceRestriction)
+        protected virtual void ValidateConditions(
+            Saml2Conditions conditions,
+            bool enforceAudienceRestriction
+        )
         {
             if (conditions != null)
             {
                 DateTime now = DateTime.UtcNow;
 
-                if (conditions.NotBefore != null
-                    && DateTimeUtil.Add(now, Configuration.MaxClockSkew) < conditions.NotBefore.Value)
+                if (
+                    conditions.NotBefore != null
+                    && DateTimeUtil.Add(now, Configuration.MaxClockSkew)
+                        < conditions.NotBefore.Value
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenNotYetValidException(SR.GetString(SR.ID4147, conditions.NotBefore.Value, now)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenNotYetValidException(
+                            SR.GetString(SR.ID4147, conditions.NotBefore.Value, now)
+                        )
+                    );
                 }
 
-                if (conditions.NotOnOrAfter != null
-                    && DateTimeUtil.Add(now, Configuration.MaxClockSkew.Negate()) >= conditions.NotOnOrAfter.Value)
+                if (
+                    conditions.NotOnOrAfter != null
+                    && DateTimeUtil.Add(now, Configuration.MaxClockSkew.Negate())
+                        >= conditions.NotOnOrAfter.Value
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenExpiredException(SR.GetString(SR.ID4148, conditions.NotOnOrAfter.Value, now)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenExpiredException(
+                            SR.GetString(SR.ID4148, conditions.NotOnOrAfter.Value, now)
+                        )
+                    );
                 }
 
                 if (conditions.OneTimeUse)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenValidationException(SR.GetString(SR.ID4149)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenValidationException(SR.GetString(SR.ID4149))
+                    );
                 }
 
                 if (conditions.ProxyRestriction != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenValidationException(SR.GetString(SR.ID4150)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenValidationException(SR.GetString(SR.ID4150))
+                    );
                 }
             }
 
             if (enforceAudienceRestriction)
             {
-                if (this.Configuration == null || this.Configuration.AudienceRestriction.AllowedAudienceUris.Count == 0)
+                if (
+                    this.Configuration == null
+                    || this.Configuration.AudienceRestriction.AllowedAudienceUris.Count == 0
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID1032)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ID1032))
+                    );
                 }
 
                 if (conditions == null || conditions.AudienceRestrictions.Count == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new AudienceUriValidationFailedException(SR.GetString(SR.ID1035)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new AudienceUriValidationFailedException(SR.GetString(SR.ID1035))
+                    );
                 }
                 else
                 {
-                    foreach (Saml2AudienceRestriction audienceRestriction in conditions.AudienceRestrictions)
+                    foreach (
+                        Saml2AudienceRestriction audienceRestriction in conditions.AudienceRestrictions
+                    )
                     {
-                        SamlSecurityTokenRequirement.ValidateAudienceRestriction(this.Configuration.AudienceRestriction.AllowedAudienceUris, audienceRestriction.Audiences);
+                        SamlSecurityTokenRequirement.ValidateAudienceRestriction(
+                            this.Configuration.AudienceRestriction.AllowedAudienceUris,
+                            audienceRestriction.Audiences
+                        );
                     }
                 }
             }
@@ -1620,11 +1906,14 @@ namespace System.IdentityModel.Tokens
         /// <returns>A string that represents the denormalized authentication type used to obtain the token.</returns>
         protected virtual string DenormalizeAuthenticationType(string normalizedAuthenticationType)
         {
-            return AuthenticationTypeMaps.Denormalize(normalizedAuthenticationType, AuthenticationTypeMaps.Saml2);
+            return AuthenticationTypeMaps.Denormalize(
+                normalizedAuthenticationType,
+                AuthenticationTypeMaps.Saml2
+            );
         }
 
         /// <summary>
-        /// Throws if a token is detected as being replayed. If the token is not found, it is added to the 
+        /// Throws if a token is detected as being replayed. If the token is not found, it is added to the
         /// <see cref="TokenReplayCache" />.
         /// </summary>
         /// <param name="token">The token to detect for replay.</param>
@@ -1644,7 +1933,10 @@ namespace System.IdentityModel.Tokens
             Saml2SecurityToken samlToken = token as Saml2SecurityToken;
             if (null == samlToken)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("token", SR.GetString(SR.ID1064, token.GetType().ToString()));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "token",
+                    SR.GetString(SR.ID1064, token.GetType().ToString())
+                );
             }
 
             // by default we only check bearer tokens.
@@ -1665,7 +1957,9 @@ namespace System.IdentityModel.Tokens
 
             if (string.IsNullOrEmpty(samlToken.Assertion.Id.Value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenValidationException(SR.GetString(SR.ID1065)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenValidationException(SR.GetString(SR.ID1065))
+                );
             }
 
             StringBuilder stringBuilder = new StringBuilder();
@@ -1675,25 +1969,55 @@ namespace System.IdentityModel.Tokens
             {
                 if (string.IsNullOrEmpty(samlToken.Assertion.Issuer.Value))
                 {
-                    stringBuilder.AppendFormat("{0}{1}", samlToken.Assertion.Id.Value, tokenTypeIdentifiers[0]);
+                    stringBuilder.AppendFormat(
+                        "{0}{1}",
+                        samlToken.Assertion.Id.Value,
+                        tokenTypeIdentifiers[0]
+                    );
                 }
                 else
                 {
-                    stringBuilder.AppendFormat("{0}{1}{2}", samlToken.Assertion.Id.Value, samlToken.Assertion.Issuer.Value, tokenTypeIdentifiers[0]);
+                    stringBuilder.AppendFormat(
+                        "{0}{1}{2}",
+                        samlToken.Assertion.Id.Value,
+                        samlToken.Assertion.Issuer.Value,
+                        tokenTypeIdentifiers[0]
+                    );
                 }
 
-                key = Convert.ToBase64String(hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(stringBuilder.ToString())));
+                key = Convert.ToBase64String(
+                    hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(stringBuilder.ToString()))
+                );
             }
 
             if (Configuration.Caches.TokenReplayCache.Contains(key))
             {
-                string issuer = (samlToken.Assertion.Issuer.Value != null) ? samlToken.Assertion.Issuer.Value : String.Empty;
+                string issuer =
+                    (samlToken.Assertion.Issuer.Value != null)
+                        ? samlToken.Assertion.Issuer.Value
+                        : String.Empty;
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenReplayDetectedException(SR.GetString(SR.ID1066, typeof(Saml2SecurityToken).ToString(), samlToken.Assertion.Id.Value, issuer)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenReplayDetectedException(
+                        SR.GetString(
+                            SR.ID1066,
+                            typeof(Saml2SecurityToken).ToString(),
+                            samlToken.Assertion.Id.Value,
+                            issuer
+                        )
+                    )
+                );
             }
             else
             {
-                Configuration.Caches.TokenReplayCache.AddOrUpdate(key, token, DateTimeUtil.Add(this.GetTokenReplayCacheEntryExpirationTime(samlToken), Configuration.MaxClockSkew));
+                Configuration.Caches.TokenReplayCache.AddOrUpdate(
+                    key,
+                    token,
+                    DateTimeUtil.Add(
+                        this.GetTokenReplayCacheEntryExpirationTime(samlToken),
+                        Configuration.MaxClockSkew
+                    )
+                );
             }
         }
 
@@ -1723,18 +2047,34 @@ namespace System.IdentityModel.Tokens
                     // The Condition has a NotOnOrAfter set, use that.
                     tokenExpiration = assertion.Conditions.NotOnOrAfter.Value;
                 }
-                else if (assertion.Subject != null && assertion.Subject.SubjectConfirmations != null &&
-                          assertion.Subject.SubjectConfirmations.Count != 0 &&
-                          assertion.Subject.SubjectConfirmations[0].SubjectConfirmationData != null &&
-                          assertion.Subject.SubjectConfirmations[0].SubjectConfirmationData.NotOnOrAfter.HasValue)
+                else if (
+                    assertion.Subject != null
+                    && assertion.Subject.SubjectConfirmations != null
+                    && assertion.Subject.SubjectConfirmations.Count != 0
+                    && assertion.Subject.SubjectConfirmations[0].SubjectConfirmationData != null
+                    && assertion
+                        .Subject
+                        .SubjectConfirmations[0]
+                        .SubjectConfirmationData
+                        .NotOnOrAfter
+                        .HasValue
+                )
                 {
                     // The condition did not have NotOnOrAfter set, but SCD[0] has a NotOnOrAfter set, use that.
-                    tokenExpiration = assertion.Subject.SubjectConfirmations[0].SubjectConfirmationData.NotOnOrAfter.Value;
+                    tokenExpiration = assertion
+                        .Subject
+                        .SubjectConfirmations[0]
+                        .SubjectConfirmationData
+                        .NotOnOrAfter
+                        .Value;
                 }
             }
 
             // DateTimeUtil handles overflows
-            DateTime maximumExpirationTime = DateTimeUtil.Add(DateTime.UtcNow, Configuration.TokenReplayCacheExpirationPeriod);
+            DateTime maximumExpirationTime = DateTimeUtil.Add(
+                DateTime.UtcNow,
+                Configuration.TokenReplayCacheExpirationPeriod
+            );
 
             // Use DateTime.MaxValue as expiration value for tokens without expiration
             tokenExpiration = tokenExpiration ?? DateTime.MaxValue;
@@ -1743,7 +2083,14 @@ namespace System.IdentityModel.Tokens
             if (DateTime.Compare(maximumExpirationTime, tokenExpiration.Value) < 0)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenValidationException(SR.GetString(SR.ID1069, tokenExpiration.Value.ToString(), Configuration.TokenReplayCacheExpirationPeriod.ToString())));
+                    new SecurityTokenValidationException(
+                        SR.GetString(
+                            SR.ID1069,
+                            tokenExpiration.Value.ToString(),
+                            Configuration.TokenReplayCacheExpirationPeriod.ToString()
+                        )
+                    )
+                );
             }
 
             return tokenExpiration.Value;
@@ -1754,9 +2101,14 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="saml2AuthenticationContextClassReference">A string representing the <see cref="Saml2Constants.AuthenticationContextClasses"/></param>
         /// <returns>Normalized value.</returns>
-        protected virtual string NormalizeAuthenticationContextClassReference(string saml2AuthenticationContextClassReference)
+        protected virtual string NormalizeAuthenticationContextClassReference(
+            string saml2AuthenticationContextClassReference
+        )
         {
-            return AuthenticationTypeMaps.Normalize(saml2AuthenticationContextClassReference, AuthenticationTypeMaps.Saml2);
+            return AuthenticationTypeMaps.Normalize(
+                saml2AuthenticationContextClassReference,
+                AuthenticationTypeMaps.Saml2
+            );
         }
 
         /// <summary>
@@ -1765,11 +2117,17 @@ namespace System.IdentityModel.Tokens
         /// <param name="assertionSubject">The Saml2Subject.</param>
         /// <param name="subject">The ClaimsIdentity subject.</param>
         /// <param name="issuer">The issuer.</param>
-        protected virtual void ProcessSamlSubject(Saml2Subject assertionSubject, ClaimsIdentity subject, string issuer)
+        protected virtual void ProcessSamlSubject(
+            Saml2Subject assertionSubject,
+            ClaimsIdentity subject,
+            string issuer
+        )
         {
             if (assertionSubject == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("assertionSubject");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "assertionSubject"
+                );
             }
 
             if (subject == null)
@@ -1781,26 +2139,36 @@ namespace System.IdentityModel.Tokens
 
             if (nameId != null)
             {
-                Claim claim = new Claim(ClaimTypes.NameIdentifier, nameId.Value, ClaimValueTypes.String, issuer);
+                Claim claim = new Claim(
+                    ClaimTypes.NameIdentifier,
+                    nameId.Value,
+                    ClaimValueTypes.String,
+                    issuer
+                );
 
                 if (nameId.Format != null)
                 {
-                    claim.Properties[ClaimProperties.SamlNameIdentifierFormat] = nameId.Format.AbsoluteUri;
+                    claim.Properties[ClaimProperties.SamlNameIdentifierFormat] = nameId
+                        .Format
+                        .AbsoluteUri;
                 }
 
                 if (nameId.NameQualifier != null)
                 {
-                    claim.Properties[ClaimProperties.SamlNameIdentifierNameQualifier] = nameId.NameQualifier;
+                    claim.Properties[ClaimProperties.SamlNameIdentifierNameQualifier] =
+                        nameId.NameQualifier;
                 }
 
                 if (nameId.SPNameQualifier != null)
                 {
-                    claim.Properties[ClaimProperties.SamlNameIdentifierSPNameQualifier] = nameId.SPNameQualifier;
+                    claim.Properties[ClaimProperties.SamlNameIdentifierSPNameQualifier] =
+                        nameId.SPNameQualifier;
                 }
 
                 if (nameId.SPProvidedId != null)
                 {
-                    claim.Properties[ClaimProperties.SamlNameIdentifierSPProvidedId] = nameId.SPProvidedId;
+                    claim.Properties[ClaimProperties.SamlNameIdentifierSPProvidedId] =
+                        nameId.SPProvidedId;
                 }
 
                 subject.AddClaim(claim);
@@ -1813,7 +2181,11 @@ namespace System.IdentityModel.Tokens
         /// <param name="statement">The Saml2AttributeStatement.</param>
         /// <param name="subject">The subject.</param>
         /// <param name="issuer">The issuer.</param>
-        protected virtual void ProcessAttributeStatement(Saml2AttributeStatement statement, ClaimsIdentity subject, string issuer)
+        protected virtual void ProcessAttributeStatement(
+            Saml2AttributeStatement statement,
+            ClaimsIdentity subject,
+            string issuer
+        )
         {
             if (statement == null)
             {
@@ -1831,7 +2203,9 @@ namespace System.IdentityModel.Tokens
                 {
                     if (subject.Actor != null)
                     {
-                        throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4218));
+                        throw DiagnosticUtility.ThrowHelperInvalidOperation(
+                            SR.GetString(SR.ID4218)
+                        );
                     }
 
                     this.SetDelegateFromAttribute(attribute, subject, issuer);
@@ -1848,16 +2222,24 @@ namespace System.IdentityModel.Tokens
                                 originalIssuer = attribute.OriginalIssuer;
                             }
 
-                            Claim claim = new Claim(attribute.Name, value, attribute.AttributeValueXsiType, issuer, originalIssuer);
+                            Claim claim = new Claim(
+                                attribute.Name,
+                                value,
+                                attribute.AttributeValueXsiType,
+                                issuer,
+                                originalIssuer
+                            );
 
                             if (attribute.NameFormat != null)
                             {
-                                claim.Properties[ClaimProperties.SamlAttributeNameFormat] = attribute.NameFormat.AbsoluteUri;
+                                claim.Properties[ClaimProperties.SamlAttributeNameFormat] =
+                                    attribute.NameFormat.AbsoluteUri;
                             }
 
                             if (attribute.FriendlyName != null)
                             {
-                                claim.Properties[ClaimProperties.SamlAttributeDisplayName] = attribute.FriendlyName;
+                                claim.Properties[ClaimProperties.SamlAttributeDisplayName] =
+                                    attribute.FriendlyName;
                             }
 
                             subject.AddClaim(claim);
@@ -1868,20 +2250,29 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// This method gets called when a special type of Saml2Attribute is detected. The Saml2Attribute passed in 
-        /// wraps a Saml2Attribute that contains a collection of AttributeValues, each of which will get mapped to a 
+        /// This method gets called when a special type of Saml2Attribute is detected. The Saml2Attribute passed in
+        /// wraps a Saml2Attribute that contains a collection of AttributeValues, each of which will get mapped to a
         /// claim.  All of the claims will be returned in an ClaimsIdentity with the specified issuer.
         /// </summary>
         /// <param name="attribute">The <see cref="Saml2Attribute"/> to use.</param>
         /// <param name="subject">The <see cref="ClaimsIdentity"/> that is the subject of this token.</param>
         /// <param name="issuer">The issuer of the claim.</param>
-        /// <exception cref="InvalidOperationException">Will be thrown if the Saml2Attribute does not contain any 
+        /// <exception cref="InvalidOperationException">Will be thrown if the Saml2Attribute does not contain any
         /// valid Saml2AttributeValues.
         /// </exception>
-        protected virtual void SetDelegateFromAttribute(Saml2Attribute attribute, ClaimsIdentity subject, string issuer)
+        protected virtual void SetDelegateFromAttribute(
+            Saml2Attribute attribute,
+            ClaimsIdentity subject,
+            string issuer
+        )
         {
             // bail here; nothing to add.
-            if (subject == null || attribute == null || attribute.Values == null || attribute.Values.Count < 1)
+            if (
+                subject == null
+                || attribute == null
+                || attribute.Values == null
+                || attribute.Values.Count < 1
+            )
             {
                 return;
             }
@@ -1893,7 +2284,12 @@ namespace System.IdentityModel.Tokens
             {
                 if (attributeValue != null)
                 {
-                    using (XmlDictionaryReader dicReader = XmlDictionaryReader.CreateTextReader(Encoding.UTF8.GetBytes(attributeValue), XmlDictionaryReaderQuotas.Max))
+                    using (
+                        XmlDictionaryReader dicReader = XmlDictionaryReader.CreateTextReader(
+                            Encoding.UTF8.GetBytes(attributeValue),
+                            XmlDictionaryReaderQuotas.Max
+                        )
+                    )
                     {
                         dicReader.MoveToContent();
                         dicReader.ReadStartElement(Actor);
@@ -1908,7 +2304,9 @@ namespace System.IdentityModel.Tokens
                                     // In this case, we have two delegates acting as an identity: we do not allow this.
                                     if (actingAsAttribute != null)
                                     {
-                                        throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4218));
+                                        throw DiagnosticUtility.ThrowHelperInvalidOperation(
+                                            SR.GetString(SR.ID4218)
+                                        );
                                     }
 
                                     actingAsAttribute = innerAttribute;
@@ -1921,21 +2319,36 @@ namespace System.IdentityModel.Tokens
                                         Claim claim = null;
                                         if (string.IsNullOrEmpty(originalIssuer))
                                         {
-                                            claim = new Claim(innerAttribute.Name, innerAttribute.Values[k], innerAttribute.AttributeValueXsiType, issuer);
+                                            claim = new Claim(
+                                                innerAttribute.Name,
+                                                innerAttribute.Values[k],
+                                                innerAttribute.AttributeValueXsiType,
+                                                issuer
+                                            );
                                         }
                                         else
                                         {
-                                            claim = new Claim(innerAttribute.Name, innerAttribute.Values[k], innerAttribute.AttributeValueXsiType, issuer, originalIssuer);
+                                            claim = new Claim(
+                                                innerAttribute.Name,
+                                                innerAttribute.Values[k],
+                                                innerAttribute.AttributeValueXsiType,
+                                                issuer,
+                                                originalIssuer
+                                            );
                                         }
 
                                         if (innerAttribute.NameFormat != null)
                                         {
-                                            claim.Properties[ClaimProperties.SamlAttributeNameFormat] = innerAttribute.NameFormat.AbsoluteUri;
+                                            claim.Properties[
+                                                ClaimProperties.SamlAttributeNameFormat
+                                            ] = innerAttribute.NameFormat.AbsoluteUri;
                                         }
 
                                         if (innerAttribute.FriendlyName != null)
                                         {
-                                            claim.Properties[ClaimProperties.SamlAttributeDisplayName] = innerAttribute.FriendlyName;
+                                            claim.Properties[
+                                                ClaimProperties.SamlAttributeDisplayName
+                                            ] = innerAttribute.FriendlyName;
                                         }
 
                                         claims.Add(claim);
@@ -1960,7 +2373,11 @@ namespace System.IdentityModel.Tokens
         /// <param name="statement">The Saml2AuthenticationStatement.</param>
         /// <param name="subject">The subject.</param>
         /// <param name="issuer">The issuer.</param>
-        protected virtual void ProcessAuthenticationStatement(Saml2AuthenticationStatement statement, ClaimsIdentity subject, string issuer)
+        protected virtual void ProcessAuthenticationStatement(
+            Saml2AuthenticationStatement statement,
+            ClaimsIdentity subject,
+            string issuer
+        )
         {
             if (subject == null)
             {
@@ -1975,14 +2392,28 @@ namespace System.IdentityModel.Tokens
             if (statement.AuthenticationContext.ClassReference != null)
             {
                 subject.AddClaim(
-                        new Claim(
-                            ClaimTypes.AuthenticationMethod,
-                            this.NormalizeAuthenticationContextClassReference(statement.AuthenticationContext.ClassReference.AbsoluteUri),
-                            ClaimValueTypes.String,
-                            issuer));
+                    new Claim(
+                        ClaimTypes.AuthenticationMethod,
+                        this.NormalizeAuthenticationContextClassReference(
+                            statement.AuthenticationContext.ClassReference.AbsoluteUri
+                        ),
+                        ClaimValueTypes.String,
+                        issuer
+                    )
+                );
             }
 
-            subject.AddClaim(new Claim(ClaimTypes.AuthenticationInstant, XmlConvert.ToString(statement.AuthenticationInstant.ToUniversalTime(), DateTimeFormats.Generated), ClaimValueTypes.DateTime, issuer));
+            subject.AddClaim(
+                new Claim(
+                    ClaimTypes.AuthenticationInstant,
+                    XmlConvert.ToString(
+                        statement.AuthenticationInstant.ToUniversalTime(),
+                        DateTimeFormats.Generated
+                    ),
+                    ClaimValueTypes.DateTime,
+                    issuer
+                )
+            );
         }
 
         /// <summary>
@@ -1991,9 +2422,11 @@ namespace System.IdentityModel.Tokens
         /// <param name="statement">The Saml2AuthorizationDecisionStatement.</param>
         /// <param name="subject">The subject.</param>
         /// <param name="issuer">The issuer.</param>
-        protected virtual void ProcessAuthorizationDecisionStatement(Saml2AuthorizationDecisionStatement statement, ClaimsIdentity subject, string issuer)
-        {
-        }
+        protected virtual void ProcessAuthorizationDecisionStatement(
+            Saml2AuthorizationDecisionStatement statement,
+            ClaimsIdentity subject,
+            string issuer
+        ) { }
 
         /// <summary>
         /// Processes all statements to generate claims.
@@ -2001,9 +2434,14 @@ namespace System.IdentityModel.Tokens
         /// <param name="statements">A collection of Saml2Statement.</param>
         /// <param name="subject">The subject.</param>
         /// <param name="issuer">The issuer.</param>
-        protected virtual void ProcessStatement(Collection<Saml2Statement> statements, ClaimsIdentity subject, string issuer)
+        protected virtual void ProcessStatement(
+            Collection<Saml2Statement> statements,
+            ClaimsIdentity subject,
+            string issuer
+        )
         {
-            Collection<Saml2AuthenticationStatement> authnStatements = new Collection<Saml2AuthenticationStatement>();
+            Collection<Saml2AuthenticationStatement> authnStatements =
+                new Collection<Saml2AuthenticationStatement>();
 
             foreach (Saml2Statement statement in statements)
             {
@@ -2014,14 +2452,16 @@ namespace System.IdentityModel.Tokens
                     continue;
                 }
 
-                Saml2AuthenticationStatement authnStatement = statement as Saml2AuthenticationStatement;
+                Saml2AuthenticationStatement authnStatement =
+                    statement as Saml2AuthenticationStatement;
                 if (authnStatement != null)
                 {
                     authnStatements.Add(authnStatement);
                     continue;
                 }
 
-                Saml2AuthorizationDecisionStatement authzStatement = statement as Saml2AuthorizationDecisionStatement;
+                Saml2AuthorizationDecisionStatement authzStatement =
+                    statement as Saml2AuthorizationDecisionStatement;
                 if (authzStatement != null)
                 {
                     this.ProcessAuthorizationDecisionStatement(authzStatement, subject, issuer);
@@ -2052,13 +2492,20 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("samlToken");
             }
 
-            ClaimsIdentity subject = new ClaimsIdentity(AuthenticationTypes.Federation, SamlSecurityTokenRequirement.NameClaimType, SamlSecurityTokenRequirement.RoleClaimType);
+            ClaimsIdentity subject = new ClaimsIdentity(
+                AuthenticationTypes.Federation,
+                SamlSecurityTokenRequirement.NameClaimType,
+                SamlSecurityTokenRequirement.RoleClaimType
+            );
 
             Saml2Assertion assertion = samlToken.Assertion;
 
             if (assertion == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("samlToken", SR.GetString(SR.ID1034));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "samlToken",
+                    SR.GetString(SR.ID1034)
+                );
             }
 
             if (this.Configuration == null)
@@ -2071,11 +2518,16 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4277));
             }
 
-            string issuer = this.Configuration.IssuerNameRegistry.GetIssuerName(samlToken.IssuerToken, assertion.Issuer.Value);
+            string issuer = this.Configuration.IssuerNameRegistry.GetIssuerName(
+                samlToken.IssuerToken,
+                assertion.Issuer.Value
+            );
 
             if (string.IsNullOrEmpty(issuer))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4175)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.ID4175))
+                );
             }
 
             this.ProcessSamlSubject(assertion.Subject, subject, issuer);
@@ -2088,40 +2540,64 @@ namespace System.IdentityModel.Tokens
         /// Validates the Saml2SubjectConfirmation data.
         /// </summary>
         /// <param name="confirmationData">The Saml2 subject confirmation data.</param>
-        protected virtual void ValidateConfirmationData(Saml2SubjectConfirmationData confirmationData)
+        protected virtual void ValidateConfirmationData(
+            Saml2SubjectConfirmationData confirmationData
+        )
         {
             if (null == confirmationData)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("confirmationData");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "confirmationData"
+                );
             }
 
             if (null != confirmationData.Address)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4153)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.ID4153))
+                );
             }
 
             if (null != confirmationData.InResponseTo)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4154)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.ID4154))
+                );
             }
 
             if (null != confirmationData.Recipient)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4157)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.ID4157))
+                );
             }
 
             DateTime now = DateTime.UtcNow;
 
-            if (null != confirmationData.NotBefore
-                    && DateTimeUtil.Add(now, Configuration.MaxClockSkew) < confirmationData.NotBefore.Value)
+            if (
+                null != confirmationData.NotBefore
+                && DateTimeUtil.Add(now, Configuration.MaxClockSkew)
+                    < confirmationData.NotBefore.Value
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4176, confirmationData.NotBefore.Value, now)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(
+                        SR.GetString(SR.ID4176, confirmationData.NotBefore.Value, now)
+                    )
+                );
             }
 
-            if (null != confirmationData.NotOnOrAfter
-                && DateTimeUtil.Add(now, Configuration.MaxClockSkew.Negate()) >= confirmationData.NotOnOrAfter.Value)
+            if (
+                null != confirmationData.NotOnOrAfter
+                && DateTimeUtil.Add(now, Configuration.MaxClockSkew.Negate())
+                    >= confirmationData.NotOnOrAfter.Value
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4177, confirmationData.NotOnOrAfter.Value, now)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(
+                        SR.GetString(SR.ID4177, confirmationData.NotOnOrAfter.Value, now)
+                    )
+                );
             }
         }
 
@@ -2131,7 +2607,10 @@ namespace System.IdentityModel.Tokens
         /// <param name="assertion"><see cref="Saml2Assertion"/> to process.</param>
         /// <param name="resolver"><see cref="SecurityTokenResolver"/> to use in resolving the <see cref="SecurityKey"/>.</param>
         /// <returns>A read only collection of <see cref="SecurityKey"/> contained in the assertion.</returns>
-        protected virtual ReadOnlyCollection<SecurityKey> ResolveSecurityKeys(Saml2Assertion assertion, SecurityTokenResolver resolver)
+        protected virtual ReadOnlyCollection<SecurityKey> ResolveSecurityKeys(
+            Saml2Assertion assertion,
+            SecurityTokenResolver resolver
+        )
         {
             if (null == assertion)
             {
@@ -2143,20 +2622,26 @@ namespace System.IdentityModel.Tokens
             if (null == subject)
             {
                 // No Subject
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4130)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.ID4130))
+                );
             }
 
             // Must have one SubjectConfirmation
             if (0 == subject.SubjectConfirmations.Count)
             {
                 // No SubjectConfirmation
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4131)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.ID4131))
+                );
             }
 
             if (subject.SubjectConfirmations.Count > 1)
             {
                 // More than one SubjectConfirmation
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4132)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.ID4132))
+                );
             }
 
             // Extract the keys for the given method
@@ -2168,36 +2653,47 @@ namespace System.IdentityModel.Tokens
             // For HolderOfKey, ensure there is at least one key, resolve and create collection
             if (Saml2Constants.ConfirmationMethods.Bearer == subjectConfirmation.Method)
             {
-                if (null != subjectConfirmation.SubjectConfirmationData
-                    && 0 != subjectConfirmation.SubjectConfirmationData.KeyIdentifiers.Count)
+                if (
+                    null != subjectConfirmation.SubjectConfirmationData
+                    && 0 != subjectConfirmation.SubjectConfirmationData.KeyIdentifiers.Count
+                )
                 {
                     // Bearer but has keys
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4133)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.ID4133))
+                    );
                 }
 
                 securityKeys = EmptyReadOnlyCollection<SecurityKey>.Instance;
             }
             else if (Saml2Constants.ConfirmationMethods.HolderOfKey == subjectConfirmation.Method)
             {
-                if (null == subjectConfirmation.SubjectConfirmationData
-                    || 0 == subjectConfirmation.SubjectConfirmationData.KeyIdentifiers.Count)
+                if (
+                    null == subjectConfirmation.SubjectConfirmationData
+                    || 0 == subjectConfirmation.SubjectConfirmationData.KeyIdentifiers.Count
+                )
                 {
                     // Holder-of-key but no keys
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4134)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.ID4134))
+                    );
                 }
 
                 List<SecurityKey> holderKeys = new List<SecurityKey>();
                 SecurityKey key;
 
-                foreach (SecurityKeyIdentifier keyIdentifier in subjectConfirmation.SubjectConfirmationData.KeyIdentifiers)
+                foreach (
+                    SecurityKeyIdentifier keyIdentifier in subjectConfirmation
+                        .SubjectConfirmationData
+                        .KeyIdentifiers
+                )
                 {
                     key = null;
 
                     // Try the resolver first
                     foreach (SecurityKeyIdentifierClause clause in keyIdentifier)
                     {
-                        if (null != resolver
-                            && resolver.TryResolveSecurityKey(clause, out key))
+                        if (null != resolver && resolver.TryResolveSecurityKey(clause, out key))
                         {
                             holderKeys.Add(key);
                             break;
@@ -2224,7 +2720,9 @@ namespace System.IdentityModel.Tokens
             else
             {
                 // SenderVouches, as well as other random things, aren't accepted
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4136, subjectConfirmation.Method)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.ID4136, subjectConfirmation.Method))
+                );
             }
 
             return securityKeys;
@@ -2238,7 +2736,10 @@ namespace System.IdentityModel.Tokens
         /// <returns>Instance of SecurityToken</returns>
         /// <exception cref="ArgumentNullException">Input parameter 'assertion' is null.</exception>
         /// <exception cref="SecurityTokenException">Unable to resolve token.</exception>
-        protected virtual SecurityToken ResolveIssuerToken(Saml2Assertion assertion, SecurityTokenResolver issuerResolver)
+        protected virtual SecurityToken ResolveIssuerToken(
+            Saml2Assertion assertion,
+            SecurityTokenResolver issuerResolver
+        )
         {
             if (null == assertion)
             {
@@ -2252,8 +2753,12 @@ namespace System.IdentityModel.Tokens
             }
             else
             {
-                string exceptionMessage = SR.GetString(assertion.SigningCredentials == null ? SR.ID4141 : SR.ID4142);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(exceptionMessage));
+                string exceptionMessage = SR.GetString(
+                    assertion.SigningCredentials == null ? SR.ID4141 : SR.ID4142
+                );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(exceptionMessage)
+                );
             }
         }
 
@@ -2264,18 +2769,26 @@ namespace System.IdentityModel.Tokens
         /// <param name="issuerResolver">The current SecurityTokenResolver associated with this handler.</param>
         /// <param name="token">Resolved token.</param>
         /// <returns>True if token is resolved.</returns>
-        protected virtual bool TryResolveIssuerToken(Saml2Assertion assertion, SecurityTokenResolver issuerResolver, out SecurityToken token)
+        protected virtual bool TryResolveIssuerToken(
+            Saml2Assertion assertion,
+            SecurityTokenResolver issuerResolver,
+            out SecurityToken token
+        )
         {
             if (null == assertion)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("assertion");
             }
 
-            if (assertion.SigningCredentials != null
+            if (
+                assertion.SigningCredentials != null
                 && assertion.SigningCredentials.SigningKeyIdentifier != null
-                && issuerResolver != null)
+                && issuerResolver != null
+            )
             {
-                SecurityKeyIdentifier keyIdentifier = assertion.SigningCredentials.SigningKeyIdentifier;
+                SecurityKeyIdentifier keyIdentifier = assertion
+                    .SigningCredentials
+                    .SigningKeyIdentifier;
                 return issuerResolver.TryResolveToken(keyIdentifier, out token);
             }
             else
@@ -2303,32 +2816,59 @@ namespace System.IdentityModel.Tokens
             {
                 return this.ReadNameId(reader);
             }
-            else if (reader.IsStartElement(Saml2Constants.Elements.EncryptedID, Saml2Constants.Namespace))
+            else if (
+                reader.IsStartElement(Saml2Constants.Elements.EncryptedID, Saml2Constants.Namespace)
+            )
             {
                 return this.ReadEncryptedId(reader);
             }
-            else if (reader.IsStartElement(Saml2Constants.Elements.BaseID, Saml2Constants.Namespace))
+            else if (
+                reader.IsStartElement(Saml2Constants.Elements.BaseID, Saml2Constants.Namespace)
+            )
             {
                 // Since BaseID is an abstract type, we have to switch off the xsi:type declaration
                 XmlQualifiedName declaredType = XmlUtil.GetXsiType(reader);
 
-                // No declaration, or declaring that this is just a "BaseID", is invalid since 
+                // No declaration, or declaring that this is just a "BaseID", is invalid since
                 // statement is abstract
-                if (null == declaredType
-                    || XmlUtil.EqualsQName(declaredType, Saml2Constants.Types.BaseIDAbstractType, Saml2Constants.Namespace))
+                if (
+                    null == declaredType
+                    || XmlUtil.EqualsQName(
+                        declaredType,
+                        Saml2Constants.Types.BaseIDAbstractType,
+                        Saml2Constants.Namespace
+                    )
+                )
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4104, reader.LocalName, reader.NamespaceURI));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(SR.ID4104, reader.LocalName, reader.NamespaceURI)
+                    );
                 }
 
                 // If it's NameID we can handle it
-                if (XmlUtil.EqualsQName(declaredType, Saml2Constants.Types.NameIDType, Saml2Constants.Namespace))
+                if (
+                    XmlUtil.EqualsQName(
+                        declaredType,
+                        Saml2Constants.Types.NameIDType,
+                        Saml2Constants.Namespace
+                    )
+                )
                 {
                     return this.ReadNameIdType(reader);
                 }
                 else
                 {
                     // Instruct the user to override to handle custom <BaseID>
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4110, parentElement, declaredType.Name, declaredType.Namespace));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(
+                            SR.ID4110,
+                            parentElement,
+                            declaredType.Name,
+                            declaredType.Namespace
+                        )
+                    );
                 }
             }
 
@@ -2356,7 +2896,14 @@ namespace System.IdentityModel.Tokens
             // disallow empty
             if (reader.IsEmptyElement)
             {
-                throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID3061, Saml2Constants.Elements.Action, Saml2Constants.Namespace));
+                throw DiagnosticUtility.ThrowHelperXml(
+                    reader,
+                    SR.GetString(
+                        SR.ID3061,
+                        Saml2Constants.Elements.Action,
+                        Saml2Constants.Namespace
+                    )
+                );
             }
 
             try
@@ -2368,18 +2915,36 @@ namespace System.IdentityModel.Tokens
                 string attributeValue;
 
                 // @xsi:type
-                XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.ActionType, Saml2Constants.Namespace);
+                XmlUtil.ValidateXsiType(
+                    reader,
+                    Saml2Constants.Types.ActionType,
+                    Saml2Constants.Namespace
+                );
 
                 // @Namespace - required
                 attributeValue = reader.GetAttribute(Saml2Constants.Attributes.Namespace);
                 if (string.IsNullOrEmpty(attributeValue))
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID0001, Saml2Constants.Attributes.Namespace, Saml2Constants.Elements.Action));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(
+                            SR.ID0001,
+                            Saml2Constants.Attributes.Namespace,
+                            Saml2Constants.Elements.Action
+                        )
+                    );
                 }
 
                 if (!UriUtil.CanCreateValidUri(attributeValue, UriKind.Absolute))
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID0011, Saml2Constants.Attributes.Namespace, Saml2Constants.Elements.Action));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(
+                            SR.ID0011,
+                            Saml2Constants.Attributes.Namespace,
+                            Saml2Constants.Elements.Action
+                        )
+                    );
                 }
 
                 actionNamespace = new Uri(attributeValue);
@@ -2391,7 +2956,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -2435,7 +3000,10 @@ namespace System.IdentityModel.Tokens
             writer.WriteStartElement(Saml2Constants.Elements.Action, Saml2Constants.Namespace);
 
             // @Namespace - required
-            writer.WriteAttributeString(Saml2Constants.Attributes.Namespace, data.Namespace.AbsoluteUri);
+            writer.WriteAttributeString(
+                Saml2Constants.Attributes.Namespace,
+                data.Namespace.AbsoluteUri
+            );
 
             // String content
             writer.WriteString(data.Value);
@@ -2450,8 +3018,8 @@ namespace System.IdentityModel.Tokens
         /// <remarks>
         /// <para>
         /// The Advice element has an extensibility point to allow XML elements
-        /// from non-SAML2 namespaces to be included. By default, because the 
-        /// Advice may be ignored without affecting the semantics of the 
+        /// from non-SAML2 namespaces to be included. By default, because the
+        /// Advice may be ignored without affecting the semantics of the
         /// assertion, any such elements are ignored. To handle the processing
         /// of those elements, override this method.
         /// </para>
@@ -2479,7 +3047,11 @@ namespace System.IdentityModel.Tokens
                 // @attributes
 
                 // @xsi:type
-                XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.AdviceType, Saml2Constants.Namespace);
+                XmlUtil.ValidateXsiType(
+                    reader,
+                    Saml2Constants.Types.AdviceType,
+                    Saml2Constants.Namespace
+                );
 
                 reader.Read();
                 if (!isEmpty)
@@ -2488,25 +3060,48 @@ namespace System.IdentityModel.Tokens
                     while (reader.IsStartElement())
                     {
                         // <AssertionIDRef>, <AssertionURIRef>, <Assertion>, <EncryptedAssertion>
-                        if (reader.IsStartElement(Saml2Constants.Elements.AssertionIDRef, Saml2Constants.Namespace))
+                        if (
+                            reader.IsStartElement(
+                                Saml2Constants.Elements.AssertionIDRef,
+                                Saml2Constants.Namespace
+                            )
+                        )
                         {
                             advice.AssertionIdReferences.Add(ReadSimpleNCNameElement(reader));
                         }
-                        else if (reader.IsStartElement(Saml2Constants.Elements.AssertionURIRef, Saml2Constants.Namespace))
+                        else if (
+                            reader.IsStartElement(
+                                Saml2Constants.Elements.AssertionURIRef,
+                                Saml2Constants.Namespace
+                            )
+                        )
                         {
                             advice.AssertionUriReferences.Add(ReadSimpleUriElement(reader));
                         }
-                        else if (reader.IsStartElement(Saml2Constants.Elements.Assertion, Saml2Constants.Namespace))
+                        else if (
+                            reader.IsStartElement(
+                                Saml2Constants.Elements.Assertion,
+                                Saml2Constants.Namespace
+                            )
+                        )
                         {
                             advice.Assertions.Add(this.ReadAssertion(reader));
                         }
-                        else if (reader.IsStartElement(Saml2Constants.Elements.EncryptedAssertion, Saml2Constants.Namespace))
+                        else if (
+                            reader.IsStartElement(
+                                Saml2Constants.Elements.EncryptedAssertion,
+                                Saml2Constants.Namespace
+                            )
+                        )
                         {
                             advice.Assertions.Add(this.ReadAssertion(reader));
                         }
                         else
                         {
-                            TraceUtility.TraceString(TraceEventType.Warning, SR.GetString(SR.ID8006, reader.LocalName, reader.NamespaceURI));
+                            TraceUtility.TraceString(
+                                TraceEventType.Warning,
+                                SR.GetString(SR.ID8006, reader.LocalName, reader.NamespaceURI)
+                            );
                             reader.Skip();
                         }
                     }
@@ -2520,7 +3115,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -2556,13 +3151,21 @@ namespace System.IdentityModel.Tokens
             // <AssertionIDRef> 0-OO
             foreach (Saml2Id id in data.AssertionIdReferences)
             {
-                writer.WriteElementString(Saml2Constants.Elements.AssertionIDRef, Saml2Constants.Namespace, id.Value);
+                writer.WriteElementString(
+                    Saml2Constants.Elements.AssertionIDRef,
+                    Saml2Constants.Namespace,
+                    id.Value
+                );
             }
 
             // <AssertionURIRef> 0-OO
             foreach (Uri uri in data.AssertionUriReferences)
             {
-                writer.WriteElementString(Saml2Constants.Elements.AssertionURIRef, Saml2Constants.Namespace, uri.AbsoluteUri);
+                writer.WriteElementString(
+                    Saml2Constants.Elements.AssertionURIRef,
+                    Saml2Constants.Namespace,
+                    uri.AbsoluteUri
+                );
             }
 
             // <Assertion> 0-OO
@@ -2602,71 +3205,120 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4276));
             }
 
-            XmlDictionaryReader plaintextReader = XmlDictionaryReader.CreateDictionaryReader(reader);
+            XmlDictionaryReader plaintextReader = XmlDictionaryReader.CreateDictionaryReader(
+                reader
+            );
 
-            Saml2Assertion assertion = new Saml2Assertion(new Saml2NameIdentifier("__TemporaryIssuer__"));
+            Saml2Assertion assertion = new Saml2Assertion(
+                new Saml2NameIdentifier("__TemporaryIssuer__")
+            );
 
-            // If it's an EncryptedAssertion, we need to retrieve the plaintext 
+            // If it's an EncryptedAssertion, we need to retrieve the plaintext
             // and repoint our reader
-            if (reader.IsStartElement(Saml2Constants.Elements.EncryptedAssertion, Saml2Constants.Namespace))
+            if (
+                reader.IsStartElement(
+                    Saml2Constants.Elements.EncryptedAssertion,
+                    Saml2Constants.Namespace
+                )
+            )
             {
                 EncryptingCredentials encryptingCredentials = null;
                 plaintextReader = CreatePlaintextReaderFromEncryptedData(
-                                    plaintextReader,
-                                    Configuration.ServiceTokenResolver,
-                                    this.KeyInfoSerializer,
-                                    assertion.ExternalEncryptedKeys,
-                                    out encryptingCredentials);
+                    plaintextReader,
+                    Configuration.ServiceTokenResolver,
+                    this.KeyInfoSerializer,
+                    assertion.ExternalEncryptedKeys,
+                    out encryptingCredentials
+                );
 
                 assertion.EncryptingCredentials = encryptingCredentials;
             }
 
             // Throw if wrong element
-            if (!plaintextReader.IsStartElement(Saml2Constants.Elements.Assertion, Saml2Constants.Namespace))
+            if (
+                !plaintextReader.IsStartElement(
+                    Saml2Constants.Elements.Assertion,
+                    Saml2Constants.Namespace
+                )
+            )
             {
-                plaintextReader.ReadStartElement(Saml2Constants.Elements.Assertion, Saml2Constants.Namespace);
+                plaintextReader.ReadStartElement(
+                    Saml2Constants.Elements.Assertion,
+                    Saml2Constants.Namespace
+                );
             }
 
             // disallow empty
             if (plaintextReader.IsEmptyElement)
             {
 #pragma warning suppress 56504 // bogus - thinks plaintextReader.LocalName, plaintextReader.NamespaceURI need validation
-                throw DiagnosticUtility.ThrowHelperXml(plaintextReader, SR.GetString(SR.ID3061, plaintextReader.LocalName, plaintextReader.NamespaceURI));
+                throw DiagnosticUtility.ThrowHelperXml(
+                    plaintextReader,
+                    SR.GetString(SR.ID3061, plaintextReader.LocalName, plaintextReader.NamespaceURI)
+                );
             }
 
-            // Construct a wrapped serializer so that the EnvelopedSignatureReader's 
+            // Construct a wrapped serializer so that the EnvelopedSignatureReader's
             // attempt to read the <ds:KeyInfo> will hit our ReadKeyInfo virtual.
             WrappedSerializer wrappedSerializer = new WrappedSerializer(this, assertion);
 
             // SAML supports enveloped signature, so we need to wrap our reader.
             // We do not dispose this reader, since as a delegating reader it would
             // dispose the inner reader, which we don't properly own.
-            EnvelopedSignatureReader realReader = new EnvelopedSignatureReader(plaintextReader, wrappedSerializer, this.Configuration.IssuerTokenResolver, false, false, false);
+            EnvelopedSignatureReader realReader = new EnvelopedSignatureReader(
+                plaintextReader,
+                wrappedSerializer,
+                this.Configuration.IssuerTokenResolver,
+                false,
+                false,
+                false
+            );
             try
             {
                 // Process @attributes
                 string value;
 
                 // @xsi:type
-                XmlUtil.ValidateXsiType(realReader, Saml2Constants.Types.AssertionType, Saml2Constants.Namespace);
+                XmlUtil.ValidateXsiType(
+                    realReader,
+                    Saml2Constants.Types.AssertionType,
+                    Saml2Constants.Namespace
+                );
 
                 // @Version - required - must be "2.0"
                 string version = realReader.GetAttribute(Saml2Constants.Attributes.Version);
                 if (string.IsNullOrEmpty(version))
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(realReader, SR.GetString(SR.ID0001, Saml2Constants.Attributes.Version, Saml2Constants.Elements.Assertion));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        realReader,
+                        SR.GetString(
+                            SR.ID0001,
+                            Saml2Constants.Attributes.Version,
+                            Saml2Constants.Elements.Assertion
+                        )
+                    );
                 }
 
                 if (!StringComparer.Ordinal.Equals(assertion.Version, version))
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(realReader, SR.GetString(SR.ID4100, version));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        realReader,
+                        SR.GetString(SR.ID4100, version)
+                    );
                 }
 
                 // @ID - required
                 value = realReader.GetAttribute(Saml2Constants.Attributes.ID);
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(realReader, SR.GetString(SR.ID0001, Saml2Constants.Attributes.ID, Saml2Constants.Elements.Assertion));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        realReader,
+                        SR.GetString(
+                            SR.ID0001,
+                            Saml2Constants.Attributes.ID,
+                            Saml2Constants.Elements.Assertion
+                        )
+                    );
                 }
 
                 assertion.Id = new Saml2Id(value);
@@ -2675,7 +3327,14 @@ namespace System.IdentityModel.Tokens
                 value = realReader.GetAttribute(Saml2Constants.Attributes.IssueInstant);
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(realReader, SR.GetString(SR.ID0001, Saml2Constants.Attributes.IssueInstant, Saml2Constants.Elements.Assertion));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        realReader,
+                        SR.GetString(
+                            SR.ID0001,
+                            Saml2Constants.Attributes.IssueInstant,
+                            Saml2Constants.Elements.Assertion
+                        )
+                    );
                 }
 
                 assertion.IssueInstant = XmlConvert.ToDateTime(value, DateTimeFormats.Accepted);
@@ -2690,19 +3349,34 @@ namespace System.IdentityModel.Tokens
                 realReader.TryReadSignature();
 
                 // <Subject> 0-1
-                if (realReader.IsStartElement(Saml2Constants.Elements.Subject, Saml2Constants.Namespace))
+                if (
+                    realReader.IsStartElement(
+                        Saml2Constants.Elements.Subject,
+                        Saml2Constants.Namespace
+                    )
+                )
                 {
                     assertion.Subject = this.ReadSubject(realReader);
                 }
 
                 // <Conditions> 0-1
-                if (realReader.IsStartElement(Saml2Constants.Elements.Conditions, Saml2Constants.Namespace))
+                if (
+                    realReader.IsStartElement(
+                        Saml2Constants.Elements.Conditions,
+                        Saml2Constants.Namespace
+                    )
+                )
                 {
                     assertion.Conditions = this.ReadConditions(realReader);
                 }
 
                 // <Advice> 0-1
-                if (realReader.IsStartElement(Saml2Constants.Elements.Advice, Saml2Constants.Namespace))
+                if (
+                    realReader.IsStartElement(
+                        Saml2Constants.Elements.Advice,
+                        Saml2Constants.Namespace
+                    )
+                )
                 {
                     assertion.Advice = this.ReadAdvice(realReader);
                 }
@@ -2712,19 +3386,39 @@ namespace System.IdentityModel.Tokens
                 {
                     Saml2Statement statement;
 
-                    if (realReader.IsStartElement(Saml2Constants.Elements.Statement, Saml2Constants.Namespace))
+                    if (
+                        realReader.IsStartElement(
+                            Saml2Constants.Elements.Statement,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
                         statement = this.ReadStatement(realReader);
                     }
-                    else if (realReader.IsStartElement(Saml2Constants.Elements.AttributeStatement, Saml2Constants.Namespace))
+                    else if (
+                        realReader.IsStartElement(
+                            Saml2Constants.Elements.AttributeStatement,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
                         statement = this.ReadAttributeStatement(realReader);
                     }
-                    else if (realReader.IsStartElement(Saml2Constants.Elements.AuthnStatement, Saml2Constants.Namespace))
+                    else if (
+                        realReader.IsStartElement(
+                            Saml2Constants.Elements.AuthnStatement,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
                         statement = this.ReadAuthenticationStatement(realReader);
                     }
-                    else if (realReader.IsStartElement(Saml2Constants.Elements.AuthzDecisionStatement, Saml2Constants.Namespace))
+                    else if (
+                        realReader.IsStartElement(
+                            Saml2Constants.Elements.AuthzDecisionStatement,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
                         statement = this.ReadAuthorizationDecisionStatement(realReader);
                     }
@@ -2750,16 +3444,18 @@ namespace System.IdentityModel.Tokens
                     // [Saml2Core, lines 1050, 1168, 1280]
                     foreach (Saml2Statement statement in assertion.Statements)
                     {
-                        if (statement is Saml2AuthenticationStatement
+                        if (
+                            statement is Saml2AuthenticationStatement
                             || statement is Saml2AttributeStatement
-                            || statement is Saml2AuthorizationDecisionStatement)
+                            || statement is Saml2AuthorizationDecisionStatement
+                        )
                         {
                             throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4119));
                         }
                     }
                 }
 
-                // Reading the end element will complete the signature; 
+                // Reading the end element will complete the signature;
                 // capture the signing creds
                 assertion.SigningCredentials = realReader.SigningCredentials;
 
@@ -2773,7 +3469,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(realReader, e);
                 if (null == wrapped)
                 {
@@ -2815,14 +3511,23 @@ namespace System.IdentityModel.Tokens
             // If an EncryptingCredentials is present then check if this is not of type ReceivedEncryptinCredentials.
             // ReceivedEncryptingCredentials mean that it was credentials that were hydrated from a token received
             // on the wire. We should not directly use this while re-serializing a token.
-            if ((null != data.EncryptingCredentials) && !(data.EncryptingCredentials is ReceivedEncryptingCredentials))
+            if (
+                (null != data.EncryptingCredentials)
+                && !(data.EncryptingCredentials is ReceivedEncryptingCredentials)
+            )
             {
                 plaintextStream = new MemoryStream();
-                writer = plaintextWriter = XmlDictionaryWriter.CreateTextWriter(plaintextStream, Encoding.UTF8, false);
+                writer = plaintextWriter = XmlDictionaryWriter.CreateTextWriter(
+                    plaintextStream,
+                    Encoding.UTF8,
+                    false
+                );
             }
             else if (data.ExternalEncryptedKeys == null || data.ExternalEncryptedKeys.Count > 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4173)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID4173))
+                );
             }
 
             // If we've saved off the token stream, re-emit it.
@@ -2839,7 +3544,12 @@ namespace System.IdentityModel.Tokens
                 if (null != data.SigningCredentials)
                 {
 #pragma warning suppress 56506
-                    writer = signatureWriter = new EnvelopedSignatureWriter(writer, data.SigningCredentials, data.Id.Value, new WrappedSerializer(this, data));
+                    writer = signatureWriter = new EnvelopedSignatureWriter(
+                        writer,
+                        data.SigningCredentials,
+                        data.Id.Value,
+                        new WrappedSerializer(this, data)
+                    );
                 }
 
                 if (null == data.Subject)
@@ -2847,31 +3557,45 @@ namespace System.IdentityModel.Tokens
                     // An assertion with no statements MUST contain a <Subject> element. [Saml2Core, line 585]
                     if (data.Statements == null || 0 == data.Statements.Count)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4106)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ID4106))
+                        );
                     }
 
                     // Furthermore, the built-in statement types all require the presence of a subject.
                     // [Saml2Core, lines 1050, 1168, 1280]
                     foreach (Saml2Statement statement in data.Statements)
                     {
-                        if (statement is Saml2AuthenticationStatement
+                        if (
+                            statement is Saml2AuthenticationStatement
                             || statement is Saml2AttributeStatement
-                            || statement is Saml2AuthorizationDecisionStatement)
+                            || statement is Saml2AuthorizationDecisionStatement
+                        )
                         {
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(SR.GetString(SR.ID4119)));
+                                new InvalidOperationException(SR.GetString(SR.ID4119))
+                            );
                         }
                     }
                 }
 
                 // <Assertion>
-                writer.WriteStartElement(Saml2Constants.Elements.Assertion, Saml2Constants.Namespace);
+                writer.WriteStartElement(
+                    Saml2Constants.Elements.Assertion,
+                    Saml2Constants.Namespace
+                );
 
                 // @ID - required
                 writer.WriteAttributeString(Saml2Constants.Attributes.ID, data.Id.Value);
 
                 // @IssueInstant - required
-                writer.WriteAttributeString(Saml2Constants.Attributes.IssueInstant, XmlConvert.ToString(data.IssueInstant.ToUniversalTime(), DateTimeFormats.Generated));
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.IssueInstant,
+                    XmlConvert.ToString(
+                        data.IssueInstant.ToUniversalTime(),
+                        DateTimeFormats.Generated
+                    )
+                );
 
                 // @Version - required
                 writer.WriteAttributeString(Saml2Constants.Attributes.Version, data.Version);
@@ -2924,18 +3648,31 @@ namespace System.IdentityModel.Tokens
                 encryptedData.KeyIdentifier = data.EncryptingCredentials.SecurityKeyIdentifier;
 
                 // Get the encryption key, which must be symmetric
-                SymmetricSecurityKey encryptingKey = data.EncryptingCredentials.SecurityKey as SymmetricSecurityKey;
+                SymmetricSecurityKey encryptingKey =
+                    data.EncryptingCredentials.SecurityKey as SymmetricSecurityKey;
                 if (encryptingKey == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.ID3064)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CryptographicException(SR.GetString(SR.ID3064))
+                    );
                 }
 
                 // Do the actual encryption
-                SymmetricAlgorithm symmetricAlgorithm = encryptingKey.GetSymmetricAlgorithm(data.EncryptingCredentials.Algorithm);
-                encryptedData.Encrypt(symmetricAlgorithm, plaintextStream.GetBuffer(), 0, (int)plaintextStream.Length);
+                SymmetricAlgorithm symmetricAlgorithm = encryptingKey.GetSymmetricAlgorithm(
+                    data.EncryptingCredentials.Algorithm
+                );
+                encryptedData.Encrypt(
+                    symmetricAlgorithm,
+                    plaintextStream.GetBuffer(),
+                    0,
+                    (int)plaintextStream.Length
+                );
                 ((IDisposable)plaintextStream).Dispose();
 
-                originalWriter.WriteStartElement(Saml2Constants.Elements.EncryptedAssertion, Saml2Constants.Namespace);
+                originalWriter.WriteStartElement(
+                    Saml2Constants.Elements.EncryptedAssertion,
+                    Saml2Constants.Namespace
+                );
                 encryptedData.WriteXml(originalWriter, this.KeyInfoSerializer);
                 foreach (EncryptedKeyIdentifierClause clause in data.ExternalEncryptedKeys)
                 {
@@ -2950,7 +3687,7 @@ namespace System.IdentityModel.Tokens
         /// Reads the &lt;saml:Attribute> element.
         /// </summary>
         /// <remarks>
-        /// The default implementation requires that the content of the 
+        /// The default implementation requires that the content of the
         /// Attribute element be a simple string. To handle complex content
         /// or content of declared simple types other than xs:string, override
         /// this method.
@@ -2967,7 +3704,10 @@ namespace System.IdentityModel.Tokens
             // throw if wrong element
             if (!reader.IsStartElement(Saml2Constants.Elements.Attribute, Saml2Constants.Namespace))
             {
-                reader.ReadStartElement(Saml2Constants.Elements.Attribute, Saml2Constants.Namespace);
+                reader.ReadStartElement(
+                    Saml2Constants.Elements.Attribute,
+                    Saml2Constants.Namespace
+                );
             }
 
             try
@@ -2978,14 +3718,25 @@ namespace System.IdentityModel.Tokens
                 // @attributes
                 string value;
 
-                // @xsi:type 
-                XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.AttributeType, Saml2Constants.Namespace);
+                // @xsi:type
+                XmlUtil.ValidateXsiType(
+                    reader,
+                    Saml2Constants.Types.AttributeType,
+                    Saml2Constants.Namespace
+                );
 
                 // @Name - required
                 value = reader.GetAttribute(Saml2Constants.Attributes.Name);
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID0001, Saml2Constants.Attributes.Name, Saml2Constants.Elements.Attribute));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(
+                            SR.ID0001,
+                            Saml2Constants.Attributes.Name,
+                            Saml2Constants.Elements.Attribute
+                        )
+                    );
                 }
 
                 attribute = new Saml2Attribute(value);
@@ -2996,29 +3747,46 @@ namespace System.IdentityModel.Tokens
                 {
                     if (!UriUtil.CanCreateValidUri(value, UriKind.Absolute))
                     {
-                        throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID0011, Saml2Constants.Attributes.Namespace, Saml2Constants.Elements.Action));
+                        throw DiagnosticUtility.ThrowHelperXml(
+                            reader,
+                            SR.GetString(
+                                SR.ID0011,
+                                Saml2Constants.Attributes.Namespace,
+                                Saml2Constants.Elements.Action
+                            )
+                        );
                     }
 
                     attribute.NameFormat = new Uri(value);
                 }
 
                 // @FriendlyName - optional
-                attribute.FriendlyName = reader.GetAttribute(Saml2Constants.Attributes.FriendlyName);
+                attribute.FriendlyName = reader.GetAttribute(
+                    Saml2Constants.Attributes.FriendlyName
+                );
 
                 // @OriginalIssuer - optional.
                 // We are lax on read here, and will accept the following namespaces for original issuer, in order:
                 // http://schemas.xmlsoap.org/ws/2009/09/identity/claims
                 // http://schemas.microsoft.com/ws/2008/06/identity
-                string originalIssuer = reader.GetAttribute(Saml2Constants.Attributes.OriginalIssuer, ClaimType2009Namespace);
+                string originalIssuer = reader.GetAttribute(
+                    Saml2Constants.Attributes.OriginalIssuer,
+                    ClaimType2009Namespace
+                );
 
                 if (originalIssuer == null)
                 {
-                    originalIssuer = reader.GetAttribute(Saml2Constants.Attributes.OriginalIssuer, ProductConstants.NamespaceUri);
+                    originalIssuer = reader.GetAttribute(
+                        Saml2Constants.Attributes.OriginalIssuer,
+                        ProductConstants.NamespaceUri
+                    );
                 }
 
                 if (originalIssuer == String.Empty)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.ID4252)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XmlException(SR.GetString(SR.ID4252))
+                    );
                 }
 
                 attribute.OriginalIssuer = originalIssuer;
@@ -3027,7 +3795,12 @@ namespace System.IdentityModel.Tokens
                 reader.Read();
                 if (!isEmpty)
                 {
-                    while (reader.IsStartElement(Saml2Constants.Elements.AttributeValue, Saml2Constants.Namespace))
+                    while (
+                        reader.IsStartElement(
+                            Saml2Constants.Elements.AttributeValue,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
                         bool isEmptyValue = reader.IsEmptyElement;
                         bool isNil = XmlUtil.IsNil(reader);
@@ -3040,27 +3813,65 @@ namespace System.IdentityModel.Tokens
                         // "some-non-empty-local-prefix:some-non-empty-string" case
                         string attributeValueXsiTypePrefix = null;
                         string attributeValueXsiTypeSuffix = null;
-                        string attributeValueXsiTypeSuffixWithLocalPrefix = reader.GetAttribute("type", XmlSchema.InstanceNamespace);
+                        string attributeValueXsiTypeSuffixWithLocalPrefix = reader.GetAttribute(
+                            "type",
+                            XmlSchema.InstanceNamespace
+                        );
                         if (!string.IsNullOrEmpty(attributeValueXsiTypeSuffixWithLocalPrefix))
                         {
                             // "some-non-empty-string" case
-                            if (attributeValueXsiTypeSuffixWithLocalPrefix.IndexOf(":", StringComparison.Ordinal) == -1)
+                            if (
+                                attributeValueXsiTypeSuffixWithLocalPrefix.IndexOf(
+                                    ":",
+                                    StringComparison.Ordinal
+                                ) == -1
+                            )
                             {
                                 attributeValueXsiTypePrefix = reader.LookupNamespace(String.Empty);
-                                attributeValueXsiTypeSuffix = attributeValueXsiTypeSuffixWithLocalPrefix;
+                                attributeValueXsiTypeSuffix =
+                                    attributeValueXsiTypeSuffixWithLocalPrefix;
                             }
-                            else if (attributeValueXsiTypeSuffixWithLocalPrefix.IndexOf(":", StringComparison.Ordinal) > 0 &&
-                                      attributeValueXsiTypeSuffixWithLocalPrefix.IndexOf(":", StringComparison.Ordinal) < attributeValueXsiTypeSuffixWithLocalPrefix.Length - 1)
+                            else if (
+                                attributeValueXsiTypeSuffixWithLocalPrefix.IndexOf(
+                                    ":",
+                                    StringComparison.Ordinal
+                                ) > 0
+                                && attributeValueXsiTypeSuffixWithLocalPrefix.IndexOf(
+                                    ":",
+                                    StringComparison.Ordinal
+                                )
+                                    < attributeValueXsiTypeSuffixWithLocalPrefix.Length - 1
+                            )
                             {
-                                string localPrefix = attributeValueXsiTypeSuffixWithLocalPrefix.Substring(0, attributeValueXsiTypeSuffixWithLocalPrefix.IndexOf(":", StringComparison.Ordinal));
+                                string localPrefix =
+                                    attributeValueXsiTypeSuffixWithLocalPrefix.Substring(
+                                        0,
+                                        attributeValueXsiTypeSuffixWithLocalPrefix.IndexOf(
+                                            ":",
+                                            StringComparison.Ordinal
+                                        )
+                                    );
                                 attributeValueXsiTypePrefix = reader.LookupNamespace(localPrefix);
-                                attributeValueXsiTypeSuffix = attributeValueXsiTypeSuffixWithLocalPrefix.Substring(attributeValueXsiTypeSuffixWithLocalPrefix.IndexOf(":", StringComparison.Ordinal) + 1);
+                                attributeValueXsiTypeSuffix =
+                                    attributeValueXsiTypeSuffixWithLocalPrefix.Substring(
+                                        attributeValueXsiTypeSuffixWithLocalPrefix.IndexOf(
+                                            ":",
+                                            StringComparison.Ordinal
+                                        ) + 1
+                                    );
                             }
                         }
 
-                        if (attributeValueXsiTypePrefix != null && attributeValueXsiTypeSuffix != null)
+                        if (
+                            attributeValueXsiTypePrefix != null
+                            && attributeValueXsiTypeSuffix != null
+                        )
                         {
-                            attribute.AttributeValueXsiType = String.Concat(attributeValueXsiTypePrefix, "#", attributeValueXsiTypeSuffix);
+                            attribute.AttributeValueXsiType = String.Concat(
+                                attributeValueXsiTypePrefix,
+                                "#",
+                                attributeValueXsiTypeSuffix
+                            );
                         }
 
                         if (isNil)
@@ -3093,7 +3904,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -3116,21 +3927,21 @@ namespace System.IdentityModel.Tokens
         protected virtual string ReadAttributeValue(XmlReader reader, Saml2Attribute attribute)
         {
             // This code was designed realizing that the writter of the xml controls how our
-            // reader will report the NodeType. A completely differnet system (IBM, etc) could write the values. 
+            // reader will report the NodeType. A completely differnet system (IBM, etc) could write the values.
             // Considering NodeType is important, because we need to read the entire value, end element and not loose anything significant.
-            // 
+            //
             // Couple of cases to help understand the design choices.
             //
-            // 1. 
+            // 1.
             // "<MyElement xmlns=""urn:mynamespace""><another>complex</another></MyElement><sibling>value</sibling>"
             // Could result in the our reader reporting the NodeType as Text OR Element, depending if '<' was entitized to '&lt;'
             //
-            // 2. 
+            // 2.
             // " <MyElement xmlns=""urn:mynamespace""><another>complex</another></MyElement><sibling>value</sibling>"
-            // Could result in the our reader reporting the NodeType as Text OR Whitespace.  Post Whitespace processing, the NodeType could be 
+            // Could result in the our reader reporting the NodeType as Text OR Whitespace.  Post Whitespace processing, the NodeType could be
             // reported as Text or Element, depending if '<' was entitized to '&lt;'
             //
-            // 3. 
+            // 3.
             // "/r/n/t   "
             // Could result in the our reader reporting the NodeType as whitespace.
             //
@@ -3138,7 +3949,7 @@ namespace System.IdentityModel.Tokens
             // the whitespace is remembered and discarded if an found is found, otherwise it becomes the value. This is to help users who accidently put a space when adding claims in ADFS
             // If we just skipped the Whitespace, then an AttributeValue that started with Whitespace would loose that part and claims generated from the AttributeValue
             // would be missing that part.
-            // 
+            //
 
             if (reader == null)
             {
@@ -3148,7 +3959,10 @@ namespace System.IdentityModel.Tokens
             string result = String.Empty;
             string whiteSpace = String.Empty;
 
-            reader.ReadStartElement(Saml2Constants.Elements.AttributeValue, Saml2Constants.Namespace);
+            reader.ReadStartElement(
+                Saml2Constants.Elements.AttributeValue,
+                Saml2Constants.Namespace
+            );
 
             while (reader.NodeType == XmlNodeType.Whitespace)
             {
@@ -3201,19 +4015,29 @@ namespace System.IdentityModel.Tokens
             // @NameFormat - optional
             if (null != data.NameFormat)
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.NameFormat, data.NameFormat.AbsoluteUri);
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.NameFormat,
+                    data.NameFormat.AbsoluteUri
+                );
             }
 
             // @FriendlyName - optional
             if (null != data.FriendlyName)
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.FriendlyName, data.FriendlyName);
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.FriendlyName,
+                    data.FriendlyName
+                );
             }
 
             // @OriginalIssuer - optional
             if (null != data.OriginalIssuer)
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.OriginalIssuer, ClaimType2009Namespace, data.OriginalIssuer);
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.OriginalIssuer,
+                    ClaimType2009Namespace,
+                    data.OriginalIssuer
+                );
             }
 
             string xsiTypePrefix = null;
@@ -3230,18 +4054,37 @@ namespace System.IdentityModel.Tokens
             // <AttributeValue> 0-OO (nillable)
             foreach (string value in data.Values)
             {
-                writer.WriteStartElement(Saml2Constants.Elements.AttributeValue, Saml2Constants.Namespace);
+                writer.WriteStartElement(
+                    Saml2Constants.Elements.AttributeValue,
+                    Saml2Constants.Namespace
+                );
 
                 if (null == value)
                 {
-                    writer.WriteAttributeString("nil", XmlSchema.InstanceNamespace, XmlConvert.ToString(true));
+                    writer.WriteAttributeString(
+                        "nil",
+                        XmlSchema.InstanceNamespace,
+                        XmlConvert.ToString(true)
+                    );
                 }
                 else if (value.Length > 0)
                 {
                     if ((xsiTypePrefix != null) && (xsiTypeSuffix != null))
                     {
-                        writer.WriteAttributeString("xmlns", ProductConstants.ClaimValueTypeSerializationPrefix, null, xsiTypePrefix);
-                        writer.WriteAttributeString("type", XmlSchema.InstanceNamespace, String.Concat(ProductConstants.ClaimValueTypeSerializationPrefixWithColon, xsiTypeSuffix));
+                        writer.WriteAttributeString(
+                            "xmlns",
+                            ProductConstants.ClaimValueTypeSerializationPrefix,
+                            null,
+                            xsiTypePrefix
+                        );
+                        writer.WriteAttributeString(
+                            "type",
+                            XmlSchema.InstanceNamespace,
+                            String.Concat(
+                                ProductConstants.ClaimValueTypeSerializationPrefixWithColon,
+                                xsiTypeSuffix
+                            )
+                        );
                     }
 
                     this.WriteAttributeValue(writer, value, data);
@@ -3262,7 +4105,11 @@ namespace System.IdentityModel.Tokens
         /// <param name="attribute">The <see cref="Saml2Attribute"/> to serialize.</param>
         /// <remarks>By default the method writes the value as a string.</remarks>
         /// <exception cref="ArgumentNullException">The input parameter 'writer' is null.</exception>
-        protected virtual void WriteAttributeValue(XmlWriter writer, string value, Saml2Attribute attribute)
+        protected virtual void WriteAttributeValue(
+            XmlWriter writer,
+            string value,
+            Saml2Attribute attribute
+        )
         {
             if (writer == null)
             {
@@ -3273,7 +4120,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Reads the &lt;saml:AttributeStatement> element, or a 
+        /// Reads the &lt;saml:AttributeStatement> element, or a
         /// &lt;saml:Statement element that specifies an xsi:type of
         /// saml:AttributeStatementType.
         /// </summary>
@@ -3292,9 +4139,17 @@ namespace System.IdentityModel.Tokens
             {
                 isStatementElement = true;
             }
-            else if (!reader.IsStartElement(Saml2Constants.Elements.AttributeStatement, Saml2Constants.Namespace))
+            else if (
+                !reader.IsStartElement(
+                    Saml2Constants.Elements.AttributeStatement,
+                    Saml2Constants.Namespace
+                )
+            )
             {
-                reader.ReadStartElement(Saml2Constants.Elements.AttributeStatement, Saml2Constants.Namespace);
+                reader.ReadStartElement(
+                    Saml2Constants.Elements.AttributeStatement,
+                    Saml2Constants.Namespace
+                );
             }
 
             try
@@ -3305,12 +4160,24 @@ namespace System.IdentityModel.Tokens
                 // @attributes
 
                 // @xsi:type
-                XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.AttributeStatementType, Saml2Constants.Namespace, isStatementElement);
+                XmlUtil.ValidateXsiType(
+                    reader,
+                    Saml2Constants.Types.AttributeStatementType,
+                    Saml2Constants.Namespace,
+                    isStatementElement
+                );
 
                 // disallow empty element, since xsi:type is ok
                 if (isEmpty)
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID3061, Saml2Constants.Elements.AttributeStatement, Saml2Constants.Namespace));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(
+                            SR.ID3061,
+                            Saml2Constants.Elements.AttributeStatement,
+                            Saml2Constants.Namespace
+                        )
+                    );
                 }
 
                 // Content
@@ -3320,11 +4187,21 @@ namespace System.IdentityModel.Tokens
                 // <Attribute|EncryptedAttribute> 1-OO
                 while (reader.IsStartElement())
                 {
-                    if (reader.IsStartElement(Saml2Constants.Elements.EncryptedAttribute, Saml2Constants.Namespace))
+                    if (
+                        reader.IsStartElement(
+                            Saml2Constants.Elements.EncryptedAttribute,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
                         throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4158));
                     }
-                    else if (reader.IsStartElement(Saml2Constants.Elements.Attribute, Saml2Constants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            Saml2Constants.Elements.Attribute,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
                         statement.Attributes.Add(this.ReadAttribute(reader));
                     }
@@ -3337,7 +4214,10 @@ namespace System.IdentityModel.Tokens
                 // At least one attribute expected
                 if (0 == statement.Attributes.Count)
                 {
-                    reader.ReadStartElement(Saml2Constants.Elements.Attribute, Saml2Constants.Namespace);
+                    reader.ReadStartElement(
+                        Saml2Constants.Elements.Attribute,
+                        Saml2Constants.Namespace
+                    );
                 }
 
                 reader.ReadEndElement();
@@ -3348,7 +4228,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -3366,7 +4246,10 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2AttributeStatement"/>.</param>
         /// <param name="data">The <see cref="Saml2AttributeStatement"/> to serialize.</param>
-        protected virtual void WriteAttributeStatement(XmlWriter writer, Saml2AttributeStatement data)
+        protected virtual void WriteAttributeStatement(
+            XmlWriter writer,
+            Saml2AttributeStatement data
+        )
         {
             if (null == writer)
             {
@@ -3380,11 +4263,16 @@ namespace System.IdentityModel.Tokens
 
             if (data.Attributes == null || 0 == data.Attributes.Count)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4124)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID4124))
+                );
             }
 
             // <AttributeStatement>
-            writer.WriteStartElement(Saml2Constants.Elements.AttributeStatement, Saml2Constants.Namespace);
+            writer.WriteStartElement(
+                Saml2Constants.Elements.AttributeStatement,
+                Saml2Constants.Namespace
+            );
 
             // <Attribute> 1-OO
             foreach (Saml2Attribute attribute in data.Attributes)
@@ -3397,7 +4285,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Reads the &lt;saml:AudienceRestriction> element or a 
+        /// Reads the &lt;saml:AudienceRestriction> element or a
         /// &lt;saml:Condition> element that specifies an xsi:type
         /// of saml:AudienceRestrictionType.
         /// </summary>
@@ -3416,9 +4304,17 @@ namespace System.IdentityModel.Tokens
             {
                 isConditionElement = true;
             }
-            else if (!reader.IsStartElement(Saml2Constants.Elements.AudienceRestriction, Saml2Constants.Namespace))
+            else if (
+                !reader.IsStartElement(
+                    Saml2Constants.Elements.AudienceRestriction,
+                    Saml2Constants.Namespace
+                )
+            )
             {
-                reader.ReadStartElement(Saml2Constants.Elements.AudienceRestriction, Saml2Constants.Namespace);
+                reader.ReadStartElement(
+                    Saml2Constants.Elements.AudienceRestriction,
+                    Saml2Constants.Namespace
+                );
             }
 
             try
@@ -3429,30 +4325,55 @@ namespace System.IdentityModel.Tokens
                 // @attributes
 
                 // @xsi:type -- if we're a <Condition> element, this declaration must be present
-                XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.AudienceRestrictionType, Saml2Constants.Namespace, isConditionElement);
+                XmlUtil.ValidateXsiType(
+                    reader,
+                    Saml2Constants.Types.AudienceRestrictionType,
+                    Saml2Constants.Namespace,
+                    isConditionElement
+                );
 
                 // disallow empty
                 if (isEmpty)
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID3061, reader.LocalName, reader.NamespaceURI));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(SR.ID3061, reader.LocalName, reader.NamespaceURI)
+                    );
                 }
 
                 // content
                 reader.Read();
 
                 // <Audience> - 1-OO
-                if (!reader.IsStartElement(Saml2Constants.Elements.Audience, Saml2Constants.Namespace))
+                if (
+                    !reader.IsStartElement(
+                        Saml2Constants.Elements.Audience,
+                        Saml2Constants.Namespace
+                    )
+                )
                 {
-                    reader.ReadStartElement(Saml2Constants.Elements.Audience, Saml2Constants.Namespace);
+                    reader.ReadStartElement(
+                        Saml2Constants.Elements.Audience,
+                        Saml2Constants.Namespace
+                    );
                 }
 
-                // We are now laxing the uri check for audience restriction to support interop partners 
+                // We are now laxing the uri check for audience restriction to support interop partners
                 // This is a specific request from server : Bug 11850
                 // ReadSimpleUriElement now has a flag that turns lax reading ON/OFF.
-                audienceRestriction = new Saml2AudienceRestriction(ReadSimpleUriElement(reader, UriKind.RelativeOrAbsolute, true));
-                while (reader.IsStartElement(Saml2Constants.Elements.Audience, Saml2Constants.Namespace))
+                audienceRestriction = new Saml2AudienceRestriction(
+                    ReadSimpleUriElement(reader, UriKind.RelativeOrAbsolute, true)
+                );
+                while (
+                    reader.IsStartElement(
+                        Saml2Constants.Elements.Audience,
+                        Saml2Constants.Namespace
+                    )
+                )
                 {
-                    audienceRestriction.Audiences.Add(ReadSimpleUriElement(reader, UriKind.RelativeOrAbsolute, true));
+                    audienceRestriction.Audiences.Add(
+                        ReadSimpleUriElement(reader, UriKind.RelativeOrAbsolute, true)
+                    );
                 }
 
                 reader.ReadEndElement();
@@ -3463,7 +4384,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -3481,7 +4402,10 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2AudienceRestriction"/>.</param>
         /// <param name="data">The <see cref="Saml2AudienceRestriction"/> to serialize.</param>
-        protected virtual void WriteAudienceRestriction(XmlWriter writer, Saml2AudienceRestriction data)
+        protected virtual void WriteAudienceRestriction(
+            XmlWriter writer,
+            Saml2AudienceRestriction data
+        )
         {
             if (null == writer)
             {
@@ -3496,17 +4420,26 @@ namespace System.IdentityModel.Tokens
             // Schema requires at least one audience.
             if (data.Audiences == null || 0 == data.Audiences.Count)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4159)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID4159))
+                );
             }
 
             // <AudienceRestriction>
-            writer.WriteStartElement(Saml2Constants.Elements.AudienceRestriction, Saml2Constants.Namespace);
+            writer.WriteStartElement(
+                Saml2Constants.Elements.AudienceRestriction,
+                Saml2Constants.Namespace
+            );
 
             // <Audience> - 1-OO
             foreach (Uri audience in data.Audiences)
             {
-                // When writing out the audience uri we use the OriginalString property to preserve the value that was initially passed down during token creation as-is. 
-                writer.WriteElementString(Saml2Constants.Elements.Audience, Saml2Constants.Namespace, audience.OriginalString);
+                // When writing out the audience uri we use the OriginalString property to preserve the value that was initially passed down during token creation as-is.
+                writer.WriteElementString(
+                    Saml2Constants.Elements.Audience,
+                    Saml2Constants.Namespace,
+                    audience.OriginalString
+                );
             }
 
             // </AudienceRestriction>
@@ -3517,8 +4450,8 @@ namespace System.IdentityModel.Tokens
         /// Reads the &lt;saml:AuthnContext> element.
         /// </summary>
         /// <remarks>
-        /// The default implementation does not handle the optional 
-        /// &lt;saml:AuthnContextDecl> element. To handle by-value 
+        /// The default implementation does not handle the optional
+        /// &lt;saml:AuthnContextDecl> element. To handle by-value
         /// authentication context declarations, override this method.
         /// </remarks>
         /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2AuthenticationContext"/> element.</param>
@@ -3531,9 +4464,17 @@ namespace System.IdentityModel.Tokens
             }
 
             // throw if wrong element
-            if (!reader.IsStartElement(Saml2Constants.Elements.AuthnContext, Saml2Constants.Namespace))
+            if (
+                !reader.IsStartElement(
+                    Saml2Constants.Elements.AuthnContext,
+                    Saml2Constants.Namespace
+                )
+            )
             {
-                reader.ReadStartElement(Saml2Constants.Elements.AuthnContext, Saml2Constants.Namespace);
+                reader.ReadStartElement(
+                    Saml2Constants.Elements.AuthnContext,
+                    Saml2Constants.Namespace
+                );
             }
 
             try
@@ -3541,51 +4482,88 @@ namespace System.IdentityModel.Tokens
                 // Disallow empty
                 if (reader.IsEmptyElement)
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID3061, Saml2Constants.Elements.AuthnContext, Saml2Constants.Namespace));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(
+                            SR.ID3061,
+                            Saml2Constants.Elements.AuthnContext,
+                            Saml2Constants.Namespace
+                        )
+                    );
                 }
 
                 // @attributes
 
                 // @xsi:type
-                XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.AuthnContextType, Saml2Constants.Namespace);
+                XmlUtil.ValidateXsiType(
+                    reader,
+                    Saml2Constants.Types.AuthnContextType,
+                    Saml2Constants.Namespace
+                );
 
                 // Content
                 reader.ReadStartElement();
 
                 // At least one of ClassRef and ( Decl XOR DeclRef) must be present
-                // At this time, we do not support Decl, which is a by-value 
+                // At this time, we do not support Decl, which is a by-value
                 // authentication context declaration.
                 Uri classRef = null;
                 Uri declRef = null;
 
                 // <AuthnContextClassRef> - see comment above
-                if (reader.IsStartElement(Saml2Constants.Elements.AuthnContextClassRef, Saml2Constants.Namespace))
+                if (
+                    reader.IsStartElement(
+                        Saml2Constants.Elements.AuthnContextClassRef,
+                        Saml2Constants.Namespace
+                    )
+                )
                 {
                     classRef = ReadSimpleUriElement(reader);
                 }
 
                 // <AuthnContextDecl> - see comment above
-                if (reader.IsStartElement(Saml2Constants.Elements.AuthnContextDecl, Saml2Constants.Namespace))
+                if (
+                    reader.IsStartElement(
+                        Saml2Constants.Elements.AuthnContextDecl,
+                        Saml2Constants.Namespace
+                    )
+                )
                 {
                     throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4118));
                 }
 
                 // <AuthnContextDeclRef> - see comment above
                 // If there was no ClassRef, there must be a DeclRef
-                if (reader.IsStartElement(Saml2Constants.Elements.AuthnContextDeclRef, Saml2Constants.Namespace))
+                if (
+                    reader.IsStartElement(
+                        Saml2Constants.Elements.AuthnContextDeclRef,
+                        Saml2Constants.Namespace
+                    )
+                )
                 {
                     declRef = ReadSimpleUriElement(reader);
                 }
                 else if (null == classRef)
                 {
-                    reader.ReadStartElement(Saml2Constants.Elements.AuthnContextDeclRef, Saml2Constants.Namespace);
+                    reader.ReadStartElement(
+                        Saml2Constants.Elements.AuthnContextDeclRef,
+                        Saml2Constants.Namespace
+                    );
                 }
 
                 // Now we have enough data to create the object
-                Saml2AuthenticationContext authnContext = new Saml2AuthenticationContext(classRef, declRef);
+                Saml2AuthenticationContext authnContext = new Saml2AuthenticationContext(
+                    classRef,
+                    declRef
+                );
 
                 // <AuthenticatingAuthority> - 0-OO
-                while (reader.IsStartElement(Saml2Constants.Elements.AuthenticatingAuthority, Saml2Constants.Namespace))
+                while (
+                    reader.IsStartElement(
+                        Saml2Constants.Elements.AuthenticatingAuthority,
+                        Saml2Constants.Namespace
+                    )
+                )
                 {
                     authnContext.AuthenticatingAuthorities.Add(ReadSimpleUriElement(reader));
                 }
@@ -3598,7 +4576,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -3616,7 +4594,10 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2AuthenticationContext"/>.</param>
         /// <param name="data">The <see cref="Saml2AuthenticationContext"/> to serialize.</param>
-        protected virtual void WriteAuthenticationContext(XmlWriter writer, Saml2AuthenticationContext data)
+        protected virtual void WriteAuthenticationContext(
+            XmlWriter writer,
+            Saml2AuthenticationContext data
+        )
         {
             if (null == writer)
             {
@@ -3632,28 +4613,44 @@ namespace System.IdentityModel.Tokens
             if (null == data.ClassReference && null == data.DeclarationReference)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID4117)));
+                    new InvalidOperationException(SR.GetString(SR.ID4117))
+                );
             }
 
             // <AuthnContext>
-            writer.WriteStartElement(Saml2Constants.Elements.AuthnContext, Saml2Constants.Namespace);
+            writer.WriteStartElement(
+                Saml2Constants.Elements.AuthnContext,
+                Saml2Constants.Namespace
+            );
 
             // <AuthnContextClassReference> 0-1
             if (null != data.ClassReference)
             {
-                writer.WriteElementString(Saml2Constants.Elements.AuthnContextClassRef, Saml2Constants.Namespace, data.ClassReference.AbsoluteUri);
+                writer.WriteElementString(
+                    Saml2Constants.Elements.AuthnContextClassRef,
+                    Saml2Constants.Namespace,
+                    data.ClassReference.AbsoluteUri
+                );
             }
 
             // <AuthnContextDeclRef> 0-1
             if (null != data.DeclarationReference)
             {
-                writer.WriteElementString(Saml2Constants.Elements.AuthnContextDeclRef, Saml2Constants.Namespace, data.DeclarationReference.AbsoluteUri);
+                writer.WriteElementString(
+                    Saml2Constants.Elements.AuthnContextDeclRef,
+                    Saml2Constants.Namespace,
+                    data.DeclarationReference.AbsoluteUri
+                );
             }
 
             // <AuthenticatingAuthority> 0-OO
             foreach (Uri authority in data.AuthenticatingAuthorities)
             {
-                writer.WriteElementString(Saml2Constants.Elements.AuthenticatingAuthority, Saml2Constants.Namespace, authority.AbsoluteUri);
+                writer.WriteElementString(
+                    Saml2Constants.Elements.AuthenticatingAuthority,
+                    Saml2Constants.Namespace,
+                    authority.AbsoluteUri
+                );
             }
 
             // </AuthnContext>
@@ -3679,14 +4676,22 @@ namespace System.IdentityModel.Tokens
             {
                 isStatementElement = true;
             }
-            else if (!reader.IsStartElement(Saml2Constants.Elements.AuthnStatement, Saml2Constants.Namespace))
+            else if (
+                !reader.IsStartElement(
+                    Saml2Constants.Elements.AuthnStatement,
+                    Saml2Constants.Namespace
+                )
+            )
             {
-                reader.ReadStartElement(Saml2Constants.Elements.AuthnStatement, Saml2Constants.Namespace);
+                reader.ReadStartElement(
+                    Saml2Constants.Elements.AuthnStatement,
+                    Saml2Constants.Namespace
+                );
             }
 
             try
             {
-                // Must cache the individual data since the required 
+                // Must cache the individual data since the required
                 // AuthnContext comes last
                 DateTime authnInstant;
                 Saml2AuthenticationContext authnContext;
@@ -3701,19 +4706,38 @@ namespace System.IdentityModel.Tokens
                 string value;
 
                 // @xsi:type -- if we're a <Statement> element, this declaration must be present
-                XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.AuthnStatementType, Saml2Constants.Namespace, isStatementElement);
+                XmlUtil.ValidateXsiType(
+                    reader,
+                    Saml2Constants.Types.AuthnStatementType,
+                    Saml2Constants.Namespace,
+                    isStatementElement
+                );
 
                 // disallow empty, since xsi:type is ok
                 if (isEmpty)
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID3061, Saml2Constants.Elements.AuthnStatement, Saml2Constants.Namespace));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(
+                            SR.ID3061,
+                            Saml2Constants.Elements.AuthnStatement,
+                            Saml2Constants.Namespace
+                        )
+                    );
                 }
 
                 // @AuthnInstant - required
                 value = reader.GetAttribute(Saml2Constants.Attributes.AuthnInstant);
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID0001, Saml2Constants.Attributes.AuthnInstant, Saml2Constants.Elements.AuthnStatement));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(
+                            SR.ID0001,
+                            Saml2Constants.Attributes.AuthnInstant,
+                            Saml2Constants.Elements.AuthnStatement
+                        )
+                    );
                 }
 
                 authnInstant = XmlConvert.ToDateTime(value, DateTimeFormats.Accepted);
@@ -3732,7 +4756,12 @@ namespace System.IdentityModel.Tokens
                 reader.Read();
 
                 // <SubjectLocality> 0-1
-                if (reader.IsStartElement(Saml2Constants.Elements.SubjectLocality, Saml2Constants.Namespace))
+                if (
+                    reader.IsStartElement(
+                        Saml2Constants.Elements.SubjectLocality,
+                        Saml2Constants.Namespace
+                    )
+                )
                 {
                     subjectLocality = this.ReadSubjectLocality(reader);
                 }
@@ -3743,7 +4772,10 @@ namespace System.IdentityModel.Tokens
                 reader.ReadEndElement();
 
                 // Construct the actual object
-                Saml2AuthenticationStatement authnStatement = new Saml2AuthenticationStatement(authnContext, authnInstant);
+                Saml2AuthenticationStatement authnStatement = new Saml2AuthenticationStatement(
+                    authnContext,
+                    authnInstant
+                );
                 authnStatement.SessionIndex = sessionIndex;
                 authnStatement.SessionNotOnOrAfter = sessionNotOnOrAfter;
                 authnStatement.SubjectLocality = subjectLocality;
@@ -3754,7 +4786,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -3772,7 +4804,10 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2AuthenticationStatement"/>.</param>
         /// <param name="data">The <see cref="Saml2AuthenticationStatement"/> to serialize.</param>
-        protected virtual void WriteAuthenticationStatement(XmlWriter writer, Saml2AuthenticationStatement data)
+        protected virtual void WriteAuthenticationStatement(
+            XmlWriter writer,
+            Saml2AuthenticationStatement data
+        )
         {
             if (null == writer)
             {
@@ -3785,21 +4820,39 @@ namespace System.IdentityModel.Tokens
             }
 
             // <AuthnStatement>
-            writer.WriteStartElement(Saml2Constants.Elements.AuthnStatement, Saml2Constants.Namespace);
+            writer.WriteStartElement(
+                Saml2Constants.Elements.AuthnStatement,
+                Saml2Constants.Namespace
+            );
 
             // @AuthnInstant - required
-            writer.WriteAttributeString(Saml2Constants.Attributes.AuthnInstant, XmlConvert.ToString(data.AuthenticationInstant.ToUniversalTime(), DateTimeFormats.Generated));
+            writer.WriteAttributeString(
+                Saml2Constants.Attributes.AuthnInstant,
+                XmlConvert.ToString(
+                    data.AuthenticationInstant.ToUniversalTime(),
+                    DateTimeFormats.Generated
+                )
+            );
 
             // @SessionIndex - optional
             if (null != data.SessionIndex)
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.SessionIndex, data.SessionIndex);
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.SessionIndex,
+                    data.SessionIndex
+                );
             }
 
             // @SessionNotOnOrAfter - optional
             if (null != data.SessionNotOnOrAfter)
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.SessionNotOnOrAfter, XmlConvert.ToString(data.SessionNotOnOrAfter.Value.ToUniversalTime(), DateTimeFormats.Generated));
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.SessionNotOnOrAfter,
+                    XmlConvert.ToString(
+                        data.SessionNotOnOrAfter.Value.ToUniversalTime(),
+                        DateTimeFormats.Generated
+                    )
+                );
             }
 
             // <SubjectLocality> 0-1
@@ -3816,13 +4869,15 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Reads the &lt;saml:AuthzDecisionStatement> element or a 
+        /// Reads the &lt;saml:AuthzDecisionStatement> element or a
         /// &lt;saml:Statement element that specifies an xsi:type of
         /// saml:AuthzDecisionStatementType.
         /// </summary>
         /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2AuthorizationDecisionStatement"/> element.</param>
         /// <returns>A <see cref="Saml2AuthorizationDecisionStatement"/> instance.</returns>
-        protected virtual Saml2AuthorizationDecisionStatement ReadAuthorizationDecisionStatement(XmlReader reader)
+        protected virtual Saml2AuthorizationDecisionStatement ReadAuthorizationDecisionStatement(
+            XmlReader reader
+        )
         {
             if (null == reader)
             {
@@ -3835,9 +4890,17 @@ namespace System.IdentityModel.Tokens
             {
                 isStatementElement = true;
             }
-            else if (!reader.IsStartElement(Saml2Constants.Elements.AuthzDecisionStatement, Saml2Constants.Namespace))
+            else if (
+                !reader.IsStartElement(
+                    Saml2Constants.Elements.AuthzDecisionStatement,
+                    Saml2Constants.Namespace
+                )
+            )
             {
-                reader.ReadStartElement(Saml2Constants.Elements.AuthzDecisionStatement, Saml2Constants.Namespace);
+                reader.ReadStartElement(
+                    Saml2Constants.Elements.AuthzDecisionStatement,
+                    Saml2Constants.Namespace
+                );
             }
 
             try
@@ -3854,19 +4917,38 @@ namespace System.IdentityModel.Tokens
                 string value;
 
                 // @xsi:type
-                XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.AuthzDecisionStatementType, Saml2Constants.Namespace, isStatementElement);
+                XmlUtil.ValidateXsiType(
+                    reader,
+                    Saml2Constants.Types.AuthzDecisionStatementType,
+                    Saml2Constants.Namespace,
+                    isStatementElement
+                );
 
                 // disallow empty, since xsi:type is ok
                 if (isEmpty)
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID3061, Saml2Constants.Elements.AuthzDecisionStatement, Saml2Constants.Namespace));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(
+                            SR.ID3061,
+                            Saml2Constants.Elements.AuthzDecisionStatement,
+                            Saml2Constants.Namespace
+                        )
+                    );
                 }
 
                 // @Decision - required
                 value = reader.GetAttribute(Saml2Constants.Attributes.Decision);
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID0001, Saml2Constants.Attributes.Decision, Saml2Constants.Elements.AuthzDecisionStatement));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(
+                            SR.ID0001,
+                            Saml2Constants.Attributes.Decision,
+                            Saml2Constants.Elements.AuthzDecisionStatement
+                        )
+                    );
                 }
                 else if (StringComparer.Ordinal.Equals(SamlAccessDecision.Permit.ToString(), value))
                 {
@@ -3876,7 +4958,12 @@ namespace System.IdentityModel.Tokens
                 {
                     decision = SamlAccessDecision.Deny;
                 }
-                else if (StringComparer.Ordinal.Equals(SamlAccessDecision.Indeterminate.ToString(), value))
+                else if (
+                    StringComparer.Ordinal.Equals(
+                        SamlAccessDecision.Indeterminate.ToString(),
+                        value
+                    )
+                )
                 {
                     decision = SamlAccessDecision.Indeterminate;
                 }
@@ -3889,7 +4976,14 @@ namespace System.IdentityModel.Tokens
                 value = reader.GetAttribute(Saml2Constants.Attributes.Resource);
                 if (null == value)
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID0001, Saml2Constants.Attributes.Resource, Saml2Constants.Elements.AuthzDecisionStatement));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(
+                            SR.ID0001,
+                            Saml2Constants.Attributes.Resource,
+                            Saml2Constants.Elements.AuthzDecisionStatement
+                        )
+                    );
                 }
                 else if (0 == value.Length)
                 {
@@ -3909,15 +5003,21 @@ namespace System.IdentityModel.Tokens
                 statement = new Saml2AuthorizationDecisionStatement(resource, decision);
                 reader.Read();
 
-                // <Action> 1-OO 
+                // <Action> 1-OO
                 do
                 {
                     statement.Actions.Add(this.ReadAction(reader));
-                }
-                while (reader.IsStartElement(Saml2Constants.Elements.Action, Saml2Constants.Namespace));
+                } while (
+                    reader.IsStartElement(Saml2Constants.Elements.Action, Saml2Constants.Namespace)
+                );
 
                 // <Evidence> 0-1
-                if (reader.IsStartElement(Saml2Constants.Elements.Evidence, Saml2Constants.Namespace))
+                if (
+                    reader.IsStartElement(
+                        Saml2Constants.Elements.Evidence,
+                        Saml2Constants.Namespace
+                    )
+                )
                 {
                     statement.Evidence = this.ReadEvidence(reader);
                 }
@@ -3930,7 +5030,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -3948,7 +5048,10 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2AuthorizationDecisionStatement"/>.</param>
         /// <param name="data">The <see cref="Saml2AuthorizationDecisionStatement"/> to serialize.</param>
-        protected virtual void WriteAuthorizationDecisionStatement(XmlWriter writer, Saml2AuthorizationDecisionStatement data)
+        protected virtual void WriteAuthorizationDecisionStatement(
+            XmlWriter writer,
+            Saml2AuthorizationDecisionStatement data
+        )
         {
             if (null == writer)
             {
@@ -3964,18 +5067,30 @@ namespace System.IdentityModel.Tokens
             if (0 == data.Actions.Count)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID4122)));
+                    new InvalidOperationException(SR.GetString(SR.ID4122))
+                );
             }
 
             // <AuthzDecisionStatement>
-            writer.WriteStartElement(Saml2Constants.Elements.AuthzDecisionStatement, Saml2Constants.Namespace);
+            writer.WriteStartElement(
+                Saml2Constants.Elements.AuthzDecisionStatement,
+                Saml2Constants.Namespace
+            );
 
             // @Decision - required
-            writer.WriteAttributeString(Saml2Constants.Attributes.Decision, data.Decision.ToString());
+            writer.WriteAttributeString(
+                Saml2Constants.Attributes.Decision,
+                data.Decision.ToString()
+            );
 
             // @Resource - required
 #pragma warning suppress 56506 // Resource are never null
-            writer.WriteAttributeString(Saml2Constants.Attributes.Resource, data.Resource.Equals(Saml2AuthorizationDecisionStatement.EmptyResource) ? data.Resource.ToString() : data.Resource.AbsoluteUri);
+            writer.WriteAttributeString(
+                Saml2Constants.Attributes.Resource,
+                data.Resource.Equals(Saml2AuthorizationDecisionStatement.EmptyResource)
+                    ? data.Resource.ToString()
+                    : data.Resource.AbsoluteUri
+            );
 
             // @Action 1-OO
             foreach (Saml2Action action in data.Actions)
@@ -3997,7 +5112,7 @@ namespace System.IdentityModel.Tokens
         /// Reads the &lt;saml:Conditions> element.
         /// </summary>
         /// <remarks>
-        /// To handle custom &lt;saml:Condition> elements, override this 
+        /// To handle custom &lt;saml:Condition> elements, override this
         /// method.
         /// </remarks>
         /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Conditions"/> element.</param>
@@ -4010,9 +5125,14 @@ namespace System.IdentityModel.Tokens
             }
 
             // throw if wrong element
-            if (!reader.IsStartElement(Saml2Constants.Elements.Conditions, Saml2Constants.Namespace))
+            if (
+                !reader.IsStartElement(Saml2Constants.Elements.Conditions, Saml2Constants.Namespace)
+            )
             {
-                reader.ReadStartElement(Saml2Constants.Elements.Conditions, Saml2Constants.Namespace);
+                reader.ReadStartElement(
+                    Saml2Constants.Elements.Conditions,
+                    Saml2Constants.Namespace
+                );
             }
 
             try
@@ -4025,7 +5145,11 @@ namespace System.IdentityModel.Tokens
                 string value;
 
                 // @xsi:type
-                XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.ConditionsType, Saml2Constants.Namespace);
+                XmlUtil.ValidateXsiType(
+                    reader,
+                    Saml2Constants.Types.ConditionsType,
+                    Saml2Constants.Namespace
+                );
 
                 // @NotBefore - optional
                 value = reader.GetAttribute(Saml2Constants.Attributes.NotBefore);
@@ -4038,7 +5162,10 @@ namespace System.IdentityModel.Tokens
                 value = reader.GetAttribute(Saml2Constants.Attributes.NotOnOrAfter);
                 if (!string.IsNullOrEmpty(value))
                 {
-                    conditions.NotOnOrAfter = XmlConvert.ToDateTime(value, DateTimeFormats.Accepted);
+                    conditions.NotOnOrAfter = XmlConvert.ToDateTime(
+                        value,
+                        DateTimeFormats.Accepted
+                    );
                 }
 
                 // Content
@@ -4049,36 +5176,79 @@ namespace System.IdentityModel.Tokens
                     while (reader.IsStartElement())
                     {
                         // <Condition> - 0-OO
-                        if (reader.IsStartElement(Saml2Constants.Elements.Condition, Saml2Constants.Namespace))
+                        if (
+                            reader.IsStartElement(
+                                Saml2Constants.Elements.Condition,
+                                Saml2Constants.Namespace
+                            )
+                        )
                         {
                             // Since Condition is abstract, must process based on xsi:type
                             XmlQualifiedName declaredType = XmlUtil.GetXsiType(reader);
 
                             // No type, throw
-                            if (null == declaredType
-                                || XmlUtil.EqualsQName(declaredType, Saml2Constants.Types.ConditionAbstractType, Saml2Constants.Namespace))
+                            if (
+                                null == declaredType
+                                || XmlUtil.EqualsQName(
+                                    declaredType,
+                                    Saml2Constants.Types.ConditionAbstractType,
+                                    Saml2Constants.Namespace
+                                )
+                            )
                             {
-                                throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4104, reader.LocalName, reader.NamespaceURI));
+                                throw DiagnosticUtility.ThrowHelperXml(
+                                    reader,
+                                    SR.GetString(SR.ID4104, reader.LocalName, reader.NamespaceURI)
+                                );
                             }
-                            else if (XmlUtil.EqualsQName(declaredType, Saml2Constants.Types.AudienceRestrictionType, Saml2Constants.Namespace))
+                            else if (
+                                XmlUtil.EqualsQName(
+                                    declaredType,
+                                    Saml2Constants.Types.AudienceRestrictionType,
+                                    Saml2Constants.Namespace
+                                )
+                            )
                             {
-                                conditions.AudienceRestrictions.Add(this.ReadAudienceRestriction(reader));
+                                conditions.AudienceRestrictions.Add(
+                                    this.ReadAudienceRestriction(reader)
+                                );
                             }
-                            else if (XmlUtil.EqualsQName(declaredType, Saml2Constants.Types.OneTimeUseType, Saml2Constants.Namespace))
+                            else if (
+                                XmlUtil.EqualsQName(
+                                    declaredType,
+                                    Saml2Constants.Types.OneTimeUseType,
+                                    Saml2Constants.Namespace
+                                )
+                            )
                             {
                                 if (conditions.OneTimeUse)
                                 {
-                                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4115, Saml2Constants.Elements.OneTimeUse));
+                                    throw DiagnosticUtility.ThrowHelperXml(
+                                        reader,
+                                        SR.GetString(SR.ID4115, Saml2Constants.Elements.OneTimeUse)
+                                    );
                                 }
 
                                 ReadEmptyContentElement(reader);
                                 conditions.OneTimeUse = true;
                             }
-                            else if (XmlUtil.EqualsQName(declaredType, Saml2Constants.Types.ProxyRestrictionType, Saml2Constants.Namespace))
+                            else if (
+                                XmlUtil.EqualsQName(
+                                    declaredType,
+                                    Saml2Constants.Types.ProxyRestrictionType,
+                                    Saml2Constants.Namespace
+                                )
+                            )
                             {
                                 if (null != conditions.ProxyRestriction)
                                 {
-                                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4115, Saml2Constants.Elements.ProxyRestricton));
+                                    throw DiagnosticUtility.ThrowHelperXml(
+                                        reader,
+                                        SR.GetString(
+                                            SR.ID4115,
+                                            Saml2Constants.Elements.ProxyRestricton
+                                        )
+                                    );
                                 }
 
                                 conditions.ProxyRestriction = this.ReadProxyRestriction(reader);
@@ -4086,28 +5256,54 @@ namespace System.IdentityModel.Tokens
                             else
                             {
                                 // Unknown type - Instruct the user to override to handle custom <Condition>
-                                throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4113));
+                                throw DiagnosticUtility.ThrowHelperXml(
+                                    reader,
+                                    SR.GetString(SR.ID4113)
+                                );
                             }
                         }
-                        else if (reader.IsStartElement(Saml2Constants.Elements.AudienceRestriction, Saml2Constants.Namespace))
+                        else if (
+                            reader.IsStartElement(
+                                Saml2Constants.Elements.AudienceRestriction,
+                                Saml2Constants.Namespace
+                            )
+                        )
                         {
-                            conditions.AudienceRestrictions.Add(this.ReadAudienceRestriction(reader));
+                            conditions.AudienceRestrictions.Add(
+                                this.ReadAudienceRestriction(reader)
+                            );
                         }
-                        else if (reader.IsStartElement(Saml2Constants.Elements.OneTimeUse, Saml2Constants.Namespace))
+                        else if (
+                            reader.IsStartElement(
+                                Saml2Constants.Elements.OneTimeUse,
+                                Saml2Constants.Namespace
+                            )
+                        )
                         {
                             if (conditions.OneTimeUse)
                             {
-                                throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4115, Saml2Constants.Elements.OneTimeUse));
+                                throw DiagnosticUtility.ThrowHelperXml(
+                                    reader,
+                                    SR.GetString(SR.ID4115, Saml2Constants.Elements.OneTimeUse)
+                                );
                             }
 
                             ReadEmptyContentElement(reader);
                             conditions.OneTimeUse = true;
                         }
-                        else if (reader.IsStartElement(Saml2Constants.Elements.ProxyRestricton, Saml2Constants.Namespace))
+                        else if (
+                            reader.IsStartElement(
+                                Saml2Constants.Elements.ProxyRestricton,
+                                Saml2Constants.Namespace
+                            )
+                        )
                         {
                             if (null != conditions.ProxyRestriction)
                             {
-                                throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4115, Saml2Constants.Elements.ProxyRestricton));
+                                throw DiagnosticUtility.ThrowHelperXml(
+                                    reader,
+                                    SR.GetString(SR.ID4115, Saml2Constants.Elements.ProxyRestricton)
+                                );
                             }
 
                             conditions.ProxyRestriction = this.ReadProxyRestriction(reader);
@@ -4127,7 +5323,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -4163,13 +5359,25 @@ namespace System.IdentityModel.Tokens
             // @NotBefore - optional
             if (null != data.NotBefore)
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.NotBefore, XmlConvert.ToString(data.NotBefore.Value.ToUniversalTime(), DateTimeFormats.Generated));
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.NotBefore,
+                    XmlConvert.ToString(
+                        data.NotBefore.Value.ToUniversalTime(),
+                        DateTimeFormats.Generated
+                    )
+                );
             }
 
             // @NotOnOrAfter - optional
             if (null != data.NotOnOrAfter)
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.NotOnOrAfter, XmlConvert.ToString(data.NotOnOrAfter.Value.ToUniversalTime(), DateTimeFormats.Generated));
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.NotOnOrAfter,
+                    XmlConvert.ToString(
+                        data.NotOnOrAfter.Value.ToUniversalTime(),
+                        DateTimeFormats.Generated
+                    )
+                );
             }
 
             // <AudienceRestriction> 0-OO
@@ -4181,7 +5389,10 @@ namespace System.IdentityModel.Tokens
             // <OneTimeUse> - limited to one in SAML spec
             if (data.OneTimeUse)
             {
-                writer.WriteStartElement(Saml2Constants.Elements.OneTimeUse, Saml2Constants.Namespace);
+                writer.WriteStartElement(
+                    Saml2Constants.Elements.OneTimeUse,
+                    Saml2Constants.Namespace
+                );
                 writer.WriteEndElement();
             }
 
@@ -4216,7 +5427,14 @@ namespace System.IdentityModel.Tokens
             // disallow empty
             if (reader.IsEmptyElement)
             {
-                throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID3061, Saml2Constants.Elements.Evidence, Saml2Constants.Namespace));
+                throw DiagnosticUtility.ThrowHelperXml(
+                    reader,
+                    SR.GetString(
+                        SR.ID3061,
+                        Saml2Constants.Elements.Evidence,
+                        Saml2Constants.Namespace
+                    )
+                );
             }
 
             try
@@ -4226,34 +5444,60 @@ namespace System.IdentityModel.Tokens
                 // @attributes
 
                 // @xsi:type
-                XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.EvidenceType, Saml2Constants.Namespace);
+                XmlUtil.ValidateXsiType(
+                    reader,
+                    Saml2Constants.Types.EvidenceType,
+                    Saml2Constants.Namespace
+                );
 
                 reader.Read();
 
                 // <AssertionIDRef|AssertionURIRef|Assertion|EncryptedAssertion> 0-OO
                 while (reader.IsStartElement())
                 {
-                    if (reader.IsStartElement(Saml2Constants.Elements.AssertionIDRef, Saml2Constants.Namespace))
+                    if (
+                        reader.IsStartElement(
+                            Saml2Constants.Elements.AssertionIDRef,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
                         evidence.AssertionIdReferences.Add(ReadSimpleNCNameElement(reader));
                     }
-                    else if (reader.IsStartElement(Saml2Constants.Elements.AssertionURIRef, Saml2Constants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            Saml2Constants.Elements.AssertionURIRef,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
                         evidence.AssertionUriReferences.Add(ReadSimpleUriElement(reader));
                     }
-                    else if (reader.IsStartElement(Saml2Constants.Elements.Assertion, Saml2Constants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            Saml2Constants.Elements.Assertion,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
                         evidence.Assertions.Add(this.ReadAssertion(reader));
                     }
-                    else if (reader.IsStartElement(Saml2Constants.Elements.EncryptedAssertion, Saml2Constants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            Saml2Constants.Elements.EncryptedAssertion,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
                         evidence.Assertions.Add(this.ReadAssertion(reader));
                     }
                 }
 
-                if (0 == evidence.AssertionIdReferences.Count
-                        && 0 == evidence.Assertions.Count
-                        && 0 == evidence.AssertionUriReferences.Count)
+                if (
+                    0 == evidence.AssertionIdReferences.Count
+                    && 0 == evidence.Assertions.Count
+                    && 0 == evidence.AssertionUriReferences.Count
+                )
                 {
                     throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4120));
                 }
@@ -4266,7 +5510,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -4296,12 +5540,15 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("data");
             }
 
-            if ((data.AssertionIdReferences == null || 0 == data.AssertionIdReferences.Count)
-               && (data.Assertions == null || 0 == data.Assertions.Count)
-               && (data.AssertionUriReferences == null || 0 == data.AssertionUriReferences.Count))
+            if (
+                (data.AssertionIdReferences == null || 0 == data.AssertionIdReferences.Count)
+                && (data.Assertions == null || 0 == data.Assertions.Count)
+                && (data.AssertionUriReferences == null || 0 == data.AssertionUriReferences.Count)
+            )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID4120)));
+                    new InvalidOperationException(SR.GetString(SR.ID4120))
+                );
             }
 
             // <Evidence>
@@ -4310,13 +5557,21 @@ namespace System.IdentityModel.Tokens
             // <AssertionIDRef> 0-OO
             foreach (Saml2Id id in data.AssertionIdReferences)
             {
-                writer.WriteElementString(Saml2Constants.Elements.AssertionIDRef, Saml2Constants.Namespace, id.Value);
+                writer.WriteElementString(
+                    Saml2Constants.Elements.AssertionIDRef,
+                    Saml2Constants.Namespace,
+                    id.Value
+                );
             }
 
             // <AssertionURIRef> 0-OO
             foreach (Uri uri in data.AssertionUriReferences)
             {
-                writer.WriteElementString(Saml2Constants.Elements.AssertionURIRef, Saml2Constants.Namespace, uri.AbsoluteUri);
+                writer.WriteElementString(
+                    Saml2Constants.Elements.AssertionURIRef,
+                    Saml2Constants.Namespace,
+                    uri.AbsoluteUri
+                );
             }
 
             // <Assertion> 0-OO
@@ -4395,7 +5650,10 @@ namespace System.IdentityModel.Tokens
         /// <param name="assertion">The <see cref="Saml2Assertion"/> that is having the signature checked.</param>
         /// <returns>The <see cref="SecurityKeyIdentifier"/> that defines the key to use to check the signature.</returns>
         /// <exception cref="ArgumentNullException">Input parameter 'reader' is null.</exception>
-        protected virtual SecurityKeyIdentifier ReadSigningKeyInfo(XmlReader reader, Saml2Assertion assertion)
+        protected virtual SecurityKeyIdentifier ReadSigningKeyInfo(
+            XmlReader reader,
+            Saml2Assertion assertion
+        )
         {
             if (null == reader)
             {
@@ -4519,10 +5777,13 @@ namespace System.IdentityModel.Tokens
                 EncryptingCredentials encryptingCredentials = data.EncryptingCredentials;
 
                 // Get the encryption key, which must be symmetric
-                SymmetricSecurityKey encryptingKey = encryptingCredentials.SecurityKey as SymmetricSecurityKey;
+                SymmetricSecurityKey encryptingKey =
+                    encryptingCredentials.SecurityKey as SymmetricSecurityKey;
                 if (encryptingKey == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.ID3284)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CryptographicException(SR.GetString(SR.ID3284))
+                    );
                 }
 
                 MemoryStream plaintextStream = null;
@@ -4531,9 +5792,18 @@ namespace System.IdentityModel.Tokens
                     // Serialize an encrypted name ID
                     plaintextStream = new MemoryStream();
 
-                    using (XmlWriter plaintextWriter = XmlDictionaryWriter.CreateTextWriter(plaintextStream, Encoding.UTF8, false))
+                    using (
+                        XmlWriter plaintextWriter = XmlDictionaryWriter.CreateTextWriter(
+                            plaintextStream,
+                            Encoding.UTF8,
+                            false
+                        )
+                    )
                     {
-                        plaintextWriter.WriteStartElement(Saml2Constants.Elements.NameID, Saml2Constants.Namespace);
+                        plaintextWriter.WriteStartElement(
+                            Saml2Constants.Elements.NameID,
+                            Saml2Constants.Namespace
+                        );
                         this.WriteNameIdType(plaintextWriter, data);
                         plaintextWriter.WriteEndElement();
                     }
@@ -4544,11 +5814,21 @@ namespace System.IdentityModel.Tokens
                     encryptedData.KeyIdentifier = encryptingCredentials.SecurityKeyIdentifier;
 
                     // Perform encryption
-                    SymmetricAlgorithm symmetricAlgorithm = encryptingKey.GetSymmetricAlgorithm(encryptingCredentials.Algorithm);
-                    encryptedData.Encrypt(symmetricAlgorithm, plaintextStream.GetBuffer(), 0, (int)plaintextStream.Length);
+                    SymmetricAlgorithm symmetricAlgorithm = encryptingKey.GetSymmetricAlgorithm(
+                        encryptingCredentials.Algorithm
+                    );
+                    encryptedData.Encrypt(
+                        symmetricAlgorithm,
+                        plaintextStream.GetBuffer(),
+                        0,
+                        (int)plaintextStream.Length
+                    );
                     ((IDisposable)plaintextStream).Dispose();
 
-                    writer.WriteStartElement(Saml2Constants.Elements.EncryptedID, Saml2Constants.Namespace);
+                    writer.WriteStartElement(
+                        Saml2Constants.Elements.EncryptedID,
+                        Saml2Constants.Namespace
+                    );
                     encryptedData.WriteXml(writer, this.KeyInfoSerializer);
 
                     foreach (EncryptedKeyIdentifierClause clause in data.ExternalEncryptedKeys)
@@ -4577,7 +5857,7 @@ namespace System.IdentityModel.Tokens
 
         /// <summary>
         /// Both &lt;Issuer> and &lt;NameID> are of NameIDType. This method reads
-        /// the content of either one of those elements. 
+        /// the content of either one of those elements.
         /// </summary>
         /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2NameIdentifier"/> element.</param>
         /// <returns>An instance of <see cref="Saml2NameIdentifier"/></returns>
@@ -4593,7 +5873,11 @@ namespace System.IdentityModel.Tokens
                 string value;
 
                 // @xsi:type
-                XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.NameIDType, Saml2Constants.Namespace);
+                XmlUtil.ValidateXsiType(
+                    reader,
+                    Saml2Constants.Types.NameIDType,
+                    Saml2Constants.Namespace
+                );
 
                 // @Format - optional
                 value = reader.GetAttribute(Saml2Constants.Attributes.Format);
@@ -4601,7 +5885,14 @@ namespace System.IdentityModel.Tokens
                 {
                     if (!UriUtil.CanCreateValidUri(value, UriKind.Absolute))
                     {
-                        throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID0011, Saml2Constants.Attributes.Format, Saml2Constants.Elements.NameID));
+                        throw DiagnosticUtility.ThrowHelperXml(
+                            reader,
+                            SR.GetString(
+                                SR.ID0011,
+                                Saml2Constants.Attributes.Format,
+                                Saml2Constants.Elements.NameID
+                            )
+                        );
                     }
 
                     nameIdentifier.Format = new Uri(value);
@@ -4633,19 +5924,40 @@ namespace System.IdentityModel.Tokens
 
                 // According to section 8.3.6, if the name identifier format is of type 'urn:oasis:names:tc:SAML:2.0:nameid-format:entity'
                 // the name identifier value must be a uri and name qualifier, spname qualifier, and spproded id must be omitted.
-                if (nameIdentifier.Format != null &&
-                    StringComparer.Ordinal.Equals(nameIdentifier.Format.AbsoluteUri, Saml2Constants.NameIdentifierFormats.Entity.AbsoluteUri))
+                if (
+                    nameIdentifier.Format != null
+                    && StringComparer.Ordinal.Equals(
+                        nameIdentifier.Format.AbsoluteUri,
+                        Saml2Constants.NameIdentifierFormats.Entity.AbsoluteUri
+                    )
+                )
                 {
                     if (!UriUtil.CanCreateValidUri(nameIdentifier.Value, UriKind.Absolute))
                     {
-                        throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4262, nameIdentifier.Value, Saml2Constants.NameIdentifierFormats.Entity.AbsoluteUri));
+                        throw DiagnosticUtility.ThrowHelperXml(
+                            reader,
+                            SR.GetString(
+                                SR.ID4262,
+                                nameIdentifier.Value,
+                                Saml2Constants.NameIdentifierFormats.Entity.AbsoluteUri
+                            )
+                        );
                     }
 
-                    if (!string.IsNullOrEmpty(nameIdentifier.NameQualifier)
+                    if (
+                        !string.IsNullOrEmpty(nameIdentifier.NameQualifier)
                         || !string.IsNullOrEmpty(nameIdentifier.SPNameQualifier)
-                        || !string.IsNullOrEmpty(nameIdentifier.SPProvidedId))
+                        || !string.IsNullOrEmpty(nameIdentifier.SPProvidedId)
+                    )
                     {
-                        throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4263, nameIdentifier.Value, Saml2Constants.NameIdentifierFormats.Entity.AbsoluteUri));
+                        throw DiagnosticUtility.ThrowHelperXml(
+                            reader,
+                            SR.GetString(
+                                SR.ID4263,
+                                nameIdentifier.Value,
+                                Saml2Constants.NameIdentifierFormats.Entity.AbsoluteUri
+                            )
+                        );
                     }
                 }
 
@@ -4655,7 +5967,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -4684,26 +5996,41 @@ namespace System.IdentityModel.Tokens
 
             reader.MoveToContent();
 
-            if (!reader.IsStartElement(Saml2Constants.Elements.EncryptedID, Saml2Constants.Namespace))
+            if (
+                !reader.IsStartElement(
+                    Saml2Constants.Elements.EncryptedID,
+                    Saml2Constants.Namespace
+                )
+            )
             {
                 // throw if wrong element
-                reader.ReadStartElement(Saml2Constants.Elements.EncryptedID, Saml2Constants.Namespace);
+                reader.ReadStartElement(
+                    Saml2Constants.Elements.EncryptedID,
+                    Saml2Constants.Namespace
+                );
             }
 
-            Collection<EncryptedKeyIdentifierClause> clauses = new Collection<EncryptedKeyIdentifierClause>();
+            Collection<EncryptedKeyIdentifierClause> clauses =
+                new Collection<EncryptedKeyIdentifierClause>();
             EncryptingCredentials encryptingCredentials = null;
             Saml2NameIdentifier saml2NameIdentifier = null;
 
             using (StringReader sr = new StringReader(reader.ReadOuterXml()))
             {
-                using (XmlDictionaryReader wrappedReader = new WrappedXmlDictionaryReader(XmlReader.Create(sr), XmlDictionaryReaderQuotas.Max))
+                using (
+                    XmlDictionaryReader wrappedReader = new WrappedXmlDictionaryReader(
+                        XmlReader.Create(sr),
+                        XmlDictionaryReaderQuotas.Max
+                    )
+                )
                 {
                     XmlReader plaintextReader = CreatePlaintextReaderFromEncryptedData(
-                                wrappedReader,
-                                Configuration.ServiceTokenResolver,
-                                this.KeyInfoSerializer,
-                                clauses,
-                                out encryptingCredentials);
+                        wrappedReader,
+                        Configuration.ServiceTokenResolver,
+                        this.KeyInfoSerializer,
+                        clauses,
+                        out encryptingCredentials
+                    );
 
                     saml2NameIdentifier = this.ReadNameIdType(plaintextReader);
                     saml2NameIdentifier.EncryptingCredentials = encryptingCredentials;
@@ -4719,7 +6046,7 @@ namespace System.IdentityModel.Tokens
 
         /// <summary>
         /// Both &lt;Issuer> and &lt;NameID> are of NameIDType. This method writes
-        /// the content of either one of those elements. 
+        /// the content of either one of those elements.
         /// </summary>
         /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2NameIdentifier"/>.</param>
         /// <param name="data">The <see cref="Saml2NameIdentifier"/> to serialize.</param>
@@ -4728,25 +6055,37 @@ namespace System.IdentityModel.Tokens
             // @Format - optional
             if (null != data.Format)
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.Format, data.Format.AbsoluteUri);
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.Format,
+                    data.Format.AbsoluteUri
+                );
             }
 
             // @NameQualifier - optional
             if (!string.IsNullOrEmpty(data.NameQualifier))
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.NameQualifier, data.NameQualifier);
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.NameQualifier,
+                    data.NameQualifier
+                );
             }
 
             // @SPNameQualifier - optional
             if (!string.IsNullOrEmpty(data.SPNameQualifier))
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.SPNameQualifier, data.SPNameQualifier);
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.SPNameQualifier,
+                    data.SPNameQualifier
+                );
             }
 
             // @SPProvidedId - optional
             if (!string.IsNullOrEmpty(data.SPProvidedId))
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.SPProvidedID, data.SPProvidedId);
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.SPProvidedID,
+                    data.SPProvidedId
+                );
             }
 
             // Content is string
@@ -4758,7 +6097,7 @@ namespace System.IdentityModel.Tokens
         /// element that specifies an xsi:type of saml:ProxyRestrictionType.
         /// </summary>
         /// <remarks>
-        /// In the default implementation, the maximum value of the Count attribute 
+        /// In the default implementation, the maximum value of the Count attribute
         /// is limited to Int32.MaxValue.
         /// </remarks>
         /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2ProxyRestriction"/> element.</param>
@@ -4776,9 +6115,17 @@ namespace System.IdentityModel.Tokens
             {
                 isConditionElement = true;
             }
-            else if (!reader.IsStartElement(Saml2Constants.Elements.ProxyRestricton, Saml2Constants.Namespace))
+            else if (
+                !reader.IsStartElement(
+                    Saml2Constants.Elements.ProxyRestricton,
+                    Saml2Constants.Namespace
+                )
+            )
             {
-                reader.ReadStartElement(Saml2Constants.Elements.ProxyRestricton, Saml2Constants.Namespace);
+                reader.ReadStartElement(
+                    Saml2Constants.Elements.ProxyRestricton,
+                    Saml2Constants.Namespace
+                );
             }
 
             try
@@ -4791,7 +6138,12 @@ namespace System.IdentityModel.Tokens
                 string value;
 
                 // @xsi:type -- if we're a <Condition> element, this declaration must be present
-                XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.ProxyRestrictionType, Saml2Constants.Namespace, isConditionElement);
+                XmlUtil.ValidateXsiType(
+                    reader,
+                    Saml2Constants.Types.ProxyRestrictionType,
+                    Saml2Constants.Namespace,
+                    isConditionElement
+                );
 
                 // @Count - optional
                 value = reader.GetAttribute(Saml2Constants.Attributes.Count);
@@ -4805,7 +6157,12 @@ namespace System.IdentityModel.Tokens
                 if (!isEmpty)
                 {
                     // <Audience> - 0-OO
-                    while (reader.IsStartElement(Saml2Constants.Elements.Audience, Saml2Constants.Namespace))
+                    while (
+                        reader.IsStartElement(
+                            Saml2Constants.Elements.Audience,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
                         proxyRestriction.Audiences.Add(ReadSimpleUriElement(reader));
                     }
@@ -4819,7 +6176,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -4849,12 +6206,18 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("data");
             }
 
-            writer.WriteStartElement(Saml2Constants.Elements.ProxyRestricton, Saml2Constants.Namespace);
+            writer.WriteStartElement(
+                Saml2Constants.Elements.ProxyRestricton,
+                Saml2Constants.Namespace
+            );
 
             // @Count - optional
             if (null != data.Count)
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.Count, XmlConvert.ToString(data.Count.Value));
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.Count,
+                    XmlConvert.ToString(data.Count.Value)
+                );
             }
 
             // <Audience> - 0-OO
@@ -4872,9 +6235,9 @@ namespace System.IdentityModel.Tokens
         /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Statement"/> element.</param>
         /// <returns>An instance of <see cref="Saml2Statement"/> derived type.</returns>
         /// <remarks>
-        /// The default implementation only handles Statement elements which 
-        /// specify an xsi:type of saml:AttributeStatementType, 
-        /// saml:AuthnStatementType, and saml:AuthzDecisionStatementType. To 
+        /// The default implementation only handles Statement elements which
+        /// specify an xsi:type of saml:AttributeStatementType,
+        /// saml:AuthnStatementType, and saml:AuthzDecisionStatementType. To
         /// handle custom statements, override this method.
         /// </remarks>
         protected virtual Saml2Statement ReadStatement(XmlReader reader)
@@ -4887,37 +6250,70 @@ namespace System.IdentityModel.Tokens
             // throw if wrong element
             if (!reader.IsStartElement(Saml2Constants.Elements.Statement, Saml2Constants.Namespace))
             {
-                reader.ReadStartElement(Saml2Constants.Elements.Statement, Saml2Constants.Namespace);
+                reader.ReadStartElement(
+                    Saml2Constants.Elements.Statement,
+                    Saml2Constants.Namespace
+                );
             }
 
             // Since Statement is an abstract type, we have to switch off the xsi:type declaration
             XmlQualifiedName declaredType = XmlUtil.GetXsiType(reader);
 
-            // No declaration, or declaring that this is just a "Statement", is invalid since 
+            // No declaration, or declaring that this is just a "Statement", is invalid since
             // statement is abstract
-            if (null == declaredType
-                || XmlUtil.EqualsQName(declaredType, Saml2Constants.Types.StatementAbstractType, Saml2Constants.Namespace))
+            if (
+                null == declaredType
+                || XmlUtil.EqualsQName(
+                    declaredType,
+                    Saml2Constants.Types.StatementAbstractType,
+                    Saml2Constants.Namespace
+                )
+            )
             {
-                throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4104, reader.LocalName, reader.NamespaceURI));
+                throw DiagnosticUtility.ThrowHelperXml(
+                    reader,
+                    SR.GetString(SR.ID4104, reader.LocalName, reader.NamespaceURI)
+                );
             }
 
             // Reroute to the known statement types if applicable
-            if (XmlUtil.EqualsQName(declaredType, Saml2Constants.Types.AttributeStatementType, Saml2Constants.Namespace))
+            if (
+                XmlUtil.EqualsQName(
+                    declaredType,
+                    Saml2Constants.Types.AttributeStatementType,
+                    Saml2Constants.Namespace
+                )
+            )
             {
                 return this.ReadAttributeStatement(reader);
             }
-            else if (XmlUtil.EqualsQName(declaredType, Saml2Constants.Types.AuthnStatementType, Saml2Constants.Namespace))
+            else if (
+                XmlUtil.EqualsQName(
+                    declaredType,
+                    Saml2Constants.Types.AuthnStatementType,
+                    Saml2Constants.Namespace
+                )
+            )
             {
                 return this.ReadAuthenticationStatement(reader);
             }
-            else if (XmlUtil.EqualsQName(declaredType, Saml2Constants.Types.AuthzDecisionStatementType, Saml2Constants.Namespace))
+            else if (
+                XmlUtil.EqualsQName(
+                    declaredType,
+                    Saml2Constants.Types.AuthzDecisionStatementType,
+                    Saml2Constants.Namespace
+                )
+            )
             {
                 return this.ReadAuthorizationDecisionStatement(reader);
             }
             else
             {
                 // Throw if we encounter an unknown concrete type
-                throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4105, declaredType.Name, declaredType.Namespace));
+                throw DiagnosticUtility.ThrowHelperXml(
+                    reader,
+                    SR.GetString(SR.ID4105, declaredType.Name, declaredType.Namespace)
+                );
             }
         }
 
@@ -4925,7 +6321,7 @@ namespace System.IdentityModel.Tokens
         /// Writes a Saml2Statement.
         /// </summary>
         /// <remarks>
-        /// This method may write a &lt;saml:AttributeStatement>, &lt;saml:AuthnStatement> 
+        /// This method may write a &lt;saml:AttributeStatement>, &lt;saml:AuthnStatement>
         /// or &lt;saml:AuthzDecisionStatement> element. To handle custom Saml2Statement
         /// classes for writing a &lt;saml:Statement> element, override this method.
         /// </remarks>
@@ -4957,7 +6353,8 @@ namespace System.IdentityModel.Tokens
                 return;
             }
 
-            Saml2AuthorizationDecisionStatement authzStatement = data as Saml2AuthorizationDecisionStatement;
+            Saml2AuthorizationDecisionStatement authzStatement =
+                data as Saml2AuthorizationDecisionStatement;
             if (null != authzStatement)
             {
                 this.WriteAuthorizationDecisionStatement(writer, authzStatement);
@@ -4965,7 +6362,10 @@ namespace System.IdentityModel.Tokens
             }
 
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(SR.GetString(SR.ID4107, data.GetType().AssemblyQualifiedName)));
+                new InvalidOperationException(
+                    SR.GetString(SR.ID4107, data.GetType().AssemblyQualifiedName)
+                )
+            );
         }
 
         /// <summary>
@@ -4997,13 +6397,20 @@ namespace System.IdentityModel.Tokens
                 if (reader.IsEmptyElement)
                 {
 #pragma warning suppress 56504 // bogus - thinks reader.LocalName, reader.NamespaceURI need validation
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID3061, reader.LocalName, reader.NamespaceURI));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(SR.ID3061, reader.LocalName, reader.NamespaceURI)
+                    );
                 }
 
                 // @attributes
 
                 // @xsi:type
-                XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.SubjectType, Saml2Constants.Namespace);
+                XmlUtil.ValidateXsiType(
+                    reader,
+                    Saml2Constants.Types.SubjectType,
+                    Saml2Constants.Namespace
+                );
 
                 // <elements>
                 Saml2Subject subject = new Saml2Subject();
@@ -5013,7 +6420,12 @@ namespace System.IdentityModel.Tokens
                 subject.NameId = this.ReadSubjectId(reader, Saml2Constants.Elements.Subject);
 
                 // <SubjectConfirmation> 0-OO
-                while (reader.IsStartElement(Saml2Constants.Elements.SubjectConfirmation, Saml2Constants.Namespace))
+                while (
+                    reader.IsStartElement(
+                        Saml2Constants.Elements.SubjectConfirmation,
+                        Saml2Constants.Namespace
+                    )
+                )
                 {
                     subject.SubjectConfirmations.Add(this.ReadSubjectConfirmation(reader));
                 }
@@ -5032,7 +6444,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -5066,7 +6478,9 @@ namespace System.IdentityModel.Tokens
 #pragma warning suppress 56506 // SubjectConfirmations is never null
             if (null == data.NameId && 0 == data.SubjectConfirmations.Count)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4108)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID4108))
+                );
             }
 
             // <Subject>
@@ -5103,9 +6517,17 @@ namespace System.IdentityModel.Tokens
             }
 
             // throw if wrong element
-            if (!reader.IsStartElement(Saml2Constants.Elements.SubjectConfirmation, Saml2Constants.Namespace))
+            if (
+                !reader.IsStartElement(
+                    Saml2Constants.Elements.SubjectConfirmation,
+                    Saml2Constants.Namespace
+                )
+            )
             {
-                reader.ReadStartElement(Saml2Constants.Elements.SubjectConfirmation, Saml2Constants.Namespace);
+                reader.ReadStartElement(
+                    Saml2Constants.Elements.SubjectConfirmation,
+                    Saml2Constants.Namespace
+                );
             }
 
             try
@@ -5115,34 +6537,63 @@ namespace System.IdentityModel.Tokens
                 // @attributes
 
                 // @xsi:type
-                XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.SubjectConfirmationType, Saml2Constants.Namespace);
+                XmlUtil.ValidateXsiType(
+                    reader,
+                    Saml2Constants.Types.SubjectConfirmationType,
+                    Saml2Constants.Namespace
+                );
 
                 // @Method - required
                 string method = reader.GetAttribute(Saml2Constants.Attributes.Method);
                 if (string.IsNullOrEmpty(method))
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID0001, Saml2Constants.Attributes.Method, Saml2Constants.Elements.SubjectConfirmation));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(
+                            SR.ID0001,
+                            Saml2Constants.Attributes.Method,
+                            Saml2Constants.Elements.SubjectConfirmation
+                        )
+                    );
                 }
 
                 if (!UriUtil.CanCreateValidUri(method, UriKind.Absolute))
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID0011, Saml2Constants.Attributes.Method, Saml2Constants.Elements.SubjectConfirmation));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(
+                            SR.ID0011,
+                            Saml2Constants.Attributes.Method,
+                            Saml2Constants.Elements.SubjectConfirmation
+                        )
+                    );
                 }
 
                 // Construct the appropriate SubjectConfirmation based on the method
-                Saml2SubjectConfirmation subjectConfirmation = new Saml2SubjectConfirmation(new Uri(method));
+                Saml2SubjectConfirmation subjectConfirmation = new Saml2SubjectConfirmation(
+                    new Uri(method)
+                );
 
                 // <elements>
                 reader.Read();
                 if (!isEmpty)
                 {
                     // <NameID> | <EncryptedID> | <BaseID> 0-1
-                    subjectConfirmation.NameIdentifier = this.ReadSubjectId(reader, Saml2Constants.Elements.SubjectConfirmation);
+                    subjectConfirmation.NameIdentifier = this.ReadSubjectId(
+                        reader,
+                        Saml2Constants.Elements.SubjectConfirmation
+                    );
 
                     // <SubjectConfirmationData> 0-1
-                    if (reader.IsStartElement(Saml2Constants.Elements.SubjectConfirmationData, Saml2Constants.Namespace))
+                    if (
+                        reader.IsStartElement(
+                            Saml2Constants.Elements.SubjectConfirmationData,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
-                        subjectConfirmation.SubjectConfirmationData = this.ReadSubjectConfirmationData(reader);
+                        subjectConfirmation.SubjectConfirmationData =
+                            this.ReadSubjectConfirmationData(reader);
                     }
 
                     reader.ReadEndElement();
@@ -5154,7 +6605,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -5172,7 +6623,10 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2SubjectConfirmation"/>.</param>
         /// <param name="data">The <see cref="Saml2SubjectConfirmation"/> to serialize.</param>
-        protected virtual void WriteSubjectConfirmation(XmlWriter writer, Saml2SubjectConfirmation data)
+        protected virtual void WriteSubjectConfirmation(
+            XmlWriter writer,
+            Saml2SubjectConfirmation data
+        )
         {
             if (null == writer)
             {
@@ -5195,7 +6649,10 @@ namespace System.IdentityModel.Tokens
             }
 
             // <SubjectConfirmation>
-            writer.WriteStartElement(Saml2Constants.Elements.SubjectConfirmation, Saml2Constants.Namespace);
+            writer.WriteStartElement(
+                Saml2Constants.Elements.SubjectConfirmation,
+                Saml2Constants.Namespace
+            );
 
             // @Method - required
             writer.WriteAttributeString(Saml2Constants.Attributes.Method, data.Method.AbsoluteUri);
@@ -5222,7 +6679,7 @@ namespace System.IdentityModel.Tokens
         /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2SubjectConfirmationData"/> element.</param>
         /// <returns>An instance of <see cref="Saml2SubjectConfirmationData"/> .</returns>
         /// <remarks>
-        /// The default implementation handles the unextended element 
+        /// The default implementation handles the unextended element
         /// as well as the extended type saml:KeyInfoConfirmationDataType.
         /// </remarks>
         protected virtual Saml2SubjectConfirmationData ReadSubjectConfirmationData(XmlReader reader)
@@ -5232,9 +6689,17 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
-            if (!reader.IsStartElement(Saml2Constants.Elements.SubjectConfirmationData, Saml2Constants.Namespace))
+            if (
+                !reader.IsStartElement(
+                    Saml2Constants.Elements.SubjectConfirmationData,
+                    Saml2Constants.Namespace
+                )
+            )
             {
-                reader.ReadStartElement(Saml2Constants.Elements.SubjectConfirmationData, Saml2Constants.Namespace);
+                reader.ReadStartElement(
+                    Saml2Constants.Elements.SubjectConfirmationData,
+                    Saml2Constants.Namespace
+                );
             }
 
             try
@@ -5251,20 +6716,38 @@ namespace System.IdentityModel.Tokens
 
                 if (null != type)
                 {
-                    if (XmlUtil.EqualsQName(type, Saml2Constants.Types.KeyInfoConfirmationDataType, Saml2Constants.Namespace))
+                    if (
+                        XmlUtil.EqualsQName(
+                            type,
+                            Saml2Constants.Types.KeyInfoConfirmationDataType,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
                         requireKeyInfo = true;
                     }
-                    else if (!XmlUtil.EqualsQName(type, Saml2Constants.Types.SubjectConfirmationDataType, Saml2Constants.Namespace))
+                    else if (
+                        !XmlUtil.EqualsQName(
+                            type,
+                            Saml2Constants.Types.SubjectConfirmationDataType,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
-                        throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4112, type.Name, type.Namespace));
+                        throw DiagnosticUtility.ThrowHelperXml(
+                            reader,
+                            SR.GetString(SR.ID4112, type.Name, type.Namespace)
+                        );
                     }
                 }
 
                 // KeyInfoConfirmationData cannot be empty
                 if (requireKeyInfo && isEmpty)
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.GetString(SR.ID4111)));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(SR.GetString(SR.ID4111))
+                    );
                 }
 
                 // @Address - optional
@@ -5285,14 +6768,20 @@ namespace System.IdentityModel.Tokens
                 value = reader.GetAttribute(Saml2Constants.Attributes.NotBefore);
                 if (!string.IsNullOrEmpty(value))
                 {
-                    confirmationData.NotBefore = XmlConvert.ToDateTime(value, DateTimeFormats.Accepted);
+                    confirmationData.NotBefore = XmlConvert.ToDateTime(
+                        value,
+                        DateTimeFormats.Accepted
+                    );
                 }
 
                 // @NotOnOrAfter - optional
                 value = reader.GetAttribute(Saml2Constants.Attributes.NotOnOrAfter);
                 if (!string.IsNullOrEmpty(value))
                 {
-                    confirmationData.NotOnOrAfter = XmlConvert.ToDateTime(value, DateTimeFormats.Accepted);
+                    confirmationData.NotOnOrAfter = XmlConvert.ToDateTime(
+                        value,
+                        DateTimeFormats.Accepted
+                    );
                 }
 
                 // @Recipient - optional
@@ -5301,7 +6790,14 @@ namespace System.IdentityModel.Tokens
                 {
                     if (!UriUtil.CanCreateValidUri(value, UriKind.Absolute))
                     {
-                        throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID0011, Saml2Constants.Attributes.Recipient, Saml2Constants.Elements.SubjectConfirmationData));
+                        throw DiagnosticUtility.ThrowHelperXml(
+                            reader,
+                            SR.GetString(
+                                SR.ID0011,
+                                Saml2Constants.Attributes.Recipient,
+                                Saml2Constants.Elements.SubjectConfirmationData
+                            )
+                        );
                     }
 
                     confirmationData.Recipient = new Uri(value);
@@ -5318,7 +6814,12 @@ namespace System.IdentityModel.Tokens
                         confirmationData.KeyIdentifiers.Add(this.ReadSubjectKeyInfo(reader));
                     }
 
-                    while (reader.IsStartElement(XmlSignatureConstants.Elements.KeyInfo, XmlSignatureConstants.Namespace))
+                    while (
+                        reader.IsStartElement(
+                            XmlSignatureConstants.Elements.KeyInfo,
+                            XmlSignatureConstants.Namespace
+                        )
+                    )
                     {
                         confirmationData.KeyIdentifiers.Add(this.ReadSubjectKeyInfo(reader));
                     }
@@ -5327,7 +6828,10 @@ namespace System.IdentityModel.Tokens
                     if (!requireKeyInfo && XmlNodeType.EndElement != reader.NodeType)
                     {
                         // So throw and tell the user how to handle the open content
-                        throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4114, Saml2Constants.Elements.SubjectConfirmationData));
+                        throw DiagnosticUtility.ThrowHelperXml(
+                            reader,
+                            SR.GetString(SR.ID4114, Saml2Constants.Elements.SubjectConfirmationData)
+                        );
                     }
 
                     reader.ReadEndElement();
@@ -5339,7 +6843,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -5361,7 +6865,10 @@ namespace System.IdentityModel.Tokens
         /// </remarks>
         /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2SubjectConfirmationData"/>.</param>
         /// <param name="data">The <see cref="Saml2SubjectConfirmationData"/> to serialize.</param>
-        protected virtual void WriteSubjectConfirmationData(XmlWriter writer, Saml2SubjectConfirmationData data)
+        protected virtual void WriteSubjectConfirmationData(
+            XmlWriter writer,
+            Saml2SubjectConfirmationData data
+        )
         {
             if (null == writer)
             {
@@ -5374,14 +6881,21 @@ namespace System.IdentityModel.Tokens
             }
 
             // <SubjectConfirmationData>
-            writer.WriteStartElement(Saml2Constants.Elements.SubjectConfirmationData, Saml2Constants.Namespace);
+            writer.WriteStartElement(
+                Saml2Constants.Elements.SubjectConfirmationData,
+                Saml2Constants.Namespace
+            );
 
             // @attributes
 
             // @xsi:type
             if (data.KeyIdentifiers != null && data.KeyIdentifiers.Count > 0)
             {
-                writer.WriteAttributeString("type", XmlSchema.InstanceNamespace, Saml2Constants.Types.KeyInfoConfirmationDataType);
+                writer.WriteAttributeString(
+                    "type",
+                    XmlSchema.InstanceNamespace,
+                    Saml2Constants.Types.KeyInfoConfirmationDataType
+                );
             }
 
             // @Address - optional
@@ -5393,25 +6907,43 @@ namespace System.IdentityModel.Tokens
             // @InResponseTo - optional
             if (null != data.InResponseTo)
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.InResponseTo, data.InResponseTo.Value);
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.InResponseTo,
+                    data.InResponseTo.Value
+                );
             }
 
             // @NotBefore - optional
             if (null != data.NotBefore)
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.NotBefore, XmlConvert.ToString(data.NotBefore.Value.ToUniversalTime(), DateTimeFormats.Generated));
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.NotBefore,
+                    XmlConvert.ToString(
+                        data.NotBefore.Value.ToUniversalTime(),
+                        DateTimeFormats.Generated
+                    )
+                );
             }
 
             // @NotOnOrAfter - optional
             if (null != data.NotOnOrAfter)
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.NotOnOrAfter, XmlConvert.ToString(data.NotOnOrAfter.Value.ToUniversalTime(), DateTimeFormats.Generated));
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.NotOnOrAfter,
+                    XmlConvert.ToString(
+                        data.NotOnOrAfter.Value.ToUniversalTime(),
+                        DateTimeFormats.Generated
+                    )
+                );
             }
 
             // @Recipient - optional
             if (null != data.Recipient)
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.Recipient, data.Recipient.OriginalString);
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.Recipient,
+                    data.Recipient.OriginalString
+                );
             }
 
             // Content
@@ -5439,9 +6971,17 @@ namespace System.IdentityModel.Tokens
             }
 
             // throw if wrong element
-            if (!reader.IsStartElement(Saml2Constants.Elements.SubjectLocality, Saml2Constants.Namespace))
+            if (
+                !reader.IsStartElement(
+                    Saml2Constants.Elements.SubjectLocality,
+                    Saml2Constants.Namespace
+                )
+            )
             {
-                reader.ReadStartElement(Saml2Constants.Elements.SubjectLocality, Saml2Constants.Namespace);
+                reader.ReadStartElement(
+                    Saml2Constants.Elements.SubjectLocality,
+                    Saml2Constants.Namespace
+                );
             }
 
             try
@@ -5452,7 +6992,11 @@ namespace System.IdentityModel.Tokens
                 // @attributes
 
                 // @xsi:type
-                XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.SubjectLocalityType, Saml2Constants.Namespace);
+                XmlUtil.ValidateXsiType(
+                    reader,
+                    Saml2Constants.Types.SubjectLocalityType,
+                    Saml2Constants.Namespace
+                );
 
                 // @Address - optional
                 subjectLocality.Address = reader.GetAttribute(Saml2Constants.Attributes.Address);
@@ -5473,7 +7017,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 Exception wrapped = TryWrapReadException(reader, e);
                 if (null == wrapped)
                 {
@@ -5504,7 +7048,10 @@ namespace System.IdentityModel.Tokens
             }
 
             // <SubjectLocality>
-            writer.WriteStartElement(Saml2Constants.Elements.SubjectLocality, Saml2Constants.Namespace);
+            writer.WriteStartElement(
+                Saml2Constants.Elements.SubjectLocality,
+                Saml2Constants.Namespace
+            );
 
             // @Address - optional
             if (null != data.Address)
@@ -5522,7 +7069,7 @@ namespace System.IdentityModel.Tokens
             writer.WriteEndElement();
         }
 
-        // This thin wrapper is used to pass a serializer down into the 
+        // This thin wrapper is used to pass a serializer down into the
         // EnvelpoedSignatureReader that will use the Saml2AssertionSerializer's
         // ReadKeyInfo method to read the KeyInfo.
         internal class WrappedSerializer : SecurityTokenSerializer
@@ -5551,7 +7098,9 @@ namespace System.IdentityModel.Tokens
                 return false;
             }
 
-            protected override bool CanWriteKeyIdentifierClauseCore(SecurityKeyIdentifierClause keyIdentifierClause)
+            protected override bool CanWriteKeyIdentifierClauseCore(
+                SecurityKeyIdentifierClause keyIdentifierClause
+            )
             {
                 return false;
             }
@@ -5566,9 +7115,13 @@ namespace System.IdentityModel.Tokens
                 return false;
             }
 
-            protected override SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore(XmlReader reader)
+            protected override SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore(
+                XmlReader reader
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
 
             protected override SecurityKeyIdentifier ReadKeyIdentifierCore(XmlReader reader)
@@ -5576,9 +7129,14 @@ namespace System.IdentityModel.Tokens
                 return this.parent.ReadSigningKeyInfo(reader, this.assertion);
             }
 
-            protected override SecurityToken ReadTokenCore(XmlReader reader, SecurityTokenResolver tokenResolver)
+            protected override SecurityToken ReadTokenCore(
+                XmlReader reader,
+                SecurityTokenResolver tokenResolver
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
 
             /// <summary>
@@ -5587,9 +7145,14 @@ namespace System.IdentityModel.Tokens
             /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="SecurityKeyIdentifierClause"/>.</param>
             /// <param name="keyIdentifierClause">The <see cref="SecurityKeyIdentifierClause"/> to serialize.</param>
             /// <remarks>This is not supported.</remarks>
-            protected override void WriteKeyIdentifierClauseCore(XmlWriter writer, SecurityKeyIdentifierClause keyIdentifierClause)
+            protected override void WriteKeyIdentifierClauseCore(
+                XmlWriter writer,
+                SecurityKeyIdentifierClause keyIdentifierClause
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
 
             /// <summary>
@@ -5597,7 +7160,10 @@ namespace System.IdentityModel.Tokens
             /// </summary>
             /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="SecurityKeyIdentifier"/>.</param>
             /// <param name="keyIdentifier">The <see cref="SecurityKeyIdentifier"/> to serialize.</param>
-            protected override void WriteKeyIdentifierCore(XmlWriter writer, SecurityKeyIdentifier keyIdentifier)
+            protected override void WriteKeyIdentifierCore(
+                XmlWriter writer,
+                SecurityKeyIdentifier keyIdentifier
+            )
             {
                 this.parent.WriteSigningKeyInfo(writer, keyIdentifier);
             }
@@ -5609,16 +7175,18 @@ namespace System.IdentityModel.Tokens
             /// <param name="token">The <see cref="SecurityToken"/> to serialize.</param>
             protected override void WriteTokenCore(XmlWriter writer, SecurityToken token)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
         }
 
         /// <summary>
         /// When encrypted SAML 2.0 token is received, the credentials that are used
         /// to encrypt the token will be hydrated as a ReceivedEncryptingCredentials.
-        /// This is to distinguish the case between a user explicitly setting an 
+        /// This is to distinguish the case between a user explicitly setting an
         /// encrypting credentials and a re-serialize case where a received token
-        /// is re-serialized by a proxy to a backend service, in which case the token 
+        /// is re-serialized by a proxy to a backend service, in which case the token
         /// should not be encrypted.
         /// </summary>
         internal class ReceivedEncryptingCredentials : EncryptingCredentials
@@ -5630,10 +7198,12 @@ namespace System.IdentityModel.Tokens
             /// <param name="key">A security key for encryption.</param>
             /// <param name="keyIdentifier">A security key identifier for the encryption key.</param>
             /// <param name="algorithm">The encryption algorithm.</param>
-            public ReceivedEncryptingCredentials(SecurityKey key, SecurityKeyIdentifier keyIdentifier, string algorithm)
-                : base(key, keyIdentifier, algorithm)
-            {
-            }
+            public ReceivedEncryptingCredentials(
+                SecurityKey key,
+                SecurityKeyIdentifier keyIdentifier,
+                string algorithm
+            )
+                : base(key, keyIdentifier, algorithm) { }
         }
     }
 }

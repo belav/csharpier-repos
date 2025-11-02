@@ -28,28 +28,30 @@
 
 using System.IO;
 
-namespace System.Data.Services {
-	public interface IDataServiceHost {
-		Uri AbsoluteRequestUri { get; }
-		Uri AbsoluteServiceUri { get; }
-		string RequestAccept { get; }
-		string RequestAcceptCharSet { get; }
-		string RequestContentType { get; }
-		string RequestHttpMethod { get; }
-		string RequestIfMatch { get; }
-		string RequestIfNoneMatch { get; }
-		Stream RequestStream { get; }
-		string RequestVersion { get; }
-		string ResponseCacheControl { get; set; }
-		string ResponseContentType { get; set; }
-		string ResponseETag { get; set; }
-		string ResponseLocation { get; set; }
-		int ResponseStatusCode { get; set; }
-		string RequestMaxVersion { get; }
-		Stream ResponseStream { get; }
-		string ResponseVersion { get; set; }
+namespace System.Data.Services
+{
+    public interface IDataServiceHost
+    {
+        Uri AbsoluteRequestUri { get; }
+        Uri AbsoluteServiceUri { get; }
+        string RequestAccept { get; }
+        string RequestAcceptCharSet { get; }
+        string RequestContentType { get; }
+        string RequestHttpMethod { get; }
+        string RequestIfMatch { get; }
+        string RequestIfNoneMatch { get; }
+        Stream RequestStream { get; }
+        string RequestVersion { get; }
+        string ResponseCacheControl { get; set; }
+        string ResponseContentType { get; set; }
+        string ResponseETag { get; set; }
+        string ResponseLocation { get; set; }
+        int ResponseStatusCode { get; set; }
+        string RequestMaxVersion { get; }
+        Stream ResponseStream { get; }
+        string ResponseVersion { get; set; }
 
-		string GetQueryStringItem (string item);
-		void ProcessException (HandleExceptionArgs args);
-	}
+        string GetQueryStringItem(string item);
+        void ProcessException(HandleExceptionArgs args);
+    }
 }

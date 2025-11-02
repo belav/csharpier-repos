@@ -30,76 +30,86 @@
 
 namespace System.Reflection.Emit
 {
-	static class AssemblyBuilderExtensions
-	{
-		public static void AddResourceFile (this AssemblyBuilder builder, params object[] args)
-		{
-			throw new NotSupportedException ();
-		}
+    static class AssemblyBuilderExtensions
+    {
+        public static void AddResourceFile(this AssemblyBuilder builder, params object[] args)
+        {
+            throw new NotSupportedException();
+        }
 
-		public static ModuleBuilder DefineDynamicModule (this AssemblyBuilder builder, params object[] args)
-		{
-			throw new NotSupportedException ();
-		}
+        public static ModuleBuilder DefineDynamicModule(
+            this AssemblyBuilder builder,
+            params object[] args
+        )
+        {
+            throw new NotSupportedException();
+        }
 
-		public static void DefineVersionInfoResource (this AssemblyBuilder builder, params object[] args)
-		{
-			throw new NotSupportedException ();
-		}
+        public static void DefineVersionInfoResource(
+            this AssemblyBuilder builder,
+            params object[] args
+        )
+        {
+            throw new NotSupportedException();
+        }
 
-		public static void DefineUnmanagedResource (this AssemblyBuilder builder, params object[] args)
-		{
-			throw new NotSupportedException ();
-		}
+        public static void DefineUnmanagedResource(
+            this AssemblyBuilder builder,
+            params object[] args
+        )
+        {
+            throw new NotSupportedException();
+        }
 
-		public static void Save (this AssemblyBuilder builder, params object[] args)
-		{
-			throw new NotSupportedException ();
-		}
+        public static void Save(this AssemblyBuilder builder, params object[] args)
+        {
+            throw new NotSupportedException();
+        }
 
-		public static void SetEntryPoint (this AssemblyBuilder builder, params object[] args)
-		{
-			throw new NotSupportedException ();
-		}
-	}
+        public static void SetEntryPoint(this AssemblyBuilder builder, params object[] args)
+        {
+            throw new NotSupportedException();
+        }
+    }
 
-	static class ConstructorBuilderExtensions
-	{
-		public static void AddDeclarativeSecurity (this ConstructorBuilder builder, params object[] args)
-		{
-			throw new NotSupportedException ();
-		}
+    static class ConstructorBuilderExtensions
+    {
+        public static void AddDeclarativeSecurity(
+            this ConstructorBuilder builder,
+            params object[] args
+        )
+        {
+            throw new NotSupportedException();
+        }
+    }
 
-	}
+    static class MethodBuilderExtensions
+    {
+        public static void AddDeclarativeSecurity(this MethodBuilder builder, params object[] args)
+        {
+            throw new NotSupportedException();
+        }
+    }
 
-	static class MethodBuilderExtensions
-	{
-		public static void AddDeclarativeSecurity (this MethodBuilder builder, params object[] args)
-		{
-			throw new NotSupportedException ();
-		}
+    static class ModuleBuilderExtensions
+    {
+        public static void DefineManifestResource(this ModuleBuilder builder, params object[] args)
+        {
+            throw new NotSupportedException();
+        }
+    }
 
-	}
+    static class TypeBuilderExtensions
+    {
+        public static void AddDeclarativeSecurity(this TypeBuilder builder, params object[] args)
+        {
+            throw new NotSupportedException();
+        }
 
-	static class ModuleBuilderExtensions
-	{
-		public static void DefineManifestResource (this ModuleBuilder builder, params object[] args)
-		{
-			throw new NotSupportedException ();
-		}
-	}
-
-	static class TypeBuilderExtensions
-	{
-		public static void AddDeclarativeSecurity (this TypeBuilder builder, params object[] args)
-		{
-			throw new NotSupportedException ();
-		}
-
-		public static Type CreateType (this TypeBuilder builder)
-		{
-			throw new NotSupportedException ();
-		}
-	}
+        public static Type CreateType(this TypeBuilder builder)
+        {
+            throw new NotSupportedException();
+        }
+    }
 }
 #endif

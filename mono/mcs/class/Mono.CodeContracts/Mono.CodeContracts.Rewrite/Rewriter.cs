@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,77 +28,96 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using Mono.Cecil.Cil;
 using Mono.Cecil;
-using System.IO;
+using Mono.Cecil.Cil;
 
-namespace Mono.CodeContracts.Rewrite {
-	public class Rewriter {
+namespace Mono.CodeContracts.Rewrite
+{
+    public class Rewriter
+    {
+        public static RewriterResults Rewrite(RewriterOptions options)
+        {
+            Rewriter rewriter = new Rewriter(options);
+            return rewriter.RewriteImpl();
+        }
 
-		public static RewriterResults Rewrite (RewriterOptions options)
-		{
-			Rewriter rewriter = new Rewriter(options);
-			return rewriter.RewriteImpl();
-		}
-		
-		private Rewriter(RewriterOptions options)
-		{
-			this.options = options;
-		}
-		
-		private RewriterOptions options;
-		private List<string> warnings = new List<string> ();
-		private List<string> errors = new List<string> ();
+        private Rewriter(RewriterOptions options)
+        {
+            this.options = options;
+        }
 
-		private RewriterResults RewriteImpl ()
-		{
-			if (!this.options.Rewrite) {
-				return RewriterResults.Warning ("Not asked to rewrite");
-			}
+        private RewriterOptions options;
+        private List<string> warnings = new List<string>();
+        private List<string> errors = new List<string>();
 
-			if (!this.options.Assembly.IsSet) {
-				return RewriterResults.Error ("No assembly given to rewrite");
-			}
+        private RewriterResults RewriteImpl()
+        {
+            if (!this.options.Rewrite)
+            {
+                return RewriterResults.Warning("Not asked to rewrite");
+            }
 
-			var readerParameters = new ReaderParameters ();
+            if (!this.options.Assembly.IsSet)
+            {
+                return RewriterResults.Error("No assembly given to rewrite");
+            }
 
-			if (options.Debug && options.WritePdbFile)
-				readerParameters.ReadSymbols = true;
+            var readerParameters = new ReaderParameters();
 
-			using (var assembly = this.options.Assembly.IsFilename ?
-				AssemblyDefinition.ReadAssembly (options.Assembly.Filename, readerParameters) :
-				AssemblyDefinition.ReadAssembly (options.Assembly.Streams.Assembly, readerParameters)) {
-			
-				if (this.options.ForceAssemblyRename != null) {
-					assembly.Name.Name = this.options.ForceAssemblyRename;
-				} else if (this.options.OutputFile.IsSet && this.options.OutputFile.IsFilename) {
-					assembly.Name.Name = Path.GetFileNameWithoutExtension(this.options.OutputFile.Filename);
-				}
+            if (options.Debug && options.WritePdbFile)
+                readerParameters.ReadSymbols = true;
 
-				var output = this.options.OutputFile.IsSet ? this.options.OutputFile : this.options.Assembly;
-				var writerParameters = new WriterParameters ();
-				if (options.WritePdbFile) {
-					if (!options.Debug) {
-						return RewriterResults.Error ("Must specify -debug if using -writePDBFile.");
-					}
-					
-					writerParameters.WriteSymbols = true;
-				}
-				
-				PerformRewrite rewriter = new PerformRewrite (this.options);
-				rewriter.Rewrite (assembly);
+            using (
+                var assembly = this.options.Assembly.IsFilename
+                    ? AssemblyDefinition.ReadAssembly(options.Assembly.Filename, readerParameters)
+                    : AssemblyDefinition.ReadAssembly(
+                        options.Assembly.Streams.Assembly,
+                        readerParameters
+                    )
+            )
+            {
+                if (this.options.ForceAssemblyRename != null)
+                {
+                    assembly.Name.Name = this.options.ForceAssemblyRename;
+                }
+                else if (this.options.OutputFile.IsSet && this.options.OutputFile.IsFilename)
+                {
+                    assembly.Name.Name = Path.GetFileNameWithoutExtension(
+                        this.options.OutputFile.Filename
+                    );
+                }
 
-				if (output.IsFilename) {
-					assembly.Write (output.Filename, writerParameters);
-				} else {
-					assembly.Write (output.Streams.Assembly, writerParameters);
-				}
-			}
-		
-			return new RewriterResults (warnings, errors);
-		}
-		
-	}
+                var output = this.options.OutputFile.IsSet
+                    ? this.options.OutputFile
+                    : this.options.Assembly;
+                var writerParameters = new WriterParameters();
+                if (options.WritePdbFile)
+                {
+                    if (!options.Debug)
+                    {
+                        return RewriterResults.Error("Must specify -debug if using -writePDBFile.");
+                    }
+
+                    writerParameters.WriteSymbols = true;
+                }
+
+                PerformRewrite rewriter = new PerformRewrite(this.options);
+                rewriter.Rewrite(assembly);
+
+                if (output.IsFilename)
+                {
+                    assembly.Write(output.Filename, writerParameters);
+                }
+                else
+                {
+                    assembly.Write(output.Streams.Assembly, writerParameters);
+                }
+            }
+
+            return new RewriterResults(warnings, errors);
+        }
+    }
 }

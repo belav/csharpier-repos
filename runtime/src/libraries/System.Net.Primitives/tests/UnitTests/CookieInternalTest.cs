@@ -3,7 +3,6 @@
 
 using System;
 using System.Net;
-
 using Xunit;
 
 namespace NetPrimitivesUnitTests
@@ -44,9 +43,18 @@ namespace NetPrimitivesUnitTests
         [Theory]
         [InlineData("cookie_name=cookie_value", new[] { "cookie_name", "cookie_value" })]
         [InlineData("cookie_name=cookie_value;", new[] { "cookie_name", "cookie_value" })]
-        [InlineData("cookie_name1=cookie_value1;cookie_name2=cookie_value2", new[] { "cookie_name1", "cookie_value1", "cookie_name2", "cookie_value2" })]
-        [InlineData("cookie_name1=cookie_value1;cookie_name2=cookie_value2;", new[] { "cookie_name1", "cookie_value1", "cookie_name2", "cookie_value2" })]
-        public void CookieParserGetServer_SetCookieHeaderValue_Success(string cookieString, string[] expectedStrings)
+        [InlineData(
+            "cookie_name1=cookie_value1;cookie_name2=cookie_value2",
+            new[] { "cookie_name1", "cookie_value1", "cookie_name2", "cookie_value2" }
+        )]
+        [InlineData(
+            "cookie_name1=cookie_value1;cookie_name2=cookie_value2;",
+            new[] { "cookie_name1", "cookie_value1", "cookie_name2", "cookie_value2" }
+        )]
+        public void CookieParserGetServer_SetCookieHeaderValue_Success(
+            string cookieString,
+            string[] expectedStrings
+        )
         {
             int index = 0;
             int cookieCount = 0;

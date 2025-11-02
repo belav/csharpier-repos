@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseImplicitObjectCreati
 
 using VerifyCS = CSharpCodeFixVerifier<
     CSharpUseImplicitObjectCreationDiagnosticAnalyzer,
-    CSharpUseImplicitObjectCreationCodeFixProvider>;
+    CSharpUseImplicitObjectCreationCodeFixProvider
+>;
 
 [Trait(Traits.Feature, Traits.Features.CodeActionsUseImplicitObjectCreation)]
 public class UseImplicitObjectCreationTests
@@ -25,11 +26,11 @@ public class UseImplicitObjectCreationTests
     public async Task TestMissingBeforeCSharp9()
     {
         var source = """
-                class C
-                {
-                    C c = new C();
-                }
-                """;
+            class C
+            {
+                C c = new C();
+            }
+            """;
         await new VerifyCS.Test
         {
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp8,
@@ -141,7 +142,8 @@ public class UseImplicitObjectCreationTests
     {
         await new VerifyCS.Test
         {
-            TestState = {
+            TestState =
+            {
                 Sources =
                 {
                     """
@@ -149,7 +151,7 @@ public class UseImplicitObjectCreationTests
                         {
                             {|#0:E|} c = new {|#1:E|}();
                         }
-                        """
+                        """,
                 },
                 ExpectedDiagnostics =
                 {
@@ -157,7 +159,7 @@ public class UseImplicitObjectCreationTests
                     DiagnosticResult.CompilerError("CS0246").WithLocation(0).WithArguments("E"),
                     // /0/Test0.cs(4,15): error CS0246: The type or namespace name 'E' could not be found (are you missing a using directive or an assembly reference?)
                     DiagnosticResult.CompilerError("CS0246").WithLocation(1).WithArguments("E"),
-                }
+                },
             },
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
         }.RunAsync();
@@ -240,8 +242,11 @@ public class UseImplicitObjectCreationTests
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
             Options =
             {
-                { CSharpCodeStyleOptions.VarWhenTypeIsApparent, CodeStyleOption2.FalseWithSuggestionEnforcement },
-            }
+                {
+                    CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                    CodeStyleOption2.FalseWithSuggestionEnforcement
+                },
+            },
         }.RunAsync();
     }
 
@@ -262,8 +267,11 @@ public class UseImplicitObjectCreationTests
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
             Options =
             {
-                { CSharpCodeStyleOptions.VarWhenTypeIsApparent, CodeStyleOption2.TrueWithSuggestionEnforcement },
-            }
+                {
+                    CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                    CodeStyleOption2.TrueWithSuggestionEnforcement
+                },
+            },
         }.RunAsync();
     }
 
@@ -722,11 +730,11 @@ public class UseImplicitObjectCreationTests
     public async Task TestMissingOnNullableStruct()
     {
         var source = """
-                class C
-                {
-                    int? i = new int?();
-                }
-                """;
+            class C
+            {
+                int? i = new int?();
+            }
+            """;
         await new VerifyCS.Test
         {
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
@@ -772,7 +780,7 @@ public class UseImplicitObjectCreationTests
                 """,
             FixedCode = """
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     IList<C> list = new List<C> { new() };
@@ -797,7 +805,7 @@ public class UseImplicitObjectCreationTests
                 """,
             FixedCode = """
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     IList<C> list = new List<C>() { new() };
@@ -822,7 +830,7 @@ public class UseImplicitObjectCreationTests
                 """,
             FixedCode = """
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     List<C> list = new() { new C() };
@@ -881,7 +889,7 @@ public class UseImplicitObjectCreationTests
                 """,
             FixedCode = """
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     C[] list = new C[] { new() };
@@ -906,7 +914,7 @@ public class UseImplicitObjectCreationTests
                 """,
             FixedCode = """
                 using System.Collections.Generic;
-                
+
                 class C
                 {
                     C[] list = { new() };

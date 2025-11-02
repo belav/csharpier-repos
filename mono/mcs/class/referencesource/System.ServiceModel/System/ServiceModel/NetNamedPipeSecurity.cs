@@ -3,9 +3,9 @@
 //----------------------------------------------------------------------------
 namespace System.ServiceModel
 {
+    using System.ComponentModel;
     using System.Net.Security;
     using System.ServiceModel.Channels;
-    using System.ComponentModel;
 
     public sealed class NetNamedPipeSecurity
     {
@@ -32,7 +32,9 @@ namespace System.ServiceModel
             {
                 if (!NetNamedPipeSecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.mode = value;
             }
@@ -61,13 +63,22 @@ namespace System.ServiceModel
             }
         }
 
-        internal static bool TryCreate(WindowsStreamSecurityBindingElement wssbe, NetNamedPipeSecurityMode mode, out NetNamedPipeSecurity security)
+        internal static bool TryCreate(
+            WindowsStreamSecurityBindingElement wssbe,
+            NetNamedPipeSecurityMode mode,
+            out NetNamedPipeSecurity security
+        )
         {
             security = null;
             NamedPipeTransportSecurity transportSecurity = new NamedPipeTransportSecurity();
             if (mode == NetNamedPipeSecurityMode.Transport)
             {
-                if (!NamedPipeTransportSecurity.IsTransportProtectionAndAuthentication(wssbe, transportSecurity))
+                if (
+                    !NamedPipeTransportSecurity.IsTransportProtectionAndAuthentication(
+                        wssbe,
+                        transportSecurity
+                    )
+                )
                     return false;
             }
             security = new NetNamedPipeSecurity(mode, transportSecurity);
@@ -77,7 +88,10 @@ namespace System.ServiceModel
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool ShouldSerializeTransport()
         {
-            if (this.transport.ProtectionLevel == ConnectionOrientedTransportDefaults.ProtectionLevel)
+            if (
+                this.transport.ProtectionLevel
+                == ConnectionOrientedTransportDefaults.ProtectionLevel
+            )
             {
                 return false;
             }
@@ -85,5 +99,3 @@ namespace System.ServiceModel
         }
     }
 }
-
-

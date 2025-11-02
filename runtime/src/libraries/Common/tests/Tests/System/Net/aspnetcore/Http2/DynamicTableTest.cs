@@ -13,8 +13,16 @@ namespace System.Net.Http.Unit.Tests.HPack
 {
     public class DynamicTableTest
     {
-        private readonly HeaderField _header1 = new HeaderField(staticTableIndex: null, Encoding.ASCII.GetBytes("header-1"), Encoding.ASCII.GetBytes("value1"));
-        private readonly HeaderField _header2 = new HeaderField(staticTableIndex: null, Encoding.ASCII.GetBytes("header-02"), Encoding.ASCII.GetBytes("value_2"));
+        private readonly HeaderField _header1 = new HeaderField(
+            staticTableIndex: null,
+            Encoding.ASCII.GetBytes("header-1"),
+            Encoding.ASCII.GetBytes("value1")
+        );
+        private readonly HeaderField _header2 = new HeaderField(
+            staticTableIndex: null,
+            Encoding.ASCII.GetBytes("header-02"),
+            Encoding.ASCII.GetBytes("value_2")
+        );
 
         [Fact]
         public void DynamicTable_IsInitiallyEmpty()
@@ -101,7 +109,10 @@ namespace System.Net.Http.Unit.Tests.HPack
         [InlineData(3)]
         public void DynamicTable_WrapsRingBuffer_Success(int targetInsertIndex)
         {
-            FieldInfo insertIndexField = typeof(DynamicTable).GetField("_insertIndex", BindingFlags.NonPublic | BindingFlags.Instance);
+            FieldInfo insertIndexField = typeof(DynamicTable).GetField(
+                "_insertIndex",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
             DynamicTable table = new DynamicTable(maxSize: 256);
             Stack<byte[]> insertedHeaders = new Stack<byte[]>();
 
@@ -109,8 +120,7 @@ namespace System.Net.Http.Unit.Tests.HPack
             do
             {
                 InsertOne();
-            }
-            while ((int)insertIndexField.GetValue(table) != 0);
+            } while ((int)insertIndexField.GetValue(table) != 0);
 
             // Finally loop until the insert index reaches the target.
             while ((int)insertIndexField.GetValue(table) != targetInsertIndex)
@@ -143,17 +153,26 @@ namespace System.Net.Http.Unit.Tests.HPack
 
         [Theory]
         [MemberData(nameof(CreateResizeData))]
-        public void DynamicTable_Resize_Success(int initialMaxSize, int finalMaxSize, int insertSize)
+        public void DynamicTable_Resize_Success(
+            int initialMaxSize,
+            int finalMaxSize,
+            int insertSize
+        )
         {
             // This is purely to make it simple to perfectly reach our initial max size to test growing a full but non-wrapping buffer.
-            Debug.Assert((insertSize % 64) == 0, $"{nameof(insertSize)} must be a multiple of 64 ({nameof(HeaderField)}.{nameof(HeaderField.RfcOverhead)} * 2)");
+            Debug.Assert(
+                (insertSize % 64) == 0,
+                $"{nameof(insertSize)} must be a multiple of 64 ({nameof(HeaderField)}.{nameof(HeaderField.RfcOverhead)} * 2)"
+            );
 
             DynamicTable dynamicTable = new DynamicTable(maxSize: initialMaxSize);
             int insertedSize = 0;
 
             while (insertedSize != insertSize)
             {
-                byte[] data = Encoding.ASCII.GetBytes($"header-{dynamicTable.Size}".PadRight(16, ' '));
+                byte[] data = Encoding.ASCII.GetBytes(
+                    $"header-{dynamicTable.Size}".PadRight(16, ' ')
+                );
                 Debug.Assert(data.Length == 16);
 
                 dynamicTable.Insert(data, data);
@@ -229,9 +248,9 @@ namespace System.Net.Http.Unit.Tests.HPack
         {
             int[] values = new[] { 128, 256, 384, 512 };
             return from initialMaxSize in values
-                   from finalMaxSize in values
-                   from insertSize in values
-                   select new object[] { initialMaxSize, finalMaxSize, insertSize };
+                from finalMaxSize in values
+                from insertSize in values
+                select new object[] { initialMaxSize, finalMaxSize, insertSize };
         }
 
         private void VerifyTableEntries(DynamicTable dynamicTable, params HeaderField[] entries)

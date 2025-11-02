@@ -43,10 +43,15 @@ namespace MonoTests.System.Configuration
     public class ConfigurationManagerTest
     {
         [Fact] // OpenExeConfiguration (ConfigurationUserLevel)
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/21528", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/21528",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void OpenExeConfiguration1_UserLevel_None()
         {
-            SysConfig config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            SysConfig config = ConfigurationManager.OpenExeConfiguration(
+                ConfigurationUserLevel.None
+            );
             FileInfo fi = new FileInfo(config.FilePath);
             Assert.Equal(TestUtil.ThisConfigFileName, fi.Name);
         }
@@ -54,23 +59,32 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void OpenExeConfiguration1_UserLevel_PerUserRoaming()
         {
-            string applicationData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string applicationData = Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData
+            );
 
             // If there is not ApplicationData folder PerUserRoaming won't work
-            if (string.IsNullOrEmpty(applicationData)) return;
+            if (string.IsNullOrEmpty(applicationData))
+                return;
 
-
-            SysConfig config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoaming);
+            SysConfig config = ConfigurationManager.OpenExeConfiguration(
+                ConfigurationUserLevel.PerUserRoaming
+            );
             Assert.False(string.IsNullOrEmpty(config.FilePath), "should have some file path");
             FileInfo fi = new FileInfo(config.FilePath);
             Assert.Equal("user.config", fi.Name);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))] // ActiveIssue: https://github.com/dotnet/runtime/issues/26195
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )] // ActiveIssue: https://github.com/dotnet/runtime/issues/26195
         [ActiveIssue("https://github.com/dotnet/runtime/issues/19875", TestPlatforms.AnyUnix)]
         public void OpenExeConfiguration1_UserLevel_PerUserRoamingAndLocal()
         {
-            SysConfig config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+            SysConfig config = ConfigurationManager.OpenExeConfiguration(
+                ConfigurationUserLevel.PerUserRoamingAndLocal
+            );
             FileInfo fi = new FileInfo(config.FilePath);
             Assert.Equal("user.config", fi.Name);
         }
@@ -110,8 +124,9 @@ namespace MonoTests.System.Configuration
             {
                 string exePath = Path.Combine(temp.Path, "DoesNotExist.exe");
 
-                ConfigurationErrorsException ex = Assert.Throws<ConfigurationErrorsException>(
-                    () => ConfigurationManager.OpenExeConfiguration(exePath));
+                ConfigurationErrorsException ex = Assert.Throws<ConfigurationErrorsException>(() =>
+                    ConfigurationManager.OpenExeConfiguration(exePath)
+                );
 
                 // An error occurred loading a configuration file:
                 // The parameter 'exePath' is invalid
@@ -132,7 +147,10 @@ namespace MonoTests.System.Configuration
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/21319", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/21319",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void exePath_UserLevelNone()
         {
             string name = TestUtil.ThisApplicationPath;
@@ -143,25 +161,36 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void exePath_UserLevelPerRoaming()
         {
-            string applicationData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string applicationData = Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData
+            );
 
             // If there is not ApplicationData folder PerUserRoaming won't work
             if (string.IsNullOrEmpty(applicationData))
                 return;
 
-            SysConfig config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoaming);
+            SysConfig config = ConfigurationManager.OpenExeConfiguration(
+                ConfigurationUserLevel.PerUserRoaming
+            );
             string filePath = config.FilePath;
             Assert.False(string.IsNullOrEmpty(filePath), "should have some file path");
             Assert.Equal("user.config", Path.GetFileName(filePath));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))] // ActiveIssue: https://github.com/dotnet/runtime/issues/26195
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )] // ActiveIssue: https://github.com/dotnet/runtime/issues/26195
         [ActiveIssue("https://github.com/dotnet/runtime/issues/19876", TestPlatforms.AnyUnix)]
         public void exePath_UserLevelPerRoamingAndLocal()
         {
-            SysConfig config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+            SysConfig config = ConfigurationManager.OpenExeConfiguration(
+                ConfigurationUserLevel.PerUserRoamingAndLocal
+            );
             string filePath = config.FilePath;
-            string applicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string applicationData = Environment.GetFolderPath(
+                Environment.SpecialFolder.LocalApplicationData
+            );
             Assert.True(filePath.StartsWith(applicationData), "#1:" + filePath);
             Assert.Equal("user.config", Path.GetFileName(filePath));
         }
@@ -172,10 +201,12 @@ namespace MonoTests.System.Configuration
             ExeConfigurationFileMap map = new ExeConfigurationFileMap();
             map.ExeConfigFilename = "execonfig";
 
-            SysConfig config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
+            SysConfig config = ConfigurationManager.OpenMappedExeConfiguration(
+                map,
+                ConfigurationUserLevel.None
+            );
             FileInfo fi = new FileInfo(config.FilePath);
             Assert.Equal("execonfig", fi.Name);
-
         }
 
         [Fact]
@@ -185,7 +216,10 @@ namespace MonoTests.System.Configuration
             map.ExeConfigFilename = "execonfig";
             map.RoamingUserConfigFilename = "roaminguser";
 
-            SysConfig config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.PerUserRoaming);
+            SysConfig config = ConfigurationManager.OpenMappedExeConfiguration(
+                map,
+                ConfigurationUserLevel.PerUserRoaming
+            );
             FileInfo fi = new FileInfo(config.FilePath);
             Assert.Equal("roaminguser", fi.Name);
         }
@@ -198,7 +232,14 @@ namespace MonoTests.System.Configuration
             ExeConfigurationFileMap map = new ExeConfigurationFileMap();
             map.RoamingUserConfigFilename = "roaminguser";
 
-            AssertExtensions.Throws<ArgumentException>("fileMap.ExeConfigFilename", () => ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.PerUserRoaming));
+            AssertExtensions.Throws<ArgumentException>(
+                "fileMap.ExeConfigFilename",
+                () =>
+                    ConfigurationManager.OpenMappedExeConfiguration(
+                        map,
+                        ConfigurationUserLevel.PerUserRoaming
+                    )
+            );
         }
 
         [Fact]
@@ -209,7 +250,10 @@ namespace MonoTests.System.Configuration
             map.RoamingUserConfigFilename = "roaminguser";
             map.LocalUserConfigFilename = "localuser";
 
-            SysConfig config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.PerUserRoamingAndLocal);
+            SysConfig config = ConfigurationManager.OpenMappedExeConfiguration(
+                map,
+                ConfigurationUserLevel.PerUserRoamingAndLocal
+            );
             FileInfo fi = new FileInfo(config.FilePath);
             Assert.Equal("localuser", fi.Name);
         }
@@ -223,7 +267,14 @@ namespace MonoTests.System.Configuration
             map.RoamingUserConfigFilename = "roaminguser";
             map.LocalUserConfigFilename = "localuser";
 
-            AssertExtensions.Throws<ArgumentException>("fileMap.ExeConfigFilename", () => ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.PerUserRoamingAndLocal));
+            AssertExtensions.Throws<ArgumentException>(
+                "fileMap.ExeConfigFilename",
+                () =>
+                    ConfigurationManager.OpenMappedExeConfiguration(
+                        map,
+                        ConfigurationUserLevel.PerUserRoamingAndLocal
+                    )
+            );
         }
 
         [Fact]
@@ -235,7 +286,14 @@ namespace MonoTests.System.Configuration
             map.ExeConfigFilename = "execonfig";
             map.LocalUserConfigFilename = "localuser";
 
-            AssertExtensions.Throws<ArgumentException>("fileMap.RoamingUserConfigFilename", () => ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.PerUserRoamingAndLocal));
+            AssertExtensions.Throws<ArgumentException>(
+                "fileMap.RoamingUserConfigFilename",
+                () =>
+                    ConfigurationManager.OpenMappedExeConfiguration(
+                        map,
+                        ConfigurationUserLevel.PerUserRoamingAndLocal
+                    )
+            );
         }
 
         [Fact]
@@ -261,10 +319,16 @@ namespace MonoTests.System.Configuration
         [Fact]
         // Doesn't pass on Mono
         // [Category("NotWorking")]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/21528", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/21528",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void mapped_ExeConfiguration_null()
         {
-            SysConfig config = ConfigurationManager.OpenMappedExeConfiguration(null, ConfigurationUserLevel.None);
+            SysConfig config = ConfigurationManager.OpenMappedExeConfiguration(
+                null,
+                ConfigurationUserLevel.None
+            );
 
             FileInfo fi = new FileInfo(config.FilePath);
             Assert.Equal(TestUtil.ThisConfigFileName, fi.Name);
@@ -332,7 +396,9 @@ namespace MonoTests.System.Configuration
                 map.ExeConfigFilename = configPath;
 
                 var config = ConfigurationManager.OpenMappedExeConfiguration(
-                    map, ConfigurationUserLevel.None);
+                    map,
+                    ConfigurationUserLevel.None
+                );
 
                 config.Sections.Add("testsection", new TestSection());
 
@@ -381,7 +447,9 @@ namespace MonoTests.System.Configuration
                 map.ExeConfigFilename = configPath;
 
                 var config = ConfigurationManager.OpenMappedExeConfiguration(
-                    map, ConfigurationUserLevel.None);
+                    map,
+                    ConfigurationUserLevel.None
+                );
 
                 config.Sections.Add("testsection", new TestSection());
                 config.Sections.Add("testcontext", new TestContextSection());
@@ -413,8 +481,14 @@ namespace MonoTests.System.Configuration
                 File.WriteAllText(file, xml);
 
                 var fileMap = new ConfigurationFileMap(file);
-                Assert.Equal(file,
-                    Assert.Throws<ConfigurationErrorsException>(() => ConfigurationManager.OpenMappedMachineConfiguration(fileMap)).Filename);
+                Assert.Equal(
+                    file,
+                    Assert
+                        .Throws<ConfigurationErrorsException>(() =>
+                            ConfigurationManager.OpenMappedMachineConfiguration(fileMap)
+                        )
+                        .Filename
+                );
             }
         }
     }

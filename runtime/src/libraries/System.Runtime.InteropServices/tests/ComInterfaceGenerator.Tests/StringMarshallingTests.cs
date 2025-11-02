@@ -19,10 +19,16 @@ namespace ComInterfaceGenerator.Tests
         [LibraryImport(NativeExportsNE.NativeExportsNE_Binary, EntryPoint = "new_utf8_marshalling")]
         public static partial void* NewIUtf8Marshalling();
 
-        [LibraryImport(NativeExportsNE.NativeExportsNE_Binary, EntryPoint = "new_utf16_marshalling")]
+        [LibraryImport(
+            NativeExportsNE.NativeExportsNE_Binary,
+            EntryPoint = "new_utf16_marshalling"
+        )]
         public static partial void* NewIUtf16Marshalling();
 
-        [LibraryImport(NativeExportsNE.NativeExportsNE_Binary, EntryPoint = "new_string_marshalling_override")]
+        [LibraryImport(
+            NativeExportsNE.NativeExportsNE_Binary,
+            EntryPoint = "new_string_marshalling_override"
+        )]
         public static partial void* NewStringMarshallingOverride();
 
         [GeneratedComClass]
@@ -31,6 +37,7 @@ namespace ComInterfaceGenerator.Tests
             string _data = "Hello, World!";
 
             public string GetString() => _data;
+
             public void SetString(string value) => _data = value;
         }
 
@@ -40,6 +47,7 @@ namespace ComInterfaceGenerator.Tests
             string _data = "Hello, World!";
 
             public string GetString() => _data;
+
             public void SetString(string value) => _data = value;
         }
 
@@ -49,6 +57,7 @@ namespace ComInterfaceGenerator.Tests
             string _data = "Hello, World!";
 
             public string GetString() => _data;
+
             public void SetString(string value) => _data = value;
         }
 
@@ -57,7 +66,8 @@ namespace ComInterfaceGenerator.Tests
         {
             var cw = new StrategyBasedComWrappers();
             var utf8 = NewIUtf8Marshalling();
-            IUTF8Marshalling obj8 = (IUTF8Marshalling)cw.GetOrCreateObjectForComInstance((nint)utf8, CreateObjectFlags.None);
+            IUTF8Marshalling obj8 = (IUTF8Marshalling)
+                cw.GetOrCreateObjectForComInstance((nint)utf8, CreateObjectFlags.None);
             string value = obj8.GetString();
             Assert.Equal("Hello, World!", value);
             obj8.SetString("TestString");
@@ -65,13 +75,15 @@ namespace ComInterfaceGenerator.Tests
             Assert.Equal("TestString", value);
 
             var utf16 = NewIUtf16Marshalling();
-            IUTF16Marshalling obj16 = (IUTF16Marshalling)cw.GetOrCreateObjectForComInstance((nint)utf16, CreateObjectFlags.None);
+            IUTF16Marshalling obj16 = (IUTF16Marshalling)
+                cw.GetOrCreateObjectForComInstance((nint)utf16, CreateObjectFlags.None);
             Assert.Equal("Hello, World!", obj16.GetString());
             obj16.SetString("TestString");
             Assert.Equal("TestString", obj16.GetString());
 
             var utf16custom = NewIUtf16Marshalling();
-            ICustomStringMarshallingUtf16 objCustom = (ICustomStringMarshallingUtf16)cw.GetOrCreateObjectForComInstance((nint)utf16custom, CreateObjectFlags.None);
+            ICustomStringMarshallingUtf16 objCustom = (ICustomStringMarshallingUtf16)
+                cw.GetOrCreateObjectForComInstance((nint)utf16custom, CreateObjectFlags.None);
             Assert.Equal("Hello, World!", objCustom.GetString());
             objCustom.SetString("TestString");
             Assert.Equal("TestString", objCustom.GetString());
@@ -83,8 +95,12 @@ namespace ComInterfaceGenerator.Tests
             var cw = new StrategyBasedComWrappers();
 
             var utf8 = new Utf8MarshalledClass();
-            var utf8ComInstance = cw.GetOrCreateComInterfaceForObject(utf8, CreateComInterfaceFlags.None);
-            var utf8ComObject = (IUTF8Marshalling)cw.GetOrCreateObjectForComInstance(utf8ComInstance, CreateObjectFlags.None);
+            var utf8ComInstance = cw.GetOrCreateComInterfaceForObject(
+                utf8,
+                CreateComInterfaceFlags.None
+            );
+            var utf8ComObject = (IUTF8Marshalling)
+                cw.GetOrCreateObjectForComInstance(utf8ComInstance, CreateObjectFlags.None);
             Assert.Equal(utf8.GetString(), utf8ComObject.GetString());
             utf8.SetString("Set from CLR object");
             Assert.Equal(utf8.GetString(), utf8ComObject.GetString());
@@ -92,8 +108,12 @@ namespace ComInterfaceGenerator.Tests
             Assert.Equal(utf8.GetString(), utf8ComObject.GetString());
 
             var utf16 = new Utf16MarshalledClass();
-            var utf16ComInstance = cw.GetOrCreateComInterfaceForObject(utf16, CreateComInterfaceFlags.None);
-            var utf16ComObject = (IUTF16Marshalling)cw.GetOrCreateObjectForComInstance(utf16ComInstance, CreateObjectFlags.None);
+            var utf16ComInstance = cw.GetOrCreateComInterfaceForObject(
+                utf16,
+                CreateComInterfaceFlags.None
+            );
+            var utf16ComObject = (IUTF16Marshalling)
+                cw.GetOrCreateObjectForComInstance(utf16ComInstance, CreateObjectFlags.None);
             Assert.Equal(utf16.GetString(), utf16ComObject.GetString());
             utf16.SetString("Set from CLR object");
             Assert.Equal(utf16.GetString(), utf16ComObject.GetString());
@@ -101,8 +121,12 @@ namespace ComInterfaceGenerator.Tests
             Assert.Equal(utf16.GetString(), utf16ComObject.GetString());
 
             var customUtf16 = new CustomUtf16MarshalledClass();
-            var customUtf16ComInstance = cw.GetOrCreateComInterfaceForObject(customUtf16, CreateComInterfaceFlags.None);
-            var customUtf16ComObject = (ICustomStringMarshallingUtf16)cw.GetOrCreateObjectForComInstance(customUtf16ComInstance, CreateObjectFlags.None);
+            var customUtf16ComInstance = cw.GetOrCreateComInterfaceForObject(
+                customUtf16,
+                CreateComInterfaceFlags.None
+            );
+            var customUtf16ComObject = (ICustomStringMarshallingUtf16)
+                cw.GetOrCreateObjectForComInstance(customUtf16ComInstance, CreateObjectFlags.None);
             Assert.Equal(customUtf16.GetString(), customUtf16ComObject.GetString());
             customUtf16.SetString("Set from CLR object");
             Assert.Equal(customUtf16.GetString(), customUtf16ComObject.GetString());
@@ -117,18 +141,45 @@ namespace ComInterfaceGenerator.Tests
             var cw = new StrategyBasedComWrappers();
             var obj = cw.GetOrCreateObjectForComInstance((nint)ptr, CreateObjectFlags.None);
             var stringMarshallingOverride = (IStringMarshallingOverride)obj;
-            Assert.Equal("Your string: MyUtf8String", stringMarshallingOverride.StringMarshallingUtf8("MyUtf8String"));
-            Assert.Equal("Your string: MyLPWStrString", stringMarshallingOverride.MarshalAsLPWString("MyLPWStrString"));
-            Assert.Equal("Your string: MyUtf16String", stringMarshallingOverride.MarshalUsingUtf16("MyUtf16String"));
+            Assert.Equal(
+                "Your string: MyUtf8String",
+                stringMarshallingOverride.StringMarshallingUtf8("MyUtf8String")
+            );
+            Assert.Equal(
+                "Your string: MyLPWStrString",
+                stringMarshallingOverride.MarshalAsLPWString("MyLPWStrString")
+            );
+            Assert.Equal(
+                "Your string: MyUtf16String",
+                stringMarshallingOverride.MarshalUsingUtf16("MyUtf16String")
+            );
 
             // Make sure the shadowing methods generated for the derived interface also follow the rules
             var stringMarshallingOverrideDerived = (IStringMarshallingOverrideDerived)obj;
-            Assert.Equal("Your string: MyUtf8String", stringMarshallingOverrideDerived.StringMarshallingUtf8("MyUtf8String"));
-            Assert.Equal("Your string: MyLPWStrString", stringMarshallingOverrideDerived.MarshalAsLPWString("MyLPWStrString"));
-            Assert.Equal("Your string: MyUtf16String", stringMarshallingOverrideDerived.MarshalUsingUtf16("MyUtf16String"));
-            Assert.Equal("Your string 2: MyUtf8String", stringMarshallingOverrideDerived.StringMarshallingUtf8_2("MyUtf8String"));
-            Assert.Equal("Your string 2: MyLPWStrString", stringMarshallingOverrideDerived.MarshalAsLPWString_2("MyLPWStrString"));
-            Assert.Equal("Your string 2: MyUtf16String", stringMarshallingOverrideDerived.MarshalUsingUtf16_2("MyUtf16String"));
+            Assert.Equal(
+                "Your string: MyUtf8String",
+                stringMarshallingOverrideDerived.StringMarshallingUtf8("MyUtf8String")
+            );
+            Assert.Equal(
+                "Your string: MyLPWStrString",
+                stringMarshallingOverrideDerived.MarshalAsLPWString("MyLPWStrString")
+            );
+            Assert.Equal(
+                "Your string: MyUtf16String",
+                stringMarshallingOverrideDerived.MarshalUsingUtf16("MyUtf16String")
+            );
+            Assert.Equal(
+                "Your string 2: MyUtf8String",
+                stringMarshallingOverrideDerived.StringMarshallingUtf8_2("MyUtf8String")
+            );
+            Assert.Equal(
+                "Your string 2: MyLPWStrString",
+                stringMarshallingOverrideDerived.MarshalAsLPWString_2("MyLPWStrString")
+            );
+            Assert.Equal(
+                "Your string 2: MyUtf16String",
+                stringMarshallingOverrideDerived.MarshalUsingUtf16_2("MyUtf16String")
+            );
         }
     }
 }

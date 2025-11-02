@@ -21,6 +21,6 @@ namespace System.Text.Json
         /// Current frame is a polymorphic converter that couldn't resolve a derived converter.
         /// (E.g. because the runtime type matches the declared type).
         /// </summary>
-        PolymorphicReEntryNotFound
+        PolymorphicReEntryNotFound,
     }
 }

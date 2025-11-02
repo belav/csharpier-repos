@@ -6,7 +6,11 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    [Obsolete(Obsoletions.DerivedCryptographicTypesMessage, DiagnosticId = Obsoletions.DerivedCryptographicTypesDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.DerivedCryptographicTypesMessage,
+        DiagnosticId = Obsoletions.DerivedCryptographicTypesDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     [EditorBrowsable(EditorBrowsableState.Never)]
     // SHA512Managed has a copy of the same implementation as SHA512
     public sealed class SHA512Managed : SHA512
@@ -25,8 +29,7 @@ namespace System.Security.Cryptography
         protected sealed override void HashCore(ReadOnlySpan<byte> source) =>
             _hashProvider.AppendHashData(source);
 
-        protected sealed override byte[] HashFinal() =>
-            _hashProvider.FinalizeHashAndReset();
+        protected sealed override byte[] HashFinal() => _hashProvider.FinalizeHashAndReset();
 
         protected sealed override bool TryHashFinal(Span<byte> destination, out int bytesWritten) =>
             _hashProvider.TryFinalizeHashAndReset(destination, out bytesWritten);

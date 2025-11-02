@@ -4,25 +4,26 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
+    using System.CodeDom.Compiler;
+    using System.Collections;
     using System.Collections.Concurrent;
     using System.Collections.Specialized;
-    using System.Collections;
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.IO;
-    using System.Text;
-    using System.Web.Compilation;
     using System.Reflection;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+    using System.Web.Compilation;
     using System.Web.Hosting;
     using System.Web.UI;
-    using System.CodeDom.Compiler;
     using System.Web.Util;
-    using System.Threading;
-    using System.ComponentModel;
-    using System.Security.Permissions;
+    using System.Xml;
 
     /*
         <!-- compilation Attributes:
@@ -95,82 +96,193 @@ namespace System.Web.Configuration {
         </compilation>
 */
 
-    public sealed class CompilationSection : ConfigurationSection {
+    public sealed class CompilationSection : ConfigurationSection
+    {
         private const string tempDirectoryAttributeName = "tempDirectory";
         private const string assemblyPostProcessorTypeAttributeName = "assemblyPostProcessorType";
-        private const string controlBuilderInterceptorTypeAttributeName = "controlBuilderInterceptorType";
+        private const string controlBuilderInterceptorTypeAttributeName =
+            "controlBuilderInterceptorType";
 
         private static ConfigurationPropertyCollection _properties;
         private static readonly ConfigurationProperty _propTempDirectory =
-            new ConfigurationProperty(tempDirectoryAttributeName, typeof(string), 
-                                        String.Empty, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propDebug =
-            new ConfigurationProperty("debug", typeof(bool), false, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propStrict =
-            new ConfigurationProperty("strict", typeof(bool), false, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propExplicit =
-            new ConfigurationProperty("explicit", typeof(bool), true, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propBatch =
-            new ConfigurationProperty("batch", typeof(bool), true, ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                tempDirectoryAttributeName,
+                typeof(string),
+                String.Empty,
+                ConfigurationPropertyOptions.None
+            );
+        private static readonly ConfigurationProperty _propDebug = new ConfigurationProperty(
+            "debug",
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty _propStrict = new ConfigurationProperty(
+            "strict",
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty _propExplicit = new ConfigurationProperty(
+            "explicit",
+            typeof(bool),
+            true,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty _propBatch = new ConfigurationProperty(
+            "batch",
+            typeof(bool),
+            true,
+            ConfigurationPropertyOptions.None
+        );
         private static readonly ConfigurationProperty _propOptimizeCompilations =
-            new ConfigurationProperty("optimizeCompilations", typeof(bool), false, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propBatchTimeout =
-            new ConfigurationProperty("batchTimeout",
-                                        typeof(TimeSpan),
-                                        TimeSpan.FromMinutes(15.0),
-                                        StdValidatorsAndConverters.TimeSpanSecondsOrInfiniteConverter,
-                                        StdValidatorsAndConverters.PositiveTimeSpanValidator,
-                                        ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propMaxBatchSize =
-            new ConfigurationProperty("maxBatchSize", typeof(int), 1000, ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "optimizeCompilations",
+                typeof(bool),
+                false,
+                ConfigurationPropertyOptions.None
+            );
+        private static readonly ConfigurationProperty _propBatchTimeout = new ConfigurationProperty(
+            "batchTimeout",
+            typeof(TimeSpan),
+            TimeSpan.FromMinutes(15.0),
+            StdValidatorsAndConverters.TimeSpanSecondsOrInfiniteConverter,
+            StdValidatorsAndConverters.PositiveTimeSpanValidator,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty _propMaxBatchSize = new ConfigurationProperty(
+            "maxBatchSize",
+            typeof(int),
+            1000,
+            ConfigurationPropertyOptions.None
+        );
         private static readonly ConfigurationProperty _propMaxBatchGeneratedFileSize =
-            new ConfigurationProperty("maxBatchGeneratedFileSize", typeof(int), 1000, ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "maxBatchGeneratedFileSize",
+                typeof(int),
+                1000,
+                ConfigurationPropertyOptions.None
+            );
         private static readonly ConfigurationProperty _propNumRecompilesBeforeAppRestart =
-            new ConfigurationProperty("numRecompilesBeforeAppRestart", typeof(int), 15, ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "numRecompilesBeforeAppRestart",
+                typeof(int),
+                15,
+                ConfigurationPropertyOptions.None
+            );
 #if !FEATURE_PAL // FEATURE_PAL does not support VisualBasic
         private static readonly ConfigurationProperty _propDefaultLanguage =
-            new ConfigurationProperty("defaultLanguage", typeof(string), "vb", ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "defaultLanguage",
+                typeof(string),
+                "vb",
+                ConfigurationPropertyOptions.None
+            );
 #else // !FEATURE_PAL
         private static readonly ConfigurationProperty _propDefaultLanguage =
-            new ConfigurationProperty("defaultLanguage", typeof(string),"c#",ConfigurationPropertyFlags.None);
+            new ConfigurationProperty(
+                "defaultLanguage",
+                typeof(string),
+                "c#",
+                ConfigurationPropertyFlags.None
+            );
 #endif // !FEATURE_PAL
         private static readonly ConfigurationProperty _propTargetFramework =
-            new ConfigurationProperty("targetFramework", typeof(string), null, ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "targetFramework",
+                typeof(string),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-        private static readonly ConfigurationProperty _propCompilers =
-            new ConfigurationProperty("compilers", typeof(CompilerCollection), null, ConfigurationPropertyOptions.IsDefaultCollection);
-        private static readonly ConfigurationProperty _propAssemblies =
-            new ConfigurationProperty("assemblies", typeof(AssemblyCollection), null, ConfigurationPropertyOptions.IsDefaultCollection);
+        private static readonly ConfigurationProperty _propCompilers = new ConfigurationProperty(
+            "compilers",
+            typeof(CompilerCollection),
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
+        private static readonly ConfigurationProperty _propAssemblies = new ConfigurationProperty(
+            "assemblies",
+            typeof(AssemblyCollection),
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
         private static readonly ConfigurationProperty _propBuildProviders =
-            new ConfigurationProperty("buildProviders", typeof(BuildProviderCollection),
-                                        null, ConfigurationPropertyOptions.IsDefaultCollection);
+            new ConfigurationProperty(
+                "buildProviders",
+                typeof(BuildProviderCollection),
+                null,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
         private static readonly ConfigurationProperty _propFolderLevelBuildProviders =
-            new ConfigurationProperty("folderLevelBuildProviders", typeof(FolderLevelBuildProviderCollection),
-                                        null, ConfigurationPropertyOptions.IsDefaultCollection);
+            new ConfigurationProperty(
+                "folderLevelBuildProviders",
+                typeof(FolderLevelBuildProviderCollection),
+                null,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
         private static readonly ConfigurationProperty _propExpressionBuilders =
-            new ConfigurationProperty("expressionBuilders", typeof(ExpressionBuilderCollection),
-                                        null, ConfigurationPropertyOptions.IsDefaultCollection);
+            new ConfigurationProperty(
+                "expressionBuilders",
+                typeof(ExpressionBuilderCollection),
+                null,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
         private static readonly ConfigurationProperty _propUrlLinePragmas =
-            new ConfigurationProperty("urlLinePragmas", typeof(bool), false, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propCodeSubDirs =
-            new ConfigurationProperty("codeSubDirectories", typeof(CodeSubDirectoriesCollection),
-                                        null, ConfigurationPropertyOptions.IsDefaultCollection);
+            new ConfigurationProperty(
+                "urlLinePragmas",
+                typeof(bool),
+                false,
+                ConfigurationPropertyOptions.None
+            );
+        private static readonly ConfigurationProperty _propCodeSubDirs = new ConfigurationProperty(
+            "codeSubDirectories",
+            typeof(CodeSubDirectoriesCollection),
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
         private static readonly ConfigurationProperty _propAssemblyPreprocessorType =
-            new ConfigurationProperty(assemblyPostProcessorTypeAttributeName, typeof(string), 
-                                        String.Empty, ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                assemblyPostProcessorTypeAttributeName,
+                typeof(string),
+                String.Empty,
+                ConfigurationPropertyOptions.None
+            );
         private static readonly ConfigurationProperty _propEnablePrefetchOptimization =
-            new ConfigurationProperty("enablePrefetchOptimization", typeof(bool), false, ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "enablePrefetchOptimization",
+                typeof(bool),
+                false,
+                ConfigurationPropertyOptions.None
+            );
         private static readonly ConfigurationProperty _propProfileGuidedOptimizations =
-            new ConfigurationProperty("profileGuidedOptimizations", typeof(ProfileGuidedOptimizationsFlags), 
-                                        ProfileGuidedOptimizationsFlags.All, ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "profileGuidedOptimizations",
+                typeof(ProfileGuidedOptimizationsFlags),
+                ProfileGuidedOptimizationsFlags.All,
+                ConfigurationPropertyOptions.None
+            );
         private static readonly ConfigurationProperty _propControlBuilderInterceptorType =
-            new ConfigurationProperty(controlBuilderInterceptorTypeAttributeName, typeof(string),
-                                        String.Empty, ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                controlBuilderInterceptorTypeAttributeName,
+                typeof(string),
+                String.Empty,
+                ConfigurationPropertyOptions.None
+            );
         private static readonly ConfigurationProperty _propDisableObsoleteWarnings =
-            new ConfigurationProperty("disableObsoleteWarnings", typeof(bool),
-                                        true, ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "disableObsoleteWarnings",
+                typeof(bool),
+                true,
+                ConfigurationPropertyOptions.None
+            );
         private static readonly ConfigurationProperty _propMaxConcurrentCompilations =
-            new ConfigurationProperty("maxConcurrentCompilations", typeof(int), 1, ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "maxConcurrentCompilations",
+                typeof(int),
+                1,
+                ConfigurationPropertyOptions.None
+            );
 
         const char fieldSeparator = ';';
 
@@ -198,7 +310,8 @@ namespace System.Web.Configuration {
         private static readonly Lazy<ConcurrentDictionary<Assembly, string>> _assemblyNames =
             new Lazy<ConcurrentDictionary<Assembly, string>>();
 
-        static CompilationSection() {
+        static CompilationSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propTempDirectory);
@@ -228,233 +341,222 @@ namespace System.Web.Configuration {
             _properties.Add(_propMaxConcurrentCompilations);
         }
 
-        public CompilationSection() {
+        public CompilationSection() { }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
-        }
-
-        protected override object GetRuntimeObject() {
+        protected override object GetRuntimeObject()
+        {
             _isRuntimeObject = true;
             return base.GetRuntimeObject();
         }
 
         [ConfigurationProperty(tempDirectoryAttributeName, DefaultValue = "")]
-        public string TempDirectory {
-            get {
-                return (string)base[_propTempDirectory];
-            }
-            set {
-                base[_propTempDirectory] = value;
-            }
+        public string TempDirectory
+        {
+            get { return (string)base[_propTempDirectory]; }
+            set { base[_propTempDirectory] = value; }
         }
 
         // Used for error handling when there is a problem withe the temp dir
-        internal void GetTempDirectoryErrorInfo(out string tempDirAttribName,
-            out string configFileName, out int configLineNumber) {
+        internal void GetTempDirectoryErrorInfo(
+            out string tempDirAttribName,
+            out string configFileName,
+            out int configLineNumber
+        )
+        {
             tempDirAttribName = tempDirectoryAttributeName;
             configFileName = ElementInformation.Properties[tempDirectoryAttributeName].Source;
             configLineNumber = ElementInformation.Properties[tempDirectoryAttributeName].LineNumber;
         }
 
         [ConfigurationProperty("debug", DefaultValue = false)]
-        public bool Debug {
-            get {
-                return (bool)base[_propDebug];
-            }
-            set {
-                base[_propDebug] = value;
-            }
+        public bool Debug
+        {
+            get { return (bool)base[_propDebug]; }
+            set { base[_propDebug] = value; }
         }
 
         [ConfigurationProperty("strict", DefaultValue = false)]
-        public bool Strict {
-            get {
-                return (bool)base[_propStrict];
-            }
-            set {
-                base[_propStrict] = value;
-            }
+        public bool Strict
+        {
+            get { return (bool)base[_propStrict]; }
+            set { base[_propStrict] = value; }
         }
 
         [ConfigurationProperty("explicit", DefaultValue = true)]
-        public bool Explicit {
-            get {
-                return (bool)base[_propExplicit];
-            }
-            set {
-                base[_propExplicit] = value;
-            }
+        public bool Explicit
+        {
+            get { return (bool)base[_propExplicit]; }
+            set { base[_propExplicit] = value; }
         }
 
         [ConfigurationProperty("batch", DefaultValue = true)]
-        public bool Batch {
-            get {
-                return (bool)base[_propBatch];
-            }
-            set {
-                base[_propBatch] = value;
-            }
+        public bool Batch
+        {
+            get { return (bool)base[_propBatch]; }
+            set { base[_propBatch] = value; }
         }
 
         [ConfigurationProperty("optimizeCompilations", DefaultValue = false)]
-        public bool OptimizeCompilations {
-            get {
-                return (bool)base[_propOptimizeCompilations];
-            }
-            set {
-                base[_propOptimizeCompilations] = value;
-            }
+        public bool OptimizeCompilations
+        {
+            get { return (bool)base[_propOptimizeCompilations]; }
+            set { base[_propOptimizeCompilations] = value; }
         }
 
         [ConfigurationProperty("urlLinePragmas", DefaultValue = false)]
-        public bool UrlLinePragmas {
-            get {
-                return (bool)base[_propUrlLinePragmas];
-            }
-            set {
-                base[_propUrlLinePragmas] = value;
-            }
+        public bool UrlLinePragmas
+        {
+            get { return (bool)base[_propUrlLinePragmas]; }
+            set { base[_propUrlLinePragmas] = value; }
         }
 
         [ConfigurationProperty("batchTimeout", DefaultValue = "00:15:00")]
-        [TimeSpanValidator(MinValueString="00:00:00", MaxValueString=TimeSpanValidatorAttribute.TimeSpanMaxValue)]
+        [TimeSpanValidator(
+            MinValueString = "00:00:00",
+            MaxValueString = TimeSpanValidatorAttribute.TimeSpanMaxValue
+        )]
         [TypeConverter(typeof(TimeSpanSecondsOrInfiniteConverter))]
-        public TimeSpan BatchTimeout {
-            get {
-                return (TimeSpan)base[_propBatchTimeout];
-            }
-            set {
-                base[_propBatchTimeout] = value;
-            }
+        public TimeSpan BatchTimeout
+        {
+            get { return (TimeSpan)base[_propBatchTimeout]; }
+            set { base[_propBatchTimeout] = value; }
         }
 
         [ConfigurationProperty("maxBatchSize", DefaultValue = 1000)]
-        public int MaxBatchSize {
-            get {
-                return (int)base[_propMaxBatchSize];
-            }
-            set {
-                base[_propMaxBatchSize] = value;
-            }
+        public int MaxBatchSize
+        {
+            get { return (int)base[_propMaxBatchSize]; }
+            set { base[_propMaxBatchSize] = value; }
         }
 
         [ConfigurationProperty("maxBatchGeneratedFileSize", DefaultValue = 1000)]
-        public int MaxBatchGeneratedFileSize {
-            get {
-                return (int)base[_propMaxBatchGeneratedFileSize];
-            }
-            set {
-                base[_propMaxBatchGeneratedFileSize] = value;
-            }
+        public int MaxBatchGeneratedFileSize
+        {
+            get { return (int)base[_propMaxBatchGeneratedFileSize]; }
+            set { base[_propMaxBatchGeneratedFileSize] = value; }
         }
 
         [ConfigurationProperty("numRecompilesBeforeAppRestart", DefaultValue = 15)]
-        public int NumRecompilesBeforeAppRestart {
-            get {
-                return (int)base[_propNumRecompilesBeforeAppRestart];
-            }
-            set {
-                base[_propNumRecompilesBeforeAppRestart] = value;
-            }
+        public int NumRecompilesBeforeAppRestart
+        {
+            get { return (int)base[_propNumRecompilesBeforeAppRestart]; }
+            set { base[_propNumRecompilesBeforeAppRestart] = value; }
         }
 
         [ConfigurationProperty("defaultLanguage", DefaultValue = "vb")]
-        public string DefaultLanguage {
-            get {
-                return (string)base[_propDefaultLanguage];
-            }
-            set {
-                base[_propDefaultLanguage] = value;
-            }
+        public string DefaultLanguage
+        {
+            get { return (string)base[_propDefaultLanguage]; }
+            set { base[_propDefaultLanguage] = value; }
         }
 
         [ConfigurationProperty("targetFramework", DefaultValue = null)]
-        public string TargetFramework {
-            get {
-                return (string)base[_propTargetFramework];
-            }
-            set {
-                base[_propTargetFramework] = value;
-            }
+        public string TargetFramework
+        {
+            get { return (string)base[_propTargetFramework]; }
+            set { base[_propTargetFramework] = value; }
         }
 
         [ConfigurationProperty("compilers")]
-        public CompilerCollection Compilers {
-            get {
-                return (CompilerCollection)base[_propCompilers];
-            }
+        public CompilerCollection Compilers
+        {
+            get { return (CompilerCollection)base[_propCompilers]; }
         }
 
         [ConfigurationProperty("assemblies")]
-        public AssemblyCollection Assemblies {
-            get {
-                if (_isRuntimeObject || BuildManagerHost.InClientBuildManager) {
+        public AssemblyCollection Assemblies
+        {
+            get
+            {
+                if (_isRuntimeObject || BuildManagerHost.InClientBuildManager)
+                {
                     EnsureReferenceSet();
                 }
                 return GetAssembliesCollection();
             }
         }
 
-        private AssemblyCollection GetAssembliesCollection() {
+        private AssemblyCollection GetAssembliesCollection()
+        {
             return (AssemblyCollection)base[_propAssemblies];
         }
 
         [ConfigurationProperty("buildProviders")]
-        public BuildProviderCollection BuildProviders {
-            get {
-                return (BuildProviderCollection)base[_propBuildProviders];
-            }
+        public BuildProviderCollection BuildProviders
+        {
+            get { return (BuildProviderCollection)base[_propBuildProviders]; }
         }
 
-        private FolderLevelBuildProviderCollection GetFolderLevelBuildProviders() {
+        private FolderLevelBuildProviderCollection GetFolderLevelBuildProviders()
+        {
             return (FolderLevelBuildProviderCollection)base[_propFolderLevelBuildProviders];
         }
 
         [ConfigurationProperty("folderLevelBuildProviders")]
-        public FolderLevelBuildProviderCollection FolderLevelBuildProviders {
-            get {
-                return GetFolderLevelBuildProviders();
-            }
+        public FolderLevelBuildProviderCollection FolderLevelBuildProviders
+        {
+            get { return GetFolderLevelBuildProviders(); }
         }
 
         [ConfigurationProperty("expressionBuilders")]
-        public ExpressionBuilderCollection ExpressionBuilders {
-            get {
-                return (ExpressionBuilderCollection)base[_propExpressionBuilders];
-            }
-
+        public ExpressionBuilderCollection ExpressionBuilders
+        {
+            get { return (ExpressionBuilderCollection)base[_propExpressionBuilders]; }
         }
 
         [ConfigurationProperty(assemblyPostProcessorTypeAttributeName, DefaultValue = "")]
-        public string AssemblyPostProcessorType {
-            get {
-                return (string)base[_propAssemblyPreprocessorType];
-            }
-            set {
-                base[_propAssemblyPreprocessorType] = value;
-            }
+        public string AssemblyPostProcessorType
+        {
+            get { return (string)base[_propAssemblyPreprocessorType]; }
+            set { base[_propAssemblyPreprocessorType] = value; }
         }
 
-        internal Type AssemblyPostProcessorTypeInternal {
-            get {
-                if (_assemblyPostProcessorType == null && !String.IsNullOrEmpty(AssemblyPostProcessorType)) {
-                    lock (this) {
-                        if (_assemblyPostProcessorType == null) {
-
+        internal Type AssemblyPostProcessorTypeInternal
+        {
+            get
+            {
+                if (
+                    _assemblyPostProcessorType == null
+                    && !String.IsNullOrEmpty(AssemblyPostProcessorType)
+                )
+                {
+                    lock (this)
+                    {
+                        if (_assemblyPostProcessorType == null)
+                        {
                             // Only allow this in full trust
-                            if (!HttpRuntime.HasUnmanagedPermission()) {
-                                throw new ConfigurationErrorsException(SR.GetString(SR.Insufficient_trust_for_attribute, assemblyPostProcessorTypeAttributeName),
-                                    ElementInformation.Properties[assemblyPostProcessorTypeAttributeName].Source,
-                                    ElementInformation.Properties[assemblyPostProcessorTypeAttributeName].LineNumber);
+                            if (!HttpRuntime.HasUnmanagedPermission())
+                            {
+                                throw new ConfigurationErrorsException(
+                                    SR.GetString(
+                                        SR.Insufficient_trust_for_attribute,
+                                        assemblyPostProcessorTypeAttributeName
+                                    ),
+                                    ElementInformation
+                                        .Properties[assemblyPostProcessorTypeAttributeName]
+                                        .Source,
+                                    ElementInformation
+                                        .Properties[assemblyPostProcessorTypeAttributeName]
+                                        .LineNumber
+                                );
                             }
 
-                            Type assemblyPostProcessorType = ConfigUtil.GetType(AssemblyPostProcessorType, assemblyPostProcessorTypeAttributeName, this);
-                            ConfigUtil.CheckBaseType(typeof(System.Web.Compilation.IAssemblyPostProcessor),
-                                assemblyPostProcessorType, "assemblyPostProcessorType", this);
+                            Type assemblyPostProcessorType = ConfigUtil.GetType(
+                                AssemblyPostProcessorType,
+                                assemblyPostProcessorTypeAttributeName,
+                                this
+                            );
+                            ConfigUtil.CheckBaseType(
+                                typeof(System.Web.Compilation.IAssemblyPostProcessor),
+                                assemblyPostProcessorType,
+                                "assemblyPostProcessorType",
+                                this
+                            );
                             _assemblyPostProcessorType = assemblyPostProcessorType;
                         }
                     }
@@ -465,80 +567,75 @@ namespace System.Web.Configuration {
         }
 
         [ConfigurationProperty("codeSubDirectories")]
-        public CodeSubDirectoriesCollection CodeSubDirectories {
-            get {
-                return (CodeSubDirectoriesCollection)base[_propCodeSubDirs];
-            }
-
+        public CodeSubDirectoriesCollection CodeSubDirectories
+        {
+            get { return (CodeSubDirectoriesCollection)base[_propCodeSubDirs]; }
         }
 
         [ConfigurationProperty("enablePrefetchOptimization", DefaultValue = false)]
-        public bool EnablePrefetchOptimization {
-            get {
-                return (bool)base[_propEnablePrefetchOptimization];
-            }
-            set {
-                base[_propEnablePrefetchOptimization] = value;
-            }
+        public bool EnablePrefetchOptimization
+        {
+            get { return (bool)base[_propEnablePrefetchOptimization]; }
+            set { base[_propEnablePrefetchOptimization] = value; }
         }
 
-        [ConfigurationProperty("profileGuidedOptimizations", DefaultValue = ProfileGuidedOptimizationsFlags.All)]
-        public ProfileGuidedOptimizationsFlags ProfileGuidedOptimizations {
-            get {
-                return (ProfileGuidedOptimizationsFlags)base[_propProfileGuidedOptimizations];
-            }
-            set {
-                base[_propProfileGuidedOptimizations] = value;
-            }
+        [ConfigurationProperty(
+            "profileGuidedOptimizations",
+            DefaultValue = ProfileGuidedOptimizationsFlags.All
+        )]
+        public ProfileGuidedOptimizationsFlags ProfileGuidedOptimizations
+        {
+            get { return (ProfileGuidedOptimizationsFlags)base[_propProfileGuidedOptimizations]; }
+            set { base[_propProfileGuidedOptimizations] = value; }
         }
 
         [ConfigurationProperty(controlBuilderInterceptorTypeAttributeName, DefaultValue = "")]
-        public string ControlBuilderInterceptorType {
-            get {
-                return (string)base[_propControlBuilderInterceptorType];
-            }
-            set {
-                base[_propControlBuilderInterceptorType] = value;
-            }
+        public string ControlBuilderInterceptorType
+        {
+            get { return (string)base[_propControlBuilderInterceptorType]; }
+            set { base[_propControlBuilderInterceptorType] = value; }
         }
 
         [ConfigurationProperty("disableObsoleteWarnings", DefaultValue = true)]
-        public bool DisableObsoleteWarnings {
-            get {
-                return (bool)base[_propDisableObsoleteWarnings];
-            }
-            set {
-                base[_propDisableObsoleteWarnings] = value;
-            }
+        public bool DisableObsoleteWarnings
+        {
+            get { return (bool)base[_propDisableObsoleteWarnings]; }
+            set { base[_propDisableObsoleteWarnings] = value; }
         }
 
         [ConfigurationProperty("maxConcurrentCompilations", DefaultValue = 1)]
-        public int MaxConcurrentCompilations {
-            get {
-                return (int)base[_propMaxConcurrentCompilations];
-            }
-            set {
-                base[_propMaxConcurrentCompilations] = value;
-            }
+        public int MaxConcurrentCompilations
+        {
+            get { return (int)base[_propMaxConcurrentCompilations]; }
+            set { base[_propMaxConcurrentCompilations] = value; }
         }
 
-        private void EnsureCompilerCacheInit() {
-            if (_compilerLanguages == null) {
-                lock (this) {
-                    if (_compilerLanguages == null) {
-                        Hashtable compilerLanguages = new Hashtable(StringComparer.OrdinalIgnoreCase);
+        private void EnsureCompilerCacheInit()
+        {
+            if (_compilerLanguages == null)
+            {
+                lock (this)
+                {
+                    if (_compilerLanguages == null)
+                    {
+                        Hashtable compilerLanguages = new Hashtable(
+                            StringComparer.OrdinalIgnoreCase
+                        );
                         _compilerExtensions = new Hashtable(StringComparer.OrdinalIgnoreCase);
 
-                        foreach (Compiler compiler in Compilers) {
+                        foreach (Compiler compiler in Compilers)
+                        {
                             // Parse the semicolon separated lists
                             string[] languageList = compiler.Language.Split(fieldSeparator);
                             string[] extensionList = compiler.Extension.Split(fieldSeparator);
 
-                            foreach (string language in languageList) {
+                            foreach (string language in languageList)
+                            {
                                 compilerLanguages[language] = compiler;
                             }
 
-                            foreach (string extension in extensionList) {
+                            foreach (string extension in extensionList)
+                            {
                                 _compilerExtensions[extension] = compiler;
                             }
                         }
@@ -553,7 +650,8 @@ namespace System.Web.Configuration {
         /*
          * Return a CompilerType that a extension maps to.
          */
-        internal CompilerType GetCompilerInfoFromExtension(string extension, bool throwOnFail) {
+        internal CompilerType GetCompilerInfoFromExtension(string extension, bool throwOnFail)
+        {
             EnsureCompilerCacheInit();
 
             // First, try the cache (i.e. old <compilers> section)
@@ -561,33 +659,40 @@ namespace System.Web.Configuration {
             object obj = _compilerExtensions[extension];
             Compiler compiler = obj as Compiler;
 
-            if (compiler != null) {
+            if (compiler != null)
+            {
                 compilerType = compiler.CompilerTypeInternal;
                 _compilerExtensions[extension] = compilerType;
             }
-            else {
+            else
+            {
                 compilerType = obj as CompilerType;
             }
 
-            if (compilerType == null) {
-
+            if (compilerType == null)
+            {
                 // If not, try the <codedom> section
 
-                if (CodeDomProvider.IsDefinedExtension(extension)) {
+                if (CodeDomProvider.IsDefinedExtension(extension))
+                {
                     string language = CodeDomProvider.GetLanguageFromExtension(extension);
 
                     CompilerInfo ci = CodeDomProvider.GetCompilerInfo(language);
 
                     compilerType = new CompilerType(
-                        ci.CodeDomProviderType, ci.CreateDefaultCompilerParameters());
+                        ci.CodeDomProviderType,
+                        ci.CreateDefaultCompilerParameters()
+                    );
 
                     // Cache it
                     _compilerExtensions[extension] = compilerType;
                 }
             }
 
-            if (compilerType == null) {
-                if (!throwOnFail) return null;
+            if (compilerType == null)
+            {
+                if (!throwOnFail)
+                    return null;
 
                 // Unsupported extension: throw an exception
                 throw new HttpException(SR.GetString(SR.Invalid_lang_extension, extension));
@@ -605,7 +710,8 @@ namespace System.Web.Configuration {
         /*
          * Return a CompilerType that a language maps to.
          */
-        internal CompilerType GetCompilerInfoFromLanguage(string language) {
+        internal CompilerType GetCompilerInfoFromLanguage(string language)
+        {
             EnsureCompilerCacheInit();
 
             // First, try the cache (i.e. old <compilers> section)
@@ -613,38 +719,48 @@ namespace System.Web.Configuration {
             object obj = _compilerLanguages[language];
             Compiler compiler = obj as Compiler;
 
-            if (compiler != null) {
+            if (compiler != null)
+            {
                 compilerType = compiler.CompilerTypeInternal;
                 _compilerLanguages[language] = compilerType;
             }
-            else {
+            else
+            {
                 compilerType = obj as CompilerType;
             }
 
-            if (compilerType == null) {
-
+            if (compilerType == null)
+            {
                 // Try the <codedom> section
 
-                if (CodeDomProvider.IsDefinedLanguage(language)) {
+                if (CodeDomProvider.IsDefinedLanguage(language))
+                {
                     CompilerInfo ci = CodeDomProvider.GetCompilerInfo(language);
 
-                    compilerType = new CompilerType(ci.CodeDomProviderType,
-                        ci.CreateDefaultCompilerParameters());
+                    compilerType = new CompilerType(
+                        ci.CodeDomProviderType,
+                        ci.CreateDefaultCompilerParameters()
+                    );
 
                     // Cache it
                     _compilerLanguages[language] = compilerType;
                 }
             }
 
-            if (compilerType == null) {
-
+            if (compilerType == null)
+            {
                 // Unsupported language: throw an exception
                 throw new HttpException(SR.GetString(SR.Invalid_lang, language));
             }
 
             // Only allow the use of compilerOptions when we have UnmanagedCode access (ASURT 73678)
-            CompilationUtil.CheckCompilerOptionsAllowed(compilerType.CompilerParameters.CompilerOptions,
-                true /*config*/, null, 0);
+            CompilationUtil.CheckCompilerOptionsAllowed(
+                compilerType.CompilerParameters.CompilerOptions,
+                true /*config*/
+                ,
+                null,
+                0
+            );
 
             // Clone it so the original is not modified
             compilerType = compilerType.Clone();
@@ -655,11 +771,13 @@ namespace System.Web.Configuration {
             return compilerType;
         }
 
-
         // This will only set the section pointer
-        private void EnsureReferenceSet() {
-            if (!_referenceSet) {
-                foreach (AssemblyInfo ai in GetAssembliesCollection()) {
+        private void EnsureReferenceSet()
+        {
+            if (!_referenceSet)
+            {
+                foreach (AssemblyInfo ai in GetAssembliesCollection())
+                {
                     ai.SetCompilationReference(this);
                 }
                 _referenceSet = true;
@@ -672,9 +790,11 @@ namespace System.Web.Configuration {
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        internal static string GetOriginalAssemblyName(Assembly a) {
+        internal static string GetOriginalAssemblyName(Assembly a)
+        {
             string name = null;
-            if (!_assemblyNames.Value.TryGetValue(a, out name)) {
+            if (!_assemblyNames.Value.TryGetValue(a, out name))
+            {
                 // If the assembly is not found in the dictionary, just
                 // return Assembly.FullName.
                 name = a.FullName;
@@ -682,15 +802,19 @@ namespace System.Web.Configuration {
             return name;
         }
 
-        internal Assembly[] LoadAssembly(AssemblyInfo ai) {
+        internal Assembly[] LoadAssembly(AssemblyInfo ai)
+        {
             Assembly[] assemblies = null;
-            if (ai.Assembly == "*") {
+            if (ai.Assembly == "*")
+            {
                 assemblies = LoadAllAssembliesFromAppDomainBinDirectory();
             }
-            else {
+            else
+            {
                 Assembly a;
                 a = LoadAssemblyHelper(ai.Assembly, false);
-                if (a != null) {
+                if (a != null)
+                {
                     assemblies = new Assembly[1];
                     assemblies[0] = a;
                     RecordAssembly(ai.Assembly, a);
@@ -699,51 +823,68 @@ namespace System.Web.Configuration {
             return assemblies;
         }
 
-        internal static Assembly LoadAndRecordAssembly(AssemblyName name) {
+        internal static Assembly LoadAndRecordAssembly(AssemblyName name)
+        {
             Assembly a = Assembly.Load(name);
             RecordAssembly(name.FullName, a);
             return a;
         }
 
-        internal static void RecordAssembly(string assemblyName, Assembly a) {
+        internal static void RecordAssembly(string assemblyName, Assembly a)
+        {
             // For each Assembly that we load, keep track of its original
             // full name as specified in the config.
-            if (!_assemblyNames.Value.ContainsKey(a)) {
+            if (!_assemblyNames.Value.ContainsKey(a))
+            {
                 _assemblyNames.Value.TryAdd(a, assemblyName);
             }
         }
 
-        internal Assembly LoadAssembly(string assemblyName, bool throwOnFail) {
-
+        internal Assembly LoadAssembly(string assemblyName, bool throwOnFail)
+        {
             // The trust should always be set before we load any assembly (VSWhidbey 317295)
             System.Web.Util.Debug.Assert(HttpRuntime.TrustLevel != null);
 
-            try {
+            try
+            {
                 // First, try to just load the assembly
                 Assembly a = Assembly.Load(assemblyName);
                 // Record the original assembly name that was used to load this assembly.
                 RecordAssembly(assemblyName, a);
                 return a;
             }
-            catch {
+            catch
+            {
                 AssemblyName asmName = new AssemblyName(assemblyName);
 
                 // Check if it's simply named
                 Byte[] publicKeyToken = asmName.GetPublicKeyToken();
-                if ((publicKeyToken == null || publicKeyToken.Length == 0) && asmName.Version == null) {
-
+                if (
+                    (publicKeyToken == null || publicKeyToken.Length == 0)
+                    && asmName.Version == null
+                )
+                {
                     EnsureReferenceSet();
 
                     // It is simply named.  Go through all the assemblies from
                     // the <assemblies> section, and if we find one that matches
                     // the simple name, return it (ASURT 100546)
-                    foreach (AssemblyInfo ai in GetAssembliesCollection()) {
+                    foreach (AssemblyInfo ai in GetAssembliesCollection())
+                    {
                         Assembly[] a = ai.AssemblyInternal;
-                        if (a != null) {
-                            for (int i = 0; i < a.Length; i++) {
+                        if (a != null)
+                        {
+                            for (int i = 0; i < a.Length; i++)
+                            {
                                 // use new AssemblyName(FullName).Name
                                 // instead of a.GetName().Name, because GetName() does not work in medium trust
-                                if (StringUtil.EqualsIgnoreCase(asmName.Name, new AssemblyName(a[i].FullName).Name)) {
+                                if (
+                                    StringUtil.EqualsIgnoreCase(
+                                        asmName.Name,
+                                        new AssemblyName(a[i].FullName).Name
+                                    )
+                                )
+                                {
                                     return a[i];
                                 }
                             }
@@ -751,7 +892,8 @@ namespace System.Web.Configuration {
                     }
                 }
 
-                if (throwOnFail) {
+                if (throwOnFail)
+                {
                     throw;
                 }
             }
@@ -759,21 +901,24 @@ namespace System.Web.Configuration {
             return null;
         }
 
-        private Assembly LoadAssemblyHelper(string assemblyName, bool starDirective) {
+        private Assembly LoadAssemblyHelper(string assemblyName, bool starDirective)
+        {
             // The trust should always be set before we load any assembly (VSWhidbey 317295)
             System.Web.Util.Debug.Assert(HttpRuntime.TrustLevel != null);
 
             Assembly retAssembly = null;
             // Load the assembly and add it to the dictionary.
-            try {
+            try
+            {
                 retAssembly = System.Reflection.Assembly.Load(assemblyName);
             }
-            catch (Exception e) {
-
+            catch (Exception e)
+            {
                 // Check if this assembly came from the '*' directive
                 bool ignoreException = false;
 
-                if (starDirective) {
+                if (starDirective)
+                {
                     int hresult = System.Runtime.InteropServices.Marshal.GetHRForException(e);
 
                     // This is expected to fail for unmanaged DLLs that happen
@@ -782,33 +927,50 @@ namespace System.Web.Configuration {
                     // Also, if the DLL is not an assembly, ignore the exception (ASURT 93073, VSWhidbey 319486)
 
                     // Test for COR_E_ASSEMBLYEXPECTED=0x80131018=-2146234344
-                    if (hresult == -2146234344) {
+                    if (hresult == -2146234344)
+                    {
                         ignoreException = true;
                     }
                 }
 
-                if (BuildManager.IgnoreBadImageFormatException) {
+                if (BuildManager.IgnoreBadImageFormatException)
+                {
                     var badImageFormatException = e as BadImageFormatException;
-                    if (badImageFormatException != null) {
+                    if (badImageFormatException != null)
+                    {
                         ignoreException = true;
                     }
                 }
 
-                if (!ignoreException) {
+                if (!ignoreException)
+                {
                     string Message = e.Message;
-                    if (String.IsNullOrEmpty(Message)) {
+                    if (String.IsNullOrEmpty(Message))
+                    {
                         // try and make a better message than empty string
-                        if (e is FileLoadException) {
-                            Message = SR.GetString(SR.Config_base_file_load_exception_no_message, "assembly");
+                        if (e is FileLoadException)
+                        {
+                            Message = SR.GetString(
+                                SR.Config_base_file_load_exception_no_message,
+                                "assembly"
+                            );
                         }
-                        else if (e is BadImageFormatException) {
-                            Message = SR.GetString(SR.Config_base_bad_image_exception_no_message, assemblyName);
+                        else if (e is BadImageFormatException)
+                        {
+                            Message = SR.GetString(
+                                SR.Config_base_bad_image_exception_no_message,
+                                assemblyName
+                            );
                         }
-                        else {
-                            Message = SR.GetString(SR.Config_base_report_exception_type, e.GetType().ToString()); // at least this is better than no message
+                        else
+                        {
+                            Message = SR.GetString(
+                                SR.Config_base_report_exception_type,
+                                e.GetType().ToString()
+                            ); // at least this is better than no message
                         }
                     }
-                    // default to section if the assembly is not in the collection 
+                    // default to section if the assembly is not in the collection
                     // which may happen it the assembly is being loaded from the bindir
                     // and not named in configuration.
                     String source = ElementInformation.Properties["assemblies"].Source;
@@ -818,7 +980,8 @@ namespace System.Web.Configuration {
                     if (starDirective)
                         assemblyName = "*";
 
-                    if (Assemblies[assemblyName] != null) {
+                    if (Assemblies[assemblyName] != null)
+                    {
                         source = Assemblies[assemblyName].ElementInformation.Source;
                         lineNumber = Assemblies[assemblyName].ElementInformation.LineNumber;
                     }
@@ -826,12 +989,16 @@ namespace System.Web.Configuration {
                 }
             }
 
-            System.Web.Util.Debug.Trace("LoadAssembly", "Successfully loaded assembly '" + assemblyName + "'");
+            System.Web.Util.Debug.Trace(
+                "LoadAssembly",
+                "Successfully loaded assembly '" + assemblyName + "'"
+            );
 
             return retAssembly;
         }
 
-        internal Assembly[] LoadAllAssembliesFromAppDomainBinDirectory() {
+        internal Assembly[] LoadAllAssembliesFromAppDomainBinDirectory()
+        {
             // Get the path to the bin directory
             string binPath = HttpRuntime.BinDirectoryInternal;
             FileInfo[] binDlls;
@@ -839,37 +1006,53 @@ namespace System.Web.Configuration {
             Assembly[] assemblies = null;
             ArrayList list;
 
-            if (!FileUtil.DirectoryExists(binPath)) {
+            if (!FileUtil.DirectoryExists(binPath))
+            {
                 // This is expected to fail if there is no 'bin' dir
-                System.Web.Util.Debug.Trace("Template", "Failed to access bin dir \"" + binPath + "\"");
+                System.Web.Util.Debug.Trace(
+                    "Template",
+                    "Failed to access bin dir \"" + binPath + "\""
+                );
             }
-            else {
+            else
+            {
                 DirectoryInfo binPathDirectory = new DirectoryInfo(binPath);
                 // Get a list of all the DLL's in the bin directory
                 binDlls = binPathDirectory.GetFiles("*.dll");
 
-                if (binDlls.Length > 0) {
+                if (binDlls.Length > 0)
+                {
                     list = new ArrayList(binDlls.Length);
 
-                    for (int i = 0; i < binDlls.Length; i++) {
+                    for (int i = 0; i < binDlls.Length; i++)
+                    {
                         string assemblyName = Util.GetAssemblyNameFromFileName(binDlls[i].Name);
 
                         // Don't autoload generated assemblies in bin (VSWhidbey 467936)
-                        if (assemblyName.StartsWith(BuildManager.WebAssemblyNamePrefix, StringComparison.Ordinal))
+                        if (
+                            assemblyName.StartsWith(
+                                BuildManager.WebAssemblyNamePrefix,
+                                StringComparison.Ordinal
+                            )
+                        )
                             continue;
 
-                        if (!GetAssembliesCollection().IsRemoved(assemblyName)) {
+                        if (!GetAssembliesCollection().IsRemoved(assemblyName))
+                        {
                             assembly = LoadAssemblyHelper(assemblyName, true);
                         }
-                        if (assembly != null) {
+                        if (assembly != null)
+                        {
                             list.Add(assembly);
                         }
                     }
-                    assemblies = (System.Reflection.Assembly[])list.ToArray(typeof(System.Reflection.Assembly));
+                    assemblies = (System.Reflection.Assembly[])
+                        list.ToArray(typeof(System.Reflection.Assembly));
                 }
             }
 
-            if (assemblies == null) {
+            if (assemblies == null)
+            {
                 // If there were no assemblies loaded, return a zero-length array
                 assemblies = new Assembly[0];
             }
@@ -877,11 +1060,16 @@ namespace System.Web.Configuration {
             return assemblies;
         }
 
-        internal long RecompilationHash {
-            get {
-                if (_recompilationHash == -1) {
-                    lock (this) {
-                        if (_recompilationHash == -1) {
+        internal long RecompilationHash
+        {
+            get
+            {
+                if (_recompilationHash == -1)
+                {
+                    lock (this)
+                    {
+                        if (_recompilationHash == -1)
+                        {
                             _recompilationHash = CompilationUtil.GetRecompilationHash(this);
                         }
                     }
@@ -891,38 +1079,72 @@ namespace System.Web.Configuration {
             }
         }
 
-        protected override void PostDeserialize() {
+        protected override void PostDeserialize()
+        {
             // check to see if the _propCodeSubDirs was defined below the app level
             WebContext context = EvaluationContext.HostingContext as WebContext;
-            if (context != null) {
-                if (context.ApplicationLevel == WebApplicationLevel.BelowApplication) {
-                    if (CodeSubDirectories.ElementInformation.IsPresent) {
+            if (context != null)
+            {
+                if (context.ApplicationLevel == WebApplicationLevel.BelowApplication)
+                {
+                    if (CodeSubDirectories.ElementInformation.IsPresent)
+                    {
                         throw new ConfigurationErrorsException(
-                            SR.GetString(SR.Config_element_below_app_illegal,
-                                         _propCodeSubDirs.Name), CodeSubDirectories.ElementInformation.Source, CodeSubDirectories.ElementInformation.LineNumber);
+                            SR.GetString(
+                                SR.Config_element_below_app_illegal,
+                                _propCodeSubDirs.Name
+                            ),
+                            CodeSubDirectories.ElementInformation.Source,
+                            CodeSubDirectories.ElementInformation.LineNumber
+                        );
                     }
-                    if (BuildProviders.ElementInformation.IsPresent) {
+                    if (BuildProviders.ElementInformation.IsPresent)
+                    {
                         throw new ConfigurationErrorsException(
-                            SR.GetString(SR.Config_element_below_app_illegal,
-                                         _propBuildProviders.Name), BuildProviders.ElementInformation.Source, BuildProviders.ElementInformation.LineNumber);
+                            SR.GetString(
+                                SR.Config_element_below_app_illegal,
+                                _propBuildProviders.Name
+                            ),
+                            BuildProviders.ElementInformation.Source,
+                            BuildProviders.ElementInformation.LineNumber
+                        );
                     }
 
-                    if (FolderLevelBuildProviders.ElementInformation.IsPresent) {
+                    if (FolderLevelBuildProviders.ElementInformation.IsPresent)
+                    {
                         throw new ConfigurationErrorsException(
-                            SR.GetString(SR.Config_element_below_app_illegal,
-                                         _propFolderLevelBuildProviders.Name), FolderLevelBuildProviders.ElementInformation.Source, FolderLevelBuildProviders.ElementInformation.LineNumber);
+                            SR.GetString(
+                                SR.Config_element_below_app_illegal,
+                                _propFolderLevelBuildProviders.Name
+                            ),
+                            FolderLevelBuildProviders.ElementInformation.Source,
+                            FolderLevelBuildProviders.ElementInformation.LineNumber
+                        );
                     }
                 }
-
             }
         }
 
-        internal Type ControlBuilderInterceptorTypeInternal {
-            get {
-                if (_controlBuilderInterceptorType == null && !String.IsNullOrWhiteSpace(ControlBuilderInterceptorType)) {
-                    lock (this) {
-                        if (_controlBuilderInterceptorType == null) {
-                            _controlBuilderInterceptorType = CompilationUtil.LoadTypeWithChecks(ControlBuilderInterceptorType, typeof(ControlBuilderInterceptor), null, this, controlBuilderInterceptorTypeAttributeName);
+        internal Type ControlBuilderInterceptorTypeInternal
+        {
+            get
+            {
+                if (
+                    _controlBuilderInterceptorType == null
+                    && !String.IsNullOrWhiteSpace(ControlBuilderInterceptorType)
+                )
+                {
+                    lock (this)
+                    {
+                        if (_controlBuilderInterceptorType == null)
+                        {
+                            _controlBuilderInterceptorType = CompilationUtil.LoadTypeWithChecks(
+                                ControlBuilderInterceptorType,
+                                typeof(ControlBuilderInterceptor),
+                                null,
+                                this,
+                                controlBuilderInterceptorTypeAttributeName
+                            );
                         }
                     }
                 }
@@ -932,9 +1154,14 @@ namespace System.Web.Configuration {
 
         // This is called as the last step of the deserialization process before the newly created section is seen by the consumer.
         // We can use it to change defaults on-the-fly.
-        protected override void SetReadOnly() {
+        protected override void SetReadOnly()
+        {
             // Unless overridden, set <compilation targetFramework="4.5" />
-            ConfigUtil.SetFX45DefaultValue(this, _propTargetFramework, BinaryCompatibility.Current.TargetFramework.ToString());
+            ConfigUtil.SetFX45DefaultValue(
+                this,
+                _propTargetFramework,
+                BinaryCompatibility.Current.TargetFramework.ToString()
+            );
 
             base.SetReadOnly();
         }

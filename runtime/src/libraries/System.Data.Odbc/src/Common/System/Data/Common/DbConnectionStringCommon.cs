@@ -18,7 +18,11 @@ namespace System.Data.Common
         // OleDb
         internal const bool AdoNetPooler = false;
         internal const string FileName = "";
-        internal const int OleDbServices = ~(/*DBPROPVAL_OS_AGR_AFTERSESSION*/0x00000008 | /*DBPROPVAL_OS_CLIENTCURSOR*/0x00000004); // -13
+        internal const int OleDbServices = ~( /*DBPROPVAL_OS_AGR_AFTERSESSION*/
+            0x00000008
+            | /*DBPROPVAL_OS_CLIENTCURSOR*/
+            0x00000004
+        ); // -13
         internal const string Provider = "";
 
         // OracleClient
@@ -149,7 +153,6 @@ namespace System.Data.Common
         internal const string UserID = "user id";
     }
 
-
     internal static class DbConnectionStringBuilderUtil
     {
         internal static bool ConvertToBoolean(object value)
@@ -158,22 +161,34 @@ namespace System.Data.Common
             string? svalue = (value as string);
             if (null != svalue)
             {
-                if (StringComparer.OrdinalIgnoreCase.Equals(svalue, "true") || StringComparer.OrdinalIgnoreCase.Equals(svalue, "yes"))
+                if (
+                    StringComparer.OrdinalIgnoreCase.Equals(svalue, "true")
+                    || StringComparer.OrdinalIgnoreCase.Equals(svalue, "yes")
+                )
                 {
                     return true;
                 }
-                else if (StringComparer.OrdinalIgnoreCase.Equals(svalue, "false") || StringComparer.OrdinalIgnoreCase.Equals(svalue, "no"))
+                else if (
+                    StringComparer.OrdinalIgnoreCase.Equals(svalue, "false")
+                    || StringComparer.OrdinalIgnoreCase.Equals(svalue, "no")
+                )
                 {
                     return false;
                 }
                 else
                 {
-                    string tmp = svalue.Trim();  // Remove leading & trailing white space.
-                    if (StringComparer.OrdinalIgnoreCase.Equals(tmp, "true") || StringComparer.OrdinalIgnoreCase.Equals(tmp, "yes"))
+                    string tmp = svalue.Trim(); // Remove leading & trailing white space.
+                    if (
+                        StringComparer.OrdinalIgnoreCase.Equals(tmp, "true")
+                        || StringComparer.OrdinalIgnoreCase.Equals(tmp, "yes")
+                    )
                     {
                         return true;
                     }
-                    else if (StringComparer.OrdinalIgnoreCase.Equals(tmp, "false") || StringComparer.OrdinalIgnoreCase.Equals(tmp, "no"))
+                    else if (
+                        StringComparer.OrdinalIgnoreCase.Equals(tmp, "false")
+                        || StringComparer.OrdinalIgnoreCase.Equals(tmp, "no")
+                    )
                     {
                         return false;
                     }
@@ -197,22 +212,36 @@ namespace System.Data.Common
             string? svalue = (value as string);
             if (null != svalue)
             {
-                if (StringComparer.OrdinalIgnoreCase.Equals(svalue, "sspi") || StringComparer.OrdinalIgnoreCase.Equals(svalue, "true") || StringComparer.OrdinalIgnoreCase.Equals(svalue, "yes"))
+                if (
+                    StringComparer.OrdinalIgnoreCase.Equals(svalue, "sspi")
+                    || StringComparer.OrdinalIgnoreCase.Equals(svalue, "true")
+                    || StringComparer.OrdinalIgnoreCase.Equals(svalue, "yes")
+                )
                 {
                     return true;
                 }
-                else if (StringComparer.OrdinalIgnoreCase.Equals(svalue, "false") || StringComparer.OrdinalIgnoreCase.Equals(svalue, "no"))
+                else if (
+                    StringComparer.OrdinalIgnoreCase.Equals(svalue, "false")
+                    || StringComparer.OrdinalIgnoreCase.Equals(svalue, "no")
+                )
                 {
                     return false;
                 }
                 else
                 {
-                    string tmp = svalue.Trim();  // Remove leading & trailing white space.
-                    if (StringComparer.OrdinalIgnoreCase.Equals(tmp, "sspi") || StringComparer.OrdinalIgnoreCase.Equals(tmp, "true") || StringComparer.OrdinalIgnoreCase.Equals(tmp, "yes"))
+                    string tmp = svalue.Trim(); // Remove leading & trailing white space.
+                    if (
+                        StringComparer.OrdinalIgnoreCase.Equals(tmp, "sspi")
+                        || StringComparer.OrdinalIgnoreCase.Equals(tmp, "true")
+                        || StringComparer.OrdinalIgnoreCase.Equals(tmp, "yes")
+                    )
                     {
                         return true;
                     }
-                    else if (StringComparer.OrdinalIgnoreCase.Equals(tmp, "false") || StringComparer.OrdinalIgnoreCase.Equals(tmp, "no"))
+                    else if (
+                        StringComparer.OrdinalIgnoreCase.Equals(tmp, "false")
+                        || StringComparer.OrdinalIgnoreCase.Equals(tmp, "no")
+                    )
                     {
                         return false;
                     }

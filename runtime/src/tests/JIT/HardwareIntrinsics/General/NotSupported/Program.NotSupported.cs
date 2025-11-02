@@ -8,8 +8,6 @@ namespace JIT.HardwareIntrinsics.General._NotSupported
 {
     public static partial class Program
     {
-        static Program()
-        {
-        }
+        static Program() { }
     }
 }

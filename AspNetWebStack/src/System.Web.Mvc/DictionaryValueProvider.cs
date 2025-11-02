@@ -9,7 +9,10 @@ namespace System.Web.Mvc
     public class DictionaryValueProvider<TValue> : IValueProvider, IEnumerableValueProvider
     {
         private PrefixContainer _prefixContainer;
-        private readonly Dictionary<string, ValueProviderResult> _values = new Dictionary<string, ValueProviderResult>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, ValueProviderResult> _values = new Dictionary<
+            string,
+            ValueProviderResult
+        >(StringComparer.OrdinalIgnoreCase);
 
         public DictionaryValueProvider(IDictionary<string, TValue> dictionary, CultureInfo culture)
         {

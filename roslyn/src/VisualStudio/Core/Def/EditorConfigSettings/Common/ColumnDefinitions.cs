@@ -18,7 +18,6 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
             public const string Severity = Prefix + AnalyzerPrefix + "severityname";
             public const string Title = Prefix + AnalyzerPrefix + "titlename";
             public const string Location = Prefix + AnalyzerPrefix + "location";
-
         }
 
         internal static class CodeStyle
@@ -47,7 +46,6 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
             public const string Description = Prefix + FormattingPrefix + "descriptionname";
             public const string Value = Prefix + FormattingPrefix + "valuename";
             public const string Location = Prefix + FormattingPrefix + "location";
-
         }
     }
 }

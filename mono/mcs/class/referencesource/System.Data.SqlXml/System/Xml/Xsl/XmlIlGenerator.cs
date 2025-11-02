@@ -12,17 +12,16 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.Versioning;
 using System.Security;
 using System.Xml.XPath;
 using System.Xml.Xsl.IlGen;
 using System.Xml.Xsl.Qil;
 using System.Xml.Xsl.Runtime;
-using System.Runtime.Versioning;
 
-namespace System.Xml.Xsl {
-
+namespace System.Xml.Xsl
+{
     internal delegate void ExecuteDelegate(XmlQueryRuntime runtime);
-
 
     /// <summary>
     /// This internal class is the entry point for creating Msil assemblies from QilExpression.
@@ -53,7 +52,8 @@ namespace System.Xml.Xsl {
     /// As visits to each node in the tree start and end, various Analyzers are invoked.  These Analyzers incrementally
     /// collect and store information that is later used to generate faster and smaller code.
     /// </remarks>
-    internal class XmlILGenerator {
+    internal class XmlILGenerator
+    {
         private QilExpression qil;
         private GenerateHelper helper;
         private XmlILOptimizerVisitor optVisitor;
@@ -63,23 +63,22 @@ namespace System.Xml.Xsl {
         /// <summary>
         /// Always output debug information in debug mode.
         /// </summary>
-        public XmlILGenerator() {
-        }
+        public XmlILGenerator() { }
 
         /// <summary>
         /// Given the logical query plan (QilExpression) generate a physical query plan (MSIL) that can be executed.
         /// </summary>
         // SxS Note: The way the trace file names are created (hardcoded) is NOT SxS safe. However the files are
-        // created only for internal tracing purposes. In addition XmlILTrace class is not compiled into retail 
-        // builds. As a result it is fine to suppress the FxCop SxS warning.  
+        // created only for internal tracing purposes. In addition XmlILTrace class is not compiled into retail
+        // builds. As a result it is fine to suppress the FxCop SxS warning.
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.None)]
-        public XmlILCommand Generate(QilExpression query, TypeBuilder typeBldr) {
+        public XmlILCommand Generate(QilExpression query, TypeBuilder typeBldr)
+        {
             this.qil = query;
 
             bool useLRE = (
-                !this.qil.IsDebug &&
-                (typeBldr == null)
+                !this.qil.IsDebug && (typeBldr == null)
 #if DEBUG
                 && !XmlILTrace.IsEnabled // Dump assembly to disk; can't do this when using LRE
 #endif
@@ -89,13 +88,13 @@ namespace System.Xml.Xsl {
             // In debug code, ensure that input QIL is correct
             QilValidationVisitor.Validate(this.qil);
 
-        #if DEBUG
+#if DEBUG
             // Trace Qil before optimization
             XmlILTrace.WriteQil(this.qil, "qilbefore.xml");
 
             // Trace optimizations
             XmlILTrace.TraceOptimizations(this.qil, "qilopt.xml");
-        #endif
+#endif
 
             // Optimize and annotate the Qil graph
             this.optVisitor = new XmlILOptimizerVisitor(this.qil, !this.qil.IsDebug);
@@ -104,17 +103,20 @@ namespace System.Xml.Xsl {
             // In debug code, ensure that output QIL is correct
             QilValidationVisitor.Validate(this.qil);
 
-        #if DEBUG
+#if DEBUG
             // Trace Qil after optimization
             XmlILTrace.WriteQil(this.qil, "qilafter.xml");
-        #endif
+#endif
 
             XmlILModule.CreateModulePermissionSet.Assert();
 
             // Create module in which methods will be generated
-            if (typeBldr != null) {
+            if (typeBldr != null)
+            {
                 this.module = new XmlILModule(typeBldr);
-            } else {
+            }
+            else
+            {
                 this.module = new XmlILModule(useLRE, emitSymbols);
             }
 
@@ -126,16 +128,32 @@ namespace System.Xml.Xsl {
 
             // Create metadata for the Execute function, which is the entry point to the query
             // public static void Execute(XmlQueryRuntime);
-            MethodInfo methExec = this.module.DefineMethod("Execute", typeof(void), new Type[] { }, new string[] { }, XmlILMethodAttributes.NonUser);
+            MethodInfo methExec = this.module.DefineMethod(
+                "Execute",
+                typeof(void),
+                new Type[] { },
+                new string[] { },
+                XmlILMethodAttributes.NonUser
+            );
 
             // Create metadata for the root expression
             // public void Root()
             Debug.Assert(this.qil.Root != null);
-            XmlILMethodAttributes methAttrs = (this.qil.Root.SourceLine == null) ? XmlILMethodAttributes.NonUser : XmlILMethodAttributes.None;
-            MethodInfo methRoot = this.module.DefineMethod("Root", typeof(void), new Type[] { }, new string[] { }, methAttrs);
+            XmlILMethodAttributes methAttrs =
+                (this.qil.Root.SourceLine == null)
+                    ? XmlILMethodAttributes.NonUser
+                    : XmlILMethodAttributes.None;
+            MethodInfo methRoot = this.module.DefineMethod(
+                "Root",
+                typeof(void),
+                new Type[] { },
+                new string[] { },
+                methAttrs
+            );
 
             // Declare all early bound function objects
-            foreach (EarlyBoundInfo info in this.qil.EarlyBoundTypes) {
+            foreach (EarlyBoundInfo info in this.qil.EarlyBoundTypes)
+            {
                 this.helper.StaticData.DeclareEarlyBound(info.NamespaceUri, info.EarlyBoundType);
             }
 
@@ -161,19 +179,23 @@ namespace System.Xml.Xsl {
             );
 
             // Create static constructor that initializes XmlQueryStaticData instance at runtime
-            if (typeBldr != null) {
+            if (typeBldr != null)
+            {
                 CreateTypeInitializer(staticData);
 
                 // Finish up creation of the type
                 this.module.BakeMethods();
 
                 return null;
-            } else {
+            }
+            else
+            {
                 // Finish up creation of the type
                 this.module.BakeMethods();
 
                 // Create delegate over "Execute" method
-                ExecuteDelegate delExec = (ExecuteDelegate)this.module.CreateDelegate("Execute", typeof(ExecuteDelegate));
+                ExecuteDelegate delExec = (ExecuteDelegate)
+                    this.module.CreateDelegate("Execute", typeof(ExecuteDelegate));
                 return new XmlILCommand(delExec, staticData);
             }
         }
@@ -183,20 +205,23 @@ namespace System.Xml.Xsl {
         /// MethodBuilder.  Also, each QilExpression argument type should be converted to a corresponding Clr type.
         /// Each argument QilExpression node should be annotated with the resulting ParameterBuilder.
         /// </summary>
-        private void CreateFunctionMetadata(IList<QilNode> funcList) {
+        private void CreateFunctionMetadata(IList<QilNode> funcList)
+        {
             MethodInfo methInfo;
             Type[] paramTypes;
             string[] paramNames;
             Type typReturn;
             XmlILMethodAttributes methAttrs;
 
-            foreach (QilFunction ndFunc in funcList) {
+            foreach (QilFunction ndFunc in funcList)
+            {
                 paramTypes = new Type[ndFunc.Arguments.Count];
                 paramNames = new string[ndFunc.Arguments.Count];
 
                 // Loop through all other parameters and save their types in the array
-                for (int arg = 0; arg < ndFunc.Arguments.Count; arg ++) {
-                    QilParameter ndParam = (QilParameter) ndFunc.Arguments[arg];
+                for (int arg = 0; arg < ndFunc.Arguments.Count; arg++)
+                {
+                    QilParameter ndParam = (QilParameter)ndFunc.Arguments[arg];
                     Debug.Assert(ndParam.NodeType == QilNodeType.Parameter);
 
                     // Get the type of each argument as a Clr type
@@ -208,20 +233,32 @@ namespace System.Xml.Xsl {
                 }
 
                 // Get the type of the return value
-                if (XmlILConstructInfo.Read(ndFunc).PushToWriterLast) {
+                if (XmlILConstructInfo.Read(ndFunc).PushToWriterLast)
+                {
                     // Push mode functions do not have a return value
                     typReturn = typeof(void);
                 }
-                else {
+                else
+                {
                     // Pull mode functions have a return value
                     typReturn = XmlILTypeHelper.GetStorageType(ndFunc.XmlType);
                 }
 
                 // Create the method metadata
-                methAttrs = ndFunc.SourceLine == null ? XmlILMethodAttributes.NonUser : XmlILMethodAttributes.None;
-                methInfo = this.module.DefineMethod(ndFunc.DebugName, typReturn, paramTypes, paramNames, methAttrs);
+                methAttrs =
+                    ndFunc.SourceLine == null
+                        ? XmlILMethodAttributes.NonUser
+                        : XmlILMethodAttributes.None;
+                methInfo = this.module.DefineMethod(
+                    ndFunc.DebugName,
+                    typReturn,
+                    paramTypes,
+                    paramNames,
+                    methAttrs
+                );
 
-                for (int arg = 0; arg < ndFunc.Arguments.Count; arg ++) {
+                for (int arg = 0; arg < ndFunc.Arguments.Count; arg++)
+                {
                     // Set location of parameter on Let node annotation
                     XmlILAnnotation.Write(ndFunc.Arguments[arg]).ArgumentPosition = arg;
                 }
@@ -234,16 +271,27 @@ namespace System.Xml.Xsl {
         /// <summary>
         /// Generate metadata for a method that calculates a global value.
         /// </summary>
-        private void CreateGlobalValueMetadata(IList<QilNode> globalList) {
+        private void CreateGlobalValueMetadata(IList<QilNode> globalList)
+        {
             MethodInfo methInfo;
             Type typReturn;
             XmlILMethodAttributes methAttrs;
 
-            foreach (QilReference ndRef in globalList) {
+            foreach (QilReference ndRef in globalList)
+            {
                 // public T GlobalValue()
                 typReturn = XmlILTypeHelper.GetStorageType(ndRef.XmlType);
-                methAttrs = ndRef.SourceLine == null ? XmlILMethodAttributes.NonUser : XmlILMethodAttributes.None;
-                methInfo = this.module.DefineMethod(ndRef.DebugName.ToString(), typReturn, new Type[] {}, new string[] {}, methAttrs);
+                methAttrs =
+                    ndRef.SourceLine == null
+                        ? XmlILMethodAttributes.NonUser
+                        : XmlILMethodAttributes.None;
+                methInfo = this.module.DefineMethod(
+                    ndRef.DebugName.ToString(),
+                    typReturn,
+                    new Type[] { },
+                    new string[] { },
+                    methAttrs
+                );
 
                 // Annotate function with MethodBuilder
                 XmlILAnnotation.Write(ndRef).FunctionBinding = methInfo;
@@ -253,7 +301,8 @@ namespace System.Xml.Xsl {
         /// <summary>
         /// Generate the "Execute" method, which is the entry point to the query.
         /// </summary>
-        private MethodInfo GenerateExecuteFunction(MethodInfo methExec, MethodInfo methRoot) {
+        private MethodInfo GenerateExecuteFunction(MethodInfo methExec, MethodInfo methRoot)
+        {
             this.helper.MethodBegin(methExec, null, false);
 
             // Force some or all global values to be evaluated at start of query
@@ -272,17 +321,19 @@ namespace System.Xml.Xsl {
         /// <summary>
         /// Create and generate various helper methods, which are called by the generated code.
         /// </summary>
-        private void CreateHelperFunctions() {
+        private void CreateHelperFunctions()
+        {
             MethodInfo meth;
             Label lblClone;
 
             // public static XPathNavigator SyncToNavigator(XPathNavigator, XPathNavigator);
             meth = this.module.DefineMethod(
-                            "SyncToNavigator",
-                            typeof(XPathNavigator),
-                            new Type[] {typeof(XPathNavigator), typeof(XPathNavigator)},
-                            new string[] {null, null},
-                            XmlILMethodAttributes.NonUser | XmlILMethodAttributes.Raw);
+                "SyncToNavigator",
+                typeof(XPathNavigator),
+                new Type[] { typeof(XPathNavigator), typeof(XPathNavigator) },
+                new string[] { null, null },
+                XmlILMethodAttributes.NonUser | XmlILMethodAttributes.Raw
+            );
 
             this.helper.MethodBegin(meth, null, false);
 
@@ -310,15 +361,26 @@ namespace System.Xml.Xsl {
         /// <summary>
         /// Generate code to force evaluation of some or all global variables and/or parameters.
         /// </summary>
-        private void EvaluateGlobalValues(IList<QilNode> iterList) {
+        private void EvaluateGlobalValues(IList<QilNode> iterList)
+        {
             MethodInfo methInfo;
 
-            foreach (QilIterator ndIter in iterList) {
+            foreach (QilIterator ndIter in iterList)
+            {
                 // Evaluate global if generating debug code, or if global might have side effects
-                if (this.qil.IsDebug || OptimizerPatterns.Read(ndIter).MatchesPattern(OptimizerPatternName.MaybeSideEffects)) {
+                if (
+                    this.qil.IsDebug
+                    || OptimizerPatterns
+                        .Read(ndIter)
+                        .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
+                )
+                {
                     // Get MethodInfo that evaluates the global value and discard its return value
                     methInfo = XmlILAnnotation.Write(ndIter).FunctionBinding;
-                    Debug.Assert(methInfo != null, "MethodInfo for global value should have been created previously.");
+                    Debug.Assert(
+                        methInfo != null,
+                        "MethodInfo for global value should have been created previously."
+                    );
 
                     this.helper.LoadQueryRuntime();
                     this.helper.Call(methInfo);
@@ -330,14 +392,20 @@ namespace System.Xml.Xsl {
         /// <summary>
         /// Create static constructor that initializes XmlQueryStaticData instance at runtime.
         /// </summary>
-        public void CreateTypeInitializer(XmlQueryStaticData staticData) {
+        public void CreateTypeInitializer(XmlQueryStaticData staticData)
+        {
             byte[] data;
             Type[] ebTypes;
-            FieldInfo fldInitData, fldData, fldTypes;
+            FieldInfo fldInitData,
+                fldData,
+                fldTypes;
             ConstructorInfo cctor;
 
             staticData.GetObjectData(out data, out ebTypes);
-            fldInitData = this.module.DefineInitializedData("__" + XmlQueryStaticData.DataFieldName, data);
+            fldInitData = this.module.DefineInitializedData(
+                "__" + XmlQueryStaticData.DataFieldName,
+                data
+            );
             fldData = this.module.DefineField(XmlQueryStaticData.DataFieldName, typeof(object));
             fldTypes = this.module.DefineField(XmlQueryStaticData.TypesFieldName, typeof(Type[]));
 
@@ -352,14 +420,16 @@ namespace System.Xml.Xsl {
             this.helper.Call(XmlILMethods.InitializeArray);
             this.helper.Emit(OpCodes.Stsfld, fldData);
 
-            if (ebTypes != null) {
+            if (ebTypes != null)
+            {
                 // Type[] types = new Type[s_ebTypes.Length];
                 LocalBuilder locTypes = this.helper.DeclareLocal("$$$types", typeof(Type[]));
                 this.helper.LoadInteger(ebTypes.Length);
                 this.helper.Emit(OpCodes.Newarr, typeof(Type));
                 this.helper.Emit(OpCodes.Stloc, locTypes);
 
-                for (int idx = 0; idx < ebTypes.Length; idx++) {
+                for (int idx = 0; idx < ebTypes.Length; idx++)
+                {
                     // types[idx] = ebTypes[idx];
                     this.helper.Emit(OpCodes.Ldloc, locTypes);
                     this.helper.LoadInteger(idx);

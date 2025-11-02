@@ -5,27 +5,33 @@
 
 using System;
 
-struct S {
-  private int x;
-  public int X {
-    get { return x; }
-    set { this.x = value; }	// Cannot be used on non-variable ns.Value
-  }
-  public void Set(int x) {
-    this.x = x;
-  }
+struct S
+{
+    private int x;
+    public int X
+    {
+        get { return x; }
+        set { this.x = value; } // Cannot be used on non-variable ns.Value
+    }
+
+    public void Set(int x)
+    {
+        this.x = x;
+    }
 }
 
-class MyTest {
-  public static void Main(String[] args) {
-    S s = new S();
-    s.Set(11);
-    Console.WriteLine("s.X = {0}", s.X);
-    S? ns = s;
-    Console.WriteLine("s.X = {0} ns.Value.X = {1}", s.X, ns.Value.X);
-    ns.Value.Set(22);
-    Console.WriteLine("s.X = {0} ns.Value.X = {1}", s.X, ns.Value.X);
-    s.Set(33);
-    Console.WriteLine("s.X = {0} ns.Value.X = {1}", s.X, ns.Value.X);
-  }
+class MyTest
+{
+    public static void Main(String[] args)
+    {
+        S s = new S();
+        s.Set(11);
+        Console.WriteLine("s.X = {0}", s.X);
+        S? ns = s;
+        Console.WriteLine("s.X = {0} ns.Value.X = {1}", s.X, ns.Value.X);
+        ns.Value.Set(22);
+        Console.WriteLine("s.X = {0} ns.Value.X = {1}", s.X, ns.Value.X);
+        s.Set(33);
+        Console.WriteLine("s.X = {0} ns.Value.X = {1}", s.X, ns.Value.X);
+    }
 }

@@ -10,7 +10,7 @@ namespace Roslyn.Utilities
     /// <summary>
     /// Compares string based upon their ordinal equality.
     /// We use this comparer for string identifiers because it does exactly what we need and nothing more
-    /// The StringComparer.Ordinal as implemented by StringComparer is more complex to support 
+    /// The StringComparer.Ordinal as implemented by StringComparer is more complex to support
     /// case sensitive and insensitive compares depending on flags.
     /// It also defers to the default string hash function that might not be the best for our scenarios.
     /// </summary>
@@ -18,9 +18,7 @@ namespace Roslyn.Utilities
     {
         public static readonly StringOrdinalComparer Instance = new StringOrdinalComparer();
 
-        private StringOrdinalComparer()
-        {
-        }
+        private StringOrdinalComparer() { }
 
         bool IEqualityComparer<string>.Equals(string? a, string? b)
         {
@@ -36,7 +34,7 @@ namespace Roslyn.Utilities
         int IEqualityComparer<string>.GetHashCode(string s)
         {
             // PERF: the default string hashcode is not always good or fast and cannot be changed for compat reasons.
-            // We, however, can use anything we want in our dictionaries. 
+            // We, however, can use anything we want in our dictionaries.
             // Our typical scenario is a relatively short string (identifier)
             // FNV performs pretty well in such cases
             return Hash.GetFNVHashCode(s);

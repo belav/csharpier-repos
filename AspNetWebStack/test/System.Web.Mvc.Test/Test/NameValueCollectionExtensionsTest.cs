@@ -35,7 +35,10 @@ namespace System.Web.Mvc.Test
             IDictionary<string, object> dictionary = GetDictionary();
 
             // Act
-            collection.CopyTo(dictionary, true /* replaceExisting */);
+            collection.CopyTo(
+                dictionary,
+                true /* replaceExisting */
+            );
 
             // Assert
             Assert.Equal(3, dictionary.Count);
@@ -48,7 +51,16 @@ namespace System.Web.Mvc.Test
         public void CopyToWithNullCollectionThrows()
         {
             Assert.ThrowsArgumentNull(
-                delegate { NameValueCollectionExtensions.CopyTo(null /* collection */, null /* destination */); }, "collection");
+                delegate
+                {
+                    NameValueCollectionExtensions.CopyTo(
+                        null /* collection */
+                        ,
+                        null /* destination */
+                    );
+                },
+                "collection"
+            );
         }
 
         [Fact]
@@ -59,7 +71,14 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { collection.CopyTo(null /* destination */); }, "destination");
+                delegate
+                {
+                    collection.CopyTo(
+                        null /* destination */
+                    );
+                },
+                "destination"
+            );
         }
 
         private static NameValueCollection GetCollection()
@@ -67,7 +86,7 @@ namespace System.Web.Mvc.Test
             return new NameValueCollection
             {
                 { "Foo", "FooCollection" },
-                { "Baz", "BazCollection" }
+                { "Baz", "BazCollection" },
             };
         }
 

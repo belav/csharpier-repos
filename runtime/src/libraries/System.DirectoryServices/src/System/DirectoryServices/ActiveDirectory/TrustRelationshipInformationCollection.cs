@@ -9,7 +9,11 @@ namespace System.DirectoryServices.ActiveDirectory
     {
         internal TrustRelationshipInformationCollection() { }
 
-        internal TrustRelationshipInformationCollection(DirectoryContext context, string? source, ArrayList trusts)
+        internal TrustRelationshipInformationCollection(
+            DirectoryContext context,
+            string? source,
+            ArrayList trusts
+        )
         {
             for (int i = 0; i < trusts.Count; i++)
             {
@@ -20,7 +24,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     continue;
                 }
 
-                TrustRelationshipInformation info = new TrustRelationshipInformation(context, source, obj);
+                TrustRelationshipInformation info = new TrustRelationshipInformation(
+                    context,
+                    source,
+                    obj
+                );
                 Add(info);
             }
         }

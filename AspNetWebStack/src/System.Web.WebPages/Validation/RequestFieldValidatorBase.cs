@@ -15,15 +15,16 @@ namespace System.Web.WebPages
         private readonly bool _useUnvalidatedValues;
 
         protected RequestFieldValidatorBase(string errorMessage)
-            : this(errorMessage, useUnvalidatedValues: false)
-        {
-        }
+            : this(errorMessage, useUnvalidatedValues: false) { }
 
         protected RequestFieldValidatorBase(string errorMessage, bool useUnvalidatedValues)
         {
             if (String.IsNullOrEmpty(errorMessage))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "errorMessage");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "errorMessage"
+                );
             }
 
             _errorMessage = errorMessage;
@@ -57,7 +58,10 @@ namespace System.Web.WebPages
 
         protected static HttpContextBase GetHttpContext(ValidationContext validationContext)
         {
-            Debug.Assert(validationContext.ObjectInstance is HttpContextBase, "For our validation context, ObjectInstance must be an HttpContextBase instance.");
+            Debug.Assert(
+                validationContext.ObjectInstance is HttpContextBase,
+                "For our validation context, ObjectInstance must be an HttpContextBase instance."
+            );
             return (HttpContextBase)validationContext.ObjectInstance;
         }
 
@@ -66,7 +70,10 @@ namespace System.Web.WebPages
             if (IgnoreUseUnvalidatedValues)
             {
                 // Make sure we do not set this when we are hosted since this is only meant for unit test scenarios.
-                Debug.Assert(HttpContext.Current == null, "This flag should not be set when we are hosted.");
+                Debug.Assert(
+                    HttpContext.Current == null,
+                    "This flag should not be set when we are hosted."
+                );
                 return request.Form[field];
             }
             return _useUnvalidatedValues ? request.Unvalidated[field] : request.Form[field];

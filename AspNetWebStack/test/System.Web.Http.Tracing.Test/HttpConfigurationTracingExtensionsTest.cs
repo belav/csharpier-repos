@@ -12,8 +12,10 @@ namespace System.Web.Http.Test
         public void EnableSystemDiagnosticsTracing_Adds_TraceWriter()
         {
             HttpConfiguration config = new HttpConfiguration();
-            SystemDiagnosticsTraceWriter returnedTraceWriter = config.EnableSystemDiagnosticsTracing();
-            ITraceWriter setTraceWriter = config.Services.GetService(typeof(ITraceWriter)) as ITraceWriter;
+            SystemDiagnosticsTraceWriter returnedTraceWriter =
+                config.EnableSystemDiagnosticsTracing();
+            ITraceWriter setTraceWriter =
+                config.Services.GetService(typeof(ITraceWriter)) as ITraceWriter;
 
             Assert.ReferenceEquals(returnedTraceWriter, setTraceWriter);
         }
@@ -21,7 +23,10 @@ namespace System.Web.Http.Test
         [Fact]
         public void EnableSystemDiagnosticsTracing_ThrowsIfNull()
         {
-            Assert.ThrowsArgumentNull(() => HttpConfigurationTracingExtensions.EnableSystemDiagnosticsTracing(null), "configuration");
+            Assert.ThrowsArgumentNull(
+                () => HttpConfigurationTracingExtensions.EnableSystemDiagnosticsTracing(null),
+                "configuration"
+            );
         }
     }
 }

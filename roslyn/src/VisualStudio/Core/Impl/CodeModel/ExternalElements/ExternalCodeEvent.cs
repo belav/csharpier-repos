@@ -16,24 +16,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
     [ComDefaultInterface(typeof(EnvDTE80.CodeEvent))]
     public sealed class ExternalCodeEvent : AbstractExternalCodeMember, EnvDTE80.CodeEvent
     {
-        internal static EnvDTE80.CodeEvent Create(CodeModelState state, ProjectId projectId, IEventSymbol symbol)
+        internal static EnvDTE80.CodeEvent Create(
+            CodeModelState state,
+            ProjectId projectId,
+            IEventSymbol symbol
+        )
         {
             var element = new ExternalCodeEvent(state, projectId, symbol);
             return (EnvDTE80.CodeEvent)ComAggregate.CreateAggregatedObject(element);
         }
 
         private ExternalCodeEvent(CodeModelState state, ProjectId projectId, IEventSymbol symbol)
-            : base(state, projectId, symbol)
-        {
-        }
+            : base(state, projectId, symbol) { }
 
         private IEventSymbol EventSymbol
         {
             get { return (IEventSymbol)LookupSymbol(); }
         }
 
-        protected override EnvDTE.CodeElements GetParameters()
-            => throw new NotImplementedException();
+        protected override EnvDTE.CodeElements GetParameters() =>
+            throw new NotImplementedException();
 
         public override EnvDTE.vsCMElement Kind
         {
@@ -50,13 +52,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
                     throw Exceptions.ThrowEFail();
                 }
 
-                return ExternalCodeAccessorFunction.Create(this.State, this.ProjectId, symbol.AddMethod, this);
+                return ExternalCodeAccessorFunction.Create(
+                    this.State,
+                    this.ProjectId,
+                    symbol.AddMethod,
+                    this
+                );
             }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         // TODO: Verify VB implementation
@@ -68,15 +71,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
         // TODO: Verify VB implementation
         public EnvDTE80.vsCMOverrideKind OverrideKind
         {
-            get
-            {
-                throw Exceptions.ThrowENotImpl();
-            }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            get { throw Exceptions.ThrowENotImpl(); }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public EnvDTE.CodeFunction Remover
@@ -89,13 +85,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
                     throw Exceptions.ThrowEFail();
                 }
 
-                return ExternalCodeAccessorFunction.Create(this.State, this.ProjectId, symbol.RemoveMethod, this);
+                return ExternalCodeAccessorFunction.Create(
+                    this.State,
+                    this.ProjectId,
+                    symbol.RemoveMethod,
+                    this
+                );
             }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public EnvDTE.CodeFunction Thrower
@@ -109,26 +106,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
                     throw Exceptions.ThrowEFail();
                 }
 
-                return ExternalCodeAccessorFunction.Create(this.State, this.ProjectId, symbol.RaiseMethod, this);
+                return ExternalCodeAccessorFunction.Create(
+                    this.State,
+                    this.ProjectId,
+                    symbol.RaiseMethod,
+                    this
+                );
             }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public EnvDTE.CodeTypeRef Type
         {
-            get
-            {
-                return CodeTypeRef.Create(this.State, this, this.ProjectId, EventSymbol.Type);
-            }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            get { return CodeTypeRef.Create(this.State, this, this.ProjectId, EventSymbol.Type); }
+            set { throw Exceptions.ThrowEFail(); }
         }
     }
 }

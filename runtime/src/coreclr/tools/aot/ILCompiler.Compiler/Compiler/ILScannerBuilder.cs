@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysisFramework;
 using Internal.IL;
@@ -22,12 +21,19 @@ namespace ILCompiler
         // calling the Use/Configure methods and still get something reasonable back.
         private Logger _logger = Logger.Null;
         private DependencyTrackingLevel _dependencyTrackingLevel = DependencyTrackingLevel.None;
-        private IEnumerable<ICompilationRootProvider> _compilationRoots = Array.Empty<ICompilationRootProvider>();
+        private IEnumerable<ICompilationRootProvider> _compilationRoots =
+            Array.Empty<ICompilationRootProvider>();
         private MetadataManager _metadataManager;
         private InteropStubManager _interopStubManager = new EmptyInteropStubManager();
         private int _parallelism = -1;
 
-        internal ILScannerBuilder(CompilerTypeSystemContext context, CompilationModuleGroup compilationGroup, NameMangler mangler, ILProvider ilProvider, PreinitializationManager preinitializationManager)
+        internal ILScannerBuilder(
+            CompilerTypeSystemContext context,
+            CompilationModuleGroup compilationGroup,
+            NameMangler mangler,
+            ILProvider ilProvider,
+            PreinitializationManager preinitializationManager
+        )
         {
             _context = context;
             _compilationGroup = compilationGroup;
@@ -43,7 +49,9 @@ namespace ILCompiler
             return this;
         }
 
-        public ILScannerBuilder UseCompilationRoots(IEnumerable<ICompilationRootProvider> compilationRoots)
+        public ILScannerBuilder UseCompilationRoots(
+            IEnumerable<ICompilationRootProvider> compilationRoots
+        )
         {
             _compilationRoots = compilationRoots;
             return this;
@@ -75,10 +83,26 @@ namespace ILCompiler
 
         public IILScanner ToILScanner()
         {
-            var nodeFactory = new ILScanNodeFactory(_context, _compilationGroup, _metadataManager, _interopStubManager, _nameMangler, _preinitializationManager);
-            DependencyAnalyzerBase<NodeFactory> graph = _dependencyTrackingLevel.CreateDependencyGraph(nodeFactory);
+            var nodeFactory = new ILScanNodeFactory(
+                _context,
+                _compilationGroup,
+                _metadataManager,
+                _interopStubManager,
+                _nameMangler,
+                _preinitializationManager
+            );
+            DependencyAnalyzerBase<NodeFactory> graph =
+                _dependencyTrackingLevel.CreateDependencyGraph(nodeFactory);
 
-            return new ILScanner(graph, nodeFactory, _compilationRoots, _ilProvider, new NullDebugInformationProvider(), _logger, _parallelism);
+            return new ILScanner(
+                graph,
+                nodeFactory,
+                _compilationRoots,
+                _ilProvider,
+                new NullDebugInformationProvider(),
+                _logger,
+                _parallelism
+            );
         }
     }
 }

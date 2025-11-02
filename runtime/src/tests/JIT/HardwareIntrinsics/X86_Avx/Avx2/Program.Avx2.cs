@@ -8,9 +8,6 @@ namespace JIT.HardwareIntrinsics.X86._Avx2
 {
     public static partial class Program
     {
-        static Program()
-        {
-
-        }
+        static Program() { }
     }
 }

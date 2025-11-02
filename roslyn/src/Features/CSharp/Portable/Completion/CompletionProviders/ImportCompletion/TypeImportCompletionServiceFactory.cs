@@ -11,22 +11,25 @@ using Microsoft.CodeAnalysis.Shared.TestHooks;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
-    [ExportLanguageServiceFactory(typeof(ITypeImportCompletionService), LanguageNames.CSharp), Shared]
+    [
+        ExportLanguageServiceFactory(typeof(ITypeImportCompletionService), LanguageNames.CSharp),
+        Shared
+    ]
     internal sealed class TypeImportCompletionServiceFactory : ILanguageServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TypeImportCompletionServiceFactory()
-        {
-        }
+        public TypeImportCompletionServiceFactory() { }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-            => new CSharpTypeImportCompletionService(languageServices.LanguageServices.SolutionServices);
+        public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+            new CSharpTypeImportCompletionService(
+                languageServices.LanguageServices.SolutionServices
+            );
 
-        private class CSharpTypeImportCompletionService(SolutionServices services) : AbstractTypeImportCompletionService(services)
+        private class CSharpTypeImportCompletionService(SolutionServices services)
+            : AbstractTypeImportCompletionService(services)
         {
-            protected override string GenericTypeSuffix
-                => "<>";
+            protected override string GenericTypeSuffix => "<>";
 
             protected override bool IsCaseSensitive => true;
 

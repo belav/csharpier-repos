@@ -5,17 +5,12 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-public class CMyException : System.Exception
-{
-}
+public class CMyException : System.Exception { }
 
 public class CTest
 {
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    private static void UseByte(byte x)
-    {
-    }
-
+    private static void UseByte(byte x) { }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     private static unsafe void CheckDoubleAlignment(double* p)
@@ -31,15 +26,14 @@ public class CTest
         System.Threading.Thread.Sleep(100);
     }
 
-
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     private static unsafe void TestArrays1(int n, double d)
     {
-        int i, j;
+        int i,
+            j;
 
         double[][] a = new double[n][];
         byte[][] b = new byte[n][];
-
 
         for (i = 0; i < n; i++)
         {

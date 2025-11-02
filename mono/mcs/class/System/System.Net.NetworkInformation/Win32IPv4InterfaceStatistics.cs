@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,64 +28,76 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if WIN_PLATFORM
-namespace System.Net.NetworkInformation {
-	class Win32IPv4InterfaceStatistics : IPv4InterfaceStatistics
-	{
-		Win32_MIB_IFROW info;
+namespace System.Net.NetworkInformation
+{
+    class Win32IPv4InterfaceStatistics : IPv4InterfaceStatistics
+    {
+        Win32_MIB_IFROW info;
 
-		public Win32IPv4InterfaceStatistics (Win32_MIB_IFROW info)
-		{
-			this.info = info;
-		}
+        public Win32IPv4InterfaceStatistics(Win32_MIB_IFROW info)
+        {
+            this.info = info;
+        }
 
-		public override long BytesReceived {
-			get { return info.InOctets; }
-		}
+        public override long BytesReceived
+        {
+            get { return info.InOctets; }
+        }
 
-		public override long BytesSent {
-			get { return info.OutOctets; }
-		}
+        public override long BytesSent
+        {
+            get { return info.OutOctets; }
+        }
 
-		public override long IncomingPacketsDiscarded {
-			get { return info.InDiscards; }
-		}
+        public override long IncomingPacketsDiscarded
+        {
+            get { return info.InDiscards; }
+        }
 
-		public override long IncomingPacketsWithErrors {
-			get { return info.InErrors; }
-		}
+        public override long IncomingPacketsWithErrors
+        {
+            get { return info.InErrors; }
+        }
 
-		public override long IncomingUnknownProtocolPackets {
-			get { return info.InUnknownProtos; }
-		}
+        public override long IncomingUnknownProtocolPackets
+        {
+            get { return info.InUnknownProtos; }
+        }
 
-		public override long NonUnicastPacketsReceived {
-			get { return info.InNUcastPkts; }
-		}
+        public override long NonUnicastPacketsReceived
+        {
+            get { return info.InNUcastPkts; }
+        }
 
-		public override long NonUnicastPacketsSent {
-			get { return info.OutNUcastPkts; }
-		}
+        public override long NonUnicastPacketsSent
+        {
+            get { return info.OutNUcastPkts; }
+        }
 
-		public override long OutgoingPacketsDiscarded {
-			get { return info.OutDiscards; }
-		}
+        public override long OutgoingPacketsDiscarded
+        {
+            get { return info.OutDiscards; }
+        }
 
-		public override long OutgoingPacketsWithErrors {
-			get { return info.OutErrors; }
-		}
+        public override long OutgoingPacketsWithErrors
+        {
+            get { return info.OutErrors; }
+        }
 
-		public override long OutputQueueLength {
-			get { return info.OutQLen; }
-		}
+        public override long OutputQueueLength
+        {
+            get { return info.OutQLen; }
+        }
 
-		public override long UnicastPacketsReceived {
-			get { return info.InUcastPkts; }
-		}
+        public override long UnicastPacketsReceived
+        {
+            get { return info.InUcastPkts; }
+        }
 
-		public override long UnicastPacketsSent {
-			get { return info.OutUcastPkts; }
-		}
-
-	}
+        public override long UnicastPacketsSent
+        {
+            get { return info.OutUcastPkts; }
+        }
+    }
 }
 #endif

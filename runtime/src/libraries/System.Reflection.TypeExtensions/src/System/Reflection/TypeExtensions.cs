@@ -8,8 +8,10 @@ namespace System.Reflection
     public static class TypeExtensions
     {
         public static ConstructorInfo? GetConstructor(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] this Type type,
-            Type[] types)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                this Type type,
+            Type[] types
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -17,7 +19,9 @@ namespace System.Reflection
         }
 
         public static ConstructorInfo[] GetConstructors(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] this Type type)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                this Type type
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -25,8 +29,13 @@ namespace System.Reflection
         }
 
         public static ConstructorInfo[] GetConstructors(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)] this Type type,
-            BindingFlags bindingAttr)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                this Type type,
+            BindingFlags bindingAttr
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -36,11 +45,14 @@ namespace System.Reflection
         public static MemberInfo[] GetDefaultMembers(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicFields
-                | DynamicallyAccessedMemberTypes.PublicMethods
-                | DynamicallyAccessedMemberTypes.PublicEvents
-                | DynamicallyAccessedMemberTypes.PublicProperties
-                | DynamicallyAccessedMemberTypes.PublicConstructors
-                | DynamicallyAccessedMemberTypes.PublicNestedTypes)] this Type type)
+                    | DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.PublicEvents
+                    | DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.PublicNestedTypes
+            )]
+                this Type type
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -48,8 +60,10 @@ namespace System.Reflection
         }
 
         public static EventInfo? GetEvent(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] this Type type,
-            string name)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
+                this Type type,
+            string name
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -57,9 +71,14 @@ namespace System.Reflection
         }
 
         public static EventInfo? GetEvent(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)] this Type type,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicEvents
+                    | DynamicallyAccessedMemberTypes.NonPublicEvents
+            )]
+                this Type type,
             string name,
-            BindingFlags bindingAttr)
+            BindingFlags bindingAttr
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -67,7 +86,8 @@ namespace System.Reflection
         }
 
         public static EventInfo[] GetEvents(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] this Type type)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] this Type type
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -75,8 +95,13 @@ namespace System.Reflection
         }
 
         public static EventInfo[] GetEvents(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)] this Type type,
-            BindingFlags bindingAttr)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicEvents
+                    | DynamicallyAccessedMemberTypes.NonPublicEvents
+            )]
+                this Type type,
+            BindingFlags bindingAttr
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -84,8 +109,10 @@ namespace System.Reflection
         }
 
         public static FieldInfo? GetField(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] this Type type,
-            string name)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+                this Type type,
+            string name
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -93,9 +120,14 @@ namespace System.Reflection
         }
 
         public static FieldInfo? GetField(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)] this Type type,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicFields
+                    | DynamicallyAccessedMemberTypes.NonPublicFields
+            )]
+                this Type type,
             string name,
-            BindingFlags bindingAttr)
+            BindingFlags bindingAttr
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -103,7 +135,8 @@ namespace System.Reflection
         }
 
         public static FieldInfo[] GetFields(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] this Type type)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] this Type type
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -111,8 +144,13 @@ namespace System.Reflection
         }
 
         public static FieldInfo[] GetFields(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)] this Type type,
-            BindingFlags bindingAttr)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicFields
+                    | DynamicallyAccessedMemberTypes.NonPublicFields
+            )]
+                this Type type,
+            BindingFlags bindingAttr
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -127,7 +165,8 @@ namespace System.Reflection
         }
 
         public static Type[] GetInterfaces(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] this Type type)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] this Type type
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -137,12 +176,15 @@ namespace System.Reflection
         public static MemberInfo[] GetMember(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicFields
-                | DynamicallyAccessedMemberTypes.PublicMethods
-                | DynamicallyAccessedMemberTypes.PublicEvents
-                | DynamicallyAccessedMemberTypes.PublicProperties
-                | DynamicallyAccessedMemberTypes.PublicConstructors
-                | DynamicallyAccessedMemberTypes.PublicNestedTypes)] this Type type,
-            string name)
+                    | DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.PublicEvents
+                    | DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.PublicNestedTypes
+            )]
+                this Type type,
+            string name
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -152,7 +194,8 @@ namespace System.Reflection
         public static MemberInfo[] GetMember(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] this Type type,
             string name,
-            BindingFlags bindingAttr)
+            BindingFlags bindingAttr
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -162,11 +205,14 @@ namespace System.Reflection
         public static MemberInfo[] GetMembers(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicFields
-                | DynamicallyAccessedMemberTypes.PublicMethods
-                | DynamicallyAccessedMemberTypes.PublicEvents
-                | DynamicallyAccessedMemberTypes.PublicProperties
-                | DynamicallyAccessedMemberTypes.PublicConstructors
-                | DynamicallyAccessedMemberTypes.PublicNestedTypes)] this Type type)
+                    | DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.PublicEvents
+                    | DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.PublicNestedTypes
+            )]
+                this Type type
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -175,7 +221,8 @@ namespace System.Reflection
 
         public static MemberInfo[] GetMembers(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] this Type type,
-            BindingFlags bindingAttr)
+            BindingFlags bindingAttr
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -183,8 +230,10 @@ namespace System.Reflection
         }
 
         public static MethodInfo? GetMethod(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] this Type type,
-            string name)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                this Type type,
+            string name
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -192,9 +241,14 @@ namespace System.Reflection
         }
 
         public static MethodInfo? GetMethod(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] this Type type,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                this Type type,
             string name,
-            BindingFlags bindingAttr)
+            BindingFlags bindingAttr
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -202,9 +256,11 @@ namespace System.Reflection
         }
 
         public static MethodInfo? GetMethod(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] this Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                this Type type,
             string name,
-            Type[] types)
+            Type[] types
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -212,7 +268,9 @@ namespace System.Reflection
         }
 
         public static MethodInfo[] GetMethods(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] this Type type)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                this Type type
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -220,8 +278,13 @@ namespace System.Reflection
         }
 
         public static MethodInfo[] GetMethods(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] this Type type,
-            BindingFlags bindingAttr)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                this Type type,
+            BindingFlags bindingAttr
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -229,9 +292,14 @@ namespace System.Reflection
         }
 
         public static Type? GetNestedType(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)] this Type type,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicNestedTypes
+                    | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+            )]
+                this Type type,
             string name,
-            BindingFlags bindingAttr)
+            BindingFlags bindingAttr
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -239,8 +307,13 @@ namespace System.Reflection
         }
 
         public static Type[] GetNestedTypes(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)] this Type type,
-            BindingFlags bindingAttr)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicNestedTypes
+                    | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+            )]
+                this Type type,
+            BindingFlags bindingAttr
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -248,7 +321,9 @@ namespace System.Reflection
         }
 
         public static PropertyInfo[] GetProperties(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] this Type type)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                this Type type
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -256,8 +331,13 @@ namespace System.Reflection
         }
 
         public static PropertyInfo[] GetProperties(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] this Type type,
-            BindingFlags bindingAttr)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.NonPublicProperties
+            )]
+                this Type type,
+            BindingFlags bindingAttr
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -265,8 +345,10 @@ namespace System.Reflection
         }
 
         public static PropertyInfo? GetProperty(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] this Type type,
-            string name)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                this Type type,
+            string name
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -274,9 +356,14 @@ namespace System.Reflection
         }
 
         public static PropertyInfo? GetProperty(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] this Type type,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.NonPublicProperties
+            )]
+                this Type type,
             string name,
-            BindingFlags bindingAttr)
+            BindingFlags bindingAttr
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -284,9 +371,11 @@ namespace System.Reflection
         }
 
         public static PropertyInfo? GetProperty(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] this Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                this Type type,
             string name,
-            Type? returnType)
+            Type? returnType
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -294,24 +383,32 @@ namespace System.Reflection
         }
 
         public static PropertyInfo? GetProperty(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] this Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                this Type type,
             string name,
             Type? returnType,
-            Type[] types)
+            Type[] types
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
             return type.GetProperty(name, returnType, types);
         }
 
-        public static bool IsAssignableFrom(this Type type, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] Type? c)
+        public static bool IsAssignableFrom(
+            this Type type,
+            [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] Type? c
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
             return type.IsAssignableFrom(c);
         }
 
-        public static bool IsInstanceOfType(this Type type, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? o)
+        public static bool IsInstanceOfType(
+            this Type type,
+            [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] object? o
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -392,7 +489,6 @@ namespace System.Reflection
 
     public static class MemberInfoExtensions
     {
-
         /// <summary>
         /// Determines if there is a metadata token available for the given member.
         /// <see cref="GetMetadataToken(MemberInfo)"/> throws <see cref="InvalidOperationException"/> otherwise.

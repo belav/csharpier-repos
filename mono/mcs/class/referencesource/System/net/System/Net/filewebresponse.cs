@@ -4,12 +4,13 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
-    using System.Runtime.Serialization;
-    using System.IO;
-    using System.Globalization;
-    using System.Security.Permissions;
+namespace System.Net
+{
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
 
     [Serializable]
     public class FileWebResponse : WebResponse, ISerializable, ICloseEx
@@ -17,7 +18,7 @@ namespace System.Net {
         const int DefaultFileStreamBufferSize = 8192;
         const string DefaultFileContentType = "application/octet-stream";
 
-    // fields
+        // fields
 
         bool m_closed;
         long m_contentLength;
@@ -26,16 +27,23 @@ namespace System.Net {
         Stream m_stream;
         Uri m_uri;
 
-    // constructors
+        // constructors
 
-        internal FileWebResponse(FileWebRequest request, Uri uri, FileAccess access, bool asyncHint) {
-            GlobalLog.Enter("FileWebResponse::FileWebResponse", "uri="+uri+", access="+access+", asyncHint="+asyncHint);
-            try {
+        internal FileWebResponse(FileWebRequest request, Uri uri, FileAccess access, bool asyncHint)
+        {
+            GlobalLog.Enter(
+                "FileWebResponse::FileWebResponse",
+                "uri=" + uri + ", access=" + access + ", asyncHint=" + asyncHint
+            );
+            try
+            {
                 m_fileAccess = access;
-                if (access == FileAccess.Write) {
+                if (access == FileAccess.Write)
+                {
                     m_stream = Stream.Null;
-                } else {
-
+                }
+                else
+                {
                     //
                     // apparently, specifying async when the stream will be read
                     // synchronously, or vice versa, can lead to a 10x perf hit.
@@ -44,46 +52,76 @@ namespace System.Net {
                     // or GetResponse to supply the async flag to the stream ctor
                     //
 
-                    m_stream = new FileWebStream(request,
-                                                 uri.LocalPath,
-                                                 FileMode.Open,
-                                                 FileAccess.Read,
-                                                 FileShare.Read,
-                                                 DefaultFileStreamBufferSize,
-                                                 asyncHint
-                                                 );
+                    m_stream = new FileWebStream(
+                        request,
+                        uri.LocalPath,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Read,
+                        DefaultFileStreamBufferSize,
+                        asyncHint
+                    );
                     m_contentLength = m_stream.Length;
                 }
                 m_headers = new WebHeaderCollection(WebHeaderCollectionType.FileWebResponse);
-                m_headers.AddInternal(HttpKnownHeaderNames.ContentLength, m_contentLength.ToString(NumberFormatInfo.InvariantInfo));
+                m_headers.AddInternal(
+                    HttpKnownHeaderNames.ContentLength,
+                    m_contentLength.ToString(NumberFormatInfo.InvariantInfo)
+                );
                 m_headers.AddInternal(HttpKnownHeaderNames.ContentType, DefaultFileContentType);
                 m_uri = uri;
-            } catch (Exception e) {
-                Exception ex = new WebException(e.Message, e, WebExceptionStatus.ConnectFailure, null);
+            }
+            catch (Exception e)
+            {
+                Exception ex = new WebException(
+                    e.Message,
+                    e,
+                    WebExceptionStatus.ConnectFailure,
+                    null
+                );
                 GlobalLog.LeaveException("FileWebResponse::FileWebResponse", ex);
                 throw ex;
-            }            
+            }
             GlobalLog.Leave("FileWebResponse::FileWebResponse");
         }
 
         //
         // ISerializable constructor
         //
-        [Obsolete("Serialization is obsoleted for this type. http://go.microsoft.com/fwlink/?linkid=14202")]
-        protected FileWebResponse(SerializationInfo serializationInfo, StreamingContext streamingContext):base(serializationInfo, streamingContext) {
-            m_headers       = (WebHeaderCollection)serializationInfo.GetValue("headers", typeof(WebHeaderCollection));
-            m_uri           = (Uri)serializationInfo.GetValue("uri", typeof(Uri));
+        [Obsolete(
+            "Serialization is obsoleted for this type. http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        protected FileWebResponse(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+            : base(serializationInfo, streamingContext)
+        {
+            m_headers = (WebHeaderCollection)
+                serializationInfo.GetValue("headers", typeof(WebHeaderCollection));
+            m_uri = (Uri)serializationInfo.GetValue("uri", typeof(Uri));
             m_contentLength = serializationInfo.GetInt64("contentLength");
-            m_fileAccess    = (FileAccess )serializationInfo.GetInt32("fileAccess");
+            m_fileAccess = (FileAccess)serializationInfo.GetInt32("fileAccess");
         }
 
         //
         // ISerializable method
         //
         /// <internalonly/>
-        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase", Justification = "System.dll is still using pre-v4 security model and needs this demand")]
-        [SecurityPermission(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.SerializationFormatter, SerializationFormatter=true)]
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",
+            Justification = "System.dll is still using pre-v4 security model and needs this demand"
+        )]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter,
+            SerializationFormatter = true
+        )]
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             GetObjectData(serializationInfo, streamingContext);
         }
@@ -92,8 +130,11 @@ namespace System.Net {
         // FxCop: provide some way for derived classes to access GetObjectData even if the derived class
         // explicitly re-inherits ISerializable.
         //
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter=true)]
-        protected override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        protected override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             serializationInfo.AddValue("headers", m_headers, typeof(WebHeaderCollection));
             serializationInfo.AddValue("uri", m_uri, typeof(Uri));
@@ -102,63 +143,77 @@ namespace System.Net {
             base.GetObjectData(serializationInfo, streamingContext);
         }
 
-    // properties
+        // properties
 
-        public override long ContentLength {
-            get {
+        public override long ContentLength
+        {
+            get
+            {
                 CheckDisposed();
                 return m_contentLength;
             }
         }
 
-        public override string ContentType {
-            get {
+        public override string ContentType
+        {
+            get
+            {
                 CheckDisposed();
                 return DefaultFileContentType;
             }
         }
 
-        public override WebHeaderCollection Headers {
-            get {
+        public override WebHeaderCollection Headers
+        {
+            get
+            {
                 CheckDisposed();
                 return m_headers;
             }
         }
-        
+
         // For portability only
-        public override bool SupportsHeaders {
-            get {
-                return true;
-            }
+        public override bool SupportsHeaders
+        {
+            get { return true; }
         }
 
-        public override Uri ResponseUri {
-            get {
+        public override Uri ResponseUri
+        {
+            get
+            {
                 CheckDisposed();
                 return m_uri;
             }
         }
 
-    // methods
+        // methods
 
-        private void CheckDisposed() {
-            if (m_closed) {
+        private void CheckDisposed()
+        {
+            if (m_closed)
+            {
                 throw new ObjectDisposedException(this.GetType().FullName);
             }
         }
 
-        public override void Close() {
+        public override void Close()
+        {
             ((ICloseEx)this).CloseEx(CloseExState.Normal);
         }
 
-        void ICloseEx.CloseEx(CloseExState closeState) {
+        void ICloseEx.CloseEx(CloseExState closeState)
+        {
             GlobalLog.Enter("FileWebResponse::Close()");
-            try {
-                if (!m_closed) {
+            try
+            {
+                if (!m_closed)
+                {
                     m_closed = true;
 
                     Stream chkStream = m_stream;
-                    if (chkStream!=null) {
+                    if (chkStream != null)
+                    {
                         if (chkStream is ICloseEx)
                             ((ICloseEx)chkStream).CloseEx(closeState);
                         else
@@ -167,17 +222,21 @@ namespace System.Net {
                     }
                 }
             }
-            finally {
+            finally
+            {
                 GlobalLog.Leave("FileWebResponse::Close()");
             }
         }
 
-        public override Stream GetResponseStream() {
+        public override Stream GetResponseStream()
+        {
             GlobalLog.Enter("FileWebResponse::GetResponseStream()");
-            try {
+            try
+            {
                 CheckDisposed();
             }
-            finally {
+            finally
+            {
                 GlobalLog.Leave("FileWebResponse::GetResponseStream()");
             }
             return m_stream;

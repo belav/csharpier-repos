@@ -39,8 +39,7 @@ public abstract class LanguageBasedSelector<T>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual T Select(string? language)
-        => Select(language, Services);
+    public virtual T Select(string? language) => Select(language, Services);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,10 +60,14 @@ public abstract class LanguageBasedSelector<T>
             return legacyService;
         }
 
-        var matches = services.Where(s => string.Equals(s.Language, language, StringComparison.OrdinalIgnoreCase)).ToList();
+        var matches = services
+            .Where(s => string.Equals(s.Language, language, StringComparison.OrdinalIgnoreCase))
+            .ToList();
         if (matches.Count == 0)
         {
-            throw new OperationException(DesignStrings.NoLanguageService(language, typeof(T).ShortDisplayName()));
+            throw new OperationException(
+                DesignStrings.NoLanguageService(language, typeof(T).ShortDisplayName())
+            );
         }
 
         return matches.Last();

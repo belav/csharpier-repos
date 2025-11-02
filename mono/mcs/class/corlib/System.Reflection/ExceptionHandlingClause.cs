@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,92 +31,74 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace System.Reflection {
+namespace System.Reflection
+{
+    [ComVisible(true)]
+    [StructLayout(LayoutKind.Sequential)]
+    public class ExceptionHandlingClause
+    {
+        #region Sync with reflection.h
+        internal Type catch_type;
+        internal int filter_offset;
+        internal ExceptionHandlingClauseOptions flags;
+        internal int try_offset;
+        internal int try_length;
+        internal int handler_offset;
+        internal int handler_length;
+        #endregion
 
-	[ComVisible (true)]
-	[StructLayout (LayoutKind.Sequential)]
-	public
-	class ExceptionHandlingClause {
-		#region Sync with reflection.h
-		internal Type catch_type;
-		internal int filter_offset;
-		internal ExceptionHandlingClauseOptions flags;
-		internal int try_offset;
-		internal int try_length;
-		internal int handler_offset;
-		internal int handler_length;
-		#endregion
+        protected ExceptionHandlingClause() { }
 
-		protected
-		ExceptionHandlingClause () {
-		}
+        public virtual Type CatchType
+        {
+            get { return catch_type; }
+        }
 
-		public
-		virtual
-		Type CatchType {
-			get {
-				return catch_type;
-			}
-		}
+        public virtual int FilterOffset
+        {
+            get { return filter_offset; }
+        }
 
-		public
-		virtual
-		int FilterOffset {
-			get {
-				return filter_offset;
-			}
-		}
+        public virtual ExceptionHandlingClauseOptions Flags
+        {
+            get { return flags; }
+        }
 
-		public
-		virtual
-		ExceptionHandlingClauseOptions Flags {
-			get {
-				return flags;
-			}
-		}
+        public virtual int HandlerLength
+        {
+            get { return handler_length; }
+        }
 
-		public
-		virtual
-		int HandlerLength {
-			get {
-				return handler_length;
-			}
-		}
+        public virtual int HandlerOffset
+        {
+            get { return handler_offset; }
+        }
 
-		public
-		virtual
-		int HandlerOffset {
-			get {
-				return handler_offset;
-			}
-		}
+        public virtual int TryLength
+        {
+            get { return try_length; }
+        }
 
-		public
-		virtual
-		int TryLength {
-			get {
-				return try_length;
-			}
-		}
+        public virtual int TryOffset
+        {
+            get { return try_offset; }
+        }
 
-		public
-		virtual
-		int TryOffset {
-			get {
-				return try_offset;
-			}
-		}
-
-		public override string ToString ()
-		{
-			string ret = String.Format ("Flags={0}, TryOffset={1}, TryLength={2}, HandlerOffset={3}, HandlerLength={4}",
-						    flags, try_offset, try_length, handler_offset, handler_length);
-			if (catch_type != null)
-				ret = String.Format ("{0}, CatchType={1}", ret, catch_type);
-			if (flags == ExceptionHandlingClauseOptions.Filter)
-				ret = String.Format ("{0}, FilterOffset={1}", ret, filter_offset);
-			return ret;
-		}
-	}
-
+        public override string ToString()
+        {
+            string ret = String.Format(
+                "Flags={0}, TryOffset={1}, TryLength={2}, HandlerOffset={3}, HandlerLength={4}",
+                flags,
+                try_offset,
+                try_length,
+                handler_offset,
+                handler_length
+            );
+            if (catch_type != null)
+                ret = String.Format("{0}, CatchType={1}", ret, catch_type);
+            if (flags == ExceptionHandlingClauseOptions.Filter)
+                ret = String.Format("{0}, FilterOffset={1}", ret, filter_offset);
+            return ret;
+        }
+    }
 }

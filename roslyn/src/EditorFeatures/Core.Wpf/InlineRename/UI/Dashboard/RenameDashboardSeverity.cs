@@ -10,6 +10,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
     {
         None,
         Info,
-        Error
+        Error,
     }
 }

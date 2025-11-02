@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Reflection.Runtime.General;
 using System.Text;
-
 using StructLayoutAttribute = System.Runtime.InteropServices.StructLayoutAttribute;
 
 namespace System.Reflection.Runtime.TypeInfos
@@ -12,7 +11,9 @@ namespace System.Reflection.Runtime.TypeInfos
     //
     // The runtime's implementation of TypeInfo for function pointer types.
     //
-    internal sealed partial class RuntimeFunctionPointerTypeInfo : RuntimeTypeInfo, IRuntimeMemberInfoWithNoMetadataDefinition
+    internal sealed partial class RuntimeFunctionPointerTypeInfo
+        : RuntimeTypeInfo,
+            IRuntimeMemberInfoWithNoMetadataDefinition
     {
         private RuntimeFunctionPointerTypeInfo(UnificationKey key)
         {
@@ -27,14 +28,13 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         public UnificationKey Key
         {
-            get
-            {
-                return _key;
-            }
+            get { return _key; }
         }
 
         public override Assembly Assembly => typeof(object).Assembly;
-        public override IEnumerable<CustomAttributeData> CustomAttributes => Array.Empty<CustomAttributeData>();
+        public override IEnumerable<CustomAttributeData> CustomAttributes =>
+            Array.Empty<CustomAttributeData>();
+
         public override Type[] GetFunctionPointerCallingConventions() => Type.EmptyTypes;
 
         public override bool ContainsGenericParameters
@@ -52,12 +52,14 @@ namespace System.Reflection.Runtime.TypeInfos
             }
         }
         public override string FullName => null!;
+
         public override bool HasSameMetadataDefinitionAs(MemberInfo other)
         {
             ArgumentNullException.ThrowIfNull(other);
 
             // This logic is written to match CoreCLR's behavior.
-            return other is RuntimeType runtimeType && runtimeType.GetRuntimeTypeInfo() is IRuntimeMemberInfoWithNoMetadataDefinition;
+            return other is RuntimeType runtimeType
+                && runtimeType.GetRuntimeTypeInfo() is IRuntimeMemberInfoWithNoMetadataDefinition;
         }
 
         public override bool IsFunctionPointer => true;
@@ -78,6 +80,7 @@ namespace System.Reflection.Runtime.TypeInfos
         public override string Namespace => null!;
 
         public override StructLayoutAttribute StructLayoutAttribute => null;
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -103,7 +106,9 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         public override TypeAttributes Attributes => TypeAttributes.Public;
+
         public override int GetHashCode() => _key.GetHashCode();
+
         internal override RuntimeTypeInfo InternalDeclaringType => null;
         public override string Name => string.Empty;
         internal override string InternalFullNameOfAssembly => string.Empty;

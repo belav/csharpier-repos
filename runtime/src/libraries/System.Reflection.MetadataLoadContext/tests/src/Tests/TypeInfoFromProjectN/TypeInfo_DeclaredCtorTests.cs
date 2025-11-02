@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Collections.Generic;
+using Xunit;
 
 namespace System.Reflection.Tests
 {
@@ -70,6 +70,7 @@ namespace System.Reflection.Tests
     {
         public static int Members = 3;
         public static int MembersEverything = 9;
+
         static StaticClass() { }
     }
 
@@ -77,11 +78,15 @@ namespace System.Reflection.Tests
     {
         public static int Members = 9;
         public static int MembersEverything = 15;
+
         static ClassWithMultipleConstructors() { }
 
         public ClassWithMultipleConstructors() { }
+
         public ClassWithMultipleConstructors(TimeSpan ts) { }
+
         public ClassWithMultipleConstructors(object o1, object o2) { }
+
         public ClassWithMultipleConstructors(object obj0, int i4) { }
     }
 
@@ -91,13 +96,16 @@ namespace System.Reflection.Tests
         public static int MembersEverything = 11;
 
         static TypeInfoBaseClass() { }
+
         public TypeInfoBaseClass() { }
+
         public TypeInfoBaseClass(short i2) { }
     }
 
     public class TypeInfoSubClass : TypeInfoBaseClass
     {
         public TypeInfoSubClass(string s) { }
+
         public TypeInfoSubClass(short i2) { }
     }
 }

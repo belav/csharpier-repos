@@ -26,39 +26,22 @@ namespace System.Activities.Statements
         }
 
         [DefaultValue(null)]
-        public Activity<T> Expression
-        {
-            get;
-            set;
-        }
+        public Activity<T> Expression { get; set; }
 
         [DefaultValue(null)]
-        public FlowNode Default
-        {
-            get;
-            set;
-        }
+        public FlowNode Default { get; set; }
 
         [Fx.Tag.KnownXamlExternal]
         public IDictionary<T, FlowNode> Cases
         {
-            get
-            {
-                return this.cases;
-            }
+            get { return this.cases; }
         }
 
         [DefaultValue(FlowSwitch<T>.DefaultDisplayName)]
         public string DisplayName
         {
-            get
-            {
-                return this.displayName;
-            }
-            set
-            {
-                this.displayName = value;
-            }
+            get { return this.displayName; }
+            set { this.displayName = value; }
         }
 
         internal override void OnOpen(Flowchart owner, NativeActivityMetadata metadata)

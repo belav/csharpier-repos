@@ -12,10 +12,14 @@ namespace Microsoft.Extensions.DependencyModel
 {
     internal static class Utf8JsonReaderExtensions
     {
-        public static bool IsTokenTypeProperty(this ref Utf8JsonReader reader)
-            => reader.TokenType == JsonTokenType.PropertyName;
+        public static bool IsTokenTypeProperty(this ref Utf8JsonReader reader) =>
+            reader.TokenType == JsonTokenType.PropertyName;
 
-        public static bool TryReadStringProperty(this ref Utf8JsonReader reader, out string? name, out string? value)
+        public static bool TryReadStringProperty(
+            this ref Utf8JsonReader reader,
+            out string? name,
+            out string? value
+        )
         {
             name = null;
             value = null;
@@ -132,15 +136,28 @@ namespace Microsoft.Extensions.DependencyModel
             return reader.GetBoolean();
         }
 
-        private static FormatException CreateUnexpectedException(ref Utf8JsonReader reader, string expected)
+        private static FormatException CreateUnexpectedException(
+            ref Utf8JsonReader reader,
+            string expected
+        )
         {
             // Replace with public API once https://github.com/dotnet/runtime/issues/28482 is fixed
             object boxedState = reader.CurrentState;
-            long lineNumber = (long)(typeof(JsonReaderState).GetField("_lineNumber", BindingFlags.Instance | BindingFlags.NonPublic)?.GetValue(boxedState) ?? -1);
-            long bytePositionInLine = (long)(typeof(JsonReaderState).GetField("_bytePositionInLine", BindingFlags.Instance | BindingFlags.NonPublic)?.GetValue(boxedState) ?? -1);
+            long lineNumber = (long)(
+                typeof(JsonReaderState)
+                    .GetField("_lineNumber", BindingFlags.Instance | BindingFlags.NonPublic)
+                    ?.GetValue(boxedState) ?? -1
+            );
+            long bytePositionInLine = (long)(
+                typeof(JsonReaderState)
+                    .GetField("_bytePositionInLine", BindingFlags.Instance | BindingFlags.NonPublic)
+                    ?.GetValue(boxedState) ?? -1
+            );
 
-            return new FormatException($"Unexpected character encountered, excepted '{expected}' " +
-                                       $"at line {lineNumber} position {bytePositionInLine}");
+            return new FormatException(
+                $"Unexpected character encountered, excepted '{expected}' "
+                    + $"at line {lineNumber} position {bytePositionInLine}"
+            );
         }
     }
 }

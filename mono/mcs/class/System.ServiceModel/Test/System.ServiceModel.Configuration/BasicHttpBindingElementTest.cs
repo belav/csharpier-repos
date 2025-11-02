@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,32 +35,38 @@ using System.ServiceModel;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {
-	[TestFixture]
-	public class BasicHttpBindingElementTest
-	{
-		class Poker : BasicHttpBindingElement
-		{
-			public Type GetBindingElementType () {
-				return BindingElementType;
-			}
-		}
+    [TestFixture]
+    public class BasicHttpBindingElementTest
+    {
+        class Poker : BasicHttpBindingElement
+        {
+            public Type GetBindingElementType()
+            {
+                return BindingElementType;
+            }
+        }
 
-		[Test]
-		public void BindingElementType () {
-			Poker poker = new Poker ();
-			Assert.AreEqual (typeof (BasicHttpBinding), poker.GetBindingElementType (), "BindingElementType");
-		}
+        [Test]
+        public void BindingElementType()
+        {
+            Poker poker = new Poker();
+            Assert.AreEqual(
+                typeof(BasicHttpBinding),
+                poker.GetBindingElementType(),
+                "BindingElementType"
+            );
+        }
 
-		[Test]
-		public void DefaultTextEncoding ()
-		{
-			var b1 = new BasicHttpBinding ();
-			var b2 = new BasicHttpBinding ();
-			Assert.AreEqual (b1.TextEncoding, b2.TextEncoding, "#1");
-			
-			var element = new BasicHttpBindingElement ();
-			Assert.AreEqual (element.TextEncoding, b1.TextEncoding, "#2");
-		}
-	}
+        [Test]
+        public void DefaultTextEncoding()
+        {
+            var b1 = new BasicHttpBinding();
+            var b2 = new BasicHttpBinding();
+            Assert.AreEqual(b1.TextEncoding, b2.TextEncoding, "#1");
+
+            var element = new BasicHttpBindingElement();
+            Assert.AreEqual(element.TextEncoding, b1.TextEncoding, "#2");
+        }
+    }
 }
 #endif

@@ -5,22 +5,26 @@
 namespace System.ServiceModel.Channels
 {
     using System;
+    using System.Diagnostics;
+    using System.IO;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics;
     using System.Xml;
-    using System.IO;
-    using System.Runtime.Diagnostics;
     using SMTD = System.ServiceModel.Diagnostics.Application.TD;
-    using System.Diagnostics;
 
-    class ByteStreamMessageEncoder : MessageEncoder, IStreamedMessageEncoder, IWebMessageEncoderHelper, ITraceSourceStringProvider
+    class ByteStreamMessageEncoder
+        : MessageEncoder,
+            IStreamedMessageEncoder,
+            IWebMessageEncoderHelper,
+            ITraceSourceStringProvider
     {
         string traceSourceString;
         string maxReceivedMessageSizeExceededResourceString;
         string maxSentMessageSizeExceededResourceString;
         XmlDictionaryReaderQuotas quotas;
         XmlDictionaryReaderQuotas bufferedReadReaderQuotas;
-        
+
         /// <summary>
         /// Specifies if this encoder produces Messages that provide a body reader (with the Message.GetReaderAtBodyContents() method) positioned on content.
         /// See the comments on 'IWebMessageEncoderHelper' for more info.
@@ -35,7 +39,9 @@ namespace System.ServiceModel.Channels
             this.bufferedReadReaderQuotas = EncoderHelpers.GetBufferedReadQuotas(this.quotas);
 
             this.maxSentMessageSizeExceededResourceString = SR.MaxSentMessageSizeExceeded("{0}");
-            this.maxReceivedMessageSizeExceededResourceString = SR.MaxReceivedMessageSizeExceeded("{0}");
+            this.maxReceivedMessageSizeExceededResourceString = SR.MaxReceivedMessageSizeExceeded(
+                "{0}"
+            );
         }
 
         void IWebMessageEncoderHelper.EnableBodyReaderMoveToContent()
@@ -75,12 +81,18 @@ namespace System.ServiceModel.Channels
                 TD.ByteStreamMessageDecodingStart();
             }
 
-            Message message = ByteStreamMessage.CreateMessage(stream, this.quotas, this.moveBodyReaderToContent);
+            Message message = ByteStreamMessage.CreateMessage(
+                stream,
+                this.quotas,
+                this.moveBodyReaderToContent
+            );
             message.Properties.Encoder = this;
 
             if (SMTD.StreamedMessageReadByEncoderIsEnabled())
             {
-                SMTD.StreamedMessageReadByEncoder(EventTraceActivityHelper.TryExtractActivity(message, true));
+                SMTD.StreamedMessageReadByEncoder(
+                    EventTraceActivityHelper.TryExtractActivity(message, true)
+                );
             }
 
             if (MessageLogger.LogMessagesAtTransportLevel)
@@ -91,7 +103,11 @@ namespace System.ServiceModel.Channels
             return message;
         }
 
-        public override Message ReadMessage(ArraySegment<byte> buffer, BufferManager bufferManager, string contentType)
+        public override Message ReadMessage(
+            ArraySegment<byte> buffer,
+            BufferManager bufferManager,
+            string contentType
+        )
         {
             if (buffer.Array == null)
             {
@@ -108,9 +124,16 @@ namespace System.ServiceModel.Channels
                 TD.ByteStreamMessageDecodingStart();
             }
 
-            ByteStreamBufferedMessageData messageData = new ByteStreamBufferedMessageData(buffer, bufferManager);
+            ByteStreamBufferedMessageData messageData = new ByteStreamBufferedMessageData(
+                buffer,
+                bufferManager
+            );
 
-            Message message = ByteStreamMessage.CreateMessage(messageData, this.bufferedReadReaderQuotas, this.moveBodyReaderToContent);
+            Message message = ByteStreamMessage.CreateMessage(
+                messageData,
+                this.bufferedReadReaderQuotas,
+                this.moveBodyReaderToContent
+            );
             message.Properties.Encoder = this;
 
             if (SMTD.MessageReadByEncoderIsEnabled())
@@ -118,7 +141,8 @@ namespace System.ServiceModel.Channels
                 SMTD.MessageReadByEncoder(
                     EventTraceActivityHelper.TryExtractActivity(message, true),
                     buffer.Count,
-                    this);
+                    this
+                );
             }
 
             if (MessageLogger.LogMessagesAtTransportLevel)
@@ -164,11 +188,18 @@ namespace System.ServiceModel.Channels
 
             if (SMTD.StreamedMessageWrittenByEncoderIsEnabled())
             {
-                SMTD.StreamedMessageWrittenByEncoder(eventTraceActivity ?? EventTraceActivityHelper.TryExtractActivity(message));
+                SMTD.StreamedMessageWrittenByEncoder(
+                    eventTraceActivity ?? EventTraceActivityHelper.TryExtractActivity(message)
+                );
             }
         }
 
-        public override IAsyncResult BeginWriteMessage(Message message, Stream stream, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWriteMessage(
+            Message message,
+            Stream stream,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (message == null)
             {
@@ -195,7 +226,12 @@ namespace System.ServiceModel.Channels
             WriteMessageAsyncResult.End(result);
         }
 
-        public override ArraySegment<byte> WriteMessage(Message message, int maxMessageSize, BufferManager bufferManager, int messageOffset)
+        public override ArraySegment<byte> WriteMessage(
+            Message message,
+            int maxMessageSize,
+            BufferManager bufferManager,
+            int messageOffset
+        )
         {
             if (message == null)
             {
@@ -207,11 +243,19 @@ namespace System.ServiceModel.Channels
             }
             if (maxMessageSize < 0)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange("maxMessageSize", maxMessageSize, SR.ArgumentOutOfMinRange(0));
+                throw FxTrace.Exception.ArgumentOutOfRange(
+                    "maxMessageSize",
+                    maxMessageSize,
+                    SR.ArgumentOutOfMinRange(0)
+                );
             }
             if (messageOffset < 0)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange("messageOffset", messageOffset, SR.ArgumentOutOfMinRange(0));
+                throw FxTrace.Exception.ArgumentOutOfRange(
+                    "messageOffset",
+                    messageOffset,
+                    SR.ArgumentOutOfMinRange(0)
+                );
             }
 
             EventTraceActivity eventTraceActivity = null;
@@ -227,7 +271,14 @@ namespace System.ServiceModel.Channels
             ArraySegment<byte> messageBuffer;
             int size;
 
-            using (BufferManagerOutputStream stream = new BufferManagerOutputStream(maxSentMessageSizeExceededResourceString, 0, maxMessageSize, bufferManager))
+            using (
+                BufferManagerOutputStream stream = new BufferManagerOutputStream(
+                    maxSentMessageSizeExceededResourceString,
+                    0,
+                    maxMessageSize,
+                    bufferManager
+                )
+            )
             {
                 stream.Skip(messageOffset);
                 using (XmlWriter writer = new XmlByteStreamWriter(stream, true))
@@ -235,7 +286,11 @@ namespace System.ServiceModel.Channels
                     message.WriteMessage(writer);
                     writer.Flush();
                     byte[] bytes = stream.ToArray(out size);
-                    messageBuffer = new ArraySegment<byte>(bytes, messageOffset, size - messageOffset);
+                    messageBuffer = new ArraySegment<byte>(
+                        bytes,
+                        messageOffset,
+                        size - messageOffset
+                    );
                 }
             }
 
@@ -244,17 +299,25 @@ namespace System.ServiceModel.Channels
                 SMTD.MessageWrittenByEncoder(
                     eventTraceActivity ?? EventTraceActivityHelper.TryExtractActivity(message),
                     messageBuffer.Count,
-                    this);
+                    this
+                );
             }
 
             if (MessageLogger.LogMessagesAtTransportLevel)
             {
                 // DevDiv#486728
                 // Don't pass in a buffer manager to avoid returning 'messageBuffer" to the bufferManager twice.
-                ByteStreamBufferedMessageData messageData = new ByteStreamBufferedMessageData(messageBuffer, null);
+                ByteStreamBufferedMessageData messageData = new ByteStreamBufferedMessageData(
+                    messageBuffer,
+                    null
+                );
                 using (XmlReader reader = new XmlBufferedByteStreamReader(messageData, this.quotas))
                 {
-                    MessageLogger.LogMessage(ref message, reader, MessageLoggingSource.TransportSend);
+                    MessageLogger.LogMessage(
+                        ref message,
+                        reader,
+                        MessageLoggingSource.TransportSend
+                    );
                 }
             }
 
@@ -303,7 +366,12 @@ namespace System.ServiceModel.Channels
             XmlByteStreamWriter writer;
             EventTraceActivity eventTraceActivity;
 
-            public WriteMessageAsyncResult(Message message, Stream stream, AsyncCallback callback, object state)
+            public WriteMessageAsyncResult(
+                Message message,
+                Stream stream,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.message = message;
@@ -326,7 +394,11 @@ namespace System.ServiceModel.Channels
 
                 try
                 {
-                    IAsyncResult result = message.BeginWriteMessage(writer, PrepareAsyncCompletion(HandleWriteMessage), this);
+                    IAsyncResult result = message.BeginWriteMessage(
+                        writer,
+                        PrepareAsyncCompletion(HandleWriteMessage),
+                        this
+                    );
                     completeSelf = SyncContinue(result);
                 }
                 catch (Exception ex)
@@ -355,7 +427,9 @@ namespace System.ServiceModel.Channels
                 if (SMTD.MessageWrittenAsynchronouslyByEncoderIsEnabled())
                 {
                     SMTD.MessageWrittenAsynchronouslyByEncoder(
-                        thisPtr.eventTraceActivity ?? EventTraceActivityHelper.TryExtractActivity(thisPtr.message));
+                        thisPtr.eventTraceActivity
+                            ?? EventTraceActivityHelper.TryExtractActivity(thisPtr.message)
+                    );
                 }
 
                 return true;
@@ -384,6 +458,5 @@ namespace System.ServiceModel.Channels
                 AsyncResult.End<WriteMessageAsyncResult>(result);
             }
         }
-
     }
 }

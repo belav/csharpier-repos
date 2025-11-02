@@ -2,9 +2,9 @@ using System;
 
 static class Test
 {
-    public static void Main ()
+    public static void Main()
     {
-        var a = new { X = 1, Y = 2, };
+        var a = new { X = 1, Y = 2 };
         Console.WriteLine(a);
     }
 }

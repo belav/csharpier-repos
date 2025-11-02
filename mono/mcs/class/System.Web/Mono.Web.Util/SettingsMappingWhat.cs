@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,82 +34,106 @@ using System.Xml.XPath;
 
 namespace Mono.Web.Util
 {
-	public enum SettingsMappingWhatOperation
-	{
-		Add,
-		Clear,
-		Replace,
-		Remove
-	}
+    public enum SettingsMappingWhatOperation
+    {
+        Add,
+        Clear,
+        Replace,
+        Remove,
+    }
 
-	public class SettingsMappingWhatContents
-	{
-		SettingsMappingWhatOperation _operation;
-		Dictionary <string, string> _attributes = new Dictionary <string, string> ();
+    public class SettingsMappingWhatContents
+    {
+        SettingsMappingWhatOperation _operation;
+        Dictionary<string, string> _attributes = new Dictionary<string, string>();
 
-		public SettingsMappingWhatOperation Operation {
-			get { return _operation; }
-		}
+        public SettingsMappingWhatOperation Operation
+        {
+            get { return _operation; }
+        }
 
-		public Dictionary <string, string> Attributes {
-			get { return _attributes; }
-		}
-    
-		public SettingsMappingWhatContents (XPathNavigator nav, SettingsMappingWhatOperation operation)
-		{
-			_operation = operation;
-      
-			if (nav.HasAttributes) {	
-				nav.MoveToFirstAttribute ();
-				_attributes.Add (nav.Name, nav.Value);
-	
-				while (nav.MoveToNextAttribute ())
-					_attributes.Add (nav.Name, nav.Value);
-			}
-		}
-	}
-  
-	public class SettingsMappingWhat
-	{    
-		string _value;
-		List <SettingsMappingWhatContents> _contents;
-    
-		public string Value {
-			get { return _value; }
-		}
+        public Dictionary<string, string> Attributes
+        {
+            get { return _attributes; }
+        }
 
-		public List <SettingsMappingWhatContents> Contents {
-			get { return _contents; }
-		}
-    
-		public SettingsMappingWhat (XPathNavigator nav)
-		{
-			_value = nav.GetAttribute ("value", String.Empty);
+        public SettingsMappingWhatContents(
+            XPathNavigator nav,
+            SettingsMappingWhatOperation operation
+        )
+        {
+            _operation = operation;
 
-			XPathNodeIterator iter = nav.Select ("./*");
-			XPathNavigator cur;
+            if (nav.HasAttributes)
+            {
+                nav.MoveToFirstAttribute();
+                _attributes.Add(nav.Name, nav.Value);
 
-			_contents = new List <SettingsMappingWhatContents> ();
-			while (iter.MoveNext ()) {
-				cur = iter.Current;
-				switch (cur.LocalName) {
-					case "replace":
-						_contents.Add (new SettingsMappingWhatContents (cur, SettingsMappingWhatOperation.Replace));
-						break;
+                while (nav.MoveToNextAttribute())
+                    _attributes.Add(nav.Name, nav.Value);
+            }
+        }
+    }
 
-					case "add":
-						_contents.Add (new SettingsMappingWhatContents (cur, SettingsMappingWhatOperation.Add));
-						break;
+    public class SettingsMappingWhat
+    {
+        string _value;
+        List<SettingsMappingWhatContents> _contents;
 
-					case "clear":
-						_contents.Add (new SettingsMappingWhatContents (cur, SettingsMappingWhatOperation.Clear));
-						break;
+        public string Value
+        {
+            get { return _value; }
+        }
 
-					case "remove":
-						_contents.Add (new SettingsMappingWhatContents (cur, SettingsMappingWhatOperation.Remove));
-						break;
-				}
-			}
-		}
-	}
+        public List<SettingsMappingWhatContents> Contents
+        {
+            get { return _contents; }
+        }
+
+        public SettingsMappingWhat(XPathNavigator nav)
+        {
+            _value = nav.GetAttribute("value", String.Empty);
+
+            XPathNodeIterator iter = nav.Select("./*");
+            XPathNavigator cur;
+
+            _contents = new List<SettingsMappingWhatContents>();
+            while (iter.MoveNext())
+            {
+                cur = iter.Current;
+                switch (cur.LocalName)
+                {
+                    case "replace":
+                        _contents.Add(
+                            new SettingsMappingWhatContents(
+                                cur,
+                                SettingsMappingWhatOperation.Replace
+                            )
+                        );
+                        break;
+
+                    case "add":
+                        _contents.Add(
+                            new SettingsMappingWhatContents(cur, SettingsMappingWhatOperation.Add)
+                        );
+                        break;
+
+                    case "clear":
+                        _contents.Add(
+                            new SettingsMappingWhatContents(cur, SettingsMappingWhatOperation.Clear)
+                        );
+                        break;
+
+                    case "remove":
+                        _contents.Add(
+                            new SettingsMappingWhatContents(
+                                cur,
+                                SettingsMappingWhatOperation.Remove
+                            )
+                        );
+                        break;
+                }
+            }
+        }
+    }
 }

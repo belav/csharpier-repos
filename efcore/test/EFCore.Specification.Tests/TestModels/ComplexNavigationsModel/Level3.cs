@@ -44,15 +44,17 @@ public class Level3
             return false;
         }
 
-        return ReferenceEquals(this, obj) ? true : obj.GetType() == GetType() && Equals((Level3)obj);
+        return ReferenceEquals(this, obj)
+            ? true
+            : obj.GetType() == GetType() && Equals((Level3)obj);
     }
 
-    protected bool Equals(Level3 other)
-        => Id == other.Id
-            && string.Equals(Name, other.Name)
-            && Level2_Required_Id == other.Level2_Required_Id
-            && Level2_Optional_Id == other.Level2_Optional_Id;
+    protected bool Equals(Level3 other) =>
+        Id == other.Id
+        && string.Equals(Name, other.Name)
+        && Level2_Required_Id == other.Level2_Required_Id
+        && Level2_Optional_Id == other.Level2_Optional_Id;
 
-    public override int GetHashCode()
-        => HashCode.Combine(Id, Name, Level2_Required_Id, Level2_Optional_Id);
+    public override int GetHashCode() =>
+        HashCode.Combine(Id, Name, Level2_Required_Id, Level2_Optional_Id);
 }

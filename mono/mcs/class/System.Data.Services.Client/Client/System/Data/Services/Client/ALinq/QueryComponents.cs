@@ -1,14 +1,13 @@
 ﻿//Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
-
 
 namespace System.Data.Services.Client
 {
@@ -36,7 +35,13 @@ namespace System.Data.Services.Client
 
         #endregion Private fields.
 
-        internal QueryComponents(Uri uri, Version version, Type lastSegmentType, LambdaExpression projection, Dictionary<Expression, Expression> normalizerRewrites)
+        internal QueryComponents(
+            Uri uri,
+            Version version,
+            Type lastSegmentType,
+            LambdaExpression projection,
+            Dictionary<Expression, Expression> normalizerRewrites
+        )
         {
             this.projection = projection;
             this.normalizerRewrites = normalizerRewrites;
@@ -49,49 +54,30 @@ namespace System.Data.Services.Client
 
         internal Uri Uri
         {
-            get
-            {
-                return this.uri;
-            }
+            get { return this.uri; }
         }
 
         internal Dictionary<Expression, Expression> NormalizerRewrites
         {
-            get 
-            { 
-                return this.normalizerRewrites; 
-            }
+            get { return this.normalizerRewrites; }
         }
 
         internal LambdaExpression Projection
         {
-            get
-            {
-                return this.projection;
-            }
+            get { return this.projection; }
         }
 
         internal Type LastSegmentType
         {
-            get
-            {
-                return this.lastSegmentType;
-            }
+            get { return this.lastSegmentType; }
         }
 
         internal Version Version
         {
-            get
-            {
-                return this.version;
-            }
+            get { return this.version; }
+#if !ASTORIA_LIGHT
 
-#if !ASTORIA_LIGHT            
-            
-           set
-            {
-                this.version = value;
-            }
+            set { this.version = value; }
 #endif
         }
 

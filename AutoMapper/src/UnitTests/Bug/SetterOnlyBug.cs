@@ -4,20 +4,16 @@
     {
         public class MappingTests : AutoMapperSpecBase
         {
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg
-                    .CreateMap<Source, Desitination>()
-                    .ForMember("Property", o => o.Ignore());
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateMap<Source, Desitination>().ForMember("Property", o => o.Ignore());
+                });
 
             [Fact]
             public void TestMapping()
             {
-                var source = new Source
-                {
-                    Property = "Something"
-                };
+                var source = new Source { Property = "Something" };
                 var destination = Mapper.Map<Source, Desitination>(source);
 
                 destination.GetProperty().ShouldBeNull();

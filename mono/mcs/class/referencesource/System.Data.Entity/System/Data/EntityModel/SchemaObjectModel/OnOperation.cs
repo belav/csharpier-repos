@@ -21,13 +21,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
     {
         private Operation _Operation;
         private Action _Action;
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parentElement"></param>
         /// <param name="operation"></param>
         public OnOperation(RelationshipEnd parentElement, Operation operation)
-        : base(parentElement)
+            : base(parentElement)
         {
             Operation = operation;
         }
@@ -37,14 +38,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// </summary>
         public Operation Operation
         {
-            get
-            {
-                return _Operation;
-            }
-            private set
-            {
-                _Operation = value;
-            }
+            get { return _Operation; }
+            private set { _Operation = value; }
         }
 
         /// <summary>
@@ -52,14 +47,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// </summary>
         public Action Action
         {
-            get
-            {
-                return _Action;
-            }
-            private set
-            {
-                _Action = value;
-            }
+            get { return _Action; }
+            private set { _Action = value; }
         }
 
         protected override bool ProhibitAttribute(string namespaceUri, string localName)
@@ -74,7 +63,6 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 return false;
             }
             return false;
-
         }
 
         protected override bool HandleAttribute(XmlReader reader)
@@ -102,7 +90,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             RelationshipKind relationshipKind = ParentElement.ParentElement.RelationshipKind;
 
-            switch ( reader.Value.Trim() )
+            switch (reader.Value.Trim())
             {
                 case "None":
                     Action = Action.None;
@@ -111,20 +99,22 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     Action = Action.Cascade;
                     break;
                 default:
-                    AddError( ErrorCode.InvalidAction, EdmSchemaErrorSeverity.Error, reader, System.Data.Entity.Strings.InvalidAction(reader.Value, ParentElement.FQName ) );
+                    AddError(
+                        ErrorCode.InvalidAction,
+                        EdmSchemaErrorSeverity.Error,
+                        reader,
+                        System.Data.Entity.Strings.InvalidAction(reader.Value, ParentElement.FQName)
+                    );
                     break;
             }
         }
 
         /// <summary>
         /// the parent element.
-            /// </summary>
+        /// </summary>
         private new RelationshipEnd ParentElement
         {
-            get
-            {
-                return (RelationshipEnd)base.ParentElement;
-            }
+            get { return (RelationshipEnd)base.ParentElement; }
         }
     }
 }

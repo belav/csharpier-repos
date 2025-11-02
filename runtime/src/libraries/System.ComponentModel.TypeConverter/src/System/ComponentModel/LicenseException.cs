@@ -23,21 +23,30 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseException'/> class for the
         /// specified type.
         /// </summary>
-        public LicenseException(Type? type) : this(type, null, SR.Format(SR.LicExceptionTypeOnly, type?.FullName))
-        {
-        }
+        public LicenseException(Type? type)
+            : this(type, null, SR.Format(SR.LicExceptionTypeOnly, type?.FullName)) { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseException'/> class for the
         /// specified type and instance.
         /// </summary>
-        public LicenseException(Type? type, object? instance) : this(type, null, SR.Format(SR.LicExceptionTypeAndInstance, type?.FullName, instance?.GetType().FullName))
-        {
-        }
+        public LicenseException(Type? type, object? instance)
+            : this(
+                type,
+                null,
+                SR.Format(
+                    SR.LicExceptionTypeAndInstance,
+                    type?.FullName,
+                    instance?.GetType().FullName
+                )
+            ) { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseException'/> class for the
         /// specified type and instance with the specified message.
         /// </summary>
-        public LicenseException(Type? type, object? instance, string? message) : base(message)
+        public LicenseException(Type? type, object? instance, string? message)
+            : base(message)
         {
             LicensedType = type;
             _instance = instance;
@@ -48,7 +57,13 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseException'/> class for the
         /// specified innerException, type and instance with the specified message.
         /// </summary>
-        public LicenseException(Type? type, object? instance, string? message, Exception? innerException) : base(message, innerException)
+        public LicenseException(
+            Type? type,
+            object? instance,
+            string? message,
+            Exception? innerException
+        )
+            : base(message, innerException)
         {
             LicensedType = type;
             _instance = instance;
@@ -58,11 +73,14 @@ namespace System.ComponentModel
         /// <summary>
         /// Need this constructor since Exception implements ISerializable.
         /// </summary>
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected LicenseException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected LicenseException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         /// <summary>
         /// Gets the type of the component that was not granted a license.
@@ -72,7 +90,11 @@ namespace System.ComponentModel
         /// <summary>
         /// Need this since Exception implements ISerializable.
         /// </summary>
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {

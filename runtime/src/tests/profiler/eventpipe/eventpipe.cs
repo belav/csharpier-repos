@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Profiler.Tests;
 using System;
 using System.Buffers;
 using System.Collections.Generic;
@@ -16,12 +15,15 @@ using System.Threading.Tasks;
 using Microsoft.Diagnostics.NETCore.Client;
 using Microsoft.Diagnostics.Tracing;
 using Microsoft.Diagnostics.Tracing.Etlx;
+using Profiler.Tests;
 
 namespace EventPipeTests
 {
     class EventPipe
     {
-        static readonly Guid EventPipeWritingProfilerGuid = new Guid("2726B5B4-3F88-462D-AEC0-4EFDC8D7B921");
+        static readonly Guid EventPipeWritingProfilerGuid = new Guid(
+            "2726B5B4-3F88-462D-AEC0-4EFDC8D7B921"
+        );
 
         public static int Main(string[] args)
         {
@@ -30,9 +32,11 @@ namespace EventPipeTests
                 return RunTest();
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "EventPipeBasic",
-                                          profilerClsid: EventPipeWritingProfilerGuid);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "EventPipeBasic",
+                profilerClsid: EventPipeWritingProfilerGuid
+            );
         }
 
         public static int RunTest()
@@ -48,17 +52,23 @@ namespace EventPipeTests
             {
                 List<EventPipeProvider> providers = new List<EventPipeProvider>
                 {
-                    new EventPipeProvider("MySuperAwesomeEventPipeProvider", EventLevel.Verbose)
+                    new EventPipeProvider("MySuperAwesomeEventPipeProvider", EventLevel.Verbose),
                 };
 
-                using (EventPipeSession session = ProfilerControlHelpers.AttachEventPipeSessionToSelf(providers))
+                using (
+                    EventPipeSession session = ProfilerControlHelpers.AttachEventPipeSessionToSelf(
+                        providers
+                    )
+                )
                 {
-                    using (EventPipeSession session2 = ProfilerControlHelpers.AttachEventPipeSessionToSelf(providers))
+                    using (
+                        EventPipeSession session2 =
+                            ProfilerControlHelpers.AttachEventPipeSessionToSelf(providers)
+                    )
                     {
                         // Trigger multiple session logic
                         Console.WriteLine("Session 2 opened");
                         TriggerMethod();
-
 
                         var source2 = new EventPipeEventSource(session2.EventStream);
                         Task.Run(() => source2.Process());
@@ -84,18 +94,25 @@ namespace EventPipeTests
                             success &= ValidateEmptyEvent(traceEvent);
                             ++emptyEventCount;
                         }
-                        else if(traceEvent.EventName == "SimpleEvent")
+                        else if (traceEvent.EventName == "SimpleEvent")
                         {
                             success &= ValidateSimpleEvent(traceEvent, simpleEventCount);
                             ++simpleEventCount;
                         }
-                        else if(traceEvent.EventName == "ArrayTypeEvent")
+                        else if (traceEvent.EventName == "ArrayTypeEvent")
                         {
                             success &= ValidateArrayTypeEvent(traceEvent);
                             ++arrayTypeEventCount;
                         }
 
-                        if (AllEventsReceived(allTypesEventCount, arrayTypeEventCount, emptyEventCount, simpleEventCount))
+                        if (
+                            AllEventsReceived(
+                                allTypesEventCount,
+                                arrayTypeEventCount,
+                                emptyEventCount,
+                                simpleEventCount
+                            )
+                        )
                         {
                             allEventsReceivedEvent.Set();
                         }
@@ -114,13 +131,21 @@ namespace EventPipeTests
                     processTask.Wait();
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine($"Exception {e.Message} when trying to attach");
                 success = false;
             }
 
-            if (success && AllEventsReceived(allTypesEventCount, arrayTypeEventCount, emptyEventCount, simpleEventCount))
+            if (
+                success
+                && AllEventsReceived(
+                    allTypesEventCount,
+                    arrayTypeEventCount,
+                    emptyEventCount,
+                    simpleEventCount
+                )
+            )
             {
                 return 100;
             }
@@ -136,12 +161,17 @@ namespace EventPipeTests
             }
         }
 
-        public static bool AllEventsReceived(int allTypesEventCount, int arrayTypeEvent, int emptyEventCount, int simpleEventCount)
+        public static bool AllEventsReceived(
+            int allTypesEventCount,
+            int arrayTypeEvent,
+            int emptyEventCount,
+            int simpleEventCount
+        )
         {
             return allTypesEventCount == 1
-                    && arrayTypeEvent == 1
-                    && emptyEventCount == 10
-                    && simpleEventCount == 10000;
+                && arrayTypeEvent == 1
+                && emptyEventCount == 10
+                && simpleEventCount == 10000;
         }
 
         public static bool ValidateAllTypesEvent(TraceEvent traceEvent)
@@ -162,7 +192,9 @@ namespace EventPipeTests
             string[] payloadNames = traceEvent.PayloadNames;
             if (payloadNames.Length != expectedPayload)
             {
-                Console.WriteLine($"AllTypesEvent payloadNames.Length={payloadNames.Length} instead of {expectedPayload} as expected...");
+                Console.WriteLine(
+                    $"AllTypesEvent payloadNames.Length={payloadNames.Length} instead of {expectedPayload} as expected..."
+                );
                 return false;
             }
 
@@ -250,7 +282,7 @@ namespace EventPipeTests
 
             // // { COR_PRF_EVENTPIPE_UINT64, L"UInt64" }
             // CopyToBuffer<uint64_t>(buffer, 2147483649LL, &offset);
-            UInt64 ui64 =  (UInt64)traceEvent.PayloadValue(9);
+            UInt64 ui64 = (UInt64)traceEvent.PayloadValue(9);
             if (payloadNames[9] != "UInt64" || ui64 != 2147483649L)
             {
                 Console.WriteLine($"Argument 9 failed to parse, got {ui64}");
@@ -278,7 +310,10 @@ namespace EventPipeTests
             // // { COR_PRF_EVENTPIPE_GUID, L"Guid" }
             // CopyToBuffer<GUID>(buffer, { 0x176FBED1,0xA55C,0x4796, { 0x98,0xCA,0xA9,0xDA,0x0E,0xF8,0x83,0xE7 }}, &offset);
             Guid guid = (Guid)traceEvent.PayloadValue(12);
-            if (payloadNames[12] != "Guid" || guid != new Guid("176FBED1-A55C-4796-98CA-A9DA0EF883E7"))
+            if (
+                payloadNames[12] != "Guid"
+                || guid != new Guid("176FBED1-A55C-4796-98CA-A9DA0EF883E7")
+            )
             {
                 Console.WriteLine($"Argument 12 failed to parse, got {guid}");
                 return false;
@@ -296,7 +331,10 @@ namespace EventPipeTests
             // // { COR_PRF_EVENTPIPE_DATETIME, L"DateTime" }
             // CopyToBuffer<uint64_t>(buffer, 132243707160000000ULL, &offset);
             DateTime dt = ((DateTime)traceEvent.PayloadValue(14)).ToUniversalTime();
-            if (payloadNames[14] != "DateTime" || dt != DateTime.Parse("1/24/2020 8:18:36 PM", CultureInfo.InvariantCulture))
+            if (
+                payloadNames[14] != "DateTime"
+                || dt != DateTime.Parse("1/24/2020 8:18:36 PM", CultureInfo.InvariantCulture)
+            )
             {
                 Console.WriteLine($"Argument 14 failed to parse, got {dt}");
                 return false;
@@ -328,13 +366,20 @@ namespace EventPipeTests
             // Or could be 1 if TraceEvent gets updated
             if (traceEvent.PayloadNames.Length != 1)
             {
-                Console.WriteLine($"Expected 1 event arg for ArrayTypeEvent but got {traceEvent.PayloadNames.Length}.");
+                Console.WriteLine(
+                    $"Expected 1 event arg for ArrayTypeEvent but got {traceEvent.PayloadNames.Length}."
+                );
                 return false;
             }
 
             int[] intArray = (int[])traceEvent.PayloadValue(0);
-            if (traceEvent.PayloadNames[0] != "IntArray"
-                || !Enumerable.SequenceEqual(intArray, Enumerable.Range(1, 100).OrderByDescending(x => x)))
+            if (
+                traceEvent.PayloadNames[0] != "IntArray"
+                || !Enumerable.SequenceEqual(
+                    intArray,
+                    Enumerable.Range(1, 100).OrderByDescending(x => x)
+                )
+            )
             {
                 Console.WriteLine($"IntArray failed to parse, got {intArray}");
                 return false;
@@ -361,7 +406,9 @@ namespace EventPipeTests
             string[] payloadNames = traceEvent.PayloadNames;
             if (payloadNames.Length != expectedPayload)
             {
-                Console.WriteLine($"EmptyEvent payloadNames.Length={payloadNames.Length} instead of {expectedPayload} as expected...");
+                Console.WriteLine(
+                    $"EmptyEvent payloadNames.Length={payloadNames.Length} instead of {expectedPayload} as expected..."
+                );
                 return false;
             }
 
@@ -376,7 +423,6 @@ namespace EventPipeTests
                 return false;
             }
 
-
             if ((int)traceEvent.ID != 2)
             {
                 Console.WriteLine("SimpleEvent ID != 2");
@@ -387,14 +433,18 @@ namespace EventPipeTests
             string[] payloadNames = traceEvent.PayloadNames;
             if (payloadNames.Length != expectedPayload)
             {
-                Console.WriteLine($"SimpleEvent payloadNames.Length={payloadNames.Length} instead of {expectedPayload} as expected...");
+                Console.WriteLine(
+                    $"SimpleEvent payloadNames.Length={payloadNames.Length} instead of {expectedPayload} as expected..."
+                );
                 return false;
             }
 
             int eventValue = (int)traceEvent.PayloadValue(0);
             if (eventValue != eventCounter)
             {
-                Console.WriteLine($"SimpleEvent got an out of order event expected={eventCounter} actual={eventValue}.");
+                Console.WriteLine(
+                    $"SimpleEvent got an out of order event expected={eventCounter} actual={eventValue}."
+                );
                 return false;
             }
 

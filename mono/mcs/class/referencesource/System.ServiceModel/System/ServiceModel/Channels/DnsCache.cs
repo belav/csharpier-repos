@@ -17,7 +17,9 @@ namespace System.ServiceModel.Channels
     static class DnsCache
     {
         const int mruWatermark = 64;
-        static MruCache<string, DnsCacheEntry> resolveCache = new MruCache<string, DnsCacheEntry>(mruWatermark);
+        static MruCache<string, DnsCacheEntry> resolveCache = new MruCache<string, DnsCacheEntry>(
+            mruWatermark
+        );
         static readonly TimeSpan cacheTimeout = TimeSpan.FromSeconds(2);
 
         // Double-checked locking pattern requires volatile for read/write synchronization
@@ -25,10 +27,7 @@ namespace System.ServiceModel.Channels
 
         static object ThisLock
         {
-            get
-            {
-                return resolveCache;
-            }
+            get { return resolveCache; }
         }
 
         public static string MachineName
@@ -47,10 +46,14 @@ namespace System.ServiceModel.Channels
                             }
                             catch (SocketException exception)
                             {
-                                DiagnosticUtility.TraceHandledException(exception,
-                                        TraceEventType.Information);                                
+                                DiagnosticUtility.TraceHandledException(
+                                    exception,
+                                    TraceEventType.Information
+                                );
                                 // we fall back to the NetBios machine if Dns fails
-                                machineName = UnsafeNativeMethods.GetComputerName(ComputerNameFormat.PhysicalNetBIOS);
+                                machineName = UnsafeNativeMethods.GetComputerName(
+                                    ComputerNameFormat.PhysicalNetBIOS
+                                );
                             }
                         }
                     }
@@ -80,7 +83,10 @@ namespace System.ServiceModel.Channels
                         if (cacheEntry.HostEntry == null)
                         {
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new EndpointNotFoundException(SR.GetString(SR.DnsResolveFailed, hostName)));
+                                new EndpointNotFoundException(
+                                    SR.GetString(SR.DnsResolveFailed, hostName)
+                                )
+                            );
                         }
                         hostEntry = cacheEntry.HostEntry;
                     }
@@ -109,7 +115,11 @@ namespace System.ServiceModel.Channels
                 if (dnsException != null)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new EndpointNotFoundException(SR.GetString(SR.DnsResolveFailed, hostName), dnsException));
+                        new EndpointNotFoundException(
+                            SR.GetString(SR.DnsResolveFailed, hostName),
+                            dnsException
+                        )
+                    );
                 }
             }
 
@@ -129,18 +139,12 @@ namespace System.ServiceModel.Channels
 
             public IPHostEntry HostEntry
             {
-                get
-                {
-                    return hostEntry;
-                }
+                get { return hostEntry; }
             }
 
             public DateTime TimeStamp
             {
-                get
-                {
-                    return timeStamp;
-                }
+                get { return timeStamp; }
             }
         }
     }

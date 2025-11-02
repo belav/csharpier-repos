@@ -16,7 +16,10 @@ namespace System.Net.Http
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties(typeof(UriExtensions), TypeAssert.TypeProperties.IsPublicVisibleClass | TypeAssert.TypeProperties.IsStatic);
+            Assert.Type.HasProperties(
+                typeof(UriExtensions),
+                TypeAssert.TypeProperties.IsPublicVisibleClass | TypeAssert.TypeProperties.IsStatic
+            );
         }
 
         [Fact]
@@ -64,7 +67,10 @@ namespace System.Net.Http
         public void TryReadQueryAsThrowsWithNull()
         {
             object value;
-            Assert.ThrowsArgumentNull(() => ((Uri)null).TryReadQueryAs(TestType, out value), "address");
+            Assert.ThrowsArgumentNull(
+                () => ((Uri)null).TryReadQueryAs(TestType, out value),
+                "address"
+            );
             Assert.ThrowsArgumentNull(() => TestAddress.TryReadQueryAs(null, out value), "type");
         }
 
@@ -75,31 +81,46 @@ namespace System.Net.Http
             UriBuilder address = new UriBuilder("http://some.host");
 
             address.Query = "a=2";
-            Assert.True(address.Uri.TryReadQueryAs(typeof(SimpleObject1), out value), "Expected 'true' reading valid data");
+            Assert.True(
+                address.Uri.TryReadQueryAs(typeof(SimpleObject1), out value),
+                "Expected 'true' reading valid data"
+            );
             SimpleObject1 so1 = (SimpleObject1)value;
             Assert.NotNull(so1);
             Assert.Equal(2, so1.a);
 
             address.Query = "b=true";
-            Assert.True(address.Uri.TryReadQueryAs(typeof(SimpleObject2), out value), "Expected 'true' reading valid data");
+            Assert.True(
+                address.Uri.TryReadQueryAs(typeof(SimpleObject2), out value),
+                "Expected 'true' reading valid data"
+            );
             SimpleObject2 so2 = (SimpleObject2)value;
             Assert.NotNull(so2);
             Assert.True(so2.b, "Value should have been true");
 
             address.Query = "c=hello";
-            Assert.True(address.Uri.TryReadQueryAs(typeof(SimpleObject3), out value), "Expected 'true' reading valid data");
+            Assert.True(
+                address.Uri.TryReadQueryAs(typeof(SimpleObject3), out value),
+                "Expected 'true' reading valid data"
+            );
             SimpleObject3 so3 = (SimpleObject3)value;
             Assert.NotNull(so3);
             Assert.Equal("hello", so3.c);
 
             address.Query = "c=";
-            Assert.True(address.Uri.TryReadQueryAs(typeof(SimpleObject3), out value), "Expected 'true' reading valid data");
+            Assert.True(
+                address.Uri.TryReadQueryAs(typeof(SimpleObject3), out value),
+                "Expected 'true' reading valid data"
+            );
             so3 = (SimpleObject3)value;
             Assert.NotNull(so3);
             Assert.Equal("", so3.c);
 
             address.Query = "c=null";
-            Assert.True(address.Uri.TryReadQueryAs(typeof(SimpleObject3), out value), "Expected 'true' reading valid data");
+            Assert.True(
+                address.Uri.TryReadQueryAs(typeof(SimpleObject3), out value),
+                "Expected 'true' reading valid data"
+            );
             so3 = (SimpleObject3)value;
             Assert.NotNull(so3);
             Assert.Equal("null", so3.c);
@@ -109,7 +130,10 @@ namespace System.Net.Http
         public void TryReadQueryAsTThrowsWithNull()
         {
             object value;
-            Assert.ThrowsArgumentNull(() => ((Uri)null).TryReadQueryAs<object>(out value), "address");
+            Assert.ThrowsArgumentNull(
+                () => ((Uri)null).TryReadQueryAs<object>(out value),
+                "address"
+            );
         }
 
         [Fact]
@@ -118,33 +142,47 @@ namespace System.Net.Http
             UriBuilder address = new UriBuilder("http://some.host");
             address.Query = "a=2";
             SimpleObject1 so1;
-            Assert.True(address.Uri.TryReadQueryAs<SimpleObject1>(out so1), "Expected 'true' reading valid data");
+            Assert.True(
+                address.Uri.TryReadQueryAs<SimpleObject1>(out so1),
+                "Expected 'true' reading valid data"
+            );
             Assert.NotNull(so1);
             Assert.Equal(2, so1.a);
 
             address.Query = "b=true";
             SimpleObject2 so2;
-            Assert.True(address.Uri.TryReadQueryAs<SimpleObject2>(out so2), "Expected 'true' reading valid data");
+            Assert.True(
+                address.Uri.TryReadQueryAs<SimpleObject2>(out so2),
+                "Expected 'true' reading valid data"
+            );
             Assert.NotNull(so2);
             Assert.True(so2.b, "Value should have been true");
 
             address.Query = "c=hello";
             SimpleObject3 so3;
-            Assert.True(address.Uri.TryReadQueryAs<SimpleObject3>(out so3), "Expected 'true' reading valid data");
+            Assert.True(
+                address.Uri.TryReadQueryAs<SimpleObject3>(out so3),
+                "Expected 'true' reading valid data"
+            );
             Assert.NotNull(so3);
             Assert.Equal("hello", so3.c);
 
             address.Query = "c=";
-            Assert.True(address.Uri.TryReadQueryAs<SimpleObject3>(out so3), "Expected 'true' reading valid data");
+            Assert.True(
+                address.Uri.TryReadQueryAs<SimpleObject3>(out so3),
+                "Expected 'true' reading valid data"
+            );
             Assert.NotNull(so3);
             Assert.Equal("", so3.c);
 
             address.Query = "c=null";
-            Assert.True(address.Uri.TryReadQueryAs<SimpleObject3>(out so3), "Expected 'true' reading valid data");
+            Assert.True(
+                address.Uri.TryReadQueryAs<SimpleObject3>(out so3),
+                "Expected 'true' reading valid data"
+            );
             Assert.NotNull(so3);
             Assert.Equal("null", so3.c);
         }
-
 
         public class SimpleObject1
         {

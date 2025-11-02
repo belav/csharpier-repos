@@ -21,15 +21,20 @@ namespace System.Web.Mvc.Test
             routes.MapRoute(
                 "Default",
                 "no-area/{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = "" }
-                );
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    id = "",
+                }
+            );
 
             RequestContext requestContext = GetRequestContext(null);
             RouteValueDictionary values = new RouteValueDictionary()
             {
                 { "controller", "home" },
                 { "action", "about" },
-                { "area", "some-area" }
+                { "area", "some-area" },
             };
 
             // Act
@@ -53,11 +58,15 @@ namespace System.Web.Mvc.Test
             {
                 { "controller", "home" },
                 { "action", "index" },
-                { "area", "some-area" }
+                { "area", "some-area" },
             };
 
             // Act
-            VirtualPathData vpd = routes.GetVirtualPathForArea(requestContext, "admin_default", values);
+            VirtualPathData vpd = routes.GetVirtualPathForArea(
+                requestContext,
+                "admin_default",
+                values
+            );
 
             // Assert
             Assert.NotNull(vpd);
@@ -72,7 +81,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { RouteCollectionExtensions.GetVirtualPathForArea(null, null, null); }, "routes");
+                delegate
+                {
+                    RouteCollectionExtensions.GetVirtualPathForArea(null, null, null);
+                },
+                "routes"
+            );
         }
 
         [Fact]
@@ -86,7 +100,7 @@ namespace System.Web.Mvc.Test
                 { "controller", "home" },
                 { "action", "tenmostrecent" },
                 { "tag", "some-tag" },
-                { "area", "blog" }
+                { "area", "blog" },
             };
 
             // Act
@@ -108,7 +122,7 @@ namespace System.Web.Mvc.Test
             {
                 { "controller", "home" },
                 { "action", "tenmostrecent" },
-                { "tag", "some-tag" }
+                { "tag", "some-tag" },
             };
 
             // Act
@@ -300,8 +314,12 @@ namespace System.Web.Mvc.Test
         public void MapRoute5WithNullRouteCollectionThrows()
         {
             Assert.ThrowsArgumentNull(
-                delegate { RouteCollectionExtensions.MapRoute(null, null, null, null, null); },
-                "routes");
+                delegate
+                {
+                    RouteCollectionExtensions.MapRoute(null, null, null, null, null);
+                },
+                "routes"
+            );
         }
 
         [Fact]
@@ -312,16 +330,30 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { routes.MapRoute(null, null /* url */, null, null); },
-                "url");
+                delegate
+                {
+                    routes.MapRoute(
+                        null,
+                        null /* url */
+                        ,
+                        null,
+                        null
+                    );
+                },
+                "url"
+            );
         }
 
         [Fact]
         public void IgnoreRoute1WithNullRouteCollectionThrows()
         {
             Assert.ThrowsArgumentNull(
-                delegate { RouteCollectionExtensions.IgnoreRoute(null, "foo"); },
-                "routes");
+                delegate
+                {
+                    RouteCollectionExtensions.IgnoreRoute(null, "foo");
+                },
+                "routes"
+            );
         }
 
         [Fact]
@@ -332,8 +364,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { routes.IgnoreRoute(null); },
-                "url");
+                delegate
+                {
+                    routes.IgnoreRoute(null);
+                },
+                "url"
+            );
         }
 
         [Fact]
@@ -383,7 +419,10 @@ namespace System.Web.Mvc.Test
             Route route = routes[0] as Route;
 
             // Act
-            VirtualPathData vpd = route.GetVirtualPath(new RequestContext(new Mock<HttpContextBase>().Object, new RouteData()), null);
+            VirtualPathData vpd = route.GetVirtualPath(
+                new RequestContext(new Mock<HttpContextBase>().Object, new RouteData()),
+                null
+            );
 
             // Assert
             Assert.Null(vpd);
@@ -438,11 +477,14 @@ namespace System.Web.Mvc.Test
             constraints.Add("custom", constraint);
 
             string expectedMessage =
-                "The constraint entry 'custom' on the route with route template '{controller}/{id}' " +
-                "must have a string value or be of a type which implements 'System.Web.Routing.IRouteConstraint'.";
+                "The constraint entry 'custom' on the route with route template '{controller}/{id}' "
+                + "must have a string value or be of a type which implements 'System.Web.Routing.IRouteConstraint'.";
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => routes.MapRoute("default", "{controller}/{id}", null, constraints), expectedMessage);
+            Assert.Throws<InvalidOperationException>(
+                () => routes.MapRoute("default", "{controller}/{id}", null, constraints),
+                expectedMessage
+            );
         }
 
         [Fact]
@@ -456,18 +498,23 @@ namespace System.Web.Mvc.Test
             constraints.Add("custom", constraint);
 
             string expectedMessage =
-                "The constraint entry 'custom' on the route with route template '{controller}/{id}' " +
-                "must have a string value or be of a type which implements 'System.Web.Routing.IRouteConstraint'.";
+                "The constraint entry 'custom' on the route with route template '{controller}/{id}' "
+                + "must have a string value or be of a type which implements 'System.Web.Routing.IRouteConstraint'.";
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => routes.IgnoreRoute("{controller}/{id}", constraints), expectedMessage);
+            Assert.Throws<InvalidOperationException>(
+                () => routes.IgnoreRoute("{controller}/{id}", constraints),
+                expectedMessage
+            );
         }
 
         private static RequestContext GetRequestContext(string currentAreaName)
         {
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
             mockHttpContext.Setup(c => c.Request.ApplicationPath).Returns("/app");
-            mockHttpContext.Setup(c => c.Response.ApplyAppPathModifier(It.IsAny<string>())).Returns<string>(virtualPath => virtualPath);
+            mockHttpContext
+                .Setup(c => c.Response.ApplyAppPathModifier(It.IsAny<string>()))
+                .Returns<string>(virtualPath => virtualPath);
 
             RouteData routeData = new RouteData();
             routeData.DataTokens["area"] = currentAreaName;
@@ -480,34 +527,60 @@ namespace System.Web.Mvc.Test
             routes.MapRoute(
                 "Default",
                 "no-area/{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = "" }
-                );
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    id = "",
+                }
+            );
 
             AreaRegistrationContext blogContext = new AreaRegistrationContext("blog", routes);
             blogContext.MapRoute(
                 "Blog_WhatsNew",
                 "whats-new/{tag}",
-                new { controller = "Home", action = "TenMostRecent", tag = "" }
-                );
+                new
+                {
+                    controller = "Home",
+                    action = "TenMostRecent",
+                    tag = "",
+                }
+            );
             blogContext.MapRoute(
                 "Blog_Default",
                 "blog-area/{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = "" }
-                );
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    id = "",
+                }
+            );
 
             AreaRegistrationContext adminContext = new AreaRegistrationContext("admin", routes);
             adminContext.MapRoute(
                 "Admin_Default",
                 "admin-area/{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = "" }
-                );
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    id = "",
+                }
+            );
 
             return routes;
         }
 
         private class CustomConstraint : IRouteConstraint
         {
-            public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
+            public bool Match(
+                HttpContextBase httpContext,
+                Route route,
+                string parameterName,
+                RouteValueDictionary values,
+                RouteDirection routeDirection
+            )
             {
                 throw new NotImplementedException();
             }

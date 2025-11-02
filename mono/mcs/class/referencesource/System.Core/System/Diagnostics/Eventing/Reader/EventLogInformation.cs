@@ -1,32 +1,32 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class: EventLogInformation
 **
-** Purpose: 
-** The objects of this class allow access to the run-time 
-** properties of logs and external log files. An instance of this 
+** Purpose:
+** The objects of this class allow access to the run-time
+** properties of logs and external log files. An instance of this
 ** class is obtained from EventLogSession.
-** 
+**
 ============================================================*/
 
 using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
 
-
-namespace System.Diagnostics.Eventing.Reader {
-
+namespace System.Diagnostics.Eventing.Reader
+{
     /// <summary>
     /// Describes the run-time properties of logs and external log files.  An instance
     /// of this class is obtained from EventLogSession.
     /// </summary>
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public sealed class EventLogInformation {
+    public sealed class EventLogInformation
+    {
         DateTime? creationTime;
         DateTime? lastAccessTime;
         DateTime? lastWriteTime;
@@ -36,33 +36,101 @@ namespace System.Diagnostics.Eventing.Reader {
         long? oldestRecordNumber;
         bool? isLogFull;
 
-
         [System.Security.SecuritySafeCritical]
-        internal EventLogInformation(EventLogSession session, string channelName, PathType pathType) {
+        internal EventLogInformation(EventLogSession session, string channelName, PathType pathType)
+        {
             EventLogPermissionHolder.GetEventLogPermission().Demand();
 
-            EventLogHandle logHandle = NativeWrapper.EvtOpenLog(session.Handle, channelName, pathType);
+            EventLogHandle logHandle = NativeWrapper.EvtOpenLog(
+                session.Handle,
+                channelName,
+                pathType
+            );
 
-            using (logHandle) {
-                creationTime = (DateTime?)NativeWrapper.EvtGetLogInfo(logHandle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogCreationTime);
-                lastAccessTime = (DateTime?)NativeWrapper.EvtGetLogInfo(logHandle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogLastAccessTime);
-                lastWriteTime = (DateTime?)NativeWrapper.EvtGetLogInfo(logHandle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogLastWriteTime);
-                fileSize = (long?)((ulong?)NativeWrapper.EvtGetLogInfo(logHandle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogFileSize));
-                fileAttributes = (int?)((uint?)NativeWrapper.EvtGetLogInfo(logHandle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogAttributes));
-                recordCount = (long?)((ulong?)NativeWrapper.EvtGetLogInfo(logHandle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogNumberOfLogRecords));
-                oldestRecordNumber = (long?)((ulong?)NativeWrapper.EvtGetLogInfo(logHandle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogOldestRecordNumber));
-                isLogFull = (bool?)NativeWrapper.EvtGetLogInfo(logHandle, UnsafeNativeMethods.EvtLogPropertyId.EvtLogFull);
+            using (logHandle)
+            {
+                creationTime = (DateTime?)
+                    NativeWrapper.EvtGetLogInfo(
+                        logHandle,
+                        UnsafeNativeMethods.EvtLogPropertyId.EvtLogCreationTime
+                    );
+                lastAccessTime = (DateTime?)
+                    NativeWrapper.EvtGetLogInfo(
+                        logHandle,
+                        UnsafeNativeMethods.EvtLogPropertyId.EvtLogLastAccessTime
+                    );
+                lastWriteTime = (DateTime?)
+                    NativeWrapper.EvtGetLogInfo(
+                        logHandle,
+                        UnsafeNativeMethods.EvtLogPropertyId.EvtLogLastWriteTime
+                    );
+                fileSize = (long?)(
+                    (ulong?)
+                        NativeWrapper.EvtGetLogInfo(
+                            logHandle,
+                            UnsafeNativeMethods.EvtLogPropertyId.EvtLogFileSize
+                        )
+                );
+                fileAttributes = (int?)(
+                    (uint?)
+                        NativeWrapper.EvtGetLogInfo(
+                            logHandle,
+                            UnsafeNativeMethods.EvtLogPropertyId.EvtLogAttributes
+                        )
+                );
+                recordCount = (long?)(
+                    (ulong?)
+                        NativeWrapper.EvtGetLogInfo(
+                            logHandle,
+                            UnsafeNativeMethods.EvtLogPropertyId.EvtLogNumberOfLogRecords
+                        )
+                );
+                oldestRecordNumber = (long?)(
+                    (ulong?)
+                        NativeWrapper.EvtGetLogInfo(
+                            logHandle,
+                            UnsafeNativeMethods.EvtLogPropertyId.EvtLogOldestRecordNumber
+                        )
+                );
+                isLogFull = (bool?)
+                    NativeWrapper.EvtGetLogInfo(
+                        logHandle,
+                        UnsafeNativeMethods.EvtLogPropertyId.EvtLogFull
+                    );
             }
         }
 
-        public DateTime? CreationTime { get { return creationTime; } }
-        public DateTime? LastAccessTime { get { return lastAccessTime; } }
-        public DateTime? LastWriteTime { get { return lastWriteTime; } }
-        public long? FileSize { get { return fileSize; } }
-        public int? Attributes { get { return fileAttributes; } }
-        public long? RecordCount { get { return recordCount; } }
-        public long? OldestRecordNumber { get { return oldestRecordNumber; } }
-        public bool? IsLogFull { get { return isLogFull; } }
+        public DateTime? CreationTime
+        {
+            get { return creationTime; }
+        }
+        public DateTime? LastAccessTime
+        {
+            get { return lastAccessTime; }
+        }
+        public DateTime? LastWriteTime
+        {
+            get { return lastWriteTime; }
+        }
+        public long? FileSize
+        {
+            get { return fileSize; }
+        }
+        public int? Attributes
+        {
+            get { return fileAttributes; }
+        }
+        public long? RecordCount
+        {
+            get { return recordCount; }
+        }
+        public long? OldestRecordNumber
+        {
+            get { return oldestRecordNumber; }
+        }
+        public bool? IsLogFull
+        {
+            get { return isLogFull; }
+        }
     }
-
 }

@@ -5,18 +5,17 @@
 #nullable disable
 
 using Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHelp;
-using Microsoft.CodeAnalysis.Options;
 using Microsoft.CodeAnalysis.Editor.Options;
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.Text.Editor.Commanding;
 using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
-using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
 {
-    internal abstract class AbstractSignatureHelpCommandHandler :
-        ForegroundThreadAffinitizedObject
+    internal abstract class AbstractSignatureHelpCommandHandler : ForegroundThreadAffinitizedObject
     {
         private readonly SignatureHelpControllerProvider _controllerProvider;
         private readonly IGlobalOptionService _globalOptions;
@@ -24,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         public AbstractSignatureHelpCommandHandler(
             IThreadingContext threadingContext,
             SignatureHelpControllerProvider controllerProvider,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
             : base(threadingContext)
         {
             _controllerProvider = controllerProvider;
@@ -38,9 +38,14 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             // If args is `InvokeSignatureHelpCommandArgs` then sig help was explicitly invoked by the user and should
             // be shown whether or not the option is set.
             var languageName = args.SubjectBuffer.GetLanguageName();
-            if (args is not InvokeSignatureHelpCommandArgs &&
-                languageName != null &&
-                !_globalOptions.GetOption(SignatureHelpViewOptionsStorage.ShowSignatureHelp, languageName))
+            if (
+                args is not InvokeSignatureHelpCommandArgs
+                && languageName != null
+                && !_globalOptions.GetOption(
+                    SignatureHelpViewOptionsStorage.ShowSignatureHelp,
+                    languageName
+                )
+            )
             {
                 controller = null;
                 return false;

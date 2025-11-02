@@ -9,9 +9,16 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal sealed partial class RenameTagger(ITextBuffer buffer, InlineRenameService renameService) : AbstractRenameTagger<ITextMarkerTag>(buffer, renameService)
+    internal sealed partial class RenameTagger(
+        ITextBuffer buffer,
+        InlineRenameService renameService
+    ) : AbstractRenameTagger<ITextMarkerTag>(buffer, renameService)
     {
-        protected override bool TryCreateTagSpan(SnapshotSpan span, RenameSpanKind type, out TagSpan<ITextMarkerTag> tagSpan)
+        protected override bool TryCreateTagSpan(
+            SnapshotSpan span,
+            RenameSpanKind type,
+            out TagSpan<ITextMarkerTag> tagSpan
+        )
         {
             ITextMarkerTag tagKind;
             switch (type)

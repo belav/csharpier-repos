@@ -25,42 +25,42 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
+namespace Microsoft.Build.Tasks.Deployment.Bootstrapper
+{
+    [ClassInterface(ClassInterfaceType.None)]
+    [Guid("532BF563-A85D-4088-8048-41F51AC5239F")]
+    [ComVisible(true)]
+    public class Product : IProduct
+    {
+        ProductCollection includes;
+        string name;
+        ProductBuilder productBuilder;
+        string productCode;
 
-	[ClassInterface (ClassInterfaceType.None)]
-	[Guid ("532BF563-A85D-4088-8048-41F51AC5239F")]
-	[ComVisible (true)]
-	public class Product : IProduct {
-	
-		ProductCollection	includes;
-		string			name;
-		ProductBuilder		productBuilder;
-		string			productCode;
-		
-		public Product ()
-		{
-		}
-		
-		public ProductCollection Includes {
-			get { return includes; }
-		}
-		
-		public string Name {
-			get { return name; }
-		}
-		
-		public ProductBuilder ProductBuilder {
-			get { return productBuilder; }
-		}
-		
-		public string ProductCode {
-			get { return productCode; }
-		}
-	}
+        public Product() { }
+
+        public ProductCollection Includes
+        {
+            get { return includes; }
+        }
+
+        public string Name
+        {
+            get { return name; }
+        }
+
+        public ProductBuilder ProductBuilder
+        {
+            get { return productBuilder; }
+        }
+
+        public string ProductCode
+        {
+            get { return productCode; }
+        }
+    }
 }
-

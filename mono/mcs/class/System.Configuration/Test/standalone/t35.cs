@@ -1,6 +1,6 @@
 using System;
-using System.Configuration;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace TestLib1
 {
@@ -8,8 +8,8 @@ namespace TestLib1
     {
         public void testIT()
         {
-	    object o = System.Configuration.ConfigurationManager.GetSection("testlib1");
-            List<System.Xml.XmlNode> sectionList = (List<System.Xml.XmlNode>) o;
+            object o = System.Configuration.ConfigurationManager.GetSection("testlib1");
+            List<System.Xml.XmlNode> sectionList = (List<System.Xml.XmlNode>)o;
             Console.WriteLine("count: " + sectionList.Count);
         }
     }
@@ -34,7 +34,9 @@ namespace TestLib1
         public object Create(object parent, object configContext, System.Xml.XmlNode section)
         {
             List<System.Xml.XmlNode> sectionList = new List<System.Xml.XmlNode>();
-            foreach (System.Xml.XmlNode sectionXmlNode in section.SelectSingleNode("mynodes").ChildNodes)
+            foreach (
+                System.Xml.XmlNode sectionXmlNode in section.SelectSingleNode("mynodes").ChildNodes
+            )
             {
                 sectionList.Add(sectionXmlNode);
             }
@@ -43,4 +45,3 @@ namespace TestLib1
         }
     }
 }
-

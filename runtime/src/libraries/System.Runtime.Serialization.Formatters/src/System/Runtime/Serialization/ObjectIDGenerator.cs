@@ -6,7 +6,11 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime.Serialization
 {
-    [Obsolete(Obsoletions.LegacyFormatterMessage, DiagnosticId = Obsoletions.LegacyFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.LegacyFormatterMessage,
+        DiagnosticId = Obsoletions.LegacyFormatterDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     public class ObjectIDGenerator
     {
         private const int NumBins = 4;

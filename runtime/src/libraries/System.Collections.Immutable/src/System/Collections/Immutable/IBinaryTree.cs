@@ -23,6 +23,7 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <exception cref="NotSupportedException">Thrown if the implementation does not store this value at the node.</exception>
         int Count { get; }
+
         /// <summary>
         /// Gets the left branch of this node.
         /// </summary>

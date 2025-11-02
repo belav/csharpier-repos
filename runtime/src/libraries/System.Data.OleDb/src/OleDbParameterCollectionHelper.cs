@@ -15,10 +15,7 @@ namespace System.Data.OleDb
 
         public override int Count
         {
-            get
-            {
-                return ((null != _items) ? _items.Count : 0);
-            }
+            get { return ((null != _items) ? _items.Count : 0); }
         }
 
         private List<OleDbParameter> InnerList
@@ -38,34 +35,22 @@ namespace System.Data.OleDb
 
         public override bool IsFixedSize
         {
-            get
-            {
-                return ((System.Collections.IList)InnerList).IsFixedSize;
-            }
+            get { return ((System.Collections.IList)InnerList).IsFixedSize; }
         }
 
         public override bool IsReadOnly
         {
-            get
-            {
-                return ((System.Collections.IList)InnerList).IsReadOnly;
-            }
+            get { return ((System.Collections.IList)InnerList).IsReadOnly; }
         }
 
         public override bool IsSynchronized
         {
-            get
-            {
-                return ((System.Collections.ICollection)InnerList).IsSynchronized;
-            }
+            get { return ((System.Collections.ICollection)InnerList).IsSynchronized; }
         }
 
         public override object SyncRoot
         {
-            get
-            {
-                return ((System.Collections.ICollection)InnerList).SyncRoot;
-            }
+            get { return ((System.Collections.ICollection)InnerList).SyncRoot; }
         }
 
         public override int Add(object value)
@@ -256,7 +241,10 @@ namespace System.Data.OleDb
         private void RemoveIndex(int index)
         {
             List<OleDbParameter> items = InnerList;
-            Debug.Assert((null != items) && (0 <= index) && (index < Count), "RemoveIndex, invalid");
+            Debug.Assert(
+                (null != items) && (0 <= index) && (index < Count),
+                "RemoveIndex, invalid"
+            );
             OleDbParameter item = items[index];
             items.RemoveAt(index);
             item.ResetParent();
@@ -265,7 +253,10 @@ namespace System.Data.OleDb
         private void Replace(int index, object newValue)
         {
             List<OleDbParameter> items = InnerList;
-            Debug.Assert((null != items) && (0 <= index) && (index < Count), "Replace Index invalid");
+            Debug.Assert(
+                (null != items) && (0 <= index) && (index < Count),
+                "Replace Index invalid"
+            );
             ValidateType(newValue);
             Validate(index, newValue);
             OleDbParameter item = items[index];

@@ -18,35 +18,40 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     public class SourceFileResolver : SourceReferenceResolver, IEquatable<SourceFileResolver>
     {
-        public static SourceFileResolver Default { get; } = new SourceFileResolver(ImmutableArray<string>.Empty, baseDirectory: null);
+        public static SourceFileResolver Default { get; } =
+            new SourceFileResolver(ImmutableArray<string>.Empty, baseDirectory: null);
 
         private readonly string? _baseDirectory;
         private readonly ImmutableArray<string> _searchPaths;
         private readonly ImmutableArray<KeyValuePair<string, string>> _pathMap;
 
         public SourceFileResolver(IEnumerable<string> searchPaths, string? baseDirectory)
-            : this(searchPaths.AsImmutableOrNull(), baseDirectory)
-        {
-        }
+            : this(searchPaths.AsImmutableOrNull(), baseDirectory) { }
 
         public SourceFileResolver(ImmutableArray<string> searchPaths, string? baseDirectory)
             : this(searchPaths, baseDirectory, ImmutableArray<KeyValuePair<string, string>>.Empty)
-        {
-        }
+        { }
 
         public SourceFileResolver(
             ImmutableArray<string> searchPaths,
             string? baseDirectory,
-            ImmutableArray<KeyValuePair<string, string>> pathMap)
+            ImmutableArray<KeyValuePair<string, string>> pathMap
+        )
         {
             if (searchPaths.IsDefault)
             {
                 throw new ArgumentNullException(nameof(searchPaths));
             }
 
-            if (baseDirectory != null && PathUtilities.GetPathKind(baseDirectory) != PathKind.Absolute)
+            if (
+                baseDirectory != null
+                && PathUtilities.GetPathKind(baseDirectory) != PathKind.Absolute
+            )
             {
-                throw new ArgumentException(CodeAnalysisResources.AbsolutePathExpected, nameof(baseDirectory));
+                throw new ArgumentException(
+                    CodeAnalysisResources.AbsolutePathExpected,
+                    nameof(baseDirectory)
+                );
             }
 
             _baseDirectory = baseDirectory;
@@ -59,24 +64,34 @@ namespace Microsoft.CodeAnalysis
             // so normalize the paths here (instead of enforcing end-with-sep).
             if (!pathMap.IsDefaultOrEmpty)
             {
-                var pathMapBuilder = ArrayBuilder<KeyValuePair<string, string>>.GetInstance(pathMap.Length);
+                var pathMapBuilder = ArrayBuilder<KeyValuePair<string, string>>.GetInstance(
+                    pathMap.Length
+                );
 
                 foreach (var (key, value) in pathMap)
                 {
                     if (key == null || key.Length == 0)
                     {
-                        throw new ArgumentException(CodeAnalysisResources.EmptyKeyInPathMap, nameof(pathMap));
+                        throw new ArgumentException(
+                            CodeAnalysisResources.EmptyKeyInPathMap,
+                            nameof(pathMap)
+                        );
                     }
 
                     if (value == null)
                     {
-                        throw new ArgumentException(CodeAnalysisResources.NullValueInPathMap, nameof(pathMap));
+                        throw new ArgumentException(
+                            CodeAnalysisResources.NullValueInPathMap,
+                            nameof(pathMap)
+                        );
                     }
 
                     var normalizedKey = PathUtilities.EnsureTrailingSeparator(key);
                     var normalizedValue = PathUtilities.EnsureTrailingSeparator(value);
 
-                    pathMapBuilder.Add(new KeyValuePair<string, string>(normalizedKey, normalizedValue));
+                    pathMapBuilder.Add(
+                        new KeyValuePair<string, string>(normalizedKey, normalizedValue)
+                    );
                 }
 
                 _pathMap = pathMapBuilder.ToImmutableAndFree();
@@ -95,13 +110,25 @@ namespace Microsoft.CodeAnalysis
 
         public override string? NormalizePath(string path, string? baseFilePath)
         {
-            string? normalizedPath = FileUtilities.NormalizeRelativePath(path, baseFilePath, _baseDirectory);
-            return (normalizedPath == null || _pathMap.IsDefaultOrEmpty) ? normalizedPath : PathUtilities.NormalizePathPrefix(normalizedPath, _pathMap);
+            string? normalizedPath = FileUtilities.NormalizeRelativePath(
+                path,
+                baseFilePath,
+                _baseDirectory
+            );
+            return (normalizedPath == null || _pathMap.IsDefaultOrEmpty)
+                ? normalizedPath
+                : PathUtilities.NormalizePathPrefix(normalizedPath, _pathMap);
         }
 
         public override string? ResolveReference(string path, string? baseFilePath)
         {
-            string? resolvedPath = FileUtilities.ResolveRelativePath(path, baseFilePath, _baseDirectory, _searchPaths, FileExists);
+            string? resolvedPath = FileUtilities.ResolveRelativePath(
+                path,
+                baseFilePath,
+                _baseDirectory,
+                _searchPaths,
+                FileExists
+            );
             if (resolvedPath == null)
             {
                 return null;
@@ -139,17 +166,20 @@ namespace Microsoft.CodeAnalysis
                 return false;
             }
 
-            return
-                string.Equals(_baseDirectory, other._baseDirectory, StringComparison.Ordinal) &&
-                _searchPaths.SequenceEqual(other._searchPaths, StringComparer.Ordinal) &&
-                _pathMap.SequenceEqual(other._pathMap);
+            return string.Equals(_baseDirectory, other._baseDirectory, StringComparison.Ordinal)
+                && _searchPaths.SequenceEqual(other._searchPaths, StringComparer.Ordinal)
+                && _pathMap.SequenceEqual(other._pathMap);
         }
 
         public override int GetHashCode()
         {
-            return Hash.Combine(_baseDirectory != null ? StringComparer.Ordinal.GetHashCode(_baseDirectory) : 0,
-                   Hash.Combine(Hash.CombineValues(_searchPaths, StringComparer.Ordinal),
-                   Hash.CombineValues(_pathMap)));
+            return Hash.Combine(
+                _baseDirectory != null ? StringComparer.Ordinal.GetHashCode(_baseDirectory) : 0,
+                Hash.Combine(
+                    Hash.CombineValues(_searchPaths, StringComparer.Ordinal),
+                    Hash.CombineValues(_pathMap)
+                )
+            );
         }
     }
 }

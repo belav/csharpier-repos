@@ -16,6 +16,7 @@ internal static partial class Interop
             IntPtr ThreadHandle,
             TokenAccessLevels dwDesiredAccess,
             [MarshalAs(UnmanagedType.Bool)] bool bOpenAsSelf,
-            out SafeTokenHandle phThreadToken);
+            out SafeTokenHandle phThreadToken
+        );
     }
 }

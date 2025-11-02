@@ -25,7 +25,8 @@ public class InMemoryStoreCache : IInMemoryStoreCache
     /// </summary>
     public InMemoryStoreCache(
         IInMemoryTableFactory tableFactory,
-        IInMemorySingletonOptions? options)
+        IInMemorySingletonOptions? options
+    )
     {
         _tableFactory = tableFactory;
 
@@ -33,9 +34,11 @@ public class InMemoryStoreCache : IInMemoryStoreCache
         {
             LazyInitializer.EnsureInitialized(
                 ref options.DatabaseRoot.Instance,
-                () => new ConcurrentDictionary<string, IInMemoryStore>());
+                () => new ConcurrentDictionary<string, IInMemoryStore>()
+            );
 
-            _namedStores = (ConcurrentDictionary<string, IInMemoryStore>)options.DatabaseRoot.Instance;
+            _namedStores =
+                (ConcurrentDictionary<string, IInMemoryStore>)options.DatabaseRoot.Instance;
         }
         else
         {
@@ -49,6 +52,6 @@ public class InMemoryStoreCache : IInMemoryStoreCache
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IInMemoryStore GetStore(string name)
-        => _namedStores.GetOrAdd(name, _ => new InMemoryStore(_tableFactory));
+    public virtual IInMemoryStore GetStore(string name) =>
+        _namedStores.GetOrAdd(name, _ => new InMemoryStore(_tableFactory));
 }

@@ -1,70 +1,70 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeStatement.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
-    using System.Runtime.Serialization;    
+    using System.Runtime.Serialization;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
     ///       Represents a statement.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeStatement : CodeObject {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeStatement : CodeObject
+    {
         private CodeLinePragma linePragma;
-        
+
         // Optionally Serializable
         [OptionalField]
         private CodeDirectiveCollection startDirectives = null;
+
         [OptionalField]
         private CodeDirectiveCollection endDirectives = null;
-        
 
         /// <devdoc>
         ///    <para>
         ///       The line the statement occurs on.
         ///    </para>
         /// </devdoc>
-        public CodeLinePragma LinePragma {
-            get {
-                return linePragma;
-            }
-            set {
-                linePragma = value;
-            }
+        public CodeLinePragma LinePragma
+        {
+            get { return linePragma; }
+            set { linePragma = value; }
         }
 
-        public CodeDirectiveCollection StartDirectives {
-            get {
-                if (startDirectives == null) {
+        public CodeDirectiveCollection StartDirectives
+        {
+            get
+            {
+                if (startDirectives == null)
+                {
                     startDirectives = new CodeDirectiveCollection();
                 }
-                return startDirectives;                
+                return startDirectives;
             }
         }
 
-        public CodeDirectiveCollection EndDirectives {
-            get {
-                if (endDirectives == null) {
+        public CodeDirectiveCollection EndDirectives
+        {
+            get
+            {
+                if (endDirectives == null)
+                {
                     endDirectives = new CodeDirectiveCollection();
                 }
-                return endDirectives ;                
+                return endDirectives;
             }
-        }        
+        }
     }
 }

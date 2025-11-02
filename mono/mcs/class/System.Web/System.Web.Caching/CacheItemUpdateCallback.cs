@@ -27,10 +27,12 @@
 
 namespace System.Web.Caching
 {
-	public delegate void CacheItemUpdateCallback (string key,
-						      CacheItemUpdateReason reason,
-						      out object expensiveObject,
-						      out CacheDependency dependency,
-						      out DateTime absoluteExpiration,
-						      out TimeSpan slidingExpiration);
+    public delegate void CacheItemUpdateCallback(
+        string key,
+        CacheItemUpdateReason reason,
+        out object expensiveObject,
+        out CacheDependency dependency,
+        out DateTime absoluteExpiration,
+        out TimeSpan slidingExpiration
+    );
 }

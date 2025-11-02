@@ -11,11 +11,11 @@ namespace System.Activities
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq.Expressions;
     using System.Runtime;
     using System.Windows.Markup;
-    using System.Diagnostics.CodeAnalysis;
-    
+
     public abstract class OutArgument : Argument
     {
         internal OutArgument()
@@ -23,9 +23,15 @@ namespace System.Activities
             this.Direction = ArgumentDirection.Out;
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Subclass needed to enforce rules about which directions can be referenced.")]
-        public static OutArgument CreateReference(OutArgument argumentToReference, string referencedArgumentName)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Subclass needed to enforce rules about which directions can be referenced."
+        )]
+        public static OutArgument CreateReference(
+            OutArgument argumentToReference,
+            string referencedArgumentName
+        )
         {
             if (argumentToReference == null)
             {
@@ -37,12 +43,23 @@ namespace System.Activities
                 throw FxTrace.Exception.ArgumentNullOrEmpty("referencedArgumentName");
             }
 
-            return (OutArgument)ActivityUtilities.CreateReferenceArgument(argumentToReference.ArgumentType, ArgumentDirection.Out, referencedArgumentName);
+            return (OutArgument)
+                ActivityUtilities.CreateReferenceArgument(
+                    argumentToReference.ArgumentType,
+                    ArgumentDirection.Out,
+                    referencedArgumentName
+                );
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Subclass needed to enforce rules about which directions can be referenced.")]
-        public static OutArgument CreateReference(InOutArgument argumentToReference, string referencedArgumentName)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Subclass needed to enforce rules about which directions can be referenced."
+        )]
+        public static OutArgument CreateReference(
+            InOutArgument argumentToReference,
+            string referencedArgumentName
+        )
         {
             if (argumentToReference == null)
             {
@@ -55,12 +72,17 @@ namespace System.Activities
             }
 
             // Note that we explicitly pass Out since we want an OutArgument created
-            return (OutArgument)ActivityUtilities.CreateReferenceArgument(argumentToReference.ArgumentType, ArgumentDirection.Out, referencedArgumentName);
+            return (OutArgument)
+                ActivityUtilities.CreateReferenceArgument(
+                    argumentToReference.ArgumentType,
+                    ArgumentDirection.Out,
+                    referencedArgumentName
+                );
         }
     }
 
     [ContentProperty("Expression")]
-    [TypeConverter(typeof(OutArgumentConverter))]    
+    [TypeConverter(typeof(OutArgumentConverter))]
     [ValueSerializer(typeof(ArgumentValueSerializer))]
     public sealed class OutArgument<T> : OutArgument
     {
@@ -78,7 +100,10 @@ namespace System.Activities
         {
             if (delegateArgument != null)
             {
-                this.Expression = new DelegateArgumentReference<T> { DelegateArgument = delegateArgument };
+                this.Expression = new DelegateArgumentReference<T>
+                {
+                    DelegateArgument = delegateArgument,
+                };
             }
         }
 
@@ -104,18 +129,11 @@ namespace System.Activities
         }
 
         [DefaultValue(null)]
-        public new Activity<Location<T>> Expression
-        {
-            get;
-            set;
-        }
+        public new Activity<Location<T>> Expression { get; set; }
 
         internal override ActivityWithResult ExpressionCore
         {
-            get
-            {
-                return this.Expression;
-            }
+            get { return this.Expression; }
             set
             {
                 if (value == null)
@@ -220,27 +238,51 @@ namespace System.Activities
             return Argument.CreateLocation<T>();
         }
 
-        internal override void Declare(LocationEnvironment targetEnvironment, ActivityInstance activityInstance)
+        internal override void Declare(
+            LocationEnvironment targetEnvironment,
+            ActivityInstance activityInstance
+        )
         {
-            targetEnvironment.DeclareTemporaryLocation<Location<T>>(this.RuntimeArgument, activityInstance, true);
+            targetEnvironment.DeclareTemporaryLocation<Location<T>>(
+                this.RuntimeArgument,
+                activityInstance,
+                true
+            );
         }
 
-        internal override bool TryPopulateValue(LocationEnvironment targetEnvironment, ActivityInstance targetActivityInstance, ActivityExecutor executor)
+        internal override bool TryPopulateValue(
+            LocationEnvironment targetEnvironment,
+            ActivityInstance targetActivityInstance,
+            ActivityExecutor executor
+        )
         {
-            Fx.Assert(this.Expression != null, "This should only be called for non-empty bindings.");
+            Fx.Assert(
+                this.Expression != null,
+                "This should only be called for non-empty bindings."
+            );
 
             if (this.Expression.UseOldFastPath)
             {
-                Location<T> argumentValue = executor.ExecuteInResolutionContext<Location<T>>(targetActivityInstance, this.Expression);
-                targetEnvironment.Declare(this.RuntimeArgument, argumentValue.CreateReference(true), targetActivityInstance);
+                Location<T> argumentValue = executor.ExecuteInResolutionContext<Location<T>>(
+                    targetActivityInstance,
+                    this.Expression
+                );
+                targetEnvironment.Declare(
+                    this.RuntimeArgument,
+                    argumentValue.CreateReference(true),
+                    targetActivityInstance
+                );
                 return true;
             }
             else
             {
-                targetEnvironment.DeclareTemporaryLocation<Location<T>>(this.RuntimeArgument, targetActivityInstance, true);
+                targetEnvironment.DeclareTemporaryLocation<Location<T>>(
+                    this.RuntimeArgument,
+                    targetActivityInstance,
+                    true
+                );
                 return false;
             }
         }
     }
 }
-

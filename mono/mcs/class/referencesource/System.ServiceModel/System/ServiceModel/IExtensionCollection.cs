@@ -9,7 +9,7 @@ namespace System.ServiceModel
     using System.Collections.ObjectModel;
 
     public interface IExtensionCollection<T> : ICollection<IExtension<T>>
-    where T : IExtensibleObject<T>
+        where T : IExtensibleObject<T>
     {
         E Find<E>();
         Collection<E> FindAll<E>();

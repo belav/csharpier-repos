@@ -100,12 +100,14 @@ namespace Microsoft.CodeAnalysis.Syntax
             Validate(start, Count);
         }
 
-        public void AddRange<TNode>(SyntaxList<TNode> list) where TNode : SyntaxNode
+        public void AddRange<TNode>(SyntaxList<TNode> list)
+            where TNode : SyntaxNode
         {
             this.AddRange(list, 0, list.Count);
         }
 
-        public void AddRange<TNode>(SyntaxList<TNode> list, int offset, int count) where TNode : SyntaxNode
+        public void AddRange<TNode>(SyntaxList<TNode> list, int offset, int count)
+            where TNode : SyntaxNode
         {
             this.AddRange(new SyntaxList<SyntaxNode>(list.Node), offset, count);
         }
@@ -176,7 +178,11 @@ namespace Microsoft.CodeAnalysis.Syntax
                 case 2:
                     return InternalSyntax.SyntaxList.List(_nodes[0].Value!, _nodes[1].Value!);
                 case 3:
-                    return InternalSyntax.SyntaxList.List(_nodes[0].Value!, _nodes[1].Value!, _nodes[2].Value!);
+                    return InternalSyntax.SyntaxList.List(
+                        _nodes[0].Value!,
+                        _nodes[1].Value!,
+                        _nodes[2].Value!
+                    );
                 default:
                     var tmp = new ArrayElement<GreenNode>[this.Count];
                     for (int i = 0; i < this.Count; i++)

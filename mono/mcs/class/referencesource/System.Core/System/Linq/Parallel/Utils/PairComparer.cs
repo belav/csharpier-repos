@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -35,7 +35,7 @@ namespace System.Linq.Parallel
         public int Compare(Pair<T, U> x, Pair<T, U> y)
         {
             int result1 = m_comparer1.Compare(x.First, y.First);
-            if (result1 != 0) 
+            if (result1 != 0)
             {
                 return result1;
             }

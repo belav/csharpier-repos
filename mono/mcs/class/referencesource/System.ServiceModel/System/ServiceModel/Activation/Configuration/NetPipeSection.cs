@@ -12,7 +12,7 @@ namespace System.ServiceModel.Activation.Configuration
     public sealed partial class NetPipeSection : ConfigurationSection
     {
         PropertyInformationCollection propertyInfo;
-        
+
         public NetPipeSection()
             : base()
         {
@@ -22,12 +22,17 @@ namespace System.ServiceModel.Activation.Configuration
         [ConfigurationProperty(ConfigurationStrings.AllowAccounts)]
         public SecurityIdentifierElementCollection AllowAccounts
         {
-            get { return (SecurityIdentifierElementCollection)base[ConfigurationStrings.AllowAccounts]; }
+            get
+            {
+                return (SecurityIdentifierElementCollection)
+                    base[ConfigurationStrings.AllowAccounts];
+            }
         }
 
-        static internal NetPipeSection GetSection()
+        internal static NetPipeSection GetSection()
         {
-            NetPipeSection retval = (NetPipeSection)ConfigurationManager.GetSection(ConfigurationStrings.NetPipeSectionPath);
+            NetPipeSection retval = (NetPipeSection)
+                ConfigurationManager.GetSection(ConfigurationStrings.NetPipeSectionPath);
             if (retval == null)
             {
                 retval = new NetPipeSection();
@@ -40,7 +45,10 @@ namespace System.ServiceModel.Activation.Configuration
             this.AllowAccounts.SetDefaultIdentifiers();
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxPendingConnections, DefaultValue = ListenerConstants.DefaultMaxPendingConnections)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxPendingConnections,
+            DefaultValue = ListenerConstants.DefaultMaxPendingConnections
+        )]
         [IntegerValidator(MinValue = 0)]
         public int MaxPendingConnections
         {
@@ -48,14 +56,17 @@ namespace System.ServiceModel.Activation.Configuration
             set { base[ConfigurationStrings.MaxPendingConnections] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxPendingAccepts, DefaultValue = ListenerConstants.DefaultMaxPendingAccepts)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxPendingAccepts,
+            DefaultValue = ListenerConstants.DefaultMaxPendingAccepts
+        )]
         [IntegerValidator(MinValue = 0)]
         public int MaxPendingAccepts
         {
             get
             {
                 int maxPendingAccepts = (int)base[ConfigurationStrings.MaxPendingAccepts];
-                
+
                 if (maxPendingAccepts != ListenerConstants.DefaultMaxPendingAccepts)
                 {
                     // if the user changed the default, return user's value
@@ -70,9 +81,14 @@ namespace System.ServiceModel.Activation.Configuration
             set { base[ConfigurationStrings.MaxPendingAccepts] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ReceiveTimeout, DefaultValue = ListenerConstants.DefaultReceiveTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ReceiveTimeout,
+            DefaultValue = ListenerConstants.DefaultReceiveTimeoutString
+        )]
         [System.ComponentModel.TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
-        [System.ServiceModel.Configuration.ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
+        [System.ServiceModel.Configuration.ServiceModelTimeSpanValidator(
+            MinValueString = ConfigurationStrings.TimeSpanZero
+        )]
         public TimeSpan ReceiveTimeout
         {
             get { return (TimeSpan)base[ConfigurationStrings.ReceiveTimeout]; }

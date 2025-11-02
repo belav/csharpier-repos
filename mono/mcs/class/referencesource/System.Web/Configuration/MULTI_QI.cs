@@ -4,33 +4,35 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System.Collections;
+    using System.Collections.Specialized;
     using System.Configuration;
     using System.Configuration.Internal;
-    using System.Web;
-    using System.Web.Util;
-    using System.Security;
+    using System.Globalization;
     using System.IO;
-    using System.Web.Hosting;
-    using System.Runtime.InteropServices;
     using System.Reflection;
-    using System.Collections.Specialized;
-    using System.Xml;
+    using System.Runtime.InteropServices;
+    using System.Security;
     using System.Security.Principal;
     using System.Threading;
-    using System.Globalization;
+    using System.Web;
+    using System.Web.Hosting;
+    using System.Web.Util;
+    using System.Xml;
 
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
     internal struct MULTI_QI : IDisposable
     {
-        internal MULTI_QI(IntPtr pid) {
+        internal MULTI_QI(IntPtr pid)
+        {
             piid = pid;
             pItf = IntPtr.Zero;
             hr = 0;
         }
 
-        internal IntPtr piid;        // 'Guid' can't be marshaled to GUID* here? use IntPtr buffer trick instead
+        internal IntPtr piid; // 'Guid' can't be marshaled to GUID* here? use IntPtr buffer trick instead
         internal IntPtr pItf;
         internal int hr;
 
@@ -47,7 +49,6 @@ namespace System.Web.Configuration {
                 piid = IntPtr.Zero;
             }
             GC.SuppressFinalize(this);
-
         }
     }
 
@@ -62,7 +63,7 @@ namespace System.Web.Configuration {
             padding = 0;
         }
 
-        internal IntPtr piid;        // 'Guid' can't be marshaled to GUID* here? use IntPtr buffer trick instead
+        internal IntPtr piid; // 'Guid' can't be marshaled to GUID* here? use IntPtr buffer trick instead
         internal IntPtr pItf;
         internal int hr;
 #pragma warning disable 0649
@@ -71,16 +72,17 @@ namespace System.Web.Configuration {
 
         void IDisposable.Dispose()
         {
-            if (pItf != IntPtr.Zero) {
+            if (pItf != IntPtr.Zero)
+            {
                 Marshal.Release(pItf);
                 pItf = IntPtr.Zero;
             }
-            if (piid != IntPtr.Zero) {
+            if (piid != IntPtr.Zero)
+            {
                 Marshal.FreeCoTaskMem(piid);
                 piid = IntPtr.Zero;
             }
             GC.SuppressFinalize(this);
-
         }
     }
 }

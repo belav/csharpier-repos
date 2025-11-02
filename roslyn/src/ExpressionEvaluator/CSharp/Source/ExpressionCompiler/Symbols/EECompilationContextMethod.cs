@@ -15,8 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
     /// binding operations work properly. However, if we the use a symbol imported from the PE,
     /// symbols for locals, lambdas and local functions that will be directly or indirectly parented to it
     /// during binding won't be able to locate their <see cref="Symbol.DeclaringCompilation"/>, which will break
-    /// assumptions made in different parts of the compilation pipeline. 
-    /// Instead we create this symbol that represents exactly the same method, but pretends that 
+    /// assumptions made in different parts of the compilation pipeline.
+    /// Instead we create this symbol that represents exactly the same method, but pretends that
     /// it is declared by EE compilation and allows to return that compilation as <see cref="Symbol.DeclaringCompilation"/>
     /// for all child symbols created during EE compilation process for evaluation.
     /// </summary>
@@ -28,7 +28,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private readonly ImmutableArray<TypeParameterSymbol> _typeParameters;
         private readonly ImmutableArray<ParameterSymbol> _parameters;
 
-        public EECompilationContextMethod(CSharpCompilation compilation, MethodSymbol underlyingMethod)
+        public EECompilationContextMethod(
+            CSharpCompilation compilation,
+            MethodSymbol underlyingMethod
+        )
         {
             Debug.Assert(underlyingMethod.IsDefinition);
 
@@ -58,11 +61,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             get { return _parameters; }
         }
 
-        public override TypeWithAnnotations ReturnTypeWithAnnotations => _underlyingMethod.ReturnTypeWithAnnotations;
+        public override TypeWithAnnotations ReturnTypeWithAnnotations =>
+            _underlyingMethod.ReturnTypeWithAnnotations;
 
-        public override ImmutableArray<MethodSymbol> ExplicitInterfaceImplementations => ImmutableArray<MethodSymbol>.Empty;
+        public override ImmutableArray<MethodSymbol> ExplicitInterfaceImplementations =>
+            ImmutableArray<MethodSymbol>.Empty;
 
-        public override ImmutableArray<CustomModifier> RefCustomModifiers => _underlyingMethod.RefCustomModifiers;
+        public override ImmutableArray<CustomModifier> RefCustomModifiers =>
+            _underlyingMethod.RefCustomModifiers;
 
         public override Symbol? AssociatedSymbol => _underlyingMethod.AssociatedSymbol;
 
@@ -73,7 +79,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return _underlyingMethod.CalculateLocalSyntaxOffset(localPosition, localTree);
         }
 
-        internal override UnmanagedCallersOnlyAttributeData? GetUnmanagedCallersOnlyAttributeData(bool forceComplete)
+        internal override UnmanagedCallersOnlyAttributeData? GetUnmanagedCallersOnlyAttributeData(
+            bool forceComplete
+        )
         {
             return _underlyingMethod.GetUnmanagedCallersOnlyAttributeData(forceComplete);
         }
@@ -94,13 +102,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 return false;
             }
 
-            thisParameter = (object)underlyingThisParameter != null
-                ? new ThisParameterSymbol(this)
-                : null;
+            thisParameter =
+                (object)underlyingThisParameter != null ? new ThisParameterSymbol(this) : null;
             return true;
         }
 
-        internal sealed override bool HasAsyncMethodBuilderAttribute(out TypeSymbol? builderArgument)
+        internal sealed override bool HasAsyncMethodBuilderAttribute(
+            out TypeSymbol? builderArgument
+        )
         {
             builderArgument = null;
             return false;

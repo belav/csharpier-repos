@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private bool TryAddAlias(
             INamespaceOrTypeSymbol symbol,
-            ArrayBuilder<SymbolDisplayPart> builder)
+            ArrayBuilder<SymbolDisplayPart> builder
+        )
         {
             var alias = GetAliasSymbol(symbol);
             if (alias != null)
@@ -29,7 +30,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // first
                 var aliasName = alias.Name;
 
-                var boundSymbols = SemanticModelOpt.LookupNamespacesAndTypes(PositionOpt, name: aliasName);
+                var boundSymbols = SemanticModelOpt.LookupNamespacesAndTypes(
+                    PositionOpt,
+                    name: aliasName
+                );
 
                 if (boundSymbols.Length == 1)
                 {
@@ -52,7 +56,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             var token = SemanticModelOpt.SyntaxTree.GetRoot().FindToken(PositionOpt);
             var startNode = token.Parent;
 
-            return SyntaxFacts.IsInNamespaceOrTypeContext(startNode as ExpressionSyntax) || token.IsKind(SyntaxKind.NewKeyword) || this.InNamespaceOrType;
+            return SyntaxFacts.IsInNamespaceOrTypeContext(startNode as ExpressionSyntax)
+                || token.IsKind(SyntaxKind.NewKeyword)
+                || this.InNamespaceOrType;
         }
 
         private void MinimallyQualify(INamespaceSymbol symbol)
@@ -63,7 +69,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(symbol.ContainingNamespace != null || symbol.IsGlobalNamespace);
 
             // NOTE(cyrusn): We only call this once we've already checked if there is an alias that
-            // corresponds to this namespace. 
+            // corresponds to this namespace.
 
             if (symbol.IsGlobalNamespace)
             {
@@ -78,24 +84,33 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ? SemanticModelOpt.LookupNamespacesAndTypes(PositionOpt, name: symbol.Name)
                 : SemanticModelOpt.LookupSymbols(PositionOpt, name: symbol.Name);
             var firstSymbol = symbols.OfType<ISymbol>().FirstOrDefault();
-            if (symbols.Length != 1 ||
-                firstSymbol == null ||
-                !firstSymbol.Equals(symbol))
+            if (symbols.Length != 1 || firstSymbol == null || !firstSymbol.Equals(symbol))
             {
                 // Just the name alone didn't bind properly.  Add our minimally qualified parent (if
                 // we have one), a dot, and then our name.
-                var containingNamespace = symbol.ContainingNamespace == null
-                    ? null
-                    : SemanticModelOpt.Compilation.GetCompilationNamespace(symbol.ContainingNamespace);
+                var containingNamespace =
+                    symbol.ContainingNamespace == null
+                        ? null
+                        : SemanticModelOpt.Compilation.GetCompilationNamespace(
+                            symbol.ContainingNamespace
+                        );
                 if (containingNamespace != null)
                 {
                     if (containingNamespace.IsGlobalNamespace)
                     {
-                        Debug.Assert(Format.GlobalNamespaceStyle == SymbolDisplayGlobalNamespaceStyle.Included ||
-                                          Format.GlobalNamespaceStyle == SymbolDisplayGlobalNamespaceStyle.Omitted ||
-                                          Format.GlobalNamespaceStyle == SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining);
+                        Debug.Assert(
+                            Format.GlobalNamespaceStyle
+                                == SymbolDisplayGlobalNamespaceStyle.Included
+                                || Format.GlobalNamespaceStyle
+                                    == SymbolDisplayGlobalNamespaceStyle.Omitted
+                                || Format.GlobalNamespaceStyle
+                                    == SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining
+                        );
 
-                        if (Format.GlobalNamespaceStyle == SymbolDisplayGlobalNamespaceStyle.Included)
+                        if (
+                            Format.GlobalNamespaceStyle
+                            == SymbolDisplayGlobalNamespaceStyle.Included
+                        )
                         {
                             AddGlobalNamespace(containingNamespace);
                             AddPunctuation(SyntaxKind.ColonColonToken);
@@ -122,7 +137,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // the symbol that we were constructed from, then we have our minimal name. Otherwise,
             // we get the minimal name of our parent, add a dot, and then add ourselves.
 
-            // TODO(cyrusn): This code needs to see if type is an attribute and if it can be shown 
+            // TODO(cyrusn): This code needs to see if type is an attribute and if it can be shown
             // in simplified form here.
 
             if (!(symbol.IsAnonymousType || symbol.IsTupleType))
@@ -140,9 +155,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else
                     {
-                        var containingNamespace = symbol.ContainingNamespace == null
-                            ? null
-                            : SemanticModelOpt.Compilation.GetCompilationNamespace(symbol.ContainingNamespace);
+                        var containingNamespace =
+                            symbol.ContainingNamespace == null
+                                ? null
+                                : SemanticModelOpt.Compilation.GetCompilationNamespace(
+                                    symbol.ContainingNamespace
+                                );
                         if (containingNamespace != null)
                         {
                             if (containingNamespace.IsGlobalNamespace)
@@ -172,7 +190,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (!this.IsMinimizing)
             {
-                return SpecializedCollections.EmptyDictionary<INamespaceOrTypeSymbol, IAliasSymbol>();
+                return SpecializedCollections.EmptyDictionary<
+                    INamespaceOrTypeSymbol,
+                    IAliasSymbol
+                >();
             }
 
             // Walk up the ancestors from the current position. If this is a speculative
@@ -204,7 +225,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var usingAliases = GetAncestorsOrThis<BaseNamespaceDeclarationSyntax>(startNode)
                 .SelectMany(n => n.Usings)
-                .Concat(GetAncestorsOrThis<CompilationUnitSyntax>(startNode).SelectMany(c => c.Usings))
+                .Concat(
+                    GetAncestorsOrThis<CompilationUnitSyntax>(startNode).SelectMany(c => c.Usings)
+                )
                 .Where(u => u.Alias != null)
                 .Select(u => semanticModel.GetDeclaredSymbol(u) as IAliasSymbol)
                 .WhereNotNull();
@@ -238,8 +261,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // clause, we speculatively bind the name of the variable in the select
                         // or group clause of the query body.
                         var identifierName = SyntaxFactory.IdentifierName(symbol.Name);
-                        type = SemanticModelOpt.GetSpeculativeTypeInfo(
-                            queryBody.SelectOrGroup.Span.End - 1, identifierName, SpeculativeBindingOption.BindAsExpression).Type;
+                        type = SemanticModelOpt
+                            .GetSpeculativeTypeInfo(
+                                queryBody.SelectOrGroup.Span.End - 1,
+                                identifierName,
+                                SpeculativeBindingOption.BindAsExpression
+                            )
+                            .Type;
                     }
 
                     var identifier = token.Parent as IdentifierNameSyntax;
@@ -256,22 +284,27 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static QueryBodySyntax? GetQueryBody(SyntaxToken token) =>
             token.Parent switch
             {
-                FromClauseSyntax fromClause when fromClause.Identifier == token =>
-                    fromClause.Parent as QueryBodySyntax ?? ((QueryExpressionSyntax)fromClause.Parent!).Body,
-                LetClauseSyntax letClause when letClause.Identifier == token =>
-                    letClause.Parent as QueryBodySyntax,
-                JoinClauseSyntax joinClause when joinClause.Identifier == token =>
-                    joinClause.Parent as QueryBodySyntax,
+                FromClauseSyntax fromClause when fromClause.Identifier == token => fromClause.Parent
+                    as QueryBodySyntax
+                    ?? ((QueryExpressionSyntax)fromClause.Parent!).Body,
+                LetClauseSyntax letClause when letClause.Identifier == token => letClause.Parent
+                    as QueryBodySyntax,
+                JoinClauseSyntax joinClause when joinClause.Identifier == token => joinClause.Parent
+                    as QueryBodySyntax,
                 QueryContinuationSyntax continuation when continuation.Identifier == token =>
                     continuation.Body,
-                _ => null
+                _ => null,
             };
 
         private string RemoveAttributeSuffixIfNecessary(INamedTypeSymbol symbol, string symbolName)
         {
-            if (this.IsMinimizing &&
-                Format.MiscellaneousOptions.IncludesOption(SymbolDisplayMiscellaneousOptions.RemoveAttributeSuffix) &&
-                SemanticModelOpt.Compilation.IsAttributeType(symbol))
+            if (
+                this.IsMinimizing
+                && Format.MiscellaneousOptions.IncludesOption(
+                    SymbolDisplayMiscellaneousOptions.RemoveAttributeSuffix
+                )
+                && SemanticModelOpt.Compilation.IsAttributeType(symbol)
+            )
             {
                 string? nameWithoutAttributeSuffix;
                 if (symbolName.TryGetWithoutAttributeSuffix(out nameWithoutAttributeSuffix))
@@ -287,12 +320,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             return symbolName;
         }
 
-        private static T? GetAncestorOrThis<T>(SyntaxNode node) where T : SyntaxNode
+        private static T? GetAncestorOrThis<T>(SyntaxNode node)
+            where T : SyntaxNode
         {
             return GetAncestorsOrThis<T>(node).FirstOrDefault();
         }
 
-        private static IEnumerable<T> GetAncestorsOrThis<T>(SyntaxNode node) where T : SyntaxNode
+        private static IEnumerable<T> GetAncestorsOrThis<T>(SyntaxNode node)
+            where T : SyntaxNode
         {
             return node == null
                 ? SpecializedCollections.EmptyEnumerable<T>()

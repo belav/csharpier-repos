@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,35 +34,42 @@ using System.Web;
 
 namespace System.Web.Caching
 {
-	[Serializable]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Unrestricted)]
-	public class SubstitutionResponseElement : ResponseElement
-	{
-		string typeName;
-		string methodName;
-		
-		public HttpResponseSubstitutionCallback Callback {
-			get;
-			private set;
-		}
-		
-		public SubstitutionResponseElement (HttpResponseSubstitutionCallback callback)
-		{
-			if (callback == null)
-				throw new ArgumentNullException ("callback");
+    [Serializable]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Unrestricted
+    )]
+    public class SubstitutionResponseElement : ResponseElement
+    {
+        string typeName;
+        string methodName;
 
-			this.Callback = callback;
+        public HttpResponseSubstitutionCallback Callback { get; private set; }
 
-			MethodInfo mi = callback.Method;
-			this.typeName = mi.DeclaringType.AssemblyQualifiedName;
-			this.methodName = mi.Name;
-		}
+        public SubstitutionResponseElement(HttpResponseSubstitutionCallback callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
 
-		[OnDeserialized]
-		void ObjectDeserialized (StreamingContext context)
-		{
-			Type type = Type.GetType (typeName, true);
-			Callback = Delegate.CreateDelegate (typeof (HttpResponseSubstitutionCallback), type, methodName, false, true) as HttpResponseSubstitutionCallback;
-		}
-	}
+            this.Callback = callback;
+
+            MethodInfo mi = callback.Method;
+            this.typeName = mi.DeclaringType.AssemblyQualifiedName;
+            this.methodName = mi.Name;
+        }
+
+        [OnDeserialized]
+        void ObjectDeserialized(StreamingContext context)
+        {
+            Type type = Type.GetType(typeName, true);
+            Callback =
+                Delegate.CreateDelegate(
+                    typeof(HttpResponseSubstitutionCallback),
+                    type,
+                    methodName,
+                    false,
+                    true
+                ) as HttpResponseSubstitutionCallback;
+        }
+    }
 }

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,33 +43,33 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization
 {
-	[TestFixture]
-	public class AttributesTest
-	{
-		[Test]
-		public void TestContractNamespaceAttribute ()
-		{
-			ContractNamespaceAttribute x = new ContractNamespaceAttribute ("test");
-			Assert.AreEqual (null, x.ClrNamespace, "#01");
-			Assert.AreEqual ("test", x.ContractNamespace, "#02");
-		}
+    [TestFixture]
+    public class AttributesTest
+    {
+        [Test]
+        public void TestContractNamespaceAttribute()
+        {
+            ContractNamespaceAttribute x = new ContractNamespaceAttribute("test");
+            Assert.AreEqual(null, x.ClrNamespace, "#01");
+            Assert.AreEqual("test", x.ContractNamespace, "#02");
+        }
 
-		[Test]
-		public void TestDataContractAttribute ()
-		{
-			DataContractAttribute x = new DataContractAttribute ();
-			Assert.AreEqual (null, x.Name, "#01");
-			Assert.AreEqual (null, x.Namespace, "#02");
-		}
+        [Test]
+        public void TestDataContractAttribute()
+        {
+            DataContractAttribute x = new DataContractAttribute();
+            Assert.AreEqual(null, x.Name, "#01");
+            Assert.AreEqual(null, x.Namespace, "#02");
+        }
 
-		[Test]
-		public void TestDataMemberAttribute ()
-		{
-			DataMemberAttribute x = new DataMemberAttribute ();
-			Assert.AreEqual (null, x.Name, "#01");
-			Assert.AreEqual (-1, x.Order, "#02");
-			Assert.AreEqual (true, x.EmitDefaultValue, "#02");
-			Assert.AreEqual (false, x.IsRequired, "#02");
-		}
-	}
+        [Test]
+        public void TestDataMemberAttribute()
+        {
+            DataMemberAttribute x = new DataMemberAttribute();
+            Assert.AreEqual(null, x.Name, "#01");
+            Assert.AreEqual(-1, x.Order, "#02");
+            Assert.AreEqual(true, x.EmitDefaultValue, "#02");
+            Assert.AreEqual(false, x.IsRequired, "#02");
+        }
+    }
 }

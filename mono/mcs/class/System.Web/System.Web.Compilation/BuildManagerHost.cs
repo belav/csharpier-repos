@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,23 +32,27 @@ using System.Web.Hosting;
 
 namespace System.Web.Compilation
 {
-	class BuildManagerHost : MarshalByRefObject, IRegisteredObject
-	{
-		// This method is used by the Cassini ASP.NET host application (and all of its
-		// derivatives, e.g. CassiniDev, see http://cassinidev.codeplex.com) to register the
-		// host assembly with System.Web's assembly resolver in order to enable loading
-		// types from assemblies not installed in GAC.
-		//
-		protected void RegisterAssembly (string assemblyName, string assemblyLocation)
-		{
-			if (String.IsNullOrEmpty (assemblyName) || String.IsNullOrEmpty (assemblyLocation))
-				return;
+    class BuildManagerHost : MarshalByRefObject, IRegisteredObject
+    {
+        // This method is used by the Cassini ASP.NET host application (and all of its
+        // derivatives, e.g. CassiniDev, see http://cassinidev.codeplex.com) to register the
+        // host assembly with System.Web's assembly resolver in order to enable loading
+        // types from assemblies not installed in GAC.
+        //
+        protected void RegisterAssembly(string assemblyName, string assemblyLocation)
+        {
+            if (String.IsNullOrEmpty(assemblyName) || String.IsNullOrEmpty(assemblyLocation))
+                return;
 
-			HttpRuntime.RegisteredAssemblies.InsertOrUpdate ((uint)assemblyName.GetHashCode (), assemblyName, assemblyLocation, assemblyLocation);
-			HttpRuntime.EnableAssemblyMapping (true);
-		}
+            HttpRuntime.RegisteredAssemblies.InsertOrUpdate(
+                (uint)assemblyName.GetHashCode(),
+                assemblyName,
+                assemblyLocation,
+                assemblyLocation
+            );
+            HttpRuntime.EnableAssemblyMapping(true);
+        }
 
-		public void Stop (bool immediate)
-		{}
-	}
+        public void Stop(bool immediate) { }
+    }
 }

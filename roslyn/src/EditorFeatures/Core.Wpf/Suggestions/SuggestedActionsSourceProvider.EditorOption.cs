@@ -17,8 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         /// Method to enable quick actions from <see cref="SuggestedActionsSourceProvider"/>.
         /// </summary>
         /// <remarks>This method must be invoked on the UI thread.</remarks>
-        public static void Enable(IEditorOptionsFactoryService editorOptionsFactory)
-            => editorOptionsFactory.GlobalOptions.SetOptionValue(EditorOption.OptionName, true);
+        public static void Enable(IEditorOptionsFactoryService editorOptionsFactory) =>
+            editorOptionsFactory.GlobalOptions.SetOptionValue(EditorOption.OptionName, true);
 
         /// <summary>
         /// Editor option to support lazy creation of <see cref="SuggestedActionsSourceProvider"/>
@@ -31,13 +31,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         private sealed class EditorOption : EditorOptionDefinition<bool>
         {
             private static readonly EditorOptionKey<bool> s_optionKey = new(OptionName);
-            public const string OptionName = $"{nameof(SuggestedActionsSourceProvider)}.{nameof(EditorOption)}";
+            public const string OptionName =
+                $"{nameof(SuggestedActionsSourceProvider)}.{nameof(EditorOption)}";
 
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public EditorOption()
-            {
-            }
+            public EditorOption() { }
 
             public override bool Default => false;
 

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,29 +27,27 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-using NUnit.Framework;
 using System;
 using System.Security;
+using NUnit.Framework;
 
-namespace MonoTests.System.Security {
+namespace MonoTests.System.Security
+{
+    [TestFixture]
+    public class SecurityTransparentAttributeTest
+    {
+        [Test]
+        public void Attributes()
+        {
+            Type t = typeof(SecurityTransparentAttribute);
+            Assert.IsFalse(t.IsSerializable, "IsSerializable");
 
-	[TestFixture]
-	public class SecurityTransparentAttributeTest {
-
-		[Test]
-		public void Attributes ()
-		{
-			Type t = typeof (SecurityTransparentAttribute);
-			Assert.IsFalse (t.IsSerializable, "IsSerializable");
-
-			object [] attrs = t.GetCustomAttributes (typeof (AttributeUsageAttribute), false);
-			Assert.AreEqual (1, attrs.Length, "AttributeUsage");
-			AttributeUsageAttribute aua = (AttributeUsageAttribute)attrs [0];
-			Assert.IsFalse (aua.AllowMultiple, "AllowMultiple");
-			Assert.IsFalse (aua.Inherited, "Inherited");
-			Assert.AreEqual (AttributeTargets.Assembly, aua.ValidOn, "ValidOn");
-		}
-	}
+            object[] attrs = t.GetCustomAttributes(typeof(AttributeUsageAttribute), false);
+            Assert.AreEqual(1, attrs.Length, "AttributeUsage");
+            AttributeUsageAttribute aua = (AttributeUsageAttribute)attrs[0];
+            Assert.IsFalse(aua.AllowMultiple, "AllowMultiple");
+            Assert.IsFalse(aua.Inherited, "Inherited");
+            Assert.AreEqual(AttributeTargets.Assembly, aua.ValidOn, "ValidOn");
+        }
+    }
 }
-

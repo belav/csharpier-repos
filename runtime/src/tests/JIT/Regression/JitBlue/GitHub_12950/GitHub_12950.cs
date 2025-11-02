@@ -11,20 +11,20 @@ public class Program
     {
         public Vector3 Min;
         public Vector3 Max;
-        
+
         public override int GetHashCode()
         {
             return Min.GetHashCode() + Max.GetHashCode();
         }
     }
-    
+
     internal static void Test()
     {
         var box = new BoundingBoxTest();
         box.Min = Vector3.Min(box.Min, box.Min);
         var hmm = box.GetHashCode();
     }
-    
+
     [Fact]
     public static int TestEntryPoint()
     {

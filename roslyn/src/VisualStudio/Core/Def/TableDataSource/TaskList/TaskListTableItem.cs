@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             string? projectName,
             Guid projectGuid,
             string[] projectNames,
-            Guid[] projectGuids)
+            Guid[] projectGuids
+        )
             : base(workspace, projectName, projectGuid, projectNames, projectGuids)
         {
             Data = data;
@@ -29,24 +30,39 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         public static TaskListTableItem Create(Workspace workspace, TaskListItem data)
         {
-            GetProjectNameAndGuid(workspace, data.DocumentId.ProjectId, out var projectName, out var projectGuid);
-            return new TaskListTableItem(workspace, data, projectName, projectGuid, projectNames: Array.Empty<string>(), projectGuids: Array.Empty<Guid>());
+            GetProjectNameAndGuid(
+                workspace,
+                data.DocumentId.ProjectId,
+                out var projectName,
+                out var projectGuid
+            );
+            return new TaskListTableItem(
+                workspace,
+                data,
+                projectName,
+                projectGuid,
+                projectNames: Array.Empty<string>(),
+                projectGuids: Array.Empty<Guid>()
+            );
         }
 
-        public override TableItem WithAggregatedData(string[] projectNames, Guid[] projectGuids)
-            => new TaskListTableItem(Workspace, Data, projectName: null, projectGuid: Guid.Empty, projectNames, projectGuids);
+        public override TableItem WithAggregatedData(string[] projectNames, Guid[] projectGuids) =>
+            new TaskListTableItem(
+                Workspace,
+                Data,
+                projectName: null,
+                projectGuid: Guid.Empty,
+                projectNames,
+                projectGuids
+            );
 
-        public override DocumentId DocumentId
-            => Data.DocumentId;
+        public override DocumentId DocumentId => Data.DocumentId;
 
-        public override ProjectId ProjectId
-            => Data.DocumentId.ProjectId;
+        public override ProjectId ProjectId => Data.DocumentId.ProjectId;
 
-        public override LinePosition GetOriginalPosition()
-            => Data.Span.StartLinePosition;
+        public override LinePosition GetOriginalPosition() => Data.Span.StartLinePosition;
 
-        public override string GetOriginalFilePath()
-            => Data.Span.Path;
+        public override string GetOriginalFilePath() => Data.Span.Path;
 
         public override bool EqualsIgnoringLocation(TableItem other)
         {
@@ -62,19 +78,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         /// <summary>
         /// Used to group diagnostics that only differ in the project they come from.
-        /// We want to avoid displaying diagnostic multuple times when it is reported from 
+        /// We want to avoid displaying diagnostic multuple times when it is reported from
         /// multi-targeted projects and/or files linked to multiple projects.
         /// </summary>
-        internal sealed class GroupingComparer : IEqualityComparer<TaskListItem>, IEqualityComparer<TaskListTableItem>
+        internal sealed class GroupingComparer
+            : IEqualityComparer<TaskListItem>,
+                IEqualityComparer<TaskListTableItem>
         {
             public static readonly GroupingComparer Instance = new();
 
             public bool Equals(TaskListItem left, TaskListItem right)
                 // We don't need to compare OriginalFilePath since TODO items are only aggregated within a single file.
-                => left.Span == right.Span;
+                =>
+                left.Span == right.Span;
 
-            public int GetHashCode(TaskListItem data)
-                => data.Span.GetHashCode();
+            public int GetHashCode(TaskListItem data) => data.Span.GetHashCode();
 
             public bool Equals(TaskListTableItem left, TaskListTableItem right)
             {
@@ -91,8 +109,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 return Equals(left.Data, right.Data);
             }
 
-            public int GetHashCode(TaskListTableItem item)
-                => GetHashCode(item.Data);
+            public int GetHashCode(TaskListTableItem item) => GetHashCode(item.Data);
         }
     }
 }

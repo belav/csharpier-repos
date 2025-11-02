@@ -8,7 +8,6 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-
         [Flags]
         internal enum InterfaceFlags
         {
@@ -98,8 +97,13 @@ internal static partial class Interop
             public readonly ulong TimestampRequestsSent;
         }
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetIcmpv4GlobalStatistics")]
-        public static unsafe partial int GetIcmpv4GlobalStatistics(Icmpv4GlobalStatistics* statistics);
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetIcmpv4GlobalStatistics"
+        )]
+        public static unsafe partial int GetIcmpv4GlobalStatistics(
+            Icmpv4GlobalStatistics* statistics
+        );
 
         [StructLayoutAttribute(LayoutKind.Sequential)]
         public readonly struct Icmpv6GlobalStatistics
@@ -134,8 +138,13 @@ internal static partial class Interop
             public readonly ulong TimeExceededMessagesSent;
         }
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetIcmpv6GlobalStatistics")]
-        public static unsafe partial int GetIcmpv6GlobalStatistics(Icmpv6GlobalStatistics* statistics);
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetIcmpv6GlobalStatistics"
+        )]
+        public static unsafe partial int GetIcmpv6GlobalStatistics(
+            Icmpv6GlobalStatistics* statistics
+        );
 
         public readonly struct NativeIPInterfaceStatistics
         {
@@ -155,8 +164,15 @@ internal static partial class Interop
             public readonly ulong Flags;
         }
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetNativeIPInterfaceStatistics", StringMarshalling = StringMarshalling.Utf8)]
-        public static partial int GetNativeIPInterfaceStatistics(string name, out NativeIPInterfaceStatistics stats);
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetNativeIPInterfaceStatistics",
+            StringMarshalling = StringMarshalling.Utf8
+        )]
+        public static partial int GetNativeIPInterfaceStatistics(
+            string name,
+            out NativeIPInterfaceStatistics stats
+        );
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetNumRoutes")]
         public static partial int GetNumRoutes();

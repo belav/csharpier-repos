@@ -16,14 +16,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
     [DataSource(MiscellaneousDiagnosticListTableWorkspaceEventListener.IdentifierString)]
     [Name(Name)]
     [Order(Before = "default")]
-    internal sealed class MiscDiagnosticTableControlEventProcessorProvider : AbstractTableControlEventProcessorProvider<DiagnosticTableItem>
+    internal sealed class MiscDiagnosticTableControlEventProcessorProvider
+        : AbstractTableControlEventProcessorProvider<DiagnosticTableItem>
     {
         internal const string Name = "Misc C#/VB Diagnostic Table Event Processor";
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MiscDiagnosticTableControlEventProcessorProvider()
-        {
-        }
+        public MiscDiagnosticTableControlEventProcessorProvider() { }
     }
 }

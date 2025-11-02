@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -18,7 +18,7 @@ using System;
 
 namespace System.Runtime.CompilerServices
 {
-    [AttributeUsage(AttributeTargets.Field, Inherited=false)]
+    [AttributeUsage(AttributeTargets.Field, Inherited = false)]
     public sealed class FixedBufferAttribute : Attribute
     {
         private Type elementType;
@@ -30,16 +30,14 @@ namespace System.Runtime.CompilerServices
             this.length = length;
         }
 
-        public Type ElementType {
-            get {
-                return elementType;
-            }
+        public Type ElementType
+        {
+            get { return elementType; }
         }
 
-        public int Length {
-            get {
-                return length;
-            }
+        public int Length
+        {
+            get { return length; }
         }
     }
 }

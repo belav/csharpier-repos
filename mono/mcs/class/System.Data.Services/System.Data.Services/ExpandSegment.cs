@@ -26,56 +26,52 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Data.Services.Providers;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Data.Services.Providers;
 
 namespace System.Data.Services
 {
-	[DebuggerDisplay ("ExpandSegment ({name},Filter={filter})]")]
-	public class ExpandSegment
-	{
-		public ExpandSegment (string name, Expression filter)
-		{
-			if (name == null)
-				throw new ArgumentNullException ("name");
+    [DebuggerDisplay("ExpandSegment ({name},Filter={filter})]")]
+    public class ExpandSegment
+    {
+        public ExpandSegment(string name, Expression filter)
+        {
+            if (name == null)
+                throw new ArgumentNullException("name");
 
-			this.Name = name;
-			this.Filter = filter;
-		}
-		public ResourceProperty ExpandedProperty {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-		public string Name {
-			get;
-			private set;
-		}
+            this.Name = name;
+            this.Filter = filter;
+        }
 
-		public Expression Filter {
-			get;
-			private set;
-		}
+        public ResourceProperty ExpandedProperty
+        {
+            get { throw new NotImplementedException(); }
+        }
+        public string Name { get; private set; }
 
-		public bool HasFilter {
-			get { return (this.Filter != null); }
-		}
+        public Expression Filter { get; private set; }
 
-		public int MaxResultsExpected {
-			get { return this.max_results_expected; }
-		}
+        public bool HasFilter
+        {
+            get { return (this.Filter != null); }
+        }
 
-		private int max_results_expected = Int32.MaxValue;
+        public int MaxResultsExpected
+        {
+            get { return this.max_results_expected; }
+        }
 
-		public static bool PathHasFilter (IEnumerable<ExpandSegment> path)
-		{
-			if (path == null)
-				throw new ArgumentNullException ("path");
+        private int max_results_expected = Int32.MaxValue;
 
-			return path.Any (s => s.HasFilter);
-		}
-	}
+        public static bool PathHasFilter(IEnumerable<ExpandSegment> path)
+        {
+            if (path == null)
+                throw new ArgumentNullException("path");
+
+            return path.Any(s => s.HasFilter);
+        }
+    }
 }

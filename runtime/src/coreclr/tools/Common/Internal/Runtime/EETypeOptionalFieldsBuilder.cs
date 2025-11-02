@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using Internal.NativeFormat;
 using System.Diagnostics;
 using System.Text;
+using Internal.NativeFormat;
 
 namespace Internal.Runtime
 {
@@ -23,7 +23,9 @@ namespace Internal.Runtime
 
         internal uint GetFieldValue(EETypeOptionalFieldTag eTag, uint defaultValueIfNotFound)
         {
-            return _rgFields[(int)eTag]._fieldPresent ? _rgFields[(int)eTag]._value : defaultValueIfNotFound;
+            return _rgFields[(int)eTag]._fieldPresent
+                ? _rgFields[(int)eTag]._value
+                : defaultValueIfNotFound;
         }
 
         internal void SetFieldValue(EETypeOptionalFieldTag eTag, uint value)
@@ -99,7 +101,6 @@ namespace Internal.Runtime
                     sb.Append('x');
                 }
 
-
                 if (i != (int)EETypeOptionalFieldTag.Count - 1)
                 {
                     sb.Append('_');
@@ -125,8 +126,13 @@ namespace Internal.Runtime
             for (EETypeOptionalFieldTag eTag = 0; eTag < EETypeOptionalFieldTag.Count; eTag++)
             {
                 int index = (int)eTag;
-                if (_rgFields[index]._fieldPresent != other._rgFields[index]._fieldPresent ||
-                    (_rgFields[index]._fieldPresent && _rgFields[index]._value != other._rgFields[index]._value))
+                if (
+                    _rgFields[index]._fieldPresent != other._rgFields[index]._fieldPresent
+                    || (
+                        _rgFields[index]._fieldPresent
+                        && _rgFields[index]._value != other._rgFields[index]._value
+                    )
+                )
                     return false;
             }
 

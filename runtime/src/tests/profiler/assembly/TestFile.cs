@@ -7,7 +7,6 @@ namespace Profiler.Tests
 {
     class TestFile
     {
-
         public static int Main(string[] args)
         {
             return 100;

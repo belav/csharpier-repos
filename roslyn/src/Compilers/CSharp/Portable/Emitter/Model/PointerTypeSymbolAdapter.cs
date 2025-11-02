@@ -12,15 +12,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal partial class
 #if DEBUG
-        PointerTypeSymbolAdapter : SymbolAdapter,
+    PointerTypeSymbolAdapter : SymbolAdapter,
 #else
-        PointerTypeSymbol :
-#endif 
-        Cci.IPointerTypeReference
+    PointerTypeSymbol :
+#endif
+            Cci.IPointerTypeReference
     {
         Cci.ITypeReference Cci.IPointerTypeReference.GetTargetType(EmitContext context)
         {
-            var type = ((PEModuleBuilder)context.Module).Translate(AdaptedPointerTypeSymbol.PointedAtType, syntaxNodeOpt: (CSharpSyntaxNode?)context.SyntaxNode, diagnostics: context.Diagnostics);
+            var type = ((PEModuleBuilder)context.Module).Translate(
+                AdaptedPointerTypeSymbol.PointedAtType,
+                syntaxNodeOpt: (CSharpSyntaxNode?)context.SyntaxNode,
+                diagnostics: context.Diagnostics
+            );
 
             if (AdaptedPointerTypeSymbol.PointedAtTypeWithAnnotations.CustomModifiers.Length == 0)
             {
@@ -28,7 +32,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                return new Cci.ModifiedTypeReference(type, ImmutableArray<Cci.ICustomModifier>.CastUp(AdaptedPointerTypeSymbol.PointedAtTypeWithAnnotations.CustomModifiers));
+                return new Cci.ModifiedTypeReference(
+                    type,
+                    ImmutableArray<Cci.ICustomModifier>.CastUp(
+                        AdaptedPointerTypeSymbol.PointedAtTypeWithAnnotations.CustomModifiers
+                    )
+                );
             }
         }
 
@@ -72,7 +81,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return null; }
         }
 
-        Cci.INamespaceTypeDefinition? Cci.ITypeReference.AsNamespaceTypeDefinition(EmitContext context)
+        Cci.INamespaceTypeDefinition? Cci.ITypeReference.AsNamespaceTypeDefinition(
+            EmitContext context
+        )
         {
             return null;
         }
@@ -124,7 +135,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (_lazyAdapter is null)
             {
-                return InterlockedOperations.Initialize(ref _lazyAdapter, new PointerTypeSymbolAdapter(this));
+                return InterlockedOperations.Initialize(
+                    ref _lazyAdapter,
+                    new PointerTypeSymbolAdapter(this)
+                );
             }
 
             return _lazyAdapter;

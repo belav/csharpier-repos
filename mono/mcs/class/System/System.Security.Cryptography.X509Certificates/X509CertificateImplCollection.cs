@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,68 +30,70 @@ using System.Collections.Generic;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-	internal class X509CertificateImplCollection : IDisposable
-	{
-		List<X509CertificateImpl> list;
+    internal class X509CertificateImplCollection : IDisposable
+    {
+        List<X509CertificateImpl> list;
 
-		public X509CertificateImplCollection ()
-		{
-			list = new List<X509CertificateImpl> ();
-		}
+        public X509CertificateImplCollection()
+        {
+            list = new List<X509CertificateImpl>();
+        }
 
-		X509CertificateImplCollection (X509CertificateImplCollection other)
-		{
-			list = new List<X509CertificateImpl> ();
-			foreach (var impl in other.list)
-				list.Add (impl.Clone ());
-		}
+        X509CertificateImplCollection(X509CertificateImplCollection other)
+        {
+            list = new List<X509CertificateImpl>();
+            foreach (var impl in other.list)
+                list.Add(impl.Clone());
+        }
 
-		public int Count {
-			get {
-				return list.Count;
-			}
-		}
+        public int Count
+        {
+            get { return list.Count; }
+        }
 
-		public X509CertificateImpl this[int index] {
-			get {
-				return list[index];
-			}
-		}
+        public X509CertificateImpl this[int index]
+        {
+            get { return list[index]; }
+        }
 
-		public void Add (X509CertificateImpl impl, bool takeOwnership)
-		{
-			if (!takeOwnership)
-				impl = impl.Clone ();
-			list.Add (impl);
-		}
+        public void Add(X509CertificateImpl impl, bool takeOwnership)
+        {
+            if (!takeOwnership)
+                impl = impl.Clone();
+            list.Add(impl);
+        }
 
-		public X509CertificateImplCollection Clone ()
-		{
-			return new X509CertificateImplCollection (this);
-		}
+        public X509CertificateImplCollection Clone()
+        {
+            return new X509CertificateImplCollection(this);
+        }
 
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-			foreach (var impl in list) {
-				try {
-					impl.Dispose ();
-				} catch {
-					;
-				}
-			}
-			list.Clear ();
-		}
+        protected virtual void Dispose(bool disposing)
+        {
+            foreach (var impl in list)
+            {
+                try
+                {
+                    impl.Dispose();
+                }
+                catch
+                {
+                    ;
+                }
+            }
+            list.Clear();
+        }
 
-		~X509CertificateImplCollection ()
-		{
-			Dispose (false);
-		}
-	}
+        ~X509CertificateImplCollection()
+        {
+            Dispose(false);
+        }
+    }
 }
 #endif

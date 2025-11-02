@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Roslyn.Utilities;
 using System;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// The .Cast&lt;T&gt;() operation generated from the query range variable's type restriction,
-        /// or null if the type restriction isn't specified. 
+        /// or null if the type restriction isn't specified.
         /// </summary>
         /// <remarks>
         /// The operation, when present is implemented via <see cref="IMethodSymbol"/>.
@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// The operation (e.g. Select(), Where(), etc) that implements the given clause.
         /// </summary>
         /// <remarks>
-        /// The clause can be implemented via <see cref="IMethodSymbol"/>, or 
+        /// The clause can be implemented via <see cref="IMethodSymbol"/>, or
         /// <see cref="IFieldSymbol"/> or <see cref="IPropertySymbol"/> that return a delegate.
         /// If it is an extension method, it is returned in reduced form.
         /// </remarks>
@@ -55,8 +55,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public bool Equals(QueryClauseInfo other)
         {
-            return _castInfo.Equals(other._castInfo)
-                && _operationInfo.Equals(other._operationInfo);
+            return _castInfo.Equals(other._castInfo) && _operationInfo.Equals(other._operationInfo);
         }
 
         public override int GetHashCode()

@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// <summary>
     /// Represents a namespace.
     /// </summary>
-    internal abstract partial class NamespaceSymbol : NamespaceOrTypeSymbol, INamespaceSymbolInternal
+    internal abstract partial class NamespaceSymbol
+        : NamespaceOrTypeSymbol,
+            INamespaceSymbolInternal
     {
         // PERF: initialization of the following fields will allocate, so we make them lazy
         private ImmutableArray<NamedTypeSymbol> _lazyTypesMightContainExtensionMethods;
@@ -41,15 +43,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns whether this namespace is the unnamed, global namespace that is 
+        /// Returns whether this namespace is the unnamed, global namespace that is
         /// at the root of all namespaces.
         /// </summary>
         public virtual bool IsGlobalNamespace
         {
-            get
-            {
-                return (object)ContainingNamespace == null;
-            }
+            get { return (object)ContainingNamespace == null; }
         }
 
         internal abstract NamespaceExtent Extent { get; }
@@ -70,7 +69,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public CSharpCompilation ContainingCompilation
         {
-            get { return this.NamespaceKind == NamespaceKind.Compilation ? this.Extent.Compilation : null; }
+            get
+            {
+                return this.NamespaceKind == NamespaceKind.Compilation
+                    ? this.Extent.Compilation
+                    : null;
+            }
         }
 
         /// <summary>
@@ -81,18 +85,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public virtual ImmutableArray<NamespaceSymbol> ConstituentNamespaces
         {
-            get
-            {
-                return ImmutableArray.Create(this);
-            }
+            get { return ImmutableArray.Create(this); }
         }
 
         public sealed override NamedTypeSymbol ContainingType
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         /// <summary>
@@ -119,24 +117,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override SymbolKind Kind
         {
-            get
-            {
-                return SymbolKind.Namespace;
-            }
+            get { return SymbolKind.Namespace; }
         }
 
         public sealed override bool IsImplicitlyDeclared
         {
-            get
-            {
-                return this.IsGlobalNamespace;
-            }
+            get { return this.IsGlobalNamespace; }
         }
 
         /// <summary>
         /// Implements visitor pattern.
         /// </summary>
-        internal override TResult Accept<TArgument, TResult>(CSharpSymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        internal override TResult Accept<TArgument, TResult>(
+            CSharpSymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitNamespace(this, argument);
         }
@@ -152,9 +147,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         // Only the compiler can create namespace symbols.
-        internal NamespaceSymbol()
-        {
-        }
+        internal NamespaceSymbol() { }
 
         /// <summary>
         /// Get this accessibility that was declared on this symbol. For symbols that do not have
@@ -163,10 +156,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public sealed override Accessibility DeclaredAccessibility
         {
             // C# spec 3.5.1: Namespaces implicitly have public declared accessibility.
-            get
-            {
-                return Accessibility.Public;
-            }
+            get { return Accessibility.Public; }
         }
 
         /// <summary>
@@ -175,10 +165,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsStatic
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -188,10 +175,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -202,10 +186,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsSealed
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -243,7 +224,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Sequence of names for nested child namespaces.
         /// </param>
         /// <returns>
-        /// Symbol for the most nested namespace, if found. Nothing 
+        /// Symbol for the most nested namespace, if found. Nothing
         /// if namespace or any part of it can not be found.
         /// </returns>
         internal NamespaceSymbol LookupNestedNamespace(ImmutableArray<ReadOnlyMemory<char>> names)
@@ -259,8 +240,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return scope;
         }
 
-        internal NamespaceSymbol GetNestedNamespace(string name)
-            => GetNestedNamespace(name.AsMemory());
+        internal NamespaceSymbol GetNestedNamespace(string name) =>
+            GetNestedNamespace(name.AsMemory());
 
         internal NamespaceSymbol GetNestedNamespace(ReadOnlyMemory<char> name)
         {
@@ -277,8 +258,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public abstract ImmutableArray<Symbol> GetMembers(ReadOnlyMemory<char> name);
 
-        public sealed override ImmutableArray<Symbol> GetMembers(string name)
-            => GetMembers(name.AsMemory());
+        public sealed override ImmutableArray<Symbol> GetMembers(string name) =>
+            GetMembers(name.AsMemory());
 
         internal NamespaceSymbol GetNestedNamespace(NameSyntax name)
         {
@@ -314,7 +295,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var typesWithExtensionMethods = this._lazyTypesMightContainExtensionMethods;
                 if (typesWithExtensionMethods.IsDefault)
                 {
-                    this._lazyTypesMightContainExtensionMethods = this.GetTypeMembersUnordered().WhereAsArray(t => t.MightContainExtensionMethods);
+                    this._lazyTypesMightContainExtensionMethods = this.GetTypeMembersUnordered()
+                        .WhereAsArray(t => t.MightContainExtensionMethods);
                     typesWithExtensionMethods = this._lazyTypesMightContainExtensionMethods;
                 }
 
@@ -330,7 +312,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <param name="nameOpt">Optional method name</param>
         /// <param name="arity">Method arity</param>
         /// <param name="options">Lookup options</param>
-        internal virtual void GetExtensionMethods(ArrayBuilder<MethodSymbol> methods, string nameOpt, int arity, LookupOptions options)
+        internal virtual void GetExtensionMethods(
+            ArrayBuilder<MethodSymbol> methods,
+            string nameOpt,
+            int arity,
+            LookupOptions options
+        )
         {
             var assembly = this.ContainingAssembly;
 
@@ -355,8 +342,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return _lazyQualifiedName ??
-                    (_lazyQualifiedName = this.ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat));
+                return _lazyQualifiedName
+                    ?? (
+                        _lazyQualifiedName = this.ToDisplayString(
+                            SymbolDisplayFormat.QualifiedNameOnlyFormat
+                        )
+                    );
             }
         }
 

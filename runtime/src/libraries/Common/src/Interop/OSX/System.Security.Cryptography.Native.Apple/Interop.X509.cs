@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Apple;
 using System.Security.Cryptography.X509Certificates;
-
 using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop
@@ -18,47 +17,55 @@ internal static partial class Interop
         private static partial int AppleCryptoNative_X509GetRawData(
             SafeSecCertificateHandle cert,
             out SafeCFDataHandle cfDataOut,
-            out int pOSStatus);
+            out int pOSStatus
+        );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
         private static partial int AppleCryptoNative_X509GetSubjectSummary(
             SafeSecCertificateHandle cert,
-            out SafeCFStringHandle cfSubjectSummaryOut);
+            out SafeCFStringHandle cfSubjectSummaryOut
+        );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial int AppleCryptoNative_X509GetPublicKey(SafeSecCertificateHandle cert, out SafeSecKeyRefHandle publicKey);
+        private static partial int AppleCryptoNative_X509GetPublicKey(
+            SafeSecCertificateHandle cert,
+            out SafeSecKeyRefHandle publicKey
+        );
 
-        internal static X509ContentType X509GetContentType(ReadOnlySpan<byte> data)
-            => X509GetContentType(ref MemoryMarshal.GetReference(data), data.Length);
+        internal static X509ContentType X509GetContentType(ReadOnlySpan<byte> data) =>
+            X509GetContentType(ref MemoryMarshal.GetReference(data), data.Length);
 
-        [LibraryImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_X509GetContentType")]
+        [LibraryImport(
+            Libraries.AppleCryptoNative,
+            EntryPoint = "AppleCryptoNative_X509GetContentType"
+        )]
         private static partial X509ContentType X509GetContentType(ref byte pbData, int cbData);
 
         [LibraryImport(Libraries.AppleCryptoNative)]
         private static partial int AppleCryptoNative_X509CopyCertFromIdentity(
             SafeSecIdentityHandle identity,
-            out SafeSecCertificateHandle cert);
+            out SafeSecCertificateHandle cert
+        );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
         private static partial int AppleCryptoNative_X509CopyPrivateKeyFromIdentity(
             SafeSecIdentityHandle identity,
-            out SafeSecKeyRefHandle key);
+            out SafeSecKeyRefHandle key
+        );
 
         [LibraryImport(Libraries.AppleCryptoNative)]
         private static partial int AppleCryptoNative_X509DemuxAndRetainHandle(
             IntPtr handle,
             out SafeSecCertificateHandle certHandle,
-            out SafeSecIdentityHandle identityHandle);
+            out SafeSecIdentityHandle identityHandle
+        );
 
         internal static byte[] X509GetRawData(SafeSecCertificateHandle cert)
         {
             int osStatus;
             SafeCFDataHandle data;
 
-            int ret = AppleCryptoNative_X509GetRawData(
-                cert,
-                out data,
-                out osStatus);
+            int ret = AppleCryptoNative_X509GetRawData(cert, out data, out osStatus);
 
             using (data)
             {
@@ -81,9 +88,7 @@ internal static partial class Interop
         {
             SafeCFStringHandle subjectSummary;
 
-            int ret = AppleCryptoNative_X509GetSubjectSummary(
-                cert,
-                out subjectSummary);
+            int ret = AppleCryptoNative_X509GetSubjectSummary(cert, out subjectSummary);
 
             using (subjectSummary)
             {
@@ -102,7 +107,9 @@ internal static partial class Interop
             throw new CryptographicException();
         }
 
-        internal static SafeSecKeyRefHandle X509GetPrivateKeyFromIdentity(SafeSecIdentityHandle identity)
+        internal static SafeSecKeyRefHandle X509GetPrivateKeyFromIdentity(
+            SafeSecIdentityHandle identity
+        )
         {
             SafeSecKeyRefHandle key;
             int osStatus = AppleCryptoNative_X509CopyPrivateKeyFromIdentity(identity, out key);

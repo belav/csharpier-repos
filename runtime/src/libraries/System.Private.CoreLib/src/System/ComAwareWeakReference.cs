@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
-
 #if FEATURE_COMINTEROP || FEATURE_COMWRAPPERS
 
 using static System.WeakReferenceHandleTags;
@@ -129,10 +128,16 @@ namespace System
             nint current = taggedHandle;
             if ((current & ComAwareBit) == 0)
             {
-                ComAwareWeakReference newRef = new ComAwareWeakReference(taggedHandle & ~HandleTagBits);
+                ComAwareWeakReference newRef = new ComAwareWeakReference(
+                    taggedHandle & ~HandleTagBits
+                );
                 nint newHandle = GCHandle.InternalAlloc(newRef, GCHandleType.Normal);
-                nint newTaggedHandle = newHandle | ComAwareBit | (taggedHandle & TracksResurrectionBit);
-                if (Interlocked.CompareExchange(ref taggedHandle, newTaggedHandle, current) == current)
+                nint newTaggedHandle =
+                    newHandle | ComAwareBit | (taggedHandle & TracksResurrectionBit);
+                if (
+                    Interlocked.CompareExchange(ref taggedHandle, newTaggedHandle, current)
+                    == current
+                )
                 {
                     // success.
                     return newRef;
@@ -143,28 +148,37 @@ namespace System
                 GC.SuppressFinalize(newRef);
             }
 
-            return Unsafe.As<ComAwareWeakReference>(GCHandle.InternalGet(taggedHandle & ~HandleTagBits));
+            return Unsafe.As<ComAwareWeakReference>(
+                GCHandle.InternalGet(taggedHandle & ~HandleTagBits)
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static object? GetTarget(nint taggedHandle)
         {
             Debug.Assert((taggedHandle & ComAwareBit) != 0);
-            return Unsafe.As<ComAwareWeakReference>(GCHandle.InternalGet(taggedHandle & ~HandleTagBits)).Target;
+            return Unsafe
+                .As<ComAwareWeakReference>(GCHandle.InternalGet(taggedHandle & ~HandleTagBits))
+                .Target;
         }
 
         internal static nint GetWeakHandle(nint taggedHandle)
         {
             Debug.Assert((taggedHandle & ComAwareBit) != 0);
-            return Unsafe.As<ComAwareWeakReference>(GCHandle.InternalGet(taggedHandle & ~HandleTagBits))._weakHandle;
+            return Unsafe
+                .As<ComAwareWeakReference>(GCHandle.InternalGet(taggedHandle & ~HandleTagBits))
+                ._weakHandle;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         internal static void SetTarget(ref nint taggedHandle, object? target, ComInfo? comInfo)
         {
-            ComAwareWeakReference comAwareRef = comInfo != null ?
-                EnsureComAwareReference(ref taggedHandle) :
-                Unsafe.As<ComAwareWeakReference>(GCHandle.InternalGet(taggedHandle & ~HandleTagBits));
+            ComAwareWeakReference comAwareRef =
+                comInfo != null
+                    ? EnsureComAwareReference(ref taggedHandle)
+                    : Unsafe.As<ComAwareWeakReference>(
+                        GCHandle.InternalGet(taggedHandle & ~HandleTagBits)
+                    );
 
             comAwareRef.SetTarget(target, comInfo);
         }
@@ -173,7 +187,9 @@ namespace System
         internal static void SetComInfoInConstructor(ref nint taggedHandle, ComInfo comInfo)
         {
             Debug.Assert((taggedHandle & ComAwareBit) == 0);
-            ComAwareWeakReference comAwareRef = new ComAwareWeakReference(taggedHandle & ~HandleTagBits);
+            ComAwareWeakReference comAwareRef = new ComAwareWeakReference(
+                taggedHandle & ~HandleTagBits
+            );
             nint newHandle = GCHandle.InternalAlloc(comAwareRef, GCHandleType.Normal);
             taggedHandle = newHandle | ComAwareBit | (taggedHandle & TracksResurrectionBit);
             comAwareRef._comInfo = comInfo;

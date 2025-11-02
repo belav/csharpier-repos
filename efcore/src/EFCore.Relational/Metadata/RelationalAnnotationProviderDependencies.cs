@@ -45,7 +45,5 @@ public sealed record RelationalAnnotationProviderDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public RelationalAnnotationProviderDependencies()
-    {
-    }
+    public RelationalAnnotationProviderDependencies() { }
 }

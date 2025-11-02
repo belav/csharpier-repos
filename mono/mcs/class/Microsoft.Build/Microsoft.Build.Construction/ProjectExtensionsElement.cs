@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,65 +27,75 @@
 //
 
 using System;
-using System.Xml;
 using System.Text;
+using System.Xml;
 
 namespace Microsoft.Build.Construction
 {
-        public class ProjectExtensionsElement : ProjectElement
+    public class ProjectExtensionsElement : ProjectElement
+    {
+        internal ProjectExtensionsElement(ProjectRootElement containingProject)
         {
-                internal ProjectExtensionsElement (ProjectRootElement containingProject)
-                {
-                        ContainingProject = containingProject;
-                }
-                public override string Condition {
-                        get { return null; }
-                        set {
-                                throw new InvalidOperationException ("Can not set Condition.");
-                        }
-                }
-                public string Content {
-                        get { return element.InnerXml; }
-                        set { element.InnerXml = value; }
-                }
-                public string this[string name] {
-                        get {
-                                var child = element[name];
-                                return child == null ? string.Empty : child.InnerXml;
-                        }
-                        set {
-                                var child = element[name];
-                                if (child == null) {
-                                        if (string.IsNullOrEmpty (name))
-                                                return;
-                                        child = document.CreateElement (name);
-                                        element.AppendChild (child);
-                                }
-                                if (string.IsNullOrEmpty (value))
-                                        element.RemoveChild (child);
-                                else
-                                        child.InnerXml = value;
-                        }
-                }
-                internal override void Load (XmlReader reader)
-                {
-                        while (reader.Read () && reader.NodeType != XmlNodeType.Element)
-                                ;
-                        FillLocation (reader);
-                        using (XmlReader subReader = reader.ReadSubtree ()) {
-                                document = new XmlDocument ();
-                                document.Load (subReader);
-                                element = document.DocumentElement;
-                        }
-                }
-                internal override void SaveValue (XmlWriter writer)
-                {
-                        element.WriteContentTo (writer);
-                }
-                internal override string XmlName {
-                        get { return "ProjectExtensions"; }
-                }
-                XmlDocument document;
-                XmlElement element;
+            ContainingProject = containingProject;
         }
+
+        public override string Condition
+        {
+            get { return null; }
+            set { throw new InvalidOperationException("Can not set Condition."); }
+        }
+        public string Content
+        {
+            get { return element.InnerXml; }
+            set { element.InnerXml = value; }
+        }
+        public string this[string name]
+        {
+            get
+            {
+                var child = element[name];
+                return child == null ? string.Empty : child.InnerXml;
+            }
+            set
+            {
+                var child = element[name];
+                if (child == null)
+                {
+                    if (string.IsNullOrEmpty(name))
+                        return;
+                    child = document.CreateElement(name);
+                    element.AppendChild(child);
+                }
+                if (string.IsNullOrEmpty(value))
+                    element.RemoveChild(child);
+                else
+                    child.InnerXml = value;
+            }
+        }
+
+        internal override void Load(XmlReader reader)
+        {
+            while (reader.Read() && reader.NodeType != XmlNodeType.Element)
+                ;
+            FillLocation(reader);
+            using (XmlReader subReader = reader.ReadSubtree())
+            {
+                document = new XmlDocument();
+                document.Load(subReader);
+                element = document.DocumentElement;
+            }
+        }
+
+        internal override void SaveValue(XmlWriter writer)
+        {
+            element.WriteContentTo(writer);
+        }
+
+        internal override string XmlName
+        {
+            get { return "ProjectExtensions"; }
+        }
+        XmlDocument document;
+        XmlElement element;
+    }
 }

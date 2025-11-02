@@ -17,14 +17,20 @@ namespace System.ComponentModel.Composition.ReflectionModel
             Lazy<Type> partType,
             bool requiresDisposal,
             Func<IEnumerable<ImportDefinition>> imports,
-            Func<IEnumerable<ExportDefinition>>exports,
+            Func<IEnumerable<ExportDefinition>> exports,
             IDictionary<string, object> metadata,
-            ICompositionElement origin)
+            ICompositionElement origin
+        )
         {
-            return (ReflectionComposablePartDefinition)ReflectionModelServices.CreatePartDefinition(partType, requiresDisposal,
-                new Lazy<IEnumerable<ImportDefinition>>(imports, false),
-                new Lazy<IEnumerable<ExportDefinition>>(exports, false),
-                metadata.AsLazy(), origin);
+            return (ReflectionComposablePartDefinition)
+                ReflectionModelServices.CreatePartDefinition(
+                    partType,
+                    requiresDisposal,
+                    new Lazy<IEnumerable<ImportDefinition>>(imports, false),
+                    new Lazy<IEnumerable<ExportDefinition>>(exports, false),
+                    metadata.AsLazy(),
+                    origin
+                );
         }
 
         [Fact]
@@ -47,13 +53,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 () => expectedImports,
                 () => expectedExports,
                 expectedMetadata,
-                expectedOrigin);
+                expectedOrigin
+            );
 
             Assert.Same(expectedType, definition.GetPartType());
             Assert.True(definition.Metadata.Keys.SequenceEqual(expectedMetadata.Keys));
             Assert.True(definition.Metadata.Values.SequenceEqual(expectedMetadata.Values));
-            Assert.True(definition.ExportDefinitions.SequenceEqual(expectedExports.Cast<ExportDefinition>()));
-            Assert.True(definition.ImportDefinitions.SequenceEqual(expectedImports.Cast<ImportDefinition>()));
+            Assert.True(
+                definition.ExportDefinitions.SequenceEqual(expectedExports.Cast<ExportDefinition>())
+            );
+            Assert.True(
+                definition.ImportDefinitions.SequenceEqual(expectedImports.Cast<ImportDefinition>())
+            );
             Assert.Same(expectedOrigin, ((ICompositionElement)definition).Origin);
             Assert.NotNull(((ICompositionElement)definition).DisplayName);
             Assert.False(definition.IsDisposalRequired);
@@ -79,13 +90,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 () => expectedImports,
                 () => expectedExports,
                 expectedMetadata,
-                expectedOrigin);
+                expectedOrigin
+            );
 
             Assert.Same(expectedType, definition.GetPartType());
             Assert.True(definition.Metadata.Keys.SequenceEqual(expectedMetadata.Keys));
             Assert.True(definition.Metadata.Values.SequenceEqual(expectedMetadata.Values));
-            Assert.True(definition.ExportDefinitions.SequenceEqual(expectedExports.Cast<ExportDefinition>()));
-            Assert.True(definition.ImportDefinitions.SequenceEqual(expectedImports.Cast<ImportDefinition>()));
+            Assert.True(
+                definition.ExportDefinitions.SequenceEqual(expectedExports.Cast<ExportDefinition>())
+            );
+            Assert.True(
+                definition.ImportDefinitions.SequenceEqual(expectedImports.Cast<ImportDefinition>())
+            );
             Assert.Same(expectedOrigin, ((ICompositionElement)definition).Origin);
             Assert.NotNull(((ICompositionElement)definition).DisplayName);
             Assert.True(definition.IsDisposalRequired);
@@ -111,7 +127,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 () => expectedImports,
                 () => expectedExports,
                 expectedMetadata,
-                expectedOrigin);
+                expectedOrigin
+            );
 
             var part = definition.CreatePart();
             Assert.NotNull(part);
@@ -138,7 +155,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 () => expectedImports,
                 () => expectedExports,
                 expectedMetadata,
-                expectedOrigin);
+                expectedOrigin
+            );
 
             var part = definition.CreatePart();
             Assert.NotNull(part);
@@ -149,7 +167,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public void CreatePart_DoesntLoadType()
         {
             Type expectedType = typeof(TestPart);
-            Lazy<Type> expectedLazyType = new Lazy<Type>(() => { throw new NotImplementedException(); /*"Part should not be loaded" */ });
+            Lazy<Type> expectedLazyType = new Lazy<Type>(() =>
+            {
+                throw new NotImplementedException(); /*"Part should not be loaded" */
+            });
             IDictionary<string, object> expectedMetadata = new Dictionary<string, object>();
             expectedMetadata["Key1"] = 1;
             expectedMetadata["Key2"] = "Value2";
@@ -165,7 +186,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 () => expectedImports,
                 () => expectedExports,
                 expectedMetadata,
-                expectedOrigin);
+                expectedOrigin
+            );
 
             var part = definition.CreatePart();
             Assert.NotNull(part);
@@ -175,7 +197,12 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void Constructor_NullMetadata_ShouldSetMetadataPropertyToEmpty()
         {
-            ReflectionComposablePartDefinition definition = CreateEmptyDefinition(typeof(object), typeof(object).GetConstructors().First(), null, new MockOrigin());
+            ReflectionComposablePartDefinition definition = CreateEmptyDefinition(
+                typeof(object),
+                typeof(object).GetConstructors().First(),
+                null,
+                new MockOrigin()
+            );
             Assert.NotNull(definition.Metadata);
             Assert.Equal(0, definition.Metadata.Count);
         }
@@ -183,7 +210,12 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void Constructor_NullOrigin_ShouldSetOriginPropertyToNull()
         {
-            ReflectionComposablePartDefinition definition = CreateEmptyDefinition(typeof(object), typeof(object).GetConstructors().First(), MetadataServices.EmptyMetadata, null);
+            ReflectionComposablePartDefinition definition = CreateEmptyDefinition(
+                typeof(object),
+                typeof(object).GetConstructors().First(),
+                MetadataServices.EmptyMetadata,
+                null
+            );
             Assert.NotNull(((ICompositionElement)definition).DisplayName);
             Assert.Null(((ICompositionElement)definition).Origin);
         }
@@ -218,7 +250,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 importsCreator,
                 exportsCreator,
                 null,
-                null);
+                null
+            );
 
             IEnumerable<ExportDefinition> exports;
             Assert.False(exportsCreatorCalled);
@@ -226,7 +259,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
             Assert.True(exportsCreatorCalled);
             exports = definition.ExportDefinitions;
 
-IEnumerable<ImportDefinition> imports;
+            IEnumerable<ImportDefinition> imports;
             Assert.False(importsCreatorCalled);
             imports = definition.ImportDefinitions;
             Assert.True(importsCreatorCalled);
@@ -246,15 +279,22 @@ IEnumerable<ImportDefinition> imports;
             }
         }
 
-        private ReflectionComposablePartDefinition CreateEmptyDefinition(Type type, ConstructorInfo constructor, IDictionary<string, object> metadata, ICompositionElement origin)
+        private ReflectionComposablePartDefinition CreateEmptyDefinition(
+            Type type,
+            ConstructorInfo constructor,
+            IDictionary<string, object> metadata,
+            ICompositionElement origin
+        )
         {
-            return (ReflectionComposablePartDefinition)ReflectionModelServices.CreatePartDefinition(
-                (type != null) ? type.AsLazy() : null,
-                false,
-                Enumerable.Empty<ImportDefinition>().AsLazy(),
-                Enumerable.Empty<ExportDefinition>().AsLazy(),
-                metadata.AsLazy(),
-                origin);
+            return (ReflectionComposablePartDefinition)
+                ReflectionModelServices.CreatePartDefinition(
+                    (type != null) ? type.AsLazy() : null,
+                    false,
+                    Enumerable.Empty<ImportDefinition>().AsLazy(),
+                    Enumerable.Empty<ExportDefinition>().AsLazy(),
+                    metadata.AsLazy(),
+                    origin
+                );
         }
 
         private static List<ImportDefinition> CreateImports(Type type)
@@ -262,7 +302,23 @@ IEnumerable<ImportDefinition> imports;
             List<ImportDefinition> imports = new List<ImportDefinition>();
             foreach (PropertyInfo property in type.GetProperties())
             {
-                imports.Add(new ReflectionMemberImportDefinition(new LazyMemberInfo(property), "Contract", (string)null, new KeyValuePair<string, Type>[] { new KeyValuePair<string, Type>("Key1", typeof(object)) }, ImportCardinality.ZeroOrOne, true, false, CreationPolicy.Any, MetadataServices.EmptyMetadata, new TypeOrigin(type)));
+                imports.Add(
+                    new ReflectionMemberImportDefinition(
+                        new LazyMemberInfo(property),
+                        "Contract",
+                        (string)null,
+                        new KeyValuePair<string, Type>[]
+                        {
+                            new KeyValuePair<string, Type>("Key1", typeof(object)),
+                        },
+                        ImportCardinality.ZeroOrOne,
+                        true,
+                        false,
+                        CreationPolicy.Any,
+                        MetadataServices.EmptyMetadata,
+                        new TypeOrigin(type)
+                    )
+                );
             }
 
             return imports;
@@ -273,7 +329,14 @@ IEnumerable<ImportDefinition> imports;
             List<ExportDefinition> exports = new List<ExportDefinition>();
             foreach (PropertyInfo property in type.GetProperties())
             {
-                exports.Add(ReflectionModelServices.CreateExportDefinition(new LazyMemberInfo(property), "Contract", new Lazy<IDictionary<string, object>>(() => null, false), new TypeOrigin(type)));
+                exports.Add(
+                    ReflectionModelServices.CreateExportDefinition(
+                        new LazyMemberInfo(property),
+                        "Contract",
+                        new Lazy<IDictionary<string, object>>(() => null, false),
+                        new TypeOrigin(type)
+                    )
+                );
             }
 
             return exports;
@@ -293,9 +356,7 @@ IEnumerable<ImportDefinition> imports;
             private readonly ICompositionElement _origin;
 
             public TypeOrigin(Type type)
-                : this(type, null)
-            {
-            }
+                : this(type, null) { }
 
             public TypeOrigin(Type type, ICompositionElement origin)
             {
@@ -305,18 +366,12 @@ IEnumerable<ImportDefinition> imports;
 
             public string DisplayName
             {
-                get
-                {
-                    return this._type.GetDisplayName();
-                }
+                get { return this._type.GetDisplayName(); }
             }
 
             public ICompositionElement Origin
             {
-                get
-                {
-                    return this._origin;
-                }
+                get { return this._origin; }
             }
         }
 

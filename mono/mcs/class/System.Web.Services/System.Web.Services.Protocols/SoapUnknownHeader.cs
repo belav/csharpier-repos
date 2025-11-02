@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.SoapUnknownHeader.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,37 +31,40 @@
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Protocols {
-	public sealed class SoapUnknownHeader : SoapHeader {
+namespace System.Web.Services.Protocols
+{
+    public sealed class SoapUnknownHeader : SoapHeader
+    {
+        #region Fields
 
-		#region Fields
+        XmlElement element;
 
-		XmlElement element;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
+        public SoapUnknownHeader()
+        {
+            element = null;
+        }
 
-		public SoapUnknownHeader ()
-		{
-			element = null;
-		}
+        internal SoapUnknownHeader(XmlElement elem)
+            : base(elem)
+        {
+            element = elem;
+        }
 
-		internal SoapUnknownHeader (XmlElement elem): base (elem)
-		{
-			element = elem;
-		}
+        #endregion // Constructors
 
-		#endregion // Constructors
+        #region Properties
 
-		#region Properties
+        [XmlIgnore]
+        public XmlElement Element
+        {
+            get { return element; }
+            set { element = value; }
+        }
 
-		[XmlIgnore]
-		public XmlElement Element {
-			get { return element; }
-			set { element = value; }
-		}
-
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

@@ -27,11 +27,22 @@ namespace System.Xml
         //
         // XmlWriter implementation
         //
-        public override XmlWriterSettings? Settings { get { return writer.Settings; } }
-        public override WriteState WriteState { get { return writer.WriteState; } }
-        public override XmlSpace XmlSpace { get { return writer.XmlSpace; } }
-        public override string? XmlLang { get { return writer.XmlLang; } }
-
+        public override XmlWriterSettings? Settings
+        {
+            get { return writer.Settings; }
+        }
+        public override WriteState WriteState
+        {
+            get { return writer.WriteState; }
+        }
+        public override XmlSpace XmlSpace
+        {
+            get { return writer.XmlSpace; }
+        }
+        public override string? XmlLang
+        {
+            get { return writer.XmlLang; }
+        }
 
         public override void WriteStartDocument()
         {

@@ -1,4 +1,5 @@
-﻿namespace System.Web.Mvc.Async {
+﻿namespace System.Web.Mvc.Async
+{
     using System;
     using System.Runtime.Serialization;
 
@@ -6,22 +7,17 @@
     // type swallows exceptions. The inner exception contains the data the user cares about.
 
     [Serializable]
-    public sealed class SynchronousOperationException : HttpException {
-
-        public SynchronousOperationException() {
-        }
+    public sealed class SynchronousOperationException : HttpException
+    {
+        public SynchronousOperationException() { }
 
         private SynchronousOperationException(SerializationInfo info, StreamingContext context)
-            : base(info, context) {
-        }
+            : base(info, context) { }
 
         public SynchronousOperationException(string message)
-            : base(message) {
-        }
+            : base(message) { }
 
         public SynchronousOperationException(string message, Exception innerException)
-            : base(message, innerException) {
-        }
-
+            : base(message, innerException) { }
     }
 }

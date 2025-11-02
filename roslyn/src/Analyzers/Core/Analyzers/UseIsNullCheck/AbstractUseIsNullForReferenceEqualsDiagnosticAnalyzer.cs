@@ -11,40 +11,56 @@ using Microsoft.CodeAnalysis.LanguageService;
 
 namespace Microsoft.CodeAnalysis.UseIsNullCheck
 {
-    internal abstract class AbstractUseIsNullCheckForReferenceEqualsDiagnosticAnalyzer<
-        TLanguageKindEnum>
+    internal abstract class AbstractUseIsNullCheckForReferenceEqualsDiagnosticAnalyzer<TLanguageKindEnum>
         : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         where TLanguageKindEnum : struct
     {
-        protected AbstractUseIsNullCheckForReferenceEqualsDiagnosticAnalyzer(LocalizableString title)
-            : base(IDEDiagnosticIds.UseIsNullCheckDiagnosticId,
-                   EnforceOnBuildValues.UseIsNullCheck,
-                   CodeStyleOptions2.PreferIsNullCheckOverReferenceEqualityMethod,
-                   title,
-                   new LocalizableResourceString(nameof(AnalyzersResources.Null_check_can_be_simplified), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
-        {
-        }
+        protected AbstractUseIsNullCheckForReferenceEqualsDiagnosticAnalyzer(
+            LocalizableString title
+        )
+            : base(
+                IDEDiagnosticIds.UseIsNullCheckDiagnosticId,
+                EnforceOnBuildValues.UseIsNullCheck,
+                CodeStyleOptions2.PreferIsNullCheckOverReferenceEqualityMethod,
+                title,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Null_check_can_be_simplified),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterCompilationStartAction(context =>
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterCompilationStartAction(context =>
             {
                 var objectType = context.Compilation.GetSpecialType(SpecialType.System_Object);
                 if (objectType != null && IsLanguageVersionSupported(context.Compilation))
                 {
-                    var referenceEqualsMethod = objectType.GetMembers(nameof(ReferenceEquals))
-                                                          .OfType<IMethodSymbol>()
-                                                          .FirstOrDefault(m => m.DeclaredAccessibility == Accessibility.Public &&
-                                                                               m.Parameters.Length == 2);
+                    var referenceEqualsMethod = objectType
+                        .GetMembers(nameof(ReferenceEquals))
+                        .OfType<IMethodSymbol>()
+                        .FirstOrDefault(m =>
+                            m.DeclaredAccessibility == Accessibility.Public
+                            && m.Parameters.Length == 2
+                        );
                     if (referenceEqualsMethod != null)
                     {
                         var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
-                        var unconstraintedGenericSupported = IsUnconstrainedGenericSupported(context.Compilation);
+                        var unconstraintedGenericSupported = IsUnconstrainedGenericSupported(
+                            context.Compilation
+                        );
                         context.RegisterSyntaxNodeAction(
-                            c => AnalyzeSyntax(c, referenceEqualsMethod, unconstraintedGenericSupported),
-                            syntaxKinds.Convert<TLanguageKindEnum>(syntaxKinds.InvocationExpression));
+                            c =>
+                                AnalyzeSyntax(
+                                    c,
+                                    referenceEqualsMethod,
+                                    unconstraintedGenericSupported
+                                ),
+                            syntaxKinds.Convert<TLanguageKindEnum>(syntaxKinds.InvocationExpression)
+                        );
                     }
                 }
             });
@@ -53,7 +69,11 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
         protected abstract bool IsUnconstrainedGenericSupported(Compilation compilation);
         protected abstract ISyntaxFacts GetSyntaxFacts();
 
-        private void AnalyzeSyntax(SyntaxNodeAnalysisContext context, IMethodSymbol referenceEqualsMethod, bool unconstraintedGenericSupported)
+        private void AnalyzeSyntax(
+            SyntaxNodeAnalysisContext context,
+            IMethodSymbol referenceEqualsMethod,
+            bool unconstraintedGenericSupported
+        )
         {
             var cancellationToken = context.CancellationToken;
 
@@ -69,11 +89,11 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
             var syntaxFacts = GetSyntaxFacts();
 
             var expression = syntaxFacts.GetExpressionOfInvocationExpression(invocation);
-            var nameNode = syntaxFacts.IsIdentifierName(expression)
-                ? expression
+            var nameNode =
+                syntaxFacts.IsIdentifierName(expression) ? expression
                 : syntaxFacts.IsSimpleMemberAccessExpression(expression)
                     ? syntaxFacts.GetNameOfMemberAccessExpression(expression)
-                    : null;
+                : null;
 
             if (!syntaxFacts.IsIdentifierName(nameNode))
             {
@@ -92,8 +112,10 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
                 return;
             }
 
-            if (!MatchesPattern(syntaxFacts, arguments[0], arguments[1]) &&
-                !MatchesPattern(syntaxFacts, arguments[1], arguments[0]))
+            if (
+                !MatchesPattern(syntaxFacts, arguments[0], arguments[1])
+                && !MatchesPattern(syntaxFacts, arguments[1], arguments[0])
+            )
             {
                 return;
             }
@@ -105,9 +127,17 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
             }
 
             var properties = ImmutableDictionary<string, string?>.Empty.Add(
-                UseIsNullConstants.Kind, UseIsNullConstants.ReferenceEqualsKey);
+                UseIsNullConstants.Kind,
+                UseIsNullConstants.ReferenceEqualsKey
+            );
 
-            var genericParameterSymbol = GetGenericParameterSymbol(syntaxFacts, semanticModel, arguments[0], arguments[1], cancellationToken);
+            var genericParameterSymbol = GetGenericParameterSymbol(
+                syntaxFacts,
+                semanticModel,
+                arguments[0],
+                arguments[1],
+                cancellationToken
+            );
             if (genericParameterSymbol != null)
             {
                 if (genericParameterSymbol.IsValueType)
@@ -139,26 +169,46 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
 
             context.ReportDiagnostic(
                 DiagnosticHelper.Create(
-                    Descriptor, nameNode.GetLocation(),
+                    Descriptor,
+                    nameNode.GetLocation(),
                     option.Notification,
-                    additionalLocations, properties));
+                    additionalLocations,
+                    properties
+                )
+            );
         }
 
-        private static ITypeParameterSymbol? GetGenericParameterSymbol(ISyntaxFacts syntaxFacts, SemanticModel semanticModel, SyntaxNode node1, SyntaxNode node2, CancellationToken cancellationToken)
+        private static ITypeParameterSymbol? GetGenericParameterSymbol(
+            ISyntaxFacts syntaxFacts,
+            SemanticModel semanticModel,
+            SyntaxNode node1,
+            SyntaxNode node2,
+            CancellationToken cancellationToken
+        )
         {
-            var valueNode = syntaxFacts.IsNullLiteralExpression(syntaxFacts.GetExpressionOfArgument(node1)) ? node2 : node1;
+            var valueNode = syntaxFacts.IsNullLiteralExpression(
+                syntaxFacts.GetExpressionOfArgument(node1)
+            )
+                ? node2
+                : node1;
             var argumentExpression = syntaxFacts.GetExpressionOfArgument(valueNode);
             if (argumentExpression != null)
             {
-                var parameterType = semanticModel.GetTypeInfo(argumentExpression, cancellationToken).Type;
+                var parameterType = semanticModel
+                    .GetTypeInfo(argumentExpression, cancellationToken)
+                    .Type;
                 return parameterType as ITypeParameterSymbol;
             }
 
             return null;
         }
 
-        private static bool MatchesPattern(ISyntaxFacts syntaxFacts, SyntaxNode node1, SyntaxNode node2)
-            => syntaxFacts.IsNullLiteralExpression(syntaxFacts.GetExpressionOfArgument(node1)) &&
-               !syntaxFacts.IsNullLiteralExpression(syntaxFacts.GetExpressionOfArgument(node2));
+        private static bool MatchesPattern(
+            ISyntaxFacts syntaxFacts,
+            SyntaxNode node1,
+            SyntaxNode node2
+        ) =>
+            syntaxFacts.IsNullLiteralExpression(syntaxFacts.GetExpressionOfArgument(node1))
+            && !syntaxFacts.IsNullLiteralExpression(syntaxFacts.GetExpressionOfArgument(node2));
     }
 }

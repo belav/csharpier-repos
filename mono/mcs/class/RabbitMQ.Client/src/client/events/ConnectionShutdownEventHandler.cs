@@ -58,6 +58,8 @@ namespace RabbitMQ.Client.Events
 {
     ///<summary>Delegate used to process connection shutdown
     ///notifications.</summary>
-    public delegate void ConnectionShutdownEventHandler(IConnection connection,
-                                                        ShutdownEventArgs reason);
+    public delegate void ConnectionShutdownEventHandler(
+        IConnection connection,
+        ShutdownEventArgs reason
+    );
 }

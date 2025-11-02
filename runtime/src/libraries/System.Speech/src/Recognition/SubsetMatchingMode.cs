@@ -9,7 +9,7 @@ namespace System.Speech.Recognition
         Subsequence,
         OrderedSubset,
         SubsequenceContentRequired,
-        OrderedSubsetContentRequired
+        OrderedSubsetContentRequired,
     }
 
     #endregion

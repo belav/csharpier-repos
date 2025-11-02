@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
     ///     {
     ///     }
     ///     ```
-    /// 
+    ///
     /// And offers to convert it to:
     ///
     ///     ```c#
@@ -35,32 +35,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
     ///     ```
     ///
     /// (this of course works in the case where there is only one using).
-    /// 
+    ///
     /// A few design decisions:
-    ///     
+    ///
     /// 1. We only offer this if the entire group of usings in a nested stack can be
     ///    converted.  We don't want to take a nice uniform group and break it into
-    ///    a combination of using-statements and using-declarations.  That may feel 
+    ///    a combination of using-statements and using-declarations.  That may feel
     ///    less pleasant to the user than just staying uniform.
-    /// 
+    ///
     /// 2. We're conservative about converting.  Because `using`s may be critical for
     ///    program correctness, we only convert when we're absolutely *certain* that
     ///    semantics will not change.
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class UseSimpleUsingStatementDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal class UseSimpleUsingStatementDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public UseSimpleUsingStatementDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseSimpleUsingStatementDiagnosticId,
-                   EnforceOnBuildValues.UseSimpleUsingStatement,
-                   CSharpCodeStyleOptions.PreferSimpleUsingStatement,
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_simple_using_statement), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.using_statement_can_be_simplified), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseSimpleUsingStatementDiagnosticId,
+                EnforceOnBuildValues.UseSimpleUsingStatement,
+                CSharpCodeStyleOptions.PreferSimpleUsingStatement,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Use_simple_using_statement),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.using_statement_can_be_simplified),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
         {
@@ -92,9 +101,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
 
             var innermostUsing = outermostUsing;
 
-            // Check that all the immediately nested usings are convertible as well.  
+            // Check that all the immediately nested usings are convertible as well.
             // We don't want take a sequence of nested-using and only convert some of them.
-            for (var current = outermostUsing; current != null; current = current.Statement as UsingStatementSyntax)
+            for (
+                var current = outermostUsing;
+                current != null;
+                current = current.Statement as UsingStatementSyntax
+            )
             {
                 innermostUsing = current;
                 if (current.Declaration == null)
@@ -102,77 +115,124 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
             }
 
             // Verify that changing this using-statement into a using-declaration will not change semantics.
-            if (!PreservesSemantics(semanticModel, parentBlock, outermostUsing, innermostUsing, cancellationToken))
+            if (
+                !PreservesSemantics(
+                    semanticModel,
+                    parentBlock,
+                    outermostUsing,
+                    innermostUsing,
+                    cancellationToken
+                )
+            )
                 return;
 
             // Converting a using-statement to a using-variable-declaration will cause the using's variables to now be
             // pushed up to the parent block's scope. This is also true for any local variables in the innermost using's
             // block. These may then collide with other variables in the block, causing an error.  Check for that and
             // bail if this happens.
-            if (CausesVariableCollision(
-                    context.SemanticModel, parentBlock,
-                    outermostUsing, innermostUsing, cancellationToken))
+            if (
+                CausesVariableCollision(
+                    context.SemanticModel,
+                    parentBlock,
+                    outermostUsing,
+                    innermostUsing,
+                    cancellationToken
+                )
+            )
             {
                 return;
             }
 
             // Good to go!
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                outermostUsing.UsingKeyword.GetLocation(),
-                option.Notification,
-                additionalLocations: ImmutableArray.Create(outermostUsing.GetLocation()),
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    outermostUsing.UsingKeyword.GetLocation(),
+                    option.Notification,
+                    additionalLocations: ImmutableArray.Create(outermostUsing.GetLocation()),
+                    properties: null
+                )
+            );
         }
 
         private static bool CausesVariableCollision(
-            SemanticModel semanticModel, BlockSyntax parentBlock,
-            UsingStatementSyntax outermostUsing, UsingStatementSyntax innermostUsing,
-            CancellationToken cancellationToken)
+            SemanticModel semanticModel,
+            BlockSyntax parentBlock,
+            UsingStatementSyntax outermostUsing,
+            UsingStatementSyntax innermostUsing,
+            CancellationToken cancellationToken
+        )
         {
-            var symbolNameToExistingSymbol = semanticModel.GetExistingSymbols(parentBlock, cancellationToken).ToLookup(s => s.Name);
+            var symbolNameToExistingSymbol = semanticModel
+                .GetExistingSymbols(parentBlock, cancellationToken)
+                .ToLookup(s => s.Name);
 
-            for (var current = outermostUsing; current != null; current = current.Statement as UsingStatementSyntax)
+            for (
+                var current = outermostUsing;
+                current != null;
+                current = current.Statement as UsingStatementSyntax
+            )
             {
                 // Check if the using statement itself contains variables that will collide with other variables in the
                 // block.
-                var usingOperation = (IUsingOperation)semanticModel.GetRequiredOperation(current, cancellationToken);
+                var usingOperation = (IUsingOperation)
+                    semanticModel.GetRequiredOperation(current, cancellationToken);
                 if (DeclaredLocalCausesCollision(symbolNameToExistingSymbol, usingOperation.Locals))
                     return true;
             }
 
-            var innerUsingOperation = (IUsingOperation)semanticModel.GetRequiredOperation(innermostUsing, cancellationToken);
+            var innerUsingOperation = (IUsingOperation)
+                semanticModel.GetRequiredOperation(innermostUsing, cancellationToken);
             if (innerUsingOperation.Body is IBlockOperation innerUsingBlock)
-                return DeclaredLocalCausesCollision(symbolNameToExistingSymbol, innerUsingBlock.Locals);
+                return DeclaredLocalCausesCollision(
+                    symbolNameToExistingSymbol,
+                    innerUsingBlock.Locals
+                );
 
             return false;
         }
 
-        private static bool DeclaredLocalCausesCollision(ILookup<string, ISymbol> symbolNameToExistingSymbol, ImmutableArray<ILocalSymbol> locals)
-            => locals.Any(static (local, symbolNameToExistingSymbol) => symbolNameToExistingSymbol[local.Name].Any(otherLocal => !local.Equals(otherLocal)), symbolNameToExistingSymbol);
+        private static bool DeclaredLocalCausesCollision(
+            ILookup<string, ISymbol> symbolNameToExistingSymbol,
+            ImmutableArray<ILocalSymbol> locals
+        ) =>
+            locals.Any(
+                static (local, symbolNameToExistingSymbol) =>
+                    symbolNameToExistingSymbol[local.Name]
+                        .Any(otherLocal => !local.Equals(otherLocal)),
+                symbolNameToExistingSymbol
+            );
 
         private static bool PreservesSemantics(
             SemanticModel semanticModel,
             BlockSyntax parentBlock,
             UsingStatementSyntax outermostUsing,
             UsingStatementSyntax innermostUsing,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var statements = parentBlock.Statements;
             var index = statements.IndexOf(outermostUsing);
 
-            return UsingValueDoesNotLeakToFollowingStatements(semanticModel, statements, index, cancellationToken) &&
-                   UsingStatementDoesNotInvolveJumps(statements, index, innermostUsing);
+            return UsingValueDoesNotLeakToFollowingStatements(
+                    semanticModel,
+                    statements,
+                    index,
+                    cancellationToken
+                ) && UsingStatementDoesNotInvolveJumps(statements, index, innermostUsing);
         }
 
         private static bool UsingStatementDoesNotInvolveJumps(
-            SyntaxList<StatementSyntax> parentStatements, int index, UsingStatementSyntax innermostUsing)
+            SyntaxList<StatementSyntax> parentStatements,
+            int index,
+            UsingStatementSyntax innermostUsing
+        )
         {
             // Jumps are not allowed to cross a using declaration in the forward direction, and can't go back unless
             // there is a curly brace between the using and the label.
-            // 
-            // We conservatively implement this by disallowing the change if there are gotos/labels 
-            // in the containing block, or inside the using body.  
+            //
+            // We conservatively implement this by disallowing the change if there are gotos/labels
+            // in the containing block, or inside the using body.
 
             // Note: we only have to check up to the `using`, since the checks below in
             // UsingValueDoesNotLeakToFollowingStatements ensure that there would be no labels/gotos *after* the using
@@ -197,15 +257,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
             return true;
         }
 
-        private static bool IsGotoOrLabeledStatement(StatementSyntax priorStatement)
-            => priorStatement.Kind() is SyntaxKind.GotoStatement or
-               SyntaxKind.LabeledStatement;
+        private static bool IsGotoOrLabeledStatement(StatementSyntax priorStatement) =>
+            priorStatement.Kind() is SyntaxKind.GotoStatement or SyntaxKind.LabeledStatement;
 
         private static bool UsingValueDoesNotLeakToFollowingStatements(
             SemanticModel semanticModel,
             SyntaxList<StatementSyntax> statements,
             int index,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Has to be one of the following forms:
             // 1. Using statement is the last statement in the parent.
@@ -216,7 +276,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
             //    might depend on the .Dispose method being called or not.
 
             // Note: we can skip local functions as moving their scope inside the using doesn't change anything.
-            while (index + 1 < statements.Count && statements[index + 1] is LocalFunctionStatementSyntax)
+            while (
+                index + 1 < statements.Count
+                && statements[index + 1] is LocalFunctionStatementSyntax
+            )
                 index++;
 
             // if we got to the end of the the block then this can be converted.
@@ -245,7 +308,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
                 // return constant;
                 //
                 // This is also safe to return as constants could not be affected by being inside or outside the using block.
-                var constantValue = semanticModel.GetConstantValue(returnStatement.Expression, cancellationToken);
+                var constantValue = semanticModel.GetConstantValue(
+                    returnStatement.Expression,
+                    cancellationToken
+                );
                 return constantValue.HasValue;
             }
 

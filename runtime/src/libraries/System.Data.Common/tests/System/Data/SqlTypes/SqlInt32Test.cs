@@ -29,7 +29,6 @@ using System.Data.SqlTypes;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
-
 using Xunit;
 
 namespace System.Data.Tests.SqlTypes
@@ -455,9 +454,7 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal("int", qualifiedName.Name);
         }
 
-        internal void ReadWriteXmlTestInternal(string xml,
-                               int testval,
-                               string unit_test_id)
+        internal void ReadWriteXmlTestInternal(string xml, int testval, string unit_test_id)
         {
             SqlInt32 test;
             SqlInt32 test1;
@@ -497,8 +494,9 @@ namespace System.Data.Tests.SqlTypes
             ReadWriteXmlTestInternal(xml1, test1, "BA01");
             ReadWriteXmlTestInternal(xml2, test2, "BA02");
 
-            InvalidOperationException ex =
-                Assert.Throws<InvalidOperationException>(() => ReadWriteXmlTestInternal(xml3, test3, "#BA03"));
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
+                ReadWriteXmlTestInternal(xml3, test3, "#BA03")
+            );
             Assert.Equal(typeof(FormatException), ex.InnerException.GetType());
         }
     }

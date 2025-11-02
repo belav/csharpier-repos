@@ -10,10 +10,13 @@ namespace Microsoft.CodeAnalysis.NamingStyles
 {
     internal partial record struct NamingStyle
     {
-        private readonly struct WordSpanEnumerable(string name, TextSpan nameSpan, string wordSeparator)
+        private readonly struct WordSpanEnumerable(
+            string name,
+            TextSpan nameSpan,
+            string wordSeparator
+        )
         {
-            public WordSpanEnumerator GetEnumerator()
-                => new(name, nameSpan, wordSeparator);
+            public WordSpanEnumerator GetEnumerator() => new(name, nameSpan, wordSeparator);
         }
     }
 }

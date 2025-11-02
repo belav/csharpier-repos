@@ -12,28 +12,28 @@ Abstract:
 Revision History:
 
 --*/
-namespace System {
-using System.Globalization;
-using System.ComponentModel;
-using System.ComponentModel.Design.Serialization;
-using System.Reflection;
+namespace System
+{
+    using System.ComponentModel;
+    using System.ComponentModel.Design.Serialization;
+    using System.Globalization;
+    using System.Reflection;
 
     //
     // A limited conversion is implemented such as to and from string
     // A conversion to InstanceDescriptor is also provided for design time support.
     //
-    public class UriTypeConverter: TypeConverter
+    public class UriTypeConverter : TypeConverter
     {
         private UriKind m_UriKind;
 
-
-        public UriTypeConverter() : this(UriKind.RelativeOrAbsolute) { }
+        public UriTypeConverter()
+            : this(UriKind.RelativeOrAbsolute) { }
 
         internal UriTypeConverter(UriKind uriKind)
         {
             m_UriKind = uriKind;
         }
-
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
@@ -48,6 +48,7 @@ using System.Reflection;
 
             return base.CanConvertFrom(context, sourceType);
         }
+
         //
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
@@ -62,8 +63,13 @@ using System.Reflection;
 
             return base.CanConvertTo(context, destinationType);
         }
+
         //
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture,  object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             string uriString = value as string;
             if (uriString != null)
@@ -71,32 +77,66 @@ using System.Reflection;
 
             Uri uri = value as Uri;
             if (uri != null)
-                return new Uri(uri.OriginalString,
-                    m_UriKind == UriKind.RelativeOrAbsolute ? uri.IsAbsoluteUri ? UriKind.Absolute : UriKind.Relative : m_UriKind);
+                return new Uri(
+                    uri.OriginalString,
+                    m_UriKind == UriKind.RelativeOrAbsolute
+                        ? uri.IsAbsoluteUri
+                            ? UriKind.Absolute
+                            : UriKind.Relative
+                        : m_UriKind
+                );
 
             return base.ConvertFrom(context, culture, value);
         }
+
         //
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             Uri uri = value as Uri;
 
             if (uri != null && destinationType == typeof(InstanceDescriptor))
             {
-                ConstructorInfo ci = typeof(Uri).GetConstructor(BindingFlags.Public | BindingFlags.Instance, null, new Type[]{typeof(string), typeof(UriKind)}, null);
-                return new InstanceDescriptor(ci, new object[] { uri.OriginalString,
-                    m_UriKind == UriKind.RelativeOrAbsolute ? uri.IsAbsoluteUri ? UriKind.Absolute : UriKind.Relative : m_UriKind });
+                ConstructorInfo ci = typeof(Uri).GetConstructor(
+                    BindingFlags.Public | BindingFlags.Instance,
+                    null,
+                    new Type[] { typeof(string), typeof(UriKind) },
+                    null
+                );
+                return new InstanceDescriptor(
+                    ci,
+                    new object[]
+                    {
+                        uri.OriginalString,
+                        m_UriKind == UriKind.RelativeOrAbsolute
+                            ? uri.IsAbsoluteUri
+                                ? UriKind.Absolute
+                                : UriKind.Relative
+                            : m_UriKind,
+                    }
+                );
             }
 
             if (uri != null && destinationType == typeof(string))
                 return uri.OriginalString;
 
             if (uri != null && destinationType == typeof(Uri))
-                return new Uri(uri.OriginalString,
-                    m_UriKind == UriKind.RelativeOrAbsolute ? uri.IsAbsoluteUri ? UriKind.Absolute : UriKind.Relative : m_UriKind);
+                return new Uri(
+                    uri.OriginalString,
+                    m_UriKind == UriKind.RelativeOrAbsolute
+                        ? uri.IsAbsoluteUri
+                            ? UriKind.Absolute
+                            : UriKind.Relative
+                        : m_UriKind
+                );
 
             return base.ConvertTo(context, culture, value, destinationType);
         }
+
         //
         public override bool IsValid(ITypeDescriptorContext context, object value)
         {
@@ -108,7 +148,4 @@ using System.Reflection;
             return value is Uri;
         }
     }
-
 }
-
-

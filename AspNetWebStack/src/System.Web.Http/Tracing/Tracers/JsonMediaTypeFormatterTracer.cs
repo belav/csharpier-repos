@@ -16,15 +16,22 @@ using Newtonsoft.Json;
 namespace System.Web.Http.Tracing.Tracers
 {
     /// <summary>
-    /// Tracer for <see cref="JsonMediaTypeFormatter"/>.  
+    /// Tracer for <see cref="JsonMediaTypeFormatter"/>.
     /// It is required because users can select formatters by this type.
     /// </summary>
-    internal class JsonMediaTypeFormatterTracer : JsonMediaTypeFormatter, IFormatterTracer, IDecorator<JsonMediaTypeFormatter>
+    internal class JsonMediaTypeFormatterTracer
+        : JsonMediaTypeFormatter,
+            IFormatterTracer,
+            IDecorator<JsonMediaTypeFormatter>
     {
         private readonly JsonMediaTypeFormatter _inner;
         private MediaTypeFormatterTracer _innerTracer;
 
-        public JsonMediaTypeFormatterTracer(JsonMediaTypeFormatter innerFormatter, ITraceWriter traceWriter, HttpRequestMessage request)
+        public JsonMediaTypeFormatterTracer(
+            JsonMediaTypeFormatter innerFormatter,
+            ITraceWriter traceWriter,
+            HttpRequestMessage request
+        )
             : base(innerFormatter)
         {
             _inner = innerFormatter;
@@ -48,14 +55,8 @@ namespace System.Web.Http.Tracing.Tracers
 
         public override IRequiredMemberSelector RequiredMemberSelector
         {
-            get
-            {
-                return _innerTracer.RequiredMemberSelector;
-            }
-            set
-            {
-                _innerTracer.RequiredMemberSelector = value;
-            }
+            get { return _innerTracer.RequiredMemberSelector; }
+            set { _innerTracer.RequiredMemberSelector = value; }
         }
 
         public override bool CanReadType(Type type)
@@ -68,64 +69,129 @@ namespace System.Web.Http.Tracing.Tracers
             return _innerTracer.CanWriteType(type);
         }
 
-        public override MediaTypeFormatter GetPerRequestFormatterInstance(Type type, HttpRequestMessage request, MediaTypeHeaderValue mediaType)
+        public override MediaTypeFormatter GetPerRequestFormatterInstance(
+            Type type,
+            HttpRequestMessage request,
+            MediaTypeHeaderValue mediaType
+        )
         {
             return _innerTracer.GetPerRequestFormatterInstance(type, request, mediaType);
         }
 
-        public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content,
-            IFormatterLogger formatterLogger)
+        public override Task<object> ReadFromStreamAsync(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger
+        )
         {
             return _innerTracer.ReadFromStreamAsync(type, readStream, content, formatterLogger);
         }
 
-        public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content,
-            IFormatterLogger formatterLogger, CancellationToken cancellationToken)
+        public override Task<object> ReadFromStreamAsync(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger,
+            CancellationToken cancellationToken
+        )
         {
-            return _innerTracer.ReadFromStreamAsync(type, readStream, content, formatterLogger, cancellationToken);
+            return _innerTracer.ReadFromStreamAsync(
+                type,
+                readStream,
+                content,
+                formatterLogger,
+                cancellationToken
+            );
         }
 
         // Callback from ReadFromStreamAsync is not expected to be called; _innerTracer.ReadFromStreamAsync uses
         // _inner.ReadFromStreamAsync
-        public override object ReadFromStream(Type type, Stream readStream, Encoding effectiveEncoding, IFormatterLogger formatterLogger)
+        public override object ReadFromStream(
+            Type type,
+            Stream readStream,
+            Encoding effectiveEncoding,
+            IFormatterLogger formatterLogger
+        )
         {
             return _inner.ReadFromStream(type, readStream, effectiveEncoding, formatterLogger);
         }
 
         // Callback from ReadFromStreamAsync is not expected to be called; _innerTracer.ReadFromStreamAsync uses
         // _inner.ReadFromStreamAsync
-        public override JsonReader CreateJsonReader(Type type, Stream readStream, Encoding effectiveEncoding)
+        public override JsonReader CreateJsonReader(
+            Type type,
+            Stream readStream,
+            Encoding effectiveEncoding
+        )
         {
             return _inner.CreateJsonReader(type, readStream, effectiveEncoding);
         }
 
-        public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content,
-            TransportContext transportContext)
+        public override Task WriteToStreamAsync(
+            Type type,
+            object value,
+            Stream writeStream,
+            HttpContent content,
+            TransportContext transportContext
+        )
         {
-            return _innerTracer.WriteToStreamAsync(type, value, writeStream, content, transportContext);
+            return _innerTracer.WriteToStreamAsync(
+                type,
+                value,
+                writeStream,
+                content,
+                transportContext
+            );
         }
 
-        public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content,
-            TransportContext transportContext, CancellationToken cancellationToken)
+        public override Task WriteToStreamAsync(
+            Type type,
+            object value,
+            Stream writeStream,
+            HttpContent content,
+            TransportContext transportContext,
+            CancellationToken cancellationToken
+        )
         {
-            return _innerTracer.WriteToStreamAsync(type, value, writeStream, content, transportContext, cancellationToken);
+            return _innerTracer.WriteToStreamAsync(
+                type,
+                value,
+                writeStream,
+                content,
+                transportContext,
+                cancellationToken
+            );
         }
 
         // Callback from WriteToStreamAsync is not expected to be called; _innerTracer.WriteToStreamAsync uses
         // _inner.WriteToStreamAsync
-        public override void WriteToStream(Type type, object value, Stream writeStream, Encoding effectiveEncoding)
+        public override void WriteToStream(
+            Type type,
+            object value,
+            Stream writeStream,
+            Encoding effectiveEncoding
+        )
         {
             _inner.WriteToStream(type, value, writeStream, effectiveEncoding);
         }
 
         // Callback from WriteToStreamAsync is not expected to be called; _innerTracer.WriteToStreamAsync uses
         // _inner.WriteToStreamAsync
-        public override JsonWriter CreateJsonWriter(Type type, Stream writeStream, Encoding effectiveEncoding)
+        public override JsonWriter CreateJsonWriter(
+            Type type,
+            Stream writeStream,
+            Encoding effectiveEncoding
+        )
         {
             return _inner.CreateJsonWriter(type, writeStream, effectiveEncoding);
         }
 
-        public override void SetDefaultContentHeaders(Type type, HttpContentHeaders headers, MediaTypeHeaderValue mediaType)
+        public override void SetDefaultContentHeaders(
+            Type type,
+            HttpContentHeaders headers,
+            MediaTypeHeaderValue mediaType
+        )
         {
             _innerTracer.SetDefaultContentHeaders(type, headers, mediaType);
         }

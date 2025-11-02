@@ -14,23 +14,25 @@ using Microsoft.CodeAnalysis.Organizing.Organizers;
 namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
 {
     [ExportSyntaxNodeOrganizer(LanguageNames.CSharp), Shared]
-    internal class EventFieldDeclarationOrganizer : AbstractSyntaxNodeOrganizer<EventFieldDeclarationSyntax>
+    internal class EventFieldDeclarationOrganizer
+        : AbstractSyntaxNodeOrganizer<EventFieldDeclarationSyntax>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EventFieldDeclarationOrganizer()
-        {
-        }
+        public EventFieldDeclarationOrganizer() { }
 
         protected override EventFieldDeclarationSyntax Organize(
             EventFieldDeclarationSyntax syntax,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return syntax.Update(syntax.AttributeLists,
+            return syntax.Update(
+                syntax.AttributeLists,
                 ModifiersOrganizer.Organize(syntax.Modifiers),
                 syntax.EventKeyword,
                 syntax.Declaration,
-                syntax.SemicolonToken);
+                syntax.SemicolonToken
+            );
         }
     }
 }

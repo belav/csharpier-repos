@@ -21,24 +21,28 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.Snippets
             Glyph glyph,
             ImmutableArray<SymbolDisplayPart> description,
             string inlineDescription,
-            ImmutableArray<string> additionalFilterTexts)
+            ImmutableArray<string> additionalFilterTexts
+        )
         {
             var props = ImmutableArray.Create(
                 new KeyValuePair<string, string>("Position", position.ToString()),
-                new KeyValuePair<string, string>(SnippetIdentifierKey, snippetIdentifier));
+                new KeyValuePair<string, string>(SnippetIdentifierKey, snippetIdentifier)
+            );
 
-            return CommonCompletionItem.Create(
-                displayText: displayText,
-                displayTextSuffix: displayTextSuffix,
-                glyph: glyph,
-                description: description,
-                // Adding a space after the identifier string that way it will always be sorted after a keyword.
-                sortText: snippetIdentifier + " ",
-                filterText: snippetIdentifier,
-                properties: props,
-                isComplexTextEdit: true,
-                inlineDescription: inlineDescription,
-                rules: CompletionItemRules.Default)
+            return CommonCompletionItem
+                .Create(
+                    displayText: displayText,
+                    displayTextSuffix: displayTextSuffix,
+                    glyph: glyph,
+                    description: description,
+                    // Adding a space after the identifier string that way it will always be sorted after a keyword.
+                    sortText: snippetIdentifier + " ",
+                    filterText: snippetIdentifier,
+                    properties: props,
+                    isComplexTextEdit: true,
+                    inlineDescription: inlineDescription,
+                    rules: CompletionItemRules.Default
+                )
                 .WithAdditionalFilterTexts(additionalFilterTexts);
         }
 

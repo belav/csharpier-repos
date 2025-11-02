@@ -15,7 +15,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 {
     public class StrongNameProviderTests
     {
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsWindowsTypes)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsWindowsTypes
+        )]
         public void ResolveStrongNameKeyFile()
         {
             string fileName = "f.snk";
@@ -24,16 +27,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string filePath = dir + @"\" + fileName;
             string subFilePath = subdir + @"\" + fileName;
 
-            var fs = new HashSet<string>
-            {
-                filePath,
-                subFilePath
-            };
+            var fs = new HashSet<string> { filePath, subFilePath };
 
             // with no search paths
             var provider = new VirtualizedStrongNameProvider(
                 existingFullPaths: fs,
-                searchPaths: ImmutableArray.Create(subdir));
+                searchPaths: ImmutableArray.Create(subdir)
+            );
             var subdirSearchPath = ImmutableArray.Create(subdir);
 
             // using base directory; base path ignored
@@ -68,7 +68,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             path = resolve(filePath, searchPathsNullBaseSP);
             Assert.Equal(filePath, path, StringComparer.OrdinalIgnoreCase);
 
-            string resolve(string keyFilePath, ImmutableArray<string> searchPaths) => DesktopStrongNameProvider.ResolveStrongNameKeyFile(keyFilePath, provider.FileSystem, searchPaths);
+            string resolve(string keyFilePath, ImmutableArray<string> searchPaths) =>
+                DesktopStrongNameProvider.ResolveStrongNameKeyFile(
+                    keyFilePath,
+                    provider.FileSystem,
+                    searchPaths
+                );
         }
 
         public class VirtualizedStrongNameProvider : DesktopStrongNameProvider
@@ -76,6 +81,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             private class VirtualStrongNameFileSystem : StrongNameFileSystem
             {
                 private readonly HashSet<string> _existingFullPaths;
+
                 public VirtualStrongNameFileSystem(HashSet<string> existingFullPaths)
                 {
                     _existingFullPaths = existingFullPaths;
@@ -83,16 +89,24 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
                 internal override bool FileExists(string fullPath)
                 {
-                    return fullPath != null && _existingFullPaths != null && _existingFullPaths.Contains(FileUtilities.NormalizeAbsolutePath(fullPath));
+                    return fullPath != null
+                        && _existingFullPaths != null
+                        && _existingFullPaths.Contains(
+                            FileUtilities.NormalizeAbsolutePath(fullPath)
+                        );
                 }
             }
 
             public VirtualizedStrongNameProvider(
                 IEnumerable<string> existingFullPaths = null,
-                ImmutableArray<string> searchPaths = default(ImmutableArray<string>))
-                : base(searchPaths.NullToEmpty(), new VirtualStrongNameFileSystem(new HashSet<string>(existingFullPaths, StringComparer.OrdinalIgnoreCase)))
-            {
-            }
+                ImmutableArray<string> searchPaths = default(ImmutableArray<string>)
+            )
+                : base(
+                    searchPaths.NullToEmpty(),
+                    new VirtualStrongNameFileSystem(
+                        new HashSet<string>(existingFullPaths, StringComparer.OrdinalIgnoreCase)
+                    )
+                ) { }
         }
     }
 }

@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             // Indexed property accessors can always be called directly, to support legacy code.
-            return property.IsIndexedProperty && (!property.IsIndexer || property.HasRefOrOutParameter());
+            return property.IsIndexedProperty
+                && (!property.IsIndexer || property.HasRefOrOutParameter());
         }
 
         public static bool HasRefOrOutParameter(this PropertySymbol property)

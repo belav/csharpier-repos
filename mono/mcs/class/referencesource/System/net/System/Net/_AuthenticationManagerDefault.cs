@@ -6,19 +6,19 @@
 
 namespace System.Net
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Configuration;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Net.Configuration;
     using System.Reflection;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Permissions;
-    using System;
     using System.Threading;
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <devdoc>
     ///    <para>Manages the authentication modules called during the client authentication
@@ -30,15 +30,14 @@ namespace System.Net
         private PrefixLookup moduleBinding = new PrefixLookup();
         private volatile ArrayList moduleList;
 
-        public AuthenticationManagerDefault()
-        {
-        }
+        public AuthenticationManagerDefault() { }
 
         [SuppressMessage(
-            "Microsoft.Performance", 
-            "CA1804", 
-            Justification = "Original AuthenticationManager implementation: " 
-            + "parameter o is used to trigger ModuleList initialization.")]
+            "Microsoft.Performance",
+            "CA1804",
+            Justification = "Original AuthenticationManager implementation: "
+                + "parameter o is used to trigger ModuleList initialization."
+        )]
         public override void EnsureConfigLoaded()
         {
             try
@@ -49,7 +48,11 @@ namespace System.Net
             {
                 // A Config System has circular dependency on HttpWebRequest so they call this method to
                 // trigger the config. For some reason they don't want any exceptions from here.
-                if (e is ThreadAbortException || e is OutOfMemoryException || e is StackOverflowException)
+                if (
+                    e is ThreadAbortException
+                    || e is OutOfMemoryException
+                    || e is StackOverflowException
+                )
                 {
                     throw;
                 }
@@ -62,17 +65,18 @@ namespace System.Net
         //
         private ArrayList ModuleList
         {
-
             [SuppressMessage(
                 "Microsoft.Design",
                 "CA1031",
-                Justification = "Previous behavior of AuthenticationManager is to catch all exceptions thrown by all " +
-                "IAuthenticationModule plugins.")]
+                Justification = "Previous behavior of AuthenticationManager is to catch all exceptions thrown by all "
+                    + "IAuthenticationModule plugins."
+            )]
 #if !TRAVE
             [SuppressMessage(
                 "Microsoft.Performance",
                 "CA1804",
-                Justification = "Variable exception is used for logging purposes.")]
+                Justification = "Variable exception is used for logging purposes."
+            )]
 #endif
             get
             {
@@ -88,12 +92,15 @@ namespace System.Net
                         if (moduleList == null)
                         {
                             GlobalLog.Print(
-                                "AuthenticationManager::Initialize(): calling ConfigurationManager.GetSection()");
+                                "AuthenticationManager::Initialize(): calling ConfigurationManager.GetSection()"
+                            );
 
                             // This will never come back as null. Additionally, it will
                             // have the items the user wants available.
-                            List<Type> authenticationModuleTypes = 
-                                AuthenticationModulesSectionInternal.GetSection().AuthenticationModules;
+                            List<Type> authenticationModuleTypes =
+                                AuthenticationModulesSectionInternal
+                                    .GetSection()
+                                    .AuthenticationModules;
 
                             //
                             // Should be registered in a growing list of encryption/algorithm strengths
@@ -110,19 +117,27 @@ namespace System.Net
                             {
                                 try
                                 {
-                                    moduleToRegister = Activator.CreateInstance(type,
-                                                        BindingFlags.CreateInstance
-                                                        | BindingFlags.Instance
-                                                        | BindingFlags.NonPublic
-                                                        | BindingFlags.Public,
-                                                        null,          // Binder
-                                                        new object[0], // no arguments
-                                                        CultureInfo.InvariantCulture) as IAuthenticationModule;
+                                    moduleToRegister =
+                                        Activator.CreateInstance(
+                                            type,
+                                            BindingFlags.CreateInstance
+                                                | BindingFlags.Instance
+                                                | BindingFlags.NonPublic
+                                                | BindingFlags.Public,
+                                            null, // Binder
+                                            new object[0], // no arguments
+                                            CultureInfo.InvariantCulture
+                                        ) as IAuthenticationModule;
                                     if (moduleToRegister != null)
                                     {
                                         GlobalLog.Print(
-                                            "WebRequest::Initialize(): Register:" + moduleToRegister.AuthenticationType);
-                                        RemoveAuthenticationType(moduleListCopy, moduleToRegister.AuthenticationType);
+                                            "WebRequest::Initialize(): Register:"
+                                                + moduleToRegister.AuthenticationType
+                                        );
+                                        RemoveAuthenticationType(
+                                            moduleListCopy,
+                                            moduleToRegister.AuthenticationType
+                                        );
                                         moduleListCopy.Add(moduleToRegister);
                                     }
                                 }
@@ -131,7 +146,10 @@ namespace System.Net
                                     //
                                     // ignore failure (log exception for debugging)
                                     //
-                                    GlobalLog.Print("AuthenticationManager::constructor failed to initialize: " + exception.ToString());
+                                    GlobalLog.Print(
+                                        "AuthenticationManager::constructor failed to initialize: "
+                                            + exception.ToString()
+                                    );
                                 }
                             }
 
@@ -148,15 +166,17 @@ namespace System.Net
         {
             for (int i = 0; i < list.Count; ++i)
             {
-                if (string.Compare(
-                    ((IAuthenticationModule)list[i]).AuthenticationType, 
-                    typeToRemove, 
-                    StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    string.Compare(
+                        ((IAuthenticationModule)list[i]).AuthenticationType,
+                        typeToRemove,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     list.RemoveAt(i);
                     break;
                 }
-
             }
         }
 
@@ -164,7 +184,11 @@ namespace System.Net
         ///    <para>Call each registered authentication module to determine the first module that
         ///       can respond to the authentication request.</para>
         /// </devdoc>
-        public override Authorization Authenticate(string challenge, WebRequest request, ICredentials credentials)
+        public override Authorization Authenticate(
+            string challenge,
+            WebRequest request,
+            ICredentials credentials
+        )
         {
             if (request == null)
             {
@@ -186,7 +210,11 @@ namespace System.Net
             HttpWebRequest httpWebRequest = request as HttpWebRequest;
             if (httpWebRequest != null && httpWebRequest.CurrentAuthenticationState.Module != null)
             {
-                response = httpWebRequest.CurrentAuthenticationState.Module.Authenticate(challenge, request, credentials);
+                response = httpWebRequest.CurrentAuthenticationState.Module.Authenticate(
+                    challenge,
+                    request,
+                    credentials
+                );
             }
             else
             {
@@ -198,7 +226,8 @@ namespace System.Net
                     //
                     for (int i = 0; i < ModuleList.Count; i++)
                     {
-                        IAuthenticationModule authenticationModule = (IAuthenticationModule)ModuleList[i];
+                        IAuthenticationModule authenticationModule = (IAuthenticationModule)
+                            ModuleList[i];
                         //
                         // the AuthenticationModule will
                         // 1) return a valid string on success
@@ -209,14 +238,22 @@ namespace System.Net
                         {
                             httpWebRequest.CurrentAuthenticationState.Module = authenticationModule;
                         }
-                        response = authenticationModule.Authenticate(challenge, request, credentials);
+                        response = authenticationModule.Authenticate(
+                            challenge,
+                            request,
+                            credentials
+                        );
 
                         if (response != null)
                         {
                             //
                             // found the Authentication Module, return it
                             //
-                            GlobalLog.Print("AuthenticationManager::Authenticate() found IAuthenticationModule:[" + authenticationModule.AuthenticationType + "]");
+                            GlobalLog.Print(
+                                "AuthenticationManager::Authenticate() found IAuthenticationModule:["
+                                    + authenticationModule.AuthenticationType
+                                    + "]"
+                            );
                             break;
                         }
                     }
@@ -232,8 +269,11 @@ namespace System.Net
         public override Authorization PreAuthenticate(WebRequest request, ICredentials credentials)
         {
             GlobalLog.Print(
-                "AuthenticationManager::PreAuthenticate() request:" 
-                + ValidationHelper.HashString(request) + " credentials:" + ValidationHelper.HashString(credentials));
+                "AuthenticationManager::PreAuthenticate() request:"
+                    + ValidationHelper.HashString(request)
+                    + " credentials:"
+                    + ValidationHelper.HashString(credentials)
+            );
 
             if (request == null)
             {
@@ -255,10 +295,12 @@ namespace System.Net
             //
             // PrefixLookup is thread-safe
             //
-            string moduleName = moduleBinding.Lookup(httpWebRequest.ChallengedUri.AbsoluteUri) as string;
+            string moduleName =
+                moduleBinding.Lookup(httpWebRequest.ChallengedUri.AbsoluteUri) as string;
             GlobalLog.Print(
-                "AuthenticationManager::PreAuthenticate() s_ModuleBinding.Lookup returns:" 
-                + ValidationHelper.ToString(moduleName));
+                "AuthenticationManager::PreAuthenticate() s_ModuleBinding.Lookup returns:"
+                    + ValidationHelper.ToString(moduleName)
+            );
 
             if (moduleName == null)
             {
@@ -272,19 +314,20 @@ namespace System.Net
                 return null;
             }
 
-            // Prepopulate the channel binding token so we can try preauth 
+            // Prepopulate the channel binding token so we can try preauth
             // (but only for modules that actually need it!).
             if (httpWebRequest.ChallengedUri.Scheme == Uri.UriSchemeHttps)
             {
                 object binding = httpWebRequest.ServicePoint.CachedChannelBinding;
 
 #if DEBUG
-                // The ModuleRequiresChannelBinding method is only compiled in DEBUG so the assert must be restricted 
+                // The ModuleRequiresChannelBinding method is only compiled in DEBUG so the assert must be restricted
                 // to DEBUG as well.
 
                 // If the authentication module does CBT, we require that it also caches channel bindings.
                 System.Diagnostics.Debug.Assert(
-                    !(binding == null && ModuleRequiresChannelBinding(authenticationModule)));
+                    !(binding == null && ModuleRequiresChannelBinding(authenticationModule))
+                );
 #endif
 
                 // can also be DBNull.Value, indicating "we previously succeeded without getting a CBT."
@@ -292,22 +335,26 @@ namespace System.Net
                 ChannelBinding channelBinding = binding as ChannelBinding;
                 if (channelBinding != null)
                 {
-                    httpWebRequest.CurrentAuthenticationState.TransportContext = 
+                    httpWebRequest.CurrentAuthenticationState.TransportContext =
                         new CachedTransportContext(channelBinding);
                 }
             }
 
             // Otherwise invoke the PreAuthenticate method.
             // We're guaranteed that CanPreAuthenticate is true because we check before calling BindModule().
-            Authorization authorization = authenticationModule.PreAuthenticate(request, credentials);
+            Authorization authorization = authenticationModule.PreAuthenticate(
+                request,
+                credentials
+            );
 
             if (authorization != null && !authorization.Complete && httpWebRequest != null)
                 httpWebRequest.CurrentAuthenticationState.Module = authenticationModule;
 
             GlobalLog.Print(
-                "AuthenticationManager::PreAuthenticate() " 
-                + "IAuthenticationModule.PreAuthenticate() returned authorization:" 
-                + ValidationHelper.HashString(authorization));
+                "AuthenticationManager::PreAuthenticate() "
+                    + "IAuthenticationModule.PreAuthenticate() returned authorization:"
+                    + ValidationHelper.HashString(authorization)
+            );
 
             return authorization;
         }
@@ -323,11 +370,16 @@ namespace System.Net
             }
 
             GlobalLog.Print(
-                "AuthenticationManager::Register() registering :[" + authenticationModule.AuthenticationType + "]");
+                "AuthenticationManager::Register() registering :["
+                    + authenticationModule.AuthenticationType
+                    + "]"
+            );
 
             lock (moduleBinding)
             {
-                IAuthenticationModule existentModule = findModule(authenticationModule.AuthenticationType);
+                IAuthenticationModule existentModule = findModule(
+                    authenticationModule.AuthenticationType
+                );
                 if (existentModule != null)
                 {
                     ModuleList.Remove(existentModule);
@@ -348,14 +400,18 @@ namespace System.Net
             }
 
             GlobalLog.Print(
-                "AuthenticationManager::Unregister() unregistering :[" 
-                + authenticationModule.AuthenticationType + "]");
+                "AuthenticationManager::Unregister() unregistering :["
+                    + authenticationModule.AuthenticationType
+                    + "]"
+            );
 
             lock (moduleBinding)
             {
                 if (!ModuleList.Contains(authenticationModule))
                 {
-                    throw new InvalidOperationException(SR.GetString(SR.net_authmodulenotregistered));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.net_authmodulenotregistered)
+                    );
                 }
 
                 ModuleList.Remove(authenticationModule);
@@ -372,13 +428,17 @@ namespace System.Net
                 throw new ArgumentNullException("authenticationScheme");
             }
 
-            GlobalLog.Print("AuthenticationManager::Unregister() unregistering :[" + authenticationScheme + "]");
+            GlobalLog.Print(
+                "AuthenticationManager::Unregister() unregistering :[" + authenticationScheme + "]"
+            );
             lock (moduleBinding)
             {
                 IAuthenticationModule existentModule = findModule(authenticationScheme);
                 if (existentModule == null)
                 {
-                    throw new InvalidOperationException(SR.GetString(SR.net_authschemenotregistered));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.net_authschemenotregistered)
+                    );
                 }
 
                 ModuleList.Remove(existentModule);
@@ -392,10 +452,7 @@ namespace System.Net
         /// </devdoc>
         public override IEnumerator RegisteredModules
         {
-            get
-            {
-                return ModuleList.GetEnumerator();
-            }
+            get { return ModuleList.GetEnumerator(); }
         }
 
         /// <devdoc>
@@ -407,11 +464,16 @@ namespace System.Net
         // generating that response
         // This association is used for deciding which module to invoke
         // for preauthentication purposes
-        public override void BindModule(Uri uri, Authorization response, IAuthenticationModule module)
+        public override void BindModule(
+            Uri uri,
+            Authorization response,
+            IAuthenticationModule module
+        )
         {
             GlobalLog.Assert(
-                module.CanPreAuthenticate, 
-                "AuthenticationManager::BindModule()|module.CanPreAuthenticate == false");
+                module.CanPreAuthenticate,
+                "AuthenticationManager::BindModule()|module.CanPreAuthenticate == false"
+            );
 
             if (response.ProtectionRealm != null)
             {
@@ -450,10 +512,13 @@ namespace System.Net
             for (int k = 0; k < moduleList.Count; k++)
             {
                 authenticationModule = (IAuthenticationModule)moduleList[k];
-                if (string.Compare(
-                    authenticationModule.AuthenticationType, 
-                    authenticationType, 
-                    StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    string.Compare(
+                        authenticationModule.AuthenticationType,
+                        authenticationType,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     returnAuthenticationModule = authenticationModule;
                     break;

@@ -11,13 +11,14 @@ namespace System.ServiceModel.Configuration
     /// HttpMessageHandlerFactoryElement for HttpMessageHandlerFactory
     /// </summary>
     public sealed partial class HttpMessageHandlerFactoryElement : ConfigurationElement
-    {   
-        public HttpMessageHandlerFactoryElement()
-        {
-        }
+    {
+        public HttpMessageHandlerFactoryElement() { }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(FxCop.Category.Configuration, "Configuration104",
-                        Justification = "Don't need a validator for this strong typed element.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            FxCop.Category.Configuration,
+            "Configuration104",
+            Justification = "Don't need a validator for this strong typed element."
+        )]
         [ConfigurationProperty(ConfigurationStrings.Handlers)]
         public DelegatingHandlerElementCollection Handlers
         {

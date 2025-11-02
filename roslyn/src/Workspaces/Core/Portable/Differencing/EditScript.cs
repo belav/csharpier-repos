@@ -66,21 +66,20 @@ namespace Microsoft.CodeAnalysis.Differencing
                         queue.Enqueue(grandChildren);
                     }
                 }
-            }
-            while (queue.Count > 0);
+            } while (queue.Count > 0);
         }
 
         private void ProcessNode(List<Edit<TNode>> edits, TNode x)
         {
             Debug.Assert(Comparer.TreesEqual(x, Root2));
-            // NOTE:  
+            // NOTE:
             // Our implementation differs from the algorithm described in the paper in following:
             // - We don't update M' and T1 since we don't need the final matching and the transformed tree.
             // - Insert and Move edits don't need to store the offset of the nodes relative to their parents,
             //   so we don't calculate those. Thus we don't need to implement FindPos.
             // - We don't mark nodes "in order" since the marks are only needed by FindPos.
-            // a) 
-            // Let x be the current node in the breadth-first search of T2. 
+            // a)
+            // Let x be the current node in the breadth-first search of T2.
             // Let y = parent(x).
             // Let z be the partner of parent(x) in M'.  (note: we don't need z for insert)
             //
@@ -94,7 +93,7 @@ namespace Microsoft.CodeAnalysis.Differencing
                 // b) If x has no partner in M'.
                 //   i. k := FindPos(x)
                 //  ii. Append INS((w, a, value(x)), z, k) to E for a new identifier w.
-                // iii. Add (w, x) to M' and apply INS((w, a, value(x)), z, k) to T1.          
+                // iii. Add (w, x) to M' and apply INS((w, a, value(x)), z, k) to T1.
                 edits.Add(new Edit<TNode>(EditKind.Insert, Comparer, oldNode: default, newNode: x));
 
                 // NOTE:
@@ -108,7 +107,7 @@ namespace Microsoft.CodeAnalysis.Differencing
 
                 // ii. if value(w) != value(x)
                 // A. Append UPD(w, value(x)) to E
-                // B. Apply UPD(w, value(x) to T1   
+                // B. Apply UPD(w, value(x) to T1
 
                 // Let the Comparer decide whether an update should be added to the edit list.
                 // The Comparer defines what changes in node values it cares about.
@@ -118,7 +117,7 @@ namespace Microsoft.CodeAnalysis.Differencing
                 }
 
                 // If parents of w and x don't match, it's a move.
-                // iii. if not (v, y) in M'             
+                // iii. if not (v, y) in M'
                 // NOTE: The paper says (y, v) but that seems wrong since M': T1 -> T2 and w,v in T1 and x,y in T2.
                 if (!_match.Contains(v, y))
                 {
@@ -132,7 +131,7 @@ namespace Microsoft.CodeAnalysis.Differencing
 
             // d) AlignChildren(w, x)
 
-            // NOTE: If we just applied an INS((w, a, value(x)), z, k) operation on tree T1 
+            // NOTE: If we just applied an INS((w, a, value(x)), z, k) operation on tree T1
             // the newly created node w would have no children. So there is nothing to align.
             if (hasPartner)
             {
@@ -146,7 +145,7 @@ namespace Microsoft.CodeAnalysis.Differencing
             //    a) Let w be the current node in the post-order traversal of T1.
             //    b) If w has no partner in M' then append DEL(w) to E and apply DEL(w) to T1.
             //
-            // NOTE: The fact that we haven't updated M' during the Insert phase 
+            // NOTE: The fact that we haven't updated M' during the Insert phase
             // doesn't affect Delete phase. The original algorithm inserted new node n1 into T1
             // when an insertion INS(n1, n2) was detected. It also added (n1, n2) to M'.
             // Then in Delete phase n1 is visited but nothing is done since it has a partner n2 in M'.
@@ -156,7 +155,9 @@ namespace Microsoft.CodeAnalysis.Differencing
             {
                 if (!_match.HasPartnerInTree2(w))
                 {
-                    edits.Add(new Edit<TNode>(EditKind.Delete, Comparer, oldNode: w, newNode: default));
+                    edits.Add(
+                        new Edit<TNode>(EditKind.Delete, Comparer, oldNode: w, newNode: default)
+                    );
                 }
             }
         }
@@ -166,8 +167,12 @@ namespace Microsoft.CodeAnalysis.Differencing
             Debug.Assert(Comparer.TreesEqual(w, Root1));
             Debug.Assert(Comparer.TreesEqual(x, Root2));
 
-            IEnumerable<TNode> wChildren, xChildren;
-            if ((wChildren = Comparer.GetChildren(w)) == null || (xChildren = Comparer.GetChildren(x)) == null)
+            IEnumerable<TNode> wChildren,
+                xChildren;
+            if (
+                (wChildren = Comparer.GetChildren(w)) == null
+                || (xChildren = Comparer.GetChildren(x)) == null
+            )
             {
                 return;
             }
@@ -225,13 +230,14 @@ namespace Microsoft.CodeAnalysis.Differencing
             //       NOTE: We don't mark nodes "in order".
             foreach (var a in s1)
             {
-
                 // (a,b) in M
                 // => b in S2 since S2 == { b | parent(b) == x && parent(partner(b)) == w }
                 // (a,b) not in S
-                if (_match.TryGetPartnerInTree2(a, out var b) &&
-                    Comparer.GetParent(b).Equals(x) &&
-                    !ContainsPair(s, a, b))
+                if (
+                    _match.TryGetPartnerInTree2(a, out var b)
+                    && Comparer.GetParent(b).Equals(x)
+                    && !ContainsPair(s, a, b)
+                )
                 {
                     Debug.Assert(Comparer.TreesEqual(a, Root1));
                     Debug.Assert(Comparer.TreesEqual(b, Root2));
@@ -241,7 +247,7 @@ namespace Microsoft.CodeAnalysis.Differencing
             }
         }
 
-        private static bool ContainsPair(Dictionary<TNode, TNode> dict, TNode a, TNode b)
-            => dict.TryGetValue(a, out var value) && value.Equals(b);
+        private static bool ContainsPair(Dictionary<TNode, TNode> dict, TNode a, TNode b) =>
+            dict.TryGetValue(a, out var value) && value.Equals(b);
     }
 }

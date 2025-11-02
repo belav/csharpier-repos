@@ -8,19 +8,20 @@ namespace System.ServiceModel.Channels
     using System.IO;
     using System.Runtime;
     using System.ServiceModel.Diagnostics;
-    using System.Xml;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Xml;
 
     class PacketRoutableHeader : DictionaryHeader
     {
         PacketRoutableHeader()
-            : base()
-        {
-        }
+            : base() { }
 
         public static void AddHeadersTo(Message message, MessageHeader header)
         {
-            int index = message.Headers.FindHeader(DotNetOneWayStrings.HeaderName, DotNetOneWayStrings.Namespace);
+            int index = message.Headers.FindHeader(
+                DotNetOneWayStrings.HeaderName,
+                DotNetOneWayStrings.Namespace
+            );
             if (index == -1)
             {
                 if (header == null)
@@ -36,14 +37,18 @@ namespace System.ServiceModel.Channels
             if (!TryValidateMessage(message))
             {
                 throw TraceUtility.ThrowHelperError(
-                    new ProtocolException(SR.GetString(SR.OneWayHeaderNotFound)), message);
+                    new ProtocolException(SR.GetString(SR.OneWayHeaderNotFound)),
+                    message
+                );
             }
         }
 
         public static bool TryValidateMessage(Message message)
         {
             int index = message.Headers.FindHeader(
-                DotNetOneWayStrings.HeaderName, DotNetOneWayStrings.Namespace);
+                DotNetOneWayStrings.HeaderName,
+                DotNetOneWayStrings.Namespace
+            );
 
             return (index != -1);
         }
@@ -63,7 +68,10 @@ namespace System.ServiceModel.Channels
             get { return XD.DotNetOneWayDictionary.Namespace; }
         }
 
-        protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteHeaderContents(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
             // no contents necessary
         }
@@ -76,7 +84,10 @@ namespace System.ServiceModel.Channels
     {
         PacketRoutableHeader packetRoutableHeader;
 
-        public RequestOneWayChannelFactory(OneWayBindingElement bindingElement, BindingContext context)
+        public RequestOneWayChannelFactory(
+            OneWayBindingElement bindingElement,
+            BindingContext context
+        )
             : base(context.Binding, context.BuildInnerChannelFactory<IRequestChannel>())
         {
             if (bindingElement.PacketRoutable)
@@ -87,8 +98,9 @@ namespace System.ServiceModel.Channels
 
         protected override IOutputChannel OnCreateChannel(EndpointAddress to, Uri via)
         {
-            IRequestChannel innerChannel =
-                ((IChannelFactory<IRequestChannel>)this.InnerChannelFactory).CreateChannel(to, via);
+            IRequestChannel innerChannel = (
+                (IChannelFactory<IRequestChannel>)this.InnerChannelFactory
+            ).CreateChannel(to, via);
 
             return new RequestOutputChannel(this, innerChannel, this.packetRoutableHeader);
         }
@@ -98,8 +110,11 @@ namespace System.ServiceModel.Channels
             IRequestChannel innerChannel;
             MessageHeader packetRoutableHeader;
 
-            public RequestOutputChannel(ChannelManagerBase factory,
-                IRequestChannel innerChannel, MessageHeader packetRoutableHeader)
+            public RequestOutputChannel(
+                ChannelManagerBase factory,
+                IRequestChannel innerChannel,
+                MessageHeader packetRoutableHeader
+            )
                 : base(factory)
             {
                 this.innerChannel = innerChannel;
@@ -127,7 +142,11 @@ namespace System.ServiceModel.Channels
                 this.innerChannel.Open(timeout);
             }
 
-            protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.innerChannel.BeginOpen(timeout, callback, state);
             }
@@ -142,7 +161,11 @@ namespace System.ServiceModel.Channels
                 this.innerChannel.Close(timeout);
             }
 
-            protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginClose(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.innerChannel.BeginClose(timeout, callback, state);
             }
@@ -185,7 +208,12 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            protected override IAsyncResult OnBeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginSend(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.innerChannel.BeginRequest(message, timeout, callback, state);
             }
@@ -215,7 +243,10 @@ namespace System.ServiceModel.Channels
                     {
                         try
                         {
-                            MessageFault messageFault = MessageFault.CreateFault(response, TransportDefaults.MaxFaultSize);
+                            MessageFault messageFault = MessageFault.CreateFault(
+                                response,
+                                TransportDefaults.MaxFaultSize
+                            );
                             innerException = new FaultException(messageFault);
                         }
                         catch (Exception e)
@@ -225,10 +256,12 @@ namespace System.ServiceModel.Channels
                                 throw;
                             }
 
-                            if (e is CommunicationException ||
-                                e is TimeoutException ||
-                                e is XmlException ||
-                                e is IOException)
+                            if (
+                                e is CommunicationException
+                                || e is TimeoutException
+                                || e is XmlException
+                                || e is IOException
+                            )
                             {
                                 innerException = e; // expected exception generating fault
                             }
@@ -240,8 +273,12 @@ namespace System.ServiceModel.Channels
                     }
 
                     throw TraceUtility.ThrowHelperError(
-                        new ProtocolException(SR.GetString(SR.OneWayUnexpectedResponse), innerException),
-                        response);
+                        new ProtocolException(
+                            SR.GetString(SR.OneWayUnexpectedResponse),
+                            innerException
+                        ),
+                        response
+                    );
                 }
             }
         }
@@ -255,7 +292,10 @@ namespace System.ServiceModel.Channels
         IChannelFactory<IDuplexChannel> innnerFactory;
         bool packetRoutable;
 
-        public DuplexOneWayChannelFactory(OneWayBindingElement bindingElement, BindingContext context)
+        public DuplexOneWayChannelFactory(
+            OneWayBindingElement bindingElement,
+            BindingContext context
+        )
             : base(context.Binding, context.BuildInnerChannelFactory<IDuplexChannel>())
         {
             this.innnerFactory = (IChannelFactory<IDuplexChannel>)this.InnerChannelFactory;
@@ -273,7 +313,10 @@ namespace System.ServiceModel.Channels
             IDuplexChannel innerChannel;
             bool packetRoutable;
 
-            public DuplexOutputChannel(DuplexOneWayChannelFactory factory, IDuplexChannel innerChannel)
+            public DuplexOutputChannel(
+                DuplexOneWayChannelFactory factory,
+                IDuplexChannel innerChannel
+            )
                 : base(factory)
             {
                 this.packetRoutable = factory.packetRoutable;
@@ -295,17 +338,30 @@ namespace System.ServiceModel.Channels
                 this.innerChannel.Abort();
             }
 
-            protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginClose(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.innerChannel.BeginClose(timeout, callback, state);
             }
 
-            protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.innerChannel.BeginOpen(timeout, callback, state);
             }
 
-            protected override IAsyncResult OnBeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginSend(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 StampMessage(message);
                 return this.innerChannel.BeginSend(message, timeout, callback, state);
@@ -361,21 +417,30 @@ namespace System.ServiceModel.Channels
         ChannelPoolSettings channelPoolSettings;
         bool packetRoutable;
 
-        public DuplexSessionOneWayChannelFactory(OneWayBindingElement bindingElement, BindingContext context)
+        public DuplexSessionOneWayChannelFactory(
+            OneWayBindingElement bindingElement,
+            BindingContext context
+        )
             : base(context.Binding, context.BuildInnerChannelFactory<IDuplexSessionChannel>())
         {
             this.packetRoutable = bindingElement.PacketRoutable;
 
-            ISecurityCapabilities innerSecurityCapabilities = this.InnerChannelFactory.GetProperty<ISecurityCapabilities>();
+            ISecurityCapabilities innerSecurityCapabilities =
+                this.InnerChannelFactory.GetProperty<ISecurityCapabilities>();
 
             // can't pool across outer channels if the inner channels support client auth
-            if (innerSecurityCapabilities != null && innerSecurityCapabilities.SupportsClientAuthentication)
+            if (
+                innerSecurityCapabilities != null
+                && innerSecurityCapabilities.SupportsClientAuthentication
+            )
             {
                 this.channelPoolSettings = bindingElement.ChannelPoolSettings.Clone();
             }
             else
             {
-                this.channelPool = new ChannelPool<IDuplexSessionChannel>(bindingElement.ChannelPoolSettings);
+                this.channelPool = new ChannelPool<IDuplexSessionChannel>(
+                    bindingElement.ChannelPoolSettings
+                );
             }
         }
 
@@ -413,7 +478,11 @@ namespace System.ServiceModel.Channels
             base.OnClose(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             if (this.channelPool != null)
@@ -438,13 +507,17 @@ namespace System.ServiceModel.Channels
             bool cleanupChannelPool;
             Uri via;
 
-            public DuplexSessionOutputChannel(DuplexSessionOneWayChannelFactory factory,
-                EndpointAddress remoteAddress, Uri via)
+            public DuplexSessionOutputChannel(
+                DuplexSessionOneWayChannelFactory factory,
+                EndpointAddress remoteAddress,
+                Uri via
+            )
                 : base(factory)
             {
                 this.channelPool = factory.GetChannelPool(out cleanupChannelPool);
                 this.packetRoutable = factory.packetRoutable;
-                this.innerFactory = (IChannelFactory<IDuplexSessionChannel>)factory.InnerChannelFactory;
+                this.innerFactory =
+                    (IChannelFactory<IDuplexSessionChannel>)factory.InnerChannelFactory;
                 this.remoteAddress = remoteAddress;
                 this.via = via;
             }
@@ -460,11 +533,13 @@ namespace System.ServiceModel.Channels
             }
 
             #region Channel Lifetime
-            protected override void OnOpen(TimeSpan timeout)
-            {
-            }
+            protected override void OnOpen(TimeSpan timeout) { }
 
-            protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new CompletedAsyncResult(callback, state);
             }
@@ -490,7 +565,11 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginClose(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 if (cleanupChannelPool)
                 {
@@ -505,7 +584,12 @@ namespace System.ServiceModel.Channels
             }
             #endregion
 
-            protected override IAsyncResult OnBeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginSend(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new SendAsyncResult(this, message, timeout, callback, state);
             }
@@ -520,8 +604,11 @@ namespace System.ServiceModel.Channels
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
                 ChannelPoolKey key = null;
                 bool isConnectionFromPool = true;
-                IDuplexSessionChannel innerChannel =
-                    GetChannelFromPool(ref timeoutHelper, out key, out isConnectionFromPool);
+                IDuplexSessionChannel innerChannel = GetChannelFromPool(
+                    ref timeoutHelper,
+                    out key,
+                    out isConnectionFromPool
+                );
 
                 bool success = false;
                 try
@@ -540,7 +627,13 @@ namespace System.ServiceModel.Channels
                 {
                     if (!success)
                     {
-                        CleanupChannel(innerChannel, false, key, isConnectionFromPool, ref timeoutHelper);
+                        CleanupChannel(
+                            innerChannel,
+                            false,
+                            key,
+                            isConnectionFromPool,
+                            ref timeoutHelper
+                        );
                     }
                 }
 
@@ -604,11 +697,22 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            void CleanupChannel(IDuplexSessionChannel channel, bool connectionStillGood, ChannelPoolKey key, bool isConnectionFromPool, ref TimeoutHelper timeoutHelper)
+            void CleanupChannel(
+                IDuplexSessionChannel channel,
+                bool connectionStillGood,
+                ChannelPoolKey key,
+                bool isConnectionFromPool,
+                ref TimeoutHelper timeoutHelper
+            )
             {
                 if (isConnectionFromPool)
                 {
-                    this.channelPool.ReturnConnection(key, channel, connectionStillGood, timeoutHelper.RemainingTime());
+                    this.channelPool.ReturnConnection(
+                        key,
+                        channel,
+                        connectionStillGood,
+                        timeoutHelper.RemainingTime()
+                    );
                 }
                 else
                 {
@@ -623,14 +727,21 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            IDuplexSessionChannel GetChannelFromPool(ref TimeoutHelper timeoutHelper, out ChannelPoolKey key,
-                out bool isConnectionFromPool)
+            IDuplexSessionChannel GetChannelFromPool(
+                ref TimeoutHelper timeoutHelper,
+                out ChannelPoolKey key,
+                out bool isConnectionFromPool
+            )
             {
                 isConnectionFromPool = true;
                 while (true)
                 {
-                    IDuplexSessionChannel pooledChannel
-                        = this.channelPool.TakeConnection(this.RemoteAddress, this.Via, timeoutHelper.RemainingTime(), out key);
+                    IDuplexSessionChannel pooledChannel = this.channelPool.TakeConnection(
+                        this.RemoteAddress,
+                        this.Via,
+                        timeoutHelper.RemainingTime(),
+                        out key
+                    );
 
                     if (pooledChannel == null)
                     {
@@ -645,7 +756,12 @@ namespace System.ServiceModel.Channels
                     }
 
                     // Abort stale connections from the pool
-                    this.channelPool.ReturnConnection(key, pooledChannel, false, timeoutHelper.RemainingTime());
+                    this.channelPool.ReturnConnection(
+                        key,
+                        pooledChannel,
+                        false,
+                        timeoutHelper.RemainingTime()
+                    );
                 }
             }
 
@@ -660,15 +776,23 @@ namespace System.ServiceModel.Channels
                 ChannelPoolKey key;
                 bool isConnectionFromPool;
 
-                public SendAsyncResult(DuplexSessionOutputChannel parent, Message message, TimeSpan timeout,
-                    AsyncCallback callback, object state)
+                public SendAsyncResult(
+                    DuplexSessionOutputChannel parent,
+                    Message message,
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.parent = parent;
                     this.message = message;
                     this.timeoutHelper = new TimeoutHelper(timeout);
-                    this.innerChannel =
-                        parent.GetChannelFromPool(ref this.timeoutHelper, out this.key, out this.isConnectionFromPool);
+                    this.innerChannel = parent.GetChannelFromPool(
+                        ref this.timeoutHelper,
+                        out this.key,
+                        out this.isConnectionFromPool
+                    );
 
                     bool success = false;
                     bool completeSelf = true;
@@ -707,8 +831,13 @@ namespace System.ServiceModel.Channels
 
                 void Cleanup(bool connectionStillGood)
                 {
-                    parent.CleanupChannel(this.innerChannel, connectionStillGood, this.key,
-                        this.isConnectionFromPool, ref this.timeoutHelper);
+                    parent.CleanupChannel(
+                        this.innerChannel,
+                        connectionStillGood,
+                        this.key,
+                        this.isConnectionFromPool,
+                        ref this.timeoutHelper
+                    );
                 }
 
                 bool OpenNewChannel()
@@ -719,7 +848,11 @@ namespace System.ServiceModel.Channels
                     }
 
                     this.parent.StampInitialMessage(this.message);
-                    IAsyncResult result = this.innerChannel.BeginOpen(timeoutHelper.RemainingTime(), onOpen, this);
+                    IAsyncResult result = this.innerChannel.BeginOpen(
+                        timeoutHelper.RemainingTime(),
+                        onOpen,
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;

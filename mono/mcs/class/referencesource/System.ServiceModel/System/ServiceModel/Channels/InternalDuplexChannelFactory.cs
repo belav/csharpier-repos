@@ -16,15 +16,24 @@ namespace System.ServiceModel.Channels
         LocalAddressProvider localAddressProvider;
         bool providesCorrelation;
 
-        internal InternalDuplexChannelFactory(InternalDuplexBindingElement bindingElement, BindingContext context,
+        internal InternalDuplexChannelFactory(
+            InternalDuplexBindingElement bindingElement,
+            BindingContext context,
             InputChannelDemuxer channelDemuxer,
-            IChannelFactory<IOutputChannel> innerChannelFactory, LocalAddressProvider localAddressProvider)
+            IChannelFactory<IOutputChannel> innerChannelFactory,
+            LocalAddressProvider localAddressProvider
+        )
             : base(context.Binding, innerChannelFactory)
         {
             this.channelDemuxer = channelDemuxer;
             this.innerChannelFactory = innerChannelFactory;
-            ChannelDemuxerFilter demuxFilter = new ChannelDemuxerFilter(new MatchNoneMessageFilter(), int.MinValue);
-            this.innerChannelListener = this.channelDemuxer.BuildChannelListener<IInputChannel>(demuxFilter);
+            ChannelDemuxerFilter demuxFilter = new ChannelDemuxerFilter(
+                new MatchNoneMessageFilter(),
+                int.MinValue
+            );
+            this.innerChannelListener = this.channelDemuxer.BuildChannelListener<IInputChannel>(
+                demuxFilter
+            );
             this.localAddressProvider = localAddressProvider;
             this.providesCorrelation = bindingElement.ProvidesCorrelation;
         }
@@ -34,8 +43,11 @@ namespace System.ServiceModel.Channels
             long tempChannelCount = Interlocked.Increment(ref channelCount);
             if (tempChannelCount > 1)
             {
-                AddressHeader uniqueEndpointHeader = AddressHeader.CreateAddressHeader(XD.UtilityDictionary.UniqueEndpointHeaderName,
-                    XD.UtilityDictionary.UniqueEndpointHeaderNamespace, tempChannelCount);
+                AddressHeader uniqueEndpointHeader = AddressHeader.CreateAddressHeader(
+                    XD.UtilityDictionary.UniqueEndpointHeaderName,
+                    XD.UtilityDictionary.UniqueEndpointHeaderNamespace,
+                    tempChannelCount
+                );
                 address = new EndpointAddress(this.innerChannelListener.Uri, uniqueEndpointHeader);
                 priority = 1;
                 return true;
@@ -68,18 +80,47 @@ namespace System.ServiceModel.Channels
                 filter = new MatchAllMessageFilter();
             }
 
-            return this.CreateChannel(address, via, localAddress, filter, priority, useUniqueHeader);
-
+            return this.CreateChannel(
+                address,
+                via,
+                localAddress,
+                filter,
+                priority,
+                useUniqueHeader
+            );
         }
 
-        public IDuplexChannel CreateChannel(EndpointAddress address, Uri via, MessageFilter filter, int priority, bool usesUniqueHeader)
+        public IDuplexChannel CreateChannel(
+            EndpointAddress address,
+            Uri via,
+            MessageFilter filter,
+            int priority,
+            bool usesUniqueHeader
+        )
         {
-            return this.CreateChannel(address, via, new EndpointAddress(this.innerChannelListener.Uri), filter, priority, usesUniqueHeader);
+            return this.CreateChannel(
+                address,
+                via,
+                new EndpointAddress(this.innerChannelListener.Uri),
+                filter,
+                priority,
+                usesUniqueHeader
+            );
         }
 
-        public IDuplexChannel CreateChannel(EndpointAddress remoteAddress, Uri via, EndpointAddress localAddress, MessageFilter filter, int priority, bool usesUniqueHeader)
+        public IDuplexChannel CreateChannel(
+            EndpointAddress remoteAddress,
+            Uri via,
+            EndpointAddress localAddress,
+            MessageFilter filter,
+            int priority,
+            bool usesUniqueHeader
+        )
         {
-            ChannelDemuxerFilter demuxFilter = new ChannelDemuxerFilter(new AndMessageFilter(new EndpointAddressMessageFilter(localAddress, true), filter), priority);
+            ChannelDemuxerFilter demuxFilter = new ChannelDemuxerFilter(
+                new AndMessageFilter(new EndpointAddressMessageFilter(localAddress, true), filter),
+                priority
+            );
             IDuplexChannel newChannel = null;
             IOutputChannel innerOutputChannel = null;
             IChannelListener<IInputChannel> innerInputListener = null;
@@ -87,10 +128,19 @@ namespace System.ServiceModel.Channels
             try
             {
                 innerOutputChannel = this.innerChannelFactory.CreateChannel(remoteAddress, via);
-                innerInputListener = this.channelDemuxer.BuildChannelListener<IInputChannel>(demuxFilter);
+                innerInputListener = this.channelDemuxer.BuildChannelListener<IInputChannel>(
+                    demuxFilter
+                );
                 innerInputListener.Open();
                 innerInputChannel = innerInputListener.AcceptChannel();
-                newChannel = new ClientCompositeDuplexChannel(this, innerInputChannel, innerInputListener, localAddress, innerOutputChannel, usesUniqueHeader);
+                newChannel = new ClientCompositeDuplexChannel(
+                    this,
+                    innerInputChannel,
+                    innerInputListener,
+                    localAddress,
+                    innerOutputChannel,
+                    usesUniqueHeader
+                );
             }
             finally
             {
@@ -129,9 +179,20 @@ namespace System.ServiceModel.Channels
             this.innerChannelListener.Open(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedOpenAsyncResult(timeout, callback, state, base.OnBeginOpen, base.OnEndOpen, this.innerChannelListener);
+            return new ChainedOpenAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.OnBeginOpen,
+                base.OnEndOpen,
+                this.innerChannelListener
+            );
         }
 
         protected override void OnEndOpen(IAsyncResult result)
@@ -146,9 +207,20 @@ namespace System.ServiceModel.Channels
             this.innerChannelListener.Close(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedCloseAsyncResult(timeout, callback, state, base.OnBeginClose, base.OnEndClose, this.innerChannelListener);
+            return new ChainedCloseAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.OnBeginClose,
+                base.OnEndClose,
+                this.innerChannelListener
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -165,7 +237,9 @@ namespace System.ServiceModel.Channels
 
             if (typeof(T) == typeof(ISecurityCapabilities) && !this.providesCorrelation)
             {
-                return InternalDuplexBindingElement.GetSecurityCapabilities<T>(base.GetProperty<ISecurityCapabilities>());
+                return InternalDuplexBindingElement.GetSecurityCapabilities<T>(
+                    base.GetProperty<ISecurityCapabilities>()
+                );
             }
 
             T baseProperty = base.GetProperty<T>();
@@ -188,9 +262,16 @@ namespace System.ServiceModel.Channels
         class ClientCompositeDuplexChannel : LayeredDuplexChannel
         {
             IChannelListener<IInputChannel> innerInputListener;
-            bool usesUniqueHeader;  // Perf optimization - don't check message headers if we know there's only one CompositeDuplexChannel created
+            bool usesUniqueHeader; // Perf optimization - don't check message headers if we know there's only one CompositeDuplexChannel created
 
-            public ClientCompositeDuplexChannel(ChannelManagerBase channelManager, IInputChannel innerInputChannel, IChannelListener<IInputChannel> innerInputListener, EndpointAddress localAddress, IOutputChannel innerOutputChannel, bool usesUniqueHeader)
+            public ClientCompositeDuplexChannel(
+                ChannelManagerBase channelManager,
+                IInputChannel innerInputChannel,
+                IChannelListener<IInputChannel> innerInputListener,
+                EndpointAddress localAddress,
+                IOutputChannel innerOutputChannel,
+                bool usesUniqueHeader
+            )
                 : base(channelManager, innerInputChannel, localAddress, innerOutputChannel)
             {
                 this.innerInputListener = innerInputListener;
@@ -203,9 +284,21 @@ namespace System.ServiceModel.Channels
                 this.innerInputListener.Abort();
             }
 
-            protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginClose(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                return new ChainedAsyncResult(timeout, callback, state, base.OnBeginClose, base.OnEndClose, this.innerInputListener.BeginClose, this.innerInputListener.EndClose);
+                return new ChainedAsyncResult(
+                    timeout,
+                    callback,
+                    state,
+                    base.OnBeginClose,
+                    base.OnEndClose,
+                    this.innerInputListener.BeginClose,
+                    this.innerInputListener.EndClose
+                );
             }
 
             protected override void OnClose(TimeSpan timeout)
@@ -223,18 +316,22 @@ namespace System.ServiceModel.Channels
             protected override void OnReceive(Message message)
             {
                 // Mark ChannelInstance header ref params as Understood on message
-                // MessageFilters will take care of proper routing of the message, but we need to mark it as understood here. 
+                // MessageFilters will take care of proper routing of the message, but we need to mark it as understood here.
 
                 if (usesUniqueHeader)
                 {
                     // 3.0 allows for messages to be received with duplicate message headers; we cannot
                     // use MessageHeaders.FindHeader() to find the header because it will throw an exception
-                    // if it encounters duplicate headers. We instead have to look through all headers. 
+                    // if it encounters duplicate headers. We instead have to look through all headers.
 
                     for (int i = 0; i < message.Headers.Count; i++)
                     {
-                        if (message.Headers[i].Name == XD.UtilityDictionary.UniqueEndpointHeaderName.Value &&
-                            message.Headers[i].Namespace == XD.UtilityDictionary.UniqueEndpointHeaderNamespace.Value)
+                        if (
+                            message.Headers[i].Name
+                                == XD.UtilityDictionary.UniqueEndpointHeaderName.Value
+                            && message.Headers[i].Namespace
+                                == XD.UtilityDictionary.UniqueEndpointHeaderNamespace.Value
+                        )
                         {
                             message.Headers.AddUnderstood(i);
                         }

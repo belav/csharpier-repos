@@ -3,26 +3,26 @@ namespace System.Workflow.Activities
     #region Imports
 
     using System;
-    using System.IO;
-    using System.Xml;
-    using System.Text;
-    using System.Reflection;
+    using System.CodeDom;
     using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Drawing;
-    using System.Diagnostics;
-    using System.Drawing.Design;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
-    using System.CodeDom;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.IO;
+    using System.Reflection;
+    using System.Text;
+    using System.Workflow.Activities.Common;
     using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Collections.Generic;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
     using System.Workflow.Runtime;
     using System.Workflow.Runtime.Hosting;
-    using System.Collections.Specialized;
-    using System.Workflow.Activities.Common;
+    using System.Xml;
 
     #endregion
 
@@ -32,31 +32,79 @@ namespace System.Workflow.Activities
     [ToolboxBitmap(typeof(InvokeWorkflowActivity), "Resources.Service.bmp")]
     [ActivityValidator(typeof(InvokeWorkflowValidator))]
     [DefaultEvent("Invoking")]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class InvokeWorkflowActivity : Activity, ITypeFilterProvider
     {
-        public static readonly DependencyProperty TargetWorkflowProperty = DependencyProperty.Register("TargetWorkflow", typeof(Type), typeof(InvokeWorkflowActivity), new PropertyMetadata(null, DependencyPropertyOptions.Metadata));
-        public static readonly DependencyProperty ParameterBindingsProperty = DependencyProperty.Register("ParameterBindings", typeof(WorkflowParameterBindingCollection), typeof(InvokeWorkflowActivity), new PropertyMetadata(DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly, new Attribute[] { new BrowsableAttribute(false), new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content) }));
+        public static readonly DependencyProperty TargetWorkflowProperty =
+            DependencyProperty.Register(
+                "TargetWorkflow",
+                typeof(Type),
+                typeof(InvokeWorkflowActivity),
+                new PropertyMetadata(null, DependencyPropertyOptions.Metadata)
+            );
+        public static readonly DependencyProperty ParameterBindingsProperty =
+            DependencyProperty.Register(
+                "ParameterBindings",
+                typeof(WorkflowParameterBindingCollection),
+                typeof(InvokeWorkflowActivity),
+                new PropertyMetadata(
+                    DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly,
+                    new Attribute[]
+                    {
+                        new BrowsableAttribute(false),
+                        new DesignerSerializationVisibilityAttribute(
+                            DesignerSerializationVisibility.Content
+                        ),
+                    }
+                )
+            );
 
-        public static readonly DependencyProperty InvokingEvent = DependencyProperty.Register("Invoking", typeof(EventHandler), typeof(InvokeWorkflowActivity));
+        public static readonly DependencyProperty InvokingEvent = DependencyProperty.Register(
+            "Invoking",
+            typeof(EventHandler),
+            typeof(InvokeWorkflowActivity)
+        );
 
-        public static readonly DependencyProperty InstanceIdProperty = DependencyProperty.Register("InstanceId", typeof(Guid), typeof(InvokeWorkflowActivity), new PropertyMetadata(Guid.Empty));
+        public static readonly DependencyProperty InstanceIdProperty = DependencyProperty.Register(
+            "InstanceId",
+            typeof(Guid),
+            typeof(InvokeWorkflowActivity),
+            new PropertyMetadata(Guid.Empty)
+        );
 
-        internal static readonly ArrayList ReservedParameterNames = new ArrayList(new string[] { "Name", "Enabled", "Description", "TargetWorkflow", "Invoking", "ParameterBindings" });
+        internal static readonly ArrayList ReservedParameterNames = new ArrayList(
+            new string[]
+            {
+                "Name",
+                "Enabled",
+                "Description",
+                "TargetWorkflow",
+                "Invoking",
+                "ParameterBindings",
+            }
+        );
 
         #region Constructors
 
         public InvokeWorkflowActivity()
         {
             //
-            base.SetReadOnlyPropertyValue(ParameterBindingsProperty, new WorkflowParameterBindingCollection(this));
+            base.SetReadOnlyPropertyValue(
+                ParameterBindingsProperty,
+                new WorkflowParameterBindingCollection(this)
+            );
         }
 
         public InvokeWorkflowActivity(string name)
             : base(name)
         {
             //
-            base.SetReadOnlyPropertyValue(ParameterBindingsProperty, new WorkflowParameterBindingCollection(this));
+            base.SetReadOnlyPropertyValue(
+                ParameterBindingsProperty,
+                new WorkflowParameterBindingCollection(this)
+            );
         }
 
         #endregion
@@ -67,24 +115,15 @@ namespace System.Workflow.Activities
         [DefaultValue(null)]
         public Type TargetWorkflow
         {
-            get
-            {
-                return base.GetValue(TargetWorkflowProperty) as Type;
-            }
-            set
-            {
-                base.SetValue(TargetWorkflowProperty, value);
-            }
+            get { return base.GetValue(TargetWorkflowProperty) as Type; }
+            set { base.SetValue(TargetWorkflowProperty, value); }
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Guid InstanceId
         {
-            get
-            {
-                return (Guid)base.GetValue(InstanceIdProperty);
-            }
+            get { return (Guid)base.GetValue(InstanceIdProperty); }
         }
 
         internal void SetInstanceId(Guid value)
@@ -99,7 +138,8 @@ namespace System.Workflow.Activities
         {
             get
             {
-                return base.GetValue(ParameterBindingsProperty) as WorkflowParameterBindingCollection;
+                return base.GetValue(ParameterBindingsProperty)
+                    as WorkflowParameterBindingCollection;
             }
         }
 
@@ -108,14 +148,8 @@ namespace System.Workflow.Activities
         [MergableProperty(false)]
         public event EventHandler Invoking
         {
-            add
-            {
-                base.AddHandler(InvokingEvent, value);
-            }
-            remove
-            {
-                base.RemoveHandler(InvokingEvent, value);
-            }
+            add { base.AddHandler(InvokingEvent, value); }
+            remove { base.RemoveHandler(InvokingEvent, value); }
         }
 
         #region ITypeFilterProvider Members
@@ -125,12 +159,23 @@ namespace System.Workflow.Activities
             if (type == null)
                 throw new ArgumentNullException("type");
 
-            bool canFilterType = TypeProvider.IsAssignable(typeof(Activity), type) && type != typeof(Activity) && !type.IsAbstract;
+            bool canFilterType =
+                TypeProvider.IsAssignable(typeof(Activity), type)
+                && type != typeof(Activity)
+                && !type.IsAbstract;
             if (canFilterType)
             {
                 //This means that the type is DesignTimeType
-                IDesignerHost designerHost = ((IComponent)this).Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
-                if (designerHost != null && String.Compare(designerHost.RootComponentClassName, type.FullName, StringComparison.Ordinal) == 0)
+                IDesignerHost designerHost =
+                    ((IComponent)this).Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
+                if (
+                    designerHost != null
+                    && String.Compare(
+                        designerHost.RootComponentClassName,
+                        type.FullName,
+                        StringComparison.Ordinal
+                    ) == 0
+                )
                 {
                     if (throwOnError)
                         throw new InvalidOperationException(SR.GetString(SR.Error_CantInvokeSelf));
@@ -147,16 +192,15 @@ namespace System.Workflow.Activities
 
         string ITypeFilterProvider.FilterDescription
         {
-            get
-            {
-                return SR.GetString(SR.FilterDescription_InvokeWorkflow);
-            }
+            get { return SR.GetString(SR.FilterDescription_InvokeWorkflow); }
         }
 
         #endregion
 
         #region Execute
-        protected override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -169,20 +213,27 @@ namespace System.Workflow.Activities
             foreach (WorkflowParameterBinding paramBinding in this.ParameterBindings)
                 namedArgumentValues.Add(paramBinding.ParameterName, paramBinding.Value);
 
-            IStartWorkflow workflowInvoker = executionContext.GetService(typeof(IStartWorkflow)) as IStartWorkflow;
+            IStartWorkflow workflowInvoker =
+                executionContext.GetService(typeof(IStartWorkflow)) as IStartWorkflow;
             if (workflowInvoker == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(IStartWorkflow).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(IStartWorkflow).FullName)
+                );
 
-            Guid instanceId = workflowInvoker.StartWorkflow(this.TargetWorkflow, namedArgumentValues);
+            Guid instanceId = workflowInvoker.StartWorkflow(
+                this.TargetWorkflow,
+                namedArgumentValues
+            );
             if (instanceId == Guid.Empty)
-                throw new InvalidOperationException(SR.GetString(SR.Error_FailedToStartTheWorkflow));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_FailedToStartTheWorkflow)
+                );
 
             this.SetInstanceId(instanceId);
 
             return ActivityExecutionStatus.Closed;
         }
         #endregion
-
     }
 
     #region validator
@@ -194,31 +245,48 @@ namespace System.Workflow.Activities
 
             InvokeWorkflowActivity invokeWorkflow = obj as InvokeWorkflowActivity;
             if (invokeWorkflow == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(InvokeWorkflowActivity).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Error_UnexpectedArgumentType,
+                        typeof(InvokeWorkflowActivity).FullName
+                    ),
+                    "obj"
+                );
 
             if (invokeWorkflow.TargetWorkflow == null)
             {
-                ValidationError error = new ValidationError(SR.GetString(SR.Error_TypePropertyInvalid, "TargetWorkflow"), ErrorNumbers.Error_PropertyNotSet);
+                ValidationError error = new ValidationError(
+                    SR.GetString(SR.Error_TypePropertyInvalid, "TargetWorkflow"),
+                    ErrorNumbers.Error_PropertyNotSet
+                );
                 error.PropertyName = "TargetWorkflow";
                 validationErrors.Add(error);
             }
             else
             {
-                ITypeProvider typeProvider = (ITypeProvider)manager.GetService(typeof(ITypeProvider));
+                ITypeProvider typeProvider = (ITypeProvider)
+                    manager.GetService(typeof(ITypeProvider));
                 if (typeProvider == null)
-                    throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName)
+                    );
 
                 Type targetWorkflowType = invokeWorkflow.TargetWorkflow;
                 if (targetWorkflowType.Assembly == null && typeProvider.LocalAssembly != null)
                 {
-                    Type workflowType = typeProvider.LocalAssembly.GetType(targetWorkflowType.FullName);
+                    Type workflowType = typeProvider.LocalAssembly.GetType(
+                        targetWorkflowType.FullName
+                    );
                     if (workflowType != null)
                         targetWorkflowType = workflowType;
                 }
 
                 if (!TypeProvider.IsAssignable(typeof(Activity), targetWorkflowType))
                 {
-                    ValidationError error = new ValidationError(SR.GetString(SR.Error_TypeIsNotRootActivity, "TargetWorkflow"), ErrorNumbers.Error_TypeIsNotRootActivity);
+                    ValidationError error = new ValidationError(
+                        SR.GetString(SR.Error_TypeIsNotRootActivity, "TargetWorkflow"),
+                        ErrorNumbers.Error_TypeIsNotRootActivity
+                    );
                     error.PropertyName = "TargetWorkflow";
                     validationErrors.Add(error);
                 }
@@ -236,7 +304,10 @@ namespace System.Workflow.Activities
 
                     if (rootActivity == null)
                     {
-                        ValidationError error = new ValidationError(SR.GetString(SR.Error_GetCalleeWorkflow, invokeWorkflow.TargetWorkflow), ErrorNumbers.Error_GetCalleeWorkflow);
+                        ValidationError error = new ValidationError(
+                            SR.GetString(SR.Error_GetCalleeWorkflow, invokeWorkflow.TargetWorkflow),
+                            ErrorNumbers.Error_GetCalleeWorkflow
+                        );
                         error.PropertyName = "TargetWorkflow";
                         validationErrors.Add(error);
                     }
@@ -246,9 +317,17 @@ namespace System.Workflow.Activities
                         Walker walker = new Walker();
                         walker.FoundActivity += delegate(Walker w, WalkerEventArgs args)
                         {
-                            if ((args.CurrentActivity is WebServiceInputActivity && ((WebServiceInputActivity)args.CurrentActivity).IsActivating))
+                            if (
+                                (
+                                    args.CurrentActivity is WebServiceInputActivity
+                                    && ((WebServiceInputActivity)args.CurrentActivity).IsActivating
+                                )
+                            )
                             {
-                                ValidationError validationError = new ValidationError(SR.GetString(SR.Error_ExecWithActivationReceive), ErrorNumbers.Error_ExecWithActivationReceive);
+                                ValidationError validationError = new ValidationError(
+                                    SR.GetString(SR.Error_ExecWithActivationReceive),
+                                    ErrorNumbers.Error_ExecWithActivationReceive
+                                );
                                 validationError.PropertyName = "Name";
                                 validationErrors.Add(validationError);
 
@@ -262,7 +341,10 @@ namespace System.Workflow.Activities
                         Activity parentScope = invokeWorkflow.Parent;
                         while (parentScope != null)
                         {
-                            if (parentScope is CompensatableTransactionScopeActivity || parentScope is TransactionScopeActivity)
+                            if (
+                                parentScope is CompensatableTransactionScopeActivity
+                                || parentScope is TransactionScopeActivity
+                            )
                             {
                                 inAtomicScope = true;
                                 break;
@@ -273,29 +355,66 @@ namespace System.Workflow.Activities
                         // Validate that if the workflow is transactional or being exec'd then it is not enclosed in an atomic scope.
                         if (inAtomicScope)
                         {
-                            ValidationError validationError = new ValidationError(SR.GetString(SR.Error_ExecInAtomicScope), ErrorNumbers.Error_ExecInAtomicScope);
+                            ValidationError validationError = new ValidationError(
+                                SR.GetString(SR.Error_ExecInAtomicScope),
+                                ErrorNumbers.Error_ExecInAtomicScope
+                            );
                             validationErrors.Add(validationError);
                         }
 
-                        foreach (WorkflowParameterBinding paramBinding in invokeWorkflow.ParameterBindings)
+                        foreach (
+                            WorkflowParameterBinding paramBinding in invokeWorkflow.ParameterBindings
+                        )
                         {
                             PropertyInfo propertyInfo = null;
 
-                            propertyInfo = targetWorkflowType.GetProperty(paramBinding.ParameterName);
+                            propertyInfo = targetWorkflowType.GetProperty(
+                                paramBinding.ParameterName
+                            );
                             if (propertyInfo == null)
                             {
-                                ValidationError validationError = new ValidationError(SR.GetString(SR.Error_ParameterNotFound, paramBinding.ParameterName), ErrorNumbers.Error_ParameterNotFound);
-                                if (InvokeWorkflowActivity.ReservedParameterNames.Contains(paramBinding.ParameterName))
-                                    validationError.PropertyName = ParameterInfoBasedPropertyDescriptor.GetParameterPropertyName(invokeWorkflow.GetType(), paramBinding.ParameterName);
+                                ValidationError validationError = new ValidationError(
+                                    SR.GetString(
+                                        SR.Error_ParameterNotFound,
+                                        paramBinding.ParameterName
+                                    ),
+                                    ErrorNumbers.Error_ParameterNotFound
+                                );
+                                if (
+                                    InvokeWorkflowActivity.ReservedParameterNames.Contains(
+                                        paramBinding.ParameterName
+                                    )
+                                )
+                                    validationError.PropertyName =
+                                        ParameterInfoBasedPropertyDescriptor.GetParameterPropertyName(
+                                            invokeWorkflow.GetType(),
+                                            paramBinding.ParameterName
+                                        );
 
                                 validationErrors.Add(validationError);
                                 continue;
                             }
 
                             Type parameterType = propertyInfo.PropertyType;
-                            if (paramBinding.GetBinding(WorkflowParameterBinding.ValueProperty) != null)
+                            if (
+                                paramBinding.GetBinding(WorkflowParameterBinding.ValueProperty)
+                                != null
+                            )
                             {
-                                ValidationErrorCollection memberErrors = ValidationHelpers.ValidateProperty(manager, invokeWorkflow, paramBinding.GetBinding(WorkflowParameterBinding.ValueProperty), new PropertyValidationContext(paramBinding, null, paramBinding.ParameterName), new BindValidationContext(parameterType, AccessTypes.Read));
+                                ValidationErrorCollection memberErrors =
+                                    ValidationHelpers.ValidateProperty(
+                                        manager,
+                                        invokeWorkflow,
+                                        paramBinding.GetBinding(
+                                            WorkflowParameterBinding.ValueProperty
+                                        ),
+                                        new PropertyValidationContext(
+                                            paramBinding,
+                                            null,
+                                            paramBinding.ParameterName
+                                        ),
+                                        new BindValidationContext(parameterType, AccessTypes.Read)
+                                    );
 
                                 if (memberErrors.Count != 0)
                                 {

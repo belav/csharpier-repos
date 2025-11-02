@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,43 +28,57 @@
 
 using System;
 
-namespace System.Configuration {
+namespace System.Configuration
+{
+    [AttributeUsage(AttributeTargets.Property)]
+    public sealed class IntegerValidatorAttribute : ConfigurationValidatorAttribute
+    {
+        bool excludeRange = false;
+        int maxValue = 0;
+        int minValue = 0;
+        ConfigurationValidatorBase instance;
 
-	[AttributeUsage (AttributeTargets.Property)]
-	public sealed class IntegerValidatorAttribute : ConfigurationValidatorAttribute
-	{
-		bool excludeRange = false;
-		int maxValue = 0;
-		int minValue = 0;
-		ConfigurationValidatorBase instance;
+        public IntegerValidatorAttribute() { }
 
-		public IntegerValidatorAttribute ()
-		{
-		}
+        public bool ExcludeRange
+        {
+            get { return excludeRange; }
+            set
+            {
+                excludeRange = value;
+                instance = null;
+            }
+        }
 
-		public bool ExcludeRange {
-			get { return excludeRange; }
-			set { excludeRange = value; instance = null; }
-		}
+        public int MaxValue
+        {
+            get { return maxValue; }
+            set
+            {
+                maxValue = value;
+                instance = null;
+            }
+        }
 
-		public int MaxValue {
-			get { return maxValue; }
-			set { maxValue = value; instance = null; }
-		}
+        public int MinValue
+        {
+            get { return minValue; }
+            set
+            {
+                minValue = value;
+                instance = null;
+            }
+        }
 
-		public int MinValue {
-			get { return minValue; }
-			set { minValue = value; instance = null; }
-		}
+        public override ConfigurationValidatorBase ValidatorInstance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new IntegerValidator(minValue, maxValue, excludeRange);
 
-		public override ConfigurationValidatorBase ValidatorInstance {
-			get {
-				if (instance == null)
-					instance = new IntegerValidator (minValue, maxValue, excludeRange);
-
-				return instance;
-			}
-		}
-	}
+                return instance;
+            }
+        }
+    }
 }
-

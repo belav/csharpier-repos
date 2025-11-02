@@ -9,11 +9,14 @@ namespace System.Linq
     {
         private sealed partial class DistinctIterator<TSource> : IIListProvider<TSource>
         {
-            public TSource[] ToArray() => Enumerable.HashSetToArray(new HashSet<TSource>(_source, _comparer));
+            public TSource[] ToArray() =>
+                Enumerable.HashSetToArray(new HashSet<TSource>(_source, _comparer));
 
-            public List<TSource> ToList() => new List<TSource>(new HashSet<TSource>(_source, _comparer));
+            public List<TSource> ToList() =>
+                new List<TSource>(new HashSet<TSource>(_source, _comparer));
 
-            public int GetCount(bool onlyIfCheap) => onlyIfCheap ? -1 : new HashSet<TSource>(_source, _comparer).Count;
+            public int GetCount(bool onlyIfCheap) =>
+                onlyIfCheap ? -1 : new HashSet<TSource>(_source, _comparer).Count;
         }
     }
 }

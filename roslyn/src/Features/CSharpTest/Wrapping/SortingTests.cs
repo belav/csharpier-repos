@@ -19,7 +19,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             var items = ImmutableArray.Create("Action1", "Action2");
 
             var sorted = WrapItemsAction.SortByMostRecentlyUsed(
-                items, ImmutableArray<string>.Empty, a => a);
+                items,
+                ImmutableArray<string>.Empty,
+                a => a
+            );
 
             // Shouldn't change order
             Assert.Equal((IEnumerable<string>)items, sorted);
@@ -31,7 +34,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             var items = ImmutableArray.Create("Action1", "Action2");
 
             var sorted = WrapItemsAction.SortByMostRecentlyUsed(
-                items, ImmutableArray.Create("Action1"), a => a);
+                items,
+                ImmutableArray.Create("Action1"),
+                a => a
+            );
 
             // Shouldn't change order
             Assert.Equal((IEnumerable<string>)items, sorted);
@@ -43,7 +49,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             var items = ImmutableArray.Create("Action1", "Action2");
 
             var sorted = WrapItemsAction.SortByMostRecentlyUsed(
-                items, ImmutableArray.Create("Action2"), a => a);
+                items,
+                ImmutableArray.Create("Action2"),
+                a => a
+            );
 
             // Should swap order.
             Assert.Equal((IEnumerable<string>)ImmutableArray.Create("Action2", "Action1"), sorted);
@@ -55,7 +64,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             var items = ImmutableArray.Create("Action1", "Action2");
 
             var sorted = WrapItemsAction.SortByMostRecentlyUsed(
-                items, ImmutableArray.Create("Action1", "Action2"), a => a);
+                items,
+                ImmutableArray.Create("Action1", "Action2"),
+                a => a
+            );
 
             // Shouldn't change order
             Assert.Equal((IEnumerable<string>)items, sorted);
@@ -67,7 +79,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             var items = ImmutableArray.Create("Action1", "Action2");
 
             var sorted = WrapItemsAction.SortByMostRecentlyUsed(
-                items, ImmutableArray.Create("Action2", "Action1"), a => a);
+                items,
+                ImmutableArray.Create("Action2", "Action1"),
+                a => a
+            );
 
             // Should swap order.
             Assert.Equal((IEnumerable<string>)ImmutableArray.Create("Action2", "Action1"), sorted);

@@ -19,7 +19,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDecimal10()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  00<!-- Comment inbetween-->01<?a?></Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  00<!-- Comment inbetween-->01<?a?></Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(1m, reader.ReadContentAs(typeof(decimal), null));
@@ -46,7 +48,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDecimal2()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  -0<?a?>0<!-- Comment inbetween-->5.<![CDATA[5]]> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  -0<?a?>0<!-- Comment inbetween-->5.<![CDATA[5]]> </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(-5.5m, reader.ReadContentAsDecimal());
@@ -55,7 +59,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDecimal3()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  00<!-- Comment inbetween-->01<?a?></Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  00<!-- Comment inbetween-->01<?a?></Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(1m, reader.ReadContentAsDecimal());
@@ -91,7 +97,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDecimal7()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  4<?a?>4.5<!-- Comment inbetween-->5  </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  4<?a?>4.5<!-- Comment inbetween-->5  </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(44.55m, reader.ReadContentAsDecimal());
@@ -100,7 +108,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDecimal8()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  4<?a?>4.5<!-- Comment inbetween-->5  </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  4<?a?>4.5<!-- Comment inbetween-->5  </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(44.55m, reader.ReadContentAs(typeof(decimal), null));
@@ -109,7 +119,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsDecimal9()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  -0<?a?>0<!-- Comment inbetween-->5.<![CDATA[5]]> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  -0<?a?>0<!-- Comment inbetween-->5.<![CDATA[5]]> </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(-5.5m, reader.ReadContentAs(typeof(decimal), null));

@@ -19,9 +19,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [DefaultMember("Indexer")]
-        private class DefaultDoesNotExist
-        {
-        }
+        private class DefaultDoesNotExist { }
 
         private interface IA
         {
@@ -29,13 +27,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             string this[int key] { get; }
         }
 
-        private interface IB : IA
-        {
-        }
+        private interface IB : IA { }
 
-        private interface IC : IB
-        {
-        }
+        private interface IC : IB { }
 
         private class Implementation : IC
         {
@@ -43,7 +37,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void CustomIndexerName()
         {
             dynamic d = new AllTheIntegers();
@@ -52,7 +49,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void CustomIndexerNameDynamicArgument()
         {
             AllTheIntegers all = new AllTheIntegers();
@@ -71,7 +71,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void DeepInheritingIndexingInterface()
         {
             IC ifaceTyped = new Implementation();
@@ -83,7 +86,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [Fact]
         public void ArrayLongIndexed()
         {
-            dynamic arr = new[] {1, 2, 3};
+            dynamic arr = new[] { 1, 2, 3 };
             dynamic ind = 2L;
             Assert.Equal(3, arr[ind]);
         }
@@ -91,7 +94,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [Fact]
         public void BadArrayIndexer()
         {
-            dynamic arr = new[] {1, 2, 3};
+            dynamic arr = new[] { 1, 2, 3 };
             dynamic ind = "a";
             Assert.Throws<RuntimeBinderException>(() => arr[ind]);
         }
@@ -127,26 +130,42 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void GetIndexWithNonRepeatingArgumentInfos()
         {
-            CallSiteBinder binder = Binder.GetIndex(CSharpBinderFlags.None, GetType(), new ArgumentEnumerable(2));
-            CallSite<Func<CallSite, object, object, object>> callSite =
-                CallSite<Func<CallSite, object, object, object>>.Create(binder);
+            CallSiteBinder binder = Binder.GetIndex(
+                CSharpBinderFlags.None,
+                GetType(),
+                new ArgumentEnumerable(2)
+            );
+            CallSite<Func<CallSite, object, object, object>> callSite = CallSite<
+                Func<CallSite, object, object, object>
+            >.Create(binder);
             Func<CallSite, object, object, object> targ = callSite.Target;
-            object result = targ(callSite, new[] {1, 2, 3}, 1);
+            object result = targ(callSite, new[] { 1, 2, 3 }, 1);
             Assert.Equal(2, result);
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void SetIndexWithNonRepeatingArgumentInfos()
         {
-            CallSiteBinder binder = Binder.SetIndex(CSharpBinderFlags.None, GetType(), new ArgumentEnumerable(3));
-            CallSite<Func<CallSite, object, object, object, object>> callSite =
-                CallSite<Func<CallSite, object, object, object, object>>.Create(binder);
+            CallSiteBinder binder = Binder.SetIndex(
+                CSharpBinderFlags.None,
+                GetType(),
+                new ArgumentEnumerable(3)
+            );
+            CallSite<Func<CallSite, object, object, object, object>> callSite = CallSite<
+                Func<CallSite, object, object, object, object>
+            >.Create(binder);
             Func<CallSite, object, object, object, object> targ = callSite.Target;
-            int[] array = {1, 2, 3};
+            int[] array = { 1, 2, 3 };
             object result = targ(callSite, array, 1, 9);
             Assert.Equal(9, result);
             Assert.Equal(9, array[1]);

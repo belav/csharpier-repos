@@ -47,13 +47,14 @@ namespace System.Net.Http.Tests
                 (_, _) => Encoding.ASCII,
                 (_, _) => Encoding.Latin1,
                 (_, _) => Encoding.UTF8,
-                (name, _) => name switch
-                {
-                    "latin1" => Encoding.Latin1,
-                    "utf8" => Encoding.UTF8,
-                    "ascii" => Encoding.ASCII,
-                    _ => null
-                }
+                (name, _) =>
+                    name switch
+                    {
+                        "latin1" => Encoding.Latin1,
+                        "utf8" => Encoding.UTF8,
+                        "ascii" => Encoding.ASCII,
+                        _ => null,
+                    },
             };
 
             foreach (MultipartContent multipartContent in multipartContents)
@@ -68,7 +69,9 @@ namespace System.Net.Http.Tests
 
         [Theory]
         [MemberData(nameof(MultipartContent_TestData))]
-        public async Task MultipartContent_TryComputeLength_ReturnsSameLengthAsCopyToAsync(MultipartContent multipartContent)
+        public async Task MultipartContent_TryComputeLength_ReturnsSameLengthAsCopyToAsync(
+            MultipartContent multipartContent
+        )
         {
             Assert.True(multipartContent.TryComputeLength(out long length));
 
@@ -77,7 +80,11 @@ namespace System.Net.Http.Tests
             Assert.Equal(length, copyToStream.Length);
 
             var copyToAsyncStream = new MemoryStream();
-            await multipartContent.CopyToAsync(copyToAsyncStream, context: null, cancellationToken: default);
+            await multipartContent.CopyToAsync(
+                copyToAsyncStream,
+                context: null,
+                cancellationToken: default
+            );
             Assert.Equal(length, copyToAsyncStream.Length);
 
             Assert.Equal(copyToStream.ToArray(), copyToAsyncStream.ToArray());

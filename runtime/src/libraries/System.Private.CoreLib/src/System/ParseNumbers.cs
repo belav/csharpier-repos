@@ -90,7 +90,12 @@ namespace System
             currPos = i;
 
             // Return the value properly signed.
-            if ((ulong)result == 0x8000000000000000 && sign == 1 && r == 10 && ((flags & TreatAsUnsigned) == 0))
+            if (
+                (ulong)result == 0x8000000000000000
+                && sign == 1
+                && r == 10
+                && ((flags & TreatAsUnsigned) == 0)
+            )
                 Number.ThrowOverflowException<long>();
 
             if (r == 10)
@@ -189,7 +194,12 @@ namespace System
                 if ((uint)result > 0xFFFF)
                     Number.ThrowOverflowException<short>();
             }
-            else if ((uint)result == 0x80000000 && sign == 1 && r == 10 && ((flags & TreatAsUnsigned) == 0))
+            else if (
+                (uint)result == 0x80000000
+                && sign == 1
+                && r == 10
+                && ((flags & TreatAsUnsigned) == 0)
+            )
             {
                 Number.ThrowOverflowException<int>();
             }
@@ -205,7 +215,8 @@ namespace System
         private static void EatWhiteSpace(ReadOnlySpan<char> s, ref int i)
         {
             int localIndex = i;
-            for (; localIndex < s.Length && char.IsWhiteSpace(s[localIndex]); localIndex++) ;
+            for (; localIndex < s.Length && char.IsWhiteSpace(s[localIndex]); localIndex++)
+                ;
             i = localIndex;
         }
 
@@ -241,10 +252,10 @@ namespace System
             {
                 Debug.Assert(radix == 2 || radix == 8 || radix == 10 || radix == 16);
                 maxVal =
-                    radix == 10 ? 0xffffffffffffffff / 10 :
-                    radix == 16 ? 0xffffffffffffffff / 16 :
-                    radix == 8 ? 0xffffffffffffffff / 8 :
-                    0xffffffffffffffff / 2;
+                    radix == 10 ? 0xffffffffffffffff / 10
+                    : radix == 16 ? 0xffffffffffffffff / 16
+                    : radix == 8 ? 0xffffffffffffffff / 8
+                    : 0xffffffffffffffff / 2;
 
                 // Read all of the digits and convert to a number
                 while (i < s.Length && IsDigit(s[i], radix, out int value))
@@ -300,10 +311,10 @@ namespace System
             {
                 Debug.Assert(radix == 2 || radix == 8 || radix == 10 || radix == 16);
                 maxVal =
-                    radix == 10 ? 0xffffffff / 10 :
-                    radix == 16 ? 0xffffffff / 16 :
-                    radix == 8 ? 0xffffffff / 8 :
-                    0xffffffff / 2;
+                    radix == 10 ? 0xffffffff / 10
+                    : radix == 16 ? 0xffffffff / 16
+                    : radix == 8 ? 0xffffffff / 8
+                    : 0xffffffff / 2;
 
                 // Read all of the digits and convert to a number
                 while (i < s.Length && IsDigit(s[i], radix, out int value))

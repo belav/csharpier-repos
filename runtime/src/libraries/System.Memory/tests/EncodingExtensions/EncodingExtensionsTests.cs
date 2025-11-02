@@ -62,8 +62,30 @@ namespace System.Text.Tests
             Decoder decoder = Encoding.UTF8.GetDecoder();
             IBufferWriter<char> writer = new ArrayBufferWriter<char>();
 
-            Assert.Throws<ArgumentNullException>("decoder", () => EncodingExtensions.Convert((Decoder)null, ReadOnlySpan<byte>.Empty, writer, true, out _, out _));
-            Assert.Throws<ArgumentNullException>("writer", () => EncodingExtensions.Convert(decoder, ReadOnlySpan<byte>.Empty, (IBufferWriter<char>)null, true, out _, out _));
+            Assert.Throws<ArgumentNullException>(
+                "decoder",
+                () =>
+                    EncodingExtensions.Convert(
+                        (Decoder)null,
+                        ReadOnlySpan<byte>.Empty,
+                        writer,
+                        true,
+                        out _,
+                        out _
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                "writer",
+                () =>
+                    EncodingExtensions.Convert(
+                        decoder,
+                        ReadOnlySpan<byte>.Empty,
+                        (IBufferWriter<char>)null,
+                        true,
+                        out _,
+                        out _
+                    )
+            );
         }
 
         [Fact]
@@ -75,29 +97,61 @@ namespace System.Text.Tests
             // First, a small input with no flushing and no leftover data.
 
             ReadOnlySpan<byte> inputData = "Hello"u8;
-            EncodingExtensions.Convert(decoder, inputData, writer, flush: false, out long charsUsed, out bool completed);
+            EncodingExtensions.Convert(
+                decoder,
+                inputData,
+                writer,
+                flush: false,
+                out long charsUsed,
+                out bool completed
+            );
             Assert.Equal(5, charsUsed);
             Assert.True(completed);
 
             // Then, a large input with no flushing and leftover data.
 
-            inputData = Encoding.UTF8.GetBytes(new string('x', 20_000_000)).Concat(new byte[] { 0xE0, 0xA0 }).ToArray();
-            EncodingExtensions.Convert(decoder, inputData, writer, flush: false, out charsUsed, out completed);
+            inputData = Encoding
+                .UTF8.GetBytes(new string('x', 20_000_000))
+                .Concat(new byte[] { 0xE0, 0xA0 })
+                .ToArray();
+            EncodingExtensions.Convert(
+                decoder,
+                inputData,
+                writer,
+                flush: false,
+                out charsUsed,
+                out completed
+            );
             Assert.Equal(20_000_000, charsUsed);
             Assert.True(completed);
 
             // Then, a large input with flushing and leftover data (should be replaced).
 
-            inputData = new byte[] { 0x80 }.Concat(Encoding.UTF8.GetBytes(new string('x', 20_000_000))).Concat(new byte[] { 0xE0 }).ToArray();
-            EncodingExtensions.Convert(decoder, inputData, writer, flush: true, out charsUsed, out completed);
+            inputData = new byte[] { 0x80 }
+                .Concat(Encoding.UTF8.GetBytes(new string('x', 20_000_000)))
+                .Concat(new byte[] { 0xE0 })
+                .ToArray();
+            EncodingExtensions.Convert(
+                decoder,
+                inputData,
+                writer,
+                flush: true,
+                out charsUsed,
+                out completed
+            );
             Assert.Equal(20_000_002, charsUsed); // 1 for leftover at beginning, 1 for replacement at end
             Assert.True(completed);
 
             // Now make sure all of the data was decoded properly.
 
             Assert.Equal(
-                expected: "Hello" + new string('x', 20_000_000) + '\u0800' + new string('x', 20_000_000) + '\ufffd',
-                actual: writer.WrittenSpan.ToString());
+                expected: "Hello"
+                    + new string('x', 20_000_000)
+                    + '\u0800'
+                    + new string('x', 20_000_000)
+                    + '\ufffd',
+                actual: writer.WrittenSpan.ToString()
+            );
         }
 
         [Fact]
@@ -106,8 +160,30 @@ namespace System.Text.Tests
             Decoder decoder = Encoding.UTF8.GetDecoder();
             IBufferWriter<char> writer = new ArrayBufferWriter<char>();
 
-            Assert.Throws<ArgumentNullException>("decoder", () => EncodingExtensions.Convert((Decoder)null, ReadOnlySequence<byte>.Empty, writer, true, out _, out _));
-            Assert.Throws<ArgumentNullException>("writer", () => EncodingExtensions.Convert(decoder, ReadOnlySequence<byte>.Empty, (IBufferWriter<char>)null, true, out _, out _));
+            Assert.Throws<ArgumentNullException>(
+                "decoder",
+                () =>
+                    EncodingExtensions.Convert(
+                        (Decoder)null,
+                        ReadOnlySequence<byte>.Empty,
+                        writer,
+                        true,
+                        out _,
+                        out _
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                "writer",
+                () =>
+                    EncodingExtensions.Convert(
+                        decoder,
+                        ReadOnlySequence<byte>.Empty,
+                        (IBufferWriter<char>)null,
+                        true,
+                        out _,
+                        out _
+                    )
+            );
         }
 
         [Fact]
@@ -121,16 +197,30 @@ namespace System.Text.Tests
             ReadOnlySequence<byte> inputData = SequenceFactory.Create(
                 new byte[] { 0x20 }, // U+0020
                 new byte[] { 0x61, 0xC2 }, // U+0061 and U+0080 (continues on next line)
-                new byte[] { 0x80, 0xED, 0x9F, 0xBF }); // (cont.) + U+D7FF
-            EncodingExtensions.Convert(decoder, inputData, writer, flush: false, out long charsUsed, out bool completed);
+                new byte[] { 0x80, 0xED, 0x9F, 0xBF }
+            ); // (cont.) + U+D7FF
+            EncodingExtensions.Convert(
+                decoder,
+                inputData,
+                writer,
+                flush: false,
+                out long charsUsed,
+                out bool completed
+            );
             Assert.Equal(4, charsUsed);
             Assert.True(completed);
 
             // Then, input with no flushing and leftover data.
 
-            inputData = SequenceFactory.Create(
-                new byte[] { 0xF4, 0x80 }); // U+100000 (continues on next line)
-            EncodingExtensions.Convert(decoder, inputData, writer, flush: false, out charsUsed, out completed);
+            inputData = SequenceFactory.Create(new byte[] { 0xF4, 0x80 }); // U+100000 (continues on next line)
+            EncodingExtensions.Convert(
+                decoder,
+                inputData,
+                writer,
+                flush: false,
+                out charsUsed,
+                out completed
+            );
             Assert.Equal(0, charsUsed);
             Assert.True(completed);
 
@@ -138,8 +228,16 @@ namespace System.Text.Tests
 
             inputData = SequenceFactory.Create(
                 new byte[] { 0x80, 0x80 }, // (cont.)
-                new byte[] { 0xC2 }); // leftover data (should be replaced)
-            EncodingExtensions.Convert(decoder, inputData, writer, flush: true, out charsUsed, out completed);
+                new byte[] { 0xC2 }
+            ); // leftover data (should be replaced)
+            EncodingExtensions.Convert(
+                decoder,
+                inputData,
+                writer,
+                flush: true,
+                out charsUsed,
+                out completed
+            );
             Assert.Equal(3, charsUsed);
             Assert.True(completed);
 
@@ -155,26 +253,46 @@ namespace System.Text.Tests
             ArrayBufferWriter<char> writer = new ArrayBufferWriter<char>();
 
             // First, input with no flushing and no leftover data.
-             
-            ReadOnlySequence<byte> inputData = SequenceFactory.Create(
-                new byte[] { 0x00, 0x20, 0x61, 0xC2, 0x80, 0xED, 0x9F, 0xBF }).Slice(1);
-            EncodingExtensions.Convert(decoder, inputData, writer, flush: false, out long charsUsed, out bool completed);
+
+            ReadOnlySequence<byte> inputData = SequenceFactory
+                .Create(new byte[] { 0x00, 0x20, 0x61, 0xC2, 0x80, 0xED, 0x9F, 0xBF })
+                .Slice(1);
+            EncodingExtensions.Convert(
+                decoder,
+                inputData,
+                writer,
+                flush: false,
+                out long charsUsed,
+                out bool completed
+            );
             Assert.Equal(4, charsUsed);
             Assert.True(completed);
 
             // Then, input with no flushing and leftover data.
 
-            inputData = SequenceFactory.Create(
-                new byte[] { 0x00, 0xF4, 0x80 }).Slice(1);
-            EncodingExtensions.Convert(decoder, inputData, writer, flush: false, out charsUsed, out completed);
+            inputData = SequenceFactory.Create(new byte[] { 0x00, 0xF4, 0x80 }).Slice(1);
+            EncodingExtensions.Convert(
+                decoder,
+                inputData,
+                writer,
+                flush: false,
+                out charsUsed,
+                out completed
+            );
             Assert.Equal(0, charsUsed);
             Assert.True(completed);
 
             // Then, input with flushing and leftover data (should be replaced).
 
-            inputData = SequenceFactory.Create(
-                new byte[] { 0x00, 0x80, 0x80, 0xC2 }).Slice(1);
-            EncodingExtensions.Convert(decoder, inputData, writer, flush: true, out charsUsed, out completed);
+            inputData = SequenceFactory.Create(new byte[] { 0x00, 0x80, 0x80, 0xC2 }).Slice(1);
+            EncodingExtensions.Convert(
+                decoder,
+                inputData,
+                writer,
+                flush: true,
+                out charsUsed,
+                out completed
+            );
             Assert.Equal(3, charsUsed);
             Assert.True(completed);
 
@@ -189,8 +307,30 @@ namespace System.Text.Tests
             Encoder encoder = Encoding.UTF8.GetEncoder();
             IBufferWriter<byte> writer = new ArrayBufferWriter<byte>();
 
-            Assert.Throws<ArgumentNullException>("encoder", () => EncodingExtensions.Convert((Encoder)null, ReadOnlySpan<char>.Empty, writer, true, out _, out _));
-            Assert.Throws<ArgumentNullException>("writer", () => EncodingExtensions.Convert(encoder, ReadOnlySpan<char>.Empty, (IBufferWriter<byte>)null, true, out _, out _));
+            Assert.Throws<ArgumentNullException>(
+                "encoder",
+                () =>
+                    EncodingExtensions.Convert(
+                        (Encoder)null,
+                        ReadOnlySpan<char>.Empty,
+                        writer,
+                        true,
+                        out _,
+                        out _
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                "writer",
+                () =>
+                    EncodingExtensions.Convert(
+                        encoder,
+                        ReadOnlySpan<char>.Empty,
+                        (IBufferWriter<byte>)null,
+                        true,
+                        out _,
+                        out _
+                    )
+            );
         }
 
         [Fact]
@@ -202,21 +342,42 @@ namespace System.Text.Tests
             // First, a small input with no flushing and no leftover data.
 
             ReadOnlySpan<char> inputData = "Hello";
-            EncodingExtensions.Convert(encoder, inputData, writer, flush: false, out long bytesUsed, out bool completed);
+            EncodingExtensions.Convert(
+                encoder,
+                inputData,
+                writer,
+                flush: false,
+                out long bytesUsed,
+                out bool completed
+            );
             Assert.Equal(5, bytesUsed);
             Assert.True(completed);
 
             // Then, a large input with no flushing and leftover data.
 
             inputData = new string('x', 20_000_000) + '\ud800';
-            EncodingExtensions.Convert(encoder, inputData, writer, flush: false, out bytesUsed, out completed);
+            EncodingExtensions.Convert(
+                encoder,
+                inputData,
+                writer,
+                flush: false,
+                out bytesUsed,
+                out completed
+            );
             Assert.Equal(20_000_000, bytesUsed);
             Assert.True(completed);
 
             // Then, a large input with flushing and leftover data (should be replaced).
 
             inputData = '\udc00' + new string('x', 20_000_000) + '\ud800';
-            EncodingExtensions.Convert(encoder, inputData, writer, flush: true, out bytesUsed, out completed);
+            EncodingExtensions.Convert(
+                encoder,
+                inputData,
+                writer,
+                flush: true,
+                out bytesUsed,
+                out completed
+            );
             Assert.Equal(20_000_007, bytesUsed); // 4 for supplementary at beginning, 3 for replacement at end
             Assert.True(completed);
 
@@ -224,7 +385,17 @@ namespace System.Text.Tests
             // Use SequenceEqual instead of Assert.Equal for perf.
 
             Assert.True(
-                Encoding.UTF8.GetBytes("Hello" + new string('x', 20_000_000) + "\U00010000" + new string('x', 20_000_000) + '\ufffd').AsSpan().SequenceEqual(writer.WrittenSpan));
+                Encoding
+                    .UTF8.GetBytes(
+                        "Hello"
+                            + new string('x', 20_000_000)
+                            + "\U00010000"
+                            + new string('x', 20_000_000)
+                            + '\ufffd'
+                    )
+                    .AsSpan()
+                    .SequenceEqual(writer.WrittenSpan)
+            );
         }
 
         [Fact]
@@ -233,8 +404,30 @@ namespace System.Text.Tests
             Encoder encoder = Encoding.UTF8.GetEncoder();
             IBufferWriter<byte> writer = new ArrayBufferWriter<byte>();
 
-            Assert.Throws<ArgumentNullException>("encoder", () => EncodingExtensions.Convert((Encoder)null, ReadOnlySequence<char>.Empty, writer, true, out _, out _));
-            Assert.Throws<ArgumentNullException>("writer", () => EncodingExtensions.Convert(encoder, ReadOnlySequence<char>.Empty, (IBufferWriter<byte>)null, true, out _, out _));
+            Assert.Throws<ArgumentNullException>(
+                "encoder",
+                () =>
+                    EncodingExtensions.Convert(
+                        (Encoder)null,
+                        ReadOnlySequence<char>.Empty,
+                        writer,
+                        true,
+                        out _,
+                        out _
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                "writer",
+                () =>
+                    EncodingExtensions.Convert(
+                        encoder,
+                        ReadOnlySequence<char>.Empty,
+                        (IBufferWriter<byte>)null,
+                        true,
+                        out _,
+                        out _
+                    )
+            );
         }
 
         [Fact]
@@ -247,16 +440,30 @@ namespace System.Text.Tests
 
             ReadOnlySequence<char> inputData = SequenceFactory.Create(
                 new char[] { '\u0020' }, // U+0020
-                new char[] { '\ud7ff' }); // U+D7FF
-            EncodingExtensions.Convert(encoder, inputData, writer, flush: false, out long bytesUsed, out bool completed);
+                new char[] { '\ud7ff' }
+            ); // U+D7FF
+            EncodingExtensions.Convert(
+                encoder,
+                inputData,
+                writer,
+                flush: false,
+                out long bytesUsed,
+                out bool completed
+            );
             Assert.Equal(4, bytesUsed);
             Assert.True(completed);
 
             // Then, input with no flushing and leftover data.
 
-            inputData = SequenceFactory.Create(
-                new char[] { '\udbc0' }); // U+100000 (continues on next line)
-            EncodingExtensions.Convert(encoder, inputData, writer, flush: false, out bytesUsed, out completed);
+            inputData = SequenceFactory.Create(new char[] { '\udbc0' }); // U+100000 (continues on next line)
+            EncodingExtensions.Convert(
+                encoder,
+                inputData,
+                writer,
+                flush: false,
+                out bytesUsed,
+                out completed
+            );
             Assert.Equal(0, bytesUsed);
             Assert.True(completed);
 
@@ -264,8 +471,16 @@ namespace System.Text.Tests
 
             inputData = SequenceFactory.Create(
                 new char[] { '\udc00' }, // (cont.)
-                new char[] { '\ud800' }); // leftover data (should be replaced)
-            EncodingExtensions.Convert(encoder, inputData, writer, flush: true, out bytesUsed, out completed);
+                new char[] { '\ud800' }
+            ); // leftover data (should be replaced)
+            EncodingExtensions.Convert(
+                encoder,
+                inputData,
+                writer,
+                flush: true,
+                out bytesUsed,
+                out completed
+            );
             Assert.Equal(7, bytesUsed);
             Assert.True(completed);
 
@@ -282,25 +497,45 @@ namespace System.Text.Tests
 
             // First, input with no flushing and no leftover data.
 
-            ReadOnlySequence<char> inputData = SequenceFactory.Create(
-                new char[] { ' ', '\u0020', '\ud7ff' }).Slice(1);
-            EncodingExtensions.Convert(encoder, inputData, writer, flush: false, out long bytesUsed, out bool completed);
+            ReadOnlySequence<char> inputData = SequenceFactory
+                .Create(new char[] { ' ', '\u0020', '\ud7ff' })
+                .Slice(1);
+            EncodingExtensions.Convert(
+                encoder,
+                inputData,
+                writer,
+                flush: false,
+                out long bytesUsed,
+                out bool completed
+            );
             Assert.Equal(4, bytesUsed);
             Assert.True(completed);
 
             // Then, input with no flushing and leftover data.
 
-            inputData = SequenceFactory.Create(
-                new char[] { ' ', '\udbc0' }).Slice(1);
-            EncodingExtensions.Convert(encoder, inputData, writer, flush: false, out bytesUsed, out completed);
+            inputData = SequenceFactory.Create(new char[] { ' ', '\udbc0' }).Slice(1);
+            EncodingExtensions.Convert(
+                encoder,
+                inputData,
+                writer,
+                flush: false,
+                out bytesUsed,
+                out completed
+            );
             Assert.Equal(0, bytesUsed);
             Assert.True(completed);
 
             // Then, input with flushing and leftover data (should be replaced).
 
-            inputData = SequenceFactory.Create(
-                new char[] { ' ', '\udc00', '\ud800' }).Slice(1);
-            EncodingExtensions.Convert(encoder, inputData, writer, flush: true, out bytesUsed, out completed);
+            inputData = SequenceFactory.Create(new char[] { ' ', '\udc00', '\ud800' }).Slice(1);
+            EncodingExtensions.Convert(
+                encoder,
+                inputData,
+                writer,
+                flush: true,
+                out bytesUsed,
+                out completed
+            );
             Assert.Equal(7, bytesUsed);
             Assert.True(completed);
 
@@ -313,7 +548,10 @@ namespace System.Text.Tests
         public static void GetBytes_Encoding_ReadOnlySequence_ParamChecks()
         {
             ReadOnlySequence<char> sequence = new ReadOnlySequence<char>(new char[0]);
-            Assert.Throws<ArgumentNullException>("encoding", () => EncodingExtensions.GetBytes(null, sequence));
+            Assert.Throws<ArgumentNullException>(
+                "encoding",
+                () => EncodingExtensions.GetBytes(null, sequence)
+            );
         }
 
         [Fact]
@@ -322,7 +560,10 @@ namespace System.Text.Tests
             // First try the single-segment code path.
 
             ReadOnlySequence<char> sequence = new ReadOnlySequence<char>("Hello!".ToCharArray());
-            Assert.Equal("Hello!"u8.ToArray(), EncodingExtensions.GetBytes(Encoding.UTF8, sequence));
+            Assert.Equal(
+                "Hello!"u8.ToArray(),
+                EncodingExtensions.GetBytes(Encoding.UTF8, sequence)
+            );
 
             // Next try the multi-segment code path.
             // We've intentionally split multi-char subsequences here to test flushing mechanisms.
@@ -334,9 +575,13 @@ namespace System.Text.Tests
                 new char[] { }, // empty segment, just to make sure we handle it correctly
                 new char[] { '\udc00', '\udbff' }, // (cont.) + U+10FFFF (continues on next line)
                 new char[] { '\udfff' }, // (cont.)
-                new char[] { '\ud800' }); // leftover data (should be replaced)
+                new char[] { '\ud800' }
+            ); // leftover data (should be replaced)
 
-            Assert.Equal("\u0020\u0061\u0080\U00010000\U0010FFFF\ufffd"u8.ToArray(), EncodingExtensions.GetBytes(Encoding.UTF8, sequence));
+            Assert.Equal(
+                "\u0020\u0061\u0080\U00010000\U0010FFFF\ufffd"u8.ToArray(),
+                EncodingExtensions.GetBytes(Encoding.UTF8, sequence)
+            );
         }
 
         [Fact]
@@ -356,8 +601,12 @@ namespace System.Text.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/79883", TestRuntimes.Mono)]
         public static void GetBytes_Encoding_ReadOnlySequence_IBufferWriter_LargeMultiSegment()
         {
-            ReadOnlySequence<char> sequence = GetLargeRepeatingReadOnlySequence<char>(AllScalarsAsUtf16, 1500); // ~ 3.2bn chars of UTF-16 input
-            RepeatingValidatingBufferWriter<byte> writer = new RepeatingValidatingBufferWriter<byte>(AllScalarsAsUtf8);
+            ReadOnlySequence<char> sequence = GetLargeRepeatingReadOnlySequence<char>(
+                AllScalarsAsUtf16,
+                1500
+            ); // ~ 3.2bn chars of UTF-16 input
+            RepeatingValidatingBufferWriter<byte> writer =
+                new RepeatingValidatingBufferWriter<byte>(AllScalarsAsUtf8);
 
             long expectedBytesWritten = 1500 * (long)AllScalarsAsUtf8.Length;
             long actualBytesWritten = EncodingExtensions.GetBytes(Encoding.UTF8, sequence, writer);
@@ -371,15 +620,25 @@ namespace System.Text.Tests
         {
             ReadOnlySequence<char> sequence = new ReadOnlySequence<char>(new char[0]);
             IBufferWriter<byte> writer = new ArrayBufferWriter<byte>();
-            Assert.Throws<ArgumentNullException>("encoding", () => EncodingExtensions.GetBytes((Encoding)null, sequence, writer));
-            Assert.Throws<ArgumentNullException>("writer", () => EncodingExtensions.GetBytes(Encoding.UTF8, sequence, (IBufferWriter<byte>)null));
+            Assert.Throws<ArgumentNullException>(
+                "encoding",
+                () => EncodingExtensions.GetBytes((Encoding)null, sequence, writer)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "writer",
+                () =>
+                    EncodingExtensions.GetBytes(Encoding.UTF8, sequence, (IBufferWriter<byte>)null)
+            );
         }
 
         [Fact]
         public static void GetBytes_Encoding_ReadOnlySequence_Span_ParamChecks()
         {
             ReadOnlySequence<char> sequence = new ReadOnlySequence<char>(new char[0]);
-            Assert.Throws<ArgumentNullException>("encoding", () => EncodingExtensions.GetBytes((Encoding)null, sequence, Span<byte>.Empty));
+            Assert.Throws<ArgumentNullException>(
+                "encoding",
+                () => EncodingExtensions.GetBytes((Encoding)null, sequence, Span<byte>.Empty)
+            );
         }
 
         [Fact]
@@ -392,7 +651,10 @@ namespace System.Text.Tests
             ReadOnlySequence<char> sequence = new ReadOnlySequence<char>("Hello!".ToCharArray());
             Assert.Equal(
                 expected: "Hello!"u8.ToArray(),
-                actual: destination.Slice(0, EncodingExtensions.GetBytes(Encoding.UTF8, sequence, destination)).ToArray());
+                actual: destination
+                    .Slice(0, EncodingExtensions.GetBytes(Encoding.UTF8, sequence, destination))
+                    .ToArray()
+            );
 
             // Next try the multi-segment code path.
             // We've intentionally split multi-char subsequences here to test flushing mechanisms.
@@ -404,11 +666,15 @@ namespace System.Text.Tests
                 new char[] { }, // empty segment, just to make sure we handle it correctly
                 new char[] { '\udc00', '\udbff' }, // (cont.) + U+10FFFF (continues on next line)
                 new char[] { '\udfff' }, // (cont.)
-                new char[] { '\ud800' }); // leftover data (should be replaced)
+                new char[] { '\ud800' }
+            ); // leftover data (should be replaced)
 
             Assert.Equal(
                 expected: "\u0020\u0061\u0080\U00010000\U0010FFFF\ufffd"u8.ToArray(),
-                actual: destination.Slice(0, EncodingExtensions.GetBytes(Encoding.UTF8, sequence, destination)).ToArray());
+                actual: destination
+                    .Slice(0, EncodingExtensions.GetBytes(Encoding.UTF8, sequence, destination))
+                    .ToArray()
+            );
         }
 
         [Fact]
@@ -416,8 +682,19 @@ namespace System.Text.Tests
         {
             IBufferWriter<byte> writer = new ArrayBufferWriter<byte>();
 
-            Assert.Throws<ArgumentNullException>("encoding", () => EncodingExtensions.GetBytes((Encoding)null, ReadOnlySpan<char>.Empty, writer));
-            Assert.Throws<ArgumentNullException>("writer", () => EncodingExtensions.GetBytes(Encoding.UTF8, ReadOnlySpan<char>.Empty, (IBufferWriter<byte>)null));
+            Assert.Throws<ArgumentNullException>(
+                "encoding",
+                () => EncodingExtensions.GetBytes((Encoding)null, ReadOnlySpan<char>.Empty, writer)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "writer",
+                () =>
+                    EncodingExtensions.GetBytes(
+                        Encoding.UTF8,
+                        ReadOnlySpan<char>.Empty,
+                        (IBufferWriter<byte>)null
+                    )
+            );
         }
 
         [Fact]
@@ -437,23 +714,27 @@ namespace System.Text.Tests
             // several locations by the internal GetChars chunking logic. This helps us test
             // that we're flowing the 'flush' parameter through the system correctly.
 
-            string largeString = string.Create(5_000_000, (object)null, (span, _) =>
-            {
-                while (span.Length >= 3)
+            string largeString = string.Create(
+                5_000_000,
+                (object)null,
+                (span, _) =>
                 {
-                    span[0] = '\u00EA'; // U+00EA LATIN SMALL LETTER E WITH CIRCUMFLEX
-                    span[1] = '\uD83D'; // U+1F405 TIGER
-                    span[2] = '\uDC05';
+                    while (span.Length >= 3)
+                    {
+                        span[0] = '\u00EA'; // U+00EA LATIN SMALL LETTER E WITH CIRCUMFLEX
+                        span[1] = '\uD83D'; // U+1F405 TIGER
+                        span[2] = '\uDC05';
 
-                    span = span.Slice(3);
+                        span = span.Slice(3);
+                    }
+
+                    // There are 2 bytes left over.
+
+                    Assert.Equal(2, span.Length);
+                    span[0] = 'x';
+                    span[1] = 'y';
                 }
-
-                // There are 2 bytes left over.
-
-                Assert.Equal(2, span.Length);
-                span[0] = 'x';
-                span[1] = 'y';
-            });
+            );
 
             writer = new ArrayBufferWriter<byte>();
             inputData = largeString + '\uD800'; // standalone lead surrogate at end of input, testing replacement
@@ -462,7 +743,12 @@ namespace System.Text.Tests
 
             // Now make sure all of the data was encoded properly.
 
-            Assert.True(Encoding.UTF8.GetBytes(largeString + "\ufffd").AsSpan().SequenceEqual(writer.WrittenSpan));
+            Assert.True(
+                Encoding
+                    .UTF8.GetBytes(largeString + "\ufffd")
+                    .AsSpan()
+                    .SequenceEqual(writer.WrittenSpan)
+            );
         }
 
         [Fact]
@@ -483,16 +769,23 @@ namespace System.Text.Tests
                 new byte[] { }, // empty segment, just to make sure we handle it correctly
                 new byte[] { 0x9F, 0xBF, 0xF4, 0x80 }, // (cont.) + U+100000 (continues on next line)
                 new byte[] { 0x80, 0x80 }, // (cont.)
-                new byte[] { 0xC2 }); // leftover data (should be replaced)
+                new byte[] { 0xC2 }
+            ); // leftover data (should be replaced)
 
-            Assert.Equal("\u0020\u0061\u0080\ud7ff\U00100000\ufffd", EncodingExtensions.GetString(Encoding.UTF8, sequence));
+            Assert.Equal(
+                "\u0020\u0061\u0080\ud7ff\U00100000\ufffd",
+                EncodingExtensions.GetString(Encoding.UTF8, sequence)
+            );
         }
 
         [Fact]
         public static void GetString_Encoding_ReadOnlySequence_ParamChecks()
         {
             ReadOnlySequence<byte> sequence = new ReadOnlySequence<byte>(new byte[0]);
-            Assert.Throws<ArgumentNullException>("encoding", () => EncodingExtensions.GetString(null, sequence));
+            Assert.Throws<ArgumentNullException>(
+                "encoding",
+                () => EncodingExtensions.GetString(null, sequence)
+            );
         }
 
         [Fact]
@@ -511,8 +804,12 @@ namespace System.Text.Tests
         [OuterLoop] // this test takes ~10 seconds on modern hardware since it operates over GBs of data
         public static void GetChars_Encoding_ReadOnlySequence_IBufferWriter_LargeMultiSegment()
         {
-            ReadOnlySequence<byte> sequence = GetLargeRepeatingReadOnlySequence<byte>(AllScalarsAsUtf8, 1500); // ~ 6.5bn bytes of UTF-8 input
-            RepeatingValidatingBufferWriter<char> writer = new RepeatingValidatingBufferWriter<char>(AllScalarsAsUtf16);
+            ReadOnlySequence<byte> sequence = GetLargeRepeatingReadOnlySequence<byte>(
+                AllScalarsAsUtf8,
+                1500
+            ); // ~ 6.5bn bytes of UTF-8 input
+            RepeatingValidatingBufferWriter<char> writer =
+                new RepeatingValidatingBufferWriter<char>(AllScalarsAsUtf16);
 
             long expectedCharsWritten = 1500 * (long)AllScalarsAsUtf16.Length;
             long actualCharsWritten = EncodingExtensions.GetChars(Encoding.UTF8, sequence, writer);
@@ -526,8 +823,15 @@ namespace System.Text.Tests
         {
             ReadOnlySequence<byte> sequence = new ReadOnlySequence<byte>(new byte[0]);
             IBufferWriter<char> writer = new ArrayBufferWriter<char>();
-            Assert.Throws<ArgumentNullException>("encoding", () => EncodingExtensions.GetChars((Encoding)null, sequence, writer));
-            Assert.Throws<ArgumentNullException>("writer", () => EncodingExtensions.GetChars(Encoding.UTF8, sequence, (IBufferWriter<char>)null));
+            Assert.Throws<ArgumentNullException>(
+                "encoding",
+                () => EncodingExtensions.GetChars((Encoding)null, sequence, writer)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "writer",
+                () =>
+                    EncodingExtensions.GetChars(Encoding.UTF8, sequence, (IBufferWriter<char>)null)
+            );
         }
 
         [Fact]
@@ -538,7 +842,12 @@ namespace System.Text.Tests
             // First try the single-segment code path.
 
             ReadOnlySequence<byte> sequence = new ReadOnlySequence<byte>("Hello!"u8.ToArray());
-            Assert.Equal("Hello!", destination.Slice(0, EncodingExtensions.GetChars(Encoding.UTF8, sequence, destination)).ToString());
+            Assert.Equal(
+                "Hello!",
+                destination
+                    .Slice(0, EncodingExtensions.GetChars(Encoding.UTF8, sequence, destination))
+                    .ToString()
+            );
 
             // Next try the multi-segment code path.
             // We've intentionally split multi-byte subsequences here to test flushing mechanisms.
@@ -550,16 +859,25 @@ namespace System.Text.Tests
                 new byte[] { }, // empty segment, just to make sure we handle it correctly
                 new byte[] { 0x9F, 0xBF, 0xF4, 0x80 }, // (cont.) + U+100000 (continues on next line)
                 new byte[] { 0x80, 0x80 }, // (cont.)
-                new byte[] { 0xC2 }); // leftover data (should be replaced)
+                new byte[] { 0xC2 }
+            ); // leftover data (should be replaced)
 
-            Assert.Equal("\u0020\u0061\u0080\ud7ff\U00100000\ufffd", destination.Slice(0, EncodingExtensions.GetChars(Encoding.UTF8, sequence, destination)).ToString());
+            Assert.Equal(
+                "\u0020\u0061\u0080\ud7ff\U00100000\ufffd",
+                destination
+                    .Slice(0, EncodingExtensions.GetChars(Encoding.UTF8, sequence, destination))
+                    .ToString()
+            );
         }
 
         [Fact]
         public static void GetChars_Encoding_ReadOnlySequence_Span_ParamChecks()
         {
             ReadOnlySequence<byte> sequence = new ReadOnlySequence<byte>(new byte[0]);
-            Assert.Throws<ArgumentNullException>("encoding", () => EncodingExtensions.GetChars((Encoding)null, sequence, Span<char>.Empty));
+            Assert.Throws<ArgumentNullException>(
+                "encoding",
+                () => EncodingExtensions.GetChars((Encoding)null, sequence, Span<char>.Empty)
+            );
         }
 
         [Fact]
@@ -567,8 +885,19 @@ namespace System.Text.Tests
         {
             IBufferWriter<char> writer = new ArrayBufferWriter<char>();
 
-            Assert.Throws<ArgumentNullException>("encoding", () => EncodingExtensions.GetChars((Encoding)null, ReadOnlySpan<byte>.Empty, writer));
-            Assert.Throws<ArgumentNullException>("writer", () => EncodingExtensions.GetChars(Encoding.UTF8, ReadOnlySpan<byte>.Empty, (IBufferWriter<char>)null));
+            Assert.Throws<ArgumentNullException>(
+                "encoding",
+                () => EncodingExtensions.GetChars((Encoding)null, ReadOnlySpan<byte>.Empty, writer)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "writer",
+                () =>
+                    EncodingExtensions.GetChars(
+                        Encoding.UTF8,
+                        ReadOnlySpan<byte>.Empty,
+                        (IBufferWriter<char>)null
+                    )
+            );
         }
 
         [Fact]
@@ -589,7 +918,10 @@ namespace System.Text.Tests
             // that we're flowing the 'flush' parameter through the system correctly.
 
             writer = new ArrayBufferWriter<char>();
-            inputData = Encoding.UTF8.GetBytes(new string('\u1234', 5_000_000)).Concat(new byte[] { 0xE0 }).ToArray();
+            inputData = Encoding
+                .UTF8.GetBytes(new string('\u1234', 5_000_000))
+                .Concat(new byte[] { 0xE0 })
+                .ToArray();
             charsWritten = EncodingExtensions.GetChars(Encoding.UTF8, inputData, writer);
             Assert.Equal(5_000_001, charsWritten); // 5 MM for data, 1 for replacement char at end
 
@@ -597,7 +929,8 @@ namespace System.Text.Tests
 
             Assert.Equal(
                 expected: new string('\u1234', 5_000_000) + '\ufffd',
-                actual: writer.WrittenSpan.ToString());
+                actual: writer.WrittenSpan.ToString()
+            );
         }
 
         /// <summary>
@@ -605,7 +938,10 @@ namespace System.Text.Tests
         /// This can be used to produce a sequence consisting of billions of elements while consuming a fraction of that memory.
         /// </summary>
         /// <returns></returns>
-        private static ReadOnlySequence<T> GetLargeRepeatingReadOnlySequence<T>(ReadOnlyMemory<T> dataToRepeat, int repetitionCount)
+        private static ReadOnlySequence<T> GetLargeRepeatingReadOnlySequence<T>(
+            ReadOnlyMemory<T> dataToRepeat,
+            int repetitionCount
+        )
         {
             const int MAX_SEGMENT_LENGTH = 300_007; // a prime number, which ensures we'll have some multi-byte / multi-char splits if the data is long
 
@@ -624,7 +960,7 @@ namespace System.Text.Tests
                     lastSegment = new MockSequenceSegment<T>
                     {
                         Memory = remainingData.Slice(0, thisSegmentLength),
-                        RunningIndex = runningTotalLength
+                        RunningIndex = runningTotalLength,
                     };
 
                     if (previousSegment != null)
@@ -649,7 +985,8 @@ namespace System.Text.Tests
         /// <summary>
         /// An <see cref="IBufferWriter{T}"/> that validates that the data written to it consists of 'knownGoodData' repeated indefinitely.
         /// </summary>
-        private class RepeatingValidatingBufferWriter<T> : IBufferWriter<T> where T : unmanaged, IEquatable<T>
+        private class RepeatingValidatingBufferWriter<T> : IBufferWriter<T>
+            where T : unmanaged, IEquatable<T>
         {
             private T[] _buffer;
             private readonly ReadOnlyMemory<T> _knownGoodData;
@@ -665,12 +1002,18 @@ namespace System.Text.Tests
             public void Advance(int count)
             {
                 ReadOnlySpan<T> bufferSpan = _buffer.AsSpan(0, count);
-                ReadOnlySpan<T> remainingGoodDataSpan = _knownGoodData.Span.Slice((int)(TotalElementsWritten % _knownGoodData.Length));
+                ReadOnlySpan<T> remainingGoodDataSpan = _knownGoodData.Span.Slice(
+                    (int)(TotalElementsWritten % _knownGoodData.Length)
+                );
 
                 while (!bufferSpan.IsEmpty)
                 {
                     int compareLength = Math.Min(bufferSpan.Length, remainingGoodDataSpan.Length);
-                    Assert.True(remainingGoodDataSpan.Slice(0, compareLength).SequenceEqual(bufferSpan.Slice(0, compareLength)));
+                    Assert.True(
+                        remainingGoodDataSpan
+                            .Slice(0, compareLength)
+                            .SequenceEqual(bufferSpan.Slice(0, compareLength))
+                    );
 
                     remainingGoodDataSpan = remainingGoodDataSpan.Slice(compareLength);
                     if (remainingGoodDataSpan.IsEmpty)

@@ -54,8 +54,12 @@ namespace System.Reflection
 
         #region Constructor
         internal RuntimeConstructorInfo(
-            RuntimeMethodHandleInternal handle, RuntimeType declaringType, RuntimeTypeCache reflectedTypeCache,
-            MethodAttributes methodAttributes, BindingFlags bindingFlags)
+            RuntimeMethodHandleInternal handle,
+            RuntimeType declaringType,
+            RuntimeTypeCache reflectedTypeCache,
+            MethodAttributes methodAttributes,
+            BindingFlags bindingFlags
+        )
         {
             m_bindingFlags = bindingFlags;
             m_reflectedTypeCache = reflectedTypeCache;
@@ -66,11 +70,13 @@ namespace System.Reflection
         #endregion
 
         #region NonPublic Methods
-        RuntimeMethodHandleInternal IRuntimeMethodInfo.Value => new RuntimeMethodHandleInternal(m_handle);
+        RuntimeMethodHandleInternal IRuntimeMethodInfo.Value =>
+            new RuntimeMethodHandleInternal(m_handle);
 
         internal override bool CacheEquals(object? o) =>
-            o is RuntimeConstructorInfo m && m.m_handle == m_handle &&
-            ReferenceEquals(m_declaringType, m.m_declaringType);
+            o is RuntimeConstructorInfo m
+            && m.m_handle == m_handle
+            && ReferenceEquals(m_declaringType, m.m_declaringType);
 
         internal Signature Signature
         {
@@ -118,11 +124,13 @@ namespace System.Reflection
         }
 
         public override bool Equals(object? obj) =>
-            ReferenceEquals(this, obj) ||
-            (MetadataUpdater.IsSupported && CacheEquals(obj));
+            ReferenceEquals(this, obj) || (MetadataUpdater.IsSupported && CacheEquals(obj));
 
         public override int GetHashCode() =>
-            HashCode.Combine(m_handle.GetHashCode(), m_declaringType.GetUnderlyingNativeHandle().GetHashCode());
+            HashCode.Combine(
+                m_handle.GetHashCode(),
+                m_declaringType.GetUnderlyingNativeHandle().GetHashCode()
+            );
         #endregion
 
         #region ICustomAttributeProvider
@@ -161,30 +169,46 @@ namespace System.Reflection
         public override string Name => RuntimeMethodHandle.GetName(this);
         public override MemberTypes MemberType => MemberTypes.Constructor;
 
-        public override Type? DeclaringType => m_reflectedTypeCache.IsGlobal ? null : m_declaringType;
+        public override Type? DeclaringType =>
+            m_reflectedTypeCache.IsGlobal ? null : m_declaringType;
 
-        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimeConstructorInfo>(other);
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            HasSameMetadataDefinitionAsCore<RuntimeConstructorInfo>(other);
 
-        public override Type? ReflectedType => m_reflectedTypeCache.IsGlobal ? null : ReflectedTypeInternal;
+        public override Type? ReflectedType =>
+            m_reflectedTypeCache.IsGlobal ? null : ReflectedTypeInternal;
 
         public override int MetadataToken => RuntimeMethodHandle.GetMethodDef(this);
         public override Module Module => GetRuntimeModule();
 
-        internal RuntimeType GetRuntimeType() { return m_declaringType; }
-        internal RuntimeModule GetRuntimeModule() { return RuntimeTypeHandle.GetModule(m_declaringType); }
-        internal RuntimeAssembly GetRuntimeAssembly() { return GetRuntimeModule().GetRuntimeAssembly(); }
+        internal RuntimeType GetRuntimeType()
+        {
+            return m_declaringType;
+        }
+
+        internal RuntimeModule GetRuntimeModule()
+        {
+            return RuntimeTypeHandle.GetModule(m_declaringType);
+        }
+
+        internal RuntimeAssembly GetRuntimeAssembly()
+        {
+            return GetRuntimeModule().GetRuntimeAssembly();
+        }
         #endregion
 
         #region MethodBase Overrides
 
         // This seems to always returns System.Void.
-        internal override Type GetReturnType() { return Signature.ReturnType; }
+        internal override Type GetReturnType()
+        {
+            return Signature.ReturnType;
+        }
 
         internal override ReadOnlySpan<ParameterInfo> GetParametersAsSpan() =>
             m_parameters ??= RuntimeParameterInfo.GetParameters(this, this, Signature);
 
-        public override ParameterInfo[] GetParameters() =>
-            GetParametersAsSpan().ToArray();
+        public override ParameterInfo[] GetParameters() => GetParametersAsSpan().ToArray();
 
         public override MethodImplAttributes GetMethodImplementationFlags()
         {
@@ -199,8 +223,11 @@ namespace System.Reflection
 
         internal RuntimeType[] ArgumentTypes => Signature.Arguments;
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2059:RunClassConstructor",
-            Justification = "This ConstructorInfo instance represents the static constructor itself, so if this object was created, the static constructor exists.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2059:RunClassConstructor",
+            Justification = "This ConstructorInfo instance represents the static constructor itself, so if this object was created, the static constructor exists."
+        )]
         private void InvokeClassConstructor()
         {
             Debug.Assert((InvocationFlags & InvocationFlags.RunClassConstructor) != 0);
@@ -216,7 +243,9 @@ namespace System.Reflection
             }
         }
 
-        [RequiresUnreferencedCode("Trimming may change method bodies. For example it can change some instructions, remove branches or local variables.")]
+        [RequiresUnreferencedCode(
+            "Trimming may change method bodies. For example it can change some instructions, remove branches or local variables."
+        )]
         public override MethodBody? GetMethodBody()
         {
             RuntimeMethodBody? mb = RuntimeMethodHandle.GetMethodBody(this, ReflectedTypeInternal);
@@ -231,7 +260,8 @@ namespace System.Reflection
 
         public override bool IsSecurityTransparent => false;
 
-        public override bool ContainsGenericParameters => DeclaringType != null && DeclaringType.ContainsGenericParameters;
+        public override bool ContainsGenericParameters =>
+            DeclaringType != null && DeclaringType.ContainsGenericParameters;
         #endregion
     }
 }

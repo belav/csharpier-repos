@@ -35,21 +35,34 @@ namespace System.Collections.Generic
             // If T implements IComparable<T> return a GenericComparer<T>
             if (typeof(IComparable<>).MakeGenericType(type).IsAssignableFrom(type))
             {
-                result = CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(GenericComparer<int>), runtimeType);
+                result = CreateInstanceForAnotherGenericParameter(
+                    (RuntimeType)typeof(GenericComparer<int>),
+                    runtimeType
+                );
             }
             else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
                 // Nullable does not implement IComparable<T?> directly because that would add an extra interface call per comparison.
                 var embeddedType = (RuntimeType)type.GetGenericArguments()[0];
-                result = CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(NullableComparer<int>), embeddedType);
+                result = CreateInstanceForAnotherGenericParameter(
+                    (RuntimeType)typeof(NullableComparer<int>),
+                    embeddedType
+                );
             }
             // The comparer for enums is specialized to avoid boxing.
             else if (type.IsEnum)
             {
-                result = CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(EnumComparer<>), runtimeType);
+                result = CreateInstanceForAnotherGenericParameter(
+                    (RuntimeType)typeof(EnumComparer<>),
+                    runtimeType
+                );
             }
 
-            return result ?? CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(ObjectComparer<object>), runtimeType);
+            return result
+                ?? CreateInstanceForAnotherGenericParameter(
+                    (RuntimeType)typeof(ObjectComparer<object>),
+                    runtimeType
+                );
         }
 
         /// <summary>
@@ -73,21 +86,34 @@ namespace System.Collections.Generic
             else if (type.IsAssignableTo(typeof(IEquatable<>).MakeGenericType(type)))
             {
                 // If T implements IEquatable<T> return a GenericEqualityComparer<T>
-                result = CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(GenericEqualityComparer<string>), runtimeType);
+                result = CreateInstanceForAnotherGenericParameter(
+                    (RuntimeType)typeof(GenericEqualityComparer<string>),
+                    runtimeType
+                );
             }
             else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
                 // Nullable does not implement IEquatable<T?> directly because that would add an extra interface call per comparison.
                 var embeddedType = (RuntimeType)type.GetGenericArguments()[0];
-                result = CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(NullableEqualityComparer<int>), embeddedType);
+                result = CreateInstanceForAnotherGenericParameter(
+                    (RuntimeType)typeof(NullableEqualityComparer<int>),
+                    embeddedType
+                );
             }
             else if (type.IsEnum)
             {
                 // The equality comparer for enums is specialized to avoid boxing.
-                result = CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(EnumEqualityComparer<>), runtimeType);
+                result = CreateInstanceForAnotherGenericParameter(
+                    (RuntimeType)typeof(EnumEqualityComparer<>),
+                    runtimeType
+                );
             }
 
-            return result ?? CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(ObjectEqualityComparer<object>), runtimeType);
+            return result
+                ?? CreateInstanceForAnotherGenericParameter(
+                    (RuntimeType)typeof(ObjectEqualityComparer<object>),
+                    runtimeType
+                );
         }
     }
 }

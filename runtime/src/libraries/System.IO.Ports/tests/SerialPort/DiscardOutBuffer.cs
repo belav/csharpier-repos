@@ -12,7 +12,10 @@ namespace System.IO.Ports.Tests
     public class DiscardOutBuffer : PortsTest
     {
         //The string used with Write(str) to fill the input buffer
-        private static readonly string s_DEFAULT_STRING = new string('H', TCSupport.MinimumBlockingByteCount);
+        private static readonly string s_DEFAULT_STRING = new string(
+            'H',
+            TCSupport.MinimumBlockingByteCount
+        );
 
         //The buffer length used whe filling the output buffer
         // This was set to 8, but the TX Fifo on a UART can swallow that completely, so you can't then tell if the data has been sent or not.
@@ -23,7 +26,11 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort), nameof(HasHardwareFlowControl))]
         public void OutBufferFilled_Discard_Once()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 Debug.WriteLine("Verifying Discard method after write buffer has been filled");
                 com1.Open();
@@ -45,9 +52,15 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort), nameof(HasHardwareFlowControl))]
         public void OutBufferFilled_Discard_Multiple()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
-                Debug.WriteLine("Verifying call Discard method several times after output buffer has been filled");
+                Debug.WriteLine(
+                    "Verifying call Discard method several times after output buffer has been filled"
+                );
 
                 com1.Open();
                 com1.WriteTimeout = 500;
@@ -70,10 +83,15 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort), nameof(HasHardwareFlowControl))]
         public void OutBufferFilled_Discard_Cycle()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 Debug.WriteLine(
-                    "Verifying call Discard method after input buffer has been filled discarded and filled again");
+                    "Verifying call Discard method after input buffer has been filled discarded and filled again"
+                );
 
                 com1.Open();
                 com1.WriteTimeout = 500;
@@ -104,8 +122,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem), nameof(HasHardwareFlowControl))]
         public void InAndOutBufferFilled_Discard()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 Debug.WriteLine("Verifying Discard method after input buffer has been filled");
 
@@ -157,7 +183,5 @@ namespace System.IO.Ports.Tests
             Assert.Equal(0, com.BytesToWrite);
         }
         #endregion
-
-
     }
 }

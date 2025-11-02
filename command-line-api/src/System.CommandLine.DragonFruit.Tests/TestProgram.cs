@@ -7,13 +7,17 @@ namespace System.CommandLine.DragonFruit.Tests
 {
     public class TestProgram
     {
-        public static readonly MethodInfo TestMainMethodInfoWithoutPara = typeof(TestProgram).GetMethod(nameof(TestMainWithoutPara));
-        
-        public static readonly MethodInfo TestMainMethodInfoWithPara = typeof(TestProgram).GetMethod(nameof(TestMainWithPara));
+        public static readonly MethodInfo TestMainMethodInfoWithoutPara =
+            typeof(TestProgram).GetMethod(nameof(TestMainWithoutPara));
 
-        public static readonly MethodInfo TestMainMethodInfoWithTextAndPara = typeof(TestProgram).GetMethod(nameof(TestMainWithTextAndPara));
+        public static readonly MethodInfo TestMainMethodInfoWithPara =
+            typeof(TestProgram).GetMethod(nameof(TestMainWithPara));
 
-        public static readonly MethodInfo TestMainMethodInfoWithDefault = typeof(TestProgram).GetMethod(nameof(TestMainWithDefault));
+        public static readonly MethodInfo TestMainMethodInfoWithTextAndPara =
+            typeof(TestProgram).GetMethod(nameof(TestMainWithTextAndPara));
+
+        public static readonly MethodInfo TestMainMethodInfoWithDefault =
+            typeof(TestProgram).GetMethod(nameof(TestMainWithDefault));
 
         /// <summary>
         /// <para>Help for the test program</para>
@@ -27,7 +31,7 @@ namespace System.CommandLine.DragonFruit.Tests
             parseResult.Configuration.Output.Write(name);
             if (args != null && args.Length > 0)
             {
-                parseResult.Configuration.Output.Write($"args: { string.Join(",", args) }");
+                parseResult.Configuration.Output.Write($"args: {string.Join(",", args)}");
             }
         }
 
@@ -41,12 +45,16 @@ namespace System.CommandLine.DragonFruit.Tests
         /// <param name="name">Specifies the name option</param>
         /// <param name="parseResult"></param>
         /// <param name="args">These are arguments</param>
-        public void TestMainWithTextAndPara(string name, ParseResult parseResult, string[] args = null)
+        public void TestMainWithTextAndPara(
+            string name,
+            ParseResult parseResult,
+            string[] args = null
+        )
         {
             parseResult.Configuration.Output.Write(name);
             if (args != null && args.Length > 0)
             {
-                parseResult.Configuration.Output.Write($"args: { string.Join(",", args) }");
+                parseResult.Configuration.Output.Write($"args: {string.Join(",", args)}");
             }
         }
 

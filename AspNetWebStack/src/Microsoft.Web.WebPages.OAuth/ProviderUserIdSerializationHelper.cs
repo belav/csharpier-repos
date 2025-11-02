@@ -13,7 +13,11 @@ namespace Microsoft.Web.WebPages.OAuth
         // Custom message purpose to prevent this data from being readable by a different subsystem.
         private static byte[] _padding = new byte[] { 0x85, 0xC5, 0x65, 0x72 };
 
-        [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times", Justification = "The instances are disposed correctly.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2202:Do not dispose objects multiple times",
+            Justification = "The instances are disposed correctly."
+        )]
         public static string ProtectData(string providerName, string providerUserId)
         {
             using (MemoryStream ms = new MemoryStream())
@@ -24,16 +28,34 @@ namespace Microsoft.Web.WebPages.OAuth
                 bw.Flush();
                 byte[] serializedWithPadding = new byte[ms.Length + _padding.Length];
                 Buffer.BlockCopy(_padding, 0, serializedWithPadding, 0, _padding.Length);
-                Buffer.BlockCopy(ms.GetBuffer(), 0, serializedWithPadding, _padding.Length, (int)ms.Length);
+                Buffer.BlockCopy(
+                    ms.GetBuffer(),
+                    0,
+                    serializedWithPadding,
+                    _padding.Length,
+                    (int)ms.Length
+                );
 #pragma warning disable 0618 // Encode is [Obsolete] in 4.5
                 return MachineKey.Encode(serializedWithPadding, MachineKeyProtection.All);
 #pragma warning restore 0618
             }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times", Justification = "The instances are disposed correctly.")]
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "All exception are being caught on purpose.")]
-        public static bool UnprotectData(string protectedData, out string providerName, out string providerUserId)
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2202:Do not dispose objects multiple times",
+            Justification = "The instances are disposed correctly."
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "All exception are being caught on purpose."
+        )]
+        public static bool UnprotectData(
+            string protectedData,
+            out string providerName,
+            out string providerUserId
+        )
         {
             providerName = null;
             providerUserId = null;
@@ -58,7 +80,13 @@ namespace Microsoft.Web.WebPages.OAuth
                 }
             }
 
-            using (MemoryStream ms = new MemoryStream(decodedWithPadding, _padding.Length, decodedWithPadding.Length - _padding.Length))
+            using (
+                MemoryStream ms = new MemoryStream(
+                    decodedWithPadding,
+                    _padding.Length,
+                    decodedWithPadding.Length - _padding.Length
+                )
+            )
             using (BinaryReader br = new BinaryReader(ms))
             {
                 try

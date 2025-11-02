@@ -28,11 +28,11 @@ namespace Xunit
 
         // GCStress3 forces a GC at various locations, typically transitions
         // to/from the VM from managed code.
-        GCStress3 = 1 << 6,  // DOTNET_GCStress includes mode 0x3.
+        GCStress3 = 1 << 6, // DOTNET_GCStress includes mode 0x3.
 
         // GCStressC forces a GC at every JIT-generated code instruction,
         // including in NGEN/ReadyToRun code.
         GCStressC = 1 << 7, // DOTNET_GCStress includes mode 0xC.
-        AnyGCStress = GCStress3 | GCStressC // Disable when any GCStress is exercised.
+        AnyGCStress = GCStress3 | GCStressC, // Disable when any GCStress is exercised.
     }
 }

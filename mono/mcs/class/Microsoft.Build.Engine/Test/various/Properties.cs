@@ -29,27 +29,28 @@
 using System;
 using System.Xml;
 using Microsoft.Build.BuildEngine;
+using MonoTests.Helpers;
 using NUnit.Framework;
 
-using MonoTests.Helpers;
+namespace MonoTests.Microsoft.Build.BuildEngine.Various
+{
+    [TestFixture]
+    public class Properties
+    {
+        Project proj;
 
-namespace MonoTests.Microsoft.Build.BuildEngine.Various {
-	[TestFixture]
-	public class Properties {
+        [SetUp]
+        public void Setup()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            proj = engine.CreateNewProject();
+        }
 
-		Project proj;
-
-		[SetUp]
-		public void Setup ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			proj = engine.CreateNewProject ();
-		}
-
-		[Test]
-		public void PropertyReference ()
-		{
-			string documentString = @"
+        [Test]
+        public void PropertyReference()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<Config>debug</Config>
@@ -60,21 +61,24 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
-			Assert.AreEqual (1, proj.PropertyGroups.Count, "A1");
-			Assert.AreEqual ("debug", proj.GetEvaluatedProperty ("Config"), "A2");
-			Assert.AreEqual ("debug-debug", proj.GetEvaluatedProperty ("ExpProp"), "A3");
-			Assert.AreEqual (" debug debug ", proj.GetEvaluatedProperty ("ExpProp2"), "A4");	
-			Assert.AreEqual ("$(Config-$(Config)", proj.GetEvaluatedProperty ("InvProp1"), "A5");
-		}
+            proj.LoadXml(documentString);
+            Assert.AreEqual(1, proj.PropertyGroups.Count, "A1");
+            Assert.AreEqual("debug", proj.GetEvaluatedProperty("Config"), "A2");
+            Assert.AreEqual("debug-debug", proj.GetEvaluatedProperty("ExpProp"), "A3");
+            Assert.AreEqual(" debug debug ", proj.GetEvaluatedProperty("ExpProp2"), "A4");
+            Assert.AreEqual("$(Config-$(Config)", proj.GetEvaluatedProperty("InvProp1"), "A5");
+        }
 
-		[Test]
-		[Category ("NotDotNet")]
-		public void PropertyReference2 ()
-		{
-			string documentString = @"
+        [Test]
+        [Category("NotDotNet")]
+        public void PropertyReference2()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-					<UsingTask TaskName='StringTestTask' AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"' />
+					<UsingTask TaskName='StringTestTask' AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"' />
 					<PropertyGroup>
 						<A>A</A>
 						<B>B</B>
@@ -88,16 +92,17 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
-			proj.Build ("Main");
-			Assert.AreEqual (1, proj.GetEvaluatedItemsByName ("Out").Count, "A1");
-			Assert.AreEqual ("AB", proj.GetEvaluatedItemsByName ("Out") [0].Include, "A2");
-		}
+            proj.LoadXml(documentString);
+            proj.Build("Main");
+            Assert.AreEqual(1, proj.GetEvaluatedItemsByName("Out").Count, "A1");
+            Assert.AreEqual("AB", proj.GetEvaluatedItemsByName("Out")[0].Include, "A2");
+        }
 
-		[Test]
-		public void StringInstanceProperties ()
-		{
-			string documentString = @"
+        [Test]
+        public void StringInstanceProperties()
+        {
+            string documentString =
+                @"
 					<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 						<PropertyGroup>
 							<Config>debug</Config>
@@ -118,23 +123,24 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 					</Project>
 				";
 
-			proj.LoadXml (documentString);
-			Assert.AreEqual ("deb ", proj.GetEvaluatedProperty ("Prop1"), "#1");
-			Assert.AreEqual ("5", proj.GetEvaluatedProperty ("Prop2"), "#2");
-			Assert.AreEqual ("True", proj.GetEvaluatedProperty ("Prop3"), "#3");
-			Assert.AreEqual ("False", proj.GetEvaluatedProperty ("Prop4"), "#4");
-			Assert.AreEqual ("", proj.GetEvaluatedProperty ("Prop5"), "#5");
-			Assert.AreEqual ("abc'def", proj.GetEvaluatedProperty ("Prop6"), "#6");
-			Assert.AreEqual ("abcdef", proj.GetEvaluatedProperty ("Prop7"), "#7");
-			Assert.AreEqual ("abcdef", proj.GetEvaluatedProperty ("Prop8"), "#8");
-			Assert.AreEqual ("ab2\"'3ef", proj.GetEvaluatedProperty ("Prop9"), "#9");
-		}
+            proj.LoadXml(documentString);
+            Assert.AreEqual("deb ", proj.GetEvaluatedProperty("Prop1"), "#1");
+            Assert.AreEqual("5", proj.GetEvaluatedProperty("Prop2"), "#2");
+            Assert.AreEqual("True", proj.GetEvaluatedProperty("Prop3"), "#3");
+            Assert.AreEqual("False", proj.GetEvaluatedProperty("Prop4"), "#4");
+            Assert.AreEqual("", proj.GetEvaluatedProperty("Prop5"), "#5");
+            Assert.AreEqual("abc'def", proj.GetEvaluatedProperty("Prop6"), "#6");
+            Assert.AreEqual("abcdef", proj.GetEvaluatedProperty("Prop7"), "#7");
+            Assert.AreEqual("abcdef", proj.GetEvaluatedProperty("Prop8"), "#8");
+            Assert.AreEqual("ab2\"'3ef", proj.GetEvaluatedProperty("Prop9"), "#9");
+        }
 
-		[Test]
-		[SetCulture ("en-us")]
-		public void AllowedFrameworkMembers ()
-		{
-			string documentString = @"
+        [Test]
+        [SetCulture("en-us")]
+        public void AllowedFrameworkMembers()
+        {
+            string documentString =
+                @"
 					<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 						<PropertyGroup>
 							<Prop1>$([System.Byte]::MaxValue)</Prop1>
@@ -148,20 +154,25 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 					</Project>
 				";
 
-			proj.LoadXml (documentString);
-			Assert.AreEqual ("255", proj.GetEvaluatedProperty ("Prop1"), "#1");
-			Assert.AreEqual ("4.2", proj.GetEvaluatedProperty ("Prop2"), "#2");
-			Assert.AreEqual (DateTime.Today.ToString (), proj.GetEvaluatedProperty ("Prop3"), "#3");
-			Assert.AreEqual ("3", proj.GetEvaluatedProperty ("Prop4"), "#4");
-			Assert.AreEqual ("0", proj.GetEvaluatedProperty ("Prop5"), "#5");
-			Assert.AreEqual (string.Join (";", Environment.GetLogicalDrives ()), proj.GetEvaluatedProperty ("Prop6"), "#6");
-			Assert.AreEqual (",n,", proj.GetEvaluatedProperty ("Prop7"), "#7");
-		}
+            proj.LoadXml(documentString);
+            Assert.AreEqual("255", proj.GetEvaluatedProperty("Prop1"), "#1");
+            Assert.AreEqual("4.2", proj.GetEvaluatedProperty("Prop2"), "#2");
+            Assert.AreEqual(DateTime.Today.ToString(), proj.GetEvaluatedProperty("Prop3"), "#3");
+            Assert.AreEqual("3", proj.GetEvaluatedProperty("Prop4"), "#4");
+            Assert.AreEqual("0", proj.GetEvaluatedProperty("Prop5"), "#5");
+            Assert.AreEqual(
+                string.Join(";", Environment.GetLogicalDrives()),
+                proj.GetEvaluatedProperty("Prop6"),
+                "#6"
+            );
+            Assert.AreEqual(",n,", proj.GetEvaluatedProperty("Prop7"), "#7");
+        }
 
-		[Test]
-		public void InstanceMethodOnStaticProperty ()
-		{
-			string documentString = @"
+        [Test]
+        public void InstanceMethodOnStaticProperty()
+        {
+            string documentString =
+                @"
 					<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 						<PropertyGroup>
 							<Prop1>$([System.DateTime]::Now.ToString(""yyyy.MM.dd""))</Prop1>
@@ -169,14 +180,19 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 					</Project>
 				";
 
-			proj.LoadXml (documentString);
-			Assert.AreEqual (DateTime.Now.ToString ("yyyy.MM.dd"), proj.GetEvaluatedProperty ("Prop1"), "#1");
-		}
+            proj.LoadXml(documentString);
+            Assert.AreEqual(
+                DateTime.Now.ToString("yyyy.MM.dd"),
+                proj.GetEvaluatedProperty("Prop1"),
+                "#1"
+            );
+        }
 
-		[Test]
-		public void InstanceMemberOnStaticProperty ()
-		{
-			string documentString = @"
+        [Test]
+        public void InstanceMemberOnStaticProperty()
+        {
+            string documentString =
+                @"
 					<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 						<PropertyGroup>
 							<Prop1>$([System.DateTime]::Now.Year)</Prop1>
@@ -184,14 +200,15 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 					</Project>
 				";
 
-			proj.LoadXml (documentString);
-			Assert.AreEqual (DateTime.Now.Year.ToString (), proj.GetEvaluatedProperty ("Prop1"), "#1");
-		}
+            proj.LoadXml(documentString);
+            Assert.AreEqual(DateTime.Now.Year.ToString(), proj.GetEvaluatedProperty("Prop1"), "#1");
+        }
 
-		[Test]
-		public void InstanceMembersOnStaticMethod ()
-		{
-			string documentString = @"
+        [Test]
+        public void InstanceMembersOnStaticMethod()
+        {
+            string documentString =
+                @"
 					<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 						<PropertyGroup>
 							<Prop1>$([System.String]::Concat('a', 'bb', 'c').Length.GetHashCode ())</Prop1>
@@ -200,15 +217,16 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 					</Project>
 				";
 
-			proj.LoadXml (documentString);
-			Assert.AreEqual (4.GetHashCode ().ToString (), proj.GetEvaluatedProperty ("Prop1"), "#1");
-		}
+            proj.LoadXml(documentString);
+            Assert.AreEqual(4.GetHashCode().ToString(), proj.GetEvaluatedProperty("Prop1"), "#1");
+        }
 
-		[Test]
-		[SetCulture ("en-us")]
-		public void MSBuildPropertyFunctions ()
-		{
-			string documentString = @"
+        [Test]
+        [SetCulture("en-us")]
+        public void MSBuildPropertyFunctions()
+        {
+            string documentString =
+                @"
 					<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 						<PropertyGroup>
 							<NumberOne>0.6</NumberOne>
@@ -218,14 +236,15 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 					</Project>
 				";
 
-			proj.LoadXml (documentString);
-			Assert.AreEqual ("6.6", proj.GetEvaluatedProperty ("Prop1"), "#1");
-		}
+            proj.LoadXml(documentString);
+            Assert.AreEqual("6.6", proj.GetEvaluatedProperty("Prop1"), "#1");
+        }
 
-		[Test]
-		public void Constructor ()
-		{
-			string documentString = @"
+        [Test]
+        public void Constructor()
+        {
+            string documentString =
+                @"
 					<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 						<PropertyGroup>
 							<NumberOne>0.6</NumberOne>
@@ -235,8 +254,8 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 					</Project>
 				";
 
-			proj.LoadXml (documentString);
-			Assert.AreEqual ("True", proj.GetEvaluatedProperty ("Prop1"), "#1");
-		}
-	}
+            proj.LoadXml(documentString);
+            Assert.AreEqual("True", proj.GetEvaluatedProperty("Prop1"), "#1");
+        }
+    }
 }

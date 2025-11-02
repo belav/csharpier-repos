@@ -68,13 +68,16 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""name1"": ""value1"",
   ""name2"": [
     1,
     2
   ]
-}", o.ToString());
+}",
+                o.ToString()
+            );
         }
     }
 }

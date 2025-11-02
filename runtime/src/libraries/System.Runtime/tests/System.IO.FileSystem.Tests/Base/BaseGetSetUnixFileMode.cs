@@ -52,7 +52,11 @@ namespace System.IO.Tests
             }
         }
 
-        private string CreateTestItem(string path = null, [CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0)
+        private string CreateTestItem(
+            string path = null,
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        )
         {
             path = path ?? GetTestFilePath(null, memberName, lineNumber);
             if (IsDirectory)

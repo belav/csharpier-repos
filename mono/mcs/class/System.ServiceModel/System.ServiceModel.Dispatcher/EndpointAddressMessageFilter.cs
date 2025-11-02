@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,64 +26,67 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.ServiceModel.Channels;
 using System.ServiceModel;
+using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Dispatcher
 {
-	public class EndpointAddressMessageFilter : MessageFilter
-	{
-		EndpointAddress address;
-		bool cmp_host;
+    public class EndpointAddressMessageFilter : MessageFilter
+    {
+        EndpointAddress address;
+        bool cmp_host;
 
-		public EndpointAddressMessageFilter (EndpointAddress address)
-			: this (address, false)
-		{
-		}
+        public EndpointAddressMessageFilter(EndpointAddress address)
+            : this(address, false) { }
 
-		public EndpointAddressMessageFilter (EndpointAddress address,
-			bool includeHostNameInComparison)
-		{
-			if (address == null)
-				throw new ArgumentNullException ("address");
-			this.address = address;
-			cmp_host = includeHostNameInComparison;
-		}
+        public EndpointAddressMessageFilter(
+            EndpointAddress address,
+            bool includeHostNameInComparison
+        )
+        {
+            if (address == null)
+                throw new ArgumentNullException("address");
+            this.address = address;
+            cmp_host = includeHostNameInComparison;
+        }
 
-		public EndpointAddress Address {
-			get { return address; }
-		}
+        public EndpointAddress Address
+        {
+            get { return address; }
+        }
 
-		public bool IncludeHostNameInComparison {
-			get { return cmp_host; }
-		}
+        public bool IncludeHostNameInComparison
+        {
+            get { return cmp_host; }
+        }
 
-		[MonoTODO]
-		protected internal override IMessageFilterTable<FilterData>
-			CreateFilterTable<FilterData> ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected internal override IMessageFilterTable<FilterData> CreateFilterTable<FilterData>()
+        {
+            throw new NotImplementedException();
+        }
 
-		public override bool Match (Message message)
-		{
-			Uri to = message.Headers.To;
-			if (to == null)
-				return false;
-			bool path = ((String.CompareOrdinal (to.AbsolutePath, address.Uri.AbsolutePath) == 0) && 
-					(to.Port == address.Uri.Port));
-			bool host = IncludeHostNameInComparison
-					? (String.CompareOrdinal (to.Host, address.Uri.Host) == 0)
-					: true;
+        public override bool Match(Message message)
+        {
+            Uri to = message.Headers.To;
+            if (to == null)
+                return false;
+            bool path = (
+                (String.CompareOrdinal(to.AbsolutePath, address.Uri.AbsolutePath) == 0)
+                && (to.Port == address.Uri.Port)
+            );
+            bool host = IncludeHostNameInComparison
+                ? (String.CompareOrdinal(to.Host, address.Uri.Host) == 0)
+                : true;
 
-			return path && host;
-		}
+            return path && host;
+        }
 
-		public override bool Match (MessageBuffer messageBuffer)
-		{
-			if (messageBuffer == null)
-				throw new ArgumentNullException ("messageBuffer");
-			return Match (messageBuffer.CreateMessage ());
-		}
-	}
+        public override bool Match(MessageBuffer messageBuffer)
+        {
+            if (messageBuffer == null)
+                throw new ArgumentNullException("messageBuffer");
+            return Match(messageBuffer.CreateMessage());
+        }
+    }
 }

@@ -18,21 +18,46 @@ namespace System.ServiceModel.Discovery
     [Fx.Tag.XamlVisible(false)]
     public class FindCriteria
     {
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotDeclareReadOnlyMutableReferenceTypes)]
-        public static readonly Uri ScopeMatchByExact = new Uri(ProtocolStrings.VersionInternal.ScopeMatchByExact);
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.DoNotDeclareReadOnlyMutableReferenceTypes
+        )]
+        public static readonly Uri ScopeMatchByExact = new Uri(
+            ProtocolStrings.VersionInternal.ScopeMatchByExact
+        );
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotDeclareReadOnlyMutableReferenceTypes)]
-        public static readonly Uri ScopeMatchByLdap = new Uri(ProtocolStrings.VersionInternal.ScopeMatchByLdap);
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.DoNotDeclareReadOnlyMutableReferenceTypes
+        )]
+        public static readonly Uri ScopeMatchByLdap = new Uri(
+            ProtocolStrings.VersionInternal.ScopeMatchByLdap
+        );
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotDeclareReadOnlyMutableReferenceTypes)]
-        public static readonly Uri ScopeMatchByPrefix = new Uri(ProtocolStrings.VersionInternal.ScopeMatchByPrefix);
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.DoNotDeclareReadOnlyMutableReferenceTypes
+        )]
+        public static readonly Uri ScopeMatchByPrefix = new Uri(
+            ProtocolStrings.VersionInternal.ScopeMatchByPrefix
+        );
 
         [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.IdentifiersShouldBeSpelledCorrectly)]
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotDeclareReadOnlyMutableReferenceTypes)]
-        public static readonly Uri ScopeMatchByUuid = new Uri(ProtocolStrings.VersionInternal.ScopeMatchByUuid);
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.DoNotDeclareReadOnlyMutableReferenceTypes
+        )]
+        public static readonly Uri ScopeMatchByUuid = new Uri(
+            ProtocolStrings.VersionInternal.ScopeMatchByUuid
+        );
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotDeclareReadOnlyMutableReferenceTypes)]
-        public static readonly Uri ScopeMatchByNone = new Uri(ProtocolStrings.VersionInternal.ScopeMatchByNone);
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.DoNotDeclareReadOnlyMutableReferenceTypes
+        )]
+        public static readonly Uri ScopeMatchByNone = new Uri(
+            ProtocolStrings.VersionInternal.ScopeMatchByNone
+        );
 
         ContractTypeNameCollection contractTypeNames;
         NonNullItemCollection<XElement> extensions;
@@ -87,11 +112,7 @@ namespace System.ServiceModel.Discovery
 
         public Uri ScopeMatchBy
         {
-            get
-            {
-                return this.scopeMatchBy;
-            }
-
+            get { return this.scopeMatchBy; }
             set
             {
                 if (value == null)
@@ -118,15 +139,16 @@ namespace System.ServiceModel.Discovery
 
         public int MaxResults
         {
-            get
-            {
-                return this.maxResults;
-            }
+            get { return this.maxResults; }
             set
             {
                 if (value <= 0)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("value", value, SR2.DiscoveryFindMaxResultsLessThanZero);
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "value",
+                        value,
+                        SR2.DiscoveryFindMaxResultsLessThanZero
+                    );
                 }
                 this.maxResults = value;
             }
@@ -134,15 +156,16 @@ namespace System.ServiceModel.Discovery
 
         public TimeSpan Duration
         {
-            get
-            {
-                return this.duration;
-            }
+            get { return this.duration; }
             set
             {
                 if (value.CompareTo(TimeSpan.Zero) <= 0)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("duration", value, SR2.DiscoveryFindDurationLessThanZero);
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "duration",
+                        value,
+                        SR2.DiscoveryFindDurationLessThanZero
+                    );
                 }
                 this.duration = value;
             }
@@ -150,10 +173,7 @@ namespace System.ServiceModel.Discovery
 
         internal Collection<Uri> InternalScopes
         {
-            get
-            {
-                return this.scopes;
-            }
+            get { return this.scopes; }
         }
 
         public static FindCriteria CreateMetadataExchangeEndpointCriteria()
@@ -172,7 +192,9 @@ namespace System.ServiceModel.Discovery
             return criteria;
         }
 
-        public static FindCriteria CreateMetadataExchangeEndpointCriteria(IEnumerable<XmlQualifiedName> contractTypeNames)
+        public static FindCriteria CreateMetadataExchangeEndpointCriteria(
+            IEnumerable<XmlQualifiedName> contractTypeNames
+        )
         {
             if (contractTypeNames == null)
             {
@@ -200,24 +222,41 @@ namespace System.ServiceModel.Discovery
                 throw FxTrace.Exception.ArgumentNull("endpointDiscoveryMetadata");
             }
 
-            return IsMatch(endpointDiscoveryMetadata, ScopeCompiler.CompileMatchCriteria(this.scopes, this.scopeMatchBy));
+            return IsMatch(
+                endpointDiscoveryMetadata,
+                ScopeCompiler.CompileMatchCriteria(this.scopes, this.scopeMatchBy)
+            );
         }
 
-        internal bool IsMatch(EndpointDiscoveryMetadata endpointDiscoveryMetadata, CompiledScopeCriteria[] compiledScopeMatchCriterias)
+        internal bool IsMatch(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata,
+            CompiledScopeCriteria[] compiledScopeMatchCriterias
+        )
         {
-            return (MatchTypes(endpointDiscoveryMetadata, this.contractTypeNames) &&
-                MatchScopes(endpointDiscoveryMetadata, compiledScopeMatchCriterias, this.scopeMatchBy));
+            return (
+                MatchTypes(endpointDiscoveryMetadata, this.contractTypeNames)
+                && MatchScopes(
+                    endpointDiscoveryMetadata,
+                    compiledScopeMatchCriterias,
+                    this.scopeMatchBy
+                )
+            );
         }
 
-        static bool MatchTypes(EndpointDiscoveryMetadata endpointDiscoveryMetadata, Collection<XmlQualifiedName> contractTypeNames)
+        static bool MatchTypes(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata,
+            Collection<XmlQualifiedName> contractTypeNames
+        )
         {
             if ((contractTypeNames == null) || (contractTypeNames.Count == 0))
             {
                 return true;
             }
 
-            if ((endpointDiscoveryMetadata.InternalContractTypeNames == null) ||
-                (endpointDiscoveryMetadata.InternalContractTypeNames.Count == 0))
+            if (
+                (endpointDiscoveryMetadata.InternalContractTypeNames == null)
+                || (endpointDiscoveryMetadata.InternalContractTypeNames.Count == 0)
+            )
             {
                 return false;
             }
@@ -233,7 +272,11 @@ namespace System.ServiceModel.Discovery
             return true;
         }
 
-        static bool MatchScopes(EndpointDiscoveryMetadata endpointDiscoveryMetadata, CompiledScopeCriteria[] compiledScopeMatchCriterias, Uri scopeMatchBy)
+        static bool MatchScopes(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata,
+            CompiledScopeCriteria[] compiledScopeMatchCriterias,
+            Uri scopeMatchBy
+        )
         {
             if (compiledScopeMatchCriterias == null)
             {
@@ -283,7 +326,7 @@ namespace System.ServiceModel.Discovery
 
         [Fx.Tag.Throws(typeof(XmlException), "throws on incorrect xml data")]
         internal void ReadFrom(DiscoveryVersion discoveryVersion, XmlReader reader)
-        {            
+        {
             if (discoveryVersion == null)
             {
                 throw FxTrace.Exception.ArgumentNull("discoveryVersion");
@@ -310,19 +353,32 @@ namespace System.ServiceModel.Discovery
             int startDepth = reader.Depth;
             reader.ReadStartElement();
 
-            if (reader.IsStartElement(ProtocolStrings.SchemaNames.TypesElement, discoveryVersion.Namespace))
+            if (
+                reader.IsStartElement(
+                    ProtocolStrings.SchemaNames.TypesElement,
+                    discoveryVersion.Namespace
+                )
+            )
             {
                 this.contractTypeNames = new ContractTypeNameCollection();
                 SerializationUtility.ReadContractTypeNames(this.contractTypeNames, reader);
             }
 
-            if (reader.IsStartElement(ProtocolStrings.SchemaNames.ScopesElement, discoveryVersion.Namespace))
+            if (
+                reader.IsStartElement(
+                    ProtocolStrings.SchemaNames.ScopesElement,
+                    discoveryVersion.Namespace
+                )
+            )
             {
                 this.scopes = new ScopeCollection();
                 Uri scopeMatchBy = SerializationUtility.ReadScopes(this.scopes, reader);
                 if (scopeMatchBy != null)
                 {
-                    this.scopeMatchBy = discoveryVersion.Implementation.ToVersionIndependentScopeMatchBy(scopeMatchBy);
+                    this.scopeMatchBy =
+                        discoveryVersion.Implementation.ToVersionIndependentScopeMatchBy(
+                            scopeMatchBy
+                        );
                 }
             }
 
@@ -334,11 +390,21 @@ namespace System.ServiceModel.Discovery
                 {
                     break;
                 }
-                else if (reader.IsStartElement(ProtocolStrings.SchemaNames.MaxResultsElement, ProtocolStrings.VersionInternal.Namespace))
+                else if (
+                    reader.IsStartElement(
+                        ProtocolStrings.SchemaNames.MaxResultsElement,
+                        ProtocolStrings.VersionInternal.Namespace
+                    )
+                )
                 {
                     this.maxResults = SerializationUtility.ReadMaxResults(reader);
                 }
-                else if (reader.IsStartElement(ProtocolStrings.SchemaNames.DurationElement, ProtocolStrings.VersionInternal.Namespace))
+                else if (
+                    reader.IsStartElement(
+                        ProtocolStrings.SchemaNames.DurationElement,
+                        ProtocolStrings.VersionInternal.Namespace
+                    )
+                )
                 {
                     this.duration = SerializationUtility.ReadDuration(reader);
                 }
@@ -353,7 +419,7 @@ namespace System.ServiceModel.Discovery
                 }
             }
 
-            reader.ReadEndElement();         
+            reader.ReadEndElement();
         }
 
         internal void WriteTo(DiscoveryVersion discoveryVersion, XmlWriter writer)
@@ -367,23 +433,34 @@ namespace System.ServiceModel.Discovery
                 throw FxTrace.Exception.ArgumentNull("writer");
             }
 
-            SerializationUtility.WriteContractTypeNames(discoveryVersion, this.contractTypeNames, writer);                   
+            SerializationUtility.WriteContractTypeNames(
+                discoveryVersion,
+                this.contractTypeNames,
+                writer
+            );
 
-            SerializationUtility.WriteScopes(discoveryVersion, this.scopes, this.scopeMatchBy, writer);
+            SerializationUtility.WriteScopes(
+                discoveryVersion,
+                this.scopes,
+                this.scopeMatchBy,
+                writer
+            );
 
             if (this.maxResults != int.MaxValue)
             {
                 writer.WriteElementString(
-                    ProtocolStrings.SchemaNames.MaxResultsElement, 
-                    ProtocolStrings.VersionInternal.Namespace, 
-                    this.maxResults.ToString(CultureInfo.InvariantCulture));
+                    ProtocolStrings.SchemaNames.MaxResultsElement,
+                    ProtocolStrings.VersionInternal.Namespace,
+                    this.maxResults.ToString(CultureInfo.InvariantCulture)
+                );
             }
             if (this.duration != TimeSpan.MaxValue)
             {
                 writer.WriteElementString(
-                    ProtocolStrings.SchemaNames.DurationElement, 
-                    ProtocolStrings.VersionInternal.Namespace, 
-                    XmlConvert.ToString(this.Duration));
+                    ProtocolStrings.SchemaNames.DurationElement,
+                    ProtocolStrings.VersionInternal.Namespace,
+                    XmlConvert.ToString(this.Duration)
+                );
             }
 
             if (this.extensions != null)
@@ -410,7 +487,9 @@ namespace System.ServiceModel.Discovery
         {
             Fx.Assert(contractTypeName != null, "The contractTypeName must be non null.");
 
-            return new Uri(string.Format(CultureInfo.InvariantCulture, "urn:{0}", contractTypeName.ToString()));
+            return new Uri(
+                string.Format(CultureInfo.InvariantCulture, "urn:{0}", contractTypeName.ToString())
+            );
         }
 
         internal FindCriteria Clone()
@@ -424,7 +503,9 @@ namespace System.ServiceModel.Discovery
 
             foreach (XmlQualifiedName contractTypeName in this.ContractTypeNames)
             {
-                findCriteriaClone.ContractTypeNames.Add(new XmlQualifiedName(contractTypeName.Name, contractTypeName.Namespace));
+                findCriteriaClone.ContractTypeNames.Add(
+                    new XmlQualifiedName(contractTypeName.Name, contractTypeName.Namespace)
+                );
             }
 
             foreach (XElement extension in this.Extensions)
@@ -445,6 +526,6 @@ namespace System.ServiceModel.Discovery
             this.scopeMatchBy = scopeMatchBy;
             this.maxResults = int.MaxValue;
             this.duration = DiscoveryDefaults.DiscoveryOperationDuration;
-        }        
+        }
     }
 }

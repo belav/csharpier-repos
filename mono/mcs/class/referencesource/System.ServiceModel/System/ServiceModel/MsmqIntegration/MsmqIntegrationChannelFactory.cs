@@ -1,15 +1,15 @@
-//------------------------------------------------------------  
-// Copyright (c) Microsoft Corporation.  All rights reserved.   
-//------------------------------------------------------------  
+//------------------------------------------------------------
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+//------------------------------------------------------------
 namespace System.ServiceModel.MsmqIntegration
 {
-    using System.Runtime.Serialization;
-    using System.ServiceModel;
-    using System.Runtime.Serialization.Formatters.Binary; // for BinaryFormatter
-    using System.Xml.Serialization; // for XmlSerializer 
-    using System.IO; // for Stream
     using System.Collections.Specialized; //For HybridDictionary
+    using System.IO; // for Stream
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary; // for BinaryFormatter
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.Xml.Serialization; // for XmlSerializer
 
     sealed class MsmqIntegrationChannelFactory : MsmqChannelFactoryBase<IOutputChannel>
     {
@@ -19,7 +19,10 @@ namespace System.ServiceModel.MsmqIntegration
         HybridDictionary xmlSerializerTable;
         const int maxSerializerTableSize = 1024;
 
-        internal MsmqIntegrationChannelFactory(MsmqIntegrationBindingElement bindingElement, BindingContext context)
+        internal MsmqIntegrationChannelFactory(
+            MsmqIntegrationBindingElement bindingElement,
+            BindingContext context
+        )
             : base(bindingElement, context, null)
         {
             this.serializationFormat = bindingElement.SerializationFormat;
@@ -42,7 +45,6 @@ namespace System.ServiceModel.MsmqIntegration
             }
         }
 
-
         ActiveXSerializer ActiveXSerializer
         {
             get
@@ -59,7 +61,6 @@ namespace System.ServiceModel.MsmqIntegration
                 return this.activeXSerializer;
             }
         }
-
 
         XmlSerializer GetXmlSerializerForType(Type serializedType)
         {
@@ -82,7 +83,10 @@ namespace System.ServiceModel.MsmqIntegration
             {
                 if (this.xmlSerializerTable.Count >= maxSerializerTableSize)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationException(SR.GetString(SR.MsmqSerializationTableFull, maxSerializerTableSize)));
+                        new CommunicationException(
+                            SR.GetString(SR.MsmqSerializationTableFull, maxSerializerTableSize)
+                        )
+                    );
                 // double-locking
                 serializer = (XmlSerializer)this.xmlSerializerTable[serializedType];
                 if (serializer != null)
@@ -96,7 +100,6 @@ namespace System.ServiceModel.MsmqIntegration
                 return serializer;
             }
         }
-
 
         public MsmqMessageSerializationFormat SerializationFormat
         {
@@ -139,12 +142,20 @@ namespace System.ServiceModel.MsmqIntegration
                 case MsmqMessageSerializationFormat.ActiveX:
                     if (property.BodyType.HasValue)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MsmqCannotUseBodyTypeWithActiveXSerialization)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentException(
+                                SR.GetString(SR.MsmqCannotUseBodyTypeWithActiveXSerialization)
+                            )
+                        );
                     }
 
                     stream = new MemoryStream();
                     int bodyType = 0;
-                    ActiveXSerializer.Serialize(stream as MemoryStream, property.Body, ref bodyType);
+                    ActiveXSerializer.Serialize(
+                        stream as MemoryStream,
+                        property.Body,
+                        ref bodyType
+                    );
                     property.BodyType = bodyType;
                     return stream;
 
@@ -152,7 +163,9 @@ namespace System.ServiceModel.MsmqIntegration
                     // body MUST be byte array
                     byte[] byteArray = property.Body as byte[];
                     if (byteArray == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SerializationException(SR.GetString(SR.MsmqByteArrayBodyExpected)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SerializationException(SR.GetString(SR.MsmqByteArrayBodyExpected))
+                        );
 
                     stream = new MemoryStream();
                     stream.Write(byteArray, 0, byteArray.Length);
@@ -162,17 +175,23 @@ namespace System.ServiceModel.MsmqIntegration
                     // body MUST be a stream
                     Stream bodyStream = property.Body as Stream;
                     if (bodyStream == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SerializationException(SR.GetString(SR.MsmqStreamBodyExpected)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SerializationException(SR.GetString(SR.MsmqStreamBodyExpected))
+                        );
 
                     // NOTE: we don't copy here as a perf optimization, but this might be dangerous
                     return bodyStream;
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SerializationException(SR.GetString(SR.MsmqUnsupportedSerializationFormat, this.SerializationFormat)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SerializationException(
+                            SR.GetString(
+                                SR.MsmqUnsupportedSerializationFormat,
+                                this.SerializationFormat
+                            )
+                        )
+                    );
             }
-
         }
-
     }
 }
-

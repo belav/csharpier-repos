@@ -29,16 +29,25 @@ namespace System.Data.OleDb
         private readonly int setCount;
         private IntPtr descBuffer;
 
-        internal PropertyInfoSet(UnsafeNativeMethods.IDBProperties idbProperties, PropertyIDSet propIDSet) : base(IntPtr.Zero, true)
+        internal PropertyInfoSet(
+            UnsafeNativeMethods.IDBProperties idbProperties,
+            PropertyIDSet propIDSet
+        )
+            : base(IntPtr.Zero, true)
         {
             OleDbHResult hr;
             int propIDSetCount = propIDSet.Count;
             RuntimeHelpers.PrepareConstrainedRegions();
-            try
-            { }
+            try { }
             finally
             {
-                hr = idbProperties.GetPropertyInfo(propIDSetCount, propIDSet, out this.setCount, out base.handle, out this.descBuffer);
+                hr = idbProperties.GetPropertyInfo(
+                    propIDSetCount,
+                    propIDSet,
+                    out this.setCount,
+                    out base.handle,
+                    out this.descBuffer
+                );
             }
             if ((0 <= hr) && (IntPtr.Zero != handle))
             {
@@ -48,10 +57,7 @@ namespace System.Data.OleDb
 
         public override bool IsInvalid
         {
-            get
-            {
-                return ((IntPtr.Zero == base.handle) && (IntPtr.Zero == this.descBuffer));
-            }
+            get { return ((IntPtr.Zero == base.handle) && (IntPtr.Zero == this.descBuffer)); }
         }
 
         internal Dictionary<string, OleDbPropertyInfo>? GetValues()
@@ -65,19 +71,29 @@ namespace System.Data.OleDb
                 DangerousAddRef(ref mustRelease);
                 if (IntPtr.Zero != this.handle)
                 {
-                    propertyLookup = new Dictionary<string, OleDbPropertyInfo>(StringComparer.OrdinalIgnoreCase);
+                    propertyLookup = new Dictionary<string, OleDbPropertyInfo>(
+                        StringComparer.OrdinalIgnoreCase
+                    );
 
                     IntPtr setPtr = this.handle;
                     ItagDBPROPINFO propinfo = OleDbStructHelpers.CreateTagDbPropInfo();
                     tagDBPROPINFOSET propinfoset = new tagDBPROPINFOSET();
 
-                    for (int i = 0; i < setCount; ++i, setPtr = ADP.IntPtrOffset(setPtr, ODB.SizeOf_tagDBPROPINFOSET))
+                    for (
+                        int i = 0;
+                        i < setCount;
+                        ++i, setPtr = ADP.IntPtrOffset(setPtr, ODB.SizeOf_tagDBPROPINFOSET)
+                    )
                     {
                         Marshal.PtrToStructure(setPtr, propinfoset);
 
                         int infoCount = propinfoset.cPropertyInfos;
                         IntPtr infoPtr = propinfoset.rgPropertyInfos;
-                        for (int k = 0; k < infoCount; ++k, infoPtr = ADP.IntPtrOffset(infoPtr, ODB.SizeOf_tagDBPROPINFO))
+                        for (
+                            int k = 0;
+                            k < infoCount;
+                            ++k, infoPtr = ADP.IntPtrOffset(infoPtr, ODB.SizeOf_tagDBPROPINFO)
+                        )
                         {
                             Marshal.PtrToStructure(infoPtr, propinfo);
 
@@ -124,7 +140,10 @@ namespace System.Data.OleDb
 
                         for (int k = 0; k < infoCount; ++k)
                         {
-                            IntPtr valuePtr = ADP.IntPtrOffset(infoPtr, (k * ODB.SizeOf_tagDBPROPINFO) + ODB.OffsetOf_tagDBPROPINFO_Value);
+                            IntPtr valuePtr = ADP.IntPtrOffset(
+                                infoPtr,
+                                (k * ODB.SizeOf_tagDBPROPINFO) + ODB.OffsetOf_tagDBPROPINFO_Value
+                            );
                             Interop.OleAut32.VariantClear(valuePtr);
                         }
                         Interop.Ole32.CoTaskMemFree(infoPtr); // was allocated by provider

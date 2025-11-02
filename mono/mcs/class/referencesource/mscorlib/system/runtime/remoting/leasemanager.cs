@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //+----------------------------------------------------------------------------
 //
@@ -22,7 +22,6 @@ namespace System.Runtime.Remoting.Lifetime
 
     internal class LeaseManager
     {
-
         // Lease Lists
         private Hashtable leaseToTimeTable = new Hashtable();
 
@@ -30,13 +29,11 @@ namespace System.Runtime.Remoting.Lifetime
         //private SortedList sponsorCallList = new SortedList();
         private Hashtable sponsorTable = new Hashtable();
 
-
         // LeaseTimeAnalyzer thread
         private TimeSpan pollTime;
         AutoResetEvent waitHandle;
         TimerCallback leaseTimeAnalyzerDelegate;
         private volatile Timer leaseTimer;
-
 
         internal static bool IsInitialized()
         {
@@ -45,7 +42,7 @@ namespace System.Runtime.Remoting.Lifetime
             return leaseManager != null;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static LeaseManager GetLeaseManager(TimeSpan pollTime)
         {
             DomainSpecificRemotingData remotingData = Thread.GetDomain().RemotingData;
@@ -68,16 +65,18 @@ namespace System.Runtime.Remoting.Lifetime
         internal static LeaseManager GetLeaseManager()
         {
             DomainSpecificRemotingData remotingData = Thread.GetDomain().RemotingData;
-            LeaseManager leaseManager = remotingData.LeaseManager;          
-            BCLDebug.Assert(leaseManager != null, "[LeaseManager.GetLeaseManager()]leaseManager !=null");
+            LeaseManager leaseManager = remotingData.LeaseManager;
+            BCLDebug.Assert(
+                leaseManager != null,
+                "[LeaseManager.GetLeaseManager()]leaseManager !=null"
+            );
             return leaseManager;
         }
 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private LeaseManager(TimeSpan pollTime)
         {
-            BCLDebug.Trace("REMOTE","LeaseManager Constructor");            
+            BCLDebug.Trace("REMOTE", "LeaseManager Constructor");
             this.pollTime = pollTime;
 
             leaseTimeAnalyzerDelegate = new TimerCallback(this.LeaseTimeAnalyzer);
@@ -85,31 +84,34 @@ namespace System.Runtime.Remoting.Lifetime
             // We need to create a Timer with Infinite dueTime to ensure that
             // leaseTimeAnalyzerDelegate doesnt get invoked before leaseTimer is initialized
             // Once initialized we can change it to the appropriate dueTime
-            leaseTimer = new Timer(leaseTimeAnalyzerDelegate, null, Timeout.Infinite, Timeout.Infinite);
+            leaseTimer = new Timer(
+                leaseTimeAnalyzerDelegate,
+                null,
+                Timeout.Infinite,
+                Timeout.Infinite
+            );
             leaseTimer.Change((int)pollTime.TotalMilliseconds, Timeout.Infinite);
         }
 
-
         internal void ChangePollTime(TimeSpan pollTime)
         {
-            BCLDebug.Trace("REMOTE","LeaseManager ChangePollTime ", pollTime);
+            BCLDebug.Trace("REMOTE", "LeaseManager ChangePollTime ", pollTime);
             this.pollTime = pollTime;
         }
 
-
         internal void ActivateLease(Lease lease)
         {
-            BCLDebug.Trace("REMOTE","LeaseManager AddLease ",lease.id," ",lease.managedObject);
-            lock(leaseToTimeTable)
+            BCLDebug.Trace("REMOTE", "LeaseManager AddLease ", lease.id, " ", lease.managedObject);
+            lock (leaseToTimeTable)
             {
                 leaseToTimeTable[lease] = lease.leaseTime;
             }
-        }       
+        }
 
         internal void DeleteLease(Lease lease)
         {
-            BCLDebug.Trace("REMOTE","LeaseManager DeleteLease ",lease.id);
-            lock(leaseToTimeTable)
+            BCLDebug.Trace("REMOTE", "LeaseManager DeleteLease ", lease.id);
+            lock (leaseToTimeTable)
             {
                 leaseToTimeTable.Remove(lease);
             }
@@ -118,16 +120,15 @@ namespace System.Runtime.Remoting.Lifetime
         [System.Diagnostics.Conditional("_LOGGING")]
         internal void DumpLeases(Lease[] leases)
         {
-            for (int i=0; i<leases.Length; i++)
+            for (int i = 0; i < leases.Length; i++)
             {
-                BCLDebug.Trace("REMOTE","LeaseManager DumpLease ",leases[i].managedObject);                                         
+                BCLDebug.Trace("REMOTE", "LeaseManager DumpLease ", leases[i].managedObject);
             }
         }
 
-
         internal ILease GetLease(MarshalByRefObject obj)
         {
-            BCLDebug.Trace("REMOTE","LeaseManager GetLease ",obj);
+            BCLDebug.Trace("REMOTE", "LeaseManager GetLease ", obj);
             bool fServer = true;
             Identity idObj = MarshalByRefObject.GetIdentity(obj, out fServer);
             if (idObj == null)
@@ -138,8 +139,18 @@ namespace System.Runtime.Remoting.Lifetime
 
         internal void ChangedLeaseTime(Lease lease, DateTime newTime)
         {
-            BCLDebug.Trace("REMOTE","LeaseManager ChangedLeaseTime ",lease.id," ",lease.managedObject," newTime ",newTime," currentTime ", DateTime.UtcNow);
-            lock(leaseToTimeTable)
+            BCLDebug.Trace(
+                "REMOTE",
+                "LeaseManager ChangedLeaseTime ",
+                lease.id,
+                " ",
+                lease.managedObject,
+                " newTime ",
+                newTime,
+                " currentTime ",
+                DateTime.UtcNow
+            );
+            lock (leaseToTimeTable)
             {
                 leaseToTimeTable[lease] = newTime;
             }
@@ -159,11 +170,21 @@ namespace System.Runtime.Remoting.Lifetime
             }
         }
 
-        internal void RegisterSponsorCall(Lease lease, Object sponsorId, TimeSpan sponsorshipTimeOut)
+        internal void RegisterSponsorCall(
+            Lease lease,
+            Object sponsorId,
+            TimeSpan sponsorshipTimeOut
+        )
         {
-            BCLDebug.Trace("REMOTE","LeaseManager RegisterSponsorCall Lease ",lease," sponsorshipTimeOut ",sponsorshipTimeOut);
+            BCLDebug.Trace(
+                "REMOTE",
+                "LeaseManager RegisterSponsorCall Lease ",
+                lease,
+                " sponsorshipTimeOut ",
+                sponsorshipTimeOut
+            );
 
-            lock(sponsorTable)
+            lock (sponsorTable)
             {
                 DateTime sponsorWaitTime = DateTime.UtcNow.Add(sponsorshipTimeOut);
                 sponsorTable[sponsorId] = new SponsorInfo(lease, sponsorId, sponsorWaitTime);
@@ -172,7 +193,7 @@ namespace System.Runtime.Remoting.Lifetime
 
         internal void DeleteSponsor(Object sponsorId)
         {
-            lock(sponsorTable)
+            lock (sponsorTable)
             {
                 sponsorTable.Remove(sponsorId);
             }
@@ -181,14 +202,14 @@ namespace System.Runtime.Remoting.Lifetime
         ArrayList tempObjects = new ArrayList(10);
 
         // Thread Loop
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private void LeaseTimeAnalyzer(Object state)
         {
             //BCLDebug.Trace("REMOTE","LeaseManager LeaseTimeAnalyzer Entry ",state);
 
             // Find expired leases
             DateTime now = DateTime.UtcNow;
-            lock(leaseToTimeTable)
+            lock (leaseToTimeTable)
             {
                 IDictionaryEnumerator e = leaseToTimeTable.GetEnumerator();
 
@@ -203,17 +224,16 @@ namespace System.Runtime.Remoting.Lifetime
                         tempObjects.Add(lease);
                     }
                 }
-                for (int i=0; i<tempObjects.Count; i++)
+                for (int i = 0; i < tempObjects.Count; i++)
                 {
                     Lease lease = (Lease)tempObjects[i];
                     //BCLDebug.Trace("REMOTE","LeaseManager LeaseTimeAnalyzer lease Expired remove from leaseToTimeTable ",lease.id);
                     leaseToTimeTable.Remove(lease);
                 }
-
             }
 
             // Need to run this without lock on leaseToTimeTable to avoid deadlock
-            for (int i=0; i<tempObjects.Count; i++)
+            for (int i = 0; i < tempObjects.Count; i++)
             {
                 Lease lease = (Lease)tempObjects[i];
                 //BCLDebug.Trace("REMOTE","LeaseManager LeaseTimeAnalyzer lease Expired ",lease.id);
@@ -221,9 +241,9 @@ namespace System.Runtime.Remoting.Lifetime
                     lease.LeaseExpired(now);
             }
 
-            tempObjects.Clear();                
+            tempObjects.Clear();
 
-            lock(sponsorTable)
+            lock (sponsorTable)
             {
                 IDictionaryEnumerator e = sponsorTable.GetEnumerator();
 
@@ -232,7 +252,7 @@ namespace System.Runtime.Remoting.Lifetime
                     // Check for SponshipTimeOuts
                     Object sponsorId = e.Key;
                     SponsorInfo sponsorInfo = (SponsorInfo)e.Value;
-                    //BCLDebug.Trace("REMOTE","LeaseManager LeaseTimeAnalyzer sponsor time ", sponsorInfo.sponsorWaitTime, " now ", now);                    
+                    //BCLDebug.Trace("REMOTE","LeaseManager LeaseTimeAnalyzer sponsor time ", sponsorInfo.sponsorWaitTime, " now ", now);
                     if (sponsorInfo.sponsorWaitTime.CompareTo(now) < 0)
                     {
                         // Sponsortimeout expired expired
@@ -241,21 +261,22 @@ namespace System.Runtime.Remoting.Lifetime
                 }
 
                 // Process the timed out sponsors
-                for (int i=0; i<tempObjects.Count; i++)
+                for (int i = 0; i < tempObjects.Count; i++)
                 {
                     SponsorInfo sponsorInfo = (SponsorInfo)tempObjects[i];
-                    //BCLDebug.Trace("REMOTE","LeaseManager LeaseTimeAnalyzer sponsor Expired remove from spansorTable", sponsorInfo.sponsorId);                    
+                    //BCLDebug.Trace("REMOTE","LeaseManager LeaseTimeAnalyzer sponsor Expired remove from spansorTable", sponsorInfo.sponsorId);
                     sponsorTable.Remove(sponsorInfo.sponsorId);
                 }
             }
 
             // Process the timed out sponsors
             // Need to run this without lock on sponsorTable to avoid deadlock
-            for (int i=0; i<tempObjects.Count; i++)
+            for (int i = 0; i < tempObjects.Count; i++)
             {
                 SponsorInfo sponsorInfo = (SponsorInfo)tempObjects[i];
-                //BCLDebug.Trace("REMOTE","LeaseManager LeaseTimeAnalyzer sponsor Expired ", sponsorInfo.sponsorId);                    
-                if (sponsorInfo != null && sponsorInfo.lease != null){
+                //BCLDebug.Trace("REMOTE","LeaseManager LeaseTimeAnalyzer sponsor Expired ", sponsorInfo.sponsorId);
+                if (sponsorInfo != null && sponsorInfo.lease != null)
+                {
                     sponsorInfo.lease.SponsorTimeout(sponsorInfo.sponsorId);
                     tempObjects[i] = null;
                 }
@@ -266,10 +287,5 @@ namespace System.Runtime.Remoting.Lifetime
 
             //BCLDebug.Trace("REMOTE","LeaseManager LeaseTimeAnalyzer Exit");
         }
-
     }
 }
-
-
-
-

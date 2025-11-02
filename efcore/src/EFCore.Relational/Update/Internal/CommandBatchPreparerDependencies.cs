@@ -52,7 +52,8 @@ public sealed record CommandBatchPreparerDependencies
         IModificationCommandFactory modificationCommandFactory,
         ILoggingOptions loggingOptions,
         IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger,
-        IDbContextOptions options)
+        IDbContextOptions options
+    )
     {
         ModificationCommandBatchFactory = modificationCommandBatchFactory;
         ParameterNameGeneratorFactory = parameterNameGeneratorFactory;

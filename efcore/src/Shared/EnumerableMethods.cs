@@ -227,34 +227,24 @@ internal static class EnumerableMethods
     // public static MethodInfo GetSumWithoutSelector(Type type)
     //     => SumWithoutSelectorMethods[type];
 
-    public static MethodInfo GetSumWithSelector(Type type)
-        => SumWithSelectorMethods[type];
+    public static MethodInfo GetSumWithSelector(Type type) => SumWithSelectorMethods[type];
 
     // public static MethodInfo GetAverageWithoutSelector(Type type)
     //     => AverageWithoutSelectorMethods[type];
 
-    public static MethodInfo GetAverageWithSelector(Type type)
-        => AverageWithSelectorMethods[type];
+    public static MethodInfo GetAverageWithSelector(Type type) => AverageWithSelectorMethods[type];
 
-    public static MethodInfo GetMaxWithoutSelector(Type type)
-        => MaxWithoutSelectorMethods.TryGetValue(type, out var method)
-            ? method
-            : MaxWithoutSelector;
+    public static MethodInfo GetMaxWithoutSelector(Type type) =>
+        MaxWithoutSelectorMethods.TryGetValue(type, out var method) ? method : MaxWithoutSelector;
 
-    public static MethodInfo GetMaxWithSelector(Type type)
-        => MaxWithSelectorMethods.TryGetValue(type, out var method)
-            ? method
-            : MaxWithSelector;
+    public static MethodInfo GetMaxWithSelector(Type type) =>
+        MaxWithSelectorMethods.TryGetValue(type, out var method) ? method : MaxWithSelector;
 
-    public static MethodInfo GetMinWithoutSelector(Type type)
-        => MinWithoutSelectorMethods.TryGetValue(type, out var method)
-            ? method
-            : MinWithoutSelector;
+    public static MethodInfo GetMinWithoutSelector(Type type) =>
+        MinWithoutSelectorMethods.TryGetValue(type, out var method) ? method : MinWithoutSelector;
 
-    public static MethodInfo GetMinWithSelector(Type type)
-        => MinWithSelectorMethods.TryGetValue(type, out var method)
-            ? method
-            : MinWithSelector;
+    public static MethodInfo GetMinWithSelector(Type type) =>
+        MinWithSelectorMethods.TryGetValue(type, out var method) ? method : MinWithSelector;
 
     static EnumerableMethods()
     {
@@ -264,299 +254,589 @@ internal static class EnumerableMethods
             .ToDictionary(e => e.Key, l => l.ToList());
 
         AggregateWithSeedSelector = GetMethod(
-            nameof(Enumerable.Aggregate), 3,
-            types => new[]
-            {
-                typeof(IEnumerable<>).MakeGenericType(types[0]),
-                types[1],
-                typeof(Func<,,>).MakeGenericType(types[1], types[0], types[1]),
-                typeof(Func<,>).MakeGenericType(types[1], types[2])
-            });
+            nameof(Enumerable.Aggregate),
+            3,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    types[1],
+                    typeof(Func<,,>).MakeGenericType(types[1], types[0], types[1]),
+                    typeof(Func<,>).MakeGenericType(types[1], types[2]),
+                }
+        );
 
         All = GetMethod(
-            nameof(Enumerable.All), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], typeof(bool)) });
+            nameof(Enumerable.All),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], typeof(bool)),
+                }
+        );
 
         AnyWithoutPredicate = GetMethod(
-            nameof(Enumerable.Any), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+            nameof(Enumerable.Any),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
         AnyWithPredicate = GetMethod(
-            nameof(Enumerable.Any), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], typeof(bool)) });
+            nameof(Enumerable.Any),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], typeof(bool)),
+                }
+        );
 
         AsEnumerable = GetMethod(
-            nameof(Enumerable.AsEnumerable), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+            nameof(Enumerable.AsEnumerable),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
         Cast = GetMethod(nameof(Enumerable.Cast), 1, _ => new[] { typeof(IEnumerable) });
 
         Concat = GetMethod(
-            nameof(Enumerable.Concat), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(IEnumerable<>).MakeGenericType(types[0]) });
+            nameof(Enumerable.Concat),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                }
+        );
 
         Contains = GetMethod(
-            nameof(Enumerable.Contains), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), types[0] });
+            nameof(Enumerable.Contains),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), types[0] }
+        );
 
         CountWithoutPredicate = GetMethod(
-            nameof(Enumerable.Count), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+            nameof(Enumerable.Count),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
         CountWithPredicate = GetMethod(
-            nameof(Enumerable.Count), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], typeof(bool)) });
+            nameof(Enumerable.Count),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], typeof(bool)),
+                }
+        );
 
         DefaultIfEmptyWithoutArgument = GetMethod(
-            nameof(Enumerable.DefaultIfEmpty), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+            nameof(Enumerable.DefaultIfEmpty),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
         DefaultIfEmptyWithArgument = GetMethod(
-            nameof(Enumerable.DefaultIfEmpty), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), types[0] });
+            nameof(Enumerable.DefaultIfEmpty),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), types[0] }
+        );
 
-        Distinct = GetMethod(nameof(Enumerable.Distinct), 1, types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+        Distinct = GetMethod(
+            nameof(Enumerable.Distinct),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
         ElementAt = GetMethod(
-            nameof(Enumerable.ElementAt), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(int) });
+            nameof(Enumerable.ElementAt),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(int) }
+        );
 
         ElementAtOrDefault = GetMethod(
-            nameof(Enumerable.ElementAtOrDefault), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(int) });
+            nameof(Enumerable.ElementAtOrDefault),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(int) }
+        );
 
         Except = GetMethod(
-            nameof(Enumerable.Except), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(IEnumerable<>).MakeGenericType(types[0]) });
+            nameof(Enumerable.Except),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                }
+        );
 
         FirstWithoutPredicate = GetMethod(
-            nameof(Enumerable.First), 1, types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+            nameof(Enumerable.First),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
         FirstWithPredicate = GetMethod(
-            nameof(Enumerable.First), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], typeof(bool)) });
+            nameof(Enumerable.First),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], typeof(bool)),
+                }
+        );
 
         FirstOrDefaultWithoutPredicate = GetMethod(
-            nameof(Enumerable.FirstOrDefault), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+            nameof(Enumerable.FirstOrDefault),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
         FirstOrDefaultWithPredicate = GetMethod(
-            nameof(Enumerable.FirstOrDefault), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], typeof(bool)) });
+            nameof(Enumerable.FirstOrDefault),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], typeof(bool)),
+                }
+        );
 
         GroupByWithKeySelector = GetMethod(
-            nameof(Enumerable.GroupBy), 2,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], types[1]) });
+            nameof(Enumerable.GroupBy),
+            2,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], types[1]),
+                }
+        );
 
         GroupByWithKeyElementSelector = GetMethod(
-            nameof(Enumerable.GroupBy), 3,
-            types => new[]
-            {
-                typeof(IEnumerable<>).MakeGenericType(types[0]),
-                typeof(Func<,>).MakeGenericType(types[0], types[1]),
-                typeof(Func<,>).MakeGenericType(types[0], types[2])
-            });
+            nameof(Enumerable.GroupBy),
+            3,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], types[1]),
+                    typeof(Func<,>).MakeGenericType(types[0], types[2]),
+                }
+        );
 
         GroupByWithKeyElementResultSelector = GetMethod(
-            nameof(Enumerable.GroupBy), 4,
-            types => new[]
-            {
-                typeof(IEnumerable<>).MakeGenericType(types[0]),
-                typeof(Func<,>).MakeGenericType(types[0], types[1]),
-                typeof(Func<,>).MakeGenericType(types[0], types[2]),
-                typeof(Func<,,>).MakeGenericType(
-                    types[1], typeof(IEnumerable<>).MakeGenericType(types[2]), types[3])
-            });
+            nameof(Enumerable.GroupBy),
+            4,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], types[1]),
+                    typeof(Func<,>).MakeGenericType(types[0], types[2]),
+                    typeof(Func<,,>).MakeGenericType(
+                        types[1],
+                        typeof(IEnumerable<>).MakeGenericType(types[2]),
+                        types[3]
+                    ),
+                }
+        );
 
         GroupByWithKeyResultSelector = GetMethod(
-            nameof(Enumerable.GroupBy), 3,
-            types => new[]
-            {
-                typeof(IEnumerable<>).MakeGenericType(types[0]),
-                typeof(Func<,>).MakeGenericType(types[0], types[1]),
-                typeof(Func<,,>).MakeGenericType(
-                    types[1], typeof(IEnumerable<>).MakeGenericType(types[0]), types[2])
-            });
+            nameof(Enumerable.GroupBy),
+            3,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], types[1]),
+                    typeof(Func<,,>).MakeGenericType(
+                        types[1],
+                        typeof(IEnumerable<>).MakeGenericType(types[0]),
+                        types[2]
+                    ),
+                }
+        );
 
         GroupJoin = GetMethod(
-            nameof(Enumerable.GroupJoin), 4,
-            types => new[]
-            {
-                typeof(IEnumerable<>).MakeGenericType(types[0]),
-                typeof(IEnumerable<>).MakeGenericType(types[1]),
-                typeof(Func<,>).MakeGenericType(types[0], types[2]),
-                typeof(Func<,>).MakeGenericType(types[1], types[2]),
-                typeof(Func<,,>).MakeGenericType(
-                    types[0], typeof(IEnumerable<>).MakeGenericType(types[1]), types[3])
-            });
+            nameof(Enumerable.GroupJoin),
+            4,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(IEnumerable<>).MakeGenericType(types[1]),
+                    typeof(Func<,>).MakeGenericType(types[0], types[2]),
+                    typeof(Func<,>).MakeGenericType(types[1], types[2]),
+                    typeof(Func<,,>).MakeGenericType(
+                        types[0],
+                        typeof(IEnumerable<>).MakeGenericType(types[1]),
+                        types[3]
+                    ),
+                }
+        );
 
         Intersect = GetMethod(
-            nameof(Enumerable.Intersect), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(IEnumerable<>).MakeGenericType(types[0]) });
+            nameof(Enumerable.Intersect),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                }
+        );
 
         Join = GetMethod(
-            nameof(Enumerable.Join), 4,
-            types => new[]
-            {
-                typeof(IEnumerable<>).MakeGenericType(types[0]),
-                typeof(IEnumerable<>).MakeGenericType(types[1]),
-                typeof(Func<,>).MakeGenericType(types[0], types[2]),
-                typeof(Func<,>).MakeGenericType(types[1], types[2]),
-                typeof(Func<,,>).MakeGenericType(types[0], types[1], types[3])
-            });
+            nameof(Enumerable.Join),
+            4,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(IEnumerable<>).MakeGenericType(types[1]),
+                    typeof(Func<,>).MakeGenericType(types[0], types[2]),
+                    typeof(Func<,>).MakeGenericType(types[1], types[2]),
+                    typeof(Func<,,>).MakeGenericType(types[0], types[1], types[3]),
+                }
+        );
 
         JoinWithComparer = GetMethod(
-            nameof(Enumerable.Join), 4,
-            types => new[]
-            {
-                typeof(IEnumerable<>).MakeGenericType(types[0]),
-                typeof(IEnumerable<>).MakeGenericType(types[1]),
-                typeof(Func<,>).MakeGenericType(types[0], types[2]),
-                typeof(Func<,>).MakeGenericType(types[1], types[2]),
-                typeof(Func<,,>).MakeGenericType(types[0], types[1], types[3]),
-                typeof(IEqualityComparer<>).MakeGenericType(types[2])
-            });
+            nameof(Enumerable.Join),
+            4,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(IEnumerable<>).MakeGenericType(types[1]),
+                    typeof(Func<,>).MakeGenericType(types[0], types[2]),
+                    typeof(Func<,>).MakeGenericType(types[1], types[2]),
+                    typeof(Func<,,>).MakeGenericType(types[0], types[1], types[3]),
+                    typeof(IEqualityComparer<>).MakeGenericType(types[2]),
+                }
+        );
 
         LastWithoutPredicate = GetMethod(
-            nameof(Enumerable.Last), 1, types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+            nameof(Enumerable.Last),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
         LastWithPredicate = GetMethod(
-            nameof(Enumerable.Last), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], typeof(bool)) });
+            nameof(Enumerable.Last),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], typeof(bool)),
+                }
+        );
 
         LastOrDefaultWithoutPredicate = GetMethod(
-            nameof(Enumerable.LastOrDefault), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+            nameof(Enumerable.LastOrDefault),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
         LastOrDefaultWithPredicate = GetMethod(
-            nameof(Enumerable.LastOrDefault), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], typeof(bool)) });
+            nameof(Enumerable.LastOrDefault),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], typeof(bool)),
+                }
+        );
 
         LongCountWithoutPredicate = GetMethod(
-            nameof(Enumerable.LongCount), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+            nameof(Enumerable.LongCount),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
         LongCountWithPredicate = GetMethod(
-            nameof(Enumerable.LongCount), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], typeof(bool)) });
+            nameof(Enumerable.LongCount),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], typeof(bool)),
+                }
+        );
 
-        MaxWithoutSelector = GetMethod(nameof(Enumerable.Max), 1, types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+        MaxWithoutSelector = GetMethod(
+            nameof(Enumerable.Max),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
         MaxWithSelector = GetMethod(
-            nameof(Enumerable.Max), 2,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], types[1]) });
+            nameof(Enumerable.Max),
+            2,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], types[1]),
+                }
+        );
 
-        MinWithoutSelector = GetMethod(nameof(Enumerable.Min), 1, types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+        MinWithoutSelector = GetMethod(
+            nameof(Enumerable.Min),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
         MinWithSelector = GetMethod(
-            nameof(Enumerable.Min), 2,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], types[1]) });
+            nameof(Enumerable.Min),
+            2,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], types[1]),
+                }
+        );
 
         OfType = GetMethod(nameof(Enumerable.OfType), 1, _ => new[] { typeof(IEnumerable) });
 
         OrderBy = GetMethod(
-            nameof(Enumerable.OrderBy), 2,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], types[1]) });
+            nameof(Enumerable.OrderBy),
+            2,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], types[1]),
+                }
+        );
 
         OrderByDescending = GetMethod(
-            nameof(Enumerable.OrderByDescending), 2,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], types[1]) });
+            nameof(Enumerable.OrderByDescending),
+            2,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], types[1]),
+                }
+        );
 
-        Reverse = GetMethod(nameof(Enumerable.Reverse), 1, types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+        Reverse = GetMethod(
+            nameof(Enumerable.Reverse),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
         Select = GetMethod(
-            nameof(Enumerable.Select), 2,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], types[1]) });
+            nameof(Enumerable.Select),
+            2,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], types[1]),
+                }
+        );
 
         SelectWithOrdinal = GetMethod(
-            nameof(Enumerable.Select), 2,
-            types => new[]
-            {
-                typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,,>).MakeGenericType(types[0], typeof(int), types[1])
-            });
+            nameof(Enumerable.Select),
+            2,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,,>).MakeGenericType(types[0], typeof(int), types[1]),
+                }
+        );
 
         SelectManyWithoutCollectionSelector = GetMethod(
-            nameof(Enumerable.SelectMany), 2,
-            types => new[]
-            {
-                typeof(IEnumerable<>).MakeGenericType(types[0]),
-                typeof(Func<,>).MakeGenericType(
-                    types[0], typeof(IEnumerable<>).MakeGenericType(types[1]))
-            });
+            nameof(Enumerable.SelectMany),
+            2,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(
+                        types[0],
+                        typeof(IEnumerable<>).MakeGenericType(types[1])
+                    ),
+                }
+        );
 
         SelectManyWithCollectionSelector = GetMethod(
-            nameof(Enumerable.SelectMany), 3,
-            types => new[]
-            {
-                typeof(IEnumerable<>).MakeGenericType(types[0]),
-                typeof(Func<,>).MakeGenericType(
-                    types[0], typeof(IEnumerable<>).MakeGenericType(types[1])),
-                typeof(Func<,,>).MakeGenericType(types[0], types[1], types[2])
-            });
+            nameof(Enumerable.SelectMany),
+            3,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(
+                        types[0],
+                        typeof(IEnumerable<>).MakeGenericType(types[1])
+                    ),
+                    typeof(Func<,,>).MakeGenericType(types[0], types[1], types[2]),
+                }
+        );
 
         SequenceEqual = GetMethod(
-            nameof(Enumerable.SequenceEqual), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(IEnumerable<>).MakeGenericType(types[0]) });
+            nameof(Enumerable.SequenceEqual),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                }
+        );
 
         SingleWithoutPredicate = GetMethod(
-            nameof(Enumerable.Single), 1, types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+            nameof(Enumerable.Single),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
         SingleWithPredicate = GetMethod(
-            nameof(Enumerable.Single), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], typeof(bool)) });
+            nameof(Enumerable.Single),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], typeof(bool)),
+                }
+        );
 
         SingleOrDefaultWithoutPredicate = GetMethod(
-            nameof(Enumerable.SingleOrDefault), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+            nameof(Enumerable.SingleOrDefault),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
         SingleOrDefaultWithPredicate = GetMethod(
-            nameof(Enumerable.SingleOrDefault), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], typeof(bool)) });
+            nameof(Enumerable.SingleOrDefault),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], typeof(bool)),
+                }
+        );
 
         Skip = GetMethod(
-            nameof(Enumerable.Skip), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(int) });
+            nameof(Enumerable.Skip),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(int) }
+        );
 
         SkipWhile = GetMethod(
-            nameof(Enumerable.SkipWhile), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], typeof(bool)) });
+            nameof(Enumerable.SkipWhile),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], typeof(bool)),
+                }
+        );
 
-        ToArray = GetMethod(nameof(Enumerable.ToArray), 1, types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+        ToArray = GetMethod(
+            nameof(Enumerable.ToArray),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
-        ToList = GetMethod(nameof(Enumerable.ToList), 1, types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) });
+        ToList = GetMethod(
+            nameof(Enumerable.ToList),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]) }
+        );
 
         Take = GetMethod(
-            nameof(Enumerable.Take), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(int) });
+            nameof(Enumerable.Take),
+            1,
+            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(int) }
+        );
 
         TakeWhile = GetMethod(
-            nameof(Enumerable.TakeWhile), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], typeof(bool)) });
+            nameof(Enumerable.TakeWhile),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], typeof(bool)),
+                }
+        );
 
         ThenBy = GetMethod(
-            nameof(Enumerable.ThenBy), 2,
-            types => new[] { typeof(IOrderedEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], types[1]) });
+            nameof(Enumerable.ThenBy),
+            2,
+            types =>
+                new[]
+                {
+                    typeof(IOrderedEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], types[1]),
+                }
+        );
 
         ThenByDescending = GetMethod(
-            nameof(Enumerable.ThenByDescending), 2,
-            types => new[] { typeof(IOrderedEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], types[1]) });
+            nameof(Enumerable.ThenByDescending),
+            2,
+            types =>
+                new[]
+                {
+                    typeof(IOrderedEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], types[1]),
+                }
+        );
 
         Union = GetMethod(
-            nameof(Enumerable.Union), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(IEnumerable<>).MakeGenericType(types[0]) });
+            nameof(Enumerable.Union),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                }
+        );
 
         Where = GetMethod(
-            nameof(Enumerable.Where), 1,
-            types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], typeof(bool)) });
+            nameof(Enumerable.Where),
+            1,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(Func<,>).MakeGenericType(types[0], typeof(bool)),
+                }
+        );
 
         ZipWithSelector = GetMethod(
-            nameof(Enumerable.Zip), 3,
-            types => new[]
-            {
-                typeof(IEnumerable<>).MakeGenericType(types[0]),
-                typeof(IEnumerable<>).MakeGenericType(types[1]),
-                typeof(Func<,,>).MakeGenericType(types[0], types[1], types[2])
-            });
+            nameof(Enumerable.Zip),
+            3,
+            types =>
+                new[]
+                {
+                    typeof(IEnumerable<>).MakeGenericType(types[0]),
+                    typeof(IEnumerable<>).MakeGenericType(types[1]),
+                    typeof(Func<,,>).MakeGenericType(types[0], types[1], types[2]),
+                }
+        );
 
         var numericTypes = new[]
         {
@@ -569,7 +849,7 @@ internal static class EnumerableMethods
             typeof(double),
             typeof(double?),
             typeof(decimal),
-            typeof(decimal?)
+            typeof(decimal?),
         };
 
         // AverageWithoutSelectorMethods = new Dictionary<Type, MethodInfo>();
@@ -586,30 +866,80 @@ internal static class EnumerableMethods
             // AverageWithoutSelectorMethods[type] = GetMethod(
             //     nameof(Enumerable.Average), 0, types => new[] { typeof(IEnumerable<>).MakeGenericType(type) });
             AverageWithSelectorMethods[type] = GetMethod(
-                nameof(Enumerable.Average), 1,
-                types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], type) });
+                nameof(Enumerable.Average),
+                1,
+                types =>
+                    new[]
+                    {
+                        typeof(IEnumerable<>).MakeGenericType(types[0]),
+                        typeof(Func<,>).MakeGenericType(types[0], type),
+                    }
+            );
             MaxWithoutSelectorMethods[type] = GetMethod(
-                nameof(Enumerable.Max), 0, _ => new[] { typeof(IEnumerable<>).MakeGenericType(type) });
+                nameof(Enumerable.Max),
+                0,
+                _ => new[] { typeof(IEnumerable<>).MakeGenericType(type) }
+            );
             MaxWithSelectorMethods[type] = GetMethod(
-                nameof(Enumerable.Max), 1,
-                types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], type) });
+                nameof(Enumerable.Max),
+                1,
+                types =>
+                    new[]
+                    {
+                        typeof(IEnumerable<>).MakeGenericType(types[0]),
+                        typeof(Func<,>).MakeGenericType(types[0], type),
+                    }
+            );
             MinWithoutSelectorMethods[type] = GetMethod(
-                nameof(Enumerable.Min), 0, _ => new[] { typeof(IEnumerable<>).MakeGenericType(type) });
+                nameof(Enumerable.Min),
+                0,
+                _ => new[] { typeof(IEnumerable<>).MakeGenericType(type) }
+            );
             MinWithSelectorMethods[type] = GetMethod(
-                nameof(Enumerable.Min), 1,
-                types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], type) });
+                nameof(Enumerable.Min),
+                1,
+                types =>
+                    new[]
+                    {
+                        typeof(IEnumerable<>).MakeGenericType(types[0]),
+                        typeof(Func<,>).MakeGenericType(types[0], type),
+                    }
+            );
             // SumWithoutSelectorMethods[type] = GetMethod(
             //     nameof(Enumerable.Sum), 0, types => new[] { typeof(IEnumerable<>).MakeGenericType(type) });
             SumWithSelectorMethods[type] = GetMethod(
-                nameof(Enumerable.Sum), 1,
-                types => new[] { typeof(IEnumerable<>).MakeGenericType(types[0]), typeof(Func<,>).MakeGenericType(types[0], type) });
+                nameof(Enumerable.Sum),
+                1,
+                types =>
+                    new[]
+                    {
+                        typeof(IEnumerable<>).MakeGenericType(types[0]),
+                        typeof(Func<,>).MakeGenericType(types[0], type),
+                    }
+            );
         }
 
-        MethodInfo GetMethod(string name, int genericParameterCount, Func<Type[], Type[]> parameterGenerator)
-            => queryableMethodGroups[name].Single(
-                mi => ((genericParameterCount == 0 && !mi.IsGenericMethod)
-                        || (mi.IsGenericMethod && mi.GetGenericArguments().Length == genericParameterCount))
-                    && mi.GetParameters().Select(e => e.ParameterType).SequenceEqual(
-                        parameterGenerator(mi.IsGenericMethod ? mi.GetGenericArguments() : Array.Empty<Type>())));
+        MethodInfo GetMethod(
+            string name,
+            int genericParameterCount,
+            Func<Type[], Type[]> parameterGenerator
+        ) =>
+            queryableMethodGroups[name]
+                .Single(mi =>
+                    (
+                        (genericParameterCount == 0 && !mi.IsGenericMethod)
+                        || (
+                            mi.IsGenericMethod
+                            && mi.GetGenericArguments().Length == genericParameterCount
+                        )
+                    )
+                    && mi.GetParameters()
+                        .Select(e => e.ParameterType)
+                        .SequenceEqual(
+                            parameterGenerator(
+                                mi.IsGenericMethod ? mi.GetGenericArguments() : Array.Empty<Type>()
+                            )
+                        )
+                );
     }
 }

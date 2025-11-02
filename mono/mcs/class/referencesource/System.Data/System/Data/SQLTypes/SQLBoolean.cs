@@ -26,13 +26,14 @@
 
 using System;
 using System.Data.Common;
-using System.Runtime.InteropServices;
 using System.Globalization;
+using System.Runtime.InteropServices;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace System.Data.SqlTypes {
+namespace System.Data.SqlTypes
+{
     /// <devdoc>
     ///    <para>
     ///       Represents an integer value that is either 1 or 0.
@@ -41,14 +42,14 @@ namespace System.Data.SqlTypes {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     [XmlSchemaProvider("GetXsdType")]
-    public struct SqlBoolean : INullable, IComparable, IXmlSerializable {
-
+    public struct SqlBoolean : INullable, IComparable, IXmlSerializable
+    {
         // m_value: 2 (true), 1 (false), 0 (unknown/Null)
         private byte m_value;
 
-        private const byte x_Null   = 0;
-        private const byte x_False  = 1;
-        private const byte x_True   = 2;
+        private const byte x_Null = 0;
+        private const byte x_False = 1;
+        private const byte x_True = 2;
 
         // constructor
 
@@ -57,23 +58,24 @@ namespace System.Data.SqlTypes {
         ///       Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlBoolean'/> class.
         ///    </para>
         /// </devdoc>
-        public SqlBoolean(bool value) {
+        public SqlBoolean(bool value)
+        {
             m_value = (byte)(value ? x_True : x_False);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SqlBoolean(int value) : this(value, false) {
-        }
+        public SqlBoolean(int value)
+            : this(value, false) { }
 
-        private SqlBoolean(int value, bool fNull) {
+        private SqlBoolean(int value, bool fNull)
+        {
             if (fNull)
                 m_value = x_Null;
             else
                 m_value = (value != 0) ? x_True : x_False;
         }
-
 
         // INullable
         /// <devdoc>
@@ -81,8 +83,9 @@ namespace System.Data.SqlTypes {
         ///       Gets whether the current <see cref='System.Data.SqlTypes.SqlBoolean.Value'/> is <see cref='System.Data.SqlTypes.SqlBoolean.Null'/>.
         ///    </para>
         /// </devdoc>
-        public bool IsNull {
-            get { return m_value == x_Null;}
+        public bool IsNull
+        {
+            get { return m_value == x_Null; }
         }
 
         // property: Value
@@ -92,9 +95,12 @@ namespace System.Data.SqlTypes {
         ///    <see langword='false'/>.
         ///    </para>
         /// </devdoc>
-        public bool Value {
-            get {
-                switch (m_value) {
+        public bool Value
+        {
+            get
+            {
+                switch (m_value)
+                {
                     case x_True:
                         return true;
 
@@ -113,8 +119,9 @@ namespace System.Data.SqlTypes {
         ///       Gets whether the current <see cref='System.Data.SqlTypes.SqlBoolean.Value'/> is <see cref='System.Data.SqlTypes.SqlBoolean.True'/>.
         ///    </para>
         /// </devdoc>
-        public bool IsTrue {
-            get { return m_value == x_True;}
+        public bool IsTrue
+        {
+            get { return m_value == x_True; }
         }
 
         // property: IsFalse
@@ -123,10 +130,10 @@ namespace System.Data.SqlTypes {
         ///       Gets whether the current <see cref='System.Data.SqlTypes.SqlBoolean.Value'/> is <see cref='System.Data.SqlTypes.SqlBoolean.False'/>.
         ///    </para>
         /// </devdoc>
-        public bool IsFalse {
-            get { return m_value == x_False;}
+        public bool IsFalse
+        {
+            get { return m_value == x_False; }
         }
-
 
         // Implicit conversion from bool to SqlBoolean
         /// <devdoc>
@@ -134,7 +141,8 @@ namespace System.Data.SqlTypes {
         ///       Converts a boolean to a <see cref='System.Data.SqlTypes.SqlBoolean'/>.
         ///    </para>
         /// </devdoc>
-        public static implicit operator SqlBoolean(bool x) {
+        public static implicit operator SqlBoolean(bool x)
+        {
             return new SqlBoolean(x);
         }
 
@@ -145,10 +153,10 @@ namespace System.Data.SqlTypes {
         ///       to a boolean.
         ///    </para>
         /// </devdoc>
-        public static explicit operator bool(SqlBoolean x) {
+        public static explicit operator bool(SqlBoolean x)
+        {
             return x.Value;
         }
-
 
         // Unary operators
 
@@ -158,8 +166,10 @@ namespace System.Data.SqlTypes {
         ///       .
         ///    </para>
         /// </devdoc>
-        public static SqlBoolean operator !(SqlBoolean x) {
-            switch (x.m_value) {
+        public static SqlBoolean operator !(SqlBoolean x)
+        {
+            switch (x.m_value)
+            {
                 case x_True:
                     return SqlBoolean.False;
 
@@ -175,14 +185,16 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static bool operator true(SqlBoolean x) {
+        public static bool operator true(SqlBoolean x)
+        {
             return x.IsTrue;
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static bool operator false(SqlBoolean x) {
+        public static bool operator false(SqlBoolean x)
+        {
             return x.IsFalse;
         }
 
@@ -195,7 +207,8 @@ namespace System.Data.SqlTypes {
         ///    .
         /// </para>
         /// </devdoc>
-        public static SqlBoolean operator &(SqlBoolean x, SqlBoolean y) {
+        public static SqlBoolean operator &(SqlBoolean x, SqlBoolean y)
+        {
             if (x.m_value == x_False || y.m_value == x_False)
                 return SqlBoolean.False;
             else if (x.m_value == x_True && y.m_value == x_True)
@@ -212,7 +225,8 @@ namespace System.Data.SqlTypes {
         ///    .
         /// </para>
         /// </devdoc>
-        public static SqlBoolean operator |(SqlBoolean x, SqlBoolean y) {
+        public static SqlBoolean operator |(SqlBoolean x, SqlBoolean y)
+        {
             if (x.m_value == x_True || y.m_value == x_True)
                 return SqlBoolean.True;
             else if (x.m_value == x_False && y.m_value == x_False)
@@ -221,14 +235,14 @@ namespace System.Data.SqlTypes {
                 return SqlBoolean.Null;
         }
 
-
-
         // property: ByteValue
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public byte ByteValue {
-            get {
+        public byte ByteValue
+        {
+            get
+            {
                 if (!IsNull)
                     return (m_value == x_True) ? (byte)1 : (byte)0;
                 else
@@ -239,14 +253,16 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override String ToString() {
+        public override String ToString()
+        {
             return IsNull ? SQLResource.NullString : Value.ToString((IFormatProvider)null);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean Parse(String s) {
+        public static SqlBoolean Parse(String s)
+        {
             if (null == s)
                 // Let Boolean.Parse throw exception
                 return new SqlBoolean(Boolean.Parse(s));
@@ -255,37 +271,36 @@ namespace System.Data.SqlTypes {
 
             s = s.TrimStart();
             char wchFirst = s[0];
-            if (Char.IsNumber(wchFirst) || ('-' == wchFirst) || ('+' == wchFirst)) {
+            if (Char.IsNumber(wchFirst) || ('-' == wchFirst) || ('+' == wchFirst))
+            {
                 return new SqlBoolean(Int32.Parse(s, (IFormatProvider)null));
             }
-            else {
+            else
+            {
                 return new SqlBoolean(Boolean.Parse(s));
             }
         }
-
 
         // Unary operators
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator ~(SqlBoolean x) {
+        public static SqlBoolean operator ~(SqlBoolean x)
+        {
             return (!x);
         }
-
 
         // Binary operators
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator ^(SqlBoolean x, SqlBoolean y) {
-            return(x.IsNull || y.IsNull) ? Null : new SqlBoolean(x.m_value != y.m_value);
+        public static SqlBoolean operator ^(SqlBoolean x, SqlBoolean y)
+        {
+            return (x.IsNull || y.IsNull) ? Null : new SqlBoolean(x.m_value != y.m_value);
         }
 
-
-
         // Implicit conversions
-
 
         // Explicit conversions
 
@@ -293,7 +308,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlBoolean(SqlByte x) {
+        public static explicit operator SqlBoolean(SqlByte x)
+        {
             return x.IsNull ? Null : new SqlBoolean(x.Value != 0);
         }
 
@@ -301,7 +317,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlBoolean(SqlInt16 x) {
+        public static explicit operator SqlBoolean(SqlInt16 x)
+        {
             return x.IsNull ? Null : new SqlBoolean(x.Value != 0);
         }
 
@@ -309,7 +326,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlBoolean(SqlInt32 x) {
+        public static explicit operator SqlBoolean(SqlInt32 x)
+        {
             return x.IsNull ? Null : new SqlBoolean(x.Value != 0);
         }
 
@@ -317,7 +335,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlBoolean(SqlInt64 x) {
+        public static explicit operator SqlBoolean(SqlInt64 x)
+        {
             return x.IsNull ? Null : new SqlBoolean(x.Value != 0);
         }
 
@@ -325,7 +344,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlBoolean(SqlDouble x) {
+        public static explicit operator SqlBoolean(SqlDouble x)
+        {
             return x.IsNull ? Null : new SqlBoolean(x.Value != 0.0);
         }
 
@@ -333,7 +353,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlBoolean(SqlSingle x) {
+        public static explicit operator SqlBoolean(SqlSingle x)
+        {
             return x.IsNull ? Null : new SqlBoolean(x.Value != 0.0);
         }
 
@@ -341,7 +362,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlBoolean(SqlMoney x) {
+        public static explicit operator SqlBoolean(SqlMoney x)
+        {
             return x.IsNull ? Null : (x != SqlMoney.Zero);
         }
 
@@ -349,9 +371,13 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlBoolean(SqlDecimal x) {
-            return x.IsNull ? SqlBoolean.Null : new SqlBoolean(x.m_data1 != 0 || x.m_data2 != 0 ||
-                                                       x.m_data3 != 0 || x.m_data4 != 0);
+        public static explicit operator SqlBoolean(SqlDecimal x)
+        {
+            return x.IsNull
+                ? SqlBoolean.Null
+                : new SqlBoolean(
+                    x.m_data1 != 0 || x.m_data2 != 0 || x.m_data3 != 0 || x.m_data4 != 0
+                );
         }
 
         // Explicit conversion from SqlString to SqlBoolean
@@ -359,7 +385,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlBoolean(SqlString x) {
+        public static explicit operator SqlBoolean(SqlString x)
+        {
             return x.IsNull ? Null : SqlBoolean.Parse(x.Value);
         }
 
@@ -367,138 +394,167 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator==(SqlBoolean x, SqlBoolean y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value == y.m_value);
+        public static SqlBoolean operator ==(SqlBoolean x, SqlBoolean y)
+        {
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value == y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator!=(SqlBoolean x, SqlBoolean y) {
-            return ! (x == y);
+        public static SqlBoolean operator !=(SqlBoolean x, SqlBoolean y)
+        {
+            return !(x == y);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator<(SqlBoolean x, SqlBoolean y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value < y.m_value);
+        public static SqlBoolean operator <(SqlBoolean x, SqlBoolean y)
+        {
+            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value < y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator>(SqlBoolean x, SqlBoolean y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value > y.m_value);
+        public static SqlBoolean operator >(SqlBoolean x, SqlBoolean y)
+        {
+            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value > y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator<=(SqlBoolean x, SqlBoolean y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value <= y.m_value);
+        public static SqlBoolean operator <=(SqlBoolean x, SqlBoolean y)
+        {
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value <= y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator>=(SqlBoolean x, SqlBoolean y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value >= y.m_value);
+        public static SqlBoolean operator >=(SqlBoolean x, SqlBoolean y)
+        {
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value >= y.m_value);
         }
-        
+
         //--------------------------------------------------
         // Alternative methods for overloaded operators
         //--------------------------------------------------
 
         // Alternative method for operator ~
-        public static SqlBoolean OnesComplement(SqlBoolean x) {
+        public static SqlBoolean OnesComplement(SqlBoolean x)
+        {
             return ~x;
         }
 
         // Alternative method for operator &
-        public static SqlBoolean And(SqlBoolean x, SqlBoolean y) {
+        public static SqlBoolean And(SqlBoolean x, SqlBoolean y)
+        {
             return x & y;
         }
 
         // Alternative method for operator |
-        public static SqlBoolean Or(SqlBoolean x, SqlBoolean y) {
+        public static SqlBoolean Or(SqlBoolean x, SqlBoolean y)
+        {
             return x | y;
         }
 
         // Alternative method for operator ^
-        public static SqlBoolean Xor(SqlBoolean x, SqlBoolean y) {
+        public static SqlBoolean Xor(SqlBoolean x, SqlBoolean y)
+        {
             return x ^ y;
         }
 
         // Alternative method for operator ==
-        public static SqlBoolean Equals(SqlBoolean x, SqlBoolean y) {
+        public static SqlBoolean Equals(SqlBoolean x, SqlBoolean y)
+        {
             return (x == y);
         }
 
         // Alternative method for operator !=
-        public static SqlBoolean NotEquals(SqlBoolean x, SqlBoolean y) {
+        public static SqlBoolean NotEquals(SqlBoolean x, SqlBoolean y)
+        {
             return (x != y);
         }
 
         // Alternative method for operator >
-        public static SqlBoolean GreaterThan(SqlBoolean x, SqlBoolean y) {
+        public static SqlBoolean GreaterThan(SqlBoolean x, SqlBoolean y)
+        {
             return (x > y);
         }
 
         // Alternative method for operator <
-        public static SqlBoolean LessThan(SqlBoolean x, SqlBoolean y) {
+        public static SqlBoolean LessThan(SqlBoolean x, SqlBoolean y)
+        {
             return (x < y);
         }
-        
+
         // Alternative method for operator <=
-        public static SqlBoolean GreaterThanOrEquals(SqlBoolean x, SqlBoolean y) {
+        public static SqlBoolean GreaterThanOrEquals(SqlBoolean x, SqlBoolean y)
+        {
             return (x >= y);
         }
 
         // Alternative method for operator !=
-        public static SqlBoolean LessThanOrEquals(SqlBoolean x, SqlBoolean y) {
+        public static SqlBoolean LessThanOrEquals(SqlBoolean x, SqlBoolean y)
+        {
             return (x <= y);
         }
 
         // Alternative method for conversions.
 
-        public SqlByte ToSqlByte() {
+        public SqlByte ToSqlByte()
+        {
             return (SqlByte)this;
         }
 
-        public SqlDouble ToSqlDouble() {
+        public SqlDouble ToSqlDouble()
+        {
             return (SqlDouble)this;
         }
 
-        public SqlInt16 ToSqlInt16() {
+        public SqlInt16 ToSqlInt16()
+        {
             return (SqlInt16)this;
         }
 
-        public SqlInt32 ToSqlInt32() {
+        public SqlInt32 ToSqlInt32()
+        {
             return (SqlInt32)this;
         }
 
-        public SqlInt64 ToSqlInt64() {
+        public SqlInt64 ToSqlInt64()
+        {
             return (SqlInt64)this;
         }
 
-        public SqlMoney ToSqlMoney() {
+        public SqlMoney ToSqlMoney()
+        {
             return (SqlMoney)this;
         }
 
-        public SqlDecimal ToSqlDecimal() {
+        public SqlDecimal ToSqlDecimal()
+        {
             return (SqlDecimal)this;
         }
 
-        public SqlSingle ToSqlSingle() {
+        public SqlSingle ToSqlSingle()
+        {
             return (SqlSingle)this;
         }
 
-        public SqlString ToSqlString() {
+        public SqlString ToSqlString()
+        {
             return (SqlString)this;
         }
-
-
 
         // IComparable
         // Compares this object to another object, returning an integer that
@@ -510,8 +566,10 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int CompareTo(Object value) {
-            if (value is SqlBoolean) {
+        public int CompareTo(Object value)
+        {
+            if (value is SqlBoolean)
+            {
                 SqlBoolean i = (SqlBoolean)value;
 
                 return CompareTo(i);
@@ -519,16 +577,19 @@ namespace System.Data.SqlTypes {
             throw ADP.WrongType(value.GetType(), typeof(SqlBoolean));
         }
 
-        public int CompareTo(SqlBoolean value) {
+        public int CompareTo(SqlBoolean value)
+        {
             // If both Null, consider them equal.
             // Otherwise, Null is less than anything.
             if (IsNull)
-                return value.IsNull ? 0  : -1;
+                return value.IsNull ? 0 : -1;
             else if (value.IsNull)
                 return 1;
 
-            if (this.ByteValue < value.ByteValue) return -1;
-            if (this.ByteValue > value.ByteValue) return 1;
+            if (this.ByteValue < value.ByteValue)
+                return -1;
+            if (this.ByteValue > value.ByteValue)
+                return 1;
             return 0;
         }
 
@@ -536,8 +597,10 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override bool Equals(Object value) {
-            if (!(value is SqlBoolean)) {
+        public override bool Equals(Object value)
+        {
+            if (!(value is SqlBoolean))
+            {
                 return false;
             }
 
@@ -553,38 +616,50 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return IsNull ? 0 : Value.GetHashCode();
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        void IXmlSerializable.ReadXml(XmlReader reader) {
+        void IXmlSerializable.ReadXml(XmlReader reader)
+        {
             string isNull = reader.GetAttribute("nil", XmlSchema.InstanceNamespace);
-            if (isNull != null && XmlConvert.ToBoolean(isNull)) {
+            if (isNull != null && XmlConvert.ToBoolean(isNull))
+            {
                 // VSTFDevDiv# 479603 - SqlTypes read null value infinitely and never read the next value. Fix - Read the next value.
                 reader.ReadElementString();
                 m_value = x_Null;
             }
-            else {
-                m_value = (byte)(XmlConvert.ToBoolean(reader.ReadElementString()) ? x_True : x_False);
+            else
+            {
+                m_value = (byte)(
+                    XmlConvert.ToBoolean(reader.ReadElementString()) ? x_True : x_False
+                );
             }
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        void IXmlSerializable.WriteXml(XmlWriter writer) {
-            if (IsNull) {
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
+            if (IsNull)
+            {
                 writer.WriteAttributeString("xsi", "nil", XmlSchema.InstanceNamespace, "true");
             }
-            else {
+            else
+            {
                 writer.WriteString(m_value == x_True ? "true" : "false");
             }
         }
@@ -592,7 +667,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static XmlQualifiedName GetXsdType(XmlSchemaSet schemaSet) {
+        public static XmlQualifiedName GetXsdType(XmlSchemaSet schemaSet)
+        {
             return new XmlQualifiedName("boolean", XmlSchema.Namespace);
         }
 
@@ -603,7 +679,8 @@ namespace System.Data.SqlTypes {
         ///       the <see cref='System.Data.SqlTypes.SqlBoolean'/> class.
         ///    </para>
         /// </devdoc>
-        public static readonly SqlBoolean True      = new SqlBoolean(true);
+        public static readonly SqlBoolean True = new SqlBoolean(true);
+
         /// <devdoc>
         ///    <para>
         ///       Represents a false value that can be assigned to the
@@ -611,25 +688,24 @@ namespace System.Data.SqlTypes {
         ///       the <see cref='System.Data.SqlTypes.SqlBoolean'/> class.
         ///    </para>
         /// </devdoc>
-        public static readonly SqlBoolean False     = new SqlBoolean(false);
+        public static readonly SqlBoolean False = new SqlBoolean(false);
+
         /// <devdoc>
         ///    <para>
         ///       Represents a null value that can be assigned to the <see cref='System.Data.SqlTypes.SqlBoolean.Value'/> property of an instance of
         ///       the <see cref='System.Data.SqlTypes.SqlBoolean'/> class.
         ///    </para>
         /// </devdoc>
-        public static readonly SqlBoolean Null      = new SqlBoolean(0, true);
+        public static readonly SqlBoolean Null = new SqlBoolean(0, true);
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static readonly SqlBoolean Zero  = new SqlBoolean(0);
+        public static readonly SqlBoolean Zero = new SqlBoolean(0);
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static readonly SqlBoolean One   = new SqlBoolean(1);
-
-
+        public static readonly SqlBoolean One = new SqlBoolean(1);
     } // SqlBoolean
-
 } // namespace System.Data.SqlTypes

@@ -10,8 +10,6 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
     {
         public static RenameInvalidIdentifierAnnotation Instance = new();
 
-        private RenameInvalidIdentifierAnnotation()
-        {
-        }
+        private RenameInvalidIdentifierAnnotation() { }
     }
 }

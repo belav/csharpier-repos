@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,126 +30,124 @@
 using System;
 using System.Collections;
 
-namespace Cairo {
-   
-	public class Pattern : IDisposable
-	{
-		[Obsolete]
-		protected IntPtr pattern = IntPtr.Zero;
+namespace Cairo
+{
+    public class Pattern : IDisposable
+    {
+        [Obsolete]
+        protected IntPtr pattern = IntPtr.Zero;
 
-		public static Pattern Lookup (IntPtr pattern, bool owner)
-		{
-			if (pattern == IntPtr.Zero)
-				return null;
-			
-			PatternType pt = NativeMethods.cairo_pattern_get_type (pattern);
-			switch (pt) {
-			case PatternType.Solid:
-				return new SolidPattern (pattern, owner);
-			case PatternType.Surface:
-				return new SurfacePattern (pattern, owner);
-			case PatternType.Linear:
-				return new LinearGradient (pattern, owner);
-			case PatternType.Radial:
-				return new RadialGradient (pattern, owner);
-			default:
-				return new Pattern (pattern, owner);
-			}
-		}
+        public static Pattern Lookup(IntPtr pattern, bool owner)
+        {
+            if (pattern == IntPtr.Zero)
+                return null;
 
-		[Obsolete]
-		protected Pattern ()
-		{
-		}
-		
-		internal Pattern (IntPtr handle, bool owned)
-		{
-			Handle = handle;
-			if (!owned)
-				NativeMethods.cairo_pattern_reference (handle);
-			if (CairoDebug.Enabled)
-				CairoDebug.OnAllocated (handle);
-		}
+            PatternType pt = NativeMethods.cairo_pattern_get_type(pattern);
+            switch (pt)
+            {
+                case PatternType.Solid:
+                    return new SolidPattern(pattern, owner);
+                case PatternType.Surface:
+                    return new SurfacePattern(pattern, owner);
+                case PatternType.Linear:
+                    return new LinearGradient(pattern, owner);
+                case PatternType.Radial:
+                    return new RadialGradient(pattern, owner);
+                default:
+                    return new Pattern(pattern, owner);
+            }
+        }
 
-		~Pattern ()
-		{
-			Dispose (false);
-		}
-		
-		[Obsolete ("Use the SurfacePattern constructor")]
-		public Pattern (Surface surface)
-			: this ( NativeMethods.cairo_pattern_create_for_surface (surface.Handle), true)
-		{
-		}
-		
-		[Obsolete]
-		protected void Reference ()
-		{
-			NativeMethods.cairo_pattern_reference (pattern);
-		}
+        [Obsolete]
+        protected Pattern() { }
 
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
+        internal Pattern(IntPtr handle, bool owned)
+        {
+            Handle = handle;
+            if (!owned)
+                NativeMethods.cairo_pattern_reference(handle);
+            if (CairoDebug.Enabled)
+                CairoDebug.OnAllocated(handle);
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-			if (!disposing || CairoDebug.Enabled)
-				CairoDebug.OnDisposed<Pattern> (Handle, disposing);
+        ~Pattern()
+        {
+            Dispose(false);
+        }
 
-			if (!disposing|| Handle == IntPtr.Zero)
-				return;
+        [Obsolete("Use the SurfacePattern constructor")]
+        public Pattern(Surface surface)
+            : this(NativeMethods.cairo_pattern_create_for_surface(surface.Handle), true) { }
 
-			NativeMethods.cairo_pattern_destroy (Handle);
-			Handle = IntPtr.Zero;
-		}
+        [Obsolete]
+        protected void Reference()
+        {
+            NativeMethods.cairo_pattern_reference(pattern);
+        }
 
-		[Obsolete ("Use Dispose()")]
-		public void Destroy ()
-		{
-			Dispose ();
-		}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		public Status Status
-		{
-			get { return NativeMethods.cairo_pattern_status (Handle); }
-		}
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposing || CairoDebug.Enabled)
+                CairoDebug.OnDisposed<Pattern>(Handle, disposing);
 
-		public Extend Extend
-		{
-			get { return NativeMethods.cairo_pattern_get_extend (Handle); }
-			set { NativeMethods.cairo_pattern_set_extend (Handle, value); }
-		}
+            if (!disposing || Handle == IntPtr.Zero)
+                return;
 
-		public Matrix Matrix {
-			set {
-				NativeMethods.cairo_pattern_set_matrix (Handle, value);
-			}
+            NativeMethods.cairo_pattern_destroy(Handle);
+            Handle = IntPtr.Zero;
+        }
 
-			get {
-				Matrix m = new Matrix ();
-				NativeMethods.cairo_pattern_get_matrix (Handle, m);
-				return m;
-			}
-		}
+        [Obsolete("Use Dispose()")]
+        public void Destroy()
+        {
+            Dispose();
+        }
+
+        public Status Status
+        {
+            get { return NativeMethods.cairo_pattern_status(Handle); }
+        }
+
+        public Extend Extend
+        {
+            get { return NativeMethods.cairo_pattern_get_extend(Handle); }
+            set { NativeMethods.cairo_pattern_set_extend(Handle, value); }
+        }
+
+        public Matrix Matrix
+        {
+            set { NativeMethods.cairo_pattern_set_matrix(Handle, value); }
+            get
+            {
+                Matrix m = new Matrix();
+                NativeMethods.cairo_pattern_get_matrix(Handle, m);
+                return m;
+            }
+        }
 
 #pragma warning disable 612
-		public IntPtr Handle {
-			get { return pattern; }
-			private set { pattern = value; }
-		}
+        public IntPtr Handle
+        {
+            get { return pattern; }
+            private set { pattern = value; }
+        }
 #pragma warning restore 612
 
-		[Obsolete]
-		public IntPtr Pointer {
-			get { return pattern; }
-		}
+        [Obsolete]
+        public IntPtr Pointer
+        {
+            get { return pattern; }
+        }
 
-		public PatternType PatternType {
-			get { return NativeMethods.cairo_pattern_get_type (Handle); }
-		}
-	}
+        public PatternType PatternType
+        {
+            get { return NativeMethods.cairo_pattern_get_type(Handle); }
+        }
+    }
 }
-

@@ -121,7 +121,12 @@ namespace System.Net.Mime
             if (context._partsEnumerator.MoveNext())
             {
                 part = (MimeBasePart)context._partsEnumerator.Current;
-                IAsyncResult sendResult = part.BeginSend(context._writer, _mimePartSentCallback!, _allowUnicode, context);
+                IAsyncResult sendResult = part.BeginSend(
+                    context._writer,
+                    _mimePartSentCallback!,
+                    _allowUnicode,
+                    context
+                );
                 if (sendResult.CompletedSynchronously)
                 {
                     MimePartSentCallbackHandler(sendResult);
@@ -130,7 +135,10 @@ namespace System.Net.Mime
             }
             else
             {
-                IAsyncResult closeResult = ((MimeWriter)context._writer).BeginClose(new AsyncCallback(MimeWriterCloseCallback), context);
+                IAsyncResult closeResult = ((MimeWriter)context._writer).BeginClose(
+                    new AsyncCallback(MimeWriterCloseCallback),
+                    context
+                );
                 if (closeResult.CompletedSynchronously)
                 {
                     MimeWriterCloseCallbackHandler(closeResult);
@@ -167,7 +175,12 @@ namespace System.Net.Mime
                 MimeBasePart part = (MimeBasePart)context._partsEnumerator.Current;
 
                 _mimePartSentCallback = new AsyncCallback(MimePartSentCallback);
-                IAsyncResult sendResult = part.BeginSend(context._writer, _mimePartSentCallback, _allowUnicode, context);
+                IAsyncResult sendResult = part.BeginSend(
+                    context._writer,
+                    _mimePartSentCallback,
+                    _allowUnicode,
+                    context
+                );
                 if (sendResult.CompletedSynchronously)
                 {
                     MimePartSentCallbackHandler(sendResult);
@@ -176,7 +189,10 @@ namespace System.Net.Mime
             }
             else
             {
-                IAsyncResult closeResult = ((MimeWriter)context._writer).BeginClose(new AsyncCallback(MimeWriterCloseCallback), context);
+                IAsyncResult closeResult = ((MimeWriter)context._writer).BeginClose(
+                    new AsyncCallback(MimeWriterCloseCallback),
+                    context
+                );
                 if (closeResult.CompletedSynchronously)
                 {
                     MimeWriterCloseCallbackHandler(closeResult);
@@ -184,15 +200,22 @@ namespace System.Net.Mime
             }
         }
 
-        internal override IAsyncResult BeginSend(BaseWriter writer, AsyncCallback? callback, bool allowUnicode,
-            object? state)
+        internal override IAsyncResult BeginSend(
+            BaseWriter writer,
+            AsyncCallback? callback,
+            bool allowUnicode,
+            object? state
+        )
         {
             _allowUnicode = allowUnicode;
             PrepareHeaders(allowUnicode);
             writer.WriteHeaders(Headers, allowUnicode);
             MimePartAsyncResult result = new MimePartAsyncResult(this, state, callback);
             MimePartContext context = new MimePartContext(writer, result, Parts.GetEnumerator());
-            IAsyncResult contentResult = writer.BeginGetContentStream(new AsyncCallback(ContentStreamCallback), context);
+            IAsyncResult contentResult = writer.BeginGetContentStream(
+                new AsyncCallback(ContentStreamCallback),
+                context
+            );
             if (contentResult.CompletedSynchronously)
             {
                 ContentStreamCallbackHandler(contentResult);
@@ -202,7 +225,11 @@ namespace System.Net.Mime
 
         internal sealed class MimePartContext
         {
-            internal MimePartContext(BaseWriter writer, LazyAsyncResult result, IEnumerator<MimeBasePart> partsEnumerator)
+            internal MimePartContext(
+                BaseWriter writer,
+                LazyAsyncResult result,
+                IEnumerator<MimeBasePart> partsEnumerator
+            )
             {
                 _writer = writer;
                 _result = result;

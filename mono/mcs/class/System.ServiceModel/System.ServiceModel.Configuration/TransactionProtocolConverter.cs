@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,36 +28,44 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
 using System.Globalization;
+using System.Text;
 
 namespace System.ServiceModel.Configuration
 {
-	sealed class TransactionProtocolConverter : TypeConverter
-	{
-		static TransactionProtocolConverter _instance = new TransactionProtocolConverter ();
+    sealed class TransactionProtocolConverter : TypeConverter
+    {
+        static TransactionProtocolConverter _instance = new TransactionProtocolConverter();
 
-		public static TransactionProtocolConverter Instance {
-			get { return _instance; }
-		}
+        public static TransactionProtocolConverter Instance
+        {
+            get { return _instance; }
+        }
 
-		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType) {
-			return sourceType == typeof (string);
-		}
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
+            return sourceType == typeof(string);
+        }
 
-		public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value) {
-			string valueString = (string) value;
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
+        {
+            string valueString = (string)value;
 
-			switch (valueString.ToLower (CultureInfo.InvariantCulture)) {
-			case "default":
-				return TransactionProtocol.Default;
-			case "oletransactions":
-				return TransactionProtocol.OleTransactions;
-			case "wsatomictransactionoctober2004":
-				return TransactionProtocol.WSAtomicTransactionOctober2004;
-			}
-			throw new NotSupportedException ();
-		}
-	}
+            switch (valueString.ToLower(CultureInfo.InvariantCulture))
+            {
+                case "default":
+                    return TransactionProtocol.Default;
+                case "oletransactions":
+                    return TransactionProtocol.OleTransactions;
+                case "wsatomictransactionoctober2004":
+                    return TransactionProtocol.WSAtomicTransactionOctober2004;
+            }
+            throw new NotSupportedException();
+        }
+    }
 }

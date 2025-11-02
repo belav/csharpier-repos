@@ -16,7 +16,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { new ViewEngineResult(searchedLocations); }, "searchedLocations");
+                delegate
+                {
+                    new ViewEngineResult(searchedLocations);
+                },
+                "searchedLocations"
+            );
         }
 
         [Fact]
@@ -27,7 +32,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { new ViewEngineResult(view, null); }, "view");
+                delegate
+                {
+                    new ViewEngineResult(view, null);
+                },
+                "view"
+            );
         }
 
         [Fact]
@@ -38,7 +48,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { new ViewEngineResult(view, null); }, "viewEngine");
+                delegate
+                {
+                    new ViewEngineResult(view, null);
+                },
+                "viewEngine"
+            );
         }
 
         [Fact]

@@ -23,7 +23,11 @@ namespace System.Web.Http
         /// <param name="configuration">configuration to be updated.</param>
         /// <param name="type">parameter type that binder is applied to</param>
         /// <param name="binder">a model binder</param>
-        public static void BindParameter(this HttpConfiguration configuration, Type type, IModelBinder binder)
+        public static void BindParameter(
+            this HttpConfiguration configuration,
+            Type type,
+            IModelBinder binder
+        )
         {
             if (configuration == null)
             {
@@ -39,15 +43,23 @@ namespace System.Web.Http
             }
 
             // Add a provider so that we can use this type recursively
-            // Be sure to insert at position 0 to preempt any eager binders (eg, MutableObjectBinder) that 
+            // Be sure to insert at position 0 to preempt any eager binders (eg, MutableObjectBinder) that
             // may eagerly claim all types.
-            configuration.Services.Insert(typeof(ModelBinderProvider), 0, new SimpleModelBinderProvider(type, binder));
+            configuration.Services.Insert(
+                typeof(ModelBinderProvider),
+                0,
+                new SimpleModelBinderProvider(type, binder)
+            );
 
-            // Add the binder to the list of rules. 
-            // This ensures that the parameter binding will actually use model binding instead of Formatters.            
+            // Add the binder to the list of rules.
+            // This ensures that the parameter binding will actually use model binding instead of Formatters.
             // Without this, the parameter binding system may see the parameter type is complex and choose
-            // to use formatters instead, in which case it would ignore the registered model binders. 
-            configuration.ParameterBindingRules.Insert(0, type, param => param.BindWithModelBinding(binder));
+            // to use formatters instead, in which case it would ignore the registered model binders.
+            configuration.ParameterBindingRules.Insert(
+                0,
+                type,
+                param => param.BindWithModelBinding(binder)
+            );
         }
 
         /// <summary>
@@ -63,7 +75,11 @@ namespace System.Web.Http
                 throw new ArgumentNullException("configuration");
             }
 
-            AttributeRoutingMapper.MapAttributeRoutes(configuration, new DefaultInlineConstraintResolver(), new DefaultDirectRouteProvider());
+            AttributeRoutingMapper.MapAttributeRoutes(
+                configuration,
+                new DefaultInlineConstraintResolver(),
+                new DefaultDirectRouteProvider()
+            );
         }
 
         /// <summary>
@@ -75,8 +91,10 @@ namespace System.Web.Http
         /// </param>
         // Corresponds to the MVC implementation of attribute routing in
         // System.Web.Mvc.RouteCollectionAttributeRoutingExtensions.
-        public static void MapHttpAttributeRoutes(this HttpConfiguration configuration,
-            IInlineConstraintResolver constraintResolver)
+        public static void MapHttpAttributeRoutes(
+            this HttpConfiguration configuration,
+            IInlineConstraintResolver constraintResolver
+        )
         {
             if (configuration == null)
             {
@@ -88,7 +106,11 @@ namespace System.Web.Http
                 throw new ArgumentNullException("constraintResolver");
             }
 
-            AttributeRoutingMapper.MapAttributeRoutes(configuration, constraintResolver, new DefaultDirectRouteProvider());
+            AttributeRoutingMapper.MapAttributeRoutes(
+                configuration,
+                constraintResolver,
+                new DefaultDirectRouteProvider()
+            );
         }
 
         /// <summary>
@@ -102,7 +124,8 @@ namespace System.Web.Http
         // System.Web.Mvc.RouteCollectionAttributeRoutingExtensions.
         public static void MapHttpAttributeRoutes(
             this HttpConfiguration configuration,
-            IDirectRouteProvider directRouteProvider)
+            IDirectRouteProvider directRouteProvider
+        )
         {
             if (configuration == null)
             {
@@ -114,7 +137,11 @@ namespace System.Web.Http
                 throw new ArgumentNullException("directRouteProvider");
             }
 
-            AttributeRoutingMapper.MapAttributeRoutes(configuration, new DefaultInlineConstraintResolver(), directRouteProvider);
+            AttributeRoutingMapper.MapAttributeRoutes(
+                configuration,
+                new DefaultInlineConstraintResolver(),
+                directRouteProvider
+            );
         }
 
         /// <summary>
@@ -132,7 +159,8 @@ namespace System.Web.Http
         public static void MapHttpAttributeRoutes(
             this HttpConfiguration configuration,
             IInlineConstraintResolver constraintResolver,
-            IDirectRouteProvider directRouteProvider)
+            IDirectRouteProvider directRouteProvider
+        )
         {
             if (configuration == null)
             {
@@ -149,14 +177,20 @@ namespace System.Web.Http
                 throw new ArgumentNullException("directRouteProvider");
             }
 
-            AttributeRoutingMapper.MapAttributeRoutes(configuration, constraintResolver, directRouteProvider);
+            AttributeRoutingMapper.MapAttributeRoutes(
+                configuration,
+                constraintResolver,
+                directRouteProvider
+            );
         }
 
-        // Test Hook for inspecting the route table generated by MapHttpAttributeRoutes. 
+        // Test Hook for inspecting the route table generated by MapHttpAttributeRoutes.
         // MapHttpAttributeRoutes doesn't return the route collection because it's an implementation detail
-        // that attr routes even generate a meaningful route collection. 
+        // that attr routes even generate a meaningful route collection.
         // Public APIs can get similar functionality by querying the IHttpRoute for IReadOnlyCollection<IHttpRoute>.
-        internal static IReadOnlyCollection<IHttpRoute> GetAttributeRoutes(this HttpConfiguration configuration)
+        internal static IReadOnlyCollection<IHttpRoute> GetAttributeRoutes(
+            this HttpConfiguration configuration
+        )
         {
             configuration.EnsureInitialized();
 
@@ -180,8 +214,11 @@ namespace System.Web.Http
         /// ignored. The remaining pipeline within the <see cref="HttpServer"/>, including
         /// <see cref="IAuthenticationFilter"/>s, is then the exclusive authority for authentication.
         /// </remarks>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
-            Justification = "Message handler should be disposed with parent configuration.")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Message handler should be disposed with parent configuration."
+        )]
         public static void SuppressHostPrincipal(this HttpConfiguration configuration)
         {
             if (configuration == null)

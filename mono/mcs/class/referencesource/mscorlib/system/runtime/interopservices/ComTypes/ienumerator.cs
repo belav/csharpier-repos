@@ -1,20 +1,20 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*==========================================================================
 **
 ** Interface:  IEnumerator
 **
 **
-** Purpose: 
-** This interface is redefined here since the original IEnumerator interface 
-** has all its methods marked as ecall's since it is a managed standard 
-** interface. This interface is used from within the runtime to make a call 
+** Purpose:
+** This interface is redefined here since the original IEnumerator interface
+** has all its methods marked as ecall's since it is a managed standard
+** interface. This interface is used from within the runtime to make a call
 ** on the COM server directly when it implements the IEnumerator interface.
 **
-** 
+**
 ==========================================================================*/
 #if !MOBILE
 namespace System.Runtime.InteropServices.ComTypes
@@ -26,10 +26,7 @@ namespace System.Runtime.InteropServices.ComTypes
     {
         bool MoveNext();
 
-        Object Current
-        {
-            get; 
-        }
+        Object Current { get; }
 
         void Reset();
     }

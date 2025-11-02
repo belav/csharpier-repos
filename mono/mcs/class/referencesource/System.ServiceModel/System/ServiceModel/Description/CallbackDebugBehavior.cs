@@ -1,14 +1,14 @@
 //------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
-namespace System.ServiceModel.Description 
+namespace System.ServiceModel.Description
 {
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Dispatcher;
-    using System.Runtime.Serialization;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
 
     public class CallbackDebugBehavior : IEndpointBehavior
     {
@@ -25,20 +25,36 @@ namespace System.ServiceModel.Description
             set { this.includeExceptionDetailInFaults = value; }
         }
 
-        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint)
+        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint) { }
+
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint serviceEndpoint,
+            BindingParameterCollection bindingParameters
+        ) { }
+
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint serviceEndpoint,
+            EndpointDispatcher endpointDispatcher
+        )
         {
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(
+                        SR.SFXEndpointBehaviorUsedOnWrongSide,
+                        typeof(CallbackDebugBehavior).Name
+                    )
+                )
+            );
         }
-        void IEndpointBehavior.AddBindingParameters(ServiceEndpoint serviceEndpoint, BindingParameterCollection bindingParameters)
+
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint serviceEndpoint,
+            ClientRuntime behavior
+        )
         {
-        }
-        void IEndpointBehavior.ApplyDispatchBehavior(ServiceEndpoint serviceEndpoint, EndpointDispatcher endpointDispatcher)
-        {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                SR.GetString(SR.SFXEndpointBehaviorUsedOnWrongSide, typeof(CallbackDebugBehavior).Name)));
-        }
-        void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint serviceEndpoint, ClientRuntime behavior)
-        {
-            ChannelDispatcher channelDispatcher = behavior.CallbackDispatchRuntime.ChannelDispatcher;
+            ChannelDispatcher channelDispatcher = behavior
+                .CallbackDispatchRuntime
+                .ChannelDispatcher;
             if (channelDispatcher != null && this.includeExceptionDetailInFaults)
             {
                 channelDispatcher.IncludeExceptionDetailInFaults = true;

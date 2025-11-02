@@ -17,6 +17,7 @@ internal static partial class Interop
             CertEncodingType dwCertEncodingType,
             ref CERT_PUBLIC_KEY_INFO pInfo,
             byte[] pbComputedHash,
-            ref int pcbComputedHash);
+            ref int pcbComputedHash
+        );
     }
 }

@@ -1,18 +1,18 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-namespace DefaultNamespace {
+namespace DefaultNamespace
+{
     using System;
     using System.Runtime.InteropServices;
 
     internal class NDPin
     {
-
         internal Object p;
         internal static NDPin m_n;
         internal static Object m_o;
 
-        internal NDPin (Object p)
+        internal NDPin(Object p)
         {
             this.p = p;
         }
@@ -26,9 +26,8 @@ namespace DefaultNamespace {
 
             for (int i = 0; i < 100000; i++)
             {
-
                 m_o = new int[10];
-                m_n = new NDPin (m_o);
+                m_n = new NDPin(m_o);
                 h.Free();
                 h = GCHandle.Alloc(m_o, GCHandleType.Pinned);
             }
@@ -40,13 +39,11 @@ namespace DefaultNamespace {
 
             if (result)
             {
-                Console.WriteLine ("Test Passed");
+                Console.WriteLine("Test Passed");
                 return 100;
             }
-            Console.WriteLine ("Test Failed");
+            Console.WriteLine("Test Failed");
             return 1;
         }
-
     }
-
 }

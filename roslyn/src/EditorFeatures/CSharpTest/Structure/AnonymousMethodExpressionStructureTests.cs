@@ -12,41 +12,45 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class AnonymousMethodExpressionTests : AbstractCSharpSyntaxNodeStructureTests<AnonymousMethodExpressionSyntax>
+public class AnonymousMethodExpressionTests
+    : AbstractCSharpSyntaxNodeStructureTests<AnonymousMethodExpressionSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new AnonymousMethodExpressionStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new AnonymousMethodExpressionStructureProvider();
 
     [Fact]
     public async Task TestAnonymousMethod()
     {
         var code = """
-                class C
+            class C
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        $${|hint:delegate {|textspan:{
-                            x();
-                        };|}|}
-                    }
+                    $${|hint:delegate {|textspan:{
+                        x();
+                    };|}|}
                 }
-                """;
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
     public async Task TestAnonymousMethodInForLoop()
     {
         var code = """
-                class C
+            class C
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        for (Action a = $$delegate { }; true; a()) { }
-                    }
+                    for (Action a = $$delegate { }; true; a()) { }
                 }
-                """;
+            }
+            """;
 
         await VerifyNoBlockSpansAsync(code);
     }
@@ -55,37 +59,41 @@ public class AnonymousMethodExpressionTests : AbstractCSharpSyntaxNodeStructureT
     public async Task TestAnonymousMethodInMethodCall1()
     {
         var code = """
-                class C
+            class C
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        someMethod(42, "test", false, {|hint:$$delegate(int x, int y, int z) {|textspan:{
-                            return x + y + z;
-                        }|}|}, "other arguments");
-                    }
+                    someMethod(42, "test", false, {|hint:$$delegate(int x, int y, int z) {|textspan:{
+                        return x + y + z;
+                    }|}|}, "other arguments");
                 }
-                """;
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
     public async Task TestAnonymousMethodInMethodCall2()
     {
         var code = """
-                class C
+            class C
+            {
+                void Main()
                 {
-                    void Main()
-                    {
-                        someMethod(42, "test", false, {|hint:$$delegate(int x, int y, int z) {|textspan:{
-                            return x + y + z;
-                        }|}|});
-                    }
+                    someMethod(42, "test", false, {|hint:$$delegate(int x, int y, int z) {|textspan:{
+                        return x + y + z;
+                    }|}|});
                 }
-                """;
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 }

@@ -12,23 +12,39 @@ namespace System.Text.Json.Serialization.Converters
     /// Implementation of <cref>JsonObjectConverter{T}</cref> that supports the deserialization
     /// of JSON objects using parameterized constructors.
     /// </summary>
-    internal sealed class SmallObjectWithParameterizedConstructorConverter<T, TArg0, TArg1, TArg2, TArg3> : ObjectWithParameterizedConstructorConverter<T> where T : notnull
+    internal sealed class SmallObjectWithParameterizedConstructorConverter<
+        T,
+        TArg0,
+        TArg1,
+        TArg2,
+        TArg3
+    > : ObjectWithParameterizedConstructorConverter<T>
+        where T : notnull
     {
         protected override object CreateObject(ref ReadStackFrame frame)
         {
-            var createObject = (JsonTypeInfo.ParameterizedConstructorDelegate<T, TArg0, TArg1, TArg2, TArg3>)
+            var createObject = (JsonTypeInfo.ParameterizedConstructorDelegate<
+                T,
+                TArg0,
+                TArg1,
+                TArg2,
+                TArg3
+            >)
                 frame.JsonTypeInfo.CreateObjectWithArgs!;
-            var arguments = (Arguments<TArg0, TArg1, TArg2, TArg3>)frame.CtorArgumentState!.Arguments;
+            var arguments =
+                (Arguments<TArg0, TArg1, TArg2, TArg3>)frame.CtorArgumentState!.Arguments;
             return createObject!(arguments.Arg0, arguments.Arg1, arguments.Arg2, arguments.Arg3);
         }
 
         protected override bool ReadAndCacheConstructorArgument(
             scoped ref ReadStack state,
             ref Utf8JsonReader reader,
-            JsonParameterInfo jsonParameterInfo)
+            JsonParameterInfo jsonParameterInfo
+        )
         {
             Debug.Assert(state.Current.CtorArgumentState!.Arguments != null);
-            var arguments = (Arguments<TArg0, TArg1, TArg2, TArg3>)state.Current.CtorArgumentState.Arguments;
+            var arguments =
+                (Arguments<TArg0, TArg1, TArg2, TArg3>)state.Current.CtorArgumentState.Arguments;
 
             bool success;
 
@@ -47,7 +63,9 @@ namespace System.Text.Json.Serialization.Converters
                     success = TryRead(ref state, ref reader, jsonParameterInfo, out arguments.Arg3);
                     break;
                 default:
-                    Debug.Fail("More than 4 params: we should be in override for LargeObjectWithParameterizedConstructorConverter.");
+                    Debug.Fail(
+                        "More than 4 params: we should be in override for LargeObjectWithParameterizedConstructorConverter."
+                    );
                     throw new InvalidOperationException();
             }
 
@@ -58,17 +76,26 @@ namespace System.Text.Json.Serialization.Converters
             scoped ref ReadStack state,
             ref Utf8JsonReader reader,
             JsonParameterInfo jsonParameterInfo,
-            out TArg? arg)
+            out TArg? arg
+        )
         {
             Debug.Assert(jsonParameterInfo.ShouldDeserialize);
 
             var info = (JsonParameterInfo<TArg>)jsonParameterInfo;
 
-            bool success = info.EffectiveConverter.TryRead(ref reader, info.ParameterType, info.Options, ref state, out TArg? value, out _);
+            bool success = info.EffectiveConverter.TryRead(
+                ref reader,
+                info.ParameterType,
+                info.Options,
+                ref state,
+                out TArg? value,
+                out _
+            );
 
-            arg = value is null && jsonParameterInfo.IgnoreNullTokensOnRead
-                ? info.DefaultValue // Use default value specified on parameter, if any.
-                : value;
+            arg =
+                value is null && jsonParameterInfo.IgnoreNullTokensOnRead
+                    ? info.DefaultValue // Use default value specified on parameter, if any.
+                    : value;
 
             if (success)
             {
@@ -78,7 +105,10 @@ namespace System.Text.Json.Serialization.Converters
             return success;
         }
 
-        protected override void InitializeConstructorArgumentCaches(ref ReadStack state, JsonSerializerOptions options)
+        protected override void InitializeConstructorArgumentCaches(
+            ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
 
@@ -105,7 +135,9 @@ namespace System.Text.Json.Serialization.Converters
                         arguments.Arg3 = ((JsonParameterInfo<TArg3>)parameterInfo).DefaultValue;
                         break;
                     default:
-                        Debug.Fail("More than 4 params: we should be in override for LargeObjectWithParameterizedConstructorConverter.");
+                        Debug.Fail(
+                            "More than 4 params: we should be in override for LargeObjectWithParameterizedConstructorConverter."
+                        );
                         throw new InvalidOperationException();
                 }
             }
@@ -115,9 +147,19 @@ namespace System.Text.Json.Serialization.Converters
 
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
-        internal override void ConfigureJsonTypeInfoUsingReflection(JsonTypeInfo jsonTypeInfo, JsonSerializerOptions options)
+        internal override void ConfigureJsonTypeInfoUsingReflection(
+            JsonTypeInfo jsonTypeInfo,
+            JsonSerializerOptions options
+        )
         {
-            jsonTypeInfo.CreateObjectWithArgs = DefaultJsonTypeInfoResolver.MemberAccessor.CreateParameterizedConstructor<T, TArg0, TArg1, TArg2, TArg3>(ConstructorInfo!);
+            jsonTypeInfo.CreateObjectWithArgs =
+                DefaultJsonTypeInfoResolver.MemberAccessor.CreateParameterizedConstructor<
+                    T,
+                    TArg0,
+                    TArg1,
+                    TArg2,
+                    TArg3
+                >(ConstructorInfo!);
         }
     }
 }

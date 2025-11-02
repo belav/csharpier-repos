@@ -11,20 +11,62 @@ namespace System.Net.Mail.Tests
     {
         public static IEnumerable<object[]> GetValidEmailTestData()
         {
-            yield return new object[] { "(comment)this.test.this(comment)<(comment)this.test.this(comment)@(comment)this.test.this(comment)>" };
-            yield return new object[] { "(comment)\" asciin;,oqu o.tesws \"(comment)<(comment)this.test.this(comment)@(comment)this.test.this(comment)>" };
-            yield return new object[] { "(comment)this.test.this(comment)<(comment)this.test.this(comment)@(comment)[  test this ](comment)>" };
-            yield return new object[] { "(comment)\" asciin;,oqu o.tesws \"(comment)<(comment)this.test.this(comment)@(comment)[  test this ](comment)>" };
-            yield return new object[] { "(comment)this.test.this(comment)<(comment)\" asciin;,oqu o.tesws \"(comment)@(comment)[  test this ](comment)>" };
-            yield return new object[] { "(comment)this(comment)<(comment)\" asciin);,oqu o.tesws \"(comment)@(comment)[  test this ](comment)>" };
-            yield return new object[] { "(comment)\" asciin;,oqu o.tesws \"(comment)<(comment)\" asciin;,oqu o.tesws \"(comment)@(comment)[  test this ](comment)>" };
-            yield return new object[] { "(comment)this.test.this(comment)<(comment)\" asciin;,oqu o.tesws \"(comment)@(comment)this.test.this(comment)>" };
-            yield return new object[] { "(comment)this(comment)<(comment)\" asciin;,oqu o.tesws \"(comment)@(comment)this.test.this(comment)>" };
-            yield return new object[] { "(comment)\" asciin;,oqu o.tesws \"(comment)<(comment)\" asciin;,oqu o.tesws \"(comment)@(comment)this.test.this(comment)>" };
-            yield return new object[] { "(comment)this.test.this(comment)@(comment)this.test.this(comment)" };
-            yield return new object[] { "(comment)this.test.this(comment)@(comment)[  test this ](comment)" };
-            yield return new object[] { "(comment)\" asciin;,oqu o.tesws \"(comment)@(comment)[  test this ](comment)" };
-            yield return new object[] { "(comment)\" asciin;,oqu o.tesws \"(comment)@(comment)this.test.this(comment)" };
+            yield return new object[]
+            {
+                "(comment)this.test.this(comment)<(comment)this.test.this(comment)@(comment)this.test.this(comment)>",
+            };
+            yield return new object[]
+            {
+                "(comment)\" asciin;,oqu o.tesws \"(comment)<(comment)this.test.this(comment)@(comment)this.test.this(comment)>",
+            };
+            yield return new object[]
+            {
+                "(comment)this.test.this(comment)<(comment)this.test.this(comment)@(comment)[  test this ](comment)>",
+            };
+            yield return new object[]
+            {
+                "(comment)\" asciin;,oqu o.tesws \"(comment)<(comment)this.test.this(comment)@(comment)[  test this ](comment)>",
+            };
+            yield return new object[]
+            {
+                "(comment)this.test.this(comment)<(comment)\" asciin;,oqu o.tesws \"(comment)@(comment)[  test this ](comment)>",
+            };
+            yield return new object[]
+            {
+                "(comment)this(comment)<(comment)\" asciin);,oqu o.tesws \"(comment)@(comment)[  test this ](comment)>",
+            };
+            yield return new object[]
+            {
+                "(comment)\" asciin;,oqu o.tesws \"(comment)<(comment)\" asciin;,oqu o.tesws \"(comment)@(comment)[  test this ](comment)>",
+            };
+            yield return new object[]
+            {
+                "(comment)this.test.this(comment)<(comment)\" asciin;,oqu o.tesws \"(comment)@(comment)this.test.this(comment)>",
+            };
+            yield return new object[]
+            {
+                "(comment)this(comment)<(comment)\" asciin;,oqu o.tesws \"(comment)@(comment)this.test.this(comment)>",
+            };
+            yield return new object[]
+            {
+                "(comment)\" asciin;,oqu o.tesws \"(comment)<(comment)\" asciin;,oqu o.tesws \"(comment)@(comment)this.test.this(comment)>",
+            };
+            yield return new object[]
+            {
+                "(comment)this.test.this(comment)@(comment)this.test.this(comment)",
+            };
+            yield return new object[]
+            {
+                "(comment)this.test.this(comment)@(comment)[  test this ](comment)",
+            };
+            yield return new object[]
+            {
+                "(comment)\" asciin;,oqu o.tesws \"(comment)@(comment)[  test this ](comment)",
+            };
+            yield return new object[]
+            {
+                "(comment)\" asciin;,oqu o.tesws \"(comment)@(comment)this.test.this(comment)",
+            };
             yield return new object[] { "(comment)displayname(comment) <a@b.c>" };
             yield return new object[] { "a.b <c@d.e>" };
             yield return new object[] { "\"Spaced Out\"@NCLMailTest.com" };
@@ -84,17 +126,26 @@ namespace System.Net.Mail.Tests
             yield return new object[] { "user.\"name\"@domain" };
             yield return new object[] { "((NestedComment)) <\"testsome\"@NCLMailTest.com>" };
             yield return new object[] { "<testsome@NCLMailTest.com> (double) (comments)" };
-            yield return new object[] { "(Escaped Unicode \\\u3044 Comment) <\"testsome\"@NCLMailTest.com>" };
+            yield return new object[]
+            {
+                "(Escaped Unicode \\\u3044 Comment) <\"testsome\"@NCLMailTest.com>",
+            };
             yield return new object[] { "(com\\)ment) <\"testsome\"@NCLMailTest.com>" };
             yield return new object[] { "(com \f ment) <\"testsome\"@NCLMailTest.com>" };
             yield return new object[] { "\"disp \f lay\" <\"testsome\"@NCLMailTest.com>" };
-            yield return new object[] { "\"EscapedUnicode \\\u3044\\\u3069 display\" <testUser1@NCLMailTest.com>" };
+            yield return new object[]
+            {
+                "\"EscapedUnicode \\\u3044\\\u3069 display\" <testUser1@NCLMailTest.com>",
+            };
             yield return new object[] { "(Unicode \u3044 Comment) <\"testsome\"@NCLMailTest.com>" };
             yield return new object[] { "\"display \r\n name\" <\"folding\"@domain.com>" };
             yield return new object[] { "\"test\r\n test\"@mail.com" };
             // Email Address Internationalization (EAI)
             yield return new object[] { "UnicodeUserName \"Test\u3044\u3069\"@NCLMailTest.com" };
-            yield return new object[] { "<\"EscapedUnicode \\\u3044\\\u3069 User\"@NCLMailTest.com>" };
+            yield return new object[]
+            {
+                "<\"EscapedUnicode \\\u3044\\\u3069 User\"@NCLMailTest.com>",
+            };
             yield return new object[] { "\"UnicodeUserName\" <\u3044.\u3069@NCLMailTest.com>" };
             yield return new object[] { "\"UnicodeDomainName\" <user@\u3044.\u3069>" };
             yield return new object[] { "\u3044 \u3069 \u3044.\u3069@\u3044.\u3069" };
@@ -158,7 +209,10 @@ namespace System.Net.Mail.Tests
             string[] data = GetInvalidEmailTestData().Select(d => (string)d.First()).ToArray();
             string emails = string.Join(",", data);
 
-            Assert.Throws<FormatException>(() => { MailAddressParser.ParseMultipleAddresses(emails); });
+            Assert.Throws<FormatException>(() =>
+            {
+                MailAddressParser.ParseMultipleAddresses(emails);
+            });
         }
 
         [Theory]

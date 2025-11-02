@@ -36,7 +36,8 @@ public abstract class TypeAttributeConventionBase<TAttribute> : IEntityTypeAdded
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
         var type = entityTypeBuilder.Metadata.ClrType;
 
@@ -58,7 +59,8 @@ public abstract class TypeAttributeConventionBase<TAttribute> : IEntityTypeAdded
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessComplexPropertyAdded(
         IConventionComplexPropertyBuilder propertyBuilder,
-        IConventionContext<IConventionComplexPropertyBuilder> context)
+        IConventionContext<IConventionComplexPropertyBuilder> context
+    )
     {
         var complexType = propertyBuilder.Metadata.ComplexType;
         var type = complexType.ClrType;
@@ -82,7 +84,8 @@ public abstract class TypeAttributeConventionBase<TAttribute> : IEntityTypeAdded
     protected abstract void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
         TAttribute attribute,
-        IConventionContext<IConventionEntityTypeBuilder> context);
+        IConventionContext<IConventionEntityTypeBuilder> context
+    );
 
     /// <summary>
     ///     Called after an complex type is added to the model if it has an attribute.
@@ -93,8 +96,8 @@ public abstract class TypeAttributeConventionBase<TAttribute> : IEntityTypeAdded
     protected virtual void ProcessComplexTypeAdded(
         IConventionComplexTypeBuilder complexTypeBuilder,
         TAttribute attribute,
-        IConventionContext context)
-        => throw new NotSupportedException();
+        IConventionContext context
+    ) => throw new NotSupportedException();
 
     /// <summary>
     ///     Tries to replace the complex type with an entity type.
@@ -104,10 +107,16 @@ public abstract class TypeAttributeConventionBase<TAttribute> : IEntityTypeAdded
     /// <returns>The builder for the new entity type.</returns>
     protected virtual IConventionEntityTypeBuilder? ReplaceWithEntityType(
         IConventionComplexTypeBuilder complexTypeBuilder,
-        bool? shouldBeOwned = null)
+        bool? shouldBeOwned = null
+    )
     {
         var modelBuilder = complexTypeBuilder.ModelBuilder;
-        if (!modelBuilder.CanHaveEntity(complexTypeBuilder.Metadata.ClrType, fromDataAnnotation: true))
+        if (
+            !modelBuilder.CanHaveEntity(
+                complexTypeBuilder.Metadata.ClrType,
+                fromDataAnnotation: true
+            )
+        )
         {
             return null;
         }
@@ -116,14 +125,24 @@ public abstract class TypeAttributeConventionBase<TAttribute> : IEntityTypeAdded
         switch (complexProperty.DeclaringType.Builder)
         {
             case IConventionEntityTypeBuilder conventionEntityTypeBuilder:
-                if (conventionEntityTypeBuilder.HasNoComplexProperty(complexProperty, fromDataAnnotation: true) == null)
+                if (
+                    conventionEntityTypeBuilder.HasNoComplexProperty(
+                        complexProperty,
+                        fromDataAnnotation: true
+                    ) == null
+                )
                 {
                     return null;
                 }
 
                 break;
             case IConventionComplexTypeBuilder conventionComplexTypeBuilder:
-                if (conventionComplexTypeBuilder.HasNoComplexProperty(complexProperty, fromDataAnnotation: true) == null)
+                if (
+                    conventionComplexTypeBuilder.HasNoComplexProperty(
+                        complexProperty,
+                        fromDataAnnotation: true
+                    ) == null
+                )
                 {
                     return null;
                 }
@@ -131,6 +150,10 @@ public abstract class TypeAttributeConventionBase<TAttribute> : IEntityTypeAdded
                 break;
         }
 
-        return complexTypeBuilder.ModelBuilder.Entity(complexTypeBuilder.Metadata.ClrType, shouldBeOwned, fromDataAnnotation: true);
+        return complexTypeBuilder.ModelBuilder.Entity(
+            complexTypeBuilder.Metadata.ClrType,
+            shouldBeOwned,
+            fromDataAnnotation: true
+        );
     }
 }

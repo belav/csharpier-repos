@@ -12,17 +12,25 @@ using Microsoft.CodeAnalysis.UseCoalesceExpression;
 namespace Microsoft.CodeAnalysis.CSharp.UseCoalesceExpression
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpUseCoalesceExpressionForTernaryConditionalCheckDiagnosticAnalyzer :
-        AbstractUseCoalesceExpressionForTernaryConditionalCheckDiagnosticAnalyzer<
+    internal class CSharpUseCoalesceExpressionForTernaryConditionalCheckDiagnosticAnalyzer
+        : AbstractUseCoalesceExpressionForTernaryConditionalCheckDiagnosticAnalyzer<
             SyntaxKind,
             ExpressionSyntax,
             ConditionalExpressionSyntax,
-            BinaryExpressionSyntax>
+            BinaryExpressionSyntax
+        >
     {
-        protected override ISyntaxFacts GetSyntaxFacts()
-            => CSharpSyntaxFacts.Instance;
+        protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;
 
-        protected override bool IsTargetTyped(SemanticModel semanticModel, ConditionalExpressionSyntax conditional, CancellationToken cancellationToken)
-            => UseCoalesceExpressionHelpers.IsTargetTyped(semanticModel, conditional, cancellationToken);
+        protected override bool IsTargetTyped(
+            SemanticModel semanticModel,
+            ConditionalExpressionSyntax conditional,
+            CancellationToken cancellationToken
+        ) =>
+            UseCoalesceExpressionHelpers.IsTargetTyped(
+                semanticModel,
+                conditional,
+                cancellationToken
+            );
     }
 }

@@ -118,7 +118,13 @@ namespace System.Reflection.Context.Delegation
             return UnderlyingField.IsDefined(attributeType, inherit);
         }
 
-        public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, CultureInfo? culture)
+        public override void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            CultureInfo? culture
+        )
         {
             UnderlyingField.SetValue(obj, value, invokeAttr, binder, culture);
         }

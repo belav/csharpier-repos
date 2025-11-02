@@ -27,10 +27,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public string AlgorithmGroup
         {
-            get
-            {
-                return _algorithmGroup;
-            }
+            get { return _algorithmGroup; }
         }
 
         public static bool operator ==(CngAlgorithmGroup? left, CngAlgorithmGroup? right)

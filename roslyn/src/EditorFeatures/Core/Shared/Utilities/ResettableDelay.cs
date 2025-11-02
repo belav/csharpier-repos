@@ -25,7 +25,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         /// delay can be reset multiple times.
         /// </summary>
         /// <param name="delayInMilliseconds">The time to delay before completing the task</param>
-        public ResettableDelay(int delayInMilliseconds, IExpeditableDelaySource expeditableDelaySource, CancellationToken cancellationToken = default)
+        public ResettableDelay(
+            int delayInMilliseconds,
+            IExpeditableDelaySource expeditableDelaySource,
+            CancellationToken cancellationToken = default
+        )
         {
             Contract.ThrowIfFalse(delayInMilliseconds >= 50, "Perf, only use delays >= 50ms");
             _delayInMilliseconds = delayInMilliseconds;
@@ -54,20 +58,29 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             _lastSetTime = Environment.TickCount;
         }
 
-        private async Task StartTimerAsync(IExpeditableDelaySource expeditableDelaySource, CancellationToken cancellationToken)
+        private async Task StartTimerAsync(
+            IExpeditableDelaySource expeditableDelaySource,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 do
                 {
                     // Keep delaying until at least delayInMilliseconds has elapsed since lastSetTime
-                    if (!await expeditableDelaySource.Delay(TimeSpan.FromMilliseconds(_delayInMilliseconds), cancellationToken).ConfigureAwait(false))
+                    if (
+                        !await expeditableDelaySource
+                            .Delay(
+                                TimeSpan.FromMilliseconds(_delayInMilliseconds),
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false)
+                    )
                     {
                         // The operation is being expedited.
                         break;
                     }
-                }
-                while (Environment.TickCount - _lastSetTime < _delayInMilliseconds);
+                } while (Environment.TickCount - _lastSetTime < _delayInMilliseconds);
 
                 _taskCompletionSource.SetResult(null);
             }

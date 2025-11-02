@@ -26,78 +26,77 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Windows.Forms;
-using System.Drawing;
 using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace MyFormProject
 {
+    class MainForm : System.Windows.Forms.Form
+    {
+        class ourLabelTwoAreas : Label
+        {
+            public ourLabelTwoAreas() { }
 
+            protected override void OnPaint(PaintEventArgs pevent)
+            {
+                Console.WriteLine(
+                    "ourLabelTwoAreas pevents {0}, pos {1} - size {2}",
+                    pevent.ClipRectangle,
+                    Location,
+                    Size
+                );
 
-	class MainForm : System.Windows.Forms.Form
-	{
-		class ourLabelTwoAreas : Label
-		{
-			public ourLabelTwoAreas ()
-			{
+                Region reg = new Region(new Rectangle(20, 20, 10, 10));
+                reg.Union(new Rectangle(5, 5, 10, 10));
+                pevent.Graphics.Clip = reg;
+                pevent.Graphics.FillRectangle(Brushes.Red, pevent.ClipRectangle);
+            }
+        }
 
-			}
-			protected override void OnPaint (PaintEventArgs pevent)
-			{
-				Console.WriteLine ("ourLabelTwoAreas pevents {0}, pos {1} - size {2}", pevent.ClipRectangle,
-					Location, Size);
+        class ourLabelOverflows : Label
+        {
+            public ourLabelOverflows() { }
 
-				Region reg = new Region (new Rectangle (20, 20, 10, 10));
-				reg.Union (new Rectangle (5, 5, 10, 10));
-				pevent.Graphics.Clip  = reg;
-				pevent.Graphics.FillRectangle (Brushes.Red, pevent.ClipRectangle);
-			}
-		}
+            protected override void OnPaint(PaintEventArgs pevent)
+            {
+                Console.WriteLine(
+                    "ourLabelOverflows pevents {0}, pos {1} - size {2}",
+                    pevent.ClipRectangle,
+                    Location,
+                    Size
+                );
 
-		class ourLabelOverflows : Label
-		{
-			public ourLabelOverflows ()
-			{
+                pevent.Graphics.FillRectangle(Brushes.Yellow, new Rectangle(0, 0, 1000, 1000));
+            }
+        }
 
-			}
-			protected override void OnPaint (PaintEventArgs pevent)
-			{
-				Console.WriteLine ("ourLabelOverflows pevents {0}, pos {1} - size {2}", pevent.ClipRectangle,
-					Location, Size);
+        protected override void OnPaint(PaintEventArgs pevent)
+        {
+            pevent.Graphics.FillRectangle(Brushes.Green, pevent.ClipRectangle);
+        }
 
-				pevent.Graphics.FillRectangle (Brushes.Yellow,
-					new Rectangle (0,0, 1000, 1000));
-			}
-		}
+        private static ourLabelTwoAreas label = new ourLabelTwoAreas();
+        private static ourLabelOverflows label2 = new ourLabelOverflows();
 
-		protected override void OnPaint (PaintEventArgs pevent)
-		{
-			pevent.Graphics.FillRectangle (Brushes.Green, pevent.ClipRectangle);
-		}
+        public MainForm()
+        {
+            label.Location = new Point(20, 20);
+            label.Size = new Size(50, 80);
+            label.Text = "Hola";
+            Controls.Add(label);
 
-		static private ourLabelTwoAreas label = new ourLabelTwoAreas ();
-		static private ourLabelOverflows label2 = new ourLabelOverflows ();
+            label2.Location = new Point(100, 100);
+            label2.Size = new Size(50, 80);
+            label2.Text = "Hola";
+            Controls.Add(label2);
 
-		public MainForm ()
-		{
-			label.Location = new Point (20, 20);
-			label.Size = new Size (50, 80);
-			label.Text = "Hola";
-			Controls.Add (label);
+            ClientSize = new Size(400, 400);
+        }
 
-			label2.Location = new Point (100, 100);
-			label2.Size = new Size (50, 80);
-			label2.Text = "Hola";
-			Controls.Add (label2);
-
-			ClientSize = new Size (400, 400);
-		}
-
-		public static void Main(string[] args)
-		{
-			Application.Run (new MainForm ());
-		}
-	}
-
+        public static void Main(string[] args)
+        {
+            Application.Run(new MainForm());
+        }
+    }
 }
-

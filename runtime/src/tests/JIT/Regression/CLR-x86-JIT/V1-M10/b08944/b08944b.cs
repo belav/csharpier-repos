@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace X
 {
     //@BEGINRENAME; Verify this renames
@@ -11,7 +12,6 @@ namespace X
 
     public class Y
     {
-
         //extern("msvcrt.dll:printf") int printf(const char *fmt, ...);
         //UInt32 int _exception_code();
 
@@ -21,7 +21,7 @@ namespace X
             Console.WriteLine("Exception code = " + a);
             return  1;
         }
-		
+        
         public static int     filt0(UInt32 a)
         {
             Console.WriteLine("Exception code = " + a);
@@ -38,7 +38,8 @@ namespace X
         [Fact]
         public static int TestEntryPoint()
         {
-            UInt32 ec, ec1;
+            UInt32 ec,
+                ec1;
 
             ec = (UInt32)0;
             ec1 = (UInt32)0;
@@ -56,14 +57,16 @@ namespace X
                     Console.WriteLine("Caught the exception once, now throwing again.");
                     throw e;
                 }
-
             }
             //except(filt(ec1 = _exception_code()))
-            catch (NullReferenceException /*e1*/)
+            catch (NullReferenceException /*e1*/
+            )
             {
                 ec1 = (UInt32)2;
                 Console.WriteLine("'Outer' catch handler");
-                Console.WriteLine("Caught the exception [code1 = " + ec + "] [code2 = " + ec1 + "]");
+                Console.WriteLine(
+                    "Caught the exception [code1 = " + ec + "] [code2 = " + ec1 + "]"
+                );
             }
             //    printf("Caught the exception [code1 = %08X] [code2 = %08X]\n", ec, ec1);
             if ((ec != 0) && (ec1 != 0))

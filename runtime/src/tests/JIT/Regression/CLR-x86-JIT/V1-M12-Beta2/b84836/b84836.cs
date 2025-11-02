@@ -4,13 +4,15 @@
 
 using System;
 using Xunit;
+
 public struct AA
 {
     [Fact]
     public static void TestEntryPoint()
     {
         bool f = false;
-        if (f) f = false;
+        if (f)
+            f = false;
         else
         {
             int n = 0;

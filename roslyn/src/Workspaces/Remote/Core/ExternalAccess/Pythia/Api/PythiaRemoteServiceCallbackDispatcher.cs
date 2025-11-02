@@ -10,10 +10,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
     {
         private readonly RemoteServiceCallbackDispatcher _dispatcher = new();
 
-        public object GetCallback(PythiaRemoteServiceCallbackIdWrapper callbackId)
-            => _dispatcher.GetCallback(callbackId.UnderlyingObject);
+        public object GetCallback(PythiaRemoteServiceCallbackIdWrapper callbackId) =>
+            _dispatcher.GetCallback(callbackId.UnderlyingObject);
 
-        RemoteServiceCallbackDispatcher.Handle IRemoteServiceCallbackDispatcher.CreateHandle(object? instance)
-            => _dispatcher.CreateHandle(instance);
+        RemoteServiceCallbackDispatcher.Handle IRemoteServiceCallbackDispatcher.CreateHandle(
+            object? instance
+        ) => _dispatcher.CreateHandle(instance);
     }
 }

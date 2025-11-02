@@ -44,14 +44,23 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         #region Types
         public class UserConverter : JsonConverter
         {
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            public override void WriteJson(
+                JsonWriter writer,
+                object value,
+                JsonSerializer serializer
+            )
             {
                 User user = (User)value;
 
                 writer.WriteValue(user.UserName);
             }
 
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            public override object ReadJson(
+                JsonReader reader,
+                Type objectType,
+                object existingValue,
+                JsonSerializer serializer
+            )
             {
                 User user = new User();
                 user.UserName = (string)reader.Value;
@@ -76,10 +85,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            User user = new User
-            {
-                UserName = @"domain\username"
-            };
+            User user = new User { UserName = @"domain\username" };
 
             string json = JsonConvert.SerializeObject(user, Formatting.Indented);
 

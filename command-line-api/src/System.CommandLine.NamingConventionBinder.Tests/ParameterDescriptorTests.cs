@@ -21,10 +21,8 @@ public class ParameterDescriptorTests
         var modelDescriptor = ModelDescriptor.FromType(type);
 
         modelDescriptor
-            .ConstructorDescriptors
-            .Single()
-            .ParameterDescriptors
-            .Single()
+            .ConstructorDescriptors.Single()
+            .ParameterDescriptors.Single()
             .GetDefaultValue()
             .Should()
             .Be(defaultValue);

@@ -8,8 +8,8 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.QueryRewriting
@@ -26,7 +26,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         internal abstract TileOpKind GetOpKind(T_Tile tile);
     }
 
-    internal class RewritingProcessor<T_Tile> : TileProcessor<T_Tile> where T_Tile : class
+    internal class RewritingProcessor<T_Tile> : TileProcessor<T_Tile>
+        where T_Tile : class
     {
         public double PERMUTE_FRACTION = 0.0;
         public int MIN_PERMUTATIONS = 0;
@@ -52,7 +53,13 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             get { return m_tileProcessor; }
         }
 
-        public void GetStatistics(out int numSATChecks, out int numIntersection, out int numUnion, out int numDifference, out int numErrors)
+        public void GetStatistics(
+            out int numSATChecks,
+            out int numIntersection,
+            out int numUnion,
+            out int numDifference,
+            out int numErrors
+        )
         {
             numSATChecks = m_numSATChecks;
             numIntersection = m_numIntersection;
@@ -63,9 +70,14 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 
         public void PrintStatistics()
         {
-            Console.WriteLine("{0} containment checks, {4} set operations ({1} intersections + {2} unions + {3} differences)",
-                m_numSATChecks, m_numIntersection, m_numUnion, m_numDifference,
-                                m_numIntersection + m_numUnion + m_numDifference);
+            Console.WriteLine(
+                "{0} containment checks, {4} set operations ({1} intersections + {2} unions + {3} differences)",
+                m_numSATChecks,
+                m_numIntersection,
+                m_numUnion,
+                m_numDifference,
+                m_numIntersection + m_numUnion + m_numDifference
+            );
             Console.WriteLine("{0} errors", m_numErrors);
         }
 
@@ -213,6 +225,7 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         }
 
         static Random rnd = new Random(1507);
+
         public static List<T> RandomPermutation<T>(IEnumerable<T> input)
         {
             List<T> output = new List<T>(input);
@@ -239,7 +252,12 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             }
         }
 
-        public bool RewriteQuery(T_Tile toFill, T_Tile toAvoid, IEnumerable<T_Tile> views, out T_Tile rewriting)
+        public bool RewriteQuery(
+            T_Tile toFill,
+            T_Tile toAvoid,
+            IEnumerable<T_Tile> views,
+            out T_Tile rewriting
+        )
         {
             if (RewriteQueryOnce(toFill, toAvoid, views, out rewriting))
             {
@@ -250,7 +268,10 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 // try several permutations of views, pick one with fewer operators
                 T_Tile newRewriting;
                 int permuteTries = 0;
-                int numPermutations = Math.Min(MAX_PERMUTATIONS, Math.Max(MIN_PERMUTATIONS, (int)(usedViews.Count * PERMUTE_FRACTION)));
+                int numPermutations = Math.Min(
+                    MAX_PERMUTATIONS,
+                    Math.Max(MIN_PERMUTATIONS, (int)(usedViews.Count * PERMUTE_FRACTION))
+                );
                 while (permuteTries++ < numPermutations)
                 {
                     IEnumerable<T_Tile> permutedViews;
@@ -262,7 +283,12 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     {
                         permutedViews = RandomPermutation(usedViews); // Tradeoff: views vs. usedViews!
                     }
-                    bool succeeded = RewriteQueryOnce(toFill, toAvoid, permutedViews, out newRewriting);
+                    bool succeeded = RewriteQueryOnce(
+                        toFill,
+                        toAvoid,
+                        permutedViews,
+                        out newRewriting
+                    );
                     Debug.Assert(succeeded);
                     int newOpCount = CountOperators(newRewriting);
                     if (newOpCount < opCount)
@@ -279,10 +305,21 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             return false;
         }
 
-        public bool RewriteQueryOnce(T_Tile toFill, T_Tile toAvoid, IEnumerable<T_Tile> views, out T_Tile rewriting)
+        public bool RewriteQueryOnce(
+            T_Tile toFill,
+            T_Tile toAvoid,
+            IEnumerable<T_Tile> views,
+            out T_Tile rewriting
+        )
         {
             List<T_Tile> viewList = new List<T_Tile>(views);
-            return RewritingPass<T_Tile>.RewriteQuery(toFill, toAvoid, out rewriting, viewList, this);
+            return RewritingPass<T_Tile>.RewriteQuery(
+                toFill,
+                toAvoid,
+                out rewriting,
+                viewList,
+                this
+            );
         }
     }
 }

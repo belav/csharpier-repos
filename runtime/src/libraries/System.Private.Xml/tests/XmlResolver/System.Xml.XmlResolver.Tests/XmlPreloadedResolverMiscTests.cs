@@ -45,7 +45,10 @@ namespace System.Xml.XmlResolverTests
             bool result = xmlResolver.SupportsType(uri, typeof(string));
             Assert.False(result);
 
-            xmlResolver = new XmlPreloadedResolver(new XmlPreloadedResolver(), XmlKnownDtds.Xhtml10);
+            xmlResolver = new XmlPreloadedResolver(
+                new XmlPreloadedResolver(),
+                XmlKnownDtds.Xhtml10
+            );
             Assert.True(xmlResolver.SupportsType(uri, typeof(Stream)));
 
             xmlResolver.Add(uri, "String Value");

@@ -16,11 +16,11 @@
 
 public class Test
 {
-	public static void Main ()
-	{
-		string s = @"Test string
+    public static void Main()
+    {
+        string s =
+            @"Test string
 			#define
 			";
-	}
+    }
 }
-

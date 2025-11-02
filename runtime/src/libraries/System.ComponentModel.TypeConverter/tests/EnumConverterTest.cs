@@ -11,68 +11,98 @@ namespace System.ComponentModel.Tests
     public class EnumConverterTests : ConverterTestBase
     {
         private static EnumConverter s_someEnumConverter = new EnumConverter(typeof(SomeEnum));
-        private static EnumConverter s_someFlagsEnumConverter = new EnumConverter(typeof(SomeFlagsEnum));
+        private static EnumConverter s_someFlagsEnumConverter = new EnumConverter(
+            typeof(SomeFlagsEnum)
+        );
 
         [Fact]
         public static void CanConvertFrom_WithContext_EnumConverter()
         {
-            CanConvertFrom_WithContext(new object[2, 2]
+            CanConvertFrom_WithContext(
+                new object[2, 2]
                 {
                     { typeof(string), true },
-                    { typeof(Enum[]), true }
+                    { typeof(Enum[]), true },
                 },
-                new EnumConverter(typeof(Enum)));
+                new EnumConverter(typeof(Enum))
+            );
         }
 
         [Fact]
         public static void CanConvertTo_WithContext_EnumConverter()
         {
-            CanConvertTo_WithContext(new object[2, 2]
+            CanConvertTo_WithContext(
+                new object[2, 2]
                 {
                     { typeof(Enum[]), true },
                     { typeof(InstanceDescriptor), true },
                 },
-                new EnumConverter(typeof(Enum)));
+                new EnumConverter(typeof(Enum))
+            );
         }
 
         [Fact]
         public static void ConvertFrom_WithContext_EnumConverter()
         {
-            ConvertFrom_WithContext(new object[2, 3]
+            ConvertFrom_WithContext(
+                new object[2, 3]
                 {
                     { "Add  ", SomeEnum.Add, null },
-                    { "Sub", SomeEnum.Sub, CultureInfo.InvariantCulture }
+                    { "Sub", SomeEnum.Sub, CultureInfo.InvariantCulture },
                 },
-                EnumConverterTests.s_someEnumConverter);
+                EnumConverterTests.s_someEnumConverter
+            );
 
-            ConvertFrom_WithContext(new object[2, 3]
+            ConvertFrom_WithContext(
+                new object[2, 3]
                 {
                     { "Option1, Option2  ", SomeFlagsEnum.Option1 | SomeFlagsEnum.Option2, null },
-                    { new Enum[2] { SomeFlagsEnum.Option1, SomeFlagsEnum.Option2 }, SomeFlagsEnum.Option1 | SomeFlagsEnum.Option2, CultureInfo.InvariantCulture },
+                    {
+                        new Enum[2] { SomeFlagsEnum.Option1, SomeFlagsEnum.Option2 },
+                        SomeFlagsEnum.Option1 | SomeFlagsEnum.Option2,
+                        CultureInfo.InvariantCulture,
+                    },
                 },
-                EnumConverterTests.s_someFlagsEnumConverter);
+                EnumConverterTests.s_someFlagsEnumConverter
+            );
         }
 
         [Fact]
         public static void ConvertFrom_WithContext_Negative()
         {
-            Assert.Throws<FormatException>(
-                () => EnumConverterTests.s_someEnumConverter.ConvertFrom(TypeConverterTests.s_context, null, "<random string>"));
+            Assert.Throws<FormatException>(() =>
+                EnumConverterTests.s_someEnumConverter.ConvertFrom(
+                    TypeConverterTests.s_context,
+                    null,
+                    "<random string>"
+                )
+            );
         }
 
         [Fact]
         public static void ConvertTo_WithContext_EnumConverter()
         {
-            ConvertTo_WithContext(new object[1, 3]
+            ConvertTo_WithContext(
+                new object[1, 3]
                 {
-                    { SomeEnum.Add, "Add", null }
+                    { SomeEnum.Add, "Add", null },
                 },
-                EnumConverterTests.s_someEnumConverter);
+                EnumConverterTests.s_someEnumConverter
+            );
 
-            object actual = EnumConverterTests.s_someEnumConverter.ConvertTo(TypeConverterTests.s_context, CultureInfo.InvariantCulture, SomeEnum.Sub, typeof(Enum[]));
+            object actual = EnumConverterTests.s_someEnumConverter.ConvertTo(
+                TypeConverterTests.s_context,
+                CultureInfo.InvariantCulture,
+                SomeEnum.Sub,
+                typeof(Enum[])
+            );
             VerifyArraysEqual<SomeEnum>(new SomeEnum[1] { SomeEnum.Sub }, actual);
 
-            var actualInstanceDescriptor = (InstanceDescriptor)EnumConverterTests.s_someEnumConverter.ConvertTo(SomeEnum.Add, typeof(InstanceDescriptor));
+            var actualInstanceDescriptor = (InstanceDescriptor)
+                EnumConverterTests.s_someEnumConverter.ConvertTo(
+                    SomeEnum.Add,
+                    typeof(InstanceDescriptor)
+                );
             var expectedMemberInfo = typeof(SomeEnum).GetField(nameof(SomeEnum.Add));
             Assert.Equal(expectedMemberInfo, actualInstanceDescriptor.MemberInfo);
             Assert.Empty(actualInstanceDescriptor.Arguments);
@@ -83,32 +113,84 @@ namespace System.ComponentModel.Tests
         [Fact]
         public static void ConvertTo_WithContext_Flags()
         {
-            ConvertTo_WithContext(new object[1, 3]
+            ConvertTo_WithContext(
+                new object[1, 3]
                 {
-                    { SomeFlagsEnum.Option1 | SomeFlagsEnum.Option2, "Option1, Option2", null }
+                    { SomeFlagsEnum.Option1 | SomeFlagsEnum.Option2, "Option1, Option2", null },
                 },
-                EnumConverterTests.s_someFlagsEnumConverter);
+                EnumConverterTests.s_someFlagsEnumConverter
+            );
 
-            object actual = EnumConverterTests.s_someFlagsEnumConverter.ConvertTo(TypeConverterTests.s_context, CultureInfo.InvariantCulture, SomeFlagsEnum.Option1 | SomeFlagsEnum.Option2, typeof(Enum[]));
-            VerifyArraysEqual<SomeFlagsEnum>(new SomeFlagsEnum[2] { SomeFlagsEnum.Option1, SomeFlagsEnum.Option2 }, actual);
+            object actual = EnumConverterTests.s_someFlagsEnumConverter.ConvertTo(
+                TypeConverterTests.s_context,
+                CultureInfo.InvariantCulture,
+                SomeFlagsEnum.Option1 | SomeFlagsEnum.Option2,
+                typeof(Enum[])
+            );
+            VerifyArraysEqual<SomeFlagsEnum>(
+                new SomeFlagsEnum[2] { SomeFlagsEnum.Option1, SomeFlagsEnum.Option2 },
+                actual
+            );
 
-            actual = EnumConverterTests.s_someFlagsEnumConverter.ConvertTo(TypeConverterTests.s_context, null, SomeFlagsEnum.Option3, typeof(Enum[]));
-            VerifyArraysEqual<SomeFlagsEnum>(new SomeFlagsEnum[1] { SomeFlagsEnum.Option3 }, actual);
+            actual = EnumConverterTests.s_someFlagsEnumConverter.ConvertTo(
+                TypeConverterTests.s_context,
+                null,
+                SomeFlagsEnum.Option3,
+                typeof(Enum[])
+            );
+            VerifyArraysEqual<SomeFlagsEnum>(
+                new SomeFlagsEnum[1] { SomeFlagsEnum.Option3 },
+                actual
+            );
 
-
-            var actualInstanceDescriptor = (InstanceDescriptor)EnumConverterTests.s_someFlagsEnumConverter.ConvertTo(SomeFlagsEnum.Option1 | SomeFlagsEnum.Option2, typeof(InstanceDescriptor));
-            var expectedMemberInfo = typeof(Enum).GetMethod("ToObject", new Type[] { typeof(Type), typeof(int) });
+            var actualInstanceDescriptor = (InstanceDescriptor)
+                EnumConverterTests.s_someFlagsEnumConverter.ConvertTo(
+                    SomeFlagsEnum.Option1 | SomeFlagsEnum.Option2,
+                    typeof(InstanceDescriptor)
+                );
+            var expectedMemberInfo = typeof(Enum).GetMethod(
+                "ToObject",
+                new Type[] { typeof(Type), typeof(int) }
+            );
             Assert.Equal(expectedMemberInfo, actualInstanceDescriptor.MemberInfo);
-            Assert.Equal(new object[] { typeof(SomeFlagsEnum), (int)(SomeFlagsEnum.Option1 | SomeFlagsEnum.Option2) }, actualInstanceDescriptor.Arguments);
+            Assert.Equal(
+                new object[]
+                {
+                    typeof(SomeFlagsEnum),
+                    (int)(SomeFlagsEnum.Option1 | SomeFlagsEnum.Option2),
+                },
+                actualInstanceDescriptor.Arguments
+            );
             Assert.True(actualInstanceDescriptor.IsComplete);
-            Assert.Equal(SomeFlagsEnum.Option1 | SomeFlagsEnum.Option2, actualInstanceDescriptor.Invoke());
+            Assert.Equal(
+                SomeFlagsEnum.Option1 | SomeFlagsEnum.Option2,
+                actualInstanceDescriptor.Invoke()
+            );
         }
 
         [Fact]
         public static void ConvertTo_WithContext_Negative()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => EnumConverterTests.s_someEnumConverter.ConvertTo(TypeConverterTests.s_context, null, 3, typeof(string)));
-            AssertExtensions.Throws<ArgumentException>("enumType", () => new EnumConverter(typeof(Enum)).ConvertTo(TypeConverterTests.s_context, null, SomeFlagsEnum.Option1, typeof(string)));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    EnumConverterTests.s_someEnumConverter.ConvertTo(
+                        TypeConverterTests.s_context,
+                        null,
+                        3,
+                        typeof(string)
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "enumType",
+                () =>
+                    new EnumConverter(typeof(Enum)).ConvertTo(
+                        TypeConverterTests.s_context,
+                        null,
+                        SomeFlagsEnum.Option1,
+                        typeof(string)
+                    )
+            );
         }
 
         [Fact]
@@ -117,7 +199,10 @@ namespace System.ComponentModel.Tests
             var converter = new EnumConverter(typeof(SomeEnum));
             SomeEnum[] standardValues = converter.GetStandardValues().Cast<SomeEnum>().ToArray();
             Assert.Equal(Enum.GetNames(typeof(SomeEnum)).Length, standardValues.Length);
-            Assert.All(Enum.GetValues(typeof(SomeEnum)).Cast<SomeEnum>(), value => Assert.Contains(value, standardValues));
+            Assert.All(
+                Enum.GetValues(typeof(SomeEnum)).Cast<SomeEnum>(),
+                value => Assert.Contains(value, standardValues)
+            );
         }
 
         [Fact]

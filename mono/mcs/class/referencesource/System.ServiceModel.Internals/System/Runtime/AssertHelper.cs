@@ -19,13 +19,16 @@ namespace System.Runtime
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
     using System.Runtime.Interop;
-    using System.Security;
     using System.Runtime.Versioning;
-
+    using System.Security;
 
     static class AssertHelper
-    {        
-        [SuppressMessage(FxCop.Category.ReliabilityBasic, FxCop.Rule.InvariantAssertRule, Justification = "Assert implementation")]
+    {
+        [SuppressMessage(
+            FxCop.Category.ReliabilityBasic,
+            FxCop.Rule.InvariantAssertRule,
+            Justification = "Assert implementation"
+        )]
         [ResourceConsumption(ResourceScope.Process)]
         internal static void FireAssert(string message)
         {
@@ -42,10 +45,16 @@ namespace System.Runtime
         }
 
 #if DEBUG_FOR_REALS
-        [SuppressMessage(FxCop.Category.Globalization, FxCop.Rule.DoNotPassLiteralsAsLocalizedParameters, Justification = "Debug Only")]
-        [Fx.Tag.SecurityNote(Critical = "Calls into various critical methods",
-            Safe = "Exists only on debug versions")]
-        [SecuritySafeCritical]       
+        [SuppressMessage(
+            FxCop.Category.Globalization,
+            FxCop.Rule.DoNotPassLiteralsAsLocalizedParameters,
+            Justification = "Debug Only"
+        )]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls into various critical methods",
+            Safe = "Exists only on debug versions"
+        )]
+        [SecuritySafeCritical]
         static void InternalFireAssert(ref string message)
         {
             try
@@ -84,7 +93,15 @@ namespace System.Runtime
                 string newMessage = "Exception during FireAssert!";
                 try
                 {
-                    newMessage = string.Concat(newMessage, " [", exception.GetType().Name, ": ", exception.Message, "] --> ", message);
+                    newMessage = string.Concat(
+                        newMessage,
+                        " [",
+                        exception.GetType().Name,
+                        ": ",
+                        exception.Message,
+                        "] --> ",
+                        message
+                    );
                 }
                 finally
                 {
@@ -96,4 +113,3 @@ namespace System.Runtime
 #endif
     }
 }
-

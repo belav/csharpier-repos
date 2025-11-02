@@ -65,7 +65,11 @@ namespace System.Data
         /// <summary>
         /// Maintain the DataView before <see cref="DataView.ListChanged"/> is raised.
         /// </summary>
-        internal void MaintainDataView(ListChangedType changedType, DataRow? row, bool trackAddRemove)
+        internal void MaintainDataView(
+            ListChangedType changedType,
+            DataRow? row,
+            bool trackAddRemove
+        )
         {
             DataView? dv = (DataView?)_dvWeak.Target;
             if (dv != null)
@@ -105,12 +109,20 @@ namespace System.Data
                 table.Columns.ColumnPropertyChanged += handlerCollection;
                 table.Columns.CollectionChanged += handlerCollection;
 
-                var handlerChildRelation = new CollectionChangeEventHandler(ChildRelationCollectionChanged);
-                ((DataRelationCollection.DataTableRelationCollection)(table.ChildRelations)).RelationPropertyChanged += handlerChildRelation;
+                var handlerChildRelation = new CollectionChangeEventHandler(
+                    ChildRelationCollectionChanged
+                );
+                (
+                    (DataRelationCollection.DataTableRelationCollection)(table.ChildRelations)
+                ).RelationPropertyChanged += handlerChildRelation;
                 table.ChildRelations.CollectionChanged += handlerChildRelation;
 
-                var handlerParentRelation = new CollectionChangeEventHandler(ParentRelationCollectionChanged);
-                ((DataRelationCollection.DataTableRelationCollection)(table.ParentRelations)).RelationPropertyChanged += handlerParentRelation;
+                var handlerParentRelation = new CollectionChangeEventHandler(
+                    ParentRelationCollectionChanged
+                );
+                (
+                    (DataRelationCollection.DataTableRelationCollection)(table.ParentRelations)
+                ).RelationPropertyChanged += handlerParentRelation;
                 table.ParentRelations.CollectionChanged += handlerParentRelation;
             }
         }
@@ -124,16 +136,24 @@ namespace System.Data
 
             if (table != null)
             {
-                CollectionChangeEventHandler handlerCollection = new CollectionChangeEventHandler(ColumnCollectionChanged);
+                CollectionChangeEventHandler handlerCollection = new CollectionChangeEventHandler(
+                    ColumnCollectionChanged
+                );
                 table.Columns.ColumnPropertyChanged -= handlerCollection;
                 table.Columns.CollectionChanged -= handlerCollection;
 
-                CollectionChangeEventHandler handlerChildRelation = new CollectionChangeEventHandler(ChildRelationCollectionChanged);
-                ((DataRelationCollection.DataTableRelationCollection)(table.ChildRelations)).RelationPropertyChanged -= handlerChildRelation;
+                CollectionChangeEventHandler handlerChildRelation =
+                    new CollectionChangeEventHandler(ChildRelationCollectionChanged);
+                (
+                    (DataRelationCollection.DataTableRelationCollection)(table.ChildRelations)
+                ).RelationPropertyChanged -= handlerChildRelation;
                 table.ChildRelations.CollectionChanged -= handlerChildRelation;
 
-                CollectionChangeEventHandler handlerParentRelation = new CollectionChangeEventHandler(ParentRelationCollectionChanged);
-                ((DataRelationCollection.DataTableRelationCollection)(table.ParentRelations)).RelationPropertyChanged -= handlerParentRelation;
+                CollectionChangeEventHandler handlerParentRelation =
+                    new CollectionChangeEventHandler(ParentRelationCollectionChanged);
+                (
+                    (DataRelationCollection.DataTableRelationCollection)(table.ParentRelations)
+                ).RelationPropertyChanged -= handlerParentRelation;
                 table.ParentRelations.CollectionChanged -= handlerParentRelation;
 
                 if (updateListeners)

@@ -10,10 +10,12 @@ namespace System.Collections.Generic
     {
         // To minimize generic instantiation overhead of creating the comparer per type, we keep the generic portion of the code as small
         // as possible and define most of the creation logic in a non-generic class.
-        public static EqualityComparer<T> Default { [Intrinsic] get; } = (EqualityComparer<T>)ComparerHelpers.CreateDefaultEqualityComparer(typeof(T));
+        public static EqualityComparer<T> Default { [Intrinsic] get; } =
+            (EqualityComparer<T>)ComparerHelpers.CreateDefaultEqualityComparer(typeof(T));
     }
 
-    public sealed partial class GenericEqualityComparer<T> : EqualityComparer<T> where T : IEquatable<T>?
+    public sealed partial class GenericEqualityComparer<T> : EqualityComparer<T>
+        where T : IEquatable<T>?
     {
         internal override int IndexOf(T[] array, T value, int startIndex, int count)
         {
@@ -22,14 +24,16 @@ namespace System.Collections.Generic
             {
                 for (int i = startIndex; i < endIndex; i++)
                 {
-                    if (array[i] == null) return i;
+                    if (array[i] == null)
+                        return i;
                 }
             }
             else
             {
                 for (int i = startIndex; i < endIndex; i++)
                 {
-                    if (array[i] != null && array[i]!.Equals(value)) return i;
+                    if (array[i] != null && array[i]!.Equals(value))
+                        return i;
                 }
             }
             return -1;
@@ -42,21 +46,24 @@ namespace System.Collections.Generic
             {
                 for (int i = startIndex; i >= endIndex; i--)
                 {
-                    if (array[i] == null) return i;
+                    if (array[i] == null)
+                        return i;
                 }
             }
             else
             {
                 for (int i = startIndex; i >= endIndex; i--)
                 {
-                    if (array[i] != null && array[i]!.Equals(value)) return i;
+                    if (array[i] != null && array[i]!.Equals(value))
+                        return i;
                 }
             }
             return -1;
         }
     }
 
-    public sealed partial class NullableEqualityComparer<T> : EqualityComparer<T?> where T : struct
+    public sealed partial class NullableEqualityComparer<T> : EqualityComparer<T?>
+        where T : struct
     {
         internal override int IndexOf(T?[] array, T? value, int startIndex, int count)
         {
@@ -65,14 +72,19 @@ namespace System.Collections.Generic
             {
                 for (int i = startIndex; i < endIndex; i++)
                 {
-                    if (!array[i].HasValue) return i;
+                    if (!array[i].HasValue)
+                        return i;
                 }
             }
             else
             {
                 for (int i = startIndex; i < endIndex; i++)
                 {
-                    if (array[i].HasValue && EqualityComparer<T>.Default.Equals(array[i].value, value.value)) return i;
+                    if (
+                        array[i].HasValue
+                        && EqualityComparer<T>.Default.Equals(array[i].value, value.value)
+                    )
+                        return i;
                 }
             }
             return -1;
@@ -85,14 +97,19 @@ namespace System.Collections.Generic
             {
                 for (int i = startIndex; i >= endIndex; i--)
                 {
-                    if (!array[i].HasValue) return i;
+                    if (!array[i].HasValue)
+                        return i;
                 }
             }
             else
             {
                 for (int i = startIndex; i >= endIndex; i--)
                 {
-                    if (array[i].HasValue && EqualityComparer<T>.Default.Equals(array[i].value, value.value)) return i;
+                    if (
+                        array[i].HasValue
+                        && EqualityComparer<T>.Default.Equals(array[i].value, value.value)
+                    )
+                        return i;
                 }
             }
             return -1;
@@ -108,14 +125,16 @@ namespace System.Collections.Generic
             {
                 for (int i = startIndex; i < endIndex; i++)
                 {
-                    if (array[i] == null) return i;
+                    if (array[i] == null)
+                        return i;
                 }
             }
             else
             {
                 for (int i = startIndex; i < endIndex; i++)
                 {
-                    if (array[i] != null && array[i]!.Equals(value)) return i;
+                    if (array[i] != null && array[i]!.Equals(value))
+                        return i;
                 }
             }
             return -1;
@@ -128,14 +147,16 @@ namespace System.Collections.Generic
             {
                 for (int i = startIndex; i >= endIndex; i--)
                 {
-                    if (array[i] == null) return i;
+                    if (array[i] == null)
+                        return i;
                 }
             }
             else
             {
                 for (int i = startIndex; i >= endIndex; i--)
                 {
-                    if (array[i] != null && array[i]!.Equals(value)) return i;
+                    if (array[i] != null && array[i]!.Equals(value))
+                        return i;
                 }
             }
             return -1;
@@ -159,7 +180,8 @@ namespace System.Collections.Generic
 #endif
     }
 
-    public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T> where T : struct, Enum
+    public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T>
+        where T : struct, Enum
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(T x, T y)
@@ -172,7 +194,8 @@ namespace System.Collections.Generic
             int endIndex = startIndex + count;
             for (int i = startIndex; i < endIndex; i++)
             {
-                if (RuntimeHelpers.EnumEquals(array[i], value)) return i;
+                if (RuntimeHelpers.EnumEquals(array[i], value))
+                    return i;
             }
             return -1;
         }
@@ -182,7 +205,8 @@ namespace System.Collections.Generic
             int endIndex = startIndex - count + 1;
             for (int i = startIndex; i >= endIndex; i--)
             {
-                if (RuntimeHelpers.EnumEquals(array[i], value)) return i;
+                if (RuntimeHelpers.EnumEquals(array[i], value))
+                    return i;
             }
             return -1;
         }

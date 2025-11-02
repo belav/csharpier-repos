@@ -17,8 +17,16 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             [Fact]
             public async Task CompilingTheSameSourceResultsInEqualModels()
             {
-                SourceGenerationSpec spec1 = (await new ConfigBindingGenTestDriver().RunGeneratorAndUpdateCompilation(BindCallSampleCode)).GenerationSpec;
-                SourceGenerationSpec spec2 = (await new ConfigBindingGenTestDriver().RunGeneratorAndUpdateCompilation(BindCallSampleCode)).GenerationSpec;
+                SourceGenerationSpec spec1 = (
+                    await new ConfigBindingGenTestDriver().RunGeneratorAndUpdateCompilation(
+                        BindCallSampleCode
+                    )
+                ).GenerationSpec;
+                SourceGenerationSpec spec2 = (
+                    await new ConfigBindingGenTestDriver().RunGeneratorAndUpdateCompilation(
+                        BindCallSampleCode
+                    )
+                ).GenerationSpec;
 
                 Assert.NotSame(spec1, spec2);
                 GeneratorTestHelpers.AssertStructurallyEqual(spec1, spec2);
@@ -32,11 +40,19 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 ConfigBindingGenTestDriver driver = new ConfigBindingGenTestDriver();
 
-                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCode);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.New, IncrementalStepRunReason.New);
+                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCode
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.New,
+                    IncrementalStepRunReason.New
+                );
 
                 result = await driver.RunGeneratorAndUpdateCompilation();
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Unchanged);
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Unchanged
+                );
             }
 
             [Fact]
@@ -44,16 +60,31 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 ConfigBindingGenTestDriver driver = new ConfigBindingGenTestDriver();
 
-                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCode);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.New, IncrementalStepRunReason.New);
+                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCode
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.New,
+                    IncrementalStepRunReason.New
+                );
 
                 // We expect different spec because diag locations are different.
-                result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_ReorderedInvocations);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Modified);
+                result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_ReorderedInvocations
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Modified
+                );
 
                 // We expect different spec because members are reordered.
-                result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_ReorderedConfigTypeMembers);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Modified);
+                result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_ReorderedConfigTypeMembers
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Modified
+                );
             }
 
             [Fact]
@@ -61,11 +92,21 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 ConfigBindingGenTestDriver driver = new ConfigBindingGenTestDriver();
 
-                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCode);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.New, IncrementalStepRunReason.New);
+                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCode
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.New,
+                    IncrementalStepRunReason.New
+                );
 
-                result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithDifferentConfigTypeName);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Modified);
+                result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithDifferentConfigTypeName
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Modified
+                );
             }
 
             [Fact]
@@ -73,11 +114,21 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 ConfigBindingGenTestDriver driver = new ConfigBindingGenTestDriver();
 
-                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCode);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.New, IncrementalStepRunReason.New);
+                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCode
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.New,
+                    IncrementalStepRunReason.New
+                );
 
-                result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithUnsupportedMember);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Modified);
+                result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithUnsupportedMember
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Modified
+                );
             }
 
             [Fact]
@@ -85,11 +136,19 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 ConfigBindingGenTestDriver driver = new ConfigBindingGenTestDriver();
 
-                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithUnsupportedMember);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.New, IncrementalStepRunReason.New);
+                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithUnsupportedMember
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.New,
+                    IncrementalStepRunReason.New
+                );
 
                 result = await driver.RunGeneratorAndUpdateCompilation();
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Unchanged);
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Unchanged
+                );
             }
 
             [Fact]
@@ -97,16 +156,31 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 ConfigBindingGenTestDriver driver = new ConfigBindingGenTestDriver();
 
-                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithUnsupportedMember);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.New, IncrementalStepRunReason.New);
+                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithUnsupportedMember
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.New,
+                    IncrementalStepRunReason.New
+                );
 
                 // We expect different spec because diag locations are different.
-                result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithUnsupportedMember_ReorderedInvocations);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Modified);
+                result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithUnsupportedMember_ReorderedInvocations
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Modified
+                );
 
                 // We expect different spec because members are reordered.
-                result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithUnsupportedMember_ReorderedConfigTypeMembers);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Modified);
+                result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithUnsupportedMember_ReorderedConfigTypeMembers
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Modified
+                );
             }
 
             [Fact]
@@ -114,11 +188,19 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 ConfigBindingGenTestDriver driver = new ConfigBindingGenTestDriver();
 
-                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithUnsupportedMember);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.New, IncrementalStepRunReason.New);
+                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithUnsupportedMember
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.New,
+                    IncrementalStepRunReason.New
+                );
 
                 result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCode);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Modified);
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Modified
+                );
             }
 
             [Fact]
@@ -126,11 +208,21 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 ConfigBindingGenTestDriver driver = new ConfigBindingGenTestDriver();
 
-                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithUnsupportedMember);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.New, IncrementalStepRunReason.New);
+                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithUnsupportedMember
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.New,
+                    IncrementalStepRunReason.New
+                );
 
-                result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithUnsupportedMember_WithDiffMemberName);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Modified);
+                result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithUnsupportedMember_WithDiffMemberName
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Modified
+                );
             }
         }
 
@@ -139,224 +231,224 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         /// Keep in sync with <see cref="BindCallSampleCode"/>.
         /// </summary>
         private const string BindCallSampleCodeVariant_ReorderedInvocations = """
-            using System.Collections.Generic;
-            using Microsoft.Extensions.Configuration;
+                using System.Collections.Generic;
+                using Microsoft.Extensions.Configuration;
 
-            public class Program
-            {
-        	    public static void Main()
-        	    {
-        		    ConfigurationBuilder configurationBuilder = new();
-        		    IConfigurationRoot config = configurationBuilder.Build();
+                public class Program
+                {
+            	    public static void Main()
+            	    {
+            		    ConfigurationBuilder configurationBuilder = new();
+            		    IConfigurationRoot config = configurationBuilder.Build();
 
-        		    MyClass configObj = new();
-                    config.Bind(configObj, options => { });
-                    config.Bind("key", configObj);
-        		    config.Bind(configObj);
-        	    }
+            		    MyClass configObj = new();
+                        config.Bind(configObj, options => { });
+                        config.Bind("key", configObj);
+            		    config.Bind(configObj);
+            	    }
 
-        	    public class MyClass
-        	    {
-        		    public string MyString { get; set; }
-        		    public int MyInt { get; set; }
-        		    public List<int> MyList { get; set; }
-        		    public Dictionary<string, string> MyDictionary { get; set; }
-                    public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
-        	    }
+            	    public class MyClass
+            	    {
+            		    public string MyString { get; set; }
+            		    public int MyInt { get; set; }
+            		    public List<int> MyList { get; set; }
+            		    public Dictionary<string, string> MyDictionary { get; set; }
+                        public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
+            	    }
 
-                public class MyClass2 { }
-            }
-        """;
+                    public class MyClass2 { }
+                }
+            """;
 
         /// <summary>
         /// Keep in sync with <see cref="BindCallSampleCode"/>.
         /// </summary>
         private const string BindCallSampleCodeVariant_ReorderedConfigTypeMembers = """
-            using System.Collections.Generic;
-            using Microsoft.Extensions.Configuration;
+                using System.Collections.Generic;
+                using Microsoft.Extensions.Configuration;
 
-            public class Program
-            {
-        	    public static void Main()
-        	    {
-        		    ConfigurationBuilder configurationBuilder = new();
-        		    IConfigurationRoot config = configurationBuilder.Build();
+                public class Program
+                {
+            	    public static void Main()
+            	    {
+            		    ConfigurationBuilder configurationBuilder = new();
+            		    IConfigurationRoot config = configurationBuilder.Build();
 
-        		    MyClass configObj = new();
-                    config.Bind(configObj, options => { });
-                    config.Bind("key", configObj);
-        		    config.Bind(configObj);
-        	    }
+            		    MyClass configObj = new();
+                        config.Bind(configObj, options => { });
+                        config.Bind("key", configObj);
+            		    config.Bind(configObj);
+            	    }
 
-        	    public class MyClass
-        	    {
-                    public List<int> MyList { get; set; }
-        		    public Dictionary<string, string> MyDictionary { get; set; }
-        		    public string MyString { get; set; }
-        		    public int MyInt { get; set; }
-                    public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
-        	    }
+            	    public class MyClass
+            	    {
+                        public List<int> MyList { get; set; }
+            		    public Dictionary<string, string> MyDictionary { get; set; }
+            		    public string MyString { get; set; }
+            		    public int MyInt { get; set; }
+                        public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
+            	    }
 
-                public class MyClass2 { }
-            }
-        """;
+                    public class MyClass2 { }
+                }
+            """;
 
         /// <summary>
         /// Keep in sync with <see cref="BindCallSampleCode"/>.
         /// </summary>
         private const string BindCallSampleCodeVariant_WithDifferentConfigTypeName = """
-            using System.Collections.Generic;
-            using Microsoft.Extensions.Configuration;
+                using System.Collections.Generic;
+                using Microsoft.Extensions.Configuration;
 
-            public class Program
-            {
-        	    public static void Main()
-        	    {
-        		    ConfigurationBuilder configurationBuilder = new();
-        		    IConfigurationRoot config = configurationBuilder.Build();
+                public class Program
+                {
+            	    public static void Main()
+            	    {
+            		    ConfigurationBuilder configurationBuilder = new();
+            		    IConfigurationRoot config = configurationBuilder.Build();
 
-        		    MyClass0 configObj = new();
-                    config.Bind(configObj, options => { });
-                    config.Bind("key", configObj);
-        		    config.Bind(configObj);
-        	    }
+            		    MyClass0 configObj = new();
+                        config.Bind(configObj, options => { });
+                        config.Bind("key", configObj);
+            		    config.Bind(configObj);
+            	    }
 
-        	    public class MyClass0
-        	    {
-                    public List<int> MyList { get; set; }
-        		    public Dictionary<string, string> MyDictionary { get; set; }
-        		    public string MyString { get; set; }
-        		    public int MyInt { get; set; }
-                    public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
-        	    }
+            	    public class MyClass0
+            	    {
+                        public List<int> MyList { get; set; }
+            		    public Dictionary<string, string> MyDictionary { get; set; }
+            		    public string MyString { get; set; }
+            		    public int MyInt { get; set; }
+                        public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
+            	    }
 
-                public class MyClass2 { }
-            }
-        """;
+                    public class MyClass2 { }
+                }
+            """;
 
         private const string BindCallSampleCodeVariant_WithUnsupportedMember = """
-            using System.Collections.Generic;
-            using Microsoft.Extensions.Configuration;
+                using System.Collections.Generic;
+                using Microsoft.Extensions.Configuration;
 
-            public class Program
-            {
-        	    public static void Main()
-        	    {
-        		    ConfigurationBuilder configurationBuilder = new();
-        		    IConfigurationRoot config = configurationBuilder.Build();
+                public class Program
+                {
+            	    public static void Main()
+            	    {
+            		    ConfigurationBuilder configurationBuilder = new();
+            		    IConfigurationRoot config = configurationBuilder.Build();
 
-        		    MyClass configObj = new();
-        		    config.Bind(configObj);
-                    config.Bind(configObj, options => { });
-                    config.Bind("key", configObj);
-        	    }
+            		    MyClass configObj = new();
+            		    config.Bind(configObj);
+                        config.Bind(configObj, options => { });
+                        config.Bind("key", configObj);
+            	    }
 
-        	    public class MyClass
-        	    {
-        		    public string MyString { get; set; }
-        		    public int MyInt { get; set; }
-        		    public List<int> MyList { get; set; }
-        		    public Dictionary<string, string> MyDictionary { get; set; }
-                    public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
-                    public int[,] UnsupportedMember { get; set; }
-        	    }
+            	    public class MyClass
+            	    {
+            		    public string MyString { get; set; }
+            		    public int MyInt { get; set; }
+            		    public List<int> MyList { get; set; }
+            		    public Dictionary<string, string> MyDictionary { get; set; }
+                        public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
+                        public int[,] UnsupportedMember { get; set; }
+            	    }
 
-                public class MyClass2 { }
-            }
-        """;
+                    public class MyClass2 { }
+                }
+            """;
 
         private const string BindCallSampleCodeVariant_WithUnsupportedMember_ReorderedInvocations = """
-            using System.Collections.Generic;
-            using Microsoft.Extensions.Configuration;
+                using System.Collections.Generic;
+                using Microsoft.Extensions.Configuration;
 
-            public class Program
-            {
-        	    public static void Main()
-        	    {
-        		    ConfigurationBuilder configurationBuilder = new();
-        		    IConfigurationRoot config = configurationBuilder.Build();
+                public class Program
+                {
+            	    public static void Main()
+            	    {
+            		    ConfigurationBuilder configurationBuilder = new();
+            		    IConfigurationRoot config = configurationBuilder.Build();
 
-        		    MyClass configObj = new();
-                    config.Bind("key", configObj);
-                    config.Bind(configObj);
-                    config.Bind(configObj, options => { });
-        	    }
+            		    MyClass configObj = new();
+                        config.Bind("key", configObj);
+                        config.Bind(configObj);
+                        config.Bind(configObj, options => { });
+            	    }
 
-        	    public class MyClass
-        	    {
-        		    public string MyString { get; set; }
-        		    public int MyInt { get; set; }
-        		    public List<int> MyList { get; set; }
-        		    public Dictionary<string, string> MyDictionary { get; set; }
-                    public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
-                    public int[,] UnsupportedMember { get; set; }
-        	    }
+            	    public class MyClass
+            	    {
+            		    public string MyString { get; set; }
+            		    public int MyInt { get; set; }
+            		    public List<int> MyList { get; set; }
+            		    public Dictionary<string, string> MyDictionary { get; set; }
+                        public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
+                        public int[,] UnsupportedMember { get; set; }
+            	    }
 
-                public class MyClass2 { }
-            }
-        """;
+                    public class MyClass2 { }
+                }
+            """;
 
         private const string BindCallSampleCodeVariant_WithUnsupportedMember_ReorderedConfigTypeMembers = """
-            using System.Collections.Generic;
-            using Microsoft.Extensions.Configuration;
+                using System.Collections.Generic;
+                using Microsoft.Extensions.Configuration;
 
-            public class Program
-            {
-        	    public static void Main()
-        	    {
-        		    ConfigurationBuilder configurationBuilder = new();
-        		    IConfigurationRoot config = configurationBuilder.Build();
+                public class Program
+                {
+            	    public static void Main()
+            	    {
+            		    ConfigurationBuilder configurationBuilder = new();
+            		    IConfigurationRoot config = configurationBuilder.Build();
 
-        		    MyClass configObj = new();
-                    config.Bind("key", configObj);
-                    config.Bind(configObj);
-                    config.Bind(configObj, options => { });
-        	    }
+            		    MyClass configObj = new();
+                        config.Bind("key", configObj);
+                        config.Bind(configObj);
+                        config.Bind(configObj, options => { });
+            	    }
 
-        	    public class MyClass
-        	    {
-        		    public string MyString { get; set; }
-        		    public int MyInt { get; set; }
-                    public int[,] UnsupportedMember { get; set; }
-        		    public Dictionary<string, string> MyDictionary { get; set; }
-                    public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
-                    public List<int> MyList { get; set; }
-        	    }
+            	    public class MyClass
+            	    {
+            		    public string MyString { get; set; }
+            		    public int MyInt { get; set; }
+                        public int[,] UnsupportedMember { get; set; }
+            		    public Dictionary<string, string> MyDictionary { get; set; }
+                        public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
+                        public List<int> MyList { get; set; }
+            	    }
 
-                public class MyClass2 { }
-            }
-        """;
+                    public class MyClass2 { }
+                }
+            """;
 
         private const string BindCallSampleCodeVariant_WithUnsupportedMember_WithDiffMemberName = """
-            using System.Collections.Generic;
-            using Microsoft.Extensions.Configuration;
+                using System.Collections.Generic;
+                using Microsoft.Extensions.Configuration;
 
-            public class Program
-            {
-        	    public static void Main()
-        	    {
-        		    ConfigurationBuilder configurationBuilder = new();
-        		    IConfigurationRoot config = configurationBuilder.Build();
+                public class Program
+                {
+            	    public static void Main()
+            	    {
+            		    ConfigurationBuilder configurationBuilder = new();
+            		    IConfigurationRoot config = configurationBuilder.Build();
 
-        		    MyClass configObj = new();
-        		    config.Bind(configObj);
-                    config.Bind(configObj, options => { });
-                    config.Bind("key", configObj);
-        	    }
+            		    MyClass configObj = new();
+            		    config.Bind(configObj);
+                        config.Bind(configObj, options => { });
+                        config.Bind("key", configObj);
+            	    }
 
-        	    public class MyClass
-        	    {
-        		    public string MyString { get; set; }
-        		    public int MyInt { get; set; }
-        		    public List<int> MyList { get; set; }
-        		    public Dictionary<string, string> MyDictionary { get; set; }
-                    public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
-                    public int[,] UnsupportedMember_DiffMemberName { get; set; }
-        	    }
+            	    public class MyClass
+            	    {
+            		    public string MyString { get; set; }
+            		    public int MyInt { get; set; }
+            		    public List<int> MyList { get; set; }
+            		    public Dictionary<string, string> MyDictionary { get; set; }
+                        public Dictionary<string, MyClass2> MyComplexDictionary { get; set; }
+                        public int[,] UnsupportedMember_DiffMemberName { get; set; }
+            	    }
 
-                public class MyClass2 { }
-            }
-        """;
+                    public class MyClass2 { }
+                }
+            """;
         #endregion Incremental test sources.
     }
 }

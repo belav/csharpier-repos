@@ -12,7 +12,7 @@ public sealed partial class InternalEntityEntry
         Unknown = 2,
         IsLoaded = 3,
         IsTemporary = 4,
-        IsStoreGenerated = 5
+        IsStoreGenerated = 5,
     }
 
     internal readonly struct StateData
@@ -31,7 +31,10 @@ public sealed partial class InternalEntityEntry
 
         public StateData(int propertyCount, int navigationCount)
         {
-            var bitsNumber = Math.Max(propertyCount, navigationCount) * BitsForPropertyFlags + BitsForAdditionalState - 1;
+            var bitsNumber =
+                Math.Max(propertyCount, navigationCount) * BitsForPropertyFlags
+                + BitsForAdditionalState
+                - 1;
             _bits = new int[(bitsNumber / BitsPerInt) + 1];
         }
 
@@ -58,14 +61,16 @@ public sealed partial class InternalEntityEntry
 
         public bool IsPropertyFlagged(int propertyIndex, PropertyFlag propertyFlag)
         {
-            propertyIndex = propertyIndex * BitsForPropertyFlags + (int)propertyFlag + BitsForAdditionalState;
+            propertyIndex =
+                propertyIndex * BitsForPropertyFlags + (int)propertyFlag + BitsForAdditionalState;
 
             return (_bits[propertyIndex / BitsPerInt] & (1 << (propertyIndex % BitsPerInt))) != 0;
         }
 
         public void FlagProperty(int propertyIndex, PropertyFlag propertyFlag, bool isFlagged)
         {
-            propertyIndex = propertyIndex * BitsForPropertyFlags + (int)propertyFlag + BitsForAdditionalState;
+            propertyIndex =
+                propertyIndex * BitsForPropertyFlags + (int)propertyFlag + BitsForAdditionalState;
 
             if (isFlagged)
             {
@@ -110,7 +115,8 @@ public sealed partial class InternalEntityEntry
             if (i == _bits.Length - 1)
             {
                 var overlay = PropertyFlagMask << (int)propertyFlag;
-                var shift = (propertyCount * BitsForPropertyFlags + BitsForAdditionalState) % BitsPerInt;
+                var shift =
+                    (propertyCount * BitsForPropertyFlags + BitsForAdditionalState) % BitsPerInt;
                 overlay = shift != 0 ? overlay << shift : 0;
                 mask &= ~overlay;
             }

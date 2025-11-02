@@ -119,12 +119,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteExclusiveOr(byte? a, byte? b, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.ExclusiveOr(
-                        Expression.Constant(a, typeof(byte?)),
-                        Expression.Constant(b, typeof(byte?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.ExclusiveOr(
+                    Expression.Constant(a, typeof(byte?)),
+                    Expression.Constant(b, typeof(byte?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal((byte?)(a ^ b), f());
@@ -132,25 +133,31 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSByteExclusiveOr(sbyte? a, sbyte? b, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.ExclusiveOr(
-                        Expression.Constant(a, typeof(sbyte?)),
-                        Expression.Constant(b, typeof(sbyte?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.ExclusiveOr(
+                    Expression.Constant(a, typeof(sbyte?)),
+                    Expression.Constant(b, typeof(sbyte?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal((sbyte?)(a ^ b), f());
         }
 
-        private static void VerifyNullableUShortExclusiveOr(ushort? a, ushort? b, bool useInterpreter)
+        private static void VerifyNullableUShortExclusiveOr(
+            ushort? a,
+            ushort? b,
+            bool useInterpreter
+        )
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.ExclusiveOr(
-                        Expression.Constant(a, typeof(ushort?)),
-                        Expression.Constant(b, typeof(ushort?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.ExclusiveOr(
+                    Expression.Constant(a, typeof(ushort?)),
+                    Expression.Constant(b, typeof(ushort?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal((ushort?)(a ^ b), f());
@@ -158,12 +165,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortExclusiveOr(short? a, short? b, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.ExclusiveOr(
-                        Expression.Constant(a, typeof(short?)),
-                        Expression.Constant(b, typeof(short?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.ExclusiveOr(
+                    Expression.Constant(a, typeof(short?)),
+                    Expression.Constant(b, typeof(short?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal((short?)(a ^ b), f());
@@ -171,12 +179,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntExclusiveOr(uint? a, uint? b, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.ExclusiveOr(
-                        Expression.Constant(a, typeof(uint?)),
-                        Expression.Constant(b, typeof(uint?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.ExclusiveOr(
+                    Expression.Constant(a, typeof(uint?)),
+                    Expression.Constant(b, typeof(uint?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a ^ b, f());
@@ -184,12 +193,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntExclusiveOr(int? a, int? b, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.ExclusiveOr(
-                        Expression.Constant(a, typeof(int?)),
-                        Expression.Constant(b, typeof(int?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.ExclusiveOr(
+                    Expression.Constant(a, typeof(int?)),
+                    Expression.Constant(b, typeof(int?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a ^ b, f());
@@ -197,12 +207,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongExclusiveOr(ulong? a, ulong? b, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.ExclusiveOr(
-                        Expression.Constant(a, typeof(ulong?)),
-                        Expression.Constant(b, typeof(ulong?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.ExclusiveOr(
+                    Expression.Constant(a, typeof(ulong?)),
+                    Expression.Constant(b, typeof(ulong?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a ^ b, f());
@@ -210,12 +221,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongExclusiveOr(long? a, long? b, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.ExclusiveOr(
-                        Expression.Constant(a, typeof(long?)),
-                        Expression.Constant(b, typeof(long?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.ExclusiveOr(
+                    Expression.Constant(a, typeof(long?)),
+                    Expression.Constant(b, typeof(long?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a ^ b, f());

@@ -27,19 +27,21 @@ namespace System.Runtime.InteropServices
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_ComInterop);
         }
 
-        [RequiresUnreferencedCode("Built-in COM support is not trim compatible", Url = "https://aka.ms/dotnet-illink/com")]
+        [RequiresUnreferencedCode(
+            "Built-in COM support is not trim compatible",
+            Url = "https://aka.ms/dotnet-illink/com"
+        )]
         [SupportedOSPlatform("windows")]
         public static object BindToMoniker(string monikerName)
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_ComInterop);
         }
 
-        public static void CleanupUnusedObjectsInCurrentContext()
-        {
-        }
+        public static void CleanupUnusedObjectsInCurrentContext() { }
 
         [SupportedOSPlatform("windows")]
-        public static IntPtr CreateAggregatedObject<T>(IntPtr pOuter, T o) where T : notnull
+        public static IntPtr CreateAggregatedObject<T>(IntPtr pOuter, T o)
+            where T : notnull
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_ComInterop);
         }
@@ -79,7 +81,11 @@ namespace System.Runtime.InteropServices
 
         [SupportedOSPlatform("windows")]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static IntPtr GetComInterfaceForObject(object o, Type T, CustomQueryInterfaceMode mode)
+        public static IntPtr GetComInterfaceForObject(
+            object o,
+            Type T,
+            CustomQueryInterfaceMode mode
+        )
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_ComInterop);
         }

@@ -70,10 +70,10 @@ namespace System.IO.Hashing
             private readonly ulong Converge()
             {
                 ulong acc =
-                    BitOperations.RotateLeft(_acc1, 1) +
-                    BitOperations.RotateLeft(_acc2, 7) +
-                    BitOperations.RotateLeft(_acc3, 12) +
-                    BitOperations.RotateLeft(_acc4, 18);
+                    BitOperations.RotateLeft(_acc1, 1)
+                    + BitOperations.RotateLeft(_acc2, 7)
+                    + BitOperations.RotateLeft(_acc3, 12)
+                    + BitOperations.RotateLeft(_acc4, 18);
 
                 acc = MergeAccumulator(acc, _acc1);
                 acc = MergeAccumulator(acc, _acc2);

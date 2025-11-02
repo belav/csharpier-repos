@@ -27,37 +27,55 @@ namespace Microsoft.CodeAnalysis
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            GeneratorInitializationContext generatorInitContext = new GeneratorInitializationContext(CancellationToken.None);
+            GeneratorInitializationContext generatorInitContext =
+                new GeneratorInitializationContext(CancellationToken.None);
             SourceGenerator.Initialize(generatorInitContext);
 
             if (generatorInitContext.Callbacks.PostInitCallback is object)
             {
-                context.RegisterPostInitializationOutput(generatorInitContext.Callbacks.PostInitCallback);
+                context.RegisterPostInitializationOutput(
+                    generatorInitContext.Callbacks.PostInitCallback
+                );
             }
 
-            var contextBuilderSource = context.CompilationProvider
-                                        .Select((c, _) => new GeneratorContextBuilder(c))
-                                        .Combine(context.ParseOptionsProvider).Select((p, _) => p.Item1 with { ParseOptions = p.Item2 })
-                                        .Combine(context.AnalyzerConfigOptionsProvider).Select((p, _) => p.Item1 with { ConfigOptions = p.Item2 })
-                                        .Combine(context.AdditionalTextsProvider.Collect()).Select((p, _) => p.Item1 with { AdditionalTexts = p.Item2 });
+            var contextBuilderSource = context
+                .CompilationProvider.Select((c, _) => new GeneratorContextBuilder(c))
+                .Combine(context.ParseOptionsProvider)
+                .Select((p, _) => p.Item1 with { ParseOptions = p.Item2 })
+                .Combine(context.AnalyzerConfigOptionsProvider)
+                .Select((p, _) => p.Item1 with { ConfigOptions = p.Item2 })
+                .Combine(context.AdditionalTextsProvider.Collect())
+                .Select((p, _) => p.Item1 with { AdditionalTexts = p.Item2 });
 
-            var syntaxContextReceiverCreator = generatorInitContext.Callbacks.SyntaxContextReceiverCreator;
+            var syntaxContextReceiverCreator = generatorInitContext
+                .Callbacks
+                .SyntaxContextReceiverCreator;
             if (syntaxContextReceiverCreator is object)
             {
                 contextBuilderSource = contextBuilderSource
-                                       .Combine(context.SyntaxProvider.CreateSyntaxReceiverProvider(syntaxContextReceiverCreator))
-                                       .Select((p, _) => p.Item1 with { Receiver = p.Item2 });
+                    .Combine(
+                        context.SyntaxProvider.CreateSyntaxReceiverProvider(
+                            syntaxContextReceiverCreator
+                        )
+                    )
+                    .Select((p, _) => p.Item1 with { Receiver = p.Item2 });
             }
 
-            context.RegisterSourceOutput(contextBuilderSource, (productionContext, contextBuilder) =>
-            {
-                var generatorExecutionContext = contextBuilder.ToExecutionContext(_sourceExtension, productionContext.CancellationToken);
-                SourceGenerator.Execute(generatorExecutionContext);
+            context.RegisterSourceOutput(
+                contextBuilderSource,
+                (productionContext, contextBuilder) =>
+                {
+                    var generatorExecutionContext = contextBuilder.ToExecutionContext(
+                        _sourceExtension,
+                        productionContext.CancellationToken
+                    );
+                    SourceGenerator.Execute(generatorExecutionContext);
 
-                // copy the contents of the old context to the new
-                generatorExecutionContext.CopyToProductionContext(productionContext);
-                generatorExecutionContext.Free();
-            });
+                    // copy the contents of the old context to the new
+                    generatorExecutionContext.CopyToProductionContext(productionContext);
+                    generatorExecutionContext.Free();
+                }
+            );
         }
 
         internal record GeneratorContextBuilder(Compilation Compilation)
@@ -70,10 +88,21 @@ namespace Microsoft.CodeAnalysis
 
             public ISyntaxContextReceiver? Receiver;
 
-            public GeneratorExecutionContext ToExecutionContext(string sourceExtension, CancellationToken cancellationToken)
+            public GeneratorExecutionContext ToExecutionContext(
+                string sourceExtension,
+                CancellationToken cancellationToken
+            )
             {
                 Debug.Assert(ParseOptions is object && ConfigOptions is object);
-                return new GeneratorExecutionContext(Compilation, ParseOptions, AdditionalTexts, ConfigOptions, Receiver, sourceExtension, cancellationToken);
+                return new GeneratorExecutionContext(
+                    Compilation,
+                    ParseOptions,
+                    AdditionalTexts,
+                    ConfigOptions,
+                    Receiver,
+                    sourceExtension,
+                    cancellationToken
+                );
             }
         }
     }

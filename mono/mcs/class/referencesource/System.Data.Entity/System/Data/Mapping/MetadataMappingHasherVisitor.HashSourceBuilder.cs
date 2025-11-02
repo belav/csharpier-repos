@@ -9,27 +9,25 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
 using System.Data.Common.Utils;
-using System.Security.Cryptography;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace System.Data.Mapping
 {
     /// <summary>
-    /// This class keeps recomputing the hash and adding it to the front of the 
+    /// This class keeps recomputing the hash and adding it to the front of the
     /// builder when the length of the string gets too long
     /// </summary>
     internal class CompressingHashBuilder : StringHashBuilder
     {
-
         // this max comes from the value that Md5Hasher uses for a buffer size when it is reading
         // from a stream
-        private const int HashCharacterCompressionThreshold = 0x1000 / 2;  // num bytes / 2 to convert to typical unicode char size
+        private const int HashCharacterCompressionThreshold = 0x1000 / 2; // num bytes / 2 to convert to typical unicode char size
         private const int SpacesPerIndent = 4;
 
         private int _indent = 0;
@@ -37,9 +35,10 @@ namespace System.Data.Mapping
         // we are starting the buffer at 1.5 times the number of bytes
         // for the threshold
         internal CompressingHashBuilder(HashAlgorithm hashAlgorithm)
-            : base(hashAlgorithm, (HashCharacterCompressionThreshold + (HashCharacterCompressionThreshold / 2)) * 2)
-        {
-        }
+            : base(
+                hashAlgorithm,
+                (HashCharacterCompressionThreshold + (HashCharacterCompressionThreshold / 2)) * 2
+            ) { }
 
         internal override void Append(string content)
         {
@@ -76,10 +75,9 @@ namespace System.Data.Mapping
             this._indent--;
         }
 
-
         private void CompressHash()
         {
-            if(base.CharCount >= HashCharacterCompressionThreshold)
+            if (base.CharCount >= HashCharacterCompressionThreshold)
             {
                 string hash = ComputeHash();
                 Clear();
@@ -88,7 +86,6 @@ namespace System.Data.Mapping
         }
     }
 
-    
     /// <summary>
     /// this class collects several strings together, and allows you to (
     /// </summary>
@@ -107,13 +104,16 @@ namespace System.Data.Mapping
         }
 
         internal StringHashBuilder(HashAlgorithm hashAlgorithm, int startingBufferSize)
-        :this(hashAlgorithm)
+            : this(hashAlgorithm)
         {
             Debug.Assert(startingBufferSize > 0, "should be a non zero positive integer");
             _cachedBuffer = new byte[startingBufferSize];
         }
 
-        internal int CharCount { get { return _totalLength; } }
+        internal int CharCount
+        {
+            get { return _totalLength; }
+        }
 
         internal virtual void Append(string s)
         {
@@ -125,7 +125,6 @@ namespace System.Data.Mapping
             InternalAppend(s);
             InternalAppend(NewLine);
         }
-
 
         private void InternalAppend(string s)
         {
@@ -139,9 +138,9 @@ namespace System.Data.Mapping
         internal string ComputeHash()
         {
             int byteCount = GetByteCount();
-            if(_cachedBuffer == null)
+            if (_cachedBuffer == null)
             {
-                // assume it is a one time use, and 
+                // assume it is a one time use, and
                 // it will grow later if needed
                 _cachedBuffer = new byte[byteCount];
             }
@@ -151,7 +150,10 @@ namespace System.Data.Mapping
                 // if that is bigger than what is needed this time.  We
                 // make it 1.5 times bigger in hopes to reduce the number of allocations (consider the
                 // case where the next one it 1 bigger)
-                int bufferSize = Math.Max(_cachedBuffer.Length + (_cachedBuffer.Length / 2), byteCount);
+                int bufferSize = Math.Max(
+                    _cachedBuffer.Length + (_cachedBuffer.Length / 2),
+                    byteCount
+                );
                 _cachedBuffer = new byte[bufferSize];
             }
 
@@ -190,11 +192,10 @@ namespace System.Data.Mapping
             return count;
         }
 
-
         private static string ConvertHashToString(byte[] hash)
         {
             StringBuilder stringData = new StringBuilder(hash.Length * 2);
-            // Loop through each byte of the data and format each one as a 
+            // Loop through each byte of the data and format each one as a
             // hexadecimal string
             for (int i = 0; i < hash.Length; i++)
             {

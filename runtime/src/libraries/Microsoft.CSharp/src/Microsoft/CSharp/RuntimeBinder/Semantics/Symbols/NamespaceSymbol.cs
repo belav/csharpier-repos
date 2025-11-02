@@ -38,7 +38,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             NamespaceSymbol root = new NamespaceSymbol
             {
-                name = NameManager.GetPredefinedName(PredefinedName.PN_VOID)
+                name = NameManager.GetPredefinedName(PredefinedName.PN_VOID),
             };
 
             root.setKind(SYMKIND.SK_NamespaceSymbol);

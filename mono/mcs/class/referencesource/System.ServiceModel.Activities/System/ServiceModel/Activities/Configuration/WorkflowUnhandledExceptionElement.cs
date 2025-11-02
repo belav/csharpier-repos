@@ -5,19 +5,20 @@
 namespace System.ServiceModel.Activities.Configuration
 {
     using System.Configuration;
-    using System.ServiceModel.Configuration;
     using System.ServiceModel.Activities.Description;
+    using System.ServiceModel.Configuration;
 
     public sealed class WorkflowUnhandledExceptionElement : BehaviorExtensionElement
     {
         ConfigurationPropertyCollection properties;
         const string action = "action";
 
-        public WorkflowUnhandledExceptionElement()
-        {
-        }
+        public WorkflowUnhandledExceptionElement() { }
 
-        [ConfigurationProperty(action, DefaultValue = WorkflowUnhandledExceptionBehavior.defaultAction)]
+        [ConfigurationProperty(
+            action,
+            DefaultValue = WorkflowUnhandledExceptionBehavior.defaultAction
+        )]
         [ServiceModelActivitiesEnumValidator(typeof(WorkflowUnhandledExceptionActionHelper))]
         public WorkflowUnhandledExceptionAction Action
         {
@@ -30,7 +31,12 @@ namespace System.ServiceModel.Activities.Configuration
             return new WorkflowUnhandledExceptionBehavior() { Action = this.Action };
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Configuration", "Configuration102:ConfigurationPropertyAttributeRule", MessageId = "System.ServiceModel.Activities.Configuration.WorkflowUnhandledExceptionElement.BehaviorType", Justification = "Not a configurable property; a property that had to be overridden from abstract parent class")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Configuration",
+            "Configuration102:ConfigurationPropertyAttributeRule",
+            MessageId = "System.ServiceModel.Activities.Configuration.WorkflowUnhandledExceptionElement.BehaviorType",
+            Justification = "Not a configurable property; a property that had to be overridden from abstract parent class"
+        )]
         public override Type BehaviorType
         {
             get { return typeof(WorkflowUnhandledExceptionBehavior); }
@@ -42,17 +48,24 @@ namespace System.ServiceModel.Activities.Configuration
             {
                 if (this.properties == null)
                 {
-                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-                    properties.Add(new ConfigurationProperty(action, typeof(WorkflowUnhandledExceptionAction), WorkflowUnhandledExceptionBehavior.defaultAction, null, new ServiceModelActivitiesEnumValidator(typeof(WorkflowUnhandledExceptionActionHelper)), System.Configuration.ConfigurationPropertyOptions.None));
+                    ConfigurationPropertyCollection properties =
+                        new ConfigurationPropertyCollection();
+                    properties.Add(
+                        new ConfigurationProperty(
+                            action,
+                            typeof(WorkflowUnhandledExceptionAction),
+                            WorkflowUnhandledExceptionBehavior.defaultAction,
+                            null,
+                            new ServiceModelActivitiesEnumValidator(
+                                typeof(WorkflowUnhandledExceptionActionHelper)
+                            ),
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
                     this.properties = properties;
                 }
                 return this.properties;
             }
         }
-
     }
 }
-
-
-
-

@@ -2,10 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 struct S0
 {
     public short F0;
     public int F1;
+
     public S0(short f0, int f1)
     {
         F0 = f0;

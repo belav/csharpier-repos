@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         private int _position;
         private const int DefaultStackCapacity = 8;
 
-        internal SyntaxTreeDiagnosticEnumerator(SyntaxTree syntaxTree, GreenNode? node, int position)
+        internal SyntaxTreeDiagnosticEnumerator(
+            SyntaxTree syntaxTree,
+            GreenNode? node,
+            int position
+        )
         {
             _syntaxTree = null;
             _current = null;
@@ -55,22 +59,30 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     //for tokens, we've already seen leading trivia on the stack, so we have to roll back
                     //for nodes, we have yet to see the leading trivia
-                    int leadingWidthAlreadyCounted = node.IsToken ? node.GetLeadingTriviaWidth() : 0;
+                    int leadingWidthAlreadyCounted = node.IsToken
+                        ? node.GetLeadingTriviaWidth()
+                        : 0;
 
                     // don't produce locations outside of tree span
                     Debug.Assert(_syntaxTree is object);
                     var length = _syntaxTree.GetRoot().FullSpan.Length;
-                    var spanStart = Math.Min(_position - leadingWidthAlreadyCounted + sdi.Offset, length);
+                    var spanStart = Math.Min(
+                        _position - leadingWidthAlreadyCounted + sdi.Offset,
+                        length
+                    );
                     var spanWidth = Math.Min(spanStart + sdi.Width, length) - spanStart;
 
-                    _current = new CSDiagnostic(sdi, new SourceLocation(_syntaxTree, new TextSpan(spanStart, spanWidth)));
+                    _current = new CSDiagnostic(
+                        sdi,
+                        new SourceLocation(_syntaxTree, new TextSpan(spanStart, spanWidth))
+                    );
 
                     _stack.UpdateDiagnosticIndexForStackTop(diagIndex);
                     return true;
                 }
 
                 var slotIndex = _stack.Top.SlotIndex;
-tryAgain:
+                tryAgain:
                 if (slotIndex < node.SlotCount - 1)
                 {
                     slotIndex++;
@@ -108,7 +120,11 @@ tryAgain:
         /// </summary>
         public Diagnostic Current
         {
-            get { Debug.Assert(_current is object); return _current; }
+            get
+            {
+                Debug.Assert(_current is object);
+                return _current;
+            }
         }
 
         private struct NodeIteration
@@ -191,10 +207,7 @@ tryAgain:
 
             internal NodeIteration Top
             {
-                get
-                {
-                    return this[_count - 1];
-                }
+                get { return this[_count - 1]; }
             }
 
             internal NodeIteration this[int index]

@@ -14,13 +14,30 @@ namespace System.Workflow.Activities.Rules
 
     public sealed class RuleDefinitions : IWorkflowChangeDiff
     {
-
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
-        public static readonly DependencyProperty RuleDefinitionsProperty = DependencyProperty.RegisterAttached("RuleDefinitions", typeof(RuleDefinitions), typeof(RuleDefinitions), new PropertyMetadata(null, DependencyPropertyOptions.Metadata, new GetValueOverride(OnGetRuleConditions), null, new Attribute[] { new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden) }));
+        public static readonly DependencyProperty RuleDefinitionsProperty =
+            DependencyProperty.RegisterAttached(
+                "RuleDefinitions",
+                typeof(RuleDefinitions),
+                typeof(RuleDefinitions),
+                new PropertyMetadata(
+                    null,
+                    DependencyPropertyOptions.Metadata,
+                    new GetValueOverride(OnGetRuleConditions),
+                    null,
+                    new Attribute[]
+                    {
+                        new DesignerSerializationVisibilityAttribute(
+                            DesignerSerializationVisibility.Hidden
+                        ),
+                    }
+                )
+            );
 
         private RuleConditionCollection conditions;
         private RuleSetCollection ruleSets;
         private bool runtimeInitialized;
+
         [NonSerialized]
         private object syncLock = new object();
 
@@ -51,7 +68,9 @@ namespace System.Workflow.Activities.Rules
             if (dependencyObject == null)
                 throw new ArgumentNullException("dependencyObject");
 
-            RuleDefinitions rules = dependencyObject.GetValueBase(RuleDefinitions.RuleDefinitionsProperty) as RuleDefinitions;
+            RuleDefinitions rules =
+                dependencyObject.GetValueBase(RuleDefinitions.RuleDefinitionsProperty)
+                as RuleDefinitions;
             if (rules != null)
                 return rules;
 
@@ -86,8 +105,14 @@ namespace System.Workflow.Activities.Rules
             if ((originalRules == null) || (changedRules == null))
                 return new List<WorkflowChangeAction>();
 
-            IList<WorkflowChangeAction> cdiff = Conditions.Diff(originalRules.Conditions, changedRules.Conditions);
-            IList<WorkflowChangeAction> rdiff = RuleSets.Diff(originalRules.RuleSets, changedRules.RuleSets);
+            IList<WorkflowChangeAction> cdiff = Conditions.Diff(
+                originalRules.Conditions,
+                changedRules.Conditions
+            );
+            IList<WorkflowChangeAction> rdiff = RuleSets.Diff(
+                originalRules.RuleSets,
+                changedRules.RuleSets
+            );
 
             // quick optimization -- if no condition changes, simply return the ruleset changes
             if (cdiff.Count == 0)

@@ -9,7 +9,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal partial class BoundSwitchExpression
     {
-        public BoundDecisionDag GetDecisionDagForLowering(CSharpCompilation compilation, out LabelSymbol? defaultLabel)
+        public BoundDecisionDag GetDecisionDagForLowering(
+            CSharpCompilation compilation,
+            out LabelSymbol? defaultLabel
+        )
         {
             defaultLabel = this.DefaultLabel;
 
@@ -25,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // we generate a new label here because the new dag might not be.
                     defaultLabel ??= new GeneratedLabelSymbol("default"),
                     BindingDiagnosticBag.Discarded,
-                    forLowering: true);
+                    forLowering: true
+                );
                 Debug.Assert(!decisionDag.ContainsAnySynthesizedNodes());
             }
 

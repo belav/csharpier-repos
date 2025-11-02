@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,131 +33,150 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-	public sealed class WebMessageEncodingBindingElement
+    public sealed class WebMessageEncodingBindingElement
 #if MOBILE
-		: MessageEncodingBindingElement
+        : MessageEncodingBindingElement
 #else
-		: MessageEncodingBindingElement, IWsdlExportExtension
+        : MessageEncodingBindingElement,
+            IWsdlExportExtension
 #endif
-	{
-		Encoding write_encoding;
-		WebContentTypeMapper content_type_mapper;
-		int max_read_pool_size = 0x10000, max_write_pool_size = 0x10000;
+    {
+        Encoding write_encoding;
+        WebContentTypeMapper content_type_mapper;
+        int max_read_pool_size = 0x10000,
+            max_write_pool_size = 0x10000;
 
-		// Constructors
+        // Constructors
 
-		public WebMessageEncodingBindingElement ()
-			: this (Encoding.UTF8)
-		{
-		}
+        public WebMessageEncodingBindingElement()
+            : this(Encoding.UTF8) { }
 
-		public WebMessageEncodingBindingElement (Encoding writeEncoding)
-		{
-			if (writeEncoding == null)
-				throw new ArgumentNullException ("writeEncoding");
-			WriteEncoding = writeEncoding;
-			ReaderQuotas = new XmlDictionaryReaderQuotas ();
-		}
+        public WebMessageEncodingBindingElement(Encoding writeEncoding)
+        {
+            if (writeEncoding == null)
+                throw new ArgumentNullException("writeEncoding");
+            WriteEncoding = writeEncoding;
+            ReaderQuotas = new XmlDictionaryReaderQuotas();
+        }
 
-		// Properties
+        // Properties
 
-		public WebContentTypeMapper ContentTypeMapper {
-			get { return content_type_mapper; }
-			set { content_type_mapper = value; }
-		}
+        public WebContentTypeMapper ContentTypeMapper
+        {
+            get { return content_type_mapper; }
+            set { content_type_mapper = value; }
+        }
 
-		[MonoTODO]
-		public int MaxReadPoolSize {
-			get { return max_read_pool_size; }
-			set { max_read_pool_size = value; }
-		}
+        [MonoTODO]
+        public int MaxReadPoolSize
+        {
+            get { return max_read_pool_size; }
+            set { max_read_pool_size = value; }
+        }
 
-		[MonoTODO]
-		public int MaxWritePoolSize {
-			get { return max_write_pool_size; }
-			set { max_write_pool_size = value; }
-		}
+        [MonoTODO]
+        public int MaxWritePoolSize
+        {
+            get { return max_write_pool_size; }
+            set { max_write_pool_size = value; }
+        }
 
-		public override MessageVersion MessageVersion {
-			get { return MessageVersion.None; }
-			set {
-				if (value == null)
-					throw new ArgumentNullException ("value");
-				if (!value.Equals (MessageVersion.None))
-					throw new ArgumentException ("Only MessageVersion.None is supported for WebMessageEncodingBindingElement");
-			}
-		}
+        public override MessageVersion MessageVersion
+        {
+            get { return MessageVersion.None; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("value");
+                if (!value.Equals(MessageVersion.None))
+                    throw new ArgumentException(
+                        "Only MessageVersion.None is supported for WebMessageEncodingBindingElement"
+                    );
+            }
+        }
 
-		public XmlDictionaryReaderQuotas ReaderQuotas { get; internal set; }
+        public XmlDictionaryReaderQuotas ReaderQuotas { get; internal set; }
 
-		public Encoding WriteEncoding {
-			get { return write_encoding; }
-			set {
-				if (value == null)
-					throw new ArgumentNullException ("value");
-				write_encoding = value;
-			}
-		}
+        public Encoding WriteEncoding
+        {
+            get { return write_encoding; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("value");
+                write_encoding = value;
+            }
+        }
 
-		// Methods
+        // Methods
 
-		public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (BindingContext context)
-		{
-			if (context == null)
-				throw new ArgumentNullException ("context");
-			context.RemainingBindingElements.Add (this);
-			return base.BuildChannelFactory<TChannel> (context);
-		}
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
+        {
+            if (context == null)
+                throw new ArgumentNullException("context");
+            context.RemainingBindingElements.Add(this);
+            return base.BuildChannelFactory<TChannel>(context);
+        }
 
 #if !MOBILE
-		[MonoTODO ("Why is it overriden?")]
-		public override bool CanBuildChannelListener<TChannel> (BindingContext context)
-		{
-			if (context == null)
-				throw new ArgumentNullException ("context");
-			return context.CanBuildInnerChannelListener<TChannel> ();
-		}
+        [MonoTODO("Why is it overriden?")]
+        public override bool CanBuildChannelListener<TChannel>(BindingContext context)
+        {
+            if (context == null)
+                throw new ArgumentNullException("context");
+            return context.CanBuildInnerChannelListener<TChannel>();
+        }
 
-		public override IChannelListener<TChannel> BuildChannelListener<TChannel> (BindingContext context)
-		{
-			if (context == null)
-				throw new ArgumentNullException ("context");
-			context.RemainingBindingElements.Add (this);
-			return base.BuildChannelListener<TChannel> (context);
-		}
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
+        {
+            if (context == null)
+                throw new ArgumentNullException("context");
+            context.RemainingBindingElements.Add(this);
+            return base.BuildChannelListener<TChannel>(context);
+        }
 #endif
 
-		public override BindingElement Clone ()
-		{
-			return (WebMessageEncodingBindingElement) MemberwiseClone ();
-		}
+        public override BindingElement Clone()
+        {
+            return (WebMessageEncodingBindingElement)MemberwiseClone();
+        }
 
-		public override MessageEncoderFactory CreateMessageEncoderFactory ()
-		{
-			return new WebMessageEncoderFactory (this);
-		}
+        public override MessageEncoderFactory CreateMessageEncoderFactory()
+        {
+            return new WebMessageEncoderFactory(this);
+        }
 
-		public override T GetProperty<T> (BindingContext context)
-		{
-			if (typeof (T) == typeof (MessageVersion))
-				return (T) (object) MessageVersion;
-			if (typeof (T) == typeof (XmlDictionaryReaderQuotas))
-				return (T) (object) ReaderQuotas;
-			return context.GetInnerProperty<T> ();
-		}
+        public override T GetProperty<T>(BindingContext context)
+        {
+            if (typeof(T) == typeof(MessageVersion))
+                return (T)(object)MessageVersion;
+            if (typeof(T) == typeof(XmlDictionaryReaderQuotas))
+                return (T)(object)ReaderQuotas;
+            return context.GetInnerProperty<T>();
+        }
 
 #if !MOBILE && !XAMMAC_4_5
-		[MonoTODO]
-		void IWsdlExportExtension.ExportContract (WsdlExporter exporter, WsdlContractConversionContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        void IWsdlExportExtension.ExportContract(
+            WsdlExporter exporter,
+            WsdlContractConversionContext context
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		void IWsdlExportExtension.ExportEndpoint (WsdlExporter exporter, WsdlEndpointConversionContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        void IWsdlExportExtension.ExportEndpoint(
+            WsdlExporter exporter,
+            WsdlEndpointConversionContext context
+        )
+        {
+            throw new NotImplementedException();
+        }
 #endif
-	}
+    }
 }

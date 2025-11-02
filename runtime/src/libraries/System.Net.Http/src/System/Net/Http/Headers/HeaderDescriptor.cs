@@ -28,13 +28,18 @@ namespace System.Net.Http.Headers
         // This should not be used directly; use static TryGet below
         internal HeaderDescriptor(string headerName, bool customHeader = false)
         {
-            Debug.Assert(customHeader || KnownHeaders.TryGetKnownHeader(headerName) is null, $"The {nameof(KnownHeader)} overload should be used for {headerName}");
+            Debug.Assert(
+                customHeader || KnownHeaders.TryGetKnownHeader(headerName) is null,
+                $"The {nameof(KnownHeader)} overload should be used for {headerName}"
+            );
             _descriptor = headerName;
         }
 
-        public string Name => _descriptor is KnownHeader header ? header.Name : (_descriptor as string)!;
+        public string Name =>
+            _descriptor is KnownHeader header ? header.Name : (_descriptor as string)!;
         public HttpHeaderParser? Parser => (_descriptor as KnownHeader)?.Parser;
-        public HttpHeaderType HeaderType => _descriptor is KnownHeader knownHeader ? knownHeader.HeaderType : HttpHeaderType.Custom;
+        public HttpHeaderType HeaderType =>
+            _descriptor is KnownHeader knownHeader ? knownHeader.HeaderType : HttpHeaderType.Custom;
         public KnownHeader? KnownHeader => _descriptor as KnownHeader;
 
         public bool Equals(KnownHeader other) => ReferenceEquals(_descriptor, other);
@@ -43,7 +48,11 @@ namespace System.Net.Http.Headers
         {
             if (_descriptor is string headerName)
             {
-                return string.Equals(headerName, other._descriptor as string, StringComparison.OrdinalIgnoreCase);
+                return string.Equals(
+                    headerName,
+                    other._descriptor as string,
+                    StringComparison.OrdinalIgnoreCase
+                );
             }
             else
             {
@@ -51,9 +60,12 @@ namespace System.Net.Http.Headers
             }
         }
 
-        public override int GetHashCode() => _descriptor is KnownHeader knownHeader ? knownHeader.GetHashCode() : StringComparer.OrdinalIgnoreCase.GetHashCode(_descriptor);
+        public override int GetHashCode() =>
+            _descriptor is KnownHeader knownHeader
+                ? knownHeader.GetHashCode()
+                : StringComparer.OrdinalIgnoreCase.GetHashCode(_descriptor);
 
-        public override bool Equals(object? obj) => throw new InvalidOperationException();   // Ensure this is never called, to avoid boxing
+        public override bool Equals(object? obj) => throw new InvalidOperationException(); // Ensure this is never called, to avoid boxing
 
         // Returns false for invalid header name.
         public static bool TryGet(string headerName, out HeaderDescriptor descriptor)
@@ -99,12 +111,17 @@ namespace System.Net.Http.Headers
             return true;
         }
 
-        internal static bool TryGetStaticQPackHeader(int index, out HeaderDescriptor descriptor, [NotNullWhen(true)] out string? knownValue)
+        internal static bool TryGetStaticQPackHeader(
+            int index,
+            out HeaderDescriptor descriptor,
+            [NotNullWhen(true)] out string? knownValue
+        )
         {
             Debug.Assert(index >= 0);
 
             // Micro-opt: store field to variable to prevent Length re-read and use unsigned to avoid bounds check.
-            (HeaderDescriptor descriptor, string value)[] qpackStaticTable = QPackStaticTable.HeaderLookup;
+            (HeaderDescriptor descriptor, string value)[] qpackStaticTable =
+                QPackStaticTable.HeaderLookup;
             Debug.Assert(qpackStaticTable.Length == 99);
 
             uint uindex = (uint)index;
@@ -179,43 +196,69 @@ namespace System.Net.Http.Headers
                 case 8:
                     switch (contentTypeValue[7])
                     {
-                        case (byte)'l': candidate = "text/xml"; break; // text/xm[l]
-                        case (byte)'s': candidate = "text/css"; break; // text/cs[s]
-                        case (byte)'v': candidate = "text/csv"; break; // text/cs[v]
+                        case (byte)'l':
+                            candidate = "text/xml";
+                            break; // text/xm[l]
+                        case (byte)'s':
+                            candidate = "text/css";
+                            break; // text/cs[s]
+                        case (byte)'v':
+                            candidate = "text/csv";
+                            break; // text/cs[v]
                     }
                     break;
 
                 case 9:
                     switch (contentTypeValue[6])
                     {
-                        case (byte)'g': candidate = "image/gif"; break; // image/[g]if
-                        case (byte)'p': candidate = "image/png"; break; // image/[p]ng
-                        case (byte)'t': candidate = "text/html"; break; // text/h[t]ml
+                        case (byte)'g':
+                            candidate = "image/gif";
+                            break; // image/[g]if
+                        case (byte)'p':
+                            candidate = "image/png";
+                            break; // image/[p]ng
+                        case (byte)'t':
+                            candidate = "text/html";
+                            break; // text/h[t]ml
                     }
                     break;
 
                 case 10:
                     switch (contentTypeValue[0])
                     {
-                        case (byte)'t': candidate = "text/plain"; break; // [t]ext/plain
-                        case (byte)'i': candidate = "image/jpeg"; break; // [i]mage/jpeg
+                        case (byte)'t':
+                            candidate = "text/plain";
+                            break; // [t]ext/plain
+                        case (byte)'i':
+                            candidate = "image/jpeg";
+                            break; // [i]mage/jpeg
                     }
                     break;
 
                 case 15:
                     switch (contentTypeValue[12])
                     {
-                        case (byte)'p': candidate = "application/pdf"; break; // application/[p]df
-                        case (byte)'x': candidate = "application/xml"; break; // application/[x]ml
-                        case (byte)'z': candidate = "application/zip"; break; // application/[z]ip
+                        case (byte)'p':
+                            candidate = "application/pdf";
+                            break; // application/[p]df
+                        case (byte)'x':
+                            candidate = "application/xml";
+                            break; // application/[x]ml
+                        case (byte)'z':
+                            candidate = "application/zip";
+                            break; // application/[z]ip
                     }
                     break;
 
                 case 16:
                     switch (contentTypeValue[12])
                     {
-                        case (byte)'g': candidate = "application/grpc"; break; // application/[g]rpc
-                        case (byte)'j': candidate = "application/json"; break; // application/[j]son
+                        case (byte)'g':
+                            candidate = "application/grpc";
+                            break; // application/[g]rpc
+                        case (byte)'j':
+                            candidate = "application/json";
+                            break; // application/[j]son
                     }
                     break;
 
@@ -230,9 +273,15 @@ namespace System.Net.Http.Headers
                 case 24:
                     switch (contentTypeValue[19])
                     {
-                        case (byte)'t': candidate = "application/octet-stream"; break; // application/octet-s[t]ream
-                        case (byte)'u': candidate = "text/html; charset=utf-8"; break; // text/html; charset=[u]tf-8
-                        case (byte)'U': candidate = "text/html; charset=UTF-8"; break; // text/html; charset=[U]TF-8
+                        case (byte)'t':
+                            candidate = "application/octet-stream";
+                            break; // application/octet-s[t]ream
+                        case (byte)'u':
+                            candidate = "text/html; charset=utf-8";
+                            break; // text/html; charset=[u]tf-8
+                        case (byte)'U':
+                            candidate = "text/html; charset=UTF-8";
+                            break; // text/html; charset=[U]TF-8
                     }
                     break;
 
@@ -251,18 +300,29 @@ namespace System.Net.Http.Headers
 
             Debug.Assert(candidate is null || candidate.Length == contentTypeValue.Length);
 
-            return candidate != null && Ascii.Equals(contentTypeValue, candidate) ?
-                candidate :
-                null;
+            return candidate != null && Ascii.Equals(contentTypeValue, candidate)
+                ? candidate
+                : null;
         }
 
-        private static bool TryDecodeUtf8(ReadOnlySpan<byte> input, [NotNullWhen(true)] out string? decoded)
+        private static bool TryDecodeUtf8(
+            ReadOnlySpan<byte> input,
+            [NotNullWhen(true)] out string? decoded
+        )
         {
             char[] rented = ArrayPool<char>.Shared.Rent(input.Length);
 
             try
             {
-                if (Utf8.ToUtf16(input, rented, out _, out int charsWritten, replaceInvalidSequences: false) == OperationStatus.Done)
+                if (
+                    Utf8.ToUtf16(
+                        input,
+                        rented,
+                        out _,
+                        out int charsWritten,
+                        replaceInvalidSequences: false
+                    ) == OperationStatus.Done
+                )
                 {
                     decoded = new string(rented, 0, charsWritten);
                     return true;

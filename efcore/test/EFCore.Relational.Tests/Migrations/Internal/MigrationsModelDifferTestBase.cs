@@ -11,16 +11,32 @@ public abstract class MigrationsModelDifferTestBase
         Action<ModelBuilder> buildSourceAction,
         Action<ModelBuilder> buildTargetAction,
         Action<IReadOnlyList<MigrationOperation>> assertAction,
-        bool skipSourceConventions = false)
-        => Execute(m => { }, buildSourceAction, buildTargetAction, assertAction, null, skipSourceConventions);
+        bool skipSourceConventions = false
+    ) =>
+        Execute(
+            m => { },
+            buildSourceAction,
+            buildTargetAction,
+            assertAction,
+            null,
+            skipSourceConventions
+        );
 
     protected void Execute(
         Action<ModelBuilder> buildCommonAction,
         Action<ModelBuilder> buildSourceAction,
         Action<ModelBuilder> buildTargetAction,
         Action<IReadOnlyList<MigrationOperation>> assertAction,
-        bool skipSourceConventions = false)
-        => Execute(buildCommonAction, buildSourceAction, buildTargetAction, assertAction, null, skipSourceConventions);
+        bool skipSourceConventions = false
+    ) =>
+        Execute(
+            buildCommonAction,
+            buildSourceAction,
+            buildTargetAction,
+            assertAction,
+            null,
+            skipSourceConventions
+        );
 
     protected void Execute(
         Action<ModelBuilder> buildCommonAction,
@@ -28,9 +44,17 @@ public abstract class MigrationsModelDifferTestBase
         Action<ModelBuilder> buildTargetAction,
         Action<IReadOnlyList<MigrationOperation>> assertActionUp,
         Action<IReadOnlyList<MigrationOperation>> assertActionDown,
-        bool skipSourceConventions = false)
-        => Execute(
-            buildCommonAction, buildSourceAction, buildTargetAction, assertActionUp, assertActionDown, null, skipSourceConventions);
+        bool skipSourceConventions = false
+    ) =>
+        Execute(
+            buildCommonAction,
+            buildSourceAction,
+            buildTargetAction,
+            assertActionUp,
+            assertActionDown,
+            null,
+            skipSourceConventions
+        );
 
     protected void Execute(
         Action<ModelBuilder> buildCommonAction,
@@ -40,7 +64,8 @@ public abstract class MigrationsModelDifferTestBase
         Action<IReadOnlyList<MigrationOperation>> assertActionDown,
         Action<DbContextOptionsBuilder> builderOptionsAction,
         bool skipSourceConventions = false,
-        bool enableSensitiveLogging = true)
+        bool enableSensitiveLogging = true
+    )
     {
         var sourceModelBuilder = CreateModelBuilder(skipSourceConventions);
         buildCommonAction(sourceModelBuilder);
@@ -69,24 +94,36 @@ public abstract class MigrationsModelDifferTestBase
 
         var modelDiffer = CreateModelDiffer(targetOptionsBuilder.Options);
 
-        var operationsUp = modelDiffer.GetDifferences(sourceModel.GetRelationalModel(), targetModel.GetRelationalModel());
+        var operationsUp = modelDiffer.GetDifferences(
+            sourceModel.GetRelationalModel(),
+            targetModel.GetRelationalModel()
+        );
         assertActionUp(operationsUp);
 
         if (assertActionDown != null)
         {
-            var operationsDown = modelDiffer.GetDifferences(targetModel.GetRelationalModel(), sourceModel.GetRelationalModel());
+            var operationsDown = modelDiffer.GetDifferences(
+                targetModel.GetRelationalModel(),
+                sourceModel.GetRelationalModel()
+            );
             assertActionDown(operationsDown);
         }
 
-        var noopOperations = modelDiffer.GetDifferences(sourceModel.GetRelationalModel(), sourceModel.GetRelationalModel());
+        var noopOperations = modelDiffer.GetDifferences(
+            sourceModel.GetRelationalModel(),
+            sourceModel.GetRelationalModel()
+        );
         Assert.Empty(noopOperations);
 
-        noopOperations = modelDiffer.GetDifferences(targetModel.GetRelationalModel(), targetModel.GetRelationalModel());
+        noopOperations = modelDiffer.GetDifferences(
+            targetModel.GetRelationalModel(),
+            targetModel.GetRelationalModel()
+        );
         Assert.Empty(noopOperations);
     }
 
-    protected void AssertMultidimensionalArray<T>(T[,] values, params Action<T>[] assertions)
-        => Assert.Collection(values.Cast<T>(), assertions);
+    protected void AssertMultidimensionalArray<T>(T[,] values, params Action<T>[] assertions) =>
+        Assert.Collection(values.Cast<T>(), assertions);
 
     protected static T[][] ToJaggedArray<T>(T[,] twoDimensionalArray, bool firstDimension = false)
     {
@@ -114,18 +151,20 @@ public abstract class MigrationsModelDifferTestBase
 
     protected abstract TestHelpers TestHelpers { get; }
 
-    protected virtual TestHelpers.TestModelBuilder CreateModelBuilder(bool skipConventions)
-        => TestHelpers.CreateConventionBuilder(configureConventions: skipConventions ? c => c.RemoveAllConventions() : null);
+    protected virtual TestHelpers.TestModelBuilder CreateModelBuilder(bool skipConventions) =>
+        TestHelpers.CreateConventionBuilder(
+            configureConventions: skipConventions ? c => c.RemoveAllConventions() : null
+        );
 
-    protected virtual MigrationsModelDiffer CreateModelDiffer(DbContextOptions options)
-        => new(
+    protected virtual MigrationsModelDiffer CreateModelDiffer(DbContextOptions options) =>
+        new(
             new TestRelationalTypeMappingSource(
                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()),
-            new MigrationsAnnotationProvider(
-                new MigrationsAnnotationProviderDependencies()),
-            new RelationalAnnotationProvider(
-                new RelationalAnnotationProviderDependencies()),
+                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+            ),
+            new MigrationsAnnotationProvider(new MigrationsAnnotationProviderDependencies()),
+            new RelationalAnnotationProvider(new RelationalAnnotationProviderDependencies()),
             TestServiceFactory.Instance.Create<IRowIdentityMapFactory>(),
-            TestHelpers.CreateContext(options).GetService<CommandBatchPreparerDependencies>());
+            TestHelpers.CreateContext(options).GetService<CommandBatchPreparerDependencies>()
+        );
 }

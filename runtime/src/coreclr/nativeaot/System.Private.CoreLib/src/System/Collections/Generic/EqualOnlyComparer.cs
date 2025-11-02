@@ -89,7 +89,9 @@ namespace System.Collections.Generic
         // a large function, however in this case the method compiles down to almost nothing so help the
         // compiler out a bit with this hint. Once the compiler supports bottom-up codegen analysis it should
         // inline this without a hint.
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        [System.Runtime.CompilerServices.MethodImpl(
+            System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining
+        )]
         public static bool Equals(T x, T y)
         {
             // Specialized Comparers
@@ -100,7 +102,10 @@ namespace System.Collections.Generic
             else if (typeof(T) == typeof(short))
                 return EqualOnlyComparerHelper.Equals(((short)(object)(x!)), ((short)(object)(y!)));
             else if (typeof(T) == typeof(ushort))
-                return EqualOnlyComparerHelper.Equals(((ushort)(object)(x!)), ((ushort)(object)(y!)));
+                return EqualOnlyComparerHelper.Equals(
+                    ((ushort)(object)(x!)),
+                    ((ushort)(object)(y!))
+                );
             else if (typeof(T) == typeof(int))
                 return EqualOnlyComparerHelper.Equals(((int)(object)(x!)), ((int)(object)(y!)));
             else if (typeof(T) == typeof(uint))
@@ -110,17 +115,32 @@ namespace System.Collections.Generic
             else if (typeof(T) == typeof(ulong))
                 return EqualOnlyComparerHelper.Equals(((ulong)(object)(x!)), ((ulong)(object)(y!)));
             else if (typeof(T) == typeof(System.IntPtr))
-                return EqualOnlyComparerHelper.Equals(((System.IntPtr)(object)(x!)), ((System.IntPtr)(object)(y!)));
+                return EqualOnlyComparerHelper.Equals(
+                    ((System.IntPtr)(object)(x!)),
+                    ((System.IntPtr)(object)(y!))
+                );
             else if (typeof(T) == typeof(System.UIntPtr))
-                return EqualOnlyComparerHelper.Equals(((System.UIntPtr)(object)(x!)), ((System.UIntPtr)(object)(y!)));
+                return EqualOnlyComparerHelper.Equals(
+                    ((System.UIntPtr)(object)(x!)),
+                    ((System.UIntPtr)(object)(y!))
+                );
             else if (typeof(T) == typeof(float))
                 return EqualOnlyComparerHelper.Equals(((float)(object)(x!)), ((float)(object)(y!)));
             else if (typeof(T) == typeof(double))
-                return EqualOnlyComparerHelper.Equals(((double)(object)(x!)), ((double)(object)(y!)));
+                return EqualOnlyComparerHelper.Equals(
+                    ((double)(object)(x!)),
+                    ((double)(object)(y!))
+                );
             else if (typeof(T) == typeof(decimal))
-                return EqualOnlyComparerHelper.Equals(((decimal)(object)(x!)), ((decimal)(object)(y!)));
+                return EqualOnlyComparerHelper.Equals(
+                    ((decimal)(object)(x!)),
+                    ((decimal)(object)(y!))
+                );
             else if (typeof(T) == typeof(string))
-                return EqualOnlyComparerHelper.Equals(((string?)(object?)(x)), ((string?)(object?)(y)));
+                return EqualOnlyComparerHelper.Equals(
+                    ((string?)(object?)(x)),
+                    ((string?)(object?)(y))
+                );
 
             // Default Comparer
 

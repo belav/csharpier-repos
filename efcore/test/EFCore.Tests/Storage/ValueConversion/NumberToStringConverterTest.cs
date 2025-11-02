@@ -721,12 +721,15 @@ public class NumberToStringConverterTest
     }
 
     [ConditionalFact]
-    public void Integer_to_string_converter_throws_for_bad_type()
-        => Assert.Equal(
+    public void Integer_to_string_converter_throws_for_bad_type() =>
+        Assert.Equal(
             CoreStrings.ConverterBadType(
                 typeof(StringNumberConverter<Guid, string, Guid>).ShortDisplayName(),
                 "Guid",
-                "'int', 'long', 'short', 'byte', 'uint', 'ulong', 'ushort', 'sbyte', 'decimal', 'float', 'double'"),
-            Assert.Throws<InvalidOperationException>(
-                () => new NumberToStringConverter<Guid>()).Message);
+                "'int', 'long', 'short', 'byte', 'uint', 'ulong', 'ushort', 'sbyte', 'decimal', 'float', 'double'"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => new NumberToStringConverter<Guid>())
+                .Message
+        );
 }

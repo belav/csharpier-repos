@@ -2,31 +2,34 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 
-using System.ServiceModel.Diagnostics;
-using System.ServiceModel.Dispatcher;
-using System.ServiceModel.Description;
-using System.ServiceModel.Security;
-using System.ServiceModel.Configuration;
 using System.Collections.ObjectModel;
 using System.Net.Security;
+using System.ServiceModel.Configuration;
+using System.ServiceModel.Description;
+using System.ServiceModel.Diagnostics;
+using System.ServiceModel.Dispatcher;
+using System.ServiceModel.Security;
 
 namespace System.ServiceModel.Channels
 {
-    using System.Xml;
-    using System.ServiceModel.Security.Tokens;
-    using System.ServiceModel.Security;
-    using System.ServiceModel;
-    using System.IO;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
     using System.Runtime.InteropServices;
+    using System.ServiceModel;
+    using System.ServiceModel.Security;
+    using System.ServiceModel.Security.Tokens;
+    using System.Xml;
 
     public class SecurityBindingElementImporter : IPolicyImportExtension
     {
         internal const string MaxPolicyRedirectionsKey = "MaxPolicyRedirections";
-        internal const string SecureConversationBootstrapEncryptionRequirements = "SecureConversationBootstrapEncryptionRequirements";
-        internal const string SecureConversationBootstrapSignatureRequirements = "SecureConversationBootstrapSignatureRequirements";
-        internal const string InSecureConversationBootstrapBindingImportMode = "InSecureConversationBootstrapBindingImportMode";
+        internal const string SecureConversationBootstrapEncryptionRequirements =
+            "SecureConversationBootstrapEncryptionRequirements";
+        internal const string SecureConversationBootstrapSignatureRequirements =
+            "SecureConversationBootstrapSignatureRequirements";
+        internal const string InSecureConversationBootstrapBindingImportMode =
+            "InSecureConversationBootstrapBindingImportMode";
         internal const string ContractProtectionLevelKey = "ContractProtectionLevelKey";
 
         int maxPolicyRedirections;
@@ -38,13 +41,14 @@ namespace System.ServiceModel.Channels
 
         public int MaxPolicyRedirections
         {
-            get
-            {
-                return this.maxPolicyRedirections;
-            }
+            get { return this.maxPolicyRedirections; }
         }
 
-        void ImportOperationScopeSupportingTokensPolicy(MetadataImporter importer, PolicyConversionContext policyContext, SecurityBindingElement binding)
+        void ImportOperationScopeSupportingTokensPolicy(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext,
+            SecurityBindingElement binding
+        )
         {
             foreach (OperationDescription operation in policyContext.Contract.Operations)
             {
@@ -60,12 +64,21 @@ namespace System.ServiceModel.Channels
 
                 SupportingTokenParameters requirements = new SupportingTokenParameters();
                 SupportingTokenParameters optionalRequirements = new SupportingTokenParameters();
-                ICollection<XmlElement> operationBindingAssertions = policyContext.GetOperationBindingAssertions(operation);
-                this.ImportSupportingTokenAssertions(importer, policyContext, operationBindingAssertions, requirements, optionalRequirements);
-                if (requirements.Endorsing.Count > 0
+                ICollection<XmlElement> operationBindingAssertions =
+                    policyContext.GetOperationBindingAssertions(operation);
+                this.ImportSupportingTokenAssertions(
+                    importer,
+                    policyContext,
+                    operationBindingAssertions,
+                    requirements,
+                    optionalRequirements
+                );
+                if (
+                    requirements.Endorsing.Count > 0
                     || requirements.Signed.Count > 0
                     || requirements.SignedEncrypted.Count > 0
-                    || requirements.SignedEndorsing.Count > 0)
+                    || requirements.SignedEndorsing.Count > 0
+                )
                 {
                     if (requestAction != null)
                     {
@@ -73,27 +86,46 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CannotImportSupportingTokensForOperationWithoutRequestAction)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.CannotImportSupportingTokensForOperationWithoutRequestAction
+                                )
+                            )
+                        );
                     }
                 }
-                if (optionalRequirements.Endorsing.Count > 0
+                if (
+                    optionalRequirements.Endorsing.Count > 0
                     || optionalRequirements.Signed.Count > 0
                     || optionalRequirements.SignedEncrypted.Count > 0
-                    || optionalRequirements.SignedEndorsing.Count > 0)
+                    || optionalRequirements.SignedEndorsing.Count > 0
+                )
                 {
                     if (requestAction != null)
                     {
-                        binding.OptionalOperationSupportingTokenParameters[requestAction] = optionalRequirements;
+                        binding.OptionalOperationSupportingTokenParameters[requestAction] =
+                            optionalRequirements;
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CannotImportSupportingTokensForOperationWithoutRequestAction)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.CannotImportSupportingTokensForOperationWithoutRequestAction
+                                )
+                            )
+                        );
                     }
                 }
             }
         }
 
-        void ImportProtectionAssertions(ICollection<XmlElement> assertions, out MessagePartSpecification signedParts, out MessagePartSpecification encryptedParts)
+        void ImportProtectionAssertions(
+            ICollection<XmlElement> assertions,
+            out MessagePartSpecification signedParts,
+            out MessagePartSpecification encryptedParts
+        )
         {
             XmlElement assertion;
 
@@ -103,16 +135,36 @@ namespace System.ServiceModel.Channels
             WSSecurityPolicy securityPolicy;
             if (WSSecurityPolicy.TryGetSecurityPolicyDriver(assertions, out securityPolicy))
             {
-                if (!securityPolicy.TryImportWsspEncryptedPartsAssertion(assertions, out encryptedParts, out assertion)
-                    && assertion != null)
+                if (
+                    !securityPolicy.TryImportWsspEncryptedPartsAssertion(
+                        assertions,
+                        out encryptedParts,
+                        out assertion
+                    )
+                    && assertion != null
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                        )
+                    );
                 }
 
-                if (!securityPolicy.TryImportWsspSignedPartsAssertion(assertions, out signedParts, out assertion)
-                    && assertion != null)
+                if (
+                    !securityPolicy.TryImportWsspSignedPartsAssertion(
+                        assertions,
+                        out signedParts,
+                        out assertion
+                    )
+                    && assertion != null
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                        )
+                    );
                 }
             }
 
@@ -126,7 +178,13 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        void ValidateExistingOrSetNewProtectionLevel(MessagePartDescription part, MessageDescription message, OperationDescription operation, ContractDescription contract, ProtectionLevel newProtectionLevel)
+        void ValidateExistingOrSetNewProtectionLevel(
+            MessagePartDescription part,
+            MessageDescription message,
+            OperationDescription operation,
+            ContractDescription contract,
+            ProtectionLevel newProtectionLevel
+        )
         {
             ProtectionLevel existingProtectionLevel;
 
@@ -167,7 +225,15 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.CannotImportProtectionLevelForContract, contract.Name, contract.Namespace)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(
+                                SR.CannotImportProtectionLevelForContract,
+                                contract.Name,
+                                contract.Namespace
+                            )
+                        )
+                    );
                 }
             }
         }
@@ -175,9 +241,13 @@ namespace System.ServiceModel.Channels
         void AddParts(ref MessagePartSpecification parts1, MessagePartSpecification parts2)
         {
             if (parts1 == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("parts1"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("parts1")
+                );
             if (parts2 == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("parts2"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("parts2")
+                );
 
             if (!parts2.IsEmpty())
             {
@@ -201,19 +271,35 @@ namespace System.ServiceModel.Channels
             bool hasUniformProtectionLevel;
             ProtectionLevel uniformProtectionLevel;
 
-            public ContractProtectionLevel(bool hasProtectionRequirements, bool hasUniformProtectionLevel, ProtectionLevel uniformProtectionLevel)
+            public ContractProtectionLevel(
+                bool hasProtectionRequirements,
+                bool hasUniformProtectionLevel,
+                ProtectionLevel uniformProtectionLevel
+            )
             {
                 this.hasProtectionRequirements = hasProtectionRequirements;
                 this.hasUniformProtectionLevel = hasUniformProtectionLevel;
                 this.uniformProtectionLevel = uniformProtectionLevel;
             }
 
-            public bool HasProtectionRequirements { get { return this.hasProtectionRequirements; } }
-            public bool HasUniformProtectionLevel { get { return this.hasUniformProtectionLevel; } }
-            public ProtectionLevel UniformProtectionLevel { get { return this.uniformProtectionLevel; } }
+            public bool HasProtectionRequirements
+            {
+                get { return this.hasProtectionRequirements; }
+            }
+            public bool HasUniformProtectionLevel
+            {
+                get { return this.hasUniformProtectionLevel; }
+            }
+            public ProtectionLevel UniformProtectionLevel
+            {
+                get { return this.uniformProtectionLevel; }
+            }
         }
 
-        void ImportMessageScopeProtectionPolicy(MetadataImporter importer, PolicyConversionContext policyContext)
+        void ImportMessageScopeProtectionPolicy(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext
+        )
         {
             MessagePartSpecification endpointSignedParts;
             MessagePartSpecification endpointEncryptedParts;
@@ -223,28 +309,41 @@ namespace System.ServiceModel.Channels
             bool isContractProtectionLevelUniform = true;
             ProtectionLevel contractProtectionLevel = ProtectionLevel.None;
 
-            string contractAssociationName = String.Format("{0}:{1}:{2}", ContractProtectionLevelKey, policyContext.Contract.Name, policyContext.Contract.Namespace);
+            string contractAssociationName = String.Format(
+                "{0}:{1}:{2}",
+                ContractProtectionLevelKey,
+                policyContext.Contract.Name,
+                policyContext.Contract.Namespace
+            );
             if (importer.State.ContainsKey(contractAssociationName))
             {
                 isContractAssociatedWithAtLeastOneOtherBinding = true;
-                otherBindingProtectionLevel = (ContractProtectionLevel)importer.State[contractAssociationName];
+                otherBindingProtectionLevel = (ContractProtectionLevel)
+                    importer.State[contractAssociationName];
             }
             else
             {
                 isContractAssociatedWithAtLeastOneOtherBinding = false;
             }
 
-            ICollection<XmlElement> endpointBindingAssertions = policyContext.GetBindingAssertions();
-            this.ImportProtectionAssertions(endpointBindingAssertions, out endpointSignedParts, out endpointEncryptedParts);
+            ICollection<XmlElement> endpointBindingAssertions =
+                policyContext.GetBindingAssertions();
+            this.ImportProtectionAssertions(
+                endpointBindingAssertions,
+                out endpointSignedParts,
+                out endpointEncryptedParts
+            );
 
             if (importer.State.ContainsKey(InSecureConversationBootstrapBindingImportMode))
             {
                 // when importing secure conversation boostrap binding, add the endpoint scope protection requirements
                 // to the importer state to be consumed in SecurityPolicy11.TryImportWsspBootrstapPolicyAssertion
                 if (endpointEncryptedParts != null)
-                    importer.State[SecureConversationBootstrapEncryptionRequirements] = endpointEncryptedParts;
+                    importer.State[SecureConversationBootstrapEncryptionRequirements] =
+                        endpointEncryptedParts;
                 if (endpointSignedParts != null)
-                    importer.State[SecureConversationBootstrapSignatureRequirements] = endpointSignedParts;
+                    importer.State[SecureConversationBootstrapSignatureRequirements] =
+                        endpointSignedParts;
             }
 
             foreach (OperationDescription operation in policyContext.Contract.Operations)
@@ -252,8 +351,13 @@ namespace System.ServiceModel.Channels
                 MessagePartSpecification operationSignedParts;
                 MessagePartSpecification operationEncryptedParts;
 
-                ICollection<XmlElement> operationBindingAssertions = policyContext.GetOperationBindingAssertions(operation);
-                this.ImportProtectionAssertions(operationBindingAssertions, out operationSignedParts, out operationEncryptedParts);
+                ICollection<XmlElement> operationBindingAssertions =
+                    policyContext.GetOperationBindingAssertions(operation);
+                this.ImportProtectionAssertions(
+                    operationBindingAssertions,
+                    out operationSignedParts,
+                    out operationEncryptedParts
+                );
                 this.AddParts(ref operationSignedParts, endpointSignedParts);
                 this.AddParts(ref operationEncryptedParts, endpointEncryptedParts);
 
@@ -266,24 +370,54 @@ namespace System.ServiceModel.Channels
                 // import application message protection requirements
                 foreach (MessageDescription message in operation.Messages)
                 {
-                    ICollection<XmlElement> messageBindingAssertions = policyContext.GetMessageBindingAssertions(message);
-                    this.ImportProtectionAssertions(messageBindingAssertions, out messageSignedParts, out messageEncryptedParts);
+                    ICollection<XmlElement> messageBindingAssertions =
+                        policyContext.GetMessageBindingAssertions(message);
+                    this.ImportProtectionAssertions(
+                        messageBindingAssertions,
+                        out messageSignedParts,
+                        out messageEncryptedParts
+                    );
                     this.AddParts(ref messageSignedParts, operationSignedParts);
                     this.AddParts(ref messageEncryptedParts, operationEncryptedParts);
 
                     // validate or set body protection level
-                    ProtectionLevel newProtectionLevel = GetProtectionLevel(messageSignedParts.IsBodyIncluded, messageEncryptedParts.IsBodyIncluded, message.Action);
+                    ProtectionLevel newProtectionLevel = GetProtectionLevel(
+                        messageSignedParts.IsBodyIncluded,
+                        messageEncryptedParts.IsBodyIncluded,
+                        message.Action
+                    );
                     if (OperationFormatter.IsValidReturnValue(message.Body.ReturnValue))
                     {
-                        ValidateExistingOrSetNewProtectionLevel(message.Body.ReturnValue, message, operation, policyContext.Contract, newProtectionLevel);
+                        ValidateExistingOrSetNewProtectionLevel(
+                            message.Body.ReturnValue,
+                            message,
+                            operation,
+                            policyContext.Contract,
+                            newProtectionLevel
+                        );
                     }
                     foreach (MessagePartDescription body in message.Body.Parts)
                     {
-                        ValidateExistingOrSetNewProtectionLevel(body, message, operation, policyContext.Contract, newProtectionLevel);
+                        ValidateExistingOrSetNewProtectionLevel(
+                            body,
+                            message,
+                            operation,
+                            policyContext.Contract,
+                            newProtectionLevel
+                        );
                     }
-                    if (!OperationFormatter.IsValidReturnValue(message.Body.ReturnValue) || message.Body.Parts.Count == 0)
+                    if (
+                        !OperationFormatter.IsValidReturnValue(message.Body.ReturnValue)
+                        || message.Body.Parts.Count == 0
+                    )
                     {
-                        ValidateExistingOrSetNewProtectionLevel(null, message, operation, policyContext.Contract, newProtectionLevel);
+                        ValidateExistingOrSetNewProtectionLevel(
+                            null,
+                            message,
+                            operation,
+                            policyContext.Contract,
+                            newProtectionLevel
+                        );
                     }
 
                     if (hasProtectionLevel)
@@ -314,10 +448,22 @@ namespace System.ServiceModel.Channels
                     // validate o set header protection level
                     foreach (MessageHeaderDescription header in message.Headers)
                     {
-                        bool signed = messageSignedParts.IsHeaderIncluded(header.Name, header.Namespace);
-                        bool encrypted = messageEncryptedParts.IsHeaderIncluded(header.Name, header.Namespace);
+                        bool signed = messageSignedParts.IsHeaderIncluded(
+                            header.Name,
+                            header.Namespace
+                        );
+                        bool encrypted = messageEncryptedParts.IsHeaderIncluded(
+                            header.Name,
+                            header.Namespace
+                        );
                         newProtectionLevel = GetProtectionLevel(signed, encrypted, message.Action);
-                        ValidateExistingOrSetNewProtectionLevel(header, message, operation, policyContext.Contract, newProtectionLevel);
+                        ValidateExistingOrSetNewProtectionLevel(
+                            header,
+                            message,
+                            operation,
+                            policyContext.Contract,
+                            newProtectionLevel
+                        );
 
                         if (hasProtectionLevel)
                         {
@@ -360,18 +506,35 @@ namespace System.ServiceModel.Channels
                 // import fault protection requirements
                 foreach (FaultDescription fault in operation.Faults)
                 {
-                    ICollection<XmlElement> faultBindingAssertions = policyContext.GetFaultBindingAssertions(fault);
-                    this.ImportProtectionAssertions(faultBindingAssertions, out messageSignedParts, out messageEncryptedParts);
+                    ICollection<XmlElement> faultBindingAssertions =
+                        policyContext.GetFaultBindingAssertions(fault);
+                    this.ImportProtectionAssertions(
+                        faultBindingAssertions,
+                        out messageSignedParts,
+                        out messageEncryptedParts
+                    );
                     this.AddParts(ref messageSignedParts, operationSignedParts);
                     this.AddParts(ref messageEncryptedParts, operationEncryptedParts);
 
                     // validate or set fault protection level
-                    ProtectionLevel newProtectionLevel = GetProtectionLevel(messageSignedParts.IsBodyIncluded, messageEncryptedParts.IsBodyIncluded, fault.Action);
+                    ProtectionLevel newProtectionLevel = GetProtectionLevel(
+                        messageSignedParts.IsBodyIncluded,
+                        messageEncryptedParts.IsBodyIncluded,
+                        fault.Action
+                    );
                     if (fault.HasProtectionLevel)
                     {
                         if (fault.ProtectionLevel != newProtectionLevel)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.CannotImportProtectionLevelForContract, policyContext.Contract.Name, policyContext.Contract.Namespace)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new ArgumentException(
+                                    SR.GetString(
+                                        SR.CannotImportProtectionLevelForContract,
+                                        policyContext.Contract.Name,
+                                        policyContext.Contract.Namespace
+                                    )
+                                )
+                            );
                         }
                     }
                     else
@@ -395,16 +558,32 @@ namespace System.ServiceModel.Channels
 
             if (isContractAssociatedWithAtLeastOneOtherBinding)
             {
-                if (hasContractProtectionLevel != otherBindingProtectionLevel.HasProtectionRequirements
-                    || isContractProtectionLevelUniform != otherBindingProtectionLevel.HasUniformProtectionLevel
-                    || contractProtectionLevel != otherBindingProtectionLevel.UniformProtectionLevel)
+                if (
+                    hasContractProtectionLevel
+                        != otherBindingProtectionLevel.HasProtectionRequirements
+                    || isContractProtectionLevelUniform
+                        != otherBindingProtectionLevel.HasUniformProtectionLevel
+                    || contractProtectionLevel != otherBindingProtectionLevel.UniformProtectionLevel
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.CannotImportProtectionLevelForContract, policyContext.Contract.Name, policyContext.Contract.Namespace)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(
+                                SR.CannotImportProtectionLevelForContract,
+                                policyContext.Contract.Name,
+                                policyContext.Contract.Namespace
+                            )
+                        )
+                    );
                 }
             }
             else
             {
-                if (hasContractProtectionLevel && isContractProtectionLevelUniform && contractProtectionLevel == ProtectionLevel.EncryptAndSign)
+                if (
+                    hasContractProtectionLevel
+                    && isContractProtectionLevelUniform
+                    && contractProtectionLevel == ProtectionLevel.EncryptAndSign
+                )
                 {
                     // remove all explicitly set protection levels on the contract description, since they are uniform across the contract
                     // and match our binding's default of EncryptAndSign
@@ -418,7 +597,11 @@ namespace System.ServiceModel.Channels
                         operation.ResetProtectionLevel();
                     }
                 }
-                importer.State[contractAssociationName] = new ContractProtectionLevel(hasContractProtectionLevel, isContractProtectionLevelUniform, contractProtectionLevel);
+                importer.State[contractAssociationName] = new ContractProtectionLevel(
+                    hasContractProtectionLevel,
+                    isContractProtectionLevelUniform,
+                    contractProtectionLevel
+                );
             }
         }
 
@@ -454,7 +637,11 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidChannelBindingException(SR.GetString(SR.PolicyRequiresConfidentialityWithoutIntegrity, action)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidChannelBindingException(
+                            SR.GetString(SR.PolicyRequiresConfidentialityWithoutIntegrity, action)
+                        )
+                    );
                 }
             }
             else if (signed)
@@ -469,45 +656,89 @@ namespace System.ServiceModel.Channels
             return result;
         }
 
-        void ImportSupportingTokenAssertions(MetadataImporter importer, PolicyConversionContext policyContext, ICollection<XmlElement> assertions, SupportingTokenParameters requirements, SupportingTokenParameters optionalRequirements)
+        void ImportSupportingTokenAssertions(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext,
+            ICollection<XmlElement> assertions,
+            SupportingTokenParameters requirements,
+            SupportingTokenParameters optionalRequirements
+        )
         {
             WSSecurityPolicy securityPolicy;
             if (WSSecurityPolicy.TryGetSecurityPolicyDriver(assertions, out securityPolicy))
             {
                 securityPolicy.TryImportWsspSupportingTokensAssertion(
-                importer,
-                policyContext,
-                assertions,
-                requirements.Signed,
-                requirements.SignedEncrypted,
-                requirements.Endorsing,
-                requirements.SignedEndorsing,
-                optionalRequirements.Signed,
-                optionalRequirements.SignedEncrypted,
-                optionalRequirements.Endorsing,
-                optionalRequirements.SignedEndorsing);
+                    importer,
+                    policyContext,
+                    assertions,
+                    requirements.Signed,
+                    requirements.SignedEncrypted,
+                    requirements.Endorsing,
+                    requirements.SignedEndorsing,
+                    optionalRequirements.Signed,
+                    optionalRequirements.SignedEncrypted,
+                    optionalRequirements.Endorsing,
+                    optionalRequirements.SignedEndorsing
+                );
             }
         }
 
-        void ImportEndpointScopeMessageBindingAssertions(MetadataImporter importer, PolicyConversionContext policyContext, SecurityBindingElement binding)
+        void ImportEndpointScopeMessageBindingAssertions(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext,
+            SecurityBindingElement binding
+        )
         {
             XmlElement assertion = null;
 
-            this.ImportSupportingTokenAssertions(importer, policyContext, policyContext.GetBindingAssertions(), binding.EndpointSupportingTokenParameters, binding.OptionalEndpointSupportingTokenParameters);
+            this.ImportSupportingTokenAssertions(
+                importer,
+                policyContext,
+                policyContext.GetBindingAssertions(),
+                binding.EndpointSupportingTokenParameters,
+                binding.OptionalEndpointSupportingTokenParameters
+            );
 
             WSSecurityPolicy securityPolicy;
-            if (WSSecurityPolicy.TryGetSecurityPolicyDriver(policyContext.GetBindingAssertions(), out securityPolicy))
+            if (
+                WSSecurityPolicy.TryGetSecurityPolicyDriver(
+                    policyContext.GetBindingAssertions(),
+                    out securityPolicy
+                )
+            )
             {
-                if (!securityPolicy.TryImportWsspWssAssertion(importer, policyContext.GetBindingAssertions(), binding, out assertion)
-                    && assertion != null)
+                if (
+                    !securityPolicy.TryImportWsspWssAssertion(
+                        importer,
+                        policyContext.GetBindingAssertions(),
+                        binding,
+                        out assertion
+                    )
+                    && assertion != null
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                        )
+                    );
                 }
 
-                if (!securityPolicy.TryImportWsspTrustAssertion(importer, policyContext.GetBindingAssertions(), binding, out assertion)
-                    && assertion != null)
+                if (
+                    !securityPolicy.TryImportWsspTrustAssertion(
+                        importer,
+                        policyContext.GetBindingAssertions(),
+                        binding,
+                        out assertion
+                    )
+                    && assertion != null
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                        )
+                    );
                 }
             }
 
@@ -520,24 +751,52 @@ namespace System.ServiceModel.Channels
                 binding.DoNotEmitTrust = true;
         }
 
-
-        bool TryImportSymmetricSecurityBindingElement(MetadataImporter importer, PolicyConversionContext policyContext, out SecurityBindingElement sbe)
+        bool TryImportSymmetricSecurityBindingElement(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext,
+            out SecurityBindingElement sbe
+        )
         {
             SymmetricSecurityBindingElement binding = null;
             XmlElement assertion;
             WSSecurityPolicy securityPolicy;
-            if (WSSecurityPolicy.TryGetSecurityPolicyDriver(policyContext.GetBindingAssertions(), out securityPolicy))
+            if (
+                WSSecurityPolicy.TryGetSecurityPolicyDriver(
+                    policyContext.GetBindingAssertions(),
+                    out securityPolicy
+                )
+            )
             {
-                if (securityPolicy.TryImportWsspSymmetricBindingAssertion(importer, policyContext, policyContext.GetBindingAssertions(), out binding, out assertion))
+                if (
+                    securityPolicy.TryImportWsspSymmetricBindingAssertion(
+                        importer,
+                        policyContext,
+                        policyContext.GetBindingAssertions(),
+                        out binding,
+                        out assertion
+                    )
+                )
                 {
-                    this.ImportEndpointScopeMessageBindingAssertions(importer, policyContext, binding);
-                    this.ImportOperationScopeSupportingTokensPolicy(importer, policyContext, binding);
+                    this.ImportEndpointScopeMessageBindingAssertions(
+                        importer,
+                        policyContext,
+                        binding
+                    );
+                    this.ImportOperationScopeSupportingTokensPolicy(
+                        importer,
+                        policyContext,
+                        binding
+                    );
                     this.ImportMessageScopeProtectionPolicy(importer, policyContext);
                     policyContext.BindingElements.Add(binding);
                 }
                 else if (assertion != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                        )
+                    );
                 }
             }
 
@@ -545,23 +804,52 @@ namespace System.ServiceModel.Channels
             return binding != null;
         }
 
-        bool TryImportAsymmetricSecurityBindingElement(MetadataImporter importer, PolicyConversionContext policyContext, out SecurityBindingElement sbe)
+        bool TryImportAsymmetricSecurityBindingElement(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext,
+            out SecurityBindingElement sbe
+        )
         {
             AsymmetricSecurityBindingElement binding = null;
             XmlElement assertion;
             WSSecurityPolicy securityPolicy;
-            if (WSSecurityPolicy.TryGetSecurityPolicyDriver(policyContext.GetBindingAssertions(), out securityPolicy))
+            if (
+                WSSecurityPolicy.TryGetSecurityPolicyDriver(
+                    policyContext.GetBindingAssertions(),
+                    out securityPolicy
+                )
+            )
             {
-                if (securityPolicy.TryImportWsspAsymmetricBindingAssertion(importer, policyContext, policyContext.GetBindingAssertions(), out binding, out assertion))
+                if (
+                    securityPolicy.TryImportWsspAsymmetricBindingAssertion(
+                        importer,
+                        policyContext,
+                        policyContext.GetBindingAssertions(),
+                        out binding,
+                        out assertion
+                    )
+                )
                 {
-                    this.ImportEndpointScopeMessageBindingAssertions(importer, policyContext, binding);
-                    this.ImportOperationScopeSupportingTokensPolicy(importer, policyContext, binding);
+                    this.ImportEndpointScopeMessageBindingAssertions(
+                        importer,
+                        policyContext,
+                        binding
+                    );
+                    this.ImportOperationScopeSupportingTokensPolicy(
+                        importer,
+                        policyContext,
+                        binding
+                    );
                     this.ImportMessageScopeProtectionPolicy(importer, policyContext);
                     policyContext.BindingElements.Add(binding);
                 }
                 else if (assertion != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                        )
+                    );
                 }
             }
 
@@ -570,24 +858,53 @@ namespace System.ServiceModel.Channels
         }
 
         // isDualSecurityModeOnly is true if the binding has both message security and https security enabled.
-        bool TryImportTransportSecurityBindingElement(MetadataImporter importer, PolicyConversionContext policyContext, out SecurityBindingElement sbe, bool isDualSecurityModeOnly)
+        bool TryImportTransportSecurityBindingElement(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext,
+            out SecurityBindingElement sbe,
+            bool isDualSecurityModeOnly
+        )
         {
             TransportSecurityBindingElement binding = null;
             XmlElement assertion;
             sbe = null;
 
             WSSecurityPolicy securityPolicy;
-            if (WSSecurityPolicy.TryGetSecurityPolicyDriver(policyContext.GetBindingAssertions(), out securityPolicy))
+            if (
+                WSSecurityPolicy.TryGetSecurityPolicyDriver(
+                    policyContext.GetBindingAssertions(),
+                    out securityPolicy
+                )
+            )
             {
-                if (securityPolicy.TryImportWsspTransportBindingAssertion(importer, policyContext.GetBindingAssertions(), out binding, out assertion))
+                if (
+                    securityPolicy.TryImportWsspTransportBindingAssertion(
+                        importer,
+                        policyContext.GetBindingAssertions(),
+                        out binding,
+                        out assertion
+                    )
+                )
                 {
-                    this.ImportEndpointScopeMessageBindingAssertions(importer, policyContext, binding);
+                    this.ImportEndpointScopeMessageBindingAssertions(
+                        importer,
+                        policyContext,
+                        binding
+                    );
 
                     // If it is not DualSecurityMode then it is Mixed mode. So we need to look for supporting tokens in the binding.
                     if (!isDualSecurityModeOnly)
                     {
-                        this.ImportOperationScopeSupportingTokensPolicy(importer, policyContext, binding);
-                        if (importer.State.ContainsKey(InSecureConversationBootstrapBindingImportMode))
+                        this.ImportOperationScopeSupportingTokensPolicy(
+                            importer,
+                            policyContext,
+                            binding
+                        );
+                        if (
+                            importer.State.ContainsKey(
+                                InSecureConversationBootstrapBindingImportMode
+                            )
+                        )
                         {
                             this.ImportMessageScopeProtectionPolicy(importer, policyContext);
                         }
@@ -601,30 +918,39 @@ namespace System.ServiceModel.Channels
                 }
                 else if (assertion != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                        )
+                    );
                 }
             }
 
             return binding != null;
         }
 
-
         static bool HasSupportingTokens(SecurityBindingElement binding)
         {
-            if (binding.EndpointSupportingTokenParameters.Endorsing.Count > 0
-                    || binding.EndpointSupportingTokenParameters.SignedEndorsing.Count > 0
-                    || binding.EndpointSupportingTokenParameters.SignedEncrypted.Count > 0
-                    || binding.EndpointSupportingTokenParameters.Signed.Count > 0)
+            if (
+                binding.EndpointSupportingTokenParameters.Endorsing.Count > 0
+                || binding.EndpointSupportingTokenParameters.SignedEndorsing.Count > 0
+                || binding.EndpointSupportingTokenParameters.SignedEncrypted.Count > 0
+                || binding.EndpointSupportingTokenParameters.Signed.Count > 0
+            )
             {
                 return true;
             }
 
-            foreach (SupportingTokenParameters r in binding.OperationSupportingTokenParameters.Values)
+            foreach (
+                SupportingTokenParameters r in binding.OperationSupportingTokenParameters.Values
+            )
             {
-                if (r.Endorsing.Count > 0
-                        || r.SignedEndorsing.Count > 0
-                        || r.SignedEncrypted.Count > 0
-                        || r.Signed.Count > 0)
+                if (
+                    r.Endorsing.Count > 0
+                    || r.SignedEndorsing.Count > 0
+                    || r.SignedEncrypted.Count > 0
+                    || r.Signed.Count > 0
+                )
                 {
                     return true;
                 }
@@ -633,7 +959,10 @@ namespace System.ServiceModel.Channels
             return false;
         }
 
-        void IPolicyImportExtension.ImportPolicy(MetadataImporter importer, PolicyConversionContext policyContext)
+        void IPolicyImportExtension.ImportPolicy(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext
+        )
         {
             if (importer == null)
             {
@@ -644,31 +973,57 @@ namespace System.ServiceModel.Channels
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("policyContext");
             }
             WSSecurityPolicy securityPolicy;
-            if (WSSecurityPolicy.TryGetSecurityPolicyDriver(policyContext.GetBindingAssertions(), out securityPolicy))
+            if (
+                WSSecurityPolicy.TryGetSecurityPolicyDriver(
+                    policyContext.GetBindingAssertions(),
+                    out securityPolicy
+                )
+            )
             {
-                if ((importer.State != null) && (!importer.State.ContainsKey(MaxPolicyRedirectionsKey)))
+                if (
+                    (importer.State != null)
+                    && (!importer.State.ContainsKey(MaxPolicyRedirectionsKey))
+                )
                 {
                     importer.State.Add(MaxPolicyRedirectionsKey, this.MaxPolicyRedirections);
                 }
 
                 SecurityBindingElement sbe = null;
-                bool success = this.TryImportSymmetricSecurityBindingElement(importer, policyContext, out sbe);
+                bool success = this.TryImportSymmetricSecurityBindingElement(
+                    importer,
+                    policyContext,
+                    out sbe
+                );
                 if (!success)
                 {
-                    success = this.TryImportAsymmetricSecurityBindingElement(importer, policyContext, out sbe);
+                    success = this.TryImportAsymmetricSecurityBindingElement(
+                        importer,
+                        policyContext,
+                        out sbe
+                    );
                 }
                 if (!success)
                 {
-                    success = this.TryImportTransportSecurityBindingElement(importer, policyContext, out sbe, false);
+                    success = this.TryImportTransportSecurityBindingElement(
+                        importer,
+                        policyContext,
+                        out sbe,
+                        false
+                    );
                 }
                 else
                 {
                     // We already have found and imported the message security binding element above. Hence this could be the dual mode security.
-                    // Now let us see if there is HttpsTransportBinding assertion also below it .This is to avoid the 
+                    // Now let us see if there is HttpsTransportBinding assertion also below it .This is to avoid the
                     // warning messages while importing wsdl representing the message security over Https transport security scenario. See Bug:136416.
 
                     SecurityBindingElement tbe = null;
-                    this.TryImportTransportSecurityBindingElement(importer, policyContext, out tbe, true);
+                    this.TryImportTransportSecurityBindingElement(
+                        importer,
+                        policyContext,
+                        out tbe,
+                        true
+                    );
                 }
 
                 if (sbe != null)
@@ -678,7 +1033,12 @@ namespace System.ServiceModel.Channels
                     if (config.HasImportFailed)
                     {
 #pragma warning suppress 56506
-                        importer.Errors.Add(new MetadataConversionError(SR.GetString(SR.SecurityBindingElementCannotBeExpressedInConfig), true));
+                        importer.Errors.Add(
+                            new MetadataConversionError(
+                                SR.GetString(SR.SecurityBindingElementCannotBeExpressedInConfig),
+                                true
+                            )
+                        );
                     }
                 }
             }

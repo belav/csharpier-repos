@@ -4,14 +4,10 @@ using ImportantForBug = Mono.Linker.Tests.Cases.References.Dependencies.Assembly
 
 namespace Mono.Linker.Tests.Cases.References.Dependencies
 {
-	public class AssemblyOnlyUsedByUsing_UnusedUsing
-	{
-		public static void UsedToKeepReference ()
-		{
-		}
+    public class AssemblyOnlyUsedByUsing_UnusedUsing
+    {
+        public static void UsedToKeepReference() { }
 
-		private static void Unused ()
-		{
-		}
-	}
+        private static void Unused() { }
+    }
 }

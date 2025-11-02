@@ -13,67 +13,112 @@ namespace System.Xml.Tests
         {
             // for function TestResolveEntityNodeType_None
             {
-                this.AddChild(new CVariation(TestResolveEntityNodeType_None) { Attribute = new Variation("ResolveEntity On None") });
+                this.AddChild(
+                    new CVariation(TestResolveEntityNodeType_None)
+                    {
+                        Attribute = new Variation("ResolveEntity On None"),
+                    }
+                );
             }
-
 
             // for function TestResolveEntityNodeType_Element
             {
-                this.AddChild(new CVariation(TestResolveEntityNodeType_Element) { Attribute = new Variation("ResolveEntity On Element") });
+                this.AddChild(
+                    new CVariation(TestResolveEntityNodeType_Element)
+                    {
+                        Attribute = new Variation("ResolveEntity On Element"),
+                    }
+                );
             }
-
 
             // for function TestResolveEntityNodeType_Attribute
             {
-                this.AddChild(new CVariation(TestResolveEntityNodeType_Attribute) { Attribute = new Variation("ResolveEntity On Attribute") });
+                this.AddChild(
+                    new CVariation(TestResolveEntityNodeType_Attribute)
+                    {
+                        Attribute = new Variation("ResolveEntity On Attribute"),
+                    }
+                );
             }
-
 
             // for function TestResolveEntityNodeType_Text
             {
-                this.AddChild(new CVariation(TestResolveEntityNodeType_Text) { Attribute = new Variation("ResolveEntity On Text") });
+                this.AddChild(
+                    new CVariation(TestResolveEntityNodeType_Text)
+                    {
+                        Attribute = new Variation("ResolveEntity On Text"),
+                    }
+                );
             }
-
 
             // for function TestResolveEntityNodeType_CDATA
             {
-                this.AddChild(new CVariation(TestResolveEntityNodeType_CDATA) { Attribute = new Variation("ResolveEntity On CDATA") });
+                this.AddChild(
+                    new CVariation(TestResolveEntityNodeType_CDATA)
+                    {
+                        Attribute = new Variation("ResolveEntity On CDATA"),
+                    }
+                );
             }
-
 
             // for function TestResolveEntityNodeType_ProcessingInstruction
             {
-                this.AddChild(new CVariation(TestResolveEntityNodeType_ProcessingInstruction) { Attribute = new Variation("ResolveEntity On ProcessingInstruction") });
+                this.AddChild(
+                    new CVariation(TestResolveEntityNodeType_ProcessingInstruction)
+                    {
+                        Attribute = new Variation("ResolveEntity On ProcessingInstruction"),
+                    }
+                );
             }
-
 
             // for function TestResolveEntityNodeType_Comment
             {
-                this.AddChild(new CVariation(TestResolveEntityNodeType_Comment) { Attribute = new Variation("ResolveEntity On Comment") });
+                this.AddChild(
+                    new CVariation(TestResolveEntityNodeType_Comment)
+                    {
+                        Attribute = new Variation("ResolveEntity On Comment"),
+                    }
+                );
             }
-
 
             // for function TestResolveEntityNodeType_Whitespace
             {
-                this.AddChild(new CVariation(TestResolveEntityNodeType_Whitespace) { Attribute = new Variation("ResolveEntity On Whitespace") });
+                this.AddChild(
+                    new CVariation(TestResolveEntityNodeType_Whitespace)
+                    {
+                        Attribute = new Variation("ResolveEntity On Whitespace"),
+                    }
+                );
             }
-
 
             // for function TestResolveEntityNodeType_EndElement
             {
-                this.AddChild(new CVariation(TestResolveEntityNodeType_EndElement) { Attribute = new Variation("ResolveEntity On EndElement") });
+                this.AddChild(
+                    new CVariation(TestResolveEntityNodeType_EndElement)
+                    {
+                        Attribute = new Variation("ResolveEntity On EndElement"),
+                    }
+                );
             }
-
 
             // for function TestResolveEntityNodeType_XmlDeclaration
             {
-                this.AddChild(new CVariation(TestResolveEntityNodeType_XmlDeclaration) { Attribute = new Variation("ResolveEntity On XmlDeclaration") });
+                this.AddChild(
+                    new CVariation(TestResolveEntityNodeType_XmlDeclaration)
+                    {
+                        Attribute = new Variation("ResolveEntity On XmlDeclaration"),
+                    }
+                );
             }
-
 
             // for function TestResolveEntityNodeType_EndEntity
             {
-                this.AddChild(new CVariation(TestResolveEntityNodeType_EndEntity) { Attribute = new Variation("ResolveEntity On EndEntity") });
+                this.AddChild(
+                    new CVariation(TestResolveEntityNodeType_EndEntity)
+                    {
+                        Attribute = new Variation("ResolveEntity On EndEntity"),
+                    }
+                );
             }
         }
     }

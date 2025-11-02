@@ -16,7 +16,9 @@ namespace System.Globalization.Tests
         [Theory]
         [InlineData("string")]
         [InlineData("    ")]
-        public void PercentDecimalSeparator_Set_GetReturnsExpected(string newPercentDecimalSeparator)
+        public void PercentDecimalSeparator_Set_GetReturnsExpected(
+            string newPercentDecimalSeparator
+        )
         {
             NumberFormatInfo format = new NumberFormatInfo();
             format.PercentDecimalSeparator = newPercentDecimalSeparator;
@@ -27,20 +29,30 @@ namespace System.Globalization.Tests
         public void PercentDecimalSeparator_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", "PercentDecimalSeparator", () => format.PercentDecimalSeparator = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                "PercentDecimalSeparator",
+                () => format.PercentDecimalSeparator = null
+            );
         }
 
         [Fact]
         public void PercentDecimalSeparator_SetEmpty_ThrowsArgumentException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentException>("value", null, () => format.PercentDecimalSeparator = "");
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                null,
+                () => format.PercentDecimalSeparator = ""
+            );
         }
 
         [Fact]
         public void PercentDecimalSeparator_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => NumberFormatInfo.InvariantInfo.PercentDecimalSeparator = "string");
+            Assert.Throws<InvalidOperationException>(() =>
+                NumberFormatInfo.InvariantInfo.PercentDecimalSeparator = "string"
+            );
         }
     }
 }

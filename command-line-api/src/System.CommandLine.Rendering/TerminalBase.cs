@@ -5,10 +5,7 @@ using System.CommandLine.IO;
 
 namespace System.CommandLine.Rendering
 {
-    public abstract class TerminalBase :
-        ITerminal,
-        IRenderable,
-        IDisposable
+    public abstract class TerminalBase : ITerminal, IRenderable, IDisposable
     {
         protected TerminalBase(IConsole console)
         {
@@ -45,9 +42,7 @@ namespace System.CommandLine.Rendering
 
         public bool IsInputRedirected => Console.IsInputRedirected;
 
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
         public void Dispose()
         {

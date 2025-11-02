@@ -20,21 +20,36 @@ namespace System.CodeDom.Compiler
 
         protected CodeTypeDeclaration CurrentClass => _currentClass;
 
-        protected string CurrentTypeName => _currentClass != null ? _currentClass.Name : "<% unknown %>";
+        protected string CurrentTypeName =>
+            _currentClass != null ? _currentClass.Name : "<% unknown %>";
 
         protected CodeTypeMember CurrentMember => _currentMember;
 
-        protected string CurrentMemberName => _currentMember != null ? _currentMember.Name : "<% unknown %>";
+        protected string CurrentMemberName =>
+            _currentMember != null ? _currentMember.Name : "<% unknown %>";
 
-        protected bool IsCurrentInterface => _currentClass != null && !(_currentClass is CodeTypeDelegate) ? _currentClass.IsInterface : false;
+        protected bool IsCurrentInterface =>
+            _currentClass != null && !(_currentClass is CodeTypeDelegate)
+                ? _currentClass.IsInterface
+                : false;
 
-        protected bool IsCurrentClass => _currentClass != null && !(_currentClass is CodeTypeDelegate) ? _currentClass.IsClass : false;
+        protected bool IsCurrentClass =>
+            _currentClass != null && !(_currentClass is CodeTypeDelegate)
+                ? _currentClass.IsClass
+                : false;
 
-        protected bool IsCurrentStruct => _currentClass != null && !(_currentClass is CodeTypeDelegate) ? _currentClass.IsStruct : false;
+        protected bool IsCurrentStruct =>
+            _currentClass != null && !(_currentClass is CodeTypeDelegate)
+                ? _currentClass.IsStruct
+                : false;
 
-        protected bool IsCurrentEnum => _currentClass != null && !(_currentClass is CodeTypeDelegate) ? _currentClass.IsEnum : false;
+        protected bool IsCurrentEnum =>
+            _currentClass != null && !(_currentClass is CodeTypeDelegate)
+                ? _currentClass.IsEnum
+                : false;
 
-        protected bool IsCurrentDelegate => _currentClass != null && _currentClass is CodeTypeDelegate;
+        protected bool IsCurrentDelegate =>
+            _currentClass != null && _currentClass is CodeTypeDelegate;
 
         protected int Indent
         {
@@ -100,9 +115,7 @@ namespace System.CodeDom.Compiler
             }
         }
 
-        protected virtual void GenerateDirectives(CodeDirectiveCollection directives)
-        {
-        }
+        protected virtual void GenerateDirectives(CodeDirectiveCollection directives) { }
 
         private void GenerateTypeMember(CodeTypeMember member, CodeTypeDeclaration declaredType)
         {
@@ -113,7 +126,11 @@ namespace System.CodeDom.Compiler
 
             if (member is CodeTypeDeclaration)
             {
-                ((ICodeGenerator)this).GenerateCodeFromType((CodeTypeDeclaration)member, _output.InnerWriter, _options);
+                ((ICodeGenerator)this).GenerateCodeFromType(
+                    (CodeTypeDeclaration)member,
+                    _output.InnerWriter,
+                    _options
+                );
 
                 // Nested types clobber the current class, so reset it.
                 _currentClass = declaredType;
@@ -213,9 +230,11 @@ namespace System.CodeDom.Compiler
                     }
                     GenerateCommentStatements(_currentMember.Comments);
                     CodeTypeConstructor imp = (CodeTypeConstructor)current;
-                    if (imp.LinePragma != null) GenerateLinePragmaStart(imp.LinePragma);
+                    if (imp.LinePragma != null)
+                        GenerateLinePragmaStart(imp.LinePragma);
                     GenerateTypeConstructor(imp);
-                    if (imp.LinePragma != null) GenerateLinePragmaEnd(imp.LinePragma);
+                    if (imp.LinePragma != null)
+                        GenerateLinePragmaEnd(imp.LinePragma);
                     if (_currentMember.EndDirectives.Count > 0)
                     {
                         GenerateDirectives(_currentMember.EndDirectives);
@@ -251,7 +270,11 @@ namespace System.CodeDom.Compiler
 
         bool ICodeGenerator.Supports(GeneratorSupport support) => Supports(support);
 
-        void ICodeGenerator.GenerateCodeFromType(CodeTypeDeclaration e, TextWriter w, CodeGeneratorOptions o)
+        void ICodeGenerator.GenerateCodeFromType(
+            CodeTypeDeclaration e,
+            TextWriter w,
+            CodeGeneratorOptions o
+        )
         {
             bool setLocal = false;
             if (_output != null && w != _output.InnerWriter)
@@ -279,7 +302,11 @@ namespace System.CodeDom.Compiler
             }
         }
 
-        void ICodeGenerator.GenerateCodeFromExpression(CodeExpression e, TextWriter w, CodeGeneratorOptions o)
+        void ICodeGenerator.GenerateCodeFromExpression(
+            CodeExpression e,
+            TextWriter w,
+            CodeGeneratorOptions o
+        )
         {
             bool setLocal = false;
             if (_output != null && w != _output.InnerWriter)
@@ -307,7 +334,11 @@ namespace System.CodeDom.Compiler
             }
         }
 
-        void ICodeGenerator.GenerateCodeFromCompileUnit(CodeCompileUnit e, TextWriter w, CodeGeneratorOptions o)
+        void ICodeGenerator.GenerateCodeFromCompileUnit(
+            CodeCompileUnit e,
+            TextWriter w,
+            CodeGeneratorOptions o
+        )
         {
             bool setLocal = false;
             if (_output != null && w != _output.InnerWriter)
@@ -342,7 +373,11 @@ namespace System.CodeDom.Compiler
             }
         }
 
-        void ICodeGenerator.GenerateCodeFromNamespace(CodeNamespace e, TextWriter w, CodeGeneratorOptions o)
+        void ICodeGenerator.GenerateCodeFromNamespace(
+            CodeNamespace e,
+            TextWriter w,
+            CodeGeneratorOptions o
+        )
         {
             bool setLocal = false;
             if (_output != null && w != _output.InnerWriter)
@@ -370,7 +405,11 @@ namespace System.CodeDom.Compiler
             }
         }
 
-        void ICodeGenerator.GenerateCodeFromStatement(CodeStatement e, TextWriter w, CodeGeneratorOptions o)
+        void ICodeGenerator.GenerateCodeFromStatement(
+            CodeStatement e,
+            TextWriter w,
+            CodeGeneratorOptions o
+        )
         {
             bool setLocal = false;
             if (_output != null && w != _output.InnerWriter)
@@ -398,7 +437,11 @@ namespace System.CodeDom.Compiler
             }
         }
 
-        public virtual void GenerateCodeFromMember(CodeTypeMember member, TextWriter writer, CodeGeneratorOptions options)
+        public virtual void GenerateCodeFromMember(
+            CodeTypeMember member,
+            TextWriter writer,
+            CodeGeneratorOptions options
+        )
         {
             if (member is null)
             {
@@ -430,7 +473,8 @@ namespace System.CodeDom.Compiler
 
         void ICodeGenerator.ValidateIdentifier(string value) => ValidateIdentifier(value);
 
-        string ICodeGenerator.CreateEscapedIdentifier(string value) => CreateEscapedIdentifier(value);
+        string ICodeGenerator.CreateEscapedIdentifier(string value) =>
+            CreateEscapedIdentifier(value);
 
         string ICodeGenerator.CreateValidIdentifier(string value) => CreateValidIdentifier(value);
 
@@ -590,7 +634,9 @@ namespace System.CodeDom.Compiler
             }
             else if (e is CodePropertySetValueReferenceExpression)
             {
-                GeneratePropertySetValueReferenceExpression((CodePropertySetValueReferenceExpression)e);
+                GeneratePropertySetValueReferenceExpression(
+                    (CodePropertySetValueReferenceExpression)e
+                );
             }
             else if (e is CodeThisReferenceExpression)
             {
@@ -616,7 +662,10 @@ namespace System.CodeDom.Compiler
                 }
                 else
                 {
-                    throw new ArgumentException(SR.Format(SR.InvalidElementType, e.GetType().FullName), nameof(e));
+                    throw new ArgumentException(
+                        SR.Format(SR.InvalidElementType, e.GetType().FullName),
+                        nameof(e)
+                    );
                 }
             }
         }
@@ -740,7 +789,11 @@ namespace System.CodeDom.Compiler
         {
             foreach (CodeTypeMember current in e.Members)
             {
-                if (current is CodeMemberMethod && !(current is CodeTypeConstructor) && !(current is CodeConstructor))
+                if (
+                    current is CodeMemberMethod
+                    && !(current is CodeTypeConstructor)
+                    && !(current is CodeConstructor)
+                )
                 {
                     _currentMember = current;
 
@@ -789,7 +842,11 @@ namespace System.CodeDom.Compiler
                         Output.WriteLine();
                     }
                     CodeTypeDeclaration currentClass = (CodeTypeDeclaration)current;
-                    ((ICodeGenerator)this).GenerateCodeFromType(currentClass, _output.InnerWriter, _options);
+                    ((ICodeGenerator)this).GenerateCodeFromType(
+                        currentClass,
+                        _output.InnerWriter,
+                        _options
+                    );
                 }
             }
         }
@@ -959,7 +1016,10 @@ namespace System.CodeDom.Compiler
             }
             else
             {
-                throw new ArgumentException(SR.Format(SR.InvalidElementType, e.GetType().FullName), nameof(e));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidElementType, e.GetType().FullName),
+                    nameof(e)
+                );
             }
 
             if (e.LinePragma != null)
@@ -981,11 +1041,17 @@ namespace System.CodeDom.Compiler
 
             foreach (CodeStatement stmt in stmts)
             {
-                ((ICodeGenerator)this).GenerateCodeFromStatement(stmt, _output.InnerWriter, _options);
+                ((ICodeGenerator)this).GenerateCodeFromStatement(
+                    stmt,
+                    _output.InnerWriter,
+                    _options
+                );
             }
         }
 
-        protected virtual void OutputAttributeDeclarations(CodeAttributeDeclarationCollection attributes)
+        protected virtual void OutputAttributeDeclarations(
+            CodeAttributeDeclarationCollection attributes
+        )
         {
             if (attributes is null)
             {
@@ -1045,7 +1111,11 @@ namespace System.CodeDom.Compiler
                 OutputIdentifier(arg.Name);
                 Output.Write('=');
             }
-            ((ICodeGenerator)this).GenerateCodeFromExpression(arg.Value, _output.InnerWriter, _options);
+            ((ICodeGenerator)this).GenerateCodeFromExpression(
+                arg.Value,
+                _output.InnerWriter,
+                _options
+            );
         }
 
         protected virtual void OutputDirection(FieldDirection dir)
@@ -1095,7 +1165,7 @@ namespace System.CodeDom.Compiler
                     Output.Write("internal ");
                     break;
                 case MemberAttributes.FamilyAndAssembly:
-                    Output.Write("internal ");  /*FamANDAssem*/
+                    Output.Write("internal "); /*FamANDAssem*/
                     break;
                 case MemberAttributes.Family:
                     Output.Write("protected ");
@@ -1152,7 +1222,11 @@ namespace System.CodeDom.Compiler
 
         protected abstract void OutputType(CodeTypeReference typeRef);
 
-        protected virtual void OutputTypeAttributes(TypeAttributes attributes, bool isStruct, bool isEnum)
+        protected virtual void OutputTypeAttributes(
+            TypeAttributes attributes,
+            bool isStruct,
+            bool isEnum
+        )
         {
             switch (attributes & TypeAttributes.VisibilityMask)
             {
@@ -1209,7 +1283,10 @@ namespace System.CodeDom.Compiler
             OutputExpressionList(expressions, newlineBetweenItems: false);
         }
 
-        protected virtual void OutputExpressionList(CodeExpressionCollection expressions, bool newlineBetweenItems)
+        protected virtual void OutputExpressionList(
+            CodeExpressionCollection expressions,
+            bool newlineBetweenItems
+        )
         {
             bool first = true;
             Indent++;
@@ -1226,7 +1303,11 @@ namespace System.CodeDom.Compiler
                     else
                         Output.Write(", ");
                 }
-                ((ICodeGenerator)this).GenerateCodeFromExpression(current, _output.InnerWriter, _options);
+                ((ICodeGenerator)this).GenerateCodeFromExpression(
+                    current,
+                    _output.InnerWriter,
+                    _options
+                );
             }
             Indent--;
         }
@@ -1289,7 +1370,9 @@ namespace System.CodeDom.Compiler
             }
         }
 
-        protected virtual void OutputParameters(CodeParameterDeclarationExpressionCollection parameters)
+        protected virtual void OutputParameters(
+            CodeParameterDeclarationExpressionCollection parameters
+        )
         {
             if (parameters is null)
             {
@@ -1372,8 +1455,12 @@ namespace System.CodeDom.Compiler
         protected abstract void GenerateCastExpression(CodeCastExpression e);
         protected abstract void GenerateDelegateCreateExpression(CodeDelegateCreateExpression e);
         protected abstract void GenerateFieldReferenceExpression(CodeFieldReferenceExpression e);
-        protected abstract void GenerateArgumentReferenceExpression(CodeArgumentReferenceExpression e);
-        protected abstract void GenerateVariableReferenceExpression(CodeVariableReferenceExpression e);
+        protected abstract void GenerateArgumentReferenceExpression(
+            CodeArgumentReferenceExpression e
+        );
+        protected abstract void GenerateVariableReferenceExpression(
+            CodeVariableReferenceExpression e
+        );
         protected abstract void GenerateIndexerExpression(CodeIndexerExpression e);
         protected abstract void GenerateArrayIndexerExpression(CodeArrayIndexerExpression e);
         protected abstract void GenerateSnippetExpression(CodeSnippetExpression e);
@@ -1383,7 +1470,9 @@ namespace System.CodeDom.Compiler
         protected abstract void GenerateDelegateInvokeExpression(CodeDelegateInvokeExpression e);
         protected abstract void GenerateObjectCreateExpression(CodeObjectCreateExpression e);
 
-        protected virtual void GenerateParameterDeclarationExpression(CodeParameterDeclarationExpression e)
+        protected virtual void GenerateParameterDeclarationExpression(
+            CodeParameterDeclarationExpression e
+        )
         {
             if (e is null)
             {
@@ -1471,23 +1560,31 @@ namespace System.CodeDom.Compiler
             }
             else
             {
-                throw new ArgumentException(SR.Format(SR.InvalidPrimitiveType, e.Value.GetType()), nameof(e));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidPrimitiveType, e.Value.GetType()),
+                    nameof(e)
+                );
             }
         }
 
-        protected virtual void GenerateSingleFloatValue(float s) => Output.Write(s.ToString("R", CultureInfo.InvariantCulture));
+        protected virtual void GenerateSingleFloatValue(float s) =>
+            Output.Write(s.ToString("R", CultureInfo.InvariantCulture));
 
-        protected virtual void GenerateDoubleValue(double d) => Output.Write(d.ToString("R", CultureInfo.InvariantCulture));
+        protected virtual void GenerateDoubleValue(double d) =>
+            Output.Write(d.ToString("R", CultureInfo.InvariantCulture));
 
-        protected virtual void GenerateDecimalValue(decimal d) => Output.Write(d.ToString(CultureInfo.InvariantCulture));
+        protected virtual void GenerateDecimalValue(decimal d) =>
+            Output.Write(d.ToString(CultureInfo.InvariantCulture));
 
-        protected virtual void GenerateDefaultValueExpression(CodeDefaultValueExpression e)
-        {
-        }
+        protected virtual void GenerateDefaultValueExpression(CodeDefaultValueExpression e) { }
 
-        protected abstract void GeneratePropertyReferenceExpression(CodePropertyReferenceExpression e);
+        protected abstract void GeneratePropertyReferenceExpression(
+            CodePropertyReferenceExpression e
+        );
 
-        protected abstract void GeneratePropertySetValueReferenceExpression(CodePropertySetValueReferenceExpression e);
+        protected abstract void GeneratePropertySetValueReferenceExpression(
+            CodePropertySetValueReferenceExpression e
+        );
 
         protected abstract void GenerateThisReferenceExpression(CodeThisReferenceExpression e);
 
@@ -1516,6 +1613,7 @@ namespace System.CodeDom.Compiler
         protected abstract void GenerateExpressionStatement(CodeExpressionStatement e);
         protected abstract void GenerateIterationStatement(CodeIterationStatement e);
         protected abstract void GenerateThrowExceptionStatement(CodeThrowExceptionStatement e);
+
         protected virtual void GenerateCommentStatement(CodeCommentStatement e)
         {
             if (e is null)
@@ -1525,7 +1623,10 @@ namespace System.CodeDom.Compiler
 
             if (e.Comment == null)
             {
-                throw new ArgumentException(SR.Format(SR.Argument_NullComment, nameof(e)), nameof(e));
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_NullComment, nameof(e)),
+                    nameof(e)
+                );
             }
             GenerateComment(e.Comment);
         }
@@ -1563,13 +1664,18 @@ namespace System.CodeDom.Compiler
             Output.WriteLine(e.Value);
         }
 
-        protected abstract void GenerateVariableDeclarationStatement(CodeVariableDeclarationStatement e);
+        protected abstract void GenerateVariableDeclarationStatement(
+            CodeVariableDeclarationStatement e
+        );
         protected abstract void GenerateLinePragmaStart(CodeLinePragma e);
         protected abstract void GenerateLinePragmaEnd(CodeLinePragma e);
         protected abstract void GenerateEvent(CodeMemberEvent e, CodeTypeDeclaration c);
         protected abstract void GenerateField(CodeMemberField e);
         protected abstract void GenerateSnippetMember(CodeSnippetTypeMember e);
-        protected abstract void GenerateEntryPointMethod(CodeEntryPointMethod e, CodeTypeDeclaration c);
+        protected abstract void GenerateEntryPointMethod(
+            CodeEntryPointMethod e,
+            CodeTypeDeclaration c
+        );
         protected abstract void GenerateMethod(CodeMemberMethod e, CodeTypeDeclaration c);
         protected abstract void GenerateProperty(CodeMemberProperty e, CodeTypeDeclaration c);
         protected abstract void GenerateConstructor(CodeConstructor e, CodeTypeDeclaration c);
@@ -1606,8 +1712,12 @@ namespace System.CodeDom.Compiler
         protected abstract void GenerateNamespaceStart(CodeNamespace e);
         protected abstract void GenerateNamespaceEnd(CodeNamespace e);
         protected abstract void GenerateNamespaceImport(CodeNamespaceImport e);
-        protected abstract void GenerateAttributeDeclarationsStart(CodeAttributeDeclarationCollection attributes);
-        protected abstract void GenerateAttributeDeclarationsEnd(CodeAttributeDeclarationCollection attributes);
+        protected abstract void GenerateAttributeDeclarationsStart(
+            CodeAttributeDeclarationCollection attributes
+        );
+        protected abstract void GenerateAttributeDeclarationsEnd(
+            CodeAttributeDeclarationCollection attributes
+        );
         protected abstract bool Supports(GeneratorSupport support);
         protected abstract bool IsValidIdentifier(string value);
 
@@ -1624,9 +1734,11 @@ namespace System.CodeDom.Compiler
         protected abstract string GetTypeOutput(CodeTypeReference value);
         protected abstract string QuoteSnippetString(string value);
 
-        public static bool IsValidLanguageIndependentIdentifier(string value) => CSharpHelpers.IsValidTypeNameOrIdentifier(value, false);
+        public static bool IsValidLanguageIndependentIdentifier(string value) =>
+            CSharpHelpers.IsValidTypeNameOrIdentifier(value, false);
 
-        internal static bool IsValidLanguageIndependentTypeName(string value) => CSharpHelpers.IsValidTypeNameOrIdentifier(value, true);
+        internal static bool IsValidLanguageIndependentTypeName(string value) =>
+            CSharpHelpers.IsValidTypeNameOrIdentifier(value, true);
 
         public static void ValidateIdentifiers(CodeObject e)
         {

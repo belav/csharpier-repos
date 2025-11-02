@@ -22,9 +22,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
         [Fact]
         public async Task BlankFileMatchesWorkspaceSettings()
         {
-            using var testWorkspace = CreateWithLines(
-                "");
-            var options = await testWorkspace.CurrentSolution.Projects.Single().Documents.Single().GetLineFormattingOptionsAsync(testWorkspace.GlobalOptions, CancellationToken.None);
+            using var testWorkspace = CreateWithLines("");
+            var options = await testWorkspace
+                .CurrentSolution.Projects.Single()
+                .Documents.Single()
+                .GetLineFormattingOptionsAsync(testWorkspace.GlobalOptions, CancellationToken.None);
 
             Assert.Equal(FormattingOptions.UseTabs.DefaultValue, options.UseTabs);
         }
@@ -32,12 +34,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61109")]
         public async Task SingleLineWithTab()
         {
-            using var testWorkspace = CreateWithLines(
-                "class C",
-                "{",
-                "\tvoid M() { }",
-                "}");
-            var options = await testWorkspace.CurrentSolution.Projects.Single().Documents.Single().GetLineFormattingOptionsAsync(testWorkspace.GlobalOptions, CancellationToken.None);
+            using var testWorkspace = CreateWithLines("class C", "{", "\tvoid M() { }", "}");
+            var options = await testWorkspace
+                .CurrentSolution.Projects.Single()
+                .Documents.Single()
+                .GetLineFormattingOptionsAsync(testWorkspace.GlobalOptions, CancellationToken.None);
 
             // the indentation is only inferred by a command handler:
             Assert.False(options.UseTabs);
@@ -46,12 +47,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
         [Fact]
         public async Task SingleLineWithFourSpaces()
         {
-            using var testWorkspace = CreateWithLines(
-                "class C",
-                "{",
-                "    void M() { }",
-                "}");
-            var options = await testWorkspace.CurrentSolution.Projects.Single().Documents.Single().GetLineFormattingOptionsAsync(testWorkspace.GlobalOptions, CancellationToken.None);
+            using var testWorkspace = CreateWithLines("class C", "{", "    void M() { }", "}");
+            var options = await testWorkspace
+                .CurrentSolution.Projects.Single()
+                .Documents.Single()
+                .GetLineFormattingOptionsAsync(testWorkspace.GlobalOptions, CancellationToken.None);
 
             Assert.False(options.UseTabs);
             Assert.Equal(4, options.IndentationSize);
@@ -59,10 +59,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
 
         private static TestWorkspace CreateWithLines(params string[] lines)
         {
-            var workspace = TestWorkspace.CreateCSharp(string.Join("\r\n", lines), openDocuments: true);
-            var editorOptionsFactoryService = workspace.ExportProvider.GetExportedValue<IEditorOptionsFactoryService>();
+            var workspace = TestWorkspace.CreateCSharp(
+                string.Join("\r\n", lines),
+                openDocuments: true
+            );
+            var editorOptionsFactoryService =
+                workspace.ExportProvider.GetExportedValue<IEditorOptionsFactoryService>();
 
-            editorOptionsFactoryService.GlobalOptions.SetOptionValue(DefaultOptions.AdaptiveFormattingOptionId, true);
+            editorOptionsFactoryService.GlobalOptions.SetOptionValue(
+                DefaultOptions.AdaptiveFormattingOptionId,
+                true
+            );
 
             return workspace;
         }

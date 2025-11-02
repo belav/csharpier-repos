@@ -38,7 +38,6 @@ namespace System.Transactions
             }
         }
 
-
         public Guid DistributedIdentifier
         {
             get
@@ -69,7 +68,6 @@ namespace System.Transactions
                 }
             }
         }
-
 
         public DateTime CreationTime => new DateTime(_internalTransaction.CreationTime);
 

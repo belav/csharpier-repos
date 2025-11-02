@@ -35,7 +35,11 @@ namespace System.Text.Unicode
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)] // the caller should be inlined, not this method
-        private static UnicodeRange CreateRange([NotNull] ref UnicodeRange? range, char first, char last)
+        private static UnicodeRange CreateRange(
+            [NotNull] ref UnicodeRange? range,
+            char first,
+            char last
+        )
         {
             // It's ok if two threads race and one overwrites the other's 'range' value.
             Volatile.Write(ref range, UnicodeRange.Create(first, last));

@@ -47,9 +47,7 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Assert.NotNull(oid);
             Assert.Equal(Oids.LocalKeyId, oid.Value);
 
-            Assert.Equal(
-                $"04{keyId.Length:X2}{keyIdHex}",
-                localKeyId.RawData.ByteArrayToHex());
+            Assert.Equal($"04{keyId.Length:X2}{keyIdHex}", localKeyId.RawData.ByteArrayToHex());
         }
 
         [Theory]

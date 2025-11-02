@@ -32,19 +32,23 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 ImmutableSegmentedHashSet<string>.Empty.WithComparer(StringComparer.Ordinal),
                 false,
                 new[] { "apple", "APPLE" },
-                new[] { "apple", "APPLE" });
+                new[] { "apple", "APPLE" }
+            );
             CustomSortTestHelper(
-                ImmutableSegmentedHashSet<string>.Empty.WithComparer(StringComparer.OrdinalIgnoreCase),
+                ImmutableSegmentedHashSet<string>.Empty.WithComparer(
+                    StringComparer.OrdinalIgnoreCase
+                ),
                 false,
                 new[] { "apple", "APPLE" },
-                new[] { "apple" });
+                new[] { "apple" }
+            );
         }
 
         [Fact]
         public void ChangeUnorderedEqualityComparer()
         {
-            var ordinalSet = ImmutableSegmentedHashSet<string>.Empty
-                .WithComparer(StringComparer.Ordinal)
+            var ordinalSet = ImmutableSegmentedHashSet<string>
+                .Empty.WithComparer(StringComparer.Ordinal)
                 .Add("apple")
                 .Add("APPLE");
             Assert.Equal(2, ordinalSet.Count); // claimed count
@@ -58,9 +62,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void ToSortTest()
         {
-            var set = ImmutableSegmentedHashSet<string>.Empty
-                .Add("apple")
-                .Add("APPLE");
+            var set = ImmutableSegmentedHashSet<string>.Empty.Add("apple").Add("APPLE");
             var sorted = System.Collections.Immutable.ImmutableSortedSet.ToImmutableSortedSet(set);
             CollectionAssertAreEquivalent(set.ToList(), sorted.ToList());
         }
@@ -135,11 +137,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(2, set.Count);
             Assert.Same(comparer, set.KeyComparer);
 
-            set = ImmutableSegmentedHashSet.CreateRange<string?>((IEnumerable<string>)new[] { "a", "b" });
+            set = ImmutableSegmentedHashSet.CreateRange<string?>(
+                (IEnumerable<string>)new[] { "a", "b" }
+            );
             Assert.Equal(2, set.Count);
             Assert.Same(EqualityComparer<string>.Default, set.KeyComparer);
 
-            set = ImmutableSegmentedHashSet.CreateRange<string?>(comparer, (IEnumerable<string>)new[] { "a", "b" });
+            set = ImmutableSegmentedHashSet.CreateRange<string?>(
+                comparer,
+                (IEnumerable<string>)new[] { "a", "b" }
+            );
             Assert.Equal(2, set.Count);
             Assert.Same(comparer, set.KeyComparer);
 
@@ -183,10 +190,17 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/54716")]
         public void DebuggerAttributesValid()
         {
-            DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableSegmentedHashSet.Create<string>());
+            DebuggerAttributes.ValidateDebuggerDisplayReferences(
+                ImmutableSegmentedHashSet.Create<string>()
+            );
             ImmutableSegmentedHashSet<int> set = ImmutableSegmentedHashSet.Create(1, 2, 3);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(set);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>()?.State == DebuggerBrowsableState.RootHidden);
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                set
+            );
+            PropertyInfo itemProperty = info.Properties.Single(pr =>
+                pr.GetCustomAttribute<DebuggerBrowsableAttribute>()?.State
+                == DebuggerBrowsableState.RootHidden
+            );
             int[]? items = itemProperty.GetValue(info.Instance) as int[];
             Assert.Equal(set, items);
         }
@@ -194,15 +208,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/54716")]
         public static void TestDebuggerAttributes_Null()
         {
-            Type proxyType = DebuggerAttributes.GetProxyType(ImmutableSegmentedHashSet.Create<string>());
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object?)null));
+            Type proxyType = DebuggerAttributes.GetProxyType(
+                ImmutableSegmentedHashSet.Create<string>()
+            );
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
+                Activator.CreateInstance(proxyType, (object?)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
         [Fact]
         public void SymmetricExceptWithComparerTests()
         {
-            var set = ImmutableSegmentedHashSet.Create<string>("a").WithComparer(StringComparer.OrdinalIgnoreCase);
+            var set = ImmutableSegmentedHashSet
+                .Create<string>("a")
+                .WithComparer(StringComparer.OrdinalIgnoreCase);
             var otherCollection = new[] { "A" };
 
             var expectedSet = new HashSet<string>(set, set.KeyComparer);

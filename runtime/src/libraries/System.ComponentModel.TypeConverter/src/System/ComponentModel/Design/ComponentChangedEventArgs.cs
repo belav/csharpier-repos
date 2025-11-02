@@ -31,7 +31,12 @@ namespace System.ComponentModel.Design
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.Design.ComponentChangedEventArgs'/> class.
         /// </summary>
-        public ComponentChangedEventArgs(object? component, MemberDescriptor? member, object? oldValue, object? newValue)
+        public ComponentChangedEventArgs(
+            object? component,
+            MemberDescriptor? member,
+            object? oldValue,
+            object? newValue
+        )
         {
             Component = component;
             Member = member;

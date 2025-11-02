@@ -4,42 +4,50 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System {
+namespace System
+{
     using System.Runtime.Serialization;
+
     /// <devdoc>
     ///    <para>
     ///       An exception class used when an invalid Uniform Resource Identifier is detected.
     ///    </para>
     /// </devdoc>
     [Serializable]
-    public class UriFormatException : FormatException, ISerializable {
-
+    public class UriFormatException : FormatException, ISerializable
+    {
         // constructors
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public UriFormatException() : base() {
-        }
+        public UriFormatException()
+            : base() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public UriFormatException(string textString) : base(textString) {
-        }
+        public UriFormatException(string textString)
+            : base(textString) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public UriFormatException(string textString, Exception e) : base(textString, e) {
-        }
+        public UriFormatException(string textString, Exception e)
+            : base(textString, e) { }
 
-        protected UriFormatException(SerializationInfo serializationInfo, StreamingContext streamingContext)
-            : base(serializationInfo, streamingContext) {
-        }
+        protected UriFormatException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+            : base(serializationInfo, streamingContext) { }
 
         /// <internalonly/>
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext) {
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+        {
             base.GetObjectData(serializationInfo, streamingContext);
         }
 
@@ -48,8 +56,5 @@ namespace System {
         // methods
 
         // data
-
     }; // class UriFormatException
-
-
 } // namespace System

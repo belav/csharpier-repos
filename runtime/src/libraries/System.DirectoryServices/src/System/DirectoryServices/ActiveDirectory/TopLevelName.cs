@@ -11,7 +11,7 @@ namespace System.DirectoryServices.ActiveDirectory
         Enabled = 0,
         NewlyCreated = 1,
         AdminDisabled = 2,
-        ConflictDisabled = 4
+        ConflictDisabled = 4,
     }
 
     public class TopLevelName
@@ -33,11 +33,17 @@ namespace System.DirectoryServices.ActiveDirectory
             get => _status;
             set
             {
-                if (value != TopLevelNameStatus.Enabled &&
-                    value != TopLevelNameStatus.NewlyCreated &&
-                    value != TopLevelNameStatus.AdminDisabled &&
-                    value != TopLevelNameStatus.ConflictDisabled)
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(TopLevelNameStatus));
+                if (
+                    value != TopLevelNameStatus.Enabled
+                    && value != TopLevelNameStatus.NewlyCreated
+                    && value != TopLevelNameStatus.AdminDisabled
+                    && value != TopLevelNameStatus.ConflictDisabled
+                )
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        (int)value,
+                        typeof(TopLevelNameStatus)
+                    );
 
                 _status = value;
             }

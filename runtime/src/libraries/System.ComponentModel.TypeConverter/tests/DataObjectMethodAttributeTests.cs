@@ -35,9 +35,24 @@ namespace System.ComponentModel.Tests
             var attribute = new DataObjectMethodAttribute(DataObjectMethodType.Fill, true);
 
             yield return new object[] { attribute, attribute, true };
-            yield return new object[] { attribute, new DataObjectMethodAttribute(DataObjectMethodType.Fill, true), true };
-            yield return new object[] { attribute, new DataObjectMethodAttribute(DataObjectMethodType.Delete, true), false };
-            yield return new object[] { attribute, new DataObjectMethodAttribute(DataObjectMethodType.Fill, false), false };
+            yield return new object[]
+            {
+                attribute,
+                new DataObjectMethodAttribute(DataObjectMethodType.Fill, true),
+                true,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new DataObjectMethodAttribute(DataObjectMethodType.Delete, true),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new DataObjectMethodAttribute(DataObjectMethodType.Fill, false),
+                false,
+            };
 
             yield return new object[] { attribute, new object(), false };
             yield return new object[] { attribute, null, false };
@@ -45,7 +60,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Other_ReturnsExpected(DataObjectMethodAttribute attribute, object other, bool expected)
+        public void Equals_Other_ReturnsExpected(
+            DataObjectMethodAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is DataObjectMethodAttribute)
@@ -59,9 +78,24 @@ namespace System.ComponentModel.Tests
             var attribute = new DataObjectMethodAttribute(DataObjectMethodType.Fill, true);
 
             yield return new object[] { attribute, attribute, true };
-            yield return new object[] { attribute, new DataObjectMethodAttribute(DataObjectMethodType.Fill, true), true };
-            yield return new object[] { attribute, new DataObjectMethodAttribute(DataObjectMethodType.Delete, true), false };
-            yield return new object[] { attribute, new DataObjectMethodAttribute(DataObjectMethodType.Fill, false), true };
+            yield return new object[]
+            {
+                attribute,
+                new DataObjectMethodAttribute(DataObjectMethodType.Fill, true),
+                true,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new DataObjectMethodAttribute(DataObjectMethodType.Delete, true),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new DataObjectMethodAttribute(DataObjectMethodType.Fill, false),
+                true,
+            };
 
             yield return new object[] { attribute, new object(), false };
             yield return new object[] { attribute, null, false };
@@ -69,7 +103,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Match_TestData))]
-        public void Match_Other_ReturnsExpected(DataObjectMethodAttribute attribute, object other, bool expected)
+        public void Match_Other_ReturnsExpected(
+            DataObjectMethodAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Match(other));
         }

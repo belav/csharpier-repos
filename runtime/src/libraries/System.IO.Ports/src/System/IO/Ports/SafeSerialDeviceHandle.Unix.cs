@@ -12,9 +12,8 @@ namespace System.IO.Ports
 {
     internal sealed class SafeSerialDeviceHandle : SafeHandleMinusOneIsInvalid
     {
-        public SafeSerialDeviceHandle() : base(ownsHandle: true)
-        {
-        }
+        public SafeSerialDeviceHandle()
+            : base(ownsHandle: true) { }
 
         internal static SafeSerialDeviceHandle Open(string portName)
         {
@@ -28,7 +27,8 @@ namespace System.IO.Ports
                 // exception type is matching Windows
                 throw new UnauthorizedAccessException(
                     SR.Format(SR.UnauthorizedAccess_IODenied_Port, portName),
-                    Interop.GetIOException(Interop.Sys.GetLastErrorInfo()));
+                    Interop.GetIOException(Interop.Sys.GetLastErrorInfo())
+                );
             }
 
             return handle;
@@ -39,7 +39,10 @@ namespace System.IO.Ports
             Interop.Serial.Shutdown(handle, SocketShutdown.Both);
             int result = Interop.Serial.SerialPortClose(handle);
 
-            Debug.Assert(result == 0, $"Close failed with result {result} and error {Interop.Sys.GetLastErrorInfo()}");
+            Debug.Assert(
+                result == 0,
+                $"Close failed with result {result} and error {Interop.Sys.GetLastErrorInfo()}"
+            );
 
             return result == 0;
         }

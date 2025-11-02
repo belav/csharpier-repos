@@ -6,12 +6,11 @@ namespace System.Workflow.ComponentModel.Design
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Workflow.ComponentModel.Design;
     using System.ComponentModel.Design;
     using System.Drawing;
     using System.ServiceModel;
-
+    using System.Text;
+    using System.Workflow.ComponentModel.Design;
 
     // <summary>
     // Helper class for visuaulizing the highlighted activity group
@@ -22,6 +21,7 @@ namespace System.Workflow.ComponentModel.Design
         private HighlightGlyphProvider highlightProvider = null;
         private ActivityDesigner owner;
         private WorkflowView workflowView;
+
         public ActivityDesignerHighlighter(ActivityDesigner owner)
         {
             this.owner = owner;
@@ -48,22 +48,33 @@ namespace System.Workflow.ComponentModel.Design
         {
             if (highlightedDesigners == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("hightlightedDesigners");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "hightlightedDesigners"
+                );
             }
 
-            glyphProviderService = this.GetService(typeof(IDesignerGlyphProviderService)) as IDesignerGlyphProviderService;
+            glyphProviderService =
+                this.GetService(typeof(IDesignerGlyphProviderService))
+                as IDesignerGlyphProviderService;
             workflowView = GetService(typeof(WorkflowView)) as WorkflowView;
 
             RemoveCurrentHighlight();
 
             IDesignerHost designerHost = this.GetService(typeof(IDesignerHost)) as IDesignerHost;
             DesignerHighlighterMesageFilter messageFilter = new DesignerHighlighterMesageFilter();
-            highlightProvider = new HighlightGlyphProvider(designerHost.GetDesigner(designerHost.RootComponent) as ActivityDesigner, highlightedDesigners);
+            highlightProvider = new HighlightGlyphProvider(
+                designerHost.GetDesigner(designerHost.RootComponent) as ActivityDesigner,
+                highlightedDesigners
+            );
             glyphProviderService.AddGlyphProvider(highlightProvider);
             highlightProvider.MessageFilter = messageFilter;
 
-            messageFilter.MouseDown += new EventHandler<System.Windows.Forms.MouseEventArgs>(messageFilter_MouseDown);
-            messageFilter.KeyDown += new EventHandler<System.Windows.Forms.KeyEventArgs>(messageFilter_KeyDown);
+            messageFilter.MouseDown += new EventHandler<System.Windows.Forms.MouseEventArgs>(
+                messageFilter_MouseDown
+            );
+            messageFilter.KeyDown += new EventHandler<System.Windows.Forms.KeyEventArgs>(
+                messageFilter_KeyDown
+            );
             workflowView.AddDesignerMessageFilter(messageFilter);
             workflowView.FitToScreenSize();
         }
@@ -75,17 +86,18 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (glyphProvider is HighlightGlyphProvider)
                 {
-                    currentHightlightGlyhProvider = (HighlightGlyphProvider) glyphProvider;
+                    currentHightlightGlyhProvider = (HighlightGlyphProvider)glyphProvider;
                     break;
                 }
             }
             if (currentHightlightGlyhProvider != null)
             {
                 //remove associated designerMessageFilter before removing currentGlyphProvider.
-                workflowView.RemoveDesignerMessageFilter(currentHightlightGlyhProvider.MessageFilter);
+                workflowView.RemoveDesignerMessageFilter(
+                    currentHightlightGlyhProvider.MessageFilter
+                );
                 glyphProviderService.RemoveGlyphProvider(currentHightlightGlyhProvider);
             }
-
         }
 
         void messageFilter_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -133,7 +145,7 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         // this is the message filter inserted in the workflowview to escape back to the normal view
-        // from the highlighted view. since glyphs cant take mouse events, this is the only way to 
+        // from the highlighted view. since glyphs cant take mouse events, this is the only way to
         // detect mouseclicks when in highlighted view.
 
         internal sealed class DesignerHighlighterMesageFilter : WorkflowDesignerMessageFilter
@@ -169,9 +181,11 @@ namespace System.Workflow.ComponentModel.Design
 
             private ActivityDesigner rootDesigner;
 
-            public HighlightGlyphProvider(ActivityDesigner rootDesigner, List<ActivityDesigner> highlightedDesigners)
+            public HighlightGlyphProvider(
+                ActivityDesigner rootDesigner,
+                List<ActivityDesigner> highlightedDesigners
+            )
             {
-
                 this.RootDesigner = rootDesigner;
                 this.HighlightedDesigners = highlightedDesigners;
             }
@@ -198,7 +212,9 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (activityDesigner == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("activityDesigner");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "activityDesigner"
+                    );
                 }
 
                 if (!activityDesigner.IsRootDesigner)
@@ -206,11 +222,11 @@ namespace System.Workflow.ComponentModel.Design
                     return null;
                 }
                 ActivityDesignerGlyphCollection glyphs = new ActivityDesignerGlyphCollection();
-                glyphs.Add(new HighlightOverlayGlyph(activityDesigner.Bounds, HighlightedDesigners));
+                glyphs.Add(
+                    new HighlightOverlayGlyph(activityDesigner.Bounds, HighlightedDesigners)
+                );
                 return glyphs;
             }
-
         }
-
     }
 }

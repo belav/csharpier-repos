@@ -16,9 +16,9 @@ namespace Microsoft.CodeAnalysis.Host
     /// Map spans in a document to other spans even in other document
     ///
     /// this will be used by various features if provided to convert span in one document to other spans.
-    /// 
-    /// for example, it is used to show spans users expect in a razor file rather than spans in 
-    /// auto generated file that is implementation detail or navigate to the right place rather 
+    ///
+    /// for example, it is used to show spans users expect in a razor file rather than spans in
+    /// auto generated file that is implementation detail or navigate to the right place rather
     /// than the generated file and etc.
     /// </summary>
     internal interface ISpanMappingService : IDocumentService
@@ -28,14 +28,17 @@ namespace Microsoft.CodeAnalysis.Host
         /// </summary>
         bool SupportsMappingImportDirectives { get; }
 
-        Task<ImmutableArray<(string mappedFilePath, TextChange mappedTextChange)>> GetMappedTextChangesAsync(
+        Task<
+            ImmutableArray<(string mappedFilePath, TextChange mappedTextChange)>
+        > GetMappedTextChangesAsync(
             Document oldDocument,
             Document newDocument,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Map spans in the document to more appropriate locations
-        /// 
+        ///
         /// in current design, this can NOT map a span to a span that is not backed by a file.
         /// for example, roslyn supports someone to have a document that is not backed by a file. and current design doesn't allow
         /// such document to be returned from this API
@@ -46,7 +49,11 @@ namespace Microsoft.CodeAnalysis.Host
         /// <param name="spans">Spans in the document</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Return mapped span. order of result should be same as the given span</returns>
-        Task<ImmutableArray<MappedSpanResult>> MapSpansAsync(Document document, IEnumerable<TextSpan> spans, CancellationToken cancellationToken);
+        Task<ImmutableArray<MappedSpanResult>> MapSpansAsync(
+            Document document,
+            IEnumerable<TextSpan> spans,
+            CancellationToken cancellationToken
+        );
     }
 
     /// <summary>

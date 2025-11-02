@@ -16,8 +16,12 @@ namespace System.Net
     /// </summary>
     internal class CommandStream : NetworkStreamWrapper
     {
-        private static readonly AsyncCallback s_writeCallbackDelegate = new AsyncCallback(WriteCallback);
-        private static readonly AsyncCallback s_readCallbackDelegate = new AsyncCallback(ReadCallback);
+        private static readonly AsyncCallback s_writeCallbackDelegate = new AsyncCallback(
+            WriteCallback
+        );
+        private static readonly AsyncCallback s_readCallbackDelegate = new AsyncCallback(
+            ReadCallback
+        );
 
         private bool _recoverableFailure;
 
@@ -44,7 +48,8 @@ namespace System.Net
 
         internal virtual void Abort(Exception e)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "closing control Stream");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, "closing control Stream");
 
             lock (this)
             {
@@ -72,7 +77,8 @@ namespace System.Net
 
         protected override void Dispose(bool disposing)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this);
 
             InvokeRequestCallback(null);
 
@@ -93,10 +99,7 @@ namespace System.Net
 
         internal bool RecoverableFailure
         {
-            get
-            {
-                return _recoverableFailure;
-            }
+            get { return _recoverableFailure; }
         }
 
         protected void MarkAsRecoverableFailure()
@@ -107,7 +110,11 @@ namespace System.Net
             }
         }
 
-        internal Stream? SubmitRequest(WebRequest request, bool isAsync, bool readInitalResponseOnConnect)
+        internal Stream? SubmitRequest(
+            WebRequest request,
+            bool isAsync,
+            bool readInitalResponseOnConnect
+        )
         {
             ClearState();
             PipelineEntry[]? commands = BuildCommandsList(request);
@@ -130,22 +137,42 @@ namespace System.Net
             return null;
         }
 
-        protected static Exception GenerateException(string message, WebExceptionStatus status, Exception? innerException)
+        protected static Exception GenerateException(
+            string message,
+            WebExceptionStatus status,
+            Exception? innerException
+        )
         {
             return new WebException(
-                            message,
-                            innerException,
-                            status,
-                            null /* no response */ );
+                message,
+                innerException,
+                status,
+                null /* no response */
+            );
         }
 
-        protected static Exception GenerateException(FtpStatusCode code, string? statusDescription, Exception? innerException)
+        protected static Exception GenerateException(
+            FtpStatusCode code,
+            string? statusDescription,
+            Exception? innerException
+        )
         {
-            return new WebException(SR.Format(SR.net_ftp_servererror, NetRes.GetWebStatusCodeString(code, statusDescription)),
-                                    innerException, WebExceptionStatus.ProtocolError, null);
+            return new WebException(
+                SR.Format(
+                    SR.net_ftp_servererror,
+                    NetRes.GetWebStatusCodeString(code, statusDescription)
+                ),
+                innerException,
+                WebExceptionStatus.ProtocolError,
+                null
+            );
         }
 
-        protected void InitCommandPipeline(WebRequest? request, PipelineEntry[]? commands, bool isAsync)
+        protected void InitCommandPipeline(
+            WebRequest? request,
+            PipelineEntry[]? commands,
+            bool isAsync
+        )
         {
             _commands = commands;
             _index = 0;
@@ -198,21 +225,32 @@ namespace System.Net
 
                     if (NetEventSource.Log.IsEnabled())
                     {
-                        string sendCommand = _commands[_index].Command.Substring(0, _commands[_index].Command.Length - 2);
+                        string sendCommand = _commands[_index]
+                            .Command.Substring(0, _commands[_index].Command.Length - 2);
                         if (_commands[_index].HasFlag(PipelineEntryFlags.DontLogParameter))
                         {
                             int index = sendCommand.IndexOf(' ');
                             if (index != -1)
-                                sendCommand = string.Concat(sendCommand.AsSpan(0, index), " ********");
+                                sendCommand = string.Concat(
+                                    sendCommand.AsSpan(0, index),
+                                    " ********"
+                                );
                         }
-                        if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Sending command {sendCommand}");
+                        if (NetEventSource.Log.IsEnabled())
+                            NetEventSource.Info(this, $"Sending command {sendCommand}");
                     }
 
                     try
                     {
                         if (isAsync)
                         {
-                            BeginWrite(sendBuffer, 0, sendBuffer.Length, s_writeCallbackDelegate, this);
+                            BeginWrite(
+                                sendBuffer,
+                                0,
+                                sendBuffer.Length,
+                                s_writeCallbackDelegate,
+                                this
+                            );
                         }
                         else
                         {
@@ -278,8 +316,11 @@ namespace System.Net
                     // If we get an exception on the QUIT command (which is
                     // always the last command), ignore the final exception
                     // and continue with the pipeline regardlss of sync/async
-                    if (index < 0 || index >= commands!.Length ||
-                        commands[index].Command != "QUIT\r\n")
+                    if (
+                        index < 0
+                        || index >= commands!.Length
+                        || commands[index].Command != "QUIT\r\n"
+                    )
                         throw;
                 }
             }
@@ -316,7 +357,11 @@ namespace System.Net
                 if (_abortReason != string.Empty)
                     exception = new WebException(_abortReason);
                 else
-                    exception = GenerateException(SR.net_ftp_protocolerror, WebExceptionStatus.ServerProtocolViolation, null);
+                    exception = GenerateException(
+                        SR.net_ftp_protocolerror,
+                        WebExceptionStatus.ServerProtocolViolation,
+                        null
+                    );
                 Abort(exception);
                 throw exception;
             }
@@ -357,11 +402,11 @@ namespace System.Net
 
         internal enum PipelineInstruction
         {
-            Abort,          // aborts the pipeline
-            Advance,        // advances to the next pipelined command
-            Pause,          // Let async callback to continue the pipeline
-            Reread,         // rereads from the command socket
-            GiveStream,     // returns with open data stream, let stream close to continue
+            Abort, // aborts the pipeline
+            Advance, // advances to the next pipelined command
+            Pause, // Let async callback to continue the pipeline
+            Reread, // rereads from the command socket
+            GiveStream, // returns with open data stream, let stream close to continue
         }
 
         [Flags]
@@ -370,7 +415,7 @@ namespace System.Net
             UserCommand = 0x1,
             GiveDataStream = 0x2,
             CreateDataConnection = 0x4,
-            DontLogParameter = 0x8
+            DontLogParameter = 0x8,
         }
 
         internal sealed class PipelineEntry
@@ -379,20 +424,28 @@ namespace System.Net
             {
                 Command = command;
             }
+
             internal PipelineEntry(string command, PipelineEntryFlags flags)
             {
                 Command = command;
                 Flags = flags;
             }
+
             internal bool HasFlag(PipelineEntryFlags flags)
             {
                 return (Flags & flags) != 0;
             }
+
             internal string Command;
             internal PipelineEntryFlags Flags;
         }
 
-        protected virtual PipelineInstruction PipelineCallback(PipelineEntry? entry, ResponseDescription? response, bool timeout, ref Stream? stream)
+        protected virtual PipelineInstruction PipelineCallback(
+            PipelineEntry? entry,
+            ResponseDescription? response,
+            bool timeout,
+            ref Stream? stream
+        )
         {
             return PipelineInstruction.Abort;
         }
@@ -471,10 +524,7 @@ namespace System.Net
 
         protected Encoding Encoding
         {
-            get
-            {
-                return _encoding;
-            }
+            get { return _encoding; }
             set
             {
                 _encoding = value;
@@ -485,7 +535,11 @@ namespace System.Net
         /// <summary>
         /// This function is implemented in a derived class to determine whether a response is valid, and when it is complete.
         /// </summary>
-        protected virtual bool CheckValid(ResponseDescription response, ref int validThrough, ref int completeLength)
+        protected virtual bool CheckValid(
+            ResponseDescription response,
+            ref int validThrough,
+            ref int completeLength
+        )
         {
             return false;
         }
@@ -517,7 +571,13 @@ namespace System.Net
                     {
                         if (_isAsync)
                         {
-                            BeginRead(state.Buffer, 0, state.Buffer.Length, s_readCallbackDelegate, state);
+                            BeginRead(
+                                state.Buffer,
+                                0,
+                                state.Buffer.Length,
+                                s_readCallbackDelegate,
+                                state
+                            );
                             return null;
                         }
                         else
@@ -543,7 +603,11 @@ namespace System.Net
             {
                 if (e is WebException)
                     throw;
-                throw GenerateException(SR.net_ftp_receivefailure, WebExceptionStatus.ReceiveFailure, e);
+                throw GenerateException(
+                    SR.net_ftp_receivefailure,
+                    WebExceptionStatus.ReceiveFailure,
+                    e
+                );
             }
             return state.Resp;
         }
@@ -579,16 +643,24 @@ namespace System.Net
                     // invoke checkvalid.
                     if (!CheckValid(state.Resp, ref validThrough, ref completeLength))
                     {
-                        throw GenerateException(SR.net_ftp_protocolerror, WebExceptionStatus.ServerProtocolViolation, null);
+                        throw GenerateException(
+                            SR.net_ftp_protocolerror,
+                            WebExceptionStatus.ServerProtocolViolation,
+                            null
+                        );
                     }
                 }
                 else // we did a Connection.BeginReceive.  Note that in this case, all bytes received are in the receive buffer (because bytes from
-                     // the buffer were transferred there if necessary
+                // the buffer were transferred there if necessary
                 {
                     // this indicates the connection was closed.
                     if (bytesRead <= 0)
                     {
-                        throw GenerateException(SR.net_ftp_protocolerror, WebExceptionStatus.ServerProtocolViolation, null);
+                        throw GenerateException(
+                            SR.net_ftp_protocolerror,
+                            WebExceptionStatus.ServerProtocolViolation,
+                            null
+                        );
                     }
 
                     // decode the bytes in the receive buffer into a string, append it to the statusbuffer, and invoke checkvalid.
@@ -602,7 +674,11 @@ namespace System.Net
                     state.Resp.StatusBuffer.Append(szResponse);
                     if (!CheckValid(state.Resp, ref validThrough, ref completeLength))
                     {
-                        throw GenerateException(SR.net_ftp_protocolerror, WebExceptionStatus.ServerProtocolViolation, null);
+                        throw GenerateException(
+                            SR.net_ftp_protocolerror,
+                            WebExceptionStatus.ServerProtocolViolation,
+                            null
+                        );
                     }
 
                     // If the response is complete, then determine how many characters are left over...these bytes need to be set into Buffer.
@@ -611,7 +687,10 @@ namespace System.Net
                         int unusedChars = state.Resp.StatusBuffer.Length - completeLength;
                         if (unusedChars > 0)
                         {
-                            _buffer = szResponse.Substring(szResponse.Length - unusedChars, unusedChars);
+                            _buffer = szResponse.Substring(
+                                szResponse.Length - unusedChars,
+                                unusedChars
+                            );
                         }
                     }
                 }
@@ -627,7 +706,13 @@ namespace System.Net
                     {
                         if (_isAsync)
                         {
-                            BeginRead(state.Buffer, 0, state.Buffer.Length, s_readCallbackDelegate, state);
+                            BeginRead(
+                                state.Buffer,
+                                0,
+                                state.Buffer.Length,
+                                s_readCallbackDelegate,
+                                state
+                            );
                             return;
                         }
                         else
@@ -658,7 +743,11 @@ namespace System.Net
             state.Resp.StatusDescription = responseString.Substring(0, completeLength);
             // Set the StatusDescription to the complete part of the response.  Note that the Buffer has already been taken care of above.
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Received response: {responseString.Substring(0, completeLength - 2)}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"Received response: {responseString.Substring(0, completeLength - 2)}"
+                );
 
             if (_isAsync)
             {
@@ -689,11 +778,26 @@ namespace System.Net
 
         internal string? StatusCodeString;
 
-        internal bool PositiveIntermediate { get { return (Status >= 100 && Status <= 199); } }
-        internal bool PositiveCompletion { get { return (Status >= 200 && Status <= 299); } }
-        internal bool TransientFailure { get { return (Status >= 400 && Status <= 499); } }
-        internal bool PermanentFailure { get { return (Status >= 500 && Status <= 599); } }
-        internal bool InvalidStatusCode { get { return (Status < 100 || Status > 599); } }
+        internal bool PositiveIntermediate
+        {
+            get { return (Status >= 100 && Status <= 199); }
+        }
+        internal bool PositiveCompletion
+        {
+            get { return (Status >= 200 && Status <= 299); }
+        }
+        internal bool TransientFailure
+        {
+            get { return (Status >= 400 && Status <= 499); }
+        }
+        internal bool PermanentFailure
+        {
+            get { return (Status >= 500 && Status <= 599); }
+        }
+        internal bool InvalidStatusCode
+        {
+            get { return (Status < 100 || Status > 599); }
+        }
     }
 
     /// <summary>
@@ -712,7 +816,7 @@ namespace System.Net
         {
             Connection = connection;
             Resp = new ResponseDescription();
-            Buffer = new byte[bufferSize];  //1024
+            Buffer = new byte[bufferSize]; //1024
             ValidThrough = 0;
         }
     }

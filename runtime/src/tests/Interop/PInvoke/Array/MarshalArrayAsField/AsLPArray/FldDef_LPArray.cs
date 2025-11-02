@@ -93,7 +93,11 @@ public struct S_LPCSTRArray_Seq
 [StructLayout(LayoutKind.Sequential)]
 public struct S_BSTRArray_Seq
 {
-    [MarshalAs(UnmanagedType.LPArray, SizeConst = Test.ARRAY_SIZE, ArraySubType = UnmanagedType.BStr)]
+    [MarshalAs(
+        UnmanagedType.LPArray,
+        SizeConst = Test.ARRAY_SIZE,
+        ArraySubType = UnmanagedType.BStr
+    )]
     public string[] arr;
 }
 
@@ -210,7 +214,11 @@ public class C_LPCSTRArray_Seq
 [StructLayout(LayoutKind.Sequential)]
 public class C_BSTRArray_Seq
 {
-    [MarshalAs(UnmanagedType.LPArray, SizeConst = Test.ARRAY_SIZE, ArraySubType = UnmanagedType.BStr)]
+    [MarshalAs(
+        UnmanagedType.LPArray,
+        SizeConst = Test.ARRAY_SIZE,
+        ArraySubType = UnmanagedType.BStr
+    )]
     public string[] arr;
 }
 
@@ -334,7 +342,11 @@ public struct S_LPCSTRArray_Exp
 public struct S_BSTRArray_Exp
 {
     [FieldOffset(0)]
-    [MarshalAs(UnmanagedType.LPArray, SizeConst = Test.ARRAY_SIZE, ArraySubType = UnmanagedType.BStr)]
+    [MarshalAs(
+        UnmanagedType.LPArray,
+        SizeConst = Test.ARRAY_SIZE,
+        ArraySubType = UnmanagedType.BStr
+    )]
     public string[] arr;
 }
 
@@ -457,7 +469,11 @@ public class C_LPCSTRArray_Exp
 public class C_BSTRArray_Exp
 {
     [FieldOffset(0)]
-    [MarshalAs(UnmanagedType.LPArray, SizeConst = Test.ARRAY_SIZE, ArraySubType = UnmanagedType.BStr)]
+    [MarshalAs(
+        UnmanagedType.LPArray,
+        SizeConst = Test.ARRAY_SIZE,
+        ArraySubType = UnmanagedType.BStr
+    )]
     public string[] arr;
 }
 

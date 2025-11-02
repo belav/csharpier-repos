@@ -16,14 +16,25 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { attr.OnMetadataCreated(null); }, "metadata");
+                delegate
+                {
+                    attr.OnMetadataCreated(null);
+                },
+                "metadata"
+            );
         }
 
         [Fact]
         public void OnMetadataCreated()
         {
             // Arrange
-            ModelMetadata modelMetadata = new ModelMetadata(new Mock<ModelMetadataProvider>().Object, null, null, typeof(object), "SomeProperty");
+            ModelMetadata modelMetadata = new ModelMetadata(
+                new Mock<ModelMetadataProvider>().Object,
+                null,
+                null,
+                typeof(object),
+                "SomeProperty"
+            );
             AllowHtmlAttribute attr = new AllowHtmlAttribute();
 
             // Act

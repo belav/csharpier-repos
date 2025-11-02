@@ -10,7 +10,7 @@ using System.Web.Http.Properties;
 namespace System.Web.Http.Routing
 {
     /// <summary>
-    /// A single route that is the composite of multiple "sub routes".  
+    /// A single route that is the composite of multiple "sub routes".
     /// </summary>
     /// <remarks>
     /// Corresponds to the MVC implementation of attribute routing in System.Web.Mvc.Routing.RouteCollectionRoute.
@@ -18,26 +18,27 @@ namespace System.Web.Http.Routing
     internal class RouteCollectionRoute : IHttpRoute, IReadOnlyCollection<IHttpRoute>
     {
         // Key for accessing SubRoutes on a RouteData.
-        // We expose this through the RouteData.Values instead of a derived class because 
-        // RouteData can get wrapped in another type, but Values still gets persisted through the wrappers. 
-        // Prefix with a \0 to protect against conflicts with user keys. 
+        // We expose this through the RouteData.Values instead of a derived class because
+        // RouteData can get wrapped in another type, but Values still gets persisted through the wrappers.
+        // Prefix with a \0 to protect against conflicts with user keys.
         public const string SubRouteDataKey = "MS_SubRoutes";
 
         private IReadOnlyCollection<IHttpRoute> _subRoutes;
 
-        private static readonly IDictionary<string, object> _empty = EmptyReadOnlyDictionary<string, object>.Value;
-        
-        public RouteCollectionRoute()
-        {
-        }
+        private static readonly IDictionary<string, object> _empty = EmptyReadOnlyDictionary<
+            string,
+            object
+        >.Value;
 
-        // This will enumerate all controllers and action descriptors, which will run those 
+        public RouteCollectionRoute() { }
+
+        // This will enumerate all controllers and action descriptors, which will run those
         // Initialization hooks, which may try to initialize controller-specific config, which
         // may call back to the initialize hook. So guard against that reentrancy.
         private bool _beingInitialized;
 
-        // deferred hook for initializing the sub routes. The composite route can be added during the middle of 
-        // intializing, but then the actual sub routes can get populated after initialization has finished. 
+        // deferred hook for initializing the sub routes. The composite route can be added during the middle of
+        // intializing, but then the actual sub routes can get populated after initialization has finished.
         public void EnsureInitialized(Func<IReadOnlyCollection<IHttpRoute>> initializer)
         {
             if (_beingInitialized && _subRoutes == null)
@@ -51,7 +52,7 @@ namespace System.Web.Http.Routing
                 _beingInitialized = true;
 
                 _subRoutes = initializer();
-                Contract.Assert(_subRoutes != null);                
+                Contract.Assert(_subRoutes != null);
             }
             finally
             {
@@ -63,9 +64,9 @@ namespace System.Web.Http.Routing
         {
             get
             {
-                // Caller should have already explicitly called EnsureInitialize. 
+                // Caller should have already explicitly called EnsureInitialize.
                 // Avoid lazy initilization from within the route table because the route table
-                // is shared resource and init can happen 
+                // is shared resource and init can happen
                 if (_subRoutes == null)
                 {
                     string msg = Error.Format(SRResources.Object_NotYetInitialized);
@@ -98,14 +99,11 @@ namespace System.Web.Http.Routing
 
         public HttpMessageHandler Handler
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
-                
-        // Returns null if no match. 
-        // Else, returns a composite route data that encapsulates the possible routes this may match against. 
+
+        // Returns null if no match.
+        // Else, returns a composite route data that encapsulates the possible routes this may match against.
         public IHttpRouteData GetRouteData(string virtualPathRoot, HttpRequestMessage request)
         {
             List<IHttpRouteData> matches = new List<IHttpRouteData>();
@@ -119,15 +117,18 @@ namespace System.Web.Http.Routing
             }
             if (matches.Count == 0)
             {
-                return null;  // no matches
+                return null; // no matches
             }
 
             return new RouteCollectionRouteData(this, matches.ToArray());
         }
 
-        public IHttpVirtualPathData GetVirtualPath(HttpRequestMessage request, IDictionary<string, object> values)
+        public IHttpVirtualPathData GetVirtualPath(
+            HttpRequestMessage request,
+            IDictionary<string, object> values
+        )
         {
-            // Use LinkGenerationRoute stubs to get placeholders for all the sub routes. 
+            // Use LinkGenerationRoute stubs to get placeholders for all the sub routes.
             return null;
         }
 
@@ -146,23 +147,23 @@ namespace System.Web.Http.Routing
             return SubRoutes.GetEnumerator();
         }
 
-        // Represents a union of multiple IHttpRouteDatas. 
+        // Represents a union of multiple IHttpRouteDatas.
         private class RouteCollectionRouteData : IHttpRouteData
         {
             public RouteCollectionRouteData(IHttpRoute parent, IHttpRouteData[] subRouteDatas)
             {
                 Route = parent;
 
-                // Each sub route may have different values. Callers need to enumerate the subroutes 
-                // and individually query each. 
-                // Find sub-routes via the SubRouteDataKey; don't expose as a property since the RouteData 
-                // can be wrapped in an outer type that doesn't propagate properties. 
+                // Each sub route may have different values. Callers need to enumerate the subroutes
+                // and individually query each.
+                // Find sub-routes via the SubRouteDataKey; don't expose as a property since the RouteData
+                // can be wrapped in an outer type that doesn't propagate properties.
                 Values = new HttpRouteValueDictionary() { { SubRouteDataKey, subRouteDatas } };
             }
 
             public IHttpRoute Route { get; private set; }
 
             public IDictionary<string, object> Values { get; private set; }
-        }        
+        }
     }
 }

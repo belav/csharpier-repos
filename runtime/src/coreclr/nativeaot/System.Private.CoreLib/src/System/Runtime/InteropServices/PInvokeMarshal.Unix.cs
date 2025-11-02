@@ -24,30 +24,51 @@ namespace System.Runtime.InteropServices
 
         #region String marshalling
 
-        public static unsafe int ConvertMultiByteToWideChar(byte* multiByteStr,
-                                                            int multiByteLen,
-                                                            char* wideCharStr,
-                                                            int wideCharLen)
+        public static unsafe int ConvertMultiByteToWideChar(
+            byte* multiByteStr,
+            int multiByteLen,
+            char* wideCharStr,
+            int wideCharLen
+        )
         {
-            return System.Text.Encoding.UTF8.GetChars(multiByteStr, multiByteLen, wideCharStr, wideCharLen);
+            return System.Text.Encoding.UTF8.GetChars(
+                multiByteStr,
+                multiByteLen,
+                wideCharStr,
+                wideCharLen
+            );
         }
 
-        public static unsafe int ConvertWideCharToMultiByte(char* wideCharStr,
-                                                            int wideCharLen,
-                                                            byte* multiByteStr,
-                                                            int multiByteLen,
-                                                            bool bestFit,
-                                                            bool throwOnUnmappableChar)
+        public static unsafe int ConvertWideCharToMultiByte(
+            char* wideCharStr,
+            int wideCharLen,
+            byte* multiByteStr,
+            int multiByteLen,
+            bool bestFit,
+            bool throwOnUnmappableChar
+        )
         {
-            return System.Text.Encoding.UTF8.GetBytes(wideCharStr, wideCharLen, multiByteStr, multiByteLen);
+            return System.Text.Encoding.UTF8.GetBytes(
+                wideCharStr,
+                wideCharLen,
+                multiByteStr,
+                multiByteLen
+            );
         }
 
-        public static unsafe int ConvertWideCharToMultiByte(char* wideCharStr,
-                                                            int wideCharLen,
-                                                            byte* multiByteStr,
-                                                            int multiByteLen)
+        public static unsafe int ConvertWideCharToMultiByte(
+            char* wideCharStr,
+            int wideCharLen,
+            byte* multiByteStr,
+            int multiByteLen
+        )
         {
-            return System.Text.Encoding.UTF8.GetBytes(wideCharStr, wideCharLen, multiByteStr, multiByteLen);
+            return System.Text.Encoding.UTF8.GetBytes(
+                wideCharStr,
+                wideCharLen,
+                multiByteStr,
+                multiByteLen
+            );
         }
 
         public static unsafe int GetByteCount(char* wideCharStr, int wideCharLen)

@@ -9,12 +9,14 @@ namespace System.Collections.Frozen
 {
     /// <summary>Provides a base class for frozen sets that store their values in a dedicated array.</summary>
     internal abstract class ItemsFrozenSet<T, TThisWrapper> : FrozenSetInternalBase<T, TThisWrapper>
-        where TThisWrapper : struct, FrozenSetInternalBase<T, TThisWrapper>.IGenericSpecializedWrapper
+        where TThisWrapper : struct,
+            FrozenSetInternalBase<T, TThisWrapper>.IGenericSpecializedWrapper
     {
         private protected readonly FrozenHashTable _hashTable;
         private protected readonly T[] _items;
 
-        protected ItemsFrozenSet(HashSet<T> source, bool keysAreHashCodes = false) : base(source.Comparer)
+        protected ItemsFrozenSet(HashSet<T> source, bool keysAreHashCodes = false)
+            : base(source.Comparer)
         {
             Debug.Assert(source.Count != 0);
 

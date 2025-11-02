@@ -11,7 +11,8 @@ namespace System.Security.Cryptography.Tests
         private class TestDerived : ECDiffieHellmanPublicKey
         {
 #pragma warning disable SYSLIB0043 // byte ctor is obsolete
-            public TestDerived(byte[] keyBlob) : base(keyBlob) { }
+            public TestDerived(byte[] keyBlob)
+                : base(keyBlob) { }
 #pragma warning restore SYSLIB0043
         }
 

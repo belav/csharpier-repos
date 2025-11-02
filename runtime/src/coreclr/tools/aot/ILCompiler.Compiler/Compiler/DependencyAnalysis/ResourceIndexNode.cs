@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Internal.NativeFormat;
 using Internal.Text;
 
@@ -26,7 +25,8 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool IsShareable => false;
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.ReadOnlyDataSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.ReadOnlyDataSection;
 
         public override bool StaticDependenciesAreComputed => true;
 
@@ -37,23 +37,27 @@ namespace ILCompiler.DependencyAnalysis
             sb.Append(nameMangler.CompilationUnitPrefix).Append("__embedded_resourceindex");
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This node has no relocations.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             byte[] blob = GenerateIndexBlob(factory);
             return new ObjectData(
                 blob,
                 Array.Empty<Relocation>(),
                 1,
-                new ISymbolDefinitionNode[]
-                {
-                    this
-                });
+                new ISymbolDefinitionNode[] { this }
+            );
         }
 
         /// <summary>
@@ -77,7 +81,9 @@ namespace ILCompiler.DependencyAnalysis
                 string assemblyName = indexData.Assembly.GetName().FullName;
                 Vertex asmName = nativeWriter.GetStringConstant(assemblyName);
                 Vertex resourceName = nativeWriter.GetStringConstant(indexData.ResourceName);
-                Vertex offsetVertex = nativeWriter.GetUnsignedConstant((uint)indexData.NativeOffset);
+                Vertex offsetVertex = nativeWriter.GetUnsignedConstant(
+                    (uint)indexData.NativeOffset
+                );
                 Vertex lengthVertex = nativeWriter.GetUnsignedConstant((uint)indexData.Length);
 
                 Vertex indexVertex = nativeWriter.GetTuple(asmName, resourceName);

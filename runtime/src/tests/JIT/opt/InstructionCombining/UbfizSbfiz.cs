@@ -14,7 +14,7 @@ public class Program
 
     internal static void AssertTrue(bool cond, [CallerLineNumber] int line = 0)
     {
-        if (!cond) 
+        if (!cond)
             throw new InvalidOperationException($"Test failed at line {line}.");
     }
 
@@ -26,15 +26,46 @@ public class Program
         {
             long[] testData =
             {
-                -1, -2, -3, -8, -128, -129, -254, -255, -256,
-                0, 1, 2, 3, 8, 128, 129, 254, 255, 256,
-                short.MinValue + 1, short.MinValue, short.MinValue + 1,
-                short.MaxValue + 1, short.MaxValue, short.MaxValue + 1,
-                int.MinValue + 1, int.MinValue, int.MinValue + 1,
-                int.MaxValue + 1, int.MaxValue, int.MaxValue + 1,
-                long.MinValue + 1, long.MinValue, long.MinValue + 1,
-                long.MaxValue + 1, long.MaxValue, long.MaxValue + 1,
-                ushort.MaxValue, uint.MaxValue, (long)ulong.MaxValue
+                -1,
+                -2,
+                -3,
+                -8,
+                -128,
+                -129,
+                -254,
+                -255,
+                -256,
+                0,
+                1,
+                2,
+                3,
+                8,
+                128,
+                129,
+                254,
+                255,
+                256,
+                short.MinValue + 1,
+                short.MinValue,
+                short.MinValue + 1,
+                short.MaxValue + 1,
+                short.MaxValue,
+                short.MaxValue + 1,
+                int.MinValue + 1,
+                int.MinValue,
+                int.MinValue + 1,
+                int.MaxValue + 1,
+                int.MaxValue,
+                int.MaxValue + 1,
+                long.MinValue + 1,
+                long.MinValue,
+                long.MinValue + 1,
+                long.MaxValue + 1,
+                long.MaxValue,
+                long.MaxValue + 1,
+                ushort.MaxValue,
+                uint.MaxValue,
+                (long)ulong.MaxValue,
             };
 
             foreach (long t in testData)
@@ -122,8 +153,8 @@ public class Tests_byte
     {
         unchecked
         {
-            return (byte)(x << Program.ShiftBy) ==
-                   (byte)(Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (byte)(x << Program.ShiftBy)
+                == (byte)(Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -132,8 +163,8 @@ public class Tests_byte
     {
         unchecked
         {
-            return (sbyte)((sbyte)x << Program.ShiftBy) ==
-                   (sbyte)((sbyte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (sbyte)((sbyte)x << Program.ShiftBy)
+                == (sbyte)((sbyte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -142,8 +173,8 @@ public class Tests_byte
     {
         unchecked
         {
-            return (ushort)(x << Program.ShiftBy) ==
-                   (ushort)(Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (ushort)(x << Program.ShiftBy)
+                == (ushort)(Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -152,37 +183,36 @@ public class Tests_byte
     {
         unchecked
         {
-            return (short)(x << Program.ShiftBy) ==
-                   (short)(Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (short)(x << Program.ShiftBy)
+                == (short)(Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_byte_to_uint(byte x)
     {
-        return (uint)x << Program.ShiftBy ==
-               (uint)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return (uint)x << Program.ShiftBy
+            == (uint)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_byte_to_int(byte x)
     {
-        return x << Program.ShiftBy ==
-               Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return x << Program.ShiftBy == Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_byte_to_ulong(byte x)
     {
-        return (ulong)x << Program.ShiftBy ==
-               (ulong)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return (ulong)x << Program.ShiftBy
+            == (ulong)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_byte_to_long(byte x)
     {
-        return (long)x << Program.ShiftBy ==
-               (long)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return (long)x << Program.ShiftBy
+            == (long)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 }
 
@@ -193,8 +223,8 @@ public class Tests_sbyte
     {
         unchecked
         {
-            return (byte)((byte)x << Program.ShiftBy) ==
-                   (byte)((byte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (byte)((byte)x << Program.ShiftBy)
+                == (byte)((byte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -203,8 +233,8 @@ public class Tests_sbyte
     {
         unchecked
         {
-            return (sbyte)(x << Program.ShiftBy) ==
-                   (sbyte)(Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (sbyte)(x << Program.ShiftBy)
+                == (sbyte)(Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -213,8 +243,8 @@ public class Tests_sbyte
     {
         unchecked
         {
-            return (ushort)((ushort)x << Program.ShiftBy) ==
-                   (ushort)((ushort)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (ushort)((ushort)x << Program.ShiftBy)
+                == (ushort)((ushort)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -223,8 +253,8 @@ public class Tests_sbyte
     {
         unchecked
         {
-            return (short)(x << Program.ShiftBy) ==
-                   (short)(Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (short)(x << Program.ShiftBy)
+                == (short)(Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -233,16 +263,15 @@ public class Tests_sbyte
     {
         unchecked
         {
-            return (uint)x << Program.ShiftBy ==
-                   (uint)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+            return (uint)x << Program.ShiftBy
+                == (uint)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_sbyte_to_int(sbyte x)
     {
-        return x << Program.ShiftBy ==
-               Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return x << Program.ShiftBy == Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -250,16 +279,16 @@ public class Tests_sbyte
     {
         unchecked
         {
-            return (ulong)x << Program.ShiftBy ==
-                   (ulong)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+            return (ulong)x << Program.ShiftBy
+                == (ulong)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_sbyte_to_long(sbyte x)
     {
-        return (long)x << Program.ShiftBy ==
-               (long)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return (long)x << Program.ShiftBy
+            == (long)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 }
 
@@ -270,8 +299,8 @@ public class Tests_ushort
     {
         unchecked
         {
-            return (byte)((byte)x << Program.ShiftBy) ==
-                   (byte)((byte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (byte)((byte)x << Program.ShiftBy)
+                == (byte)((byte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -280,8 +309,8 @@ public class Tests_ushort
     {
         unchecked
         {
-            return (sbyte)((sbyte)x << Program.ShiftBy) ==
-                   (sbyte)((sbyte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (sbyte)((sbyte)x << Program.ShiftBy)
+                == (sbyte)((sbyte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -290,8 +319,8 @@ public class Tests_ushort
     {
         unchecked
         {
-            return (ushort)(x << Program.ShiftBy) ==
-                   (ushort)(Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (ushort)(x << Program.ShiftBy)
+                == (ushort)(Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -300,37 +329,36 @@ public class Tests_ushort
     {
         unchecked
         {
-            return (short)((short)x << Program.ShiftBy) ==
-                   (short)((short)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (short)((short)x << Program.ShiftBy)
+                == (short)((short)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_ushort_to_uint(ushort x)
     {
-        return (uint)x << Program.ShiftBy ==
-               (uint)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return (uint)x << Program.ShiftBy
+            == (uint)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_ushort_to_int(ushort x)
     {
-        return x << Program.ShiftBy ==
-               Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return x << Program.ShiftBy == Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_ushort_to_ulong(ushort x)
     {
-        return (ulong)x << Program.ShiftBy ==
-               (ulong)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return (ulong)x << Program.ShiftBy
+            == (ulong)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_ushort_to_long(ushort x)
     {
-        return (long)x << Program.ShiftBy ==
-               (long)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return (long)x << Program.ShiftBy
+            == (long)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 }
 
@@ -341,8 +369,8 @@ public class Tests_short
     {
         unchecked
         {
-            return (byte)((byte)x << Program.ShiftBy) ==
-                   (byte)((byte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (byte)((byte)x << Program.ShiftBy)
+                == (byte)((byte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -351,8 +379,8 @@ public class Tests_short
     {
         unchecked
         {
-            return (sbyte)((sbyte)x << Program.ShiftBy) ==
-                   (sbyte)((sbyte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (sbyte)((sbyte)x << Program.ShiftBy)
+                == (sbyte)((sbyte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -361,8 +389,8 @@ public class Tests_short
     {
         unchecked
         {
-            return (ushort)((ushort)x << Program.ShiftBy) ==
-                   (ushort)((ushort)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (ushort)((ushort)x << Program.ShiftBy)
+                == (ushort)((ushort)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -371,8 +399,8 @@ public class Tests_short
     {
         unchecked
         {
-            return (short)(x << Program.ShiftBy) ==
-                   (short)(Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (short)(x << Program.ShiftBy)
+                == (short)(Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -381,16 +409,15 @@ public class Tests_short
     {
         unchecked
         {
-            return (uint)x << Program.ShiftBy ==
-                   (uint)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+            return (uint)x << Program.ShiftBy
+                == (uint)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_short_to_int(short x)
     {
-        return x << Program.ShiftBy ==
-               Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return x << Program.ShiftBy == Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -398,16 +425,16 @@ public class Tests_short
     {
         unchecked
         {
-            return (ulong)x << Program.ShiftBy ==
-                   (ulong)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+            return (ulong)x << Program.ShiftBy
+                == (ulong)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_short_to_long(short x)
     {
-        return (long)x << Program.ShiftBy ==
-               (long)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return (long)x << Program.ShiftBy
+            == (long)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 }
 
@@ -418,8 +445,8 @@ public class Tests_uint
     {
         unchecked
         {
-            return (byte)((byte)x << Program.ShiftBy) ==
-                   (byte)((byte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (byte)((byte)x << Program.ShiftBy)
+                == (byte)((byte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -428,8 +455,8 @@ public class Tests_uint
     {
         unchecked
         {
-            return (sbyte)((sbyte)x << Program.ShiftBy) ==
-                   (sbyte)((sbyte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (sbyte)((sbyte)x << Program.ShiftBy)
+                == (sbyte)((sbyte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -438,8 +465,8 @@ public class Tests_uint
     {
         unchecked
         {
-            return (ushort)((ushort)x << Program.ShiftBy) ==
-                   (ushort)((ushort)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (ushort)((ushort)x << Program.ShiftBy)
+                == (ushort)((ushort)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -448,16 +475,15 @@ public class Tests_uint
     {
         unchecked
         {
-            return (short)((short)x << Program.ShiftBy) ==
-                   (short)((short)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (short)((short)x << Program.ShiftBy)
+                == (short)((short)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_uint_to_uint(uint x)
     {
-        return x << Program.ShiftBy ==
-               Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return x << Program.ShiftBy == Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -465,23 +491,23 @@ public class Tests_uint
     {
         unchecked
         {
-            return (int)x << Program.ShiftBy ==
-                   (int)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+            return (int)x << Program.ShiftBy
+                == (int)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_uint_to_ulong(uint x)
     {
-        return (ulong)x << Program.ShiftBy ==
-               (ulong)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return (ulong)x << Program.ShiftBy
+            == (ulong)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_uint_to_long(uint x)
     {
-        return (long)x << Program.ShiftBy ==
-               (long)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return (long)x << Program.ShiftBy
+            == (long)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 }
 
@@ -492,8 +518,8 @@ public class Tests_int
     {
         unchecked
         {
-            return (byte)((byte)x << Program.ShiftBy) ==
-                   (byte)((byte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (byte)((byte)x << Program.ShiftBy)
+                == (byte)((byte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -502,8 +528,8 @@ public class Tests_int
     {
         unchecked
         {
-            return (sbyte)((sbyte)x << Program.ShiftBy) ==
-                   (sbyte)((sbyte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (sbyte)((sbyte)x << Program.ShiftBy)
+                == (sbyte)((sbyte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -512,8 +538,8 @@ public class Tests_int
     {
         unchecked
         {
-            return (ushort)((ushort)x << Program.ShiftBy) ==
-                   (ushort)((ushort)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (ushort)((ushort)x << Program.ShiftBy)
+                == (ushort)((ushort)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -522,8 +548,8 @@ public class Tests_int
     {
         unchecked
         {
-            return (short)((short)x << Program.ShiftBy) ==
-                   (short)((short)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (short)((short)x << Program.ShiftBy)
+                == (short)((short)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -532,16 +558,15 @@ public class Tests_int
     {
         unchecked
         {
-            return (uint)x << Program.ShiftBy ==
-                   (uint)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+            return (uint)x << Program.ShiftBy
+                == (uint)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_int_to_int(int x)
     {
-        return x << Program.ShiftBy ==
-               Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return x << Program.ShiftBy == Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -549,16 +574,16 @@ public class Tests_int
     {
         unchecked
         {
-            return (ulong)x << Program.ShiftBy ==
-                   (ulong)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+            return (ulong)x << Program.ShiftBy
+                == (ulong)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_int_to_long(int x)
     {
-        return (long)x << Program.ShiftBy ==
-               (long)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return (long)x << Program.ShiftBy
+            == (long)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 }
 
@@ -569,8 +594,8 @@ public class Tests_ulong
     {
         unchecked
         {
-            return (byte)((byte)x << Program.ShiftBy) ==
-                   (byte)((byte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (byte)((byte)x << Program.ShiftBy)
+                == (byte)((byte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -579,8 +604,8 @@ public class Tests_ulong
     {
         unchecked
         {
-            return (sbyte)((sbyte)x << Program.ShiftBy) ==
-                   (sbyte)((sbyte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (sbyte)((sbyte)x << Program.ShiftBy)
+                == (sbyte)((sbyte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -589,8 +614,8 @@ public class Tests_ulong
     {
         unchecked
         {
-            return (ushort)((ushort)x << Program.ShiftBy) ==
-                   (ushort)((ushort)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (ushort)((ushort)x << Program.ShiftBy)
+                == (ushort)((ushort)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -599,8 +624,8 @@ public class Tests_ulong
     {
         unchecked
         {
-            return (short)((short)x << Program.ShiftBy) ==
-                   (short)((short)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (short)((short)x << Program.ShiftBy)
+                == (short)((short)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -609,8 +634,8 @@ public class Tests_ulong
     {
         unchecked
         {
-            return (uint)x << Program.ShiftBy ==
-                   (uint)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+            return (uint)x << Program.ShiftBy
+                == (uint)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
         }
     }
 
@@ -619,16 +644,15 @@ public class Tests_ulong
     {
         unchecked
         {
-            return (int)x << Program.ShiftBy ==
-                   (int)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+            return (int)x << Program.ShiftBy
+                == (int)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_ulong_to_ulong(ulong x)
     {
-        return x << Program.ShiftBy ==
-               Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return x << Program.ShiftBy == Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -636,8 +660,8 @@ public class Tests_ulong
     {
         unchecked
         {
-            return (long)x << Program.ShiftBy ==
-                   (long)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+            return (long)x << Program.ShiftBy
+                == (long)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
         }
     }
 }
@@ -649,8 +673,8 @@ public class Tests_long
     {
         unchecked
         {
-            return (byte)((byte)x << Program.ShiftBy) ==
-                   (byte)((byte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (byte)((byte)x << Program.ShiftBy)
+                == (byte)((byte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -659,8 +683,8 @@ public class Tests_long
     {
         unchecked
         {
-            return (sbyte)((sbyte)x << Program.ShiftBy) ==
-                   (sbyte)((sbyte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (sbyte)((sbyte)x << Program.ShiftBy)
+                == (sbyte)((sbyte)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -669,8 +693,8 @@ public class Tests_long
     {
         unchecked
         {
-            return (ushort)((ushort)x << Program.ShiftBy) ==
-                   (ushort)((ushort)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (ushort)((ushort)x << Program.ShiftBy)
+                == (ushort)((ushort)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -679,8 +703,8 @@ public class Tests_long
     {
         unchecked
         {
-            return (short)((short)x << Program.ShiftBy) ==
-                   (short)((short)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
+            return (short)((short)x << Program.ShiftBy)
+                == (short)((short)Program.ToVar(x) << Program.ToVar(Program.ShiftBy));
         }
     }
 
@@ -689,8 +713,8 @@ public class Tests_long
     {
         unchecked
         {
-            return (uint)x << Program.ShiftBy ==
-                   (uint)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+            return (uint)x << Program.ShiftBy
+                == (uint)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
         }
     }
 
@@ -699,8 +723,8 @@ public class Tests_long
     {
         unchecked
         {
-            return (int)x << Program.ShiftBy ==
-                   (int)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+            return (int)x << Program.ShiftBy
+                == (int)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
         }
     }
 
@@ -709,15 +733,14 @@ public class Tests_long
     {
         unchecked
         {
-            return (ulong)x << Program.ShiftBy ==
-                   (ulong)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+            return (ulong)x << Program.ShiftBy
+                == (ulong)Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Test_long_to_long(long x)
     {
-        return x << Program.ShiftBy ==
-               Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
+        return x << Program.ShiftBy == Program.ToVar(x) << Program.ToVar(Program.ShiftBy);
     }
 }

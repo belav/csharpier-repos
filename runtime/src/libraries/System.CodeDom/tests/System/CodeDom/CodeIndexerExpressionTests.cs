@@ -20,13 +20,24 @@ namespace System.CodeDom.Tests
         public static IEnumerable<object[]> Ctor_CodeExpression_ParamsCodeExpression_TestData()
         {
             yield return new object[] { null, new CodeExpression[0] };
-            yield return new object[] { new CodePrimitiveExpression(""), new CodeExpression[] { new CodePrimitiveExpression() } };
-            yield return new object[] { new CodePrimitiveExpression("Hello"), new CodeExpression[] { new CodePrimitiveExpression("Value1") } };
+            yield return new object[]
+            {
+                new CodePrimitiveExpression(""),
+                new CodeExpression[] { new CodePrimitiveExpression() },
+            };
+            yield return new object[]
+            {
+                new CodePrimitiveExpression("Hello"),
+                new CodeExpression[] { new CodePrimitiveExpression("Value1") },
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_CodeExpression_ParamsCodeExpression_TestData))]
-        public void Ctor_CodeExpression_ParamsCodeExpression(CodeExpression targetObject, CodeExpression[] parameters)
+        public void Ctor_CodeExpression_ParamsCodeExpression(
+            CodeExpression targetObject,
+            CodeExpression[] parameters
+        )
         {
             var indexer = new CodeIndexerExpression(targetObject, parameters);
             Assert.Equal(targetObject, indexer.TargetObject);
@@ -36,14 +47,20 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullIndices_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeIndexerExpression(new CodePrimitiveExpression("Hello"), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeIndexerExpression(new CodePrimitiveExpression("Hello"), null)
+            );
         }
 
         [Fact]
         public void Ctor_NullObjectInIndices_ThrowsArgumentNullException()
         {
             CodeExpression[] parameters = new CodeExpression[] { null };
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeIndexerExpression(new CodePrimitiveExpression("Hello"), parameters));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeIndexerExpression(new CodePrimitiveExpression("Hello"), parameters)
+            );
         }
 
         [Theory]
@@ -62,11 +79,17 @@ namespace System.CodeDom.Tests
 
             CodeExpression expression1 = new CodePrimitiveExpression("Value1");
             indexer.Indices.Add(expression1);
-            Assert.Equal(new CodeExpression[] { expression1 }, indexer.Indices.Cast<CodeExpression>());
+            Assert.Equal(
+                new CodeExpression[] { expression1 },
+                indexer.Indices.Cast<CodeExpression>()
+            );
 
             CodeExpression expression2 = new CodePrimitiveExpression("Value2");
             indexer.Indices.Add(expression2);
-            Assert.Equal(new CodeExpression[] { expression1, expression2 }, indexer.Indices.Cast<CodeExpression>());
+            Assert.Equal(
+                new CodeExpression[] { expression1, expression2 },
+                indexer.Indices.Cast<CodeExpression>()
+            );
         }
     }
 }

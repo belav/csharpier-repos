@@ -31,10 +31,11 @@ public class ProjectConstructorParameters : AutoMapperSpecBase
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Source, SourceDto>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Source, SourceDto>();
+        });
 
     protected override void Because_of()
     {

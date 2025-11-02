@@ -17,8 +17,13 @@ namespace System.Activities.Expressions
     {
         public const int FuncCacheCapacity = 500;
 
-        static void PrepareForVariables(MethodBase methodInfo, ParameterExpression objectArray, Collection<ParameterExpression> variables,
-            Collection<Expression> assignVariablesExpressions, Collection<Expression> assignVariablesBackExpressions)
+        static void PrepareForVariables(
+            MethodBase methodInfo,
+            ParameterExpression objectArray,
+            Collection<ParameterExpression> variables,
+            Collection<Expression> assignVariablesExpressions,
+            Collection<Expression> assignVariablesBackExpressions
+        )
         {
             if (methodInfo != null)
             {
@@ -27,31 +32,64 @@ namespace System.Activities.Expressions
                 for (int i = 0; i < parameterInfos.Length; i++)
                 {
                     Type parameterType = parameterInfos[i].ParameterType;
-                    ParameterExpression variable = Expression.Parameter(parameterType.IsByRef ? parameterType.GetElementType() : parameterType, "arg" + i);
+                    ParameterExpression variable = Expression.Parameter(
+                        parameterType.IsByRef ? parameterType.GetElementType() : parameterType,
+                        "arg" + i
+                    );
                     // If variable.Type is NOT a Nullable<T>, we include the call to Convert.ChangeType on the actual parameter.
-                    if (variable.Type.IsValueType && Nullable.GetUnderlyingType(variable.Type) == null)
+                    if (
+                        variable.Type.IsValueType
+                        && Nullable.GetUnderlyingType(variable.Type) == null
+                    )
                     {
-                        assignVariablesExpressions.Add(Expression.Assign(variable,
-                             Expression.Convert(
-                                Expression.Call(typeof(Convert).GetMethod("ChangeType", new Type[] { typeof(object), typeof(Type) }), Expression.ArrayIndex(objectArray, Expression.Constant(i)), Expression.Constant(variable.Type, typeof(Type))),
-                                variable.Type)));
+                        assignVariablesExpressions.Add(
+                            Expression.Assign(
+                                variable,
+                                Expression.Convert(
+                                    Expression.Call(
+                                        typeof(Convert).GetMethod(
+                                            "ChangeType",
+                                            new Type[] { typeof(object), typeof(Type) }
+                                        ),
+                                        Expression.ArrayIndex(objectArray, Expression.Constant(i)),
+                                        Expression.Constant(variable.Type, typeof(Type))
+                                    ),
+                                    variable.Type
+                                )
+                            )
+                        );
                     }
                     else
                     {
-                        assignVariablesExpressions.Add(Expression.Assign(variable,
-                                Expression.Convert(Expression.ArrayIndex(objectArray, Expression.Constant(i)), variable.Type)));
+                        assignVariablesExpressions.Add(
+                            Expression.Assign(
+                                variable,
+                                Expression.Convert(
+                                    Expression.ArrayIndex(objectArray, Expression.Constant(i)),
+                                    variable.Type
+                                )
+                            )
+                        );
                     }
                     if (parameterType.IsByRef)
                     {
                         if (variable.Type.IsValueType)
                         {
-                            assignVariablesBackExpressions.Add(Expression.Assign(Expression.ArrayAccess(objectArray, Expression.Constant(i)),
-                                Expression.Convert(variable, typeof(object))));
+                            assignVariablesBackExpressions.Add(
+                                Expression.Assign(
+                                    Expression.ArrayAccess(objectArray, Expression.Constant(i)),
+                                    Expression.Convert(variable, typeof(object))
+                                )
+                            );
                         }
                         else
                         {
-                            assignVariablesBackExpressions.Add(Expression.Assign(Expression.ArrayAccess(objectArray, Expression.Constant(i)),
-                                variable));
+                            assignVariablesBackExpressions.Add(
+                                Expression.Assign(
+                                    Expression.ArrayAccess(objectArray, Expression.Constant(i)),
+                                    variable
+                                )
+                            );
                         }
                     }
                     variables.Add(variable);
@@ -59,12 +97,20 @@ namespace System.Activities.Expressions
             }
         }
 
-        static MethodCallExpression PrepareForCallExpression(MethodInfo methodInfo, ParameterExpression targetInstance, Collection<ParameterExpression> variables)
+        static MethodCallExpression PrepareForCallExpression(
+            MethodInfo methodInfo,
+            ParameterExpression targetInstance,
+            Collection<ParameterExpression> variables
+        )
         {
             MethodCallExpression callExpression;
             if (!methodInfo.IsStatic)
             {
-                callExpression = Expression.Call(Expression.Convert(targetInstance, methodInfo.DeclaringType), methodInfo, variables);
+                callExpression = Expression.Call(
+                    Expression.Convert(targetInstance, methodInfo.DeclaringType),
+                    methodInfo,
+                    variables
+                );
             }
             else
             {
@@ -73,8 +119,13 @@ namespace System.Activities.Expressions
             return callExpression;
         }
 
-        static MethodCallExpression PrepareForCallExpression(MethodInfo methodInfo, ParameterExpression targetInstance,
-            Collection<ParameterExpression> variables, out ParameterExpression tempInstance, out Expression assignTempInstanceExpression)
+        static MethodCallExpression PrepareForCallExpression(
+            MethodInfo methodInfo,
+            ParameterExpression targetInstance,
+            Collection<ParameterExpression> variables,
+            out ParameterExpression tempInstance,
+            out Expression assignTempInstanceExpression
+        )
         {
             MethodCallExpression callExpression;
             tempInstance = null;
@@ -84,13 +135,19 @@ namespace System.Activities.Expressions
                 if (methodInfo.DeclaringType.IsValueType)
                 {
                     tempInstance = Expression.Parameter(methodInfo.DeclaringType, "tempInstance");
-                    assignTempInstanceExpression = Expression.Assign(tempInstance, Expression.Convert(targetInstance, methodInfo.DeclaringType));
-                    callExpression = Expression.Call(tempInstance,
-                        methodInfo, variables);
+                    assignTempInstanceExpression = Expression.Assign(
+                        tempInstance,
+                        Expression.Convert(targetInstance, methodInfo.DeclaringType)
+                    );
+                    callExpression = Expression.Call(tempInstance, methodInfo, variables);
                 }
                 else
                 {
-                    callExpression = Expression.Call(Expression.Convert(targetInstance, methodInfo.DeclaringType), methodInfo, variables);
+                    callExpression = Expression.Call(
+                        Expression.Convert(targetInstance, methodInfo.DeclaringType),
+                        methodInfo,
+                        variables
+                    );
                 }
             }
             else
@@ -100,8 +157,15 @@ namespace System.Activities.Expressions
             return callExpression;
         }
 
-        static Expression ComposeBlockExpression(Collection<ParameterExpression> variables, Collection<Expression> assignVariables, Expression callExpression,
-            Collection<Expression> assignVariablesBack, Type returnType, bool isConstructor, bool valueTypeReference)
+        static Expression ComposeBlockExpression(
+            Collection<ParameterExpression> variables,
+            Collection<Expression> assignVariables,
+            Expression callExpression,
+            Collection<Expression> assignVariablesBack,
+            Type returnType,
+            bool isConstructor,
+            bool valueTypeReference
+        )
         {
             Collection<Expression> expressions = new Collection<Expression>();
             foreach (Expression expression in assignVariables)
@@ -109,15 +173,20 @@ namespace System.Activities.Expressions
                 expressions.Add(expression);
             }
 
-            ParameterExpression result = Expression.Parameter(isConstructor ? returnType : typeof(object), "result");
+            ParameterExpression result = Expression.Parameter(
+                isConstructor ? returnType : typeof(object),
+                "result"
+            );
             variables.Add(result);
             if (returnType != typeof(void))
             {
                 Expression resultAssign = null;
                 if (!isConstructor && returnType.IsValueType)
                 {
-                    resultAssign = Expression.Assign(result,
-                        Expression.Convert(callExpression, typeof(object)));
+                    resultAssign = Expression.Assign(
+                        result,
+                        Expression.Convert(callExpression, typeof(object))
+                    );
                 }
                 else
                 {
@@ -143,13 +212,25 @@ namespace System.Activities.Expressions
             return block;
         }
 
-        static Expression ComposeLinqExpression(MethodInfo methodInfo, ParameterExpression targetInstance, ParameterExpression objectArray, Type returnType, bool valueTypeReference)
+        static Expression ComposeLinqExpression(
+            MethodInfo methodInfo,
+            ParameterExpression targetInstance,
+            ParameterExpression objectArray,
+            Type returnType,
+            bool valueTypeReference
+        )
         {
             Collection<Expression> assignVariablesExpressions = new Collection<Expression>();
             Collection<Expression> assignVariablesBackExpressions = new Collection<Expression>();
             Collection<ParameterExpression> variables = new Collection<ParameterExpression>();
 
-            PrepareForVariables(methodInfo, objectArray, variables, assignVariablesExpressions, assignVariablesBackExpressions);
+            PrepareForVariables(
+                methodInfo,
+                objectArray,
+                variables,
+                assignVariablesExpressions,
+                assignVariablesBackExpressions
+            );
 
             ParameterExpression tempInstance = null;
             Expression assignTempInstanceExpression = null;
@@ -157,28 +238,66 @@ namespace System.Activities.Expressions
 
             if (!methodInfo.IsStatic && methodInfo.DeclaringType.IsValueType && valueTypeReference)
             {
-                expression = PrepareForCallExpression((MethodInfo)methodInfo, targetInstance, variables, out tempInstance, out assignTempInstanceExpression);
+                expression = PrepareForCallExpression(
+                    (MethodInfo)methodInfo,
+                    targetInstance,
+                    variables,
+                    out tempInstance,
+                    out assignTempInstanceExpression
+                );
                 variables.Add(tempInstance);
                 assignVariablesExpressions.Add(assignTempInstanceExpression);
-                assignVariablesBackExpressions.Add(Expression.Assign(targetInstance, Expression.Convert(tempInstance, typeof(object))));
-                return ComposeBlockExpression(variables, assignVariablesExpressions, expression, assignVariablesBackExpressions, returnType, false, true);
+                assignVariablesBackExpressions.Add(
+                    Expression.Assign(
+                        targetInstance,
+                        Expression.Convert(tempInstance, typeof(object))
+                    )
+                );
+                return ComposeBlockExpression(
+                    variables,
+                    assignVariablesExpressions,
+                    expression,
+                    assignVariablesBackExpressions,
+                    returnType,
+                    false,
+                    true
+                );
             }
             else
             {
-                expression = PrepareForCallExpression((MethodInfo)methodInfo, targetInstance, variables);
-                return ComposeBlockExpression(variables, assignVariablesExpressions, expression, assignVariablesBackExpressions, returnType, false, false);
+                expression = PrepareForCallExpression(
+                    (MethodInfo)methodInfo,
+                    targetInstance,
+                    variables
+                );
+                return ComposeBlockExpression(
+                    variables,
+                    assignVariablesExpressions,
+                    expression,
+                    assignVariablesBackExpressions,
+                    returnType,
+                    false,
+                    false
+                );
             }
-
-
         }
 
-        static Expression ComposeLinqExpression<TResult>(ConstructorInfo constructorInfo, ParameterExpression objectArray)
+        static Expression ComposeLinqExpression<TResult>(
+            ConstructorInfo constructorInfo,
+            ParameterExpression objectArray
+        )
         {
             Collection<Expression> assignVariablesExpressions = new Collection<Expression>();
             Collection<Expression> assignVariablesBackExpressions = new Collection<Expression>();
             Collection<ParameterExpression> variables = new Collection<ParameterExpression>();
 
-            PrepareForVariables(constructorInfo, objectArray, variables, assignVariablesExpressions, assignVariablesBackExpressions);
+            PrepareForVariables(
+                constructorInfo,
+                objectArray,
+                variables,
+                assignVariablesExpressions,
+                assignVariablesBackExpressions
+            );
 
             NewExpression newExpression;
             if (constructorInfo != null)
@@ -189,17 +308,43 @@ namespace System.Activities.Expressions
             {
                 newExpression = Expression.New(typeof(TResult));
             }
-            return ComposeBlockExpression(variables, assignVariablesExpressions, newExpression, assignVariablesBackExpressions, typeof(TResult), true, false);
+            return ComposeBlockExpression(
+                variables,
+                assignVariablesExpressions,
+                newExpression,
+                assignVariablesBackExpressions,
+                typeof(TResult),
+                true,
+                false
+            );
         }
 
-        static Func<object, object[], object> GetFunc(CodeActivityMetadata metadata, MethodInfo methodInfo, bool valueTypeReference = false)
+        static Func<object, object[], object> GetFunc(
+            CodeActivityMetadata metadata,
+            MethodInfo methodInfo,
+            bool valueTypeReference = false
+        )
         {
             try
             {
-                ParameterExpression targetInstance = Expression.Parameter(typeof(object), "targetInstance");
-                ParameterExpression objectArray = Expression.Parameter(typeof(object[]), "arguments");
-                Expression block = ComposeLinqExpression(methodInfo, targetInstance, objectArray, methodInfo.ReturnType, valueTypeReference);
-                Expression<Func<object, object[], object>> lambdaExpression = Expression.Lambda<Func<object, object[], object>>(block, targetInstance, objectArray);
+                ParameterExpression targetInstance = Expression.Parameter(
+                    typeof(object),
+                    "targetInstance"
+                );
+                ParameterExpression objectArray = Expression.Parameter(
+                    typeof(object[]),
+                    "arguments"
+                );
+                Expression block = ComposeLinqExpression(
+                    methodInfo,
+                    targetInstance,
+                    objectArray,
+                    methodInfo.ReturnType,
+                    valueTypeReference
+                );
+                Expression<Func<object, object[], object>> lambdaExpression = Expression.Lambda<
+                    Func<object, object[], object>
+                >(block, targetInstance, objectArray);
                 return lambdaExpression.Compile();
             }
             catch (Exception e)
@@ -211,16 +356,23 @@ namespace System.Activities.Expressions
                 metadata.AddValidationError(e.Message);
                 return null;
             }
-
         }
 
-        static Func<object[], TResult> GetFunc<TResult>(CodeActivityMetadata metadata, ConstructorInfo constructorInfo)
+        static Func<object[], TResult> GetFunc<TResult>(
+            CodeActivityMetadata metadata,
+            ConstructorInfo constructorInfo
+        )
         {
             try
             {
-                ParameterExpression objectArray = Expression.Parameter(typeof(object[]), "arguments");
+                ParameterExpression objectArray = Expression.Parameter(
+                    typeof(object[]),
+                    "arguments"
+                );
                 Expression block = ComposeLinqExpression<TResult>(constructorInfo, objectArray);
-                Expression<Func<object[], TResult>> lambdaExpression = Expression.Lambda<Func<object[], TResult>>(block, objectArray);
+                Expression<Func<object[], TResult>> lambdaExpression = Expression.Lambda<
+                    Func<object[], TResult>
+                >(block, objectArray);
                 return lambdaExpression.Compile();
             }
             catch (Exception e)
@@ -232,7 +384,6 @@ namespace System.Activities.Expressions
                 metadata.AddValidationError(e.Message);
                 return null;
             }
-
         }
 
         internal static bool NeedRetrieve(MethodBase newMethod, MethodBase oldMethod, Delegate func)
@@ -248,8 +399,13 @@ namespace System.Activities.Expressions
             return true;
         }
 
-        internal static Func<object, object[], object> GetFunc(CodeActivityMetadata metadata, MethodInfo methodInfo, 
-            MruCache<MethodInfo, Func<object, object[], object>> cache, ReaderWriterLockSlim locker, bool valueTypeReference = false)
+        internal static Func<object, object[], object> GetFunc(
+            CodeActivityMetadata metadata,
+            MethodInfo methodInfo,
+            MruCache<MethodInfo, Func<object, object[], object>> cache,
+            ReaderWriterLockSlim locker,
+            bool valueTypeReference = false
+        )
         {
             Func<object, object[], object> func = null;
             locker.EnterWriteLock();
@@ -286,8 +442,12 @@ namespace System.Activities.Expressions
             return func;
         }
 
-        internal static Func<object[], TResult> GetFunc<TResult>(CodeActivityMetadata metadata, ConstructorInfo constructorInfo, 
-            MruCache<ConstructorInfo, Func<object[], TResult>> cache, ReaderWriterLockSlim locker)
+        internal static Func<object[], TResult> GetFunc<TResult>(
+            CodeActivityMetadata metadata,
+            ConstructorInfo constructorInfo,
+            MruCache<ConstructorInfo, Func<object[], TResult>> cache,
+            ReaderWriterLockSlim locker
+        )
         {
             Func<object[], TResult> func = null;
             if (constructorInfo != null)

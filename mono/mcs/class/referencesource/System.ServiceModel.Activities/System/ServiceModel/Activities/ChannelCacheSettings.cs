@@ -13,9 +13,12 @@ namespace System.ServiceModel.Activities
         TimeSpan idleTimeout;
         TimeSpan leaseTimeout;
         int maxItemsInCache;
-        
-        internal static ChannelCacheSettings EmptyCacheSettings = new ChannelCacheSettings { MaxItemsInCache = 0 };
-        
+
+        internal static ChannelCacheSettings EmptyCacheSettings = new ChannelCacheSettings
+        {
+            MaxItemsInCache = 0,
+        };
+
         public ChannelCacheSettings()
         {
             this.idleTimeout = ChannelCacheDefaults.DefaultIdleTimeout;
@@ -26,18 +29,18 @@ namespace System.ServiceModel.Activities
         [Fx.Tag.KnownXamlExternal]
         public TimeSpan IdleTimeout
         {
-            get
-            {
-                return this.idleTimeout;
-            }
-
+            get { return this.idleTimeout; }
             set
             {
                 TimeoutHelper.ThrowIfNegativeArgument(value);
-                
+
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("IdleTimeout", value, SR.ValueTooLarge("IdleTimeout"));
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "IdleTimeout",
+                        value,
+                        SR.ValueTooLarge("IdleTimeout")
+                    );
                 }
 
                 this.idleTimeout = value;
@@ -47,17 +50,18 @@ namespace System.ServiceModel.Activities
         [Fx.Tag.KnownXamlExternal]
         public TimeSpan LeaseTimeout
         {
-            get
-            {
-                return leaseTimeout;
-            }
+            get { return leaseTimeout; }
             set
             {
                 TimeoutHelper.ThrowIfNegativeArgument(value);
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("LeaseTimeout", value, SR.ValueTooLarge("LeaseTimeout"));
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "LeaseTimeout",
+                        value,
+                        SR.ValueTooLarge("LeaseTimeout")
+                    );
                 }
 
                 this.leaseTimeout = value;
@@ -66,15 +70,16 @@ namespace System.ServiceModel.Activities
 
         public int MaxItemsInCache
         {
-            get
-            {
-                return this.maxItemsInCache;
-            }
+            get { return this.maxItemsInCache; }
             set
             {
                 if (value < 0)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("MaxItemsInCache", value, SR.ValueCannotBeNegative("MaxItemsInCache"));
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "MaxItemsInCache",
+                        value,
+                        SR.ValueCannotBeNegative("MaxItemsInCache")
+                    );
                 }
 
                 this.maxItemsInCache = value;

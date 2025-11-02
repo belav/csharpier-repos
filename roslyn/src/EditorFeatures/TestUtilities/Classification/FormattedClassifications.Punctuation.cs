@@ -14,8 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
         public static class Punctuation
         {
             [DebuggerStepThrough]
-            private static FormattedClassification New(string text)
-               => new FormattedClassification(text, ClassificationTypeNames.Punctuation);
+            private static FormattedClassification New(string text) =>
+                new FormattedClassification(text, ClassificationTypeNames.Punctuation);
 
             public static FormattedClassification OpenCurly { get; } = New("{");
             public static FormattedClassification CloseCurly { get; } = New("}");

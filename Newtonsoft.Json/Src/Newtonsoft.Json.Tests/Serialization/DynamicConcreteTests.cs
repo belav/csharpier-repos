@@ -57,7 +57,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 // create a dynamic mock object for interfaces or abstract classes
                 if (contract.CreatedType.IsInterface || contract.CreatedType.IsAbstract)
                 {
-                    contract.DefaultCreator = () => DynamicConcrete.GetInstanceFor(contract.CreatedType);
+                    contract.DefaultCreator = () =>
+                        DynamicConcrete.GetInstanceFor(contract.CreatedType);
                 }
 
                 return contract;
@@ -69,10 +70,13 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             string json = @"{Name:""Name!""}";
 
-            var c = JsonConvert.DeserializeObject<IInterfaceWithNoConcrete>(json, new JsonSerializerSettings
-            {
-                ContractResolver = new DynamicConcreteContractResolver()
-            });
+            var c = JsonConvert.DeserializeObject<IInterfaceWithNoConcrete>(
+                json,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new DynamicConcreteContractResolver(),
+                }
+            );
 
             Assert.AreEqual("Name!", c.Name);
         }
@@ -82,10 +86,13 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             string json = @"{Name:""Name!"", Game:""Same""}";
 
-            var c = JsonConvert.DeserializeObject<AbstractWithNoConcrete>(json, new JsonSerializerSettings
-            {
-                ContractResolver = new DynamicConcreteContractResolver()
-            });
+            var c = JsonConvert.DeserializeObject<AbstractWithNoConcrete>(
+                json,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new DynamicConcreteContractResolver(),
+                }
+            );
 
             Assert.AreEqual("Name!", c.Name);
             Assert.AreEqual("Same", c.Game);
@@ -96,10 +103,13 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             string json = @"{Name:""Name!""}";
 
-            var c = JsonConvert.DeserializeObject<IInterfaceWithNoConcrete>(json, new JsonSerializerSettings
-            {
-                ContractResolver = new DynamicConcreteContractResolver()
-            });
+            var c = JsonConvert.DeserializeObject<IInterfaceWithNoConcrete>(
+                json,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new DynamicConcreteContractResolver(),
+                }
+            );
 
             c.FuncWithRefType(10, null);
             c.FuncWithValType_1();
@@ -146,7 +156,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             lock (DynamicAssembly)
             {
-                var constructedType = DynamicAssembly.GetType(ProxyName(targetType)) ?? GetConstructedType(targetType);
+                var constructedType =
+                    DynamicAssembly.GetType(ProxyName(targetType))
+                    ?? GetConstructedType(targetType);
                 var instance = Activator.CreateInstance(constructedType);
                 return instance;
             }
@@ -160,18 +172,25 @@ namespace Newtonsoft.Json.Tests.Serialization
         static DynamicConcrete()
         {
             var assemblyName = new AssemblyName("DynImpl");
-            DynamicAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
+            DynamicAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                assemblyName,
+                AssemblyBuilderAccess.RunAndSave
+            );
             ModuleBuilder = DynamicAssembly.DefineDynamicModule("DynImplModule");
         }
 
         static Type GetConstructedType(Type targetType)
         {
-            var typeBuilder = ModuleBuilder.DefineType(targetType.Name + "Proxy", TypeAttributes.Public);
+            var typeBuilder = ModuleBuilder.DefineType(
+                targetType.Name + "Proxy",
+                TypeAttributes.Public
+            );
 
             var ctorBuilder = typeBuilder.DefineConstructor(
                 MethodAttributes.Public,
                 CallingConventions.Standard,
-                new Type[] { });
+                new Type[] { }
+            );
             var ilGenerator = ctorBuilder.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ret);
 
@@ -227,7 +246,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 CallingConventions.HasThis,
                 methodInfo.ReturnType,
                 args
-                );
+            );
 
             var methodILGen = methodBuilder.GetILGenerator();
             if (methodInfo.ReturnType == typeof(void))
@@ -242,8 +261,10 @@ namespace Newtonsoft.Json.Tests.Serialization
                 }
                 else if (methodInfo.ReturnType.IsValueType || methodInfo.ReturnType.IsEnum)
                 {
-                    var getMethod = typeof(Activator).GetMethod("CreateInstance",
-                        new[] { typeof(Type) });
+                    var getMethod = typeof(Activator).GetMethod(
+                        "CreateInstance",
+                        new[] { typeof(Type) }
+                    );
                     var lb = methodILGen.DeclareLocal(methodInfo.ReturnType);
                     if (lb.LocalType != null)
                     {
@@ -270,12 +291,22 @@ namespace Newtonsoft.Json.Tests.Serialization
             // Backing Field
             var propertyName = methodInfo.Name.Replace("get_", "");
             var propertyType = methodInfo.ReturnType;
-            var backingField = typeBuilder.DefineField("_" + propertyName, propertyType, FieldAttributes.Private);
+            var backingField = typeBuilder.DefineField(
+                "_" + propertyName,
+                propertyType,
+                FieldAttributes.Private
+            );
 
             //Getter
-            var backingGet = typeBuilder.DefineMethod("get_" + propertyName, MethodAttributes.Public |
-                                                                             MethodAttributes.SpecialName | MethodAttributes.Virtual |
-                                                                             MethodAttributes.HideBySig, propertyType, Type.EmptyTypes);
+            var backingGet = typeBuilder.DefineMethod(
+                "get_" + propertyName,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.Virtual
+                    | MethodAttributes.HideBySig,
+                propertyType,
+                Type.EmptyTypes
+            );
             var getIl = backingGet.GetILGenerator();
 
             getIl.Emit(OpCodes.Ldarg_0);
@@ -283,9 +314,15 @@ namespace Newtonsoft.Json.Tests.Serialization
             getIl.Emit(OpCodes.Ret);
 
             //Setter
-            var backingSet = typeBuilder.DefineMethod("set_" + propertyName, MethodAttributes.Public |
-                                                                             MethodAttributes.SpecialName | MethodAttributes.Virtual |
-                                                                             MethodAttributes.HideBySig, null, new[] { propertyType });
+            var backingSet = typeBuilder.DefineMethod(
+                "set_" + propertyName,
+                MethodAttributes.Public
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.Virtual
+                    | MethodAttributes.HideBySig,
+                null,
+                new[] { propertyType }
+            );
 
             var setIl = backingSet.GetILGenerator();
 
@@ -295,7 +332,12 @@ namespace Newtonsoft.Json.Tests.Serialization
             setIl.Emit(OpCodes.Ret);
 
             // Property
-            var propertyBuilder = typeBuilder.DefineProperty(propertyName, PropertyAttributes.None, propertyType, null);
+            var propertyBuilder = typeBuilder.DefineProperty(
+                propertyName,
+                PropertyAttributes.None,
+                propertyType,
+                null
+            );
             propertyBuilder.SetGetMethod(backingGet);
             propertyBuilder.SetSetMethod(backingSet);
         }

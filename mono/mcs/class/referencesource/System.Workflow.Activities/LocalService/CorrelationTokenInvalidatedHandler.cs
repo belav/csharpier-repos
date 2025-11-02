@@ -1,7 +1,7 @@
 using System;
-using System.Diagnostics;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Workflow.ComponentModel;
@@ -11,7 +11,8 @@ using System.Workflow.Runtime.Hosting;
 namespace System.Workflow.Activities
 {
     [Serializable]
-    internal sealed class CorrelationTokenInvalidatedHandler : IActivityEventListener<CorrelationTokenEventArgs>
+    internal sealed class CorrelationTokenInvalidatedHandler
+        : IActivityEventListener<CorrelationTokenEventArgs>
     {
         IActivityEventListener<QueueEventArgs> eventHandler;
         EventQueueName queueName;
@@ -22,7 +23,12 @@ namespace System.Workflow.Activities
         Type interfaceType;
         string followerOperation;
 
-        internal CorrelationTokenInvalidatedHandler(Type interfaceType, string operation, IActivityEventListener<QueueEventArgs> eventHandler, Guid instanceId)
+        internal CorrelationTokenInvalidatedHandler(
+            Type interfaceType,
+            string operation,
+            IActivityEventListener<QueueEventArgs> eventHandler,
+            Guid instanceId
+        )
         {
             this.eventHandler = eventHandler;
             this.interfaceType = interfaceType;
@@ -31,7 +37,10 @@ namespace System.Workflow.Activities
         }
 
         #region IActivityEventListener<CorrelationTokenEventArgs> Members
-        void IActivityEventListener<CorrelationTokenEventArgs>.OnEvent(object sender, CorrelationTokenEventArgs dataChangeEventArgs)
+        void IActivityEventListener<CorrelationTokenEventArgs>.OnEvent(
+            object sender,
+            CorrelationTokenEventArgs dataChangeEventArgs
+        )
         {
             if (sender == null)
                 throw new ArgumentException("sender");
@@ -41,7 +50,9 @@ namespace System.Workflow.Activities
             ActivityExecutionContext context = sender as ActivityExecutionContext;
             Activity activity = context.Activity;
 
-            ICollection<CorrelationProperty> correlationValues = dataChangeEventArgs.CorrelationToken.Properties;
+            ICollection<CorrelationProperty> correlationValues = dataChangeEventArgs
+                .CorrelationToken
+                .Properties;
             if (dataChangeEventArgs.IsInitializing)
             {
                 CreateSubscription(this.instanceId, context, correlationValues);
@@ -50,26 +61,47 @@ namespace System.Workflow.Activities
 
             if (queueName != null)
             {
-                if (!CorrelationResolver.IsInitializingMember(queueName.InterfaceType, queueName.MethodName,
-                    correlationValues == null ? null : new object[] { correlationValues }))
+                if (
+                    !CorrelationResolver.IsInitializingMember(
+                        queueName.InterfaceType,
+                        queueName.MethodName,
+                        correlationValues == null ? null : new object[] { correlationValues }
+                    )
+                )
                 {
                     DeleteSubscription(context);
                 }
             }
 
-            dataChangeEventArgs.CorrelationToken.UnsubscribeFromCorrelationTokenInitializedEvent(activity, this);
+            dataChangeEventArgs.CorrelationToken.UnsubscribeFromCorrelationTokenInitializedEvent(
+                activity,
+                this
+            );
         }
         #endregion
 
-        private void CreateSubscription(Guid instanceId, ActivityExecutionContext context, ICollection<CorrelationProperty> correlationValues)
+        private void CreateSubscription(
+            Guid instanceId,
+            ActivityExecutionContext context,
+            ICollection<CorrelationProperty> correlationValues
+        )
         {
             WorkflowQueuingService queueSvcs = context.GetService<WorkflowQueuingService>();
-            EventQueueName queueId = new EventQueueName(this.interfaceType, this.followerOperation, correlationValues);
+            EventQueueName queueId = new EventQueueName(
+                this.interfaceType,
+                this.followerOperation,
+                correlationValues
+            );
 
             WorkflowQueue workflowQueue = null;
             if (!queueSvcs.Exists(queueId))
             {
-                WorkflowActivityTrace.Activity.TraceEvent(TraceEventType.Information, 0, "CorrelationTokenInvalidatedHandler: creating q {0} ", queueId.GetHashCode());
+                WorkflowActivityTrace.Activity.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "CorrelationTokenInvalidatedHandler: creating q {0} ",
+                    queueId.GetHashCode()
+                );
                 workflowQueue = queueSvcs.CreateWorkflowQueue(queueId, true);
                 queueCreator = true;
             }
@@ -83,9 +115,13 @@ namespace System.Workflow.Activities
                 workflowQueue.RegisterForQueueItemAvailable(this.eventHandler);
             }
 
-            WorkflowSubscriptionService subscriptionService = (WorkflowSubscriptionService)context.GetService(typeof(WorkflowSubscriptionService));
+            WorkflowSubscriptionService subscriptionService = (WorkflowSubscriptionService)
+                context.GetService(typeof(WorkflowSubscriptionService));
 
-            MessageEventSubscription subscription = new MessageEventSubscription(queueId, instanceId);
+            MessageEventSubscription subscription = new MessageEventSubscription(
+                queueId,
+                instanceId
+            );
             this.queueName = queueId;
             this.subscriptionId = subscription.SubscriptionId;
             subscription.InterfaceType = this.interfaceType;
@@ -122,12 +158,18 @@ namespace System.Workflow.Activities
             if (this.eventHandler != null)
                 return;
 
-            WorkflowSubscriptionService subscriptionService = context.GetService<WorkflowSubscriptionService>();
+            WorkflowSubscriptionService subscriptionService =
+                context.GetService<WorkflowSubscriptionService>();
             if (subscriptionService != null)
                 subscriptionService.DeleteSubscription(this.subscriptionId);
 
-            WorkflowActivityTrace.Activity.TraceEvent(TraceEventType.Information, 0, "CorrelationTokenInvalidatedHandler subscription deleted SubId {0} QueueId {1}", this.subscriptionId, this.queueName);
+            WorkflowActivityTrace.Activity.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "CorrelationTokenInvalidatedHandler subscription deleted SubId {0} QueueId {1}",
+                this.subscriptionId,
+                this.queueName
+            );
         }
-
     }
 }

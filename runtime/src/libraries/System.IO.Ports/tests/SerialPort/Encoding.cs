@@ -19,21 +19,32 @@ namespace System.IO.Ports.Tests
         //The maximum time we will wait for all of encoded bytes to be received
         private const int MAX_WAIT_TIME = 1250;
 
-        private enum ThrowAt { Set, Open };
+        private enum ThrowAt
+        {
+            Set,
+            Open,
+        };
 
         #region Test Cases
 
         [ConditionalFact(nameof(HasNullModem))]
         public void Encoding_Default()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default Encoding");
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
                 com1.Open();
 
                 serPortProp.VerifyPropertiesAndPrint(com1);
@@ -146,7 +157,11 @@ namespace System.IO.Ports.Tests
         #region Verification for Test Cases
         private void VerifyException(Encoding encoding, ThrowAt throwAt, Type expectedException)
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 VerifyExceptionAtOpen(com, encoding, throwAt, expectedException);
 
@@ -157,13 +172,21 @@ namespace System.IO.Ports.Tests
             }
         }
 
-        private void VerifyExceptionAtOpen(SerialPort com, Encoding encoding, ThrowAt throwAt, Type expectedException)
+        private void VerifyExceptionAtOpen(
+            SerialPort com,
+            Encoding encoding,
+            ThrowAt throwAt,
+            Type expectedException
+        )
         {
             Encoding origEncoding = com.Encoding;
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             serPortProp.SetAllPropertiesToDefaults();
-            serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+            serPortProp.SetProperty(
+                "PortName",
+                TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+            );
 
             if (ThrowAt.Open == throwAt)
                 serPortProp.SetProperty("Encoding", encoding);
@@ -181,18 +204,28 @@ namespace System.IO.Ports.Tests
 
                 if (null != expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() to throw {0} and nothing was thrown", expectedException);
+                    Fail(
+                        "ERROR!!! Expected Open() to throw {0} and nothing was thrown",
+                        expectedException
+                    );
                 }
             }
             catch (Exception e)
             {
                 if (null == expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() NOT to throw an exception and {0} was thrown", e.GetType());
+                    Fail(
+                        "ERROR!!! Expected Open() NOT to throw an exception and {0} was thrown",
+                        e.GetType()
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() throw {0} and {1} was thrown", expectedException, e.GetType());
+                    Fail(
+                        "ERROR!!! Expected Open() throw {0} and {1} was thrown",
+                        expectedException,
+                        e.GetType()
+                    );
                 }
             }
 
@@ -200,13 +233,20 @@ namespace System.IO.Ports.Tests
             com.Encoding = origEncoding;
         }
 
-        private void VerifyExceptionAfterOpen(SerialPort com, Encoding encoding, Type expectedException)
+        private void VerifyExceptionAfterOpen(
+            SerialPort com,
+            Encoding encoding,
+            Type expectedException
+        )
         {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             com.Open();
             serPortProp.SetAllPropertiesToOpenDefaults();
-            serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+            serPortProp.SetProperty(
+                "PortName",
+                TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+            );
 
             try
             {
@@ -214,33 +254,49 @@ namespace System.IO.Ports.Tests
 
                 if (null != expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the Encoding after Open() to throw {0} and nothing was thrown", expectedException);
+                    Fail(
+                        "ERROR!!! Expected setting the Encoding after Open() to throw {0} and nothing was thrown",
+                        expectedException
+                    );
                 }
             }
             catch (Exception e)
             {
                 if (null == expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the Encoding after Open() NOT to throw an exception and {0} was thrown", e.GetType());
+                    Fail(
+                        "ERROR!!! Expected setting the Encoding after Open() NOT to throw an exception and {0} was thrown",
+                        e.GetType()
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the Encoding after Open() throw {0} and {1} was thrown", expectedException, e.GetType());
+                    Fail(
+                        "ERROR!!! Expected setting the Encoding after Open() throw {0} and {1} was thrown",
+                        expectedException,
+                        e.GetType()
+                    );
                 }
             }
 
             serPortProp.VerifyPropertiesAndPrint(com);
         }
 
-
         private void VerifyEncodingBeforeOpen(Encoding encoding)
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
                 com1.Encoding = encoding;
                 com1.Open();
@@ -254,12 +310,19 @@ namespace System.IO.Ports.Tests
 
         private void VerifyEncodingAfterOpen(Encoding encoding)
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
                 com1.Open();
                 com1.Encoding = encoding;
@@ -273,7 +336,11 @@ namespace System.IO.Ports.Tests
 
         private void VerifyEncoding(SerialPort com1)
         {
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 int origReadTimeout = com1.ReadTimeout;
                 char[] xmitChars = TCSupport.GetRandomChars(DEFAULT_CHAR_ARRAY_SIZE, true);
@@ -301,7 +368,11 @@ namespace System.IO.Ports.Tests
 
                     if (MAX_WAIT_TIME < waitTime)
                     {
-                        Fail("ERROR!!! Expected BytesToRead={0} actual={1}", xmitBytes.Length, com1.BytesToRead);
+                        Fail(
+                            "ERROR!!! Expected BytesToRead={0} actual={1}",
+                            xmitBytes.Length,
+                            com1.BytesToRead
+                        );
                     }
                 }
 

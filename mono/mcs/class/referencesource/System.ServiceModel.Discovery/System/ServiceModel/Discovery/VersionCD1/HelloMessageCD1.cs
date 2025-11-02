@@ -9,31 +9,34 @@ namespace System.ServiceModel.Discovery.VersionCD1
     [MessageContract(IsWrapped = false)]
     class HelloMessageCD1
     {
-        private HelloMessageCD1()
-        {
-        }
+        private HelloMessageCD1() { }
 
-        [MessageHeader(Name = ProtocolStrings.SchemaNames.AppSequenceElement, Namespace = ProtocolStrings.VersionCD1.Namespace)]
-        public DiscoveryMessageSequenceCD1 MessageSequence
-        {
-            get;
-            private set;
-        }
+        [MessageHeader(
+            Name = ProtocolStrings.SchemaNames.AppSequenceElement,
+            Namespace = ProtocolStrings.VersionCD1.Namespace
+        )]
+        public DiscoveryMessageSequenceCD1 MessageSequence { get; private set; }
 
-        [MessageBodyMember(Name = ProtocolStrings.SchemaNames.HelloElement, Namespace = ProtocolStrings.VersionCD1.Namespace)]
-        public EndpointDiscoveryMetadataCD1 Hello
-        {
-            get;
-            private set;
-        }
+        [MessageBodyMember(
+            Name = ProtocolStrings.SchemaNames.HelloElement,
+            Namespace = ProtocolStrings.VersionCD1.Namespace
+        )]
+        public EndpointDiscoveryMetadataCD1 Hello { get; private set; }
 
-        public static HelloMessageCD1 Create(DiscoveryMessageSequence messageSequence, EndpointDiscoveryMetadata endpointDiscoveryMetadata)
+        public static HelloMessageCD1 Create(
+            DiscoveryMessageSequence messageSequence,
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata
+        )
         {
             return new HelloMessageCD1()
-                {
-                    MessageSequence = DiscoveryMessageSequenceCD1.FromDiscoveryMessageSequence(messageSequence),
-                    Hello = EndpointDiscoveryMetadataCD1.FromEndpointDiscoveryMetadata(endpointDiscoveryMetadata)
-                };
+            {
+                MessageSequence = DiscoveryMessageSequenceCD1.FromDiscoveryMessageSequence(
+                    messageSequence
+                ),
+                Hello = EndpointDiscoveryMetadataCD1.FromEndpointDiscoveryMetadata(
+                    endpointDiscoveryMetadata
+                ),
+            };
         }
     }
 }

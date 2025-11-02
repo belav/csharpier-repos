@@ -19,14 +19,18 @@ public partial class ThreadPoolBoundHandleTests
         {
             ThreadTestHelpers.WaitForCondition(() =>
             {
-                changeInCompletedWorkItemCount = ThreadPool.CompletedWorkItemCount - initialCompletedWorkItemCount;
+                changeInCompletedWorkItemCount =
+                    ThreadPool.CompletedWorkItemCount - initialCompletedWorkItemCount;
                 return changeInCompletedWorkItemCount >= 2;
             });
         }
         catch (Exception ex)
         {
             // Test likely timed out, include the change for more information
-            throw new AggregateException($"changeInCompletedWorkItemCount: {changeInCompletedWorkItemCount}", ex);
+            throw new AggregateException(
+                $"changeInCompletedWorkItemCount: {changeInCompletedWorkItemCount}",
+                ex
+            );
         }
     }
 }

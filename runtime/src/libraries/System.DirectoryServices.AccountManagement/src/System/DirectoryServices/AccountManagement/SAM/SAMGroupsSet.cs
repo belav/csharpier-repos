@@ -13,9 +13,18 @@ namespace System.DirectoryServices.AccountManagement
 {
     internal sealed class SAMGroupsSet : ResultSet
     {
-        internal SAMGroupsSet(UnsafeNativeMethods.IADsMembers iADsMembers, SAMStoreCtx storeCtx, DirectoryEntry ctxBase)
+        internal SAMGroupsSet(
+            UnsafeNativeMethods.IADsMembers iADsMembers,
+            SAMStoreCtx storeCtx,
+            DirectoryEntry ctxBase
+        )
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMGroupsSet", "SAMGroupsSet: creating for path={0}", ctxBase.Path);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SAMGroupsSet",
+                "SAMGroupsSet: creating for path={0}",
+                ctxBase.Path
+            );
 
             _groupsEnumerator = ((IEnumerable)iADsMembers).GetEnumerator();
 
@@ -52,16 +61,18 @@ namespace System.DirectoryServices.AccountManagement
             {
                 // Got a group.  Create a DirectoryEntry for it.
                 // Clone the ctxBase to pick up its credentials, then build an appropriate path.
-                UnsafeNativeMethods.IADs nativeMember = (UnsafeNativeMethods.IADs)_groupsEnumerator.Current;
+                UnsafeNativeMethods.IADs nativeMember = (UnsafeNativeMethods.IADs)
+                    _groupsEnumerator.Current;
 
                 // We do this, rather than using the DirectoryEntry constructor that takes a native IADs object,
                 // is so the credentials get transferred to the new DirectoryEntry.  If we just use the native
                 // object constructor, the native object will have the right credentials, but the DirectoryEntry
                 // will have default (null) credentials, which it'll use anytime it needs to use credentials.
                 DirectoryEntry de = SDSUtils.BuildDirectoryEntry(
-                                                nativeMember.ADsPath,
-                                                _storeCtx.Credentials,
-                                                _storeCtx.AuthTypes);
+                    nativeMember.ADsPath,
+                    _storeCtx.Credentials,
+                    _storeCtx.AuthTypes
+                );
 
                 _current = de;
             }

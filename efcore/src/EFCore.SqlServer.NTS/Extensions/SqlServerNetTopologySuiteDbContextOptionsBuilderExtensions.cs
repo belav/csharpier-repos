@@ -22,14 +22,20 @@ public static class SqlServerNetTopologySuiteDbContextOptionsBuilderExtensions
     /// <param name="optionsBuilder">The build being used to configure SQL Server.</param>
     /// <returns>The options builder so that further configuration can be chained.</returns>
     public static SqlServerDbContextOptionsBuilder UseNetTopologySuite(
-        this SqlServerDbContextOptionsBuilder optionsBuilder)
+        this SqlServerDbContextOptionsBuilder optionsBuilder
+    )
     {
-        var coreOptionsBuilder = ((IRelationalDbContextOptionsBuilderInfrastructure)optionsBuilder).OptionsBuilder;
+        var coreOptionsBuilder = (
+            (IRelationalDbContextOptionsBuilderInfrastructure)optionsBuilder
+        ).OptionsBuilder;
 
-        var extension = coreOptionsBuilder.Options.FindExtension<SqlServerNetTopologySuiteOptionsExtension>()
+        var extension =
+            coreOptionsBuilder.Options.FindExtension<SqlServerNetTopologySuiteOptionsExtension>()
             ?? new SqlServerNetTopologySuiteOptionsExtension();
 
-        ((IDbContextOptionsBuilderInfrastructure)coreOptionsBuilder).AddOrUpdateExtension(extension);
+        ((IDbContextOptionsBuilderInfrastructure)coreOptionsBuilder).AddOrUpdateExtension(
+            extension
+        );
 
         return optionsBuilder;
     }

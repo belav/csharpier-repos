@@ -60,13 +60,29 @@ namespace System.ServiceModel.Activities
                         }
                         finally
                         {
-                            if (settings == null || !bool.TryParse(settings["microsoft:WorkflowServices:DefaultAutomaticInstanceKeyDisassociation"], out defaultAutomaticInstanceKeyDisassociation))
+                            if (
+                                settings == null
+                                || !bool.TryParse(
+                                    settings[
+                                        "microsoft:WorkflowServices:DefaultAutomaticInstanceKeyDisassociation"
+                                    ],
+                                    out defaultAutomaticInstanceKeyDisassociation
+                                )
+                            )
                             {
                                 defaultAutomaticInstanceKeyDisassociation = false;
                             }
 
-                            if (settings == null || !int.TryParse(settings["microsoft:WorkflowServices:FilterResumeTimeoutInSeconds"], out filterResumeTimeoutInSeconds) ||
-                                (filterResumeTimeoutInSeconds < 0))
+                            if (
+                                settings == null
+                                || !int.TryParse(
+                                    settings[
+                                        "microsoft:WorkflowServices:FilterResumeTimeoutInSeconds"
+                                    ],
+                                    out filterResumeTimeoutInSeconds
+                                )
+                                || (filterResumeTimeoutInSeconds < 0)
+                            )
                             {
                                 filterResumeTimeoutInSeconds = 60;
                             }

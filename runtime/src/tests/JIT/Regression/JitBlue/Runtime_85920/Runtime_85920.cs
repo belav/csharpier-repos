@@ -35,7 +35,8 @@ public static class Test
     }
 }
 
-public class Obj {
+public class Obj
+{
     long field;
 
     public Obj(Vector128<uint> v1)
@@ -125,10 +126,10 @@ public struct VT16
     }
 }
 
-public class Program 
+public class Program
 {
     [Fact]
-    public static void TestCall ()
+    public static void TestCall()
     {
         Vector128<uint> vec = Test.GetVector();
         Obj.Method1(vec);
@@ -142,7 +143,7 @@ public class Program
     }
 
     [Fact]
-    public static void TestNewobj ()
+    public static void TestNewobj()
     {
         Vector128<uint> vec = Test.GetVector();
         Obj o = new Obj(vec);
@@ -156,7 +157,7 @@ public class Program
     }
 
     [Fact]
-    public static void TestNewobjVT8 ()
+    public static void TestNewobjVT8()
     {
         Vector128<uint> vec = Test.GetVector();
         VT8 vt = new VT8(vec);
@@ -170,7 +171,7 @@ public class Program
     }
 
     [Fact]
-    public static void TestNewobjVT16 ()
+    public static void TestNewobjVT16()
     {
         Vector128<uint> vec = Test.GetVector();
         VT16 vt = new VT16(vec);

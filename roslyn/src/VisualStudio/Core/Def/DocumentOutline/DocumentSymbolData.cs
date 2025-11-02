@@ -20,5 +20,6 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         Glyph Glyph,
         SnapshotSpan RangeSpan,
         SnapshotSpan SelectionRangeSpan,
-        ImmutableArray<DocumentSymbolData> Children);
+        ImmutableArray<DocumentSymbolData> Children
+    );
 }

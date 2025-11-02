@@ -24,10 +24,7 @@ namespace System.Diagnostics.CodeAnalysis.Tests
         [InlineData(null)]
         public void TestSetMin(object min)
         {
-            var attr = new ConstantExpectedAttribute
-            {
-                Min = min
-            };
+            var attr = new ConstantExpectedAttribute { Min = min };
 
             Assert.Same(min, attr.Min);
         }
@@ -40,10 +37,7 @@ namespace System.Diagnostics.CodeAnalysis.Tests
         [InlineData(null)]
         public void TestSetMax(object max)
         {
-            var attr = new ConstantExpectedAttribute
-            {
-                Max = max
-            };
+            var attr = new ConstantExpectedAttribute { Max = max };
 
             Assert.Same(max, attr.Max);
         }
@@ -57,11 +51,7 @@ namespace System.Diagnostics.CodeAnalysis.Tests
         [InlineData(10, "https://dot.net")]
         public void TestSetMinAndMax(object min, object max)
         {
-            var attr = new ConstantExpectedAttribute
-            {
-                Min = min,
-                Max = max
-            };
+            var attr = new ConstantExpectedAttribute { Min = min, Max = max };
 
             Assert.Same(min, attr.Min);
             Assert.Same(max, attr.Max);

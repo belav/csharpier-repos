@@ -14,7 +14,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.LinkedFileDiffMerging
     [UseExportProvider]
     public partial class LinkedFileDiffMergingTests
     {
-        private static void TestLinkedFileSet(string startText, List<string> updatedTexts, string expectedMergedText, string languageName)
+        private static void TestLinkedFileSet(
+            string startText,
+            List<string> updatedTexts,
+            string expectedMergedText,
+            string languageName
+        )
         {
             using var workspace = new AdhocWorkspace();
             var solution = workspace.CurrentSolution;
@@ -27,7 +32,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.LinkedFileDiffMerging
                 var documentId = DocumentId.CreateNewId(projectId);
                 documentIds.Add(documentId);
 
-                var projectInfo = ProjectInfo.Create(projectId, VersionStamp.Create(), "ProjectName" + i, "AssemblyName" + i, languageName);
+                var projectInfo = ProjectInfo.Create(
+                    projectId,
+                    VersionStamp.Create(),
+                    "ProjectName" + i,
+                    "AssemblyName" + i,
+                    languageName
+                );
 
                 solution = solution
                     .AddProject(projectInfo)
@@ -42,15 +53,22 @@ namespace Microsoft.CodeAnalysis.UnitTests.LinkedFileDiffMerging
                 var text = updatedTexts[i];
                 if (text != startText)
                 {
-                    updatedSolution = updatedSolution
-                        .WithDocumentText(documentIds[i], SourceText.From(text));
+                    updatedSolution = updatedSolution.WithDocumentText(
+                        documentIds[i],
+                        SourceText.From(text)
+                    );
                 }
             }
 
-            var mergedSolution = updatedSolution.WithMergedLinkedFileChangesAsync(startingSolution).Result;
+            var mergedSolution = updatedSolution
+                .WithMergedLinkedFileChangesAsync(startingSolution)
+                .Result;
             for (var i = 0; i < updatedTexts.Count; i++)
             {
-                AssertEx.EqualOrDiff(expectedMergedText, mergedSolution.GetDocument(documentIds[i]).GetTextAsync().Result.ToString());
+                AssertEx.EqualOrDiff(
+                    expectedMergedText,
+                    mergedSolution.GetDocument(documentIds[i]).GetTextAsync().Result.ToString()
+                );
             }
         }
     }

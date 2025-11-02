@@ -19,44 +19,35 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { typeof(PrivateType), false };
             yield return new object[] { typeof(ProtectedType), false };
             yield return new object[] { typeof(InternalType), false };
-            yield return new object[] { typeof(InnerManagedInterface), false};
+            yield return new object[] { typeof(InnerManagedInterface), false };
             yield return new object[] { typeof(INonGenericInterface), true };
             yield return new object[] { typeof(NonGenericStruct), true };
             yield return new object[] { typeof(ManagedClassWithComVisibleFalse), false };
             yield return new object[] { typeof(ManagedClassWithComVisibleTrue), true };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [MemberData(nameof(IsTypeVisibleFromCom_Windows_TestData))]
         public void IsTypeVisibleFromCom_Windows_ReturnsExpected(Type value, bool expected)
         {
             Assert.Equal(expected, Marshal.IsTypeVisibleFromCom(value));
         }
 
-        private class PrivateType
-        {
-        }
+        private class PrivateType { }
 
-        protected class ProtectedType
-        {
-        }
+        protected class ProtectedType { }
 
-        internal class InternalType
-        {
-        }
+        internal class InternalType { }
 
-        interface InnerManagedInterface
-        {
-        }
+        interface InnerManagedInterface { }
     }
 
     [ComVisibleAttribute(false)]
-    public class ManagedClassWithComVisibleFalse
-    {
-    }
+    public class ManagedClassWithComVisibleFalse { }
 
     [ComVisibleAttribute(true)]
-    public class ManagedClassWithComVisibleTrue
-    {
-    }
+    public class ManagedClassWithComVisibleTrue { }
 }

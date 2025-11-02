@@ -11,20 +11,22 @@ namespace Microsoft.CodeAnalysis.CodeActions
     /// <summary>
     /// A <see cref="CodeActionOperation"/> for navigating to a specific position in a document and invoking inline rename.
     /// When <see cref="CodeAction.GetOperationsAsync(System.Threading.CancellationToken)"/> is called an implementation
-    /// of <see cref="CodeAction"/> can return an instance of this operation along with the other 
+    /// of <see cref="CodeAction"/> can return an instance of this operation along with the other
     /// operations they want to apply. For example, an implementation could generate a new <see cref="Document"/>
     /// in one <see cref="CodeActionOperation"/> and then have the host editor navigate to that
     /// <see cref="Document"/> and invoke rename at a given position using this operation.
     /// </summary>
 #pragma warning restore RS0030 // Do not used banned APIs
-    internal sealed class StartInlineRenameSessionOperation(DocumentId documentId, int position) : CodeActionOperation
+    internal sealed class StartInlineRenameSessionOperation(DocumentId documentId, int position)
+        : CodeActionOperation
     {
-        public DocumentId DocumentId { get; } = documentId ?? throw new ArgumentNullException(nameof(documentId));
+        public DocumentId DocumentId { get; } =
+            documentId ?? throw new ArgumentNullException(nameof(documentId));
         public int Position { get; } = position;
 
         public override void Apply(Workspace workspace, CancellationToken cancellationToken)
         {
-            // Intentionally empty.  Handling of this operation is special cased in CodeActionEditHandlerService.cs 
+            // Intentionally empty.  Handling of this operation is special cased in CodeActionEditHandlerService.cs
         }
     }
 }

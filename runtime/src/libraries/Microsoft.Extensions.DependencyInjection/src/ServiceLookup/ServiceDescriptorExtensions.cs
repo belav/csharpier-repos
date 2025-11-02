@@ -8,11 +8,14 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
     internal static class ServiceDescriptorExtensions
     {
-        public static bool HasImplementationInstance(this ServiceDescriptor serviceDescriptor) => GetImplementationInstance(serviceDescriptor) != null;
+        public static bool HasImplementationInstance(this ServiceDescriptor serviceDescriptor) =>
+            GetImplementationInstance(serviceDescriptor) != null;
 
-        public static bool HasImplementationFactory(this ServiceDescriptor serviceDescriptor) => GetImplementationFactory(serviceDescriptor) != null;
+        public static bool HasImplementationFactory(this ServiceDescriptor serviceDescriptor) =>
+            GetImplementationFactory(serviceDescriptor) != null;
 
-        public static bool HasImplementationType(this ServiceDescriptor serviceDescriptor) => GetImplementationType(serviceDescriptor) != null;
+        public static bool HasImplementationType(this ServiceDescriptor serviceDescriptor) =>
+            GetImplementationType(serviceDescriptor) != null;
 
         public static object? GetImplementationInstance(this ServiceDescriptor serviceDescriptor)
         {
@@ -36,7 +39,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 : serviceDescriptor.ImplementationType;
         }
 
-        public static bool TryGetImplementationType(this ServiceDescriptor serviceDescriptor, out Type? type)
+        public static bool TryGetImplementationType(
+            this ServiceDescriptor serviceDescriptor,
+            out Type? type
+        )
         {
             type = GetImplementationType(serviceDescriptor);
             return type != null;

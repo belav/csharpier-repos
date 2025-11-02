@@ -112,7 +112,13 @@ namespace System.Runtime.InteropServices
             throw new NotImplementedException();
         }
 
-        void IDispatch.GetIDsOfNames(ref Guid iid, string[] names, int cNames, int lcid, int[] rgDispId)
+        void IDispatch.GetIDsOfNames(
+            ref Guid iid,
+            string[] names,
+            int cNames,
+            int lcid,
+            int[] rgDispId
+        )
         {
             throw new NotImplementedException();
         }
@@ -129,7 +135,9 @@ namespace System.Runtime.InteropServices
                 // contains another VARIANT with VT_BYREF | VT_VARIANT, then we need to extract the
                 // inner VARIANT and use it instead of the outer one. Note that if the inner VARIANT
                 // is VT_BYREF | VT_VARIANT | VT_ARRAY, it will pass the below test too.
-                ref ComVariant pByRefVariant = ref *(ComVariant*)(pSrc.GetRawDataRef<nint>().ToPointer());
+                ref ComVariant pByRefVariant = ref *(ComVariant*)(
+                    pSrc.GetRawDataRef<nint>().ToPointer()
+                );
                 if ((pByRefVariant.VarType & VT_BYREF_TYPEMASK) == VT_BYREF_VARIANT)
                 {
                     return ref pByRefVariant;
@@ -147,7 +155,8 @@ namespace System.Runtime.InteropServices
             ref ComTypes.DISPPARAMS pDispParams,
             IntPtr pVarResult,
             IntPtr pExcepInfo,
-            IntPtr puArgErr)
+            IntPtr puArgErr
+        )
         {
             ComEventsMethod? method = FindMethod(dispid);
             if (method == null)
@@ -238,7 +247,11 @@ namespace System.Runtime.InteropServices
             ppv = IntPtr.Zero;
             if (iid == _iidSourceItf || iid == typeof(IDispatch).GUID)
             {
-                ppv = Marshal.GetComInterfaceForObject(this, typeof(IDispatch), CustomQueryInterfaceMode.Ignore);
+                ppv = Marshal.GetComInterfaceForObject(
+                    this,
+                    typeof(IDispatch),
+                    CustomQueryInterfaceMode.Ignore
+                );
                 return CustomQueryInterfaceResult.Handled;
             }
 

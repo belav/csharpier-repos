@@ -6,7 +6,5 @@ using System.Runtime.CompilerServices;
 
 public class A
 {
-	internal void Test ()
-	{
-	}
+    internal void Test() { }
 }

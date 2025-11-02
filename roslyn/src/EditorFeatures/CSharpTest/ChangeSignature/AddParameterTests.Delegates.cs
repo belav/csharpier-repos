@@ -32,10 +32,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
-                new AddedParameterOrExistingIndex(1)
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
+                new AddedParameterOrExistingIndex(1),
             };
             var expectedUpdatedCode = """
                 delegate void MyDelegate(bool z, int newIntegerParameter, string y);
@@ -49,8 +59,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature,
-                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode, expectedSelectedIndex: 0);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode,
+                expectedSelectedIndex: 0
+            );
         }
 
         [Fact]
@@ -68,10 +83,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
-                new AddedParameterOrExistingIndex(1)
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
+                new AddedParameterOrExistingIndex(1),
             };
             var expectedUpdatedCode = """
                 delegate void MyDelegate(bool z, int newIntegerParameter, string y);
@@ -85,8 +110,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature,
-                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode, expectedSelectedIndex: 1);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode,
+                expectedSelectedIndex: 1
+            );
         }
 
         [Fact]
@@ -104,10 +134,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
-                new AddedParameterOrExistingIndex(1)
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
+                new AddedParameterOrExistingIndex(1),
             };
             var expectedUpdatedCode = """
                 delegate void MyDelegate(bool z, int newIntegerParameter, string y);
@@ -121,8 +161,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature,
-                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode, expectedSelectedIndex: 2);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode,
+                expectedSelectedIndex: 2
+            );
         }
 
         [Fact]
@@ -141,10 +186,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
-                new AddedParameterOrExistingIndex(1)
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
+                new AddedParameterOrExistingIndex(1),
             };
             var expectedUpdatedCode = """
                 delegate void MyDelegate(bool z, int newIntegerParameter, string y);
@@ -159,7 +214,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -177,10 +237,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
-                new AddedParameterOrExistingIndex(1)
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
+                new AddedParameterOrExistingIndex(1),
             };
             var expectedUpdatedCode = """
                 delegate void MyDelegate(bool z, int newIntegerParameter, string y);
@@ -194,7 +264,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -214,8 +289,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
+            var updatedSignature = new[]
+            {
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
             };
             var expectedUpdatedCode = """
                 delegate void MyDelegate(int newIntegerParameter);
@@ -231,7 +316,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -254,10 +344,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     void Goo(int a, object b, bool c) { }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
-                new AddedParameterOrExistingIndex(1)
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
+                new AddedParameterOrExistingIndex(1),
             };
             var expectedUpdatedCode = """
                 delegate void MyDelegate(bool z, int newIntegerParameter, string y);
@@ -276,7 +376,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     void Goo(int a, object b, bool c) { }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -298,10 +403,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     void Goo(int a, object b, bool c) { }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
-                new AddedParameterOrExistingIndex(1)
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
+                new AddedParameterOrExistingIndex(1),
             };
             var expectedUpdatedCode = """
                 delegate void MyDelegate(bool z, int newIntegerParameter, string y);
@@ -319,7 +434,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     void Goo(int a, object b, bool c) { }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -343,10 +463,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     void Goo(int a, object b, bool c) { }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
-                new AddedParameterOrExistingIndex(1)
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
+                new AddedParameterOrExistingIndex(1),
             };
             var expectedUpdatedCode = """
                 delegate void MyDelegate(bool z, int newIntegerParameter, string y);
@@ -366,7 +496,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     void Goo(int a, object b, bool c) { }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -392,10 +527,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     void Goo(int a, object b, bool c) { }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
-                new AddedParameterOrExistingIndex(1)
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
+                new AddedParameterOrExistingIndex(1),
             };
             var expectedUpdatedCode = """
                 delegate void MyDelegate(bool z, int newIntegerParameter, string y);
@@ -417,7 +562,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     void Goo(int a, object b, bool c) { }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -444,10 +594,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     void Goo(int a, object b, bool c) { }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
-                new AddedParameterOrExistingIndex(1)
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
+                new AddedParameterOrExistingIndex(1),
             };
             var expectedUpdatedCode = """
                 using System.Collections.Generic;
@@ -470,7 +630,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     void Goo(int a, object b, bool c) { }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -489,10 +654,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     void Target(MyDelegate d) { }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
-                new AddedParameterOrExistingIndex(1)
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
+                new AddedParameterOrExistingIndex(1),
             };
             var expectedUpdatedCode = """
                 delegate void MyDelegate(bool z, int newIntegerParameter, string y);
@@ -507,7 +682,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     void Target(MyDelegate d) { }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -525,10 +705,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
-                new AddedParameterOrExistingIndex(1)
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
+                new AddedParameterOrExistingIndex(1),
             };
             var expectedUpdatedCode = """
                 using System.Collections.Generic;
@@ -542,7 +732,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -560,10 +755,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
-                new AddedParameterOrExistingIndex(1)
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
+                new AddedParameterOrExistingIndex(1),
             };
             var expectedUpdatedCode = """
                 delegate RecursiveDelegate RecursiveDelegate(bool z, int newIntegerParameter, string y);
@@ -577,7 +782,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -610,10 +820,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     void Goo(int a, string b, bool c) { }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
-                new AddedParameterOrExistingIndex(1)
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
+                new AddedParameterOrExistingIndex(1),
             };
             var expectedUpdatedCode = """
                 /// <summary>
@@ -642,7 +862,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     void Goo(bool c, int newIntegerParameter, string b) { }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -662,10 +887,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     void Program_MyEvent(int a, string b, bool c) { }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
-                new AddedParameterOrExistingIndex(1)
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
+                new AddedParameterOrExistingIndex(1),
             };
             var expectedUpdatedCode = """
                 delegate void MyDelegate(bool z, int newIntegerParameter, string y);
@@ -681,7 +916,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     void Program_MyEvent(bool c, int newIntegerParameter, string b) { }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -706,8 +946,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
+            var updatedSignature = new[]
+            {
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
             };
             var expectedUpdatedCode = """
                 public class DP16a
@@ -728,7 +978,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -745,8 +1000,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     internal void M17(string s) { }
                 }
                 """;
-            var updatedSignature = new[] {
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
+            var updatedSignature = new[]
+            {
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
             };
             var expectedUpdatedCode = """
                 public class D17<T>
@@ -759,7 +1024,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     internal void M17(int newIntegerParameter) { }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -788,8 +1058,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
+            var updatedSignature = new[]
+            {
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
             };
             var expectedUpdatedCode = """
                 class DA
@@ -814,7 +1094,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -833,8 +1118,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int")
+            var updatedSignature = new[]
+            {
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
             };
             var expectedUpdatedCode = """
                 public class CD<T>
@@ -849,8 +1144,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature,
-                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode, expectedSelectedIndex: 0);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode,
+                expectedSelectedIndex: 0
+            );
         }
 
         [Fact]
@@ -874,8 +1174,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int")
+            var updatedSignature = new[]
+            {
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
             };
             var expectedUpdatedCode = """
                 public class C2<T>
@@ -895,7 +1205,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact]
@@ -920,10 +1235,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(2),
-                new AddedParameterOrExistingIndex(new AddedParameter(null, "int", "newIntegerParameter", CallSiteKind.Value, "12345"), "int"),
-                new AddedParameterOrExistingIndex(1)
+                new AddedParameterOrExistingIndex(
+                    new AddedParameter(
+                        null,
+                        "int",
+                        "newIntegerParameter",
+                        CallSiteKind.Value,
+                        "12345"
+                    ),
+                    "int"
+                ),
+                new AddedParameterOrExistingIndex(1),
             };
             var expectedUpdatedCode = """
                 class C0
@@ -944,7 +1269,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
     }
 }

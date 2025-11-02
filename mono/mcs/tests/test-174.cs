@@ -13,24 +13,24 @@
 
 using System;
 using System.Collections;
-        
-class ProtectedAccessToPropertyOnChild : Hashtable {
 
-	ProtectedAccessToPropertyOnChild ()
-	{
-		comparer = null;
-	}
-	
-	public static int Main ()
-	{
-		TestAccessToProtectedOnChildInstanceFromParent t = new TestAccessToProtectedOnChildInstanceFromParent ();
+class ProtectedAccessToPropertyOnChild : Hashtable
+{
+    ProtectedAccessToPropertyOnChild()
+    {
+        comparer = null;
+    }
 
-		if (t.Test () != 0)
-			return 1;
-		
-		return 0;
-		
-	}
+    public static int Main()
+    {
+        TestAccessToProtectedOnChildInstanceFromParent t =
+            new TestAccessToProtectedOnChildInstanceFromParent();
+
+        if (t.Test() != 0)
+            return 1;
+
+        return 0;
+    }
 }
 
 //
@@ -38,73 +38,70 @@ class ProtectedAccessToPropertyOnChild : Hashtable {
 //
 public class TestAccessToPrivateMemberInParentClass
 {
-        double[][] data;
-        int rows;
-        int columns;
+    double[][] data;
+    int rows;
+    int columns;
 
-        public TestAccessToPrivateMemberInParentClass()
-        {
-        }
+    public TestAccessToPrivateMemberInParentClass() { }
 
-        double[][] Array
-        {
-                get { return data; }
-        }
+    double[][] Array
+    {
+        get { return data; }
+    }
 
-        class CholeskyDecomposition
+    class CholeskyDecomposition
+    {
+        TestAccessToPrivateMemberInParentClass L;
+        bool isSymmetric;
+        bool isPositiveDefinite;
+
+        public CholeskyDecomposition(TestAccessToPrivateMemberInParentClass A)
         {
-                TestAccessToPrivateMemberInParentClass L;
-                bool isSymmetric;
-                bool isPositiveDefinite;
-        
-                public CholeskyDecomposition(TestAccessToPrivateMemberInParentClass A)
-                {
-                        L = new TestAccessToPrivateMemberInParentClass();
-                                        
-                        double[][] a = A.Array;
-                        double[][] l = L.Array;
-                }
+            L = new TestAccessToPrivateMemberInParentClass();
+
+            double[][] a = A.Array;
+            double[][] l = L.Array;
         }
+    }
 }
 
-public class TestAccessToProtectedOnChildInstanceFromParent {
+public class TestAccessToProtectedOnChildInstanceFromParent
+{
+    class Parent
+    {
+        protected int a;
 
-	class Parent {
-		protected int a;
+        static int x;
 
-		static int x;
-		
-		protected Parent ()
-		{
-			a = x++;
-		}
-		
-		public int TestAccessToProtected (Child c)
-		{
-			if (c.a == 0)
-				return 1;
-			else
-				return 2;
-		}
-	}
+        protected Parent()
+        {
+            a = x++;
+        }
 
-	class Child : Parent {
-		
-	}
+        public int TestAccessToProtected(Child c)
+        {
+            if (c.a == 0)
+                return 1;
+            else
+                return 2;
+        }
+    }
 
-	Child c, d;
-	
-	public TestAccessToProtectedOnChildInstanceFromParent ()
-	{
-		c = new Child ();
-		d = new Child ();
-	}
+    class Child : Parent { }
 
-	public int Test ()
-	{
-		if (d.TestAccessToProtected (c) == 1)
-			return 0;
-		return 1;
-	}
-	
+    Child c,
+        d;
+
+    public TestAccessToProtectedOnChildInstanceFromParent()
+    {
+        c = new Child();
+        d = new Child();
+    }
+
+    public int Test()
+    {
+        if (d.TestAccessToProtected(c) == 1)
+            return 0;
+        return 1;
+    }
 }

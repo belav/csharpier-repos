@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,26 +32,26 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	public class DirectoryControl
-	{
-		public DirectoryControl (string type, byte [] value, bool isCritical, bool serverSide)
-		{
-			Type = type;
-			IsCritical = isCritical;
-			ServerSide = serverSide;
+    public class DirectoryControl
+    {
+        public DirectoryControl(string type, byte[] value, bool isCritical, bool serverSide)
+        {
+            Type = type;
+            IsCritical = isCritical;
+            ServerSide = serverSide;
 
-			// value
-			throw new NotImplementedException ();
-		}
+            // value
+            throw new NotImplementedException();
+        }
 
-		public bool IsCritical { get; set; }
-		public bool ServerSide { get; set; }
-		public string Type { get; private set; }
+        public bool IsCritical { get; set; }
+        public bool ServerSide { get; set; }
+        public string Type { get; private set; }
 
-		[MonoTODO]
-		public virtual byte [] GetValue ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public virtual byte[] GetValue()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

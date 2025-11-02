@@ -16,7 +16,12 @@ namespace System.DirectoryServices.ActiveDirectory
         private readonly Hashtable _nameTable;
         private readonly bool _advanced;
 
-        internal AttributeMetadata(IntPtr info, bool advanced, DirectoryServer server, Hashtable table)
+        internal AttributeMetadata(
+            IntPtr info,
+            bool advanced,
+            DirectoryServer server,
+            Hashtable table
+        )
         {
             if (advanced)
             {
@@ -26,12 +31,17 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 Name = Marshal.PtrToStringUni(attrMetaData.pszAttributeName)!;
                 Version = attrMetaData.dwVersion;
-                long ftimeChangeValue = (long)((uint)attrMetaData.ftimeLastOriginatingChange1 + (((long)attrMetaData.ftimeLastOriginatingChange2) << 32));
+                long ftimeChangeValue = (long)(
+                    (uint)attrMetaData.ftimeLastOriginatingChange1
+                    + (((long)attrMetaData.ftimeLastOriginatingChange2) << 32)
+                );
                 LastOriginatingChangeTime = DateTime.FromFileTime(ftimeChangeValue);
                 LastOriginatingInvocationId = attrMetaData.uuidLastOriginatingDsaInvocationID;
                 OriginatingChangeUsn = attrMetaData.usnOriginatingChange;
                 LocalChangeUsn = attrMetaData.usnLocalChange;
-                _pszLastOriginatingDsaDN = Marshal.PtrToStringUni(attrMetaData.pszLastOriginatingDsaDN);
+                _pszLastOriginatingDsaDN = Marshal.PtrToStringUni(
+                    attrMetaData.pszLastOriginatingDsaDN
+                );
             }
             else
             {
@@ -41,7 +51,10 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 Name = Marshal.PtrToStringUni(attrMetaData.pszAttributeName)!;
                 Version = attrMetaData.dwVersion;
-                long ftimeChangeValue = (long)((uint)attrMetaData.ftimeLastOriginatingChange1 + (((long)attrMetaData.ftimeLastOriginatingChange2) << 32));
+                long ftimeChangeValue = (long)(
+                    (uint)attrMetaData.ftimeLastOriginatingChange1
+                    + (((long)attrMetaData.ftimeLastOriginatingChange2) << 32)
+                );
                 LastOriginatingChangeTime = DateTime.FromFileTime(ftimeChangeValue);
                 LastOriginatingInvocationId = attrMetaData.uuidLastOriginatingDsaInvocationID;
                 OriginatingChangeUsn = attrMetaData.usnOriginatingChange;
@@ -78,7 +91,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     // do the translation for downlevel platform or kcc is able to do the name translation
                     else if (!_advanced || (_advanced && _pszLastOriginatingDsaDN != null))
                     {
-                        _originatingServerName = Utils.GetServerNameFromInvocationID(_pszLastOriginatingDsaDN, LastOriginatingInvocationId, _server);
+                        _originatingServerName = Utils.GetServerNameFromInvocationID(
+                            _pszLastOriginatingDsaDN,
+                            LastOriginatingInvocationId,
+                            _server
+                        );
 
                         // add it to the hashtable
                         _nameTable.Add(LastOriginatingInvocationId, _originatingServerName);

@@ -8,10 +8,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Globalization;
-using System.Diagnostics;
 
 namespace System.Data
 {
@@ -25,11 +25,15 @@ namespace System.Data
         /// LINQ's Where operator for generic EnumerableRowCollection.
         /// </summary>
         public static EnumerableRowCollection<TRow> Where<TRow>(
-                                                this TypedTableBase<TRow> source,
-                                                Func<TRow, bool> predicate) where TRow : DataRow
+            this TypedTableBase<TRow> source,
+            Func<TRow, bool> predicate
+        )
+            where TRow : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, "source");
-            EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>((DataTable)source);
+            EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>(
+                (DataTable)source
+            );
             return erc.Where<TRow>(predicate);
         }
 
@@ -37,11 +41,15 @@ namespace System.Data
         /// LINQ's OrderBy operator for generic EnumerableRowCollection.
         /// </summary>
         public static OrderedEnumerableRowCollection<TRow> OrderBy<TRow, TKey>(
-                                                        this TypedTableBase<TRow> source,
-                                                        Func<TRow, TKey> keySelector) where TRow : DataRow
+            this TypedTableBase<TRow> source,
+            Func<TRow, TKey> keySelector
+        )
+            where TRow : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, "source");
-            EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>((DataTable)source);
+            EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>(
+                (DataTable)source
+            );
             return erc.OrderBy<TRow, TKey>(keySelector);
         }
 
@@ -49,12 +57,16 @@ namespace System.Data
         /// LINQ's OrderBy operator for generic EnumerableRowCollection.
         /// </summary>
         public static OrderedEnumerableRowCollection<TRow> OrderBy<TRow, TKey>(
-                                                        this TypedTableBase<TRow> source,
-                                                        Func<TRow, TKey> keySelector,
-                                                        IComparer<TKey> comparer) where TRow : DataRow
+            this TypedTableBase<TRow> source,
+            Func<TRow, TKey> keySelector,
+            IComparer<TKey> comparer
+        )
+            where TRow : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, "source");
-            EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>((DataTable)source);
+            EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>(
+                (DataTable)source
+            );
             return erc.OrderBy<TRow, TKey>(keySelector, comparer);
         }
 
@@ -62,11 +74,15 @@ namespace System.Data
         /// LINQ's OrderByDescending operator for generic EnumerableRowCollection.
         /// </summary>
         public static OrderedEnumerableRowCollection<TRow> OrderByDescending<TRow, TKey>(
-                                                        this TypedTableBase<TRow> source,
-                                                        Func<TRow, TKey> keySelector) where TRow : DataRow
+            this TypedTableBase<TRow> source,
+            Func<TRow, TKey> keySelector
+        )
+            where TRow : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, "source");
-            EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>((DataTable)source);
+            EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>(
+                (DataTable)source
+            );
             return erc.OrderByDescending<TRow, TKey>(keySelector);
         }
 
@@ -74,15 +90,18 @@ namespace System.Data
         /// LINQ's OrderByDescending operator for generic EnumerableRowCollection.
         /// </summary>
         public static OrderedEnumerableRowCollection<TRow> OrderByDescending<TRow, TKey>(
-                                                        this TypedTableBase<TRow> source,
-                                                        Func<TRow, TKey> keySelector,
-                                                        IComparer<TKey> comparer) where TRow : DataRow
+            this TypedTableBase<TRow> source,
+            Func<TRow, TKey> keySelector,
+            IComparer<TKey> comparer
+        )
+            where TRow : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, "source");
-            EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>((DataTable)source);
+            EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>(
+                (DataTable)source
+            );
             return erc.OrderByDescending<TRow, TKey>(keySelector, comparer);
         }
-
 
         /// <summary>
         /// Executes a Select (Projection) on EnumerableDataTable. If the selector returns a different
@@ -90,17 +109,17 @@ namespace System.Data
         /// represents an enumerable over the LINQ Query.
         /// </summary>
         public static EnumerableRowCollection<S> Select<TRow, S>(
-                                                this TypedTableBase<TRow> source,
-                                                Func<TRow, S> selector) where TRow : DataRow
+            this TypedTableBase<TRow> source,
+            Func<TRow, S> selector
+        )
+            where TRow : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, "source");
-            EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>((DataTable)source);
+            EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>(
+                (DataTable)source
+            );
             return erc.Select<TRow, S>(selector);
         }
-
-
-
-
 
         /// <summary>
         ///   This method returns a IEnumerable of TRow.
@@ -111,15 +130,19 @@ namespace System.Data
         /// <returns>
         ///   IEnumerable of datarows.
         /// </returns>
-        public static EnumerableRowCollection<TRow> AsEnumerable<TRow>(this TypedTableBase<TRow> source) where TRow : DataRow
+        public static EnumerableRowCollection<TRow> AsEnumerable<TRow>(
+            this TypedTableBase<TRow> source
+        )
+            where TRow : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, "source");
             return new EnumerableRowCollection<TRow>(source as DataTable);
         }
 
-        public static TRow ElementAtOrDefault<TRow>(this TypedTableBase<TRow> source, int index) where TRow : DataRow
+        public static TRow ElementAtOrDefault<TRow>(this TypedTableBase<TRow> source, int index)
+            where TRow : DataRow
         {
-            if ((index >= 0) && (index < source.Rows.Count)) 
+            if ((index >= 0) && (index < source.Rows.Count))
             {
                 return (TRow)source.Rows[index];
             }
@@ -128,6 +151,5 @@ namespace System.Data
                 return default(TRow);
             }
         }
-
     } //end class
 }

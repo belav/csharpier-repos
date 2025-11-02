@@ -1,18 +1,18 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Drawing;
+    using System.Reflection;
+    using System.Text;
     using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Serialization;
-    using System.Collections.Generic;
-    using System.Workflow.ComponentModel.Compiler;
 
     [SRDescription(SR.CodeActivityDescription)]
     [ToolboxItem(typeof(ActivityToolboxItem))]
@@ -21,25 +21,29 @@ namespace System.Workflow.Activities
     [DefaultEvent("ExecuteCode")]
     [SRCategory(SR.Standard)]
     [ActivityValidator(typeof(CodeActivityValidator))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class CodeActivity : Activity
     {
         #region Constructors
 
-        public CodeActivity()
-        {
-        }
+        public CodeActivity() { }
 
         public CodeActivity(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         #endregion
 
-        public static readonly DependencyProperty ExecuteCodeEvent = DependencyProperty.Register("ExecuteCode", typeof(EventHandler), typeof(CodeActivity));
+        public static readonly DependencyProperty ExecuteCodeEvent = DependencyProperty.Register(
+            "ExecuteCode",
+            typeof(EventHandler),
+            typeof(CodeActivity)
+        );
 
-        protected override sealed ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected sealed override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             base.RaiseEvent(CodeActivity.ExecuteCodeEvent, this, EventArgs.Empty);
 
@@ -51,19 +55,16 @@ namespace System.Workflow.Activities
         [MergableProperty(false)]
         public event EventHandler ExecuteCode
         {
-            add
-            {
-                base.AddHandler(ExecuteCodeEvent, value);
-            }
-            remove
-            {
-                base.RemoveHandler(ExecuteCodeEvent, value);
-            }
+            add { base.AddHandler(ExecuteCodeEvent, value); }
+            remove { base.RemoveHandler(ExecuteCodeEvent, value); }
         }
 
         private class CodeActivityValidator : ActivityValidator
         {
-            public override ValidationErrorCollection Validate(ValidationManager manager, object obj)
+            public override ValidationErrorCollection Validate(
+                ValidationManager manager,
+                object obj
+            )
             {
                 ValidationErrorCollection errors = new ValidationErrorCollection();
 
@@ -72,10 +73,13 @@ namespace System.Workflow.Activities
                     throw new InvalidOperationException();
 
                 // This violates the P || C validation condition, but we are compiling with csc.exe here!
-                if (code.GetInvocationList<EventHandler>(CodeActivity.ExecuteCodeEvent).Length == 0 &&
-                    code.GetBinding(CodeActivity.ExecuteCodeEvent) == null)
+                if (
+                    code.GetInvocationList<EventHandler>(CodeActivity.ExecuteCodeEvent).Length == 0
+                    && code.GetBinding(CodeActivity.ExecuteCodeEvent) == null
+                )
                 {
-                    Hashtable hashtable = code.GetValue(WorkflowMarkupSerializer.EventsProperty) as Hashtable;
+                    Hashtable hashtable =
+                        code.GetValue(WorkflowMarkupSerializer.EventsProperty) as Hashtable;
                     if (hashtable == null || hashtable["ExecuteCode"] == null)
                         errors.Add(ValidationError.GetNotSetValidationError("ExecuteCode"));
                 }

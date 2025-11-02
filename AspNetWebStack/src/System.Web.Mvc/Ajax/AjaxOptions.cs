@@ -131,7 +131,11 @@ namespace System.Web.Mvc.Ajax
             set { _updateTargetId = value; }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", Justification = "This property is used by the optionsBuilder which always accepts a string.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1056:UriPropertiesShouldNotBeStrings",
+            Justification = "This property is used by the optionsBuilder which always accepts a string."
+        )]
         public string Url
         {
             get { return _url ?? String.Empty; }
@@ -143,10 +147,14 @@ namespace System.Web.Mvc.Ajax
         internal string ToJavascriptString()
         {
             // creates a string of the form { key1: value1, key2 : value2, ... }
-            // This method is used for generating obtrusive JavaScript (using MicrosoftMvcAjax.js) which is no longer 
+            // This method is used for generating obtrusive JavaScript (using MicrosoftMvcAjax.js) which is no longer
             // actively maintained. Consequently, we'll ignore the AllowCache option if it's set for this code path.
             StringBuilder optionsBuilder = new StringBuilder("{");
-            optionsBuilder.AppendFormat(CultureInfo.InvariantCulture, " insertionMode: {0},", InsertionModeString);
+            optionsBuilder.AppendFormat(
+                CultureInfo.InvariantCulture,
+                " insertionMode: {0},",
+                InsertionModeString
+            );
             optionsBuilder.Append(PropertyStringIfSpecified("confirm", Confirm));
             optionsBuilder.Append(PropertyStringIfSpecified("httpMethod", HttpMethod));
             optionsBuilder.Append(PropertyStringIfSpecified("loadingElementId", LoadingElementId));
@@ -163,10 +171,7 @@ namespace System.Web.Mvc.Ajax
 
         public IDictionary<string, object> ToUnobtrusiveHtmlAttributes()
         {
-            var result = new Dictionary<string, object>
-            {
-                { "data-ajax", "true" },
-            };
+            var result = new Dictionary<string, object> { { "data-ajax", "true" } };
 
             AddToDictionaryIfSpecified(result, "data-ajax-url", Url);
             AddToDictionaryIfSpecified(result, "data-ajax-method", HttpMethod);
@@ -180,7 +185,7 @@ namespace System.Web.Mvc.Ajax
             if (AllowCache)
             {
                 // On the client, the absence of the data-ajax-cache attribute is equivalent to setting it to false.
-                // Consequently we'll only set it if the user wants to opt into caching. 
+                // Consequently we'll only set it if the user wants to opt into caching.
                 AddToDictionaryIfSpecified(result, "data-ajax-cache", "true");
             }
 
@@ -205,7 +210,11 @@ namespace System.Web.Mvc.Ajax
 
         // Helpers
 
-        private static void AddToDictionaryIfSpecified(IDictionary<string, object> dictionary, string name, string value)
+        private static void AddToDictionaryIfSpecified(
+            IDictionary<string, object> dictionary,
+            string name,
+            string value
+        )
         {
             if (!String.IsNullOrWhiteSpace(value))
             {
@@ -217,7 +226,12 @@ namespace System.Web.Mvc.Ajax
         {
             if (!String.IsNullOrEmpty(handler))
             {
-                return String.Format(CultureInfo.InvariantCulture, " {0}: Function.createDelegate(this, {1}),", propertyName, handler.ToString());
+                return String.Format(
+                    CultureInfo.InvariantCulture,
+                    " {0}: Function.createDelegate(this, {1}),",
+                    propertyName,
+                    handler.ToString()
+                );
             }
             return String.Empty;
         }
@@ -227,14 +241,19 @@ namespace System.Web.Mvc.Ajax
             if (!String.IsNullOrEmpty(propertyValue))
             {
                 string escapedPropertyValue = propertyValue.Replace("'", @"\'");
-                return String.Format(CultureInfo.InvariantCulture, " {0}: '{1}',", propertyName, escapedPropertyValue);
+                return String.Format(
+                    CultureInfo.InvariantCulture,
+                    " {0}: '{1}',",
+                    propertyName,
+                    escapedPropertyValue
+                );
             }
             return String.Empty;
         }
 
         private static string EscapeIdSelector(string selector)
         {
-            // The string returned by this function is used as a value for jQuery's selector. The characters dot, colon and 
+            // The string returned by this function is used as a value for jQuery's selector. The characters dot, colon and
             // square brackets are valid id characters but need to be properly escaped since they have special meaning. For
             // e.g., for the id a.b, $('#a.b') would cause ".b" to treated as a class selector. The correct way to specify
             // this selector would be to escape the dot to get $('#a\.b').

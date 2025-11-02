@@ -16,14 +16,24 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             return typeInfo.DeclaredEvents;
         }
 
-        public sealed override IEnumerable<EventInfo> CoreGetDeclaredMembers(RuntimeTypeInfo type, NameFilter? filter, RuntimeTypeInfo reflectedType)
+        public sealed override IEnumerable<EventInfo> CoreGetDeclaredMembers(
+            RuntimeTypeInfo type,
+            NameFilter? filter,
+            RuntimeTypeInfo reflectedType
+        )
         {
             return type.GetEventsCore(filter, reflectedType);
         }
 
         public sealed override bool AlwaysTreatAsDeclaredOnly => false;
 
-        public sealed override void GetMemberAttributes(EventInfo member, out MethodAttributes visibility, out bool isStatic, out bool isVirtual, out bool isNewSlot)
+        public sealed override void GetMemberAttributes(
+            EventInfo member,
+            out MethodAttributes visibility,
+            out bool isStatic,
+            out bool isVirtual,
+            out bool isNewSlot
+        )
         {
             MethodInfo? accessorMethod = GetAccessorMethod(member);
             if (accessorMethod == null)
@@ -49,7 +59,12 @@ namespace System.Reflection.Runtime.BindingFlagSupport
         //
         // .NET Framework compat: Events hide events in base types if they have the same name.
         //
-        public sealed override bool IsSuppressedByMoreDerivedMember(EventInfo member, EventInfo[] priorMembers, int startIndex, int endIndex)
+        public sealed override bool IsSuppressedByMoreDerivedMember(
+            EventInfo member,
+            EventInfo[] priorMembers,
+            int startIndex,
+            int endIndex
+        )
         {
             for (int i = startIndex; i < endIndex; i++)
             {
@@ -59,11 +74,17 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             return false;
         }
 
-        public sealed override bool ImplicitlyOverrides(EventInfo? baseMember, EventInfo? derivedMember)
+        public sealed override bool ImplicitlyOverrides(
+            EventInfo? baseMember,
+            EventInfo? derivedMember
+        )
         {
             MethodInfo? baseAccessor = GetAccessorMethod(baseMember!);
             MethodInfo? derivedAccessor = GetAccessorMethod(derivedMember!);
-            return MemberPolicies<MethodInfo>.Default.ImplicitlyOverrides(baseAccessor, derivedAccessor);
+            return MemberPolicies<MethodInfo>.Default.ImplicitlyOverrides(
+                baseAccessor,
+                derivedAccessor
+            );
         }
 
         public sealed override bool OkToIgnoreAmbiguity(EventInfo m1, EventInfo m2)

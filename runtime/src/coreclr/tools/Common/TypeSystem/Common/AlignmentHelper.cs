@@ -14,7 +14,7 @@ namespace Internal.TypeSystem
             // alignment must be a power of 2 for this implementation to work (need modulo otherwise)
             Debug.Assert(0 == (alignment & (alignment - 1)));
             int result = (val + (alignment - 1)) & ~(alignment - 1);
-            Debug.Assert(result >= val);      // check for overflow
+            Debug.Assert(result >= val); // check for overflow
 
             return result;
         }

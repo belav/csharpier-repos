@@ -15,27 +15,38 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
     /// <summary>
     /// Analyzer that reports diagnostics in strings that we know are regex text.
     /// </summary>
-    internal abstract class AbstractRegexDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal abstract class AbstractRegexDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public const string DiagnosticId = "RE0001";
 
         private readonly EmbeddedLanguageInfo _info;
 
         protected AbstractRegexDiagnosticAnalyzer(EmbeddedLanguageInfo info)
-            : base(DiagnosticId,
-                   EnforceOnBuildValues.Regex,
-                   option: null,
-                   new LocalizableResourceString(nameof(FeaturesResources.Invalid_regex_pattern), FeaturesResources.ResourceManager, typeof(FeaturesResources)),
-                   new LocalizableResourceString(nameof(FeaturesResources.Regex_issue_0), FeaturesResources.ResourceManager, typeof(FeaturesResources)))
+            : base(
+                DiagnosticId,
+                EnforceOnBuildValues.Regex,
+                option: null,
+                new LocalizableResourceString(
+                    nameof(FeaturesResources.Invalid_regex_pattern),
+                    FeaturesResources.ResourceManager,
+                    typeof(FeaturesResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(FeaturesResources.Regex_issue_0),
+                    FeaturesResources.ResourceManager,
+                    typeof(FeaturesResources)
+                )
+            )
         {
             _info = info;
         }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSemanticModelAction(Analyze);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSemanticModelAction(Analyze);
 
         public void Analyze(SemanticModelAnalysisContext context)
         {
@@ -79,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
             SemanticModelAnalysisContext context,
             RegexLanguageDetector detector,
             SyntaxToken token,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (_info.IsAnyStringLiteral(token.RawKind))
             {
@@ -88,13 +100,16 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
                 {
                     foreach (var diag in tree.Diagnostics)
                     {
-                        context.ReportDiagnostic(DiagnosticHelper.Create(
-                            Descriptor,
-                            Location.Create(context.SemanticModel.SyntaxTree, diag.Span),
-                            NotificationOption2.Warning,
-                            additionalLocations: null,
-                            properties: null,
-                            diag.Message));
+                        context.ReportDiagnostic(
+                            DiagnosticHelper.Create(
+                                Descriptor,
+                                Location.Create(context.SemanticModel.SyntaxTree, diag.Span),
+                                NotificationOption2.Warning,
+                                additionalLocations: null,
+                                properties: null,
+                                diag.Message
+                            )
+                        );
                     }
                 }
             }

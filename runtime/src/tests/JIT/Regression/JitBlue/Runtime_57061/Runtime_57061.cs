@@ -16,7 +16,9 @@ struct S0
     public uint F2;
     public short F3;
     public ulong F4;
-    public S0(bool f0, bool f1, uint f2, short f3, ulong f4): this()
+
+    public S0(bool f0, bool f1, uint f2, short f3, ulong f4)
+        : this()
     {
         F0 = f0;
         F1 = f1;
@@ -28,9 +30,7 @@ struct S0
 
 class C0
 {
-    public C0(S0 f7, S0 f8)
-    {
-    }
+    public C0(S0 f7, S0 f8) { }
 }
 
 class C1
@@ -41,9 +41,8 @@ class C1
 
 struct S2
 {
-    public S2(C0 f4): this()
-    {
-    }
+    public S2(C0 f4)
+        : this() { }
 }
 
 struct S3
@@ -62,6 +61,7 @@ public class Runtime_57061
     static C1 s_37;
     static sbyte s_56;
     static S3 s_60;
+
     [Fact]
     public static void TestEntryPoint()
     {
@@ -97,7 +97,6 @@ public class Runtime_57061
 
             vr3 = vr3;
         }
-       
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]

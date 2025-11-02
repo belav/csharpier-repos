@@ -15,7 +15,9 @@ namespace System.Xml.XmlWriterTests
         public static void WriteWithXmlnsNewLine()
         {
             XmlDocument xml = new();
-            xml.LoadXml("<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" width=\"10\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" height=\"10\"><g /></svg>");
+            xml.LoadXml(
+                "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" width=\"10\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" height=\"10\"><g /></svg>"
+            );
 
             XmlWriterSettings settings = new();
             settings.NewLineOnAttributes = true;
@@ -29,7 +31,10 @@ namespace System.Xml.XmlWriterTests
                 xml.Save(writer);
             }
 
-            Assert.Equal("<?xml version=\"1.0\" encoding=\"utf-16\"?>\n<svg\n version=\"1.1\"\n xmlns=\"http://www.w3.org/2000/svg\"\n width=\"10\"\n xmlns:xlink=\"http://www.w3.org/1999/xlink\"\n height=\"10\">\n <g />\n</svg>", output.ToString());
+            Assert.Equal(
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?>\n<svg\n version=\"1.1\"\n xmlns=\"http://www.w3.org/2000/svg\"\n width=\"10\"\n xmlns:xlink=\"http://www.w3.org/1999/xlink\"\n height=\"10\">\n <g />\n</svg>",
+                output.ToString()
+            );
         }
     }
 }

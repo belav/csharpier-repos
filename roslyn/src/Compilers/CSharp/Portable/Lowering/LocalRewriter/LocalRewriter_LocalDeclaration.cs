@@ -13,10 +13,22 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override BoundNode? VisitLocalDeclaration(BoundLocalDeclaration node)
         {
-            return RewriteLocalDeclaration(node, node.Syntax, node.LocalSymbol, VisitExpression(node.InitializerOpt), node.HasErrors);
+            return RewriteLocalDeclaration(
+                node,
+                node.Syntax,
+                node.LocalSymbol,
+                VisitExpression(node.InitializerOpt),
+                node.HasErrors
+            );
         }
 
-        private BoundStatement? RewriteLocalDeclaration(BoundLocalDeclaration? originalOpt, SyntaxNode syntax, LocalSymbol localSymbol, BoundExpression? rewrittenInitializer, bool hasErrors = false)
+        private BoundStatement? RewriteLocalDeclaration(
+            BoundLocalDeclaration? originalOpt,
+            SyntaxNode syntax,
+            LocalSymbol localSymbol,
+            BoundExpression? rewrittenInitializer,
+            bool hasErrors = false
+        )
         {
             // A declaration of a local variable without an initializer has no associated IL.
             // Simply remove the declaration from the bound tree. The local symbol will
@@ -27,9 +39,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // A declaration of a local constant also does nothing, even though there is
-            // an assignment. The value will be emitted directly where it is used. The 
-            // local symbol remains in the bound block, but codegen will skip making a 
-            // stack frame location for it. (We still need a symbol for it to stay 
+            // an assignment. The value will be emitted directly where it is used. The
+            // local symbol remains in the bound block, but codegen will skip making a
+            // stack frame location for it. (We still need a symbol for it to stay
             // around because we'll be generating debug info for it.)
             if (localSymbol.IsConst)
             {
@@ -56,35 +68,56 @@ namespace Microsoft.CodeAnalysis.CSharp
                 syntax,
                 _factory.AssignmentExpression(
                     syntax,
-                    new BoundLocal(
-                        syntax,
-                        localSymbol,
-                        null,
-                        localSymbol.Type
-                    ),
+                    new BoundLocal(syntax, localSymbol, null, localSymbol.Type),
                     rewrittenInitializer,
                     localSymbol.Type,
-                    localSymbol.IsRef),
-                hasErrors);
+                    localSymbol.IsRef
+                ),
+                hasErrors
+            );
 
-            return InstrumentLocalDeclarationIfNecessary(originalOpt, localSymbol, rewrittenLocalDeclaration);
+            return InstrumentLocalDeclarationIfNecessary(
+                originalOpt,
+                localSymbol,
+                rewrittenLocalDeclaration
+            );
         }
 
-        private BoundStatement InstrumentLocalDeclarationIfNecessary(BoundLocalDeclaration? originalOpt, LocalSymbol localSymbol, BoundStatement rewrittenLocalDeclaration)
+        private BoundStatement InstrumentLocalDeclarationIfNecessary(
+            BoundLocalDeclaration? originalOpt,
+            LocalSymbol localSymbol,
+            BoundStatement rewrittenLocalDeclaration
+        )
         {
             // Add sequence points, if necessary.
-            if (this.Instrument && originalOpt?.WasCompilerGenerated == false && !localSymbol.IsConst &&
-                (originalOpt.Syntax.Kind() == SyntaxKind.VariableDeclarator ||
-                    (originalOpt.Syntax.Kind() == SyntaxKind.LocalDeclarationStatement &&
-                        ((LocalDeclarationStatementSyntax)originalOpt.Syntax).Declaration.Variables.Count == 1)))
+            if (
+                this.Instrument
+                && originalOpt?.WasCompilerGenerated == false
+                && !localSymbol.IsConst
+                && (
+                    originalOpt.Syntax.Kind() == SyntaxKind.VariableDeclarator
+                    || (
+                        originalOpt.Syntax.Kind() == SyntaxKind.LocalDeclarationStatement
+                        && ((LocalDeclarationStatementSyntax)originalOpt.Syntax)
+                            .Declaration
+                            .Variables
+                            .Count == 1
+                    )
+                )
+            )
             {
-                rewrittenLocalDeclaration = Instrumenter.InstrumentUserDefinedLocalInitialization(originalOpt, rewrittenLocalDeclaration);
+                rewrittenLocalDeclaration = Instrumenter.InstrumentUserDefinedLocalInitialization(
+                    originalOpt,
+                    rewrittenLocalDeclaration
+                );
             }
 
             return rewrittenLocalDeclaration;
         }
 
-        public sealed override BoundNode VisitOutVariablePendingInference(OutVariablePendingInference node)
+        public sealed override BoundNode VisitOutVariablePendingInference(
+            OutVariablePendingInference node
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }

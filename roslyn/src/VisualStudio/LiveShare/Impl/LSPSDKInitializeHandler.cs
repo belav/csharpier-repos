@@ -19,21 +19,24 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare
     /// Handle the initialize request and report the capabilities of the server.
     /// TODO Once the client side code is migrated to LSP client, this can be removed.
     /// </summary>
-    [ExportLspRequestHandler(LiveShareConstants.RoslynLSPSDKContractName, LSP.Methods.InitializeName)]
-    internal class LSPSDKInitializeHandler : ILspRequestHandler<LSP.InitializeParams, LSP.InitializeResult, Solution>
+    [ExportLspRequestHandler(
+        LiveShareConstants.RoslynLSPSDKContractName,
+        LSP.Methods.InitializeName
+    )]
+    internal class LSPSDKInitializeHandler
+        : ILspRequestHandler<LSP.InitializeParams, LSP.InitializeResult, Solution>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LSPSDKInitializeHandler()
-        {
-        }
+        public LSPSDKInitializeHandler() { }
 
-        public Task<LSP.InitializeResult> HandleAsync(LSP.InitializeParams request, RequestContext<Solution> requestContext, CancellationToken cancellationToken)
+        public Task<LSP.InitializeResult> HandleAsync(
+            LSP.InitializeParams request,
+            RequestContext<Solution> requestContext,
+            CancellationToken cancellationToken
+        )
         {
-            var result = new LSP.InitializeResult
-            {
-                Capabilities = new LSP.ServerCapabilities()
-            };
+            var result = new LSP.InitializeResult { Capabilities = new LSP.ServerCapabilities() };
 
             return Task.FromResult(result);
         }

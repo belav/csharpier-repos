@@ -16,7 +16,8 @@ namespace System.MathBenchmarks
 
         public static void CopySignTest()
         {
-            double result = 1.0, value = -1.0;
+            double result = 1.0,
+                value = -1.0;
 
             for (int iteration = 0; iteration < MathTests.Iterations; iteration++)
             {
@@ -26,7 +27,9 @@ namespace System.MathBenchmarks
 
             if (result != copySignExpectedResult)
             {
-                throw new Exception($"Expected Result {copySignExpectedResult}; Actual Result {result}");
+                throw new Exception(
+                    $"Expected Result {copySignExpectedResult}; Actual Result {result}"
+                );
             }
         }
     }

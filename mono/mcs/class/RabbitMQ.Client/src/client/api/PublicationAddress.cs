@@ -95,9 +95,7 @@ namespace RabbitMQ.Client
 
         ///<summary>Construct a PublicationAddress with the given exchange
         ///type, exchange name and routing key.</summary>
-        public PublicationAddress(string exchangeType,
-                                  string exchangeName,
-                                  string routingKey)
+        public PublicationAddress(string exchangeType, string exchangeName, string routingKey)
         {
             m_exchangeType = exchangeType;
             m_exchangeName = exchangeName;
@@ -111,9 +109,11 @@ namespace RabbitMQ.Client
             Match m = PSEUDO_URI_PARSER.Match(uriLikeString);
             if (m.Success)
             {
-                return new PublicationAddress(m.Groups[1].Value,
-                                              m.Groups[2].Value,
-                                              m.Groups[3].Value);
+                return new PublicationAddress(
+                    m.Groups[1].Value,
+                    m.Groups[2].Value,
+                    m.Groups[3].Value
+                );
             }
             else
             {
@@ -122,13 +122,22 @@ namespace RabbitMQ.Client
         }
 
         ///<summary>Retrieve the exchange type string.</summary>
-        public string ExchangeType { get { return m_exchangeType; } }
+        public string ExchangeType
+        {
+            get { return m_exchangeType; }
+        }
 
         ///<summary>Retrieve the exchange name.</summary>
-        public string ExchangeName { get { return m_exchangeName; } }
+        public string ExchangeName
+        {
+            get { return m_exchangeName; }
+        }
 
         ///<summary>Retrieve the routing key.</summary>
-        public string RoutingKey { get { return m_routingKey; } }
+        public string RoutingKey
+        {
+            get { return m_routingKey; }
+        }
 
         ///<summary>Reconstruct the "uri" from its constituents.</summary>
         public override string ToString()

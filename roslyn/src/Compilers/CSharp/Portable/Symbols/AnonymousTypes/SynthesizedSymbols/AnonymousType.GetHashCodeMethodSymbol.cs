@@ -25,9 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private sealed partial class AnonymousTypeGetHashCodeMethodSymbol : SynthesizedMethodBase
         {
             internal AnonymousTypeGetHashCodeMethodSymbol(NamedTypeSymbol container)
-                : base(container, WellKnownMemberNames.ObjectGetHashCode)
-            {
-            }
+                : base(container, WellKnownMemberNames.ObjectGetHashCode) { }
 
             public override MethodKind MethodKind
             {
@@ -59,17 +57,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return true; }
             }
 
-            internal sealed override bool IsMetadataVirtual(bool ignoreInterfaceImplementationChanges = false)
+            internal sealed override bool IsMetadataVirtual(
+                bool ignoreInterfaceImplementationChanges = false
+            )
             {
                 return true;
             }
 
             internal override bool IsMetadataFinal
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
         }
     }

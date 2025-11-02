@@ -32,7 +32,8 @@ namespace System.Reflection.Metadata
         /// The default decoder used by <see cref="MetadataReader"/> to decode UTF-8 when
         /// no decoder is provided to the constructor.
         /// </summary>
-        public static MetadataStringDecoder DefaultUTF8 { get; } = new MetadataStringDecoder(Encoding.UTF8);
+        public static MetadataStringDecoder DefaultUTF8 { get; } =
+            new MetadataStringDecoder(Encoding.UTF8);
 
         /// <summary>
         /// Creates a <see cref="MetadataStringDecoder"/> for the given encoding.

@@ -24,8 +24,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder ToView(
         this EntityTypeBuilder entityTypeBuilder,
-        string? name)
-        => entityTypeBuilder.ToView(name, (string?)null);
+        string? name
+    ) => entityTypeBuilder.ToView(name, (string?)null);
 
     /// <summary>
     ///     Configures the view that the entity type maps to when targeting a relational database.
@@ -39,9 +39,10 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder<TEntity> ToView<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
-        string? name)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)ToView((EntityTypeBuilder)entityTypeBuilder, name);
+        string? name
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)ToView((EntityTypeBuilder)entityTypeBuilder, name);
 
     /// <summary>
     ///     Configures the view that the entity type maps to when targeting a relational database.
@@ -56,7 +57,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder ToView(
         this EntityTypeBuilder entityTypeBuilder,
         string? name,
-        string? schema)
+        string? schema
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -82,9 +84,10 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> ToView<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string? name,
-        string? schema)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)ToView((EntityTypeBuilder)entityTypeBuilder, name, schema);
+        string? schema
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)ToView((EntityTypeBuilder)entityTypeBuilder, name, schema);
 
     /// <summary>
     ///     Configures the view that the entity type maps to when targeting a relational database.
@@ -99,8 +102,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder ToView(
         this EntityTypeBuilder entityTypeBuilder,
         string name,
-        Action<ViewBuilder> buildAction)
-        => entityTypeBuilder.ToView(name, null, buildAction);
+        Action<ViewBuilder> buildAction
+    ) => entityTypeBuilder.ToView(name, null, buildAction);
 
     /// <summary>
     ///     Configures the view that the entity type maps to when targeting a relational database.
@@ -116,9 +119,9 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> ToView<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
-        Action<ViewBuilder<TEntity>> buildAction)
-        where TEntity : class
-        => ToView(entityTypeBuilder, name, null, buildAction);
+        Action<ViewBuilder<TEntity>> buildAction
+    )
+        where TEntity : class => ToView(entityTypeBuilder, name, null, buildAction);
 
     /// <summary>
     ///     Configures the view that the entity type maps to when targeting a relational database.
@@ -135,7 +138,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder entityTypeBuilder,
         string name,
         string? schema,
-        Action<ViewBuilder> buildAction)
+        Action<ViewBuilder> buildAction
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -143,7 +147,12 @@ public static partial class RelationalEntityTypeBuilderExtensions
         entityTypeBuilder.Metadata.SetViewName(name);
         entityTypeBuilder.Metadata.SetViewSchema(schema);
         entityTypeBuilder.Metadata.SetAnnotation(RelationalAnnotationNames.ViewDefinitionSql, null);
-        buildAction(new ViewBuilder(StoreObjectIdentifier.View(name, entityTypeBuilder.Metadata.GetViewSchema()), entityTypeBuilder));
+        buildAction(
+            new ViewBuilder(
+                StoreObjectIdentifier.View(name, entityTypeBuilder.Metadata.GetViewSchema()),
+                entityTypeBuilder
+            )
+        );
 
         return entityTypeBuilder;
     }
@@ -164,7 +173,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
         string? schema,
-        Action<ViewBuilder<TEntity>> buildAction)
+        Action<ViewBuilder<TEntity>> buildAction
+    )
         where TEntity : class
     {
         Check.NotNull(name, nameof(name));
@@ -174,7 +184,11 @@ public static partial class RelationalEntityTypeBuilderExtensions
         entityTypeBuilder.Metadata.SetViewSchema(schema);
         entityTypeBuilder.Metadata.SetAnnotation(RelationalAnnotationNames.ViewDefinitionSql, null);
         buildAction(
-            new ViewBuilder<TEntity>(StoreObjectIdentifier.View(name, entityTypeBuilder.Metadata.GetViewSchema()), entityTypeBuilder));
+            new ViewBuilder<TEntity>(
+                StoreObjectIdentifier.View(name, entityTypeBuilder.Metadata.GetViewSchema()),
+                entityTypeBuilder
+            )
+        );
 
         return entityTypeBuilder;
     }
@@ -190,8 +204,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static OwnedNavigationBuilder ToView(
         this OwnedNavigationBuilder ownedNavigationBuilder,
-        string? name)
-        => ownedNavigationBuilder.ToView(name, (string?)null);
+        string? name
+    ) => ownedNavigationBuilder.ToView(name, (string?)null);
 
     /// <summary>
     ///     Configures the view that the entity type maps to when targeting a relational database.
@@ -204,12 +218,17 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="ownedNavigationBuilder">The builder for the entity type being configured.</param>
     /// <param name="name">The name of the view.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToView<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToView<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
-        string? name)
+        string? name
+    )
         where TOwnerEntity : class
-        where TDependentEntity : class
-        => (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)ToView((OwnedNavigationBuilder)ownedNavigationBuilder, name);
+        where TDependentEntity : class =>
+        (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+            ToView((OwnedNavigationBuilder)ownedNavigationBuilder, name);
 
     /// <summary>
     ///     Configures the view that the entity type maps to when targeting a relational database.
@@ -224,14 +243,18 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static OwnedNavigationBuilder ToView(
         this OwnedNavigationBuilder ownedNavigationBuilder,
         string? name,
-        string? schema)
+        string? schema
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
 
         ownedNavigationBuilder.OwnedEntityType.SetViewName(name);
         ownedNavigationBuilder.OwnedEntityType.SetViewSchema(schema);
-        ownedNavigationBuilder.OwnedEntityType.SetAnnotation(RelationalAnnotationNames.ViewDefinitionSql, null);
+        ownedNavigationBuilder.OwnedEntityType.SetAnnotation(
+            RelationalAnnotationNames.ViewDefinitionSql,
+            null
+        );
 
         return ownedNavigationBuilder;
     }
@@ -248,14 +271,18 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="name">The name of the view.</param>
     /// <param name="schema">The schema of the view.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToView<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToView<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
         string? name,
-        string? schema)
+        string? schema
+    )
         where TOwnerEntity : class
-        where TDependentEntity : class
-        => (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)ToView(
-            (OwnedNavigationBuilder)ownedNavigationBuilder, name, schema);
+        where TDependentEntity : class =>
+        (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+            ToView((OwnedNavigationBuilder)ownedNavigationBuilder, name, schema);
 
     /// <summary>
     ///     Configures the view that the entity type maps to when targeting a relational database.
@@ -270,8 +297,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static OwnedNavigationBuilder ToView(
         this OwnedNavigationBuilder ownedNavigationBuilder,
         string name,
-        Action<OwnedNavigationViewBuilder> buildAction)
-        => ownedNavigationBuilder.ToView(name, null, buildAction);
+        Action<OwnedNavigationViewBuilder> buildAction
+    ) => ownedNavigationBuilder.ToView(name, null, buildAction);
 
     /// <summary>
     ///     Configures the view that the entity type maps to when targeting a relational database.
@@ -285,13 +312,16 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="name">The name of the view.</param>
     /// <param name="buildAction">An action that performs configuration of the view.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToView<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToView<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
         string name,
-        Action<OwnedNavigationViewBuilder<TOwnerEntity, TDependentEntity>> buildAction)
+        Action<OwnedNavigationViewBuilder<TOwnerEntity, TDependentEntity>> buildAction
+    )
         where TOwnerEntity : class
-        where TDependentEntity : class
-        => ToView(ownedNavigationBuilder, name, null, buildAction);
+        where TDependentEntity : class => ToView(ownedNavigationBuilder, name, null, buildAction);
 
     /// <summary>
     ///     Configures the view that the entity type maps to when targeting a relational database.
@@ -308,17 +338,27 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this OwnedNavigationBuilder ownedNavigationBuilder,
         string name,
         string? schema,
-        Action<OwnedNavigationViewBuilder> buildAction)
+        Action<OwnedNavigationViewBuilder> buildAction
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
 
         ownedNavigationBuilder.OwnedEntityType.SetViewName(name);
         ownedNavigationBuilder.OwnedEntityType.SetViewSchema(schema);
-        ownedNavigationBuilder.OwnedEntityType.SetAnnotation(RelationalAnnotationNames.ViewDefinitionSql, null);
+        ownedNavigationBuilder.OwnedEntityType.SetAnnotation(
+            RelationalAnnotationNames.ViewDefinitionSql,
+            null
+        );
         buildAction(
             new OwnedNavigationViewBuilder(
-                StoreObjectIdentifier.View(name, ownedNavigationBuilder.OwnedEntityType.GetViewSchema()), ownedNavigationBuilder));
+                StoreObjectIdentifier.View(
+                    name,
+                    ownedNavigationBuilder.OwnedEntityType.GetViewSchema()
+                ),
+                ownedNavigationBuilder
+            )
+        );
 
         return ownedNavigationBuilder;
     }
@@ -336,11 +376,15 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="schema">The schema of the view.</param>
     /// <param name="buildAction">An action that performs configuration of the view.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToView<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToView<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
         string name,
         string? schema,
-        Action<OwnedNavigationViewBuilder<TOwnerEntity, TDependentEntity>> buildAction)
+        Action<OwnedNavigationViewBuilder<TOwnerEntity, TDependentEntity>> buildAction
+    )
         where TOwnerEntity : class
         where TDependentEntity : class
     {
@@ -349,10 +393,19 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         ownedNavigationBuilder.OwnedEntityType.SetViewName(name);
         ownedNavigationBuilder.OwnedEntityType.SetViewSchema(schema);
-        ownedNavigationBuilder.OwnedEntityType.SetAnnotation(RelationalAnnotationNames.ViewDefinitionSql, null);
+        ownedNavigationBuilder.OwnedEntityType.SetAnnotation(
+            RelationalAnnotationNames.ViewDefinitionSql,
+            null
+        );
         buildAction(
             new OwnedNavigationViewBuilder<TOwnerEntity, TDependentEntity>(
-                StoreObjectIdentifier.View(name, ownedNavigationBuilder.OwnedEntityType.GetViewSchema()), ownedNavigationBuilder));
+                StoreObjectIdentifier.View(
+                    name,
+                    ownedNavigationBuilder.OwnedEntityType.GetViewSchema()
+                ),
+                ownedNavigationBuilder
+            )
+        );
 
         return ownedNavigationBuilder;
     }
@@ -371,8 +424,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder SplitToView(
         this EntityTypeBuilder entityTypeBuilder,
         string name,
-        Action<SplitViewBuilder> buildAction)
-        => entityTypeBuilder.SplitToView(name, null, buildAction);
+        Action<SplitViewBuilder> buildAction
+    ) => entityTypeBuilder.SplitToView(name, null, buildAction);
 
     /// <summary>
     ///     Configures some of the properties on this entity type to be mapped to a different view.
@@ -389,9 +442,9 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> SplitToView<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
-        Action<SplitViewBuilder<TEntity>> buildAction)
-        where TEntity : class
-        => entityTypeBuilder.SplitToView(name, null, buildAction);
+        Action<SplitViewBuilder<TEntity>> buildAction
+    )
+        where TEntity : class => entityTypeBuilder.SplitToView(name, null, buildAction);
 
     /// <summary>
     ///     Configures some of the properties on this entity type to be mapped to a different view.
@@ -409,7 +462,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder entityTypeBuilder,
         string name,
         string? schema,
-        Action<SplitViewBuilder> buildAction)
+        Action<SplitViewBuilder> buildAction
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -417,7 +471,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         buildAction(
             new SplitViewBuilder(
-                StoreObjectIdentifier.View(name, schema ?? entityTypeBuilder.Metadata.GetDefaultViewSchema()), entityTypeBuilder));
+                StoreObjectIdentifier.View(
+                    name,
+                    schema ?? entityTypeBuilder.Metadata.GetDefaultViewSchema()
+                ),
+                entityTypeBuilder
+            )
+        );
 
         return entityTypeBuilder;
     }
@@ -439,7 +499,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
         string? schema,
-        Action<SplitViewBuilder<TEntity>> buildAction)
+        Action<SplitViewBuilder<TEntity>> buildAction
+    )
         where TEntity : class
     {
         Check.NotNull(name, nameof(name));
@@ -448,7 +509,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         buildAction(
             new SplitViewBuilder<TEntity>(
-                StoreObjectIdentifier.View(name, schema ?? entityTypeBuilder.Metadata.GetDefaultViewSchema()), entityTypeBuilder));
+                StoreObjectIdentifier.View(
+                    name,
+                    schema ?? entityTypeBuilder.Metadata.GetDefaultViewSchema()
+                ),
+                entityTypeBuilder
+            )
+        );
 
         return entityTypeBuilder;
     }
@@ -467,8 +534,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static OwnedNavigationBuilder SplitToView(
         this OwnedNavigationBuilder ownedNavigationBuilder,
         string name,
-        Action<OwnedNavigationSplitViewBuilder> buildAction)
-        => ownedNavigationBuilder.SplitToView(name, null, buildAction);
+        Action<OwnedNavigationSplitViewBuilder> buildAction
+    ) => ownedNavigationBuilder.SplitToView(name, null, buildAction);
 
     /// <summary>
     ///     Configures some of the properties on this entity type to be mapped to a different view.
@@ -483,13 +550,17 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="name">The name of the view.</param>
     /// <param name="buildAction">An action that performs configuration of the view.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> SplitToView<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> SplitToView<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
         string name,
-        Action<OwnedNavigationSplitViewBuilder<TOwnerEntity, TDependentEntity>> buildAction)
+        Action<OwnedNavigationSplitViewBuilder<TOwnerEntity, TDependentEntity>> buildAction
+    )
         where TOwnerEntity : class
-        where TDependentEntity : class
-        => ownedNavigationBuilder.SplitToView(name, null, buildAction);
+        where TDependentEntity : class =>
+        ownedNavigationBuilder.SplitToView(name, null, buildAction);
 
     /// <summary>
     ///     Configures some of the properties on this entity type to be mapped to a different view.
@@ -507,7 +578,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this OwnedNavigationBuilder ownedNavigationBuilder,
         string name,
         string? schema,
-        Action<OwnedNavigationSplitViewBuilder> buildAction)
+        Action<OwnedNavigationSplitViewBuilder> buildAction
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -515,8 +587,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         buildAction(
             new OwnedNavigationSplitViewBuilder(
-                StoreObjectIdentifier.View(name, schema ?? ownedNavigationBuilder.OwnedEntityType.GetDefaultViewSchema()),
-                ownedNavigationBuilder));
+                StoreObjectIdentifier.View(
+                    name,
+                    schema ?? ownedNavigationBuilder.OwnedEntityType.GetDefaultViewSchema()
+                ),
+                ownedNavigationBuilder
+            )
+        );
 
         return ownedNavigationBuilder;
     }
@@ -535,11 +612,15 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="schema">The schema of the view.</param>
     /// <param name="buildAction">An action that performs configuration of the view.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> SplitToView<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> SplitToView<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
         string name,
         string? schema,
-        Action<OwnedNavigationSplitViewBuilder<TOwnerEntity, TDependentEntity>> buildAction)
+        Action<OwnedNavigationSplitViewBuilder<TOwnerEntity, TDependentEntity>> buildAction
+    )
         where TOwnerEntity : class
         where TDependentEntity : class
     {
@@ -549,8 +630,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         buildAction(
             new OwnedNavigationSplitViewBuilder<TOwnerEntity, TDependentEntity>(
-                StoreObjectIdentifier.View(name, schema ?? ownedNavigationBuilder.OwnedEntityType.GetDefaultViewSchema()),
-                ownedNavigationBuilder));
+                StoreObjectIdentifier.View(
+                    name,
+                    schema ?? ownedNavigationBuilder.OwnedEntityType.GetDefaultViewSchema()
+                ),
+                ownedNavigationBuilder
+            )
+        );
 
         return ownedNavigationBuilder;
     }
@@ -570,7 +656,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? ToView(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!entityTypeBuilder.CanSetView(name, fromDataAnnotation))
         {
@@ -598,10 +685,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
         string? schema,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
-        if (!entityTypeBuilder.CanSetView(name, fromDataAnnotation)
-            || !entityTypeBuilder.CanSetViewSchema(schema, fromDataAnnotation))
+        if (
+            !entityTypeBuilder.CanSetView(name, fromDataAnnotation)
+            || !entityTypeBuilder.CanSetViewSchema(schema, fromDataAnnotation)
+        )
         {
             return null;
         }
@@ -625,11 +715,16 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static bool CanSetView(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
 
-        return entityTypeBuilder.CanSetAnnotation(RelationalAnnotationNames.ViewName, name, fromDataAnnotation);
+        return entityTypeBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.ViewName,
+            name,
+            fromDataAnnotation
+        );
     }
 
     /// <summary>
@@ -647,7 +742,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? ToViewSchema(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? schema,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!entityTypeBuilder.CanSetSchema(schema, fromDataAnnotation))
         {
@@ -672,10 +768,15 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static bool CanSetViewSchema(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? schema,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NullButNotEmpty(schema, nameof(schema));
 
-        return entityTypeBuilder.CanSetAnnotation(RelationalAnnotationNames.ViewSchema, schema, fromDataAnnotation);
+        return entityTypeBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.ViewSchema,
+            schema,
+            fromDataAnnotation
+        );
     }
 }

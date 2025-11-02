@@ -14,7 +14,11 @@ namespace System.ServiceModel.Channels
         TimeSpan defaultSendTimeout;
         RequestContext innerContext;
 
-        public ContextChannelRequestContext(RequestContext innerContext, ContextProtocol contextProtocol, TimeSpan defaultSendTimeout)
+        public ContextChannelRequestContext(
+            RequestContext innerContext,
+            ContextProtocol contextProtocol,
+            TimeSpan defaultSendTimeout
+        )
         {
             if (innerContext == null)
             {
@@ -40,12 +44,21 @@ namespace System.ServiceModel.Channels
             this.innerContext.Abort();
         }
 
-        public override IAsyncResult BeginReply(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginReply(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ReplyAsyncResult(message, this, timeout, callback, state);
         }
 
-        public override IAsyncResult BeginReply(Message message, AsyncCallback callback, object state)
+        public override IAsyncResult BeginReply(
+            Message message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.BeginReply(message, this.defaultSendTimeout, callback, state);
         }
@@ -77,15 +90,21 @@ namespace System.ServiceModel.Channels
                 CorrelationCallbackMessageProperty callback;
                 if (CorrelationCallbackMessageProperty.TryGet(message, out callback))
                 {
-                    ContextExchangeCorrelationHelper.AddOutgoingCorrelationCallbackData(callback, message, false);
+                    ContextExchangeCorrelationHelper.AddOutgoingCorrelationCallbackData(
+                        callback,
+                        message,
+                        false
+                    );
 
                     if (callback.IsFullyDefined)
                     {
-                        replyMessage = callback.FinalizeCorrelation(message, timeoutHelper.RemainingTime());
+                        replyMessage = callback.FinalizeCorrelation(
+                            message,
+                            timeoutHelper.RemainingTime()
+                        );
                         // we are done finalizing correlation, removing the messageproperty since we do not need it anymore
                         replyMessage.Properties.Remove(CorrelationCallbackMessageProperty.Name);
                     }
-
                 }
             }
 
@@ -109,16 +128,25 @@ namespace System.ServiceModel.Channels
 
         class ReplyAsyncResult : AsyncResult
         {
-
-            static AsyncCallback onFinalizeCorrelation = Fx.ThunkCallback(new AsyncCallback(OnFinalizeCorrelationCompletedCallback));
-            static AsyncCallback onReply = Fx.ThunkCallback(new AsyncCallback(OnReplyCompletedCallback));
+            static AsyncCallback onFinalizeCorrelation = Fx.ThunkCallback(
+                new AsyncCallback(OnFinalizeCorrelationCompletedCallback)
+            );
+            static AsyncCallback onReply = Fx.ThunkCallback(
+                new AsyncCallback(OnReplyCompletedCallback)
+            );
             ContextChannelRequestContext context;
             CorrelationCallbackMessageProperty correlationCallback;
             Message message;
             Message replyMessage;
             TimeoutHelper timeoutHelper;
 
-            public ReplyAsyncResult(Message message, ContextChannelRequestContext context, TimeSpan timeout, AsyncCallback callback, object state)
+            public ReplyAsyncResult(
+                Message message,
+                ContextChannelRequestContext context,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.context = context;
@@ -130,13 +158,27 @@ namespace System.ServiceModel.Channels
                 {
                     this.context.contextProtocol.OnOutgoingMessage(message, this.context);
 
-                    if (CorrelationCallbackMessageProperty.TryGet(message, out this.correlationCallback))
+                    if (
+                        CorrelationCallbackMessageProperty.TryGet(
+                            message,
+                            out this.correlationCallback
+                        )
+                    )
                     {
-                        ContextExchangeCorrelationHelper.AddOutgoingCorrelationCallbackData(this.correlationCallback, message, false);
+                        ContextExchangeCorrelationHelper.AddOutgoingCorrelationCallbackData(
+                            this.correlationCallback,
+                            message,
+                            false
+                        );
 
                         if (this.correlationCallback.IsFullyDefined)
                         {
-                            IAsyncResult result = correlationCallback.BeginFinalizeCorrelation(this.message, this.timeoutHelper.RemainingTime(), onFinalizeCorrelation, this);
+                            IAsyncResult result = correlationCallback.BeginFinalizeCorrelation(
+                                this.message,
+                                this.timeoutHelper.RemainingTime(),
+                                onFinalizeCorrelation,
+                                this
+                            );
                             if (result.CompletedSynchronously)
                             {
                                 if (OnFinalizeCorrelationCompleted(result))
@@ -152,7 +194,12 @@ namespace System.ServiceModel.Channels
 
                 if (shouldReply)
                 {
-                    IAsyncResult result = this.context.innerContext.BeginReply(this.message, this.timeoutHelper.RemainingTime(), onReply, this);
+                    IAsyncResult result = this.context.innerContext.BeginReply(
+                        this.message,
+                        this.timeoutHelper.RemainingTime(),
+                        onReply,
+                        this
+                    );
                     if (result.CompletedSynchronously)
                     {
                         OnReplyCompleted(result);
@@ -233,14 +280,22 @@ namespace System.ServiceModel.Channels
                 IAsyncResult replyResult;
                 try
                 {
-                    replyResult = this.context.innerContext.BeginReply(this.replyMessage, this.timeoutHelper.RemainingTime(), onReply, this);
+                    replyResult = this.context.innerContext.BeginReply(
+                        this.replyMessage,
+                        this.timeoutHelper.RemainingTime(),
+                        onReply,
+                        this
+                    );
                     throwing = false;
                 }
                 finally
                 {
                     if (throwing)
                     {
-                        if (this.message != null && !object.ReferenceEquals(this.message, this.replyMessage))
+                        if (
+                            this.message != null
+                            && !object.ReferenceEquals(this.message, this.replyMessage)
+                        )
                         {
                             this.replyMessage.Close();
                         }
@@ -264,7 +319,10 @@ namespace System.ServiceModel.Channels
                 }
                 finally
                 {
-                    if (this.message != null && !object.ReferenceEquals(this.message, this.replyMessage))
+                    if (
+                        this.message != null
+                        && !object.ReferenceEquals(this.message, this.replyMessage)
+                    )
                     {
                         this.replyMessage.Close();
                     }

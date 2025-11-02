@@ -18,7 +18,9 @@ namespace System.ComponentModel
         /// read-only.
         ///
         /// </summary>
-        public static readonly InheritanceAttribute Inherited = new InheritanceAttribute(InheritanceLevel.Inherited);
+        public static readonly InheritanceAttribute Inherited = new InheritanceAttribute(
+            InheritanceLevel.Inherited
+        );
 
         /// <summary>
         ///
@@ -27,7 +29,9 @@ namespace System.ComponentModel
         /// read-only.
         ///
         /// </summary>
-        public static readonly InheritanceAttribute InheritedReadOnly = new InheritanceAttribute(InheritanceLevel.InheritedReadOnly);
+        public static readonly InheritanceAttribute InheritedReadOnly = new InheritanceAttribute(
+            InheritanceLevel.InheritedReadOnly
+        );
 
         /// <summary>
         ///
@@ -35,7 +39,9 @@ namespace System.ComponentModel
         /// read-only.
         ///
         /// </summary>
-        public static readonly InheritanceAttribute NotInherited = new InheritanceAttribute(InheritanceLevel.NotInherited);
+        public static readonly InheritanceAttribute NotInherited = new InheritanceAttribute(
+            InheritanceLevel.NotInherited
+        );
 
         /// <summary>
         ///
@@ -106,6 +112,9 @@ namespace System.ComponentModel
         /// <summary>
         /// Converts this attribute to a string.
         /// </summary>
-        public override string ToString() => TypeDescriptor.GetConverterTrimUnsafe(typeof(InheritanceLevel)).ConvertToString(InheritanceLevel)!;
+        public override string ToString() =>
+            TypeDescriptor
+                .GetConverterTrimUnsafe(typeof(InheritanceLevel))
+                .ConvertToString(InheritanceLevel)!;
     }
 }

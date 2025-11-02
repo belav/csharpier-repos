@@ -14,11 +14,13 @@ namespace System.Diagnostics
         private string _counterName = string.Empty;
         private string _counterHelp = string.Empty;
 
-        public CounterCreationData()
-        {
-        }
+        public CounterCreationData() { }
 
-        public CounterCreationData(string counterName, string counterHelp, PerformanceCounterType counterType)
+        public CounterCreationData(
+            string counterName,
+            string counterHelp,
+            PerformanceCounterType counterType
+        )
         {
             CounterType = counterType;
             CounterName = counterName;
@@ -27,14 +29,15 @@ namespace System.Diagnostics
 
         public PerformanceCounterType CounterType
         {
-            get
-            {
-                return _counterType;
-            }
+            get { return _counterType; }
             set
             {
                 if (!Enum.IsDefined(typeof(PerformanceCounterType), value))
-                    throw new InvalidEnumArgumentException(nameof(PerformanceCounterType), (int)value, typeof(PerformanceCounterType));
+                    throw new InvalidEnumArgumentException(
+                        nameof(PerformanceCounterType),
+                        (int)value,
+                        typeof(PerformanceCounterType)
+                    );
 
                 _counterType = value;
             }
@@ -42,10 +45,7 @@ namespace System.Diagnostics
 
         public string CounterName
         {
-            get
-            {
-                return _counterName;
-            }
+            get { return _counterName; }
             set
             {
                 PerformanceCounterCategory.CheckValidCounter(value);
@@ -55,10 +55,7 @@ namespace System.Diagnostics
 
         public string CounterHelp
         {
-            get
-            {
-                return _counterHelp;
-            }
+            get { return _counterHelp; }
             set
             {
                 PerformanceCounterCategory.CheckValidHelp(value);

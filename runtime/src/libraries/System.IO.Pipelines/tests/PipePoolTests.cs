@@ -106,7 +106,15 @@ namespace System.IO.Pipelines.Tests
             var pool = new DisposeTrackingBufferPool();
             var writeSize = 512;
 
-            var pipe = new Pipe(new PipeOptions(pool, minimumSegmentSize: 2020, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false));
+            var pipe = new Pipe(
+                new PipeOptions(
+                    pool,
+                    minimumSegmentSize: 2020,
+                    readerScheduler: PipeScheduler.Inline,
+                    writerScheduler: PipeScheduler.Inline,
+                    useSynchronizationContext: false
+                )
+            );
 
             Memory<byte> buffer = pipe.Writer.GetMemory(writeSize);
             int allocatedSize = buffer.Length;
@@ -139,10 +147,12 @@ namespace System.IO.Pipelines.Tests
         public void ReturnsWriteHeadWhenRequestingLargerBlock()
         {
             var pool = new DisposeTrackingBufferPool();
-            var options = new PipeOptions(pool,
+            var options = new PipeOptions(
+                pool,
                 readerScheduler: PipeScheduler.Inline,
                 writerScheduler: PipeScheduler.Inline,
-                minimumSegmentSize: 2048);
+                minimumSegmentSize: 2048
+            );
 
             var pipe = new Pipe(options);
             pipe.Writer.GetMemory(512);
@@ -184,7 +194,10 @@ namespace System.IO.Pipelines.Tests
             Assert.Equal(1, pool.CurrentlyRentedBlocks);
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            pipe.Reader.OnWriterCompleted((exception, o) => Assert.Equal(0, pool.CurrentlyRentedBlocks), null);
+            pipe.Reader.OnWriterCompleted(
+                (exception, o) => Assert.Equal(0, pool.CurrentlyRentedBlocks),
+                null
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
 
             pipe.Reader.Complete();
@@ -202,7 +215,10 @@ namespace System.IO.Pipelines.Tests
             Assert.Equal(1, pool.CurrentlyRentedBlocks);
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            pipe.Writer.OnReaderCompleted((exception, o) => Assert.Equal(0, pool.CurrentlyRentedBlocks), null);
+            pipe.Writer.OnReaderCompleted(
+                (exception, o) => Assert.Equal(0, pool.CurrentlyRentedBlocks),
+                null
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
 
             pipe.Writer.Complete();
@@ -211,7 +227,12 @@ namespace System.IO.Pipelines.Tests
 
         private static PipeOptions CreatePipeWithInlineSchedulers(DisposeTrackingBufferPool pool)
         {
-            return new PipeOptions(pool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+            return new PipeOptions(
+                pool,
+                readerScheduler: PipeScheduler.Inline,
+                writerScheduler: PipeScheduler.Inline,
+                useSynchronizationContext: false
+            );
         }
     }
 }

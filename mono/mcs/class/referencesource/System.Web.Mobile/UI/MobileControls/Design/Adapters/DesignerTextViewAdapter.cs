@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="DesignerTextViewAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System.Globalization;
@@ -12,33 +12,30 @@ using System.Web.UI.MobileControls.Adapters;
 
 namespace System.Web.UI.Design.MobileControls.Adapters
 {
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class DesignerTextViewAdapter : System.Web.UI.MobileControls.Adapters.HtmlControlAdapter 
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal class DesignerTextViewAdapter
+        : System.Web.UI.MobileControls.Adapters.HtmlControlAdapter
     {
         protected new TextView Control
         {
-            get
-            {
-                return (TextView)base.Control;
-            }
+            get { return (TextView)base.Control; }
         }
 
         public override MobileCapabilities Device
         {
-            get
-            {
-                return DesignerCapabilities.Instance;
-            }
+            get { return DesignerCapabilities.Instance; }
         }
 
         public override void Render(HtmlMobileTextWriter writer)
         {
-            Alignment alignment = (Alignment) Style[Style.AlignmentKey, true];
-            Wrapping wrapping = (Wrapping) Style[Style.WrappingKey, true];
+            Alignment alignment = (Alignment)Style[Style.AlignmentKey, true];
+            Wrapping wrapping = (Wrapping)Style[Style.WrappingKey, true];
             bool wrap = (wrapping == Wrapping.Wrap || wrapping == Wrapping.NotSet);
             String width = DesignerAdapterUtil.GetWidth(Control);
 
@@ -71,7 +68,12 @@ namespace System.Web.UI.Design.MobileControls.Adapters
             int requiredHeight = MSHTMLHostUtil.GetHtmlFragmentHeight(filteredText);
             int requiredWidth = MSHTMLHostUtil.GetHtmlFragmentWidth(filteredText);
 
-            ((DesignerTextWriter)writer).WriteCssStyleText(Style, null, (requiredHeight > uniqueLineHeight || requiredWidth > 1) ? filteredText : "&nbsp;", false);
+            ((DesignerTextWriter)writer).WriteCssStyleText(
+                Style,
+                null,
+                (requiredHeight > uniqueLineHeight || requiredWidth > 1) ? filteredText : "&nbsp;",
+                false
+            );
             writer.WriteEndTag("div");
             ((DesignerTextWriter)writer).ExitZeroFontSizeTag();
         }
@@ -82,14 +84,15 @@ namespace System.Web.UI.Design.MobileControls.Adapters
             InsideTagName,
             InsideAttributeName,
             InsideAttributeValue,
-            ExpectingAttributeValue
+            ExpectingAttributeValue,
         }
 
         private String FilterTags(String text)
         {
             StringBuilder filteredText = new StringBuilder();
             // StringBuilder hrefValue = null;
-            int len = text.Length, i;
+            int len = text.Length,
+                i;
             int tagBegin = 0; //, attribBegin = 0;
             bool doubleQuotedAttributeValue = false;
             // bool cacheHRefValue = false;
@@ -152,7 +155,7 @@ namespace System.Web.UI.Design.MobileControls.Adapters
                                 //{
                                 //    hrefValue.Append('"');
                                 //}
-                                if (text[i-1] != '\\' && doubleQuotedAttributeValue)
+                                if (text[i - 1] != '\\' && doubleQuotedAttributeValue)
                                 {
                                     // leaving attribute value
                                     cs = CursorStatus.InsideAttributeName;
@@ -189,7 +192,7 @@ namespace System.Web.UI.Design.MobileControls.Adapters
                                 //{
                                 //    hrefValue.Append('\'');
                                 //}
-                                if (text[i-1] != '\\' && !doubleQuotedAttributeValue)
+                                if (text[i - 1] != '\\' && !doubleQuotedAttributeValue)
                                 {
                                     // leaving attribute value
                                     cs = CursorStatus.InsideAttributeName;
@@ -212,7 +215,9 @@ namespace System.Web.UI.Design.MobileControls.Adapters
                         {
                             case CursorStatus.InsideTagName:
                             {
-                                tagName = text.Substring(tagBegin+1, i-tagBegin-1).Trim().ToUpper(CultureInfo.InvariantCulture);
+                                tagName = text.Substring(tagBegin + 1, i - tagBegin - 1)
+                                    .Trim()
+                                    .ToUpper(CultureInfo.InvariantCulture);
 
                                 if (tagName.Trim().Length > 0)
                                 {
@@ -240,14 +245,16 @@ namespace System.Web.UI.Design.MobileControls.Adapters
                                 // leaving tag
                                 if (cs == CursorStatus.InsideTagName)
                                 {
-                                    tagName = text.Substring(tagBegin+1, i-tagBegin-1).Trim().ToUpper(CultureInfo.InvariantCulture);
+                                    tagName = text.Substring(tagBegin + 1, i - tagBegin - 1)
+                                        .Trim()
+                                        .ToUpper(CultureInfo.InvariantCulture);
                                 }
                                 cs = CursorStatus.OutsideTag;
                                 switch (tagName)
                                 {
                                     case "A":
                                     {
-                                        //filteredText.Append(String.Format("<A HREF={0}>", 
+                                        //filteredText.Append(String.Format("<A HREF={0}>",
                                         //    hrefValue == null ? String.Empty : hrefValue.ToString()));
                                         filteredText.Append("<A HREF=\"\">");
                                         break;
@@ -293,7 +300,9 @@ namespace System.Web.UI.Design.MobileControls.Adapters
                                 {
                                     cs = CursorStatus.InsideAttributeName;
                                     // attribBegin = i;
-                                    tagName = text.Substring(tagBegin+1, i-tagBegin-1).Trim().ToUpper(CultureInfo.InvariantCulture);
+                                    tagName = text.Substring(tagBegin + 1, i - tagBegin - 1)
+                                        .Trim()
+                                        .ToUpper(CultureInfo.InvariantCulture);
                                     break;
                                 }
                             }
@@ -318,4 +327,3 @@ namespace System.Web.UI.Design.MobileControls.Adapters
         }
     }
 }
-

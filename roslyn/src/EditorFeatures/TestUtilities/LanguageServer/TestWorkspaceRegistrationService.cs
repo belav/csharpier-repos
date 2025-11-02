@@ -17,8 +17,6 @@ public abstract partial class AbstractLanguageServerProtocolTests
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestWorkspaceRegistrationService()
-        {
-        }
+        public TestWorkspaceRegistrationService() { }
     }
 }

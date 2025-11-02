@@ -24,28 +24,43 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     [ExportCompletionProvider(nameof(ObjectCreationCompletionProvider), LanguageNames.CSharp)]
     [ExtensionOrder(After = nameof(ExplicitInterfaceTypeCompletionProvider))]
     [Shared]
-    internal partial class ObjectCreationCompletionProvider : AbstractObjectCreationCompletionProvider<CSharpSyntaxContext>
+    internal partial class ObjectCreationCompletionProvider
+        : AbstractObjectCreationCompletionProvider<CSharpSyntaxContext>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ObjectCreationCompletionProvider()
-        {
-        }
+        public ObjectCreationCompletionProvider() { }
 
         internal override string Language => LanguageNames.CSharp;
 
-        public override bool IsInsertionTrigger(SourceText text, int characterPosition, CompletionOptions options)
-            => CompletionUtilities.IsTriggerAfterSpaceOrStartOfWordCharacter(text, characterPosition, options);
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int characterPosition,
+            CompletionOptions options
+        ) =>
+            CompletionUtilities.IsTriggerAfterSpaceOrStartOfWordCharacter(
+                text,
+                characterPosition,
+                options
+            );
 
-        public override ImmutableHashSet<char> TriggerCharacters { get; } = CompletionUtilities.SpaceTriggerCharacter;
+        public override ImmutableHashSet<char> TriggerCharacters { get; } =
+            CompletionUtilities.SpaceTriggerCharacter;
 
-        protected override SyntaxNode? GetObjectCreationNewExpression(SyntaxTree tree, int position, CancellationToken cancellationToken)
+        protected override SyntaxNode? GetObjectCreationNewExpression(
+            SyntaxTree tree,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             if (tree != null)
             {
                 if (!tree.IsInNonUserCode(position, cancellationToken))
                 {
-                    var tokenOnLeftOfPosition = tree.FindTokenOnLeftOfPosition(position, cancellationToken);
+                    var tokenOnLeftOfPosition = tree.FindTokenOnLeftOfPosition(
+                        position,
+                        cancellationToken
+                    );
                     var newToken = tokenOnLeftOfPosition.GetPreviousTokenIfTouchingWord(position);
 
                     // Only after 'new'.
@@ -53,7 +68,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     {
                         // Only if the 'new' belongs to an object creation expression (and isn't a 'new'
                         // modifier on a member).
-                        if (tree.IsObjectCreationTypeContext(position, tokenOnLeftOfPosition, cancellationToken))
+                        if (
+                            tree.IsObjectCreationTypeContext(
+                                position,
+                                tokenOnLeftOfPosition,
+                                cancellationToken
+                            )
+                        )
                             return newToken.Parent as ExpressionSyntax;
                     }
                 }
@@ -63,21 +84,44 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         }
 
         protected override async Task<ImmutableArray<SymbolAndSelectionInfo>> GetSymbolsAsync(
-            CompletionContext? completionContext, CSharpSyntaxContext context, int position, CompletionOptions options, CancellationToken cancellationToken)
+            CompletionContext? completionContext,
+            CSharpSyntaxContext context,
+            int position,
+            CompletionOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            var result = await base.GetSymbolsAsync(completionContext, context, position, options, cancellationToken).ConfigureAwait(false);
+            var result = await base.GetSymbolsAsync(
+                    completionContext,
+                    context,
+                    position,
+                    options,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (result.Any())
             {
                 var type = (ITypeSymbol)result.Single().Symbol;
-                var alias = await type.FindApplicableAliasAsync(position, context.SemanticModel, cancellationToken).ConfigureAwait(false);
+                var alias = await type.FindApplicableAliasAsync(
+                        position,
+                        context.SemanticModel,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (alias != null)
-                    return ImmutableArray.Create(new SymbolAndSelectionInfo(alias, result.Single().Preselect));
+                    return ImmutableArray.Create(
+                        new SymbolAndSelectionInfo(alias, result.Single().Preselect)
+                    );
             }
 
             return result;
         }
 
-        protected override (string displayText, string suffix, string insertionText) GetDisplayAndSuffixAndInsertionText(ISymbol symbol, CSharpSyntaxContext context)
+        protected override (
+            string displayText,
+            string suffix,
+            string insertionText
+        ) GetDisplayAndSuffixAndInsertionText(ISymbol symbol, CSharpSyntaxContext context)
         {
             if (symbol is IAliasSymbol)
             {
@@ -95,29 +139,60 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 symbol = typeSymbol.WithNullableAnnotation(NullableAnnotation.NotAnnotated);
             }
 
-            var displayString = symbol.ToMinimalDisplayString(context.SemanticModel, context.Position);
+            var displayString = symbol.ToMinimalDisplayString(
+                context.SemanticModel,
+                context.Position
+            );
             return (displayString, suffix: "", displayString);
         }
 
-        private static readonly CompletionItemRules s_arrayRules =
-            CompletionItemRules.Create(
-                commitCharacterRules: ImmutableArray.Create(CharacterSetModificationRule.Create(CharacterSetModificationKind.Replace, ' ', '(', '[')),
-                matchPriority: MatchPriority.Default,
-                selectionBehavior: CompletionItemSelectionBehavior.SoftSelection);
+        private static readonly CompletionItemRules s_arrayRules = CompletionItemRules.Create(
+            commitCharacterRules: ImmutableArray.Create(
+                CharacterSetModificationRule.Create(
+                    CharacterSetModificationKind.Replace,
+                    ' ',
+                    '(',
+                    '['
+                )
+            ),
+            matchPriority: MatchPriority.Default,
+            selectionBehavior: CompletionItemSelectionBehavior.SoftSelection
+        );
 
-        private static readonly CompletionItemRules s_objectRules =
-            CompletionItemRules.Create(
-                commitCharacterRules: ImmutableArray.Create(CharacterSetModificationRule.Create(CharacterSetModificationKind.Replace, ' ', '(', '[', ';', '.')),
-                matchPriority: MatchPriority.Preselect,
-                selectionBehavior: CompletionItemSelectionBehavior.HardSelection);
+        private static readonly CompletionItemRules s_objectRules = CompletionItemRules.Create(
+            commitCharacterRules: ImmutableArray.Create(
+                CharacterSetModificationRule.Create(
+                    CharacterSetModificationKind.Replace,
+                    ' ',
+                    '(',
+                    '[',
+                    ';',
+                    '.'
+                )
+            ),
+            matchPriority: MatchPriority.Preselect,
+            selectionBehavior: CompletionItemSelectionBehavior.HardSelection
+        );
 
-        private static readonly CompletionItemRules s_defaultRules =
-            CompletionItemRules.Create(
-                commitCharacterRules: ImmutableArray.Create(CharacterSetModificationRule.Create(CharacterSetModificationKind.Replace, ' ', '(', '[', '{', ';', '.')),
-                matchPriority: MatchPriority.Preselect,
-                selectionBehavior: CompletionItemSelectionBehavior.HardSelection);
+        private static readonly CompletionItemRules s_defaultRules = CompletionItemRules.Create(
+            commitCharacterRules: ImmutableArray.Create(
+                CharacterSetModificationRule.Create(
+                    CharacterSetModificationKind.Replace,
+                    ' ',
+                    '(',
+                    '[',
+                    '{',
+                    ';',
+                    '.'
+                )
+            ),
+            matchPriority: MatchPriority.Preselect,
+            selectionBehavior: CompletionItemSelectionBehavior.HardSelection
+        );
 
-        protected override CompletionItemRules GetCompletionItemRules(ImmutableArray<SymbolAndSelectionInfo> symbols)
+        protected override CompletionItemRules GetCompletionItemRules(
+            ImmutableArray<SymbolAndSelectionInfo> symbols
+        )
         {
             var preselect = symbols.Any(static t => t.Preselect);
             if (!preselect)

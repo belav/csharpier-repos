@@ -5,24 +5,24 @@ namespace System.CommandLine.Rendering.Views
 {
     public class ContentView : View
     {
-        public ContentView(string content) 
-            : this (new ContentSpan(content))
-        { }
+        public ContentView(string content)
+            : this(new ContentSpan(content)) { }
 
         public ContentView(TextSpan span)
         {
             Span = span ?? throw new ArgumentNullException(nameof(span));
         }
 
-        protected ContentView()
-        { }
+        protected ContentView() { }
 
         protected TextSpan Span { get; set; }
 
         public override void Render(ConsoleRenderer renderer, Region region)
         {
-            if (renderer == null) throw new ArgumentNullException(nameof(renderer));
-            if (region == null) throw new ArgumentNullException(nameof(region));
+            if (renderer == null)
+                throw new ArgumentNullException(nameof(renderer));
+            if (region == null)
+                throw new ArgumentNullException(nameof(region));
 
             renderer.RenderToRegion(Span, region);
         }
@@ -47,7 +47,10 @@ namespace System.CommandLine.Rendering.Views
             return ConsoleRenderer.MeasureSpan(Span, maxSize);
         }
 
-        protected void Observe<T>(IObservable<T> observable, Func<T, FormattableString> formatProvider)
+        protected void Observe<T>(
+            IObservable<T> observable,
+            Func<T, FormattableString> formatProvider
+        )
         {
             if (observable == null)
             {
@@ -62,7 +65,10 @@ namespace System.CommandLine.Rendering.Views
             observable.Subscribe(new Observer<T>(this, formatProvider));
         }
 
-        public static ContentView FromObservable<T>(IObservable<T> observable, Func<T, FormattableString> formatProvider = null)
+        public static ContentView FromObservable<T>(
+            IObservable<T> observable,
+            Func<T, FormattableString> formatProvider = null
+        )
         {
             var rv = new ContentView();
             rv.Observe(observable, formatProvider ?? (x => $"{x}"));
@@ -71,21 +77,21 @@ namespace System.CommandLine.Rendering.Views
 
         internal static ContentView Create(object content, TextSpanFormatter formatter)
         {
-            if (content == null) return new ContentView(TextSpan.Empty());
+            if (content == null)
+                return new ContentView(TextSpan.Empty());
             return CreateView((dynamic)content, formatter);
         }
 
-        private static ContentView CreateView(string stringContent, TextSpanFormatter _)
-            => new(stringContent);
+        private static ContentView CreateView(string stringContent, TextSpanFormatter _) =>
+            new(stringContent);
 
-        private static ContentView CreateView(TextSpan span, TextSpanFormatter _) 
-            => new(span);
+        private static ContentView CreateView(TextSpan span, TextSpanFormatter _) => new(span);
 
-        private static ContentView CreateView<T>(IObservable<T> observable, TextSpanFormatter _)
-            => FromObservable(observable);
+        private static ContentView CreateView<T>(IObservable<T> observable, TextSpanFormatter _) =>
+            FromObservable(observable);
 
-        private static ContentView CreateView(object value, TextSpanFormatter formatter)
-            => new(formatter.Format(value));
+        private static ContentView CreateView(object value, TextSpanFormatter formatter) =>
+            new(formatter.Format(value));
 
         private class Observer<T> : IObserver<T>
         {

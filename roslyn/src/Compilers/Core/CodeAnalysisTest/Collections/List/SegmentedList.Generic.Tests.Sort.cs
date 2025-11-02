@@ -36,10 +36,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             SegmentedList<T> list = GenericListFactory(count);
             IComparer<T> comparer = Comparer<T>.Default;
             list.Sort();
-            Assert.All(Enumerable.Range(0, count - 2), i =>
-            {
-                Assert.True(comparer.Compare(list[i], list[i + 1]) < 0);
-            });
+            Assert.All(
+                Enumerable.Range(0, count - 2),
+                i =>
+                {
+                    Assert.True(comparer.Compare(list[i], list[i + 1]) < 0);
+                }
+            );
         }
 
         [Theory]
@@ -50,10 +53,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             list.Add(list[0]);
             IComparer<T> comparer = Comparer<T>.Default;
             list.Sort();
-            Assert.All(Enumerable.Range(0, count - 2), i =>
-            {
-                Assert.True(comparer.Compare(list[i], list[i + 1]) <= 0);
-            });
+            Assert.All(
+                Enumerable.Range(0, count - 2),
+                i =>
+                {
+                    Assert.True(comparer.Compare(list[i], list[i + 1]) <= 0);
+                }
+            );
         }
 
         #endregion
@@ -67,10 +73,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             SegmentedList<T> list = GenericListFactory(count);
             IComparer<T> comparer = GetIComparer();
             list.Sort(comparer);
-            Assert.All(Enumerable.Range(0, count - 2), i =>
-            {
-                Assert.True(comparer.Compare(list[i], list[i + 1]) < 0);
-            });
+            Assert.All(
+                Enumerable.Range(0, count - 2),
+                i =>
+                {
+                    Assert.True(comparer.Compare(list[i], list[i + 1]) < 0);
+                }
+            );
         }
 
         [Theory]
@@ -81,10 +90,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             list.Add(list[0]);
             IComparer<T> comparer = GetIComparer();
             list.Sort(comparer);
-            Assert.All(Enumerable.Range(0, count - 2), i =>
-            {
-                Assert.True(comparer.Compare(list[i], list[i + 1]) <= 0);
-            });
+            Assert.All(
+                Enumerable.Range(0, count - 2),
+                i =>
+                {
+                    Assert.True(comparer.Compare(list[i], list[i + 1]) <= 0);
+                }
+            );
         }
 
         #endregion
@@ -97,12 +109,20 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             SegmentedList<T> list = GenericListFactory(count);
             IComparer<T> iComparer = GetIComparer();
-            Comparison<T> comparer = ((T first, T second) => { return iComparer.Compare(first, second); });
+            Comparison<T> comparer = (
+                (T first, T second) =>
+                {
+                    return iComparer.Compare(first, second);
+                }
+            );
             list.Sort(comparer);
-            Assert.All(Enumerable.Range(0, count - 2), i =>
-            {
-                Assert.True(iComparer.Compare(list[i], list[i + 1]) < 0);
-            });
+            Assert.All(
+                Enumerable.Range(0, count - 2),
+                i =>
+                {
+                    Assert.True(iComparer.Compare(list[i], list[i + 1]) < 0);
+                }
+            );
         }
 
         [Theory]
@@ -112,12 +132,20 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             SegmentedList<T> list = GenericListFactory(count);
             list.Add(list[0]);
             IComparer<T> iComparer = GetIComparer();
-            Comparison<T> comparer = ((T first, T second) => { return iComparer.Compare(first, second); });
+            Comparison<T> comparer = (
+                (T first, T second) =>
+                {
+                    return iComparer.Compare(first, second);
+                }
+            );
             list.Sort(comparer);
-            Assert.All(Enumerable.Range(0, count - 2), i =>
-            {
-                Assert.True(iComparer.Compare(list[i], list[i + 1]) <= 0);
-            });
+            Assert.All(
+                Enumerable.Range(0, count - 2),
+                i =>
+                {
+                    Assert.True(iComparer.Compare(list[i], list[i + 1]) <= 0);
+                }
+            );
         }
 
         #endregion
@@ -131,13 +159,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             SegmentedList<T> unsortedList = GenericListFactory(count);
             IComparer<T> comparer = GetIComparer();
             for (int startIndex = 0; startIndex < count - 2; startIndex++)
-                for (int sortCount = 1; sortCount < count - startIndex; sortCount++)
-                {
-                    SegmentedList<T> list = new SegmentedList<T>(unsortedList);
-                    list.Sort(startIndex, sortCount + 1, comparer);
-                    for (int i = startIndex; i < sortCount; i++)
-                        Assert.InRange(comparer.Compare(list[i], list[i + 1]), int.MinValue, 0);
-                }
+            for (int sortCount = 1; sortCount < count - startIndex; sortCount++)
+            {
+                SegmentedList<T> list = new SegmentedList<T>(unsortedList);
+                list.Sort(startIndex, sortCount + 1, comparer);
+                for (int i = startIndex; i < sortCount; i++)
+                    Assert.InRange(comparer.Compare(list[i], list[i + 1]), int.MinValue, 0);
+            }
         }
 
         [Theory]
@@ -148,13 +176,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             IComparer<T> comparer = GetIComparer();
             unsortedList.Add(unsortedList[0]);
             for (int startIndex = 0; startIndex < count - 2; startIndex++)
-                for (int sortCount = 2; sortCount < count - startIndex; sortCount++)
-                {
-                    SegmentedList<T> list = new SegmentedList<T>(unsortedList);
-                    list.Sort(startIndex, sortCount + 1, comparer);
-                    for (int i = startIndex; i < sortCount; i++)
-                        Assert.InRange(comparer.Compare(list[i], list[i + 1]), int.MinValue, 1);
-                }
+            for (int sortCount = 2; sortCount < count - startIndex; sortCount++)
+            {
+                SegmentedList<T> list = new SegmentedList<T>(unsortedList);
+                list.Sort(startIndex, sortCount + 1, comparer);
+                for (int i = startIndex; i < sortCount; i++)
+                    Assert.InRange(comparer.Compare(list[i], list[i + 1]), int.MinValue, 1);
+            }
         }
 
         [Theory]
@@ -164,23 +192,28 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             SegmentedList<T> list = GenericListFactory(count);
             Tuple<int, int>[] InvalidParameters = new Tuple<int, int>[]
             {
-                Tuple.Create(-1,-1),
+                Tuple.Create(-1, -1),
                 Tuple.Create(-1, 0),
                 Tuple.Create(-1, 1),
                 Tuple.Create(-1, 2),
                 Tuple.Create(-2, 0),
                 Tuple.Create(int.MinValue, 0),
-                Tuple.Create(0 ,-1),
-                Tuple.Create(0 ,-2),
-                Tuple.Create(0 , int.MinValue),
-                Tuple.Create(1 ,-1),
-                Tuple.Create(2 ,-1),
+                Tuple.Create(0, -1),
+                Tuple.Create(0, -2),
+                Tuple.Create(0, int.MinValue),
+                Tuple.Create(1, -1),
+                Tuple.Create(2, -1),
             };
 
-            Assert.All(InvalidParameters, invalidSet =>
-            {
-                Assert.Throws<ArgumentOutOfRangeException>(() => list.Sort(invalidSet.Item1, invalidSet.Item2, GetIComparer()));
-            });
+            Assert.All(
+                InvalidParameters,
+                invalidSet =>
+                {
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        list.Sort(invalidSet.Item1, invalidSet.Item2, GetIComparer())
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -195,10 +228,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Tuple.Create(int.MaxValue, 0),
             };
 
-            Assert.All(InvalidParameters, invalidSet =>
-            {
-                Assert.Throws<ArgumentException>(null, () => list.Sort(invalidSet.Item1, invalidSet.Item2, GetIComparer()));
-            });
+            Assert.All(
+                InvalidParameters,
+                invalidSet =>
+                {
+                    Assert.Throws<ArgumentException>(
+                        null,
+                        () => list.Sort(invalidSet.Item1, invalidSet.Item2, GetIComparer())
+                    );
+                }
+            );
         }
 
         #endregion

@@ -12,8 +12,14 @@ namespace System.Linq.Tests
         {
             int?[] source = { 9, 8 };
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => source.AsQueryable().ElementAt(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => source.AsQueryable().ElementAt(^3));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => source.AsQueryable().ElementAt(-1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => source.AsQueryable().ElementAt(^3)
+            );
         }
 
         [Fact]
@@ -21,9 +27,18 @@ namespace System.Linq.Tests
         {
             int[] source = { 1, 2, 3, 4 };
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => source.AsQueryable().ElementAt(source.Length));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => source.AsQueryable().ElementAt(new Index(source.Length)));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => source.AsQueryable().ElementAt(^0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => source.AsQueryable().ElementAt(source.Length)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => source.AsQueryable().ElementAt(new Index(source.Length))
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => source.AsQueryable().ElementAt(^0)
+            );
         }
 
         [Fact]
@@ -31,9 +46,18 @@ namespace System.Linq.Tests
         {
             int[] source = { };
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => source.AsQueryable().ElementAt(0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => source.AsQueryable().ElementAt(new Index(0)));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => source.AsQueryable().ElementAt(^0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => source.AsQueryable().ElementAt(0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => source.AsQueryable().ElementAt(new Index(0))
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => source.AsQueryable().ElementAt(^0)
+            );
         }
 
         [Fact]
@@ -59,9 +83,18 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).ElementAt(2));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).ElementAt(new Index(2)));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).ElementAt(^2));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).ElementAt(2)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).ElementAt(new Index(2))
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).ElementAt(^2)
+            );
         }
 
         [Fact]

@@ -9,6 +9,7 @@ namespace GCLatencyTest
     public class InducedGen1GC : ILatencyTest
     {
         private int _numGen1Collections = 0;
+
         public void Test()
         {
             _numGen1Collections = GC.CollectionCount(1);
@@ -16,9 +17,7 @@ namespace GCLatencyTest
             _numGen1Collections = GC.CollectionCount(1) - _numGen1Collections;
         }
 
-        public void Cleanup()
-        {
-        }
+        public void Cleanup() { }
 
         public bool Pass(GCLatencyMode gcMode, int numCollections)
         {

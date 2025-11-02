@@ -260,7 +260,11 @@ namespace System.Collections.Immutable
             /// <param name="start">The starting index within <paramref name="items"/> that should be captured by the node tree.</param>
             /// <param name="length">The number of elements from <paramref name="items"/> that should be captured by the node tree.</param>
             /// <returns>The root of the created node tree.</returns>
-            internal static Node NodeTreeFromList(IOrderedCollection<T> items, int start, int length)
+            internal static Node NodeTreeFromList(
+                IOrderedCollection<T> items,
+                int start,
+                int length
+            )
             {
                 Requires.NotNull(items, nameof(items));
                 Requires.Range(start >= 0, nameof(start));
@@ -533,7 +537,10 @@ namespace System.Collections.Immutable
                 }
                 else
                 {
-                    ImmutableList<T>.Node newRight = _right!.ReplaceAt(index - _left._count - 1, value);
+                    ImmutableList<T>.Node newRight = _right!.ReplaceAt(
+                        index - _left._count - 1,
+                        value
+                    );
                     result = this.MutateRight(newRight);
                 }
 
@@ -565,9 +572,7 @@ namespace System.Collections.Immutable
                 {
                     T a = result.ItemRef(start);
                     T b = result.ItemRef(end);
-                    result = result
-                        .ReplaceAt(end, a)
-                        .ReplaceAt(start, b);
+                    result = result.ReplaceAt(end, a).ReplaceAt(start, b);
                     start++;
                     end--;
                 }
@@ -687,7 +692,12 @@ namespace System.Collections.Immutable
                 }
                 else if (index > thisNodeIndex)
                 {
-                    int result = _right!.BinarySearch(index - thisNodeIndex - 1, count, item, comparer);
+                    int result = _right!.BinarySearch(
+                        index - thisNodeIndex - 1,
+                        count,
+                        item,
+                        comparer
+                    );
                     int offset = thisNodeIndex + 1;
                     return result < 0 ? result - offset : result + offset;
                 }
@@ -704,7 +714,10 @@ namespace System.Collections.Immutable
                 else if (compare > 0)
                 {
                     int adjustedCount = count - (thisNodeIndex - index) - 1;
-                    int result = adjustedCount < 0 ? -1 : _right!.BinarySearch(0, adjustedCount, item, comparer);
+                    int result =
+                        adjustedCount < 0
+                            ? -1
+                            : _right!.BinarySearch(0, adjustedCount, item, comparer);
                     int offset = thisNodeIndex + 1;
                     return result < 0 ? result - offset : result + offset;
                 }
@@ -735,7 +748,8 @@ namespace System.Collections.Immutable
             /// The zero-based index of the first occurrence of <paramref name="item"/> within the entire
             /// <see cref="ImmutableList{T}"/>, if found; otherwise, -1.
             /// </returns>
-            internal int IndexOf(T item, IEqualityComparer<T>? equalityComparer) => this.IndexOf(item, 0, this.Count, equalityComparer);
+            internal int IndexOf(T item, IEqualityComparer<T>? equalityComparer) =>
+                this.IndexOf(item, 0, this.Count, equalityComparer);
 
             /// <summary>
             /// Searches for the specified object and returns <c>true</c> if it is found, <c>false</c> otherwise.
@@ -750,7 +764,8 @@ namespace System.Collections.Immutable
             /// <returns>
             /// <c>true</c> if it is found, <c>false</c> otherwise.
             /// </returns>
-            internal bool Contains(T item, IEqualityComparer<T> equalityComparer) => Contains(this, item, equalityComparer);
+            internal bool Contains(T item, IEqualityComparer<T> equalityComparer) =>
+                Contains(this, item, equalityComparer);
 
             /// <summary>
             /// Searches for the specified object and returns the zero-based index of the
@@ -777,7 +792,12 @@ namespace System.Collections.Immutable
             /// elements in the <see cref="ImmutableList{T}"/> that starts at <paramref name="index"/> and
             /// contains <paramref name="count"/> number of elements, if found; otherwise, -1.
             /// </returns>
-            internal int IndexOf(T item, int index, int count, IEqualityComparer<T>? equalityComparer)
+            internal int IndexOf(
+                T item,
+                int index,
+                int count,
+                IEqualityComparer<T>? equalityComparer
+            )
             {
                 Requires.Range(index >= 0, nameof(index));
                 Requires.Range(count >= 0, nameof(count));
@@ -819,14 +839,26 @@ namespace System.Collections.Immutable
             /// in the <see cref="ImmutableList{T}"/> that contains <paramref name="count"/> number of elements
             /// and ends at <paramref name="index"/>, if found; otherwise, -1.
             /// </returns>
-            internal int LastIndexOf(T item, int index, int count, IEqualityComparer<T>? equalityComparer)
+            internal int LastIndexOf(
+                T item,
+                int index,
+                int count,
+                IEqualityComparer<T>? equalityComparer
+            )
             {
                 Requires.Range(index >= 0, nameof(index));
                 Requires.Range(count >= 0 && count <= this.Count, nameof(count));
                 Requires.Argument(index - count + 1 >= 0);
 
                 equalityComparer ??= EqualityComparer<T>.Default;
-                using (var enumerator = new Enumerator(this, startIndex: index, count: count, reversed: true))
+                using (
+                    var enumerator = new Enumerator(
+                        this,
+                        startIndex: index,
+                        count: count,
+                        reversed: true
+                    )
+                )
                 {
                     while (enumerator.MoveNext())
                     {
@@ -1080,9 +1112,7 @@ namespace System.Collections.Immutable
                     }
                 }
 
-                return list != null ?
-                    ImmutableList.CreateRange(list) :
-                    ImmutableList<T>.Empty;
+                return list != null ? ImmutableList.CreateRange(list) : ImmutableList<T>.Empty;
             }
 
             /// <summary>
@@ -1257,7 +1287,14 @@ namespace System.Collections.Immutable
                 Requires.Range(count <= this.Count, nameof(count));
                 Requires.Range(startIndex - count + 1 >= 0, nameof(startIndex));
 
-                using (var enumerator = new Enumerator(this, startIndex: startIndex, count: count, reversed: true))
+                using (
+                    var enumerator = new Enumerator(
+                        this,
+                        startIndex: startIndex,
+                        count: count,
+                        reversed: true
+                    )
+                )
                 {
                     int index = startIndex;
                     while (enumerator.MoveNext())
@@ -1329,7 +1366,8 @@ namespace System.Collections.Immutable
                 Node rightLeft = right._left;
                 return rightLeft.MutateBoth(
                     left: this.MutateRight(rightLeft._left!),
-                    right: right.MutateLeft(rightLeft._right!));
+                    right: right.MutateLeft(rightLeft._right!)
+                );
             }
 
             /// <summary>
@@ -1347,7 +1385,8 @@ namespace System.Collections.Immutable
                 Node leftRight = left._right;
                 return leftRight.MutateBoth(
                     left: left.MutateRight(leftRight._left!),
-                    right: this.MutateLeft(leftRight._right!));
+                    right: this.MutateLeft(leftRight._right!)
+                );
             }
 
             /// <summary>
@@ -1534,7 +1573,8 @@ namespace System.Collections.Immutable
             /// <param name="right">The right child.</param>
             /// <returns>The height of the parent node.</returns>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            private static byte ParentHeight(Node left, Node right) => checked((byte)(1 + Math.Max(left._height, right._height)));
+            private static byte ParentHeight(Node left, Node right) =>
+                checked((byte)(1 + Math.Max(left._height, right._height)));
 
             /// <summary>
             /// Calculates the number of elements in the parent node from its children.
@@ -1587,7 +1627,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="key">The leaf node's key.</param>
             /// <returns>The leaf node.</returns>
-            private static Node CreateLeaf(T key) => new Node(key, left: EmptyNode, right: EmptyNode);
+            private static Node CreateLeaf(T key) =>
+                new Node(key, left: EmptyNode, right: EmptyNode);
 
             /// <summary>
             /// Traverses the node tree looking for a node with the provided value. The provided node will be checked
@@ -1603,7 +1644,17 @@ namespace System.Collections.Immutable
             /// The equality comparer to use for testing the node and value.
             /// </param>
             /// <returns></returns>
-            private static bool Contains(Node node, T value, IEqualityComparer<T> equalityComparer) => !node.IsEmpty && (equalityComparer.Equals(value, node._key) || Contains(node._left!, value, equalityComparer) || Contains(node._right!, value, equalityComparer));
+            private static bool Contains(
+                Node node,
+                T value,
+                IEqualityComparer<T> equalityComparer
+            ) =>
+                !node.IsEmpty
+                && (
+                    equalityComparer.Equals(value, node._key)
+                    || Contains(node._left!, value, equalityComparer)
+                    || Contains(node._right!, value, equalityComparer)
+                );
         }
     }
 }

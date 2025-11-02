@@ -14,32 +14,35 @@ namespace Microsoft.DotNet.Build.Tasks
             var headers = TpnSectionHeader.ParseAll(lines).ToArray();
 
             var sections = headers
-                .Select((h, i) =>
-                {
-                    int headerEndLine = h.StartLine + h.LineLength + 1;
-                    int linesUntilNext = lines.Length - headerEndLine;
-
-                    if (i + 1 < headers.Length)
+                .Select(
+                    (h, i) =>
                     {
-                        linesUntilNext = headers[i + 1].StartLine - headerEndLine;
+                        int headerEndLine = h.StartLine + h.LineLength + 1;
+                        int linesUntilNext = lines.Length - headerEndLine;
+
+                        if (i + 1 < headers.Length)
+                        {
+                            linesUntilNext = headers[i + 1].StartLine - headerEndLine;
+                        }
+
+                        return new TpnSection
+                        {
+                            Header = h,
+                            Content = string.Join(
+                                Environment.NewLine,
+                                lines
+                                    .Skip(headerEndLine)
+                                    .Take(linesUntilNext)
+                                    // Skip lines in the content that could be confused for separators.
+                                    .Where(line => !TpnSectionHeader.IsSeparatorLine(line))
+                                    // Trim empty line at the end of the section.
+                                    .Reverse()
+                                    .SkipWhile(line => string.IsNullOrWhiteSpace(line))
+                                    .Reverse()
+                            ),
+                        };
                     }
-
-                    return new TpnSection
-                    {
-                        Header = h,
-                        Content = string.Join(
-                            Environment.NewLine,
-                            lines
-                                .Skip(headerEndLine)
-                                .Take(linesUntilNext)
-                                // Skip lines in the content that could be confused for separators.
-                                .Where(line => !TpnSectionHeader.IsSeparatorLine(line))
-                                // Trim empty line at the end of the section.
-                                .Reverse()
-                                .SkipWhile(line => string.IsNullOrWhiteSpace(line))
-                                .Reverse())
-                    };
-                })
+                )
                 .ToArray();
 
             if (sections.Length == 0)
@@ -51,9 +54,10 @@ namespace Microsoft.DotNet.Build.Tasks
             {
                 Preamble = string.Join(
                     Environment.NewLine,
-                    lines.Take(sections.First().Header.StartLine)),
+                    lines.Take(sections.First().Header.StartLine)
+                ),
 
-                Sections = sections
+                Sections = sections,
             };
         }
 
@@ -62,8 +66,9 @@ namespace Microsoft.DotNet.Build.Tasks
         public IEnumerable<TpnSection> Sections { get; set; }
 
         public override string ToString() =>
-            Preamble + Environment.NewLine +
-            string.Join(Environment.NewLine + Environment.NewLine, Sections) +
-            Environment.NewLine;
+            Preamble
+            + Environment.NewLine
+            + string.Join(Environment.NewLine + Environment.NewLine, Sections)
+            + Environment.NewLine;
     }
 }

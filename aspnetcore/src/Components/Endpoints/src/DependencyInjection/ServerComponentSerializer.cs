@@ -46,8 +46,7 @@ internal sealed class ServerComponentSerializer
         var serverComponent = new ServerComponent(
             sequence,
             key,
-            rootComponent.Assembly.GetName().Name
-                ?? throw new InvalidOperationException(
+            rootComponent.Assembly.GetName().Name ?? throw new InvalidOperationException(
                     "Cannot prerender components from assemblies with a null name"
                 ),
             rootComponent.FullName

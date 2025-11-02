@@ -22,6 +22,6 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Indicates an <see cref="CodeAnalysis.AnalyzerConfigDocument"/>
         /// </summary>
-        AnalyzerConfigDocument
+        AnalyzerConfigDocument,
     }
 }

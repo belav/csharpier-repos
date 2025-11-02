@@ -4,14 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection.Runtime.General;
-
 using Internal.Metadata.NativeFormat;
 using Internal.NativeFormat;
 using Internal.Runtime;
 using Internal.Runtime.Augments;
 using Internal.Runtime.TypeLoader;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 using ReflectionExecution = Internal.Reflection.Execution.ReflectionExecution;
 
@@ -37,13 +35,18 @@ namespace Internal.StackTraceMetadata
         internal static void Initialize()
         {
             _perModuleMethodNameResolverHashtable = new PerModuleMethodNameResolverHashtable();
-            RuntimeAugments.InitializeStackTraceMetadataSupport(new StackTraceMetadataCallbacksImpl());
+            RuntimeAugments.InitializeStackTraceMetadataSupport(
+                new StackTraceMetadataCallbacksImpl()
+            );
         }
 
         /// <summary>
         /// Locate the containing module for a method and try to resolve its name based on start address.
         /// </summary>
-        public static unsafe string GetMethodNameFromStartAddressIfAvailable(IntPtr methodStartAddress, out bool isStackTraceHidden)
+        public static unsafe string GetMethodNameFromStartAddressIfAvailable(
+            IntPtr methodStartAddress,
+            out bool isStackTraceHidden
+        )
         {
             IntPtr moduleStartAddress = RuntimeAugments.GetOSModuleFromPointer(methodStartAddress);
             int rva = (int)((byte*)methodStartAddress - (byte*)moduleStartAddress);
@@ -51,7 +54,9 @@ namespace Internal.StackTraceMetadata
             {
                 if (moduleInfo.Handle.OsModuleBase == moduleStartAddress)
                 {
-                    string name = _perModuleMethodNameResolverHashtable.GetOrCreateValue(moduleInfo.Handle.GetIntPtrUNSAFE()).GetMethodNameFromRvaIfAvailable(rva, out isStackTraceHidden);
+                    string name = _perModuleMethodNameResolverHashtable
+                        .GetOrCreateValue(moduleInfo.Handle.GetIntPtrUNSAFE())
+                        .GetMethodNameFromRvaIfAvailable(rva, out isStackTraceHidden);
                     if (name != null || isStackTraceHidden)
                         return name;
                 }
@@ -60,23 +65,46 @@ namespace Internal.StackTraceMetadata
             isStackTraceHidden = false;
 
             // We haven't found information in the stack trace metadata tables, but maybe reflection will have this
-            if (IsReflectionExecutionAvailable() && ReflectionExecution.TryGetMethodMetadataFromStartAddress(methodStartAddress,
-                out MetadataReader reader,
-                out TypeDefinitionHandle typeHandle,
-                out MethodHandle methodHandle))
+            if (
+                IsReflectionExecutionAvailable()
+                && ReflectionExecution.TryGetMethodMetadataFromStartAddress(
+                    methodStartAddress,
+                    out MetadataReader reader,
+                    out TypeDefinitionHandle typeHandle,
+                    out MethodHandle methodHandle
+                )
+            )
             {
-                foreach (CustomAttributeHandle cah in reader.GetTypeDefinition(typeHandle).CustomAttributes)
+                foreach (
+                    CustomAttributeHandle cah in reader
+                        .GetTypeDefinition(typeHandle)
+                        .CustomAttributes
+                )
                 {
-                    if (cah.IsCustomAttributeOfType(reader, "System.Diagnostics", "StackTraceHiddenAttribute"))
+                    if (
+                        cah.IsCustomAttributeOfType(
+                            reader,
+                            "System.Diagnostics",
+                            "StackTraceHiddenAttribute"
+                        )
+                    )
                     {
                         isStackTraceHidden = true;
                         break;
                     }
                 }
 
-                foreach (CustomAttributeHandle cah in reader.GetMethod(methodHandle).CustomAttributes)
+                foreach (
+                    CustomAttributeHandle cah in reader.GetMethod(methodHandle).CustomAttributes
+                )
                 {
-                    if (cah.IsCustomAttributeOfType(reader, "System.Diagnostics", "StackTraceHiddenAttribute"))
+                    if (
+                        cah.IsCustomAttributeOfType(
+                            reader,
+                            "System.Diagnostics",
+                            "StackTraceHiddenAttribute"
+                        )
+                    )
                     {
                         isStackTraceHidden = true;
                         break;
@@ -95,7 +123,8 @@ namespace Internal.StackTraceMetadata
         /// <summary>
         /// This hashtable supports mapping from module start addresses to per-module method name resolvers.
         /// </summary>
-        private sealed class PerModuleMethodNameResolverHashtable : LockFreeReaderHashtable<IntPtr, PerModuleMethodNameResolver>
+        private sealed class PerModuleMethodNameResolverHashtable
+            : LockFreeReaderHashtable<IntPtr, PerModuleMethodNameResolver>
         {
             /// <summary>
             /// Given a key, compute a hash code. This function must be thread safe.
@@ -128,7 +157,10 @@ namespace Internal.StackTraceMetadata
             /// Compare a value with another value. Return true if values are equal.
             /// This function must be thread safe.
             /// </summary>
-            protected override bool CompareValueToValue(PerModuleMethodNameResolver value1, PerModuleMethodNameResolver value2)
+            protected override bool CompareValueToValue(
+                PerModuleMethodNameResolver value1,
+                PerModuleMethodNameResolver value2
+            )
             {
                 return value1.ModuleAddress == value2.ModuleAddress;
             }
@@ -148,9 +180,15 @@ namespace Internal.StackTraceMetadata
         /// </summary>
         private sealed class StackTraceMetadataCallbacksImpl : StackTraceMetadataCallbacks
         {
-            public override string TryGetMethodNameFromStartAddress(IntPtr methodStartAddress, out bool isStackTraceHidden)
+            public override string TryGetMethodNameFromStartAddress(
+                IntPtr methodStartAddress,
+                out bool isStackTraceHidden
+            )
             {
-                return GetMethodNameFromStartAddressIfAvailable(methodStartAddress, out isStackTraceHidden);
+                return GetMethodNameFromStartAddressIfAvailable(
+                    methodStartAddress,
+                    out isStackTraceHidden
+                );
             }
         }
 
@@ -177,7 +215,10 @@ namespace Internal.StackTraceMetadata
             /// <summary>
             /// Publicly exposed module address property.
             /// </summary>
-            public IntPtr ModuleAddress { get { return _moduleAddress; } }
+            public IntPtr ModuleAddress
+            {
+                get { return _moduleAddress; }
+            }
 
             /// <summary>
             /// Construct the per-module resolver by looking up the necessary blobs.
@@ -194,34 +235,46 @@ namespace Internal.StackTraceMetadata
                     return;
                 }
 
-                NativeFormatModuleInfo nativeFormatModuleInfo = moduleInfo as NativeFormatModuleInfo;
+                NativeFormatModuleInfo nativeFormatModuleInfo =
+                    moduleInfo as NativeFormatModuleInfo;
                 if (nativeFormatModuleInfo == null)
                 {
                     // It is not a native format module
                     return;
                 }
 
-                byte *metadataBlob;
+                byte* metadataBlob;
                 uint metadataBlobSize;
 
-                byte *rvaToTokenMapBlob;
+                byte* rvaToTokenMapBlob;
                 uint rvaToTokenMapBlobSize;
 
-                if (nativeFormatModuleInfo.TryFindBlob(
+                if (
+                    nativeFormatModuleInfo.TryFindBlob(
                         (int)ReflectionMapBlob.EmbeddedMetadata,
                         out metadataBlob,
-                        out metadataBlobSize) &&
-                    nativeFormatModuleInfo.TryFindBlob(
+                        out metadataBlobSize
+                    )
+                    && nativeFormatModuleInfo.TryFindBlob(
                         (int)ReflectionMapBlob.BlobIdStackTraceMethodRvaToTokenMapping,
                         out rvaToTokenMapBlob,
-                        out rvaToTokenMapBlobSize))
+                        out rvaToTokenMapBlobSize
+                    )
+                )
                 {
-                    _metadataReader = new MetadataReader(new IntPtr(metadataBlob), (int)metadataBlobSize);
+                    _metadataReader = new MetadataReader(
+                        new IntPtr(metadataBlob),
+                        (int)metadataBlobSize
+                    );
 
                     int entryCount = *(int*)rvaToTokenMapBlob;
                     _stacktraceDatas = new StackTraceData[entryCount];
 
-                    PopulateRvaToTokenMap(handle, rvaToTokenMapBlob + sizeof(int), rvaToTokenMapBlobSize - sizeof(int));
+                    PopulateRvaToTokenMap(
+                        handle,
+                        rvaToTokenMapBlob + sizeof(int),
+                        rvaToTokenMapBlobSize - sizeof(int)
+                    );
                 }
             }
 
@@ -232,7 +285,11 @@ namespace Internal.StackTraceMetadata
             /// <param name="handle">Module to use to construct the mapping</param>
             /// <param name="pMap">List of RVA - token pairs</param>
             /// <param name="length">Length of the blob</param>
-            private unsafe void PopulateRvaToTokenMap(TypeManagerHandle handle, byte* pMap, uint length)
+            private unsafe void PopulateRvaToTokenMap(
+                TypeManagerHandle handle,
+                byte* pMap,
+                uint length
+            )
             {
                 Handle currentOwningType = default;
                 MethodSignatureHandle currentSignature = default;
@@ -247,25 +304,44 @@ namespace Internal.StackTraceMetadata
 
                     if ((command & StackTraceDataCommand.UpdateOwningType) != 0)
                     {
-                        currentOwningType = Handle.FromIntToken((int)NativePrimitiveDecoder.ReadUInt32(ref pCurrent));
-                        Debug.Assert(currentOwningType.HandleType is HandleType.TypeDefinition or HandleType.TypeReference or HandleType.TypeSpecification);
+                        currentOwningType = Handle.FromIntToken(
+                            (int)NativePrimitiveDecoder.ReadUInt32(ref pCurrent)
+                        );
+                        Debug.Assert(
+                            currentOwningType.HandleType
+                                is HandleType.TypeDefinition
+                                    or HandleType.TypeReference
+                                    or HandleType.TypeSpecification
+                        );
                     }
 
                     if ((command & StackTraceDataCommand.UpdateName) != 0)
                     {
-                        currentName = new Handle(HandleType.ConstantStringValue, (int)NativePrimitiveDecoder.DecodeUnsigned(ref pCurrent)).ToConstantStringValueHandle(_metadataReader);
+                        currentName = new Handle(
+                            HandleType.ConstantStringValue,
+                            (int)NativePrimitiveDecoder.DecodeUnsigned(ref pCurrent)
+                        ).ToConstantStringValueHandle(_metadataReader);
                     }
 
                     if ((command & StackTraceDataCommand.UpdateSignature) != 0)
                     {
-                        currentSignature = new Handle(HandleType.MethodSignature, (int)NativePrimitiveDecoder.DecodeUnsigned(ref pCurrent)).ToMethodSignatureHandle(_metadataReader);
+                        currentSignature = new Handle(
+                            HandleType.MethodSignature,
+                            (int)NativePrimitiveDecoder.DecodeUnsigned(ref pCurrent)
+                        ).ToMethodSignatureHandle(_metadataReader);
                         currentMethodInst = default;
                     }
 
                     if ((command & StackTraceDataCommand.UpdateGenericSignature) != 0)
                     {
-                        currentSignature = new Handle(HandleType.MethodSignature, (int)NativePrimitiveDecoder.DecodeUnsigned(ref pCurrent)).ToMethodSignatureHandle(_metadataReader);
-                        currentMethodInst = new Handle(HandleType.ConstantStringArray, (int)NativePrimitiveDecoder.DecodeUnsigned(ref pCurrent)).ToConstantStringArrayHandle(_metadataReader);
+                        currentSignature = new Handle(
+                            HandleType.MethodSignature,
+                            (int)NativePrimitiveDecoder.DecodeUnsigned(ref pCurrent)
+                        ).ToMethodSignatureHandle(_metadataReader);
+                        currentMethodInst = new Handle(
+                            HandleType.ConstantStringArray,
+                            (int)NativePrimitiveDecoder.DecodeUnsigned(ref pCurrent)
+                        ).ToConstantStringArrayHandle(_metadataReader);
                     }
 
                     void* pMethod = ReadRelPtr32(pCurrent);
@@ -284,8 +360,7 @@ namespace Internal.StackTraceMetadata
                         GenericArguments = currentMethodInst,
                     };
 
-                    static void* ReadRelPtr32(byte* address)
-                        => address + *(int*)address;
+                    static void* ReadRelPtr32(byte* address) => address + *(int*)address;
                 }
 
                 Debug.Assert(current == _stacktraceDatas.Length);
@@ -306,7 +381,10 @@ namespace Internal.StackTraceMetadata
                     return null;
                 }
 
-                int index = Array.BinarySearch(_stacktraceDatas, new StackTraceData() { Rva = rva });
+                int index = Array.BinarySearch(
+                    _stacktraceDatas,
+                    new StackTraceData() { Rva = rva }
+                );
                 if (index < 0)
                 {
                     // Method RVA not found in the map
@@ -319,12 +397,20 @@ namespace Internal.StackTraceMetadata
 
                 if (data.OwningType.IsNull(_metadataReader))
                 {
-                    Debug.Assert(data.Name.IsNull(_metadataReader) && data.Signature.IsNull(_metadataReader));
+                    Debug.Assert(
+                        data.Name.IsNull(_metadataReader) && data.Signature.IsNull(_metadataReader)
+                    );
                     Debug.Assert(isStackTraceHidden);
                     return null;
                 }
 
-                return MethodNameFormatter.FormatMethodName(_metadataReader, data.OwningType, data.Name, data.Signature, data.GenericArguments);
+                return MethodNameFormatter.FormatMethodName(
+                    _metadataReader,
+                    data.OwningType,
+                    data.Name,
+                    data.Signature,
+                    data.GenericArguments
+                );
             }
 
             private struct StackTraceData : IComparable<StackTraceData>

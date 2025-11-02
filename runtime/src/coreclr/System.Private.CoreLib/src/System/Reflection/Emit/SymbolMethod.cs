@@ -18,8 +18,15 @@ namespace System.Reflection.Emit
         #endregion
 
         #region Constructor
-        internal SymbolMethod(ModuleBuilder mod, int token, Type arrayClass, string methodName,
-            CallingConventions callingConvention, Type? returnType, Type[]? parameterTypes)
+        internal SymbolMethod(
+            ModuleBuilder mod,
+            int token,
+            Type arrayClass,
+            string methodName,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes
+        )
         {
             // This is a kind of MethodInfo to represent methods for array type of unbaked type
 
@@ -49,7 +56,15 @@ namespace System.Reflection.Emit
 
             // Validate signature
             SignatureHelper.GetMethodSigHelper(
-                mod, callingConvention, returnType, null, null, parameterTypes, null, null);
+                mod,
+                callingConvention,
+                returnType,
+                null,
+                null,
+                parameterTypes,
+                null,
+                null
+            );
         }
         #endregion
 
@@ -61,7 +76,13 @@ namespace System.Reflection.Emit
 
         internal int GetToken(RuntimeModuleBuilder mod)
         {
-            return mod.GetArrayMethodToken(m_containingType, m_name, m_callingConvention, m_returnType, m_parameterTypes);
+            return mod.GetArrayMethodToken(
+                m_containingType,
+                m_name,
+                m_callingConvention,
+                m_returnType,
+                m_parameterTypes
+            );
         }
 
         #endregion
@@ -89,11 +110,13 @@ namespace System.Reflection.Emit
             throw new NotSupportedException(SR.NotSupported_SymbolMethod);
         }
 
-        public override MethodAttributes Attributes => throw new NotSupportedException(SR.NotSupported_SymbolMethod);
+        public override MethodAttributes Attributes =>
+            throw new NotSupportedException(SR.NotSupported_SymbolMethod);
 
         public override CallingConventions CallingConvention => m_callingConvention;
 
-        public override RuntimeMethodHandle MethodHandle => throw new NotSupportedException(SR.NotSupported_SymbolMethod);
+        public override RuntimeMethodHandle MethodHandle =>
+            throw new NotSupportedException(SR.NotSupported_SymbolMethod);
 
         #endregion
 
@@ -102,7 +125,13 @@ namespace System.Reflection.Emit
 
         public override ICustomAttributeProvider ReturnTypeCustomAttributes => new EmptyCAHolder();
 
-        public override object Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             throw new NotSupportedException(SR.NotSupported_SymbolMethod);
         }

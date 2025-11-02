@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
 //
@@ -19,7 +19,7 @@ namespace System.Security
     ///     from - which allows permission sets to be created from XML representing a permission set in a
     ///     previous version of the framework to be deserialized on the current version while still
     ///     serializing back to XML that makes sense on the original framework version.
-    ///     
+    ///
     ///     Note that while we protect against modifications of the permission set itself (such as adding or
     ///     removing permissions), we do not make any attempt to guard against modification to the permissions
     ///     which are members of the set.  Permission accesor APIs always return a copy of the permission in
@@ -95,7 +95,9 @@ namespace System.Security
 
         protected override IPermission AddPermissionImpl(IPermission perm)
         {
-            throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_ModifyROPermSet"));
+            throw new InvalidOperationException(
+                Environment.GetResourceString("InvalidOperation_ModifyROPermSet")
+            );
         }
 
         public override void FromXml(SecurityElement et)
@@ -109,18 +111,24 @@ namespace System.Security
             }
             else
             {
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_ModifyROPermSet"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_ModifyROPermSet")
+                );
             }
         }
 
         protected override IPermission RemovePermissionImpl(Type permClass)
         {
-            throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_ModifyROPermSet"));
+            throw new InvalidOperationException(
+                Environment.GetResourceString("InvalidOperation_ModifyROPermSet")
+            );
         }
 
         protected override IPermission SetPermissionImpl(IPermission perm)
         {
-            throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_ModifyROPermSet"));
+            throw new InvalidOperationException(
+                Environment.GetResourceString("InvalidOperation_ModifyROPermSet")
+            );
         }
     }
 

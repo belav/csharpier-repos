@@ -19,80 +19,800 @@ namespace XLinqTests
 
         public override void AddChildren()
         {
-            AddChild(new TestVariation(CreateXDocument) { Attribute = new VariationAttribute("Empty XDocument") { Priority = 0 } });
-            AddChild(new TestVariation(CreateXDocument_Decl) { Attribute = new VariationAttribute("Empty XDocument + XmlDecl") { Param = true, Priority = 0 } });
-            AddChild(new TestVariation(CreateXDocument_Decl) { Attribute = new VariationAttribute("Empty XDocument + XmlDecl=null") { Param = false, Priority = 0 } });
-            AddChild(new TestVariation(CreateXDocument2) { Attribute = new VariationAttribute("Copy Empty XDocument") { Priority = 1 } });
-            AddChild(new TestVariation(CreateXDocument3) { Attribute = new VariationAttribute("Copy NonEmpty XDocument") { Priority = 1 } });
-            AddChild(new TestVariation(CreateXDocument4) { Attribute = new VariationAttribute("XDocument - null test") { Priority = 1 } });
-            AddChild(new TestVariation(CreateXElement1) { Attribute = new VariationAttribute("Empty XElement - Xname") { Priority = 0 } });
-            AddChild(new TestVariation(CreateXElement2) { Attribute = new VariationAttribute("Empty XElement - Xname - noNS") { Priority = 2 } });
-            AddChild(new TestVariation(CreateXElement3) { Attribute = new VariationAttribute("XElement - Xname - null") { Priority = 2 } });
-            AddChild(new TestVariation(CreateXElement31) { Attribute = new VariationAttribute("XElement - Xname - empty string") { Priority = 2 } });
-            AddChild(new TestVariation(CreateXElement4) { Attribute = new VariationAttribute("Empty XElement - string") { Priority = 0 } });
-            AddChild(new TestVariation(CreateXElement5) { Attribute = new VariationAttribute("Empty XElement - string - noNS") { Priority = 2 } });
-            AddChild(new TestVariation(CreateXElement6) { Attribute = new VariationAttribute("XElement - string - null") { Priority = 2 } });
-            AddChild(new TestVariation(CreateXElement6_1) { Attribute = new VariationAttribute("XElement - XStreamingElement - null") { Priority = 2 } });
-            AddChild(new TestVariation(CreateXElement7) { Attribute = new VariationAttribute("XElement - copy empty") { Priority = 0 } });
-            AddChild(new TestVariation(CreateXElement8) { Attribute = new VariationAttribute("XElement - copy: connected, in XDocument") { Params = new object[] { true, true }, Priority = 0 } });
-            AddChild(new TestVariation(CreateXElement8) { Attribute = new VariationAttribute("XElement - copy: not connected, in XDocument") { Params = new object[] { false, true }, Priority = 0 } });
-            AddChild(new TestVariation(CreateXElement8) { Attribute = new VariationAttribute("XElement - copy: connected, not in XDocument") { Params = new object[] { true, false }, Priority = 0 } });
-            AddChild(new TestVariation(CreateXElement8) { Attribute = new VariationAttribute("XElement - copy: not connected, not in XDocument") { Params = new object[] { false, false }, Priority = 0 } });
-            AddChild(new TestVariation(CreateXElementFromReader1) { Attribute = new VariationAttribute("XElement - from reader - from root element") { Priority = 0 } });
-            AddChild(new TestVariation(CreateXElementFromReader2) { Attribute = new VariationAttribute("XElement - from reader - from inner element") { Priority = 0 } });
-            AddChild(new TestVariation(CreateXElementFromReaderEmptyElem) { Attribute = new VariationAttribute("XElement - from reader - from inner empty element") { Priority = 0 } });
-            AddChild(new TestVariation(CreateXElementFromReader3) { Attribute = new VariationAttribute("XElement - from reader - from inner element, namespaces") { Priority = 0 } });
-            AddChild(new TestVariation(NotAllowedNodesRead) { Attribute = new VariationAttribute("XElement - from reader - not allowed nodes - endElement") { Param = 4, Priority = 2 } });
-            AddChild(new TestVariation(NotAllowedNodesRead) { Attribute = new VariationAttribute("XElement - from reader - not allowed nodes - initial") { Param = 0, Priority = 2 } });
-            AddChild(new TestVariation(NotAllowedNodesRead) { Attribute = new VariationAttribute("XElement - from reader - not allowed nodes - decl") { Param = 1, Priority = 2 } });
-            AddChild(new TestVariation(NotAllowedNodesAttr) { Attribute = new VariationAttribute("XElement - from reader - not allowed nodes - attribute") { Param = false, Priority = 2 } });
-            AddChild(new TestVariation(CreateXAttribute) { Attribute = new VariationAttribute("XAttribute - xname - not namespace decl") { Priority = 0 } });
-            AddChild(new TestVariation(CreateXAttribute1) { Attribute = new VariationAttribute("XAttribute - xname - namespace decl - default") { Param = "xmlns", Priority = 1 } });
-            AddChild(new TestVariation(CreateXAttribute2) { Attribute = new VariationAttribute("XAttribute - xname - namespace decl - normal") { Param = "p", Priority = 1 } });
-            AddChild(new TestVariation(CreateXAttribute3) { Attribute = new VariationAttribute("XAttribute - copy - not namespace decl - connected") { Param = true, Priority = 0 } });
-            AddChild(new TestVariation(CreateXAttribute3) { Attribute = new VariationAttribute("XAttribute - copy - not namespace decl - not connected") { Param = false, Priority = 0 } });
-            AddChild(new TestVariation(CreateXAttribute4) { Attribute = new VariationAttribute("XAttribute - copy - default namespace decl - connected") { Params = new object[] { true, "xmlns" }, Priority = 1 } });
-            AddChild(new TestVariation(CreateXAttribute4) { Attribute = new VariationAttribute("XAttribute - copy - default namespace decl - not connected") { Params = new object[] { false, "xmlns" }, Priority = 1 } });
-            AddChild(new TestVariation(CreateXAttribute5) { Attribute = new VariationAttribute("XAttribute - copy - namespace decl - connected") { Params = new object[] { true, "p" }, Priority = 1 } });
-            AddChild(new TestVariation(CreateXAttribute5) { Attribute = new VariationAttribute("XAttribute - copy - namespace decl - not connected") { Params = new object[] { false, "p" }, Priority = 1 } });
-            AddChild(new TestVariation(CreateXAttribute6) { Attribute = new VariationAttribute("XAttribute - default namespace decl & empty value") { Params = new object[] { false, "xmlns" }, Priority = 1 } });
-            AddChild(new TestVariation(CreateXAttribute7) { Attribute = new VariationAttribute("XAttribute - prefixed namespace decl & empty value") { Params = new object[] { true, "p" }, Priority = 1 } });
-            AddChild(new TestVariation(CreateXAttribute8) { Attribute = new VariationAttribute("XAttribute - xml namespace - redeclared (positive).") { Params = new object[] { "xml", "http://www.w3.org/XML/1998/namespace", false }, Priority = 1 } });
-            AddChild(new TestVariation(CreateXAttribute8) { Attribute = new VariationAttribute("XAttribute - xml namespace - prefix redef") { Params = new object[] { "xml", "another", true }, Priority = 1 } });
-            AddChild(new TestVariation(CreateXAttribute8) { Attribute = new VariationAttribute("XAttribute - xml namespace - bound to diff. prefix") { Params = new object[] { "p", "http://www.w3.org/XML/1998/namespace", true }, Priority = 1 } });
-            AddChild(new TestVariation(CreateXAttribute8) { Attribute = new VariationAttribute("XAttribute - xmlns namespace - bound to diff. prefix") { Params = new object[] { "p", "http://www.w3.org/2000/xmlns/", true }, Priority = 1 } });
-            AddChild(new TestVariation(CreateXPI1) { Attribute = new VariationAttribute("XProcessingInstruction - target & data") { Priority = 1 } });
-            AddChild(new TestVariation(CreateXPI2) { Attribute = new VariationAttribute("XProcessingInstruction - target only") { Priority = 1 } });
-            AddChild(new TestVariation(CreateXPINegative) { Attribute = new VariationAttribute("XProcessingInstruction - invalid name (invalid char)") { Param = "?>", Priority = 1 } });
-            AddChild(new TestVariation(CreateXPINegative2) { Attribute = new VariationAttribute("XProcessingInstruction - invalid name (XmL)") { Param = "XmL", Priority = 2 } });
-            AddChild(new TestVariation(CreateXPINegative2) { Attribute = new VariationAttribute("XProcessingInstruction - invalid name (XmL)") { Param = "XmL", Priority = 2 } });
-            AddChild(new TestVariation(CreateXPINegative2) { Attribute = new VariationAttribute("XProcessingInstruction - invalid name (xML)") { Param = "xML", Priority = 2 } });
-            AddChild(new TestVariation(CreateXPINegative2) { Attribute = new VariationAttribute("XProcessingInstruction - invalid name (xmL)") { Param = "xmL", Priority = 2 } });
-            AddChild(new TestVariation(CreateXPINegative2) { Attribute = new VariationAttribute("XProcessingInstruction - invalid name (Xml)") { Param = "Xml", Priority = 2 } });
-            AddChild(new TestVariation(CreateXPINegative2) { Attribute = new VariationAttribute("XProcessingInstruction - invalid name (xmL)") { Param = "xmL", Priority = 2 } });
-            AddChild(new TestVariation(CreateXPINegative2) { Attribute = new VariationAttribute("XProcessingInstruction - invalid name (XML)") { Param = "XML", Priority = 2 } });
-            AddChild(new TestVariation(CreateXPINegative2) { Attribute = new VariationAttribute("XProcessingInstruction - invalid name (empty string)") { Param = "", Priority = 2 } });
-            AddChild(new TestVariation(CreateXPINegative2) { Attribute = new VariationAttribute("XProcessingInstruction - invalid name (xml)") { Param = "xml", Priority = 2 } });
-            AddChild(new TestVariation(CreateXPI3) { Attribute = new VariationAttribute("XProcessingInstruction - from reader - target & data") { Param = 2, Priority = 1 } });
-            AddChild(new TestVariation(CreateXPI3) { Attribute = new VariationAttribute("XProcessingInstruction - from reader - target only") { Param = 4, Priority = 1 } });
-            AddChild(new TestVariation(CreateXComment1) { Attribute = new VariationAttribute("XComment") { Priority = 1 } });
-            AddChild(new TestVariation(CreateXComment2) { Attribute = new VariationAttribute("XComment - empty") { Priority = 3 } });
-            AddChild(new TestVariation(CreateXComment3) { Attribute = new VariationAttribute("XComment - from reader") { Priority = 1 } });
-            AddChild(new TestVariation(CreateXText0) { Attribute = new VariationAttribute("XText - from string") { Priority = 0 } });
-            AddChild(new TestVariation(CreateXText01) { Attribute = new VariationAttribute("XText - copy") { Priority = 0 } });
-            AddChild(new TestVariation(CreateXText1) { Attribute = new VariationAttribute("XText - CDATA") { Params = new object[] { XmlNodeType.CDATA, "<![CDATA[MY_TEXT]]>" }, Priority = 1 } });
-            AddChild(new TestVariation(CreateXText1) { Attribute = new VariationAttribute("XText - text") { Params = new object[] { XmlNodeType.Text, "MY_TEXT" }, Priority = 1 } });
-            AddChild(new TestVariation(CreateXText2) { Attribute = new VariationAttribute("XText - Text - empty") { Params = new object[] { XmlNodeType.Text, "" }, Priority = 3 } });
-            AddChild(new TestVariation(CreateXText2) { Attribute = new VariationAttribute("XText - CData - empty") { Params = new object[] { XmlNodeType.CDATA, "<![CDATA[]]>" }, Priority = 3 } });
-            AddChild(new TestVariation(CreateXTextReader) { Attribute = new VariationAttribute("XText - Text - from reader") { Params = new object[] { 4, XmlNodeType.Text, "MY_TEXT", "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>" }, Priority = 1 } });
-            AddChild(new TestVariation(CreateXTextReader) { Attribute = new VariationAttribute("XText - Text - from reader/ significant whitespace") { Params = new object[] { 2, XmlNodeType.Text, "\t", "<a xml:space='preserve'>\t<X/></a>" }, Priority = 1 } });
-            AddChild(new TestVariation(CreateXTextReader) { Attribute = new VariationAttribute("XText - Text - from reader/ whitespace") { Params = new object[] { 6, XmlNodeType.Text, "\t", "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>" }, Priority = 1 } });
-            AddChild(new TestVariation(CreateXTextReader) { Attribute = new VariationAttribute("XText - CDATA - from reader") { Params = new object[] { 2, XmlNodeType.CDATA, "MY_TEXT", "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>" }, Priority = 1 } });
-            AddChild(new TestVariation(DTDConstruct) { Attribute = new VariationAttribute("DTD - all nulls") { Params = new object[] { new[] { "root", null, null, null }, "<!DOCTYPE root >" }, Priority = 1 } });
-            AddChild(new TestVariation(DTDConstruct) { Attribute = new VariationAttribute("DTD - no publicId") { Params = new object[] { new[] { "root", null, "a2", "a3" }, "<!DOCTYPE root SYSTEM \"a2\"[a3]>" }, Priority = 1 } });
-            AddChild(new TestVariation(DTDConstruct) { Attribute = new VariationAttribute("DTD - no systemId") { Params = new object[] { new[] { "root", "a1", null, "a3" }, "<!DOCTYPE root PUBLIC \"a1\" \"\"[a3]>" }, Priority = 1 } });
-            AddChild(new TestVariation(DTDConstruct) { Attribute = new VariationAttribute("DTD - no publicId, no systemId") { Params = new object[] { new[] { "root", null, null, "a3" }, "<!DOCTYPE root [a3]>" }, Priority = 1 } });
-            AddChild(new TestVariation(DTDConstruct) { Attribute = new VariationAttribute("DTD - normal") { Params = new object[] { new[] { "root", "a1", "a2", "a3" }, "<!DOCTYPE root PUBLIC \"a1\" \"a2\"[a3]>" }, Priority = 0 } });
+            AddChild(
+                new TestVariation(CreateXDocument)
+                {
+                    Attribute = new VariationAttribute("Empty XDocument") { Priority = 0 },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXDocument_Decl)
+                {
+                    Attribute = new VariationAttribute("Empty XDocument + XmlDecl")
+                    {
+                        Param = true,
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXDocument_Decl)
+                {
+                    Attribute = new VariationAttribute("Empty XDocument + XmlDecl=null")
+                    {
+                        Param = false,
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXDocument2)
+                {
+                    Attribute = new VariationAttribute("Copy Empty XDocument") { Priority = 1 },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXDocument3)
+                {
+                    Attribute = new VariationAttribute("Copy NonEmpty XDocument") { Priority = 1 },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXDocument4)
+                {
+                    Attribute = new VariationAttribute("XDocument - null test") { Priority = 1 },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElement1)
+                {
+                    Attribute = new VariationAttribute("Empty XElement - Xname") { Priority = 0 },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElement2)
+                {
+                    Attribute = new VariationAttribute("Empty XElement - Xname - noNS")
+                    {
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElement3)
+                {
+                    Attribute = new VariationAttribute("XElement - Xname - null") { Priority = 2 },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElement31)
+                {
+                    Attribute = new VariationAttribute("XElement - Xname - empty string")
+                    {
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElement4)
+                {
+                    Attribute = new VariationAttribute("Empty XElement - string") { Priority = 0 },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElement5)
+                {
+                    Attribute = new VariationAttribute("Empty XElement - string - noNS")
+                    {
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElement6)
+                {
+                    Attribute = new VariationAttribute("XElement - string - null") { Priority = 2 },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElement6_1)
+                {
+                    Attribute = new VariationAttribute("XElement - XStreamingElement - null")
+                    {
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElement7)
+                {
+                    Attribute = new VariationAttribute("XElement - copy empty") { Priority = 0 },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElement8)
+                {
+                    Attribute = new VariationAttribute("XElement - copy: connected, in XDocument")
+                    {
+                        Params = new object[] { true, true },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElement8)
+                {
+                    Attribute = new VariationAttribute(
+                        "XElement - copy: not connected, in XDocument"
+                    )
+                    {
+                        Params = new object[] { false, true },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElement8)
+                {
+                    Attribute = new VariationAttribute(
+                        "XElement - copy: connected, not in XDocument"
+                    )
+                    {
+                        Params = new object[] { true, false },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElement8)
+                {
+                    Attribute = new VariationAttribute(
+                        "XElement - copy: not connected, not in XDocument"
+                    )
+                    {
+                        Params = new object[] { false, false },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElementFromReader1)
+                {
+                    Attribute = new VariationAttribute("XElement - from reader - from root element")
+                    {
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElementFromReader2)
+                {
+                    Attribute = new VariationAttribute(
+                        "XElement - from reader - from inner element"
+                    )
+                    {
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElementFromReaderEmptyElem)
+                {
+                    Attribute = new VariationAttribute(
+                        "XElement - from reader - from inner empty element"
+                    )
+                    {
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXElementFromReader3)
+                {
+                    Attribute = new VariationAttribute(
+                        "XElement - from reader - from inner element, namespaces"
+                    )
+                    {
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(NotAllowedNodesRead)
+                {
+                    Attribute = new VariationAttribute(
+                        "XElement - from reader - not allowed nodes - endElement"
+                    )
+                    {
+                        Param = 4,
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(NotAllowedNodesRead)
+                {
+                    Attribute = new VariationAttribute(
+                        "XElement - from reader - not allowed nodes - initial"
+                    )
+                    {
+                        Param = 0,
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(NotAllowedNodesRead)
+                {
+                    Attribute = new VariationAttribute(
+                        "XElement - from reader - not allowed nodes - decl"
+                    )
+                    {
+                        Param = 1,
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(NotAllowedNodesAttr)
+                {
+                    Attribute = new VariationAttribute(
+                        "XElement - from reader - not allowed nodes - attribute"
+                    )
+                    {
+                        Param = false,
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXAttribute)
+                {
+                    Attribute = new VariationAttribute("XAttribute - xname - not namespace decl")
+                    {
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXAttribute1)
+                {
+                    Attribute = new VariationAttribute(
+                        "XAttribute - xname - namespace decl - default"
+                    )
+                    {
+                        Param = "xmlns",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXAttribute2)
+                {
+                    Attribute = new VariationAttribute(
+                        "XAttribute - xname - namespace decl - normal"
+                    )
+                    {
+                        Param = "p",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXAttribute3)
+                {
+                    Attribute = new VariationAttribute(
+                        "XAttribute - copy - not namespace decl - connected"
+                    )
+                    {
+                        Param = true,
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXAttribute3)
+                {
+                    Attribute = new VariationAttribute(
+                        "XAttribute - copy - not namespace decl - not connected"
+                    )
+                    {
+                        Param = false,
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXAttribute4)
+                {
+                    Attribute = new VariationAttribute(
+                        "XAttribute - copy - default namespace decl - connected"
+                    )
+                    {
+                        Params = new object[] { true, "xmlns" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXAttribute4)
+                {
+                    Attribute = new VariationAttribute(
+                        "XAttribute - copy - default namespace decl - not connected"
+                    )
+                    {
+                        Params = new object[] { false, "xmlns" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXAttribute5)
+                {
+                    Attribute = new VariationAttribute(
+                        "XAttribute - copy - namespace decl - connected"
+                    )
+                    {
+                        Params = new object[] { true, "p" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXAttribute5)
+                {
+                    Attribute = new VariationAttribute(
+                        "XAttribute - copy - namespace decl - not connected"
+                    )
+                    {
+                        Params = new object[] { false, "p" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXAttribute6)
+                {
+                    Attribute = new VariationAttribute(
+                        "XAttribute - default namespace decl & empty value"
+                    )
+                    {
+                        Params = new object[] { false, "xmlns" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXAttribute7)
+                {
+                    Attribute = new VariationAttribute(
+                        "XAttribute - prefixed namespace decl & empty value"
+                    )
+                    {
+                        Params = new object[] { true, "p" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXAttribute8)
+                {
+                    Attribute = new VariationAttribute(
+                        "XAttribute - xml namespace - redeclared (positive)."
+                    )
+                    {
+                        Params = new object[]
+                        {
+                            "xml",
+                            "http://www.w3.org/XML/1998/namespace",
+                            false,
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXAttribute8)
+                {
+                    Attribute = new VariationAttribute("XAttribute - xml namespace - prefix redef")
+                    {
+                        Params = new object[] { "xml", "another", true },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXAttribute8)
+                {
+                    Attribute = new VariationAttribute(
+                        "XAttribute - xml namespace - bound to diff. prefix"
+                    )
+                    {
+                        Params = new object[] { "p", "http://www.w3.org/XML/1998/namespace", true },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXAttribute8)
+                {
+                    Attribute = new VariationAttribute(
+                        "XAttribute - xmlns namespace - bound to diff. prefix"
+                    )
+                    {
+                        Params = new object[] { "p", "http://www.w3.org/2000/xmlns/", true },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXPI1)
+                {
+                    Attribute = new VariationAttribute("XProcessingInstruction - target & data")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXPI2)
+                {
+                    Attribute = new VariationAttribute("XProcessingInstruction - target only")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXPINegative)
+                {
+                    Attribute = new VariationAttribute(
+                        "XProcessingInstruction - invalid name (invalid char)"
+                    )
+                    {
+                        Param = "?>",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXPINegative2)
+                {
+                    Attribute = new VariationAttribute(
+                        "XProcessingInstruction - invalid name (XmL)"
+                    )
+                    {
+                        Param = "XmL",
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXPINegative2)
+                {
+                    Attribute = new VariationAttribute(
+                        "XProcessingInstruction - invalid name (XmL)"
+                    )
+                    {
+                        Param = "XmL",
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXPINegative2)
+                {
+                    Attribute = new VariationAttribute(
+                        "XProcessingInstruction - invalid name (xML)"
+                    )
+                    {
+                        Param = "xML",
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXPINegative2)
+                {
+                    Attribute = new VariationAttribute(
+                        "XProcessingInstruction - invalid name (xmL)"
+                    )
+                    {
+                        Param = "xmL",
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXPINegative2)
+                {
+                    Attribute = new VariationAttribute(
+                        "XProcessingInstruction - invalid name (Xml)"
+                    )
+                    {
+                        Param = "Xml",
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXPINegative2)
+                {
+                    Attribute = new VariationAttribute(
+                        "XProcessingInstruction - invalid name (xmL)"
+                    )
+                    {
+                        Param = "xmL",
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXPINegative2)
+                {
+                    Attribute = new VariationAttribute(
+                        "XProcessingInstruction - invalid name (XML)"
+                    )
+                    {
+                        Param = "XML",
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXPINegative2)
+                {
+                    Attribute = new VariationAttribute(
+                        "XProcessingInstruction - invalid name (empty string)"
+                    )
+                    {
+                        Param = "",
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXPINegative2)
+                {
+                    Attribute = new VariationAttribute(
+                        "XProcessingInstruction - invalid name (xml)"
+                    )
+                    {
+                        Param = "xml",
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXPI3)
+                {
+                    Attribute = new VariationAttribute(
+                        "XProcessingInstruction - from reader - target & data"
+                    )
+                    {
+                        Param = 2,
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXPI3)
+                {
+                    Attribute = new VariationAttribute(
+                        "XProcessingInstruction - from reader - target only"
+                    )
+                    {
+                        Param = 4,
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXComment1)
+                {
+                    Attribute = new VariationAttribute("XComment") { Priority = 1 },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXComment2)
+                {
+                    Attribute = new VariationAttribute("XComment - empty") { Priority = 3 },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXComment3)
+                {
+                    Attribute = new VariationAttribute("XComment - from reader") { Priority = 1 },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXText0)
+                {
+                    Attribute = new VariationAttribute("XText - from string") { Priority = 0 },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXText01)
+                {
+                    Attribute = new VariationAttribute("XText - copy") { Priority = 0 },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXText1)
+                {
+                    Attribute = new VariationAttribute("XText - CDATA")
+                    {
+                        Params = new object[] { XmlNodeType.CDATA, "<![CDATA[MY_TEXT]]>" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXText1)
+                {
+                    Attribute = new VariationAttribute("XText - text")
+                    {
+                        Params = new object[] { XmlNodeType.Text, "MY_TEXT" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXText2)
+                {
+                    Attribute = new VariationAttribute("XText - Text - empty")
+                    {
+                        Params = new object[] { XmlNodeType.Text, "" },
+                        Priority = 3,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXText2)
+                {
+                    Attribute = new VariationAttribute("XText - CData - empty")
+                    {
+                        Params = new object[] { XmlNodeType.CDATA, "<![CDATA[]]>" },
+                        Priority = 3,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXTextReader)
+                {
+                    Attribute = new VariationAttribute("XText - Text - from reader")
+                    {
+                        Params = new object[]
+                        {
+                            4,
+                            XmlNodeType.Text,
+                            "MY_TEXT",
+                            "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>",
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXTextReader)
+                {
+                    Attribute = new VariationAttribute(
+                        "XText - Text - from reader/ significant whitespace"
+                    )
+                    {
+                        Params = new object[]
+                        {
+                            2,
+                            XmlNodeType.Text,
+                            "\t",
+                            "<a xml:space='preserve'>\t<X/></a>",
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXTextReader)
+                {
+                    Attribute = new VariationAttribute("XText - Text - from reader/ whitespace")
+                    {
+                        Params = new object[]
+                        {
+                            6,
+                            XmlNodeType.Text,
+                            "\t",
+                            "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>",
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXTextReader)
+                {
+                    Attribute = new VariationAttribute("XText - CDATA - from reader")
+                    {
+                        Params = new object[]
+                        {
+                            2,
+                            XmlNodeType.CDATA,
+                            "MY_TEXT",
+                            "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>",
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DTDConstruct)
+                {
+                    Attribute = new VariationAttribute("DTD - all nulls")
+                    {
+                        Params = new object[]
+                        {
+                            new[] { "root", null, null, null },
+                            "<!DOCTYPE root >",
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DTDConstruct)
+                {
+                    Attribute = new VariationAttribute("DTD - no publicId")
+                    {
+                        Params = new object[]
+                        {
+                            new[] { "root", null, "a2", "a3" },
+                            "<!DOCTYPE root SYSTEM \"a2\"[a3]>",
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DTDConstruct)
+                {
+                    Attribute = new VariationAttribute("DTD - no systemId")
+                    {
+                        Params = new object[]
+                        {
+                            new[] { "root", "a1", null, "a3" },
+                            "<!DOCTYPE root PUBLIC \"a1\" \"\"[a3]>",
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DTDConstruct)
+                {
+                    Attribute = new VariationAttribute("DTD - no publicId, no systemId")
+                    {
+                        Params = new object[]
+                        {
+                            new[] { "root", null, null, "a3" },
+                            "<!DOCTYPE root [a3]>",
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DTDConstruct)
+                {
+                    Attribute = new VariationAttribute("DTD - normal")
+                    {
+                        Params = new object[]
+                        {
+                            new[] { "root", "a1", "a2", "a3" },
+                            "<!DOCTYPE root PUBLIC \"a1\" \"a2\"[a3]>",
+                        },
+                        Priority = 0,
+                    },
+                }
+            );
         }
 
         // XDocument constructors
@@ -291,7 +1011,11 @@ namespace XLinqTests
             TestLog.Compare(comment.Value, "value", "Value");
             TestLog.Compare(comment.Document == null, "Document");
             TestLog.Compare(comment.Parent == null, "Parent");
-            TestLog.Compare(comment.ToString(SaveOptions.DisableFormatting), @"<!--value-->", "Xml");
+            TestLog.Compare(
+                comment.ToString(SaveOptions.DisableFormatting),
+                @"<!--value-->",
+                "Xml"
+            );
         }
 
         //[Variation(Priority = 3, Desc = "XComment - empty")]
@@ -321,7 +1045,11 @@ namespace XLinqTests
                 TestLog.Compare(comment.Value, "value", "Value");
                 TestLog.Compare(comment.Document == null, "Document");
                 TestLog.Compare(comment.Parent == null, "Parent");
-                TestLog.Compare(comment.ToString(SaveOptions.DisableFormatting), @"<!--value-->", "Xml");
+                TestLog.Compare(
+                    comment.ToString(SaveOptions.DisableFormatting),
+                    @"<!--value-->",
+                    "Xml"
+                );
 
                 TestLog.Compare(r.ReadState, ReadState.Interactive, "reader state ");
                 TestLog.Compare(r.NodeType, XmlNodeType.Element, "reader position");
@@ -366,12 +1094,30 @@ namespace XLinqTests
             var doc = new XDocument(doc1);
             TestLog.Compare(doc != null, "doc!=null");
             TestLog.Compare(doc != doc1, "(object)doc!=(object)doc1");
-            TestLog.Compare(XNode.DeepEquals(doc.Root, doc1.Root), "XNode.DeepEquals(doc.Root, doc1.Root)");
+            TestLog.Compare(
+                XNode.DeepEquals(doc.Root, doc1.Root),
+                "XNode.DeepEquals(doc.Root, doc1.Root)"
+            );
             TestLog.Compare(doc.Root != doc1.Root, "(object)doc.Root == (object)doc1.Root");
-            TestLog.Compare(doc.Declaration.Version, doc1.Declaration.Version, "Declaration.Version");
-            TestLog.Compare(doc.Declaration.Encoding, doc1.Declaration.Encoding, "Declaration.Encoding");
-            TestLog.Compare(doc.Declaration.Standalone, doc1.Declaration.Standalone, "Declaration.Standalone");
-            TestLog.Compare(doc.Declaration != doc1.Declaration, "(object)doc.Declaration != (object)doc1.Declaration");
+            TestLog.Compare(
+                doc.Declaration.Version,
+                doc1.Declaration.Version,
+                "Declaration.Version"
+            );
+            TestLog.Compare(
+                doc.Declaration.Encoding,
+                doc1.Declaration.Encoding,
+                "Declaration.Encoding"
+            );
+            TestLog.Compare(
+                doc.Declaration.Standalone,
+                doc1.Declaration.Standalone,
+                "Declaration.Standalone"
+            );
+            TestLog.Compare(
+                doc.Declaration != doc1.Declaration,
+                "(object)doc.Declaration != (object)doc1.Declaration"
+            );
             TestLog.Compare(doc.DocumentType == null, "doc.DocumentType == null");
             TestLog.Compare(doc.Document == doc, "doc.Document == doc");
             TestLog.Compare(doc1.Document == doc1, "doc1.Document == doc1");
@@ -394,7 +1140,9 @@ namespace XLinqTests
 
         public void CreateXDocument_Decl()
         {
-            XDeclaration decl = (bool)Variation.Param ? new XDeclaration("1.0", "UTF8", "True") : null;
+            XDeclaration decl = (bool)Variation.Param
+                ? new XDeclaration("1.0", "UTF8", "True")
+                : null;
             var doc = new XDocument(decl, null);
             TestLog.Compare(doc != null, "doc!=null");
             TestLog.Compare(doc.FirstNode == null, "doc is empty");
@@ -576,7 +1324,12 @@ namespace XLinqTests
 
             XNamespace ns1 = XNamespace.Get("http://myNS");
             XName xname = ns1 + "elem1";
-            var elem1 = new XElement(xname, "text", new XElement("inner"), new XAttribute("id", "a1"));
+            var elem1 = new XElement(
+                xname,
+                "text",
+                new XElement("inner"),
+                new XAttribute("id", "a1")
+            );
 
             if (isConnected)
             {
@@ -605,12 +1358,18 @@ namespace XLinqTests
             // compare attributes
             TestLog.Compare(elem.Attribute("id") != null, "attributes null");
             TestLog.Compare(elem.Attribute("id") != elem1.Attribute("id"), "attribute ==");
-            TestLog.Compare(elem.Attribute("id").Value.Equals(elem1.Attribute("id").Value), "attribute Equals");
+            TestLog.Compare(
+                elem.Attribute("id").Value.Equals(elem1.Attribute("id").Value),
+                "attribute Equals"
+            );
 
             // compare children
             TestLog.Compare(elem.Element("inner") != null, "element null");
             TestLog.Compare(elem.Element("inner") != elem1.Element("inner"), "element ==");
-            TestLog.Compare(XNode.DeepEquals(elem.Element("inner"), elem1.Element("inner")), "element Equals");
+            TestLog.Compare(
+                XNode.DeepEquals(elem.Element("inner"), elem1.Element("inner")),
+                "element Equals"
+            );
 
             TestLog.Compare(elem.NodeType, XmlNodeType.Element, "NodeType");
             TestLog.Compare(elem.Parent == null, "Parent");
@@ -673,7 +1432,8 @@ namespace XLinqTests
         //[Variation(Priority = 0, Desc = "XElement - from reader - from inner element, namespaces")]
         public void CreateXElementFromReader3()
         {
-            string xml = "<X xmlns='ns1' xmlns:p='ns2'><A p:id='a' xmlns:q='ns3'><q:B/></A><?PI targ?></X>";
+            string xml =
+                "<X xmlns='ns1' xmlns:p='ns2'><A p:id='a' xmlns:q='ns3'><q:B/></A><?PI targ?></X>";
             using (XmlReader r = XmlReader.Create(new StringReader(xml)))
             {
                 r.Read();
@@ -696,7 +1456,14 @@ namespace XLinqTests
 
         public void CreateXElementFromReaderEmptyElem()
         {
-            string[] xmls = { "<X><A/><B/><?PI targ?></X>", "<X><A id='a'/><B/><?PI targ?></X>", "<X><A xmlms='nas'/><B/><?PI targ?></X>", "<X><A></A><B/><?PI targ?></X>", "<X><A id='a'></A><B/><?PI targ?></X>" };
+            string[] xmls =
+            {
+                "<X><A/><B/><?PI targ?></X>",
+                "<X><A id='a'/><B/><?PI targ?></X>",
+                "<X><A xmlms='nas'/><B/><?PI targ?></X>",
+                "<X><A></A><B/><?PI targ?></X>",
+                "<X><A id='a'></A><B/><?PI targ?></X>",
+            };
 
             foreach (string xml in xmls)
             {
@@ -796,9 +1563,7 @@ namespace XLinqTests
                 var pi = new XProcessingInstruction(name, "");
                 TestLog.Compare(false, "Should fail; name = " + name);
             }
-            catch (XmlException)
-            {
-            }
+            catch (XmlException) { }
         }
 
         //[Variation(Priority = 2, Desc = "XProcessingInstruction - invalid name (empty string)", Param = "")]
@@ -818,9 +1583,7 @@ namespace XLinqTests
                 var pi = new XProcessingInstruction(name, "");
                 TestLog.Compare(false, "Should fail; name = " + name);
             }
-            catch (ArgumentException)
-            {
-            }
+            catch (ArgumentException) { }
         }
 
         //[Variation(Priority = 1, Desc = "XProcessingInstruction - from reader - target & data", Param = 2)]
@@ -862,7 +1625,8 @@ namespace XLinqTests
             var nodeType = (XmlNodeType)Variation.Params[0];
             var expectedXml = (string)Variation.Params[1];
 
-            XText cdata = nodeType == XmlNodeType.CDATA ? new XCData("MY_TEXT") : new XText("MY_TEXT");
+            XText cdata =
+                nodeType == XmlNodeType.CDATA ? new XCData("MY_TEXT") : new XText("MY_TEXT");
             TestLog.Compare(cdata != null, "cdata != null");
             TestLog.Compare(cdata.NodeType, nodeType, "NodeType");
             TestLog.Compare(cdata.Value, "MY_TEXT", "Value");
@@ -906,7 +1670,10 @@ namespace XLinqTests
                 {
                     r.Read();
                 }
-                XText cdata = nodeType == XmlNodeType.CDATA ? (XCData)XNode.ReadFrom(r) : (XText)XNode.ReadFrom(r);
+                XText cdata =
+                    nodeType == XmlNodeType.CDATA
+                        ? (XCData)XNode.ReadFrom(r)
+                        : (XText)XNode.ReadFrom(r);
                 TestLog.Compare(cdata != null, "cdata != null");
                 TestLog.Compare(cdata.NodeType, nodeType, "NodeType");
                 TestLog.Compare(cdata.Value, expValue, "Value");

@@ -16,7 +16,10 @@ namespace System.Collections.Specialized.Tests
         public void Add(int count1, int count2)
         {
             NameValueCollection nameValueCollection1 = Helpers.CreateNameValueCollection(count1);
-            NameValueCollection nameValueCollection2 = Helpers.CreateNameValueCollection(count2, count1);
+            NameValueCollection nameValueCollection2 = Helpers.CreateNameValueCollection(
+                count2,
+                count1
+            );
 
             nameValueCollection2.Add(nameValueCollection1);
             Assert.Equal(count1 + count2, nameValueCollection2.Count);
@@ -77,7 +80,6 @@ namespace System.Collections.Specialized.Tests
             Assert.Equal(1, nameValueCollection2.Count);
             Assert.Equal(value1 + "," + value2, nameValueCollection2[name]);
             Assert.Equal(new string[] { value1, value2 }, nameValueCollection2.GetValues(name));
-
         }
 
         [Fact]
@@ -86,7 +88,6 @@ namespace System.Collections.Specialized.Tests
             NameValueCollection nameValueCollection1 = new NameValueCollection();
             NameValueCollection nameValueCollection2 = new NameValueCollection();
             NameValueCollection nameValueCollection3 = new NameValueCollection();
-
 
             string nullKeyValue1 = "value";
             string nullKeyValue2 = "value";
@@ -122,7 +123,10 @@ namespace System.Collections.Specialized.Tests
         [Fact]
         public void Add_NullNameValueCollection_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("c", () => new NameValueCollection().Add(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "c",
+                () => new NameValueCollection().Add(null)
+            );
         }
     }
 }

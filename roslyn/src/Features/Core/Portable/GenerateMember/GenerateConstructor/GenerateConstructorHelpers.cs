@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             SemanticDocument document,
             ImmutableArray<IParameterSymbol> parameters,
             ImmutableArray<TExpressionSyntax?> expressions,
-            IMethodSymbol constructor)
+            IMethodSymbol constructor
+        )
             where TExpressionSyntax : SyntaxNode
         {
             // Look for constructors in this specified type that are:
@@ -29,14 +30,18 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             // 3. Are compatible with the parameters we're generating for this constructor.  Compatible means there
             //    exists an implicit conversion from the new constructor's parameter types to the existing
             //    constructor's parameter types.
-            var semanticFacts = document.Document.GetRequiredLanguageService<ISemanticFactsService>();
+            var semanticFacts =
+                document.Document.GetRequiredLanguageService<ISemanticFactsService>();
             var semanticModel = document.SemanticModel;
             var compilation = semanticModel.Compilation;
 
-            return constructor.Parameters.Length == parameters.Length &&
-                   constructor.Parameters.SequenceEqual(parameters, (p1, p2) => p1.RefKind == p2.RefKind) &&
-                   IsSymbolAccessible(compilation, constructor) &&
-                   IsCompatible(semanticFacts, semanticModel, constructor, expressions);
+            return constructor.Parameters.Length == parameters.Length
+                && constructor.Parameters.SequenceEqual(
+                    parameters,
+                    (p1, p2) => p1.RefKind == p2.RefKind
+                )
+                && IsSymbolAccessible(compilation, constructor)
+                && IsCompatible(semanticFacts, semanticModel, constructor, expressions);
         }
 
         private static bool IsSymbolAccessible(Compilation compilation, ISymbol symbol)
@@ -44,8 +49,10 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             if (symbol == null)
                 return false;
 
-            if (symbol is IPropertySymbol { SetMethod: { } setMethod } &&
-                !IsSymbolAccessible(compilation, setMethod))
+            if (
+                symbol is IPropertySymbol { SetMethod: { } setMethod }
+                && !IsSymbolAccessible(compilation, setMethod)
+            )
             {
                 return false;
             }
@@ -62,7 +69,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                     return true;
                 case Accessibility.ProtectedAndInternal:
                 case Accessibility.Internal:
-                    return compilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(symbol.ContainingAssembly);
+                    return compilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(
+                        symbol.ContainingAssembly
+                    );
 
                 default:
                     return false;
@@ -73,14 +82,16 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             ISemanticFactsService semanticFacts,
             SemanticModel semanticModel,
             IMethodSymbol constructor,
-            ImmutableArray<TExpressionSyntax?> expressions)
+            ImmutableArray<TExpressionSyntax?> expressions
+        )
             where TExpressionSyntax : SyntaxNode
         {
             Debug.Assert(constructor.Parameters.Length == expressions.Length);
 
             // Resolve the constructor into our semantic model's compilation; if the constructor we're looking at is from
             // another project with a different language.
-            var constructorInCompilation = (IMethodSymbol?)SymbolKey.Create(constructor).Resolve(semanticModel.Compilation).Symbol;
+            var constructorInCompilation = (IMethodSymbol?)
+                SymbolKey.Create(constructor).Resolve(semanticModel.Compilation).Symbol;
 
             if (constructorInCompilation == null)
             {
@@ -111,7 +122,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 if (expression is null)
                     continue;
 
-                var conversion = semanticFacts.ClassifyConversion(semanticModel, expression, constructorParameter.Type);
+                var conversion = semanticFacts.ClassifyConversion(
+                    semanticModel,
+                    expression,
+                    constructorParameter.Type
+                );
                 if (!conversion.IsIdentity && !conversion.IsImplicit)
                     return false;
             }

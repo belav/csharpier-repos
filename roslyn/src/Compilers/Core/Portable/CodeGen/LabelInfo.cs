@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private readonly struct LabelInfo
         {
             //some labels can be jumped to only with non zero stack depth.
-            //all jumps must agree on the stack depth as well as if we reach the 
+            //all jumps must agree on the stack depth as well as if we reach the
             //label via fall through.
             //if a label is marked before any branches to the label have been seen
             //the stack is considered to be 0.
@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             /// <summary>
             /// Sometimes we need to know if a label is targeted by conditional branches.
-            /// For example optimizer can do optimizations of branches into outer try scopes only 
+            /// For example optimizer can do optimizations of branches into outer try scopes only
             /// if they are unconditional (because there are no conditional Leave opcodes)
             /// </summary>
             internal readonly bool targetOfConditionalBranches;
@@ -32,9 +32,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
             /// Used when we see a branch, but label is not yet marked.
             /// </summary>
             internal LabelInfo(int stack, bool targetOfConditionalBranches)
-                : this(null, stack, targetOfConditionalBranches)
-            {
-            }
+                : this(null, stack, targetOfConditionalBranches) { }
 
             /// <summary>
             /// Used when label is marked to the code.

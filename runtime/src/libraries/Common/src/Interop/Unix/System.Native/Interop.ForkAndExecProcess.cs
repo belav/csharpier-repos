@@ -12,12 +12,26 @@ internal static partial class Interop
     internal static partial class Sys
     {
         internal static unsafe int ForkAndExecProcess(
-            string filename, string[] argv, string[] envp, string? cwd,
-            bool redirectStdin, bool redirectStdout, bool redirectStderr,
-            bool setUser, uint userId, uint groupId, uint[]? groups,
-            out int lpChildPid, out int stdinFd, out int stdoutFd, out int stderrFd, bool shouldThrow = true)
+            string filename,
+            string[] argv,
+            string[] envp,
+            string? cwd,
+            bool redirectStdin,
+            bool redirectStdout,
+            bool redirectStderr,
+            bool setUser,
+            uint userId,
+            uint groupId,
+            uint[]? groups,
+            out int lpChildPid,
+            out int stdinFd,
+            out int stdoutFd,
+            out int stderrFd,
+            bool shouldThrow = true
+        )
         {
-            byte** argvPtr = null, envpPtr = null;
+            byte** argvPtr = null,
+                envpPtr = null;
             int result = -1;
             try
             {
@@ -26,10 +40,23 @@ internal static partial class Interop
                 fixed (uint* pGroups = groups)
                 {
                     result = ForkAndExecProcess(
-                        filename, argvPtr, envpPtr, cwd,
-                        redirectStdin ? 1 : 0, redirectStdout ? 1 : 0, redirectStderr ? 1 :0,
-                        setUser ? 1 : 0, userId, groupId, pGroups, groups?.Length ?? 0,
-                        out lpChildPid, out stdinFd, out stdoutFd, out stderrFd);
+                        filename,
+                        argvPtr,
+                        envpPtr,
+                        cwd,
+                        redirectStdin ? 1 : 0,
+                        redirectStdout ? 1 : 0,
+                        redirectStderr ? 1 : 0,
+                        setUser ? 1 : 0,
+                        userId,
+                        groupId,
+                        pGroups,
+                        groups?.Length ?? 0,
+                        out lpChildPid,
+                        out stdinFd,
+                        out stdoutFd,
+                        out stderrFd
+                    );
                 }
                 return result == 0 ? 0 : Marshal.GetLastPInvokeError();
             }
@@ -40,12 +67,30 @@ internal static partial class Interop
             }
         }
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_ForkAndExecProcess", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_ForkAndExecProcess",
+            StringMarshalling = StringMarshalling.Utf8,
+            SetLastError = true
+        )]
         private static unsafe partial int ForkAndExecProcess(
-            string filename, byte** argv, byte** envp, string? cwd,
-            int redirectStdin, int redirectStdout, int redirectStderr,
-            int setUser, uint userId, uint groupId, uint* groups, int groupsLength,
-            out int lpChildPid, out int stdinFd, out int stdoutFd, out int stderrFd);
+            string filename,
+            byte** argv,
+            byte** envp,
+            string? cwd,
+            int redirectStdin,
+            int redirectStdout,
+            int redirectStderr,
+            int setUser,
+            uint userId,
+            uint groupId,
+            uint* groups,
+            int groupsLength,
+            out int lpChildPid,
+            out int stdinFd,
+            out int stdoutFd,
+            out int stderrFd
+        );
 
         private static unsafe void AllocNullTerminatedArray(string[] arr, ref byte** arrPtr)
         {
@@ -67,7 +112,10 @@ internal static partial class Interop
                 int byteLength = Encoding.UTF8.GetByteCount(str);
                 arrPtr[i] = (byte*)NativeMemory.Alloc((nuint)byteLength + 1); //+1 for null termination
 
-                int bytesWritten = Encoding.UTF8.GetBytes(str, new Span<byte>(arrPtr[i], byteLength));
+                int bytesWritten = Encoding.UTF8.GetBytes(
+                    str,
+                    new Span<byte>(arrPtr[i], byteLength)
+                );
                 Debug.Assert(bytesWritten == byteLength);
 
                 arrPtr[i][bytesWritten] = (byte)'\0'; // null terminate

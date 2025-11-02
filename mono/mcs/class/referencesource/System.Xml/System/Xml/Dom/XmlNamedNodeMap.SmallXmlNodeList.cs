@@ -1,18 +1,19 @@
 ﻿//------------------------------------------------------------------------------
 // <copyright file="XmlNamedNodeMap.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">lionelu</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml {
+namespace System.Xml
+{
     using System.Collections;
 
-    partial class XmlNamedNodeMap {
-
+    partial class XmlNamedNodeMap
+    {
         // Optimized to minimize space in the zero or one element cases.
-        internal struct SmallXmlNodeList {
-
+        internal struct SmallXmlNodeList
+        {
             // If field is null, that represents an empty list.
             // If field is non-null, but not an ArrayList, then the 'list' contains a single
             // object.
@@ -20,8 +21,10 @@ namespace System.Xml {
             // never degrades back, even if all elements are removed.
             private object field;
 
-            public int Count {
-                get {
+            public int Count
+            {
+                get
+                {
                     if (field == null)
                         return 0;
 
@@ -33,8 +36,10 @@ namespace System.Xml {
                 }
             }
 
-            public object this[int index] {
-                get {
+            public object this[int index]
+            {
+                get
+                {
                     if (field == null)
                         throw new ArgumentOutOfRangeException("index");
 
@@ -49,9 +54,12 @@ namespace System.Xml {
                 }
             }
 
-            public void Add(object value) {
-                if (field == null) {
-                    if (value == null) {
+            public void Add(object value)
+            {
+                if (field == null)
+                {
+                    if (value == null)
+                    {
                         // If a single null value needs to be stored, then
                         // upgrade to an ArrayList
                         ArrayList temp = new ArrayList();
@@ -65,10 +73,12 @@ namespace System.Xml {
                 }
 
                 ArrayList list = field as ArrayList;
-                if (list != null) {
+                if (list != null)
+                {
                     list.Add(value);
                 }
-                else {
+                else
+                {
                     list = new ArrayList();
                     list.Add(field);
                     list.Add(value);
@@ -76,12 +86,14 @@ namespace System.Xml {
                 }
             }
 
-            public void RemoveAt(int index) {
+            public void RemoveAt(int index)
+            {
                 if (field == null)
                     throw new ArgumentOutOfRangeException("index");
 
                 ArrayList list = field as ArrayList;
-                if (list != null) {
+                if (list != null)
+                {
                     list.RemoveAt(index);
                     return;
                 }
@@ -92,8 +104,10 @@ namespace System.Xml {
                 field = null;
             }
 
-            public void Insert(int index, object value) {
-                if (field == null) {
+            public void Insert(int index, object value)
+            {
+                if (field == null)
+                {
                     if (index != 0)
                         throw new ArgumentOutOfRangeException("index");
                     Add(value);
@@ -101,47 +115,58 @@ namespace System.Xml {
                 }
 
                 ArrayList list = field as ArrayList;
-                if (list != null) {
+                if (list != null)
+                {
                     list.Insert(index, value);
                     return;
                 }
 
-                if (index == 0) {
+                if (index == 0)
+                {
                     list = new ArrayList();
                     list.Add(value);
                     list.Add(field);
                     field = list;
                 }
-                else if (index == 1) {
+                else if (index == 1)
+                {
                     list = new ArrayList();
                     list.Add(field);
                     list.Add(value);
                     field = list;
                 }
-                else {
+                else
+                {
                     throw new ArgumentOutOfRangeException("index");
                 }
             }
 
-            class SingleObjectEnumerator : IEnumerator {
+            class SingleObjectEnumerator : IEnumerator
+            {
                 object loneValue;
                 int position = -1;
 
-                public SingleObjectEnumerator(object value) {
+                public SingleObjectEnumerator(object value)
+                {
                     loneValue = value;
                 }
 
-                public object Current {
-                    get {
-                        if (position != 0) {
+                public object Current
+                {
+                    get
+                    {
+                        if (position != 0)
+                        {
                             throw new InvalidOperationException();
                         }
                         return this.loneValue;
                     }
                 }
 
-                public bool MoveNext() {
-                    if (position < 0) {
+                public bool MoveNext()
+                {
+                    if (position < 0)
+                    {
                         position = 0;
                         return true;
                     }
@@ -149,18 +174,22 @@ namespace System.Xml {
                     return false;
                 }
 
-                public void Reset() {
+                public void Reset()
+                {
                     position = -1;
                 }
             }
 
-            public IEnumerator GetEnumerator() {
-                if (field == null) {
+            public IEnumerator GetEnumerator()
+            {
+                if (field == null)
+                {
                     return XmlDocument.EmptyEnumerator;
                 }
 
                 ArrayList list = field as ArrayList;
-                if (list != null) {
+                if (list != null)
+                {
                     return list.GetEnumerator();
                 }
 

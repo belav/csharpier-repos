@@ -19,22 +19,19 @@ namespace System.Activities.DurableInstancing
         public LoadRetryExponentialBackoffStrategy()
         {
             this.multiplier = DefaultBackoffMultiplier;
-            this.maxDelay = DefaultBackoffLimit;   
+            this.maxDelay = DefaultBackoffLimit;
         }
 
         public TimeSpan RetryDelay(int retryAttempt)
         {
             int power = Math.Min(retryAttempt, this.expLimit);
 
-            return TimeSpan.FromMilliseconds
-            (
-                Math.Min
-                (
+            return TimeSpan.FromMilliseconds(
+                Math.Min(
                     this.maxDelay.TotalMilliseconds,
                     this.multiplier.TotalMilliseconds * random.Next(1, ((2 << power) - 1))
                 )
             );
         }
-
     }
 }

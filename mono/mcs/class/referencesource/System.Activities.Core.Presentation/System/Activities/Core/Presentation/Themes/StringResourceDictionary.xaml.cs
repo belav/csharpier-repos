@@ -3,7 +3,6 @@
 //----------------------------------------------------------------
 namespace System.Activities.Core.Presentation.Themes
 {
-
     sealed partial class StringResourceDictionary
     {
         static StringResourceDictionary instance;
@@ -34,6 +33,5 @@ namespace System.Activities.Core.Presentation.Themes
         {
             return (string)(this.Contains(key) ? this[key] : defaultValue);
         }
-
     }
 }

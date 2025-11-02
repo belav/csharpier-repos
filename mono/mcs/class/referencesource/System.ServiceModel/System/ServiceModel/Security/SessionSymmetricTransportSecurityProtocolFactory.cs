@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.ServiceModel.Security.Tokens;
     using System.ServiceModel;
+    using System.ServiceModel.Security.Tokens;
 
     class SessionSymmetricTransportSecurityProtocolFactory : TransportSecurityProtocolFactory
     {
@@ -13,24 +13,16 @@ namespace System.ServiceModel.Security
         SessionDerivedKeySecurityTokenParameters derivedKeyTokenParameters;
 
         public SessionSymmetricTransportSecurityProtocolFactory()
-            : base()
-        {
-        }
+            : base() { }
 
         public override bool SupportsReplayDetection
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public SecurityTokenParameters SecurityTokenParameters
         {
-            get
-            {
-                return this.securityTokenParameters;
-            }
+            get { return this.securityTokenParameters; }
             set
             {
                 ThrowIfImmutable();
@@ -38,7 +30,12 @@ namespace System.ServiceModel.Security
             }
         }
 
-        protected override SecurityProtocol OnCreateSecurityProtocol(EndpointAddress target, Uri via, object listenerSecurityState, TimeSpan timeout)
+        protected override SecurityProtocol OnCreateSecurityProtocol(
+            EndpointAddress target,
+            Uri via,
+            object listenerSecurityState,
+            TimeSpan timeout
+        )
         {
             if (this.ActAsInitiator)
             {
@@ -60,7 +57,9 @@ namespace System.ServiceModel.Security
             if (this.SecurityTokenParameters.RequireDerivedKeys)
             {
                 this.ExpectKeyDerivation = true;
-                this.derivedKeyTokenParameters = new SessionDerivedKeySecurityTokenParameters(this.ActAsInitiator);
+                this.derivedKeyTokenParameters = new SessionDerivedKeySecurityTokenParameters(
+                    this.ActAsInitiator
+                );
             }
         }
 

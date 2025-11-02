@@ -14,12 +14,13 @@ namespace System.Dynamic.Tests
         private class MinimumOverrideSetMemberBinder : SetMemberBinder
         {
             public MinimumOverrideSetMemberBinder(string name, bool ignoreCase)
-                : base(name, ignoreCase)
-            {
-            }
+                : base(name, ignoreCase) { }
 
             public override DynamicMetaObject FallbackSetMember(
-                DynamicMetaObject target, DynamicMetaObject value, DynamicMetaObject errorSuggestion)
+                DynamicMetaObject target,
+                DynamicMetaObject value,
+                DynamicMetaObject errorSuggestion
+            )
             {
                 throw new NotSupportedException();
             }
@@ -37,11 +38,17 @@ namespace System.Dynamic.Tests
 
         private static readonly string[] Names =
         {
-            "arg", "ARG", "Arg", "Argument name that isn\u2019t a valid C\u266F name \uD83D\uDC7F\uD83E\uDD22",
-            "horrid name with" + (char)0xD800 + "a half surrogate", "new", "break"
+            "arg",
+            "ARG",
+            "Arg",
+            "Argument name that isn\u2019t a valid C\u266F name \uD83D\uDC7F\uD83E\uDD22",
+            "horrid name with" + (char)0xD800 + "a half surrogate",
+            "new",
+            "break",
         };
 
-        public static IEnumerable<object[]> NamesAndBools() => Names.Select((n, i) => new object[] { n, i % 2 == 0 });
+        public static IEnumerable<object[]> NamesAndBools() =>
+            Names.Select((n, i) => new object[] { n, i % 2 == 0 });
 
         [Fact]
         public void InvokeInstanceProperty()
@@ -73,8 +80,14 @@ namespace System.Dynamic.Tests
         [Fact]
         public void NullName()
         {
-            AssertExtensions.Throws<ArgumentNullException>("name", () => new MinimumOverrideSetMemberBinder(null, false));
-            AssertExtensions.Throws<ArgumentNullException>("name", () => new MinimumOverrideSetMemberBinder(null, true));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => new MinimumOverrideSetMemberBinder(null, false)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => new MinimumOverrideSetMemberBinder(null, true)
+            );
         }
 
         [Theory, MemberData(nameof(NamesAndBools))]
@@ -87,6 +100,9 @@ namespace System.Dynamic.Tests
 
         [Theory, MemberData(nameof(NamesAndBools))]
         public void ReturnTypeObject(string name, bool ignoreCase) =>
-            Assert.Equal(typeof(object), new MinimumOverrideSetMemberBinder(name, ignoreCase).ReturnType);
+            Assert.Equal(
+                typeof(object),
+                new MinimumOverrideSetMemberBinder(name, ignoreCase).ReturnType
+            );
     }
 }

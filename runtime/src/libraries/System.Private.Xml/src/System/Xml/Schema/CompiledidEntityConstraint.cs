@@ -21,7 +21,7 @@ namespace System.Xml.Schema
         {
             Unique,
             Key,
-            Keyref
+            Keyref,
         }
 
         public ConstraintRole Role
@@ -43,7 +43,10 @@ namespace System.Xml.Schema
 
         private CompiledIdentityConstraint() { }
 
-        public CompiledIdentityConstraint(XmlSchemaIdentityConstraint constraint, XmlNamespaceManager nsmgr)
+        public CompiledIdentityConstraint(
+            XmlSchemaIdentityConstraint constraint,
+            XmlNamespaceManager nsmgr
+        )
         {
             this.name = constraint.QualifiedName;
 
@@ -64,7 +67,11 @@ namespace System.Xml.Schema
             {
                 try
                 {
-                    _fields[idxField] = new Asttree(((XmlSchemaXPath)fields[idxField]).XPath!, true, nsmgr);
+                    _fields[idxField] = new Asttree(
+                        ((XmlSchemaXPath)fields[idxField]).XPath!,
+                        true,
+                        nsmgr
+                    );
                 }
                 catch (XmlSchemaException e)
                 {
@@ -81,7 +88,7 @@ namespace System.Xml.Schema
                 _role = ConstraintRole.Key;
             }
             else
-            {             // XmlSchemaKeyref
+            { // XmlSchemaKeyref
                 _role = ConstraintRole.Keyref;
                 this.refer = ((XmlSchemaKeyref)constraint).Refer;
             }

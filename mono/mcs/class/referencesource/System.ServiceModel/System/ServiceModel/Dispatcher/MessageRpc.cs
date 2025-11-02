@@ -15,10 +15,10 @@ namespace System.ServiceModel.Dispatcher
     using System.ServiceModel.Activation;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
-    using System.Threading;
-    using System.Xml;
-    using System.Transactions;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
+    using System.Transactions;
+    using System.Xml;
 
     delegate void MessageRpcProcessor(ref MessageRpc rpc);
 
@@ -70,23 +70,42 @@ namespace System.ServiceModel.Dispatcher
         internal MessageRpcInvokeNotification InvokeNotification;
         internal EventTraceActivity EventTraceActivity;
 
-        static AsyncCallback handleEndComplete = Fx.ThunkCallback(new AsyncCallback(HandleEndComplete));
-        static AsyncCallback handleEndAbandon = Fx.ThunkCallback(new AsyncCallback(HandleEndAbandon));
+        static AsyncCallback handleEndComplete = Fx.ThunkCallback(
+            new AsyncCallback(HandleEndComplete)
+        );
+        static AsyncCallback handleEndAbandon = Fx.ThunkCallback(
+            new AsyncCallback(HandleEndAbandon)
+        );
 
         bool paused;
         bool switchedThreads;
         bool isInstanceContextSingleton;
         SignalGate<IAsyncResult> invokeContinueGate;
 
-        internal MessageRpc(RequestContext requestContext, Message request, DispatchOperationRuntime operation,
-            ServiceChannel channel, ServiceHostBase host, ChannelHandler channelHandler, bool cleanThread,
-            OperationContext operationContext, InstanceContext instanceContext, EventTraceActivity eventTraceActivity)
+        internal MessageRpc(
+            RequestContext requestContext,
+            Message request,
+            DispatchOperationRuntime operation,
+            ServiceChannel channel,
+            ServiceHostBase host,
+            ChannelHandler channelHandler,
+            bool cleanThread,
+            OperationContext operationContext,
+            InstanceContext instanceContext,
+            EventTraceActivity eventTraceActivity
+        )
         {
-            Fx.Assert((operationContext != null), "System.ServiceModel.Dispatcher.MessageRpc.MessageRpc(), operationContext == null");
-            Fx.Assert(channelHandler != null, "System.ServiceModel.Dispatcher.MessageRpc.MessageRpc(), channelHandler == null");
+            Fx.Assert(
+                (operationContext != null),
+                "System.ServiceModel.Dispatcher.MessageRpc.MessageRpc(), operationContext == null"
+            );
+            Fx.Assert(
+                channelHandler != null,
+                "System.ServiceModel.Dispatcher.MessageRpc.MessageRpc(), channelHandler == null"
+            );
 
             this.Activity = null;
-            this.EventTraceActivity = eventTraceActivity;            
+            this.EventTraceActivity = eventTraceActivity;
             this.AsyncResult = null;
             this.CanSendReply = true;
             this.Channel = channel;
@@ -98,7 +117,9 @@ namespace System.ServiceModel.Dispatcher
             this.TransactedBatchContext = null;
             this.Error = null;
             this.ErrorProcessor = null;
-            this.FaultInfo = new ErrorHandlerFaultInfo(request.Version.Addressing.DefaultFaultAction);
+            this.FaultInfo = new ErrorHandlerFaultInfo(
+                request.Version.Addressing.DefaultFaultAction
+            );
             this.HasSecurityContext = false;
             this.Host = host;
             this.Instance = null;
@@ -127,7 +148,9 @@ namespace System.ServiceModel.Dispatcher
             this.InputParameters = null;
             this.OutputParameters = null;
             this.ReturnParameter = null;
-            this.isInstanceContextSingleton = InstanceContextProviderBase.IsProviderSingleton(this.Channel.DispatchRuntime.InstanceContextProvider);
+            this.isInstanceContextSingleton = InstanceContextProviderBase.IsProviderSingleton(
+                this.Channel.DispatchRuntime.InstanceContextProvider
+            );
             this.invokeContinueGate = null;
 
             if (!operation.IsOneWay && !operation.Parent.ManualAddressing)
@@ -157,20 +180,29 @@ namespace System.ServiceModel.Dispatcher
                 this.ResponseActivityId = Guid.Empty;
             }
 
-            this.InvokeNotification = new MessageRpcInvokeNotification(this.Activity, this.channelHandler);
+            this.InvokeNotification = new MessageRpcInvokeNotification(
+                this.Activity,
+                this.channelHandler
+            );
 
             if (this.EventTraceActivity == null && FxTrace.Trace.IsEnd2EndActivityTracingEnabled)
             {
                 if (this.Request != null)
                 {
-                    this.EventTraceActivity = EventTraceActivityHelper.TryExtractActivity(this.Request, true);
+                    this.EventTraceActivity = EventTraceActivityHelper.TryExtractActivity(
+                        this.Request,
+                        true
+                    );
                 }
             }
         }
 
         internal bool FinalizeCorrelationImplicitly
         {
-            get { return this.CorrelationCallback != null && this.CorrelationCallback.IsFullyDefined; }
+            get
+            {
+                return this.CorrelationCallback != null && this.CorrelationCallback.IsFullyDefined;
+            }
         }
 
         internal bool IsPaused
@@ -185,10 +217,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal bool IsInstanceContextSingleton
         {
-            set
-            {
-                this.isInstanceContextSingleton = value;
-            }
+            set { this.isInstanceContextSingleton = value; }
         }
 
         internal TransactionRpcFacet Transaction
@@ -227,8 +256,9 @@ namespace System.ServiceModel.Dispatcher
                         new CallbackState
                         {
                             ReceiveContext = receiveContext,
-                            ChannelHandler = this.channelHandler
-                        });
+                            ChannelHandler = this.channelHandler,
+                        }
+                    );
 
                     if (result.CompletedSynchronously)
                     {
@@ -252,7 +282,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 this.AbortRequestContext(this.OperationContext.RequestContext);
             }
-            if ((this.RequestContext != null) && (this.RequestContext != this.OperationContext.RequestContext))
+            if (
+                (this.RequestContext != null)
+                && (this.RequestContext != this.OperationContext.RequestContext)
+            )
             {
                 this.AbortRequestContext(this.RequestContext);
             }
@@ -281,7 +314,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 this.DisposeRequestContext(this.OperationContext.RequestContext);
             }
-            if ((this.RequestContext != null) && (this.RequestContext != this.OperationContext.RequestContext))
+            if (
+                (this.RequestContext != null)
+                && (this.RequestContext != this.OperationContext.RequestContext)
+            )
             {
                 this.DisposeRequestContext(this.RequestContext);
             }
@@ -307,14 +343,14 @@ namespace System.ServiceModel.Dispatcher
                         new CallbackState
                         {
                             ChannelHandler = this.channelHandler,
-                            ReceiveContext = receiveContext
-                        });
+                            ReceiveContext = receiveContext,
+                        }
+                    );
 
                     if (result.CompletedSynchronously)
                     {
                         receiveContext.EndComplete(result);
                     }
-
                 }
             }
             catch (Exception e)
@@ -468,7 +504,6 @@ namespace System.ServiceModel.Dispatcher
                     }
                 }
 
-
                 this.Error = e;
 
                 if (this.ErrorProcessor != null)
@@ -565,8 +600,10 @@ namespace System.ServiceModel.Dispatcher
             return wrapper;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method ApplyHostingIntegrationContextNoInline. Caller must ensure that"
-            + "function is called appropriately and result is guarded and Dispose()'d correctly.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical method ApplyHostingIntegrationContextNoInline. Caller must ensure that"
+                + "function is called appropriately and result is guarded and Dispose()'d correctly."
+        )]
         [SecurityCritical]
         IDisposable ApplyHostingIntegrationContext()
         {
@@ -580,8 +617,10 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method HostingMessageProperty.ApplyIntegrationContext. Caller must ensure that"
-            + "function is called appropriately and result is guarded and Dispose()'d correctly.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical method HostingMessageProperty.ApplyIntegrationContext. Caller must ensure that"
+                + "function is called appropriately and result is guarded and Dispose()'d correctly."
+        )]
         [SecurityCritical]
         [MethodImpl(MethodImplOptions.NoInlining)]
         IDisposable ApplyHostingIntegrationContextNoInline()
@@ -589,8 +628,10 @@ namespace System.ServiceModel.Dispatcher
             return this.HostingProperty.ApplyIntegrationContext();
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method ApplyHostingIntegrationContext.",
-            Safe = "Does call properly and calls Dispose, doesn't leak control of the IDisposable out of the function.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical method ApplyHostingIntegrationContext.",
+            Safe = "Does call properly and calls Dispose, doesn't leak control of the IDisposable out of the function."
+        )]
         [SecuritySafeCritical]
         internal bool Process(bool isOperationContextSet)
         {
@@ -690,7 +731,6 @@ namespace System.ServiceModel.Dispatcher
         {
             this.paused = false;
             DecrementBusyCount();
-
         }
 
         internal bool UnlockInvokeContinueGate(out IAsyncResult result)
@@ -711,7 +751,9 @@ namespace System.ServiceModel.Dispatcher
                 this.Host.IncrementBusyCount();
                 if (AspNetEnvironment.Current.TraceIncrementBusyCountIsEnabled())
                 {
-                    AspNetEnvironment.Current.TraceIncrementBusyCount(SR.GetString(SR.ServiceBusyCountTrace, this.Operation.Action));
+                    AspNetEnvironment.Current.TraceIncrementBusyCount(
+                        SR.GetString(SR.ServiceBusyCountTrace, this.Operation.Action)
+                    );
                 }
             }
         }
@@ -723,24 +765,18 @@ namespace System.ServiceModel.Dispatcher
                 this.Host.DecrementBusyCount();
                 if (AspNetEnvironment.Current.TraceDecrementBusyCountIsEnabled())
                 {
-                    AspNetEnvironment.Current.TraceDecrementBusyCount(SR.GetString(SR.ServiceBusyCountTrace, this.Operation.Action));
+                    AspNetEnvironment.Current.TraceDecrementBusyCount(
+                        SR.GetString(SR.ServiceBusyCountTrace, this.Operation.Action)
+                    );
                 }
             }
         }
 
         class CallbackState
         {
-            public ReceiveContextRPCFacet ReceiveContext
-            {
-                get;
-                set;
-            }
+            public ReceiveContextRPCFacet ReceiveContext { get; set; }
 
-            public ChannelHandler ChannelHandler
-            {
-                get;
-                set;
-            }
+            public ChannelHandler ChannelHandler { get; set; }
         }
 
         class Wrapper : IResumeMessageRpc
@@ -756,7 +792,6 @@ namespace System.ServiceModel.Dispatcher
                     Fx.Assert("MessageRpc.Wrapper.Wrapper: (rpc.NextProcessor != null)");
                 }
                 this.rpc.IncrementBusyCount();
-
             }
 
             public InstanceContext GetMessageInstanceContext()
@@ -782,7 +817,6 @@ namespace System.ServiceModel.Dispatcher
                 finally
                 {
                     this.rpc.DecrementBusyCount();
-
                 }
             }
 
@@ -806,7 +840,10 @@ namespace System.ServiceModel.Dispatcher
                     this.Resume(out alreadyResumedNoLock);
                     if (alreadyResumedNoLock)
                     {
-                        string text = SR.GetString(SR.SFxMultipleCallbackFromAsyncOperation, rpc.Operation.Name);
+                        string text = SR.GetString(
+                            SR.SFxMultipleCallbackFromAsyncOperation,
+                            rpc.Operation.Name
+                        );
                         Exception error = new InvalidOperationException(text);
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(error);
                     }
@@ -822,7 +859,6 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
         }
-
     }
 
     class MessageRpcInvokeNotification : IInvokeReceivedNotification

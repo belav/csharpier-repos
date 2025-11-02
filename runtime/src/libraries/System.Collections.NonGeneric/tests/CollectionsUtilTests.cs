@@ -46,7 +46,10 @@ namespace System.Collections.Tests
             Assert.Equal("value1", hashtable2["key1"]);
             Assert.Equal(2, hashtable2.Count);
 
-            AssertExtensions.Throws<ArgumentException>(null, () => hashtable2.Add("key1", "value1"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => hashtable2.Add("key1", "value1")
+            );
         }
 
         [Fact]
@@ -59,7 +62,10 @@ namespace System.Collections.Tests
             Assert.Equal("value1", sortedList["key1"]);
             Assert.Equal(1, sortedList.Count);
 
-            AssertExtensions.Throws<ArgumentException>(null, () => sortedList.Add("key1", "value1"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => sortedList.Add("key1", "value1")
+            );
         }
     }
 }

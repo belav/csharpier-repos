@@ -27,7 +27,10 @@ namespace System.Resources.Tests
         {
             string message = "message";
             Exception innerException = new Exception();
-            MissingManifestResourceException mmre = new MissingManifestResourceException(message, innerException);
+            MissingManifestResourceException mmre = new MissingManifestResourceException(
+                message,
+                innerException
+            );
             Assert.Equal(message, mmre.Message);
             Assert.Same(innerException, mmre.InnerException);
         }

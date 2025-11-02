@@ -20,11 +20,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
         public int NumberRadix
         {
-            get
-            {
-                return _numberRadix;
-            }
-
+            get { return _numberRadix; }
             set
             {
                 if (!IsValidRadix(value))
@@ -53,11 +49,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
         public MemberDisplayFormat MemberDisplayFormat
         {
-            get
-            {
-                return _memberDisplayFormat;
-            }
-
+            get { return _memberDisplayFormat; }
             set
             {
                 if (!value.IsValid())
@@ -71,11 +63,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
         public int MaximumOutputLength
         {
-            get
-            {
-                return _maximumOutputLength;
-            }
-
+            get { return _maximumOutputLength; }
             set
             {
                 if (value <= 0)

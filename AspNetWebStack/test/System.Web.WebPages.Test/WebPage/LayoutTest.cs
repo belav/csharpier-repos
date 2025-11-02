@@ -54,7 +54,11 @@ namespace System.Web.WebPages.Test
                 {
                     p.WriteLiteral(p.PageData["Title"]);
                     p.Write(p.RenderBody());
-                }, pagePath, layoutPath, layoutPage);
+                },
+                pagePath,
+                layoutPath,
+                layoutPage
+            );
             var request = new Mock<HttpRequestBase>();
             request.SetupGet(c => c.Path).Returns("/myapp/index.cshtml");
             request.SetupGet(c => c.RawUrl).Returns("http://localhost:8080/index.cshtml");
@@ -69,7 +73,11 @@ namespace System.Web.WebPages.Test
             Assert.Contains("~/MyFiles/Layout.cshtml", page.PageContext.SourceFiles);
         }
 
-        private static void LayoutBasicTestInternal(string layoutPath, string pagePath = "~/index.cshtml", string layoutPage = "Layout.cshtml")
+        private static void LayoutBasicTestInternal(
+            string layoutPath,
+            string pagePath = "~/index.cshtml",
+            string layoutPage = "Layout.cshtml"
+        )
         {
             // The page ~/index.cshtml does the following:
             // PageData["Title"] = "MyPage";
@@ -95,7 +103,10 @@ namespace System.Web.WebPages.Test
                     p.WriteLiteral(p.PageData["Title"]);
                     p.Write(p.RenderBody());
                 },
-                pagePath, layoutPath, layoutPage);
+                pagePath,
+                layoutPath,
+                layoutPage
+            );
 
             Assert.Equal(title + content, result);
         }
@@ -133,7 +144,8 @@ namespace System.Web.WebPages.Test
                     p.Write(p.RenderBody());
                     p.WriteLiteral("</layout2>");
                 },
-                layout2Path);
+                layout2Path
+            );
 
             var layout1Path = "~/Layout1.cshtml";
             var layout1 = Utils.CreatePage(
@@ -144,15 +156,15 @@ namespace System.Web.WebPages.Test
                     p.Write(p.RenderBody());
                     p.WriteLiteral("</layout1>");
                 },
-                layout1Path);
+                layout1Path
+            );
 
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.PageData["Title"] = "MyPage";
-                    p.Layout = "Layout1.cshtml";
-                    p.WriteLiteral("hello world");
-                });
+            var page = Utils.CreatePage(p =>
+            {
+                p.PageData["Title"] = "MyPage";
+                p.Layout = "Layout1.cshtml";
+                p.WriteLiteral("hello world");
+            });
 
             Utils.AssignObjectFactoriesAndDisplayModeProvider(page, layout1, layout2);
 
@@ -230,50 +242,73 @@ namespace System.Web.WebPages.Test
                     p.Write(p.RenderSection("footer2"));
                     p.WriteLiteral("</layout2 footer>");
                 },
-                layout2Path);
+                layout2Path
+            );
 
             var layout1Path = "~/Layout1.cshtml";
             var layout1 = Utils.CreatePage(
                 p =>
                 {
                     p.Layout = "Layout2.cshtml";
-                    p.DefineSection("header2", () =>
-                    {
-                        p.WriteLiteral("<layout1 header>");
-                        p.Write(p.RenderSection("header1"));
-                        p.WriteLiteral("</layout1 header>");
-                    });
+                    p.DefineSection(
+                        "header2",
+                        () =>
+                        {
+                            p.WriteLiteral("<layout1 header>");
+                            p.Write(p.RenderSection("header1"));
+                            p.WriteLiteral("</layout1 header>");
+                        }
+                    );
 
                     p.WriteLiteral("<layout1>");
                     p.Write(p.RenderBody());
                     p.WriteLiteral("</layout1>");
 
-                    p.DefineSection("footer2", () =>
-                    {
-                        p.WriteLiteral("<layout1 footer>");
-                        p.Write(p.RenderSection("footer1"));
-                        p.WriteLiteral("</layout1 footer>");
-                    });
+                    p.DefineSection(
+                        "footer2",
+                        () =>
+                        {
+                            p.WriteLiteral("<layout1 footer>");
+                            p.Write(p.RenderSection("footer1"));
+                            p.WriteLiteral("</layout1 footer>");
+                        }
+                    );
                 },
-                layout1Path);
+                layout1Path
+            );
 
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.PageData["Title"] = "MyPage";
-                    p.Layout = "Layout1.cshtml";
-                    p.DefineSection("header1", () => { p.WriteLiteral("index header"); });
-                    p.WriteLiteral("hello world");
-                    p.DefineSection("footer1", () => { p.WriteLiteral("index footer"); });
-                });
+            var page = Utils.CreatePage(p =>
+            {
+                p.PageData["Title"] = "MyPage";
+                p.Layout = "Layout1.cshtml";
+                p.DefineSection(
+                    "header1",
+                    () =>
+                    {
+                        p.WriteLiteral("index header");
+                    }
+                );
+                p.WriteLiteral("hello world");
+                p.DefineSection(
+                    "footer1",
+                    () =>
+                    {
+                        p.WriteLiteral("index footer");
+                    }
+                );
+            });
 
             Utils.AssignObjectFactoriesAndDisplayModeProvider(page, layout1, layout2);
 
             var result = Utils.RenderWebPage(page);
-            var expected = "MyPage" + Environment.NewLine
-                         + "<layout2 header><layout1 header>index header</layout1 header></layout2 header>" + Environment.NewLine
-                         + "<layout2><layout1>hello world</layout1></layout2>" + Environment.NewLine
-                         + "<layout2 footer><layout1 footer>index footer</layout1 footer></layout2 footer>";
+            var expected =
+                "MyPage"
+                + Environment.NewLine
+                + "<layout2 header><layout1 header>index header</layout1 header></layout2 header>"
+                + Environment.NewLine
+                + "<layout2><layout1>hello world</layout1></layout2>"
+                + Environment.NewLine
+                + "<layout2 footer><layout1 footer>index footer</layout1 footer></layout2 footer>";
             Assert.Equal(expected, result);
         }
 
@@ -308,26 +343,36 @@ namespace System.Web.WebPages.Test
                     p.WriteLiteral("body in layout2 ");
                     p.Write(p.RenderSection("body"));
                 },
-                layout2Path);
+                layout2Path
+            );
             var layout1Path = "~/Layout1.cshtml";
             var layout1 = Utils.CreatePage(
                 p =>
                 {
                     p.Layout = "Layout2.cshtml";
-                    p.DefineSection("body", () =>
-                    {
-                        p.WriteLiteral("body in layout1 ");
-                        p.Write(p.RenderSection("body"));
-                    });
+                    p.DefineSection(
+                        "body",
+                        () =>
+                        {
+                            p.WriteLiteral("body in layout1 ");
+                            p.Write(p.RenderSection("body"));
+                        }
+                    );
                 },
-                layout1Path);
+                layout1Path
+            );
 
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.Layout = "Layout1.cshtml";
-                    p.DefineSection("body", () => { p.WriteLiteral("body in index"); });
-                });
+            var page = Utils.CreatePage(p =>
+            {
+                p.Layout = "Layout1.cshtml";
+                p.DefineSection(
+                    "body",
+                    () =>
+                    {
+                        p.WriteLiteral("body in index");
+                    }
+                );
+            });
 
             Utils.AssignObjectFactoriesAndDisplayModeProvider(page, layout1, layout2);
 
@@ -343,8 +388,20 @@ namespace System.Web.WebPages.Test
                 p =>
                 {
                     p.Write("123");
-                    p.DefineSection("abc", () => { p.Write("abc"); });
-                    p.DefineSection("XYZ", () => { p.Write("xyz"); });
+                    p.DefineSection(
+                        "abc",
+                        () =>
+                        {
+                            p.Write("abc");
+                        }
+                    );
+                    p.DefineSection(
+                        "XYZ",
+                        () =>
+                        {
+                            p.Write("xyz");
+                        }
+                    );
                     p.Write("456");
                 },
                 p =>
@@ -352,7 +409,8 @@ namespace System.Web.WebPages.Test
                     p.Write(p.RenderSection("AbC"));
                     p.Write(p.RenderSection("xyZ"));
                     p.Write(p.RenderBody());
-                });
+                }
+            );
             var result = Utils.RenderWebPage(page);
             var expected = "abcxyz123456";
             Assert.Equal(expected, result);
@@ -362,16 +420,22 @@ namespace System.Web.WebPages.Test
         public void MissingLayoutPageTest()
         {
             var layoutPage = "Layout.cshtml";
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.PageData["Title"] = "MyPage";
-                    p.Layout = layoutPage;
-                });
+            var page = Utils.CreatePage(p =>
+            {
+                p.PageData["Title"] = "MyPage";
+                p.Layout = layoutPage;
+            });
             var layoutPath1 = "~/Layout.cshtml";
 
-            Assert.Throws<HttpException>(() => Utils.RenderWebPage(page),
-                                                  String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_LayoutPageNotFound, layoutPage, layoutPath1));
+            Assert.Throws<HttpException>(
+                () => Utils.RenderWebPage(page),
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    WebPageResources.WebPage_LayoutPageNotFound,
+                    layoutPage,
+                    layoutPath1
+                )
+            );
         }
 
         [Fact]
@@ -384,9 +448,13 @@ namespace System.Web.WebPages.Test
                 {
                     p.Write(p.RenderBody());
                     p.Write(p.RenderBody());
-                });
+                }
+            );
 
-            Assert.Throws<HttpException>(() => Utils.RenderWebPage(page), WebPageResources.WebPage_RenderBodyAlreadyCalled);
+            Assert.Throws<HttpException>(
+                () => Utils.RenderWebPage(page),
+                WebPageResources.WebPage_RenderBodyAlreadyCalled
+            );
         }
 
         [Fact]
@@ -394,31 +462,54 @@ namespace System.Web.WebPages.Test
         {
             // Page does not define any sections, but layout page does not call RenderBody
             var layoutPath = "~/Layout.cshtml";
-            var page = CreatePageWithLayout(
-                p => { },
-                p => { },
-                layoutPath: layoutPath);
+            var page = CreatePageWithLayout(p => { }, p => { }, layoutPath: layoutPath);
 
-            Assert.Throws<HttpException>(() => Utils.RenderWebPage(page),
-                                                  String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_RenderBodyNotCalled, layoutPath));
+            Assert.Throws<HttpException>(
+                () => Utils.RenderWebPage(page),
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    WebPageResources.WebPage_RenderBodyNotCalled,
+                    layoutPath
+                )
+            );
         }
 
         [Fact]
         public void RenderBodyCalledDirectlyTest()
         {
             // A Page that is not a layout page calls the RenderBody method
-            var page = Utils.CreatePage(p => { p.RenderBody(); });
-            Assert.Throws<HttpException>(() => Utils.RenderWebPage(page),
-                                                  String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_CannotRequestDirectly, "~/index.cshtml", "RenderBody"));
+            var page = Utils.CreatePage(p =>
+            {
+                p.RenderBody();
+            });
+            Assert.Throws<HttpException>(
+                () => Utils.RenderWebPage(page),
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    WebPageResources.WebPage_CannotRequestDirectly,
+                    "~/index.cshtml",
+                    "RenderBody"
+                )
+            );
         }
 
         [Fact]
         public void RenderSectionCalledDirectlyTest()
         {
             // A Page that is not a layout page calls the RenderBody method
-            var page = Utils.CreatePage(p => { p.RenderSection(""); });
-            Assert.Throws<HttpException>(() => Utils.RenderWebPage(page),
-                                                  String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_CannotRequestDirectly, "~/index.cshtml", "RenderSection"));
+            var page = Utils.CreatePage(p =>
+            {
+                p.RenderSection("");
+            });
+            Assert.Throws<HttpException>(
+                () => Utils.RenderWebPage(page),
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    WebPageResources.WebPage_CannotRequestDirectly,
+                    "~/index.cshtml",
+                    "RenderSection"
+                )
+            );
         }
 
         [Fact]
@@ -433,8 +524,14 @@ namespace System.Web.WebPages.Test
                 p.DefineSection(sectionName, () => { });
             });
 
-            Assert.Throws<HttpException>(() => Utils.RenderWebPage(page),
-                                                  String.Format(CultureInfo.InvariantCulture, WebPageResources.WebPage_SectionAleadyDefined, sectionName));
+            Assert.Throws<HttpException>(
+                () => Utils.RenderWebPage(page),
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    WebPageResources.WebPage_SectionAleadyDefined,
+                    sectionName
+                )
+            );
         }
 
         [Fact]
@@ -451,8 +548,14 @@ namespace System.Web.WebPages.Test
                 p.DefineSection(name2, () => { });
             });
 
-            Assert.Throws<HttpException>(() => Utils.RenderWebPage(page),
-                                                  String.Format(CultureInfo.InvariantCulture, WebPageResources.WebPage_SectionAleadyDefined, name2));
+            Assert.Throws<HttpException>(
+                () => Utils.RenderWebPage(page),
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    WebPageResources.WebPage_SectionAleadyDefined,
+                    name2
+                )
+            );
         }
 
         [Fact]
@@ -462,10 +565,20 @@ namespace System.Web.WebPages.Test
             var sectionName = "NoSuchSection";
             var page = CreatePageWithLayout(
                 p => { },
-                p => { p.Write(p.RenderSection(sectionName)); });
+                p =>
+                {
+                    p.Write(p.RenderSection(sectionName));
+                }
+            );
 
-            Assert.Throws<HttpException>(() => Utils.RenderWebPage(page),
-                                                  String.Format(CultureInfo.InvariantCulture, WebPageResources.WebPage_SectionNotDefined, sectionName));
+            Assert.Throws<HttpException>(
+                () => Utils.RenderWebPage(page),
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    WebPageResources.WebPage_SectionNotDefined,
+                    sectionName
+                )
+            );
         }
 
         [Fact]
@@ -483,10 +596,17 @@ namespace System.Web.WebPages.Test
                 {
                     p.Write(p.RenderSection(sectionName));
                     p.Write(p.RenderSection(sectionName));
-                });
+                }
+            );
 
-            Assert.Throws<HttpException>(() => Utils.RenderWebPage(page),
-                                                  String.Format(CultureInfo.InvariantCulture, WebPageResources.WebPage_SectionAleadyRendered, sectionName));
+            Assert.Throws<HttpException>(
+                () => Utils.RenderWebPage(page),
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    WebPageResources.WebPage_SectionAleadyRendered,
+                    sectionName
+                )
+            );
         }
 
         [Fact]
@@ -519,11 +639,19 @@ namespace System.Web.WebPages.Test
                     p.Write(p.RenderSection(sectionName2));
                     p.Write(p.RenderSection(sectionName4));
                 },
-                layoutPath: layoutPath);
+                layoutPath: layoutPath
+            );
 
             var sectionsNotRendered = "section1; section3; section5";
-            Assert.Throws<HttpException>(() => Utils.RenderWebPage(page),
-                                                  String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_SectionsNotRendered, layoutPath, sectionsNotRendered));
+            Assert.Throws<HttpException>(
+                () => Utils.RenderWebPage(page),
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    WebPageResources.WebPage_SectionsNotRendered,
+                    layoutPath,
+                    sectionsNotRendered
+                )
+            );
         }
 
         [Fact]
@@ -543,12 +671,23 @@ namespace System.Web.WebPages.Test
                     p.DefineSection(sectionName2, sectionAction);
                 },
                 // The layout page only calls RenderBody
-                p => { p.Write(p.RenderBody()); },
-                layoutPath: layoutPath);
+                p =>
+                {
+                    p.Write(p.RenderBody());
+                },
+                layoutPath: layoutPath
+            );
 
             var sectionsNotRendered = "section1; section2";
-            Assert.Throws<HttpException>(() => Utils.RenderWebPage(page),
-                                                  String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_SectionsNotRendered, layoutPath, sectionsNotRendered));
+            Assert.Throws<HttpException>(
+                () => Utils.RenderWebPage(page),
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    WebPageResources.WebPage_SectionsNotRendered,
+                    layoutPath,
+                    sectionsNotRendered
+                )
+            );
         }
 
         [Fact]
@@ -564,15 +703,31 @@ namespace System.Web.WebPages.Test
             var layoutPage = new object();
 
             var objectFactory = new Mock<IVirtualPathFactory>();
-            objectFactory.Setup(c => c.Exists(It.IsAny<string>())).Returns<string>(p => layoutPath.Equals(p, StringComparison.OrdinalIgnoreCase));
-            objectFactory.Setup(c => c.CreateInstance(It.IsAny<string>())).Returns<string>(_ => layoutPage as WebPageBase);
+            objectFactory
+                .Setup(c => c.Exists(It.IsAny<string>()))
+                .Returns<string>(p => layoutPath.Equals(p, StringComparison.OrdinalIgnoreCase));
+            objectFactory
+                .Setup(c => c.CreateInstance(It.IsAny<string>()))
+                .Returns<string>(_ => layoutPage as WebPageBase);
             page.VirtualPathFactory = objectFactory.Object;
 
-            Assert.Throws<HttpException>(() => Utils.RenderWebPage(page),
-                                                  String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_InvalidPageType, layoutPath));
+            Assert.Throws<HttpException>(
+                () => Utils.RenderWebPage(page),
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    WebPageResources.WebPage_InvalidPageType,
+                    layoutPath
+                )
+            );
 
-            Assert.Throws<HttpException>(() => Utils.RenderWebPage(page),
-                                                  String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_InvalidPageType, layoutPath));
+            Assert.Throws<HttpException>(
+                () => Utils.RenderWebPage(page),
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    WebPageResources.WebPage_InvalidPageType,
+                    layoutPath
+                )
+            );
         }
 
         [Fact]
@@ -612,7 +767,8 @@ namespace System.Web.WebPages.Test
                     p.Write("section2: " + p.IsSectionDefined("section2") + "; ");
                     p.Write("section3: " + p.IsSectionDefined("section3") + "; ");
                     p.Write("section4: " + p.IsSectionDefined("section4") + "; ");
-                });
+                }
+            );
             var result = Utils.RenderWebPage(page);
             var expected = "section1: True; section2: False; section3: True; section4: False; ";
             Assert.Equal(expected, result);
@@ -625,8 +781,20 @@ namespace System.Web.WebPages.Test
             var page = CreatePageWithLayout(
                 p =>
                 {
-                    p.DefineSection("section1", () => { p.Write("section1 "); });
-                    p.DefineSection("section3", () => { p.Write("section3"); });
+                    p.DefineSection(
+                        "section1",
+                        () =>
+                        {
+                            p.Write("section1 ");
+                        }
+                    );
+                    p.DefineSection(
+                        "section3",
+                        () =>
+                        {
+                            p.Write("section3");
+                        }
+                    );
                 },
                 p =>
                 {
@@ -634,7 +802,8 @@ namespace System.Web.WebPages.Test
                     p.Write(p.RenderSection("section2", required: false));
                     p.Write(p.RenderSection("section3", required: false));
                     p.Write(p.RenderSection("section4", required: false));
-                });
+                }
+            );
             var result = Utils.RenderWebPage(page);
             var expected = "section1 section3";
             Assert.Equal(expected, result);
@@ -655,7 +824,8 @@ namespace System.Web.WebPages.Test
                 {
                     p.Write(p.PageData["contents"]);
                     p.Write(p.RenderBody());
-                });
+                }
+            );
             var result = Utils.RenderWebPage(page);
             var expected = contents + " body";
             Assert.Equal(expected, result);
@@ -668,16 +838,25 @@ namespace System.Web.WebPages.Test
             var layoutPagePath = "~/layout.cshtml";
             var page = Utils.CreatePage(p =>
             {
-                p.DefineSection("foo", () => { p.Write("This is foo"); });
+                p.DefineSection(
+                    "foo",
+                    () =>
+                    {
+                        p.Write("This is foo");
+                    }
+                );
                 p.Write(p.RenderPage("bar.cshtml"));
                 p.Layout = layoutPagePath;
             });
-            var layoutPage = Utils.CreatePage(p =>
-            {
-                p.Write(p.RenderBody());
-                p.Write(" ");
-                p.Write(p.RenderSection("foo"));
-            }, layoutPagePath);
+            var layoutPage = Utils.CreatePage(
+                p =>
+                {
+                    p.Write(p.RenderBody());
+                    p.Write(" ");
+                    p.Write(p.RenderSection("foo"));
+                },
+                layoutPagePath
+            );
 
             var subPage = Utils.CreatePage(p => p.Write("This is bar"), "~/bar.cshtml");
             Utils.AssignObjectFactoriesAndDisplayModeProvider(page, layoutPage, subPage);
@@ -687,15 +866,31 @@ namespace System.Web.WebPages.Test
             Assert.Equal(expected, result);
         }
 
-        public static string RenderPageWithLayout(Action<WebPage> pageExecuteAction, Action<WebPage> layoutExecuteAction,
-                                                  string pagePath = "~/index.cshtml", string layoutPath = "~/Layout.cshtml", string layoutPage = "Layout.cshtml")
+        public static string RenderPageWithLayout(
+            Action<WebPage> pageExecuteAction,
+            Action<WebPage> layoutExecuteAction,
+            string pagePath = "~/index.cshtml",
+            string layoutPath = "~/Layout.cshtml",
+            string layoutPage = "Layout.cshtml"
+        )
         {
-            var page = CreatePageWithLayout(pageExecuteAction, layoutExecuteAction, pagePath, layoutPath, layoutPage);
+            var page = CreatePageWithLayout(
+                pageExecuteAction,
+                layoutExecuteAction,
+                pagePath,
+                layoutPath,
+                layoutPage
+            );
             return Utils.RenderWebPage(page);
         }
 
-        public static MockPage CreatePageWithLayout(Action<WebPage> pageExecuteAction, Action<WebPage> layoutExecuteAction,
-                                                    string pagePath = "~/index.cshtml", string layoutPath = "~/Layout.cshtml", string layoutPageName = "Layout.cshtml")
+        public static MockPage CreatePageWithLayout(
+            Action<WebPage> pageExecuteAction,
+            Action<WebPage> layoutExecuteAction,
+            string pagePath = "~/index.cshtml",
+            string layoutPath = "~/Layout.cshtml",
+            string layoutPageName = "Layout.cshtml"
+        )
         {
             var page = Utils.CreatePage(
                 p =>
@@ -703,10 +898,15 @@ namespace System.Web.WebPages.Test
                     p.Layout = layoutPageName;
                     pageExecuteAction(p);
                 },
-                pagePath);
+                pagePath
+            );
             var layoutPage = Utils.CreatePage(
-                p => { layoutExecuteAction(p); },
-                layoutPath);
+                p =>
+                {
+                    layoutExecuteAction(p);
+                },
+                layoutPath
+            );
 
             Utils.AssignObjectFactoriesAndDisplayModeProvider(layoutPage, page);
 

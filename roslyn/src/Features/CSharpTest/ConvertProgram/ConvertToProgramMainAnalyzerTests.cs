@@ -15,14 +15,18 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertProgram
 {
-    using VerifyCS = CSharpCodeFixVerifier<ConvertToProgramMainDiagnosticAnalyzer, ConvertToProgramMainCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        ConvertToProgramMainDiagnosticAnalyzer,
+        ConvertToProgramMainCodeFixProvider
+    >;
 
     public class ConvertToProgramMainAnalyzerTests
     {
         [Fact]
         public async Task NotOfferedWhenUserPrefersTopLevelStatements()
         {
-            var code = @"
+            var code =
+                @"
 System.Console.WriteLine(0);
 ";
 
@@ -39,7 +43,8 @@ System.Console.WriteLine(0);
         [Fact]
         public async Task NotOfferedWhenUserPrefersProgramMainButNoTopLevelStatements()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M()
@@ -63,10 +68,12 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"{|IDE0211:
+                TestCode =
+                    @"{|IDE0211:
 System.Console.WriteLine(0);
 |}",
-                FixedCode = @"
+                FixedCode =
+                    @"
 internal class Program
 {
     private static void Main(string[] args)
@@ -76,7 +83,14 @@ internal class Program
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Silent } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Silent
+                    },
+                },
             }.RunAsync();
         }
 
@@ -85,11 +99,13 @@ internal class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"{|IDE0211:// This is a file banner
+                TestCode =
+                    @"{|IDE0211:// This is a file banner
 
 System.Console.WriteLine(0);
 |}",
-                FixedCode = @"// This is a file banner
+                FixedCode =
+                    @"// This is a file banner
 
 internal class Program
 {
@@ -100,7 +116,14 @@ internal class Program
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Silent } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Silent
+                    },
+                },
             }.RunAsync();
         }
 
@@ -109,12 +132,14 @@ internal class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"{|IDE0211:// This is a file banner
+                TestCode =
+                    @"{|IDE0211:// This is a file banner
 using System;
 
 System.Console.WriteLine(0);
 |}",
-                FixedCode = @"// This is a file banner
+                FixedCode =
+                    @"// This is a file banner
 using System;
 
 internal class Program
@@ -126,14 +151,22 @@ internal class Program
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Silent } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Silent
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task NotOfferedInLibrary()
         {
-            var code = @"
+            var code =
+                @"
 {|CS8805:System.Console.WriteLine(0);|}
 ";
 
@@ -142,14 +175,22 @@ internal class Program
                 TestCode = code,
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.CSharp9,
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Silent } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Silent
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task NotOfferedWhenSuppressed()
         {
-            var code = @"
+            var code =
+                @"
 System.Console.WriteLine(0);
 ";
 
@@ -159,7 +200,14 @@ System.Console.WriteLine(0);
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.None } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.None
+                    },
+                },
             }.RunAsync();
         }
 
@@ -168,10 +216,12 @@ System.Console.WriteLine(0);
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 {|IDE0211:System|}.Console.WriteLine(0);
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 internal class Program
 {
     private static void Main(string[] args)
@@ -181,7 +231,14 @@ internal class Program
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
@@ -190,10 +247,12 @@ internal class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 {|IDE0211:System|}.Console.WriteLine(0);
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class Program
 {
     static void Main(string[] args)
@@ -205,8 +264,15 @@ class Program
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
                 Options =
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.Never },
-                    { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion },
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.Never
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
                 },
             }.RunAsync();
         }
@@ -216,12 +282,14 @@ class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 {|IDE0211:Console|}.WriteLine(0);
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 internal class Program
@@ -233,7 +301,14 @@ internal class Program
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
@@ -242,14 +317,16 @@ internal class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 {|IDE0211:Console|}.WriteLine(0);
 
 return 0;
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 internal class Program
@@ -263,7 +340,14 @@ internal class Program
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
@@ -272,7 +356,8 @@ internal class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 {|IDE0211:Console|}.WriteLine(0);
@@ -283,7 +368,8 @@ void M()
 
 return 0;
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 internal class Program
@@ -301,7 +387,14 @@ internal class Program
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
@@ -310,12 +403,14 @@ internal class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 {|IDE0211:await|} Console.Out.WriteLineAsync();
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 using System.Threading.Tasks;
 
@@ -328,7 +423,14 @@ internal class Program
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
@@ -337,14 +439,16 @@ internal class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 {|IDE0211:await|} Console.Out.WriteLineAsync();
 
 return 0;
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 using System.Threading.Tasks;
 
@@ -359,7 +463,14 @@ internal class Program
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
@@ -368,13 +479,15 @@ internal class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 // This comment probably describes logic of the statement below
 {|IDE0211:Console|}.WriteLine(0);
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 internal class Program
@@ -387,7 +500,14 @@ internal class Program
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
@@ -396,14 +516,16 @@ internal class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 // This comment probably does not describe the logic of the statement below
 
 {|IDE0211:Console|}.WriteLine(0);
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 // This comment probably does not describe the logic of the statement below
@@ -417,7 +539,14 @@ internal class Program
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
@@ -426,13 +555,15 @@ internal class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 // See https://aka.ms/new-console-template for more information
 {|IDE0211:Console|}.WriteLine(0);
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 internal class Program
@@ -444,7 +575,14 @@ internal class Program
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
@@ -453,14 +591,16 @@ internal class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 // See https://aka.ms/new-console-template for more information
 
 {|IDE0211:Console|}.WriteLine(0);
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 internal class Program
@@ -472,7 +612,14 @@ internal class Program
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
@@ -481,12 +628,14 @@ internal class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 // See https://aka.ms/new-console-template for more information
 
 {|IDE0211:System|}.Console.WriteLine(0);
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 internal class Program
 {
     private static void Main(string[] args)
@@ -496,7 +645,14 @@ internal class Program
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
@@ -505,11 +661,13 @@ internal class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 // See https://aka.ms/new-console-template for more information
 {|IDE0211:System|}.Console.WriteLine(0);
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 internal class Program
 {
     private static void Main(string[] args)
@@ -519,7 +677,14 @@ internal class Program
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
@@ -528,7 +693,8 @@ internal class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 #if true
@@ -537,7 +703,8 @@ using System;
 
 #endif
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 #if true
@@ -554,7 +721,14 @@ internal class Program
 ",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
@@ -563,7 +737,8 @@ internal class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 #if true
@@ -574,7 +749,8 @@ return;
 
 #endif
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 #if true
@@ -593,7 +769,14 @@ internal class Program
 ",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
@@ -602,7 +785,8 @@ internal class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 {|IDE0211:Console|}.WriteLine(0);
@@ -612,7 +796,8 @@ partial class Program
     int x;
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 partial class Program
@@ -626,7 +811,14 @@ partial class Program
 }",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
@@ -640,7 +832,8 @@ partial class Program
         {
             await new VerifyCS.Test
             {
-                TestCode = $@"
+                TestCode =
+                    $@"
 using System;
 
 {{|IDE0211:Console|}}.WriteLine(0);
@@ -650,7 +843,8 @@ using System;
     static int x;
 }}
 ",
-                FixedCode = $@"
+                FixedCode =
+                    $@"
 using System;
 
 {modifier} partial class Program
@@ -664,7 +858,14 @@ using System;
 }}",
                 LanguageVersion = LanguageVersion.CSharp11,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
@@ -673,7 +874,8 @@ using System;
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 {|IDE0211:Console|}.WriteLine(0);
@@ -683,7 +885,8 @@ class X
     int x;
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 internal class Program
@@ -701,7 +904,14 @@ class X
 ",
                 LanguageVersion = LanguageVersion.CSharp9,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                Options = { { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
     }

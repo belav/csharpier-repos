@@ -10,9 +10,9 @@
 namespace System.Data.Common.EntitySql.AST
 {
     using System;
-    using System.Globalization;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Globalization;
 
     /// <summary>
     /// Represents the Seached Case Expression - CASE WHEN THEN [ELSE] END.
@@ -27,9 +27,7 @@ namespace System.Data.Common.EntitySql.AST
         /// </summary>
         /// <param name="whenThenExpr">whenThen expression list</param>
         internal CaseExpr(NodeList<WhenThenExpr> whenThenExpr)
-            : this(whenThenExpr, null)
-        {
-        }
+            : this(whenThenExpr, null) { }
 
         /// <summary>
         /// Initializes case expression with else sub-expression.

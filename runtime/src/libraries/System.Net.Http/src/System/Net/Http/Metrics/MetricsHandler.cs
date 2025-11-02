@@ -15,7 +15,11 @@ namespace System.Net.Http.Metrics
         private readonly UpDownCounter<long> _activeRequests;
         private readonly Histogram<double> _requestsDuration;
 
-        public MetricsHandler(HttpMessageHandler innerHandler, IMeterFactory? meterFactory, out Meter meter)
+        public MetricsHandler(
+            HttpMessageHandler innerHandler,
+            IMeterFactory? meterFactory,
+            out Meter meter
+        )
         {
             _innerHandler = innerHandler;
 
@@ -25,14 +29,20 @@ namespace System.Net.Http.Metrics
             _activeRequests = meter.CreateUpDownCounter<long>(
                 "http.client.active_requests",
                 unit: "{request}",
-                description: "Number of outbound HTTP requests that are currently active on the client.");
+                description: "Number of outbound HTTP requests that are currently active on the client."
+            );
             _requestsDuration = meter.CreateHistogram<double>(
                 "http.client.request.duration",
                 unit: "s",
-                description: "Duration of HTTP client requests.");
+                description: "Duration of HTTP client requests."
+            );
         }
 
-        internal override ValueTask<HttpResponseMessage> SendAsync(HttpRequestMessage request, bool async, CancellationToken cancellationToken)
+        internal override ValueTask<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            bool async,
+            CancellationToken cancellationToken
+        )
         {
             if (_activeRequests.Enabled || _requestsDuration.Enabled)
             {
@@ -40,22 +50,32 @@ namespace System.Net.Http.Metrics
             }
             else
             {
-                return async ?
-                    new ValueTask<HttpResponseMessage>(_innerHandler.SendAsync(request, cancellationToken)) :
-                    new ValueTask<HttpResponseMessage>(_innerHandler.Send(request, cancellationToken));
+                return async
+                    ? new ValueTask<HttpResponseMessage>(
+                        _innerHandler.SendAsync(request, cancellationToken)
+                    )
+                    : new ValueTask<HttpResponseMessage>(
+                        _innerHandler.Send(request, cancellationToken)
+                    );
             }
         }
 
-        private async ValueTask<HttpResponseMessage> SendAsyncWithMetrics(HttpRequestMessage request, bool async, CancellationToken cancellationToken)
+        private async ValueTask<HttpResponseMessage> SendAsyncWithMetrics(
+            HttpRequestMessage request,
+            bool async,
+            CancellationToken cancellationToken
+        )
         {
             (long startTimestamp, bool recordCurrentRequests) = RequestStart(request);
             HttpResponseMessage? response = null;
             Exception? exception = null;
             try
             {
-                response = async ?
-                    await _innerHandler.SendAsync(request, cancellationToken).ConfigureAwait(false) :
-                    _innerHandler.Send(request, cancellationToken);
+                response = async
+                    ? await _innerHandler
+                        .SendAsync(request, cancellationToken)
+                        .ConfigureAwait(false)
+                    : _innerHandler.Send(request, cancellationToken);
                 return response;
             }
             catch (Exception ex)
@@ -79,7 +99,9 @@ namespace System.Net.Http.Metrics
             base.Dispose(disposing);
         }
 
-        private (long StartTimestamp, bool RecordCurrentRequests) RequestStart(HttpRequestMessage request)
+        private (long StartTimestamp, bool RecordCurrentRequests) RequestStart(
+            HttpRequestMessage request
+        )
         {
             bool recordCurrentRequests = _activeRequests.Enabled;
             long startTimestamp = Stopwatch.GetTimestamp();
@@ -93,7 +115,13 @@ namespace System.Net.Http.Metrics
             return (startTimestamp, recordCurrentRequests);
         }
 
-        private void RequestStop(HttpRequestMessage request, HttpResponseMessage? response, Exception? exception, long startTimestamp, bool recordCurrentRequests)
+        private void RequestStop(
+            HttpRequestMessage request,
+            HttpResponseMessage? response,
+            Exception? exception,
+            long startTimestamp,
+            bool recordCurrentRequests
+        )
         {
             TagList tags = InitializeCommonTags(request);
 
@@ -118,20 +146,35 @@ namespace System.Net.Http.Metrics
                 tags.Add("error.type", errorType);
             }
 
-            TimeSpan durationTime = Stopwatch.GetElapsedTime(startTimestamp, Stopwatch.GetTimestamp());
+            TimeSpan durationTime = Stopwatch.GetElapsedTime(
+                startTimestamp,
+                Stopwatch.GetTimestamp()
+            );
 
-            HttpMetricsEnrichmentContext? enrichmentContext = HttpMetricsEnrichmentContext.GetEnrichmentContextForRequest(request);
+            HttpMetricsEnrichmentContext? enrichmentContext =
+                HttpMetricsEnrichmentContext.GetEnrichmentContextForRequest(request);
             if (enrichmentContext is null)
             {
                 _requestsDuration.Record(durationTime.TotalSeconds, tags);
             }
             else
             {
-                enrichmentContext.RecordDurationWithEnrichment(request, response, exception, durationTime, tags, _requestsDuration);
+                enrichmentContext.RecordDurationWithEnrichment(
+                    request,
+                    response,
+                    exception,
+                    durationTime,
+                    tags,
+                    _requestsDuration
+                );
             }
         }
 
-        private static bool TryGetErrorType(HttpResponseMessage? response, Exception? exception, out string? errorType)
+        private static bool TryGetErrorType(
+            HttpResponseMessage? response,
+            Exception? exception,
+            out string? errorType
+        )
         {
             if (response is not null)
             {
@@ -153,7 +196,10 @@ namespace System.Net.Http.Metrics
                 return false;
             }
 
-            Debug.Assert(Enum.GetValues<HttpRequestError>().Length == 12, "We need to extend the mapping in case new values are added to HttpRequestError.");
+            Debug.Assert(
+                Enum.GetValues<HttpRequestError>().Length == 12,
+                "We need to extend the mapping in case new values are added to HttpRequestError."
+            );
             errorType = (exception as HttpRequestException)?.HttpRequestError switch
             {
                 HttpRequestError.NameResolutionError => "name_resolution_error",
@@ -169,19 +215,20 @@ namespace System.Net.Http.Metrics
                 HttpRequestError.ConfigurationLimitExceeded => "configuration_limit_exceeded",
 
                 // Fall back to the exception type name in case of HttpRequestError.Unknown or when exception is not an HttpRequestException.
-                _ => exception.GetType().FullName!
+                _ => exception.GetType().FullName!,
             };
             return true;
         }
 
-        private static string GetProtocolVersionString(Version httpVersion) => (httpVersion.Major, httpVersion.Minor) switch
-        {
-            (1, 0) => "1.0",
-            (1, 1) => "1.1",
-            (2, 0) => "2",
-            (3, 0) => "3",
-            _ => httpVersion.ToString()
-        };
+        private static string GetProtocolVersionString(Version httpVersion) =>
+            (httpVersion.Major, httpVersion.Minor) switch
+            {
+                (1, 0) => "1.0",
+                (1, 1) => "1.1",
+                (2, 0) => "2",
+                (3, 0) => "3",
+                _ => httpVersion.ToString(),
+            };
 
         private static TagList InitializeCommonTags(HttpRequestMessage request)
         {
@@ -206,7 +253,10 @@ namespace System.Net.Http.Metrics
         {
             // Return canonical names for known methods and "_OTHER" for unknown ones.
             HttpMethod? known = HttpMethod.GetKnownMethod(method.Method);
-            return new KeyValuePair<string, object?>("http.request.method", known?.Method ?? "_OTHER");
+            return new KeyValuePair<string, object?>(
+                "http.request.method",
+                known?.Method ?? "_OTHER"
+            );
         }
 
         private static object[]? s_boxedStatusCodes;
@@ -214,7 +264,10 @@ namespace System.Net.Http.Metrics
 
         private static object GetBoxedStatusCode(int statusCode)
         {
-            object[] boxes = LazyInitializer.EnsureInitialized(ref s_boxedStatusCodes, static () => new object[512]);
+            object[] boxes = LazyInitializer.EnsureInitialized(
+                ref s_boxedStatusCodes,
+                static () => new object[512]
+            );
 
             return (uint)statusCode < (uint)boxes.Length
                 ? boxes[statusCode] ??= statusCode
@@ -225,7 +278,10 @@ namespace System.Net.Http.Metrics
         {
             Debug.Assert(statusCode >= 400 && statusCode <= 599);
 
-            string[] strings = LazyInitializer.EnsureInitialized(ref s_statusCodeStrings, static () => new string[200]);
+            string[] strings = LazyInitializer.EnsureInitialized(
+                ref s_statusCodeStrings,
+                static () => new string[200]
+            );
             int index = statusCode - 400;
             return (uint)index < (uint)strings.Length
                 ? strings[index] ??= statusCode.ToString()
@@ -235,10 +291,9 @@ namespace System.Net.Http.Metrics
         private sealed class SharedMeter : Meter
         {
             public static Meter Instance { get; } = new SharedMeter();
+
             private SharedMeter()
-                : base("System.Net.Http")
-            {
-            }
+                : base("System.Net.Http") { }
 
             protected override void Dispose(bool disposing)
             {

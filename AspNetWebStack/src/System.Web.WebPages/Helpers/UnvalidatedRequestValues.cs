@@ -28,10 +28,7 @@ namespace System.Web.Helpers
 
         public string this[string key]
         {
-            get
-            {
-                return _request.Unvalidated[key];
-            }
+            get { return _request.Unvalidated[key]; }
         }
     }
 }

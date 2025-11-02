@@ -16,6 +16,7 @@ internal static partial class Interop
             NativeOverlapped* overlapped,
             out uint bytesTransferred,
             [MarshalAs(UnmanagedType.Bool)] bool wait,
-            out SocketFlags socketFlags);
+            out SocketFlags socketFlags
+        );
     }
 }

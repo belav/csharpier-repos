@@ -14,7 +14,9 @@ using System.Xml;
 namespace System.Configuration
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public class ConfigurationErrorsException : ConfigurationException
     {
         // Constants
@@ -32,59 +34,67 @@ namespace System.Configuration
         // The ConfigurationException class is obsolete, but we still need to derive from it and call the base ctor, so we
         // just disable the obsoletion warning.
 #pragma warning disable 0618
-        public ConfigurationErrorsException(string message, Exception inner, string filename, int line)
+        public ConfigurationErrorsException(
+            string message,
+            Exception inner,
+            string filename,
+            int line
+        )
             : base(message, inner)
         {
 #pragma warning restore 0618
             Init(filename, line);
         }
 
-        public ConfigurationErrorsException() :
-            this(null, null, null, 0)
-        { }
+        public ConfigurationErrorsException()
+            : this(null, null, null, 0) { }
 
-        public ConfigurationErrorsException(string message) :
-            this(message, null, null, 0)
-        { }
+        public ConfigurationErrorsException(string message)
+            : this(message, null, null, 0) { }
 
-        public ConfigurationErrorsException(string message, Exception inner) :
-            this(message, inner, null, 0)
-        { }
+        public ConfigurationErrorsException(string message, Exception inner)
+            : this(message, inner, null, 0) { }
 
-        public ConfigurationErrorsException(string message, string filename, int line) :
-            this(message, null, filename, line)
-        { }
+        public ConfigurationErrorsException(string message, string filename, int line)
+            : this(message, null, filename, line) { }
 
-        public ConfigurationErrorsException(string message, XmlNode node) :
-            this(message, null, GetFilename(node), GetLineNumber(node))
-        { }
+        public ConfigurationErrorsException(string message, XmlNode node)
+            : this(message, null, GetFilename(node), GetLineNumber(node)) { }
 
-        public ConfigurationErrorsException(string message, Exception inner, XmlNode node) :
-            this(message, inner, GetFilename(node), GetLineNumber(node))
-        { }
+        public ConfigurationErrorsException(string message, Exception inner, XmlNode node)
+            : this(message, inner, GetFilename(node), GetLineNumber(node)) { }
 
-        public ConfigurationErrorsException(string message, XmlReader reader) :
-            this(message, null, GetFilename(reader), GetLineNumber(reader))
-        { }
+        public ConfigurationErrorsException(string message, XmlReader reader)
+            : this(message, null, GetFilename(reader), GetLineNumber(reader)) { }
 
-        public ConfigurationErrorsException(string message, Exception inner, XmlReader reader) :
-            this(message, inner, GetFilename(reader), GetLineNumber(reader))
-        { }
+        public ConfigurationErrorsException(string message, Exception inner, XmlReader reader)
+            : this(message, inner, GetFilename(reader), GetLineNumber(reader)) { }
 
-        internal ConfigurationErrorsException(string message, IConfigErrorInfo errorInfo) :
-            this(message, null, GetConfigErrorInfoFilename(errorInfo), GetConfigErrorInfoLineNumber(errorInfo))
-        { }
+        internal ConfigurationErrorsException(string message, IConfigErrorInfo errorInfo)
+            : this(
+                message,
+                null,
+                GetConfigErrorInfoFilename(errorInfo),
+                GetConfigErrorInfoLineNumber(errorInfo)
+            ) { }
 
-        internal ConfigurationErrorsException(string message, Exception inner, IConfigErrorInfo errorInfo) :
-            this(message, inner, GetConfigErrorInfoFilename(errorInfo), GetConfigErrorInfoLineNumber(errorInfo))
-        { }
+        internal ConfigurationErrorsException(
+            string message,
+            Exception inner,
+            IConfigErrorInfo errorInfo
+        )
+            : this(
+                message,
+                inner,
+                GetConfigErrorInfoFilename(errorInfo),
+                GetConfigErrorInfoLineNumber(errorInfo)
+            ) { }
 
-        internal ConfigurationErrorsException(ConfigurationException e) :
-            this(e?.BareMessage, e?.InnerException, e?.Filename, e?.Line ?? 0)
-        { }
+        internal ConfigurationErrorsException(ConfigurationException e)
+            : this(e?.BareMessage, e?.InnerException, e?.Filename, e?.Line ?? 0) { }
 
-        internal ConfigurationErrorsException(ICollection<ConfigurationException> coll) :
-            this(GetFirstException(coll))
+        internal ConfigurationErrorsException(ICollection<ConfigurationException> coll)
+            : this(GetFirstException(coll))
         {
             if (coll.Count > 1)
             {
@@ -93,20 +103,25 @@ namespace System.Configuration
             }
         }
 
-        internal ConfigurationErrorsException(ArrayList coll) :
-            this((ConfigurationException)(coll.Count > 0 ? coll[0] : null))
+        internal ConfigurationErrorsException(ArrayList coll)
+            : this((ConfigurationException)(coll.Count > 0 ? coll[0] : null))
         {
-            if (coll.Count <= 1) return;
+            if (coll.Count <= 1)
+                return;
             _errors = new ConfigurationException[coll.Count];
             coll.CopyTo(_errors, 0);
         }
 
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
-        protected ConfigurationErrorsException(SerializationInfo info, StreamingContext context) :
-            base(info, context)
+        protected ConfigurationErrorsException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             int firstLine;
             int count;
@@ -120,7 +135,8 @@ namespace System.Configuration
             // Retrieve errors for _errors object
             count = info.GetInt32(SerializationParamErrorCount);
 
-            if (count == 0) return;
+            if (count == 0)
+                return;
             _errors = new ConfigurationException[count];
 
             for (int i = 0; i < count; i++)
@@ -130,11 +146,14 @@ namespace System.Configuration
                 Type currentExceptionType = Type.GetType(currentType, true);
 
                 // Only allow our exception types
-                if ((currentExceptionType != typeof(ConfigurationException)) &&
-                    (currentExceptionType != typeof(ConfigurationErrorsException)))
+                if (
+                    (currentExceptionType != typeof(ConfigurationException))
+                    && (currentExceptionType != typeof(ConfigurationErrorsException))
+                )
                     throw ExceptionUtil.UnexpectedError("ConfigurationErrorsException");
 
-                _errors[i] = (ConfigurationException)info.GetValue(numPrefix + SerializationParamErrorData, currentExceptionType);
+                _errors[i] = (ConfigurationException)
+                    info.GetValue(numPrefix + SerializationParamErrorData, currentExceptionType);
             }
         }
 
@@ -148,7 +167,12 @@ namespace System.Configuration
                 if (!string.IsNullOrEmpty(file))
                 {
                     return Line != 0
-                        ? BareMessage + " (" + file + " line " + Line.ToString(CultureInfo.CurrentCulture) + ")"
+                        ? BareMessage
+                            + " ("
+                            + file
+                            + " line "
+                            + Line.ToString(CultureInfo.CurrentCulture)
+                            + ")"
                         : BareMessage + " (" + file + ")";
                 }
 
@@ -166,38 +190,52 @@ namespace System.Configuration
         {
             get
             {
-                if (_errors != null) return _errors;
+                if (_errors != null)
+                    return _errors;
 
-                ConfigurationErrorsException e = new ConfigurationErrorsException(BareMessage, InnerException,
-                    _firstFilename, _firstLine);
+                ConfigurationErrorsException e = new ConfigurationErrorsException(
+                    BareMessage,
+                    InnerException,
+                    _firstFilename,
+                    _firstLine
+                );
 
                 ConfigurationException[] a = { e };
                 return a;
             }
         }
 
-        internal ICollection<ConfigurationException> ErrorsGeneric => (ICollection<ConfigurationException>)Errors;
+        internal ICollection<ConfigurationException> ErrorsGeneric =>
+            (ICollection<ConfigurationException>)Errors;
 
         private void Init(string filename, int line)
         {
             HResult = HResults.Configuration;
 
             // BaseConfigurationRecord.cs uses -1 as uninitialized line number.
-            if (line == -1) line = 0;
+            if (line == -1)
+                line = 0;
 
             _firstFilename = filename;
             _firstLine = line;
         }
 
-        private static ConfigurationException GetFirstException(ICollection<ConfigurationException> coll)
+        private static ConfigurationException GetFirstException(
+            ICollection<ConfigurationException> coll
+        )
         {
-            foreach (ConfigurationException e in coll) return e;
+            foreach (ConfigurationException e in coll)
+                return e;
 
             return null;
         }
 
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
         public override void GetObjectData(SerializationInfo info, StreamingContext context)

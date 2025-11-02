@@ -35,11 +35,10 @@ namespace RenderingPlayground
             int top = 0,
             int left = 0,
             string text = null,
-            bool overwrite = true)
+            bool overwrite = true
+        )
 #pragma warning restore CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
-        {
- 
-        }
+        { }
     }
 
     internal enum SampleName

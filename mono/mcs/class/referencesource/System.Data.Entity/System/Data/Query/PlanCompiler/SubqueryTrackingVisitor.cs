@@ -10,18 +10,19 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Query.InternalTrees;
+
 //using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
 
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
-// to prevent from simple mistakes during development (e.g. method argument validation 
-// in cases where it was you who created the variables or the variables had already been validated or 
-// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default 
-// "else" block is chosen why the new condition should be treated separately). This kind of asserts are 
-// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in 
-// the shipped product. 
-// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions 
+// to prevent from simple mistakes during development (e.g. method argument validation
+// in cases where it was you who created the variables or the variables had already been validated or
+// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default
+// "else" block is chosen why the new condition should be treated separately). This kind of asserts are
+// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in
+// the shipped product.
+// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions
 // about how the tree was built etc. - in these cases we probably want to throw an exception (this is
-// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct 
+// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct
 // or the tree was built/rewritten not the way we thought it was.
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
@@ -29,18 +30,22 @@ using System.Data.Query.InternalTrees;
 namespace System.Data.Query.PlanCompiler
 {
     /// <summary>
-    /// The SubqueryTracking Visitor serves as a base class for the visitors that may turn 
+    /// The SubqueryTracking Visitor serves as a base class for the visitors that may turn
     /// scalar subqueryies into outer-apply subqueries.
     /// </summary>
     internal abstract class SubqueryTrackingVisitor : BasicOpVisitorOfNode
     {
         #region Private State
         protected readonly PlanCompiler m_compilerState;
-        protected Command m_command { get { return m_compilerState.Command; } }
+        protected Command m_command
+        {
+            get { return m_compilerState.Command; }
+        }
 
         // nested subquery tracking
         protected readonly Stack<Node> m_ancestors = new Stack<Node>();
-        private readonly Dictionary<Node, List<Node>> m_nodeSubqueries = new Dictionary<Node, List<Node>>();
+        private readonly Dictionary<Node, List<Node>> m_nodeSubqueries =
+            new Dictionary<Node, List<Node>>();
         #endregion
 
         #region Constructor
@@ -137,9 +142,9 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Augments a node with a number of OuterApply's - one for each subquery
-        /// If S1, S2, ... are the list of subqueries for the node, and D is the 
+        /// If S1, S2, ... are the list of subqueries for the node, and D is the
         /// original (driver) input, we convert D into
-        ///    OuterApply(OuterApply(D, S1), S2), ... 
+        ///    OuterApply(OuterApply(D, S1), S2), ...
         /// </summary>
         /// <param name="input">the input (driver) node</param>
         /// <param name="subqueries">List of subqueries</param>
@@ -178,21 +183,21 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Default processing for RelOps. 
-        /// - First, we mark the current node as its own ancestor (so that any 
+        /// Default processing for RelOps.
+        /// - First, we mark the current node as its own ancestor (so that any
         ///   subqueries that we detect internally will be added to this node's list)
         /// - then, visit each child
         /// - finally, accumulate all nested subqueries.
         /// - if the current RelOp has only one input, then add the nested subqueries via
-        ///   Outer apply nodes to this input. 
-        /// 
-        /// The interesting RelOps are 
-        ///   Project, Filter, GroupBy, Sort,  
+        ///   Outer apply nodes to this input.
+        ///
+        /// The interesting RelOps are
+        ///   Project, Filter, GroupBy, Sort,
         /// Should we break this out into separate functions instead?
         /// </summary>
         /// <param name="op">Current RelOp</param>
         /// <param name="n">Node to process</param>
-        /// <returns>Current subtree</returns> 
+        /// <returns>Current subtree</returns>
         protected override Node VisitRelOpDefault(RelOp op, Node n)
         {
             VisitChildren(n); // visit all my children first
@@ -204,9 +209,12 @@ namespace System.Data.Query.PlanCompiler
             {
                 // Validate - this must only apply to the following nodes
                 PlanCompiler.Assert(
-                    n.Op.OpType == OpType.Project || n.Op.OpType == OpType.Filter ||
-                    n.Op.OpType == OpType.GroupBy || n.Op.OpType == OpType.GroupByInto,
-                    "VisitRelOpDefault: Unexpected op?" + n.Op.OpType);
+                    n.Op.OpType == OpType.Project
+                        || n.Op.OpType == OpType.Filter
+                        || n.Op.OpType == OpType.GroupBy
+                        || n.Op.OpType == OpType.GroupByInto,
+                    "VisitRelOpDefault: Unexpected op?" + n.Op.OpType
+                );
 
                 Node newInputNode = AugmentWithSubqueries(n.Child0, nestedSubqueries, true);
                 // Now make this the new input child
@@ -226,8 +234,8 @@ namespace System.Data.Query.PlanCompiler
         {
             VisitChildren(n); // visit all my children first
 
-            // then check to see if we have any nested subqueries. This can only 
-            // occur in the join condition. 
+            // then check to see if we have any nested subqueries. This can only
+            // occur in the join condition.
             // What we'll do in this case is to convert the join condition - "p" into
             //    p -> Exists(Filter(SingleRowTableOp, p))
             // We will then move the subqueries into an outerApply on the SingleRowTable
@@ -237,15 +245,22 @@ namespace System.Data.Query.PlanCompiler
                 return false;
             }
 
-            PlanCompiler.Assert(n.Op.OpType == OpType.InnerJoin ||
-                n.Op.OpType == OpType.LeftOuterJoin ||
-                n.Op.OpType == OpType.FullOuterJoin, "unexpected op?");
+            PlanCompiler.Assert(
+                n.Op.OpType == OpType.InnerJoin
+                    || n.Op.OpType == OpType.LeftOuterJoin
+                    || n.Op.OpType == OpType.FullOuterJoin,
+                "unexpected op?"
+            );
             PlanCompiler.Assert(n.HasChild2, "missing second child to JoinOp?");
             Node joinCondition = n.Child2;
 
             Node inputNode = m_command.CreateNode(m_command.CreateSingleRowTableOp());
             inputNode = AugmentWithSubqueries(inputNode, nestedSubqueries, true);
-            Node filterNode = m_command.CreateNode(m_command.CreateFilterOp(), inputNode, joinCondition);
+            Node filterNode = m_command.CreateNode(
+                m_command.CreateFilterOp(),
+                inputNode,
+                joinCondition
+            );
             Node existsNode = m_command.CreateNode(m_command.CreateExistsOp(), filterNode);
 
             n.Child2 = existsNode;
@@ -254,7 +269,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Visitor for UnnestOp. If the child has any subqueries, we need to convert this
-        /// into an 
+        /// into an
         ///    OuterApply(S, Unnest)
         /// unlike the other cases where the OuterApply will appear as the input of the node
         /// </summary>
@@ -270,7 +285,11 @@ namespace System.Data.Query.PlanCompiler
             {
                 // We pass 'inputFirst = false' since the subqueries contribute to the driver in the unnest,
                 // they are not generated by the unnest.
-                Node newNode = AugmentWithSubqueries(n, nestedSubqueries, false /* inputFirst */);
+                Node newNode = AugmentWithSubqueries(
+                    n,
+                    nestedSubqueries,
+                    false /* inputFirst */
+                );
                 return newNode;
             }
             else
@@ -282,6 +301,5 @@ namespace System.Data.Query.PlanCompiler
         #endregion
 
         #endregion
-
     }
 }

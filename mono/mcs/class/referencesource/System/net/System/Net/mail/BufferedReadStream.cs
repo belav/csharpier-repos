@@ -18,32 +18,32 @@ namespace System.Net
         int storedOffset;
         bool readMore;
 
-        internal BufferedReadStream(Stream stream) : this(stream, false)
-        {
-        }
+        internal BufferedReadStream(Stream stream)
+            : this(stream, false) { }
 
-        internal BufferedReadStream(Stream stream, bool readMore) : base(stream)
+        internal BufferedReadStream(Stream stream, bool readMore)
+            : base(stream)
         {
             this.readMore = readMore;
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool CanSeek
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             ReadAsyncResult result = new ReadAsyncResult(this, callback, state);
             result.Read(buffer, offset, count);
@@ -74,7 +74,12 @@ namespace System.Net
             return read + base.Read(buffer, offset, count);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             int read = 0;
             if (this.storedOffset >= this.storedLength)
@@ -95,9 +100,16 @@ namespace System.Net
             return ReadMoreAsync(read, buffer, offset, count, cancellationToken);
         }
 
-        private async Task<int> ReadMoreAsync(int bytesAlreadyRead, byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        private async Task<int> ReadMoreAsync(
+            int bytesAlreadyRead,
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
-            int returnValue = await base.ReadAsync(buffer, offset, count, cancellationToken).ConfigureAwait(false);
+            int returnValue = await base.ReadAsync(buffer, offset, count, cancellationToken)
+                .ConfigureAwait(false);
             return bytesAlreadyRead + returnValue;
         }
 
@@ -113,7 +125,6 @@ namespace System.Net
             }
         }
 
-        
         // adds additional content to the beginning of the buffer
         // so the layout of the storedBuffer will be
         // <buffer><existingBuffer>
@@ -142,14 +153,26 @@ namespace System.Net
                 // if there's room in the buffer but need to shift things over
                 else if (count <= this.storedBuffer.Length - this.storedLength + this.storedOffset)
                 {
-                    Buffer.BlockCopy(this.storedBuffer, this.storedOffset, this.storedBuffer, count, this.storedLength - this.storedOffset);
+                    Buffer.BlockCopy(
+                        this.storedBuffer,
+                        this.storedOffset,
+                        this.storedBuffer,
+                        count,
+                        this.storedLength - this.storedOffset
+                    );
                     this.storedLength += count - this.storedOffset;
                     this.storedOffset = 0;
                 }
                 else
                 {
                     byte[] newBuffer = new byte[count + this.storedLength - this.storedOffset];
-                    Buffer.BlockCopy(this.storedBuffer, this.storedOffset, newBuffer, count, this.storedLength - this.storedOffset);
+                    Buffer.BlockCopy(
+                        this.storedBuffer,
+                        this.storedOffset,
+                        newBuffer,
+                        count,
+                        this.storedLength - this.storedOffset
+                    );
                     this.storedLength += count - this.storedOffset;
                     this.storedOffset = 0;
                     this.storedBuffer = newBuffer;
@@ -190,7 +213,13 @@ namespace System.Net
                 // if there's room in the buffer but need to shift things over
                 else if (count <= this.storedBuffer.Length - this.storedLength + this.storedOffset)
                 {
-                    Buffer.BlockCopy(this.storedBuffer, this.storedOffset, this.storedBuffer, 0, this.storedLength - this.storedOffset);
+                    Buffer.BlockCopy(
+                        this.storedBuffer,
+                        this.storedOffset,
+                        this.storedBuffer,
+                        0,
+                        this.storedLength - this.storedOffset
+                    );
                     newBufferPosition = this.storedLength - this.storedOffset;
                     this.storedOffset = 0;
                     this.storedLength = count + newBufferPosition;
@@ -201,7 +230,13 @@ namespace System.Net
                     // allocate new buffer
                     byte[] newBuffer = new byte[count + this.storedLength - this.storedOffset];
                     // and prepopulate the remaining content of the original buffer
-                    Buffer.BlockCopy(this.storedBuffer, this.storedOffset, newBuffer, 0, this.storedLength - this.storedOffset);
+                    Buffer.BlockCopy(
+                        this.storedBuffer,
+                        this.storedOffset,
+                        newBuffer,
+                        0,
+                        this.storedLength - this.storedOffset
+                    );
                     newBufferPosition = this.storedLength - this.storedOffset;
                     this.storedOffset = 0;
                     this.storedLength = count + newBufferPosition;
@@ -218,16 +253,28 @@ namespace System.Net
             int read;
             static AsyncCallback onRead = new AsyncCallback(OnRead);
 
-            internal ReadAsyncResult(BufferedReadStream parent, AsyncCallback callback, object state) : base(null,state,callback)
+            internal ReadAsyncResult(
+                BufferedReadStream parent,
+                AsyncCallback callback,
+                object state
+            )
+                : base(null, state, callback)
             {
                 this.parent = parent;
             }
 
-            internal void Read(byte[] buffer, int offset, int count){
+            internal void Read(byte[] buffer, int offset, int count)
+            {
                 if (parent.storedOffset < parent.storedLength)
                 {
                     this.read = Math.Min(count, parent.storedLength - parent.storedOffset);
-                    Buffer.BlockCopy(parent.storedBuffer, parent.storedOffset, buffer, offset, this.read);
+                    Buffer.BlockCopy(
+                        parent.storedBuffer,
+                        parent.storedOffset,
+                        buffer,
+                        offset,
+                        this.read
+                    );
                     parent.storedOffset += this.read;
                     if (this.read == count || !this.parent.readMore)
                     {
@@ -237,10 +284,16 @@ namespace System.Net
                     count -= this.read;
                     offset += this.read;
                 }
-                IAsyncResult result = parent.BaseStream.BeginRead(buffer, offset, count, onRead, this);
+                IAsyncResult result = parent.BaseStream.BeginRead(
+                    buffer,
+                    offset,
+                    count,
+                    onRead,
+                    this
+                );
                 if (result.CompletedSynchronously)
                 {
-                    // 
+                    //
                     this.read += parent.BaseStream.EndRead(result);
                     InvokeCallback();
                 }

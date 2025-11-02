@@ -10,6 +10,7 @@ namespace System.Reflection
     /// </summary>
     internal sealed partial class RoModifiedStandaloneType : RoModifiedType
     {
-        public RoModifiedStandaloneType(RoType delegatingType) : base(delegatingType) { }
+        public RoModifiedStandaloneType(RoType delegatingType)
+            : base(delegatingType) { }
     }
 }

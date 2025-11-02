@@ -7,7 +7,13 @@ namespace System.Xml.Xsl.Xslt
 {
     internal sealed class CompilerError
     {
-        public CompilerError(string fileName, int line, int column, string errorNumber, string errorText)
+        public CompilerError(
+            string fileName,
+            int line,
+            int column,
+            string errorNumber,
+            string errorText
+        )
         {
             Line = line;
             Column = column;

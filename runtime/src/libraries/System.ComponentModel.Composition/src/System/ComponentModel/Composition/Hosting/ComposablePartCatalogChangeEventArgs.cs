@@ -38,8 +38,11 @@ namespace System.ComponentModel.Composition.Hosting
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="addedDefinitions"/> or <paramref name="removedDefinitions"/> is <see langword="null"/>.
         /// </exception>
-        public ComposablePartCatalogChangeEventArgs(IEnumerable<ComposablePartDefinition> addedDefinitions,
-            IEnumerable<ComposablePartDefinition> removedDefinitions, AtomicComposition? atomicComposition)
+        public ComposablePartCatalogChangeEventArgs(
+            IEnumerable<ComposablePartDefinition> addedDefinitions,
+            IEnumerable<ComposablePartDefinition> removedDefinitions,
+            AtomicComposition? atomicComposition
+        )
         {
             Requires.NotNull(addedDefinitions, nameof(addedDefinitions));
             Requires.NotNull(removedDefinitions, nameof(removedDefinitions));

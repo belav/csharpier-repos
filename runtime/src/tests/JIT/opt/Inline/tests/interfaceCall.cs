@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 namespace JitInliningTest
 {
     internal interface IDimensions
@@ -20,18 +21,22 @@ namespace JitInliningTest
             _lengthInches = length;
             _widthInches = width;
         }
+
         public float Length()
         {
             return _lengthInches;
         }
+
         public float Width()
         {
             return _widthInches;
         }
+
         float IDimensions.Length()
         {
             return _lengthInches;
         }
+
         float IDimensions.Width()
         {
             return _widthInches;
@@ -53,4 +58,3 @@ namespace JitInliningTest
         }
     }
 }
-

@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Remote
             AssetProvider assetProvider,
             Checksum solutionChecksum,
             int workspaceVersion,
-            bool updatePrimaryBranch)
+            bool updatePrimaryBranch
+        )
         {
             Contract.ThrowIfFalse(_gate.CurrentCount == 0);
 
@@ -54,8 +55,14 @@ namespace Microsoft.CodeAnalysis.Remote
             // to compute the primary branch as well, let it know so it can start that now.
             if (updatePrimaryBranch)
             {
-                solution.TryKickOffPrimaryBranchWork_NoLock((disconnectedSolution, cancellationToken) =>
-                    this.TryUpdateWorkspaceCurrentSolutionAsync(workspaceVersion, disconnectedSolution, cancellationToken));
+                solution.TryKickOffPrimaryBranchWork_NoLock(
+                    (disconnectedSolution, cancellationToken) =>
+                        this.TryUpdateWorkspaceCurrentSolutionAsync(
+                            workspaceVersion,
+                            disconnectedSolution,
+                            cancellationToken
+                        )
+                );
             }
 
             CheckCacheInvariants_NoLock();
@@ -81,15 +88,27 @@ namespace Microsoft.CodeAnalysis.Remote
                 // See if we're being asked for a checksum we already have cached a solution for.  Safe to read directly
                 // as we're holding _gate.
                 var cachedSolution =
-                    _lastRequestedPrimaryBranchSolution.checksum == solutionChecksum ? _lastRequestedPrimaryBranchSolution.solution :
-                    _lastRequestedAnyBranchSolution.checksum == solutionChecksum ? _lastRequestedAnyBranchSolution.solution : null;
+                    _lastRequestedPrimaryBranchSolution.checksum == solutionChecksum
+                        ? _lastRequestedPrimaryBranchSolution.solution
+                    : _lastRequestedAnyBranchSolution.checksum == solutionChecksum
+                        ? _lastRequestedAnyBranchSolution.solution
+                    : null;
 
                 // We're the first call that is asking about this checksum.  Kick off async computation to compute it
                 // (or use an existing cached value we already have).  Start with an in-flight-count of 1 to represent
-                // our caller. 
+                // our caller.
                 solution = new InFlightSolution(
-                    this, solutionChecksum,
-                    async cancellationToken => cachedSolution ?? await ComputeDisconnectedSolutionAsync(assetProvider, solutionChecksum, cancellationToken).ConfigureAwait(false));
+                    this,
+                    solutionChecksum,
+                    async cancellationToken =>
+                        cachedSolution
+                        ?? await ComputeDisconnectedSolutionAsync(
+                                assetProvider,
+                                solutionChecksum,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false)
+                );
                 Contract.ThrowIfFalse(solution.InFlightCount == 1);
 
                 _solutionChecksumToSolution.Add(solutionChecksum, solution);

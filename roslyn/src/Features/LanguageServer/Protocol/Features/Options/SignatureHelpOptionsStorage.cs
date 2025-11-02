@@ -9,9 +9,15 @@ namespace Microsoft.CodeAnalysis.SignatureHelp;
 
 internal static class SignatureHelpOptionsStorage
 {
-    public static SignatureHelpOptions GetSignatureHelpOptions(this IGlobalOptionService globalOptions, string language)
-      => new()
-      {
-          HideAdvancedMembers = globalOptions.GetOption(CompletionOptionsStorage.HideAdvancedMembers, language)
-      };
+    public static SignatureHelpOptions GetSignatureHelpOptions(
+        this IGlobalOptionService globalOptions,
+        string language
+    ) =>
+        new()
+        {
+            HideAdvancedMembers = globalOptions.GetOption(
+                CompletionOptionsStorage.HideAdvancedMembers,
+                language
+            ),
+        };
 }

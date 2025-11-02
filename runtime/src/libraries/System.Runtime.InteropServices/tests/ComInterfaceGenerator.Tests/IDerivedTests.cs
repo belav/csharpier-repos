@@ -19,15 +19,27 @@ namespace ComInterfaceGenerator.Tests
             // Make sure that we have the correct derived and base types here.
             Assert.Contains(typeof(IGetAndSetInt), typeof(IDerived).GetInterfaces());
 
-            IIUnknownDerivedDetails baseInterfaceDetails = StrategyBasedComWrappers.DefaultIUnknownInterfaceDetailsStrategy.GetIUnknownDerivedDetails(typeof(IGetAndSetInt).TypeHandle);
-            IIUnknownDerivedDetails derivedInterfaceDetails = StrategyBasedComWrappers.DefaultIUnknownInterfaceDetailsStrategy.GetIUnknownDerivedDetails(typeof(IDerived).TypeHandle);
+            IIUnknownDerivedDetails baseInterfaceDetails =
+                StrategyBasedComWrappers.DefaultIUnknownInterfaceDetailsStrategy.GetIUnknownDerivedDetails(
+                    typeof(IGetAndSetInt).TypeHandle
+                );
+            IIUnknownDerivedDetails derivedInterfaceDetails =
+                StrategyBasedComWrappers.DefaultIUnknownInterfaceDetailsStrategy.GetIUnknownDerivedDetails(
+                    typeof(IDerived).TypeHandle
+                );
 
             var numBaseMethods = typeof(IGetAndSetInt).GetMethods().Length;
 
             var numPointersToCompare = 3 + numBaseMethods;
 
-            var expected = new ReadOnlySpan<nint>(baseInterfaceDetails.ManagedVirtualMethodTable, numPointersToCompare);
-            var actual = new ReadOnlySpan<nint>(derivedInterfaceDetails.ManagedVirtualMethodTable, numPointersToCompare);
+            var expected = new ReadOnlySpan<nint>(
+                baseInterfaceDetails.ManagedVirtualMethodTable,
+                numPointersToCompare
+            );
+            var actual = new ReadOnlySpan<nint>(
+                derivedInterfaceDetails.ManagedVirtualMethodTable,
+                numPointersToCompare
+            );
 
             Assert.True(expected.SequenceEqual(actual));
         }
@@ -37,7 +49,10 @@ namespace ComInterfaceGenerator.Tests
         {
             var cw = new SingleQIComWrapper();
             var derivedImpl = new DerivedImpl();
-            var nativeObj = cw.GetOrCreateComInterfaceForObject(derivedImpl, CreateComInterfaceFlags.None);
+            var nativeObj = cw.GetOrCreateComInterfaceForObject(
+                derivedImpl,
+                CreateComInterfaceFlags.None
+            );
             var obj = cw.GetOrCreateObjectForComInstance(nativeObj, CreateObjectFlags.None);
             IDerived iface = (IDerived)obj;
 
@@ -49,7 +64,10 @@ namespace ComInterfaceGenerator.Tests
             iface.SetName("updated");
             Assert.Equal("updated", iface.GetName());
 
-            var iUnknownStrategyProperty = typeof(ComObject).GetProperty("IUnknownStrategy", BindingFlags.NonPublic | BindingFlags.Instance);
+            var iUnknownStrategyProperty = typeof(ComObject).GetProperty(
+                "IUnknownStrategy",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
 
             Assert.NotNull(iUnknownStrategyProperty);
 
@@ -63,6 +81,7 @@ namespace ComInterfaceGenerator.Tests
         {
             int data = 3;
             string myName = "myName";
+
             public void DoThingWithString(string name) => throw new NotImplementedException();
 
             public int GetInt() => data;
@@ -82,19 +101,25 @@ namespace ComInterfaceGenerator.Tests
             public class CountQI : IIUnknownStrategy
             {
                 public CountQI(IIUnknownStrategy iUnknown) => _iUnknownStrategy = iUnknown;
+
                 private IIUnknownStrategy _iUnknownStrategy;
                 public int QiCallCount = 0;
-                public unsafe void* CreateInstancePointer(void* unknown) => _iUnknownStrategy.CreateInstancePointer(unknown);
+
+                public unsafe void* CreateInstancePointer(void* unknown) =>
+                    _iUnknownStrategy.CreateInstancePointer(unknown);
+
                 public unsafe int QueryInterface(void* instancePtr, in Guid iid, out void* ppObj)
                 {
                     QiCallCount++;
                     return _iUnknownStrategy.QueryInterface(instancePtr, in iid, out ppObj);
                 }
-                public unsafe int Release(void* instancePtr) => _iUnknownStrategy.Release(instancePtr);
+
+                public unsafe int Release(void* instancePtr) =>
+                    _iUnknownStrategy.Release(instancePtr);
             }
 
-            protected override IIUnknownStrategy GetOrCreateIUnknownStrategy()
-                => new CountQI(base.GetOrCreateIUnknownStrategy());
+            protected override IIUnknownStrategy GetOrCreateIUnknownStrategy() =>
+                new CountQI(base.GetOrCreateIUnknownStrategy());
         }
     }
 }

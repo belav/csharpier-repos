@@ -1,8 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
-
 //------------------------------------------------------------------------------
 
 using System.Collections.Generic;
@@ -15,17 +13,23 @@ namespace System.Data.ProviderBase
     {
         private readonly int _defaultLocaleID;
 
-        public FieldNameLookup(string[] fieldNames, int defaultLocaleID) : base(fieldNames)
+        public FieldNameLookup(string[] fieldNames, int defaultLocaleID)
+            : base(fieldNames)
         {
             _defaultLocaleID = defaultLocaleID;
         }
 
-        public FieldNameLookup(System.Collections.ObjectModel.ReadOnlyCollection<string> columnNames, int defaultLocaleID) : base(columnNames)
+        public FieldNameLookup(
+            System.Collections.ObjectModel.ReadOnlyCollection<string> columnNames,
+            int defaultLocaleID
+        )
+            : base(columnNames)
         {
             _defaultLocaleID = defaultLocaleID;
         }
 
-        public FieldNameLookup(IDataReader reader, int defaultLocaleID) : base(reader)
+        public FieldNameLookup(IDataReader reader, int defaultLocaleID)
+            : base(reader)
         {
             _defaultLocaleID = defaultLocaleID;
         }

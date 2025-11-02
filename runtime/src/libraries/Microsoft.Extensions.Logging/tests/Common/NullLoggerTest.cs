@@ -14,9 +14,7 @@ namespace Microsoft.Extensions.Logging.Abstractions
             var logger = NullLogger.Instance;
 
             // Act & Assert
-            using (logger.BeginScope("48656c6c6f20576f726c64"))
-            {
-            }
+            using (logger.BeginScope("48656c6c6f20576f726c64")) { }
         }
 
         [Fact]
@@ -42,7 +40,17 @@ namespace Microsoft.Extensions.Logging.Abstractions
             bool isCalled = false;
 
             // Act
-            logger.Log<object>(LogLevel.Trace, eventId: 0, state: null, exception: null, formatter: (ex, message) => { isCalled = true; return string.Empty; });
+            logger.Log<object>(
+                LogLevel.Trace,
+                eventId: 0,
+                state: null,
+                exception: null,
+                formatter: (ex, message) =>
+                {
+                    isCalled = true;
+                    return string.Empty;
+                }
+            );
 
             // Assert
             Assert.False(isCalled);

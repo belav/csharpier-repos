@@ -16,13 +16,16 @@ namespace System.ComponentModel
         /// Specifies that the parent property should be notified on changes to the
         /// child class property. This field is read-only.
         /// </summary>
-        public static readonly NotifyParentPropertyAttribute Yes = new NotifyParentPropertyAttribute(true);
+        public static readonly NotifyParentPropertyAttribute Yes =
+            new NotifyParentPropertyAttribute(true);
 
         /// <summary>
         /// Specifies that the parent property should not be notified of changes to the
         /// child class property. This field is read-only.
         /// </summary>
-        public static readonly NotifyParentPropertyAttribute No = new NotifyParentPropertyAttribute(false);
+        public static readonly NotifyParentPropertyAttribute No = new NotifyParentPropertyAttribute(
+            false
+        );
 
         /// <summary>
         /// Specifies the default attribute state, that the parent property should not be
@@ -40,7 +43,6 @@ namespace System.ComponentModel
         {
             NotifyParent = notifyParent;
         }
-
 
         /// <summary>
         /// Gets or sets whether the parent property should be notified on changes to a

@@ -21,7 +21,6 @@ namespace System.Security.AccessControl
             : base(securityDescriptor)
         {
             ArgumentNullException.ThrowIfNull(securityDescriptor);
-
         }
 
         #region Private Methods
@@ -43,7 +42,12 @@ namespace System.Security.AccessControl
             }
         }
 
-        private AuthorizationRuleCollection GetRules(bool access, bool includeExplicit, bool includeInherited, System.Type targetType)
+        private AuthorizationRuleCollection GetRules(
+            bool access,
+            bool includeExplicit,
+            bool includeInherited,
+            System.Type targetType
+        )
         {
             ReadLock();
 
@@ -53,14 +57,20 @@ namespace System.Security.AccessControl
 
                 if (!IsValidTargetTypeStatic(targetType))
                 {
-                    throw new ArgumentException(SR.Arg_MustBeIdentityReferenceType, nameof(targetType));
+                    throw new ArgumentException(
+                        SR.Arg_MustBeIdentityReferenceType,
+                        nameof(targetType)
+                    );
                 }
 
                 CommonAcl? acl = null;
 
                 if (access)
                 {
-                    if ((SecurityDescriptor.ControlFlags & ControlFlags.DiscretionaryAclPresent) != 0)
+                    if (
+                        (SecurityDescriptor.ControlFlags & ControlFlags.DiscretionaryAclPresent)
+                        != 0
+                    )
                     {
                         acl = SecurityDescriptor.DiscretionaryAcl;
                     }
@@ -85,7 +95,9 @@ namespace System.Security.AccessControl
 
                 if (targetType != typeof(SecurityIdentifier))
                 {
-                    IdentityReferenceCollection irSource = new IdentityReferenceCollection(acl.Count);
+                    IdentityReferenceCollection irSource = new IdentityReferenceCollection(
+                        acl.Count
+                    );
 
                     for (int i = 0; i < acl.Count; i++)
                     {
@@ -118,7 +130,10 @@ namespace System.Security.AccessControl
 
                         if (access)
                         {
-                            if (ace.AceQualifier != AceQualifier.AccessAllowed && ace.AceQualifier != AceQualifier.AccessDenied)
+                            if (
+                                ace.AceQualifier != AceQualifier.AccessAllowed
+                                && ace.AceQualifier != AceQualifier.AccessDenied
+                            )
                             {
                                 continue;
                             }
@@ -172,7 +187,10 @@ namespace System.Security.AccessControl
 
                     if (access)
                     {
-                        if (ace.AceQualifier != AceQualifier.AccessAllowed && ace.AceQualifier != AceQualifier.AccessDenied)
+                        if (
+                            ace.AceQualifier != AceQualifier.AccessAllowed
+                            && ace.AceQualifier != AceQualifier.AccessDenied
+                        )
                         {
                             continue;
                         }
@@ -185,9 +203,15 @@ namespace System.Security.AccessControl
                         }
                     }
 
-                    if ((includeExplicit && ((ace.AceFlags & AceFlags.Inherited) == 0)) || (includeInherited && ((ace.AceFlags & AceFlags.Inherited) != 0)))
+                    if (
+                        (includeExplicit && ((ace.AceFlags & AceFlags.Inherited) == 0))
+                        || (includeInherited && ((ace.AceFlags & AceFlags.Inherited) != 0))
+                    )
                     {
-                        IdentityReference iref = (targetType == typeof(SecurityIdentifier)) ? ace.SecurityIdentifier : irTarget![i];
+                        IdentityReference iref =
+                            (targetType == typeof(SecurityIdentifier))
+                                ? ace.SecurityIdentifier
+                                : irTarget![i];
 
                         if (access)
                         {
@@ -204,7 +228,18 @@ namespace System.Security.AccessControl
 
                             if (ace is ObjectAce objectAce)
                             {
-                                result.AddRule(AccessRuleFactory(iref, objectAce.AccessMask, objectAce.IsInherited, objectAce.InheritanceFlags, objectAce.PropagationFlags, type, objectAce.ObjectAceType, objectAce.InheritedObjectAceType));
+                                result.AddRule(
+                                    AccessRuleFactory(
+                                        iref,
+                                        objectAce.AccessMask,
+                                        objectAce.IsInherited,
+                                        objectAce.InheritanceFlags,
+                                        objectAce.PropagationFlags,
+                                        type,
+                                        objectAce.ObjectAceType,
+                                        objectAce.InheritedObjectAceType
+                                    )
+                                );
                             }
                             else
                             {
@@ -215,14 +250,34 @@ namespace System.Security.AccessControl
                                     continue;
                                 }
 
-                                result.AddRule(AccessRuleFactory(iref, commonAce.AccessMask, commonAce.IsInherited, commonAce.InheritanceFlags, commonAce.PropagationFlags, type));
+                                result.AddRule(
+                                    AccessRuleFactory(
+                                        iref,
+                                        commonAce.AccessMask,
+                                        commonAce.IsInherited,
+                                        commonAce.InheritanceFlags,
+                                        commonAce.PropagationFlags,
+                                        type
+                                    )
+                                );
                             }
                         }
                         else
                         {
                             if (ace is ObjectAce objectAce)
                             {
-                                result.AddRule(AuditRuleFactory(iref, objectAce.AccessMask, objectAce.IsInherited, objectAce.InheritanceFlags, objectAce.PropagationFlags, objectAce.AuditFlags, objectAce.ObjectAceType, objectAce.InheritedObjectAceType));
+                                result.AddRule(
+                                    AuditRuleFactory(
+                                        iref,
+                                        objectAce.AccessMask,
+                                        objectAce.IsInherited,
+                                        objectAce.InheritanceFlags,
+                                        objectAce.PropagationFlags,
+                                        objectAce.AuditFlags,
+                                        objectAce.ObjectAceType,
+                                        objectAce.InheritedObjectAceType
+                                    )
+                                );
                             }
                             else
                             {
@@ -233,7 +288,16 @@ namespace System.Security.AccessControl
                                     continue;
                                 }
 
-                                result.AddRule(AuditRuleFactory(iref, commonAce.AccessMask, commonAce.IsInherited, commonAce.InheritanceFlags, commonAce.PropagationFlags, commonAce.AuditFlags));
+                                result.AddRule(
+                                    AuditRuleFactory(
+                                        iref,
+                                        commonAce.AccessMask,
+                                        commonAce.IsInherited,
+                                        commonAce.InheritanceFlags,
+                                        commonAce.PropagationFlags,
+                                        commonAce.AuditFlags
+                                    )
+                                );
                             }
                         }
                     }
@@ -250,13 +314,21 @@ namespace System.Security.AccessControl
         //
         // Modifies the DACL
         //
-        private bool ModifyAccess(AccessControlModification modification, ObjectAccessRule rule, out bool modified)
+        private bool ModifyAccess(
+            AccessControlModification modification,
+            ObjectAccessRule rule,
+            out bool modified
+        )
         {
             bool result = true;
 
             if (SecurityDescriptor.DiscretionaryAcl == null)
             {
-                if (modification == AccessControlModification.Remove || modification == AccessControlModification.RemoveAll || modification == AccessControlModification.RemoveSpecific)
+                if (
+                    modification == AccessControlModification.Remove
+                    || modification == AccessControlModification.RemoveAll
+                    || modification == AccessControlModification.RemoveSpecific
+                )
                 {
                     modified = false;
                     return result;
@@ -266,8 +338,13 @@ namespace System.Security.AccessControl
                 //_securityDescriptor.AddControlFlags(ControlFlags.DiscretionaryAclPresent);
                 SecurityDescriptor.AddDiscretionaryAcl(GenericAcl.AclRevisionDS, 1);
             }
-            else if ((modification == AccessControlModification.Add || modification == AccessControlModification.Set || modification == AccessControlModification.Reset) &&
-                        (rule.ObjectFlags != ObjectAceFlags.None))
+            else if (
+                (
+                    modification == AccessControlModification.Add
+                    || modification == AccessControlModification.Set
+                    || modification == AccessControlModification.Reset
+                ) && (rule.ObjectFlags != ObjectAceFlags.None)
+            )
             {
                 //
                 // This will result in an object ace being added to the dacl, so the dacl revision must be AclRevisionDS
@@ -281,11 +358,16 @@ namespace System.Security.AccessControl
                     SecurityDescriptor.DiscretionaryAcl.GetBinaryForm(binaryForm, 0);
                     binaryForm[0] = GenericAcl.AclRevisionDS; // revision is the first byte of the binary form
 
-                    SecurityDescriptor.DiscretionaryAcl = new DiscretionaryAcl(IsContainer, IsDS, new RawAcl(binaryForm, 0));
+                    SecurityDescriptor.DiscretionaryAcl = new DiscretionaryAcl(
+                        IsContainer,
+                        IsDS,
+                        new RawAcl(binaryForm, 0)
+                    );
                 }
             }
 
-            SecurityIdentifier sid = (SecurityIdentifier)rule.IdentityReference.Translate(typeof(SecurityIdentifier));
+            SecurityIdentifier sid = (SecurityIdentifier)
+                rule.IdentityReference.Translate(typeof(SecurityIdentifier));
 
             Debug.Assert(SecurityDescriptor.DiscretionaryAcl != null);
             if (rule.AccessControlType == AccessControlType.Allow)
@@ -294,27 +376,61 @@ namespace System.Security.AccessControl
                 {
                     case AccessControlModification.Add:
                         //_securityDescriptor.DiscretionaryAcl.AddAccess(AccessControlType.Allow, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
-                        SecurityDescriptor.DiscretionaryAcl.AddAccess(AccessControlType.Allow, sid, rule);
+                        SecurityDescriptor.DiscretionaryAcl.AddAccess(
+                            AccessControlType.Allow,
+                            sid,
+                            rule
+                        );
                         break;
 
                     case AccessControlModification.Set:
                         //_securityDescriptor.DiscretionaryAcl.SetAccess(AccessControlType.Allow, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
-                        SecurityDescriptor.DiscretionaryAcl.SetAccess(AccessControlType.Allow, sid, rule);
+                        SecurityDescriptor.DiscretionaryAcl.SetAccess(
+                            AccessControlType.Allow,
+                            sid,
+                            rule
+                        );
                         break;
 
                     case AccessControlModification.Reset:
-                        SecurityDescriptor.DiscretionaryAcl.RemoveAccess(AccessControlType.Deny, sid, -1, InheritanceFlags.ContainerInherit, 0, ObjectAceFlags.None, Guid.Empty, Guid.Empty);
+                        SecurityDescriptor.DiscretionaryAcl.RemoveAccess(
+                            AccessControlType.Deny,
+                            sid,
+                            -1,
+                            InheritanceFlags.ContainerInherit,
+                            0,
+                            ObjectAceFlags.None,
+                            Guid.Empty,
+                            Guid.Empty
+                        );
                         //_securityDescriptor.DiscretionaryAcl.SetAccess(AccessControlType.Allow, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
-                        SecurityDescriptor.DiscretionaryAcl.SetAccess(AccessControlType.Allow, sid, rule);
+                        SecurityDescriptor.DiscretionaryAcl.SetAccess(
+                            AccessControlType.Allow,
+                            sid,
+                            rule
+                        );
                         break;
 
                     case AccessControlModification.Remove:
                         //result = _securityDescriptor.DiscretionaryAcl.RemoveAccess(AccessControlType.Allow, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
-                        result = SecurityDescriptor.DiscretionaryAcl.RemoveAccess(AccessControlType.Allow, sid, rule);
+                        result = SecurityDescriptor.DiscretionaryAcl.RemoveAccess(
+                            AccessControlType.Allow,
+                            sid,
+                            rule
+                        );
                         break;
 
                     case AccessControlModification.RemoveAll:
-                        result = SecurityDescriptor.DiscretionaryAcl.RemoveAccess(AccessControlType.Allow, sid, -1, InheritanceFlags.ContainerInherit, 0, ObjectAceFlags.None, Guid.Empty, Guid.Empty);
+                        result = SecurityDescriptor.DiscretionaryAcl.RemoveAccess(
+                            AccessControlType.Allow,
+                            sid,
+                            -1,
+                            InheritanceFlags.ContainerInherit,
+                            0,
+                            ObjectAceFlags.None,
+                            Guid.Empty,
+                            Guid.Empty
+                        );
                         if (result == false)
                         {
                             throw new InvalidOperationException(SR.InvalidOperation_RemoveFail);
@@ -324,13 +440,18 @@ namespace System.Security.AccessControl
 
                     case AccessControlModification.RemoveSpecific:
                         //_securityDescriptor.DiscretionaryAcl.RemoveAccessSpecific(AccessControlType.Allow, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
-                        SecurityDescriptor.DiscretionaryAcl.RemoveAccessSpecific(AccessControlType.Allow, sid, rule);
+                        SecurityDescriptor.DiscretionaryAcl.RemoveAccessSpecific(
+                            AccessControlType.Allow,
+                            sid,
+                            rule
+                        );
                         break;
 
                     default:
                         throw new ArgumentOutOfRangeException(
                             nameof(modification),
-                            SR.ArgumentOutOfRange_Enum);
+                            SR.ArgumentOutOfRange_Enum
+                        );
                 }
             }
             else if (rule.AccessControlType == AccessControlType.Deny)
@@ -339,27 +460,61 @@ namespace System.Security.AccessControl
                 {
                     case AccessControlModification.Add:
                         //_securityDescriptor.DiscretionaryAcl.AddAccess(AccessControlType.Deny, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
-                        SecurityDescriptor.DiscretionaryAcl.AddAccess(AccessControlType.Deny, sid, rule);
+                        SecurityDescriptor.DiscretionaryAcl.AddAccess(
+                            AccessControlType.Deny,
+                            sid,
+                            rule
+                        );
                         break;
 
                     case AccessControlModification.Set:
                         //_securityDescriptor.DiscretionaryAcl.SetAccess(AccessControlType.Deny, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
-                        SecurityDescriptor.DiscretionaryAcl.SetAccess(AccessControlType.Deny, sid, rule);
+                        SecurityDescriptor.DiscretionaryAcl.SetAccess(
+                            AccessControlType.Deny,
+                            sid,
+                            rule
+                        );
                         break;
 
                     case AccessControlModification.Reset:
-                        SecurityDescriptor.DiscretionaryAcl.RemoveAccess(AccessControlType.Allow, sid, -1, InheritanceFlags.ContainerInherit, 0, ObjectAceFlags.None, Guid.Empty, Guid.Empty);
+                        SecurityDescriptor.DiscretionaryAcl.RemoveAccess(
+                            AccessControlType.Allow,
+                            sid,
+                            -1,
+                            InheritanceFlags.ContainerInherit,
+                            0,
+                            ObjectAceFlags.None,
+                            Guid.Empty,
+                            Guid.Empty
+                        );
                         //_securityDescriptor.DiscretionaryAcl.SetAccess(AccessControlType.Deny, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
-                        SecurityDescriptor.DiscretionaryAcl.SetAccess(AccessControlType.Deny, sid, rule);
+                        SecurityDescriptor.DiscretionaryAcl.SetAccess(
+                            AccessControlType.Deny,
+                            sid,
+                            rule
+                        );
                         break;
 
                     case AccessControlModification.Remove:
                         //result = _securityDescriptor.DiscretionaryAcl.RemoveAccess(AccessControlType.Deny, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
-                        result = SecurityDescriptor.DiscretionaryAcl.RemoveAccess(AccessControlType.Deny, sid, rule);
+                        result = SecurityDescriptor.DiscretionaryAcl.RemoveAccess(
+                            AccessControlType.Deny,
+                            sid,
+                            rule
+                        );
                         break;
 
                     case AccessControlModification.RemoveAll:
-                        result = SecurityDescriptor.DiscretionaryAcl.RemoveAccess(AccessControlType.Deny, sid, -1, InheritanceFlags.ContainerInherit, 0, ObjectAceFlags.None, Guid.Empty, Guid.Empty);
+                        result = SecurityDescriptor.DiscretionaryAcl.RemoveAccess(
+                            AccessControlType.Deny,
+                            sid,
+                            -1,
+                            InheritanceFlags.ContainerInherit,
+                            0,
+                            ObjectAceFlags.None,
+                            Guid.Empty,
+                            Guid.Empty
+                        );
                         if (result == false)
                         {
                             throw new InvalidOperationException(SR.InvalidOperation_RemoveFail);
@@ -369,18 +524,25 @@ namespace System.Security.AccessControl
 
                     case AccessControlModification.RemoveSpecific:
                         //_securityDescriptor.DiscretionaryAcl.RemoveAccessSpecific(AccessControlType.Deny, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
-                        SecurityDescriptor.DiscretionaryAcl.RemoveAccessSpecific(AccessControlType.Deny, sid, rule);
+                        SecurityDescriptor.DiscretionaryAcl.RemoveAccessSpecific(
+                            AccessControlType.Deny,
+                            sid,
+                            rule
+                        );
                         break;
 
                     default:
                         throw new ArgumentOutOfRangeException(
                             nameof(modification),
-                            SR.ArgumentOutOfRange_Enum);
+                            SR.ArgumentOutOfRange_Enum
+                        );
                 }
             }
             else
             {
-                throw new ArgumentException(SR.Format(SR.TypeUnrecognized_AccessControl, rule.AccessControlType));
+                throw new ArgumentException(
+                    SR.Format(SR.TypeUnrecognized_AccessControl, rule.AccessControlType)
+                );
             }
 
             modified = result;
@@ -391,13 +553,21 @@ namespace System.Security.AccessControl
         //
         // Modifies the SACL
         //
-        private bool ModifyAudit(AccessControlModification modification, ObjectAuditRule rule, out bool modified)
+        private bool ModifyAudit(
+            AccessControlModification modification,
+            ObjectAuditRule rule,
+            out bool modified
+        )
         {
             bool result = true;
 
             if (SecurityDescriptor.SystemAcl == null)
             {
-                if (modification == AccessControlModification.Remove || modification == AccessControlModification.RemoveAll || modification == AccessControlModification.RemoveSpecific)
+                if (
+                    modification == AccessControlModification.Remove
+                    || modification == AccessControlModification.RemoveAll
+                    || modification == AccessControlModification.RemoveSpecific
+                )
                 {
                     modified = false;
                     return result;
@@ -407,8 +577,13 @@ namespace System.Security.AccessControl
                 //_securityDescriptor.AddControlFlags(ControlFlags.SystemAclPresent);
                 SecurityDescriptor.AddSystemAcl(GenericAcl.AclRevisionDS, 1);
             }
-            else if ((modification == AccessControlModification.Add || modification == AccessControlModification.Set || modification == AccessControlModification.Reset) &&
-                        (rule.ObjectFlags != ObjectAceFlags.None))
+            else if (
+                (
+                    modification == AccessControlModification.Add
+                    || modification == AccessControlModification.Set
+                    || modification == AccessControlModification.Reset
+                ) && (rule.ObjectFlags != ObjectAceFlags.None)
+            )
             {
                 //
                 // This will result in an object ace being added to the sacl, so the sacl revision must be AclRevisionDS
@@ -422,11 +597,16 @@ namespace System.Security.AccessControl
                     SecurityDescriptor.SystemAcl.GetBinaryForm(binaryForm, 0);
                     binaryForm[0] = GenericAcl.AclRevisionDS; // revision is the first byte of the binary form
 
-                    SecurityDescriptor.SystemAcl = new SystemAcl(IsContainer, IsDS, new RawAcl(binaryForm, 0));
+                    SecurityDescriptor.SystemAcl = new SystemAcl(
+                        IsContainer,
+                        IsDS,
+                        new RawAcl(binaryForm, 0)
+                    );
                 }
             }
 
-            SecurityIdentifier sid = (SecurityIdentifier)rule.IdentityReference.Translate(typeof(SecurityIdentifier));
+            SecurityIdentifier sid = (SecurityIdentifier)
+                rule.IdentityReference.Translate(typeof(SecurityIdentifier));
 
             Debug.Assert(SecurityDescriptor.SystemAcl != null);
             switch (modification)
@@ -442,7 +622,16 @@ namespace System.Security.AccessControl
                     break;
 
                 case AccessControlModification.Reset:
-                    SecurityDescriptor.SystemAcl.RemoveAudit(AuditFlags.Failure | AuditFlags.Success, sid, -1, InheritanceFlags.ContainerInherit, 0, ObjectAceFlags.None, Guid.Empty, Guid.Empty);
+                    SecurityDescriptor.SystemAcl.RemoveAudit(
+                        AuditFlags.Failure | AuditFlags.Success,
+                        sid,
+                        -1,
+                        InheritanceFlags.ContainerInherit,
+                        0,
+                        ObjectAceFlags.None,
+                        Guid.Empty,
+                        Guid.Empty
+                    );
                     //_securityDescriptor.SystemAcl.SetAudit(rule.AuditFlags, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
                     SecurityDescriptor.SystemAcl.SetAudit(sid, rule);
                     break;
@@ -453,7 +642,16 @@ namespace System.Security.AccessControl
                     break;
 
                 case AccessControlModification.RemoveAll:
-                    result = SecurityDescriptor.SystemAcl.RemoveAudit(AuditFlags.Failure | AuditFlags.Success, sid, -1, InheritanceFlags.ContainerInherit, 0, ObjectAceFlags.None, Guid.Empty, Guid.Empty);
+                    result = SecurityDescriptor.SystemAcl.RemoveAudit(
+                        AuditFlags.Failure | AuditFlags.Success,
+                        sid,
+                        -1,
+                        InheritanceFlags.ContainerInherit,
+                        0,
+                        ObjectAceFlags.None,
+                        Guid.Empty,
+                        Guid.Empty
+                    );
                     if (result == false)
                     {
                         throw new InvalidOperationException(SR.InvalidOperation_RemoveFail);
@@ -469,7 +667,8 @@ namespace System.Security.AccessControl
                 default:
                     throw new ArgumentOutOfRangeException(
                         nameof(modification),
-                        SR.ArgumentOutOfRange_Enum);
+                        SR.ArgumentOutOfRange_Enum
+                    );
             }
 
             modified = result;
@@ -477,21 +676,43 @@ namespace System.Security.AccessControl
             return result;
         }
 
-#endregion
+        #endregion
 
-#region public Methods
+        #region public Methods
 
-        public virtual AccessRule AccessRuleFactory(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type, Guid objectType, Guid inheritedObjectType)
+        public virtual AccessRule AccessRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType type,
+            Guid objectType,
+            Guid inheritedObjectType
+        )
         {
             throw NotImplemented.ByDesign;
         }
 
-        public virtual AuditRule AuditRuleFactory(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags, Guid objectType, Guid inheritedObjectType)
+        public virtual AuditRule AuditRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags,
+            Guid objectType,
+            Guid inheritedObjectType
+        )
         {
             throw NotImplemented.ByDesign;
         }
 
-        protected override bool ModifyAccess(AccessControlModification modification, AccessRule rule, out bool modified)
+        protected override bool ModifyAccess(
+            AccessControlModification modification,
+            AccessRule rule,
+            out bool modified
+        )
         {
             ////if (this.AccessRuleType.IsAssignableFrom(rule.GetType().GetTypeInfo()))
             ////if (!TypeExtensions.IsAssignableFrom(this.AccessRuleType, rule.GetType()))
@@ -503,7 +724,11 @@ namespace System.Security.AccessControl
             return ModifyAccess(modification, (ObjectAccessRule)rule, out modified);
         }
 
-        protected override bool ModifyAudit(AccessControlModification modification, AuditRule rule, out bool modified)
+        protected override bool ModifyAudit(
+            AccessControlModification modification,
+            AuditRule rule,
+            out bool modified
+        )
         {
             //if (this.AccessRuleType.IsAssignableFrom(rule.GetType().GetTypeInfo()))
             ////if (!TypeExtensions.IsAssignableFrom(this.AuditRuleType, rule.GetType()))
@@ -514,9 +739,9 @@ namespace System.Security.AccessControl
             //}
             return ModifyAudit(modification, (ObjectAuditRule)rule, out modified);
         }
-#endregion
+        #endregion
 
-#region Public Methods
+        #region Public Methods
 
         protected void AddAccessRule(ObjectAccessRule rule)
         {
@@ -711,16 +936,24 @@ namespace System.Security.AccessControl
             }
         }
 
-        public AuthorizationRuleCollection GetAccessRules(bool includeExplicit, bool includeInherited, System.Type targetType)
+        public AuthorizationRuleCollection GetAccessRules(
+            bool includeExplicit,
+            bool includeInherited,
+            System.Type targetType
+        )
         {
             return GetRules(true, includeExplicit, includeInherited, targetType);
         }
 
-        public AuthorizationRuleCollection GetAuditRules(bool includeExplicit, bool includeInherited, System.Type targetType)
+        public AuthorizationRuleCollection GetAuditRules(
+            bool includeExplicit,
+            bool includeInherited,
+            System.Type targetType
+        )
         {
             return GetRules(false, includeExplicit, includeInherited, targetType);
         }
 
-#endregion
+        #endregion
     }
 }

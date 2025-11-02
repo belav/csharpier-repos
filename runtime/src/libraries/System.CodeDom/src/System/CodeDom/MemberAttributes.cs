@@ -3,7 +3,9 @@
 
 namespace System.CodeDom
 {
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public enum MemberAttributes
     {
         Abstract = 0x0001,
@@ -21,6 +23,6 @@ namespace System.CodeDom
         Public = 0x6000,
         AccessMask = 0xF000,
         ScopeMask = 0x000F,
-        VTableMask = 0x00F0
+        VTableMask = 0x00F0,
     }
 }

@@ -34,7 +34,9 @@ namespace System.Web.Mvc.Test
             // Arrange
             string[] expectedLoadedAreas = new string[] { "AreaRegistrationTest_AreaRegistration" };
             AnnotatedRouteCollection routes = new AnnotatedRouteCollection();
-            MockBuildManager buildManager = new MockBuildManager(new Assembly[] { typeof(AreaRegistrationTest).Assembly });
+            MockBuildManager buildManager = new MockBuildManager(
+                new Assembly[] { typeof(AreaRegistrationTest).Assembly }
+            );
 
             // Act
             AreaRegistration.RegisterAllAreas(routes, buildManager, null);
@@ -75,27 +77,33 @@ namespace System.Web.Mvc.Test
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-            ((AnnotatedRouteCollection)context.Routes)._areasLoaded.Add("AreaRegistrationTest_AbstractAreaRegistration");
+            ((AnnotatedRouteCollection)context.Routes)._areasLoaded.Add(
+                "AreaRegistrationTest_AbstractAreaRegistration"
+            );
         }
     }
 
-    public class AreaRegistrationTest_AreaRegistration : AreaRegistrationTest_AbstractAreaRegistration
+    public class AreaRegistrationTest_AreaRegistration
+        : AreaRegistrationTest_AbstractAreaRegistration
     {
         public override void RegisterArea(AreaRegistrationContext context)
         {
-            ((AnnotatedRouteCollection)context.Routes)._areasLoaded.Add("AreaRegistrationTest_AreaRegistration");
+            ((AnnotatedRouteCollection)context.Routes)._areasLoaded.Add(
+                "AreaRegistrationTest_AreaRegistration"
+            );
         }
     }
 
-    public class AreaRegistrationTest_NoConstructorAreaRegistration : AreaRegistrationTest_AreaRegistration
+    public class AreaRegistrationTest_NoConstructorAreaRegistration
+        : AreaRegistrationTest_AreaRegistration
     {
-        private AreaRegistrationTest_NoConstructorAreaRegistration()
-        {
-        }
+        private AreaRegistrationTest_NoConstructorAreaRegistration() { }
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-            ((AnnotatedRouteCollection)context.Routes)._areasLoaded.Add("AreaRegistrationTest_NoConstructorAreaRegistration");
+            ((AnnotatedRouteCollection)context.Routes)._areasLoaded.Add(
+                "AreaRegistrationTest_NoConstructorAreaRegistration"
+            );
         }
     }
 }

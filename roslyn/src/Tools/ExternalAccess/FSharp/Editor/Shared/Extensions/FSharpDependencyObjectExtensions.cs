@@ -13,12 +13,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor.Shared.Extensions
 {
     internal static class FSharpDependencyObjectExtensions
     {
-        public static void SetTextProperties(this DependencyObject dependencyObject, TextFormattingRunProperties textProperties)
+        public static void SetTextProperties(
+            this DependencyObject dependencyObject,
+            TextFormattingRunProperties textProperties
+        )
         {
             DependencyObjectExtensions.SetTextProperties(dependencyObject, textProperties);
         }
 
-        public static void SetDefaultTextProperties(this DependencyObject dependencyObject, IClassificationFormatMap formatMap)
+        public static void SetDefaultTextProperties(
+            this DependencyObject dependencyObject,
+            IClassificationFormatMap formatMap
+        )
         {
             DependencyObjectExtensions.SetDefaultTextProperties(dependencyObject, formatMap);
         }

@@ -4,12 +4,12 @@
 
 namespace System.ServiceModel
 {
-    using System.Xml;
+    using System.Runtime.Serialization;
     using System.ServiceModel;
     using System.ServiceModel.Description;
+    using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System.Runtime.Serialization;
 
     public class FaultCode
     {
@@ -19,26 +19,24 @@ namespace System.ServiceModel
         EnvelopeVersion version;
 
         public FaultCode(string name)
-            : this(name, "", null)
-        {
-        }
+            : this(name, "", null) { }
 
         public FaultCode(string name, FaultCode subCode)
-            : this(name, "", subCode)
-        {
-        }
+            : this(name, "", subCode) { }
 
         public FaultCode(string name, string ns)
-            : this(name, ns, null)
-        {
-        }
+            : this(name, ns, null) { }
 
         public FaultCode(string name, string ns, FaultCode subCode)
         {
             if (name == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("name"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("name")
+                );
             if (name.Length == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("name"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("name")
+                );
 
             if (!string.IsNullOrEmpty(ns))
                 NamingHelper.CheckUriParameter(ns, "ns");
@@ -59,10 +57,7 @@ namespace System.ServiceModel
 
         public bool IsPredefinedFault
         {
-            get
-            {
-                return ns.Length == 0 || version != null;
-            }
+            get { return ns.Length == 0 || version != null; }
         }
 
         public bool IsSenderFault
@@ -89,26 +84,17 @@ namespace System.ServiceModel
 
         public string Namespace
         {
-            get
-            {
-                return ns;
-            }
+            get { return ns; }
         }
 
         public string Name
         {
-            get
-            {
-                return name;
-            }
+            get { return name; }
         }
 
         public FaultCode SubCode
         {
-            get
-            {
-                return subCode;
-            }
+            get { return subCode; }
         }
 
         public static FaultCode CreateSenderFaultCode(FaultCode subCode)
@@ -124,7 +110,9 @@ namespace System.ServiceModel
         public static FaultCode CreateReceiverFaultCode(FaultCode subCode)
         {
             if (subCode == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("subCode"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("subCode")
+                );
             return new FaultCode("Receiver", subCode);
         }
 

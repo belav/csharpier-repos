@@ -10,11 +10,17 @@ namespace Microsoft.VisualBasic.Activities
     using System.Runtime;
     using System.Xaml;
 
-    [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.TypeNamesShouldNotMatchNamespaces,
-        Justification = "Approved name")]
+    [SuppressMessage(
+        FxCop.Category.Naming,
+        FxCop.Rule.TypeNamesShouldNotMatchNamespaces,
+        Justification = "Approved name"
+    )]
     public static class VisualBasic
     {
-        static AttachableMemberIdentifier settingsPropertyID = new AttachableMemberIdentifier(typeof(VisualBasic), "Settings");
+        static AttachableMemberIdentifier settingsPropertyID = new AttachableMemberIdentifier(
+            typeof(VisualBasic),
+            "Settings"
+        );
 
         public static void SetSettings(object target, VisualBasicSettings value)
         {
@@ -24,7 +30,9 @@ namespace Microsoft.VisualBasic.Activities
         public static VisualBasicSettings GetSettings(object target)
         {
             VisualBasicSettings value;
-            return AttachablePropertyServices.TryGetProperty(target, settingsPropertyID, out value) ? value : null;
+            return AttachablePropertyServices.TryGetProperty(target, settingsPropertyID, out value)
+                ? value
+                : null;
         }
 
         public static void SetSettingsForImplementation(object target, VisualBasicSettings value)

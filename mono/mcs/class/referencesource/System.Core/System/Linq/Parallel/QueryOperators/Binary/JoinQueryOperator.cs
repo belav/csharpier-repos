@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -43,9 +43,9 @@ namespace System.Linq.Parallel
     /// <typeparam name="TRightInput"></typeparam>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TOutput"></typeparam>
-    internal sealed class JoinQueryOperator<TLeftInput, TRightInput, TKey, TOutput> : BinaryQueryOperator<TLeftInput, TRightInput, TOutput>
+    internal sealed class JoinQueryOperator<TLeftInput, TRightInput, TKey, TOutput>
+        : BinaryQueryOperator<TLeftInput, TRightInput, TOutput>
     {
-
         private readonly Func<TLeftInput, TKey> m_leftKeySelector; // The key selection routine for the outer (left) data source.
         private readonly Func<TRightInput, TKey> m_rightKeySelector; // The key selection routine for the inner (right) data source.
         private readonly Func<TLeftInput, TRightInput, TOutput> m_resultSelector; // The result selection routine.
@@ -55,12 +55,15 @@ namespace System.Linq.Parallel
         // Constructs a new join operator.
         //
 
-        internal JoinQueryOperator(ParallelQuery<TLeftInput> left, ParallelQuery<TRightInput> right,
-                                   Func<TLeftInput, TKey> leftKeySelector,
-                                   Func<TRightInput, TKey> rightKeySelector,
-                                   Func<TLeftInput, TRightInput, TOutput> resultSelector,
-                                   IEqualityComparer<TKey> keyComparer)
-            :base(left, right)
+        internal JoinQueryOperator(
+            ParallelQuery<TLeftInput> left,
+            ParallelQuery<TRightInput> right,
+            Func<TLeftInput, TKey> leftKeySelector,
+            Func<TRightInput, TKey> rightKeySelector,
+            Func<TLeftInput, TRightInput, TOutput> resultSelector,
+            IEqualityComparer<TKey> keyComparer
+        )
+            : base(left, right)
         {
             Contract.Assert(left != null && right != null, "child data sources cannot be null");
             Contract.Assert(leftKeySelector != null, "left key selector must not be null");
@@ -77,22 +80,44 @@ namespace System.Linq.Parallel
         }
 
         public override void WrapPartitionedStream<TLeftKey, TRightKey>(
-            PartitionedStream<TLeftInput, TLeftKey> leftStream, PartitionedStream<TRightInput, TRightKey> rightStream, 
-            IPartitionedStreamRecipient<TOutput> outputRecipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TLeftInput, TLeftKey> leftStream,
+            PartitionedStream<TRightInput, TRightKey> rightStream,
+            IPartitionedStreamRecipient<TOutput> outputRecipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             Contract.Assert(rightStream.PartitionCount == leftStream.PartitionCount);
 
             if (LeftChild.OutputOrdered)
             {
                 WrapPartitionedStreamHelper<TLeftKey, TRightKey>(
-                    ExchangeUtilities.HashRepartitionOrdered(leftStream, m_leftKeySelector, m_keyComparer, null, settings.CancellationState.MergedCancellationToken),
-                    rightStream, outputRecipient, settings.CancellationState.MergedCancellationToken);
+                    ExchangeUtilities.HashRepartitionOrdered(
+                        leftStream,
+                        m_leftKeySelector,
+                        m_keyComparer,
+                        null,
+                        settings.CancellationState.MergedCancellationToken
+                    ),
+                    rightStream,
+                    outputRecipient,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
             else
             {
                 WrapPartitionedStreamHelper<int, TRightKey>(
-                    ExchangeUtilities.HashRepartition(leftStream, m_leftKeySelector, m_keyComparer, null, settings.CancellationState.MergedCancellationToken),
-                    rightStream, outputRecipient, settings.CancellationState.MergedCancellationToken);
+                    ExchangeUtilities.HashRepartition(
+                        leftStream,
+                        m_leftKeySelector,
+                        m_keyComparer,
+                        null,
+                        settings.CancellationState.MergedCancellationToken
+                    ),
+                    rightStream,
+                    outputRecipient,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
         }
 
@@ -102,20 +127,43 @@ namespace System.Linq.Parallel
         //
 
         private void WrapPartitionedStreamHelper<TLeftKey, TRightKey>(
-            PartitionedStream<Pair<TLeftInput, TKey>, TLeftKey> leftHashStream, PartitionedStream<TRightInput, TRightKey> rightPartitionedStream, 
-            IPartitionedStreamRecipient<TOutput> outputRecipient, CancellationToken cancellationToken)
+            PartitionedStream<Pair<TLeftInput, TKey>, TLeftKey> leftHashStream,
+            PartitionedStream<TRightInput, TRightKey> rightPartitionedStream,
+            IPartitionedStreamRecipient<TOutput> outputRecipient,
+            CancellationToken cancellationToken
+        )
         {
             int partitionCount = leftHashStream.PartitionCount;
-            PartitionedStream<Pair<TRightInput, TKey>, int> rightHashStream = ExchangeUtilities.HashRepartition(
-                rightPartitionedStream, m_rightKeySelector, m_keyComparer, null, cancellationToken);
+            PartitionedStream<Pair<TRightInput, TKey>, int> rightHashStream =
+                ExchangeUtilities.HashRepartition(
+                    rightPartitionedStream,
+                    m_rightKeySelector,
+                    m_keyComparer,
+                    null,
+                    cancellationToken
+                );
 
-            PartitionedStream<TOutput, TLeftKey> outputStream = new PartitionedStream<TOutput, TLeftKey>(
-                partitionCount, leftHashStream.KeyComparer, OrdinalIndexState);
+            PartitionedStream<TOutput, TLeftKey> outputStream = new PartitionedStream<
+                TOutput,
+                TLeftKey
+            >(partitionCount, leftHashStream.KeyComparer, OrdinalIndexState);
 
             for (int i = 0; i < partitionCount; i++)
             {
-                outputStream[i] = new HashJoinQueryOperatorEnumerator<TLeftInput, TLeftKey, TRightInput, TKey, TOutput>(
-                    leftHashStream[i], rightHashStream[i], m_resultSelector, null, m_keyComparer, cancellationToken);
+                outputStream[i] = new HashJoinQueryOperatorEnumerator<
+                    TLeftInput,
+                    TLeftKey,
+                    TRightInput,
+                    TKey,
+                    TOutput
+                >(
+                    leftHashStream[i],
+                    rightHashStream[i],
+                    m_resultSelector,
+                    null,
+                    m_keyComparer,
+                    cancellationToken
+                );
             }
 
             outputRecipient.Receive(outputStream);
@@ -135,11 +183,22 @@ namespace System.Linq.Parallel
 
         internal override IEnumerable<TOutput> AsSequentialQuery(CancellationToken token)
         {
-            IEnumerable<TLeftInput> wrappedLeftChild = CancellableEnumerable.Wrap(LeftChild.AsSequentialQuery(token), token);
-            IEnumerable<TRightInput> wrappedRightChild = CancellableEnumerable.Wrap(RightChild.AsSequentialQuery(token), token);
+            IEnumerable<TLeftInput> wrappedLeftChild = CancellableEnumerable.Wrap(
+                LeftChild.AsSequentialQuery(token),
+                token
+            );
+            IEnumerable<TRightInput> wrappedRightChild = CancellableEnumerable.Wrap(
+                RightChild.AsSequentialQuery(token),
+                token
+            );
 
             return wrappedLeftChild.Join(
-                wrappedRightChild, m_leftKeySelector, m_rightKeySelector, m_resultSelector, m_keyComparer);
+                wrappedRightChild,
+                m_leftKeySelector,
+                m_rightKeySelector,
+                m_resultSelector,
+                m_keyComparer
+            );
         }
 
         //---------------------------------------------------------------------------------------

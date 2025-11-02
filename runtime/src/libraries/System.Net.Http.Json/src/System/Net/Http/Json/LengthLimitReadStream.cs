@@ -30,7 +30,9 @@ namespace System.Net.Http.Json
 
         internal static void ThrowExceededBufferLimit(int limit)
         {
-            throw new HttpRequestException(SR.Format(SR.net_http_content_buffersize_exceeded, limit));
+            throw new HttpRequestException(
+                SR.Format(SR.net_http_content_buffersize_exceeded, limit)
+            );
         }
 
         public override bool CanRead => _innerStream.CanRead;
@@ -38,10 +40,17 @@ namespace System.Net.Http.Json
         public override bool CanWrite => false;
 
 #if NETCOREAPP
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) =>
-            ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) => ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             ValueTask<int> readTask = _innerStream.ReadAsync(buffer, cancellationToken);
 
@@ -67,9 +76,16 @@ namespace System.Net.Http.Json
             }
         }
 #else
-        public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
-            int read = await _innerStream.ReadAsync(buffer, offset, count, cancellationToken).ConfigureAwait(false);
+            int read = await _innerStream
+                .ReadAsync(buffer, offset, count, cancellationToken)
+                .ConfigureAwait(false);
             CheckLengthLimit(read);
             return read;
         }
@@ -83,12 +99,23 @@ namespace System.Net.Http.Json
         }
 
         public override void Flush() => _innerStream.Flush();
-        public override Task FlushAsync(CancellationToken cancellationToken) => _innerStream.FlushAsync(cancellationToken);
-        public override long Seek(long offset, SeekOrigin origin) => _innerStream.Seek(offset, origin);
-        public override void SetLength(long value) => _innerStream.SetLength(value);
-        public override long Length => _innerStream.Length;
-        public override long Position { get => _innerStream.Position; set => _innerStream.Position = value; }
 
-        public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+        public override Task FlushAsync(CancellationToken cancellationToken) =>
+            _innerStream.FlushAsync(cancellationToken);
+
+        public override long Seek(long offset, SeekOrigin origin) =>
+            _innerStream.Seek(offset, origin);
+
+        public override void SetLength(long value) => _innerStream.SetLength(value);
+
+        public override long Length => _innerStream.Length;
+        public override long Position
+        {
+            get => _innerStream.Position;
+            set => _innerStream.Position = value;
+        }
+
+        public override void Write(byte[] buffer, int offset, int count) =>
+            throw new NotSupportedException();
     }
 }

@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -29,71 +29,87 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 
-namespace Microsoft.Build.BuildEngine {
-	internal class BuildChoose {
-		
-		BuildWhen	otherwise;
-		//Project		project;
-		//ImportedProject	importedProject;
-		//XmlElement	xmlElement;
-		List <BuildWhen>	whens;
-		
-		public BuildChoose (XmlElement xmlElement, Project project)
-			: this (xmlElement, project, null)
-		{
-		}
+namespace Microsoft.Build.BuildEngine
+{
+    internal class BuildChoose
+    {
+        BuildWhen otherwise;
 
-		internal BuildChoose (XmlElement xmlElement, Project project, ImportedProject importedProject)
-		{
-			//this.xmlElement = xmlElement;
-			//this.project = project;
-			//this.importedProject = importedProject;
-			this.whens = new List <BuildWhen> ();
+        //Project		project;
+        //ImportedProject	importedProject;
+        //XmlElement	xmlElement;
+        List<BuildWhen> whens;
 
-			foreach (XmlNode xn in xmlElement.ChildNodes) {
-				if (!(xn is XmlElement))
-					continue;
+        public BuildChoose(XmlElement xmlElement, Project project)
+            : this(xmlElement, project, null) { }
 
-				XmlElement xe = (XmlElement)xn;
+        internal BuildChoose(
+            XmlElement xmlElement,
+            Project project,
+            ImportedProject importedProject
+        )
+        {
+            //this.xmlElement = xmlElement;
+            //this.project = project;
+            //this.importedProject = importedProject;
+            this.whens = new List<BuildWhen>();
 
-				if (xe.Name == "When") {
-					if (otherwise != null)
-						throw new InvalidProjectFileException ("The 'Otherwise' element must be last in a 'Choose' element.");
-					if (xe.Attributes.GetNamedItem ("Condition") == null)
-						throw new InvalidProjectFileException ("The 'When' element requires a 'Condition' attribute.");
-					BuildWhen bw = new BuildWhen (xe, project);
-					whens.Add (bw);
-				} else if (xe.Name == "Otherwise") {
-					if (this.whens.Count == 0)
-						throw new InvalidProjectFileException ("At least one 'When' element must occur in a 'Choose' element.");
-					
-					otherwise = new BuildWhen (xe, project);
-				}
-			}
+            foreach (XmlNode xn in xmlElement.ChildNodes)
+            {
+                if (!(xn is XmlElement))
+                    continue;
 
-			DefinedInFileName = importedProject != null ? importedProject.FullFileName :
-						project != null ? project.FullFileName : null;
-		}
-		
-		public void Evaluate ()
-		{
-		}
-		
-		//public bool IsImported {
-		//	get { return isImported; }
-		//	set { isImported = value; }
-		//}
-		
-		public BuildWhen Otherwise {
-			get { return otherwise; }
-			set { otherwise = value; }
-		}
-		
-		public List <BuildWhen> Whens {
-			get { return whens; }
-			set { whens = value; }
-		}
+                XmlElement xe = (XmlElement)xn;
 
-		internal string DefinedInFileName { get; private set; }
-	}
+                if (xe.Name == "When")
+                {
+                    if (otherwise != null)
+                        throw new InvalidProjectFileException(
+                            "The 'Otherwise' element must be last in a 'Choose' element."
+                        );
+                    if (xe.Attributes.GetNamedItem("Condition") == null)
+                        throw new InvalidProjectFileException(
+                            "The 'When' element requires a 'Condition' attribute."
+                        );
+                    BuildWhen bw = new BuildWhen(xe, project);
+                    whens.Add(bw);
+                }
+                else if (xe.Name == "Otherwise")
+                {
+                    if (this.whens.Count == 0)
+                        throw new InvalidProjectFileException(
+                            "At least one 'When' element must occur in a 'Choose' element."
+                        );
+
+                    otherwise = new BuildWhen(xe, project);
+                }
+            }
+
+            DefinedInFileName =
+                importedProject != null ? importedProject.FullFileName
+                : project != null ? project.FullFileName
+                : null;
+        }
+
+        public void Evaluate() { }
+
+        //public bool IsImported {
+        //	get { return isImported; }
+        //	set { isImported = value; }
+        //}
+
+        public BuildWhen Otherwise
+        {
+            get { return otherwise; }
+            set { otherwise = value; }
+        }
+
+        public List<BuildWhen> Whens
+        {
+            get { return whens; }
+            set { whens = value; }
+        }
+
+        internal string DefinedInFileName { get; private set; }
+    }
 }

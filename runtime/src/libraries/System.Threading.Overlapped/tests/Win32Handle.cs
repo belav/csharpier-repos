@@ -7,14 +7,10 @@ using System.Runtime.InteropServices;
 public class Win32Handle : SafeHandle
 {
     private Win32Handle()
-        : base(IntPtr.Zero, true)
-    {
-    }
+        : base(IntPtr.Zero, true) { }
 
     public Win32Handle(IntPtr handle)
-        : base(handle, false)
-    {
-    }
+        : base(handle, false) { }
 
     public override bool IsInvalid
     {
@@ -30,6 +26,4 @@ public class Win32Handle : SafeHandle
     {
         DllImport.CloseHandle(handle);
     }
-
-
 }

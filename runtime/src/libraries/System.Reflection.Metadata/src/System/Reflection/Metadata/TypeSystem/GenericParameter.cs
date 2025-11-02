@@ -34,10 +34,7 @@ namespace System.Reflection.Metadata
         /// </remarks>
         public EntityHandle Parent
         {
-            get
-            {
-                return _reader.GenericParamTable.GetOwner(Handle);
-            }
+            get { return _reader.GenericParamTable.GetOwner(Handle); }
         }
 
         /// <summary>
@@ -48,10 +45,7 @@ namespace System.Reflection.Metadata
         /// </remarks>
         public GenericParameterAttributes Attributes
         {
-            get
-            {
-                return _reader.GenericParamTable.GetFlags(Handle);
-            }
+            get { return _reader.GenericParamTable.GetFlags(Handle); }
         }
 
         /// <summary>
@@ -62,10 +56,7 @@ namespace System.Reflection.Metadata
         /// </remarks>
         public int Index
         {
-            get
-            {
-                return _reader.GenericParamTable.GetNumber(Handle);
-            }
+            get { return _reader.GenericParamTable.GetNumber(Handle); }
         }
 
         /// <summary>
@@ -76,10 +67,7 @@ namespace System.Reflection.Metadata
         /// </remarks>
         public StringHandle Name
         {
-            get
-            {
-                return _reader.GenericParamTable.GetName(Handle);
-            }
+            get { return _reader.GenericParamTable.GetName(Handle); }
         }
 
         public GenericParameterConstraintHandleCollection GetConstraints()

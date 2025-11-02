@@ -7,15 +7,30 @@ using System.Threading;
 
 internal static class DllImport
 {
-    [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, BestFitMapping = false)]
-    internal static extern Win32Handle CreateFile(string lpFileName,
-       FileAccess dwDesiredAccess, FileShare dwShareMode,
-       IntPtr securityAttrs, CreationDisposition dwCreationDisposition,
-       FileAttributes dwFlagsAndAttributes, IntPtr hTemplateFile);
+    [DllImport(
+        "kernel32.dll",
+        SetLastError = true,
+        CharSet = CharSet.Unicode,
+        BestFitMapping = false
+    )]
+    internal static extern Win32Handle CreateFile(
+        string lpFileName,
+        FileAccess dwDesiredAccess,
+        FileShare dwShareMode,
+        IntPtr securityAttrs,
+        CreationDisposition dwCreationDisposition,
+        FileAttributes dwFlagsAndAttributes,
+        IntPtr hTemplateFile
+    );
 
     [DllImport("kernel32.dll", SetLastError = true)]
-    internal static extern unsafe int WriteFile(SafeHandle handle, byte* bytes, int numBytesToWrite, IntPtr numBytesWritten_mustBeZero, NativeOverlapped* lpOverlapped);
-
+    internal static extern unsafe int WriteFile(
+        SafeHandle handle,
+        byte* bytes,
+        int numBytesToWrite,
+        IntPtr numBytesWritten_mustBeZero,
+        NativeOverlapped* lpOverlapped
+    );
 
     [DllImport("kernel32.dll", SetLastError = true)]
     internal static extern bool CloseHandle(IntPtr handle);
@@ -80,6 +95,6 @@ internal static class DllImport
         PosixSemantics = 0x01000000,
         OpenReparsePoint = 0x00200000,
         OpenNoRecall = 0x00100000,
-        FirstPipeInstance = 0x00080000
+        FirstPipeInstance = 0x00080000,
     }
 }

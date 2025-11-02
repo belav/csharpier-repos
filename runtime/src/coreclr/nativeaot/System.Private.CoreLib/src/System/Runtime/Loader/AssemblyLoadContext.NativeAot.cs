@@ -3,7 +3,6 @@
 
 using System.Reflection;
 using System.Runtime.InteropServices;
-
 using Internal.Reflection.Augments;
 
 // This type is just stubbed out to be harmonious with CoreCLR
@@ -11,7 +10,8 @@ namespace System.Runtime.Loader
 {
     public partial class AssemblyLoadContext
     {
-        internal static Assembly[] GetLoadedAssemblies() => ReflectionAugments.ReflectionCoreCallbacks.GetLoadedAssemblies();
+        internal static Assembly[] GetLoadedAssemblies() =>
+            ReflectionAugments.ReflectionCoreCallbacks.GetLoadedAssemblies();
 
         public Assembly LoadFromAssemblyName(AssemblyName assemblyName)
         {
@@ -19,27 +19,28 @@ namespace System.Runtime.Loader
         }
 
 #pragma warning disable IDE0060
-        private static IntPtr InitializeAssemblyLoadContext(IntPtr ptrAssemblyLoadContext, bool fRepresentsTPALoadContext, bool isCollectible)
+        private static IntPtr InitializeAssemblyLoadContext(
+            IntPtr ptrAssemblyLoadContext,
+            bool fRepresentsTPALoadContext,
+            bool isCollectible
+        )
         {
             return IntPtr.Zero;
         }
 
-        private static void PrepareForAssemblyLoadContextRelease(IntPtr ptrNativeAssemblyLoadContext, IntPtr ptrAssemblyLoadContextStrong)
-        {
-        }
+        private static void PrepareForAssemblyLoadContextRelease(
+            IntPtr ptrNativeAssemblyLoadContext,
+            IntPtr ptrAssemblyLoadContextStrong
+        ) { }
 
         public static AssemblyLoadContext? GetLoadContext(Assembly assembly)
         {
             return Default;
         }
 
-        public void SetProfileOptimizationRoot(string directoryPath)
-        {
-        }
+        public void SetProfileOptimizationRoot(string directoryPath) { }
 
-        public void StartProfileOptimization(string profile)
-        {
-        }
+        public void StartProfileOptimization(string profile) { }
 
         private static Assembly InternalLoadFromPath(string? assemblyPath, string? nativeImagePath)
         {
@@ -50,7 +51,10 @@ namespace System.Runtime.Loader
 #pragma warning restore IDE0060
 
 #pragma warning disable CA1822
-        internal Assembly InternalLoad(ReadOnlySpan<byte> arrAssembly, ReadOnlySpan<byte> arrSymbols)
+        internal Assembly InternalLoad(
+            ReadOnlySpan<byte> arrAssembly,
+            ReadOnlySpan<byte> arrSymbols
+        )
         {
             return ReflectionAugments.ReflectionCoreCallbacks.Load(arrAssembly, arrSymbols);
         }

@@ -11,31 +11,29 @@ using System;
 //using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
 
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
-// to prevent from simple mistakes during development (e.g. method argument validation 
-// in cases where it was you who created the variables or the variables had already been validated or 
-// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default 
-// "else" block is chosen why the new condition should be treated separately). This kind of asserts are 
-// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in 
-// the shipped product. 
-// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions 
+// to prevent from simple mistakes during development (e.g. method argument validation
+// in cases where it was you who created the variables or the variables had already been validated or
+// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default
+// "else" block is chosen why the new condition should be treated separately). This kind of asserts are
+// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in
+// the shipped product.
+// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions
 // about how the tree was built etc. - in these cases we probably want to throw an exception (this is
-// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct 
+// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct
 // or the tree was built/rewritten not the way we thought it was.
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
 
 using System.Collections.Generic;
-using System.Globalization;
-
 using System.Data.Common;
-using md = System.Data.Metadata.Edm;
 using System.Data.Query.InternalTrees;
 using System.Data.Query.PlanCompiler;
+using System.Globalization;
 using System.Linq;
+using md = System.Data.Metadata.Edm;
 
 namespace System.Data.Query.PlanCompiler
 {
-
     /// <summary>
     /// This class "pulls" up nest operations to the root of the tree
     /// </summary>
@@ -45,7 +43,6 @@ namespace System.Data.Query.PlanCompiler
     ///</remarks>
     internal class NestPullup : BasicOpVisitorOfNode
     {
-
         #region private state
 
         private PlanCompiler m_compilerState;
@@ -72,7 +69,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Whether a sort was encountered under an UnnestOp.
-        /// If so, sort removal needs to be performed.  
+        /// If so, sort removal needs to be performed.
         /// </summary>
         private bool m_foundSortUnderUnnest = false;
         #endregion
@@ -100,7 +97,10 @@ namespace System.Data.Query.PlanCompiler
         /// </summary>
         private void Process()
         {
-            PlanCompiler.Assert(Command.Root.Op.OpType == OpType.PhysicalProject, "root node is not physicalProject?");
+            PlanCompiler.Assert(
+                Command.Root.Op.OpType == OpType.PhysicalProject,
+                "root node is not physicalProject?"
+            );
             Command.Root = VisitNode(Command.Root);
 
             if (m_foundSortUnderUnnest)
@@ -118,7 +118,10 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// the iqt we're processing
         /// </summary>
-        private Command Command { get { return m_compilerState.Command; } }
+        private Command Command
+        {
+            get { return m_compilerState.Command; }
+        }
 
         /// <summary>
         /// is the node a NestOp node?
@@ -127,8 +130,13 @@ namespace System.Data.Query.PlanCompiler
         /// <returns></returns>
         private static bool IsNestOpNode(Node n)
         {
-            PlanCompiler.Assert(n.Op.OpType != OpType.SingleStreamNest, "illegal singleStreamNest?");
-            return (n.Op.OpType == OpType.SingleStreamNest || n.Op.OpType == OpType.MultiStreamNest);
+            PlanCompiler.Assert(
+                n.Op.OpType != OpType.SingleStreamNest,
+                "illegal singleStreamNest?"
+            );
+            return (
+                n.Op.OpType == OpType.SingleStreamNest || n.Op.OpType == OpType.MultiStreamNest
+            );
         }
 
         /// <summary>
@@ -189,7 +197,10 @@ namespace System.Data.Query.PlanCompiler
             {
                 if (!toVarEnumerator.MoveNext())
                 {
-                    throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.ColumnCountMismatch, 2);
+                    throw EntityUtil.InternalError(
+                        EntityUtil.InternalErrorCode.ColumnCountMismatch,
+                        2
+                    );
                 }
                 m_varRemapper.AddMapping(v, toVarEnumerator.Current);
             }
@@ -207,7 +218,10 @@ namespace System.Data.Query.PlanCompiler
         /// </summary>
         /// <param name="sortKeys">sortkeys</param>
         /// <param name="varMap">the mapping info for Vars</param>
-        private static void RemapSortKeys(List<InternalTrees.SortKey> sortKeys, Dictionary<Var, Var> varMap)
+        private static void RemapSortKeys(
+            List<InternalTrees.SortKey> sortKeys,
+            Dictionary<Var, Var> varMap
+        )
         {
             if (sortKeys != null)
             {
@@ -277,8 +291,8 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// VarDefOp
-        /// 
-        /// Essentially, maintains m_varRefMap, adding an entry for each VarDef that has a 
+        ///
+        /// Essentially, maintains m_varRefMap, adding an entry for each VarDef that has a
         /// VarRef on it.
         /// </summary>
         /// <param name="op"></param>
@@ -366,7 +380,10 @@ namespace System.Data.Query.PlanCompiler
             VarVec newOutputs = ((ProjectOp)n.Child0.Op).Outputs;
             if (newOutputs.Count > 1)
             {
-                PlanCompiler.Assert(newOutputs.IsSet(inputVar), "The constant var is not present after NestPull up over the input of ExistsOp.");
+                PlanCompiler.Assert(
+                    newOutputs.IsSet(inputVar),
+                    "The constant var is not present after NestPull up over the input of ExistsOp."
+                );
                 newOutputs.Clear();
                 newOutputs.Set(inputVar);
             }
@@ -377,8 +394,8 @@ namespace System.Data.Query.PlanCompiler
         #region RelOp Visitors
 
         /// <summary>
-        /// Default RelOp processing: 
-        /// 
+        /// Default RelOp processing:
+        ///
         /// We really don't want to allow any NestOps through; just fail if we don't have
         /// something coded.
         /// </summary>
@@ -402,18 +419,18 @@ namespace System.Data.Query.PlanCompiler
         ///     JoinOp/ApplyOp(NestOp(X, ...), Y) => NestOp(JoinOp/ApplyOp(X, Y), ...)
         ///
         /// In addition, if the NestOp is on a 'nullable' side of a join (i.e. right side of
-        /// LeftOuterJoin/OuterApply or either side of FullOuterJoin), the driving node 
-        /// of that NestOp (X) is capped with a project with a null sentinel and 
+        /// LeftOuterJoin/OuterApply or either side of FullOuterJoin), the driving node
+        /// of that NestOp (X) is capped with a project with a null sentinel and
         /// the dependant collection nodes (the rest of the NestOp children)
         /// are filtered based on that sentinel:
         ///
         ///  LOJ/OA/FOJ (X, NestOp(Y, Z1, Z2, ..ZN))  =>  NestOp( LOJ/OA/FOJ (X, PROJECT (Y, v = 1)), FILTER(Z1, v!=null), FILTER(Z2, v!=null), ... FILTER(ZN, v!=null))
         ///         FOJ (NestOp(Y, Z1, Z2, ..ZN), X)  =>  NestOp( LOJ/OA/FOJ (PROJECT (Y, v = 1), X), FILTER(Z1, v!=null), FILTER(Z2, v!=null), ... FILTER(ZN, v!=null))
         ///
-        ///  Also, FILTER(Zi, v != null) may be transformed to push the filter below any NestOps. 
+        ///  Also, FILTER(Zi, v != null) may be transformed to push the filter below any NestOps.
         ///  The definitions for collection vars corresponding to the filtered collection nodes (in m_definingNodeMap)
-        ///  are also updated to filter based on the sentinel. 
-        ///  
+        ///  are also updated to filter based on the sentinel.
+        ///
         /// Requires: Every input to the join/apply must have a key.
         /// </remarks>
         /// <param name="op"></param>
@@ -442,9 +459,11 @@ namespace System.Data.Query.PlanCompiler
                         //
                         //      Project(Collect(PhysicalProject(...)))
                         //
-                        // isn’t good enough, because that will get converted to a MultiStreamNest, with
+                        // isnï¿½t good enough, because that will get converted to a MultiStreamNest, with
                         // the SingleStreamNest as the input to the MultiStreamNest.
-                        throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.JoinOverSingleStreamNest);
+                        throw EntityUtil.InternalError(
+                            EntityUtil.InternalErrorCode.JoinOverSingleStreamNest
+                        );
                     }
                 }
             }
@@ -487,27 +506,46 @@ namespace System.Data.Query.PlanCompiler
                 {
                     newCollectionInfoList.AddRange(((MultiStreamNestOp)chi.Op).CollectionInfo);
 
-                    // SQLBUDT #615513: If the nest op is on a 'nullable' side of join 
+                    // SQLBUDT #615513: If the nest op is on a 'nullable' side of join
                     // (i.e. right side of LeftOuterJoin/OuterApply or either side of FullOuterJoin)
-                    // the driving node of that nest operation needs to be capped with a project with 
+                    // the driving node of that nest operation needs to be capped with a project with
                     // a null sentinel and the dependant collection nodes need to be filtered based on that sentinel.
                     //
                     //  LOJ/OA/FOJ (X, MSN(Y, Z1, Z2, ..ZN))  =>  MSN( LOJ/OA/FOJ (X, PROJECT (Y, v = 1)), FILTER(Z1, v!=null), FILTER(Z2, v!=null), ... FILTER(ZN, v!=null))
                     //         FOJ (MSN(Y, Z1, Z2, ..ZN), X)  =>  MSN( LOJ/OA/FOJ (PROJECT (Y, v = 1), X), FILTER(Z1, v!=null), FILTER(Z2, v!=null), ... FILTER(ZN, v!=null))
                     //
-                    //  Note: we transform FILTER(Zi, v != null) to push the filter below any MSNs. 
-                    if ((op.OpType == OpType.FullOuterJoin)
-                        || ((op.OpType == OpType.LeftOuterJoin || op.OpType == OpType.OuterApply) && n.Child1.Op.OpType == OpType.MultiStreamNest))
+                    //  Note: we transform FILTER(Zi, v != null) to push the filter below any MSNs.
+                    if (
+                        (op.OpType == OpType.FullOuterJoin)
+                        || (
+                            (op.OpType == OpType.LeftOuterJoin || op.OpType == OpType.OuterApply)
+                            && n.Child1.Op.OpType == OpType.MultiStreamNest
+                        )
+                    )
                     {
                         Var sentinelVar = null;
-                        newJoinApplyChildren.Add(AugmentNodeWithConstant(chi.Child0,  () => Command.CreateNullSentinelOp(), out sentinelVar));
+                        newJoinApplyChildren.Add(
+                            AugmentNodeWithConstant(
+                                chi.Child0,
+                                () => Command.CreateNullSentinelOp(),
+                                out sentinelVar
+                            )
+                        );
 
-                        // Update the definitions corresponding ot the collection vars to be filtered based on the sentinel. 
-                        foreach (CollectionInfo collectionInfo in ((MultiStreamNestOp)chi.Op).CollectionInfo)
+                        // Update the definitions corresponding ot the collection vars to be filtered based on the sentinel.
+                        foreach (
+                            CollectionInfo collectionInfo in (
+                                (MultiStreamNestOp)chi.Op
+                            ).CollectionInfo
+                        )
                         {
-                            m_definingNodeMap[collectionInfo.CollectionVar].Child0 = ApplyIsNotNullFilter(m_definingNodeMap[collectionInfo.CollectionVar].Child0, sentinelVar);
+                            m_definingNodeMap[collectionInfo.CollectionVar].Child0 =
+                                ApplyIsNotNullFilter(
+                                    m_definingNodeMap[collectionInfo.CollectionVar].Child0,
+                                    sentinelVar
+                                );
                         }
-                        
+
                         for (int i = 1; i < chi.Children.Count; i++)
                         {
                             Node newNestChild = ApplyIsNotNullFilter(chi.Children[i], sentinelVar);
@@ -549,16 +587,20 @@ namespace System.Data.Query.PlanCompiler
             }
 
             // (6) create the new nestop
-            NestBaseOp newNestOp = Command.CreateMultiStreamNestOp(new List<InternalTrees.SortKey>(), newOutputVars, newCollectionInfoList);
+            NestBaseOp newNestOp = Command.CreateMultiStreamNestOp(
+                new List<InternalTrees.SortKey>(),
+                newOutputVars,
+                newCollectionInfoList
+            );
             Node newNode = Command.CreateNode(newNestOp, newNestChildren);
             return newNode;
         }
 
         /// <summary>
         /// Applies a IsNotNull(sentinelVar) filter to the given node.
-        /// The filter is pushed below all MultiStremNest-s, because this part of the tree has 
+        /// The filter is pushed below all MultiStremNest-s, because this part of the tree has
         /// already been visited and it is expected that the MultiStreamNests have bubbled up
-        /// above the filters. 
+        /// above the filters.
         /// </summary>
         /// <param name="node"></param>
         /// <param name="sentinelVar"></param>
@@ -598,11 +640,9 @@ namespace System.Data.Query.PlanCompiler
         {
             Node varRefNode = Command.CreateNode(Command.CreateVarRefOp(var));
             Node predicateNode = Command.CreateNode(
-                                            Command.CreateConditionalOp(OpType.Not),
-                                            Command.CreateNode(
-                                                    Command.CreateConditionalOp(OpType.IsNull),
-                                                    varRefNode));
-
+                Command.CreateConditionalOp(OpType.Not),
+                Command.CreateNode(Command.CreateConditionalOp(OpType.IsNull), varRefNode)
+            );
 
             Node filterNode = Command.CreateNode(Command.CreateFilterOp(), input, predicateNode);
             return filterNode;
@@ -623,8 +663,8 @@ namespace System.Data.Query.PlanCompiler
         /// DistinctOp
         /// </summary>
         /// <remarks>
-        /// The input to a DistinctOp cannot be a NestOp – that would imply that
-        /// we support distinctness over collections - which we don’t.
+        /// The input to a DistinctOp cannot be a NestOp ï¿½ that would imply that
+        /// we support distinctness over collections - which we donï¿½t.
         /// </remarks>
         /// <param name="op"></param>
         /// <param name="n"></param>
@@ -669,7 +709,10 @@ namespace System.Data.Query.PlanCompiler
                 NodeInfo predicateNodeInfo = Command.GetNodeInfo(n.Child1);
                 foreach (CollectionInfo ci in nestOp.CollectionInfo)
                 {
-                    PlanCompiler.Assert(!predicateNodeInfo.ExternalReferences.IsSet(ci.CollectionVar), "predicate references collection?");
+                    PlanCompiler.Assert(
+                        !predicateNodeInfo.ExternalReferences.IsSet(ci.CollectionVar),
+                        "predicate references collection?"
+                    );
                 }
 #endif //DEBUG
 
@@ -709,11 +752,11 @@ namespace System.Data.Query.PlanCompiler
         /// GroupByIntoOp
         /// </summary>
         /// <remarks>
-        /// Transform the GroupByInto node into a Project over a GroupBy. The project 
-        /// outputs all keys and aggregates produced by the GroupBy and has the definition of the 
+        /// Transform the GroupByInto node into a Project over a GroupBy. The project
+        /// outputs all keys and aggregates produced by the GroupBy and has the definition of the
         /// group aggregates var in its var def list.
-        /// 
-        /// GroupByInto({key1, key2, ... , keyn}, {fa1, fa1, ... , fan}, {ga1, ga2, ..., gn}) => 
+        ///
+        /// GroupByInto({key1, key2, ... , keyn}, {fa1, fa1, ... , fan}, {ga1, ga2, ..., gn}) =>
         ///     Project(GroupBy({key1, key2, ... , keyn}, {fa1, fa1, ... , fan}),   // input
         ///             {ga1, ga2, ..., gn}                                         // vardeflist
         /// </remarks>
@@ -722,7 +765,10 @@ namespace System.Data.Query.PlanCompiler
         /// <returns></returns>
         public override Node Visit(GroupByIntoOp op, Node n)
         {
-            PlanCompiler.Assert(n.HasChild3 && n.Child3.Children.Count > 0, "GroupByIntoOp with no group aggregates?");
+            PlanCompiler.Assert(
+                n.HasChild3 && n.Child3.Children.Count > 0,
+                "GroupByIntoOp with no group aggregates?"
+            );
             Node varDefListNode = n.Child3;
 
             VarVec projectOpOutputs = Command.CreateVarVec(op.Outputs);
@@ -737,11 +783,17 @@ namespace System.Data.Query.PlanCompiler
 
             //Create the new groupByOp
             Node groupByNode = Command.CreateNode(
-                Command.CreateGroupByOp(op.Keys, groupByOutputs), n.Child0, n.Child1, n.Child2);
+                Command.CreateGroupByOp(op.Keys, groupByOutputs),
+                n.Child0,
+                n.Child1,
+                n.Child2
+            );
 
             Node projectNode = Command.CreateNode(
-                                Command.CreateProjectOp(projectOpOutputs),
-                                groupByNode, varDefListNode);
+                Command.CreateProjectOp(projectOpOutputs),
+                groupByNode,
+                varDefListNode
+            );
 
             return VisitNode(projectNode);
         }
@@ -761,10 +813,10 @@ namespace System.Data.Query.PlanCompiler
         /// ProjectOp
         /// </summary>
         /// <remarks>
-        /// If after visiting the children, the ProjectOp's input is a SortOp, swap the ProjectOp and the SortOp, 
-        /// to allow the SortOp to bubble up and be honored. This may only occur if the original input to the  
-        /// ProjectOp was an UnnestOp. 
-        /// 
+        /// If after visiting the children, the ProjectOp's input is a SortOp, swap the ProjectOp and the SortOp,
+        /// to allow the SortOp to bubble up and be honored. This may only occur if the original input to the
+        /// ProjectOp was an UnnestOp.
+        ///
         /// There are three cases to handle in ProjectOp:
         ///
         ///  (1) The input is not a NestOp; but the ProjectOp locally defines some Vars
@@ -784,7 +836,7 @@ namespace System.Data.Query.PlanCompiler
         ///
         ///      Where:
         ///         ProjectOp' is ProjectOp plus any additional Vars needed by NestOp
-        ///                    (see NestOp.Outputs – except the collection vars)
+        ///                    (see NestOp.Outputs ï¿½ except the collection vars)
         ///
         ///         MsnOp'     should be MsnOp. Additionally, its Outputs should be enhanced
         ///                    to include any Vars produced by the ProjectOp
@@ -808,9 +860,9 @@ namespace System.Data.Query.PlanCompiler
 
             Node newNode;
 
-            // If the ProjectOp's input is a SortOp, swap the ProjectOp and the SortOp, 
-            // to allow the SortOp to buble up and be honored. This may only occur if the original input to the  
-            // ProjectOp was an UnnestOp (or a Project over a Unnest Op). 
+            // If the ProjectOp's input is a SortOp, swap the ProjectOp and the SortOp,
+            // to allow the SortOp to buble up and be honored. This may only occur if the original input to the
+            // ProjectOp was an UnnestOp (or a Project over a Unnest Op).
             if (n.Child0.Op.OpType == OpType.Sort)
             {
                 Node sortNode = n.Child0;
@@ -834,7 +886,7 @@ namespace System.Data.Query.PlanCompiler
             }
 
 #if DEBUG
-            int size = input.Length;// GC.KeepAlive makes FxCop Grumpy.
+            int size = input.Length; // GC.KeepAlive makes FxCop Grumpy.
             string output = Dump.ToXml(Command, newNode);
 #endif //DEBUG
             return newNode;
@@ -866,29 +918,28 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Fold nested MultiStreamNestOps into one:
-        /// 
+        ///
         ///     MSN(MSN(X,Y),Z) ==> MSN(X,Y,Z)
-        /// 
+        ///
         /// NOTE: It would be incorrect to merge NestOps from the non-driving node
-        ///       into one nest op, because that would change the intent.  Instead, 
+        ///       into one nest op, because that would change the intent.  Instead,
         ///       we let those go through the tree and wait until we get to the top
         ///       level PhysicalProject, when we'll use the ConvertToSingleStreamNest
         ///       process to handle them.
-        /// 
+        ///
         /// NOTE: We should never have three levels of nestOps, because we should
         ///       have folded the lower two together when we constructed one of them.
-        /// 
+        ///
         /// We also remove unreferenced collections, that is, if any collection is
-        /// not referred to by the top level-NestOp, we can safely remove it from 
+        /// not referred to by the top level-NestOp, we can safely remove it from
         /// the merged NestOp we produce.
         /// </summary>
         /// <param name="nestNode"></param>
         /// <returns></returns>
         private Node MergeNestedNestOps(Node nestNode)
         {
-
-            // First, determine if there is anything we can actually do.  If we 
-            // aren't given a NestOp or if it's driving node isn't a NestOp we 
+            // First, determine if there is anything we can actually do.  If we
+            // aren't given a NestOp or if it's driving node isn't a NestOp we
             // can just ignore this.
             if (!IsNestOpNode(nestNode) || !IsNestOpNode(nestNode.Child0))
             {
@@ -917,16 +968,22 @@ namespace System.Data.Query.PlanCompiler
             // Add the new DrivingNode;
             newNestInputs.Add(nestedNestNode.Child0);
 
-            // Now add each of the nested nodes collections, but only when they're 
+            // Now add each of the nested nodes collections, but only when they're
             // referenced by the top level nestOp's outputs.
             for (int i = 1; i < nestedNestNode.Children.Count; i++)
             {
                 CollectionInfo ci = nestedNestOp.CollectionInfo[i - 1];
-                if (nestOpCollectionOutputs.IsSet(ci.CollectionVar) || newOutputVars.IsSet(ci.CollectionVar))
+                if (
+                    nestOpCollectionOutputs.IsSet(ci.CollectionVar)
+                    || newOutputVars.IsSet(ci.CollectionVar)
+                )
                 {
                     newCollectionInfo.Add(ci);
                     newNestInputs.Add(nestedNestNode.Children[i]);
-                    PlanCompiler.Assert(newOutputVars.IsSet(ci.CollectionVar), "collectionVar not in output Vars?"); // I must have missed something...
+                    PlanCompiler.Assert(
+                        newOutputVars.IsSet(ci.CollectionVar),
+                        "collectionVar not in output Vars?"
+                    ); // I must have missed something...
                 }
             }
 
@@ -937,12 +994,18 @@ namespace System.Data.Query.PlanCompiler
                 CollectionInfo ci = nestOp.CollectionInfo[i - 1];
                 newCollectionInfo.Add(ci);
                 newNestInputs.Add(nestNode.Children[i]);
-                PlanCompiler.Assert(newOutputVars.IsSet(ci.CollectionVar), "collectionVar not in output Vars?"); // I must have missed something...
+                PlanCompiler.Assert(
+                    newOutputVars.IsSet(ci.CollectionVar),
+                    "collectionVar not in output Vars?"
+                ); // I must have missed something...
             }
 
             //The prefix sort keys for the new nest op should include these of the input nestOp followed by the nestedNestOp
             //(The nestOp-s that are being merged may have prefix sort keys propagated to them by constrainedSortOp-s pushed below them.
-            List<InternalTrees.SortKey> sortKeys = ConsolidateSortKeys(nestOp.PrefixSortKeys, nestedNestOp.PrefixSortKeys);
+            List<InternalTrees.SortKey> sortKeys = ConsolidateSortKeys(
+                nestOp.PrefixSortKeys,
+                nestedNestOp.PrefixSortKeys
+            );
 
             // Make sure we pullup the sort keys in our output too...
             foreach (InternalTrees.SortKey sk in sortKeys)
@@ -951,14 +1014,18 @@ namespace System.Data.Query.PlanCompiler
             }
 
             // Ready to go; build the new NestNode, etc.
-            MultiStreamNestOp newNestOp = Command.CreateMultiStreamNestOp(sortKeys, newOutputVars, newCollectionInfo);
+            MultiStreamNestOp newNestOp = Command.CreateMultiStreamNestOp(
+                sortKeys,
+                newOutputVars,
+                newCollectionInfo
+            );
             Node newNode = Command.CreateNode(newNestOp, newNestInputs);
 
             // Finally, recompute node info
             Command.RecomputeNodeInfo(newNode);
 
 #if DEBUG
-            int size = input.Length;// GC.KeepAlive makes FxCop Grumpy.
+            int size = input.Length; // GC.KeepAlive makes FxCop Grumpy.
             string output = Dump.ToXml(Command, newNode);
 #endif //DEBUG
             return newNode;
@@ -999,13 +1066,23 @@ namespace System.Data.Query.PlanCompiler
                 if (OpType.Collect == definingExprNode.Op.OpType)
                 {
                     PlanCompiler.Assert(definingExprNode.HasChild0, "collect without input?");
-                    PlanCompiler.Assert(OpType.PhysicalProject == definingExprNode.Child0.Op.OpType, "collect without physicalProject?");
+                    PlanCompiler.Assert(
+                        OpType.PhysicalProject == definingExprNode.Child0.Op.OpType,
+                        "collect without physicalProject?"
+                    );
                     Node physicalProjectNode = definingExprNode.Child0;
 
                     // Update collection var->defining node map;
                     m_definingNodeMap.Add(varDefOp.Var, physicalProjectNode);
 
-                    ConvertToNestOpInput(physicalProjectNode, varDefOp.Var, collectionInfoList, collectionNodes, externalReferences, collectionReferences);
+                    ConvertToNestOpInput(
+                        physicalProjectNode,
+                        varDefOp.Var,
+                        collectionInfoList,
+                        collectionNodes,
+                        externalReferences,
+                        collectionReferences
+                    );
                 }
                 else if (OpType.VarRef == definingExprNode.Op.OpType)
                 {
@@ -1017,7 +1094,14 @@ namespace System.Data.Query.PlanCompiler
                         physicalProjectNode = CopyCollectionVarDefinition(physicalProjectNode);
                         //SQLBUDT #602888: We need to track the copy too, in case we need to reuse it
                         m_definingNodeMap.Add(varDefOp.Var, physicalProjectNode);
-                        ConvertToNestOpInput(physicalProjectNode, varDefOp.Var, collectionInfoList, collectionNodes, externalReferences, collectionReferences);
+                        ConvertToNestOpInput(
+                            physicalProjectNode,
+                            varDefOp.Var,
+                            collectionInfoList,
+                            collectionNodes,
+                            externalReferences,
+                            collectionReferences
+                        );
                     }
                     else
                     {
@@ -1057,16 +1141,16 @@ namespace System.Data.Query.PlanCompiler
 
             // Create the new projectOp, and hook it into this one.  The new projectOp
             // no longer references the collections in it's children; of course we only
-            // construct a new projectOp if it actually projects out some Vars.  
+            // construct a new projectOp if it actually projects out some Vars.
             if (!newProjectVars.IsEmpty)
             {
                 if (IsNestOpNode(projectNode.Child0))
                 {
                     // If the input is a nest node, we need to figure out what to do with the
-                    // rest of the in the VarDefList; we can't just pitch them, but we also 
+                    // rest of the in the VarDefList; we can't just pitch them, but we also
                     // really want to have the input be a nestop.
                     //
-                    // What we do is essentially push any non-collection VarDef’s down under 
+                    // What we do is essentially push any non-collection VarDefï¿½s down under
                     // the driving node of the MSN:
                     //
                     //      Project[Z,Y,W](Msn(X,Y),VarDef(Z=blah),VarDef(W=Collect(etc)) ==> MSN(MSN(Project[Z](X,VarDef(Z=blah)),Y),W)
@@ -1085,18 +1169,20 @@ namespace System.Data.Query.PlanCompiler
                     {
                         NestBaseOp nestedNestOp = (NestBaseOp)projectNode.Child0.Op;
 
-                        // Build the new ProjectOp to be used as input to the new nestedNestOp; 
-                        // it's input is the input to the current nestedNestOp and a new 
-                        // VarDefList with only the vars that were defined on the top level 
+                        // Build the new ProjectOp to be used as input to the new nestedNestOp;
+                        // it's input is the input to the current nestedNestOp and a new
+                        // VarDefList with only the vars that were defined on the top level
                         // ProjectOp.
                         List<Node> newNestedProjectNodeInputs = new List<Node>();
                         newNestedProjectNodeInputs.Add(projectNode.Child0.Child0);
                         referencedVars.AddRange(definedVars);
-                        newNestedProjectNodeInputs.Add(Command.CreateNode(Command.CreateVarDefListOp(), referencedVars));
+                        newNestedProjectNodeInputs.Add(
+                            Command.CreateNode(Command.CreateVarDefListOp(), referencedVars)
+                        );
 
                         VarVec newNestedProjectOutputs = Command.CreateVarVec(nestedNestOp.Outputs);
 
-                        // SQLBUDT #508722:  We need to remove the collection vars, 
+                        // SQLBUDT #508722:  We need to remove the collection vars,
                         //  these are not produced by the project
                         foreach (CollectionInfo ci in nestedNestOp.CollectionInfo)
                         {
@@ -1108,7 +1194,10 @@ namespace System.Data.Query.PlanCompiler
                             newNestedProjectOutputs.Set(((VarDefOp)varDefNode.Op).Var);
                         }
 
-                        Node newNestedProjectNode = Command.CreateNode(Command.CreateProjectOp(newNestedProjectOutputs), newNestedProjectNodeInputs);
+                        Node newNestedProjectNode = Command.CreateNode(
+                            Command.CreateProjectOp(newNestedProjectOutputs),
+                            newNestedProjectNodeInputs
+                        );
 
                         // Now build the new nestedNestedNestOp, with the new nestedProjectOp
                         // as it's input; we have to update the outputs of the NestOp to include
@@ -1117,9 +1206,10 @@ namespace System.Data.Query.PlanCompiler
                         newNestedNestOutputs.Or(nestedNestOp.Outputs);
 
                         MultiStreamNestOp newNestedNestOp = Command.CreateMultiStreamNestOp(
-                                                                    nestedNestOp.PrefixSortKeys,
-                                                                    newNestedNestOutputs,
-                                                                    nestedNestOp.CollectionInfo);
+                            nestedNestOp.PrefixSortKeys,
+                            newNestedNestOutputs,
+                            nestedNestOp.CollectionInfo
+                        );
 
                         List<Node> newNestedNestNodeInputs = new List<Node>();
                         newNestedNestNodeInputs.Add(newNestedProjectNode);
@@ -1149,14 +1239,18 @@ namespace System.Data.Query.PlanCompiler
 
             // We need to make sure that we project out any external references to the driving
             // node that the nested collections have, or we're going to end up with unresolvable
-            // vars when we pull them up over the current driving node.  Of course, we only 
+            // vars when we pull them up over the current driving node.  Of course, we only
             // want the references that are actually ON the driving node.
             externalReferences.And(projectNode.GetExtendedNodeInfo(Command).Definitions);
             outputVars.Or(externalReferences);
 
             // There are currently no prefix sortkeys. The processing for a SortOp may later
             // introduce some prefix sortkeys, but there aren't any now.
-            MultiStreamNestOp nestOp = Command.CreateMultiStreamNestOp(new List<InternalTrees.SortKey>(), outputVars, collectionInfoList);
+            MultiStreamNestOp nestOp = Command.CreateMultiStreamNestOp(
+                new List<InternalTrees.SortKey>(),
+                outputVars,
+                collectionInfoList
+            );
 
             // Insert the current node at the head of the the list of collections
             collectionNodes.Insert(0, projectNode);
@@ -1167,14 +1261,14 @@ namespace System.Data.Query.PlanCompiler
             Command.RecomputeNodeInfo(nestNode);
 
 #if DEBUG
-            int size = input.Length;// GC.KeepAlive makes FxCop Grumpy.
+            int size = input.Length; // GC.KeepAlive makes FxCop Grumpy.
             string output = Dump.ToXml(Command, nestNode);
 #endif //DEBUG
             return nestNode;
         }
 
         /// <summary>
-        /// If we're going to eat the ProjectNode, then we at least need to make 
+        /// If we're going to eat the ProjectNode, then we at least need to make
         /// sure we remap any vars it defines as varRefs, and ensure that any
         /// references to them are switched.
         /// </summary>
@@ -1195,7 +1289,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// We need to make sure that we remap the column maps that we're pulling
-        /// up to point to the defined var, not it's reference. 
+        /// up to point to the defined var, not it's reference.
         /// </summary>
         /// <param name="referencedVars"></param>
         private void EnsureReferencedVarsAreRemapped(List<Node> referencedVars)
@@ -1226,7 +1320,14 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="collectionNodes">where to append the collectionNode</param>
         /// <param name="externalReferences">a bit vector of external references of the physicalProject</param>
         /// <param name="collectionReferences">a bit vector of collection vars</param>
-        private void ConvertToNestOpInput(Node physicalProjectNode, Var collectionVar, List<CollectionInfo> collectionInfoList, List<Node> collectionNodes, VarVec externalReferences, VarVec collectionReferences)
+        private void ConvertToNestOpInput(
+            Node physicalProjectNode,
+            Var collectionVar,
+            List<CollectionInfo> collectionInfoList,
+            List<Node> collectionNodes,
+            VarVec externalReferences,
+            VarVec collectionReferences
+        )
         {
             // Keep track of any external references the physicalProjectOp has
             externalReferences.Or(Command.GetNodeInfo(physicalProjectNode).ExternalReferences);
@@ -1236,7 +1337,7 @@ namespace System.Data.Query.PlanCompiler
 
             // Now build the collectionInfo for this input, including the flattened
             // list of vars, which is essentially the outputs from the physicalProject
-            // with the sortKey vars that aren't already in the outputs we already 
+            // with the sortKey vars that aren't already in the outputs we already
             // have.
             PhysicalProjectOp physicalProjectOp = (PhysicalProjectOp)physicalProjectNode.Op;
             VarList flattenedElementVarList = Command.CreateVarList(physicalProjectOp.Outputs);
@@ -1270,10 +1371,17 @@ namespace System.Data.Query.PlanCompiler
             VarVec keyVarsClone = keyVars.Clone();
             keyVarsClone.Minus(flattenedElementVarVec);
 
-            VarVec keys = (keyVarsClone.IsEmpty) ?  keyVars.Clone() : Command.CreateVarVec();    
+            VarVec keys = (keyVarsClone.IsEmpty) ? keyVars.Clone() : Command.CreateVarVec();
 
             // Create the collectionInfo
-            CollectionInfo collectionInfo = Command.CreateCollectionInfo(collectionVar, physicalProjectOp.ColumnMap.Element, flattenedElementVarList, keys, sortKeys, null/*discriminatorValue*/);
+            CollectionInfo collectionInfo = Command.CreateCollectionInfo(
+                collectionVar,
+                physicalProjectOp.ColumnMap.Element,
+                flattenedElementVarList,
+                keys,
+                sortKeys,
+                null /*discriminatorValue*/
+            );
 
             // Now update the collections we're tracking.
             collectionInfoList.Add(collectionInfo);
@@ -1301,12 +1409,12 @@ namespace System.Data.Query.PlanCompiler
         ///     (4) oldProjectOpCollectionOutputs = oldProjectOpOutputs - oldProjectOpNonCollectionOutputs
         ///     (5) build a new list of collectionInfo's for the new NestOp, including
         ///         only oldProjectOpCollectionOutputs.
-        ///     (6) leftCorrelationVars = vars that are defined by the left most child of the input nestOpNode 
+        ///     (6) leftCorrelationVars = vars that are defined by the left most child of the input nestOpNode
         ///         and used in the subtrees rooted at the other children of the input nestOpNode
         ///     (7) newProjectOpOutputs = oldProjectOpNonCollectionOutputs + oldNestOpNonCollectionOutputs + leftCorrelationVars
-        ///         
+        ///
         ///     (8) newProjectOpChildren = ....
-        /// 
+        ///
         /// Of course everything needs to be "derefed", that is, expressed in the projectOp Var Ids.
         ///
         ///     (9) Set ProjectOp's input to NestOp's input
@@ -1340,7 +1448,11 @@ namespace System.Data.Query.PlanCompiler
                 if (OpType.VarRef == definingExprNode.Op.OpType)
                 {
                     VarRefOp varRefOp = (VarRefOp)definingExprNode.Op;
-                    PlanCompiler.Assert(varRefOp.Var == varDefOp.Var || !projectNodeInfo.LocalDefinitions.IsSet(varRefOp.Var), "need to remap vars!");
+                    PlanCompiler.Assert(
+                        varRefOp.Var == varDefOp.Var
+                            || !projectNodeInfo.LocalDefinitions.IsSet(varRefOp.Var),
+                        "need to remap vars!"
+                    );
 
                     //if (!projectToNestVarMap.ContainsKey(varRefOp.Var)) {
                     //    projectToNestVarMap.Add(varRefOp.Var, varDefOp.Var);
@@ -1397,13 +1509,15 @@ namespace System.Data.Query.PlanCompiler
                 }
             }
 
-            // (6) leftCorrelationVars = vars that are defined by the left most child of the input nestOpNode 
+            // (6) leftCorrelationVars = vars that are defined by the left most child of the input nestOpNode
             //   and used in the subtrees rooted at the other children of the input nestOpNode
-            //   #479547:  These need to be added to the outputs of the project 
+            //   #479547:  These need to be added to the outputs of the project
             VarVec leftCorrelationVars = Command.CreateVarVec();
             for (int i = 1; i < nestNode.Children.Count; i++)
             {
-                leftCorrelationVars.Or(nestNode.Children[i].GetExtendedNodeInfo(Command).ExternalReferences);
+                leftCorrelationVars.Or(
+                    nestNode.Children[i].GetExtendedNodeInfo(Command).ExternalReferences
+                );
             }
             leftCorrelationVars.And(nestNode.Child0.GetExtendedNodeInfo(this.Command).Definitions);
 
@@ -1433,7 +1547,10 @@ namespace System.Data.Query.PlanCompiler
                 // have an empty projection list.
                 if (newProjectOpOutputs.IsEmpty)
                 {
-                    PlanCompiler.Assert(newProjectOpChildren.Count == 0, "outputs is empty with non-zero count of children?");
+                    PlanCompiler.Assert(
+                        newProjectOpChildren.Count == 0,
+                        "outputs is empty with non-zero count of children?"
+                    );
 
                     NullOp tempOp = Command.CreateNullOp(Command.StringType);
                     Node tempNode = Command.CreateNode(tempOp);
@@ -1466,7 +1583,9 @@ namespace System.Data.Query.PlanCompiler
 
                 for (int i = 1; i < newNestNodeChildren.Count; i++)
                 {
-                    nestOpOutputs.Or(newNestNodeChildren[i].GetNodeInfo(Command).ExternalReferences);
+                    nestOpOutputs.Or(
+                        newNestNodeChildren[i].GetNodeInfo(Command).ExternalReferences
+                    );
                 }
 
                 // We need to make sure we project out the sort keys too...
@@ -1475,7 +1594,11 @@ namespace System.Data.Query.PlanCompiler
                     nestOpOutputs.Set(sk.Var);
                 }
 
-                nestNode.Op = Command.CreateMultiStreamNestOp(nestOp.PrefixSortKeys, nestOpOutputs, newCollectionInfoList);
+                nestNode.Op = Command.CreateMultiStreamNestOp(
+                    nestOp.PrefixSortKeys,
+                    nestOpOutputs,
+                    newCollectionInfoList
+                );
 
                 // we need to create a new node because we may have removed some of the collections.
                 nestNode = Command.CreateNode(nestNode.Op, newNestNodeChildren);
@@ -1501,12 +1624,12 @@ namespace System.Data.Query.PlanCompiler
         /// SetOp common processing
         /// </summary>
         /// <remarks>
-        /// The input to an IntersectOp or an ExceptOp cannot be a NestOp – that
+        /// The input to an IntersectOp or an ExceptOp cannot be a NestOp ï¿½ that
         /// would imply that we support distinctness over collections  - which
-        /// we don’t.
+        /// we donï¿½t.
         ///
         /// UnionAllOp is somewhat trickier. We would need a way to percolate keys
-        /// up the UnionAllOp – and I’m ok with not supporting this case for now.
+        /// up the UnionAllOp ï¿½ and Iï¿½m ok with not supporting this case for now.
         /// </remarks>
         /// <param name="op"></param>
         /// <param name="n"></param>
@@ -1518,7 +1641,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// SingleRowOp
-        /// 
+        ///
         /// SingleRowOp(NestOp(x,...)) => NestOp(SingleRowOp(x),...)
         /// </summary>
         /// <param name="op"></param>
@@ -1543,7 +1666,7 @@ namespace System.Data.Query.PlanCompiler
         /// </summary>
         /// <remarks>
         /// If the input to a SortOp is a NestOp, then none of the sort
-        /// keys can be collection Vars of the NestOp – we don't support
+        /// keys can be collection Vars of the NestOp ï¿½ we don't support
         /// sorts over collections.
         /// </remarks>
         /// <param name="op"></param>
@@ -1575,8 +1698,8 @@ namespace System.Data.Query.PlanCompiler
         /// Push the ConstrainedSortOp onto the driving node of the NestOp:
         ///
         ///     ConstrainedSortOp(NestOp(X,Y,...)) ==> NestOp(ConstrainedSortOp(X),Y,...)
-        /// 
-        /// There should not be any need for var renaming, because the ConstrainedSortOp cannot 
+        ///
+        /// There should not be any need for var renaming, because the ConstrainedSortOp cannot
         /// refer to any vars from the NestOp
         /// </remarks>
         /// <param name="op"></param>
@@ -1609,7 +1732,10 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="inputNestOp"></param>
         /// <param name="sortKeys"></param>
         /// <returns></returns>
-        private NestBaseOp GetNestOpWithConsolidatedSortKeys(NestBaseOp inputNestOp, List<InternalTrees.SortKey> sortKeys)
+        private NestBaseOp GetNestOpWithConsolidatedSortKeys(
+            NestBaseOp inputNestOp,
+            List<InternalTrees.SortKey> sortKeys
+        )
         {
             NestBaseOp result;
 
@@ -1622,24 +1748,35 @@ namespace System.Data.Query.PlanCompiler
             {
                 foreach (InternalTrees.SortKey sk in sortKeys)
                 {
-                    //SQLBUDT #507170 - We can't just add the sort keys, we need to copy them, 
+                    //SQLBUDT #507170 - We can't just add the sort keys, we need to copy them,
                     // to avoid changes to one to affect the other
-                    inputNestOp.PrefixSortKeys.Add(Command.CreateSortKey(sk.Var, sk.AscendingSort, sk.Collation));
+                    inputNestOp.PrefixSortKeys.Add(
+                        Command.CreateSortKey(sk.Var, sk.AscendingSort, sk.Collation)
+                    );
                 }
                 result = inputNestOp;
             }
             else
             {
-
                 VarVec sortVars = Command.CreateVarVec();
 
                 // First add the sort keys from the SortBaseOp, then the NestOp keys
-                List<InternalTrees.SortKey> sortKeyList = ConsolidateSortKeys(sortKeys, inputNestOp.PrefixSortKeys);
+                List<InternalTrees.SortKey> sortKeyList = ConsolidateSortKeys(
+                    sortKeys,
+                    inputNestOp.PrefixSortKeys
+                );
 
-                PlanCompiler.Assert(inputNestOp is MultiStreamNestOp, "Unexpected SingleStreamNestOp?");
+                PlanCompiler.Assert(
+                    inputNestOp is MultiStreamNestOp,
+                    "Unexpected SingleStreamNestOp?"
+                );
 
                 // Finally, build a new NestOp with the keys...
-                result = Command.CreateMultiStreamNestOp(sortKeyList, inputNestOp.Outputs, inputNestOp.CollectionInfo);
+                result = Command.CreateMultiStreamNestOp(
+                    sortKeyList,
+                    inputNestOp.Outputs,
+                    inputNestOp.CollectionInfo
+                );
             }
             return result;
         }
@@ -1651,7 +1788,10 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="sortKeyList1"></param>
         /// <param name="sortKeyList2"></param>
         /// <returns></returns>
-        private List<InternalTrees.SortKey> ConsolidateSortKeys(List<InternalTrees.SortKey> sortKeyList1, List<InternalTrees.SortKey> sortKeyList2)
+        private List<InternalTrees.SortKey> ConsolidateSortKeys(
+            List<InternalTrees.SortKey> sortKeyList1,
+            List<InternalTrees.SortKey> sortKeyList2
+        )
         {
             VarVec sortVars = Command.CreateVarVec();
             List<InternalTrees.SortKey> sortKeyList = new List<InternalTrees.SortKey>();
@@ -1662,7 +1802,7 @@ namespace System.Data.Query.PlanCompiler
                 {
                     sortVars.Set(sk.Var);
 
-                    //SQLBUDT #507170 - We can't just add the sort keys, we need to copy them, 
+                    //SQLBUDT #507170 - We can't just add the sort keys, we need to copy them,
                     // to avoid changes to one to affect the other
                     sortKeyList.Add(Command.CreateSortKey(sk.Var, sk.AscendingSort, sk.Collation));
                 }
@@ -1691,26 +1831,26 @@ namespace System.Data.Query.PlanCompiler
         /// produced by the defining expression.
         ///
         /// There are essentially four cases:
-        /// 
+        ///
         /// Case 1: The UnnestOps Var is a UDT. Only the store can handle this, so we
         ///         pass it on without changing it.
-        /// 
+        ///
         /// Case 2: The UnnestOp has a Function as its input.  This implies that the
-        ///         store has TVFs, which it can Unnest, so we let it handle that and do 
+        ///         store has TVFs, which it can Unnest, so we let it handle that and do
         ///         nothing.
-        /// 
-        /// Case 3: The UnnestOp Var defines a Nested collection.  We'll just replace 
+        ///
+        /// Case 3: The UnnestOp Var defines a Nested collection.  We'll just replace
         ///         the UnnestOp with the Input:
-        /// 
+        ///
         ///             UnnestOp(VarDef(CollectOp(PhysicalProjectOp(input)))) => input
         ///
         /// Case 4: The UnnestOp Var refers to a Nested collection from elsewhere.  As we
         ///         discover NestOps, we maintain a var->PhysicalProject Node map.  When
         ///         we get this case, we just make a copy of the PhysicalProject node, for
         ///         the referenced Var, and we replace the UnnestOp with it.
-        /// 
+        ///
         ///             UnnestOp(VarDef(VarRef(v))) ==> copy-of-defining-node-for-v
-        /// 
+        ///
         /// Then, we need to update all references to the output Vars (ColumnVars) produced
         /// by the Unnest to instead refer to the Vars produced by the copy of the subquery.
         /// We produce a map from the Vars of the subquery to the corresponding vars of the
@@ -1718,7 +1858,7 @@ namespace System.Data.Query.PlanCompiler
         /// to the Unnest Vars by the new Vars.
         ///
         /// To simplify this process, as part of the ITreeGenerator, whenever we generate
-        /// an UnnestOp, we will generate a ProjectOp above it – which simply selects out
+        /// an UnnestOp, we will generate a ProjectOp above it ï¿½ which simply selects out
         /// all Vars from the UnnestOp; and has no local definitions. This allows us to
         /// restrict the Var->Var replacement to just ProjectOp.
         /// </remarks>
@@ -1742,7 +1882,10 @@ namespace System.Data.Query.PlanCompiler
             }
 
             // Find the VarDef node for the var we're supposed to unnest.
-            PlanCompiler.Assert(n.Child0.Op.OpType == OpType.VarDef, "Unnest without VarDef input?");
+            PlanCompiler.Assert(
+                n.Child0.Op.OpType == OpType.VarDef,
+                "Unnest without VarDef input?"
+            );
             PlanCompiler.Assert(((VarDefOp)n.Child0.Op).Var == op.Var, "Unnest var not found?");
             PlanCompiler.Assert(n.Child0.HasChild0, "VarDef without input?");
             Node newNode = n.Child0.Child0;
@@ -1761,7 +1904,10 @@ namespace System.Data.Query.PlanCompiler
                 PlanCompiler.Assert(newNode.HasChild0, "collect without input?");
                 newNode = newNode.Child0;
 
-                PlanCompiler.Assert(newNode.Op.OpType == OpType.PhysicalProject, "collect without physicalProject?");
+                PlanCompiler.Assert(
+                    newNode.Op.OpType == OpType.PhysicalProject,
+                    "collect without physicalProject?"
+                );
 
                 // Ensure others that reference my var will know to use me;
                 m_definingNodeMap.Add(op.Var, newNode);
@@ -1776,15 +1922,25 @@ namespace System.Data.Query.PlanCompiler
                 Var refVar = ((VarRefOp)newNode.Op).Var;
                 Node refVarDefiningNode;
                 bool found = m_definingNodeMap.TryGetValue(refVar, out refVarDefiningNode);
-                PlanCompiler.Assert(found, "Could not find a definition for a referenced collection var");
+                PlanCompiler.Assert(
+                    found,
+                    "Could not find a definition for a referenced collection var"
+                );
 
                 newNode = CopyCollectionVarDefinition(refVarDefiningNode);
 
-                PlanCompiler.Assert(newNode.Op.OpType == OpType.PhysicalProject, "driving node is not physicalProject?");
+                PlanCompiler.Assert(
+                    newNode.Op.OpType == OpType.PhysicalProject,
+                    "driving node is not physicalProject?"
+                );
             }
             else
             {
-                throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.InvalidInternalTree, 2, newNode.Op.OpType);
+                throw EntityUtil.InternalError(
+                    EntityUtil.InternalErrorCode.InvalidInternalTree,
+                    2,
+                    newNode.Op.OpType
+                );
             }
 
             IEnumerable<Var> inputVars = ((PhysicalProjectOp)newNode.Op).Outputs;
@@ -1792,7 +1948,7 @@ namespace System.Data.Query.PlanCompiler
             PlanCompiler.Assert(newNode.HasChild0, "physicalProject without input?");
             newNode = newNode.Child0;
 
-            // Dev10 #530752 : it is not correct to just remove the sort key    
+            // Dev10 #530752 : it is not correct to just remove the sort key
             if (newNode.Op.OpType == OpType.Sort)
             {
                 m_foundSortUnderUnnest = true;
@@ -1811,46 +1967,52 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Copies the given defining node for a collection var, but also makes sure to 'register' all newly
         /// created collection vars (i.e. copied).
-        /// 
+        ///
         ///SQLBUDT #557427: The defining node that is being copied may itself contain definitions to other
-        /// collection vars. These defintions would be present in m_definingNodeMap. However, after we make a copy 
-        /// of the defining node, we need to make sure to also put 'matching' definitions of these other collection 
+        /// collection vars. These defintions would be present in m_definingNodeMap. However, after we make a copy
+        /// of the defining node, we need to make sure to also put 'matching' definitions of these other collection
         /// vars into m_definingNodeMap.
-        /// The dictionary collectionVarDefinitions (below) contains the copied definitions of such collection vars. 
+        /// The dictionary collectionVarDefinitions (below) contains the copied definitions of such collection vars.
         /// but without the wrapping PhysicalProjectOp.
         ///
-        /// Example:     m_definingNodeMap contains (var1, definition1) and (var2, definintion2). 
-        ///              var2 is defined inside the definition of var1. 
+        /// Example:     m_definingNodeMap contains (var1, definition1) and (var2, definintion2).
+        ///              var2 is defined inside the definition of var1.
         ///              Here we copy definition1 -> definintion1'.
         ///              We need to add to m_definitionNodeMap (var2', definition2').
-        ///              definition2' should be a copy of definiton2 in the context of to definition1', 
-        ///              i.e. definition2' should relate to definition1' in same way that definition2 relates to definition1 
+        ///              definition2' should be a copy of definiton2 in the context of to definition1',
+        ///              i.e. definition2' should relate to definition1' in same way that definition2 relates to definition1
         ///         /// </summary>
         /// <param name="refVarDefiningNode"></param>
         /// <returns></returns>
         private Node CopyCollectionVarDefinition(Node refVarDefiningNode)
         {
-
             VarMap varMap;
             Dictionary<Var, Node> collectionVarDefinitions;
-            Node newNode = OpCopierTrackingCollectionVars.Copy(Command, refVarDefiningNode, out varMap, out collectionVarDefinitions);
+            Node newNode = OpCopierTrackingCollectionVars.Copy(
+                Command,
+                refVarDefiningNode,
+                out varMap,
+                out collectionVarDefinitions
+            );
 
             if (collectionVarDefinitions.Count != 0)
             {
                 VarMap reverseMap = varMap.GetReverseMap();
 
-                foreach (KeyValuePair<Var, Node> collectionVarDefinitionPair in collectionVarDefinitions)
+                foreach (
+                    KeyValuePair<Var, Node> collectionVarDefinitionPair in collectionVarDefinitions
+                )
                 {
                     //
                     // Getting the matching definition for a collection map (i.e. definition2' from the example above)
                     //
-                    // Definitions of collection vars are rooted at a PhysicalProjectOp, 
-                    //      i.e. definition2 = PhysicalProjectOp(output2, columnMap2, definingSubtree2) 
+                    // Definitions of collection vars are rooted at a PhysicalProjectOp,
+                    //      i.e. definition2 = PhysicalProjectOp(output2, columnMap2, definingSubtree2)
                     //
-                    //  The collectionVarDefinitions dictionary gives us the defining nodes rooted at what would a child 
+                    //  The collectionVarDefinitions dictionary gives us the defining nodes rooted at what would a child
                     //  of such PhysicalProjectOp, i.e.  definingSubtree2'.
-                    // 
-                    //  definition2' = PhysicalProjectOp(CopyWithRemap(output2), CopyWithRemap(columnMap2), definingSubtree2') 
+                    //
+                    //  definition2' = PhysicalProjectOp(CopyWithRemap(output2), CopyWithRemap(columnMap2), definingSubtree2')
                     //
 
                     Node keyDefiningNode;
@@ -1858,13 +2020,25 @@ namespace System.Data.Query.PlanCompiler
                     //Note: we should not call ResolveVarReference(keyDefiningNode), we can only use the exact var
                     if (m_definingNodeMap.TryGetValue(keyDefiningVar, out keyDefiningNode))
                     {
-                        PhysicalProjectOp originalPhysicalProjectOp = (PhysicalProjectOp)keyDefiningNode.Op;
+                        PhysicalProjectOp originalPhysicalProjectOp = (PhysicalProjectOp)
+                            keyDefiningNode.Op;
 
-                        VarList newOutputs = VarRemapper.RemapVarList(Command, varMap, originalPhysicalProjectOp.Outputs);
-                        SimpleCollectionColumnMap newColumnMap = (SimpleCollectionColumnMap)ColumnMapCopier.Copy(originalPhysicalProjectOp.ColumnMap, varMap);
+                        VarList newOutputs = VarRemapper.RemapVarList(
+                            Command,
+                            varMap,
+                            originalPhysicalProjectOp.Outputs
+                        );
+                        SimpleCollectionColumnMap newColumnMap = (SimpleCollectionColumnMap)
+                            ColumnMapCopier.Copy(originalPhysicalProjectOp.ColumnMap, varMap);
 
-                        PhysicalProjectOp newPhysicalProjectOp = Command.CreatePhysicalProjectOp(newOutputs, newColumnMap);
-                        Node newDefiningNode = Command.CreateNode(newPhysicalProjectOp, collectionVarDefinitionPair.Value);
+                        PhysicalProjectOp newPhysicalProjectOp = Command.CreatePhysicalProjectOp(
+                            newOutputs,
+                            newColumnMap
+                        );
+                        Node newDefiningNode = Command.CreateNode(
+                            newPhysicalProjectOp,
+                            collectionVarDefinitionPair.Value
+                        );
 
                         m_definingNodeMap.Add(collectionVarDefinitionPair.Key, newDefiningNode);
                     }
@@ -1934,7 +2108,7 @@ namespace System.Data.Query.PlanCompiler
             // to sort/union all; it's much easier to unnest them if we don't monkey with them
             // until then.
             //
-            // Also, even if we're the root physicalProjectNode and the children aren't NestOps, 
+            // Also, even if we're the root physicalProjectNode and the children aren't NestOps,
             // then there's nothing further to do.
             if (n != Command.Root || !IsNestOpNode(n.Child0))
             {
@@ -1952,15 +2126,22 @@ namespace System.Data.Query.PlanCompiler
             // a single SingleStreamNestOp.
             //
             // NOTE: if we ever wanted to support MARS, we would probably avoid the conversion
-            //       to SingleStreamNest here, and do something to optimize this a bit 
+            //       to SingleStreamNest here, and do something to optimize this a bit
             //       differently for MARS.  But that's a future feature.
             Dictionary<Var, ColumnMap> varRefReplacementMap = new Dictionary<Var, ColumnMap>();
 
             //Dev10_579146: The parameters that are output should be retained.
-            VarList outputVars = Command.CreateVarList(op.Outputs.Where(v => v.VarType == VarType.Parameter));
+            VarList outputVars = Command.CreateVarList(
+                op.Outputs.Where(v => v.VarType == VarType.Parameter)
+            );
             SimpleColumnMap[] keyColumnMaps;
 
-            nestNode = ConvertToSingleStreamNest(nestNode, varRefReplacementMap, outputVars, out keyColumnMaps);
+            nestNode = ConvertToSingleStreamNest(
+                nestNode,
+                varRefReplacementMap,
+                outputVars,
+                out keyColumnMaps
+            );
             SingleStreamNestOp ssnOp = (SingleStreamNestOp)nestNode.Op;
 
             // Build up the sort node (if necessary).
@@ -1968,8 +2149,18 @@ namespace System.Data.Query.PlanCompiler
 
             // Create a new column map using the columnMapPatcher that was updated by the
             // conversion to SingleStreamNest process.
-            SimpleCollectionColumnMap newProjectColumnMap = (SimpleCollectionColumnMap)ColumnMapTranslator.Translate(((PhysicalProjectOp)n.Op).ColumnMap, varRefReplacementMap);
-            newProjectColumnMap = new SimpleCollectionColumnMap(newProjectColumnMap.Type, newProjectColumnMap.Name, newProjectColumnMap.Element, keyColumnMaps, null);
+            SimpleCollectionColumnMap newProjectColumnMap = (SimpleCollectionColumnMap)
+                ColumnMapTranslator.Translate(
+                    ((PhysicalProjectOp)n.Op).ColumnMap,
+                    varRefReplacementMap
+                );
+            newProjectColumnMap = new SimpleCollectionColumnMap(
+                newProjectColumnMap.Type,
+                newProjectColumnMap.Name,
+                newProjectColumnMap.Element,
+                keyColumnMaps,
+                null
+            );
 
             // Ok, build the new PhysicalProjectOp, slap the sortNode as its input
             // and we're all done.
@@ -1977,7 +2168,7 @@ namespace System.Data.Query.PlanCompiler
             n.Child0 = sortNode;
 
 #if DEBUG
-            int size = input.Length;// GC.KeepAlive makes FxCop Grumpy.
+            int size = input.Length; // GC.KeepAlive makes FxCop Grumpy.
             string output = Dump.ToXml(Command, n);
 #endif //DEBUG
 
@@ -1985,7 +2176,7 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Build up a sort node above the nestOp's input - only if there 
+        /// Build up a sort node above the nestOp's input - only if there
         /// are any sort keys to produce
         /// </summary>
         /// <param name="ssnOp"></param>
@@ -2053,7 +2244,10 @@ namespace System.Data.Query.PlanCompiler
             }
 
             // Then add the discriminator var
-            PlanCompiler.Assert(!sortVars.IsSet(ssnOp.Discriminator), "prefix sort on discriminator?");
+            PlanCompiler.Assert(
+                !sortVars.IsSet(ssnOp.Discriminator),
+                "prefix sort on discriminator?"
+            );
             sortKeyList.Add(Command.CreateSortKey(ssnOp.Discriminator));
 
             // Finally, add the postfix keys
@@ -2067,7 +2261,6 @@ namespace System.Data.Query.PlanCompiler
             }
             return sortKeyList;
         }
-
 
         /// <summary>
         /// convert MultiStreamNestOp to SingleStreamNestOp
@@ -2114,14 +2307,19 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="flattenedOutputVarList"></param>
         /// <param name="parentKeyColumnMaps"></param>
         /// <returns></returns>
-        private Node ConvertToSingleStreamNest(Node nestNode, Dictionary<Var, ColumnMap> varRefReplacementMap, VarList flattenedOutputVarList, out SimpleColumnMap[] parentKeyColumnMaps)
+        private Node ConvertToSingleStreamNest(
+            Node nestNode,
+            Dictionary<Var, ColumnMap> varRefReplacementMap,
+            VarList flattenedOutputVarList,
+            out SimpleColumnMap[] parentKeyColumnMaps
+        )
         {
 #if DEBUG
             string input = Dump.ToXml(Command, nestNode);
 #endif //DEBUG
             MultiStreamNestOp nestOp = (MultiStreamNestOp)nestNode.Op;
 
-            // We can't convert this node to a SingleStreamNest until all it's MultiStreamNest 
+            // We can't convert this node to a SingleStreamNest until all it's MultiStreamNest
             // inputs are converted, so do that first.
             for (int i = 1; i < nestNode.Children.Count; i++)
             {
@@ -2134,24 +2332,35 @@ namespace System.Data.Query.PlanCompiler
                     VarList childFlattenedOutputVars = Command.CreateVarList();
                     SimpleColumnMap[] childKeyColumnMaps;
 
-                    nestNode.Children[i] = ConvertToSingleStreamNest(chi, varRefReplacementMap, childFlattenedOutputVars, out childKeyColumnMaps);
+                    nestNode.Children[i] = ConvertToSingleStreamNest(
+                        chi,
+                        varRefReplacementMap,
+                        childFlattenedOutputVars,
+                        out childKeyColumnMaps
+                    );
 
                     // Now this may seem odd here, and it may look like we should have done this
                     // inside the recursive ConvertToSingleStreamNest call above, but that call
                     // doesn't have access to the CollectionInfo for it's parent, which is what
                     // we need to manipulate before we enter the loop below where we try and fold
                     // THIS nestOp nodes into a singleStreamNestOp.
-                    ColumnMap childColumnMap = ColumnMapTranslator.Translate(chiCi.ColumnMap, varRefReplacementMap);
+                    ColumnMap childColumnMap = ColumnMapTranslator.Translate(
+                        chiCi.ColumnMap,
+                        varRefReplacementMap
+                    );
 
-                    VarVec childKeys = Command.CreateVarVec(((SingleStreamNestOp)nestNode.Children[i].Op).Keys);
+                    VarVec childKeys = Command.CreateVarVec(
+                        ((SingleStreamNestOp)nestNode.Children[i].Op).Keys
+                    );
 
-                    nestOp.CollectionInfo[i - 1] = Command.CreateCollectionInfo(chiCi.CollectionVar,
-                                                                                  childColumnMap,
-                                                                                  childFlattenedOutputVars,
-                                                                                  childKeys,
-                                                                                  chiCi.SortKeys,
-                                                                                  null /*discriminatorValue*/
-                                                                                  );
+                    nestOp.CollectionInfo[i - 1] = Command.CreateCollectionInfo(
+                        chiCi.CollectionVar,
+                        childColumnMap,
+                        childFlattenedOutputVars,
+                        childKeys,
+                        chiCi.SortKeys,
+                        null /*discriminatorValue*/
+                    );
                 }
             }
 
@@ -2162,20 +2371,20 @@ namespace System.Data.Query.PlanCompiler
             if (drivingNodeKeys.NoKeys)
             {
                 // Microsoft: In this case we used to wrap drivingNode into a projection that would also project Edm.NewGuid() thus giving us a synthetic key.
-                // This solution did not work however due to a bug in SQL Server that allowed pulling non-deterministic functions above joins and applies, thus 
+                // This solution did not work however due to a bug in SQL Server that allowed pulling non-deterministic functions above joins and applies, thus
                 // producing incorrect results. SQL Server bug was filed in "sqlbuvsts01\Sql Server" database as #725272.
-                // The only known path how we can get a keyless drivingNode is if 
+                // The only known path how we can get a keyless drivingNode is if
                 //    - drivingNode is over a TVF call
                 //    - TVF is declared as Collection(Row) is SSDL (the only form of TVF definitions at the moment)
                 //    - TVF is not mapped to entities
-                //      Note that if TVF is mapped to entities via function import mapping, and the user query is actually the call of the 
+                //      Note that if TVF is mapped to entities via function import mapping, and the user query is actually the call of the
                 //      function import, we infer keys for the TVF from the c-space entity keys and their mappings.
                 throw EntityUtil.KeysRequiredForNesting();
             }
 
             // Get a deterministic ordering of Vars from this node.
             // NOTE: we're using the drivingNode's definitions, which is a VarVec so it
-            //       won't match the order of the input's columns, but the key thing is 
+            //       won't match the order of the input's columns, but the key thing is
             //       that we use the same order for all nested children, so it's OK.
             ExtendedNodeInfo drivingNodeInfo = Command.GetExtendedNodeInfo(drivingNode);
             VarVec drivingNodeVarVec = drivingNodeInfo.Definitions;
@@ -2186,12 +2395,24 @@ namespace System.Data.Query.PlanCompiler
             // add a discriminatorVar to each collection child
             VarList discriminatorVarList;
             List<List<InternalTrees.SortKey>> postfixSortKeyList;
-            NormalizeNestOpInputs(nestOp, nestNode, out discriminatorVarList, out postfixSortKeyList);
+            NormalizeNestOpInputs(
+                nestOp,
+                nestNode,
+                out discriminatorVarList,
+                out postfixSortKeyList
+            );
 
             // Now build up the union-all subquery
             List<Dictionary<Var, Var>> varMapList;
             Var outputDiscriminatorVar;
-            Node unionAllNode = BuildUnionAllSubqueryForNestOp(nestOp, nestNode, drivingNodeVars, discriminatorVarList, out outputDiscriminatorVar, out varMapList);
+            Node unionAllNode = BuildUnionAllSubqueryForNestOp(
+                nestOp,
+                nestNode,
+                drivingNodeVars,
+                discriminatorVarList,
+                out outputDiscriminatorVar,
+                out varMapList
+            );
             Dictionary<Var, Var> drivingNodeVarMap = varMapList[0];
 
             // OK.  We've finally created the UnionAll over each of the project/outerApply
@@ -2257,7 +2478,7 @@ namespace System.Data.Query.PlanCompiler
                 }
             }
 
-            // Now that we've handled the driving node, deal with each of the 
+            // Now that we've handled the driving node, deal with each of the
             // nested inputs, in sequence.
             for (int i = 1; i < nestNode.Children.Count; i++)
             {
@@ -2268,18 +2489,22 @@ namespace System.Data.Query.PlanCompiler
                 newPostfixSortKeys.AddRange(postfixSortKeys);
 
                 ColumnMap newColumnMap = ColumnMapTranslator.Translate(ci.ColumnMap, varMapList[i]);
-                VarList newFlattenedElementVars = RemapVarList(ci.FlattenedElementVars, varMapList[i]);
+                VarList newFlattenedElementVars = RemapVarList(
+                    ci.FlattenedElementVars,
+                    varMapList[i]
+                );
                 VarVec newCollectionKeys = RemapVarVec(ci.Keys, varMapList[i]);
 
                 RemapSortKeys(ci.SortKeys, varMapList[i]);
 
                 CollectionInfo newCollectionInfo = Command.CreateCollectionInfo(
-                                                                                ci.CollectionVar,
-                                                                                newColumnMap,
-                                                                                newFlattenedElementVars,
-                                                                                newCollectionKeys,
-                                                                                ci.SortKeys,
-                                                                                i);
+                    ci.CollectionVar,
+                    newColumnMap,
+                    newFlattenedElementVars,
+                    newCollectionKeys,
+                    ci.SortKeys,
+                    i
+                );
                 newCollectionInfoList.Add(newCollectionInfo);
 
                 // For a collection Var, we add the flattened elementVars for the
@@ -2305,30 +2530,32 @@ namespace System.Data.Query.PlanCompiler
                     keyColumnMapIndex++;
                 }
 
-                DiscriminatedCollectionColumnMap collectionColumnMap = new DiscriminatedCollectionColumnMap(
-                                                                            TypeUtils.CreateCollectionType(newCollectionInfo.ColumnMap.Type),
-                                                                            newCollectionInfo.ColumnMap.Name,
-                                                                            newCollectionInfo.ColumnMap,
-                                                                            keyColumnMaps,
-                                                                            parentKeyColumnMaps,
-                                                                            discriminatorColumnMap,
-                                                                            newCollectionInfo.DiscriminatorValue
-                                                                            );
+                DiscriminatedCollectionColumnMap collectionColumnMap =
+                    new DiscriminatedCollectionColumnMap(
+                        TypeUtils.CreateCollectionType(newCollectionInfo.ColumnMap.Type),
+                        newCollectionInfo.ColumnMap.Name,
+                        newCollectionInfo.ColumnMap,
+                        keyColumnMaps,
+                        parentKeyColumnMaps,
+                        discriminatorColumnMap,
+                        newCollectionInfo.DiscriminatorValue
+                    );
                 varRefReplacementMap[ci.CollectionVar] = collectionColumnMap;
             }
 
             // Finally, build up the SingleStreamNest Node
             SingleStreamNestOp newSsnOp = Command.CreateSingleStreamNestOp(
-                                                            parentKeys,
-                                                            nestOp.PrefixSortKeys,
-                                                            newPostfixSortKeys,
-                                                            nestOpOutputs,
-                                                            newCollectionInfoList,
-                                                            outputDiscriminatorVar);
+                parentKeys,
+                nestOp.PrefixSortKeys,
+                newPostfixSortKeys,
+                nestOpOutputs,
+                newCollectionInfoList,
+                outputDiscriminatorVar
+            );
             Node newNestNode = Command.CreateNode(newSsnOp, unionAllNode);
 
 #if DEBUG
-            int size = input.Length;// GC.KeepAlive makes FxCop Grumpy.
+            int size = input.Length; // GC.KeepAlive makes FxCop Grumpy.
             string output = Dump.ToXml(Command, newNestNode);
 #endif //DEBUG
 
@@ -2348,9 +2575,14 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="nestNode">the nestOp subtree</param>
         /// <param name="discriminatorVarList">Discriminator Vars for each Collection input</param>
         /// <param name="sortKeys">SortKeys (postfix) for each Collection input</param>
-        /// 
-        /// 
-        private void NormalizeNestOpInputs(NestBaseOp nestOp, Node nestNode, out VarList discriminatorVarList, out List<List<InternalTrees.SortKey>> sortKeys)
+        ///
+        ///
+        private void NormalizeNestOpInputs(
+            NestBaseOp nestOp,
+            Node nestNode,
+            out VarList discriminatorVarList,
+            out List<List<InternalTrees.SortKey>> sortKeys
+        )
         {
             discriminatorVarList = Command.CreateVarList();
 
@@ -2364,8 +2596,8 @@ namespace System.Data.Query.PlanCompiler
             for (int i = 1; i < nestNode.Children.Count; i++)
             {
                 Node inputNode = nestNode.Children[i];
-                // Since we're called from ConvertToSingleStreamNest, it is possible that we have a 
-                // SingleStreamNest here, because the input to the MultiStreamNest we're converting 
+                // Since we're called from ConvertToSingleStreamNest, it is possible that we have a
+                // SingleStreamNest here, because the input to the MultiStreamNest we're converting
                 // may have been a MultiStreamNest that was converted to a SingleStreamNest.
                 SingleStreamNestOp ssnOp = inputNode.Op as SingleStreamNestOp;
 
@@ -2415,7 +2647,11 @@ namespace System.Data.Query.PlanCompiler
                 // happen before the outer-apply is added on; we need to use the value of
                 // the discriminator to distinguish between null and empty collections
                 Var discriminatorVar;
-                Node augmentedInput = AugmentNodeWithInternalIntegerConstant(inputNode, i, out discriminatorVar);
+                Node augmentedInput = AugmentNodeWithInternalIntegerConstant(
+                    inputNode,
+                    i,
+                    out discriminatorVar
+                );
                 nestNode.Children[i] = augmentedInput;
                 discriminatorVarList.Add(discriminatorVar);
             }
@@ -2428,9 +2664,17 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="value"></param>
         /// <param name="internalConstantVar"></param>
         /// <returns></returns>
-        private Node AugmentNodeWithInternalIntegerConstant(Node input, int value, out Var internalConstantVar)
+        private Node AugmentNodeWithInternalIntegerConstant(
+            Node input,
+            int value,
+            out Var internalConstantVar
+        )
         {
-            return AugmentNodeWithConstant(input, () => Command.CreateInternalConstantOp(Command.IntegerType, value), out internalConstantVar);
+            return AugmentNodeWithConstant(
+                input,
+                () => Command.CreateInternalConstantOp(Command.IntegerType, value),
+                out internalConstantVar
+            );
         }
 
         /// <summary>
@@ -2442,9 +2686,13 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="createOp">The fucntion to create the constant op </param>
         /// <param name="constantVar">the computed Var for the internal constant</param>
         /// <returns>the augmented node</returns>
-        private Node AugmentNodeWithConstant(Node input, Func<ConstantBaseOp> createOp, out Var constantVar)
+        private Node AugmentNodeWithConstant(
+            Node input,
+            Func<ConstantBaseOp> createOp,
+            out Var constantVar
+        )
         {
-            // Construct the op for the constant value and 
+            // Construct the op for the constant value and
             // a VarDef node that that defines it.
             ConstantBaseOp constantOp = createOp();
             Node constantNode = Command.CreateNode(constantOp);
@@ -2472,7 +2720,14 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="discriminatorVar"></param>
         /// <param name="varMapList"></param>
         /// <returns></returns>
-        private Node BuildUnionAllSubqueryForNestOp(NestBaseOp nestOp, Node nestNode, VarList drivingNodeVars, VarList discriminatorVarList, out Var discriminatorVar, out List<Dictionary<Var, Var>> varMapList)
+        private Node BuildUnionAllSubqueryForNestOp(
+            NestBaseOp nestOp,
+            Node nestNode,
+            VarList drivingNodeVars,
+            VarList discriminatorVarList,
+            out Var discriminatorVar,
+            out List<Dictionary<Var, Var>> varMapList
+        )
         {
             Node drivingNode = nestNode.Child0;
 
@@ -2492,8 +2747,13 @@ namespace System.Data.Query.PlanCompiler
 
                 if (i > 1)
                 {
-                    newDrivingNode = OpCopier.Copy(Command, drivingNode, drivingNodeVars, out newDrivingNodeVars);
-                    // 
+                    newDrivingNode = OpCopier.Copy(
+                        Command,
+                        drivingNode,
+                        drivingNodeVars,
+                        out newDrivingNodeVars
+                    );
+                    //
                     // Bug 450245: If we copied the driver node, then references to driver node vars
                     // from the collection subquery must be patched up
                     //
@@ -2506,7 +2766,9 @@ namespace System.Data.Query.PlanCompiler
                     varRemapper.RemapSubtree(nestNode.Children[i]);
 
                     // Bug 479183: Remap the flattened element vars
-                    newFlattenedElementVars = varRemapper.RemapVarList(nestOp.CollectionInfo[i - 1].FlattenedElementVars);
+                    newFlattenedElementVars = varRemapper.RemapVarList(
+                        nestOp.CollectionInfo[i - 1].FlattenedElementVars
+                    );
 
                     // Create a cross apply for all but the first collection
                     op = Command.CreateCrossApplyOp();
@@ -2517,7 +2779,7 @@ namespace System.Data.Query.PlanCompiler
                     newDrivingNodeVars = drivingNodeVars;
                     newFlattenedElementVars = nestOp.CollectionInfo[i - 1].FlattenedElementVars;
 
-                    // Create an outer apply for the first collection, 
+                    // Create an outer apply for the first collection,
                     // that way we ensure at least one row for each row in the driver node.
                     op = Command.CreateOuterApplyOp();
                 }
@@ -2557,14 +2819,20 @@ namespace System.Data.Query.PlanCompiler
                             NullOp nullOp = Command.CreateNullOp(v.Type);
                             Node nullOpNode = Command.CreateNode(nullOp);
                             Var nullOpVar;
-                            Node nullOpVarDefNode = Command.CreateVarDefNode(nullOpNode, out nullOpVar);
+                            Node nullOpVarDefNode = Command.CreateVarDefNode(
+                                nullOpNode,
+                                out nullOpVar
+                            );
                             varDefListChildren.Add(nullOpVarDefNode);
                             projectOutputs.Add(nullOpVar);
                         }
                     }
                 }
 
-                Node varDefListNode = Command.CreateNode(Command.CreateVarDefListOp(), varDefListChildren);
+                Node varDefListNode = Command.CreateNode(
+                    Command.CreateVarDefListOp(),
+                    varDefListChildren
+                );
 
                 // Now, build up the projectOp
                 VarVec projectOutputsVarSet = Command.CreateVarVec(projectOutputs);
@@ -2611,12 +2879,16 @@ namespace System.Data.Query.PlanCompiler
             for (int i = 0; i < nestNode.Children.Count; i++)
             {
                 Dictionary<Var, Var> varMap = new Dictionary<Var, Var>();
-                VarList varList = (i == 0) ? drivingNodeVars : nestOp.CollectionInfo[i - 1].FlattenedElementVars;
+                VarList varList =
+                    (i == 0) ? drivingNodeVars : nestOp.CollectionInfo[i - 1].FlattenedElementVars;
                 foreach (Var v in varList)
                 {
                     if (!outputVarsEnumerator.MoveNext())
                     {
-                        throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.ColumnCountMismatch, 5); // more columns from children than are on the unionAll?
+                        throw EntityUtil.InternalError(
+                            EntityUtil.InternalErrorCode.ColumnCountMismatch,
+                            5
+                        ); // more columns from children than are on the unionAll?
                     }
                     varMap[v] = outputVarsEnumerator.Current;
                 }
@@ -2671,9 +2943,7 @@ namespace System.Data.Query.PlanCompiler
 
         #region Private Constructor
         private OpCopierTrackingCollectionVars(Command cmd)
-            : base(cmd)
-        {
-        }
+            : base(cmd) { }
         #endregion
 
         #region Public Surface
@@ -2686,7 +2956,12 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="varMap"></param>
         /// <param name="newCollectionVarDefinitions"></param>
         /// <returns></returns>
-        internal static Node Copy(Command cmd, Node n, out VarMap varMap, out Dictionary<Var, Node> newCollectionVarDefinitions)
+        internal static Node Copy(
+            Command cmd,
+            Node n,
+            out VarMap varMap,
+            out Dictionary<Var, Node> newCollectionVarDefinitions
+        )
         {
             OpCopierTrackingCollectionVars oc = new OpCopierTrackingCollectionVars(cmd);
             Node newNode = oc.CopyNode(n);
@@ -2710,7 +2985,10 @@ namespace System.Data.Query.PlanCompiler
 
             for (int i = 0; i < newOp.CollectionInfo.Count; i++)
             {
-                m_newCollectionVarDefinitions.Add(newOp.CollectionInfo[i].CollectionVar, result.Children[i + 1]);
+                m_newCollectionVarDefinitions.Add(
+                    newOp.CollectionInfo[i].CollectionVar,
+                    result.Children[i + 1]
+                );
             }
             return result;
         }
@@ -2720,7 +2998,7 @@ namespace System.Data.Query.PlanCompiler
 
     #region Class SortRemover
     /// <summary>
-    /// Removes all sort nodes from the given command except for the top most one 
+    /// Removes all sort nodes from the given command except for the top most one
     /// (the child of the root PhysicalProjectOp node) if any
     /// </summary>
     internal class SortRemover : BasicOpVisitorOfNode
@@ -2768,7 +3046,7 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Iterates over all children.
         /// If any of the children changes, update the node info.
-        /// This is safe to do because the only way a child can change is 
+        /// This is safe to do because the only way a child can change is
         /// if it is a sort node that needs to be removed. The nodes whose children have
         /// chagnged also get tracked.
         /// </summary>
@@ -2780,7 +3058,10 @@ namespace System.Data.Query.PlanCompiler
             {
                 Node originalChild = n.Children[i];
                 n.Children[i] = VisitNode(n.Children[i]);
-                if (!Object.ReferenceEquals(originalChild, n.Children[i]) || changedNodes.Contains(originalChild))
+                if (
+                    !Object.ReferenceEquals(originalChild, n.Children[i])
+                    || changedNodes.Contains(originalChild)
+                )
                 {
                     anyChanged = true;
                 }
@@ -2795,7 +3076,7 @@ namespace System.Data.Query.PlanCompiler
 
         #region Visitors
         /// <summary>
-        /// If the given node is not the top most SortOp node remove it. 
+        /// If the given node is not the top most SortOp node remove it.
         /// </summary>
         /// <param name="op"></param>
         /// <param name="n"></param>
@@ -2820,5 +3101,4 @@ namespace System.Data.Query.PlanCompiler
         #endregion
     }
     #endregion
-
 }

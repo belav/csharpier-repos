@@ -5,7 +5,6 @@ using System;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using Debug = Internal.Runtime.CompilerHelpers.StartupDebug;
 
 namespace Internal.Runtime.CompilerHelpers
@@ -27,11 +26,26 @@ namespace Internal.Runtime.CompilerHelpers
         /// </summary>
         private static IntPtr s_moduleGCStaticsSpines;
 
-        [UnmanagedCallersOnly(EntryPoint = "InitializeModules", CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        internal static unsafe void InitializeModules(IntPtr osModule, IntPtr* pModuleHeaders, int count, IntPtr* pClasslibFunctions, int nClasslibFunctions)
+        [UnmanagedCallersOnly(
+            EntryPoint = "InitializeModules",
+            CallConvs = new Type[] { typeof(CallConvCdecl) }
+        )]
+        internal static unsafe void InitializeModules(
+            IntPtr osModule,
+            IntPtr* pModuleHeaders,
+            int count,
+            IntPtr* pClasslibFunctions,
+            int nClasslibFunctions
+        )
         {
             RuntimeImports.RhpRegisterOsModule(osModule);
-            TypeManagerHandle[] modules = CreateTypeManagers(osModule, pModuleHeaders, count, pClasslibFunctions, nClasslibFunctions);
+            TypeManagerHandle[] modules = CreateTypeManagers(
+                osModule,
+                pModuleHeaders,
+                count,
+                pClasslibFunctions,
+                nClasslibFunctions
+            );
             object[] gcStaticBaseSpines = new object[count];
 
             for (int i = 0; i < modules.Length; i++)
@@ -39,7 +53,10 @@ namespace Internal.Runtime.CompilerHelpers
                 InitializeGlobalTablesForModule(modules[i], i, gcStaticBaseSpines);
             }
 
-            s_moduleGCStaticsSpines = RuntimeImports.RhHandleAlloc(gcStaticBaseSpines, GCHandleType.Normal);
+            s_moduleGCStaticsSpines = RuntimeImports.RhHandleAlloc(
+                gcStaticBaseSpines,
+                GCHandleType.Normal
+            );
 
             // We are now at a stage where we can use GC statics - publish the list of modules
             // so that the eager constructors can access it.
@@ -62,7 +79,9 @@ namespace Internal.Runtime.CompilerHelpers
         {
             if (outputModules != null)
             {
-                int copyLimit = (s_moduleCount < outputModules.Length ? s_moduleCount : outputModules.Length);
+                int copyLimit = (
+                    s_moduleCount < outputModules.Length ? s_moduleCount : outputModules.Length
+                );
                 for (int copyIndex = 0; copyIndex < copyLimit; copyIndex++)
                 {
                     outputModules[copyIndex] = s_modules[copyIndex];
@@ -71,7 +90,13 @@ namespace Internal.Runtime.CompilerHelpers
             return s_moduleCount;
         }
 
-        private static unsafe TypeManagerHandle[] CreateTypeManagers(IntPtr osModule, IntPtr* pModuleHeaders, int count, IntPtr* pClasslibFunctions, int nClasslibFunctions)
+        private static unsafe TypeManagerHandle[] CreateTypeManagers(
+            IntPtr osModule,
+            IntPtr* pModuleHeaders,
+            int count,
+            IntPtr* pClasslibFunctions,
+            int nClasslibFunctions
+        )
         {
             // Count the number of modules so we can allocate an array to hold the TypeManager objects.
             // At this stage of startup, complex collection classes will not work.
@@ -92,11 +117,19 @@ namespace Internal.Runtime.CompilerHelpers
             {
                 if (pModuleHeaders[i] != IntPtr.Zero)
                 {
-                    TypeManagerHandle handle = RuntimeImports.RhpCreateTypeManager(osModule, pModuleHeaders[i], pClasslibFunctions, nClasslibFunctions);
+                    TypeManagerHandle handle = RuntimeImports.RhpCreateTypeManager(
+                        osModule,
+                        pModuleHeaders[i],
+                        pClasslibFunctions,
+                        nClasslibFunctions
+                    );
 
                     // Rehydrate any dehydrated data structures
                     IntPtr dehydratedDataSection = RuntimeImports.RhGetModuleSection(
-                        handle, ReadyToRunSectionType.DehydratedData, out int dehydratedDataLength);
+                        handle,
+                        ReadyToRunSectionType.DehydratedData,
+                        out int dehydratedDataLength
+                    );
                     if (dehydratedDataSection != IntPtr.Zero)
                     {
                         RehydrateData(dehydratedDataSection, dehydratedDataLength);
@@ -119,31 +152,53 @@ namespace Internal.Runtime.CompilerHelpers
         /// statics, etc that need initializing. InitializeGlobalTables walks through the modules
         /// and offers each a chance to initialize its global tables.
         /// </summary>
-        private static unsafe void InitializeGlobalTablesForModule(TypeManagerHandle typeManager, int moduleIndex, object[] gcStaticBaseSpines)
+        private static unsafe void InitializeGlobalTablesForModule(
+            TypeManagerHandle typeManager,
+            int moduleIndex,
+            object[] gcStaticBaseSpines
+        )
         {
             // Configure the module indirection cell with the newly created TypeManager. This allows EETypes to find
             // their interface dispatch map tables.
             int length;
-            TypeManagerSlot* section = (TypeManagerSlot*)RuntimeImports.RhGetModuleSection(typeManager, ReadyToRunSectionType.TypeManagerIndirection, out length);
+            TypeManagerSlot* section = (TypeManagerSlot*)
+                RuntimeImports.RhGetModuleSection(
+                    typeManager,
+                    ReadyToRunSectionType.TypeManagerIndirection,
+                    out length
+                );
             section->TypeManager = typeManager;
             section->ModuleIndex = moduleIndex;
 
             // Initialize statics if any are present
-            IntPtr staticsSection = RuntimeImports.RhGetModuleSection(typeManager, ReadyToRunSectionType.GCStaticRegion, out length);
+            IntPtr staticsSection = RuntimeImports.RhGetModuleSection(
+                typeManager,
+                ReadyToRunSectionType.GCStaticRegion,
+                out length
+            );
             if (staticsSection != IntPtr.Zero)
             {
-                Debug.Assert(length % (MethodTable.SupportsRelativePointers ? sizeof(int) : sizeof(nint)) == 0);
+                Debug.Assert(
+                    length % (MethodTable.SupportsRelativePointers ? sizeof(int) : sizeof(nint))
+                        == 0
+                );
 
                 object[] spine = InitializeStatics(staticsSection, length);
 
                 // Call write barrier directly. Assigning object reference does a type check.
                 Debug.Assert((uint)moduleIndex < (uint)gcStaticBaseSpines.Length);
-                ref object rawSpineIndexData = ref Unsafe.As<byte, object>(ref Unsafe.As<RawArrayData>(gcStaticBaseSpines).Data);
+                ref object rawSpineIndexData = ref Unsafe.As<byte, object>(
+                    ref Unsafe.As<RawArrayData>(gcStaticBaseSpines).Data
+                );
                 Unsafe.Add(ref rawSpineIndexData, moduleIndex) = spine;
             }
 
             // Initialize frozen object segment for the module with GC present
-            IntPtr frozenObjectSection = RuntimeImports.RhGetModuleSection(typeManager, ReadyToRunSectionType.FrozenObjectRegion, out length);
+            IntPtr frozenObjectSection = RuntimeImports.RhGetModuleSection(
+                typeManager,
+                ReadyToRunSectionType.FrozenObjectRegion,
+                out length
+            );
             if (frozenObjectSection != IntPtr.Zero)
             {
                 Debug.Assert(length % IntPtr.Size == 0);
@@ -151,12 +206,24 @@ namespace Internal.Runtime.CompilerHelpers
             }
         }
 
-        private static unsafe void InitializeModuleFrozenObjectSegment(IntPtr segmentStart, int length)
+        private static unsafe void InitializeModuleFrozenObjectSegment(
+            IntPtr segmentStart,
+            int length
+        )
         {
-            if (RuntimeImports.RhRegisterFrozenSegment((void*)segmentStart, (nuint)length, (nuint)length, (nuint)length) == IntPtr.Zero)
+            if (
+                RuntimeImports.RhRegisterFrozenSegment(
+                    (void*)segmentStart,
+                    (nuint)length,
+                    (nuint)length,
+                    (nuint)length
+                ) == IntPtr.Zero
+            )
             {
                 // This should only happen if we ran out of memory.
-                RuntimeExceptionHelpers.FailFast("Failed to register frozen object segment for the module.");
+                RuntimeExceptionHelpers.FailFast(
+                    "Failed to register frozen object segment for the module."
+                );
             }
         }
 
@@ -168,63 +235,94 @@ namespace Internal.Runtime.CompilerHelpers
             }
         }
 
-        private static unsafe void RunInitializers(TypeManagerHandle typeManager, ReadyToRunSectionType section)
+        private static unsafe void RunInitializers(
+            TypeManagerHandle typeManager,
+            ReadyToRunSectionType section
+        )
         {
-            var pInitializers = (byte*)RuntimeImports.RhGetModuleSection(typeManager, section, out int length);
-            Debug.Assert(length % (MethodTable.SupportsRelativePointers ? sizeof(int) : sizeof(nint)) == 0);
+            var pInitializers = (byte*)
+                RuntimeImports.RhGetModuleSection(typeManager, section, out int length);
+            Debug.Assert(
+                length % (MethodTable.SupportsRelativePointers ? sizeof(int) : sizeof(nint)) == 0
+            );
 
-            for (byte* pCurrent = pInitializers;
+            for (
+                byte* pCurrent = pInitializers;
                 pCurrent < (pInitializers + length);
-                pCurrent += MethodTable.SupportsRelativePointers ? sizeof(int) : sizeof(nint))
+                pCurrent += MethodTable.SupportsRelativePointers ? sizeof(int) : sizeof(nint)
+            )
             {
-                var initializer = MethodTable.SupportsRelativePointers ? (delegate*<void>)ReadRelPtr32(pCurrent) : *(delegate*<void>*)pCurrent;
+                var initializer = MethodTable.SupportsRelativePointers
+                    ? (delegate* <void>)ReadRelPtr32(pCurrent)
+                    : *(delegate* <void>*)pCurrent;
                 initializer();
             }
 
-            static void* ReadRelPtr32(void* address)
-                => (byte*)address + *(int*)address;
+            static void* ReadRelPtr32(void* address) => (byte*)address + *(int*)address;
         }
 
         private static unsafe object[] InitializeStatics(IntPtr gcStaticRegionStart, int length)
         {
             byte* gcStaticRegionEnd = (byte*)gcStaticRegionStart + length;
 
-            object[] spine = new object[length / (MethodTable.SupportsRelativePointers ? sizeof(int) : sizeof(nint))];
+            object[] spine = new object[
+                length / (MethodTable.SupportsRelativePointers ? sizeof(int) : sizeof(nint))
+            ];
 
-            ref object rawSpineData = ref Unsafe.As<byte, object>(ref Unsafe.As<RawArrayData>(spine).Data);
+            ref object rawSpineData = ref Unsafe.As<byte, object>(
+                ref Unsafe.As<RawArrayData>(spine).Data
+            );
 
             int currentBase = 0;
-            for (byte* block = (byte*)gcStaticRegionStart;
+            for (
+                byte* block = (byte*)gcStaticRegionStart;
                 block < gcStaticRegionEnd;
-                block += MethodTable.SupportsRelativePointers ? sizeof(int) : sizeof(nint))
+                block += MethodTable.SupportsRelativePointers ? sizeof(int) : sizeof(nint)
+            )
             {
                 // Gc Static regions can be shared by modules linked together during compilation. To ensure each
                 // is initialized once, the static region pointer is stored with lowest bit set in the image.
                 // The first time we initialize the static region its pointer is replaced with an object reference
                 // whose lowest bit is no longer set.
-                IntPtr* pBlock = MethodTable.SupportsRelativePointers ? (IntPtr*)ReadRelPtr32(block) : *(IntPtr**)block;
-                nint blockAddr = MethodTable.SupportsRelativePointers ? (nint)ReadRelPtr32(pBlock) : *pBlock;
-                if ((blockAddr & GCStaticRegionConstants.Uninitialized) == GCStaticRegionConstants.Uninitialized)
+                IntPtr* pBlock = MethodTable.SupportsRelativePointers
+                    ? (IntPtr*)ReadRelPtr32(block)
+                    : *(IntPtr**)block;
+                nint blockAddr = MethodTable.SupportsRelativePointers
+                    ? (nint)ReadRelPtr32(pBlock)
+                    : *pBlock;
+                if (
+                    (blockAddr & GCStaticRegionConstants.Uninitialized)
+                    == GCStaticRegionConstants.Uninitialized
+                )
                 {
                     object? obj = null;
                     RuntimeImports.RhAllocateNewObject(
                         new IntPtr(blockAddr & ~GCStaticRegionConstants.Mask),
                         (uint)GC_ALLOC_FLAGS.GC_ALLOC_PINNED_OBJECT_HEAP,
-                        Unsafe.AsPointer(ref obj));
+                        Unsafe.AsPointer(ref obj)
+                    );
                     if (obj == null)
                     {
                         RuntimeExceptionHelpers.FailFast("Failed allocating GC static bases");
                     }
 
-
-                    if ((blockAddr & GCStaticRegionConstants.HasPreInitializedData) == GCStaticRegionConstants.HasPreInitializedData)
+                    if (
+                        (blockAddr & GCStaticRegionConstants.HasPreInitializedData)
+                        == GCStaticRegionConstants.HasPreInitializedData
+                    )
                     {
                         // The next pointer is preinitialized data blob that contains preinitialized static GC fields,
                         // which are pointer relocs to GC objects in frozen segment.
                         // It actually has all GC fields including non-preinitialized fields and we simply copy over the
                         // entire blob to this object, overwriting everything.
-                        void* pPreInitDataAddr = MethodTable.SupportsRelativePointers ? ReadRelPtr32((int*)pBlock + 1) : (void*)*(pBlock + 1);
-                        RuntimeImports.RhBulkMoveWithWriteBarrier(ref obj.GetRawData(), ref *(byte *)pPreInitDataAddr, obj.GetRawObjectDataSize());
+                        void* pPreInitDataAddr = MethodTable.SupportsRelativePointers
+                            ? ReadRelPtr32((int*)pBlock + 1)
+                            : (void*)*(pBlock + 1);
+                        RuntimeImports.RhBulkMoveWithWriteBarrier(
+                            ref obj.GetRawData(),
+                            ref *(byte*)pPreInitDataAddr,
+                            obj.GetRawObjectDataSize()
+                        );
                     }
 
                     // Call write barrier directly. Assigning object reference does a type check.
@@ -240,8 +338,7 @@ namespace Internal.Runtime.CompilerHelpers
 
             return spine;
 
-            static void* ReadRelPtr32(void* address)
-                => (byte*)address + *(int*)address;
+            static void* ReadRelPtr32(void* address) => (byte*)address + *(int*)address;
         }
 
         private static unsafe void RehydrateData(IntPtr dehydratedData, int length)
@@ -331,11 +428,10 @@ namespace Internal.Runtime.CompilerHelpers
                 }
             }
 
-            static void* ReadRelPtr32(void* address)
-                => (byte*)address + *(int*)address;
+            static void* ReadRelPtr32(void* address) => (byte*)address + *(int*)address;
 
-            static void WriteRelPtr32(void* dest, void* value)
-                => *(int*)dest = (int)((byte*)value - (byte*)dest);
+            static void WriteRelPtr32(void* dest, void* value) =>
+                *(int*)dest = (int)((byte*)value - (byte*)dest);
         }
     }
 

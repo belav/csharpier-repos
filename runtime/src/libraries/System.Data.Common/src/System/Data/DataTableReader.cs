@@ -289,7 +289,10 @@ namespace System.Data
             }
         }
 
-        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)]
+        [return: DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.PublicFields
+        )]
         public override Type GetProviderSpecificFieldType(int ordinal)
         {
             ValidateOpen(nameof(GetProviderSpecificFieldType));
@@ -343,7 +346,13 @@ namespace System.Data
             }
         }
 
-        public override long GetBytes(int ordinal, long dataIndex, byte[]? buffer, int bufferIndex, int length)
+        public override long GetBytes(
+            int ordinal,
+            long dataIndex,
+            byte[]? buffer,
+            int bufferIndex,
+            int length
+        )
         {
             ValidateState(nameof(GetBytes));
             ValidateReader();
@@ -372,7 +381,11 @@ namespace System.Data
             }
             else if ((bufferIndex < 0) || (bufferIndex > 0 && bufferIndex >= buffer.Length))
             {
-                throw ADP.InvalidDestinationBufferIndex(buffer.Length, bufferIndex, nameof(bufferIndex));
+                throw ADP.InvalidDestinationBufferIndex(
+                    buffer.Length,
+                    bufferIndex,
+                    nameof(bufferIndex)
+                );
             }
 
             if (0 < byteCount)
@@ -406,7 +419,13 @@ namespace System.Data
             }
         }
 
-        public override long GetChars(int ordinal, long dataIndex, char[]? buffer, int bufferIndex, int length)
+        public override long GetChars(
+            int ordinal,
+            long dataIndex,
+            char[]? buffer,
+            int bufferIndex,
+            int length
+        )
         {
             ValidateState(nameof(GetChars));
             ValidateReader();
@@ -435,7 +454,11 @@ namespace System.Data
             }
             else if ((bufferIndex < 0) || (bufferIndex > 0 && bufferIndex >= buffer.Length))
             {
-                throw ADP.InvalidDestinationBufferIndex(buffer.Length, bufferIndex, nameof(bufferIndex));
+                throw ADP.InvalidDestinationBufferIndex(
+                    buffer.Length,
+                    bufferIndex,
+                    nameof(bufferIndex)
+                );
             }
 
             if (0 < charCount)
@@ -507,7 +530,10 @@ namespace System.Data
             }
         }
 
-        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)]
+        [return: DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.PublicFields
+        )]
         public override Type GetFieldType(int ordinal)
         {
             ValidateOpen(nameof(GetFieldType));
@@ -677,9 +703,20 @@ namespace System.Data
                 throw ExceptionBuilder.ArgumentNull(nameof(values));
             }
 
-            Array.Copy(_currentDataRow!.ItemArray, values, _currentDataRow.ItemArray.Length > values.Length ? values.Length : _currentDataRow.ItemArray.Length);
-            return (_currentDataRow.ItemArray.Length > values.Length ? values.Length : _currentDataRow.ItemArray.Length);
+            Array.Copy(
+                _currentDataRow!.ItemArray,
+                values,
+                _currentDataRow.ItemArray.Length > values.Length
+                    ? values.Length
+                    : _currentDataRow.ItemArray.Length
+            );
+            return (
+                _currentDataRow.ItemArray.Length > values.Length
+                    ? values.Length
+                    : _currentDataRow.ItemArray.Length
+            );
         }
+
         public override bool IsDBNull(int ordinal)
         {
             ValidateState(nameof(IsDBNull));
@@ -715,35 +752,83 @@ namespace System.Data
             DataColumn ColumnName = new DataColumn(SchemaTableColumn.ColumnName, typeof(string));
             DataColumn ColumnOrdinal = new DataColumn(SchemaTableColumn.ColumnOrdinal, typeof(int));
             DataColumn ColumnSize = new DataColumn(SchemaTableColumn.ColumnSize, typeof(int));
-            DataColumn NumericPrecision = new DataColumn(SchemaTableColumn.NumericPrecision, typeof(short));
+            DataColumn NumericPrecision = new DataColumn(
+                SchemaTableColumn.NumericPrecision,
+                typeof(short)
+            );
             DataColumn NumericScale = new DataColumn(SchemaTableColumn.NumericScale, typeof(short));
             DataColumn DataType = GetSystemTypeDataColumn();
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2111:ReflectionToDynamicallyAccessedMembers",
-                Justification = "The problem is Type.TypeInitializer which requires constructors on the Type instance." +
-                    "In this case the TypeInitializer property is not accessed dynamically.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2111:ReflectionToDynamicallyAccessedMembers",
+                Justification = "The problem is Type.TypeInitializer which requires constructors on the Type instance."
+                    + "In this case the TypeInitializer property is not accessed dynamically."
+            )]
             static DataColumn GetSystemTypeDataColumn() =>
                 new DataColumn(SchemaTableColumn.DataType, typeof(Type));
 
             DataColumn ProviderType = new DataColumn(SchemaTableColumn.ProviderType, typeof(int));
             DataColumn IsLong = new DataColumn(SchemaTableColumn.IsLong, typeof(bool));
             DataColumn AllowDBNull = new DataColumn(SchemaTableColumn.AllowDBNull, typeof(bool));
-            DataColumn IsReadOnly = new DataColumn(SchemaTableOptionalColumn.IsReadOnly, typeof(bool));
-            DataColumn IsRowVersion = new DataColumn(SchemaTableOptionalColumn.IsRowVersion, typeof(bool));
+            DataColumn IsReadOnly = new DataColumn(
+                SchemaTableOptionalColumn.IsReadOnly,
+                typeof(bool)
+            );
+            DataColumn IsRowVersion = new DataColumn(
+                SchemaTableOptionalColumn.IsRowVersion,
+                typeof(bool)
+            );
             DataColumn IsUnique = new DataColumn(SchemaTableColumn.IsUnique, typeof(bool));
             DataColumn IsKeyColumn = new DataColumn(SchemaTableColumn.IsKey, typeof(bool));
-            DataColumn IsAutoIncrement = new DataColumn(SchemaTableOptionalColumn.IsAutoIncrement, typeof(bool));
-            DataColumn BaseSchemaName = new DataColumn(SchemaTableColumn.BaseSchemaName, typeof(string));
-            DataColumn BaseCatalogName = new DataColumn(SchemaTableOptionalColumn.BaseCatalogName, typeof(string));
-            DataColumn BaseTableName = new DataColumn(SchemaTableColumn.BaseTableName, typeof(string));
-            DataColumn BaseColumnName = new DataColumn(SchemaTableColumn.BaseColumnName, typeof(string));
-            DataColumn AutoIncrementSeed = new DataColumn(SchemaTableOptionalColumn.AutoIncrementSeed, typeof(long));
-            DataColumn AutoIncrementStep = new DataColumn(SchemaTableOptionalColumn.AutoIncrementStep, typeof(long));
-            DataColumn DefaultValue = new DataColumn(SchemaTableOptionalColumn.DefaultValue, typeof(object));
-            DataColumn Expression = new DataColumn(SchemaTableOptionalColumn.Expression, typeof(string));
-            DataColumn ColumnMapping = new DataColumn(SchemaTableOptionalColumn.ColumnMapping, typeof(MappingType));
-            DataColumn BaseTableNamespace = new DataColumn(SchemaTableOptionalColumn.BaseTableNamespace, typeof(string));
-            DataColumn BaseColumnNamespace = new DataColumn(SchemaTableOptionalColumn.BaseColumnNamespace, typeof(string));
+            DataColumn IsAutoIncrement = new DataColumn(
+                SchemaTableOptionalColumn.IsAutoIncrement,
+                typeof(bool)
+            );
+            DataColumn BaseSchemaName = new DataColumn(
+                SchemaTableColumn.BaseSchemaName,
+                typeof(string)
+            );
+            DataColumn BaseCatalogName = new DataColumn(
+                SchemaTableOptionalColumn.BaseCatalogName,
+                typeof(string)
+            );
+            DataColumn BaseTableName = new DataColumn(
+                SchemaTableColumn.BaseTableName,
+                typeof(string)
+            );
+            DataColumn BaseColumnName = new DataColumn(
+                SchemaTableColumn.BaseColumnName,
+                typeof(string)
+            );
+            DataColumn AutoIncrementSeed = new DataColumn(
+                SchemaTableOptionalColumn.AutoIncrementSeed,
+                typeof(long)
+            );
+            DataColumn AutoIncrementStep = new DataColumn(
+                SchemaTableOptionalColumn.AutoIncrementStep,
+                typeof(long)
+            );
+            DataColumn DefaultValue = new DataColumn(
+                SchemaTableOptionalColumn.DefaultValue,
+                typeof(object)
+            );
+            DataColumn Expression = new DataColumn(
+                SchemaTableOptionalColumn.Expression,
+                typeof(string)
+            );
+            DataColumn ColumnMapping = new DataColumn(
+                SchemaTableOptionalColumn.ColumnMapping,
+                typeof(MappingType)
+            );
+            DataColumn BaseTableNamespace = new DataColumn(
+                SchemaTableOptionalColumn.BaseTableNamespace,
+                typeof(string)
+            );
+            DataColumn BaseColumnNamespace = new DataColumn(
+                SchemaTableOptionalColumn.BaseColumnNamespace,
+                typeof(string)
+            );
 
             ColumnSize.DefaultValue = -1;
 
@@ -892,7 +977,11 @@ namespace System.Data
             }
 
             //See if without any event raing, if our rows are deleted, or removed! Reader is not invalid, user should be able to read and reach goo row
-            if ((_currentDataRow.RowState == DataRowState.Deleted) || (_currentDataRow.RowState == DataRowState.Detached) || _currentRowRemoved)
+            if (
+                (_currentDataRow.RowState == DataRowState.Deleted)
+                || (_currentDataRow.RowState == DataRowState.Detached)
+                || _currentRowRemoved
+            )
             {
                 throw ExceptionBuilder.InvalidCurrentRowInDataTableReader();
             }
@@ -952,11 +1041,11 @@ namespace System.Data
                     if (_currentDataRow == _currentDataTable.Rows[_rowCounter + 1])
                     {
                         // check if we moved one position up
-                        _rowCounter++;  // if so, refresh the datarow and fix the counter
+                        _rowCounter++; // if so, refresh the datarow and fix the counter
                     }
                     break;
                 case DataRowAction.Delete: // delete
-                case DataRowAction.Rollback:// rejectchanges
+                case DataRowAction.Rollback: // rejectchanges
                 case DataRowAction.Commit: // acceptchanges
                     if (args.Row.RowState == DataRowState.Detached)
                     {

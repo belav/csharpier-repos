@@ -4,19 +4,19 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
-    using System.IO;
-    using System.Runtime.Serialization.Formatters;
-    using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.ComponentModel;
+namespace System.Web.Configuration
+{
     using System.Collections;
+    using System.ComponentModel;
     using System.Configuration;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization.Formatters;
     using System.Security;
     using System.Security.Permissions;
-    using System.Globalization;
+    using System.Threading;
     using System.Web.Hosting;
     using System.Web.Security;
     using System.Web.Util;
@@ -28,7 +28,7 @@ namespace System.Web.Configuration {
     /*
         <protocols>
             <add
-                id="<protocolID>" 
+                id="<protocolID>"
                 processHandlerType="<typeName>"
                 appDomainHandlerType="<typeName>"
                 [validate="false"]
@@ -37,17 +37,15 @@ namespace System.Web.Configuration {
         </protocols>
     */
     //
-    public sealed class ProtocolsConfigurationHandler : IConfigurationSectionHandler {
+    public sealed class ProtocolsConfigurationHandler : IConfigurationSectionHandler
+    {
+        public ProtocolsConfigurationHandler() { }
 
-        public ProtocolsConfigurationHandler() {
-        }
-
-        public object Create(Object parent, Object configContextObj, XmlNode section) {
+        public object Create(Object parent, Object configContextObj, XmlNode section)
+        {
             // can be called from client config ( default app domain)
             Debug.Assert(parent == null, "<protocols> config is only allowed in machine.config");
             return new ProtocolsConfiguration(section);
         }
     }
 }
-
-

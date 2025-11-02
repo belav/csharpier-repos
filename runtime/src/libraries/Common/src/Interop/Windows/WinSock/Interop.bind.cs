@@ -13,10 +13,12 @@ internal static partial class Interop
         private static partial SocketError bind(
             SafeSocketHandle socketHandle,
             ReadOnlySpan<byte> socketAddress,
-            int socketAddressSize);
+            int socketAddressSize
+        );
 
         internal static SocketError bind(
             SafeSocketHandle socketHandle,
-            ReadOnlySpan<byte> socketAddress) => bind(socketHandle, socketAddress, socketAddress.Length);
+            ReadOnlySpan<byte> socketAddress
+        ) => bind(socketHandle, socketAddress, socketAddress.Length);
     }
 }

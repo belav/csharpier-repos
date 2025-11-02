@@ -40,8 +40,8 @@ namespace System.Threading
         }
 
         private bool SetTimer(uint actualDuration) =>
-            ThreadPool.UseWindowsThreadPool ?
-            SetTimerWindowsThreadPool(actualDuration) :
-            SetTimerPortable(actualDuration);
+            ThreadPool.UseWindowsThreadPool
+                ? SetTimerWindowsThreadPool(actualDuration)
+                : SetTimerPortable(actualDuration);
     }
 }

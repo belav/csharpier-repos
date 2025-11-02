@@ -17,7 +17,7 @@ namespace System.Web.Http
 
             Assert.Equal(String.Empty, attribute.Template);
         }
-        
+
         [Fact]
         public void Ctor_NotNull()
         {

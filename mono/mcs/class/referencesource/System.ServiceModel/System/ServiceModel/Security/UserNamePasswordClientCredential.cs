@@ -26,10 +26,7 @@ namespace System.ServiceModel.Security
 
         public string UserName
         {
-            get 
-            {
-                return this.userName;
-            }
+            get { return this.userName; }
             set
             {
                 ThrowIfImmutable();
@@ -39,10 +36,7 @@ namespace System.ServiceModel.Security
 
         public string Password
         {
-            get 
-            {
-                return this.password;
-            }
+            get { return this.password; }
             set
             {
                 ThrowIfImmutable();
@@ -59,7 +53,9 @@ namespace System.ServiceModel.Security
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             }
         }
     }

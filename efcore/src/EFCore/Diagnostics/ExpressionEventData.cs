@@ -21,7 +21,8 @@ public class ExpressionEventData : EventData
     public ExpressionEventData(
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
-        Expression expression)
+        Expression expression
+    )
         : base(eventDefinition, messageGenerator)
     {
         Expression = expression;

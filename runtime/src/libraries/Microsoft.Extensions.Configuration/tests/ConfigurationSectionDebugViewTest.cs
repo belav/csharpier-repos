@@ -14,16 +14,19 @@ namespace Microsoft.Extensions.Configuration.Test
         {
             var config = new ConfigurationManager();
 
-            config.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                {"Mem1:", "NoKeyValue1"},
-                {"Mem1:KeyInMem1", "ValueInMem1"},
-                {"Mem1:KeyInMem1:Deep1", "ValueDeep1"}
-            });
+            config.AddInMemoryCollection(
+                new Dictionary<string, string>
+                {
+                    { "Mem1:", "NoKeyValue1" },
+                    { "Mem1:KeyInMem1", "ValueInMem1" },
+                    { "Mem1:KeyInMem1:Deep1", "ValueDeep1" },
+                }
+            );
 
             var items = ConfigurationSectionDebugView.FromConfiguration(config, config);
 
-            Assert.Collection(items,
+            Assert.Collection(
+                items,
                 i =>
                 {
                     Assert.Equal("Mem1", i.Path);
@@ -47,7 +50,8 @@ namespace Microsoft.Extensions.Configuration.Test
                     Assert.Equal("Mem1:KeyInMem1:Deep1", i.Path);
                     Assert.Equal("ValueDeep1", i.Value);
                     Assert.IsType<MemoryConfigurationProvider>(i.Provider);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -55,20 +59,23 @@ namespace Microsoft.Extensions.Configuration.Test
         {
             var config = new ConfigurationManager();
 
-            config.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                {"Mem1:", "NoKeyValue1"},
-                {"Mem1:KeyInMem1", "ValueInMem1"},
-                {"Mem1:KeyInMem1:", "NoKeyValue2"},
-                {"Mem1:KeyInMem1:Deep1", "ValueDeep1"},
-                {"Mem1:KeyInMem2", "ValueInMem1"}
-            });
+            config.AddInMemoryCollection(
+                new Dictionary<string, string>
+                {
+                    { "Mem1:", "NoKeyValue1" },
+                    { "Mem1:KeyInMem1", "ValueInMem1" },
+                    { "Mem1:KeyInMem1:", "NoKeyValue2" },
+                    { "Mem1:KeyInMem1:Deep1", "ValueDeep1" },
+                    { "Mem1:KeyInMem2", "ValueInMem1" },
+                }
+            );
 
             var section = config.GetSection("Mem1:KeyInMem1");
 
             var items = ConfigurationSectionDebugView.FromConfiguration(section, config);
 
-            Assert.Collection(items,
+            Assert.Collection(
+                items,
                 i =>
                 {
                     Assert.Equal("", i.Path);
@@ -80,22 +87,27 @@ namespace Microsoft.Extensions.Configuration.Test
                     Assert.Equal("Deep1", i.Path);
                     Assert.Equal("ValueDeep1", i.Value);
                     Assert.IsType<MemoryConfigurationProvider>(i.Provider);
-                });
+                }
+            );
         }
 
         [Fact]
         public void FromConfiguration_MultipleProviders()
         {
-            var provider1 = new TestMemorySourceProvider(new Dictionary<string, string>
-            {
-                {"Mem1:", "NoKeyValue1"},
-                {"Key1", "ValueInMem1"}
-            });
-            var provider2 = new TestMemorySourceProvider(new Dictionary<string, string>
-            {
-                {"Mem2:", "NoKeyValue2"},
-                {"Key2", "ValueInMem2"}
-            });
+            var provider1 = new TestMemorySourceProvider(
+                new Dictionary<string, string>
+                {
+                    { "Mem1:", "NoKeyValue1" },
+                    { "Key1", "ValueInMem1" },
+                }
+            );
+            var provider2 = new TestMemorySourceProvider(
+                new Dictionary<string, string>
+                {
+                    { "Mem2:", "NoKeyValue2" },
+                    { "Key2", "ValueInMem2" },
+                }
+            );
 
             var config = new ConfigurationManager();
             config.Sources.Add(provider1);
@@ -103,7 +115,8 @@ namespace Microsoft.Extensions.Configuration.Test
 
             var items = ConfigurationSectionDebugView.FromConfiguration(config, config);
 
-            Assert.Collection(items,
+            Assert.Collection(
+                items,
                 i =>
                 {
                     Assert.Equal("Key1", i.Path);
@@ -145,14 +158,14 @@ namespace Microsoft.Extensions.Configuration.Test
                     Assert.Equal(string.Empty, i.Key);
                     Assert.Equal("NoKeyValue2", i.Value);
                     Assert.Equal(provider2, i.Provider);
-                });
+                }
+            );
         }
 
         public class TestMemorySourceProvider : MemoryConfigurationProvider, IConfigurationSource
         {
             public TestMemorySourceProvider(Dictionary<string, string> initialData)
-                : base(new MemoryConfigurationSource { InitialData = initialData })
-            { }
+                : base(new MemoryConfigurationSource { InitialData = initialData }) { }
 
             public IConfigurationProvider Build(IConfigurationBuilder builder)
             {

@@ -16,7 +16,11 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
     // and the value is hoisted into a local variables array. This placeholder can then
     // be compiled and cached, and the array lookup happens at runtime.
 
-    [SuppressMessage("Microsoft.Usage", "CA2218:OverrideGetHashCodeOnOverridingEquals", Justification = "Overrides AddToHashCodeCombiner() instead.")]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2218:OverrideGetHashCodeOnOverridingEquals",
+        Justification = "Overrides AddToHashCodeCombiner() instead."
+    )]
     internal sealed class ConstantExpressionFingerprint : ExpressionFingerprint
     {
         public ConstantExpressionFingerprint(ExpressionType nodeType, Type type)
@@ -29,8 +33,7 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
         public override bool Equals(object obj)
         {
             ConstantExpressionFingerprint other = obj as ConstantExpressionFingerprint;
-            return (other != null)
-                   && this.Equals(other);
+            return (other != null) && this.Equals(other);
         }
     }
 }

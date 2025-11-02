@@ -1,14 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="DataSourceControl.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System.Collections;
     using System.ComponentModel;
     using System.Security.Permissions;
-
 
     /// <summary>
     /// A DataSourceControl represents a data source that can be used to
@@ -29,74 +28,60 @@ namespace System.Web.UI {
     /// is typically bound to a single list within the DataControl.
     /// </summary>
     [
-    Bindable(false),
-    ControlBuilder(typeof(DataSourceControlBuilder)),
-    Designer("System.Web.UI.Design.DataSourceDesigner, " + AssemblyRef.SystemDesign),
-    NonVisualControl()
+        Bindable(false),
+        ControlBuilder(typeof(DataSourceControlBuilder)),
+        Designer("System.Web.UI.Design.DataSourceDesigner, " + AssemblyRef.SystemDesign),
+        NonVisualControl()
     ]
-    public abstract class DataSourceControl : Control, IDataSource, IListSource {
-
+    public abstract class DataSourceControl : Control, IDataSource, IListSource
+    {
         private static readonly object EventDataSourceChanged = new object();
         private static readonly object EventDataSourceChangedInternal = new object();
 
-        [
-        Browsable(false),
-        EditorBrowsable(EditorBrowsableState.Never),
-        ]
-        public override string ClientID {
-            get {
-                return base.ClientID;
-            }
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public override string ClientID
+        {
+            get { return base.ClientID; }
         }
 
         [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        EditorBrowsable(EditorBrowsableState.Never),
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            EditorBrowsable(EditorBrowsableState.Never),
         ]
-        public override ClientIDMode ClientIDMode {
-            get {
-                return base.ClientIDMode;
-            }
-            set {
-                throw new NotSupportedException();
+        public override ClientIDMode ClientIDMode
+        {
+            get { return base.ClientIDMode; }
+            set { throw new NotSupportedException(); }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override ControlCollection Controls
+        {
+            get { return base.Controls; }
+        }
+
+        [Browsable(false), DefaultValue(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public override bool EnableTheming
+        {
+            get { return false; }
+            set
+            {
+                throw new NotSupportedException(
+                    SR.GetString(SR.NoThemingSupport, this.GetType().Name)
+                );
             }
         }
 
-        [
-        EditorBrowsable(EditorBrowsableState.Never),
-        ]
-        public override ControlCollection Controls {
-            get {
-                return base.Controls;
-            }
-        }
-
-        [
-        Browsable(false),
-        DefaultValue(false),
-        EditorBrowsable(EditorBrowsableState.Never),
-        ]
-        public override bool EnableTheming {
-            get {
-                return false;
-            }
-            set {
-                throw new NotSupportedException(SR.GetString(SR.NoThemingSupport, this.GetType().Name));
-            }
-        }
-
-        [
-        Browsable(false),
-        DefaultValue(""),
-        EditorBrowsable(EditorBrowsableState.Never),
-        ]
-        public override string SkinID {
-            get {
-                return String.Empty;
-            }
-            set {
-                throw new NotSupportedException(SR.GetString(SR.NoThemingSupport, this.GetType().Name));
+        [Browsable(false), DefaultValue(""), EditorBrowsable(EditorBrowsableState.Never)]
+        public override string SkinID
+        {
+            get { return String.Empty; }
+            set
+            {
+                throw new NotSupportedException(
+                    SR.GetString(SR.NoThemingSupport, this.GetType().Name)
+                );
             }
         }
 
@@ -104,17 +89,15 @@ namespace System.Web.UI {
         /// Gets or sets a value that indicates whether a control should be rendered on
         /// the page.
         /// </summary>
-        [
-        Browsable(false),
-        DefaultValue(false),
-        EditorBrowsable(EditorBrowsableState.Never),
-        ]
-        public override bool Visible {
-            get {
-                return false;
-            }
-            set {
-                throw new NotSupportedException(SR.GetString(SR.ControlNonVisual, this.GetType().Name));
+        [Browsable(false), DefaultValue(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public override bool Visible
+        {
+            get { return false; }
+            set
+            {
+                throw new NotSupportedException(
+                    SR.GetString(SR.ControlNonVisual, this.GetType().Name)
+                );
             }
         }
 
@@ -126,85 +109,82 @@ namespace System.Web.UI {
         /// attaches to it and fires its DataSourceViewChanged event.  We want that
         /// to fire before the DataSourceChanged event.
         /// </devdoc>
-        internal event EventHandler DataSourceChangedInternal {
-            add {
-                Events.AddHandler(EventDataSourceChangedInternal, value);
-            }
-            remove {
-                Events.RemoveHandler(EventDataSourceChangedInternal, value);
-            }
+        internal event EventHandler DataSourceChangedInternal
+        {
+            add { Events.AddHandler(EventDataSourceChangedInternal, value); }
+            remove { Events.RemoveHandler(EventDataSourceChangedInternal, value); }
         }
 
-
-        [
-        EditorBrowsable(EditorBrowsableState.Never),
-        ]
-        public override void ApplyStyleSheetSkin(Page page) {
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override void ApplyStyleSheetSkin(Page page)
+        {
             base.ApplyStyleSheetSkin(page);
         }
 
         /// <devdoc>
         /// Overidden to prevent child controls from being added to this control.
         /// </devdoc>
-        protected override ControlCollection CreateControlCollection() {
+        protected override ControlCollection CreateControlCollection()
+        {
             return new EmptyControlCollection(this);
         }
 
-        [
-        EditorBrowsable(EditorBrowsableState.Never),
-        ]
-        public override Control FindControl(string id) {
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override Control FindControl(string id)
+        {
             return base.FindControl(id);
         }
 
         /// <devdoc>
         /// </devdoc>
-        [
-        EditorBrowsable(EditorBrowsableState.Never),
-        ]
-        public override void Focus() {
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override void Focus()
+        {
             throw new NotSupportedException(SR.GetString(SR.NoFocusSupport, this.GetType().Name));
         }
 
         protected abstract DataSourceView GetView(string viewName);
 
-        protected virtual ICollection GetViewNames() {
+        protected virtual ICollection GetViewNames()
+        {
             return null;
         }
 
-        [
-        EditorBrowsable(EditorBrowsableState.Never),
-        ]
-        public override bool HasControls() {
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override bool HasControls()
+        {
             return base.HasControls();
         }
 
-        private void OnDataSourceChanged(EventArgs e) {
+        private void OnDataSourceChanged(EventArgs e)
+        {
             EventHandler handler = (EventHandler)Events[EventDataSourceChanged];
-            if (handler != null) {
+            if (handler != null)
+            {
                 handler(this, e);
             }
         }
 
-        private void OnDataSourceChangedInternal(EventArgs e) {
+        private void OnDataSourceChangedInternal(EventArgs e)
+        {
             EventHandler handler = (EventHandler)Events[EventDataSourceChangedInternal];
-            if (handler != null) {
+            if (handler != null)
+            {
                 handler(this, e);
             }
         }
 
-        protected virtual void RaiseDataSourceChangedEvent(EventArgs e) {
+        protected virtual void RaiseDataSourceChangedEvent(EventArgs e)
+        {
             OnDataSourceChangedInternal(e);
             OnDataSourceChanged(e);
         }
 
-        [
-        EditorBrowsable(EditorBrowsableState.Never),
-        ]
-        public override void RenderControl(HtmlTextWriter writer) {
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override void RenderControl(HtmlTextWriter writer)
+        {
             base.RenderControl(writer);
         }
-
 
         #region Implementation of IDataSource
         /// <summary>
@@ -213,24 +193,21 @@ namespace System.Web.UI {
         ///   or a change in the data due to an edit action performed by
         ///   the DataSourceControl.
         /// </summary>
-        event EventHandler IDataSource.DataSourceChanged {
-            add {
-                Events.AddHandler(EventDataSourceChanged, value);
-            }
-            remove {
-                Events.RemoveHandler(EventDataSourceChanged, value);
-            }
+        event EventHandler IDataSource.DataSourceChanged
+        {
+            add { Events.AddHandler(EventDataSourceChanged, value); }
+            remove { Events.RemoveHandler(EventDataSourceChanged, value); }
         }
 
-
         /// <internalonly/>
-        DataSourceView IDataSource.GetView(string viewName) {
+        DataSourceView IDataSource.GetView(string viewName)
+        {
             return GetView(viewName);
         }
 
-
         /// <internalonly/>
-        ICollection IDataSource.GetViewNames() {
+        ICollection IDataSource.GetViewNames()
+        {
             return GetViewNames();
         }
         #endregion
@@ -239,24 +216,27 @@ namespace System.Web.UI {
         #region Implementation of IListSource
 
         /// <internalonly/>
-        bool IListSource.ContainsListCollection {
-            get {
-                if (DesignMode) {
+        bool IListSource.ContainsListCollection
+        {
+            get
+            {
+                if (DesignMode)
+                {
                     return false;
                 }
                 return ListSourceHelper.ContainsListCollection(this);
             }
         }
 
-
         /// <internalonly/>
-        IList IListSource.GetList() {
-            if (DesignMode) {
+        IList IListSource.GetList()
+        {
+            if (DesignMode)
+            {
                 return null;
             }
             return ListSourceHelper.GetList(this);
         }
         #endregion
     }
-
 }

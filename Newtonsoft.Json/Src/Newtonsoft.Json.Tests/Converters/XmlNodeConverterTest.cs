@@ -79,7 +79,10 @@ namespace Newtonsoft.Json.Tests.Converters
             else if (node is XmlAttribute)
             {
                 XmlAttribute attribute = (XmlAttribute)node;
-                xNode = new XAttribute(XName.Get(attribute.LocalName, attribute.NamespaceURI), attribute.Value);
+                xNode = new XAttribute(
+                    XName.Get(attribute.LocalName, attribute.NamespaceURI),
+                    attribute.Value
+                );
             }
             else
             {
@@ -112,14 +115,16 @@ namespace Newtonsoft.Json.Tests.Converters
                 converter.DeserializeRootElementName = deserializeRootElementName;
             }
 
-            XmlNode node = (XmlNode)converter.ReadJson(reader, typeof(XmlDocument), null, new JsonSerializer());
+            XmlNode node = (XmlNode)
+                converter.ReadJson(reader, typeof(XmlDocument), null, new JsonSerializer());
 
 #if !NET20
             string xmlText = node.OuterXml;
 
             reader = new JsonTextReader(new StringReader(json));
             reader.Read();
-            XDocument d = (XDocument)converter.ReadJson(reader, typeof(XDocument), null, new JsonSerializer());
+            XDocument d = (XDocument)
+                converter.ReadJson(reader, typeof(XDocument), null, new JsonSerializer());
 
             string linqXmlText = d.ToString(SaveOptions.DisableFormatting);
             if (d.Declaration != null)
@@ -139,7 +144,10 @@ namespace Newtonsoft.Json.Tests.Converters
             XmlReader reader = XmlReader.Create(new StringReader(xml));
 
             StringWriter sw = new StringWriter();
-            XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true });
+            XmlWriter writer = XmlWriter.Create(
+                sw,
+                new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true }
+            );
 
             while (reader.Read())
             {
@@ -175,7 +183,10 @@ namespace Newtonsoft.Json.Tests.Converters
 
             XmlDocument xmlNode = JsonConvert.DeserializeXmlNode(initialJson, null, false, true);
 
-            Assert.AreEqual("<Be_x003A_fore_x003A_After_x0021_>Value!</Be_x003A_fore_x003A_After_x0021_>", xmlNode.OuterXml);
+            Assert.AreEqual(
+                "<Be_x003A_fore_x003A_After_x0021_>Value!</Be_x003A_fore_x003A_After_x0021_>",
+                xmlNode.OuterXml
+            );
 
             string json = JsonConvert.SerializeXmlNode(xmlNode);
 
@@ -199,7 +210,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void XmlNode_EncodeSpecialCharacters()
         {
-            string initialJson = @"{
+            string initialJson =
+                @"{
   ""?xml"": {
     ""@version"": ""1.0"",
     ""@standalone"": ""no""
@@ -239,7 +251,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             XmlDocument xmlNode = JsonConvert.DeserializeXmlNode(initialJson, "root", false, true);
 
-            StringAssert.AreEqual(@"<root>
+            StringAssert.AreEqual(
+                @"<root>
   <_x003F_xml>
     <_x0040_version>1.0</_x0040_version>
     <_x0040_standalone>no</_x0040_standalone>
@@ -271,7 +284,9 @@ namespace Newtonsoft.Json.Tests.Converters
       </abbr>
     </a>
   </span>
-</root>", IndentXml(xmlNode.OuterXml));
+</root>",
+                IndentXml(xmlNode.OuterXml)
+            );
 
             string json = JsonConvert.SerializeXmlNode(xmlNode, Formatting.Indented, true);
 
@@ -338,7 +353,10 @@ namespace Newtonsoft.Json.Tests.Converters
 
             XDocument xmlNode = JsonConvert.DeserializeXNode(initialJson, null, false, true);
 
-            Assert.AreEqual("<Be_x003A_fore_x003A_After_x0021_>Value!</Be_x003A_fore_x003A_After_x0021_>", xmlNode.ToString());
+            Assert.AreEqual(
+                "<Be_x003A_fore_x003A_After_x0021_>Value!</Be_x003A_fore_x003A_After_x0021_>",
+                xmlNode.ToString()
+            );
 
             string json = JsonConvert.SerializeXNode(xmlNode);
 
@@ -362,7 +380,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void XNode_EncodeSpecialCharacters()
         {
-            string initialJson = @"{
+            string initialJson =
+                @"{
   ""?xml"": {
     ""@version"": ""1.0"",
     ""@standalone"": ""no""
@@ -402,7 +421,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             XDocument xmlNode = JsonConvert.DeserializeXNode(initialJson, "root", false, true);
 
-            StringAssert.AreEqual(@"<root>
+            StringAssert.AreEqual(
+                @"<root>
   <_x003F_xml>
     <_x0040_version>1.0</_x0040_version>
     <_x0040_standalone>no</_x0040_standalone>
@@ -434,7 +454,9 @@ namespace Newtonsoft.Json.Tests.Converters
       </abbr>
     </a>
   </span>
-</root>", xmlNode.ToString());
+</root>",
+                xmlNode.ToString()
+            );
 
             string json = JsonConvert.SerializeXNode(xmlNode, Formatting.Indented, true);
 
@@ -444,7 +466,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void XNode_MetadataArray_EncodeSpecialCharacters()
         {
-            string initialJson = @"{
+            string initialJson =
+                @"{
   ""$id"": ""1"",
   ""$values"": [
     ""1"",
@@ -457,14 +480,17 @@ namespace Newtonsoft.Json.Tests.Converters
 
             XDocument xmlNode = JsonConvert.DeserializeXNode(initialJson, "root", false, true);
 
-            StringAssert.AreEqual(@"<root>
+            StringAssert.AreEqual(
+                @"<root>
   <_x0024_id>1</_x0024_id>
   <_x0024_values>1</_x0024_values>
   <_x0024_values>2</_x0024_values>
   <_x0024_values>3</_x0024_values>
   <_x0024_values>4</_x0024_values>
   <_x0024_values>5</_x0024_values>
-</root>", xmlNode.ToString());
+</root>",
+                xmlNode.ToString()
+            );
 
             string json = JsonConvert.SerializeXNode(xmlNode, Formatting.Indented, true);
 
@@ -481,7 +507,7 @@ namespace Newtonsoft.Json.Tests.Converters
             Assert.AreEqual(@"<_x0024_>test</_x0024_>", doc.ToString());
 
             var json2 = JsonConvert.SerializeXNode(doc);
-            
+
             Assert.AreEqual(json1, json2);
         }
 
@@ -514,14 +540,20 @@ namespace Newtonsoft.Json.Tests.Converters
             json["Prop2"] = new MyModel().MyProperty;
 
             var xmlNodeConverter = new XmlNodeConverter { DeserializeRootElementName = "object" };
-            var jsonSerializerSettings = new JsonSerializerSettings { Converters = new JsonConverter[] { xmlNodeConverter } };
+            var jsonSerializerSettings = new JsonSerializerSettings
+            {
+                Converters = new JsonConverter[] { xmlNodeConverter },
+            };
             var jsonSerializer = JsonSerializer.CreateDefault(jsonSerializerSettings);
             XDocument d = json.ToObject<XDocument>(jsonSerializer);
 
-            StringAssert.Equals(@"<object>
+            StringAssert.Equals(
+                @"<object>
   <Prop1 />
   <Prop2 />
-</object>", d.ToString());
+</object>",
+                d.ToString()
+            );
         }
 
         public class Foo
@@ -544,13 +576,15 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void MultipleNamespacesXDocument()
         {
-            string xml = @"<result xp_0:end=""2014-08-15 13:12:11.9184"" xp_0:start=""2014-08-15 13:11:49.3140"" xp_0:time_diff=""22604.3836"" xmlns:xp_0=""Test1"" p2:end=""2014-08-15 13:13:49.5522"" p2:start=""2014-08-15 13:13:49.0268"" p2:time_diff=""525.4646"" xmlns:p2=""Test2"" />";
+            string xml =
+                @"<result xp_0:end=""2014-08-15 13:12:11.9184"" xp_0:start=""2014-08-15 13:11:49.3140"" xp_0:time_diff=""22604.3836"" xmlns:xp_0=""Test1"" p2:end=""2014-08-15 13:13:49.5522"" p2:start=""2014-08-15 13:13:49.0268"" p2:time_diff=""525.4646"" xmlns:p2=""Test2"" />";
 
             XDocument d = XDocument.Parse(xml);
 
             string json = JsonConvert.SerializeObject(d, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""result"": {
     ""@xp_0:end"": ""2014-08-15 13:12:11.9184"",
     ""@xp_0:start"": ""2014-08-15 13:11:49.3140"",
@@ -561,7 +595,9 @@ namespace Newtonsoft.Json.Tests.Converters
     ""@p2:time_diff"": ""525.4646"",
     ""@xmlns:p2"": ""Test2""
   }
-}", json);
+}",
+                json
+            );
 
             XDocument doc = JsonConvert.DeserializeObject<XDocument>(json);
 
@@ -573,14 +609,16 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void MultipleNamespacesXmlDocument()
         {
-            string xml = @"<result xp_0:end=""2014-08-15 13:12:11.9184"" xp_0:start=""2014-08-15 13:11:49.3140"" xp_0:time_diff=""22604.3836"" xmlns:xp_0=""Test1"" p2:end=""2014-08-15 13:13:49.5522"" p2:start=""2014-08-15 13:13:49.0268"" p2:time_diff=""525.4646"" xmlns:p2=""Test2"" />";
+            string xml =
+                @"<result xp_0:end=""2014-08-15 13:12:11.9184"" xp_0:start=""2014-08-15 13:11:49.3140"" xp_0:time_diff=""22604.3836"" xmlns:xp_0=""Test1"" p2:end=""2014-08-15 13:13:49.5522"" p2:start=""2014-08-15 13:13:49.0268"" p2:time_diff=""525.4646"" xmlns:p2=""Test2"" />";
 
             XmlDocument d = new XmlDocument();
             d.LoadXml(xml);
 
             string json = JsonConvert.SerializeObject(d, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""result"": {
     ""@xp_0:end"": ""2014-08-15 13:12:11.9184"",
     ""@xp_0:start"": ""2014-08-15 13:11:49.3140"",
@@ -591,7 +629,9 @@ namespace Newtonsoft.Json.Tests.Converters
     ""@p2:time_diff"": ""525.4646"",
     ""@xmlns:p2"": ""Test2""
   }
-}", json);
+}",
+                json
+            );
 
             XmlDocument doc = JsonConvert.DeserializeObject<XmlDocument>(json);
 
@@ -601,7 +641,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeXmlElement()
         {
-            string xml = @"<payload>
+            string xml =
+                @"<payload>
     <Country>6</Country>
     <FinancialTransactionApprovalRequestUID>79</FinancialTransactionApprovalRequestUID>
     <TransactionStatus>Approved</TransactionStatus>
@@ -617,7 +658,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             var json = JsonConvert.SerializeObject(result, Formatting.Indented); // <--- fails here with the cast message
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Country"": ""6""
   },
@@ -633,7 +675,9 @@ namespace Newtonsoft.Json.Tests.Converters
   {
     ""RequestedBy"": ""Someone""
   }
-]", json);
+]",
+                json
+            );
         }
 #endif
 
@@ -641,7 +685,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeXElement()
         {
-            string xml = @"<payload>
+            string xml =
+                @"<payload>
     <Country>6</Country>
     <FinancialTransactionApprovalRequestUID>79</FinancialTransactionApprovalRequestUID>
     <TransactionStatus>Approved</TransactionStatus>
@@ -655,7 +700,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             var json = JsonConvert.SerializeObject(result, Formatting.Indented); // <--- fails here with the cast message
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Country"": ""6""
   },
@@ -671,7 +717,9 @@ namespace Newtonsoft.Json.Tests.Converters
   {
     ""RequestedBy"": ""Someone""
   }
-]", json);
+]",
+                json
+            );
         }
 
         public class DecimalContainer
@@ -687,11 +735,14 @@ namespace Newtonsoft.Json.Tests.Converters
 
             var json = JsonConvert.SerializeObject(x, Formatting.Indented);
 
-            XDocument doc1 = JsonConvert.DeserializeObject<XDocument>(json, new JsonSerializerSettings
-            {
-                Converters = { new XmlNodeConverter() },
-                FloatParseHandling = FloatParseHandling.Decimal
-            });
+            XDocument doc1 = JsonConvert.DeserializeObject<XDocument>(
+                json,
+                new JsonSerializerSettings
+                {
+                    Converters = { new XmlNodeConverter() },
+                    FloatParseHandling = FloatParseHandling.Decimal,
+                }
+            );
 
             var xml = doc1.ToString();
             Assert.AreEqual("<Number>1000000003.14159265358979</Number>", xml);
@@ -711,23 +762,36 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DateTimeParseHandlingOffset()
         {
-            DateTimeOffset d = new DateTimeOffset(2012, 12, 12, 12, 44, 1, TimeSpan.FromHours(12).Add(TimeSpan.FromMinutes(34)));
+            DateTimeOffset d = new DateTimeOffset(
+                2012,
+                12,
+                12,
+                12,
+                44,
+                1,
+                TimeSpan.FromHours(12).Add(TimeSpan.FromMinutes(34))
+            );
             var x = new DateTimeOffsetContainer { Date = d };
 
             var json = JsonConvert.SerializeObject(x, Formatting.Indented);
 
-            XDocument doc1 = JsonConvert.DeserializeObject<XDocument>(json, new JsonSerializerSettings
-            {
-                Converters = { new XmlNodeConverter() },
-                DateParseHandling = DateParseHandling.DateTimeOffset
-            });
+            XDocument doc1 = JsonConvert.DeserializeObject<XDocument>(
+                json,
+                new JsonSerializerSettings
+                {
+                    Converters = { new XmlNodeConverter() },
+                    DateParseHandling = DateParseHandling.DateTimeOffset,
+                }
+            );
 
             var xml = doc1.ToString();
             Assert.AreEqual("<Date>2012-12-12T12:44:01+12:34</Date>", xml);
 
             string json2 = JsonConvert.SerializeObject(doc1, Formatting.Indented);
 
-            DateTimeOffsetContainer x2 = JsonConvert.DeserializeObject<DateTimeOffsetContainer>(json2);
+            DateTimeOffsetContainer x2 = JsonConvert.DeserializeObject<DateTimeOffsetContainer>(
+                json2
+            );
 
             Assert.AreEqual(x.Date, x2.Date);
         }
@@ -739,13 +803,19 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json = JsonConvert.SerializeXNode(XElement.Parse(xml));
 
-            Assert.AreEqual(@"{""root"":{""p"":{""#text"":[""Text1"","" Text2""],""span"":[""Span1"",""Span2""]}}}", json);
+            Assert.AreEqual(
+                @"{""root"":{""p"":{""#text"":[""Text1"","" Text2""],""span"":[""Span1"",""Span2""]}}}",
+                json
+            );
 
             XDocument doc = JsonConvert.DeserializeXNode(json);
 
-            StringAssert.AreEqual(@"<root>
+            StringAssert.AreEqual(
+                @"<root>
   <p>Text1 Text2<span>Span1</span><span>Span2</span></p>
-</root>", doc.ToString());
+</root>",
+                doc.ToString()
+            );
         }
 
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
@@ -779,7 +849,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeAndDeserializeXmlWithNamespaceInChildrenAndNoValueInChildren()
         {
-            var xmlString = @"<root>
+            var xmlString =
+                @"<root>
                               <b xmlns='http://www.example.com/ns'/>
                               <c>AAA</c>
                               <test>adad</test>
@@ -813,7 +884,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeMultipleRootElements()
         {
-            string json = @"{
+            string json =
+                @"{
     ""Id"": 1,
      ""Email"": ""james@example.com"",
      ""Active"": true,
@@ -829,14 +901,19 @@ namespace Newtonsoft.Json.Tests.Converters
     }
 }";
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => { JsonConvert.DeserializeXmlNode(json); },
-                "JSON root object has multiple properties. The root object must have a single property in order to create a valid XML document. Consider specifying a DeserializeRootElementName. Path 'Email', line 3, position 13.");
+                () =>
+                {
+                    JsonConvert.DeserializeXmlNode(json);
+                },
+                "JSON root object has multiple properties. The root object must have a single property in order to create a valid XML document. Consider specifying a DeserializeRootElementName. Path 'Email', line 3, position 13."
+            );
         }
 
         [Test]
         public void DocumentSerializeIndented()
         {
-            string xml = @"<?xml version=""1.0"" standalone=""no""?>
+            string xml =
+                @"<?xml version=""1.0"" standalone=""no""?>
 <?xml-stylesheet href=""classic.xsl"" type=""text/xml""?>
 <span class=""vevent"">
   <a class=""url"" href=""http://www.web2con.com/"">
@@ -850,7 +927,8 @@ namespace Newtonsoft.Json.Tests.Converters
             doc.LoadXml(xml);
 
             string jsonText = SerializeXmlNode(doc);
-            string expected = @"{
+            string expected =
+                @"{
   ""?xml"": {
     ""@version"": ""1.0"",
     ""@standalone"": ""no""
@@ -897,7 +975,8 @@ namespace Newtonsoft.Json.Tests.Converters
             XmlDocument doc = new XmlDocument();
             string jsonText;
 
-            string xml = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+            string xml =
+                @"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <xs:schema xs:id=""SomeID"" 
 	xmlns="""" 
 	xmlns:xs=""http://www.w3.org/2001/XMLSchema"" 
@@ -910,7 +989,10 @@ namespace Newtonsoft.Json.Tests.Converters
             document.LoadXml(xml);
 
             // XmlAttribute
-            XmlAttribute attribute = document.DocumentElement.ChildNodes[0].Attributes["IsDataSet", "urn:schemas-microsoft-com:xml-msdata"];
+            XmlAttribute attribute = document.DocumentElement.ChildNodes[0].Attributes[
+                "IsDataSet",
+                "urn:schemas-microsoft-com:xml-msdata"
+            ];
             attribute.Value = "true";
 
             jsonText = JsonConvert.SerializeXmlNode(attribute);
@@ -919,7 +1001,9 @@ namespace Newtonsoft.Json.Tests.Converters
 
 #if !NET20
             XDocument d = XDocument.Parse(xml);
-            XAttribute a = d.Root.Element("{http://www.w3.org/2001/XMLSchema}element").Attribute("{urn:schemas-microsoft-com:xml-msdata}IsDataSet");
+            XAttribute a = d
+                .Root.Element("{http://www.w3.org/2001/XMLSchema}element")
+                .Attribute("{urn:schemas-microsoft-com:xml-msdata}IsDataSet");
 
             jsonText = JsonConvert.SerializeXNode(a);
 
@@ -927,11 +1011,17 @@ namespace Newtonsoft.Json.Tests.Converters
 #endif
 
             // XmlProcessingInstruction
-            XmlProcessingInstruction instruction = doc.CreateProcessingInstruction("xml-stylesheet", @"href=""classic.xsl"" type=""text/xml""");
+            XmlProcessingInstruction instruction = doc.CreateProcessingInstruction(
+                "xml-stylesheet",
+                @"href=""classic.xsl"" type=""text/xml"""
+            );
 
             jsonText = JsonConvert.SerializeXmlNode(instruction);
 
-            Assert.AreEqual(@"{""?xml-stylesheet"":""href=\""classic.xsl\"" type=\""text/xml\""""}", jsonText);
+            Assert.AreEqual(
+                @"{""?xml-stylesheet"":""href=\""classic.xsl\"" type=\""text/xml\""""}",
+                jsonText
+            );
 
             // XmlProcessingInstruction
             XmlCDataSection cDataSection = doc.CreateCDataSection("<Kiwi>true</Kiwi>");
@@ -941,8 +1031,14 @@ namespace Newtonsoft.Json.Tests.Converters
             Assert.AreEqual(@"{""#cdata-section"":""<Kiwi>true</Kiwi>""}", jsonText);
 
             // XmlElement
-            XmlElement element = doc.CreateElement("xs", "Choice", "http://www.w3.org/2001/XMLSchema");
-            element.SetAttributeNode(doc.CreateAttribute("msdata", "IsDataSet", "urn:schemas-microsoft-com:xml-msdata"));
+            XmlElement element = doc.CreateElement(
+                "xs",
+                "Choice",
+                "http://www.w3.org/2001/XMLSchema"
+            );
+            element.SetAttributeNode(
+                doc.CreateAttribute("msdata", "IsDataSet", "urn:schemas-microsoft-com:xml-msdata")
+            );
 
             XmlAttribute aa = doc.CreateAttribute(@"xmlns", "xs", "http://www.w3.org/2000/xmlns/");
             aa.Value = "http://www.w3.org/2001/XMLSchema";
@@ -959,7 +1055,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             jsonText = JsonConvert.SerializeXmlNode(element, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""xs:Choice"": {
     ""@msdata:IsDataSet"": """",
     ""@xmlns:xs"": ""http://www.w3.org/2001/XMLSchema"",
@@ -967,13 +1064,16 @@ namespace Newtonsoft.Json.Tests.Converters
     ""?xml-stylesheet"": ""href=\""classic.xsl\"" type=\""text/xml\"""",
     ""#cdata-section"": ""<Kiwi>true</Kiwi>""
   }
-}", jsonText);
+}",
+                jsonText
+            );
         }
 
         [Test]
         public void SerializeNodeTypes_Encoding()
         {
-            XmlNode node = DeserializeXmlNode(@"{
+            XmlNode node = DeserializeXmlNode(
+                @"{
   ""xs!:Choice!"": {
     ""@msdata:IsDataSet!"": """",
     ""@xmlns:xs!"": ""http://www.w3.org/2001/XMLSchema"",
@@ -981,13 +1081,18 @@ namespace Newtonsoft.Json.Tests.Converters
     ""?xml-stylesheet"": ""href=\""classic.xsl\"" type=\""text/xml\"""",
     ""#cdata-section"": ""<Kiwi>true</Kiwi>""
   }
-}");
+}"
+            );
 
-            Assert.AreEqual(@"<xs_x0021_:Choice_x0021_ msdata:IsDataSet_x0021_="""" xmlns:xs_x0021_=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata""><?xml-stylesheet href=""classic.xsl"" type=""text/xml""?><![CDATA[<Kiwi>true</Kiwi>]]></xs_x0021_:Choice_x0021_>", node.InnerXml);
+            Assert.AreEqual(
+                @"<xs_x0021_:Choice_x0021_ msdata:IsDataSet_x0021_="""" xmlns:xs_x0021_=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata""><?xml-stylesheet href=""classic.xsl"" type=""text/xml""?><![CDATA[<Kiwi>true</Kiwi>]]></xs_x0021_:Choice_x0021_>",
+                node.InnerXml
+            );
 
             string json = SerializeXmlNode(node);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""xs!:Choice!"": {
     ""@msdata:IsDataSet!"": """",
     ""@xmlns:xs!"": ""http://www.w3.org/2001/XMLSchema"",
@@ -995,7 +1100,9 @@ namespace Newtonsoft.Json.Tests.Converters
     ""?xml-stylesheet"": ""href=\""classic.xsl\"" type=\""text/xml\"""",
     ""#cdata-section"": ""<Kiwi>true</Kiwi>""
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -1018,9 +1125,11 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void XmlDocumentTypeSerialize()
         {
-            string xml = @"<?xml version=""1.0"" encoding=""utf-8""?><!DOCTYPE STOCKQUOTE PUBLIC ""-//W3C//DTD StockQuote 1.5//EN"" ""http://www.idontexistnopenopewhatnope123.org/dtd/stockquote_1.5.dtd""><STOCKQUOTE ROWCOUNT=""2""><RESULT><ROW><ASK>0</ASK><BID>0</BID><CHANGE>-16.310</CHANGE><COMPANYNAME>Dow Jones</COMPANYNAME><DATETIME>2014-04-17 15:50:37</DATETIME><DIVIDEND>0</DIVIDEND><EPS>0</EPS><EXCHANGE></EXCHANGE><HIGH>16460.490</HIGH><LASTDATETIME>2014-04-17 15:50:37</LASTDATETIME><LASTPRICE>16408.540</LASTPRICE><LOW>16368.140</LOW><OPEN>16424.140</OPEN><PCHANGE>-0.099</PCHANGE><PE>0</PE><PREVIOUSCLOSE>16424.850</PREVIOUSCLOSE><SHARES>0</SHARES><TICKER>DJII</TICKER><TRADES>0</TRADES><VOLUME>136188700</VOLUME><YEARHIGH>11309.000</YEARHIGH><YEARLOW>9302.280</YEARLOW><YIELD>0</YIELD></ROW><ROW><ASK>0</ASK><BID>0</BID><CHANGE>9.290</CHANGE><COMPANYNAME>NASDAQ</COMPANYNAME><DATETIME>2014-04-17 15:40:01</DATETIME><DIVIDEND>0</DIVIDEND><EPS>0</EPS><EXCHANGE></EXCHANGE><HIGH>4110.460</HIGH><LASTDATETIME>2014-04-17 15:40:01</LASTDATETIME><LASTPRICE>4095.520</LASTPRICE><LOW>4064.700</LOW><OPEN>4080.300</OPEN><PCHANGE>0.227</PCHANGE><PE>0</PE><PREVIOUSCLOSE>4086.230</PREVIOUSCLOSE><SHARES>0</SHARES><TICKER>COMP</TICKER><TRADES>0</TRADES><VOLUME>1784210100</VOLUME><YEARHIGH>4371.710</YEARHIGH><YEARLOW>3154.960</YEARLOW><YIELD>0</YIELD></ROW></RESULT><STATUS>Couldn't find ticker: SPIC?</STATUS><STATUSCODE>2</STATUSCODE></STOCKQUOTE>";
+            string xml =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><!DOCTYPE STOCKQUOTE PUBLIC ""-//W3C//DTD StockQuote 1.5//EN"" ""http://www.idontexistnopenopewhatnope123.org/dtd/stockquote_1.5.dtd""><STOCKQUOTE ROWCOUNT=""2""><RESULT><ROW><ASK>0</ASK><BID>0</BID><CHANGE>-16.310</CHANGE><COMPANYNAME>Dow Jones</COMPANYNAME><DATETIME>2014-04-17 15:50:37</DATETIME><DIVIDEND>0</DIVIDEND><EPS>0</EPS><EXCHANGE></EXCHANGE><HIGH>16460.490</HIGH><LASTDATETIME>2014-04-17 15:50:37</LASTDATETIME><LASTPRICE>16408.540</LASTPRICE><LOW>16368.140</LOW><OPEN>16424.140</OPEN><PCHANGE>-0.099</PCHANGE><PE>0</PE><PREVIOUSCLOSE>16424.850</PREVIOUSCLOSE><SHARES>0</SHARES><TICKER>DJII</TICKER><TRADES>0</TRADES><VOLUME>136188700</VOLUME><YEARHIGH>11309.000</YEARHIGH><YEARLOW>9302.280</YEARLOW><YIELD>0</YIELD></ROW><ROW><ASK>0</ASK><BID>0</BID><CHANGE>9.290</CHANGE><COMPANYNAME>NASDAQ</COMPANYNAME><DATETIME>2014-04-17 15:40:01</DATETIME><DIVIDEND>0</DIVIDEND><EPS>0</EPS><EXCHANGE></EXCHANGE><HIGH>4110.460</HIGH><LASTDATETIME>2014-04-17 15:40:01</LASTDATETIME><LASTPRICE>4095.520</LASTPRICE><LOW>4064.700</LOW><OPEN>4080.300</OPEN><PCHANGE>0.227</PCHANGE><PE>0</PE><PREVIOUSCLOSE>4086.230</PREVIOUSCLOSE><SHARES>0</SHARES><TICKER>COMP</TICKER><TRADES>0</TRADES><VOLUME>1784210100</VOLUME><YEARHIGH>4371.710</YEARHIGH><YEARLOW>3154.960</YEARLOW><YIELD>0</YIELD></ROW></RESULT><STATUS>Couldn't find ticker: SPIC?</STATUS><STATUSCODE>2</STATUSCODE></STOCKQUOTE>";
 
-            string expected = @"{
+            string expected =
+                @"{
   ""?xml"": {
     ""@version"": ""1.0"",
     ""@encoding"": ""utf-8""
@@ -1124,16 +1233,20 @@ namespace Newtonsoft.Json.Tests.Converters
                 get { return Encoding.UTF8; }
             }
 
-            public Utf8StringWriter(StringBuilder sb) : base(sb)
-            {
-            }
+            public Utf8StringWriter(StringBuilder sb)
+                : base(sb) { }
         }
 
 #if !NET20
         public static string ToStringWithDeclaration(XDocument doc, bool indent = false)
         {
             StringBuilder builder = new StringBuilder();
-            using (var writer = XmlWriter.Create(new Utf8StringWriter(builder), new XmlWriterSettings { Indent = indent }))
+            using (
+                var writer = XmlWriter.Create(
+                    new Utf8StringWriter(builder),
+                    new XmlWriterSettings { Indent = indent }
+                )
+            )
             {
                 doc.Save(writer);
             }
@@ -1144,7 +1257,12 @@ namespace Newtonsoft.Json.Tests.Converters
         public static string ToStringWithDeclaration(XmlDocument doc, bool indent = false)
         {
             StringBuilder builder = new StringBuilder();
-            using (var writer = XmlWriter.Create(new Utf8StringWriter(builder), new XmlWriterSettings { Indent = indent }))
+            using (
+                var writer = XmlWriter.Create(
+                    new Utf8StringWriter(builder),
+                    new XmlWriterSettings { Indent = indent }
+                )
+            )
             {
                 doc.Save(writer);
             }
@@ -1154,7 +1272,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void NamespaceSerializeDeserialize()
         {
-            string xml = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+            string xml =
+                @"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <xs:schema xs:id=""SomeID"" 
 	xmlns="""" 
 	xmlns:xs=""http://www.w3.org/2001/XMLSchema"" 
@@ -1183,7 +1302,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string jsonText = SerializeXmlNode(doc);
 
-            string expected = @"{
+            string expected =
+                @"{
   ""?xml"": {
     ""@version"": ""1.0"",
     ""@encoding"": ""utf-8""
@@ -1242,13 +1362,15 @@ namespace Newtonsoft.Json.Tests.Converters
 
             ExceptionAssert.Throws<JsonSerializationException>(
                 () => JsonConvert.DeserializeXmlNode(json, "ROOT"),
-                "Unexpected end when reading JSON. Path 'Row', line 1, position 9.");
+                "Unexpected end when reading JSON. Path 'Row', line 1, position 9."
+            );
         }
 
         [Test]
         public void DocumentDeserialize()
         {
-            string jsonText = @"{
+            string jsonText =
+                @"{
   ""?xml"": {
     ""@version"": ""1.0"",
     ""@standalone"": ""no""
@@ -1269,7 +1391,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             XmlDocument doc = (XmlDocument)DeserializeXmlNode(jsonText);
 
-            string expected = @"<?xml version=""1.0"" standalone=""no""?>
+            string expected =
+                @"<?xml version=""1.0"" standalone=""no""?>
 <span class=""vevent"">
   <a class=""url"" href=""http://www.web2con.com/"">
     <span class=""summary"">Web 2.0 Conference<![CDATA[my escaped text]]></span>
@@ -1316,7 +1439,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SingleTextNode()
         {
-            string xml = @"<?xml version=""1.0"" standalone=""no""?>
+            string xml =
+                @"<?xml version=""1.0"" standalone=""no""?>
 			<root>
 			  <person id=""1"">
 	  			<name>Alan</name>
@@ -1341,7 +1465,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void EmptyNode()
         {
-            string xml = @"<?xml version=""1.0"" standalone=""no""?>
+            string xml =
+                @"<?xml version=""1.0"" standalone=""no""?>
 			<root>
 			  <person id=""1"">
 				<name>Alan</name>
@@ -1358,7 +1483,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string jsonText = SerializeXmlNode(doc);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""?xml"": {
     ""@version"": ""1.0"",
     ""@standalone"": ""no""
@@ -1377,7 +1503,9 @@ namespace Newtonsoft.Json.Tests.Converters
       }
     ]
   }
-}", jsonText);
+}",
+                jsonText
+            );
 
             XmlDocument newDoc = (XmlDocument)DeserializeXmlNode(jsonText);
 
@@ -1387,11 +1515,13 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void OtherElementDataTypes()
         {
-            string jsonText = @"{""?xml"":{""@version"":""1.0"",""@standalone"":""no""},""root"":{""person"":[{""@id"":""1"",""Float"":2.5,""Integer"":99},{""Boolean"":true,""@id"":""2"",""date"":""\/Date(954374400000)\/""}]}}";
+            string jsonText =
+                @"{""?xml"":{""@version"":""1.0"",""@standalone"":""no""},""root"":{""person"":[{""@id"":""1"",""Float"":2.5,""Integer"":99},{""Boolean"":true,""@id"":""2"",""date"":""\/Date(954374400000)\/""}]}}";
 
             XmlDocument newDoc = (XmlDocument)DeserializeXmlNode(jsonText);
 
-            string expected = @"<?xml version=""1.0"" standalone=""no""?><root><person id=""1""><Float>2.5</Float><Integer>99</Integer></person><person id=""2""><Boolean>true</Boolean><date>2000-03-30T00:00:00Z</date></person></root>";
+            string expected =
+                @"<?xml version=""1.0"" standalone=""no""?><root><person id=""1""><Float>2.5</Float><Integer>99</Integer></person><person id=""2""><Boolean>true</Boolean><date>2000-03-30T00:00:00Z</date></person></root>";
 
             Assert.AreEqual(expected, newDoc.InnerXml);
         }
@@ -1399,15 +1529,26 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void NoRootObject()
         {
-            ExceptionAssert.Throws<JsonSerializationException>(() => { XmlDocument newDoc = (XmlDocument)JsonConvert.DeserializeXmlNode(@"[1]"); }, "XmlNodeConverter can only convert JSON that begins with an object. Path '', line 1, position 1.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    XmlDocument newDoc = (XmlDocument)JsonConvert.DeserializeXmlNode(@"[1]");
+                },
+                "XmlNodeConverter can only convert JSON that begins with an object. Path '', line 1, position 1."
+            );
         }
 
         [Test]
         public void RootObjectMultipleProperties()
         {
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => { XmlDocument newDoc = (XmlDocument)JsonConvert.DeserializeXmlNode(@"{Prop1:1,Prop2:2}"); },
-                "JSON root object has multiple properties. The root object must have a single property in order to create a valid XML document. Consider specifying a DeserializeRootElementName. Path 'Prop2', line 1, position 15.");
+                () =>
+                {
+                    XmlDocument newDoc = (XmlDocument)
+                        JsonConvert.DeserializeXmlNode(@"{Prop1:1,Prop2:2}");
+                },
+                "JSON root object has multiple properties. The root object must have a single property in order to create a valid XML document. Consider specifying a DeserializeRootElementName. Path 'Prop2', line 1, position 15."
+            );
         }
 
         [Test]
@@ -1422,7 +1563,8 @@ namespace Newtonsoft.Json.Tests.Converters
             Assert.AreEqual(expected, newDoc.InnerXml);
 
             string json = SerializeXmlNode(newDoc);
-            expected = @"{
+            expected =
+                @"{
   ""root"": {
     ""r"": {
       ""Date"": [
@@ -1439,7 +1581,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void ForceJsonArray()
         {
-            string arrayXml = @"<root xmlns:json=""http://james.newtonking.com/projects/json"">
+            string arrayXml =
+                @"<root xmlns:json=""http://james.newtonking.com/projects/json"">
 			  <person id=""1"">
 				  <name>Alan</name>
 				  <url>http://www.google.com</url>
@@ -1451,7 +1594,8 @@ namespace Newtonsoft.Json.Tests.Converters
             arrayDoc.LoadXml(arrayXml);
 
             string arrayJsonText = SerializeXmlNode(arrayDoc);
-            string expected = @"{
+            string expected =
+                @"{
   ""root"": {
     ""person"": {
       ""@id"": ""1"",
@@ -1465,7 +1609,8 @@ namespace Newtonsoft.Json.Tests.Converters
 }";
             StringAssert.AreEqual(expected, arrayJsonText);
 
-            arrayXml = @"<root xmlns:json=""http://james.newtonking.com/projects/json"">
+            arrayXml =
+                @"<root xmlns:json=""http://james.newtonking.com/projects/json"">
 			  <person id=""1"">
 				  <name>Alan</name>
 				  <url>http://www.google.com</url>
@@ -1478,7 +1623,8 @@ namespace Newtonsoft.Json.Tests.Converters
             arrayDoc.LoadXml(arrayXml);
 
             arrayJsonText = SerializeXmlNode(arrayDoc);
-            expected = @"{
+            expected =
+                @"{
   ""root"": {
     ""person"": {
       ""@id"": ""1"",
@@ -1493,7 +1639,8 @@ namespace Newtonsoft.Json.Tests.Converters
 }";
             StringAssert.AreEqual(expected, arrayJsonText);
 
-            arrayXml = @"<root xmlns:json=""http://james.newtonking.com/projects/json"">
+            arrayXml =
+                @"<root xmlns:json=""http://james.newtonking.com/projects/json"">
 			  <person id=""1"">
 				  <name>Alan</name>
 				  <url>http://www.google.com</url>
@@ -1505,7 +1652,8 @@ namespace Newtonsoft.Json.Tests.Converters
             arrayDoc.LoadXml(arrayXml);
 
             arrayJsonText = SerializeXmlNode(arrayDoc);
-            expected = @"{
+            expected =
+                @"{
   ""root"": {
     ""person"": {
       ""@id"": ""1"",
@@ -1517,7 +1665,8 @@ namespace Newtonsoft.Json.Tests.Converters
 }";
             StringAssert.AreEqual(expected, arrayJsonText);
 
-            arrayXml = @"<root>
+            arrayXml =
+                @"<root>
 			  <person id=""1"">
 				  <name>Alan</name>
 				  <url>http://www.google.com</url>
@@ -1529,7 +1678,8 @@ namespace Newtonsoft.Json.Tests.Converters
             arrayDoc.LoadXml(arrayXml);
 
             arrayJsonText = SerializeXmlNode(arrayDoc);
-            expected = @"{
+            expected =
+                @"{
   ""root"": {
     ""person"": {
       ""@id"": ""1"",
@@ -1550,8 +1700,12 @@ namespace Newtonsoft.Json.Tests.Converters
             string json = @"{""count"": 773840,""photos"": null}";
 
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => { JsonConvert.DeserializeXmlNode(json); },
-                "JSON root object has multiple properties. The root object must have a single property in order to create a valid XML document. Consider specifying a DeserializeRootElementName. Path 'photos', line 1, position 26.");
+                () =>
+                {
+                    JsonConvert.DeserializeXmlNode(json);
+                },
+                "JSON root object has multiple properties. The root object must have a single property in order to create a valid XML document. Consider specifying a DeserializeRootElementName. Path 'photos', line 1, position 26."
+            );
         }
 #endif
 
@@ -1562,8 +1716,12 @@ namespace Newtonsoft.Json.Tests.Converters
             string json = @"{""count"": 773840,""photos"": null}";
 
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => { JsonConvert.DeserializeXNode(json); },
-                "JSON root object has multiple properties. The root object must have a single property in order to create a valid XML document. Consider specifying a DeserializeRootElementName. Path 'photos', line 1, position 26.");
+                () =>
+                {
+                    JsonConvert.DeserializeXNode(json);
+                },
+                "JSON root object has multiple properties. The root object must have a single property in order to create a valid XML document. Consider specifying a DeserializeRootElementName. Path 'photos', line 1, position 26."
+            );
         }
 #endif
 
@@ -1575,20 +1733,27 @@ namespace Newtonsoft.Json.Tests.Converters
 #if !PORTABLE
             XmlDocument newDoc = JsonConvert.DeserializeXmlNode(json, "myRoot");
 
-            Assert.AreEqual(@"<myRoot><count>773840</count><photos>773840</photos></myRoot>", newDoc.InnerXml);
+            Assert.AreEqual(
+                @"<myRoot><count>773840</count><photos>773840</photos></myRoot>",
+                newDoc.InnerXml
+            );
 #endif
 
 #if !NET20
             XDocument newXDoc = JsonConvert.DeserializeXNode(json, "myRoot");
 
-            Assert.AreEqual(@"<myRoot><count>773840</count><photos>773840</photos></myRoot>", newXDoc.ToString(SaveOptions.DisableFormatting));
+            Assert.AreEqual(
+                @"<myRoot><count>773840</count><photos>773840</photos></myRoot>",
+                newXDoc.ToString(SaveOptions.DisableFormatting)
+            );
 #endif
         }
 
         [Test]
         public void NestedArrays()
         {
-            string json = @"{
+            string json =
+                @"{
   ""available_sizes"": [
     [
       ""assets/images/resized/0001/1070/11070v1-max-150x150.jpg"",
@@ -1609,7 +1774,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string xml = IndentXml(newDoc.InnerXml);
 
-            StringAssert.AreEqual(@"<myRoot>
+            StringAssert.AreEqual(
+                @"<myRoot>
   <available_sizes>
     <available_sizes>assets/images/resized/0001/1070/11070v1-max-150x150.jpg</available_sizes>
     <available_sizes>assets/images/resized/0001/1070/11070v1-max-150x150.jpg</available_sizes>
@@ -1621,13 +1787,16 @@ namespace Newtonsoft.Json.Tests.Converters
   <available_sizes>
     <available_sizes>assets/images/resized/0001/1070/11070v1-max-250x250.jpg</available_sizes>
   </available_sizes>
-</myRoot>", IndentXml(newDoc.InnerXml));
+</myRoot>",
+                IndentXml(newDoc.InnerXml)
+            );
 #endif
 
 #if !NET20
             XDocument newXDoc = JsonConvert.DeserializeXNode(json, "myRoot");
 
-            StringAssert.AreEqual(@"<myRoot>
+            StringAssert.AreEqual(
+                @"<myRoot>
   <available_sizes>
     <available_sizes>assets/images/resized/0001/1070/11070v1-max-150x150.jpg</available_sizes>
     <available_sizes>assets/images/resized/0001/1070/11070v1-max-150x150.jpg</available_sizes>
@@ -1639,7 +1808,9 @@ namespace Newtonsoft.Json.Tests.Converters
   <available_sizes>
     <available_sizes>assets/images/resized/0001/1070/11070v1-max-250x250.jpg</available_sizes>
   </available_sizes>
-</myRoot>", IndentXml(newXDoc.ToString(SaveOptions.DisableFormatting)));
+</myRoot>",
+                IndentXml(newXDoc.ToString(SaveOptions.DisableFormatting))
+            );
 #endif
 
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
@@ -1651,7 +1822,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void RoundTripNestedArrays()
         {
-            string json = @"{
+            string json =
+                @"{
   ""available_sizes"": [
     [
       ""assets/images/resized/0001/1070/11070v1-max-150x150.jpg"",
@@ -1670,7 +1842,8 @@ namespace Newtonsoft.Json.Tests.Converters
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
             XmlDocument newDoc = JsonConvert.DeserializeXmlNode(json, "myRoot", true);
 
-            StringAssert.AreEqual(@"<myRoot>
+            StringAssert.AreEqual(
+                @"<myRoot>
   <available_sizes json:Array=""true"" xmlns:json=""http://james.newtonking.com/projects/json"">
     <available_sizes>assets/images/resized/0001/1070/11070v1-max-150x150.jpg</available_sizes>
     <available_sizes>assets/images/resized/0001/1070/11070v1-max-150x150.jpg</available_sizes>
@@ -1682,13 +1855,16 @@ namespace Newtonsoft.Json.Tests.Converters
   <available_sizes json:Array=""true"" xmlns:json=""http://james.newtonking.com/projects/json"">
     <available_sizes json:Array=""true"">assets/images/resized/0001/1070/11070v1-max-250x250.jpg</available_sizes>
   </available_sizes>
-</myRoot>", IndentXml(newDoc.InnerXml));
+</myRoot>",
+                IndentXml(newDoc.InnerXml)
+            );
 #endif
 
 #if !NET20
             XDocument newXDoc = JsonConvert.DeserializeXNode(json, "myRoot", true);
 
-            StringAssert.AreEqual(@"<myRoot>
+            StringAssert.AreEqual(
+                @"<myRoot>
   <available_sizes json:Array=""true"" xmlns:json=""http://james.newtonking.com/projects/json"">
     <available_sizes>assets/images/resized/0001/1070/11070v1-max-150x150.jpg</available_sizes>
     <available_sizes>assets/images/resized/0001/1070/11070v1-max-150x150.jpg</available_sizes>
@@ -1700,7 +1876,9 @@ namespace Newtonsoft.Json.Tests.Converters
   <available_sizes json:Array=""true"" xmlns:json=""http://james.newtonking.com/projects/json"">
     <available_sizes json:Array=""true"">assets/images/resized/0001/1070/11070v1-max-250x250.jpg</available_sizes>
   </available_sizes>
-</myRoot>", IndentXml(newXDoc.ToString(SaveOptions.DisableFormatting)));
+</myRoot>",
+                IndentXml(newXDoc.ToString(SaveOptions.DisableFormatting))
+            );
 #endif
 
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
@@ -1712,7 +1890,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void MultipleNestedArraysToXml()
         {
-            string json = @"{
+            string json =
+                @"{
   ""available_sizes"": [
     [
       [113, 150],
@@ -1732,13 +1911,19 @@ namespace Newtonsoft.Json.Tests.Converters
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
             XmlDocument newDoc = JsonConvert.DeserializeXmlNode(json, "myRoot");
 
-            Assert.AreEqual(@"<myRoot><available_sizes><available_sizes><available_sizes>113</available_sizes><available_sizes>150</available_sizes></available_sizes><available_sizes>assets/images/resized/0001/1070/11070v1-max-150x150.jpg</available_sizes></available_sizes><available_sizes><available_sizes><available_sizes>189</available_sizes><available_sizes>250</available_sizes></available_sizes><available_sizes>assets/images/resized/0001/1070/11070v1-max-250x250.jpg</available_sizes></available_sizes><available_sizes><available_sizes><available_sizes>341</available_sizes><available_sizes>450</available_sizes></available_sizes><available_sizes>assets/images/resized/0001/1070/11070v1-max-450x450.jpg</available_sizes></available_sizes></myRoot>", newDoc.InnerXml);
+            Assert.AreEqual(
+                @"<myRoot><available_sizes><available_sizes><available_sizes>113</available_sizes><available_sizes>150</available_sizes></available_sizes><available_sizes>assets/images/resized/0001/1070/11070v1-max-150x150.jpg</available_sizes></available_sizes><available_sizes><available_sizes><available_sizes>189</available_sizes><available_sizes>250</available_sizes></available_sizes><available_sizes>assets/images/resized/0001/1070/11070v1-max-250x250.jpg</available_sizes></available_sizes><available_sizes><available_sizes><available_sizes>341</available_sizes><available_sizes>450</available_sizes></available_sizes><available_sizes>assets/images/resized/0001/1070/11070v1-max-450x450.jpg</available_sizes></available_sizes></myRoot>",
+                newDoc.InnerXml
+            );
 #endif
 
 #if !NET20
             XDocument newXDoc = JsonConvert.DeserializeXNode(json, "myRoot");
 
-            Assert.AreEqual(@"<myRoot><available_sizes><available_sizes><available_sizes>113</available_sizes><available_sizes>150</available_sizes></available_sizes><available_sizes>assets/images/resized/0001/1070/11070v1-max-150x150.jpg</available_sizes></available_sizes><available_sizes><available_sizes><available_sizes>189</available_sizes><available_sizes>250</available_sizes></available_sizes><available_sizes>assets/images/resized/0001/1070/11070v1-max-250x250.jpg</available_sizes></available_sizes><available_sizes><available_sizes><available_sizes>341</available_sizes><available_sizes>450</available_sizes></available_sizes><available_sizes>assets/images/resized/0001/1070/11070v1-max-450x450.jpg</available_sizes></available_sizes></myRoot>", newXDoc.ToString(SaveOptions.DisableFormatting));
+            Assert.AreEqual(
+                @"<myRoot><available_sizes><available_sizes><available_sizes>113</available_sizes><available_sizes>150</available_sizes></available_sizes><available_sizes>assets/images/resized/0001/1070/11070v1-max-150x150.jpg</available_sizes></available_sizes><available_sizes><available_sizes><available_sizes>189</available_sizes><available_sizes>250</available_sizes></available_sizes><available_sizes>assets/images/resized/0001/1070/11070v1-max-250x250.jpg</available_sizes></available_sizes><available_sizes><available_sizes><available_sizes>341</available_sizes><available_sizes>450</available_sizes></available_sizes><available_sizes>assets/images/resized/0001/1070/11070v1-max-450x450.jpg</available_sizes></available_sizes></myRoot>",
+                newXDoc.ToString(SaveOptions.DisableFormatting)
+            );
 #endif
         }
 
@@ -1751,9 +1936,12 @@ namespace Newtonsoft.Json.Tests.Converters
             doc.LoadXml(@"<name>O""Connor</name>"); // i use "" so it will be easier to see the  problem
 
             string json = SerializeXmlNode(doc);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""name"": ""O\""Connor""
-}", json);
+}",
+                json
+            );
         }
 #endif
 
@@ -1761,7 +1949,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeComment()
         {
-            string xml = @"<span class=""vevent"">
+            string xml =
+                @"<span class=""vevent"">
   <a class=""url"" href=""http://www.web2con.com/""><!-- Hi --><span>Text</span></a><!-- Hi! -->
 </span>";
             XmlDocument doc = new XmlDocument();
@@ -1769,7 +1958,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string jsonText = SerializeXmlNode(doc);
 
-            string expected = @"{
+            string expected =
+                @"{
   ""span"": {
     ""@class"": ""vevent"",
     ""a"": {
@@ -1783,13 +1973,17 @@ namespace Newtonsoft.Json.Tests.Converters
             StringAssert.AreEqual(expected, jsonText);
 
             XmlDocument newDoc = (XmlDocument)DeserializeXmlNode(jsonText);
-            Assert.AreEqual(@"<span class=""vevent""><a class=""url"" href=""http://www.web2con.com/""><!-- Hi --><span>Text</span></a><!-- Hi! --></span>", newDoc.InnerXml);
+            Assert.AreEqual(
+                @"<span class=""vevent""><a class=""url"" href=""http://www.web2con.com/""><!-- Hi --><span>Text</span></a><!-- Hi! --></span>",
+                newDoc.InnerXml
+            );
         }
 
         [Test]
         public void SerializeExample()
         {
-            string xml = @"<?xml version=""1.0"" standalone=""no""?>
+            string xml =
+                @"<?xml version=""1.0"" standalone=""no""?>
 			<root>
 			  <person id=""1"">
 				<name>Alan</name>
@@ -1829,7 +2023,8 @@ namespace Newtonsoft.Json.Tests.Converters
             // format
             jsonText = JObject.Parse(jsonText).ToString();
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""?xml"": {
     ""@version"": ""1.0"",
     ""@standalone"": ""no""
@@ -1848,7 +2043,9 @@ namespace Newtonsoft.Json.Tests.Converters
       }
     ]
   }
-}", jsonText);
+}",
+                jsonText
+            );
 
             XmlDocument newDoc = (XmlDocument)DeserializeXmlNode(jsonText);
 
@@ -1858,7 +2055,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeExample()
         {
-            string json = @"{
+            string json =
+                @"{
         ""?xml"": {
           ""@version"": ""1.0"",
           ""@standalone"": ""no""
@@ -1892,13 +2090,17 @@ namespace Newtonsoft.Json.Tests.Converters
             //   </person>
             // </root>
 
-            StringAssert.AreEqual(@"<?xml version=""1.0"" standalone=""no""?><root><person id=""1""><name>Alan</name><url>http://www.google.com</url></person><person id=""2""><name>Louis</name><url>http://www.yahoo.com</url></person></root>", doc.InnerXml);
+            StringAssert.AreEqual(
+                @"<?xml version=""1.0"" standalone=""no""?><root><person id=""1""><name>Alan</name><url>http://www.google.com</url></person><person id=""2""><name>Louis</name><url>http://www.yahoo.com</url></person></root>",
+                doc.InnerXml
+            );
         }
 
         [Test]
         public void EscapingNames()
         {
-            string json = @"{
+            string json =
+                @"{
               ""root!"": {
                 ""person!"": [
                   {
@@ -1917,11 +2119,15 @@ namespace Newtonsoft.Json.Tests.Converters
 
             XmlDocument doc = (XmlDocument)DeserializeXmlNode(json);
 
-            Assert.AreEqual(@"<root_x0021_><person_x0021_ id_x0021_=""1""><name_x0021_>Alan</name_x0021_><url_x0021_>http://www.google.com</url_x0021_></person_x0021_><person_x0021_ id_x0021_=""2""><name_x0021_>Louis</name_x0021_><url_x0021_>http://www.yahoo.com</url_x0021_></person_x0021_></root_x0021_>", doc.InnerXml);
+            Assert.AreEqual(
+                @"<root_x0021_><person_x0021_ id_x0021_=""1""><name_x0021_>Alan</name_x0021_><url_x0021_>http://www.google.com</url_x0021_></person_x0021_><person_x0021_ id_x0021_=""2""><name_x0021_>Louis</name_x0021_><url_x0021_>http://www.yahoo.com</url_x0021_></person_x0021_></root_x0021_>",
+                doc.InnerXml
+            );
 
             string json2 = SerializeXmlNode(doc);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""root!"": {
     ""person!"": [
       {
@@ -1936,20 +2142,33 @@ namespace Newtonsoft.Json.Tests.Converters
       }
     ]
   }
-}", json2);
+}",
+                json2
+            );
         }
 
         [Test]
         public void SerializeDeserializeMetadataProperties()
         {
-            PreserveReferencesHandlingTests.CircularDictionary circularDictionary = new PreserveReferencesHandlingTests.CircularDictionary();
-            circularDictionary.Add("other", new PreserveReferencesHandlingTests.CircularDictionary { { "blah", null } });
+            PreserveReferencesHandlingTests.CircularDictionary circularDictionary =
+                new PreserveReferencesHandlingTests.CircularDictionary();
+            circularDictionary.Add(
+                "other",
+                new PreserveReferencesHandlingTests.CircularDictionary { { "blah", null } }
+            );
             circularDictionary.Add("self", circularDictionary);
 
-            string json = JsonConvert.SerializeObject(circularDictionary, Formatting.Indented,
-                new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.All });
+            string json = JsonConvert.SerializeObject(
+                circularDictionary,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.All,
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""$id"": ""1"",
   ""other"": {
     ""$id"": ""2"",
@@ -1958,11 +2177,14 @@ namespace Newtonsoft.Json.Tests.Converters
   ""self"": {
     ""$ref"": ""1""
   }
-}", json);
+}",
+                json
+            );
 
             XmlNode node = DeserializeXmlNode(json, "root");
             string xml = GetIndentedInnerXml(node);
-            string expected = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <root xmlns:json=""http://james.newtonking.com/projects/json"" json:id=""1"">
   <other json:id=""2"">
     <blah />
@@ -1973,7 +2195,8 @@ namespace Newtonsoft.Json.Tests.Converters
             StringAssert.AreEqual(expected, xml);
 
             string xmlJson = SerializeXmlNode(node);
-            string expectedXmlJson = @"{
+            string expectedXmlJson =
+                @"{
   ""root"": {
     ""$id"": ""1"",
     ""other"": {
@@ -1992,7 +2215,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeDeserializeMetadataArray()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$id"": ""1"",
   ""$values"": [
     ""1"",
@@ -2006,14 +2230,17 @@ namespace Newtonsoft.Json.Tests.Converters
             XmlNode node = JsonConvert.DeserializeXmlNode(json, "root");
             string xml = GetIndentedInnerXml(node);
 
-            StringAssert.AreEqual(@"<?xml version=""1.0"" encoding=""utf-16""?>
+            StringAssert.AreEqual(
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <root xmlns:json=""http://james.newtonking.com/projects/json"" json:id=""1"">
   <values xmlns=""http://james.newtonking.com/projects/json"">1</values>
   <values xmlns=""http://james.newtonking.com/projects/json"">2</values>
   <values xmlns=""http://james.newtonking.com/projects/json"">3</values>
   <values xmlns=""http://james.newtonking.com/projects/json"">4</values>
   <values xmlns=""http://james.newtonking.com/projects/json"">5</values>
-</root>", xml);
+</root>",
+                xml
+            );
 
             string newJson = JsonConvert.SerializeXmlNode(node, Formatting.Indented, true);
 
@@ -2023,7 +2250,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeDeserializeMetadataArrayNoId()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$values"": [
     ""1"",
     ""2"",
@@ -2036,14 +2264,17 @@ namespace Newtonsoft.Json.Tests.Converters
             XmlNode node = JsonConvert.DeserializeXmlNode(json, "root");
             string xml = GetIndentedInnerXml(node);
 
-            StringAssert.AreEqual(@"<?xml version=""1.0"" encoding=""utf-16""?>
+            StringAssert.AreEqual(
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <root xmlns:json=""http://james.newtonking.com/projects/json"">
   <values xmlns=""http://james.newtonking.com/projects/json"">1</values>
   <values xmlns=""http://james.newtonking.com/projects/json"">2</values>
   <values xmlns=""http://james.newtonking.com/projects/json"">3</values>
   <values xmlns=""http://james.newtonking.com/projects/json"">4</values>
   <values xmlns=""http://james.newtonking.com/projects/json"">5</values>
-</root>", xml);
+</root>",
+                xml
+            );
 
             string newJson = JsonConvert.SerializeXmlNode(node, Formatting.Indented, true);
 
@@ -2055,7 +2286,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeDeserializeMetadataArrayWithIdLast()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$values"": [
     ""1"",
     ""2"",
@@ -2069,18 +2301,22 @@ namespace Newtonsoft.Json.Tests.Converters
             XmlNode node = JsonConvert.DeserializeXmlNode(json, "root");
             string xml = GetIndentedInnerXml(node);
 
-            StringAssert.AreEqual(@"<?xml version=""1.0"" encoding=""utf-16""?>
+            StringAssert.AreEqual(
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <root xmlns:json=""http://james.newtonking.com/projects/json"" json:id=""1"">
   <values xmlns=""http://james.newtonking.com/projects/json"">1</values>
   <values xmlns=""http://james.newtonking.com/projects/json"">2</values>
   <values xmlns=""http://james.newtonking.com/projects/json"">3</values>
   <values xmlns=""http://james.newtonking.com/projects/json"">4</values>
   <values xmlns=""http://james.newtonking.com/projects/json"">5</values>
-</root>", xml);
+</root>",
+                xml
+            );
 
             string newJson = JsonConvert.SerializeXmlNode(node, Formatting.Indented, true);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""$id"": ""1"",
   ""$values"": [
     ""1"",
@@ -2089,45 +2325,60 @@ namespace Newtonsoft.Json.Tests.Converters
     ""4"",
     ""5""
   ]
-}", newJson);
+}",
+                newJson
+            );
         }
 
         [Test]
         public void SerializeMetadataPropertyWithBadValue()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$id"": []
 }";
 
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => { JsonConvert.DeserializeXmlNode(json, "root"); },
-                "Unexpected JsonToken: StartArray. Path '$id', line 2, position 10.");
+                () =>
+                {
+                    JsonConvert.DeserializeXmlNode(json, "root");
+                },
+                "Unexpected JsonToken: StartArray. Path '$id', line 2, position 10."
+            );
         }
 
         [Test]
         public void SerializeDeserializeMetadataWithNullValue()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$id"": null
 }";
 
             XmlNode node = JsonConvert.DeserializeXmlNode(json, "root");
             string xml = GetIndentedInnerXml(node);
 
-            StringAssert.AreEqual(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<root xmlns:json=""http://james.newtonking.com/projects/json"" json:id="""" />", xml);
+            StringAssert.AreEqual(
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
+<root xmlns:json=""http://james.newtonking.com/projects/json"" json:id="""" />",
+                xml
+            );
 
             string newJson = JsonConvert.SerializeXmlNode(node, Formatting.Indented, true);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""$id"": """"
-}", newJson);
+}",
+                newJson
+            );
         }
 
         [Test]
         public void SerializeDeserializeMetadataArrayNull()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$id"": ""1"",
   ""$values"": null
 }";
@@ -2135,10 +2386,13 @@ namespace Newtonsoft.Json.Tests.Converters
             XmlNode node = JsonConvert.DeserializeXmlNode(json, "root");
             string xml = GetIndentedInnerXml(node);
 
-            StringAssert.AreEqual(@"<?xml version=""1.0"" encoding=""utf-16""?>
+            StringAssert.AreEqual(
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <root xmlns:json=""http://james.newtonking.com/projects/json"" json:id=""1"">
   <values xmlns=""http://james.newtonking.com/projects/json"" />
-</root>", xml);
+</root>",
+                xml
+            );
 
             string newJson = JsonConvert.SerializeXmlNode(node, Formatting.Indented, true);
 
@@ -2148,7 +2402,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void EmptyPropertyName()
         {
-            string json = @"{
+            string json =
+                @"{
   ""8452309520V2"": {
     """": {
       ""CLIENT"": {
@@ -2228,8 +2483,12 @@ namespace Newtonsoft.Json.Tests.Converters
 }";
 
             ExceptionAssert.Throws<JsonSerializationException>(
-                () => { DeserializeXmlNode(json); },
-                "XmlNodeConverter cannot convert JSON with an empty property name to XML. Path '8452309520V2.', line 3, position 9.");
+                () =>
+                {
+                    DeserializeXmlNode(json);
+                },
+                "XmlNodeConverter cannot convert JSON with an empty property name to XML. Path '8452309520V2.', line 3, position 9."
+            );
         }
 
         [Test]
@@ -2246,16 +2505,23 @@ namespace Newtonsoft.Json.Tests.Converters
 
             XmlDocument xmlProduct = JsonConvert.DeserializeXmlNode(output, "product", true);
 
-            StringAssert.AreEqual(@"<product>
+            StringAssert.AreEqual(
+                @"<product>
   <Name>Apple</Name>
   <ExpiryDate>2008-12-28T00:00:00Z</ExpiryDate>
   <Price>3.99</Price>
   <Sizes json:Array=""true"" xmlns:json=""http://james.newtonking.com/projects/json"">Small</Sizes>
-</product>", IndentXml(xmlProduct.InnerXml));
+</product>",
+                IndentXml(xmlProduct.InnerXml)
+            );
 
-            string output2 = JsonConvert.SerializeXmlNode(xmlProduct.DocumentElement, Formatting.Indented);
+            string output2 = JsonConvert.SerializeXmlNode(
+                xmlProduct.DocumentElement,
+                Formatting.Indented
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""product"": {
     ""Name"": ""Apple"",
     ""ExpiryDate"": ""2008-12-28T00:00:00Z"",
@@ -2264,7 +2530,9 @@ namespace Newtonsoft.Json.Tests.Converters
       ""Small""
     ]
   }
-}", output2);
+}",
+                output2
+            );
         }
 
         public class TestComplexArrayClass
@@ -2279,17 +2547,15 @@ namespace Newtonsoft.Json.Tests.Converters
             TestComplexArrayClass o = new TestComplexArrayClass
             {
                 Name = "Hi",
-                Products = new List<Product>
-                {
-                    new Product { Name = "First" }
-                }
+                Products = new List<Product> { new Product { Name = "First" } },
             };
 
             string output = JsonConvert.SerializeObject(o, new IsoDateTimeConverter());
 
             XmlDocument xmlProduct = JsonConvert.DeserializeXmlNode(output, "test", true);
 
-            StringAssert.AreEqual(@"<test>
+            StringAssert.AreEqual(
+                @"<test>
   <Name>Hi</Name>
   <Products json:Array=""true"" xmlns:json=""http://james.newtonking.com/projects/json"">
     <Name>First</Name>
@@ -2297,11 +2563,18 @@ namespace Newtonsoft.Json.Tests.Converters
     <Price>0</Price>
     <Sizes />
   </Products>
-</test>", IndentXml(xmlProduct.InnerXml));
+</test>",
+                IndentXml(xmlProduct.InnerXml)
+            );
 
-            string output2 = JsonConvert.SerializeXmlNode(xmlProduct.DocumentElement, Formatting.Indented, true);
+            string output2 = JsonConvert.SerializeXmlNode(
+                xmlProduct.DocumentElement,
+                Formatting.Indented,
+                true
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""Hi"",
   ""Products"": [
     {
@@ -2311,13 +2584,16 @@ namespace Newtonsoft.Json.Tests.Converters
       ""Sizes"": null
     }
   ]
-}", output2);
+}",
+                output2
+            );
         }
 
         [Test]
         public void OmitRootObject()
         {
-            string xml = @"<test>
+            string xml =
+                @"<test>
   <Name>Hi</Name>
   <Name>Hi</Name>
   <Products json:Array=""true"" xmlns:json=""http://james.newtonking.com/projects/json"">
@@ -2333,7 +2609,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string output = JsonConvert.SerializeXmlNode(d, Formatting.Indented, true);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": [
     ""Hi"",
     ""Hi""
@@ -2346,13 +2623,16 @@ namespace Newtonsoft.Json.Tests.Converters
       ""Sizes"": null
     }
   ]
-}", output);
+}",
+                output
+            );
         }
 
         [Test]
         public void EmtpyElementWithArrayAttributeShouldWriteAttributes()
         {
-            string xml = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+            string xml =
+                @"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <root xmlns:json=""http://james.newtonking.com/projects/json"">
 <A>
 <B name=""sample"" json:Array=""true""/>
@@ -2366,7 +2646,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json = JsonConvert.SerializeXmlNode(d, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""?xml"": {
     ""@version"": ""1.0"",
     ""@encoding"": ""utf-8""
@@ -2384,24 +2665,30 @@ namespace Newtonsoft.Json.Tests.Converters
       ]
     }
   }
-}", json);
+}",
+                json
+            );
 
             XmlDocument d2 = JsonConvert.DeserializeXmlNode(json);
 
-            StringAssert.AreEqual(@"<?xml version=""1.0"" encoding=""utf-8""?>
+            StringAssert.AreEqual(
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <root>
   <A>
     <B name=""sample"" />
     <C></C>
     <C></C>
   </A>
-</root>", ToStringWithDeclaration(d2, true));
+</root>",
+                ToStringWithDeclaration(d2, true)
+            );
         }
 
         [Test]
         public void EmtpyElementWithArrayAttributeShouldWriteElement()
         {
-            string xml = @"<root>
+            string xml =
+                @"<root>
 <Reports d1p1:Array=""true"" xmlns:d1p1=""http://james.newtonking.com/projects/json"" />
 </root>";
 
@@ -2410,40 +2697,61 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json = JsonConvert.SerializeXmlNode(d, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""root"": {
     ""Reports"": [
       {}
     ]
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
         public void DeserializeNonInt64IntegerValues()
         {
-            var dict = new Dictionary<string, object> { { "Int16", (short)1 }, { "Float", 2f }, { "Int32", 3 } };
+            var dict = new Dictionary<string, object>
+            {
+                { "Int16", (short)1 },
+                { "Float", 2f },
+                { "Int32", 3 },
+            };
             var obj = JObject.FromObject(dict);
-            var serializer = JsonSerializer.Create(new JsonSerializerSettings { Converters = { new XmlNodeConverter() { DeserializeRootElementName = "root" } } });
+            var serializer = JsonSerializer.Create(
+                new JsonSerializerSettings
+                {
+                    Converters = { new XmlNodeConverter() { DeserializeRootElementName = "root" } },
+                }
+            );
             using (var reader = obj.CreateReader())
             {
                 var value = (XmlDocument)serializer.Deserialize(reader, typeof(XmlDocument));
 
-                Assert.AreEqual(@"<root><Int16>1</Int16><Float>2</Float><Int32>3</Int32></root>", value.InnerXml);
+                Assert.AreEqual(
+                    @"<root><Int16>1</Int16><Float>2</Float><Int32>3</Int32></root>",
+                    value.InnerXml
+                );
             }
         }
 
         [Test]
         public void DeserializingBooleanValues()
         {
-            MemoryStream ms = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(@"{root:{""@booleanType"":true}}"));
+            MemoryStream ms = new MemoryStream(
+                System.Text.Encoding.UTF8.GetBytes(@"{root:{""@booleanType"":true}}")
+            );
             MemoryStream xml = new MemoryStream();
 
             JsonBodyToSoapXml(ms, xml);
 
             string xmlString = System.Text.Encoding.UTF8.GetString(xml.ToArray());
 
-            Assert.AreEqual(@"﻿<?xml version=""1.0"" encoding=""utf-8""?><root booleanType=""true"" />", xmlString);
+            Assert.AreEqual(
+                @"﻿<?xml version=""1.0"" encoding=""utf-8""?><root booleanType=""true"" />",
+                xmlString
+            );
         }
 
 #if !(NETSTANDARD1_0 || NETSTANDARD1_3)
@@ -2458,23 +2766,28 @@ namespace Newtonsoft.Json.Tests.Converters
 
                 // in russian culture value 12.27 will be written as 12,27
 
-                var serializer = JsonSerializer.Create(new JsonSerializerSettings
-                {
-                    Converters = { new XmlNodeConverter() },
-                });
+                var serializer = JsonSerializer.Create(
+                    new JsonSerializerSettings { Converters = { new XmlNodeConverter() } }
+                );
 
-                var json = new StringBuilder(@"{
+                var json = new StringBuilder(
+                    @"{
                     ""metrics"": {
                         ""type"": ""CPULOAD"",
                         ""@value"": 12.27
                     }
-                }");
+                }"
+                );
 
                 using (var stringReader = new StringReader(json.ToString()))
                 using (var jsonReader = new JsonTextReader(stringReader))
                 {
-                    var document = (XmlDocument)serializer.Deserialize(jsonReader, typeof(XmlDocument));
-                    StringAssert.AreEqual(@"<metrics value=""12.27""><type>CPULOAD</type></metrics>", document.OuterXml);
+                    var document = (XmlDocument)
+                        serializer.Deserialize(jsonReader, typeof(XmlDocument));
+                    StringAssert.AreEqual(
+                        @"<metrics value=""12.27""><type>CPULOAD</type></metrics>",
+                        document.OuterXml
+                    );
                 }
             }
             finally
@@ -2487,14 +2800,19 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void NullAttributeValue()
         {
-            var node = JsonConvert.DeserializeXmlNode(@"{
+            var node = JsonConvert.DeserializeXmlNode(
+                @"{
                     ""metrics"": {
                         ""type"": ""CPULOAD"",
                         ""@value"": null
                     }
-                }");
+                }"
+            );
 
-            StringAssert.AreEqual(@"<metrics value=""""><type>CPULOAD</type></metrics>", node.OuterXml);
+            StringAssert.AreEqual(
+                @"<metrics value=""""><type>CPULOAD</type></metrics>",
+                node.OuterXml
+            );
         }
 
         [Test]
@@ -2502,24 +2820,32 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             JObject o = new JObject
             {
-                new JProperty("root", new JObject
-                {
-                    new JProperty("@uri", new JValue(new Uri("http://localhost/"))),
-                    new JProperty("@time_span", new JValue(TimeSpan.FromMinutes(1))),
-                    new JProperty("@bytes", new JValue(System.Text.Encoding.UTF8.GetBytes("Hello world")))
-                })
+                new JProperty(
+                    "root",
+                    new JObject
+                    {
+                        new JProperty("@uri", new JValue(new Uri("http://localhost/"))),
+                        new JProperty("@time_span", new JValue(TimeSpan.FromMinutes(1))),
+                        new JProperty(
+                            "@bytes",
+                            new JValue(System.Text.Encoding.UTF8.GetBytes("Hello world"))
+                        ),
+                    }
+                ),
             };
 
             using (var jsonReader = o.CreateReader())
             {
-                var serializer = JsonSerializer.Create(new JsonSerializerSettings
-                {
-                    Converters = { new XmlNodeConverter() },
-                });
+                var serializer = JsonSerializer.Create(
+                    new JsonSerializerSettings { Converters = { new XmlNodeConverter() } }
+                );
 
                 var document = (XmlDocument)serializer.Deserialize(jsonReader, typeof(XmlDocument));
 
-                StringAssert.AreEqual(@"<root uri=""http://localhost/"" time_span=""00:01:00"" bytes=""SGVsbG8gd29ybGQ="" />", document.OuterXml);
+                StringAssert.AreEqual(
+                    @"<root uri=""http://localhost/"" time_span=""00:01:00"" bytes=""SGVsbG8gd29ybGQ="" />",
+                    document.OuterXml
+                );
             }
         }
 
@@ -2528,38 +2854,55 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             JObject o = new JObject
             {
-                new JProperty("root", new JObject
-                {
-                    new JProperty("uri", new JValue(new Uri("http://localhost/"))),
-                    new JProperty("time_span", new JValue(TimeSpan.FromMinutes(1))),
-                    new JProperty("bytes", new JValue(System.Text.Encoding.UTF8.GetBytes("Hello world")))
-                })
+                new JProperty(
+                    "root",
+                    new JObject
+                    {
+                        new JProperty("uri", new JValue(new Uri("http://localhost/"))),
+                        new JProperty("time_span", new JValue(TimeSpan.FromMinutes(1))),
+                        new JProperty(
+                            "bytes",
+                            new JValue(System.Text.Encoding.UTF8.GetBytes("Hello world"))
+                        ),
+                    }
+                ),
             };
 
             using (var jsonReader = o.CreateReader())
             {
-                var serializer = JsonSerializer.Create(new JsonSerializerSettings
-                {
-                    Converters = { new XmlNodeConverter() },
-                });
+                var serializer = JsonSerializer.Create(
+                    new JsonSerializerSettings { Converters = { new XmlNodeConverter() } }
+                );
 
                 var document = (XmlDocument)serializer.Deserialize(jsonReader, typeof(XmlDocument));
 
-                StringAssert.AreEqual(@"<root><uri>http://localhost/</uri><time_span>00:01:00</time_span><bytes>SGVsbG8gd29ybGQ=</bytes></root>", document.OuterXml);
+                StringAssert.AreEqual(
+                    @"<root><uri>http://localhost/</uri><time_span>00:01:00</time_span><bytes>SGVsbG8gd29ybGQ=</bytes></root>",
+                    document.OuterXml
+                );
             }
         }
 
         private static void JsonBodyToSoapXml(Stream json, Stream xml)
         {
-            Newtonsoft.Json.JsonSerializerSettings settings = new Newtonsoft.Json.JsonSerializerSettings();
+            Newtonsoft.Json.JsonSerializerSettings settings =
+                new Newtonsoft.Json.JsonSerializerSettings();
             settings.Converters.Add(new Newtonsoft.Json.Converters.XmlNodeConverter());
-            Newtonsoft.Json.JsonSerializer serializer = Newtonsoft.Json.JsonSerializer.Create(settings);
-            using (Newtonsoft.Json.JsonTextReader reader = new Newtonsoft.Json.JsonTextReader(new System.IO.StreamReader(json)))
+            Newtonsoft.Json.JsonSerializer serializer = Newtonsoft.Json.JsonSerializer.Create(
+                settings
+            );
+            using (
+                Newtonsoft.Json.JsonTextReader reader = new Newtonsoft.Json.JsonTextReader(
+                    new System.IO.StreamReader(json)
+                )
+            )
             {
                 XmlDocument doc = (XmlDocument)serializer.Deserialize(reader, typeof(XmlDocument));
                 if (reader.Read() && reader.TokenType != JsonToken.Comment)
                 {
-                    throw new JsonSerializationException("Additional text found in JSON string after finishing deserializing object.");
+                    throw new JsonSerializationException(
+                        "Additional text found in JSON string after finishing deserializing object."
+                    );
                 }
                 using (XmlWriter writer = XmlWriter.Create(xml))
                 {
@@ -2573,7 +2916,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeXNodeDefaultNamespace()
         {
-            string xaml = @"<Grid xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"" xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml"" xmlns:toolkit=""clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"" Style=""{StaticResource trimFormGrid}"" x:Name=""TrimObjectForm"">
+            string xaml =
+                @"<Grid xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"" xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml"" xmlns:toolkit=""clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"" Style=""{StaticResource trimFormGrid}"" x:Name=""TrimObjectForm"">
   <Grid.ColumnDefinitions>
     <ColumnDefinition Width=""63*"" />
     <ColumnDefinition Width=""320*"" />
@@ -2608,7 +2952,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json = JsonConvert.SerializeXNode(XDocument.Parse(xaml), Formatting.Indented);
 
-            string expectedJson = @"{
+            string expectedJson =
+                @"{
   ""Grid"": {
     ""@xmlns"": ""http://schemas.microsoft.com/winfx/2006/xaml/presentation"",
     ""@xmlns:x"": ""http://schemas.microsoft.com/winfx/2006/xaml"",
@@ -2771,7 +3116,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string xaml2 = node.ToString();
 
-            string expectedXaml = @"<Grid xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"" xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml"" xmlns:toolkit=""clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"" Style=""{StaticResource trimFormGrid}"" x:Name=""TrimObjectForm"">
+            string expectedXaml =
+                @"<Grid xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"" xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml"" xmlns:toolkit=""clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"" Style=""{StaticResource trimFormGrid}"" x:Name=""TrimObjectForm"">
   <Grid.ColumnDefinitions>
     <ColumnDefinition Width=""63*"" />
     <ColumnDefinition Width=""320*"" />
@@ -2812,7 +3158,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeXmlNodeDefaultNamespace()
         {
-            string xaml = @"<Grid xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"" xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml"" xmlns:toolkit=""clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"" Style=""{StaticResource trimFormGrid}"" x:Name=""TrimObjectForm"">
+            string xaml =
+                @"<Grid xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"" xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml"" xmlns:toolkit=""clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"" Style=""{StaticResource trimFormGrid}"" x:Name=""TrimObjectForm"">
   <Grid.ColumnDefinitions>
     <ColumnDefinition Width=""63*"" />
     <ColumnDefinition Width=""320*"" />
@@ -2850,7 +3197,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json = JsonConvert.SerializeXmlNode(document, Formatting.Indented);
 
-            string expectedJson = @"{
+            string expectedJson =
+                @"{
   ""Grid"": {
     ""@xmlns"": ""http://schemas.microsoft.com/winfx/2006/xaml/presentation"",
     ""@xmlns:x"": ""http://schemas.microsoft.com/winfx/2006/xaml"",
@@ -3012,17 +3360,17 @@ namespace Newtonsoft.Json.Tests.Converters
             XmlNode node = JsonConvert.DeserializeXmlNode(json);
 
             StringWriter sw = new StringWriter();
-            XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings
-            {
-                Indent = true,
-                OmitXmlDeclaration = true
-            });
+            XmlWriter writer = XmlWriter.Create(
+                sw,
+                new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true }
+            );
             node.WriteTo(writer);
             writer.Flush();
 
             string xaml2 = sw.ToString();
 
-            string expectedXaml = @"<Grid xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"" xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml"" xmlns:toolkit=""clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"" Style=""{StaticResource trimFormGrid}"" x:Name=""TrimObjectForm"">
+            string expectedXaml =
+                @"<Grid xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"" xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml"" xmlns:toolkit=""clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"" Style=""{StaticResource trimFormGrid}"" x:Name=""TrimObjectForm"">
   <Grid.ColumnDefinitions>
     <ColumnDefinition Width=""63*"" />
     <ColumnDefinition Width=""320*"" />
@@ -3061,18 +3409,23 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeAttributePropertyNotAtStart()
         {
-            string json = @"{""item"": {""@action"": ""update"", ""@itemid"": ""1"", ""elements"": [{""@action"": ""none"", ""@id"": ""2""},{""@action"": ""none"", ""@id"": ""3""}],""@description"": ""temp""}}";
+            string json =
+                @"{""item"": {""@action"": ""update"", ""@itemid"": ""1"", ""elements"": [{""@action"": ""none"", ""@id"": ""2""},{""@action"": ""none"", ""@id"": ""3""}],""@description"": ""temp""}}";
 
             XmlDocument xmldoc = JsonConvert.DeserializeXmlNode(json);
 
-            Assert.AreEqual(@"<item action=""update"" itemid=""1"" description=""temp""><elements action=""none"" id=""2"" /><elements action=""none"" id=""3"" /></item>", xmldoc.InnerXml);
+            Assert.AreEqual(
+                @"<item action=""update"" itemid=""1"" description=""temp""><elements action=""none"" id=""2"" /><elements action=""none"" id=""3"" /></item>",
+                xmldoc.InnerXml
+            );
         }
 #endif
 
         [Test]
         public void SerializingXmlNamespaceScope()
         {
-            var xmlString = @"<root xmlns=""http://www.example.com/ns"">
+            var xmlString =
+                @"<root xmlns=""http://www.example.com/ns"">
   <a/>
   <bns:b xmlns:bns=""http://www.example.com/ns""/>
   <c/>
@@ -3083,7 +3436,10 @@ namespace Newtonsoft.Json.Tests.Converters
 
             var json1 = JsonConvert.SerializeObject(xml);
 
-            Assert.AreEqual(@"{""root"":{""@xmlns"":""http://www.example.com/ns"",""a"":null,""bns:b"":{""@xmlns:bns"":""http://www.example.com/ns""},""c"":null}}", json1);
+            Assert.AreEqual(
+                @"{""root"":{""@xmlns"":""http://www.example.com/ns"",""a"":null,""bns:b"":{""@xmlns:bns"":""http://www.example.com/ns""},""c"":null}}",
+                json1
+            );
 #endif
 #if !(PORTABLE)
             var xml1 = new XmlDocument();
@@ -3091,7 +3447,10 @@ namespace Newtonsoft.Json.Tests.Converters
 
             var json2 = JsonConvert.SerializeObject(xml1);
 
-            Assert.AreEqual(@"{""root"":{""@xmlns"":""http://www.example.com/ns"",""a"":null,""bns:b"":{""@xmlns:bns"":""http://www.example.com/ns""},""c"":null}}", json2);
+            Assert.AreEqual(
+                @"{""root"":{""@xmlns"":""http://www.example.com/ns"",""a"":null,""bns:b"":{""@xmlns:bns"":""http://www.example.com/ns""},""c"":null}}",
+                json2
+            );
 #endif
         }
 
@@ -3106,7 +3465,11 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeAndDeserializeNullableXml()
         {
-            var xml = new NullableXml { Name = "test", notNull = XElement.Parse("<root>test</root>") };
+            var xml = new NullableXml
+            {
+                Name = "test",
+                notNull = XElement.Parse("<root>test</root>"),
+            };
             var json = JsonConvert.SerializeObject(xml);
 
             var w2 = JsonConvert.DeserializeObject<NullableXml>(json);
@@ -3120,7 +3483,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeAndDeserializeXElementWithNamespaceInChildrenRootDontHaveNameSpace()
         {
-            var xmlString = @"<root>
+            var xmlString =
+                @"<root>
                               <b xmlns='http://www.example.com/ns'>Asd</b>
                               <c>AAA</c>
                               <test>adad</test>
@@ -3140,7 +3504,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeAndDeserializeXmlElementWithNamespaceInChildrenRootDontHaveNameSpace()
         {
-            var xmlString = @"<root>
+            var xmlString =
+                @"<root>
                               <b xmlns='http://www.example.com/ns'>Asd</b>
                               <c>AAA</c>
                               <test>adad</test>
@@ -3152,7 +3517,10 @@ namespace Newtonsoft.Json.Tests.Converters
             var json1 = JsonConvert.SerializeXmlNode(xml);
             var xmlBack = JsonConvert.DeserializeObject<XmlDocument>(json1);
 
-            Assert.AreEqual(@"<root><b xmlns=""http://www.example.com/ns"">Asd</b><c>AAA</c><test>adad</test></root>", xmlBack.OuterXml);
+            Assert.AreEqual(
+                @"<root><b xmlns=""http://www.example.com/ns"">Asd</b><c>AAA</c><test>adad</test></root>",
+                xmlBack.OuterXml
+            );
         }
 
 #if !(NET20 || NET35 || PORTABLE || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
@@ -3188,7 +3556,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void RootPropertyError()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$id"": ""1"",
   ""AOSLocaleName"": ""en-US"",
   ""AXLanguage"": ""EN-AU"",
@@ -3211,7 +3580,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             ExceptionAssert.Throws<JsonSerializationException>(
                 () => JsonConvert.DeserializeXmlNode(json),
-                "JSON root object has property '$id' that will be converted to an attribute. A root object cannot have any attribute properties. Consider specifying a DeserializeRootElementName. Path '$id', line 2, position 12.");
+                "JSON root object has property '$id' that will be converted to an attribute. A root object cannot have any attribute properties. Consider specifying a DeserializeRootElementName. Path '$id', line 2, position 12."
+            );
         }
 
         [Test]
@@ -3256,13 +3626,18 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json = JsonConvert.SerializeXNode(d);
 
-            Assert.AreEqual(@"{""?xml"":{""@version"":""Version!"",""@encoding"":""Encoding!"",""@standalone"":""Standalone!""}}", json);
+            Assert.AreEqual(
+                @"{""?xml"":{""@version"":""Version!"",""@encoding"":""Encoding!"",""@standalone"":""Standalone!""}}",
+                json
+            );
         }
 
         [Test]
         public void Deserialize_XDocument_NoRootWithDeclaration()
         {
-            XDocument d = JsonConvert.DeserializeXNode(@"{""?xml"":{""@version"":""Version!"",""@encoding"":""Encoding!"",""@standalone"":""Standalone!""}}");
+            XDocument d = JsonConvert.DeserializeXNode(
+                @"{""?xml"":{""@version"":""Version!"",""@encoding"":""Encoding!"",""@standalone"":""Standalone!""}}"
+            );
 
             Assert.AreEqual(null, d.Root);
             Assert.AreEqual("Version!", d.Declaration.Version);
@@ -3277,7 +3652,9 @@ namespace Newtonsoft.Json.Tests.Converters
             var dxml = JsonConvert.DeserializeXNode(json, "root");
             Assert.AreEqual("2014-01-23T00:00:00", dxml.Root.Element("CreatedDate").Value);
 
-            Console.WriteLine("DateTimeToXml_Unspecified: " + dxml.Root.Element("CreatedDate").Value);
+            Console.WriteLine(
+                "DateTimeToXml_Unspecified: " + dxml.Root.Element("CreatedDate").Value
+            );
         }
 
         [Test]
@@ -3297,7 +3674,10 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json = @"{""CreatedDate"": ""2014-01-23T00:00:00+01:00""}";
             var dxml = JsonConvert.DeserializeXNode(json, "root");
-            Assert.AreEqual(dt.ToString("yyyy-MM-ddTHH:mm:sszzzzzzz", CultureInfo.InvariantCulture), dxml.Root.Element("CreatedDate").Value);
+            Assert.AreEqual(
+                dt.ToString("yyyy-MM-ddTHH:mm:sszzzzzzz", CultureInfo.InvariantCulture),
+                dxml.Root.Element("CreatedDate").Value
+            );
 
             Console.WriteLine("DateTimeToXml_Local: " + dxml.Root.Element("CreatedDate").Value);
         }
@@ -3309,7 +3689,9 @@ namespace Newtonsoft.Json.Tests.Converters
             var dxml = JsonConvert.DeserializeXNode(json, "root");
             Assert.AreEqual("2014-01-23T00:00:00.1234567", dxml.Root.Element("CreatedDate").Value);
 
-            Console.WriteLine("DateTimeToXml_Unspecified: " + dxml.Root.Element("CreatedDate").Value);
+            Console.WriteLine(
+                "DateTimeToXml_Unspecified: " + dxml.Root.Element("CreatedDate").Value
+            );
         }
 
         [Test]
@@ -3329,7 +3711,10 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json = @"{""CreatedDate"": ""2014-01-23T00:00:00.1234567+01:00""}";
             var dxml = JsonConvert.DeserializeXNode(json, "root");
-            Assert.AreEqual(dt.ToString("yyyy-MM-ddTHH:mm:ss.FFFFFFFK", CultureInfo.InvariantCulture), dxml.Root.Element("CreatedDate").Value);
+            Assert.AreEqual(
+                dt.ToString("yyyy-MM-ddTHH:mm:ss.FFFFFFFK", CultureInfo.InvariantCulture),
+                dxml.Root.Element("CreatedDate").Value
+            );
 
             Console.WriteLine("DateTimeToXml_Local: " + dxml.Root.Element("CreatedDate").Value);
         }
@@ -3409,13 +3794,15 @@ namespace Newtonsoft.Json.Tests.Converters
             Model model = new Model();
             model.Document = new XElement("Value", new XAttribute("foo", "bar"))
             {
-                Value = "2001-01-01T11:11:11"
+                Value = "2001-01-01T11:11:11",
             };
 
-            var serializer = JsonSerializer.Create(new JsonSerializerSettings
-            {
-                Converters = new List<JsonConverter>(new[] { new XmlNodeConverter() })
-            });
+            var serializer = JsonSerializer.Create(
+                new JsonSerializerSettings
+                {
+                    Converters = new List<JsonConverter>(new[] { new XmlNodeConverter() }),
+                }
+            );
 
             var json = new StringBuilder(1024);
 
@@ -3425,7 +3812,10 @@ namespace Newtonsoft.Json.Tests.Converters
                 jsonWriter.Formatting = Formatting.None;
                 serializer.Serialize(jsonWriter, model);
 
-                Assert.AreEqual(@"{""Document"":{""Value"":{""@foo"":""bar"",""#text"":""2001-01-01T11:11:11""}}}", json.ToString());
+                Assert.AreEqual(
+                    @"{""Document"":{""Value"":{""@foo"":""bar"",""#text"":""2001-01-01T11:11:11""}}}",
+                    json.ToString()
+                );
             }
 
             using (var stringReader = new StringReader(json.ToString()))
@@ -3433,9 +3823,12 @@ namespace Newtonsoft.Json.Tests.Converters
             {
                 var document = (XDocument)serializer.Deserialize(jsonReader, typeof(XDocument));
 
-                StringAssert.AreEqual(@"<Document>
+                StringAssert.AreEqual(
+                    @"<Document>
   <Value foo=""bar"">2001-01-01T11:11:11</Value>
-</Document>", document.ToString());
+</Document>",
+                    document.ToString()
+                );
             }
         }
 #endif

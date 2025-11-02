@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [CompilerTrait(CompilerFeature.IOperation)]
         public void FixedStatement_FixedClassVariableAndPrint()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -36,7 +37,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IFixedOperation (OperationKind.None, Type: null) (Syntax: 'fixed(int * ... }')
   Locals: Local_1: System.Int32* p
   Declaration: 
@@ -83,15 +85,20 @@ IFixedOperation (OperationKind.None, Type: null) (Syntax: 'fixed(int * ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<FixedStatementSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                compilationOptions: TestOptions.UnsafeDebugDll);
+            VerifyOperationTreeAndDiagnosticsForTest<FixedStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                compilationOptions: TestOptions.UnsafeDebugDll
+            );
         }
 
         [Fact]
         [CompilerTrait(CompilerFeature.IOperation)]
         public void FixedStatement_MultipleDeclarators()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -112,7 +119,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IFixedOperation (OperationKind.None, Type: null) (Syntax: 'fixed (int* ... }')
   Locals: Local_1: System.Int32* p1
     Local_2: System.Int32* p2
@@ -163,15 +171,20 @@ IFixedOperation (OperationKind.None, Type: null) (Syntax: 'fixed (int* ... }')
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<FixedStatementSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                compilationOptions: TestOptions.UnsafeDebugDll);
+            VerifyOperationTreeAndDiagnosticsForTest<FixedStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                compilationOptions: TestOptions.UnsafeDebugDll
+            );
         }
 
         [Fact]
         [CompilerTrait(CompilerFeature.IOperation)]
         public void FixedStatement_MultipleFixedStatements()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -193,7 +206,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IFixedOperation (OperationKind.None, Type: null) (Syntax: 'fixed (int* ... }')
   Locals: Local_1: System.Int32* p1
   Declaration: 
@@ -252,15 +266,20 @@ IFixedOperation (OperationKind.None, Type: null) (Syntax: 'fixed (int* ... }')
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<FixedStatementSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                compilationOptions: TestOptions.UnsafeDebugDll);
+            VerifyOperationTreeAndDiagnosticsForTest<FixedStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                compilationOptions: TestOptions.UnsafeDebugDll
+            );
         }
 
         [Fact]
         [CompilerTrait(CompilerFeature.IOperation)]
         public void FixedStatement_InvalidVariable()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -278,7 +297,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IFixedOperation (OperationKind.None, Type: null, IsInvalid) (Syntax: 'fixed (int* ... }')
   Locals: Local_1: System.Int32* p1
   Declaration: 
@@ -304,21 +324,29 @@ IFixedOperation (OperationKind.None, Type: null, IsInvalid) (Syntax: 'fixed (int
                 Children(1):
                     ILocalReferenceOperation: p1 (OperationKind.LocalReference, Type: System.Int32*) (Syntax: 'p1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ')'
                 //             /*<bind>*/fixed (int* p1 =)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(11, 39),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(11, 39),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<FixedStatementSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                compilationOptions: TestOptions.UnsafeDebugDll);
+            VerifyOperationTreeAndDiagnosticsForTest<FixedStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                compilationOptions: TestOptions.UnsafeDebugDll
+            );
         }
 
         [Fact]
         [CompilerTrait(CompilerFeature.IOperation)]
         public void FixedStatement_InvalidBody()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -338,7 +366,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IFixedOperation (OperationKind.None, Type: null, IsInvalid) (Syntax: 'fixed (int* ... }')
   Locals: Local_1: System.Int32* p1
   Declaration: 
@@ -372,21 +401,29 @@ IFixedOperation (OperationKind.None, Type: null, IsInvalid) (Syntax: 'fixed (int
                     Reference: 
                       ILocalReferenceOperation: p1 (OperationKind.LocalReference, Type: System.Int32*, IsInvalid) (Syntax: 'p1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(15,22): error CS0266: Cannot implicitly convert type 'int**' to 'int'. An explicit conversion exists (are you missing a cast?)
                 //                 i3 = &p1;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "&p1").WithArguments("int**", "int").WithLocation(15, 22)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "&p1")
+                    .WithArguments("int**", "int")
+                    .WithLocation(15, 22),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<FixedStatementSyntax>(source, expectedOperationTree, expectedDiagnostics,
-                compilationOptions: TestOptions.UnsafeDebugDll);
+            VerifyOperationTreeAndDiagnosticsForTest<FixedStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                compilationOptions: TestOptions.UnsafeDebugDll
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void FixedStatement_01()
         {
-            string source = @"
+            string source =
+                @"
 unsafe public class MyClass
 {
     int i;
@@ -399,17 +436,21 @@ unsafe public class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'int*' to 'object'
                 //             System.Console.WriteLine($"P is {p}");
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "p").WithArguments("int*", "object").WithLocation(9, 46)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "p")
+                    .WithArguments("int*", "object")
+                    .WithLocation(9, 46),
             };
 
             // https://github.com/dotnet/roslyn/issues/27491: This graph verification was added to verify general handling of operations
             //                      with OperationKind.None. We have special handling for fixed statements now.
             //                      Need to make sure we haven't lost coverage for the general implementation and
             //                      add new tests if necessary.
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -463,14 +504,20 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, compilationOptions: TestOptions.UnsafeDebugDll);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                compilationOptions: TestOptions.UnsafeDebugDll
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void FixedStatement_02()
         {
-            string source = @"
+            string source =
+                @"
 unsafe public class MyClass
 {
     int i;
@@ -486,17 +533,21 @@ unsafe public class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'int*' to 'object'
                 //                 System.Console.WriteLine($"P is {p}");
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "p").WithArguments("int*", "object").WithLocation(11, 50)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "p")
+                    .WithArguments("int*", "object")
+                    .WithLocation(11, 50),
             };
 
             // https://github.com/dotnet/roslyn/issues/27491: This graph verification was added to verify general handling of operations
             //                      with OperationKind.None. We have special handling for fixed statements now.
             //                      Need to make sure we haven't lost coverage for the general implementation and
             //                      add new tests if necessary.
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -558,14 +609,20 @@ Block[B3] - Exit
     Predecessors: [B1] [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, compilationOptions: TestOptions.UnsafeDebugDll);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                compilationOptions: TestOptions.UnsafeDebugDll
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void FixedStatement_04()
         {
-            string source = @"
+            string source =
+                @"
 unsafe public class MyClass
 {
     int i1, i2;
@@ -581,20 +638,22 @@ unsafe public class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
                 //         fixed (int* p = b ? &i1 : &i2)
                 Diagnostic(ErrorCode.ERR_FixedNeeded, "&i1").WithLocation(7, 29),
                 // CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
                 //         fixed (int* p = b ? &i1 : &i2)
-                Diagnostic(ErrorCode.ERR_FixedNeeded, "&i2").WithLocation(7, 35)
+                Diagnostic(ErrorCode.ERR_FixedNeeded, "&i2").WithLocation(7, 35),
             };
 
             // https://github.com/dotnet/roslyn/issues/27491: This graph verification was added to verify general handling of operations
             //                      with OperationKind.None. We have special handling for fixed statements now.
             //                      Need to make sure we haven't lost coverage for the general implementation and
             //                      add new tests if necessary.
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -693,14 +752,20 @@ Block[B7] - Exit
     Predecessors: [B5] [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, compilationOptions: TestOptions.UnsafeDebugDll);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                compilationOptions: TestOptions.UnsafeDebugDll
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void FixedFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(object x)
@@ -717,7 +782,8 @@ class P
     private int i;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -782,14 +848,20 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics, compilationOptions: TestOptions.UnsafeDebugDll);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics,
+                compilationOptions: TestOptions.UnsafeDebugDll
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void FixedFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool x, P input)
@@ -807,7 +879,8 @@ class P
     private int j;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -913,8 +986,12 @@ Block[B7] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics, compilationOptions: TestOptions.UnsafeDebugDll);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics,
+                compilationOptions: TestOptions.UnsafeDebugDll
+            );
         }
-
     }
 }

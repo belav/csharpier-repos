@@ -11,9 +11,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
-                        where x > int.MinValue
-                        select x;
+            var q =
+                from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
+                where x > int.MinValue
+                select x;
 
             Assert.Equal(q.LongCount(), q.LongCount());
         }
@@ -21,9 +22,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
-                    where !string.IsNullOrEmpty(x)
-                    select x;
+            var q =
+                from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
+                where !string.IsNullOrEmpty(x)
+                select x;
 
             Assert.Equal(q.LongCount(), q.LongCount());
         }
@@ -43,7 +45,11 @@ namespace System.Linq.Tests
 
         [Theory]
         [MemberData(nameof(LongCount_TestData))]
-        public static void LongCount(IEnumerable<int> source, Func<int, bool> predicate, long expected)
+        public static void LongCount(
+            IEnumerable<int> source,
+            Func<int, bool> predicate,
+            long expected
+        )
         {
             if (predicate == null)
             {
@@ -57,7 +63,11 @@ namespace System.Linq.Tests
 
         [Theory]
         [MemberData(nameof(LongCount_TestData))]
-        public static void LongCountRunOnce(IEnumerable<int> source, Func<int, bool> predicate, long expected)
+        public static void LongCountRunOnce(
+            IEnumerable<int> source,
+            Func<int, bool> predicate,
+            long expected
+        )
         {
             if (predicate == null)
             {
@@ -79,15 +89,24 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).LongCount());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).LongCount(i => i != 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).LongCount()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).LongCount(i => i != 0)
+            );
         }
 
         [Fact]
         public void NullPredicate_ThrowsArgumentNullException()
         {
             Func<int, bool> predicate = null;
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => Enumerable.Range(0, 3).LongCount(predicate));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => Enumerable.Range(0, 3).LongCount(predicate)
+            );
         }
     }
 }

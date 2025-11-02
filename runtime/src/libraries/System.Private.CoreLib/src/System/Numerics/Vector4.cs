@@ -34,26 +34,23 @@ namespace System.Numerics
         /// <summary>Creates a new <see cref="Vector4" /> object whose four elements have the same value.</summary>
         /// <param name="value">The value to assign to all four elements.</param>
         [Intrinsic]
-        public Vector4(float value) : this(value, value, value, value)
-        {
-        }
+        public Vector4(float value)
+            : this(value, value, value, value) { }
 
         /// <summary>Creates a   new <see cref="Vector4" /> object from the specified <see cref="Vector2" /> object and a Z and a W component.</summary>
         /// <param name="value">The vector to use for the X and Y components.</param>
         /// <param name="z">The Z component.</param>
         /// <param name="w">The W component.</param>
         [Intrinsic]
-        public Vector4(Vector2 value, float z, float w) : this(value.X, value.Y, z, w)
-        {
-        }
+        public Vector4(Vector2 value, float z, float w)
+            : this(value.X, value.Y, z, w) { }
 
         /// <summary>Constructs a new <see cref="Vector4" /> object from the specified <see cref="Vector3" /> object and a W component.</summary>
         /// <param name="value">The vector to use for the X, Y, and Z components.</param>
         /// <param name="w">The W component.</param>
         [Intrinsic]
-        public Vector4(Vector3 value, float w) : this(value.X, value.Y, value.Z, w)
-        {
-        }
+        public Vector4(Vector3 value, float w)
+            : this(value.X, value.Y, value.Z, w) { }
 
         /// <summary>Creates a vector whose elements have the specified values.</summary>
         /// <param name="x">The value to assign to the <see cref="X" /> field.</param>
@@ -78,7 +75,9 @@ namespace System.Numerics
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.values);
             }
 
-            this = Unsafe.ReadUnaligned<Vector4>(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(values)));
+            this = Unsafe.ReadUnaligned<Vector4>(
+                ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(values))
+            );
         }
 
         /// <summary>Gets a vector whose 4 elements are equal to zero.</summary>
@@ -139,7 +138,6 @@ namespace System.Numerics
             [Intrinsic]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             readonly get => this.GetElement(index);
-
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set => this = this.WithElement(index, value);
         }
@@ -379,9 +377,9 @@ namespace System.Numerics
         public static float Dot(Vector4 vector1, Vector4 vector2)
         {
             return (vector1.X * vector2.X)
-                 + (vector1.Y * vector2.Y)
-                 + (vector1.Z * vector2.Z)
-                 + (vector1.W * vector2.W);
+                + (vector1.Y * vector2.Y)
+                + (vector1.Z * vector2.Z)
+                + (vector1.W * vector2.W);
         }
 
         /// <summary>Performs a linear interpolation between two vectors based on the given weighting.</summary>
@@ -515,8 +513,8 @@ namespace System.Numerics
         /// <param name="matrix">The transformation matrix.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Transform(Vector2 position, Matrix4x4 matrix)
-            => Transform(position, in matrix.AsImpl());
+        public static Vector4 Transform(Vector2 position, Matrix4x4 matrix) =>
+            Transform(position, in matrix.AsImpl());
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Vector4 Transform(Vector2 position, in Matrix4x4.Impl matrix)
@@ -563,8 +561,8 @@ namespace System.Numerics
         /// <param name="matrix">The transformation matrix.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Transform(Vector3 position, Matrix4x4 matrix)
-            => Transform(position, in matrix.AsImpl());
+        public static Vector4 Transform(Vector3 position, Matrix4x4 matrix) =>
+            Transform(position, in matrix.AsImpl());
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Vector4 Transform(Vector3 position, in Matrix4x4.Impl matrix)
@@ -612,8 +610,8 @@ namespace System.Numerics
         /// <param name="matrix">The transformation matrix.</param>
         /// <returns>The transformed vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Transform(Vector4 vector, Matrix4x4 matrix)
-            => Transform(vector, in matrix.AsImpl());
+        public static Vector4 Transform(Vector4 vector, Matrix4x4 matrix) =>
+            Transform(vector, in matrix.AsImpl());
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Vector4 Transform(Vector4 vector, in Matrix4x4.Impl matrix)
@@ -652,7 +650,8 @@ namespace System.Numerics
                 value.X * (1.0f - yy2 - zz2) + value.Y * (xy2 - wz2) + value.Z * (xz2 + wy2),
                 value.X * (xy2 + wz2) + value.Y * (1.0f - xx2 - zz2) + value.Z * (yz2 - wx2),
                 value.X * (xz2 - wy2) + value.Y * (yz2 + wx2) + value.Z * (1.0f - xx2 - yy2),
-                value.W);
+                value.W
+            );
         }
 
         /// <summary>Copies the elements of the vector to a specified array.</summary>
@@ -713,7 +712,10 @@ namespace System.Numerics
                 ThrowHelper.ThrowArgumentException_DestinationTooShort();
             }
 
-            Unsafe.WriteUnaligned(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)), this);
+            Unsafe.WriteUnaligned(
+                ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)),
+                this
+            );
         }
 
         /// <summary>Attempts to copy the vector to the given <see cref="Span{Single}" />. The length of the destination span must be at least 4.</summary>
@@ -727,7 +729,10 @@ namespace System.Numerics
                 return false;
             }
 
-            Unsafe.WriteUnaligned(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)), this);
+            Unsafe.WriteUnaligned(
+                ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)),
+                this
+            );
             return true;
         }
 
@@ -810,7 +815,9 @@ namespace System.Numerics
         /// <remarks>This method returns a string in which each element of the vector is formatted using <paramref name="format" /> and the current culture's formatting conventions. The "&lt;" and "&gt;" characters are used to begin and end the string, and the current culture's <see cref="NumberFormatInfo.NumberGroupSeparator" /> property followed by a space is used to separate each element.</remarks>
         /// <related type="Article" href="/dotnet/standard/base-types/standard-numeric-format-strings">Standard Numeric Format Strings</related>
         /// <related type="Article" href="/dotnet/standard/base-types/custom-numeric-format-strings">Custom Numeric Format Strings</related>
-        public readonly string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format)
+        public readonly string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format
+        )
         {
             return ToString(format, CultureInfo.CurrentCulture);
         }
@@ -822,7 +829,10 @@ namespace System.Numerics
         /// <remarks>This method returns a string in which each element of the vector is formatted using <paramref name="format" /> and <paramref name="formatProvider" />. The "&lt;" and "&gt;" characters are used to begin and end the string, and the format provider's <see cref="NumberFormatInfo.NumberGroupSeparator" /> property followed by a space is used to separate each element.</remarks>
         /// <related type="Article" href="/dotnet/standard/base-types/standard-numeric-format-strings">Standard Numeric Format Strings</related>
         /// <related type="Article" href="/dotnet/standard/base-types/custom-numeric-format-strings">Custom Numeric Format Strings</related>
-        public readonly string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? formatProvider)
+        public readonly string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format,
+            IFormatProvider? formatProvider
+        )
         {
             string separator = NumberFormatInfo.GetInstance(formatProvider).NumberGroupSeparator;
 

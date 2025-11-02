@@ -16,21 +16,31 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
-    public class UseExpressionBodyForLambdasAnalyzerTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class UseExpressionBodyForLambdasAnalyzerTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseExpressionBodyForLambdasAnalyzerTests(ITestOutputHelper logger)
-            : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new UseExpressionBodyForLambdaDiagnosticAnalyzer(), new UseExpressionBodyForLambdaCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new UseExpressionBodyForLambdaDiagnosticAnalyzer(),
+                new UseExpressionBodyForLambdaCodeFixProvider()
+            );
 
-        private OptionsCollection UseExpressionBody
-            => this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedLambdas, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement);
+        private OptionsCollection UseExpressionBody =>
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedLambdas,
+                CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+            );
 
-        private OptionsCollection UseBlockBody
-            => this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedLambdas, CSharpCodeStyleOptions.NeverWithSuggestionEnforcement);
+        private OptionsCollection UseBlockBody =>
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedLambdas,
+                CSharpCodeStyleOptions.NeverWithSuggestionEnforcement
+            );
 
         [Fact]
         public async Task UseExpressionBodyInMethod()
@@ -60,7 +70,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<int, string> f = x => x.ToString();
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -77,7 +89,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<int, string> f = x [|=>|] x.ToString();
                     }
                 }
-                """, new TestParameters(options: UseExpressionBody));
+                """,
+                new TestParameters(options: UseExpressionBody)
+            );
         }
 
         [Fact]
@@ -108,7 +122,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -125,7 +141,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<int, string> f = x [|=>|] { return x.ToString(); };
                     }
                 }
-                """, new TestParameters(options: UseBlockBody));
+                """,
+                new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact]
@@ -160,7 +178,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 
                     void TargetMethod(Func<int, string> targetParam) { }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -195,7 +215,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 
                     void TargetMethod(Func<int, string> targetParam) { }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -215,7 +237,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, new TestParameters(options: UseExpressionBody));
+                """,
+                new TestParameters(options: UseExpressionBody)
+            );
         }
 
         [Fact]
@@ -235,7 +259,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, new TestParameters(options: UseExpressionBody));
+                """,
+                new TestParameters(options: UseExpressionBody)
+            );
         }
 
         [Fact]
@@ -255,7 +281,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         [|}|];
                     }
                 }
-                """, new TestParameters(options: UseExpressionBody));
+                """,
+                new TestParameters(options: UseExpressionBody)
+            );
         }
 
         [Fact]
@@ -286,7 +314,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<int, string> f = x => throw null;
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -317,7 +347,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -348,7 +380,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Action<int> f = x => x.ToString();
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -379,7 +413,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Action<int> f = x => throw null;
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -410,7 +446,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -441,7 +479,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -472,7 +512,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Action<int> f = async x => x.ToString();
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -503,7 +545,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Action<int> f = async x => throw null;
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -534,7 +578,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -565,7 +611,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -598,7 +646,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<Task> f = () => Task.CompletedTask;
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -631,7 +681,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<Task> f = () => throw null;
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -664,7 +716,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -697,7 +751,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -730,7 +786,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<Task> f = async () => await Task.CompletedTask;
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -763,7 +821,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<Task> f = async () => throw null;
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -796,7 +856,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -829,7 +891,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -862,7 +926,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<int, Task<string>> f = x => Task.FromResult(x.ToString());
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -895,7 +961,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<int, Task<string>> f = x => throw null;
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -928,7 +996,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -961,7 +1031,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -994,7 +1066,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<int, Task<string>> f = async x => await Task.FromResult(x.ToString());
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -1027,7 +1101,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<int, Task<string>> f = async x => throw null;
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -1060,7 +1136,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -1093,7 +1171,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -1129,7 +1209,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                             x.ToString();
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -1162,7 +1244,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<int, string> f = x => x.ToString();
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -1195,7 +1279,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         }; // Comment
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -1229,7 +1315,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<int, Func<int, string>> f = x => y => (x + y).ToString();
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -1263,7 +1351,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<int, Func<int, string>> f = x => y => (x + y).ToString();
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -1297,7 +1387,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -1331,7 +1423,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -1365,7 +1459,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<int, Func<int, string>> f = a => b => b.ToString();
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -1399,7 +1495,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         Func<int, Func<int, string>> f = a => b => b.ToString();
                     }
                 }
-                """, options: UseExpressionBody);
+                """,
+                options: UseExpressionBody
+            );
         }
 
         [Fact]
@@ -1433,7 +1531,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
 
         [Fact]
@@ -1467,7 +1567,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         };
                     }
                 }
-                """, options: UseBlockBody);
+                """,
+                options: UseBlockBody
+            );
         }
     }
 }

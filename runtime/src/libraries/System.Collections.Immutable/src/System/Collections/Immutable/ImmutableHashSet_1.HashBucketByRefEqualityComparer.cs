@@ -8,7 +8,14 @@ namespace System.Collections.Immutable
     /// <content>
     /// Contains the inner <see cref="ImmutableHashSet{T}.HashBucketByRefEqualityComparer"/> class.
     /// </content>
-    public sealed partial class ImmutableHashSet<T> : IImmutableSet<T>, IHashKeyCollection<T>, IReadOnlyCollection<T>, ICollection<T>, ISet<T>, ICollection, IStrongEnumerable<T, ImmutableHashSet<T>.Enumerator>
+    public sealed partial class ImmutableHashSet<T>
+        : IImmutableSet<T>,
+            IHashKeyCollection<T>,
+            IReadOnlyCollection<T>,
+            ICollection<T>,
+            ISet<T>,
+            ICollection,
+            IStrongEnumerable<T, ImmutableHashSet<T>.Enumerator>
     {
         /// <summary>
         /// Compares equality between two <see cref="HashBucket"/> instances
@@ -19,7 +26,8 @@ namespace System.Collections.Immutable
             /// <summary>
             /// The singleton instance.
             /// </summary>
-            private static readonly IEqualityComparer<HashBucket> s_defaultInstance = new HashBucketByRefEqualityComparer();
+            private static readonly IEqualityComparer<HashBucket> s_defaultInstance =
+                new HashBucketByRefEqualityComparer();
 
             /// <summary>
             /// Gets the singleton instance to use.
@@ -29,9 +37,7 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Prevents a default instance of the <see cref="HashBucketByRefEqualityComparer"/> class from being created.
             /// </summary>
-            private HashBucketByRefEqualityComparer()
-            {
-            }
+            private HashBucketByRefEqualityComparer() { }
 
             /// <inheritdoc />
             public bool Equals(HashBucket x, HashBucket y) => x.EqualsByRef(y);

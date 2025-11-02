@@ -19,7 +19,7 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelBindingContext bindingContext = GetBindingContext();
             bindingContext.ValueProvider = new SimpleHttpValueProvider
             {
-                { "theModelName", "not an integer" }
+                { "theModelName", "not an integer" },
             };
 
             TypeMatchModelBinder binder = new TypeMatchModelBinder();
@@ -37,15 +37,15 @@ namespace System.Web.Http.ModelBinding.Binders
         {
             // Arrange
             ModelBindingContext bindingContext = GetBindingContext();
-            bindingContext.ValueProvider = new SimpleHttpValueProvider
-            {
-                { "theModelName", 42 }
-            };
+            bindingContext.ValueProvider = new SimpleHttpValueProvider { { "theModelName", 42 } };
 
             TypeMatchModelBinder binder = new TypeMatchModelBinder();
             HttpActionContext actionContext = new HttpActionContext
             {
-                ControllerContext = new HttpControllerContext { Configuration = new HttpConfiguration() }
+                ControllerContext = new HttpControllerContext
+                {
+                    Configuration = new HttpConfiguration(),
+                },
             };
 
             // Act
@@ -64,11 +64,13 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelBindingContext bindingContext = GetBindingContext();
             bindingContext.ValueProvider = new SimpleHttpValueProvider
             {
-                { "theModelName", "not an integer" }
+                { "theModelName", "not an integer" },
             };
 
             // Act
-            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext);
+            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(
+                bindingContext
+            );
 
             // Assert
             Assert.Null(vpResult); // Raw value is the wrong type
@@ -79,13 +81,12 @@ namespace System.Web.Http.ModelBinding.Binders
         {
             // Arrange
             ModelBindingContext bindingContext = GetBindingContext();
-            bindingContext.ValueProvider = new SimpleHttpValueProvider
-            {
-                { "theModelName", 42 }
-            };
+            bindingContext.ValueProvider = new SimpleHttpValueProvider { { "theModelName", 42 } };
 
             // Act
-            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext);
+            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(
+                bindingContext
+            );
 
             // Assert
             Assert.NotNull(vpResult);
@@ -99,7 +100,9 @@ namespace System.Web.Http.ModelBinding.Binders
             bindingContext.ValueProvider = new SimpleHttpValueProvider();
 
             // Act
-            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext);
+            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(
+                bindingContext
+            );
 
             // Assert
             Assert.Null(vpResult); // No key matched
@@ -115,12 +118,15 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelBindingContext bindingContext = GetBindingContext(typeof(Customer));
             bindingContext.ValueProvider = new SimpleHttpValueProvider
             {
-                { "theModelName", model }
+                { "theModelName", model },
             };
 
             // Act
-            Assert.ThrowsArgument(() => binder.BindModel(actionContext, bindingContext),
-                "actionContext", "HttpActionContext.ControllerContext must not be null.");
+            Assert.ThrowsArgument(
+                () => binder.BindModel(actionContext, bindingContext),
+                "actionContext",
+                "HttpActionContext.ControllerContext must not be null."
+            );
         }
 
         [Fact]
@@ -128,17 +134,23 @@ namespace System.Web.Http.ModelBinding.Binders
         {
             // Arrange
             TypeMatchModelBinder binder = new TypeMatchModelBinder();
-            HttpActionContext actionContext = new HttpActionContext { ControllerContext = new HttpControllerContext() };
+            HttpActionContext actionContext = new HttpActionContext
+            {
+                ControllerContext = new HttpControllerContext(),
+            };
             Customer model = new Customer { Age = 99999 };
             ModelBindingContext bindingContext = GetBindingContext(typeof(Customer));
             bindingContext.ValueProvider = new SimpleHttpValueProvider
             {
-                { "theModelName", model }
+                { "theModelName", model },
             };
 
             // Act
-            Assert.ThrowsArgument(() => binder.BindModel(actionContext, bindingContext),
-                "actionContext", "HttpControllerContext.Configuration must not be null.");
+            Assert.ThrowsArgument(
+                () => binder.BindModel(actionContext, bindingContext),
+                "actionContext",
+                "HttpControllerContext.Configuration must not be null."
+            );
         }
 
         [Fact]
@@ -148,14 +160,17 @@ namespace System.Web.Http.ModelBinding.Binders
             TypeMatchModelBinder binder = new TypeMatchModelBinder();
             HttpActionContext actionContext = new HttpActionContext
             {
-                ControllerContext = new HttpControllerContext { Configuration = new HttpConfiguration() }
+                ControllerContext = new HttpControllerContext
+                {
+                    Configuration = new HttpConfiguration(),
+                },
             };
 
             Customer model = new Customer { Age = 99999 };
             ModelBindingContext bindingContext = GetBindingContext(typeof(Customer));
             bindingContext.ValueProvider = new SimpleHttpValueProvider
             {
-                { "theModelName", model }
+                { "theModelName", model },
             };
             bindingContext.ModelState = actionContext.ModelState;
 
@@ -167,7 +182,10 @@ namespace System.Web.Http.ModelBinding.Binders
             Assert.Same(model, bindingContext.Model);
             Assert.True(actionContext.ModelState.ContainsKey("theModelName"));
             Assert.False(actionContext.ModelState.IsValid);
-            Assert.Equal("The field Age must be between 0 and 100.", actionContext.ModelState["theModelName.Age"].Errors[0].ErrorMessage);
+            Assert.Equal(
+                "The field Age must be between 0 and 100.",
+                actionContext.ModelState["theModelName.Age"].Errors[0].ErrorMessage
+            );
         }
 
         [Fact]
@@ -177,14 +195,17 @@ namespace System.Web.Http.ModelBinding.Binders
             TypeMatchModelBinder binder = new TypeMatchModelBinder();
             HttpActionContext actionContext = new HttpActionContext
             {
-                ControllerContext = new HttpControllerContext { Configuration = new HttpConfiguration() }
+                ControllerContext = new HttpControllerContext
+                {
+                    Configuration = new HttpConfiguration(),
+                },
             };
 
             Customer[] model = new[] { new Customer { Age = 99999 } };
             ModelBindingContext bindingContext = GetBindingContext(typeof(Customer[]));
             bindingContext.ValueProvider = new SimpleHttpValueProvider
             {
-                { "theModelName", model }
+                { "theModelName", model },
             };
             bindingContext.ModelState = actionContext.ModelState;
 
@@ -196,7 +217,10 @@ namespace System.Web.Http.ModelBinding.Binders
             Assert.Same(model, bindingContext.Model);
             Assert.True(actionContext.ModelState.ContainsKey("theModelName"));
             Assert.False(actionContext.ModelState.IsValid);
-            Assert.Equal("The field Age must be between 0 and 100.", actionContext.ModelState["theModelName[0].Age"].Errors[0].ErrorMessage);
+            Assert.Equal(
+                "The field Age must be between 0 and 100.",
+                actionContext.ModelState["theModelName[0].Age"].Errors[0].ErrorMessage
+            );
         }
 
         private static ModelBindingContext GetBindingContext()
@@ -208,7 +232,10 @@ namespace System.Web.Http.ModelBinding.Binders
         {
             return new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, modelType),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    modelType
+                ),
                 ModelName = "theModelName",
             };
         }

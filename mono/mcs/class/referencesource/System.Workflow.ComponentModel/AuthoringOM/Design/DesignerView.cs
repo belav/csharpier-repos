@@ -2,28 +2,28 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Drawing;
     using System.CodeDom;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Windows.Forms;
-    using System.ComponentModel;
-    using System.Globalization;
-    using System.Drawing.Design;
-    using System.Drawing.Imaging;
-    using System.Drawing.Drawing2D;
-    using System.Windows.Forms.Design;
-    using System.ComponentModel.Design;
-    using System.Collections.Specialized;
-    using System.ComponentModel.Design.Serialization;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel.Serialization;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Imaging;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
-    using System.Workflow.ComponentModel.Design;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.ComponentModel.Serialization;
 
     //
 
@@ -31,7 +31,9 @@ namespace System.Workflow.ComponentModel.Design
     /// <summary>
     /// Holds information about the views supported by CompositeActivityDesigner
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class DesignerView
     {
         private static int MaxViewName = 150;
@@ -55,11 +57,17 @@ namespace System.Workflow.ComponentModel.Design
                 throw new ArgumentNullException("image");
 
             this.viewId = viewId;
-            this.text = ((text.Length > MaxViewName)) ? text.Substring(0, MaxViewName) + "..." : text;
+            this.text =
+                ((text.Length > MaxViewName)) ? text.Substring(0, MaxViewName) + "..." : text;
             this.image = image;
         }
 
-        public DesignerView(int viewId, string text, Image image, ActivityDesigner associatedDesigner)
+        public DesignerView(
+            int viewId,
+            string text,
+            Image image,
+            ActivityDesigner associatedDesigner
+        )
             : this(viewId, text, image)
         {
             if (associatedDesigner == null)
@@ -73,10 +81,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public int ViewId
         {
-            get
-            {
-                return this.viewId;
-            }
+            get { return this.viewId; }
         }
 
         /// <summary>
@@ -84,10 +89,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public string Text
         {
-            get
-            {
-                return this.text;
-            }
+            get { return this.text; }
         }
 
         /// <summary>
@@ -95,10 +97,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public Image Image
         {
-            get
-            {
-                return this.image;
-            }
+            get { return this.image; }
         }
 
         /// <summary>
@@ -119,25 +118,18 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public virtual ActivityDesigner AssociatedDesigner
         {
-            get
-            {
-                return this.designer;
-            }
+            get { return this.designer; }
         }
 
         /// <summary>
         /// Called when activating the view
         /// </summary>
-        public virtual void OnActivate()
-        {
-        }
+        public virtual void OnActivate() { }
 
         /// <summary>
-        /// Called when deactivating the view 
+        /// Called when deactivating the view
         /// </summary>
-        public virtual void OnDeactivate()
-        {
-        }
+        public virtual void OnDeactivate() { }
 
         public override bool Equals(object obj)
         {
@@ -154,5 +146,4 @@ namespace System.Workflow.ComponentModel.Design
         }
     }
     #endregion
-
 }

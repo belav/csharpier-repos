@@ -26,7 +26,10 @@ internal static partial class Interop
             {
                 get
                 {
-                    Debug.Assert(dwOriginatorChoice == CMsgKeyAgreeOriginatorChoice.CMSG_KEY_AGREE_ORIGINATOR_CERT);
+                    Debug.Assert(
+                        dwOriginatorChoice
+                            == CMsgKeyAgreeOriginatorChoice.CMSG_KEY_AGREE_ORIGINATOR_CERT
+                    );
                     return Originator.OriginatorCertId;
                 }
             }
@@ -35,7 +38,10 @@ internal static partial class Interop
             {
                 get
                 {
-                    Debug.Assert(dwOriginatorChoice == CMsgKeyAgreeOriginatorChoice.CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY);
+                    Debug.Assert(
+                        dwOriginatorChoice
+                            == CMsgKeyAgreeOriginatorChoice.CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY
+                    );
                     return Originator.OriginatorPublicKeyInfo;
                 }
             }

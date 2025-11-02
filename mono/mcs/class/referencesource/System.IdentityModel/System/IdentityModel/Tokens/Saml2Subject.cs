@@ -19,14 +19,13 @@ namespace System.IdentityModel.Tokens
     public class Saml2Subject
     {
         private Saml2NameIdentifier nameId;
-        private Collection<Saml2SubjectConfirmation> subjectConfirmations = new Collection<Saml2SubjectConfirmation>();
+        private Collection<Saml2SubjectConfirmation> subjectConfirmations =
+            new Collection<Saml2SubjectConfirmation>();
 
         /// <summary>
         /// Initialize an instance of <see cref="Saml2Subject"/>.
         /// </summary>
-        public Saml2Subject()
-        {
-        }
+        public Saml2Subject() { }
 
         /// <summary>
         /// Initializes an instance of <see cref="Saml2Subject"/> from a <see cref="Saml2NameIdentifier"/>.
@@ -45,7 +44,9 @@ namespace System.IdentityModel.Tokens
         {
             if (null == subjectConfirmation)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("subjectConfirmation");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "subjectConfirmation"
+                );
             }
 
             this.subjectConfirmations.Add(subjectConfirmation);
@@ -64,8 +65,8 @@ namespace System.IdentityModel.Tokens
         /// Gets a collection of <see cref="Saml2SubjectConfirmation"/> which can be used to validate and confirm the <see cref="Saml2Subject"/>. [Saml2Core, 2.4.1]
         /// </summary>
         /// <remarks>
-        /// If more than one subject confirmation is provied, then satisfying any one of 
-        /// them is sufficient to confirm the subject for the purpose of applying the 
+        /// If more than one subject confirmation is provied, then satisfying any one of
+        /// them is sufficient to confirm the subject for the purpose of applying the
         /// assertion.
         /// </remarks>
         public Collection<Saml2SubjectConfirmation> SubjectConfirmations

@@ -8,7 +8,11 @@ internal static partial class Interop
 {
     internal static partial class User32
     {
-        [LibraryImport(Libraries.User32, SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.User32,
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         public static partial IntPtr CreateWindowExW(
             int exStyle,
             string lpszClassName,
@@ -21,6 +25,7 @@ internal static partial class Interop
             IntPtr hWndParent,
             IntPtr hMenu,
             IntPtr hInst,
-            IntPtr pvParam);
+            IntPtr pvParam
+        );
     }
 }

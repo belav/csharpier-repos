@@ -234,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeLens
         [InlineData("record struct")]
         public async Task TestFullyQualifiedName(string typeKind)
         {
-            var input = $@"<Workspace>
+            var input =
+                $@"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""Proj1"">
         <Document FilePath=""CurrentDocument.cs""><![CDATA[
 public {typeKind} A

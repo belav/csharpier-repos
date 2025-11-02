@@ -11,7 +11,9 @@ namespace System
     /// The exception that is thrown when an attempt is made to store an element of the wrong type within an array.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class ArrayTypeMismatchException : SystemException
     {
         // Creates a new ArrayMismatchException with its message string set to
@@ -39,10 +41,13 @@ namespace System
             HResult = HResults.COR_E_ARRAYTYPEMISMATCH;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected ArrayTypeMismatchException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected ArrayTypeMismatchException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

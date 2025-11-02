@@ -1,31 +1,33 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 //
 // ApplicationActivator class is the base class that handles activation of Add-ins.
-// There is a single designated instance of the ApplicationActivator in each Appdomain 
-// to which all Add-in activation calls are routed to. The AppdomainManager for the 
+// There is a single designated instance of the ApplicationActivator in each Appdomain
+// to which all Add-in activation calls are routed to. The AppdomainManager for the
 // current Appdomain could provide its own custom ApplicationActivator, or an instance
 // of the default ApplicationActivator is created.
 //
 
-namespace System.Runtime.Hosting {
+namespace System.Runtime.Hosting
+{
     using System.Deployment.Internal.Isolation;
     using System.Deployment.Internal.Isolation.Manifest;
+    using System.Diagnostics.Contracts;
     using System.IO;
     using System.Reflection;
     using System.Runtime.Remoting;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Policy;
     using System.Threading;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 
-    internal sealed class ManifestRunner {
+    internal sealed class ManifestRunner
+    {
         private AppDomain m_domain;
         private string m_path;
         private string[] m_args;
@@ -38,14 +40,16 @@ namespace System.Runtime.Hosting {
         // able to call ActivationContext.ApplicationDirectory.
         //
 
-        [System.Security.SecurityCritical]  // auto-generated
-        [SecurityPermissionAttribute(SecurityAction.Assert, Unrestricted=true)]
+        [System.Security.SecurityCritical] // auto-generated
+        [SecurityPermissionAttribute(SecurityAction.Assert, Unrestricted = true)]
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        internal ManifestRunner (AppDomain domain, ActivationContext activationContext) {
+        internal ManifestRunner(AppDomain domain, ActivationContext activationContext)
+        {
             m_domain = domain;
 
-            string file, parameters;
+            string file,
+                parameters;
             CmsUtils.GetEntryPoint(activationContext, out file, out parameters);
 
             if (String.IsNullOrEmpty(file))
@@ -63,26 +67,30 @@ namespace System.Runtime.Hosting {
             m_path = Path.Combine(directoryName, file);
         }
 
-        internal RuntimeAssembly EntryAssembly {
-            [System.Security.SecurityCritical]  // auto-generated
-            [FileIOPermissionAttribute(SecurityAction.Assert, Unrestricted=true)]
-            [SecurityPermissionAttribute(SecurityAction.Assert, Unrestricted=true)]
+        internal RuntimeAssembly EntryAssembly
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            [FileIOPermissionAttribute(SecurityAction.Assert, Unrestricted = true)]
+            [SecurityPermissionAttribute(SecurityAction.Assert, Unrestricted = true)]
             [ResourceExposure(ResourceScope.None)]
             [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-            get {
+            get
+            {
                 if (m_assembly == null)
                     m_assembly = (RuntimeAssembly)Assembly.LoadFrom(m_path);
                 return m_assembly;
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private void NewThreadRunner () {
+        [System.Security.SecurityCritical] // auto-generated
+        private void NewThreadRunner()
+        {
             m_runResult = Run(false);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private int RunInNewThread () {
+        [System.Security.SecurityCritical] // auto-generated
+        private int RunInNewThread()
+        {
             Thread th = new Thread(new ThreadStart(NewThreadRunner));
             th.SetApartmentState(m_apt);
             th.Start();
@@ -90,19 +98,28 @@ namespace System.Runtime.Hosting {
             return m_runResult;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private int Run (bool checkAptModel) {
-            if (checkAptModel && m_apt != ApartmentState.Unknown) {
-                if (Thread.CurrentThread.GetApartmentState() != ApartmentState.Unknown && Thread.CurrentThread.GetApartmentState() != m_apt)
+        [System.Security.SecurityCritical] // auto-generated
+        private int Run(bool checkAptModel)
+        {
+            if (checkAptModel && m_apt != ApartmentState.Unknown)
+            {
+                if (
+                    Thread.CurrentThread.GetApartmentState() != ApartmentState.Unknown
+                    && Thread.CurrentThread.GetApartmentState() != m_apt
+                )
                     return RunInNewThread();
                 Thread.CurrentThread.SetApartmentState(m_apt);
             }
             return m_domain.nExecuteAssembly(EntryAssembly, m_args);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal int ExecuteAsAssembly () {
-            Object[] attrs = EntryAssembly.EntryPoint.GetCustomAttributes(typeof(STAThreadAttribute), false);
+        [System.Security.SecurityCritical] // auto-generated
+        internal int ExecuteAsAssembly()
+        {
+            Object[] attrs = EntryAssembly.EntryPoint.GetCustomAttributes(
+                typeof(STAThreadAttribute),
+                false
+            );
             if (attrs.Length > 0)
                 m_apt = ApartmentState.STA;
             attrs = EntryAssembly.EntryPoint.GetCustomAttributes(typeof(MTAThreadAttribute), false);
@@ -116,64 +133,94 @@ namespace System.Runtime.Hosting {
     }
 
     [System.Runtime.InteropServices.ComVisible(true)]
-    public class ApplicationActivator {
-        public ApplicationActivator () {}
+    public class ApplicationActivator
+    {
+        public ApplicationActivator() { }
 
-        public virtual ObjectHandle CreateInstance (ActivationContext activationContext) {
+        public virtual ObjectHandle CreateInstance(ActivationContext activationContext)
+        {
             return CreateInstance(activationContext, null);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        public virtual ObjectHandle CreateInstance (ActivationContext activationContext, string[] activationCustomData) {
+        public virtual ObjectHandle CreateInstance(
+            ActivationContext activationContext,
+            string[] activationCustomData
+        )
+        {
             if (activationContext == null)
                 throw new ArgumentNullException("activationContext");
             Contract.EndContractBlock();
 
-            if (CmsUtils.CompareIdentities(AppDomain.CurrentDomain.ActivationContext, activationContext)) {
-                ManifestRunner runner = new ManifestRunner(AppDomain.CurrentDomain, activationContext);
+            if (
+                CmsUtils.CompareIdentities(
+                    AppDomain.CurrentDomain.ActivationContext,
+                    activationContext
+                )
+            )
+            {
+                ManifestRunner runner = new ManifestRunner(
+                    AppDomain.CurrentDomain,
+                    activationContext
+                );
                 return new ObjectHandle(runner.ExecuteAsAssembly());
             }
 
-            AppDomainSetup adSetup = new AppDomainSetup(new ActivationArguments(activationContext, activationCustomData));
+            AppDomainSetup adSetup = new AppDomainSetup(
+                new ActivationArguments(activationContext, activationCustomData)
+            );
 
             // inherit the calling domain's AppDomain Manager
             AppDomainSetup currentDomainSetup = AppDomain.CurrentDomain.SetupInformation;
             adSetup.AppDomainManagerType = currentDomainSetup.AppDomainManagerType;
             adSetup.AppDomainManagerAssembly = currentDomainSetup.AppDomainManagerAssembly;
-            
+
             // we inherit the evidence from the calling domain
             return CreateInstanceHelper(adSetup);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        protected static ObjectHandle CreateInstanceHelper (AppDomainSetup adSetup) {
+        [System.Security.SecuritySafeCritical] // auto-generated
+        protected static ObjectHandle CreateInstanceHelper(AppDomainSetup adSetup)
+        {
             if (adSetup.ActivationArguments == null)
-                throw new ArgumentException(Environment.GetResourceString("Arg_MissingActivationArguments"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_MissingActivationArguments")
+                );
             Contract.EndContractBlock();
 
             adSetup.ActivationArguments.ActivateInstance = true;
             // inherit the caller's domain evidence for the activation.
             Evidence activatorEvidence = AppDomain.CurrentDomain.Evidence;
             // add the application identity as an evidence.
-            Evidence appEvidence = CmsUtils.MergeApplicationEvidence(null,
-                                                                     adSetup.ActivationArguments.ApplicationIdentity,
-                                                                     adSetup.ActivationArguments.ActivationContext,
-                                                                     adSetup.ActivationArguments.ActivationData);
+            Evidence appEvidence = CmsUtils.MergeApplicationEvidence(
+                null,
+                adSetup.ActivationArguments.ApplicationIdentity,
+                adSetup.ActivationArguments.ActivationContext,
+                adSetup.ActivationArguments.ActivationData
+            );
 
             HostSecurityManager securityManager = AppDomain.CurrentDomain.HostSecurityManager;
-            ApplicationTrust appTrust = securityManager.DetermineApplicationTrust(appEvidence, activatorEvidence, new TrustManagerContext());
+            ApplicationTrust appTrust = securityManager.DetermineApplicationTrust(
+                appEvidence,
+                activatorEvidence,
+                new TrustManagerContext()
+            );
             if (appTrust == null || !appTrust.IsApplicationTrustedToRun)
-                throw new PolicyException(Environment.GetResourceString("Policy_NoExecutionPermission"), 
-                                          System.__HResults.CORSEC_E_NO_EXEC_PERM,
-                                          null);
+                throw new PolicyException(
+                    Environment.GetResourceString("Policy_NoExecutionPermission"),
+                    System.__HResults.CORSEC_E_NO_EXEC_PERM,
+                    null
+                );
 
-            ObjRef or = AppDomain.nCreateInstance(adSetup.ActivationArguments.ApplicationIdentity.FullName,
-                                                  adSetup,
-                                                  appEvidence,
-                                                  appEvidence == null ? AppDomain.CurrentDomain.InternalEvidence : null,
-                                                  AppDomain.CurrentDomain.GetSecurityDescriptor());
+            ObjRef or = AppDomain.nCreateInstance(
+                adSetup.ActivationArguments.ApplicationIdentity.FullName,
+                adSetup,
+                appEvidence,
+                appEvidence == null ? AppDomain.CurrentDomain.InternalEvidence : null,
+                AppDomain.CurrentDomain.GetSecurityDescriptor()
+            );
             if (or == null)
                 return null;
             return RemotingServices.Unmarshal(or) as ObjectHandle;

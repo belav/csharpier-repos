@@ -41,8 +41,10 @@ public static class RelationalOwnedNavigationBuilderExtensions
     /// </remarks>
     /// <param name="builder">The builder for the owned navigation being configured.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToJson<TOwnerEntity, TDependentEntity>(
-        this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> builder)
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToJson<
+        TOwnerEntity,
+        TDependentEntity
+    >(this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> builder)
         where TOwnerEntity : class
         where TDependentEntity : class
     {
@@ -63,9 +65,10 @@ public static class RelationalOwnedNavigationBuilderExtensions
     /// <param name="builder">The builder for the owned navigation being configured.</param>
     /// <param name="jsonColumnName">JSON column name to use.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToJson<TOwnerEntity, TDependentEntity>(
-        this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> builder,
-        string? jsonColumnName)
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToJson<
+        TOwnerEntity,
+        TDependentEntity
+    >(this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> builder, string? jsonColumnName)
         where TOwnerEntity : class
         where TDependentEntity : class
     {
@@ -87,7 +90,8 @@ public static class RelationalOwnedNavigationBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static OwnedNavigationBuilder ToJson(
         this OwnedNavigationBuilder builder,
-        string? jsonColumnName)
+        string? jsonColumnName
+    )
     {
         builder.OwnedEntityType.SetContainerColumnName(jsonColumnName);
 
@@ -103,14 +107,16 @@ public static class RelationalOwnedNavigationBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static OwnedNavigationBuilder HasJsonPropertyName(
         this OwnedNavigationBuilder navigationBuilder,
-        string? name)
+        string? name
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
 
         if (!navigationBuilder.Metadata.PrincipalEntityType.IsOwned())
         {
             throw new InvalidOperationException(
-                RelationalStrings.JsonPropertyNameShouldBeConfiguredOnNestedNavigation);
+                RelationalStrings.JsonPropertyNameShouldBeConfiguredOnNestedNavigation
+            );
         }
 
         navigationBuilder.Metadata.DeclaringEntityType.SetJsonPropertyName(name);
@@ -127,8 +133,10 @@ public static class RelationalOwnedNavigationBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static OwnedNavigationBuilder<TSource, TTarget> HasJsonPropertyName<TSource, TTarget>(
         this OwnedNavigationBuilder<TSource, TTarget> navigationBuilder,
-        string? name)
+        string? name
+    )
         where TSource : class
-        where TTarget : class
-        => (OwnedNavigationBuilder<TSource, TTarget>)HasJsonPropertyName((OwnedNavigationBuilder)navigationBuilder, name);
+        where TTarget : class =>
+        (OwnedNavigationBuilder<TSource, TTarget>)
+            HasJsonPropertyName((OwnedNavigationBuilder)navigationBuilder, name);
 }

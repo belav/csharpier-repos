@@ -7,7 +7,6 @@ namespace System.ServiceModel.Discovery.Configuration
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Discovery;
 
-    public class AnnouncementEndpointCollectionElement : StandardEndpointCollectionElement<AnnouncementEndpoint, AnnouncementEndpointElement>
-    {
-    }
+    public class AnnouncementEndpointCollectionElement
+        : StandardEndpointCollectionElement<AnnouncementEndpoint, AnnouncementEndpointElement> { }
 }

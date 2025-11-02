@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.ExceptionClassAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,32 +31,34 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
-	[AttributeUsage (AttributeTargets.Class)]
-	[ComVisible(false)]
-	public sealed class ExceptionClassAttribute : Attribute {
+namespace System.EnterpriseServices
+{
+    [AttributeUsage(AttributeTargets.Class)]
+    [ComVisible(false)]
+    public sealed class ExceptionClassAttribute : Attribute
+    {
+        #region Fields
 
-		#region Fields
+        string name;
 
-		string name;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
+        public ExceptionClassAttribute(string name)
+        {
+            this.name = name;
+        }
 
-		public ExceptionClassAttribute (string name)
-		{
-			this.name = name;
-		}
+        #endregion // Constructors
 
-		#endregion // Constructors
+        #region Properties
 
-		#region Properties
+        public string Value
+        {
+            get { return name; }
+        }
 
-		public string Value {
-			get { return name; }
-		}
-
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

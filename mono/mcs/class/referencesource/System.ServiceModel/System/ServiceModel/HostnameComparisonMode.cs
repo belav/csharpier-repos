@@ -9,15 +9,14 @@ namespace System.ServiceModel
     {
         StrongWildcard = 0, // +
         Exact = 1,
-        WeakWildcard = 2,   // *
+        WeakWildcard = 2, // *
     }
 
     static class HostNameComparisonModeHelper
     {
         internal static bool IsDefined(HostNameComparisonMode value)
         {
-            return
-                value == HostNameComparisonMode.StrongWildcard
+            return value == HostNameComparisonMode.StrongWildcard
                 || value == HostNameComparisonMode.Exact
                 || value == HostNameComparisonMode.WeakWildcard;
         }
@@ -26,8 +25,13 @@ namespace System.ServiceModel
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("value", (int)value,
-                    typeof(HostNameComparisonMode)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(HostNameComparisonMode)
+                    )
+                );
             }
         }
     }

@@ -10,7 +10,9 @@ namespace System.Collections.ObjectModel
     [Serializable]
     [DebuggerTypeProxy(typeof(ICollectionDebugView<>))]
     [DebuggerDisplay("Count = {Count}")]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class Collection<T> : IList<T>, IList, IReadOnlyList<T>
     {
         private readonly IList<T> items; // Do not rename (binary serialization)
@@ -40,7 +42,9 @@ namespace System.Collections.ObjectModel
             {
                 if (items.IsReadOnly)
                 {
-                    ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+                    ThrowHelper.ThrowNotSupportedException(
+                        ExceptionResource.NotSupported_ReadOnlyCollection
+                    );
                 }
 
                 if ((uint)index >= (uint)items.Count)
@@ -56,7 +60,9 @@ namespace System.Collections.ObjectModel
         {
             if (items.IsReadOnly)
             {
-                ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+                ThrowHelper.ThrowNotSupportedException(
+                    ExceptionResource.NotSupported_ReadOnlyCollection
+                );
             }
 
             int index = items.Count;
@@ -67,7 +73,9 @@ namespace System.Collections.ObjectModel
         {
             if (items.IsReadOnly)
             {
-                ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+                ThrowHelper.ThrowNotSupportedException(
+                    ExceptionResource.NotSupported_ReadOnlyCollection
+                );
             }
 
             ClearItems();
@@ -97,7 +105,9 @@ namespace System.Collections.ObjectModel
         {
             if (items.IsReadOnly)
             {
-                ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+                ThrowHelper.ThrowNotSupportedException(
+                    ExceptionResource.NotSupported_ReadOnlyCollection
+                );
             }
 
             if ((uint)index > (uint)items.Count)
@@ -112,11 +122,14 @@ namespace System.Collections.ObjectModel
         {
             if (items.IsReadOnly)
             {
-                ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+                ThrowHelper.ThrowNotSupportedException(
+                    ExceptionResource.NotSupported_ReadOnlyCollection
+                );
             }
 
             int index = items.IndexOf(item);
-            if (index < 0) return false;
+            if (index < 0)
+                return false;
             RemoveItem(index);
             return true;
         }
@@ -125,7 +138,9 @@ namespace System.Collections.ObjectModel
         {
             if (items.IsReadOnly)
             {
-                ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+                ThrowHelper.ThrowNotSupportedException(
+                    ExceptionResource.NotSupported_ReadOnlyCollection
+                );
             }
 
             if ((uint)index >= (uint)items.Count)
@@ -208,7 +223,12 @@ namespace System.Collections.ObjectModel
                 //
                 Type targetType = array.GetType().GetElementType()!;
                 Type sourceType = typeof(T);
-                if (!(targetType.IsAssignableFrom(sourceType) || sourceType.IsAssignableFrom(targetType)))
+                if (
+                    !(
+                        targetType.IsAssignableFrom(sourceType)
+                        || sourceType.IsAssignableFrom(targetType)
+                    )
+                )
                 {
                     ThrowHelper.ThrowArgumentException_Argument_IncompatibleArrayType();
                 }
@@ -282,7 +302,9 @@ namespace System.Collections.ObjectModel
         {
             if (items.IsReadOnly)
             {
-                ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+                ThrowHelper.ThrowNotSupportedException(
+                    ExceptionResource.NotSupported_ReadOnlyCollection
+                );
             }
             ThrowHelper.IfNullAndNullsAreIllegalThenThrow<T>(value, ExceptionArgument.value);
 
@@ -324,7 +346,9 @@ namespace System.Collections.ObjectModel
         {
             if (items.IsReadOnly)
             {
-                ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+                ThrowHelper.ThrowNotSupportedException(
+                    ExceptionResource.NotSupported_ReadOnlyCollection
+                );
             }
             ThrowHelper.IfNullAndNullsAreIllegalThenThrow<T>(value, ExceptionArgument.value);
 
@@ -346,7 +370,9 @@ namespace System.Collections.ObjectModel
         {
             if (items.IsReadOnly)
             {
-                ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+                ThrowHelper.ThrowNotSupportedException(
+                    ExceptionResource.NotSupported_ReadOnlyCollection
+                );
             }
 
             if (IsCompatibleObject(value))

@@ -15,7 +15,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         private abstract partial class CompilationAndGeneratorDriverTranslationAction
         {
-            public virtual Task<Compilation> TransformCompilationAsync(Compilation oldCompilation, CancellationToken cancellationToken)
+            public virtual Task<Compilation> TransformCompilationAsync(
+                Compilation oldCompilation,
+                CancellationToken cancellationToken
+            )
             {
                 return Task.FromResult(oldCompilation);
             }
@@ -32,7 +35,9 @@ namespace Microsoft.CodeAnalysis
             /// </remarks>
             public abstract bool CanUpdateCompilationWithStaleGeneratedTreesIfGeneratorsGiveSameOutput { get; }
 
-            public virtual GeneratorDriver? TransformGeneratorDriver(GeneratorDriver generatorDriver) => generatorDriver;
+            public virtual GeneratorDriver? TransformGeneratorDriver(
+                GeneratorDriver generatorDriver
+            ) => generatorDriver;
 
             /// <summary>
             /// When changes are made to a solution, we make a list of translation actions. If multiple similar changes happen in rapid
@@ -40,8 +45,9 @@ namespace Microsoft.CodeAnalysis
             /// </summary>
             /// <param name="priorAction">The action prior to this one. May be a different type.</param>
             /// <returns>A non-null <see cref="CompilationAndGeneratorDriverTranslationAction" /> if we could create a merged one, null otherwise.</returns>
-            public virtual CompilationAndGeneratorDriverTranslationAction? TryMergeWithPrior(CompilationAndGeneratorDriverTranslationAction priorAction)
-                => null;
+            public virtual CompilationAndGeneratorDriverTranslationAction? TryMergeWithPrior(
+                CompilationAndGeneratorDriverTranslationAction priorAction
+            ) => null;
         }
     }
 }

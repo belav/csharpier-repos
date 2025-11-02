@@ -13,12 +13,15 @@ class XmlUrlResolverDefaults
 {
     public static int Main()
     {
-        File.WriteAllText("file.xml", """
+        File.WriteAllText(
+            "file.xml",
+            """
             <?xml version="1.0" encoding="utf-8" ?>
             <root>
               <some-element>test-value</some-element>
             </root>
-            """);
+            """
+        );
 
         XDocument doc = XDocument.Load("file.xml");
 

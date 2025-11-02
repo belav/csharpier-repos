@@ -14,16 +14,15 @@ namespace System.Diagnostics.Tracing
     {
         internal readonly PropertyAnalysis[]? properties;
 
-        public InvokeTypeInfo(
-            Type type,
-            TypeAnalysis typeAnalysis)
+        public InvokeTypeInfo(Type type, TypeAnalysis typeAnalysis)
             : base(
                 type,
                 typeAnalysis.name!,
                 typeAnalysis.level,
                 typeAnalysis.opcode,
                 typeAnalysis.keywords,
-                typeAnalysis.tags)
+                typeAnalysis.tags
+            )
         {
             if (typeAnalysis.properties.Length != 0)
                 this.properties = typeAnalysis.properties;
@@ -32,7 +31,8 @@ namespace System.Diagnostics.Tracing
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string? name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             TraceLoggingMetadataCollector groupCollector = collector.AddGroup(name);
             if (this.properties != null)
@@ -47,10 +47,7 @@ namespace System.Diagnostics.Tracing
                         propertyFormat = propertyAttribute.Format;
                     }
 
-                    property.typeInfo.WriteMetadata(
-                        groupCollector,
-                        property.name,
-                        propertyFormat);
+                    property.typeInfo.WriteMetadata(groupCollector, property.name, propertyFormat);
                 }
             }
         }

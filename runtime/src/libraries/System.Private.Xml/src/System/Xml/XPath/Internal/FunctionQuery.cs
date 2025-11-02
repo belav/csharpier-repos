@@ -15,11 +15,14 @@ namespace MS.Internal.Xml.XPath
         private readonly IList<Query> _args;
         private IXsltContextFunction? _function;
 
-        public FunctionQuery(string prefix, string name, List<Query> args) : base(prefix, name)
+        public FunctionQuery(string prefix, string name, List<Query> args)
+            : base(prefix, name)
         {
             _args = args;
         }
-        private FunctionQuery(FunctionQuery other) : base(other)
+
+        private FunctionQuery(FunctionQuery other)
+            : base(other)
         {
             _function = other._function;
             Query[] tmp = new Query[other._args.Count];
@@ -73,7 +76,7 @@ namespace MS.Internal.Xml.XPath
             {
                 argVals[i] = _args[i].Evaluate(nodeIterator);
                 if (argVals[i] is XPathNodeIterator)
-                {// ForBack Compat. To protect our queries from users.
+                { // ForBack Compat. To protect our queries from users.
                     Debug.Assert(nodeIterator.Current != null);
                     argVals[i] = new XPathSelectionIterator(nodeIterator.Current, _args[i]);
                 }
@@ -81,7 +84,9 @@ namespace MS.Internal.Xml.XPath
             try
             {
                 Debug.Assert(_function != null);
-                object? retVal = ProcessResult(_function.Invoke(xsltContext, argVals, nodeIterator.Current!));
+                object? retVal = ProcessResult(
+                    _function.Invoke(xsltContext, argVals, nodeIterator.Current!)
+                );
 
                 // ProcessResult may return null when the input value is XmlNode and here doesn't seem to be the case.
                 Debug.Assert(retVal != null);
@@ -99,7 +104,12 @@ namespace MS.Internal.Xml.XPath
             {
                 throw XPathException.Create(SR.Xp_InvalidPattern);
             }
-            this.Evaluate(new XPathSingletonIterator(navigator!, /*moved:*/true));
+            this.Evaluate(
+                new XPathSingletonIterator(
+                    navigator!, /*moved:*/
+                    true
+                )
+            );
             XPathNavigator? nav;
             while ((nav = this.Advance()) != null)
             {
@@ -115,7 +125,8 @@ namespace MS.Internal.Xml.XPath
         {
             get
             {
-                XPathResultType result = _function != null ? _function.ReturnType : XPathResultType.Any;
+                XPathResultType result =
+                    _function != null ? _function.ReturnType : XPathResultType.Any;
                 if (result == XPathResultType.Error)
                 {
                     // In v.1 we confused Error & Any so now for backward compatibility we should allow users to return any of them.
@@ -125,6 +136,9 @@ namespace MS.Internal.Xml.XPath
             }
         }
 
-        public override XPathNodeIterator Clone() { return new FunctionQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new FunctionQuery(this);
+        }
     }
 }

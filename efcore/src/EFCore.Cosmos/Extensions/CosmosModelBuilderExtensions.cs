@@ -26,9 +26,7 @@ public static class CosmosModelBuilderExtensions
     /// <param name="modelBuilder">The model builder.</param>
     /// <param name="name">The default container name.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static ModelBuilder HasDefaultContainer(
-        this ModelBuilder modelBuilder,
-        string? name)
+    public static ModelBuilder HasDefaultContainer(this ModelBuilder modelBuilder, string? name)
     {
         Check.NullButNotEmpty(name, nameof(name));
 
@@ -55,7 +53,8 @@ public static class CosmosModelBuilderExtensions
     public static IConventionModelBuilder? HasDefaultContainer(
         this IConventionModelBuilder modelBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!modelBuilder.CanSetDefaultContainer(name, fromDataAnnotation))
         {
@@ -81,11 +80,16 @@ public static class CosmosModelBuilderExtensions
     public static bool CanSetDefaultContainer(
         this IConventionModelBuilder modelBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
 
-        return modelBuilder.CanSetAnnotation(CosmosAnnotationNames.ContainerName, name, fromDataAnnotation);
+        return modelBuilder.CanSetAnnotation(
+            CosmosAnnotationNames.ContainerName,
+            name,
+            fromDataAnnotation
+        );
     }
 
     /// <summary>
@@ -113,7 +117,10 @@ public static class CosmosModelBuilderExtensions
     /// </remarks>
     /// <param name="modelBuilder">The model builder.</param>
     /// <param name="throughput">The throughput to set.</param>
-    public static ModelBuilder HasAutoscaleThroughput(this ModelBuilder modelBuilder, int? throughput)
+    public static ModelBuilder HasAutoscaleThroughput(
+        this ModelBuilder modelBuilder,
+        int? throughput
+    )
     {
         modelBuilder.Model.SetThroughput(throughput, autoscale: true);
 
@@ -135,7 +142,8 @@ public static class CosmosModelBuilderExtensions
         this IConventionModelBuilder modelBuilder,
         int? throughput,
         bool autoscale,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!modelBuilder.CanSetThroughput(throughput, autoscale, fromDataAnnotation))
         {
@@ -163,15 +171,20 @@ public static class CosmosModelBuilderExtensions
         this IConventionModelBuilder modelBuilder,
         int? throughput,
         bool autoscale,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
-        var existingAnnotation = modelBuilder.Metadata.FindAnnotation(CosmosAnnotationNames.Throughput);
+        var existingAnnotation = modelBuilder.Metadata.FindAnnotation(
+            CosmosAnnotationNames.Throughput
+        );
         if (existingAnnotation == null)
         {
             return true;
         }
 
-        var configurationSource = fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention;
+        var configurationSource = fromDataAnnotation
+            ? ConfigurationSource.DataAnnotation
+            : ConfigurationSource.Convention;
         if (configurationSource.Overrides(existingAnnotation.GetConfigurationSource()))
         {
             return true;

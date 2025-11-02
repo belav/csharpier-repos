@@ -14,7 +14,8 @@ namespace System.Threading
         internal static void UninterruptibleSleep0() => Thread.Yield();
 
 #if !CORECLR
-        private static void SleepInternal(int millisecondsTimeout) => WaitSubsystem.Sleep(millisecondsTimeout);
+        private static void SleepInternal(int millisecondsTimeout) =>
+            WaitSubsystem.Sleep(millisecondsTimeout);
 #endif
 
         // sched_getcpu doesn't exist on all platforms. On those it doesn't exist on, the shim returns -1

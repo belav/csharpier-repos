@@ -34,7 +34,9 @@ namespace DbLinq.Util
         }
 
         [NonSerialized]
-        ReaderWriterLockSlim dictionaryLock = Locks.GetLockInstance(LockRecursionPolicy.NoRecursion); //setup the lock;
+        ReaderWriterLockSlim dictionaryLock = Locks.GetLockInstance(
+            LockRecursionPolicy.NoRecursion
+        ); //setup the lock;
 
         /// <summary>
         /// This is a blind remove. Prevents the need to check for existence first.
@@ -53,9 +55,9 @@ namespace DbLinq.Util
                 }
             }
         }
-        
+
         /// <summary>
-        /// Merge does a blind remove, and then add.  Basically a blind Upsert.  
+        /// Merge does a blind remove, and then add.  Basically a blind Upsert.
         /// </summary>
         /// <param name="key">Key to lookup</param>
         /// <param name="newValue">New Value</param>
@@ -71,7 +73,7 @@ namespace DbLinq.Util
                 this.dict.Add(key, newValue);
             }
         }
-        
+
         public virtual bool Remove(TKey key)
         {
             using (new WriteLock(this.dictionaryLock))
@@ -87,7 +89,7 @@ namespace DbLinq.Util
                 return this.dict.ContainsKey(key);
             }
         }
-        
+
         public virtual bool TryGetValue(TKey key, out TValue value)
         {
             using (new ReadOnlyLock(this.dictionaryLock))
@@ -113,7 +115,7 @@ namespace DbLinq.Util
                 }
             }
         }
-        
+
         public virtual ICollection<TKey> Keys
         {
             get
@@ -124,7 +126,7 @@ namespace DbLinq.Util
                 }
             }
         }
-        
+
         public virtual ICollection<TValue> Values
         {
             get
@@ -135,7 +137,7 @@ namespace DbLinq.Util
                 }
             }
         }
-        
+
         public virtual void Clear()
         {
             using (new WriteLock(this.dictionaryLock))
@@ -143,7 +145,7 @@ namespace DbLinq.Util
                 this.dict.Clear();
             }
         }
-        
+
         public virtual int Count
         {
             get
@@ -154,7 +156,7 @@ namespace DbLinq.Util
                 }
             }
         }
-        
+
         public virtual bool Contains(KeyValuePair<TKey, TValue> item)
         {
             using (new ReadOnlyLock(this.dictionaryLock))
@@ -162,7 +164,7 @@ namespace DbLinq.Util
                 return this.dict.Contains(item);
             }
         }
-        
+
         public virtual void Add(KeyValuePair<TKey, TValue> item)
         {
             using (new WriteLock(this.dictionaryLock))
@@ -170,7 +172,7 @@ namespace DbLinq.Util
                 this.dict.Add(item);
             }
         }
-        
+
         public virtual void Add(TKey key, TValue value)
         {
             using (new WriteLock(this.dictionaryLock))
@@ -178,7 +180,7 @@ namespace DbLinq.Util
                 this.dict.Add(key, value);
             }
         }
-        
+
         public virtual bool Remove(KeyValuePair<TKey, TValue> item)
         {
             using (new WriteLock(this.dictionaryLock))
@@ -186,7 +188,7 @@ namespace DbLinq.Util
                 return this.dict.Remove(item);
             }
         }
-        
+
         public virtual void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
         {
             using (new ReadOnlyLock(this.dictionaryLock))
@@ -194,7 +196,7 @@ namespace DbLinq.Util
                 this.dict.CopyTo(array, arrayIndex);
             }
         }
-        
+
         public virtual bool IsReadOnly
         {
             get
@@ -205,15 +207,19 @@ namespace DbLinq.Util
                 }
             }
         }
-        
+
         public virtual IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
-            throw new NotSupportedException("Cannot enumerate a threadsafe dictionary.  Instead, enumerate the keys or values collection");
+            throw new NotSupportedException(
+                "Cannot enumerate a threadsafe dictionary.  Instead, enumerate the keys or values collection"
+            );
         }
-        
+
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotSupportedException("Cannot enumerate a threadsafe dictionary.  Instead, enumerate the keys or values collection");
+            throw new NotSupportedException(
+                "Cannot enumerate a threadsafe dictionary.  Instead, enumerate the keys or values collection"
+            );
         }
     }
 
@@ -225,69 +231,69 @@ namespace DbLinq.Util
             while (!lockAcquired)
                 lockAcquired = locks.TryEnterUpgradeableReadLock(1);
         }
-        
+
         public static void GetReadOnlyLock(ReaderWriterLockSlim locks)
         {
             bool lockAcquired = false;
             while (!lockAcquired)
                 lockAcquired = locks.TryEnterReadLock(1);
         }
-        
+
         public static void GetWriteLock(ReaderWriterLockSlim locks)
         {
             bool lockAcquired = false;
             while (!lockAcquired)
                 lockAcquired = locks.TryEnterWriteLock(1);
         }
-        
+
         public static void ReleaseReadOnlyLock(ReaderWriterLockSlim locks)
         {
             if (locks.IsReadLockHeld)
                 locks.ExitReadLock();
         }
-        
+
         public static void ReleaseReadLock(ReaderWriterLockSlim locks)
         {
             if (locks.IsUpgradeableReadLockHeld)
                 locks.ExitUpgradeableReadLock();
         }
-        
+
         public static void ReleaseWriteLock(ReaderWriterLockSlim locks)
         {
             if (locks.IsWriteLockHeld)
                 locks.ExitWriteLock();
         }
-        
+
         public static void ReleaseLock(ReaderWriterLockSlim locks)
         {
             ReleaseWriteLock(locks);
             ReleaseReadLock(locks);
             ReleaseReadOnlyLock(locks);
         }
-        
+
         public static ReaderWriterLockSlim GetLockInstance()
         {
             return GetLockInstance(LockRecursionPolicy.SupportsRecursion);
         }
-        
+
         public static ReaderWriterLockSlim GetLockInstance(LockRecursionPolicy recursionPolicy)
         {
             return new ReaderWriterLockSlim(recursionPolicy);
         }
     }
-    
+
     public abstract class BaseLock : IDisposable
     {
         protected ReaderWriterLockSlim _Locks;
-        
+
         public BaseLock(ReaderWriterLockSlim locks)
         {
             _Locks = locks;
         }
-        
+
         public abstract void Dispose();
     }
-    
+
     public class ReadLock : BaseLock
     {
         public ReadLock(ReaderWriterLockSlim locks)
@@ -295,13 +301,13 @@ namespace DbLinq.Util
         {
             Locks.GetReadLock(this._Locks);
         }
-        
+
         public override void Dispose()
         {
             Locks.ReleaseReadLock(this._Locks);
         }
     }
-    
+
     public class ReadOnlyLock : BaseLock
     {
         public ReadOnlyLock(ReaderWriterLockSlim locks)
@@ -309,13 +315,13 @@ namespace DbLinq.Util
         {
             Locks.GetReadOnlyLock(this._Locks);
         }
-        
+
         public override void Dispose()
         {
             Locks.ReleaseReadOnlyLock(this._Locks);
         }
     }
-    
+
     public class WriteLock : BaseLock
     {
         public WriteLock(ReaderWriterLockSlim locks)
@@ -323,7 +329,7 @@ namespace DbLinq.Util
         {
             Locks.GetWriteLock(this._Locks);
         }
-        
+
         public override void Dispose()
         {
             Locks.ReleaseWriteLock(this._Locks);

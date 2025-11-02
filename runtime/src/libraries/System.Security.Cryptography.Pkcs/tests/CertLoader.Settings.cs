@@ -41,6 +41,6 @@ namespace Test.Cryptography
         // These fields are nominally private and readonly but intentionally not declared as such so that an ad-hoc test host can change them for convenience.
         //
         public static CertLoadMode TestMode = CertLoadMode.LoadFromPfx;
-        public static string StoreName = "DotNetCoreFxTestCerts";  // Do not use "MY" here as that can break many test assumptions.
+        public static string StoreName = "DotNetCoreFxTestCerts"; // Do not use "MY" here as that can break many test assumptions.
     }
 }

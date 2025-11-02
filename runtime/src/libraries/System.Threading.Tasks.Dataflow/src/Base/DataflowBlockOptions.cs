@@ -56,7 +56,9 @@ namespace System.Threading.Tasks.Dataflow
     /// to the provided <see cref="DataflowBlockOptions"/> instance should not affect the behavior
     /// of a dataflow block.
     /// </remarks>
-    [DebuggerDisplay("TaskScheduler = {TaskScheduler}, MaxMessagesPerTask = {MaxMessagesPerTask}, BoundedCapacity = {BoundedCapacity}")]
+    [DebuggerDisplay(
+        "TaskScheduler = {TaskScheduler}, MaxMessagesPerTask = {MaxMessagesPerTask}, BoundedCapacity = {BoundedCapacity}"
+    )]
     public class DataflowBlockOptions
     {
         /// <summary>
@@ -67,14 +69,19 @@ namespace System.Threading.Tasks.Dataflow
 
         /// <summary>The scheduler to use for scheduling tasks to process messages.</summary>
         private TaskScheduler _taskScheduler = TaskScheduler.Default;
+
         /// <summary>The cancellation token to monitor for cancellation requests.</summary>
         private CancellationToken _cancellationToken = CancellationToken.None;
+
         /// <summary>The maximum number of messages that may be processed per task.</summary>
         private int _maxMessagesPerTask = Unbounded;
+
         /// <summary>The maximum number of messages that may be buffered by the block.</summary>
         private int _boundedCapacity = Unbounded;
+
         /// <summary>The name format to use for creating a name for a block.</summary>
         private string _nameFormat = "{0} Id={1}"; // see NameFormat property for a description of format items
+
         /// <summary>Whether to force ordered processing of messages.</summary>
         private bool _ensureOrdered = true;
 
@@ -88,16 +95,16 @@ namespace System.Threading.Tasks.Dataflow
         /// <returns>An instance of the options that may be cached by the block.</returns>
         internal DataflowBlockOptions DefaultOrClone()
         {
-            return (this == Default) ?
-                this :
-                new DataflowBlockOptions
+            return (this == Default)
+                ? this
+                : new DataflowBlockOptions
                 {
                     TaskScheduler = this.TaskScheduler,
                     CancellationToken = this.CancellationToken,
                     MaxMessagesPerTask = this.MaxMessagesPerTask,
                     BoundedCapacity = this.BoundedCapacity,
                     NameFormat = this.NameFormat,
-                    EnsureOrdered = this.EnsureOrdered
+                    EnsureOrdered = this.EnsureOrdered,
                 };
         }
 
@@ -111,7 +118,8 @@ namespace System.Threading.Tasks.Dataflow
             set
             {
                 Debug.Assert(this != Default, "Default instance is supposed to be immutable.");
-                if (value == null) throw new ArgumentNullException(nameof(value));
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
                 _taskScheduler = value;
             }
         }
@@ -134,7 +142,8 @@ namespace System.Threading.Tasks.Dataflow
             set
             {
                 Debug.Assert(this != Default, "Default instance is supposed to be immutable.");
-                if (value < 1 && value != Unbounded) throw new ArgumentOutOfRangeException(nameof(value));
+                if (value < 1 && value != Unbounded)
+                    throw new ArgumentOutOfRangeException(nameof(value));
                 _maxMessagesPerTask = value;
             }
         }
@@ -154,7 +163,8 @@ namespace System.Threading.Tasks.Dataflow
             set
             {
                 Debug.Assert(this != Default, "Default instance is supposed to be immutable.");
-                if (value < 1 && value != Unbounded) throw new ArgumentOutOfRangeException(nameof(value));
+                if (value < 1 && value != Unbounded)
+                    throw new ArgumentOutOfRangeException(nameof(value));
                 _boundedCapacity = value;
             }
         }
@@ -173,7 +183,8 @@ namespace System.Threading.Tasks.Dataflow
             set
             {
                 Debug.Assert(this != Default, "Default instance is supposed to be immutable.");
-                if (value == null) throw new ArgumentNullException(nameof(value));
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
                 _nameFormat = value;
             }
         }
@@ -246,22 +257,25 @@ namespace System.Threading.Tasks.Dataflow
     /// to the provided <see cref="ExecutionDataflowBlockOptions"/> instance should not affect the behavior
     /// of a dataflow block.
     /// </remarks>
-    [DebuggerDisplay("TaskScheduler = {TaskScheduler}, MaxMessagesPerTask = {MaxMessagesPerTask}, BoundedCapacity = {BoundedCapacity}, MaxDegreeOfParallelism = {MaxDegreeOfParallelism}")]
+    [DebuggerDisplay(
+        "TaskScheduler = {TaskScheduler}, MaxMessagesPerTask = {MaxMessagesPerTask}, BoundedCapacity = {BoundedCapacity}, MaxDegreeOfParallelism = {MaxDegreeOfParallelism}"
+    )]
     public class ExecutionDataflowBlockOptions : DataflowBlockOptions
     {
         /// <summary>A default instance of <see cref="DataflowBlockOptions"/>.</summary>
         /// <remarks>
         /// Do not change the values of this instance.  It is shared by all of our blocks when no options are provided by the user.
         /// </remarks>
-        internal static new readonly ExecutionDataflowBlockOptions Default = new ExecutionDataflowBlockOptions();
+        internal static new readonly ExecutionDataflowBlockOptions Default =
+            new ExecutionDataflowBlockOptions();
 
         /// <summary>Returns this <see cref="ExecutionDataflowBlockOptions"/> instance if it's the default instance or else a cloned instance.</summary>
         /// <returns>An instance of the options that may be cached by the block.</returns>
         internal new ExecutionDataflowBlockOptions DefaultOrClone()
         {
-            return (this == Default) ?
-                this :
-                new ExecutionDataflowBlockOptions
+            return (this == Default)
+                ? this
+                : new ExecutionDataflowBlockOptions
                 {
                     TaskScheduler = this.TaskScheduler,
                     CancellationToken = this.CancellationToken,
@@ -270,12 +284,13 @@ namespace System.Threading.Tasks.Dataflow
                     NameFormat = this.NameFormat,
                     EnsureOrdered = this.EnsureOrdered,
                     MaxDegreeOfParallelism = this.MaxDegreeOfParallelism,
-                    SingleProducerConstrained = this.SingleProducerConstrained
+                    SingleProducerConstrained = this.SingleProducerConstrained,
                 };
         }
 
         /// <summary>The maximum number of tasks that may be used concurrently to process messages.</summary>
         private int _maxDegreeOfParallelism = 1;
+
         /// <summary>Whether the code using this block will only ever have a single producer accessing the block at any given time.</summary>
         private bool _singleProducerConstrained;
 
@@ -289,7 +304,8 @@ namespace System.Threading.Tasks.Dataflow
             set
             {
                 Debug.Assert(this != Default, "Default instance is supposed to be immutable.");
-                if (value < 1 && value != Unbounded) throw new ArgumentOutOfRangeException(nameof(value));
+                if (value < 1 && value != Unbounded)
+                    throw new ArgumentOutOfRangeException(nameof(value));
                 _maxDegreeOfParallelism = value;
             }
         }
@@ -321,11 +337,19 @@ namespace System.Threading.Tasks.Dataflow
         /// <remarks>Unlike MaxDegreeOfParallelism, this property will always return a positive value.</remarks>
         internal int ActualMaxDegreeOfParallelism
         {
-            get { return (_maxDegreeOfParallelism == Unbounded) ? int.MaxValue : _maxDegreeOfParallelism; }
+            get
+            {
+                return (_maxDegreeOfParallelism == Unbounded)
+                    ? int.MaxValue
+                    : _maxDegreeOfParallelism;
+            }
         }
 
         /// <summary>Gets whether these dataflow block options allow for parallel execution.</summary>
-        internal bool SupportsParallelExecution { get { return _maxDegreeOfParallelism == Unbounded || _maxDegreeOfParallelism > 1; } }
+        internal bool SupportsParallelExecution
+        {
+            get { return _maxDegreeOfParallelism == Unbounded || _maxDegreeOfParallelism > 1; }
+        }
     }
 
     /// <summary>
@@ -378,22 +402,25 @@ namespace System.Threading.Tasks.Dataflow
     /// to the provided <see cref="GroupingDataflowBlockOptions"/> instance should not affect the behavior
     /// of a dataflow block.
     /// </remarks>
-    [DebuggerDisplay("TaskScheduler = {TaskScheduler}, MaxMessagesPerTask = {MaxMessagesPerTask}, BoundedCapacity = {BoundedCapacity}, Greedy = {Greedy}, MaxNumberOfGroups = {MaxNumberOfGroups}")]
+    [DebuggerDisplay(
+        "TaskScheduler = {TaskScheduler}, MaxMessagesPerTask = {MaxMessagesPerTask}, BoundedCapacity = {BoundedCapacity}, Greedy = {Greedy}, MaxNumberOfGroups = {MaxNumberOfGroups}"
+    )]
     public class GroupingDataflowBlockOptions : DataflowBlockOptions
     {
         /// <summary>A default instance of <see cref="DataflowBlockOptions"/>.</summary>
         /// <remarks>
         /// Do not change the values of this instance.  It is shared by all of our blocks when no options are provided by the user.
         /// </remarks>
-        internal static new readonly GroupingDataflowBlockOptions Default = new GroupingDataflowBlockOptions();
+        internal static new readonly GroupingDataflowBlockOptions Default =
+            new GroupingDataflowBlockOptions();
 
         /// <summary>Returns this <see cref="GroupingDataflowBlockOptions"/> instance if it's the default instance or else a cloned instance.</summary>
         /// <returns>An instance of the options that may be cached by the block.</returns>
         internal new GroupingDataflowBlockOptions DefaultOrClone()
         {
-            return (this == Default) ?
-                this :
-                new GroupingDataflowBlockOptions
+            return (this == Default)
+                ? this
+                : new GroupingDataflowBlockOptions
                 {
                     TaskScheduler = this.TaskScheduler,
                     CancellationToken = this.CancellationToken,
@@ -402,12 +429,13 @@ namespace System.Threading.Tasks.Dataflow
                     NameFormat = this.NameFormat,
                     EnsureOrdered = this.EnsureOrdered,
                     Greedy = this.Greedy,
-                    MaxNumberOfGroups = this.MaxNumberOfGroups
+                    MaxNumberOfGroups = this.MaxNumberOfGroups,
                 };
         }
 
         /// <summary>Whether the block should greedily consume offered messages.</summary>
         private bool _greedy = true;
+
         /// <summary>The maximum number of groups that should be generated by the block.</summary>
         private long _maxNumberOfGroups = Unbounded;
 
@@ -432,7 +460,8 @@ namespace System.Threading.Tasks.Dataflow
             set
             {
                 Debug.Assert(this != Default, "Default instance is supposed to be immutable.");
-                if (value <= 0 && value != Unbounded) throw new ArgumentOutOfRangeException(nameof(value));
+                if (value <= 0 && value != Unbounded)
+                    throw new ArgumentOutOfRangeException(nameof(value));
                 _maxNumberOfGroups = value;
             }
         }

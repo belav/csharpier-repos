@@ -8,26 +8,24 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Data.Common.Utils.Boolean;
-using System.Diagnostics;
 using System.Data.Common.Utils;
+using System.Data.Common.Utils.Boolean;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
-
-    using WrapperBoolExpr = BoolExpr<LeftCellWrapper>;
-    using WrapperTreeExpr = TreeExpr<LeftCellWrapper>;
     using WrapperAndExpr = AndExpr<LeftCellWrapper>;
-    using WrapperOrExpr = OrExpr<LeftCellWrapper>;
-    using WrapperNotExpr = NotExpr<LeftCellWrapper>;
-    using WrapperTermExpr = TermExpr<LeftCellWrapper>;
-    using WrapperTrueExpr = TrueExpr<LeftCellWrapper>;
+    using WrapperBoolExpr = BoolExpr<LeftCellWrapper>;
     using WrapperFalseExpr = FalseExpr<LeftCellWrapper>;
+    using WrapperNotExpr = NotExpr<LeftCellWrapper>;
+    using WrapperOrExpr = OrExpr<LeftCellWrapper>;
+    using WrapperTermExpr = TermExpr<LeftCellWrapper>;
+    using WrapperTreeExpr = TreeExpr<LeftCellWrapper>;
+    using WrapperTrueExpr = TrueExpr<LeftCellWrapper>;
 
     internal partial class CellTreeNode
     {
-
         #region Abstract Visitors
         // Abstract visitor implementation for Cell trees
         // TOutput is the return type of the visitor and TInput is a single
@@ -53,11 +51,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
         #region Default CellTree Visitor
         // Default visitor implementation for CellTreeVisitor
-        // TInput is the type of the parameter that can be passed in to each visit 
+        // TInput is the type of the parameter that can be passed in to each visit
         // Returns a CellTreeVisitor as output
         private class DefaultCellTreeVisitor<TInput> : CellTreeVisitor<TInput, CellTreeNode>
         {
-
             internal override CellTreeNode VisitLeaf(LeafCellTreeNode node, TInput param)
             {
                 return node;
@@ -106,9 +103,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         private class FlatteningVisitor : SimpleCellTreeVisitor<bool, CellTreeNode>
         {
             #region Constructor/Fields/Invocation
-            protected FlatteningVisitor()
-            {
-            }
+            protected FlatteningVisitor() { }
 
             // effects: Flattens node and returns a new tree that is flattened
             internal static CellTreeNode Flatten(CellTreeNode node)
@@ -135,7 +130,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     flattenedChildren.Add(flattenedChild);
                 }
 
-                Debug.Assert(flattenedChildren.Count >= 1, "node must have more than 1 child and be an OpCellTreeNode");
+                Debug.Assert(
+                    flattenedChildren.Count >= 1,
+                    "node must have more than 1 child and be an OpCellTreeNode"
+                );
                 // If only one child, return that
                 if (flattenedChildren.Count == 1)
                 {
@@ -143,9 +141,16 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 }
 
                 Debug.Assert(flattenedChildren.Count > 1, "Opnode has 0 children?");
-                Debug.Assert(node.OpType != CellTreeOpType.Leaf, "Wrong op type for operation node");
+                Debug.Assert(
+                    node.OpType != CellTreeOpType.Leaf,
+                    "Wrong op type for operation node"
+                );
 
-                OpCellTreeNode result = new OpCellTreeNode(node.ViewgenContext, node.OpType, flattenedChildren);
+                OpCellTreeNode result = new OpCellTreeNode(
+                    node.ViewgenContext,
+                    node.OpType,
+                    flattenedChildren
+                );
                 return result;
             }
             #endregion
@@ -160,9 +165,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         private class AssociativeOpFlatteningVisitor : SimpleCellTreeVisitor<bool, CellTreeNode>
         {
             #region Constructor/Fields/Invocation
-            private AssociativeOpFlatteningVisitor()
-            {
-            }
+            private AssociativeOpFlatteningVisitor() { }
 
             internal static CellTreeNode Flatten(CellTreeNode node)
             {
@@ -189,7 +192,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     flattenedChildren.Add(flattenedChild);
                 }
 
-                Debug.Assert(flattenedChildren.Count > 1, "node must have more than 1 child and be an OpCellTreeNode");
+                Debug.Assert(
+                    flattenedChildren.Count > 1,
+                    "node must have more than 1 child and be an OpCellTreeNode"
+                );
 
                 // If this op is associative and a child's OP is the same as this
                 // op, add those to be this nodes children
@@ -210,7 +216,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     }
                 }
 
-                OpCellTreeNode result = new OpCellTreeNode(node.ViewgenContext, node.OpType, finalChildren);
+                OpCellTreeNode result = new OpCellTreeNode(
+                    node.ViewgenContext,
+                    node.OpType,
+                    finalChildren
+                );
                 return result;
             }
             #endregion
@@ -221,7 +231,6 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         // This visitor returns all the leaf tree nodes in this
         private class LeafVisitor : SimpleCellTreeVisitor<bool, IEnumerable<LeafCellTreeNode>>
         {
-
             private LeafVisitor() { }
 
             internal static IEnumerable<LeafCellTreeNode> GetLeaves(CellTreeNode node)
@@ -230,16 +239,25 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 return node.Accept<bool, IEnumerable<LeafCellTreeNode>>(visitor, true);
             }
 
-            internal override IEnumerable<LeafCellTreeNode> VisitLeaf(LeafCellTreeNode node, bool dummy)
+            internal override IEnumerable<LeafCellTreeNode> VisitLeaf(
+                LeafCellTreeNode node,
+                bool dummy
+            )
             {
                 yield return node;
             }
 
-            internal override IEnumerable<LeafCellTreeNode> VisitOpNode(OpCellTreeNode node, bool dummy)
+            internal override IEnumerable<LeafCellTreeNode> VisitOpNode(
+                OpCellTreeNode node,
+                bool dummy
+            )
             {
                 foreach (CellTreeNode child in node.Children)
                 {
-                    IEnumerable<LeafCellTreeNode> children = child.Accept<bool, IEnumerable<LeafCellTreeNode>>(this, dummy);
+                    IEnumerable<LeafCellTreeNode> children = child.Accept<
+                        bool,
+                        IEnumerable<LeafCellTreeNode>
+                    >(this, dummy);
                     foreach (LeafCellTreeNode leafNode in children)
                     {
                         yield return leafNode;

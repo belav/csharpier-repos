@@ -19,7 +19,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsFloat10()
         {
-            var reader = Utils.CreateFragmentReader("<Root> -0<!-- Comment inbetween-->05.145<?a?><![CDATA[6]]> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> -0<!-- Comment inbetween-->05.145<?a?><![CDATA[6]]> </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(-5.1456F, reader.ReadElementContentAs(typeof(float), null));
         }
@@ -36,7 +38,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsFloat12()
         {
-            var reader = Utils.CreateFragmentReader("<Root> <?a?>00<!-- Comment inbetween-->9<![CDATA[9]]>.<![CDATA[9]]>99999</Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> <?a?>00<!-- Comment inbetween-->9<![CDATA[9]]>.<![CDATA[9]]>99999</Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(99.999999F, reader.ReadElementContentAs(typeof(float), null));
         }
@@ -44,7 +48,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsFloat13()
         {
-            var reader = Utils.CreateFragmentReader("<Root>-5<![CDATA[6]]>.4<?a?>444<!-- Comment inbetween-->455<![CDATA[6]]> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>-5<![CDATA[6]]>.4<?a?>444<!-- Comment inbetween-->455<![CDATA[6]]> </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(-56.44444556F, reader.ReadElementContentAs(typeof(float), null));
         }
@@ -52,7 +58,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsFloat14()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  5<![CDATA[6]]>.455555<!-- Comment inbetween--><![CDATA[6]]>44<?a?>  </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  5<![CDATA[6]]>.455555<!-- Comment inbetween--><![CDATA[6]]>44<?a?>  </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(56.455555644F, reader.ReadElementContentAs(typeof(float), null));
         }
@@ -60,7 +68,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsFloat15()
         {
-            var reader = Utils.CreateFragmentReader("<Root> -000123<?a?>45<!-- Comment inbetween--><![CDATA[6]]> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> -000123<?a?>45<!-- Comment inbetween--><![CDATA[6]]> </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(-123456F, reader.ReadElementContentAs(typeof(float), null));
         }
@@ -68,7 +78,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsFloat16()
         {
-            var reader = Utils.CreateFragmentReader("<Root> <![CDATA[9]]>999<!-- Comment inbetween-->9.444<?a?>5<![CDATA[6]]> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> <![CDATA[9]]>999<!-- Comment inbetween-->9.444<?a?>5<![CDATA[6]]> </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(99999.44456F, reader.ReadElementContentAs(typeof(float), null));
         }
@@ -93,7 +105,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsFloat2()
         {
-            var reader = Utils.CreateFragmentReader("<Root> -0<!-- Comment inbetween-->05.145<?a?><![CDATA[6]]> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> -0<!-- Comment inbetween-->05.145<?a?><![CDATA[6]]> </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(-5.1456F, reader.ReadElementContentAsFloat());
         }
@@ -101,7 +115,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsFloat3()
         {
-            var reader = Utils.CreateFragmentReader("<Root> <?a?>00<!-- Comment inbetween-->9<![CDATA[9]]>.<![CDATA[9]]>99999</Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> <?a?>00<!-- Comment inbetween-->9<![CDATA[9]]>.<![CDATA[9]]>99999</Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(99.999999F, reader.ReadElementContentAsFloat());
         }
@@ -109,7 +125,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsFloat4()
         {
-            var reader = Utils.CreateFragmentReader("<Root>-5<![CDATA[6]]>.4<?a?>444<!-- Comment inbetween-->455<![CDATA[6]]> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>-5<![CDATA[6]]>.4<?a?>444<!-- Comment inbetween-->455<![CDATA[6]]> </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(-56.44444556F, reader.ReadElementContentAsFloat());
         }
@@ -117,7 +135,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsFloat5()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  5<![CDATA[6]]>.455555<!-- Comment inbetween--><![CDATA[6]]>44<?a?>  </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  5<![CDATA[6]]>.455555<!-- Comment inbetween--><![CDATA[6]]>44<?a?>  </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(56.455555644F, reader.ReadElementContentAsFloat());
         }
@@ -125,7 +145,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsFloat6()
         {
-            var reader = Utils.CreateFragmentReader("<Root> -000123<?a?>45<!-- Comment inbetween--><![CDATA[6]]> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> -000123<?a?>45<!-- Comment inbetween--><![CDATA[6]]> </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(-123456F, reader.ReadElementContentAsFloat());
         }
@@ -133,7 +155,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadElementContentAsFloat7()
         {
-            var reader = Utils.CreateFragmentReader("<Root> <![CDATA[9]]>999<!-- Comment inbetween-->9.444<?a?>5<![CDATA[6]]> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> <![CDATA[9]]>999<!-- Comment inbetween-->9.444<?a?>5<![CDATA[6]]> </Root>"
+            );
             reader.PositionOnElement("Root");
             Assert.Equal(99999.44456F, reader.ReadElementContentAsFloat());
         }

@@ -33,10 +33,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     int $$
                 }
                 """;
-            await VerifySymbolKinds(markup,
+            await VerifySymbolKinds(
+                markup,
                 new SymbolKindOrTypeKind(SymbolKind.Field),
                 new SymbolKindOrTypeKind(SymbolKind.Property),
-                new SymbolKindOrTypeKind(MethodKind.Ordinary));
+                new SymbolKindOrTypeKind(MethodKind.Ordinary)
+            );
             await VerifyNoModifiers(markup);
             await VerifyTypeName(markup, "int");
             await VerifyAccessibility(markup, null);
@@ -51,10 +53,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     public int $$
                 }
                 """;
-            await VerifySymbolKinds(markup,
+            await VerifySymbolKinds(
+                markup,
                 new SymbolKindOrTypeKind(SymbolKind.Field),
                 new SymbolKindOrTypeKind(SymbolKind.Property),
-                new SymbolKindOrTypeKind(MethodKind.Ordinary));
+                new SymbolKindOrTypeKind(MethodKind.Ordinary)
+            );
             await VerifyNoModifiers(markup);
             await VerifyTypeName(markup, "int");
             await VerifyAccessibility(markup, Accessibility.Public);
@@ -69,9 +73,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     public virtual int $$
                 }
                 """;
-            await VerifySymbolKinds(markup,
+            await VerifySymbolKinds(
+                markup,
                 new SymbolKindOrTypeKind(SymbolKind.Property),
-                new SymbolKindOrTypeKind(MethodKind.Ordinary));
+                new SymbolKindOrTypeKind(MethodKind.Ordinary)
+            );
             await VerifyModifiers(markup, new DeclarationModifiers(isVirtual: true));
             await VerifyTypeName(markup, "int");
             await VerifyAccessibility(markup, Accessibility.Public);
@@ -86,10 +92,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     private static int $$
                 }
                 """;
-            await VerifySymbolKinds(markup,
+            await VerifySymbolKinds(
+                markup,
                 new SymbolKindOrTypeKind(SymbolKind.Field),
                 new SymbolKindOrTypeKind(SymbolKind.Property),
-                new SymbolKindOrTypeKind(MethodKind.Ordinary));
+                new SymbolKindOrTypeKind(MethodKind.Ordinary)
+            );
             await VerifyModifiers(markup, new DeclarationModifiers(isStatic: true));
             await VerifyTypeName(markup, "int");
             await VerifyAccessibility(markup, Accessibility.Private);
@@ -104,8 +112,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     private const int $$
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Field));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Field));
             await VerifyModifiers(markup, new DeclarationModifiers(isConst: true));
             await VerifyTypeName(markup, "int");
             await VerifyAccessibility(markup, Accessibility.Private);
@@ -123,9 +130,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     }
                 }
                 """;
-            await VerifySymbolKinds(markup,
+            await VerifySymbolKinds(
+                markup,
                 new SymbolKindOrTypeKind(SymbolKind.Local),
-                new SymbolKindOrTypeKind(MethodKind.LocalFunction));
+                new SymbolKindOrTypeKind(MethodKind.LocalFunction)
+            );
             await VerifyModifiers(markup, new DeclarationModifiers());
             await VerifyTypeName(markup, "int");
             await VerifyAccessibility(markup, null);
@@ -143,8 +152,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     }
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Local));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Local));
             await VerifyModifiers(markup, new DeclarationModifiers());
             await VerifyTypeName(markup, "int");
             await VerifyAccessibility(markup, null);
@@ -162,9 +170,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     }
                 }
                 """;
-            await VerifySymbolKinds(markup,
+            await VerifySymbolKinds(
+                markup,
                 new SymbolKindOrTypeKind(SymbolKind.Local),
-                new SymbolKindOrTypeKind(MethodKind.LocalFunction));
+                new SymbolKindOrTypeKind(MethodKind.LocalFunction)
+            );
             await VerifyModifiers(markup, new DeclarationModifiers(isReadOnly: true));
             await VerifyTypeName(markup, "int");
             await VerifyAccessibility(markup, null);
@@ -182,8 +192,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     }
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Local));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Local));
             await VerifyModifiers(markup, new DeclarationModifiers(isReadOnly: true));
             await VerifyTypeName(markup, "int");
             await VerifyAccessibility(markup, null);
@@ -201,8 +210,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     }
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Local));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Local));
             await VerifyModifiers(markup, new DeclarationModifiers());
             await VerifyTypeName(markup, "int");
             await VerifyAccessibility(markup, null);
@@ -220,8 +228,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     }
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Local));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Local));
             await VerifyModifiers(markup, new DeclarationModifiers());
             await VerifyTypeName(markup, "int");
             await VerifyAccessibility(markup, null);
@@ -239,8 +246,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     }
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Local));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Local));
             await VerifyModifiers(markup, new DeclarationModifiers());
             await VerifyTypeName(markup, "int");
             await VerifyAccessibility(markup, null);
@@ -258,8 +264,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     }
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Local));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Local));
             await VerifyModifiers(markup, new DeclarationModifiers());
             await VerifyTypeName(markup, "int");
             await VerifyAccessibility(markup, null);
@@ -277,8 +282,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     }
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Local));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Local));
             await VerifyModifiers(markup, new DeclarationModifiers());
             await VerifyTypeName(markup, "int");
             await VerifyAccessibility(markup, null);
@@ -294,8 +298,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     }
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Parameter));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Parameter));
             await VerifyModifiers(markup, new DeclarationModifiers());
             await VerifyTypeName(markup, "global::C");
             await VerifyAccessibility(markup, null);
@@ -311,8 +314,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     }
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Parameter));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Parameter));
             await VerifyModifiers(markup, new DeclarationModifiers());
             await VerifyTypeName(markup, "global::C");
             await VerifyAccessibility(markup, null);
@@ -328,8 +330,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     }
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Parameter));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Parameter));
             await VerifyModifiers(markup, new DeclarationModifiers());
             await VerifyTypeName(markup, "string");
             await VerifyAccessibility(markup, null);
@@ -345,8 +346,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     }
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Parameter));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Parameter));
             await VerifyModifiers(markup, new DeclarationModifiers());
             await VerifyTypeName(markup, "string");
             await VerifyAccessibility(markup, null);
@@ -363,8 +363,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     }
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Parameter));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Parameter));
             await VerifyModifiers(markup, new DeclarationModifiers());
             await VerifyTypeName(markup, "global::System.Collections.Generic.List<string>");
             await VerifyAccessibility(markup, null);
@@ -378,8 +377,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                 {
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.TypeParameter));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.TypeParameter));
         }
 
         [Fact]
@@ -390,8 +388,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                 {
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.TypeParameter));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.TypeParameter));
         }
 
         [Fact]
@@ -403,8 +400,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     readonly int $$
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Field));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Field));
         }
 
         [Fact]
@@ -416,8 +412,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     const int $$
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Field));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Field));
         }
 
         [Fact]
@@ -429,9 +424,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     abstract int $$
                 }
                 """;
-            await VerifySymbolKinds(markup,
+            await VerifySymbolKinds(
+                markup,
                 new SymbolKindOrTypeKind(SymbolKind.Property),
-                new SymbolKindOrTypeKind(MethodKind.Ordinary));
+                new SymbolKindOrTypeKind(MethodKind.Ordinary)
+            );
         }
 
         [Fact]
@@ -443,9 +440,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     virtual int $$
                 }
                 """;
-            await VerifySymbolKinds(markup,
+            await VerifySymbolKinds(
+                markup,
                 new SymbolKindOrTypeKind(SymbolKind.Property),
-                new SymbolKindOrTypeKind(MethodKind.Ordinary));
+                new SymbolKindOrTypeKind(MethodKind.Ordinary)
+            );
         }
 
         [Fact]
@@ -457,9 +456,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     sealed int $$
                 }
                 """;
-            await VerifySymbolKinds(markup,
+            await VerifySymbolKinds(
+                markup,
                 new SymbolKindOrTypeKind(SymbolKind.Property),
-                new SymbolKindOrTypeKind(MethodKind.Ordinary));
+                new SymbolKindOrTypeKind(MethodKind.Ordinary)
+            );
         }
 
         [Fact]
@@ -471,9 +472,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     override int $$
                 }
                 """;
-            await VerifySymbolKinds(markup,
+            await VerifySymbolKinds(
+                markup,
                 new SymbolKindOrTypeKind(SymbolKind.Property),
-                new SymbolKindOrTypeKind(MethodKind.Ordinary));
+                new SymbolKindOrTypeKind(MethodKind.Ordinary)
+            );
         }
 
         [Fact]
@@ -485,8 +488,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     async int $$
                 }
                 """;
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(MethodKind.Ordinary));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(MethodKind.Ordinary));
         }
 
         [Fact]
@@ -499,10 +501,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
                     partial int $$
                 }
                 """;
-            await VerifySymbolKinds(markup,
+            await VerifySymbolKinds(
+                markup,
                 new SymbolKindOrTypeKind(SymbolKind.Field),
                 new SymbolKindOrTypeKind(SymbolKind.Property),
-                new SymbolKindOrTypeKind(MethodKind.Ordinary));
+                new SymbolKindOrTypeKind(MethodKind.Ordinary)
+            );
         }
 
         [Theory]
@@ -511,7 +515,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DeclarationInfoTests
         [InlineData("List<string>")]
         public async Task ModifierExclusionInsideMethod_Const(string type)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System.Collections.Generic;
 class C
 {{
@@ -521,8 +526,7 @@ class C
     }}
 }}
 ";
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Local));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Local));
         }
 
         [Theory]
@@ -531,7 +535,8 @@ class C
         [InlineData("List<string>")]
         public async Task ModifierExclusionInsideMethod_ConstLocalDeclaration(string type)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System.Collections.Generic;
 class C
 {{
@@ -541,8 +546,7 @@ class C
     }}
 }}
 ";
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Local));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Local));
         }
 
         [Theory]
@@ -551,7 +555,8 @@ class C
         [InlineData("List<string>")]
         public async Task ModifierExclusionInsideMethod_ConstLocalFunction(string type)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System.Collections.Generic;
 class C
 {{
@@ -563,8 +568,7 @@ class C
     }}
 }}
 ";
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(SymbolKind.Local));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(SymbolKind.Local));
         }
 
         [Theory]
@@ -576,7 +580,8 @@ class C
             // This only works with a partially written name.
             // Because async is not a keyword, the syntax tree when the name is missing is completely broken
             // in that there can be multiple statements full of missing and skipped tokens depending on the type syntax.
-            var markup = $@"
+            var markup =
+                $@"
 using System.Collections.Generic;
 class C
 {{
@@ -586,8 +591,7 @@ class C
     }}
 }}
 ";
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(MethodKind.LocalFunction));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(MethodKind.LocalFunction));
         }
 
         [Theory]
@@ -596,7 +600,8 @@ class C
         [InlineData("List<string>")]
         public async Task ModifierExclusionInsideMethod_AsyncLocalDeclaration(string type)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System.Collections.Generic;
 class C
 {{
@@ -606,8 +611,7 @@ class C
     }}
 }}
 ";
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(MethodKind.LocalFunction));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(MethodKind.LocalFunction));
         }
 
         [Theory]
@@ -616,7 +620,8 @@ class C
         [InlineData("List<string>")]
         public async Task ModifierExclusionInsideMethod_AsyncLocalFunction(string type)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System.Collections.Generic;
 class C
 {{
@@ -628,8 +633,7 @@ class C
     }}
 }}
 ";
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(MethodKind.LocalFunction));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(MethodKind.LocalFunction));
         }
 
         [Theory]
@@ -638,7 +642,8 @@ class C
         [InlineData("List<string>")]
         public async Task ModifierExclusionInsideMethod_Unsafe(string type)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System.Collections.Generic;
 class C
 {{
@@ -648,8 +653,7 @@ class C
     }}
 }}
 ";
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(MethodKind.LocalFunction));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(MethodKind.LocalFunction));
         }
 
         [Theory]
@@ -658,7 +662,8 @@ class C
         [InlineData("List<string>")]
         public async Task ModifierExclusionInsideMethod_UnsafeLocalDeclaration(string type)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System.Collections.Generic;
 class C
 {{
@@ -668,8 +673,7 @@ class C
     }}
 }}
 ";
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(MethodKind.LocalFunction));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(MethodKind.LocalFunction));
         }
 
         [Theory]
@@ -678,7 +682,8 @@ class C
         [InlineData("List<string>")]
         public async Task ModifierExclusionInsideMethod_UnsafeLocalFunction(string type)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System.Collections.Generic;
 class C
 {{
@@ -690,8 +695,7 @@ class C
     }}
 }}
 ";
-            await VerifySymbolKinds(markup,
-                new SymbolKindOrTypeKind(MethodKind.LocalFunction));
+            await VerifySymbolKinds(markup, new SymbolKindOrTypeKind(MethodKind.LocalFunction));
         }
 
         [Fact]
@@ -709,9 +713,11 @@ class C
                         }
                     }
                 """;
-            await VerifySymbolKinds(markup,
+            await VerifySymbolKinds(
+                markup,
                 new SymbolKindOrTypeKind(SymbolKind.Local),
-                new SymbolKindOrTypeKind(MethodKind.LocalFunction));
+                new SymbolKindOrTypeKind(MethodKind.LocalFunction)
+            );
         }
 
         [Fact]
@@ -729,9 +735,11 @@ class C
                         }
                     }
                 """;
-            await VerifySymbolKinds(markup,
+            await VerifySymbolKinds(
+                markup,
                 new SymbolKindOrTypeKind(SymbolKind.Local),
-                new SymbolKindOrTypeKind(MethodKind.LocalFunction));
+                new SymbolKindOrTypeKind(MethodKind.LocalFunction)
+            );
         }
 
         [Fact]
@@ -749,9 +757,11 @@ class C
                         }
                     }
                 """;
-            await VerifySymbolKinds(markup,
+            await VerifySymbolKinds(
+                markup,
                 new SymbolKindOrTypeKind(SymbolKind.Local),
-                new SymbolKindOrTypeKind(MethodKind.LocalFunction));
+                new SymbolKindOrTypeKind(MethodKind.LocalFunction)
+            );
         }
 
         [Fact]
@@ -768,15 +778,20 @@ class C
                         }
                     }
                 """;
-            await VerifySymbolKinds(markup,
+            await VerifySymbolKinds(
+                markup,
                 new SymbolKindOrTypeKind(SymbolKind.Local),
-                new SymbolKindOrTypeKind(MethodKind.LocalFunction));
+                new SymbolKindOrTypeKind(MethodKind.LocalFunction)
+            );
         }
 
         private async Task VerifyTypeName(string markup, string typeName)
         {
             var result = await GetResultsAsync(markup);
-            Assert.Equal(typeName, result.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));
+            Assert.Equal(
+                typeName,
+                result.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+            );
         }
 
         private async Task VerifyNoModifiers(string markup)
@@ -785,7 +800,10 @@ class C
             Assert.Equal(default, result.Modifiers);
         }
 
-        private async Task VerifySymbolKinds(string markup, params SymbolKindOrTypeKind[] expectedSymbolKinds)
+        private async Task VerifySymbolKinds(
+            string markup,
+            params SymbolKindOrTypeKind[] expectedSymbolKinds
+        )
         {
             var result = await GetResultsAsync(markup);
             Assert.True(expectedSymbolKinds.SequenceEqual(result.PossibleSymbolKinds));
@@ -806,7 +824,11 @@ class C
         private async Task<NameDeclarationInfo> GetResultsAsync(string markup)
         {
             var (document, position) = ApplyChangesToFixture(markup);
-            var result = await NameDeclarationInfo.GetDeclarationInfoAsync(document, position, CancellationToken.None);
+            var result = await NameDeclarationInfo.GetDeclarationInfoAsync(
+                document,
+                position,
+                CancellationToken.None
+            );
             return result;
         }
 

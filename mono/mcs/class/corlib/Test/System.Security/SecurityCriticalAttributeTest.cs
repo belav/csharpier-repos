@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,57 +27,73 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
 using System.Security;
+using NUnit.Framework;
 
-namespace MonoTests.System.Security {
-
-	[TestFixture]
-	public class SecurityCriticalAttributeTest {
+namespace MonoTests.System.Security
+{
+    [TestFixture]
+    public class SecurityCriticalAttributeTest
+    {
 #if !MOBILE
-		[Test]
-		public void Constructor_Default ()
-		{
-			SecurityCriticalAttribute sca = new SecurityCriticalAttribute ();
-			Assert.AreEqual (SecurityCriticalScope.Explicit, sca.Scope);
-		}
+        [Test]
+        public void Constructor_Default()
+        {
+            SecurityCriticalAttribute sca = new SecurityCriticalAttribute();
+            Assert.AreEqual(SecurityCriticalScope.Explicit, sca.Scope);
+        }
 
-		[Test]
-		public void Constructor_Scope_Everything ()
-		{
-			SecurityCriticalAttribute sca = new SecurityCriticalAttribute (SecurityCriticalScope.Everything);
-			Assert.AreEqual (SecurityCriticalScope.Everything, sca.Scope);
-		}
+        [Test]
+        public void Constructor_Scope_Everything()
+        {
+            SecurityCriticalAttribute sca = new SecurityCriticalAttribute(
+                SecurityCriticalScope.Everything
+            );
+            Assert.AreEqual(SecurityCriticalScope.Everything, sca.Scope);
+        }
 
-		[Test]
-		public void Constructor_Scope_Explicit ()
-		{
-			SecurityCriticalAttribute sca = new SecurityCriticalAttribute (SecurityCriticalScope.Explicit);
-			Assert.AreEqual (SecurityCriticalScope.Explicit, sca.Scope);
-		}
+        [Test]
+        public void Constructor_Scope_Explicit()
+        {
+            SecurityCriticalAttribute sca = new SecurityCriticalAttribute(
+                SecurityCriticalScope.Explicit
+            );
+            Assert.AreEqual(SecurityCriticalScope.Explicit, sca.Scope);
+        }
 
-		[Test]
-		public void Constructor_Scope_Bad ()
-		{
-			SecurityCriticalScope scs = (SecurityCriticalScope)UInt32.MinValue;
-			SecurityCriticalAttribute sca = new SecurityCriticalAttribute (scs);
-			Assert.AreEqual (SecurityCriticalScope.Explicit, sca.Scope);
-		}
+        [Test]
+        public void Constructor_Scope_Bad()
+        {
+            SecurityCriticalScope scs = (SecurityCriticalScope)UInt32.MinValue;
+            SecurityCriticalAttribute sca = new SecurityCriticalAttribute(scs);
+            Assert.AreEqual(SecurityCriticalScope.Explicit, sca.Scope);
+        }
 #endif
-		[Test]
-		public void Attributes ()
-		{
-			Type t = typeof (SecurityCriticalAttribute);
-			Assert.IsFalse (t.IsSerializable, "IsSerializable");
 
-			object [] attrs = t.GetCustomAttributes (typeof (AttributeUsageAttribute), false);
-			Assert.AreEqual (1, attrs.Length, "AttributeUsage");
-			AttributeUsageAttribute aua = (AttributeUsageAttribute)attrs [0];
-			Assert.IsFalse (aua.AllowMultiple, "AllowMultiple");
-			Assert.IsFalse (aua.Inherited, "Inherited");
-			AttributeTargets at = (AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Field | AttributeTargets.Interface | AttributeTargets.Delegate);
-			Assert.AreEqual (at, aua.ValidOn, "ValidOn");
-		}
-	}
+        [Test]
+        public void Attributes()
+        {
+            Type t = typeof(SecurityCriticalAttribute);
+            Assert.IsFalse(t.IsSerializable, "IsSerializable");
+
+            object[] attrs = t.GetCustomAttributes(typeof(AttributeUsageAttribute), false);
+            Assert.AreEqual(1, attrs.Length, "AttributeUsage");
+            AttributeUsageAttribute aua = (AttributeUsageAttribute)attrs[0];
+            Assert.IsFalse(aua.AllowMultiple, "AllowMultiple");
+            Assert.IsFalse(aua.Inherited, "Inherited");
+            AttributeTargets at = (
+                AttributeTargets.Assembly
+                | AttributeTargets.Class
+                | AttributeTargets.Struct
+                | AttributeTargets.Enum
+                | AttributeTargets.Constructor
+                | AttributeTargets.Method
+                | AttributeTargets.Field
+                | AttributeTargets.Interface
+                | AttributeTargets.Delegate
+            );
+            Assert.AreEqual(at, aua.ValidOn, "ValidOn");
+        }
+    }
 }

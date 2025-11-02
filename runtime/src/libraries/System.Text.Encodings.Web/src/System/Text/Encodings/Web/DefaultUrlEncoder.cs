@@ -8,7 +8,9 @@ namespace System.Text.Encodings.Web
 {
     internal sealed class DefaultUrlEncoder : UrlEncoder
     {
-        internal static readonly DefaultUrlEncoder BasicLatinSingleton = new DefaultUrlEncoder(new TextEncoderSettings(UnicodeRanges.BasicLatin));
+        internal static readonly DefaultUrlEncoder BasicLatinSingleton = new DefaultUrlEncoder(
+            new TextEncoderSettings(UnicodeRanges.BasicLatin)
+        );
 
         private readonly OptimizedInboxTextEncoder _innerEncoder;
 
@@ -64,39 +66,43 @@ namespace System.Text.Encodings.Web
             // Basic Latin set is:
             // ALPHA / DIGIT / "-" / "." / "_" / "~" / "!" / "$" / "(" / ")" / "*" / "," / ";" / "@"
 
-            _innerEncoder = new OptimizedInboxTextEncoder(EscaperImplementation.Singleton, settings.GetAllowedCodePointsBitmap(), extraCharactersToEscape: stackalloc char[] {
-                ' ', // chars from Basic Latin which aren't already disallowed by the base encoder
-                '#',
-                '%',
-                '/',
-                ':',
-                '=',
-                '?',
-                '[',
-                '\\',
-                ']',
-                '^',
-                '`',
-                '{',
-                '|',
-                '}',
-                '\uFFF0', // specials (U+FFF0 .. U+FFFF) are forbidden by the definition of 'ucschar' above
-                '\uFFF1',
-                '\uFFF2',
-                '\uFFF3',
-                '\uFFF4',
-                '\uFFF5',
-                '\uFFF6',
-                '\uFFF7',
-                '\uFFF8',
-                '\uFFF9',
-                '\uFFFA',
-                '\uFFFB',
-                '\uFFFC',
-                '\uFFFD',
-                '\uFFFE',
-                '\uFFFF',
-            });
+            _innerEncoder = new OptimizedInboxTextEncoder(
+                EscaperImplementation.Singleton,
+                settings.GetAllowedCodePointsBitmap(),
+                extraCharactersToEscape: stackalloc char[] {
+                    ' ', // chars from Basic Latin which aren't already disallowed by the base encoder
+                    '#',
+                    '%',
+                    '/',
+                    ':',
+                    '=',
+                    '?',
+                    '[',
+                    '\\',
+                    ']',
+                    '^',
+                    '`',
+                    '{',
+                    '|',
+                    '}',
+                    '\uFFF0', // specials (U+FFF0 .. U+FFFF) are forbidden by the definition of 'ucschar' above
+                    '\uFFF1',
+                    '\uFFF2',
+                    '\uFFF3',
+                    '\uFFF4',
+                    '\uFFF5',
+                    '\uFFF6',
+                    '\uFFF7',
+                    '\uFFF8',
+                    '\uFFF9',
+                    '\uFFFA',
+                    '\uFFFB',
+                    '\uFFFC',
+                    '\uFFFD',
+                    '\uFFFE',
+                    '\uFFFF',
+                }
+            );
         }
 
         public override int MaxOutputCharactersPerInputCharacter => 9; // "%XX%YY%ZZ" for a single char ("%XX%YY%ZZ%WW" [12 chars] for supplementary scalar value)
@@ -107,26 +113,60 @@ namespace System.Text.Encodings.Web
          */
 
 #pragma warning disable CS0618 // some of the adapters are intentionally marked [Obsolete]
-        private protected override OperationStatus EncodeCore(ReadOnlySpan<char> source, Span<char> destination, out int charsConsumed, out int charsWritten, bool isFinalBlock)
-            => _innerEncoder.Encode(source, destination, out charsConsumed, out charsWritten, isFinalBlock);
+        private protected override OperationStatus EncodeCore(
+            ReadOnlySpan<char> source,
+            Span<char> destination,
+            out int charsConsumed,
+            out int charsWritten,
+            bool isFinalBlock
+        ) =>
+            _innerEncoder.Encode(
+                source,
+                destination,
+                out charsConsumed,
+                out charsWritten,
+                isFinalBlock
+            );
 
-        private protected override OperationStatus EncodeUtf8Core(ReadOnlySpan<byte> utf8Source, Span<byte> utf8Destination, out int bytesConsumed, out int bytesWritten, bool isFinalBlock)
-            => _innerEncoder.EncodeUtf8(utf8Source, utf8Destination, out bytesConsumed, out bytesWritten, isFinalBlock);
+        private protected override OperationStatus EncodeUtf8Core(
+            ReadOnlySpan<byte> utf8Source,
+            Span<byte> utf8Destination,
+            out int bytesConsumed,
+            out int bytesWritten,
+            bool isFinalBlock
+        ) =>
+            _innerEncoder.EncodeUtf8(
+                utf8Source,
+                utf8Destination,
+                out bytesConsumed,
+                out bytesWritten,
+                isFinalBlock
+            );
 
-        private protected override int FindFirstCharacterToEncode(ReadOnlySpan<char> text)
-            => _innerEncoder.GetIndexOfFirstCharToEncode(text);
+        private protected override int FindFirstCharacterToEncode(ReadOnlySpan<char> text) =>
+            _innerEncoder.GetIndexOfFirstCharToEncode(text);
 
-        public override unsafe int FindFirstCharacterToEncode(char* text, int textLength)
-            => _innerEncoder.FindFirstCharacterToEncode(text, textLength);
+        public override unsafe int FindFirstCharacterToEncode(char* text, int textLength) =>
+            _innerEncoder.FindFirstCharacterToEncode(text, textLength);
 
-        public override int FindFirstCharacterToEncodeUtf8(ReadOnlySpan<byte> utf8Text)
-            => _innerEncoder.GetIndexOfFirstByteToEncode(utf8Text);
+        public override int FindFirstCharacterToEncodeUtf8(ReadOnlySpan<byte> utf8Text) =>
+            _innerEncoder.GetIndexOfFirstByteToEncode(utf8Text);
 
-        public override unsafe bool TryEncodeUnicodeScalar(int unicodeScalar, char* buffer, int bufferLength, out int numberOfCharactersWritten)
-            => _innerEncoder.TryEncodeUnicodeScalar(unicodeScalar, buffer, bufferLength, out numberOfCharactersWritten);
+        public override unsafe bool TryEncodeUnicodeScalar(
+            int unicodeScalar,
+            char* buffer,
+            int bufferLength,
+            out int numberOfCharactersWritten
+        ) =>
+            _innerEncoder.TryEncodeUnicodeScalar(
+                unicodeScalar,
+                buffer,
+                bufferLength,
+                out numberOfCharactersWritten
+            );
 
-        public override bool WillEncode(int unicodeScalar)
-            => !_innerEncoder.IsScalarValueAllowed(new Rune(unicodeScalar));
+        public override bool WillEncode(int unicodeScalar) =>
+            !_innerEncoder.IsScalarValueAllowed(new Rune(unicodeScalar));
 #pragma warning restore CS0618
 
         /*
@@ -141,58 +181,102 @@ namespace System.Text.Encodings.Web
 
             internal override int EncodeUtf8(Rune value, Span<byte> destination)
             {
-                uint utf8lsb = (uint)UnicodeHelpers.GetUtf8RepresentationForScalarValue((uint)value.Value);
+                uint utf8lsb = (uint)
+                    UnicodeHelpers.GetUtf8RepresentationForScalarValue((uint)value.Value);
 
-                if (!SpanUtility.IsValidIndex(destination, 2)) { goto OutOfSpace; }
+                if (!SpanUtility.IsValidIndex(destination, 2))
+                {
+                    goto OutOfSpace;
+                }
                 destination[0] = (byte)'%';
                 HexConverter.ToBytesBuffer((byte)utf8lsb, destination, startingIndex: 1);
-                if ((utf8lsb >>= 8) == 0) { return 3; } // "%XX"
+                if ((utf8lsb >>= 8) == 0)
+                {
+                    return 3;
+                } // "%XX"
 
-                if (!SpanUtility.IsValidIndex(destination, 5)) { goto OutOfSpace; }
+                if (!SpanUtility.IsValidIndex(destination, 5))
+                {
+                    goto OutOfSpace;
+                }
                 destination[3] = (byte)'%';
                 HexConverter.ToBytesBuffer((byte)utf8lsb, destination, startingIndex: 4);
-                if ((utf8lsb >>= 8) == 0) { return 6; } // "%XX%YY"
+                if ((utf8lsb >>= 8) == 0)
+                {
+                    return 6;
+                } // "%XX%YY"
 
-                if (!SpanUtility.IsValidIndex(destination, 8)) { goto OutOfSpace; }
+                if (!SpanUtility.IsValidIndex(destination, 8))
+                {
+                    goto OutOfSpace;
+                }
                 destination[6] = (byte)'%';
                 HexConverter.ToBytesBuffer((byte)utf8lsb, destination, startingIndex: 7);
-                if ((utf8lsb >>= 8) == 0) { return 9; } // "%XX%YY%ZZ"
+                if ((utf8lsb >>= 8) == 0)
+                {
+                    return 9;
+                } // "%XX%YY%ZZ"
 
-                if (!SpanUtility.IsValidIndex(destination, 11)) { goto OutOfSpace; }
+                if (!SpanUtility.IsValidIndex(destination, 11))
+                {
+                    goto OutOfSpace;
+                }
                 destination[9] = (byte)'%';
                 HexConverter.ToBytesBuffer((byte)utf8lsb, destination, startingIndex: 10);
-                return 12;  // "%XX%YY%ZZ%WW"
+                return 12; // "%XX%YY%ZZ%WW"
 
-            OutOfSpace:
+                OutOfSpace:
 
                 return -1;
             }
 
             internal override int EncodeUtf16(Rune value, Span<char> destination)
             {
-                uint utf8lsb = (uint)UnicodeHelpers.GetUtf8RepresentationForScalarValue((uint)value.Value);
+                uint utf8lsb = (uint)
+                    UnicodeHelpers.GetUtf8RepresentationForScalarValue((uint)value.Value);
 
-                if (!SpanUtility.IsValidIndex(destination, 2)) { goto OutOfSpace; }
+                if (!SpanUtility.IsValidIndex(destination, 2))
+                {
+                    goto OutOfSpace;
+                }
                 destination[0] = '%';
                 HexConverter.ToCharsBuffer((byte)utf8lsb, destination, startingIndex: 1);
-                if ((utf8lsb >>= 8) == 0) { return 3; } // "%XX"
+                if ((utf8lsb >>= 8) == 0)
+                {
+                    return 3;
+                } // "%XX"
 
-                if (!SpanUtility.IsValidIndex(destination, 5)) { goto OutOfSpace; }
+                if (!SpanUtility.IsValidIndex(destination, 5))
+                {
+                    goto OutOfSpace;
+                }
                 destination[3] = '%';
                 HexConverter.ToCharsBuffer((byte)utf8lsb, destination, startingIndex: 4);
-                if ((utf8lsb >>= 8) == 0) { return 6; } // "%XX%YY"
+                if ((utf8lsb >>= 8) == 0)
+                {
+                    return 6;
+                } // "%XX%YY"
 
-                if (!SpanUtility.IsValidIndex(destination, 8)) { goto OutOfSpace; }
+                if (!SpanUtility.IsValidIndex(destination, 8))
+                {
+                    goto OutOfSpace;
+                }
                 destination[6] = '%';
                 HexConverter.ToCharsBuffer((byte)utf8lsb, destination, startingIndex: 7);
-                if ((utf8lsb >>= 8) == 0) { return 9; } // "%XX%YY%ZZ"
+                if ((utf8lsb >>= 8) == 0)
+                {
+                    return 9;
+                } // "%XX%YY%ZZ"
 
-                if (!SpanUtility.IsValidIndex(destination, 11)) { goto OutOfSpace; }
+                if (!SpanUtility.IsValidIndex(destination, 11))
+                {
+                    goto OutOfSpace;
+                }
                 destination[9] = '%';
                 HexConverter.ToCharsBuffer((byte)utf8lsb, destination, startingIndex: 10);
-                return 12;  // "%XX%YY%ZZ%WW"
+                return 12; // "%XX%YY%ZZ%WW"
 
-            OutOfSpace:
+                OutOfSpace:
 
                 return -1;
             }

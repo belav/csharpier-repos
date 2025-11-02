@@ -3,8 +3,8 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Reflection.Metadata.Ecma335;
 using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Internal.TypeSystem.Ecma
 {
@@ -15,7 +15,8 @@ namespace Internal.TypeSystem.Ecma
         EntityHandle GetTypeDefOrRefHandleForTypeDesc(TypeDesc type);
     }
 
-    public class EcmaSignatureEncoder<TEntityHandleProvider> where TEntityHandleProvider : IEntityHandleProvider
+    public class EcmaSignatureEncoder<TEntityHandleProvider>
+        where TEntityHandleProvider : IEntityHandleProvider
     {
         private TEntityHandleProvider _entityHandleProvider;
 
@@ -24,16 +25,26 @@ namespace Internal.TypeSystem.Ecma
             _entityHandleProvider = entityHandleProvider;
         }
 
-        public void EncodeMethodSignature(BlobBuilder methodSignatureBlob, MethodSignature signature)
+        public void EncodeMethodSignature(
+            BlobBuilder methodSignatureBlob,
+            MethodSignature signature
+        )
         {
             BlobEncoder encoder = new BlobEncoder(methodSignatureBlob);
 
             MethodSignatureEncoder methodSigEncoder = encoder.MethodSignature(
-                SignatureCallingConvention.Default, signature.GenericParameterCount, !signature.IsStatic);
+                SignatureCallingConvention.Default,
+                signature.GenericParameterCount,
+                !signature.IsStatic
+            );
 
             ReturnTypeEncoder returnTypeEncoder;
             ParametersEncoder parametersEncoder;
-            methodSigEncoder.Parameters(signature.Length, out returnTypeEncoder, out parametersEncoder);
+            methodSigEncoder.Parameters(
+                signature.Length,
+                out returnTypeEncoder,
+                out parametersEncoder
+            );
 
             // Return Type Sig
             EncodeTypeSignature(returnTypeEncoder.Type(), signature.ReturnType);
@@ -47,40 +58,57 @@ namespace Internal.TypeSystem.Ecma
         {
             if (type is RuntimeDeterminedType)
             {
-                EncodeTypeSignature(encoder, ((RuntimeDeterminedType)type).RuntimeDeterminedDetailsType);
+                EncodeTypeSignature(
+                    encoder,
+                    ((RuntimeDeterminedType)type).RuntimeDeterminedDetailsType
+                );
                 return;
             }
 
             switch (type.Category)
             {
                 case TypeFlags.Boolean:
-                    encoder.Boolean(); break;
+                    encoder.Boolean();
+                    break;
                 case TypeFlags.Byte:
-                    encoder.Byte(); break;
+                    encoder.Byte();
+                    break;
                 case TypeFlags.SByte:
-                    encoder.SByte(); break;
+                    encoder.SByte();
+                    break;
                 case TypeFlags.Char:
-                    encoder.Char(); break;
+                    encoder.Char();
+                    break;
                 case TypeFlags.Int16:
-                    encoder.Int16(); break;
+                    encoder.Int16();
+                    break;
                 case TypeFlags.UInt16:
-                    encoder.UInt16(); break;
+                    encoder.UInt16();
+                    break;
                 case TypeFlags.Int32:
-                    encoder.Int32(); break;
+                    encoder.Int32();
+                    break;
                 case TypeFlags.UInt32:
-                    encoder.UInt32(); break;
+                    encoder.UInt32();
+                    break;
                 case TypeFlags.Int64:
-                    encoder.Int64(); break;
+                    encoder.Int64();
+                    break;
                 case TypeFlags.UInt64:
-                    encoder.UInt64(); break;
+                    encoder.UInt64();
+                    break;
                 case TypeFlags.Single:
-                    encoder.Single(); break;
+                    encoder.Single();
+                    break;
                 case TypeFlags.Double:
-                    encoder.Double(); break;
+                    encoder.Double();
+                    break;
                 case TypeFlags.IntPtr:
-                    encoder.IntPtr(); break;
+                    encoder.IntPtr();
+                    break;
                 case TypeFlags.UIntPtr:
-                    encoder.UIntPtr(); break;
+                    encoder.UIntPtr();
+                    break;
                 case TypeFlags.Void:
                     encoder.Builder.WriteByte((byte)PrimitiveTypeCode.Void);
                     break;
@@ -108,8 +136,11 @@ namespace Internal.TypeSystem.Ecma
                         FunctionPointerType fptrType = (FunctionPointerType)type;
                         encoder.FunctionPointer(
                             SignatureCallingConvention.Default,
-                            fptrType.Signature.IsStatic ? default(FunctionPointerAttributes) : FunctionPointerAttributes.HasThis,
-                            fptrType.Signature.GenericParameterCount);
+                            fptrType.Signature.IsStatic
+                                ? default(FunctionPointerAttributes)
+                                : FunctionPointerAttributes.HasThis,
+                            fptrType.Signature.GenericParameterCount
+                        );
 
                         // Return Type Sig
                         EncodeTypeSignature(encoder, fptrType.Signature.ReturnType);
@@ -126,8 +157,11 @@ namespace Internal.TypeSystem.Ecma
                         ImmutableArray<int> bounds = ImmutableArray.Create<int>();
                         ImmutableArray<int> lowerBounds = ImmutableArray.Create<int>();
                         encoder.Array(
-                            elementType => EncodeTypeSignature(elementType, ((ArrayType)type).ElementType),
-                            arrayShape => arrayShape.Shape(((ArrayType)type).Rank, bounds, lowerBounds));
+                            elementType =>
+                                EncodeTypeSignature(elementType, ((ArrayType)type).ElementType),
+                            arrayShape =>
+                                arrayShape.Shape(((ArrayType)type).Rank, bounds, lowerBounds)
+                        );
                     }
                     break;
 
@@ -160,20 +194,31 @@ namespace Internal.TypeSystem.Ecma
                             encoder.PrimitiveType(PrimitiveTypeCode.String);
                         else if (type.HasInstantiation && !type.IsGenericDefinition)
                         {
-                            encoder.GenericInstantiation(_entityHandleProvider.GetTypeDefOrRefHandleForTypeDesc(type.GetTypeDefinition()), type.Instantiation.Length, type.IsValueType);
+                            encoder.GenericInstantiation(
+                                _entityHandleProvider.GetTypeDefOrRefHandleForTypeDesc(
+                                    type.GetTypeDefinition()
+                                ),
+                                type.Instantiation.Length,
+                                type.IsValueType
+                            );
 
                             for (int i = 0; i < type.Instantiation.Length; i++)
                                 EncodeTypeSignature(encoder, type.Instantiation[i]);
                         }
                         else
                         {
-                            encoder.Type(_entityHandleProvider.GetTypeDefOrRefHandleForTypeDesc(type), type.IsValueType);
+                            encoder.Type(
+                                _entityHandleProvider.GetTypeDefOrRefHandleForTypeDesc(type),
+                                type.IsValueType
+                            );
                         }
                     }
                     break;
 
                 default:
-                    throw new InvalidOperationException("Attempting to encode an invalid type signature.");
+                    throw new InvalidOperationException(
+                        "Attempting to encode an invalid type signature."
+                    );
             }
         }
     }

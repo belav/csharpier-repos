@@ -90,7 +90,10 @@ namespace System.ComponentModel.Composition
             var container = ContainerFactory.Create(aggCat);
             var eventListener = new ExportProviderListener(container, container);
 
-            eventListener.VerifyCatalogAdd(() => aggCat.Catalogs.Add(catalog), typeof(SampleCatalogExport));
+            eventListener.VerifyCatalogAdd(
+                () => aggCat.Catalogs.Add(catalog),
+                typeof(SampleCatalogExport)
+            );
         }
 
         [Fact]
@@ -103,7 +106,10 @@ namespace System.ComponentModel.Composition
             aggCat.Catalogs.Add(catalog);
             var eventListener = new ExportProviderListener(container, container);
 
-            eventListener.VerifyCatalogRemove(() => aggCat.Catalogs.Remove(catalog), typeof(SampleCatalogExport));
+            eventListener.VerifyCatalogRemove(
+                () => aggCat.Catalogs.Remove(catalog),
+                typeof(SampleCatalogExport)
+            );
         }
 
         [Fact]
@@ -115,7 +121,10 @@ namespace System.ComponentModel.Composition
             var container = ContainerFactory.Create(parentContainer);
             var eventListener = new ExportProviderListener(parentContainer, container);
 
-            eventListener.VerifyCatalogAdd(() => aggCat.Catalogs.Add(catalog), typeof(SampleCatalogExport));
+            eventListener.VerifyCatalogAdd(
+                () => aggCat.Catalogs.Add(catalog),
+                typeof(SampleCatalogExport)
+            );
         }
 
         public class ExportProviderListener
@@ -127,7 +136,10 @@ namespace System.ComponentModel.Composition
             private int _changedEventCount;
             private int _changingEventCount;
 
-            public ExportProviderListener(CompositionContainer container, ExportProvider watchExportProvider)
+            public ExportProviderListener(
+                CompositionContainer container,
+                ExportProvider watchExportProvider
+            )
             {
                 watchExportProvider.ExportsChanged += OnExportsChanged;
                 watchExportProvider.ExportsChanging += OnExportsChanging;
@@ -182,10 +194,13 @@ namespace System.ComponentModel.Composition
                 }
                 else
                 {
-                    Assert.All(_expectedAdds, add =>
-                    {
-                        Assert.False(this._container.IsPresent(add));
-                    });
+                    Assert.All(
+                        _expectedAdds,
+                        add =>
+                        {
+                            Assert.False(this._container.IsPresent(add));
+                        }
+                    );
                 }
 
                 if (this._expectedRemoves == null)
@@ -194,10 +209,13 @@ namespace System.ComponentModel.Composition
                 }
                 else
                 {
-                    Assert.All(_expectedRemoves, remove =>
-                    {
-                        Assert.True(this._container.IsPresent(remove));
-                    });
+                    Assert.All(
+                        _expectedRemoves,
+                        remove =>
+                        {
+                            Assert.True(this._container.IsPresent(remove));
+                        }
+                    );
                 }
 
                 this._changingEventCount++;
@@ -213,10 +231,13 @@ namespace System.ComponentModel.Composition
                 }
                 else
                 {
-                    Assert.All(_expectedAdds, add =>
-                    {
-                        Assert.True(this._container.IsPresent(add));
-                    });
+                    Assert.All(
+                        _expectedAdds,
+                        add =>
+                        {
+                            Assert.True(this._container.IsPresent(add));
+                        }
+                    );
                 }
 
                 if (this._expectedRemoves == null)
@@ -225,10 +246,13 @@ namespace System.ComponentModel.Composition
                 }
                 else
                 {
-                    Assert.All(_expectedRemoves, remove =>
-                    {
-                        Assert.False(this._container.IsPresent(remove));
-                    });
+                    Assert.All(
+                        _expectedRemoves,
+                        remove =>
+                        {
+                            Assert.False(this._container.IsPresent(remove));
+                        }
+                    );
                 }
 
                 Assert.Null(args.AtomicComposition);
@@ -256,7 +280,11 @@ namespace System.ComponentModel.Composition
 
             private static string[] GetContractNames(IEnumerable<Type> types)
             {
-                return GetContractNames(types.Select(t => AttributedModelServices.CreatePartDefinition(t, null)).SelectMany(p => p.ExportDefinitions));
+                return GetContractNames(
+                    types
+                        .Select(t => AttributedModelServices.CreatePartDefinition(t, null))
+                        .SelectMany(p => p.ExportDefinitions)
+                );
             }
         }
     }

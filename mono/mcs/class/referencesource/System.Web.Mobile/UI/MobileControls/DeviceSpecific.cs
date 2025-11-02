@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="DeviceSpecific.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -10,15 +10,14 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Globalization;
+using System.Security.Permissions;
 using System.Web;
+using System.Web.Mobile;
 using System.Web.UI;
 using System.Web.UI.Design.WebControls;
-using System.Web.Mobile;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * DeviceSpecific object.
      *
@@ -36,9 +35,17 @@ namespace System.Web.UI.MobileControls
         ToolboxItemFilter("System.Web.UI"),
         ToolboxItemFilter("System.Web.UI.MobileControls", ToolboxItemFilterType.Require),
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class DeviceSpecific : Control
     {
         private DeviceSpecificChoiceCollection _choices;
@@ -47,10 +54,7 @@ namespace System.Web.UI.MobileControls
         private Object _owner;
 
         /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecific.Owner"]/*' />
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Object Owner
         {
             get
@@ -62,15 +66,15 @@ namespace System.Web.UI.MobileControls
 
         internal void SetOwner(Object owner)
         {
-            Debug.Assert((_owner == null || MobilePage == null || MobilePage.DesignMode), "Owner has already been set");
+            Debug.Assert(
+                (_owner == null || MobilePage == null || MobilePage.DesignMode),
+                "Owner has already been set"
+            );
             _owner = owner;
         }
 
         /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecific.Choices"]/*' />
-        [
-            Browsable(false),
-            PersistenceMode(PersistenceMode.InnerDefaultProperty)
-        ]
+        [Browsable(false), PersistenceMode(PersistenceMode.InnerDefaultProperty)]
         public DeviceSpecificChoiceCollection Choices
         {
             get
@@ -84,33 +88,22 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecific.HasTemplates"]/*' />
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool HasTemplates
         {
-            get
-            {
-                return (SelectedChoice != null) ?
-                            _selectedChoice.HasTemplates :
-                            false;
-            }
+            get { return (SelectedChoice != null) ? _selectedChoice.HasTemplates : false; }
         }
 
         /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecific.GetTemplate"]/*' />
         public ITemplate GetTemplate(String templateName)
         {
-            return (SelectedChoice != null) ? 
-                _selectedChoice.Templates[templateName] as ITemplate : 
-                null;
+            return (SelectedChoice != null)
+                ? _selectedChoice.Templates[templateName] as ITemplate
+                : null;
         }
 
         /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecific.SelectedChoice"]/*' />
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DeviceSpecificChoice SelectedChoice
         {
             get
@@ -143,10 +136,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecific.MobilePage"]/*' />
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MobilePage MobilePage
         {
             get
@@ -155,7 +145,7 @@ namespace System.Web.UI.MobileControls
                 {
                     return ((Style)Owner).Control.MobilePage;
                 }
-                else 
+                else
                 {
                     Debug.Assert(Owner is MobileControl);
                     return ((MobileControl)Owner).MobilePage;
@@ -166,7 +156,7 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecific.AddParsedSubObject"]/*' />
         protected override void AddParsedSubObject(Object obj)
         {
-            DeviceSpecificChoice choice = obj as DeviceSpecificChoice; 
+            DeviceSpecificChoice choice = obj as DeviceSpecificChoice;
             if (choice != null)
             {
                 Choices.Add(choice);
@@ -191,11 +181,10 @@ namespace System.Web.UI.MobileControls
                 if (_closestTemplateControl == null)
                 {
                     Style asStyle = Owner as Style;
-                    MobileControl control = 
+                    MobileControl control =
                         (asStyle != null) ? asStyle.Control : (MobileControl)Owner;
 
-                    _closestTemplateControl =
-                        control.FindContainingTemplateControl();
+                    _closestTemplateControl = control.FindContainingTemplateControl();
                     Debug.Assert(_closestTemplateControl != null);
                 }
                 return _closestTemplateControl;
@@ -207,99 +196,51 @@ namespace System.Web.UI.MobileControls
         /////////////////////////////////////////////////////////////////////////
 
         /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecific.Init"]/*' />
-        [
-            Browsable(false),
-        ]
+        [Browsable(false)]
         public new event EventHandler Init
         {
-            add
-            {
-                base.Init += value;
-            }
-            remove
-            {
-                base.Init -= value;
-            }
+            add { base.Init += value; }
+            remove { base.Init -= value; }
         }
 
         /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecific.Load"]/*' />
-        [
-            Browsable(false),
-        ]
+        [Browsable(false)]
         public new event EventHandler Load
         {
-            add
-            {
-                base.Load += value;
-            }
-            remove
-            {
-                base.Load -= value;
-            }
+            add { base.Load += value; }
+            remove { base.Load -= value; }
         }
 
         /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecific.Unload"]/*' />
-        [
-            Browsable(false),
-        ]
+        [Browsable(false)]
         public new event EventHandler Unload
         {
-            add
-            {
-                base.Unload += value;
-            }
-            remove
-            {
-                base.Unload -= value;
-            }
+            add { base.Unload += value; }
+            remove { base.Unload -= value; }
         }
 
         /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecific.PreRender"]/*' />
-        [
-            Browsable(false),
-        ]
+        [Browsable(false)]
         public new event EventHandler PreRender
         {
-            add
-            {
-                base.PreRender += value;
-            }
-            remove
-            {
-                base.PreRender -= value;
-            }
+            add { base.PreRender += value; }
+            remove { base.PreRender -= value; }
         }
 
         /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecific.Disposed"]/*' />
-        [
-            Browsable(false),
-        ]
+        [Browsable(false)]
         public new event EventHandler Disposed
         {
-            add
-            {
-                base.Disposed += value;
-            }
-            remove
-            {
-                base.Disposed -= value;
-            }
+            add { base.Disposed += value; }
+            remove { base.Disposed -= value; }
         }
-        
+
         /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecific.DataBinding"]/*' />
-        [
-            Browsable(false),
-        ]
+        [Browsable(false)]
         public new event EventHandler DataBinding
         {
-            add
-            {
-                base.DataBinding += value;
-            }
-            remove
-            {
-                base.DataBinding -= value;
-            }
+            add { base.DataBinding += value; }
+            remove { base.DataBinding -= value; }
         }
 
         internal void SetDesignerChoice(DeviceSpecificChoice choice)
@@ -316,16 +257,10 @@ namespace System.Web.UI.MobileControls
             Bindable(false),
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
         ]
-        public override bool Visible 
+        public override bool Visible
         {
-            get
-            {
-                return base.Visible;
-            }
-            set
-            {
-                base.Visible = value;
-            }
+            get { return base.Visible; }
+            set { base.Visible = value; }
         }
 
         // Do not expose the EnableViewState property in the Designer
@@ -337,14 +272,8 @@ namespace System.Web.UI.MobileControls
         ]
         public override bool EnableViewState
         {
-            get
-            {
-                return base.EnableViewState;
-            }
-            set
-            {
-                base.EnableViewState = value;
-            }
+            get { return base.EnableViewState; }
+            set { base.EnableViewState = value; }
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -359,9 +288,17 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecificControlBuilder"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class DeviceSpecificControlBuilder : ControlBuilder
     {
         /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecificControlBuilder.AppendLiteralString"]/*' />
@@ -371,17 +308,16 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\DeviceSpecific.uex' path='docs/doc[@for="DeviceSpecificControlBuilder.GetChildControlType"]/*' />
-        public override Type GetChildControlType(String tagName, IDictionary attributes) 
+        public override Type GetChildControlType(String tagName, IDictionary attributes)
         {
             if (String.Compare(tagName, "Choice", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 return typeof(DeviceSpecificChoice);
             }
-            else 
+            else
             {
                 throw new Exception(SR.GetString(SR.DeviceSpecific_OnlyChoiceElementsAllowed));
             }
         }
-
     }
 }

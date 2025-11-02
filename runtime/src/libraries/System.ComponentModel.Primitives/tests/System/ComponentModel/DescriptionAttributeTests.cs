@@ -35,10 +35,7 @@ namespace System.ComponentModel.Tests
         [InlineData("descriptionValue")]
         public void DescriptionValue_Set_GetReturnsExpected(string value)
         {
-            var attribute = new SubDescriptionAttribute("Name")
-            {
-                DescriptionValue = value
-            };
+            var attribute = new SubDescriptionAttribute("Name") { DescriptionValue = value };
             Assert.Same(value, attribute.Description);
             Assert.Same(value, attribute.DescriptionValue);
 
@@ -52,7 +49,12 @@ namespace System.ComponentModel.Tests
             var attribute = new DescriptionAttribute("description");
             yield return new object[] { attribute, attribute, true };
             yield return new object[] { attribute, new DescriptionAttribute("description"), true };
-            yield return new object[] { attribute, new DescriptionAttribute("description2"), false };
+            yield return new object[]
+            {
+                attribute,
+                new DescriptionAttribute("description2"),
+                false,
+            };
             yield return new object[] { attribute, new DescriptionAttribute(""), false };
             // .NET Framework throws a NullReferenceException.
             if (!PlatformDetection.IsNetFramework)
@@ -63,12 +65,32 @@ namespace System.ComponentModel.Tests
             // .NET Framework throws a NullReferenceException.
             if (!PlatformDetection.IsNetFramework)
             {
-                yield return new object[] { new DescriptionAttribute(null), new DescriptionAttribute(null), true };
-                yield return new object[] { new DescriptionAttribute(null), new DescriptionAttribute("description"), false };
-                yield return new object[] { new DescriptionAttribute(null), new DescriptionAttribute(""), false };
+                yield return new object[]
+                {
+                    new DescriptionAttribute(null),
+                    new DescriptionAttribute(null),
+                    true,
+                };
+                yield return new object[]
+                {
+                    new DescriptionAttribute(null),
+                    new DescriptionAttribute("description"),
+                    false,
+                };
+                yield return new object[]
+                {
+                    new DescriptionAttribute(null),
+                    new DescriptionAttribute(""),
+                    false,
+                };
             }
 
-            yield return new object[] { new DescriptionAttribute("description"), new object(), false };
+            yield return new object[]
+            {
+                new DescriptionAttribute("description"),
+                new object(),
+                false,
+            };
             yield return new object[] { new DescriptionAttribute("description"), null, false };
             yield return new object[] { new DescriptionAttribute(null), new object(), false };
             yield return new object[] { new DescriptionAttribute(null), null, false };
@@ -76,7 +98,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(DescriptionAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            DescriptionAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is DescriptionAttribute otherAttribute)
@@ -102,13 +128,11 @@ namespace System.ComponentModel.Tests
 
         private class SubDescriptionAttribute : DescriptionAttribute
         {
-            public SubDescriptionAttribute() : base()
-            {
-            }
+            public SubDescriptionAttribute()
+                : base() { }
 
-            public SubDescriptionAttribute(string description) : base(description)
-            {
-            }
+            public SubDescriptionAttribute(string description)
+                : base(description) { }
 
             public new string DescriptionValue
             {
@@ -119,13 +143,11 @@ namespace System.ComponentModel.Tests
 
         private class AlwaysEqualAttribute : DescriptionAttribute
         {
-            public AlwaysEqualAttribute() : base()
-            {
-            }
+            public AlwaysEqualAttribute()
+                : base() { }
 
-            public AlwaysEqualAttribute(string description) : base(description)
-            {
-            }
+            public AlwaysEqualAttribute(string description)
+                : base(description) { }
 
             public override bool Equals(object obj) => true;
 

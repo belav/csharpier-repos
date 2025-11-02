@@ -9,6 +9,6 @@ namespace System.Web.Razor.Parser.SyntaxTree
         MetaCode,
         Comment,
         Code,
-        Markup
+        Markup,
     }
 }

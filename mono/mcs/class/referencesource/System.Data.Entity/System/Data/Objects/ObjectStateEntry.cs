@@ -6,12 +6,12 @@
 // @owner       Microsoft
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Metadata.Edm;
 using System.Data.Objects.DataClasses;
 using System.Diagnostics;
-using System.Collections;
 
 namespace System.Data.Objects
 {
@@ -82,14 +82,8 @@ namespace System.Data.Objects
         /// <returns> DataRowState </returns>
         public EntityState State
         {
-            get
-            {
-                return _state;
-            }
-            internal set
-            {
-                _state = value;
-            }
+            get { return _state; }
+            internal set { _state = value; }
         }
 
         /// <summary>
@@ -114,7 +108,10 @@ namespace System.Data.Objects
         /// </summary>
         abstract internal BitArray ModifiedProperties { get; }
 
-        BitArray IEntityStateEntry.ModifiedProperties { get { return this.ModifiedProperties; } }
+        BitArray IEntityStateEntry.ModifiedProperties
+        {
+            get { return this.ModifiedProperties; }
+        }
 
         /// <summary>
         /// Original values of entity
@@ -122,9 +119,9 @@ namespace System.Data.Objects
         /// <param></param>
         /// <returns> DbDataRecord </returns>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // don't have debugger view expand this
-        abstract public DbDataRecord OriginalValues { get; }
+        public abstract DbDataRecord OriginalValues { get; }
 
-        abstract public OriginalValueRecord GetUpdatableOriginalValues();
+        public abstract OriginalValueRecord GetUpdatableOriginalValues();
 
         /// <summary>
         /// Current values of entity/ DataRow
@@ -132,7 +129,7 @@ namespace System.Data.Objects
         /// <param></param>
         /// <returns> DbUpdatableDataRecord </returns>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // don't have debugger view expand this
-        abstract public CurrentValueRecord CurrentValues { get; }
+        public abstract CurrentValueRecord CurrentValues { get; }
 
         /// <summary>
         /// API to accept the current values as original values and  mark the entity as Unchanged.
@@ -140,7 +137,7 @@ namespace System.Data.Objects
         /// <param></param>
         /// <returns></returns>
         abstract public void AcceptChanges();
-        
+
         /// <summary>
         /// API to mark the entity deleted. if entity is in added state, it will be detached
         /// </summary>
@@ -175,7 +172,7 @@ namespace System.Data.Objects
         /// <summary>
         /// Rejects any changes made to the property with the given name since the property was last loaded,
         /// attached, saved, or changes were accepted. The orginal value of the property is stored and the
-        /// property will no longer be marked as modified. 
+        /// property will no longer be marked as modified.
         /// </summary>
         /// <remarks>
         /// If the result is that no properties of the entity are marked as modified, then the entity will
@@ -209,10 +206,7 @@ namespace System.Data.Objects
         /// have associated RelationshipManagers.
         /// </summary>
         /// <exception cref="InvalidOperationException">The entry is a stub or represents a relationship</exception>
-        abstract public RelationshipManager RelationshipManager
-        {
-            get;
-        }
+        abstract public RelationshipManager RelationshipManager { get; }
 
         /// <summary>
         /// Changes state of the entry to the specified <paramref name="state"/>
@@ -237,10 +231,7 @@ namespace System.Data.Objects
         #region IEntityStateEntry
         IEntityStateManager IEntityStateEntry.StateManager
         {
-            get
-            {
-                return (IEntityStateManager)this.ObjectStateManager;
-            }
+            get { return (IEntityStateManager)this.ObjectStateManager; }
         }
 
         // must explicitly implement this because interface is internal & so is the property on the
@@ -248,10 +239,7 @@ namespace System.Data.Objects
         // an interface (even if the interface is also internal)
         bool IEntityStateEntry.IsKeyEntry
         {
-            get
-            {
-                return this.IsKeyEntry;
-            }
+            get { return this.IsKeyEntry; }
         }
         #endregion // IEntityStateEntry
 
@@ -285,9 +273,17 @@ namespace System.Data.Objects
         /// <param name="entityMemberName">The name of the top-level entity property that is changing</param>
         /// <param name="complexObject">The complex object that contains the property that is changing</param>
         /// <param name="complexObjectMemberName">The name of the property that is changing on complexObject</param>
-        void IEntityChangeTracker.EntityComplexMemberChanging(string entityMemberName, object complexObject, string complexObjectMemberName)
+        void IEntityChangeTracker.EntityComplexMemberChanging(
+            string entityMemberName,
+            object complexObject,
+            string complexObjectMemberName
+        )
         {
-            this.EntityComplexMemberChanging(entityMemberName, complexObject, complexObjectMemberName);
+            this.EntityComplexMemberChanging(
+                entityMemberName,
+                complexObject,
+                complexObjectMemberName
+            );
         }
 
         /// <summary>
@@ -297,9 +293,17 @@ namespace System.Data.Objects
         /// <param name="entityMemberName">The name of the top-level entity property that has changed</param>
         /// <param name="complexObject">The complex object that contains the property that changed</param>
         /// <param name="complexObjectMemberName">The name of the property that changed on complexObject</param>
-        void IEntityChangeTracker.EntityComplexMemberChanged(string entityMemberName, object complexObject, string complexObjectMemberName)
+        void IEntityChangeTracker.EntityComplexMemberChanged(
+            string entityMemberName,
+            object complexObject,
+            string complexObjectMemberName
+        )
         {
-            this.EntityComplexMemberChanged(entityMemberName, complexObject, complexObjectMemberName);
+            this.EntityComplexMemberChanged(
+                entityMemberName,
+                complexObject,
+                complexObjectMemberName
+            );
         }
 
         /// <summary>
@@ -307,10 +311,7 @@ namespace System.Data.Objects
         /// </summary>
         EntityState IEntityChangeTracker.EntityState
         {
-            get
-            {
-                return this.State;
-            }
+            get { return this.State; }
         }
 
         #endregion // IEntityChangeTracker
@@ -319,29 +320,43 @@ namespace System.Data.Objects
 
         abstract internal bool IsKeyEntry { get; }
 
-        abstract internal int GetFieldCount(StateManagerTypeMetadata metadata);
+        internal abstract int GetFieldCount(StateManagerTypeMetadata metadata);
 
-        abstract internal Type GetFieldType(int ordinal, StateManagerTypeMetadata metadata);
+        internal abstract Type GetFieldType(int ordinal, StateManagerTypeMetadata metadata);
 
-        abstract internal string GetCLayerName(int ordinal, StateManagerTypeMetadata metadata);
+        internal abstract string GetCLayerName(int ordinal, StateManagerTypeMetadata metadata);
 
-        abstract internal int GetOrdinalforCLayerName(string name, StateManagerTypeMetadata metadata);
+        internal abstract int GetOrdinalforCLayerName(
+            string name,
+            StateManagerTypeMetadata metadata
+        );
 
-        abstract internal void RevertDelete();
+        internal abstract void RevertDelete();
 
-        abstract internal void SetModifiedAll();
+        internal abstract void SetModifiedAll();
 
-        abstract internal void EntityMemberChanging(string entityMemberName);
-        abstract internal void EntityMemberChanged(string entityMemberName);
-        abstract internal void EntityComplexMemberChanging(string entityMemberName, object complexObject, string complexObjectMemberName);
-        abstract internal void EntityComplexMemberChanged(string entityMemberName, object complexObject, string complexObjectMemberName);
+        internal abstract void EntityMemberChanging(string entityMemberName);
+        internal abstract void EntityMemberChanged(string entityMemberName);
+        internal abstract void EntityComplexMemberChanging(
+            string entityMemberName,
+            object complexObject,
+            string complexObjectMemberName
+        );
+        internal abstract void EntityComplexMemberChanged(
+            string entityMemberName,
+            object complexObject,
+            string complexObjectMemberName
+        );
 
         /// <summary>
         /// Reuse or create a new (Entity)DataRecordInfo.
         /// </summary>
-        abstract internal DataRecordInfo GetDataRecordInfo(StateManagerTypeMetadata metadata, object userObject);
+        abstract internal DataRecordInfo GetDataRecordInfo(
+            StateManagerTypeMetadata metadata,
+            object userObject
+        );
 
-        virtual internal void Reset()
+        internal virtual void Reset()
         {
             _cache = null;
             _entitySet = null;
@@ -367,7 +382,11 @@ namespace System.Data.Objects
         internal object userObject;
         internal object originalValue;
 
-        internal StateManagerValue(StateManagerMemberMetadata metadata, object instance, object value)
+        internal StateManagerValue(
+            StateManagerMemberMetadata metadata,
+            object instance,
+            object value
+        )
         {
             memberMetadata = metadata;
             userObject = instance;
@@ -383,9 +402,8 @@ namespace System.Data.Objects
         OriginalUpdatablePublic = 3,
     }
 
-
     // This class is used in Referential Integrity Constraints feature.
-    // It is used to get around the problem of enumerating dictionary contents, 
+    // It is used to get around the problem of enumerating dictionary contents,
     // but allowing update of the value without breaking the enumerator.
     internal sealed class IntBox
     {
@@ -396,17 +414,10 @@ namespace System.Data.Objects
             this.val = val;
         }
 
-        internal int Value 
+        internal int Value
         {
-            get
-            {
-                return val;
-            }
-
-            set 
-            {
-                val = value;
-            }
+            get { return val; }
+            set { val = value; }
         }
     }
 }

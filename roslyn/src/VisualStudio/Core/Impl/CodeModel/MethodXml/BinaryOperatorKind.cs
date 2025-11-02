@@ -13,6 +13,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Metho
         BitwiseAnd,
         BitwiseOr,
         Concatenate,
-        Plus
+        Plus,
     }
 }

@@ -31,28 +31,40 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void Constructor1_NullAsDefinitionArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>("definition", () =>
-            {
-                new ReflectionComposablePart((ReflectionComposablePartDefinition)null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "definition",
+                () =>
+                {
+                    new ReflectionComposablePart((ReflectionComposablePartDefinition)null);
+                }
+            );
         }
 
         [Fact]
         public void Constructor2_NullAsAttributedPartArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>("attributedPart", () =>
-            {
-                new ReflectionComposablePart(PartDefinitionFactory.CreateAttributed(), (object)null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "attributedPart",
+                () =>
+                {
+                    new ReflectionComposablePart(
+                        PartDefinitionFactory.CreateAttributed(),
+                        (object)null
+                    );
+                }
+            );
         }
 
         [Fact]
         public void Constructor2_ValueTypeAsAttributedPartArgument_ShouldThrowArgument()
         {
-            Assert.Throws<ArgumentException>("attributedPart", () =>
-            {
-                new ReflectionComposablePart(PartDefinitionFactory.CreateAttributed(), 42);
-            });
+            Assert.Throws<ArgumentException>(
+                "attributedPart",
+                () =>
+                {
+                    new ReflectionComposablePart(PartDefinitionFactory.CreateAttributed(), 42);
+                }
+            );
         }
 
         [Fact]
@@ -82,13 +94,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void Constructor1_Type_ShouldProduceValidObject()
         {
-            var part = new ReflectionComposablePart(PartDefinitionFactory.CreateAttributed(typeof(MyExport)));
+            var part = new ReflectionComposablePart(
+                PartDefinitionFactory.CreateAttributed(typeof(MyExport))
+            );
         }
 
         [Fact]
         public void Constructor1_Object_ShouldProduceValidObject()
         {
-            var part = new ReflectionComposablePart(PartDefinitionFactory.CreateAttributed(typeof(MyExport)), new MyExport());
+            var part = new ReflectionComposablePart(
+                PartDefinitionFactory.CreateAttributed(typeof(MyExport)),
+                new MyExport()
+            );
         }
 
         [Fact]
@@ -97,10 +114,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var part = CreateDefaultDisposablePart();
             ((IDisposable)part).Dispose();
 
-            ExceptionAssert.ThrowsDisposed(part, () =>
-            {
-                var metadata = part.Metadata;
-            });
+            ExceptionAssert.ThrowsDisposed(
+                part,
+                () =>
+                {
+                    var metadata = part.Metadata;
+                }
+            );
         }
 
         [Fact]
@@ -109,10 +129,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var part = CreateDefaultDisposablePart();
             ((IDisposable)part).Dispose();
 
-            ExceptionAssert.ThrowsDisposed(part, () =>
-            {
-                var definitions = part.ImportDefinitions;
-            });
+            ExceptionAssert.ThrowsDisposed(
+                part,
+                () =>
+                {
+                    var definitions = part.ImportDefinitions;
+                }
+            );
         }
 
         [Fact]
@@ -121,10 +144,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var part = CreateDefaultDisposablePart();
             ((IDisposable)part).Dispose();
 
-            ExceptionAssert.ThrowsDisposed(part, () =>
-            {
-                var definitions = part.ExportDefinitions;
-            });
+            ExceptionAssert.ThrowsDisposed(
+                part,
+                () =>
+                {
+                    var definitions = part.ExportDefinitions;
+                }
+            );
         }
 
         [Fact]
@@ -133,10 +159,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var part = CreateDefaultDisposablePart();
             ((IDisposable)part).Dispose();
 
-            ExceptionAssert.ThrowsDisposed(part, () =>
-            {
-                part.Activate();
-            });
+            ExceptionAssert.ThrowsDisposed(
+                part,
+                () =>
+                {
+                    part.Activate();
+                }
+            );
         }
 
         [Fact]
@@ -172,10 +201,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var definition = part.ImportDefinitions.First();
             part.SetImport(definition, CreateSimpleExports(21));
 
-            CompositionAssert.ThrowsPart<NotImplementedException>(RetryMode.DoNotRetry, () =>
-            {
-                part.Activate();
-            });
+            CompositionAssert.ThrowsPart<NotImplementedException>(
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    part.Activate();
+                }
+            );
         }
 
         [Fact]
@@ -186,10 +218,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             ((IDisposable)part).Dispose();
 
-            ExceptionAssert.ThrowsDisposed(part, () =>
-            {
-                part.SetImport(definition, Enumerable.Empty<Export>());
-            });
+            ExceptionAssert.ThrowsDisposed(
+                part,
+                () =>
+                {
+                    part.SetImport(definition, Enumerable.Empty<Export>());
+                }
+            );
         }
 
         [Fact]
@@ -197,10 +232,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             var part = CreateDefaultPart();
 
-            Assert.Throws<ArgumentNullException>("definition", () =>
-            {
-                part.SetImport((ImportDefinition)null, Enumerable.Empty<Export>());
-            });
+            Assert.Throws<ArgumentNullException>(
+                "definition",
+                () =>
+                {
+                    part.SetImport((ImportDefinition)null, Enumerable.Empty<Export>());
+                }
+            );
         }
 
         [Fact]
@@ -209,10 +247,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var part = CreatePart(typeof(MySharedPartExport));
             var import = part.ImportDefinitions.First();
 
-            Assert.Throws<ArgumentNullException>("exports", () =>
-            {
-                part.SetImport(import, (IEnumerable<Export>)null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "exports",
+                () =>
+                {
+                    part.SetImport(import, (IEnumerable<Export>)null);
+                }
+            );
         }
 
         [Fact]
@@ -221,10 +262,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var part = CreatePart(typeof(MySharedPartExport));
             var definition = part.ImportDefinitions.First();
 
-            Assert.Throws<ArgumentException>("exports", () =>
-            {
-                part.SetImport(definition, new Export[] { null });
-            });
+            Assert.Throws<ArgumentException>(
+                "exports",
+                () =>
+                {
+                    part.SetImport(definition, new Export[] { null });
+                }
+            );
         }
 
         [Fact]
@@ -234,10 +278,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             var definition = ImportDefinitionFactory.Create();
 
-            Assert.Throws<ArgumentException>("definition", () =>
-            {
-                part.SetImport(definition, Enumerable.Empty<Export>());
-            });
+            Assert.Throws<ArgumentException>(
+                "definition",
+                () =>
+                {
+                    part.SetImport(definition, Enumerable.Empty<Export>());
+                }
+            );
         }
 
         [Fact]
@@ -263,10 +310,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             var exports = ExportFactory.Create("Import", 2);
 
-            Assert.Throws<ArgumentException>("exports", () =>
-            {
-                part.SetImport(definition, exports);
-            });
+            Assert.Throws<ArgumentException>(
+                "exports",
+                () =>
+                {
+                    part.SetImport(definition, exports);
+                }
+            );
         }
 
         [Fact]
@@ -277,10 +327,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             var exports = ExportFactory.Create("Import", 2);
 
-            Assert.Throws<ArgumentException>("exports", () =>
-            {
-                part.SetImport(definition, exports);
-            });
+            Assert.Throws<ArgumentException>(
+                "exports",
+                () =>
+                {
+                    part.SetImport(definition, exports);
+                }
+            );
         }
 
         [Fact]
@@ -291,10 +344,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             var exports = Enumerable.Empty<Export>();
 
-            Assert.Throws<ArgumentException>("exports", () =>
-            {
-                part.SetImport(definition, exports);
-            });
+            Assert.Throws<ArgumentException>(
+                "exports",
+                () =>
+                {
+                    part.SetImport(definition, exports);
+                }
+            );
         }
 
         [Fact]
@@ -304,9 +360,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var import = part.ImportDefinitions.First();
 
             CompositionAssert.ThrowsPart(() =>
-           {
-               part.SetImport(import, CreateSimpleExports("21"));
-           });
+            {
+                part.SetImport(import, CreateSimpleExports("21"));
+            });
         }
 
         [Fact]
@@ -340,10 +396,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             ((IDisposable)part).Dispose();
 
-            ExceptionAssert.ThrowsDisposed(part, () =>
-            {
-                part.GetExportedValue(definition);
-            });
+            ExceptionAssert.ThrowsDisposed(
+                part,
+                () =>
+                {
+                    part.GetExportedValue(definition);
+                }
+            );
         }
 
         [Fact]
@@ -351,10 +410,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             var part = CreateDefaultPart();
 
-            Assert.Throws<ArgumentNullException>("definition", () =>
-            {
-                part.GetExportedValue((ExportDefinition)null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "definition",
+                () =>
+                {
+                    part.GetExportedValue((ExportDefinition)null);
+                }
+            );
         }
 
         [Fact]
@@ -363,10 +425,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var part = CreateDefaultPart();
             var definition = ExportDefinitionFactory.Create();
 
-            Assert.Throws<ArgumentException>("definition", () =>
-            {
-                part.GetExportedValue(definition);
-            });
+            Assert.Throws<ArgumentException>(
+                "definition",
+                () =>
+                {
+                    part.GetExportedValue(definition);
+                }
+            );
         }
 
         [Fact]
@@ -523,7 +588,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public class PropertyExporter
         {
             [Export]
-            public object Property { get { return new object(); } }
+            public object Property
+            {
+                get { return new object(); }
+            }
         }
 
         [PartNotDiscoverable]
@@ -542,9 +610,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         [PartNotDiscoverable]
         [Export]
-        public class TypeExporter
-        {
-        }
+        public class TypeExporter { }
 
         [Fact]
         public void GetExportedObjectAlwaysReturnsSameReference_ForProperty()
@@ -594,22 +660,16 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public class MethodWithoutContractName
         {
             [Export]
-            public void MethodWithoutContractNameNotAllowed()
-            {
-            }
+            public void MethodWithoutContractNameNotAllowed() { }
         }
 
-        public interface IContract
-        {
-        }
+        public interface IContract { }
 
         [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
         public class CustomImportAttributeInvalidTarget : ImportAttribute
         {
             public CustomImportAttributeInvalidTarget()
-                : base(typeof(IContract))
-            {
-            }
+                : base(typeof(IContract)) { }
         }
 
         [PartNotDiscoverable]
@@ -631,11 +691,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             var part = CreatePart(typeof(ImportWithCustomImport));
             Assert.Equal(1, part.ImportDefinitions.Count());
-            ContractBasedImportDefinition import = part.ImportDefinitions.First() as ContractBasedImportDefinition;
+            ContractBasedImportDefinition import =
+                part.ImportDefinitions.First() as ContractBasedImportDefinition;
             Assert.NotNull(import);
 
-            Assert.Equal(AttributedModelServices.GetContractName(typeof(IContract)), import.ContractName);
-            Assert.Equal(AttributedModelServices.GetTypeIdentity(typeof(IContract)), import.RequiredTypeIdentity);
+            Assert.Equal(
+                AttributedModelServices.GetContractName(typeof(IContract)),
+                import.ContractName
+            );
+            Assert.Equal(
+                AttributedModelServices.GetTypeIdentity(typeof(IContract)),
+                import.RequiredTypeIdentity
+            );
         }
 
         [Fact]
@@ -664,11 +731,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             var part = CreatePart(typeof(ImportManyWithCustomImportMany));
             Assert.Equal(1, part.ImportDefinitions.Count());
-            ContractBasedImportDefinition import = part.ImportDefinitions.First() as ContractBasedImportDefinition;
+            ContractBasedImportDefinition import =
+                part.ImportDefinitions.First() as ContractBasedImportDefinition;
             Assert.NotNull(import);
 
-            Assert.Equal(AttributedModelServices.GetContractName(typeof(IContract)), import.ContractName);
-            Assert.Equal(AttributedModelServices.GetTypeIdentity(typeof(IContract)), import.RequiredTypeIdentity);
+            Assert.Equal(
+                AttributedModelServices.GetContractName(typeof(IContract)),
+                import.ContractName
+            );
+            Assert.Equal(
+                AttributedModelServices.GetTypeIdentity(typeof(IContract)),
+                import.RequiredTypeIdentity
+            );
         }
 
         [Fact]
@@ -682,27 +756,23 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public class CustomImportingConstructorAttribute : ImportingConstructorAttribute
         {
             public CustomImportingConstructorAttribute()
-                : base()
-            {
-            }
+                : base() { }
         }
 
         [AttributeUsage(AttributeTargets.Constructor, AllowMultiple = true, Inherited = false)]
-        public class CustomImportingConstructorAllowMultipleAttribute : ImportingConstructorAttribute
+        public class CustomImportingConstructorAllowMultipleAttribute
+            : ImportingConstructorAttribute
         {
             public CustomImportingConstructorAllowMultipleAttribute()
-                : base()
-            {
-            }
+                : base() { }
         }
 
         [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-        public class CustomImportingConstructorInvalidTargetAttribute : ImportingConstructorAttribute
+        public class CustomImportingConstructorInvalidTargetAttribute
+            : ImportingConstructorAttribute
         {
             public CustomImportingConstructorInvalidTargetAttribute()
-                : base()
-            {
-            }
+                : base() { }
         }
 
         [PartNotDiscoverable]
@@ -717,7 +787,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             [CustomImportingConstructorAllowMultiple]
             [CustomImportingConstructorAllowMultiple]
-            ImportingConstructorWithCustomImportingConstructorAllowMultiple([Import] IContract argument) { }
+            ImportingConstructorWithCustomImportingConstructorAllowMultiple(
+                [Import] IContract argument
+            ) { }
         }
 
         [PartNotDiscoverable]
@@ -732,30 +804,48 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             var part = CreatePart(typeof(ImportingConstructorWithCustomImportingConstructor));
             Assert.Equal(1, part.ImportDefinitions.Count());
-            ContractBasedImportDefinition import = part.ImportDefinitions.First() as ContractBasedImportDefinition;
+            ContractBasedImportDefinition import =
+                part.ImportDefinitions.First() as ContractBasedImportDefinition;
             Assert.NotNull(import);
 
-            Assert.Equal(AttributedModelServices.GetContractName(typeof(IContract)), import.ContractName);
-            Assert.Equal(AttributedModelServices.GetTypeIdentity(typeof(IContract)), import.RequiredTypeIdentity);
+            Assert.Equal(
+                AttributedModelServices.GetContractName(typeof(IContract)),
+                import.ContractName
+            );
+            Assert.Equal(
+                AttributedModelServices.GetTypeIdentity(typeof(IContract)),
+                import.RequiredTypeIdentity
+            );
         }
 
         [Fact]
         public void ImportDefinitions_ImportingConstructorWithCustomAttributeImportingConstructorsWithAllowMultiple_ShouldNotThrowInvalidOperation()
         {
-            var part = CreatePart(typeof(ImportingConstructorWithCustomImportingConstructorAllowMultiple));
+            var part = CreatePart(
+                typeof(ImportingConstructorWithCustomImportingConstructorAllowMultiple)
+            );
 
             Assert.Equal(1, part.ImportDefinitions.Count());
-            ContractBasedImportDefinition import = part.ImportDefinitions.First() as ContractBasedImportDefinition;
+            ContractBasedImportDefinition import =
+                part.ImportDefinitions.First() as ContractBasedImportDefinition;
             Assert.NotNull(import);
 
-            Assert.Equal(AttributedModelServices.GetContractName(typeof(IContract)), import.ContractName);
-            Assert.Equal(AttributedModelServices.GetTypeIdentity(typeof(IContract)), import.RequiredTypeIdentity);
+            Assert.Equal(
+                AttributedModelServices.GetContractName(typeof(IContract)),
+                import.ContractName
+            );
+            Assert.Equal(
+                AttributedModelServices.GetTypeIdentity(typeof(IContract)),
+                import.RequiredTypeIdentity
+            );
         }
 
         [Fact]
         public void ImportDefinitions_ImportingConstructorWithCustomImportingConstructorInvalidTarget_ShouldbeIgnored()
         {
-            var part = CreatePart(typeof(ImportingConstructorWithCustomImportingConstructorInvalidTarget));
+            var part = CreatePart(
+                typeof(ImportingConstructorWithCustomImportingConstructorInvalidTarget)
+            );
             Assert.Equal(0, part.ImportDefinitions.Count());
         }
 

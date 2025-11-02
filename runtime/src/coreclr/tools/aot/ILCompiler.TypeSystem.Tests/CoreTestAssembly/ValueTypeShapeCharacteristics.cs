@@ -42,9 +42,7 @@ namespace ValueTypeShapeCharacteristics
         SimpleHfaDoubleStruct field4;
     }
 
-    struct NonHAEmptyStruct
-    {
-    }
+    struct NonHAEmptyStruct { }
 
     struct NonHAStruct
     {

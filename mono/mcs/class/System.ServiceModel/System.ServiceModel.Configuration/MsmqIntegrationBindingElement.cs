@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,73 +49,85 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public partial class MsmqIntegrationBindingElement
-		 : MsmqBindingElementBase,  IBindingConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty binding_element_type;
-		static ConfigurationProperty security;
-		static ConfigurationProperty serialization_format;
+    [MonoTODO]
+    public partial class MsmqIntegrationBindingElement
+        : MsmqBindingElementBase,
+            IBindingConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty binding_element_type;
+        static ConfigurationProperty security;
+        static ConfigurationProperty serialization_format;
 
-		static MsmqIntegrationBindingElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
+        static MsmqIntegrationBindingElement()
+        {
+            properties = new ConfigurationPropertyCollection();
 
-			security = new ConfigurationProperty ("security",
-				typeof (MsmqIntegrationSecurityElement), null, null/* FIXME: get converter for MsmqIntegrationSecurityElement*/, null,
-				ConfigurationPropertyOptions.None);
+            security = new ConfigurationProperty(
+                "security",
+                typeof(MsmqIntegrationSecurityElement),
+                null,
+                null /* FIXME: get converter for MsmqIntegrationSecurityElement*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			serialization_format = new ConfigurationProperty ("serializationFormat",
-				typeof (MsmqMessageSerializationFormat), "Xml", null/* FIXME: get converter for MsmqMessageSerializationFormat*/, null,
-				ConfigurationPropertyOptions.None);
+            serialization_format = new ConfigurationProperty(
+                "serializationFormat",
+                typeof(MsmqMessageSerializationFormat),
+                "Xml",
+                null /* FIXME: get converter for MsmqMessageSerializationFormat*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			properties.Add (binding_element_type);
-			properties.Add (security);
-			properties.Add (serialization_format);
-		}
+            properties.Add(binding_element_type);
+            properties.Add(security);
+            properties.Add(serialization_format);
+        }
 
-		public MsmqIntegrationBindingElement ()
-		{
-		}
+        public MsmqIntegrationBindingElement() { }
 
+        // Properties
 
-		// Properties
+        protected override Type BindingElementType
+        {
+            get { return (Type)base[binding_element_type]; }
+        }
 
-		protected override Type BindingElementType {
-			get { return (Type) base [binding_element_type]; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        [ConfigurationProperty("security", Options = ConfigurationPropertyOptions.None)]
+        public MsmqIntegrationSecurityElement Security
+        {
+            get { return (MsmqIntegrationSecurityElement)base[security]; }
+        }
 
-		[ConfigurationProperty ("security",
-			 Options = ConfigurationPropertyOptions.None)]
-		public MsmqIntegrationSecurityElement Security {
-			get { return (MsmqIntegrationSecurityElement) base [security]; }
-		}
+        [ConfigurationProperty(
+            "serializationFormat",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "Xml"
+        )]
+        public MsmqMessageSerializationFormat SerializationFormat
+        {
+            get { return (MsmqMessageSerializationFormat)base[serialization_format]; }
+            set { base[serialization_format] = value; }
+        }
 
-		[ConfigurationProperty ("serializationFormat",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "Xml")]
-		public MsmqMessageSerializationFormat SerializationFormat {
-			get { return (MsmqMessageSerializationFormat) base [serialization_format]; }
-			set { base [serialization_format] = value; }
-		}
-
-
-
-		protected override void OnApplyConfiguration (Binding binding) {
-			throw new NotImplementedException ();
-		}
-	}
-
+        protected override void OnApplyConfiguration(Binding binding)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

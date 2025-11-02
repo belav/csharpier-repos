@@ -41,11 +41,14 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
         Guid transactionId,
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger,
         bool transactionOwned,
-        ISqlGenerationHelper sqlGenerationHelper)
+        ISqlGenerationHelper sqlGenerationHelper
+    )
     {
         if (connection.DbConnection != transaction.Connection)
         {
-            throw new InvalidOperationException(RelationalStrings.TransactionAssociatedWithDifferentConnection);
+            throw new InvalidOperationException(
+                RelationalStrings.TransactionAssociatedWithDifferentConnection
+            );
         }
 
         Connection = connection;
@@ -82,7 +85,8 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 Connection,
                 _dbTransaction,
                 TransactionId,
-                startTime);
+                startTime
+            );
 
             if (!interceptionResult.IsSuppressed)
             {
@@ -94,7 +98,8 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 _dbTransaction,
                 TransactionId,
                 startTime,
-                stopwatch.Elapsed);
+                stopwatch.Elapsed
+            );
         }
         catch (Exception e)
         {
@@ -105,7 +110,8 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 "Commit",
                 e,
                 startTime,
-                stopwatch.Elapsed);
+                stopwatch.Elapsed
+            );
 
             throw;
         }
@@ -125,7 +131,8 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 Connection,
                 _dbTransaction,
                 TransactionId,
-                startTime);
+                startTime
+            );
 
             if (!interceptionResult.IsSuppressed)
             {
@@ -137,7 +144,8 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 _dbTransaction,
                 TransactionId,
                 startTime,
-                stopwatch.Elapsed);
+                stopwatch.Elapsed
+            );
         }
         catch (Exception e)
         {
@@ -148,7 +156,8 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 "Rollback",
                 e,
                 startTime,
-                stopwatch.Elapsed);
+                stopwatch.Elapsed
+            );
 
             throw;
         }
@@ -164,12 +173,14 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
 
         try
         {
-            var interceptionResult = await Logger.TransactionCommittingAsync(
+            var interceptionResult = await Logger
+                .TransactionCommittingAsync(
                     Connection,
                     _dbTransaction,
                     TransactionId,
                     startTime,
-                    cancellationToken)
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
 
             if (!interceptionResult.IsSuppressed)
@@ -177,18 +188,21 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 await _dbTransaction.CommitAsync(cancellationToken).ConfigureAwait(false);
             }
 
-            await Logger.TransactionCommittedAsync(
+            await Logger
+                .TransactionCommittedAsync(
                     Connection,
                     _dbTransaction,
                     TransactionId,
                     startTime,
                     stopwatch.Elapsed,
-                    cancellationToken)
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
         }
         catch (Exception e)
         {
-            await Logger.TransactionErrorAsync(
+            await Logger
+                .TransactionErrorAsync(
                     Connection,
                     _dbTransaction,
                     TransactionId,
@@ -196,7 +210,8 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                     e,
                     startTime,
                     stopwatch.Elapsed,
-                    cancellationToken)
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
 
             throw;
@@ -213,12 +228,14 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
 
         try
         {
-            var interceptionResult = await Logger.TransactionRollingBackAsync(
+            var interceptionResult = await Logger
+                .TransactionRollingBackAsync(
                     Connection,
                     _dbTransaction,
                     TransactionId,
                     startTime,
-                    cancellationToken)
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
 
             if (!interceptionResult.IsSuppressed)
@@ -226,18 +243,21 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 await _dbTransaction.RollbackAsync(cancellationToken).ConfigureAwait(false);
             }
 
-            await Logger.TransactionRolledBackAsync(
+            await Logger
+                .TransactionRolledBackAsync(
                     Connection,
                     _dbTransaction,
                     TransactionId,
                     startTime,
                     stopwatch.Elapsed,
-                    cancellationToken)
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
         }
         catch (Exception e)
         {
-            await Logger.TransactionErrorAsync(
+            await Logger
+                .TransactionErrorAsync(
                     Connection,
                     _dbTransaction,
                     TransactionId,
@@ -245,7 +265,8 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                     e,
                     startTime,
                     stopwatch.Elapsed,
-                    cancellationToken)
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
 
             throw;
@@ -266,7 +287,8 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 Connection,
                 _dbTransaction,
                 TransactionId,
-                startTime);
+                startTime
+            );
 
             if (!interceptionResult.IsSuppressed)
             {
@@ -280,7 +302,8 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 Connection,
                 _dbTransaction,
                 TransactionId,
-                startTime);
+                startTime
+            );
         }
         catch (Exception e)
         {
@@ -291,26 +314,33 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 "CreateSavepoint",
                 e,
                 startTime,
-                stopwatch.Elapsed);
+                stopwatch.Elapsed
+            );
 
             throw;
         }
     }
 
     /// <inheritdoc />
-    public virtual async Task CreateSavepointAsync(string name, CancellationToken cancellationToken = default)
+    public virtual async Task CreateSavepointAsync(
+        string name,
+        CancellationToken cancellationToken = default
+    )
     {
         var startTime = DateTimeOffset.UtcNow;
         var stopwatch = SharedStopwatch.StartNew();
 
         try
         {
-            var interceptionResult = await Logger.CreatingTransactionSavepointAsync(
-                Connection,
-                _dbTransaction,
-                TransactionId,
-                startTime,
-                cancellationToken).ConfigureAwait(false);
+            var interceptionResult = await Logger
+                .CreatingTransactionSavepointAsync(
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    startTime,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (!interceptionResult.IsSuppressed)
             {
@@ -321,24 +351,30 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
             }
 
-            await Logger.CreatedTransactionSavepointAsync(
-                Connection,
-                _dbTransaction,
-                TransactionId,
-                startTime,
-                cancellationToken).ConfigureAwait(false);
+            await Logger
+                .CreatedTransactionSavepointAsync(
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    startTime,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
         catch (Exception e)
         {
-            await Logger.TransactionErrorAsync(
-                Connection,
-                _dbTransaction,
-                TransactionId,
-                "CreateSavepoint",
-                e,
-                startTime,
-                stopwatch.Elapsed,
-                cancellationToken).ConfigureAwait(false);
+            await Logger
+                .TransactionErrorAsync(
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    "CreateSavepoint",
+                    e,
+                    startTime,
+                    stopwatch.Elapsed,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             throw;
         }
@@ -356,13 +392,16 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 Connection,
                 _dbTransaction,
                 TransactionId,
-                startTime);
+                startTime
+            );
 
             if (!interceptionResult.IsSuppressed)
             {
                 using var command = Connection.DbConnection.CreateCommand();
                 command.Transaction = _dbTransaction;
-                command.CommandText = _sqlGenerationHelper.GenerateRollbackToSavepointStatement(name);
+                command.CommandText = _sqlGenerationHelper.GenerateRollbackToSavepointStatement(
+                    name
+                );
                 command.ExecuteNonQuery();
             }
 
@@ -370,7 +409,8 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 Connection,
                 _dbTransaction,
                 TransactionId,
-                startTime);
+                startTime
+            );
         }
         catch (Exception e)
         {
@@ -381,54 +421,69 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 "RollbackToSavepoint",
                 e,
                 startTime,
-                stopwatch.Elapsed);
+                stopwatch.Elapsed
+            );
 
             throw;
         }
     }
 
     /// <inheritdoc />
-    public virtual async Task RollbackToSavepointAsync(string name, CancellationToken cancellationToken = default)
+    public virtual async Task RollbackToSavepointAsync(
+        string name,
+        CancellationToken cancellationToken = default
+    )
     {
         var startTime = DateTimeOffset.UtcNow;
         var stopwatch = SharedStopwatch.StartNew();
 
         try
         {
-            var interceptionResult = await Logger.RollingBackToTransactionSavepointAsync(
-                Connection,
-                _dbTransaction,
-                TransactionId,
-                startTime,
-                cancellationToken).ConfigureAwait(false);
+            var interceptionResult = await Logger
+                .RollingBackToTransactionSavepointAsync(
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    startTime,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (!interceptionResult.IsSuppressed)
             {
                 var command = Connection.DbConnection.CreateCommand();
                 await using var _ = command.ConfigureAwait(false);
                 command.Transaction = _dbTransaction;
-                command.CommandText = _sqlGenerationHelper.GenerateRollbackToSavepointStatement(name);
+                command.CommandText = _sqlGenerationHelper.GenerateRollbackToSavepointStatement(
+                    name
+                );
                 await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
             }
 
-            await Logger.RolledBackToTransactionSavepointAsync(
-                Connection,
-                _dbTransaction,
-                TransactionId,
-                startTime,
-                cancellationToken).ConfigureAwait(false);
+            await Logger
+                .RolledBackToTransactionSavepointAsync(
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    startTime,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
         catch (Exception e)
         {
-            await Logger.TransactionErrorAsync(
-                Connection,
-                _dbTransaction,
-                TransactionId,
-                "RollbackToSavepoint",
-                e,
-                startTime,
-                stopwatch.Elapsed,
-                cancellationToken).ConfigureAwait(false);
+            await Logger
+                .TransactionErrorAsync(
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    "RollbackToSavepoint",
+                    e,
+                    startTime,
+                    stopwatch.Elapsed,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             throw;
         }
@@ -446,7 +501,8 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 Connection,
                 _dbTransaction,
                 TransactionId,
-                startTime);
+                startTime
+            );
 
             if (!interceptionResult.IsSuppressed)
             {
@@ -460,7 +516,8 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 Connection,
                 _dbTransaction,
                 TransactionId,
-                startTime);
+                startTime
+            );
         }
         catch (Exception e)
         {
@@ -471,26 +528,33 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 "ReleaseSavepoint",
                 e,
                 startTime,
-                stopwatch.Elapsed);
+                stopwatch.Elapsed
+            );
 
             throw;
         }
     }
 
     /// <inheritdoc />
-    public virtual async Task ReleaseSavepointAsync(string name, CancellationToken cancellationToken = default)
+    public virtual async Task ReleaseSavepointAsync(
+        string name,
+        CancellationToken cancellationToken = default
+    )
     {
         var startTime = DateTimeOffset.UtcNow;
         var stopwatch = SharedStopwatch.StartNew();
 
         try
         {
-            var interceptionResult = await Logger.ReleasingTransactionSavepointAsync(
-                Connection,
-                _dbTransaction,
-                TransactionId,
-                startTime,
-                cancellationToken).ConfigureAwait(false);
+            var interceptionResult = await Logger
+                .ReleasingTransactionSavepointAsync(
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    startTime,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (!interceptionResult.IsSuppressed)
             {
@@ -501,32 +565,37 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                 await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
             }
 
-            await Logger.ReleasedTransactionSavepointAsync(
-                Connection,
-                _dbTransaction,
-                TransactionId,
-                startTime,
-                cancellationToken).ConfigureAwait(false);
+            await Logger
+                .ReleasedTransactionSavepointAsync(
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    startTime,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
         catch (Exception e)
         {
-            await Logger.TransactionErrorAsync(
-                Connection,
-                _dbTransaction,
-                TransactionId,
-                "ReleaseSavepoint",
-                e,
-                startTime,
-                stopwatch.Elapsed,
-                cancellationToken).ConfigureAwait(false);
+            await Logger
+                .TransactionErrorAsync(
+                    Connection,
+                    _dbTransaction,
+                    TransactionId,
+                    "ReleaseSavepoint",
+                    e,
+                    startTime,
+                    stopwatch.Elapsed,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             throw;
         }
     }
 
     /// <inheritdoc />
-    public virtual bool SupportsSavepoints
-        => true;
+    public virtual bool SupportsSavepoints => true;
 
     /// <inheritdoc />
     public virtual void Dispose()
@@ -543,7 +612,8 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                     Connection,
                     _dbTransaction,
                     TransactionId,
-                    DateTimeOffset.UtcNow);
+                    DateTimeOffset.UtcNow
+                );
             }
 
             ClearTransaction();
@@ -565,7 +635,8 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
                     Connection,
                     _dbTransaction,
                     TransactionId,
-                    DateTimeOffset.UtcNow);
+                    DateTimeOffset.UtcNow
+                );
             }
 
             await ClearTransactionAsync().ConfigureAwait(false);
@@ -579,7 +650,8 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
     {
         Check.DebugAssert(
             Connection.CurrentTransaction == null || Connection.CurrentTransaction == this,
-            "Connection.CurrentTransaction is unexpected instance");
+            "Connection.CurrentTransaction is unexpected instance"
+        );
 
         Connection.UseTransaction(null);
 
@@ -594,11 +666,14 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
     /// <summary>
     ///     Remove the underlying transaction from the connection
     /// </summary>
-    protected virtual async Task ClearTransactionAsync(CancellationToken cancellationToken = default)
+    protected virtual async Task ClearTransactionAsync(
+        CancellationToken cancellationToken = default
+    )
     {
         Check.DebugAssert(
             Connection.CurrentTransaction == null || Connection.CurrentTransaction == this,
-            "Connection.CurrentTransaction is unexpected instance");
+            "Connection.CurrentTransaction is unexpected instance"
+        );
 
         await Connection.UseTransactionAsync(null, cancellationToken).ConfigureAwait(false);
 
@@ -610,6 +685,5 @@ public class RelationalTransaction : IDbContextTransaction, IInfrastructure<DbTr
         }
     }
 
-    DbTransaction IInfrastructure<DbTransaction>.Instance
-        => _dbTransaction;
+    DbTransaction IInfrastructure<DbTransaction>.Instance => _dbTransaction;
 }

@@ -12,7 +12,7 @@ namespace System.DirectoryServices.ActiveDirectory
         SidAdminDisabled = 1,
         SidConflictDisabled = 2,
         NetBiosNameAdminDisabled = 4,
-        NetBiosNameConflictDisabled = 8
+        NetBiosNameConflictDisabled = 8,
     }
 
     public class ForestTrustDomainInformation
@@ -20,14 +20,27 @@ namespace System.DirectoryServices.ActiveDirectory
         private ForestTrustDomainStatus _status;
         internal LARGE_INTEGER time;
 
-        internal ForestTrustDomainInformation(int flag, LSA_FOREST_TRUST_DOMAIN_INFO domainInfo, LARGE_INTEGER time)
+        internal ForestTrustDomainInformation(
+            int flag,
+            LSA_FOREST_TRUST_DOMAIN_INFO domainInfo,
+            LARGE_INTEGER time
+        )
         {
             _status = (ForestTrustDomainStatus)flag;
-            DnsName = Marshal.PtrToStringUni(domainInfo.DNSNameBuffer, domainInfo.DNSNameLength / 2);
-            NetBiosName = Marshal.PtrToStringUni(domainInfo.NetBIOSNameBuffer, domainInfo.NetBIOSNameLength / 2);
+            DnsName = Marshal.PtrToStringUni(
+                domainInfo.DNSNameBuffer,
+                domainInfo.DNSNameLength / 2
+            );
+            NetBiosName = Marshal.PtrToStringUni(
+                domainInfo.NetBIOSNameBuffer,
+                domainInfo.NetBIOSNameLength / 2
+            );
 
             string sidLocal;
-            global::Interop.BOOL result = global::Interop.Advapi32.ConvertSidToStringSid(domainInfo.sid, out sidLocal);
+            global::Interop.BOOL result = global::Interop.Advapi32.ConvertSidToStringSid(
+                domainInfo.sid,
+                out sidLocal
+            );
             if (result == global::Interop.BOOL.FALSE)
             {
                 throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastPInvokeError());
@@ -48,12 +61,18 @@ namespace System.DirectoryServices.ActiveDirectory
             get => _status;
             set
             {
-                if (value != ForestTrustDomainStatus.Enabled &&
-                    value != ForestTrustDomainStatus.SidAdminDisabled &&
-                    value != ForestTrustDomainStatus.SidConflictDisabled &&
-                    value != ForestTrustDomainStatus.NetBiosNameAdminDisabled &&
-                    value != ForestTrustDomainStatus.NetBiosNameConflictDisabled)
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(ForestTrustDomainStatus));
+                if (
+                    value != ForestTrustDomainStatus.Enabled
+                    && value != ForestTrustDomainStatus.SidAdminDisabled
+                    && value != ForestTrustDomainStatus.SidConflictDisabled
+                    && value != ForestTrustDomainStatus.NetBiosNameAdminDisabled
+                    && value != ForestTrustDomainStatus.NetBiosNameConflictDisabled
+                )
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        (int)value,
+                        typeof(ForestTrustDomainStatus)
+                    );
 
                 _status = value;
             }

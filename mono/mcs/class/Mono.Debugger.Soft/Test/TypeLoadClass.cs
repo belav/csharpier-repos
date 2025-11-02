@@ -1,11 +1,6 @@
-
 class TypeLoadClass
 {
-	static TypeLoadClass ()
-	{
-	}
+    static TypeLoadClass() { }
 }
 
-class TypeLoadClass2
-{
-}
+class TypeLoadClass2 { }

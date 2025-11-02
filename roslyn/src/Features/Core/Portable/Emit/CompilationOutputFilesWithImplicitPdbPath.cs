@@ -23,7 +23,10 @@ namespace Microsoft.CodeAnalysis.Emit
         {
             if (assemblyFilePath != null)
             {
-                CompilerPathUtilities.RequireAbsolutePath(assemblyFilePath, nameof(assemblyFilePath));
+                CompilerPathUtilities.RequireAbsolutePath(
+                    assemblyFilePath,
+                    nameof(assemblyFilePath)
+                );
             }
 
             AssemblyFilePath = assemblyFilePath;
@@ -32,14 +35,13 @@ namespace Microsoft.CodeAnalysis.Emit
         public override string? AssemblyDisplayPath => AssemblyFilePath;
 
         // heuristic for error messages (determining the actual path requires opening the assembly):
-        public override string PdbDisplayPath => Path.GetFileNameWithoutExtension(AssemblyFilePath) + ".pdb";
+        public override string PdbDisplayPath =>
+            Path.GetFileNameWithoutExtension(AssemblyFilePath) + ".pdb";
 
-        protected override Stream? OpenAssemblyStream()
-            => TryOpenFileStream(AssemblyFilePath);
+        protected override Stream? OpenAssemblyStream() => TryOpenFileStream(AssemblyFilePath);
 
         // Not gonna be called since we override OpenPdb.
-        protected override Stream OpenPdbStream()
-            => throw ExceptionUtilities.Unreachable();
+        protected override Stream OpenPdbStream() => throw ExceptionUtilities.Unreachable();
 
         public override DebugInformationReaderProvider? OpenPdb()
         {
@@ -54,13 +56,19 @@ namespace Microsoft.CodeAnalysis.Emit
             using (var peReader = new PEReader(assemblyStream))
             {
                 var debugDirectory = peReader.ReadDebugDirectory();
-                var embeddedPdbEntry = debugDirectory.FirstOrDefault(e => e.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
+                var embeddedPdbEntry = debugDirectory.FirstOrDefault(e =>
+                    e.Type == DebugDirectoryEntryType.EmbeddedPortablePdb
+                );
                 if (embeddedPdbEntry.DataSize != 0)
                 {
-                    return DebugInformationReaderProvider.CreateFromMetadataReader(peReader.ReadEmbeddedPortablePdbDebugDirectoryData(embeddedPdbEntry));
+                    return DebugInformationReaderProvider.CreateFromMetadataReader(
+                        peReader.ReadEmbeddedPortablePdbDebugDirectoryData(embeddedPdbEntry)
+                    );
                 }
 
-                var codeViewEntry = debugDirectory.FirstOrDefault(e => e.Type == DebugDirectoryEntryType.CodeView);
+                var codeViewEntry = debugDirectory.FirstOrDefault(e =>
+                    e.Type == DebugDirectoryEntryType.CodeView
+                );
                 if (codeViewEntry.DataSize == 0)
                 {
                     return null;
@@ -71,10 +79,17 @@ namespace Microsoft.CodeAnalysis.Emit
 
             // First try to use the full path as specified in the PDB, then look next to the assembly.
             var pdbStream =
-                TryOpenFileStream(pdbPath) ??
-                TryOpenFileStream(Path.Combine(Path.GetDirectoryName(AssemblyFilePath)!, PathUtilities.GetFileName(pdbPath)));
+                TryOpenFileStream(pdbPath)
+                ?? TryOpenFileStream(
+                    Path.Combine(
+                        Path.GetDirectoryName(AssemblyFilePath)!,
+                        PathUtilities.GetFileName(pdbPath)
+                    )
+                );
 
-            return (pdbStream != null) ? DebugInformationReaderProvider.CreateFromStream(pdbStream) : null;
+            return (pdbStream != null)
+                ? DebugInformationReaderProvider.CreateFromStream(pdbStream)
+                : null;
         }
 
         private static Stream? TryOpenFileStream(string? path)
@@ -86,7 +101,12 @@ namespace Microsoft.CodeAnalysis.Emit
 
             try
             {
-                return new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read | FileShare.Delete);
+                return new FileStream(
+                    path,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read | FileShare.Delete
+                );
             }
             catch (Exception e) when (e is FileNotFoundException or DirectoryNotFoundException)
             {

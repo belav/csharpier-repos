@@ -4,11 +4,14 @@
 namespace System.Runtime.Serialization
 {
     using System;
+    using System.Globalization;
     using System.Reflection;
     using System.Xml;
-    using System.Globalization;
 
-    [DataContract(Name = "DateTimeOffset", Namespace = "http://schemas.datacontract.org/2004/07/System")]
+    [DataContract(
+        Name = "DateTimeOffset",
+        Namespace = "http://schemas.datacontract.org/2004/07/System"
+    )]
 #if USE_REFEMIT
     public struct DateTimeOffsetAdapter
 #else
@@ -45,7 +48,10 @@ namespace System.Runtime.Serialization
                 switch (value.UtcDateTime.Kind)
                 {
                     case DateTimeKind.Unspecified:
-                        return new DateTimeOffset(value.UtcDateTime, new TimeSpan(0, value.OffsetMinutes, 0));
+                        return new DateTimeOffset(
+                            value.UtcDateTime,
+                            new TimeSpan(0, value.OffsetMinutes, 0)
+                        );
 
                     //DateTimeKind.Utc and DateTimeKind.Local
                     //Read in deserialized DateTime portion of the DateTimeOffsetAdapter and convert DateTimeKind to Unspecified.
@@ -58,7 +64,13 @@ namespace System.Runtime.Serialization
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(value.ToString(CultureInfo.InvariantCulture), "DateTimeOffset", exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlExceptionHelper.CreateConversionException(
+                        value.ToString(CultureInfo.InvariantCulture),
+                        "DateTimeOffset",
+                        exception
+                    )
+                );
             }
         }
 
@@ -71,6 +83,5 @@ namespace System.Runtime.Serialization
         {
             return "DateTime: " + this.UtcDateTime + ", Offset: " + this.OffsetMinutes;
         }
-
     }
 }

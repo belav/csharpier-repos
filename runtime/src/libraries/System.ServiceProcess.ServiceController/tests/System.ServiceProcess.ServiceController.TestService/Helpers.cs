@@ -11,6 +11,6 @@ namespace System.ServiceProcess.Tests
         Stop,
         OnCustomCommand,
         ExceptionThrown,
-        Connected
+        Connected,
     };
 }

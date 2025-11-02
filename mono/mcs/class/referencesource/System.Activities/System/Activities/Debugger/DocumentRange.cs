@@ -7,7 +7,9 @@ namespace System.Activities.Debugger
     using System.Diagnostics;
 
     // Immutable, start and end always non-null.
-    [DebuggerDisplay("({Start.LineNumber.Value}:{Start.LinePosition.Value}) - ({End.LineNumber.Value}:{End.LinePosition.Value})")]
+    [DebuggerDisplay(
+        "({Start.LineNumber.Value}:{Start.LinePosition.Value}) - ({End.LineNumber.Value}:{End.LinePosition.Value})"
+    )]
     internal class DocumentRange : IEquatable<DocumentRange>
     {
         private DocumentLocation start;
@@ -17,15 +19,28 @@ namespace System.Activities.Debugger
         {
             UnitTestUtility.Assert(start != null, "DocumentRange.Start cannot be null");
             UnitTestUtility.Assert(end != null, "DocumentRange.End cannot be null");
-            UnitTestUtility.Assert((start.LineNumber.Value < end.LineNumber.Value) || ((start.LineNumber.Value == end.LineNumber.Value) && (start.LinePosition.Value <= end.LinePosition.Value)), "Start cannot before go after End.");
+            UnitTestUtility.Assert(
+                (start.LineNumber.Value < end.LineNumber.Value)
+                    || (
+                        (start.LineNumber.Value == end.LineNumber.Value)
+                        && (start.LinePosition.Value <= end.LinePosition.Value)
+                    ),
+                "Start cannot before go after End."
+            );
             this.start = start;
             this.end = end;
         }
 
-        internal DocumentRange(int startLineNumber, int startLinePosition, int endLineNumber, int endLinePosition)
-            : this(new DocumentLocation(startLineNumber, startLinePosition), new DocumentLocation(endLineNumber, endLinePosition))
-        {
-        }
+        internal DocumentRange(
+            int startLineNumber,
+            int startLinePosition,
+            int endLineNumber,
+            int endLinePosition
+        )
+            : this(
+                new DocumentLocation(startLineNumber, startLinePosition),
+                new DocumentLocation(endLineNumber, endLinePosition)
+            ) { }
 
         internal DocumentLocation Start
         {

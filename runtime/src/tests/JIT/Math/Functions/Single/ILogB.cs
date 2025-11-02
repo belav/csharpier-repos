@@ -27,7 +27,9 @@ namespace System.MathBenchmarks
 
             if (result != iLogBExpectedResult)
             {
-                throw new Exception($"Expected Result {iLogBExpectedResult,10:g9}; Actual Result {result,10:g9}");
+                throw new Exception(
+                    $"Expected Result {iLogBExpectedResult, 10:g9}; Actual Result {result, 10:g9}"
+                );
             }
         }
     }

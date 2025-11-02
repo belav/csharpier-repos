@@ -14,7 +14,9 @@ public class Program
         byte[] file2 = File.ReadAllBytes("crossgen2smoke2.ildll");
         if (file1.Length != file2.Length)
         {
-            Console.WriteLine("Expected R2R'd files to be identical but they have different sizes.");
+            Console.WriteLine(
+                "Expected R2R'd files to be identical but they have different sizes."
+            );
             return 1;
         }
 

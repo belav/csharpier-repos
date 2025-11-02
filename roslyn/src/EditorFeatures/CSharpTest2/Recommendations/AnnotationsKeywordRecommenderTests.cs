@@ -14,115 +14,109 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 class C { }
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 System.Console.WriteLine();
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 int i = 0;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
         public async Task TestAfterHash()
         {
-            await VerifyAbsenceAsync(
-@"#$$");
+            await VerifyAbsenceAsync(@"#$$");
         }
 
         [Fact]
         public async Task TestAfterHashAndSpace()
         {
-            await VerifyAbsenceAsync(
-@"# $$");
+            await VerifyAbsenceAsync(@"# $$");
         }
 
         [Fact]
         public async Task TestAfterPragma()
         {
-            await VerifyAbsenceAsync(
-@"#pragma $$");
+            await VerifyAbsenceAsync(@"#pragma $$");
         }
 
         [Fact]
         public async Task TestAfterNullable()
         {
-            await VerifyAbsenceAsync(
-@"#nullable $$");
+            await VerifyAbsenceAsync(@"#nullable $$");
         }
 
         [Fact]
         public async Task TestAfterNullableEnable()
         {
-            await VerifyKeywordAsync(
-@"#nullable enable $$");
+            await VerifyKeywordAsync(@"#nullable enable $$");
         }
 
         [Fact]
         public async Task TestAfterNullableDisable()
         {
-            await VerifyKeywordAsync(
-@"#nullable disable $$");
+            await VerifyKeywordAsync(@"#nullable disable $$");
         }
 
         [Fact]
         public async Task TestAfterNullableRestore()
         {
-            await VerifyKeywordAsync(
-@"#nullable restore $$");
+            await VerifyKeywordAsync(@"#nullable restore $$");
         }
 
         [Fact]
         public async Task TestAfterNullableBadSetting()
         {
-            await VerifyAbsenceAsync(
-@"#nullable true $$");
+            await VerifyAbsenceAsync(@"#nullable true $$");
         }
     }
 }

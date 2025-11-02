@@ -19,7 +19,7 @@ namespace System.Runtime.Serialization
 #endif
     {
         GlobalReference = 0x00000001,
-        GenericTypeParameter = 0x00000002
+        GenericTypeParameter = 0x00000002,
     }
 
 #if CODEDOM
@@ -67,7 +67,8 @@ namespace System.Runtime.Serialization
             _isInterface = type.IsInterface;
         }
 
-        public CodeTypeReference(Type type, CodeTypeReferenceOptions codeTypeReferenceOption) : this(type)
+        public CodeTypeReference(Type type, CodeTypeReferenceOptions codeTypeReferenceOption)
+            : this(type)
         {
             Options = codeTypeReferenceOption;
         }
@@ -185,7 +186,8 @@ namespace System.Runtime.Serialization
                     if (typeName[current] == '[')
                     {
                         // break if we found matched brackets
-                        if (--unmatchedRightBrackets == 0) break;
+                        if (--unmatchedRightBrackets == 0)
+                            break;
                     }
                     else if (typeName[current] == ']')
                     {
@@ -203,7 +205,9 @@ namespace System.Runtime.Serialization
                         //
                         if (current + 1 < subTypeNameEndIndex)
                         {
-                            subTypeNames.Push(typeName.Substring(current + 1, subTypeNameEndIndex - current - 1));
+                            subTypeNames.Push(
+                                typeName.Substring(current + 1, subTypeNameEndIndex - current - 1)
+                            );
                         }
 
                         subTypeNameEndIndex = current;
@@ -216,7 +220,9 @@ namespace System.Runtime.Serialization
                     // push the last generic type argument name if there is any
                     if (current + 1 < subTypeNameEndIndex)
                     {
-                        subTypeNames.Push(typeName.Substring(current + 1, subTypeNameEndIndex - current - 1));
+                        subTypeNames.Push(
+                            typeName.Substring(current + 1, subTypeNameEndIndex - current - 1)
+                        );
                     }
 
                     // we found matched brackets and the brackets contains some characters.
@@ -238,7 +244,10 @@ namespace System.Runtime.Serialization
 
             if (q.Count > 0)
             {
-                CodeTypeReference type = new CodeTypeReference(typeName.Substring(0, end + 1), Options);
+                CodeTypeReference type = new CodeTypeReference(
+                    typeName.Substring(0, end + 1),
+                    Options
+                );
 
                 for (int i = 0; i < typeArgumentList.Count; i++)
                 {
@@ -281,7 +290,8 @@ namespace System.Runtime.Serialization
             }
         }
 
-        public CodeTypeReference(string typeName, params CodeTypeReference[] typeArguments) : this(typeName)
+        public CodeTypeReference(string typeName, params CodeTypeReference[] typeArguments)
+            : this(typeName)
         {
             if (typeArguments != null && typeArguments.Length > 0)
             {
@@ -290,8 +300,8 @@ namespace System.Runtime.Serialization
         }
 
 #if CODEDOM
-        public CodeTypeReference(CodeTypeParameter typeParameter) :
-            this(typeParameter?.Name)
+        public CodeTypeReference(CodeTypeParameter typeParameter)
+            : this(typeParameter?.Name)
         {
             Options = CodeTypeReferenceOptions.GenericTypeParameter;
         }
@@ -315,7 +325,8 @@ namespace System.Runtime.Serialization
 
         public int ArrayRank { get; set; }
 
-        internal int NestedArrayDepth => ArrayElementType == null ? 0 : 1 + ArrayElementType.NestedArrayDepth;
+        internal int NestedArrayDepth =>
+            ArrayElementType == null ? 0 : 1 + ArrayElementType.NestedArrayDepth;
 
         public string BaseType
         {
@@ -332,9 +343,9 @@ namespace System.Runtime.Serialization
                 }
 
                 string returnType = _baseType;
-                return _needsFixup && TypeArguments.Count > 0 ?
-                    $"{returnType}`{(uint)TypeArguments.Count}" :
-                    returnType;
+                return _needsFixup && TypeArguments.Count > 0
+                    ? $"{returnType}`{(uint)TypeArguments.Count}"
+                    : returnType;
             }
             set
             {
@@ -375,8 +386,10 @@ namespace System.Runtime.Serialization
             string result = typeName;
 
             // skip whitespace in the beginning
-            while (start < typeName.Length && char.IsWhiteSpace(typeName[start])) start++;
-            while (end >= 0 && char.IsWhiteSpace(typeName[end])) end--;
+            while (start < typeName.Length && char.IsWhiteSpace(typeName[start]))
+                start++;
+            while (end >= 0 && char.IsWhiteSpace(typeName[end]))
+                end--;
 
             if (start < end)
             {

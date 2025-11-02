@@ -109,31 +109,30 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeList()
         {
-            IList<TimeOnly> l = new List<TimeOnly>
-            {
-                new TimeOnly(23, 59, 59)
-            };
+            IList<TimeOnly> l = new List<TimeOnly> { new TimeOnly(23, 59, 59) };
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
 
-            Assert.AreEqual(@"[
+            Assert.AreEqual(
+                @"[
   ""23:59:59""
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void SerializeList_Nullable()
         {
-            IList<TimeOnly?> l = new List<TimeOnly?>
-            {
-                new TimeOnly(23, 59, 59),
-                null
-            };
+            IList<TimeOnly?> l = new List<TimeOnly?> { new TimeOnly(23, 59, 59), null };
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
 
-            Assert.AreEqual(@"[
+            Assert.AreEqual(
+                @"[
   ""23:59:59"",
   null
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
@@ -187,9 +186,11 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeList()
         {
-            var l = JsonConvert.DeserializeObject<IList<TimeOnly>>(@"[
+            var l = JsonConvert.DeserializeObject<IList<TimeOnly>>(
+                @"[
   ""23:59:59""
-]");
+]"
+            );
 
             Assert.AreEqual(1, l.Count);
             Assert.AreEqual(new TimeOnly(23, 59, 59), l[0]);
@@ -198,10 +199,12 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeList_Nullable()
         {
-            var l = JsonConvert.DeserializeObject<IList<TimeOnly?>>(@"[
+            var l = JsonConvert.DeserializeObject<IList<TimeOnly?>>(
+                @"[
   ""23:59:59"",
   null
-]");
+]"
+            );
 
             Assert.AreEqual(2, l.Count);
             Assert.AreEqual(new TimeOnly(23, 59, 59), l[0]);

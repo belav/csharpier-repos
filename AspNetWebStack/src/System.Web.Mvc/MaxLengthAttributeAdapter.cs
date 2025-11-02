@@ -8,10 +8,12 @@ namespace System.Web.Mvc
 {
     public class MaxLengthAttributeAdapter : DataAnnotationsModelValidator<MaxLengthAttribute>
     {
-        public MaxLengthAttributeAdapter(ModelMetadata metadata, ControllerContext context, MaxLengthAttribute attribute)
-            : base(metadata, context, attribute)
-        {
-        }
+        public MaxLengthAttributeAdapter(
+            ModelMetadata metadata,
+            ControllerContext context,
+            MaxLengthAttribute attribute
+        )
+            : base(metadata, context, attribute) { }
 
         public override IEnumerable<ModelClientValidationRule> GetClientValidationRules()
         {

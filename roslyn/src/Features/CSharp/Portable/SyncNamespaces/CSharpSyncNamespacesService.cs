@@ -19,10 +19,15 @@ namespace Microsoft.CodeAnalysis.CSharp.SyncNamespaces
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     internal sealed class CSharpSyncNamespacesService(
         CSharpMatchFolderAndNamespaceDiagnosticAnalyzer diagnosticAnalyzer,
-        CSharpChangeNamespaceToMatchFolderCodeFixProvider codeFixProvider) : AbstractSyncNamespacesService<SyntaxKind, BaseNamespaceDeclarationSyntax>
+        CSharpChangeNamespaceToMatchFolderCodeFixProvider codeFixProvider
+    ) : AbstractSyncNamespacesService<SyntaxKind, BaseNamespaceDeclarationSyntax>
     {
-        public override AbstractMatchFolderAndNamespaceDiagnosticAnalyzer<SyntaxKind, BaseNamespaceDeclarationSyntax> DiagnosticAnalyzer { get; } = diagnosticAnalyzer;
+        public override AbstractMatchFolderAndNamespaceDiagnosticAnalyzer<
+            SyntaxKind,
+            BaseNamespaceDeclarationSyntax
+        > DiagnosticAnalyzer { get; } = diagnosticAnalyzer;
 
-        public override AbstractChangeNamespaceToMatchFolderCodeFixProvider CodeFixProvider { get; } = codeFixProvider;
+        public override AbstractChangeNamespaceToMatchFolderCodeFixProvider CodeFixProvider { get; } =
+            codeFixProvider;
     }
 }

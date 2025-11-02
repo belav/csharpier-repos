@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -13,10 +12,23 @@ namespace System.Net.Http.Tests
     public class HttpHeaderValueCollectionTest
     {
         // Note: These are not real known headers, so they won't be returned if we call HeaderDescriptor.Get().
-        private static readonly HeaderDescriptor knownStringHeader = (new KnownHeader("known-string-header", HttpHeaderType.General, new MockHeaderParser(typeof(string)))).Descriptor;
-        private static readonly HeaderDescriptor knownUriHeader = (new KnownHeader("known-uri-header", HttpHeaderType.General, new MockHeaderParser(typeof(Uri)))).Descriptor;
+        private static readonly HeaderDescriptor knownStringHeader = (
+            new KnownHeader(
+                "known-string-header",
+                HttpHeaderType.General,
+                new MockHeaderParser(typeof(string))
+            )
+        ).Descriptor;
+        private static readonly HeaderDescriptor knownUriHeader = (
+            new KnownHeader(
+                "known-uri-header",
+                HttpHeaderType.General,
+                new MockHeaderParser(typeof(Uri))
+            )
+        ).Descriptor;
 
-        private static readonly TransferCodingHeaderValue specialChunked = new TransferCodingHeaderValue("chunked");
+        private static readonly TransferCodingHeaderValue specialChunked =
+            new TransferCodingHeaderValue("chunked");
 
         // Note that this type just forwards calls to HttpHeaders. So this test method focuses on making sure
         // the correct calls to HttpHeaders are made. This test suite will not test HttpHeaders functionality.
@@ -25,7 +37,10 @@ namespace System.Net.Http.Tests
         public void IsReadOnly_CallProperty_AlwaysFalse()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<string> collection = new HttpHeaderValueCollection<string>(knownStringHeader, headers);
+            HttpHeaderValueCollection<string> collection = new HttpHeaderValueCollection<string>(
+                knownStringHeader,
+                headers
+            );
 
             Assert.False(collection.IsReadOnly);
         }
@@ -34,16 +49,25 @@ namespace System.Net.Http.Tests
         public void Add_CallWithNullValue_Throw()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
-            Assert.Throws<ArgumentNullException>(() => { collection.Add(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                collection.Add(null);
+            });
         }
 
         [Fact]
         public void Add_AddValues_AllValuesAdded()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
             collection.Add(new Uri("http://www.example.org/1/"));
             collection.Add(new Uri("http://www.example.org/2/"));
@@ -103,7 +127,10 @@ namespace System.Net.Http.Tests
         public void ParseAdd_CallWithNullValue_NothingAdded()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
             collection.ParseAdd(null);
             Assert.Equal(0, collection.Count);
@@ -114,7 +141,10 @@ namespace System.Net.Http.Tests
         public void ParseAdd_AddValues_AllValuesAdded()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
             collection.ParseAdd("http://www.example.org/1/");
             collection.ParseAdd("http://www.example.org/2/");
@@ -129,7 +159,10 @@ namespace System.Net.Http.Tests
             HttpResponseHeaders headers = new HttpResponseHeaders();
             string input = "Basic, D\rigest qop=\"auth\",algorithm=MD5-sess";
 
-            Assert.Throws<FormatException>(() => { headers.WwwAuthenticate.ParseAdd(input); });
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.WwwAuthenticate.ParseAdd(input);
+            });
         }
 
         [Fact]
@@ -147,7 +180,10 @@ namespace System.Net.Http.Tests
         public void TryParseAdd_AddValues_AllAdded()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
             Assert.True(collection.TryParseAdd("http://www.example.org/1/"));
             Assert.True(collection.TryParseAdd("http://www.example.org/2/"));
@@ -181,7 +217,10 @@ namespace System.Net.Http.Tests
         public void Clear_AddValuesThenClear_NoElementsInCollection()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
             collection.Add(new Uri("http://www.example.org/1/"));
             collection.Add(new Uri("http://www.example.org/2/"));
@@ -198,24 +237,38 @@ namespace System.Net.Http.Tests
         public void Contains_CallWithNullValue_Throw()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
-            Assert.Throws<ArgumentNullException>(() => { collection.Contains(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                collection.Contains(null);
+            });
         }
 
         [Fact]
         public void Contains_AddValuesThenCallContains_ReturnsTrueForExistingItemsFalseOtherwise()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
             collection.Add(new Uri("http://www.example.org/1/"));
             collection.Add(new Uri("http://www.example.org/2/"));
             collection.Add(new Uri("http://www.example.org/3/"));
 
-            Assert.True(collection.Contains(new Uri("http://www.example.org/2/")), "Expected true for existing item.");
-            Assert.False(collection.Contains(new Uri("http://www.example.org/4/")),
-                "Expected false for non-existing item.");
+            Assert.True(
+                collection.Contains(new Uri("http://www.example.org/2/")),
+                "Expected true for existing item."
+            );
+            Assert.False(
+                collection.Contains(new Uri("http://www.example.org/4/")),
+                "Expected false for non-existing item."
+            );
         }
 
         [Fact]
@@ -254,7 +307,10 @@ namespace System.Net.Http.Tests
         public void CopyTo_CallWithStartIndexPlusElementCountGreaterArrayLength_Throw()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
             collection.Add(new Uri("http://www.example.org/1/"));
             collection.Add(new Uri("http://www.example.org/2/"));
@@ -262,14 +318,20 @@ namespace System.Net.Http.Tests
             Uri[] array = new Uri[2];
 
             // startIndex + Count = 1 + 2 > array.Length
-            AssertExtensions.Throws<ArgumentException>(() => { collection.CopyTo(array, 1); });
+            AssertExtensions.Throws<ArgumentException>(() =>
+            {
+                collection.CopyTo(array, 1);
+            });
         }
 
         [Fact]
         public void CopyTo_EmptyToEmpty_Success()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
             Uri[] array = new Uri[0];
             collection.CopyTo(array, 0);
@@ -279,7 +341,10 @@ namespace System.Net.Http.Tests
         public void CopyTo_NoValues_DoesNotChangeArray()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
             Uri[] array = new Uri[4];
             collection.CopyTo(array, 0);
@@ -294,7 +359,10 @@ namespace System.Net.Http.Tests
         public void CopyTo_AddSingleValue_ContainsSingleValue()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
             collection.Add(new Uri("http://www.example.org/"));
 
@@ -307,7 +375,10 @@ namespace System.Net.Http.Tests
         public void CopyTo_AddMultipleValues_ContainsAllValuesInTheRightOrder()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
             collection.Add(new Uri("http://www.example.org/1/"));
             collection.Add(new Uri("http://www.example.org/2/"));
@@ -327,7 +398,10 @@ namespace System.Net.Http.Tests
         public void CopyTo_ArrayTooSmall_Throw()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<string> collection = new HttpHeaderValueCollection<string>(knownStringHeader, headers);
+            HttpHeaderValueCollection<string> collection = new HttpHeaderValueCollection<string>(
+                knownStringHeader,
+                headers
+            );
 
             string[] array = new string[1];
             array[0] = null;
@@ -335,53 +409,94 @@ namespace System.Net.Http.Tests
             collection.CopyTo(array, 0); // no exception
             Assert.Null(array[0]);
 
-            Assert.Throws<ArgumentNullException>(() => { collection.CopyTo(null, 0); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { collection.CopyTo(array, -1); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { collection.CopyTo(array, 2); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                collection.CopyTo(null, 0);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                collection.CopyTo(array, -1);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                collection.CopyTo(array, 2);
+            });
 
             headers.Add(knownStringHeader, "special");
             array = new string[0];
-            AssertExtensions.Throws<ArgumentException>(null, () => { collection.CopyTo(array, 0); });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    collection.CopyTo(array, 0);
+                }
+            );
 
             headers.Add(knownStringHeader, "special");
             headers.Add(knownStringHeader, "special");
             array = new string[1];
-            AssertExtensions.Throws<ArgumentException>(() => { collection.CopyTo(array, 0); });
+            AssertExtensions.Throws<ArgumentException>(() =>
+            {
+                collection.CopyTo(array, 0);
+            });
 
             headers.Add(knownStringHeader, "value1");
             array = new string[0];
-            AssertExtensions.Throws<ArgumentException>(() => { collection.CopyTo(array, 0); });
+            AssertExtensions.Throws<ArgumentException>(() =>
+            {
+                collection.CopyTo(array, 0);
+            });
 
             headers.Add(knownStringHeader, "value2");
             array = new string[1];
-            AssertExtensions.Throws<ArgumentException>(() => { collection.CopyTo(array, 0); });
+            AssertExtensions.Throws<ArgumentException>(() =>
+            {
+                collection.CopyTo(array, 0);
+            });
 
             array = new string[2];
-            AssertExtensions.Throws<ArgumentException>(() => { collection.CopyTo(array, 1); });
+            AssertExtensions.Throws<ArgumentException>(() =>
+            {
+                collection.CopyTo(array, 1);
+            });
         }
 
         [Fact]
         public void Remove_CallWithNullValue_Throw()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
-            Assert.Throws<ArgumentNullException>(() => { collection.Remove(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                collection.Remove(null);
+            });
         }
 
         [Fact]
         public void Remove_AddValuesThenCallRemove_ReturnsTrueWhenRemovingExistingValuesFalseOtherwise()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
             collection.Add(new Uri("http://www.example.org/1/"));
             collection.Add(new Uri("http://www.example.org/2/"));
             collection.Add(new Uri("http://www.example.org/3/"));
 
-            Assert.True(collection.Remove(new Uri("http://www.example.org/2/")), "Expected true for existing item.");
-            Assert.False(collection.Remove(new Uri("http://www.example.org/4/")),
-                "Expected false for non-existing item.");
+            Assert.True(
+                collection.Remove(new Uri("http://www.example.org/2/")),
+                "Expected true for existing item."
+            );
+            Assert.False(
+                collection.Remove(new Uri("http://www.example.org/4/")),
+                "Expected false for non-existing item."
+            );
         }
 
         [Fact]
@@ -433,7 +548,10 @@ namespace System.Net.Http.Tests
         public void GetEnumerator_AddSingleValueAndGetEnumerator_AllValuesReturned()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
             collection.Add(new Uri("http://www.example.org/"));
 
@@ -449,7 +567,10 @@ namespace System.Net.Http.Tests
         public void GetEnumerator_AddValuesAndGetEnumerator_AllValuesReturned()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
             collection.Add(new Uri("http://www.example.org/1/"));
             collection.Add(new Uri("http://www.example.org/2/"));
@@ -467,7 +588,10 @@ namespace System.Net.Http.Tests
         public void GetEnumerator_NoValues_EmptyEnumerator()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
             IEnumerator<Uri> enumerator = collection.GetEnumerator();
 
@@ -478,7 +602,10 @@ namespace System.Net.Http.Tests
         public void GetEnumerator_AddValuesAndGetEnumeratorFromInterface_AllValuesReturned()
         {
             MockHeaders headers = new MockHeaders();
-            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(knownUriHeader, headers);
+            HttpHeaderValueCollection<Uri> collection = new HttpHeaderValueCollection<Uri>(
+                knownUriHeader,
+                headers
+            );
 
             collection.Add(new Uri("http://www.example.org/1/"));
             collection.Add(new Uri("http://www.example.org/2/"));
@@ -563,15 +690,17 @@ namespace System.Net.Http.Tests
         public class MockException : Exception
         {
             public MockException() { }
-            public MockException(string message) : base(message) { }
-            public MockException(string message, Exception inner) : base(message, inner) { }
+
+            public MockException(string message)
+                : base(message) { }
+
+            public MockException(string message, Exception inner)
+                : base(message, inner) { }
         }
 
         private class MockHeaders : HttpHeaders
         {
-            public MockHeaders()
-            {
-            }
+            public MockHeaders() { }
         }
 
         private class MockHeaderParser : HttpHeaderParser
@@ -591,7 +720,12 @@ namespace System.Net.Http.Tests
                 this.valueType = valueType;
             }
 
-            public override bool TryParseValue(string value, object storeValue, ref int index, out object parsedValue)
+            public override bool TryParseValue(
+                string value,
+                object storeValue,
+                ref int index,
+                out object parsedValue
+            )
             {
                 parsedValue = null;
                 if (value == null)
@@ -606,6 +740,7 @@ namespace System.Net.Http.Tests
                 return true;
             }
         }
+
         private class MockComparer : IEqualityComparer
         {
             public int EqualsCount { get; private set; }

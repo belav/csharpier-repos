@@ -13,18 +13,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly SyntaxList<AttributeListSyntax> _attributeLists;
 
         public LambdaParameterSymbol(
-           LambdaSymbol owner,
-           SyntaxReference? syntaxRef,
-           SyntaxList<AttributeListSyntax> attributeLists,
-           TypeWithAnnotations parameterType,
-           int ordinal,
-           RefKind refKind,
-           ScopedKind scope,
-           string name,
-           bool isDiscard,
-           bool isParams,
-           Location location)
-           : base(owner, ordinal, parameterType, refKind, name, location, syntaxRef, isParams, isExtensionMethodThis: false, scope)
+            LambdaSymbol owner,
+            SyntaxReference? syntaxRef,
+            SyntaxList<AttributeListSyntax> attributeLists,
+            TypeWithAnnotations parameterType,
+            int ordinal,
+            RefKind refKind,
+            ScopedKind scope,
+            string name,
+            bool isDiscard,
+            bool isParams,
+            Location location
+        )
+            : base(
+                owner,
+                ordinal,
+                parameterType,
+                refKind,
+                name,
+                location,
+                syntaxRef,
+                isParams,
+                isExtensionMethodThis: false,
+                scope
+            )
         {
             _attributeLists = attributeLists;
             IsDiscard = isDiscard;
@@ -42,7 +54,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return false; }
         }
 
-        internal override OneOrMany<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations() => OneOrMany.Create(_attributeLists);
+        internal override OneOrMany<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations() =>
+            OneOrMany.Create(_attributeLists);
     }
 }
-

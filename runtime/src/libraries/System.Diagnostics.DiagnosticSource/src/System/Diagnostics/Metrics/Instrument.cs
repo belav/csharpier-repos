@@ -10,7 +10,8 @@ namespace System.Diagnostics.Metrics
     /// </summary>
     public abstract class Instrument
     {
-        internal static KeyValuePair<string, object?>[] EmptyTags => Array.Empty<KeyValuePair<string, object?>>();
+        internal static KeyValuePair<string, object?>[] EmptyTags =>
+            Array.Empty<KeyValuePair<string, object?>>();
 
         // The SyncObject is used to synchronize the following operations:
         //  - Instrument.Publish()
@@ -24,7 +25,8 @@ namespace System.Diagnostics.Metrics
 
         // We use LikedList here so we don't have to take any lock while iterating over the list as we always hold on a node which be either valid or null.
         // DiagLinkedList is thread safe for Add and Remove operations.
-        internal readonly DiagLinkedList<ListenerSubscription> _subscriptions = new DiagLinkedList<ListenerSubscription>();
+        internal readonly DiagLinkedList<ListenerSubscription> _subscriptions =
+            new DiagLinkedList<ListenerSubscription>();
 
         /// <summary>
         /// Protected constructor to initialize the common instrument properties like the meter, name, description, and unit.
@@ -34,7 +36,8 @@ namespace System.Diagnostics.Metrics
         /// <param name="name">The instrument name. cannot be null.</param>
         /// <param name="unit">Optional instrument unit of measurements.</param>
         /// <param name="description">Optional instrument description.</param>
-        protected Instrument(Meter meter, string name, string? unit, string? description) : this(meter, name, unit, description, null) { }
+        protected Instrument(Meter meter, string name, string? unit, string? description)
+            : this(meter, name, unit, description, null) { }
 
         /// <summary>
         /// Protected constructor to initialize the common instrument properties like the meter, name, description, and unit.
@@ -45,7 +48,13 @@ namespace System.Diagnostics.Metrics
         /// <param name="unit">Optional instrument unit of measurements.</param>
         /// <param name="description">Optional instrument description.</param>
         /// <param name="tags">Optional instrument tags.</param>
-        protected Instrument(Meter meter, string name, string? unit, string? description, IEnumerable<KeyValuePair<string, object?>>? tags)
+        protected Instrument(
+            Meter meter,
+            string name,
+            string? unit,
+            string? description,
+            IEnumerable<KeyValuePair<string, object?>>? tags
+        )
         {
             Meter = meter ?? throw new ArgumentNullException(nameof(meter));
             Name = name ?? throw new ArgumentNullException(nameof(name));
@@ -54,7 +63,9 @@ namespace System.Diagnostics.Metrics
             if (tags is not null)
             {
                 var tagList = new List<KeyValuePair<string, object?>>(tags);
-                tagList.Sort((left, right) => string.Compare(left.Key, right.Key, StringComparison.Ordinal));
+                tagList.Sort(
+                    (left, right) => string.Compare(left.Key, right.Key, StringComparison.Ordinal)
+                );
                 Tags = tagList;
             }
         }
@@ -141,23 +152,47 @@ namespace System.Diagnostics.Metrics
         internal static void ValidateTypeParameter<T>()
         {
             Type type = typeof(T);
-            if (type != typeof(byte)   && type != typeof(short) && type != typeof(int) && type != typeof(long) &&
-                type != typeof(double) && type != typeof(float) && type != typeof(decimal))
+            if (
+                type != typeof(byte)
+                && type != typeof(short)
+                && type != typeof(int)
+                && type != typeof(long)
+                && type != typeof(double)
+                && type != typeof(float)
+                && type != typeof(decimal)
+            )
             {
                 throw new InvalidOperationException(SR.Format(SR.UnsupportedType, type));
             }
         }
 
         // Called from MeterListener.EnableMeasurementEvents
-        internal object? EnableMeasurement(ListenerSubscription subscription, out bool oldStateStored)
+        internal object? EnableMeasurement(
+            ListenerSubscription subscription,
+            out bool oldStateStored
+        )
         {
             oldStateStored = false;
 
-            if (!_subscriptions.AddIfNotExist(subscription, (s1, s2) => object.ReferenceEquals(s1.Listener, s2.Listener)))
+            if (
+                !_subscriptions.AddIfNotExist(
+                    subscription,
+                    (s1, s2) => object.ReferenceEquals(s1.Listener, s2.Listener)
+                )
+            )
             {
-                ListenerSubscription oldSubscription = _subscriptions.Remove(subscription, (s1, s2) => object.ReferenceEquals(s1.Listener, s2.Listener));
-                _subscriptions.AddIfNotExist(subscription, (s1, s2) => object.ReferenceEquals(s1.Listener, s2.Listener));
-                oldStateStored = object.ReferenceEquals(oldSubscription.Listener, subscription.Listener);
+                ListenerSubscription oldSubscription = _subscriptions.Remove(
+                    subscription,
+                    (s1, s2) => object.ReferenceEquals(s1.Listener, s2.Listener)
+                );
+                _subscriptions.AddIfNotExist(
+                    subscription,
+                    (s1, s2) => object.ReferenceEquals(s1.Listener, s2.Listener)
+                );
+                oldStateStored = object.ReferenceEquals(
+                    oldSubscription.Listener,
+                    subscription.Listener
+                );
                 return oldSubscription.State;
             }
 
@@ -165,7 +200,13 @@ namespace System.Diagnostics.Metrics
         }
 
         // Called from MeterListener.DisableMeasurementEvents
-        internal object? DisableMeasurements(MeterListener listener) => _subscriptions.Remove(new ListenerSubscription(listener), (s1, s2) => object.ReferenceEquals(s1.Listener, s2.Listener)).State;
+        internal object? DisableMeasurements(MeterListener listener) =>
+            _subscriptions
+                .Remove(
+                    new ListenerSubscription(listener),
+                    (s1, s2) => object.ReferenceEquals(s1.Listener, s2.Listener)
+                )
+                .State;
 
         internal virtual void Observe(MeterListener listener)
         {

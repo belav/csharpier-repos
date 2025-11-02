@@ -36,8 +36,8 @@ public interface IStoreStoredProcedureParameter : IColumnBase
     /// </summary>
     /// <param name="entityType">An entity type.</param>
     /// <returns>The property mapping or <see langword="null" /> if not found.</returns>
-    IStoredProcedureParameterMapping? FindParameterMapping(IReadOnlyEntityType entityType)
-        => (IStoredProcedureParameterMapping?)FindColumnMapping(entityType);
+    IStoredProcedureParameterMapping? FindParameterMapping(IReadOnlyEntityType entityType) =>
+        (IStoredProcedureParameterMapping?)FindColumnMapping(entityType);
 
     /// <summary>
     ///     <para>

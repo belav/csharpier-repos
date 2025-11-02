@@ -9,15 +9,15 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
+using Microsoft.CodeAnalysis.CompilerServer;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Test.Utilities;
+using Microsoft.CodeAnalysis.VisualBasic;
 using Roslyn.Test.Utilities;
 using Xunit;
 using static Roslyn.Test.Utilities.SharedResourceHelpers;
-using System.Reflection;
-using Microsoft.CodeAnalysis.CompilerServer;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.VisualBasic;
 
 namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 {
@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
     {
         private static readonly string s_libDirectory = Environment.GetEnvironmentVariable("LIB");
         private readonly string _baseDirectory = TempRoot.Root;
-        private const string HelloWorldCS = @"using System;
+        private const string HelloWorldCS =
+            @"using System;
 
 class C
 {
@@ -35,7 +36,8 @@ class C
     }
 }";
 
-        private const string HelloWorldVB = @"Imports System
+        private const string HelloWorldVB =
+            @"Imports System
 Class C
     Shared Sub Main(args As String())
         Console.WriteLine(""Hello, world"")
@@ -46,7 +48,9 @@ End Class
         [ConditionalFact(typeof(DesktopOnly))]
         public void CSharpTrivialMetadataCaching()
         {
-            var loader = DefaultAnalyzerAssemblyLoader.CreateNonLockingLoader(Temp.CreateDirectory().Path);
+            var loader = DefaultAnalyzerAssemblyLoader.CreateNonLockingLoader(
+                Temp.CreateDirectory().Path
+            );
             var filelist = new List<string>();
 
             // Do the following compilation twice.
@@ -66,26 +70,32 @@ End Class
                     CompilerServerHost.SharedAssemblyReferenceProvider,
                     responseFile: null,
                     new[] { "/nologo", "/touchedfiles:" + touchedBase, source1 },
-                    new BuildPaths(clientDirectory, _baseDirectory, RuntimeEnvironment.GetRuntimeDirectory(), Path.GetTempPath()),
+                    new BuildPaths(
+                        clientDirectory,
+                        _baseDirectory,
+                        RuntimeEnvironment.GetRuntimeDirectory(),
+                        Path.GetTempPath()
+                    ),
                     s_libDirectory,
                     loader,
-                    driverCache: null);
+                    driverCache: null
+                );
 
                 List<string> expectedReads;
                 List<string> expectedWrites;
-                BuildTouchedFiles(cmd,
-                                  Path.ChangeExtension(source1, "exe"),
-                                  out expectedReads,
-                                  out expectedWrites);
+                BuildTouchedFiles(
+                    cmd,
+                    Path.ChangeExtension(source1, "exe"),
+                    out expectedReads,
+                    out expectedWrites
+                );
 
                 var exitCode = cmd.Run(outWriter);
 
                 Assert.Equal(string.Empty, outWriter.ToString().Trim());
                 Assert.Equal(0, exitCode);
 
-                AssertTouchedFilesEqual(expectedReads,
-                                        expectedWrites,
-                                        touchedBase);
+                AssertTouchedFilesEqual(expectedReads, expectedWrites, touchedBase);
             }
 
             foreach (String f in filelist)
@@ -97,7 +107,9 @@ End Class
         [ConditionalFact(typeof(DesktopOnly))]
         public void VisualBasicTrivialMetadataCaching()
         {
-            var loader = DefaultAnalyzerAssemblyLoader.CreateNonLockingLoader(Temp.CreateDirectory().Path);
+            var loader = DefaultAnalyzerAssemblyLoader.CreateNonLockingLoader(
+                Temp.CreateDirectory().Path
+            );
             var filelist = new List<string>();
 
             // Do the following compilation twice.
@@ -117,26 +129,32 @@ End Class
                     CompilerServerHost.SharedAssemblyReferenceProvider,
                     responseFile: null,
                     new[] { "/nologo", "/touchedfiles:" + touchedBase, source1 },
-                    new BuildPaths(clientDirectory, _baseDirectory, RuntimeEnvironment.GetRuntimeDirectory(), Path.GetTempPath()),
+                    new BuildPaths(
+                        clientDirectory,
+                        _baseDirectory,
+                        RuntimeEnvironment.GetRuntimeDirectory(),
+                        Path.GetTempPath()
+                    ),
                     s_libDirectory,
                     loader,
-                    driverCache: null);
+                    driverCache: null
+                );
 
                 List<string> expectedReads;
                 List<string> expectedWrites;
-                BuildTouchedFiles(cmd,
-                                  Path.ChangeExtension(source1, "exe"),
-                                  out expectedReads,
-                                  out expectedWrites);
+                BuildTouchedFiles(
+                    cmd,
+                    Path.ChangeExtension(source1, "exe"),
+                    out expectedReads,
+                    out expectedWrites
+                );
 
                 var exitCode = cmd.Run(outWriter);
 
                 Assert.Equal(string.Empty, outWriter.ToString().Trim());
                 Assert.Equal(0, exitCode);
 
-                AssertTouchedFilesEqual(expectedReads,
-                                        expectedWrites,
-                                        touchedBase);
+                AssertTouchedFilesEqual(expectedReads, expectedWrites, touchedBase);
             }
 
             foreach (string f in filelist)
@@ -151,15 +169,22 @@ End Class
         /// so this method must be called before the execution of
         /// Csc.Run.
         /// </summary>
-        private static void BuildTouchedFiles(CommonCompiler cmd,
-                                              string outputPath,
-                                              out List<string> expectedReads,
-                                              out List<string> expectedWrites)
+        private static void BuildTouchedFiles(
+            CommonCompiler cmd,
+            string outputPath,
+            out List<string> expectedReads,
+            out List<string> expectedWrites
+        )
         {
             expectedReads = new List<string>();
             expectedReads.AddRange(cmd.Arguments.MetadataReferences.Select(r => r.Reference));
 
-            if (cmd.Arguments is VisualBasicCommandLineArguments { DefaultCoreLibraryReference: { } reference })
+            if (
+                cmd.Arguments is VisualBasicCommandLineArguments
+                {
+                    DefaultCoreLibraryReference: { } reference
+                }
+            )
             {
                 expectedReads.Add(reference.Reference);
             }
@@ -178,18 +203,17 @@ End Class
         private static void AssertTouchedFilesEqual(
             List<string> expectedReads,
             List<string> expectedWrites,
-            string touchedFilesBase)
+            string touchedFilesBase
+        )
         {
             var touchedReadPath = touchedFilesBase + ".read";
             var touchedWritesPath = touchedFilesBase + ".write";
 
             var expected = expectedReads.Select(s => s.ToUpperInvariant()).OrderBy(s => s);
-            Assert.Equal(string.Join("\r\n", expected),
-                         File.ReadAllText(touchedReadPath).Trim());
+            Assert.Equal(string.Join("\r\n", expected), File.ReadAllText(touchedReadPath).Trim());
 
             expected = expectedWrites.Select(s => s.ToUpperInvariant()).OrderBy(s => s);
-            Assert.Equal(string.Join("\r\n", expected),
-                         File.ReadAllText(touchedWritesPath).Trim());
+            Assert.Equal(string.Join("\r\n", expected), File.ReadAllText(touchedWritesPath).Trim());
         }
     }
 }

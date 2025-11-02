@@ -1,4 +1,4 @@
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,46 +29,39 @@ using System.Collections.Generic;
 using System.Security;
 using System.Threading;
 
-namespace System.Windows.Threading {
+namespace System.Windows.Threading
+{
+    public class DispatcherFrame : DispatcherObject
+    {
+        DispatcherFrame parent_frame;
 
-	public class DispatcherFrame : DispatcherObject  {
-		DispatcherFrame parent_frame;
-		
-		internal bool exit_on_request;
-		bool cont;
-		internal Dispatcher dispatcher;
-		
-		public DispatcherFrame ()
-		{
-			exit_on_request = true;
-			cont = true;
-		}
+        internal bool exit_on_request;
+        bool cont;
+        internal Dispatcher dispatcher;
 
-		public DispatcherFrame (bool exitWhenRequested)
-		{
-			exit_on_request = exitWhenRequested;
-			cont = true;
-		}
+        public DispatcherFrame()
+        {
+            exit_on_request = true;
+            cont = true;
+        }
 
-		public bool Continue {
-			get {
-				return cont;
-			}
+        public DispatcherFrame(bool exitWhenRequested)
+        {
+            exit_on_request = exitWhenRequested;
+            cont = true;
+        }
 
-			[SecurityCritical]
-			set {
-				cont = value;
-			}
-		}
+        public bool Continue
+        {
+            get { return cont; }
+            [SecurityCritical]
+            set { cont = value; }
+        }
 
-		internal DispatcherFrame ParentFrame {
-			get {
-				return parent_frame;
-			}
-
-			set {
-				parent_frame = value;
-			}
-		}
-	}
+        internal DispatcherFrame ParentFrame
+        {
+            get { return parent_frame; }
+            set { parent_frame = value; }
+        }
+    }
 }

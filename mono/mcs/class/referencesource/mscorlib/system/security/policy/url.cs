@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 //  Url.cs
@@ -12,12 +12,13 @@
 //  Url is an IIdentity representing url internet sites.
 //
 
-namespace System.Security.Policy {
+namespace System.Security.Policy
+{
+    using System.Diagnostics.Contracts;
     using System.IO;
+    using System.Runtime.Serialization;
     using System.Security.Util;
     using UrlIdentityPermission = System.Security.Permissions.UrlIdentityPermission;
-    using System.Runtime.Serialization;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
@@ -25,22 +26,22 @@ namespace System.Security.Policy {
     {
         private URLString m_url;
 
-        internal Url( String name, bool parsed )
+        internal Url(String name, bool parsed)
         {
             if (name == null)
-                throw new ArgumentNullException( "name" );
+                throw new ArgumentNullException("name");
             Contract.EndContractBlock();
 
-            m_url = new URLString( name, parsed );
+            m_url = new URLString(name, parsed);
         }
 
-        public Url( String name )
+        public Url(String name)
         {
             if (name == null)
-                throw new ArgumentNullException( "name" );
+                throw new ArgumentNullException("name");
             Contract.EndContractBlock();
 
-            m_url = new URLString( name );
+            m_url = new URLString(name);
         }
 
         private Url(Url url)
@@ -59,9 +60,9 @@ namespace System.Security.Policy {
             return m_url;
         }
 
-        public IPermission CreateIdentityPermission( Evidence evidence )
+        public IPermission CreateIdentityPermission(Evidence evidence)
         {
-            return new UrlIdentityPermission( m_url );
+            return new UrlIdentityPermission(m_url);
         }
 
         public override bool Equals(Object o)
@@ -93,15 +94,18 @@ namespace System.Security.Policy {
 #if FEATURE_CAS_POLICY
         internal SecurityElement ToXml()
         {
-            SecurityElement root = new SecurityElement( "System.Security.Policy.Url" );
-            // If you hit this assert then most likely you are trying to change the name of this class. 
+            SecurityElement root = new SecurityElement("System.Security.Policy.Url");
+            // If you hit this assert then most likely you are trying to change the name of this class.
             // This is ok as long as you change the hard coded string above and change the assert below.
-            Contract.Assert( this.GetType().FullName.Equals( "System.Security.Policy.Url" ), "Class name changed!" );
+            Contract.Assert(
+                this.GetType().FullName.Equals("System.Security.Policy.Url"),
+                "Class name changed!"
+            );
 
-            root.AddAttribute( "version", "1" );
+            root.AddAttribute("version", "1");
 
             if (m_url != null)
-                root.AddChild( new SecurityElement( "Url", m_url.ToString() ) );
+                root.AddChild(new SecurityElement("Url", m_url.ToString()));
 
             return root;
         }

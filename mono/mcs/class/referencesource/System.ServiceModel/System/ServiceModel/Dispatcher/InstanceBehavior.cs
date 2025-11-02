@@ -15,7 +15,8 @@ namespace System.ServiceModel.Dispatcher
 
     class InstanceBehavior
     {
-        const BindingFlags DefaultBindingFlags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public;
+        const BindingFlags DefaultBindingFlags =
+            BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public;
 
         bool useSession;
         ServiceHostBase host;
@@ -28,16 +29,24 @@ namespace System.ServiceModel.Dispatcher
         bool isSynchronized;
         ImmutableDispatchRuntime immutableRuntime;
 
-        internal InstanceBehavior(DispatchRuntime dispatch, ImmutableDispatchRuntime immutableRuntime)
+        internal InstanceBehavior(
+            DispatchRuntime dispatch,
+            ImmutableDispatchRuntime immutableRuntime
+        )
         {
             this.useSession = dispatch.ChannelDispatcher.Session;
             this.immutableRuntime = immutableRuntime;
-            this.host = (dispatch.ChannelDispatcher == null) ? null : dispatch.ChannelDispatcher.Host;
-            this.initializers = EmptyArray<IInstanceContextInitializer>.ToArray(dispatch.InstanceContextInitializers);
+            this.host =
+                (dispatch.ChannelDispatcher == null) ? null : dispatch.ChannelDispatcher.Host;
+            this.initializers = EmptyArray<IInstanceContextInitializer>.ToArray(
+                dispatch.InstanceContextInitializers
+            );
             this.provider = dispatch.InstanceProvider;
             this.singleton = dispatch.SingletonInstanceContext;
-            this.transactionAutoCompleteOnSessionClose = dispatch.TransactionAutoCompleteOnSessionClose;
-            this.releaseServiceInstanceOnTransactionComplete = dispatch.ReleaseServiceInstanceOnTransactionComplete;
+            this.transactionAutoCompleteOnSessionClose =
+                dispatch.TransactionAutoCompleteOnSessionClose;
+            this.releaseServiceInstanceOnTransactionComplete =
+                dispatch.ReleaseServiceInstanceOnTransactionComplete;
             this.isSynchronized = (dispatch.ConcurrencyMode != ConcurrencyMode.Multiple);
             this.instanceContextProvider = dispatch.InstanceContextProvider;
 
@@ -51,14 +60,23 @@ namespace System.ServiceModel.Dispatcher
 
                 if (this.singleton == null)
                 {
-                    if (dispatch.Type != null && (dispatch.Type.IsAbstract || dispatch.Type.IsInterface))
+                    if (
+                        dispatch.Type != null
+                        && (dispatch.Type.IsAbstract || dispatch.Type.IsInterface)
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxServiceTypeNotCreatable)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxServiceTypeNotCreatable)
+                            )
+                        );
                     }
 
                     if (constructor == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxNoDefaultConstructor)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.SFxNoDefaultConstructor))
+                        );
                     }
                 }
 
@@ -67,7 +85,10 @@ namespace System.ServiceModel.Dispatcher
                     if (this.singleton == null || !this.singleton.IsWellKnown)
                     {
                         InvokerUtil util = new InvokerUtil();
-                        CreateInstanceDelegate creator = util.GenerateCreateInstanceDelegate(dispatch.Type, constructor);
+                        CreateInstanceDelegate creator = util.GenerateCreateInstanceDelegate(
+                            dispatch.Type,
+                            constructor
+                        );
                         this.provider = new InstanceProvider(creator);
                     }
                 }
@@ -81,26 +102,17 @@ namespace System.ServiceModel.Dispatcher
 
         internal bool TransactionAutoCompleteOnSessionClose
         {
-            get
-            {
-                return this.transactionAutoCompleteOnSessionClose;
-            }
+            get { return this.transactionAutoCompleteOnSessionClose; }
         }
 
         internal bool ReleaseServiceInstanceOnTransactionComplete
         {
-            get
-            {
-                return this.releaseServiceInstanceOnTransactionComplete;
-            }
+            get { return this.releaseServiceInstanceOnTransactionComplete; }
         }
 
         internal IInstanceContextProvider InstanceContextProvider
         {
-            get
-            {
-                return this.instanceContextProvider;
-            }
+            get { return this.instanceContextProvider; }
         }
 
         internal void AfterReply(ref MessageRpc rpc, ErrorBehavior error)
@@ -118,10 +130,12 @@ namespace System.ServiceModel.Dispatcher
                             context.ReleaseServiceInstance();
                         }
                     }
-                    else if (releaseServiceInstanceOnTransactionComplete &&
-                            this.isSynchronized &&
-                            rpc.transaction != null &&
-                            (rpc.transaction.IsCompleted || (rpc.Error != null)))
+                    else if (
+                        releaseServiceInstanceOnTransactionComplete
+                        && this.isSynchronized
+                        && rpc.transaction != null
+                        && (rpc.transaction.IsCompleted || (rpc.Error != null))
+                    )
                     {
                         if (context.State == CommunicationState.Opened)
                         {
@@ -129,9 +143,11 @@ namespace System.ServiceModel.Dispatcher
                         }
                         if (DiagnosticUtility.ShouldTraceInformation)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Information,
-                                                                         TraceCode.TxReleaseServiceInstanceOnCompletion,
-                                                                         SR.GetString(SR.TraceCodeTxReleaseServiceInstanceOnCompletion, "*"));
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Information,
+                                TraceCode.TxReleaseServiceInstanceOnCompletion,
+                                SR.GetString(SR.TraceCodeTxReleaseServiceInstanceOnCompletion, "*")
+                            );
                         }
                     }
                 }
@@ -164,14 +180,19 @@ namespace System.ServiceModel.Dispatcher
             if (InstanceContextProviderBase.IsProviderSingleton(this.instanceContextProvider))
                 return false;
 
-            if (InstanceContextProviderBase.IsProviderPerCall(this.instanceContextProvider) ||
-                InstanceContextProviderBase.IsProviderSessionful(this.instanceContextProvider))
+            if (
+                InstanceContextProviderBase.IsProviderPerCall(this.instanceContextProvider)
+                || InstanceContextProviderBase.IsProviderSessionful(this.instanceContextProvider)
+            )
                 return true;
 
             //User provided InstanceContextProvider. Call the provider to check for idle.
             if (!this.instanceContextProvider.IsIdle(instanceContext))
             {
-                this.instanceContextProvider.NotifyIdle(InstanceContext.NotifyIdleCallback, instanceContext);
+                this.instanceContextProvider.NotifyIdle(
+                    InstanceContext.NotifyIdleCallback,
+                    instanceContext
+                );
                 return false;
             }
             return true;
@@ -182,7 +203,8 @@ namespace System.ServiceModel.Dispatcher
             if (rpc.InstanceContext == null)
             {
                 rpc.InstanceContext = new InstanceContext(rpc.Host, false);
-                rpc.InstanceContext.ServiceThrottle = rpc.channelHandler.InstanceContextServiceThrottle;
+                rpc.InstanceContext.ServiceThrottle =
+                    rpc.channelHandler.InstanceContextServiceThrottle;
                 rpc.MessageRpcOwnsInstanceContextThrottle = false;
             }
 
@@ -211,7 +233,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.provider == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxNoDefaultConstructor)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SFxNoDefaultConstructor))
+                );
             }
 
             return this.provider.GetInstance(instanceContext);
@@ -221,7 +245,10 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.provider == null)
             {
-                throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxNoDefaultConstructor)), request);
+                throw TraceUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SFxNoDefaultConstructor)),
+                    request
+                );
             }
 
             return this.provider.GetInstance(instanceContext, request);
@@ -234,8 +261,13 @@ namespace System.ServiceModel.Dispatcher
 
             if (current != null && current.InternalServiceChannel != null)
             {
-                IContextChannel transparentProxy = (IContextChannel)current.InternalServiceChannel.Proxy;
-                this.instanceContextProvider.InitializeInstanceContext(instanceContext, message, transparentProxy);
+                IContextChannel transparentProxy = (IContextChannel)
+                    current.InternalServiceChannel.Proxy;
+                this.instanceContextProvider.InitializeInstanceContext(
+                    instanceContext,
+                    message,
+                    transparentProxy
+                );
             }
 
             for (int i = 0; i < this.initializers.Length; i++)

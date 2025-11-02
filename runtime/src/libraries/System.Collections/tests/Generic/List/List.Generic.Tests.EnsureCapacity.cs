@@ -37,7 +37,10 @@ namespace System.Collections.Tests
         public void EnsureCapacity_NegativeCapacityRequested_Throws()
         {
             var list = new List<T>();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => list.EnsureCapacity(-1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => list.EnsureCapacity(-1)
+            );
         }
 
         public static IEnumerable<object[]> EnsureCapacity_LargeCapacity_Throws_MemberData()
@@ -57,7 +60,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [InlineData(5)]
-        public void EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCurrent_CapacityUnchanged(int currentCapacity)
+        public void EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCurrent_CapacityUnchanged(
+            int currentCapacity
+        )
         {
             var list = new List<T>(currentCapacity);
 
@@ -70,7 +75,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCount_CapacityUnchanged(int count)
+        public void EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCount_CapacityUnchanged(
+            int count
+        )
         {
             List<T> list = GenericListFactory(count);
             var currentCapacity = list.Capacity;

@@ -1,14 +1,15 @@
 ﻿// <copyright file="KeyedPriorityQueue.cs" company="Microsoft">Copyright (c) Microsoft Corporation.  All rights reserved.</copyright>
 
 using System;
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace System.Workflow.Runtime
 {
-    internal sealed class KeyedPriorityQueueHeadChangedEventArgs<T> : EventArgs where T : class
+    internal sealed class KeyedPriorityQueueHeadChangedEventArgs<T> : EventArgs
+        where T : class
     {
         private T oldFirstElement;
         private T newFirstElement;
@@ -19,8 +20,14 @@ namespace System.Workflow.Runtime
             this.newFirstElement = newFirstElement;
         }
 
-        public T OldFirstElement { get { return oldFirstElement; } }
-        public T NewFirstElement { get { return newFirstElement; } }
+        public T OldFirstElement
+        {
+            get { return oldFirstElement; }
+        }
+        public T NewFirstElement
+        {
+            get { return newFirstElement; }
+        }
     }
 
     /// <summary> Combines the functionality of a dictionary and a heap-sorted priority queue.
@@ -31,7 +38,8 @@ namespace System.Workflow.Runtime
     /// <typeparam name="V">Value</typeparam>
     /// <typeparam name="P">Priority</typeparam>
     [Serializable]
-    internal class KeyedPriorityQueue<K, V, P> where V : class
+    internal class KeyedPriorityQueue<K, V, P>
+        where V : class
     {
         private List<HeapNode<K, V, P>> heap = new List<HeapNode<K, V, P>>();
         private int size;
@@ -42,7 +50,7 @@ namespace System.Workflow.Runtime
 
         public KeyedPriorityQueue()
         {
-            heap.Add(default(HeapNode<K, V, P>));       // Dummy zeroth element, heap is 1-based
+            heap.Add(default(HeapNode<K, V, P>)); // Dummy zeroth element, heap is 1-based
         }
 
         public void Enqueue(K key, V value, P priority)
@@ -83,7 +91,6 @@ namespace System.Workflow.Runtime
             Heapify(1);
             return oldHead;
         }
-
 
         public V Remove(K key)
         {
@@ -202,12 +209,14 @@ namespace System.Workflow.Runtime
                 Swap(i, highest);
                 Heapify(highest);
             }
-
         }
 
         private void Swap(int i, int j)
         {
-            Debug.Assert(i >= 1 || j >= 1 || i <= size || j <= size, "Index out of range: i = " + i + ", j = " + j + ", size = " + size);
+            Debug.Assert(
+                i >= 1 || j >= 1 || i <= size || j <= size,
+                "Index out of range: i = " + i + ", j = " + j + ", size = " + size
+            );
 
             HeapNode<K, V, P> temp = heap[i];
             heap[i] = heap[j];
