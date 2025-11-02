@@ -424,7 +424,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<EntityCompositeKey>()
                     .Include(e => e.LeafSkipFull)
-                    .ThenInclude(e => e.OneSkip),
+                        .ThenInclude(e => e.OneSkip),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -444,9 +444,9 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<EntityThree>()
                     .Include(e => e.OneSkipPayloadFull)
-                    .ThenInclude(e => e.Reference)
+                        .ThenInclude(e => e.Reference)
                     .Include(e => e.OneSkipPayloadFull)
-                    .ThenInclude(e => e.SelfSkipPayloadRight),
+                        .ThenInclude(e => e.SelfSkipPayloadRight),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -485,7 +485,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<EntityThree>()
                     .Include(e => e.OneSkipPayloadFullShared)
-                    .ThenInclude(e => e.ThreeSkipPayloadFullShared),
+                        .ThenInclude(e => e.ThreeSkipPayloadFullShared),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -621,7 +621,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<EntityRoot>()
                     .Include(e => e.ThreeSkipShared)
-                    .ThenInclude(e => e.OneSkipPayloadFullShared.Where(i => i.Id < 10)),
+                        .ThenInclude(e => e.OneSkipPayloadFullShared.Where(i => i.Id < 10)),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -643,7 +643,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<EntityRoot>()
                     .Include(e => e.CompositeKeySkipShared)
-                    .ThenInclude(e => e.ThreeSkipFull.OrderBy(i => i.Id).Skip(1).Take(2)),
+                        .ThenInclude(e => e.ThreeSkipFull.OrderBy(i => i.Id).Skip(1).Take(2)),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -667,7 +667,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<EntityLeaf>()
                     .Include(e => e.CompositeKeySkipFull.Where(i => i.Key1 < 5))
-                    .ThenInclude(e => e.TwoSkipShared),
+                        .ThenInclude(e => e.TwoSkipShared),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -693,7 +693,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<EntityOne>()
                     .Include(e => e.TwoSkip.OrderBy(i => i.Id).Skip(1).Take(2))
-                    .ThenInclude(e => e.ThreeSkipFull.Where(i => i.Id < 10)),
+                        .ThenInclude(e => e.ThreeSkipFull.Where(i => i.Id < 10)),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -755,7 +755,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<EntityOne>()
                     .Include(e => e.TwoSkip.Where(i => i.Id < 10))
-                    .ThenInclude(e => e.ThreeSkipFull.OrderBy(i => i.Id).Skip(1).Take(2)),
+                        .ThenInclude(e => e.ThreeSkipFull.OrderBy(i => i.Id).Skip(1).Take(2)),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -780,9 +780,9 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<EntityTwo>()
                     .Include(e => e.OneSkip.Where(i => i.Id < 10))
-                    .ThenInclude(e => e.Reference)
+                        .ThenInclude(e => e.Reference)
                     .Include(e => e.OneSkip)
-                    .ThenInclude(e => e.Collection),
+                        .ThenInclude(e => e.Collection),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -806,9 +806,9 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<EntityThree>()
                     .Include(e => e.OneSkipPayloadFull.Where(i => i.Id < 10))
-                    .ThenInclude(e => e.TwoSkip.OrderBy(e => e.Id).Skip(1).Take(2))
+                        .ThenInclude(e => e.TwoSkip.OrderBy(e => e.Id).Skip(1).Take(2))
                     .Include(e => e.OneSkipPayloadFull)
-                    .ThenInclude(e => e.BranchSkip.Where(e => e.Id < 20)),
+                        .ThenInclude(e => e.BranchSkip.Where(e => e.Id < 20)),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -848,9 +848,9 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                         ss =>
                             ss.Set<EntityTwo>()
                                 .Include(e => e.OneSkip.Where(i => i.Id < 10))
-                                .ThenInclude(e => e.BranchSkip)
+                                    .ThenInclude(e => e.BranchSkip)
                                 .Include(e => e.OneSkip.Where(i => i.Id < 20))
-                                .ThenInclude(e => e.ThreeSkipPayloadFull)
+                                    .ThenInclude(e => e.ThreeSkipPayloadFull)
                     )
                 )
             )
@@ -876,11 +876,11 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                         ss =>
                             ss.Set<EntityCompositeKey>()
                                 .Include(e => e.TwoSkipShared)
-                                .ThenInclude(e => e.OneSkip.Where(i => i.Id < 10))
-                                .ThenInclude(e => e.BranchSkip)
+                                    .ThenInclude(e => e.OneSkip.Where(i => i.Id < 10))
+                                        .ThenInclude(e => e.BranchSkip)
                                 .Include(e => e.TwoSkipShared)
-                                .ThenInclude(e => e.OneSkip.Where(i => i.Id < 20))
-                                .ThenInclude(e => e.ThreeSkipPayloadFull)
+                                    .ThenInclude(e => e.OneSkip.Where(i => i.Id < 20))
+                                        .ThenInclude(e => e.ThreeSkipPayloadFull)
                     )
                 )
             )
@@ -898,7 +898,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<EntityThree>()
                     .Include(e => e.OneSkipPayloadFull.Where(i => i.Id > 15))
-                    .ThenInclude(e => e.Collection.Where(i => i.Id < 5)),
+                        .ThenInclude(e => e.Collection.Where(i => i.Id < 5)),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -925,7 +925,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<EntityOne>()
                     .Include(e => e.Collection.Where(i => i.Id > 15))
-                    .ThenInclude(e => e.ThreeSkipFull.Where(i => i.Id < 5)),
+                        .ThenInclude(e => e.ThreeSkipFull.Where(i => i.Id < 5)),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -950,10 +950,10 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<EntityOne>()
                     .Include(e => e.ThreeSkipPayloadFull)
-                    .ThenInclude(e => e.CollectionInverse)
+                        .ThenInclude(e => e.CollectionInverse)
                     .Include(e => e.JoinThreePayloadFull)
-                    .ThenInclude(e => e.Three)
-                    .ThenInclude(e => e.ReferenceInverse),
+                        .ThenInclude(e => e.Three)
+                            .ThenInclude(e => e.ReferenceInverse),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -991,11 +991,11 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<EntityThree>()
                     .Include(e => e.OneSkipPayloadFull)
-                    .ThenInclude(e => e.Collection.Where(i => i.Id < 5))
+                        .ThenInclude(e => e.Collection.Where(i => i.Id < 5))
                     .Include(e => e.JoinOnePayloadFull)
-                    .ThenInclude(e => e.One)
-                    .ThenInclude(e => e.Collection)
-                    .ThenInclude(e => e.Reference),
+                        .ThenInclude(e => e.One)
+                            .ThenInclude(e => e.Collection)
+                                .ThenInclude(e => e.Reference),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -1047,10 +1047,10 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                         ss =>
                             ss.Set<EntityThree>()
                                 .Include(e => e.OneSkipPayloadFull)
-                                .ThenInclude(e => e.Collection.Where(i => i.Id < 20))
+                                    .ThenInclude(e => e.Collection.Where(i => i.Id < 20))
                                 .Include(e => e.JoinOnePayloadFull)
-                                .ThenInclude(e => e.One)
-                                .ThenInclude(e => e.Collection.Where(i => i.Id < 10))
+                                    .ThenInclude(e => e.One)
+                                        .ThenInclude(e => e.Collection.Where(i => i.Id < 10))
                     )
                 )
             )
@@ -1510,7 +1510,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<UnidirectionalEntityLeaf>()
                     .Include(e => e.CompositeKeySkipFull.Where(i => i.Key1 < 5))
-                    .ThenInclude(e => e.TwoSkipShared),
+                        .ThenInclude(e => e.TwoSkipShared),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -1534,9 +1534,9 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<EntityTwo>()
                     .Include(e => e.OneSkip.Where(i => i.Id < 10))
-                    .ThenInclude(e => e.Reference)
+                        .ThenInclude(e => e.Reference)
                     .Include(e => e.OneSkip)
-                    .ThenInclude(e => e.Collection)
+                        .ThenInclude(e => e.Collection)
         );
 
     [ConditionalTheory]
@@ -1563,7 +1563,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                                         )
                                         .Where(i => i.Id < 10)
                                 )
-                                .ThenInclude(e => e.BranchSkip)
+                                    .ThenInclude(e => e.BranchSkip)
                                 .Include(e =>
                                     EF.Property<IEnumerable<UnidirectionalEntityOne>>(
                                             e,
@@ -1599,8 +1599,8 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss.Set<UnidirectionalEntityOne>()
                     .Include("ThreeSkipPayloadFull.CollectionInverse")
                     .Include(e => e.JoinThreePayloadFull)
-                    .ThenInclude(e => e.Three)
-                    .ThenInclude(e => e.ReferenceInverse)
+                        .ThenInclude(e => e.Three)
+                            .ThenInclude(e => e.ReferenceInverse)
         );
 
     [ConditionalTheory]

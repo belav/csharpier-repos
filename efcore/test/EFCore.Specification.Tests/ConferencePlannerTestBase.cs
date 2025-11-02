@@ -238,7 +238,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
         {
             var attendee = await _db
                 .Attendees.Include(a => a.SessionsAttendees)
-                .ThenInclude(sa => sa.Session)
+                    .ThenInclude(sa => sa.Session)
                 .SingleOrDefaultAsync(a => a.UserName == username);
 
             return attendee?.MapAttendeeResponse();
@@ -249,7 +249,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                 .Sessions.AsNoTracking()
                 .Include(s => s.Track)
                 .Include(s => s.SessionSpeakers)
-                .ThenInclude(ss => ss.Speaker)
+                    .ThenInclude(ss => ss.Speaker)
                 .Where(s => s.SessionAttendees.Any(sa => sa.Attendee.UserName == username))
                 .Select(m => m.MapSessionResponse())
                 .ToListAsync();
@@ -283,7 +283,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
         {
             var attendee = await _db
                 .Attendees.Include(a => a.SessionsAttendees)
-                .ThenInclude(sa => sa.Session)
+                    .ThenInclude(sa => sa.Session)
                 .SingleOrDefaultAsync(a => a.UserName == username);
 
             if (attendee == null)
@@ -388,13 +388,13 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
             var sessionResults = await _db
                 .Sessions.Include(s => s.Track)
                 .Include(s => s.SessionSpeakers)
-                .ThenInclude(ss => ss.Speaker)
+                    .ThenInclude(ss => ss.Speaker)
                 .Where(s => s.Title.Contains(query) || s.Track.Name.Contains(query))
                 .ToListAsync();
 
             var speakerResults = await _db
                 .Speakers.Include(s => s.SessionSpeakers)
-                .ThenInclude(ss => ss.Session)
+                    .ThenInclude(ss => ss.Session)
                 .Where(s =>
                     s.Name.Contains(query) || s.Bio.Contains(query) || s.WebSite.Contains(query)
                 )
@@ -574,7 +574,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                 .Sessions.AsNoTracking()
                 .Include(s => s.Track)
                 .Include(s => s.SessionSpeakers)
-                .ThenInclude(ss => ss.Speaker)
+                    .ThenInclude(ss => ss.Speaker)
                 .Select(m => m.MapSessionResponse())
                 .ToListAsync();
 
@@ -584,7 +584,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                 .Sessions.AsNoTracking()
                 .Include(s => s.Track)
                 .Include(s => s.SessionSpeakers)
-                .ThenInclude(ss => ss.Speaker)
+                    .ThenInclude(ss => ss.Speaker)
                 .SingleOrDefaultAsync(s => s.Id == id);
 
             return session?.MapSessionResponse();
@@ -696,7 +696,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
             await _db
                 .Speakers.AsNoTracking()
                 .Include(s => s.SessionSpeakers)
-                .ThenInclude(ss => ss.Session)
+                    .ThenInclude(ss => ss.Session)
                 .Select(s => s.MapSpeakerResponse())
                 .ToListAsync();
 
@@ -705,7 +705,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
             var speaker = await _db
                 .Speakers.AsNoTracking()
                 .Include(s => s.SessionSpeakers)
-                .ThenInclude(ss => ss.Session)
+                    .ThenInclude(ss => ss.Session)
                 .SingleOrDefaultAsync(s => s.Id == id);
 
             return speaker?.MapSpeakerResponse();

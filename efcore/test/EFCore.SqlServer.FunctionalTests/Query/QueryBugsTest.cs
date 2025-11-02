@@ -1098,7 +1098,7 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
         {
             var results = context
                 .Parents.Include(p => p.ChildCollection)
-                .ThenInclude(c => c.SelfReferenceCollection)
+                    .ThenInclude(c => c.SelfReferenceCollection)
                 .ToList();
 
             Assert.Single(results);
@@ -1146,7 +1146,7 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
         {
             var results = context
                 .Children.Include(c => c.SelfReferenceBackNavigation)
-                .ThenInclude(c => c.ParentBackNavigation)
+                    .ThenInclude(c => c.ParentBackNavigation)
                 .ToList();
 
             Assert.Equal(3, results.Count);
@@ -1636,7 +1636,7 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                 var result = ctx
                     .Posts.Where(x => x.Blog.Id > 1)
                     .Include(x => x.Blog)
-                    .ThenInclude(b => b.Author)
+                        .ThenInclude(b => b.Author)
                     .ToList();
 
                 Assert.Equal(198, result.Count);
@@ -1689,7 +1689,7 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                     var result = await ctx
                         .Posts.Where(x => x.Blog.Id > 1)
                         .Include(x => x.Blog)
-                        .ThenInclude(b => b.Author)
+                            .ThenInclude(b => b.Author)
                         .ToListAsync();
 
                     Assert.Equal(198, result.Count);
@@ -2651,8 +2651,8 @@ BEGIN
             var result = await context
                 .People.OfType<MyContext9038.PersonTeacher9038>()
                 .Include(m => m.Students)
-                .ThenInclude(m => m.Family)
-                .ThenInclude(m => m.Members)
+                    .ThenInclude(m => m.Family)
+                        .ThenInclude(m => m.Members)
                 .ToListAsync();
 
             Assert.Equal(2, result.Count);
@@ -4826,7 +4826,7 @@ LEFT JOIN [Categories] AS [c] ON [p].[CategoryId] = [c].[Id]
             var query = context
                 .BuildingSet.Where(selection)
                 .Include(a => a.Builder)
-                .ThenInclude(a => a.City)
+                    .ThenInclude(a => a.City)
                 .Include(a => a.Mandator)
                 .ToList();
 
@@ -10245,7 +10245,7 @@ OUTPUT INSERTED.[Id], i._Position;
             var query = context
                 .Set<Principal23674>()
                 .Include(p => p.ManyDependents)
-                .ThenInclude(m => m.Principal.SingleDependent);
+                    .ThenInclude(m => m.Principal.SingleDependent);
 
             Assert.Equal(
                 CoreStrings.WarningAsErrorTemplate(
@@ -10295,7 +10295,7 @@ OUTPUT INSERTED.[Id], i._Position;
             var query = context
                 .Set<ManyDependent23674>()
                 .Include(p => p.Principal.ManyDependents)
-                .ThenInclude(m => m.SingleDependent)
+                    .ThenInclude(m => m.SingleDependent)
                 .ToList();
         }
     }
@@ -10370,11 +10370,11 @@ OUTPUT INSERTED.[Id], i._Position;
         var person = await context
             .Persons.Include(p => p.Images)
             .Include(p => p.Actor)
-            .ThenInclude(a => a.Movies)
-            .ThenInclude(p => p.Movie)
+                .ThenInclude(a => a.Movies)
+                    .ThenInclude(p => p.Movie)
             .Include(p => p.Director)
-            .ThenInclude(a => a.Movies)
-            .ThenInclude(p => p.Movie)
+                .ThenInclude(a => a.Movies)
+                    .ThenInclude(p => p.Movie)
             .Select(x => new
             {
                 x.Id,

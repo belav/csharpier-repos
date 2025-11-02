@@ -1430,9 +1430,9 @@ INNER JOIN (
         var query = context
             .LevelOne.FromSqlRaw("SELECT * FROM [LevelOne]")
             .Include(e => e.OneToOne_Optional_FK1)
-            .ThenInclude(e => e.OneToMany_Optional2)
+                .ThenInclude(e => e.OneToMany_Optional2)
             .Include(e => e.OneToMany_Optional1)
-            .ThenInclude(e => e.OneToOne_Optional_FK2);
+                .ThenInclude(e => e.OneToOne_Optional_FK2);
 
         var results = query.ToList();
 

@@ -36,7 +36,7 @@ public abstract class NorthwindMiscellaneousQueryRelationalTestBase<TFixture>
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("F"))
                     .Include(c => c.Orders)
-                    .ThenInclude(o => o.OrderDetails)
+                        .ThenInclude(o => o.OrderDetails)
                     .OrderBy(e => e.CustomerID)
                     .AsSplitQuery()
                     .Select(c => c.Orders),

@@ -459,7 +459,7 @@ public abstract class NorthwindSetOperationsQueryTestBase<TFixture> : QueryTestB
                                 ss.Set<Customer>()
                                     .Where(c => c.City == "London")
                                     .Include(c => c.Orders)
-                                    .ThenInclude(o => o.OrderDetails)
+                                        .ThenInclude(o => o.OrderDetails)
                             )
                 )
             )

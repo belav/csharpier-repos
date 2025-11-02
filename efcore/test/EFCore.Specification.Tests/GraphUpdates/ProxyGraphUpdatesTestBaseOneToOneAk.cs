@@ -302,17 +302,17 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     var root2 = context2
                         .Set<Root>()
                         .Include(e => e.OptionalChildrenAk)
-                        .ThenInclude(e => e.Children)
+                            .ThenInclude(e => e.Children)
                         .Include(e => e.OptionalChildrenAk)
-                        .ThenInclude(e => e.CompositeChildren)
+                            .ThenInclude(e => e.CompositeChildren)
                         .Include(e => e.OptionalSingleAk)
-                        .ThenInclude(e => e.Single)
+                            .ThenInclude(e => e.Single)
                         .Include(e => e.OptionalSingleAk)
-                        .ThenInclude(e => e.SingleComposite)
+                            .ThenInclude(e => e.SingleComposite)
                         .Include(e => e.OptionalSingleAkDerived)
-                        .ThenInclude(e => e.Single)
+                            .ThenInclude(e => e.Single)
                         .Include(e => e.OptionalSingleAkMoreDerived)
-                        .ThenInclude(e => e.Single)
+                            .ThenInclude(e => e.Single)
                         .Single(IsTheRoot);
 
                     context2.AddRange(new1, new1d, new1dd, new2, new2d, new2dd, new2c);

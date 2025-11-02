@@ -45,7 +45,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                 ss.Set<Order>()
                     .Where(o => o.CustomerID.StartsWith("F"))
                     .Include(o => o.Customer)
-                    .ThenInclude(c => c.Orders),
+                        .ThenInclude(c => c.Orders),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -97,7 +97,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
             ss =>
                 ss.Set<Customer>()
                     .Include(c => c.Orders)
-                    .ThenInclude(o => o.OrderDetails)
+                        .ThenInclude(o => o.OrderDetails)
                     .Where(c => c.CustomerID.StartsWith("W"))
                     .OrderByDescending(c =>
                         c.Orders.OrderByDescending(oo => oo.OrderDate).FirstOrDefault().OrderDate
@@ -120,7 +120,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                 ss =>
                     ss.Set<Customer>()
                         .Include(o => o.Orders)
-                        .ThenInclude(o => new { o.Customer, o.OrderDetails })
+                            .ThenInclude(o => new { o.Customer, o.OrderDetails })
             )
         );
 
@@ -168,7 +168,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                 ss.Set<Product>()
                     .Where(p => p.ProductID % 17 == 5)
                     .Include(p => p.OrderDetails)
-                    .ThenInclude(od => od.Order),
+                        .ThenInclude(od => od.Order),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -231,7 +231,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                 ss.Set<Product>()
                     .Where(p => p.ProductID % 17 == 5 && p.UnitPrice < 20)
                     .Include(p => p.OrderDetails)
-                    .ThenInclude(od => od.Order),
+                        .ThenInclude(od => od.Order),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -1081,7 +1081,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("F"))
                     .Include(c => c.Orders)
-                    .ThenInclude(o => o.OrderDetails),
+                        .ThenInclude(o => o.OrderDetails),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -1102,8 +1102,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("F"))
                     .Include(c => c.Orders)
-                    .ThenInclude(o => o.OrderDetails)
-                    .ThenInclude(od => od.Product),
+                        .ThenInclude(o => o.OrderDetails)
+                            .ThenInclude(od => od.Product),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -1196,8 +1196,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                 ss.Set<OrderDetail>()
                     .Where(od => od.OrderID % 23 == 13)
                     .Include(od => od.Order)
-                    .ThenInclude(o => o.Customer)
-                    .ThenInclude(c => c.Orders)
+                        .ThenInclude(o => o.Customer)
+                            .ThenInclude(c => c.Orders)
                     .Include(od => od.Product),
             elementAsserter: (e, a) =>
                 AssertInclude(
@@ -1222,8 +1222,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                     .Where(od => od.OrderID % 23 == 13)
                     .Include(od => od.Product)
                     .Include(od => od.Order)
-                    .ThenInclude(o => o.Customer)
-                    .ThenInclude(c => c.Orders),
+                        .ThenInclude(o => o.Customer)
+                            .ThenInclude(c => c.Orders),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -1244,7 +1244,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                 ss.Set<OrderDetail>()
                     .Where(od => od.OrderID % 23 == 13)
                     .Include(od => od.Order)
-                    .ThenInclude(o => o.Customer)
+                        .ThenInclude(o => o.Customer)
                     .Include(od => od.Product),
             elementAsserter: (e, a) =>
                 AssertInclude(
@@ -1266,7 +1266,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                     .Where(od => od.OrderID % 23 == 13)
                     .Include(od => od.Product)
                     .Include(od => od.Order)
-                    .ThenInclude(o => o.Customer),
+                        .ThenInclude(o => o.Customer),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -1286,8 +1286,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                 ss.Set<OrderDetail>()
                     .Where(od => od.ProductID % 23 == 17 && od.Quantity < 10)
                     .Include(od => od.Order)
-                    .ThenInclude(o => o.Customer)
-                    .ThenInclude(c => c.Orders),
+                        .ThenInclude(o => o.Customer)
+                            .ThenInclude(c => c.Orders),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -1308,8 +1308,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
             ss =>
                 ss.Set<OrderDetail>()
                     .Include(od => od.Order)
-                    .ThenInclude(o => o.Customer)
-                    .ThenInclude(c => c.Orders)
+                        .ThenInclude(o => o.Customer)
+                            .ThenInclude(c => c.Orders)
                     .Where(od => od.OrderID == 10248),
             elementAsserter: (e, a) =>
                 AssertInclude(
@@ -1330,7 +1330,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                 ss.Set<OrderDetail>()
                     .Where(od => od.OrderID % 23 == 13)
                     .Include(od => od.Order)
-                    .ThenInclude(o => o.Customer),
+                        .ThenInclude(o => o.Customer),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -1742,7 +1742,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                 (
                     from c in ss.Set<Customer>()
                         .Include(e => e.Orders)
-                        .ThenInclude(e => e.OrderDetails)
+                            .ThenInclude(e => e.OrderDetails)
                     where c.CustomerID.StartsWith("A")
                     orderby c.CustomerID
                     select new { c.CustomerID, Orders = c.Orders.ToList() }
@@ -1768,7 +1768,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                 (
                     from c in ss.Set<Customer>()
                         .Include(e => e.Orders)
-                        .ThenInclude(e => e.OrderDetails)
+                            .ThenInclude(e => e.OrderDetails)
                     where c.CustomerID.StartsWith("A")
                     orderby c.CustomerID
                     select new { c.CustomerID, Orders = c.Orders.ToList() }
@@ -1794,7 +1794,7 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                 (
                     from c in ss.Set<Customer>()
                         .Include(e => e.Orders)
-                        .ThenInclude(e => e.OrderDetails)
+                            .ThenInclude(e => e.OrderDetails)
                     where c.CustomerID.StartsWith("A")
                     orderby c.CustomerID
                     select new { c.CustomerID, Orders = c.Orders.ToList() }

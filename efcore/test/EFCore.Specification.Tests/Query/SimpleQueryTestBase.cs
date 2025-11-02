@@ -24,9 +24,9 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
         var query = context
             .Appraisals.Include(ap => ap.Staff)
-            .ThenInclude(s => s.Manager)
+                .ThenInclude(s => s.Manager)
             .Include(ap => ap.Staff)
-            .ThenInclude(s => s.SecondaryManager)
+                .ThenInclude(s => s.SecondaryManager)
             .Where(ap => ap.Id == id);
 
         var appraisal = async ? await query.SingleOrDefaultAsync() : query.SingleOrDefault();

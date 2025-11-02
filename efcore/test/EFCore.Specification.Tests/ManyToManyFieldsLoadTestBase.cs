@@ -829,7 +829,7 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
         var queryable = collectionEntry
             .Query()
             .Include(e => e.OneSkipShared)
-            .ThenInclude(e => e.TwoSkipShared);
+                .ThenInclude(e => e.TwoSkipShared);
         var children = async ? await queryable.ToListAsync() : queryable.ToList();
 
         Assert.True(collectionEntry.IsLoaded);

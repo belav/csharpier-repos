@@ -5157,7 +5157,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     .Set<EntityOne>()
                     .Where(e => keys.Contains(e.Id))
                     .Include(e => e.TwoSkip)
-                    .ThenInclude(e => e.Extra);
+                        .ThenInclude(e => e.Extra);
 
                 var results = async ? await queryable.ToListAsync() : queryable.ToList();
                 Assert.Equal(3, results.Count);
@@ -5333,7 +5333,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     .Set<EntityOne>()
                     .Where(e => keys.Contains(e.Id))
                     .Include(e => e.TwoSkip)
-                    .ThenInclude(e => e.Extra);
+                        .ThenInclude(e => e.Extra);
 
                 var results = async ? await queryable.ToListAsync() : queryable.ToList();
                 Assert.Equal(3, results.Count);

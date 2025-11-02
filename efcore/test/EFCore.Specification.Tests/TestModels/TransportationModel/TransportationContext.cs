@@ -75,9 +75,9 @@ public class TransportationContext : PoolableDbContext
         var expected = CreateVehicles().OrderBy(v => v.Name).ToList();
         var actual = Vehicles
             .Include(v => v.Operator)
-            .ThenInclude(v => v.Details)
+                .ThenInclude(v => v.Details)
             .Include(v => ((PoweredVehicle)v).Engine)
-            .ThenInclude(e => (e as CombustionEngine).FuelTank)
+                .ThenInclude(e => (e as CombustionEngine).FuelTank)
             .OrderBy(v => v.Name)
             .ToList();
 

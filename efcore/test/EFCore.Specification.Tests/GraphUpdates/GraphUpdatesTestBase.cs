@@ -886,9 +886,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
     protected IOrderedQueryable<Root> QueryRequiredGraph(DbContext context) =>
         ModifyQueryRoot(context.Set<Root>())
             .Include(e => e.RequiredChildren)
-            .ThenInclude(e => e.Children)
+                .ThenInclude(e => e.Children)
             .Include(e => e.RequiredSingle)
-            .ThenInclude(e => e.Single)
+                .ThenInclude(e => e.Single)
             .OrderBy(e => e.Id);
 
     protected Root LoadOptionalGraph(DbContext context) =>
@@ -897,15 +897,15 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
     protected IOrderedQueryable<Root> QueryOptionalGraph(DbContext context) =>
         ModifyQueryRoot(context.Set<Root>())
             .Include(e => e.OptionalChildren)
-            .ThenInclude(e => e.Children)
+                .ThenInclude(e => e.Children)
             .Include(e => e.OptionalChildren)
-            .ThenInclude(e => e.CompositeChildren)
+                .ThenInclude(e => e.CompositeChildren)
             .Include(e => e.OptionalSingle)
-            .ThenInclude(e => e.Single)
+                .ThenInclude(e => e.Single)
             .Include(e => e.OptionalSingleDerived)
-            .ThenInclude(e => e.Single)
+                .ThenInclude(e => e.Single)
             .Include(e => e.OptionalSingleMoreDerived)
-            .ThenInclude(e => e.Single)
+                .ThenInclude(e => e.Single)
             .OrderBy(e => e.Id);
 
     protected Root LoadRequiredNonPkGraph(DbContext context) =>
@@ -914,17 +914,17 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
     protected IOrderedQueryable<Root> QueryRequiredNonPkGraph(DbContext context) =>
         ModifyQueryRoot(context.Set<Root>())
             .Include(e => e.RequiredNonPkSingle)
-            .ThenInclude(e => e.Single)
+                .ThenInclude(e => e.Single)
             .Include(e => e.RequiredNonPkSingleDerived)
-            .ThenInclude(e => e.Single)
+                .ThenInclude(e => e.Single)
             .Include(e => e.RequiredNonPkSingleDerived)
-            .ThenInclude(e => e.Root)
+                .ThenInclude(e => e.Root)
             .Include(e => e.RequiredNonPkSingleMoreDerived)
-            .ThenInclude(e => e.Single)
+                .ThenInclude(e => e.Single)
             .Include(e => e.RequiredNonPkSingleMoreDerived)
-            .ThenInclude(e => e.Root)
+                .ThenInclude(e => e.Root)
             .Include(e => e.RequiredNonPkSingleMoreDerived)
-            .ThenInclude(e => e.DerivedRoot)
+                .ThenInclude(e => e.DerivedRoot)
             .OrderBy(e => e.Id);
 
     protected Root LoadRequiredAkGraph(DbContext context) =>
@@ -933,13 +933,13 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
     protected IOrderedQueryable<Root> QueryRequiredAkGraph(DbContext context) =>
         ModifyQueryRoot(context.Set<Root>())
             .Include(e => e.RequiredChildrenAk)
-            .ThenInclude(e => e.Children)
+                .ThenInclude(e => e.Children)
             .Include(e => e.RequiredChildrenAk)
-            .ThenInclude(e => e.CompositeChildren)
+                .ThenInclude(e => e.CompositeChildren)
             .Include(e => e.RequiredSingleAk)
-            .ThenInclude(e => e.Single)
+                .ThenInclude(e => e.Single)
             .Include(e => e.RequiredSingleAk)
-            .ThenInclude(e => e.SingleComposite)
+                .ThenInclude(e => e.SingleComposite)
             .OrderBy(e => e.Id);
 
     protected Root LoadOptionalAkGraph(DbContext context) =>
@@ -948,17 +948,17 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
     protected IOrderedQueryable<Root> QueryOptionalAkGraph(DbContext context) =>
         ModifyQueryRoot(context.Set<Root>())
             .Include(e => e.OptionalChildrenAk)
-            .ThenInclude(e => e.Children)
+                .ThenInclude(e => e.Children)
             .Include(e => e.OptionalChildrenAk)
-            .ThenInclude(e => e.CompositeChildren)
+                .ThenInclude(e => e.CompositeChildren)
             .Include(e => e.OptionalSingleAk)
-            .ThenInclude(e => e.Single)
+                .ThenInclude(e => e.Single)
             .Include(e => e.OptionalSingleAk)
-            .ThenInclude(e => e.SingleComposite)
+                .ThenInclude(e => e.SingleComposite)
             .Include(e => e.OptionalSingleAkDerived)
-            .ThenInclude(e => e.Single)
+                .ThenInclude(e => e.Single)
             .Include(e => e.OptionalSingleAkMoreDerived)
-            .ThenInclude(e => e.Single)
+                .ThenInclude(e => e.Single)
             .OrderBy(e => e.Id);
 
     protected Root LoadRequiredNonPkAkGraph(DbContext context) =>
@@ -967,17 +967,17 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
     protected IOrderedQueryable<Root> QueryRequiredNonPkAkGraph(DbContext context) =>
         ModifyQueryRoot(context.Set<Root>())
             .Include(e => e.RequiredNonPkSingleAk)
-            .ThenInclude(e => e.Single)
+                .ThenInclude(e => e.Single)
             .Include(e => e.RequiredNonPkSingleAkDerived)
-            .ThenInclude(e => e.Single)
+                .ThenInclude(e => e.Single)
             .Include(e => e.RequiredNonPkSingleAkDerived)
-            .ThenInclude(e => e.Root)
+                .ThenInclude(e => e.Root)
             .Include(e => e.RequiredNonPkSingleAkMoreDerived)
-            .ThenInclude(e => e.Single)
+                .ThenInclude(e => e.Single)
             .Include(e => e.RequiredNonPkSingleAkMoreDerived)
-            .ThenInclude(e => e.Root)
+                .ThenInclude(e => e.Root)
             .Include(e => e.RequiredNonPkSingleAkMoreDerived)
-            .ThenInclude(e => e.DerivedRoot)
+                .ThenInclude(e => e.DerivedRoot)
             .OrderBy(e => e.Id);
 
     protected Root LoadOptionalOneToManyGraph(DbContext context) =>
@@ -986,13 +986,13 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
     protected IOrderedQueryable<Root> QueryOptionalOneToManyGraph(DbContext context) =>
         ModifyQueryRoot(context.Set<Root>())
             .Include(e => e.OptionalChildren)
-            .ThenInclude(e => e.Children)
+                .ThenInclude(e => e.Children)
             .Include(e => e.OptionalChildren)
-            .ThenInclude(e => e.CompositeChildren)
+                .ThenInclude(e => e.CompositeChildren)
             .Include(e => e.OptionalChildrenAk)
-            .ThenInclude(e => e.Children)
+                .ThenInclude(e => e.Children)
             .Include(e => e.OptionalChildrenAk)
-            .ThenInclude(e => e.CompositeChildren)
+                .ThenInclude(e => e.CompositeChildren)
             .OrderBy(e => e.Id);
 
     protected Root LoadRequiredCompositeGraph(DbContext context) =>
@@ -1001,7 +1001,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
     protected IOrderedQueryable<Root> QueryRequiredCompositeGraph(DbContext context) =>
         ModifyQueryRoot(context.Set<Root>())
             .Include(e => e.RequiredCompositeChildren)
-            .ThenInclude(e => e.CompositeChildren)
+                .ThenInclude(e => e.CompositeChildren)
             .OrderBy(e => e.Id);
 
     protected static void AssertEntries(

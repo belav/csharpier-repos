@@ -59,8 +59,8 @@ public abstract class QueryCompilationTests
         _multipleJoinQuery = _context
             .Customers.AsNoTracking()
             .Include(c => c.Orders)
-            .ThenInclude(o => o.OrderLines)
-            .ThenInclude(ol => ol.Product);
+                .ThenInclude(o => o.OrderLines)
+                    .ThenInclude(ol => ol.Product);
     }
 
     [GlobalCleanup]

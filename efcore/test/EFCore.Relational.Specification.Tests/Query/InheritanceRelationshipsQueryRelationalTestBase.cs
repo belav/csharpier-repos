@@ -273,7 +273,7 @@ public abstract class InheritanceRelationshipsQueryRelationalTestBase<TFixture>
             ss =>
                 ss.Set<BaseInheritanceRelationshipEntity>()
                     .Include(e => e.BaseCollectionOnBase)
-                    .ThenInclude(e => e.NestedReference)
+                        .ThenInclude(e => e.NestedReference)
                     .AsSplitQuery(),
             elementAsserter: (e, a) =>
                 AssertInclude(
@@ -314,7 +314,7 @@ public abstract class InheritanceRelationshipsQueryRelationalTestBase<TFixture>
             ss =>
                 ss.Set<BaseInheritanceRelationshipEntity>()
                     .Include(e => e.BaseCollectionOnBase)
-                    .ThenInclude(e => e.NestedCollection)
+                        .ThenInclude(e => e.NestedCollection)
                     .AsSplitQuery(),
             elementAsserter: (e, a) =>
                 AssertInclude(
@@ -355,7 +355,7 @@ public abstract class InheritanceRelationshipsQueryRelationalTestBase<TFixture>
             ss =>
                 ss.Set<ReferencedEntity>()
                     .Include(e => e.Principals)
-                    .ThenInclude(e => e.Reference)
+                        .ThenInclude(e => e.Reference)
                     .AsSplitQuery(),
             elementAsserter: (e, a) =>
                 AssertInclude(

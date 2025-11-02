@@ -740,7 +740,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(e => e.OneToMany_Optional1)
-                    .ThenInclude(e => e.OneToMany_Optional2),
+                        .ThenInclude(e => e.OneToMany_Optional2),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -760,8 +760,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(e => e.OneToMany_Optional1)
-                    .ThenInclude(e => e.OneToMany_Optional2)
-                    .ThenInclude(e => e.OneToMany_Required_Inverse3.OneToMany_Optional2),
+                        .ThenInclude(e => e.OneToMany_Optional2)
+                            .ThenInclude(e => e.OneToMany_Required_Inverse3.OneToMany_Optional2),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -790,9 +790,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(e => e.OneToOne_Optional_FK1)
-                    .ThenInclude(e => e.OneToMany_Optional2)
+                        .ThenInclude(e => e.OneToMany_Optional2)
                     .Include(e => e.OneToMany_Optional1)
-                    .ThenInclude(e => e.OneToOne_Optional_FK2),
+                        .ThenInclude(e => e.OneToOne_Optional_FK2),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -818,9 +818,11 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(e => EF.Property<Level2>(e, "OneToOne_Optional_FK1"))
-                    .ThenInclude(e => EF.Property<ICollection<Level3>>(e, "OneToMany_Optional2"))
+                        .ThenInclude(e =>
+                            EF.Property<ICollection<Level3>>(e, "OneToMany_Optional2")
+                        )
                     .Include(e => EF.Property<ICollection<Level2>>(e, "OneToMany_Optional1"))
-                    .ThenInclude(e => EF.Property<Level3>(e, "OneToOne_Optional_FK2")),
+                        .ThenInclude(e => EF.Property<Level3>(e, "OneToOne_Optional_FK2")),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -846,9 +848,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(e => e.OneToOne_Optional_Self1)
-                    .ThenInclude(e => e.OneToMany_Optional_Self1)
+                        .ThenInclude(e => e.OneToMany_Optional_Self1)
                     .Include(e => e.OneToMany_Optional_Self1)
-                    .ThenInclude(e => e.OneToOne_Optional_Self1),
+                        .ThenInclude(e => e.OneToOne_Optional_Self1),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -874,11 +876,11 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(e => EF.Property<Level1>(e, "OneToOne_Optional_Self1"))
-                    .ThenInclude(e =>
-                        EF.Property<ICollection<Level1>>(e, "OneToMany_Optional_Self1")
-                    )
+                        .ThenInclude(e =>
+                            EF.Property<ICollection<Level1>>(e, "OneToMany_Optional_Self1")
+                        )
                     .Include(e => EF.Property<ICollection<Level1>>(e, "OneToMany_Optional_Self1"))
-                    .ThenInclude(e => EF.Property<Level1>(e, "OneToOne_Optional_Self1")),
+                        .ThenInclude(e => EF.Property<Level1>(e, "OneToOne_Optional_Self1")),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -926,7 +928,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(e => e.OneToOne_Optional_FK1)
-                    .ThenInclude(e => e.OneToMany_Optional2)
+                        .ThenInclude(e => e.OneToMany_Optional2)
                     .OrderBy(e => e.Name),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -949,7 +951,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(e => e.OneToMany_Optional1)
-                    .ThenInclude(e => e.OneToOne_Optional_FK2),
+                        .ThenInclude(e => e.OneToOne_Optional_FK2),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -985,9 +987,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(e => e.OneToOne_Optional_FK1)
-                    .ThenInclude(e => e.OneToMany_Optional2)
+                        .ThenInclude(e => e.OneToMany_Optional2)
                     .Include(e => e.OneToMany_Optional1)
-                    .ThenInclude(e => e.OneToOne_Optional_FK2),
+                        .ThenInclude(e => e.OneToOne_Optional_FK2),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -1013,7 +1015,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 from l1 in ss.Set<Level1>()
                     .Include(e => e.OneToOne_Optional_FK1.OneToMany_Required2)
-                    .ThenInclude(e => e.OneToOne_Required_FK3)
+                        .ThenInclude(e => e.OneToOne_Required_FK3)
                 where l1.OneToOne_Optional_FK1.Name != "L2 09"
                 select l1,
             elementAsserter: (e, a) =>
@@ -1040,9 +1042,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(e => e.OneToOne_Required_FK1)
-                    .ThenInclude(e => e.OneToMany_Optional2)
+                        .ThenInclude(e => e.OneToMany_Optional2)
                     .Include(e => e.OneToOne_Required_FK1)
-                    .ThenInclude(e => e.OneToMany_Required2)
+                        .ThenInclude(e => e.OneToMany_Required2)
                     .OrderBy(t => t.Name)
                     .Skip(0)
                     .Take(10),
@@ -1072,9 +1074,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(e => e.OneToOne_Optional_FK1)
-                    .ThenInclude(e => e.OneToMany_Optional2)
+                        .ThenInclude(e => e.OneToMany_Optional2)
                     .Include(e => e.OneToOne_Required_FK1)
-                    .ThenInclude(e => e.OneToMany_Required2)
+                        .ThenInclude(e => e.OneToMany_Required2)
                     .OrderBy(t => t.Name)
                     .Skip(0)
                     .Take(10),
@@ -1105,7 +1107,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(e => e.OneToOne_Optional_FK1.OneToOne_Required_FK2)
-                    .ThenInclude(e => e.OneToMany_Optional3)
+                        .ThenInclude(e => e.OneToMany_Optional3)
                     .OrderBy(t => t.Name)
                     .Skip(0)
                     .Take(10),
@@ -1133,11 +1135,11 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(e => e.OneToOne_Required_FK1)
-                    .ThenInclude(e => e.OneToMany_Optional2)
+                        .ThenInclude(e => e.OneToMany_Optional2)
                     .Include(e => e.OneToOne_Required_FK1)
-                    .ThenInclude(e => e.OneToOne_Optional_FK2)
+                        .ThenInclude(e => e.OneToOne_Optional_FK2)
                     .Include(e => e.OneToOne_Optional_FK1)
-                    .ThenInclude(e => e.OneToOne_Optional_FK2)
+                        .ThenInclude(e => e.OneToOne_Optional_FK2)
                     .Where(e => e.OneToOne_Required_FK1.OneToOne_Optional_PK2.Name != "Foo")
                     .OrderBy(e => e.Id),
             elementAsserter: (e, a) =>
@@ -1211,7 +1213,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 ss.Set<Level1>()
                     .SelectMany(l1 => l1.OneToMany_Optional1)
                     .Include(l2 => l2.OneToOne_Required_FK2)
-                    .ThenInclude(l3 => l3.OneToMany_Optional3),
+                        .ThenInclude(l3 => l3.OneToMany_Optional3),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -1269,7 +1271,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level4>()
                     .Include(l4 => l4.OneToOne_Required_FK_Inverse4.OneToMany_Required_Inverse3)
-                    .ThenInclude(l2 => l2.OneToMany_Optional_Inverse2)
+                        .ThenInclude(l2 => l2.OneToMany_Optional_Inverse2)
                     .Select(l4 => l4.OneToOne_Required_FK_Inverse4),
             elementAsserter: (e, a) =>
                 AssertInclude(
@@ -1291,7 +1293,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToOne_Optional_FK1.OneToMany_Optional2)
-                    .ThenInclude(l3 => l3.OneToOne_Optional_FK3)
+                        .ThenInclude(l3 => l3.OneToOne_Optional_FK3)
                     .Select(l1 => l1.OneToOne_Optional_FK1),
             elementAsserter: (e, a) =>
                 AssertInclude(
@@ -1686,7 +1688,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 => l2.OneToOne_Optional_PK2),
+                        .ThenInclude(l2 => l2.OneToOne_Optional_PK2),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -1707,7 +1709,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToOne_Optional_FK1)
-                    .ThenInclude(l2 => l2.OneToMany_Optional2),
+                        .ThenInclude(l2 => l2.OneToMany_Optional2),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -1747,7 +1749,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 ss.Set<Level1>()
                     .OrderBy(l1 => l1.Id)
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
+                        .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
                     .Select(l1 => l1.OneToMany_Optional1),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -1774,8 +1776,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 ss.Set<Level1>()
                     .OrderBy(l1 => l1.Id)
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
-                    .ThenInclude(l3 => l3.OneToOne_Optional_FK3)
+                        .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
+                            .ThenInclude(l3 => l3.OneToOne_Optional_FK3)
                     .Select(l1 => l1.OneToMany_Optional1),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -1803,8 +1805,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
-                    .ThenInclude(l3 => l3.OneToOne_Optional_FK3),
+                        .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
+                            .ThenInclude(l3 => l3.OneToOne_Optional_FK3),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -1832,11 +1834,11 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 ss.Set<Level1>()
                     .OrderBy(l1 => l1.Id)
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
-                    .ThenInclude(l3 => l3.OneToOne_Optional_FK3)
+                        .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
+                            .ThenInclude(l3 => l3.OneToOne_Optional_FK3)
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 => l2.OneToOne_Optional_FK2)
-                    .ThenInclude(l3 => l3.OneToMany_Optional3)
+                        .ThenInclude(l2 => l2.OneToOne_Optional_FK2)
+                            .ThenInclude(l3 => l3.OneToMany_Optional3)
                     .Select(l1 => l1.OneToMany_Optional1),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -1864,11 +1866,11 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
-                    .ThenInclude(l3 => l3.OneToOne_Optional_FK3)
+                        .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
+                            .ThenInclude(l3 => l3.OneToOne_Optional_FK3)
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 => l2.OneToOne_Optional_FK2)
-                    .ThenInclude(l3 => l3.OneToMany_Optional3),
+                        .ThenInclude(l2 => l2.OneToOne_Optional_FK2)
+                            .ThenInclude(l3 => l3.OneToMany_Optional3),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -1904,8 +1906,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 ss.Set<Level1>()
                     .OrderBy(l1 => l1.Id)
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
-                    .ThenInclude(l3 => l3.OneToOne_Optional_FK3)
+                        .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
+                            .ThenInclude(l3 => l3.OneToOne_Optional_FK3)
                     .Select(l1 => l1.OneToMany_Optional1.Select(l2 => l2.OneToOne_Optional_PK2)),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -1932,7 +1934,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 ss.Set<Level1>()
                     .OrderBy(l1 => l1.Id)
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
+                        .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
                     .Select(l1 => new { l1, l1.OneToMany_Optional1 }),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -1967,8 +1969,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
-                    .ThenInclude(l3 => l3.OneToOne_Optional_FK3)
+                        .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
+                            .ThenInclude(l3 => l3.OneToOne_Optional_FK3)
                     .Where(l1 =>
                         l1.OneToMany_Optional1.Where(l2 => l2.OneToOne_Optional_PK2.Name != "Foo")
                             .Count() > 0
@@ -1997,8 +1999,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => EF.Property<ICollection<Level2>>(l1, "OneToMany_Optional1"))
-                    .ThenInclude(l2 => EF.Property<Level3>(l2, "OneToOne_Optional_PK2"))
-                    .ThenInclude(l3 => EF.Property<Level4>(l3, "OneToOne_Optional_FK3"))
+                        .ThenInclude(l2 => EF.Property<Level3>(l2, "OneToOne_Optional_PK2"))
+                            .ThenInclude(l3 => EF.Property<Level4>(l3, "OneToOne_Optional_FK3"))
                     .Where(l1 =>
                         EF.Property<ICollection<Level2>>(l1, "OneToMany_Optional1")
                             .Where(l2 => l2.OneToOne_Optional_PK2.Name != "Foo")
@@ -2030,7 +2032,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(e => e.OneToOne_Required_FK1)
-                    .ThenInclude(e => e.OneToOne_Optional_FK2)
+                        .ThenInclude(e => e.OneToOne_Optional_FK2)
                     .Select(e => new Level1
                     {
                         Id = e.Id,
@@ -2149,7 +2151,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 => l2.OneToMany_Optional2.OrderBy(x => x.Name)),
+                        .ThenInclude(l2 => l2.OneToMany_Optional2.OrderBy(x => x.Name)),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -2172,7 +2174,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToMany_Optional1.OrderBy(x => x.Name))
-                    .ThenInclude(l2 => l2.OneToMany_Optional2.OrderByDescending(x => x.Name)),
+                        .ThenInclude(l2 => l2.OneToMany_Optional2.OrderByDescending(x => x.Name)),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -2313,12 +2315,12 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToOne_Optional_FK1)
-                    .ThenInclude(l2 =>
-                        l2.OneToMany_Optional2.Where(x => x.Name != "Foo")
-                            .OrderBy(x => x.Name)
-                            .Skip(1)
-                            .Take(3)
-                    ),
+                        .ThenInclude(l2 =>
+                            l2.OneToMany_Optional2.Where(x => x.Name != "Foo")
+                                .OrderBy(x => x.Name)
+                                .Skip(1)
+                                .Take(3)
+                        ),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -2341,13 +2343,13 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => EF.Property<Level2>(l1, "OneToOne_Optional_FK1"))
-                    .ThenInclude(l2 =>
-                        EF.Property<ICollection<Level3>>(l2, "OneToMany_Optional2")
-                            .Where(x => x.Name != "Foo")
-                            .OrderBy(x => x.Name)
-                            .Skip(1)
-                            .Take(3)
-                    ),
+                        .ThenInclude(l2 =>
+                            EF.Property<ICollection<Level3>>(l2, "OneToMany_Optional2")
+                                .Where(x => x.Name != "Foo")
+                                .OrderBy(x => x.Name)
+                                .Skip(1)
+                                .Take(3)
+                        ),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -2439,11 +2441,11 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                             .OrderBy(x => x.Name)
                             .Take(3)
                     )
-                    .ThenInclude(l2 =>
-                        l2.OneToMany_Required2.Where(x => x.Name != "Bar")
-                            .OrderByDescending(x => x.Name)
-                            .Skip(1)
-                    ),
+                        .ThenInclude(l2 =>
+                            l2.OneToMany_Required2.Where(x => x.Name != "Bar")
+                                .OrderByDescending(x => x.Name)
+                                .Skip(1)
+                        ),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -2520,9 +2522,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                         ss =>
                             ss.Set<Level1>()
                                 .Include(l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Foo"))
-                                .ThenInclude(l2 => l2.OneToMany_Optional2)
+                                    .ThenInclude(l2 => l2.OneToMany_Optional2)
                                 .Include(l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Bar"))
-                                .ThenInclude(l2 => l2.OneToOne_Required_FK2)
+                                    .ThenInclude(l2 => l2.OneToOne_Required_FK2)
                     )
                 )
             )
@@ -2574,13 +2576,13 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                             .OrderBy(x => x.Id)
                             .Take(2)
                     )
-                    .ThenInclude(l2 => l2.OneToMany_Optional2)
+                        .ThenInclude(l2 => l2.OneToMany_Optional2)
                     .Include(l1 =>
                         l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
                             .OrderBy(x => x.Id)
                             .Take(2)
                     )
-                    .ThenInclude(l2 => l2.OneToOne_Required_FK2),
+                        .ThenInclude(l2 => l2.OneToOne_Required_FK2),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -2610,9 +2612,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                             .OrderBy(x => x.Id)
                             .Take(2)
                     )
-                    .ThenInclude(l2 => l2.OneToMany_Optional2)
+                        .ThenInclude(l2 => l2.OneToMany_Optional2)
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 => l2.OneToOne_Required_FK2),
+                        .ThenInclude(l2 => l2.OneToOne_Required_FK2),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -2695,9 +2697,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                             .Take(1)
                     )
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 =>
-                        l2.OneToOne_Optional_PK2.OneToMany_Optional3.Where(x => x.Id > 1)
-                    ),
+                        .ThenInclude(l2 =>
+                            l2.OneToOne_Optional_PK2.OneToMany_Optional3.Where(x => x.Id > 1)
+                        ),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -2730,19 +2732,19 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 =>
-                        l2.OneToMany_Optional2.Where(x => x.Name != "Foo")
-                            .OrderBy(x => x.Id)
-                            .Take(1)
-                    )
-                    .ThenInclude(l3 => l3.OneToMany_Optional3)
+                        .ThenInclude(l2 =>
+                            l2.OneToMany_Optional2.Where(x => x.Name != "Foo")
+                                .OrderBy(x => x.Id)
+                                .Take(1)
+                        )
+                            .ThenInclude(l3 => l3.OneToMany_Optional3)
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 =>
-                        l2.OneToMany_Optional2.Where(x => x.Name != "Foo")
-                            .OrderBy(x => x.Id)
-                            .Take(1)
-                    )
-                    .ThenInclude(l3 => l3.OneToMany_Required3),
+                        .ThenInclude(l2 =>
+                            l2.OneToMany_Optional2.Where(x => x.Name != "Foo")
+                                .OrderBy(x => x.Id)
+                                .Take(1)
+                        )
+                            .ThenInclude(l3 => l3.OneToMany_Required3),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -2776,15 +2778,15 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 =>
-                        l2.OneToMany_Optional2.Where(x => x.Name != "Foo")
-                            .OrderBy(x => x.Id)
-                            .Take(1)
-                    )
-                    .ThenInclude(l3 => l3.OneToMany_Optional3)
+                        .ThenInclude(l2 =>
+                            l2.OneToMany_Optional2.Where(x => x.Name != "Foo")
+                                .OrderBy(x => x.Id)
+                                .Take(1)
+                        )
+                            .ThenInclude(l3 => l3.OneToMany_Optional3)
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 => l2.OneToMany_Optional2)
-                    .ThenInclude(l3 => l3.OneToMany_Required3),
+                        .ThenInclude(l2 => l2.OneToMany_Optional2)
+                            .ThenInclude(l3 => l3.OneToMany_Required3),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -2981,7 +2983,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                         ss =>
                             ss.Set<Level1>()
                                 .Include(l1 => l1.OneToMany_Optional1)
-                                .ThenInclude(l2 => l2.AsQueryable().Where(xx => xx.Id != 42))
+                                    .ThenInclude(l2 => l2.AsQueryable().Where(xx => xx.Id != 42))
                     )
                 )
             ).Message
@@ -2995,7 +2997,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToMany_Optional1.OrderByDescending(x => x.Name).Take(4))
-                    .ThenInclude(l2 => l2.OneToOne_Optional_FK2)
+                        .ThenInclude(l2 => l2.OneToOne_Optional_FK2)
                     .OrderBy(l1 => l1.Id)
                     .Take(5),
             assertOrder: true,
@@ -3023,7 +3025,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .Include(l1 =>
                         l1.OneToMany_Optional1.OrderByDescending(x => x.Name).Skip(1).Take(4)
                     )
-                    .ThenInclude(l2 => l2.OneToOne_Optional_FK2)
+                        .ThenInclude(l2 => l2.OneToOne_Optional_FK2)
                     .OrderByDescending(l1 => l1.Id)
                     .Skip(1)
                     .Take(5),
@@ -3051,7 +3053,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 ss.Set<Level1>()
                     .OrderBy(l1 => l1.Id)
                     .Include(l1 => l1.OneToMany_Optional1.Take(40))
-                    .ThenInclude(l2 => l2.OneToOne_Optional_FK2),
+                        .ThenInclude(l2 => l2.OneToOne_Optional_FK2),
             asserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -3075,7 +3077,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 ss.Set<Level1>()
                     .OrderBy(l1 => l1.Id)
                     .Include(l1 => l1.OneToMany_Optional1.Take(40))
-                    .ThenInclude(l2 => l2.OneToOne_Optional_FK2)
+                        .ThenInclude(l2 => l2.OneToOne_Optional_FK2)
                     .Take(30),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -3386,7 +3388,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .Include(l1 => l1.OneToOne_Optional_FK1)
                     .Where(l1 => l1.OneToOne_Optional_PK1.Id < 3 || l1.OneToOne_Optional_FK1.Id > 8)
                     .Include(l1 => l1.OneToOne_Optional_FK1.OneToMany_Optional2)
-                    .ThenInclude(l3 => l3.OneToOne_Optional_FK3),
+                        .ThenInclude(l3 => l3.OneToOne_Optional_FK3),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -3417,7 +3419,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     )
                     .Where(l1 => l1.OneToOne_Optional_PK1.Id < 3 || l1.OneToOne_Optional_FK1.Id > 8)
                     .Include(l1 => l1.OneToOne_Optional_FK1.OneToMany_Required2)
-                    .ThenInclude(l3 => l3.OneToOne_Optional_FK3),
+                        .ThenInclude(l3 => l3.OneToOne_Optional_FK3),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -3666,7 +3668,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 => l2.OneToMany_Optional2)
+                        .ThenInclude(l2 => l2.OneToMany_Optional2)
                     .GroupBy(l1 => l1.Name),
             elementSorter: e => e.Key,
             elementAsserter: (e, a) =>
@@ -3694,7 +3696,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToMany_Optional1)
-                    .ThenInclude(l2 => l2.OneToOne_Optional_FK2)
+                        .ThenInclude(l2 => l2.OneToOne_Optional_FK2)
                     .GroupBy(l1 => l1.Name),
             elementSorter: e => e.Key,
             elementAsserter: (e, a) =>

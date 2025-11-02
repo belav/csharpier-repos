@@ -66,7 +66,7 @@ public abstract class ManyToManyNoTrackingQueryTestBase<TFixture>
                             ss.Set<EntityThree>()
                                 .AsNoTracking()
                                 .Include(e => e.OneSkipPayloadFullShared)
-                                .ThenInclude(e => e.ThreeSkipPayloadFullShared),
+                                    .ThenInclude(e => e.ThreeSkipPayloadFullShared),
                         elementAsserter: (e, a) =>
                             AssertInclude(
                                 e,

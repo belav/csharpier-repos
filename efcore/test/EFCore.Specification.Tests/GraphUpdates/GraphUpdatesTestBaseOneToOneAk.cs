@@ -1335,9 +1335,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     newRoot = context
                         .Set<Root>()
                         .Include(e => e.RequiredSingleAk)
-                        .ThenInclude(e => e.Single)
+                            .ThenInclude(e => e.Single)
                         .Include(e => e.RequiredSingleAk)
-                        .ThenInclude(e => e.SingleComposite)
+                            .ThenInclude(e => e.SingleComposite)
                         .OrderBy(e => e.Id)
                         .Single(e => e.Id == newRoot.Id);
 

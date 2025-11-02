@@ -174,13 +174,13 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 ss =>
                     ss.Set<Gear>()
                         .Include(g => g.AssignedCity.BornGears)
-                        .ThenInclude(g => g.Tag)
+                            .ThenInclude(g => g.Tag)
                         .Include(g => g.AssignedCity.StationedGears)
-                        .ThenInclude(g => g.Tag)
+                            .ThenInclude(g => g.Tag)
                         .Include(g => g.CityOfBirth.BornGears)
-                        .ThenInclude(g => g.Tag)
+                            .ThenInclude(g => g.Tag)
                         .Include(g => g.CityOfBirth.StationedGears)
-                        .ThenInclude(g => g.Tag)
+                            .ThenInclude(g => g.Tag)
                         .OrderBy(g => g.Nickname)
             )
         );
@@ -3815,7 +3815,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<Faction>()
                     .Include(f => (f as LocustHorde).Commander)
-                    .ThenInclude(c => (c.DefeatedBy as Officer).Reports),
+                        .ThenInclude(c => (c.DefeatedBy as Officer).Reports),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -3834,7 +3834,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<Gear>()
                     .Include(g => ((Officer)g).Reports)
-                    .ThenInclude(g => ((Officer)g).Reports),
+                        .ThenInclude(g => ((Officer)g).Reports),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -3852,7 +3852,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<Faction>()
                     .Include(f => ((LocustHorde)f).Leaders)
-                    .ThenInclude(l => ((LocustCommander)l).DefeatedBy),
+                        .ThenInclude(l => ((LocustCommander)l).DefeatedBy),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -3888,7 +3888,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<Gear>()
                     .Include(g => ((Officer)g).Reports)
-                    .ThenInclude(g => g.Squad.Missions),
+                        .ThenInclude(g => g.Squad.Missions),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -5267,7 +5267,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<LocustLeader>()
                     .Include(ll => ((LocustCommander)ll).DefeatedBy)
-                    .ThenInclude(g => g.Weapons)
+                        .ThenInclude(g => g.Weapons)
                     .OrderBy(ll => ((LocustCommander)ll).DefeatedBy.Tag.Note)
                     .Take(10),
             ss => ss.Set<LocustLeader>().Take(10),
@@ -6675,7 +6675,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
         using var ctx = CreateContext();
         var query = ctx
             .Squads.Include(s => s.Members)
-            .ThenInclude(g => g.Weapons)
+                .ThenInclude(g => g.Weapons)
             .Where(s => s.Name == "Delta")
             .Select(s => new { s.Name, Client(s).Members });
 
@@ -7405,7 +7405,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     .AsTracking()
                     .OrderBy(t => t.Note)
                     .Include(t => t.Gear)
-                    .ThenInclude(g => g.Squad),
+                        .ThenInclude(g => g.Squad),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -8926,7 +8926,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     .Where(ll => ll.Name.Contains("Queen"))
                     .Cast<LocustCommander>()
                     .Include(lc => lc.DefeatedBy)
-                    .ThenInclude(g => g.Weapons),
+                        .ThenInclude(g => g.Weapons),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,

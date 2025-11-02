@@ -1711,7 +1711,7 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
                         CreateDbParameter("customerID", "ALFKI")
                     )
                     .Include(e => e.Orders)
-                    .ThenInclude(o => o.OrderDetails)
+                        .ThenInclude(o => o.OrderDetails)
                     .AsSplitQuery(),
             ss => ss.Set<Customer>().Where(x => x.CustomerID == "ALFKI"),
             elementAsserter: (e, a) =>

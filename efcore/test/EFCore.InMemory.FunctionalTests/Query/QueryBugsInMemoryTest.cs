@@ -579,7 +579,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                     var result = ctx
                         .Posts.Where(x => x.Blog.Id > 1)
                         .Include(x => x.Blog)
-                        .ThenInclude(b => b.Author)
+                            .ThenInclude(b => b.Author)
                         .ToList();
 
                     Assert.Equal(198, result.Count);
@@ -602,7 +602,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                     var result = await ctx
                         .Posts.Where(x => x.Blog.Id > 1)
                         .Include(x => x.Blog)
-                        .ThenInclude(b => b.Author)
+                            .ThenInclude(b => b.Author)
                         .ToListAsync();
 
                     Assert.Equal(198, result.Count);

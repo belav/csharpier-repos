@@ -864,7 +864,7 @@ public class SqlServerEndToEndTest : IClassFixture<SqlServerFixture>
         {
             var entityA = context
                 .EntitiesA.Include(x => x.EntityB)
-                .ThenInclude(x => x.EntitiesC)
+                    .ThenInclude(x => x.EntitiesC)
                 .OrderBy(x => x.Id)
                 .First();
 
@@ -879,7 +879,7 @@ public class SqlServerEndToEndTest : IClassFixture<SqlServerFixture>
         {
             var entityA = context
                 .EntitiesA.Include(x => x.EntityB)
-                .ThenInclude(x => x.EntitiesC)
+                    .ThenInclude(x => x.EntitiesC)
                 .OrderBy(x => x.Id)
                 .First();
 

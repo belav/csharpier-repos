@@ -1779,9 +1779,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             var swedes = context
                 .Set<Parsnip>()
                 .Include(x => x.Carrot)
-                .ThenInclude(x => x.Turnips)
+                    .ThenInclude(x => x.Turnips)
                 .Include(x => x.Swede)
-                .ThenInclude(x => x.TurnipSwedes)
+                    .ThenInclude(x => x.TurnipSwedes)
                 .Single(x => x.Id == 1);
 
             swedes.Carrot.Turnips.Clear();
@@ -1991,8 +1991,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         var existingRoot = context
             .Set<Bayaz>()
             .Include(x => x.FirstLaw)
-            .ThenInclude(x => x.SecondLaw)
-            .ThenInclude(x => x.ThirdLaw)
+                .ThenInclude(x => x.SecondLaw)
+                    .ThenInclude(x => x.ThirdLaw)
             .Single(x => x.BayazId == newRoot.BayazId);
 
         existingRoot.BayazName = newRoot.BayazName;

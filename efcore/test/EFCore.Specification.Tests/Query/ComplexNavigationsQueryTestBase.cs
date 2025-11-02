@@ -165,9 +165,9 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
 
         var query = context
             .Fields.Include(x => x.Label.Globalizations)
-            .ThenInclude(x => x.Language)
+                .ThenInclude(x => x.Language)
             .Include(x => x.Placeholder.Globalizations)
-            .ThenInclude(x => x.Language);
+                .ThenInclude(x => x.Language);
 
         var result = (async ? await query.ToListAsync() : query.ToList())
             .OrderBy(e => e.Name)
@@ -3627,7 +3627,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToOne_Optional_FK1)
-                    .ThenInclude(l1 => l1.OneToOne_Optional_PK2),
+                        .ThenInclude(l1 => l1.OneToOne_Optional_PK2),
             elementAsserter: (e, a) =>
                 AssertInclude(
                     e,
@@ -3847,7 +3847,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToOne_Optional_FK1)
-                    .ThenInclude(l2 => l2.OneToOne_Optional_FK2)
+                        .ThenInclude(l2 => l2.OneToOne_Optional_FK2)
                     .Select(l1 => new
                     {
                         one = l1,
@@ -4823,7 +4823,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 ss.Set<Level1>()
                     .Include(x => x.OneToMany_Optional1)
-                    .ThenInclude(x => x.OneToMany_Optional2)
+                        .ThenInclude(x => x.OneToMany_Optional2)
                     .Where(l1 => l1.Id < 3)
                     .Select(l1 => new
                     {
@@ -4845,7 +4845,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 ss.Set<Level1>()
                     .Include(x => x.OneToMany_Optional1)
-                    .ThenInclude(x => x.OneToMany_Optional2)
+                        .ThenInclude(x => x.OneToMany_Optional2)
                     .Where(l1 => l1.Id < 3)
                     .Select(l1 => new
                     {

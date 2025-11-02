@@ -462,8 +462,8 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
                 var people = context
                     .Set<Person>()
                     .Include(p => p.Parent!)
-                    .ThenInclude(c => c.Parent!)
-                    .ThenInclude(c => c.Parent)
+                        .ThenInclude(c => c.Parent!)
+                            .ThenInclude(c => c.Parent)
                     .ToList();
                 Assert.Equal(7, people.Count);
                 Assert.Equal("1", people.Single(p => p.Parent == null).Name);

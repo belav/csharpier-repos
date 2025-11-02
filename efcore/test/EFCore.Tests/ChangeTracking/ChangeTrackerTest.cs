@@ -3256,7 +3256,7 @@ public class ChangeTrackerTest
             detachedContainer = context
                 .Set<Kontainer>()
                 .Include(container => container.Rooms)
-                .ThenInclude(room => room.Troduct)
+                    .ThenInclude(room => room.Troduct)
                 .AsNoTracking()
                 .Single();
         }
@@ -3266,7 +3266,7 @@ public class ChangeTrackerTest
             var attachedContainer = context
                 .Set<Kontainer>()
                 .Include(container => container.Rooms)
-                .ThenInclude(room => room.Troduct)
+                    .ThenInclude(room => room.Troduct)
                 .Single();
 
             var attachedRoom = attachedContainer.Rooms.Single();
@@ -3429,7 +3429,7 @@ public class ChangeTrackerTest
             detachedContainer = context
                 .Set<Kontainer>()
                 .Include(container => container.Rooms)
-                .ThenInclude(room => room.Troduct)
+                    .ThenInclude(room => room.Troduct)
                 .AsNoTracking()
                 .Single();
         }
@@ -3439,7 +3439,7 @@ public class ChangeTrackerTest
             var attachedContainer = context
                 .Set<Kontainer>()
                 .Include(container => container.Rooms)
-                .ThenInclude(room => room.Troduct)
+                    .ThenInclude(room => room.Troduct)
                 .Single();
 
             var attachedRoom = attachedContainer.Rooms.Single();

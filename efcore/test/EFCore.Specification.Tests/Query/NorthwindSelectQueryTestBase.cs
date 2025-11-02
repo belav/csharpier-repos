@@ -2470,7 +2470,7 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                 ss.Set<Order>()
                     .Where(o => o.OrderID < 10350)
                     .Include(e => e.OrderDetails)
-                    .ThenInclude(e => e.Product)
+                        .ThenInclude(e => e.Product)
                     .Select(o => new
                     {
                         o.OrderID,
@@ -2667,7 +2667,7 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             ss =>
                 ss.Set<Customer>()
                     .Include(c => c.Orders)
-                    .ThenInclude(o => o.OrderDetails)
+                        .ThenInclude(o => o.OrderDetails)
                     .Where(c => c.CustomerID.StartsWith("F"))
                     .Select(c => new
                     {
