@@ -3,7 +3,8 @@
   <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.targets, $(MSBuildThisFileDirectory)..))" />
 
   <!-- EventPipe tests use Microsoft.Extensions.Logging and getting its dependencies require this workaround for NativeAOT
-  --><!-- Get all the *.dll files that has IsNative != "true"-->
+  -->
+  <!-- Get all the *.dll files that has IsNative != "true"-->
   <Target
     Name="GetRequiredNativeAOTAssemblies"
     DependsOnTargets="ResolveLibrariesRuntimeFilesFromLocalBuild"

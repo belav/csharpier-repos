@@ -24,9 +24,48 @@
   </xs:schema>
 
   <hc:ResourceStrings xmlns:hc="xsdResources">
-    <!--                                          --><!-- This XML file is used to generate the public header file corerror.h --><!-- and resource file msgurt.rc. All new HRESULT declarations should be added to this XML. --><!--                                          --><!--     IMPORTANT***IMPORTANT***IMPORTANT    --><!--                                          --><!--     All CLR error codes should be in     --><!--     HRESULT NumericValue="0x......" format --><!--                                          --><!-- These HRESULTs are used for mapping managed exceptions to COM error codes --><!-- and vice versa through COM Interop.  For background on COM error codes see --><!-- http://msdn.microsoft.com/library/default.asp?url=/library/en-us/com/error_9td2.asp. -->
+    <!--                                          -->
+    <!-- This XML file is used to generate the public header file corerror.h -->
+    <!-- and resource file msgurt.rc. All new HRESULT declarations should be added to this XML. -->
+    <!--                                          -->
+    <!--     IMPORTANT***IMPORTANT***IMPORTANT    -->
+    <!--                                          -->
+    <!--     All CLR error codes should be in     -->
+    <!--     HRESULT NumericValue="0x......" format -->
+    <!--                                          -->
+    <!-- These HRESULTs are used for mapping managed exceptions to COM error codes -->
+    <!-- and vice versa through COM Interop.  For background on COM error codes see -->
+    <!-- http://msdn.microsoft.com/library/default.asp?url=/library/en-us/com/error_9td2.asp. -->
 
-    <!-- The range (0x8013xxxx) and (0x13xxxx) is reserved for the .NET Framework SDK teams. --><!-- Within that range, the following subranges have been allocated for different feature areas: --><!-- 0x10yy for Execution Engine --><!-- 0x11yy for Metadata, TypeLib Export, and CLDB --><!-- 0x12yy for MetaData Validator --><!-- 0x13yy for Debugger and Profiler errors --><!-- 0x14yy for Security --><!-- 0x15yy for BCL--><!-- 0x1600 - 0x161F for Reflection --><!-- 0x1620 - 0x163F for System.IO --><!-- 0x1640 - 0x165F for Security --><!-- 0x1660 - 0x16FF for BCL --><!-- 0x17yy for shim --><!-- 0x18yy for IL Verifier --><!-- 0x19yy for .NET Framework --><!-- 0x1Ayy for .NET Framework --><!-- 0x1Byy for MetaData Validator --><!-- 0x1Cyy for more debugger errors --><!-- 0x1Dyy for PE Format Validation --><!-- 0x1Eyy for CLR Optimization Service errors --><!-- 0x1Fyy for NGEN errors --><!-- 0x30yy for VSA errors --><!-- 0x31yy for NGEN errors --><!-- 0x32yy for binder errors --><!-- Base class library HRESULTs are copied from this file into many different --><!-- files named __HResults.cs under the BCL directory.  Frameworks HRESULTs are --><!-- defined in src/main/HResults.cs. If you make any modifications to --><!-- the range allocations described above, please make sure this xml file gets updated. --><!--                                          -->
+    <!-- The range (0x8013xxxx) and (0x13xxxx) is reserved for the .NET Framework SDK teams. -->
+    <!-- Within that range, the following subranges have been allocated for different feature areas: -->
+    <!-- 0x10yy for Execution Engine -->
+    <!-- 0x11yy for Metadata, TypeLib Export, and CLDB -->
+    <!-- 0x12yy for MetaData Validator -->
+    <!-- 0x13yy for Debugger and Profiler errors -->
+    <!-- 0x14yy for Security -->
+    <!-- 0x15yy for BCL-->
+    <!-- 0x1600 - 0x161F for Reflection -->
+    <!-- 0x1620 - 0x163F for System.IO -->
+    <!-- 0x1640 - 0x165F for Security -->
+    <!-- 0x1660 - 0x16FF for BCL -->
+    <!-- 0x17yy for shim -->
+    <!-- 0x18yy for IL Verifier -->
+    <!-- 0x19yy for .NET Framework -->
+    <!-- 0x1Ayy for .NET Framework -->
+    <!-- 0x1Byy for MetaData Validator -->
+    <!-- 0x1Cyy for more debugger errors -->
+    <!-- 0x1Dyy for PE Format Validation -->
+    <!-- 0x1Eyy for CLR Optimization Service errors -->
+    <!-- 0x1Fyy for NGEN errors -->
+    <!-- 0x30yy for VSA errors -->
+    <!-- 0x31yy for NGEN errors -->
+    <!-- 0x32yy for binder errors -->
+    <!-- Base class library HRESULTs are copied from this file into many different -->
+    <!-- files named __HResults.cs under the BCL directory.  Frameworks HRESULTs are -->
+    <!-- defined in src/main/HResults.cs. If you make any modifications to -->
+    <!-- the range allocations described above, please make sure this xml file gets updated. -->
+    <!--                                          -->
 
     <HRESULT NumericValue="0x131106">
       <SymbolicName>CLDB_S_TRUNCATION</SymbolicName>

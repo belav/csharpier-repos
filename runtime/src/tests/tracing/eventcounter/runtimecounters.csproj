@@ -16,7 +16,8 @@
 
   <!-- Hack to get NativeAOT assemblies into IlcReference
        In CoreCLR tests, these assemblies get copied to CORE_ROOT, which NativeAOT doesn't use
-  --><!-- Get all the *.dll files that has IsNative != "true"-->
+  -->
+  <!-- Get all the *.dll files that has IsNative != "true"-->
   <Target
     Name="GetRequiredNativeAOTAssemblies"
     DependsOnTargets="ResolveLibrariesRuntimeFilesFromLocalBuild"

@@ -47,7 +47,8 @@
       <WasmHelixTestAppRelativeDir Condition="'$(WasmHelixTestAppRelativeDir)' == ''"
         >$(MSBuildProjectName)</WasmHelixTestAppRelativeDir
       >
-      <!-- Helix properties --><!-- AnyCPU as Platform-->
+      <!-- Helix properties -->
+      <!-- AnyCPU as Platform-->
       <OSPlatformConfig>$(TargetOS).AnyCPU.$(Configuration)</OSPlatformConfig>
       <HelixArchiveRoot>$([MSBuild]::NormalizeDirectory($(ArtifactsDir), 'helix'))</HelixArchiveRoot>
       <HelixArchiveRunOnlyRoot>$([MSBuild]::NormalizeDirectory($(HelixArchiveRoot), 'runonly'))</HelixArchiveRunOnlyRoot>

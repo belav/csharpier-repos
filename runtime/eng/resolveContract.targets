@@ -104,7 +104,8 @@
     <ApiCompatValidateAssemblies Condition="'$(HasMatchingContract)' != 'true'"
       >false</ApiCompatValidateAssemblies
     >
-    <!-- TODO: Move into Microsoft.DotNet.GenFacadesNotSupported.targets. --><!-- Not supported sources are created from the ref assembly, we currently don't produce finalizers in dummy assemblies, so we disable ApiCompat to not fail. -->
+    <!-- TODO: Move into Microsoft.DotNet.GenFacadesNotSupported.targets. -->
+    <!-- Not supported sources are created from the ref assembly, we currently don't produce finalizers in dummy assemblies, so we disable ApiCompat to not fail. -->
     <ApiCompatValidateAssemblies Condition="'$(GeneratePlatformNotSupportedAssemblyMessage)' != ''"
       >false</ApiCompatValidateAssemblies
     >

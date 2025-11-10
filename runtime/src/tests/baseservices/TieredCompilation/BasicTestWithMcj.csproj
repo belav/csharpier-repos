@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <!-- Needs to build an exe with explicit Main as the MCJ functionality seems not to play well --><!-- with the Roslyn-generated wrapper. --><!-- Needed for CLRTestTargetUnsupported -->
+    <!-- Needs to build an exe with explicit Main as the MCJ functionality seems not to play well -->
+    <!-- with the Roslyn-generated wrapper. -->
+    <!-- Needed for CLRTestTargetUnsupported -->
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <OutputType>Exe</OutputType>
     <ReferenceXUnitWrapperGenerator>false</ReferenceXUnitWrapperGenerator>

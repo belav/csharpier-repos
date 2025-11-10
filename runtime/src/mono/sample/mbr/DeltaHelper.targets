@@ -1,6 +1,7 @@
 <Project>
   <!-- Invoke hotreload-delta-gen to apply the DeltaScript to the output assembly to
-       create the .dmeta, .dil and .dpdb files on the OutputPath --><!-- Have to be careful about AfterTargets. If we happen to go after a design-time target, we could get into an infinite loop. -->
+       create the .dmeta, .dil and .dpdb files on the OutputPath -->
+  <!-- Have to be careful about AfterTargets. If we happen to go after a design-time target, we could get into an infinite loop. -->
   <Target Name="CompileDiff" AfterTargets="Build">
     <Message
       Importance="High"

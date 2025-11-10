@@ -30,7 +30,8 @@
     Condition="'$(EnforceE2ETestPrerequisites)' == 'true'"
     BeforeTargets="Build"
   >
-    <!-- JAVA --><!-- https://github.com/dotnet/aspnetcore-internal/issues/2555 -->
+    <!-- JAVA -->
+    <!-- https://github.com/dotnet/aspnetcore-internal/issues/2555 -->
     <Message Importance="High" Text="Ensuring JAVA is available" />
     <Exec Command="java -version" />
     <Message Importance="High" Text="JAVA is available on the PATH" />

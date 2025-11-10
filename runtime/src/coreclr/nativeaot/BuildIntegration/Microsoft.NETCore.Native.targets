@@ -335,7 +335,8 @@ The .NET Foundation licenses this file to you under the MIT license.
         Condition="%(ManagedAssemblyToLink.TrimmerSingleWarn) == 'false'"
       />
 
-      <!-- Now process the raw ItemGroup into the form that ILC accepts: assembly names only --><!-- Use the logic that ILLinker uses: if the file exists, this is a file name. Otherwise it's an assembly name -->
+      <!-- Now process the raw ItemGroup into the form that ILC accepts: assembly names only -->
+      <!-- Use the logic that ILLinker uses: if the file exists, this is a file name. Otherwise it's an assembly name -->
       <_IlcRootedAssemblies
         Include="@(_IlcRootedAssembliesRaw->'%(Filename)')"
         Condition="Exists('%(Identity)')"

@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <!-- Needed for JitOptimizationSensitive, GC.WaitForPendingFinalizers --><!-- See https://github.com/dotnet/runtime/issues/68529 -->
+    <!-- Needed for JitOptimizationSensitive, GC.WaitForPendingFinalizers -->
+    <!-- See https://github.com/dotnet/runtime/issues/68529 -->
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
 
     <CLRTestPriority>1</CLRTestPriority>

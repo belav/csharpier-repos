@@ -14,7 +14,8 @@ This file contains the logic for providing Execution Script generation.
   <!--
   *******************************************************************************************
   PROPERTIES/ITEMS: Used when prepping a test for execution
-  --><!-- Temporary Defaults -->
+  -->
+  <!-- Temporary Defaults -->
   <PropertyGroup>
     <_CLRTestNeedsToRun Condition=" '$(_CLRTestNeedsToRun)' == '' ">true</_CLRTestNeedsToRun>
     <_CLRTestBuildsExecutable Condition=" '$(_CLRTestBuildsExecutable)' == '' "

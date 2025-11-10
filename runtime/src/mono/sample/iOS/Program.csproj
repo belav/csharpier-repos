@@ -84,7 +84,8 @@
     AfterTargets="_AppleGenerateAppBundle"
   >
     <PropertyGroup>
-      <!-- Helix properties --><!-- AnyCPU as Platform-->
+      <!-- Helix properties -->
+      <!-- AnyCPU as Platform-->
       <OSPlatformConfig>$(TargetOS).AnyCPU.$(Configuration)</OSPlatformConfig>
       <!-- <OSPlatformConfig>$(TargetOS).$(Platform).$(Configuration)</OSPlatformConfig> -->
       <HelixArchiveRoot>$(ArtifactsDir)helix/</HelixArchiveRoot>

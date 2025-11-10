@@ -191,7 +191,8 @@
     <AutoUnifyAssemblyReferences>true</AutoUnifyAssemblyReferences>
   </PropertyGroup>
 
-  <!-- Project language --><!-- TODO: This might just be the Language property -->
+  <!-- Project language -->
+  <!-- TODO: This might just be the Language property -->
   <PropertyGroup Condition="'$(ProjectLanguage)' == ''">
     <ProjectLanguage Condition="'$(MSBuildProjectExtension)' == '.ilproj' OR '$(Language)' == 'IL'"
       >IL</ProjectLanguage
@@ -210,7 +211,10 @@
     >
   </PropertyGroup>
 
-  <!-- If a test in a merged test directory (e.g., under JIT\Directed where Directed_1.csproj and siblings --><!-- represent the groups) has OutputType==Exe set, then it will end up being skipped because the merged --><!-- groups are supposed to cover all of the tests. The merged groups themselves should be Exes, as      --><!-- should any test marked RequiresProcessIsolation or BuildAsStandalone. -->
+  <!-- If a test in a merged test directory (e.g., under JIT\Directed where Directed_1.csproj and siblings -->
+  <!-- represent the groups) has OutputType==Exe set, then it will end up being skipped because the merged -->
+  <!-- groups are supposed to cover all of the tests. The merged groups themselves should be Exes, as      -->
+  <!-- should any test marked RequiresProcessIsolation or BuildAsStandalone. -->
   <Target Name="CheckForTestOutsideOfGroup" BeforeTargets="Build">
     <Error
       Condition="'$(InMergedTestDirectory)' == 'true'
@@ -228,7 +232,16 @@
       <NativeProjectBinaries Include="$(NativeProjectOutputFolder)\*.*" />
     </ItemGroup>
     <ItemGroup Condition="'$(UseVisualStudioNativeBinariesLayout)' != 'true'">
-      <!-- ############################################################### --><!-- The following is required because the single configuration      --><!-- generators, unlike multi-configuration generators,              --><!-- do not place the binaries built into a separate                 --><!-- Debug/Checked/Release directory. Therefore we must filter       --><!-- the folder to only include dynamic libraries, static libraries  --><!--  and executables.                                               --><!--                                                                 --><!-- Please take care when modifying the following lines of code.    --><!-- ############################################################### -->
+      <!-- ############################################################### -->
+      <!-- The following is required because the single configuration      -->
+      <!-- generators, unlike multi-configuration generators,              -->
+      <!-- do not place the binaries built into a separate                 -->
+      <!-- Debug/Checked/Release directory. Therefore we must filter       -->
+      <!-- the folder to only include dynamic libraries, static libraries  -->
+      <!--  and executables.                                               -->
+      <!--                                                                 -->
+      <!-- Please take care when modifying the following lines of code.    -->
+      <!-- ############################################################### -->
 
       <!-- Include everything and then filter. -->
       <NativeProjectBinariesMatched Include="$(NativeProjectOutputFolder)\**\*.*" />

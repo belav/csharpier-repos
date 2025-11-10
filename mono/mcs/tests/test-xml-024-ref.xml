@@ -17,7 +17,8 @@
       <include path="/foo/bar" />
     </member>
     <member name="M:Testing.Test.Baz(System.Int32)">
-      <!-- Badly formed XML in at comment file `there-is-no-such-file': cannot be included --><!-- No matching elements were found for the include tag embedded here. -->
+      <!-- Badly formed XML in at comment file `there-is-no-such-file': cannot be included -->
+      <!-- No matching elements were found for the include tag embedded here. -->
       <include file="there-is-no-such-file" path="/foo/bar" />
     </member>
   </members>

@@ -80,13 +80,15 @@
       <method name="InternalArray__IReadOnlyCollection_get_Count" />
     </type>
 
-    <!-- mono/metadata/exception.c mono/metadata/marshal.c ... --><!-- exception.c (mono_get_exception_array_type_mismatch) -->
+    <!-- mono/metadata/exception.c mono/metadata/marshal.c ... -->
+    <!-- exception.c (mono_get_exception_array_type_mismatch) -->
     <type fullname="System.ArrayTypeMismatchException">
       <!-- mono_exception_from_name -->
       <method signature="System.Void .ctor()" />
     </type>
 
-    <!-- domain.c: mono_defaults.attribute_class --><!-- used in reflection.c to create array of attributes (no need to preserve everything beside the type itself) -->
+    <!-- domain.c: mono_defaults.attribute_class -->
+    <!-- used in reflection.c to create array of attributes (no need to preserve everything beside the type itself) -->
     <type fullname="System.Attribute" preserve="nothing" />
 
     <!-- exception.c / mono-error.c -->
@@ -129,7 +131,8 @@
     <!-- domain.c: mono_defaults.delegate_class -->
     <type fullname="System.Delegate" preserve="fields" />
 
-    <!-- domain.c: mono_defaults.stack_frame_class --><!-- used in mini-exceptions.c to create array and MonoStackFrame instance, i.e. only fields are required to be preserved -->
+    <!-- domain.c: mono_defaults.stack_frame_class -->
+    <!-- used in mini-exceptions.c to create array and MonoStackFrame instance, i.e. only fields are required to be preserved -->
     <type fullname="System.Diagnostics.StackFrame" preserve="fields">
       <!-- threads.c mono_object_new_checked in mono_threads_get_thread_dump -->
       <method signature="System.Void .ctor()" />
@@ -191,7 +194,8 @@
     <type fullname="System.FieldAccessException">
       <!-- exception.c: mono_get_exception_field_access / mono_exception_from_name -->
       <method signature="System.Void .ctor()" />
-      <!-- exception.c: mono_get_exception_field_access_msg / mono_exception_from_name_msg --><!-- mini.c (mono_jit_compiler_method_inner) mono_exception_from_name_msg -->
+      <!-- exception.c: mono_get_exception_field_access_msg / mono_exception_from_name_msg -->
+      <!-- mini.c (mono_jit_compiler_method_inner) mono_exception_from_name_msg -->
       <method signature="System.Void .ctor(System.String)" />
     </type>
 
@@ -232,7 +236,8 @@
       <method signature="System.Void .ctor()" />
     </type>
 
-    <!-- marshal.c: emit several times using mono_mb_emit_exception_full --><!-- exception.c (mono_get_exception_invalid_operation) -->
+    <!-- marshal.c: emit several times using mono_mb_emit_exception_full -->
+    <!-- exception.c (mono_get_exception_invalid_operation) -->
     <type fullname="System.InvalidOperationException">
       <!-- mono_exception_from_name_msg -->
       <method signature="System.Void .ctor(System.String)" />
@@ -254,7 +259,8 @@
     <type fullname="System.MethodAccessException">
       <!-- exception.c: mono_get_exception_method_access / mono_exception_from_name -->
       <method signature="System.Void .ctor()" />
-      <!-- exception.c: mono_get_exception_method_access_msg / mono_exception_from_name_msg --><!-- mini.c (mono_jit_compiler_method_inner) mono_exception_from_name_msg -->
+      <!-- exception.c: mono_get_exception_method_access_msg / mono_exception_from_name_msg -->
+      <!-- mini.c (mono_jit_compiler_method_inner) mono_exception_from_name_msg -->
       <method signature="System.Void .ctor(System.String)" />
     </type>
 
@@ -306,7 +312,8 @@
       <method signature="System.Void .ctor(System.String)" />
     </type>
 
-    <!-- appdomain.c (create_domain_objects) domain->null_reference_ex --><!-- exception.c (mono_get_exception_null_reference) -->
+    <!-- appdomain.c (create_domain_objects) domain->null_reference_ex -->
+    <!-- exception.c (mono_get_exception_null_reference) -->
     <type fullname="System.NullReferenceException">
       <!-- exception.c: mono_exception_from_name -->
       <method signature="System.Void .ctor()" />
@@ -520,7 +527,8 @@
     <type fullname="System.IO.FileNotFoundException">
       <!-- mini.c (mono_jit_compiler_method_inner) mono_exception_from_name_msg -->
       <method signature="System.Void .ctor(System.String)" />
-      <!-- exception.c (mono_get_exception_file_not_found and mono_get_exception_file_not_found) --><!-- mono_exception_from_name_two_strings -->
+      <!-- exception.c (mono_get_exception_file_not_found and mono_get_exception_file_not_found) -->
+      <!-- mono_exception_from_name_two_strings -->
       <method signature="System.Void .ctor(System.String,System.String)" />
     </type>
 
@@ -698,7 +706,8 @@
       <method signature="System.Void .ctor(System.String)" />
     </type>
 
-    <!-- appdomain.c: mono_context_init --><!-- marshal.c: mono_remoting_marshal_init / removed with DISABLE_REMOTING -->
+    <!-- appdomain.c: mono_context_init -->
+    <!-- marshal.c: mono_remoting_marshal_init / removed with DISABLE_REMOTING -->
     <type fullname="System.Runtime.Remoting.Contexts.Context" preserve="fields" feature="remoting">
       <method name="get_NeedsContextSink" />
     </type>
@@ -708,7 +717,9 @@
       <method name="CanCastTo" />
     </type>
 
-    <!-- domain.c: mono_defaults.asyncresult_class (Stubify can't be applied on this type) --><!-- object.c MONO_OBJECT_SETREF in mono_async_result_new --><!-- threadpool.c: MONO_OBJECT_SETREF in create_simple_asyncresult -->
+    <!-- domain.c: mono_defaults.asyncresult_class (Stubify can't be applied on this type) -->
+    <!-- object.c MONO_OBJECT_SETREF in mono_async_result_new -->
+    <!-- threadpool.c: MONO_OBJECT_SETREF in create_simple_asyncresult -->
     <type fullname="System.Runtime.Remoting.Messaging.AsyncResult" preserve="fields">
       <!-- object.c mono_object_new_checked in mono_async_result_new -->
       <method signature="System.Void .ctor()" />
@@ -773,7 +784,8 @@
       <method name="Exchange" />
     </type>
 
-    <!-- domain.c: mono_defaults.monitor_class --><!-- monitor.c / method-to-ir.c: Enter and Exit are only string comparison (safe to link) -->
+    <!-- domain.c: mono_defaults.monitor_class -->
+    <!-- monitor.c / method-to-ir.c: Enter and Exit are only string comparison (safe to link) -->
     <type fullname="System.Threading.Monitor">
       <!-- marshal.c: mono_marshal_get_synchronized_wrapper-->
       <method name="Enter" />
@@ -800,7 +812,8 @@
     <!-- domain.c: mono_defaults.internal_thread_class -->
     <type fullname="System.Threading.InternalThread" preserve="fields" />
 
-    <!-- domain.c: mono_defaults.threadabortexception_class --><!-- exception.c (mono_get_exception_thread_abort) -->
+    <!-- domain.c: mono_defaults.threadabortexception_class -->
+    <!-- exception.c (mono_get_exception_thread_abort) -->
     <type fullname="System.Threading.ThreadAbortException">
       <!-- mono_exception_from_name -->
       <method signature="System.Void .ctor()" />

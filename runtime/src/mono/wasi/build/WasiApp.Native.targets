@@ -276,7 +276,8 @@
       <_WasiClangCommonFlags Include="--sysroot=&quot;$(WasiSdkRoot.Replace('\', '/'))/share/wasi-sysroot&quot;" />
       <_WasiClangCommonFlags Include="-g" Condition="'$(WasmNativeStrip)' == 'false'" />
       <_WasiClangCommonFlags Include="-v" Condition="'$(WasiClangVerbose)' != 'false'" />
-      <!--<_WasiClangCommonFlags Include="-s DISABLE_EXCEPTION_CATCHING=0"   Condition="'$(WasmEnableExceptionHandling)' == 'false'" />--><!--<_WasiClangCommonFlags Include="-fwasm-exceptions"                 Condition="'$(WasmEnableExceptionHandling)' == 'true'" />-->
+      <!--<_WasiClangCommonFlags Include="-s DISABLE_EXCEPTION_CATCHING=0"   Condition="'$(WasmEnableExceptionHandling)' == 'false'" />-->
+      <!--<_WasiClangCommonFlags Include="-fwasm-exceptions"                 Condition="'$(WasmEnableExceptionHandling)' == 'true'" />-->
       <_WasiClangCommonFlags Include="-msimd128" Condition="'$(WasmEnableSIMD)' == 'true'" />
 
       <_WasmCommonCFlags Include="-DGEN_PINVOKE=1" />
@@ -350,7 +351,8 @@
 
       <_WasmPInvokeModules Include="libSystem.Native" />
       <_WasmPInvokeModules Include="libSystem.Globalization.Native" />
-      <!-- FIXME: wasi --><!--<_WasmPInvokeModules Include="libSystem.IO.Compression.Native" />-->
+      <!-- FIXME: wasi -->
+      <!--<_WasmPInvokeModules Include="libSystem.IO.Compression.Native" />-->
     </ItemGroup>
 
     <PropertyGroup>
@@ -493,7 +495,8 @@
       <_WasmEHLib Condition="'$(WasmEnableExceptionHandling)' == 'true'"
         >libmono-wasm-eh-wasm.a</_WasmEHLib
       >
-      <!--<_WasmEHLib Condition="'$(WasmEnableExceptionHandling)' != 'true'">libmono-wasm-eh-js.a</_WasmEHLib>--><!--<_WasmEHLibToExclude Condition="'$(WasmEnableExceptionHandling)' == 'true'">libmono-wasm-eh-js.a</_WasmEHLibToExclude>-->
+      <!--<_WasmEHLib Condition="'$(WasmEnableExceptionHandling)' != 'true'">libmono-wasm-eh-js.a</_WasmEHLib>-->
+      <!--<_WasmEHLibToExclude Condition="'$(WasmEnableExceptionHandling)' == 'true'">libmono-wasm-eh-js.a</_WasmEHLibToExclude>-->
       <_WasmEHLibToExclude Condition="'$(WasmEnableExceptionHandling)' != 'true'"
         >libmono-wasm-eh-wasm.a</_WasmEHLibToExclude
       >
@@ -832,7 +835,8 @@
       />
     </ItemGroup>
 
-    <!-- Run mono-cil-strip on the assemblies --><!-- TODO: replace this with a linker task -->
+    <!-- Run mono-cil-strip on the assemblies -->
+    <!-- TODO: replace this with a linker task -->
     <MakeDir Directories="$(_WasmStrippedAssembliesPath)" />
     <Exec Command="mono-cil-strip -q &quot;%(_WasmStrippedAssemblies.OriginalPath)&quot; &quot;%(_WasmStrippedAssemblies.Identity)&quot;" />
 

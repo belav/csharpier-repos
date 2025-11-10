@@ -318,7 +318,8 @@
 
     <ItemGroup>
       <_DependencyDirectoriesTemp Include="@(ReferencePathWithRefAssemblies->'%(RootDir)%(Directory)')" />
-      <!-- Remove duplicate directories by batching over them --><!-- Add project references first to give precedence to project-specific files -->
+      <!-- Remove duplicate directories by batching over them -->
+      <!-- Add project references first to give precedence to project-specific files -->
       <_DependencyDirectories
         Condition="'%(_DependencyDirectoriesTemp.ReferenceSourceTarget)'=='ProjectReference'"
         Include="%(_DependencyDirectoriesTemp.Identity)"

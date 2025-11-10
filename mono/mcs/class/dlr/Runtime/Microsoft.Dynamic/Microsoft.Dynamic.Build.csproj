@@ -75,7 +75,9 @@
   </ItemGroup>
   <!-- Begin Generated Project Items By GenerateSystemCoreCsproj.py -->
   <ItemGroup>
-    <!--                    --><!--                    --><!--                    -->
+    <!--                    -->
+    <!--                    -->
+    <!--                    -->
     <Compile Include="DebugOptions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IValueEquality.cs" />
@@ -87,7 +89,9 @@
     <Compile Include="SpecSharp.cs" />
   </ItemGroup>
   <ItemGroup>
-    <!--                           --><!--          Actions          --><!--                           -->
+    <!--                           -->
+    <!--          Actions          -->
+    <!--                           -->
     <Compile Include="Actions\ActionBinder.cs" />
     <Compile Include="Actions\Argument.cs" />
     <Compile Include="Actions\ArgumentType.cs" />
@@ -135,7 +139,9 @@
     <Compile Include="Actions\TypeTracker.cs" />
   </ItemGroup>
   <ItemGroup>
-    <!--                                 --><!--          Actions.Calls          --><!--                                 -->
+    <!--                                 -->
+    <!--          Actions.Calls          -->
+    <!--                                 -->
     <Compile Include="Actions\Calls\ActualArguments.cs" />
     <Compile Include="Actions\Calls\ApplicableCandidate.cs" />
     <Compile Include="Actions\Calls\ArgBuilder.cs" />
@@ -171,7 +177,9 @@
     <Compile Include="Actions\Calls\TypeInferer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <!--                       --><!--          Ast          --><!--                       -->
+    <!--                       -->
+    <!--          Ast          -->
+    <!--                       -->
     <Compile Include="Ast\BinaryExpression.cs" />
     <Compile Include="Ast\Block.cs" />
     <Compile Include="Ast\BlockBuilder.cs" />
@@ -202,7 +210,9 @@
     <Compile Include="Ast\YieldExpression.cs" />
   </ItemGroup>
   <ItemGroup>
-    <!--                              --><!--          ComInterop          --><!--                              -->
+    <!--                              -->
+    <!--          ComInterop          -->
+    <!--                              -->
     <Compile Include="ComInterop\ArgBuilder.cs" />
     <Compile Include="ComInterop\BoolArgBuilder.cs" />
     <Compile Include="ComInterop\BoundDispEvent.cs" />
@@ -263,7 +273,9 @@
     <Compile Include="ComInterop\VariantBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <!--                              --><!--          Generation          --><!--                              -->
+    <!--                              -->
+    <!--          Generation          -->
+    <!--                              -->
     <Compile Include="Generation\AssemblyGen.cs" />
     <Compile Include="Generation\CompilerHelpers.cs" />
     <Compile Include="Generation\ConstantCheck.cs" />
@@ -280,7 +292,9 @@
     <Compile Include="Generation\TypeGen.cs" />
   </ItemGroup>
   <ItemGroup>
-    <!--                                 --><!--          Hosting.Shell          --><!--                                 -->
+    <!--                                 -->
+    <!--          Hosting.Shell          -->
+    <!--                                 -->
     <Compile Include="Hosting\Shell\BasicConsole.cs" />
     <Compile Include="Hosting\Shell\CommandLine.cs" />
     <Compile Include="Hosting\Shell\ConsoleHost.cs" />
@@ -294,7 +308,9 @@
     <Compile Include="Hosting\Shell\SuperConsole.cs" />
   </ItemGroup>
   <ItemGroup>
-    <!--                                        --><!--          Hosting.Shell.Remote          --><!--                                        -->
+    <!--                                        -->
+    <!--          Hosting.Shell.Remote          -->
+    <!--                                        -->
     <Compile Include="Hosting\Shell\Remote\ConsoleRestartManager.cs" />
     <Compile Include="Hosting\Shell\Remote\RemoteCommandDispatcher.cs" />
     <Compile Include="Hosting\Shell\Remote\RemoteConsoleCommandLine.cs" />
@@ -302,7 +318,9 @@
     <Compile Include="Hosting\Shell\Remote\RemoteRuntimeServer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <!--                               --><!--          Interpreter          --><!--                               -->
+    <!--                               -->
+    <!--          Interpreter          -->
+    <!--                               -->
     <Compile Include="Interpreter\BranchLabel.cs" />
     <Compile Include="Interpreter\ILightCallSiteBinder.cs" />
     <Compile Include="Interpreter\InterpretedFrame.cs" />
@@ -318,7 +336,9 @@
     <Compile Include="Interpreter\RuntimeVariables.cs" />
   </ItemGroup>
   <ItemGroup>
-    <!--                                            --><!--          Interpreter.Instructions          --><!--                                            -->
+    <!--                                            -->
+    <!--          Interpreter.Instructions          -->
+    <!--                                            -->
     <Compile Include="Interpreter\Instructions\AddInstruction.cs" />
     <Compile Include="Interpreter\Instructions\ArrayOperations.cs" />
     <Compile Include="Interpreter\Instructions\CallInstruction.cs" />
@@ -342,17 +362,23 @@
     <Compile Include="Interpreter\Instructions\TypeOperations.cs" />
   </ItemGroup>
   <ItemGroup>
-    <!--                        --><!--          Math          --><!--                        -->
+    <!--                        -->
+    <!--          Math          -->
+    <!--                        -->
     <Compile Include="Math\BigIntegerV2.cs" />
     <Compile Include="Math\BigIntegerV4.cs" />
     <Compile Include="Math\Complex64.cs" />
   </ItemGroup>
   <ItemGroup>
-    <!--                              --><!--          Properties          --><!--                              -->
+    <!--                              -->
+    <!--          Properties          -->
+    <!--                              -->
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <!--                           --><!--          Runtime          --><!--                           -->
+    <!--                           -->
+    <!--          Runtime          -->
+    <!--                           -->
     <Compile Include="Runtime\AmbiguousFileNameException.cs" />
     <Compile Include="Runtime\ArgumentArray.cs" />
     <Compile Include="Runtime\AssemblyTypeNames.cs" />
@@ -412,7 +438,9 @@
     <Compile Include="Runtime\Uninitialized.cs" />
   </ItemGroup>
   <ItemGroup>
-    <!--                         --><!--          Utils          --><!--                         -->
+    <!--                         -->
+    <!--          Utils          -->
+    <!--                         -->
     <Compile Include="Utils\ArrayUtils.cs" />
     <Compile Include="Utils\AssemblyQualifiedTypeName.cs" />
     <Compile Include="Utils\Assert.cs" />

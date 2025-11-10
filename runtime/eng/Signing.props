@@ -26,7 +26,8 @@
     <FileSignInfo Include="mscordaccore.dll" CertificateName="None" />
     <FileSignInfo Include="mscordbi.dll" CertificateName="None" />
 
-    <!-- We don't need to code sign .js files because they are not used in Windows Script Host. --><!-- WARNING: Needs to happed outside of any target -->
+    <!-- We don't need to code sign .js files because they are not used in Windows Script Host. -->
+    <!-- WARNING: Needs to happed outside of any target -->
     <FileExtensionSignInfo Update=".js" CertificateName="None" />
 
     <!-- Third-party components which should be signed.  -->

@@ -12,7 +12,8 @@
     <ExtensionInstallationRoot>$(CommonExtensionInstallationRoot)</ExtensionInstallationRoot>
     <ExtensionInstallationFolder>$(LanguageServicesExtensionInstallationFolder)\Core</ExtensionInstallationFolder>
 
-    <!-- VS Insertion --><!--
+    <!-- VS Insertion -->
+    <!--
        Only set InsertionComponent in official build, otherwise PackageInstaller would fail to install the vsix for integration CI
        if the package isn't already present in `Microsoft.CodeAnalysis.LanguageServices` component. We should remove this workaround
        once our integration CI moves to VS 17.7 Preview 2.
@@ -21,7 +22,8 @@
       >Microsoft.CodeAnalysis.LanguageServices</VisualStudioInsertionComponent
     >
 
-    <!-- ServiceHub AssemblyPath --><!-- Path to our servicehub entry point dll in the vsix directory relative 
+    <!-- ServiceHub AssemblyPath -->
+    <!-- Path to our servicehub entry point dll in the vsix directory relative 
          to our servicehub.servicehub.json files in the same vsix directory -->
     <ServiceHubAssemblyBasePath>.\</ServiceHubAssemblyBasePath>
     <ServiceHubHostRuntime>core</ServiceHubHostRuntime>

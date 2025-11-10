@@ -102,7 +102,9 @@ Unify Enum declarations with other block type declarations.
       <description>The base class for all nodes in the VB syntax tree except tokens and trivia.</description>
      </node-structure>-->
 
-    <!-- ************************************************************************************************** --><!-- **  GENERAL STATEMENT PRIMITIVES                                                                ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  GENERAL STATEMENT PRIMITIVES                                                                ** -->
+    <!-- ************************************************************************************************** -->
 
     <!--****************
       -  Statement
@@ -300,7 +302,9 @@ Unify Enum declarations with other block type declarations.
       </child>
     </node-structure>
 
-    <!-- ************************************************************************************************** --><!-- **  FILE LEVEL STATEMENTS (SOURCE FILE/OPTIONS/ATTRIBUTES/IMPORTS)                              ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  FILE LEVEL STATEMENTS (SOURCE FILE/OPTIONS/ATTRIBUTES/IMPORTS)                              ** -->
+    <!-- ************************************************************************************************** -->
 
     <!--****************
       -  Program
@@ -548,7 +552,9 @@ Unify Enum declarations with other block type declarations.
       <child name="GreaterThanToken" kind="GreaterThanToken"></child>
     </node-structure>
 
-    <!-- ************************************************************************************************** --><!-- **  NAMESPACE AND TYPE DECLARATIONS                                                             ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  NAMESPACE AND TYPE DECLARATIONS                                                             ** -->
+    <!-- ************************************************************************************************** -->
 
     <!--********************
       -  NamespaceBlock
@@ -1254,7 +1260,9 @@ Unify Enum declarations with other block type declarations.
       </child>
     </node-structure>
 
-    <!-- ************************************************************************************************** --><!-- **  TYPE MEMBER DECLARATIONS (Methods, Properties, Variables, ...)                              ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  TYPE MEMBER DECLARATIONS (Methods, Properties, Variables, ...)                              ** -->
+    <!-- ************************************************************************************************** -->
     <node-structure name="EnumMemberDeclarationSyntax" parent="DeclarationStatementSyntax">
       <description>
         Represents a name and value in an EnumDeclarationBlock.
@@ -2003,7 +2011,8 @@ Unify Enum declarations with other block type declarations.
 
     <!--********************
       -  ImplementsClause
-      **********************--><!-- REVIEW: share this with the Implements statement that is inside a class? Its is structurally similar, 
+      **********************-->
+    <!-- REVIEW: share this with the Implements statement that is inside a class? Its is structurally similar, 
     but used for different things. -->
     <node-structure name="ImplementsClauseSyntax" parent="VisualBasicSyntaxNode">
       <description>
@@ -2301,7 +2310,9 @@ Unify Enum declarations with other block type declarations.
       </child>
     </node-structure>
 
-    <!-- ************************************************************************************************** --><!-- **  DECLARATION PARTS (As clause, Initializer, Parameter, ...)                                  ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  DECLARATION PARTS (As clause, Initializer, Parameter, ...)                                  ** -->
+    <!-- ************************************************************************************************** -->
 
     <!--********************
       -  AsClauseNode
@@ -2627,7 +2638,8 @@ Unify Enum declarations with other block type declarations.
 
     <!--********************
       -  ModifiedIdentifier
-      **********************--><!-- REVIEW: Need better name. What does spec call it? -->
+      **********************-->
+    <!-- REVIEW: Need better name. What does spec call it? -->
     <node-structure name="ModifiedIdentifierSyntax" parent="VisualBasicSyntaxNode">
       <description>
         Represents an identifier with optional "?" or "()" or "(,,,)" modifiers, as used in parameter declarations and
@@ -2698,7 +2710,9 @@ Unify Enum declarations with other block type declarations.
       </child>
     </node-structure>
 
-    <!-- ************************************************************************************************** --><!-- **  ATTRIBUTES                                                                                  ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  ATTRIBUTES                                                                                  ** -->
+    <!-- ************************************************************************************************** -->
 
     <!--********************
       -  AttributeListNode
@@ -2812,7 +2826,9 @@ Unify Enum declarations with other block type declarations.
       </child>
     </node-structure>
 
-    <!-- ************************************************************************************************** --><!-- **  EXECUTABLE STATEMENTS                                                                       ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  EXECUTABLE STATEMENTS                                                                       ** -->
+    <!-- ************************************************************************************************** -->
 
     <!--****************
       -  ExpressionStatement
@@ -5141,7 +5157,9 @@ Unify Enum declarations with other block type declarations.
       </child>
     </node-structure>
 
-    <!-- ************************************************************************************************** --><!-- **  EXPRESSIONS                                                                                 ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  EXPRESSIONS                                                                                 ** -->
+    <!-- ************************************************************************************************** -->
 
     <!--****************
       -  ExpressionNode
@@ -5782,7 +5800,8 @@ Unify Enum declarations with other block type declarations.
       </child>
     </node-structure>
 
-    <!-- TODO: New Array Expression --><!--****************
+    <!-- TODO: New Array Expression -->
+    <!--****************
       -  ArrayCreationExpression
       ******************-->
     <node-structure name="ArrayCreationExpressionSyntax" parent="NewExpressionSyntax">
@@ -6579,7 +6598,9 @@ Unify Enum declarations with other block type declarations.
       </child>
     </node-structure>
 
-    <!-- ************************************************************************************************** --><!-- **  QUERY (LINQ) EXPRESSIONS                                                                    ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  QUERY (LINQ) EXPRESSIONS                                                                    ** -->
+    <!-- ************************************************************************************************** -->
 
     <!--********************
       - QueryExpressionSyntax
@@ -6891,7 +6912,8 @@ Unify Enum declarations with other block type declarations.
 
     <!--********************
       -  LetClause
-      **********************--><!-- REVIEW: Unify with Select or From? Or should it stay its own node? -->
+      **********************-->
+    <!-- REVIEW: Unify with Select or From? Or should it stay its own node? -->
     <node-structure name="LetClauseSyntax" parent="QueryClauseSyntax">
       <description>Represents a "Let" query operator.</description>
       <lm-equiv name="LetNode"></lm-equiv>
@@ -7485,7 +7507,8 @@ Unify Enum declarations with other block type declarations.
 
       <child name="LessThanQuestionToken" kind="LessThanQuestionToken"></child>
 
-      <!-- Should there be xml keyword tokens for Xml/Version/Standalone/Encoding???--><!-- But these keywords are really contextual keywords, maybe contextualkind on NCName is better-->
+      <!-- Should there be xml keyword tokens for Xml/Version/Standalone/Encoding???-->
+      <!-- But these keywords are really contextual keywords, maybe contextualkind on NCName is better-->
       <child name="XmlKeyword" kind="XmlKeyword"></child>
 
       <child name="Version" kind="XmlDeclarationOption"></child>
@@ -7721,7 +7744,8 @@ Unify Enum declarations with other block type declarations.
 
       <child name="LessThanQuestionToken" kind="LessThanQuestionToken"></child>
 
-      <!-- TODO this name is really an XMLName, colon's are allowed --><!-- In the spec this is a PiTarget, an XmlName with colon's allowed - Xml-->
+      <!-- TODO this name is really an XMLName, colon's are allowed -->
+      <!-- In the spec this is a PiTarget, an XmlName with colon's allowed - Xml-->
       <child name="Name" kind="XmlNameToken"></child>
 
       <!-- rename XmlPIToken to something better.  This is the char data in the pi-->
@@ -7753,7 +7777,9 @@ Unify Enum declarations with other block type declarations.
       <child name="PercentGreaterThanToken" kind="PercentGreaterThanToken"></child>
     </node-structure>
 
-    <!-- ************************************************************************************************** --><!-- **  TYPES                                                                                       ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  TYPES                                                                                       ** -->
+    <!-- ************************************************************************************************** -->
 
     <!--********************
       -  TypeName
@@ -7855,7 +7881,9 @@ Unify Enum declarations with other block type declarations.
       <description>A type name that cannot be an array or tuple type.</description>
     </node-kind-alias>
 
-    <!-- ************************************************************************************************** --><!-- **  NAMES                                                                                        ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  NAMES                                                                                        ** -->
+    <!-- ************************************************************************************************** -->
 
     <!--********************
       -  Name
@@ -8030,7 +8058,9 @@ Unify Enum declarations with other block type declarations.
       </child>
     </node-structure>
 
-    <!-- ************************************************************************************************** --><!-- **  CREF reference syntax                                                                       ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  CREF reference syntax                                                                       ** -->
+    <!-- ************************************************************************************************** -->
 
     <node-structure name="CrefReferenceSyntax" parent="VisualBasicSyntaxNode">
       <description>
@@ -8100,7 +8130,9 @@ Unify Enum declarations with other block type declarations.
       <child name="Right" kind="CrefOperatorReference" />
     </node-structure>
 
-    <!-- ************************************************************************************************** --><!-- **  Visual Basic 11.0 Syntax                                                                    ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  Visual Basic 11.0 Syntax                                                                    ** -->
+    <!-- ************************************************************************************************** -->
 
     <!--****************
       -  YieldStatement
@@ -8152,7 +8184,9 @@ Unify Enum declarations with other block type declarations.
       </child>
     </node-structure>
 
-    <!-- ************************************************************************************************** --><!-- **  TOKENS                                                                                      ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  TOKENS                                                                                      ** -->
+    <!-- ************************************************************************************************** -->
 
     <!--********************
       -  Token
@@ -9550,7 +9584,9 @@ Unify Enum declarations with other block type declarations.
       </enumerators>
     </enumeration>
 
-    <!-- ************************************************************************************************** --><!-- **  STRUCTURED TRIVIA                                                                          ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  STRUCTURED TRIVIA                                                                          ** -->
+    <!-- ************************************************************************************************** -->
 
     <node-structure name="StructuredTriviaSyntax" abstract="true" parent="VisualBasicSyntaxNode">
       <description>Abstract class that represent structured trivia.</description>
@@ -9782,7 +9818,9 @@ Unify Enum declarations with other block type declarations.
       </child>
     </node-structure>
 
-    <!-- ************************************************************************************************** --><!-- **  TRIVIA                                                                                      ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  TRIVIA                                                                                      ** -->
+    <!-- ************************************************************************************************** -->
 
     <!--********************
       -  Trivia
@@ -9824,7 +9862,9 @@ Unify Enum declarations with other block type declarations.
       </node-kind>
     </node-structure>
 
-    <!-- ************************************************************************************************** --><!-- **  Preprocessor Statements                                                                     ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  Preprocessor Statements                                                                     ** -->
+    <!-- ************************************************************************************************** -->
 
     <node-structure name="ConstDirectiveTriviaSyntax" parent="DirectiveTriviaSyntax">
       <description>Represents a #Const pre-processing constant declaration appearing in source.</description>
@@ -9964,7 +10004,9 @@ Unify Enum declarations with other block type declarations.
       <child name="File" kind="StringLiteralToken" />
     </node-structure>
 
-    <!-- ************************************************************************************************** --><!-- **  ERROR NODES                                                                                 ** --><!-- ************************************************************************************************** -->
+    <!-- ************************************************************************************************** -->
+    <!-- **  ERROR NODES                                                                                 ** -->
+    <!-- ************************************************************************************************** -->
 
     <!--****************
       -  BadDirective

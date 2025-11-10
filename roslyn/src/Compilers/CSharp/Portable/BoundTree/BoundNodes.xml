@@ -960,13 +960,15 @@
   -->
 
   <Node Name="BoundArgList" Base="BoundExpression">
-    <!-- This is the "__arglist" expression that may appear inside a varargs method. --><!-- Non-null type is required for this node kind -->
+    <!-- This is the "__arglist" expression that may appear inside a varargs method. -->
+    <!-- Non-null type is required for this node kind -->
 
     <Field Name="Type" Type="TypeSymbol" Override="true" Null="disallow" />
   </Node>
 
   <Node Name="BoundArgListOperator" Base="BoundExpression">
-    <!-- This is the "__arglist(x, y, z)" expression that may appear in a call to a varargs method. --><!-- Non-null type is required for this node kind -->
+    <!-- This is the "__arglist(x, y, z)" expression that may appear in a call to a varargs method. -->
+    <!-- Non-null type is required for this node kind -->
     <Field Name="Type" Type="TypeSymbol?" Override="true" />
 
     <Field Name="Arguments" Type="ImmutableArray&lt;BoundExpression&gt;" />
@@ -984,7 +986,8 @@
     <!-- char* for type string, T* for type T[]. -->
     <Field Name="ElementPointerType" Type="TypeSymbol" Null="disallow" />
 
-    <!-- Conversion from ElementPointerType to the type of the corresponding local. --><!-- Used as an operand to bind ElementPointerConversion -->
+    <!-- Conversion from ElementPointerType to the type of the corresponding local. -->
+    <!-- Used as an operand to bind ElementPointerConversion -->
     <Field
       Name="ElementPointerPlaceholder"
       Type="BoundValuePlaceholder?"
@@ -1301,7 +1304,9 @@
     <!-- Could be a BoundConversion or, in some cases of an identity conversion, the OperandPlaceholder, or null for no conversion case -->
     <Field Name="ElementConversion" Type="BoundExpression?" SkipInVisitor="true" Null="allow" />
 
-    <!-- Pieces corresponding to the syntax --><!-- This is so the binding API can find produce semantic info if the type is "var". --><!-- If there is a deconstruction, there will be no iteration variable (but we'll still have a type for it). -->
+    <!-- Pieces corresponding to the syntax -->
+    <!-- This is so the binding API can find produce semantic info if the type is "var". -->
+    <!-- If there is a deconstruction, there will be no iteration variable (but we'll still have a type for it). -->
     <Field Name="IterationVariableType" Type="BoundTypeExpression" />
     <Field Name="IterationVariables" Type="ImmutableArray&lt;LocalSymbol&gt;" />
     <!-- In error scenarios where the iteration variable is some arbitrary expression, we

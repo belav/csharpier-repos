@@ -2,7 +2,8 @@
   <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.props, $(MSBuildThisFileDirectory)..))" />
 
   <PropertyGroup>
-    <!-- IJW is Windows-only --><!-- Test unsupported outside of windows -->
+    <!-- IJW is Windows-only -->
+    <!-- Test unsupported outside of windows -->
     <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'"
       >true</CLRTestTargetUnsupported
     >

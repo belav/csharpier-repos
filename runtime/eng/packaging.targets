@@ -42,7 +42,8 @@
     <PackageUseIncrementalServicingVersion Condition="'$(IsShipping)' != 'true'"
       >false</PackageUseIncrementalServicingVersion
     >
-    <!-- Generate packages for rid specific projects or for allconfigurations during build. --><!-- A package isn't generated if in servicing or in runtimelab. Intended to be overridden at project level. -->
+    <!-- Generate packages for rid specific projects or for allconfigurations during build. -->
+    <!-- A package isn't generated if in servicing or in runtimelab. Intended to be overridden at project level. -->
     <IsRIDSpecificProject
       Condition="$(MSBuildProjectName.StartsWith('runtime.')) and
                                      !$(MSBuildProjectName.StartsWith('runtime.native'))"

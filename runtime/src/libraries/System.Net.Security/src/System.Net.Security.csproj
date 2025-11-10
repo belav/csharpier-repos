@@ -170,7 +170,9 @@
     />
   </ItemGroup>
 
-  <!-- This file depends on IANA registry. We do not want anyone's build to break after the update --><!-- or if they don't have internet connection - explicit opt-in required --><!-- To expose newly generated APIs, generated file have to be deliberately copied -->
+  <!-- This file depends on IANA registry. We do not want anyone's build to break after the update -->
+  <!-- or if they don't have internet connection - explicit opt-in required -->
+  <!-- To expose newly generated APIs, generated file have to be deliberately copied -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != ''">
     <Compile Include="System\Net\Security\TlsCipherSuite.cs">
       <DesignTime>True</DesignTime>

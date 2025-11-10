@@ -170,7 +170,9 @@
       Condition="'$(PostBuildSign)' != 'true'"
     />
 
-    <!-- Symbol packages should get no NuGet signature --><!-- Requires https://github.com/dotnet/arcade/issues/6192 to be fixed --><!-- <FileSignInfo Include="@(_SymbolPackages->'%(FileName)%(Extension)'->Distinct())" CertificateName="None" /> -->
+    <!-- Symbol packages should get no NuGet signature -->
+    <!-- Requires https://github.com/dotnet/arcade/issues/6192 to be fixed -->
+    <!-- <FileSignInfo Include="@(_SymbolPackages->'%(FileName)%(Extension)'->Distinct())" CertificateName="None" /> -->
 
     <!--
       We include the Microsoft.Build.Locator.dll assembly in our global tool 'Microsoft.dotnet-openapi'.

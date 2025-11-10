@@ -28,7 +28,8 @@
     <!--
       When adding new projects to @(RequiresDelayedBuild), temporarily reference the projects here, run
       GenerateProjectList.ps1, then undo changes in this file. See comments in Build.props for other options.
-    --><!-- RequiresDelayedBuild Include="..." / -->
+    -->
+    <!-- RequiresDelayedBuild Include="..." / -->
 
     <!-- Enforce build order. Need shared Fx before building the important projects. -->
     <ProjectReference

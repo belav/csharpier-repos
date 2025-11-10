@@ -22,7 +22,9 @@
       Condition="'$(TargetArchitecture)' == 'arm64'"
       Include="mattr=+crc"
     />
-    <!-- enable System.Runtime.Intrinsics.Arm (Crc32 and ArmBase for now) --><!--<MonoAOTCompilerDefaultAotArguments Include="direct-pinvoke" />--><!-- TODO: enable direct-pinvokes (to get rid of -force_loads)-->
+    <!-- enable System.Runtime.Intrinsics.Arm (Crc32 and ArmBase for now) -->
+    <!--<MonoAOTCompilerDefaultAotArguments Include="direct-pinvoke" />-->
+    <!-- TODO: enable direct-pinvokes (to get rid of -force_loads)-->
   </ItemGroup>
   <ItemGroup Condition="'$(TargetOS)' == 'ios' or '$(TargetOS)' == 'iossimulator' or '$(TargetOS)' == 'tvos' or '$(TargetOS)' == 'tvossimulator' or '$(TargetOS)' == 'maccatalyst'">
     <MonoAOTCompilerDefaultProcessArguments Include="-O=gsharedvt" />

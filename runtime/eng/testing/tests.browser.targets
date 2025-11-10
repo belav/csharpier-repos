@@ -66,7 +66,10 @@
     >
   </PropertyGroup>
 
-  <!-- We expect WASM users to indicate they would like to have bigger download size by adding WasmIncludeFullIcuData, --><!-- by default we make their icu small by sharding. --><!-- Trimming test InvariantGlobalizationFalse requires full ICU data. --><!-- ToDo: edit after https://github.com/dotnet/runtime/issues/82819 is merged -->
+  <!-- We expect WASM users to indicate they would like to have bigger download size by adding WasmIncludeFullIcuData, -->
+  <!-- by default we make their icu small by sharding. -->
+  <!-- Trimming test InvariantGlobalizationFalse requires full ICU data. -->
+  <!-- ToDo: edit after https://github.com/dotnet/runtime/issues/82819 is merged -->
   <PropertyGroup Condition="'$(TestTrimming)' == 'true'">
     <WasmIncludeFullIcuData>true</WasmIncludeFullIcuData>
   </PropertyGroup>
@@ -476,7 +479,9 @@
         Variants="net7;latest"
         Condition="'$(WorkloadsTestPreviousVersions)' == 'true'"
       />
-      <!--<WorkloadCombinationsToInstall Include="net6"     Variants="net6" />--><!--<WorkloadCombinationsToInstall Include="net6+7"   Variants="net6;net7" />--><!--<WorkloadCombinationsToInstall Include="none" />-->
+      <!--<WorkloadCombinationsToInstall Include="net6"     Variants="net6" />-->
+      <!--<WorkloadCombinationsToInstall Include="net6+7"   Variants="net6;net7" />-->
+      <!--<WorkloadCombinationsToInstall Include="none" />-->
     </ItemGroup>
   </Target>
 

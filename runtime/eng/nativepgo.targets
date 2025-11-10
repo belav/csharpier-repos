@@ -48,7 +48,15 @@
     />
   </ItemGroup>
 
-  <!--                                                                       --><!-- Task: GetPgoDataPackagePath                                           --><!--                                                                       --><!-- Notes:                                                                --><!--                                                                       --><!-- DumpPgoDataPackagePath is used to get the path of the native PGO data --><!-- for other MSBuild projects, generally to pass to another project or   --><!-- native script like build-runtime.cmd/sh.                              --><!--                                                                       -->
+  <!--                                                                       -->
+  <!-- Task: GetPgoDataPackagePath                                           -->
+  <!--                                                                       -->
+  <!-- Notes:                                                                -->
+  <!--                                                                       -->
+  <!-- DumpPgoDataPackagePath is used to get the path of the native PGO data -->
+  <!-- for other MSBuild projects, generally to pass to another project or   -->
+  <!-- native script like build-runtime.cmd/sh.                              -->
+  <!--                                                                       -->
 
   <Target Name="GetPgoDataPackagePath" Returns="$(PgoPackagePath)">
     <PropertyGroup>

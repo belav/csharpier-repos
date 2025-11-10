@@ -451,7 +451,8 @@
     Condition="'$(XunitTestBinBase)' != '' and '$(TargetsOSX)' == 'true' and '$(TargetArchitecture)' == 'arm64' and '$(RuntimeFlavor)' == 'coreclr' "
   ></ItemGroup>
 
-  <!-- Tests that need to be triaged for vararg usage as that is not supported --><!-- Note these will only be excluded for unix platforms on all runtimes -->
+  <!-- Tests that need to be triaged for vararg usage as that is not supported -->
+  <!-- Note these will only be excluded for unix platforms on all runtimes -->
   <ItemGroup Condition="'$(XunitTestBinBase)' != '' and '$(TargetsWindows)' != 'true' ">
     <ExcludeList Include="$(XunitTestBinBase)/JIT/Directed/PREFIX/unaligned/1/arglist*/*">
       <Issue>needs triage</Issue>
@@ -467,7 +468,8 @@
     </ExcludeList>
   </ItemGroup>
 
-  <!-- Tests that need to be triaged for vararg usage as that is not supported --><!-- Note these will only be excluded for unix platforms on CoreCLR only -->
+  <!-- Tests that need to be triaged for vararg usage as that is not supported -->
+  <!-- Note these will only be excluded for unix platforms on CoreCLR only -->
   <ItemGroup Condition="'$(XunitTestBinBase)' != '' and '$(TargetsWindows)' != 'true' and '$(RuntimeFlavor)' == 'coreclr'">
     <ExcludeList Include="$(XunitTestBinBase)/JIT/jit64/gc/misc/funclet/*">
       <Issue>needs triage</Issue>
@@ -1114,13 +1116,15 @@
       <Issue>expects to see System.Private.CoreLib in CORE_ROOT</Issue>
     </ExcludeList>
 
-    <!-- Complex constrained calls --><!-- https://github.com/dotnet/runtimelab/issues/1431 -->
+    <!-- Complex constrained calls -->
+    <!-- https://github.com/dotnet/runtimelab/issues/1431 -->
     <ExcludeList Include="$(XunitTestBinBase)/Regressions\coreclr\16354\notimplemented\*" />
     <ExcludeList Include="$(XunitTestBinBase)/Loader/classloader\DefaultInterfaceMethods\constrainedcall\constrainedcall\*" />
     <ExcludeList Include="$(XunitTestBinBase)/Loader/classloader\DefaultInterfaceMethods\constrainedcall\constrained2\*" />
     <ExcludeList Include="$(XunitTestBinBase)/Loader/classloader\DefaultInterfaceMethods\constrainedcall\constrained2_gm\*" />
 
-    <!-- Arrays with non-zero lower bounds --><!-- https://github.com/dotnet/runtimelab/issues/155 -->
+    <!-- Arrays with non-zero lower bounds -->
+    <!-- https://github.com/dotnet/runtimelab/issues/155 -->
     <ExcludeList Include="$(XunitTestBinBase)/JIT/Methodical\Arrays\huge\huge_b_r\*" />
     <ExcludeList Include="$(XunitTestBinBase)/JIT/Methodical\Arrays\huge\huge_i4_r\*" />
     <ExcludeList Include="$(XunitTestBinBase)/JIT/Methodical\Arrays\huge\huge_objref_r\*" />
@@ -1158,7 +1162,8 @@
     <ExcludeList Include="$(XunitTestBinBase)/JIT/Performance/CodeQuality/Benchstones/MDBenchI/MDGeneralArray/MDGeneralArray/*" />
     <ExcludeList Include="$(XunitTestBinBase)/Loader/classloader/regressions/GitHub_93597/GitHub_93597/*" />
 
-    <!-- Covariant returns --><!-- https://github.com/dotnet/runtimelab/issues/205 -->
+    <!-- Covariant returns -->
+    <!-- https://github.com/dotnet/runtimelab/issues/205 -->
     <ExcludeList Include="$(XunitTestBinBase)/Loader\classloader\MethodImpl\CovariantReturns\Interfaces\UnitTest\*" />
     <ExcludeList Include="$(XunitTestBinBase)/Loader\classloader\MethodImpl\CovariantReturns\Interfaces\UnsupportedScenario1\*" />
     <ExcludeList Include="$(XunitTestBinBase)/Loader\classloader\MethodImpl\CovariantReturns\Interfaces\UnsupportedScenario2\*" />

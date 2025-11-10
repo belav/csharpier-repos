@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <IncludeRemoteExecutor>true</IncludeRemoteExecutor>
-    <!-- xUnit2008 is about regexes and isn't appropriate in the test project for regexes --><!-- SYSLIB0036 is about obsoletion of regex members --><!-- SYSLIB1045 is for switching to GeneratedRegex -->
+    <!-- xUnit2008 is about regexes and isn't appropriate in the test project for regexes -->
+    <!-- SYSLIB0036 is about obsoletion of regex members -->
+    <!-- SYSLIB1045 is for switching to GeneratedRegex -->
     <NoWarn>$(NoWarn);xUnit2008;SYSLIB0036;SYSLIB1045</NoWarn>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkCurrent)</TargetFrameworks>
     <DebuggerSupport Condition="'$(DebuggerSupport)' == '' and '$(TargetOS)' == 'browser'"

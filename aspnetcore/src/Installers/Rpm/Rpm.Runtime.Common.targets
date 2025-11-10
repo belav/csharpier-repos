@@ -1,7 +1,8 @@
 <!-- This file is for properties shared by the generic aspnetcore-runtime rpm and RHEL rpm.  -->
 <Project>
   <PropertyGroup>
-    <!-- installer versions --><!-- CLI would take a dependency such as 'aspnetcore-runtime-M.N >= M.N.P'. Here M.N is the part of the id and M.N.P is the package version -->
+    <!-- installer versions -->
+    <!-- CLI would take a dependency such as 'aspnetcore-runtime-M.N >= M.N.P'. Here M.N is the part of the id and M.N.P is the package version -->
     <PackageId>$(RuntimeInstallerBaseName)-$(AspNetCoreMajorMinorVersion)</PackageId>
     <PackageVersion>$(AspNetCoreMajorMinorVersion).$(AspNetCorePatchVersion)</PackageVersion>
 

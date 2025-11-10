@@ -25,7 +25,8 @@
   -->
   <Choose>
     <When Condition=" '$(IsHelixPRCheck)' == 'true' ">
-      <!-- aspnetcore-ci[-official] (ci.yml) --><!-- aspnetcore-quarantined-pr (quarantined-pr.yml) -->
+      <!-- aspnetcore-ci[-official] (ci.yml) -->
+      <!-- aspnetcore-quarantined-pr (quarantined-pr.yml) -->
       <ItemGroup>
         <HelixAvailableTargetQueue Include="Ubuntu.2004.Amd64.Open" Platform="Linux" />
         <HelixAvailableTargetQueue Include="OSX.13.Amd64.Open" Platform="OSX" />
@@ -34,7 +35,8 @@
       </ItemGroup>
     </When>
     <Otherwise>
-      <!-- aspnetcore-helix-matrix[-internal] (helix-matrix.yml) and RunHelix.ps1 --><!-- aspnetcore-quarantined-tests (quarantined-tests.yml) and RunHelix.ps1 -RunQuarantinedTests -->
+      <!-- aspnetcore-helix-matrix[-internal] (helix-matrix.yml) and RunHelix.ps1 -->
+      <!-- aspnetcore-quarantined-tests (quarantined-tests.yml) and RunHelix.ps1 -RunQuarantinedTests -->
       <ItemGroup>
         <!-- Linux -->
         <HelixAvailableTargetQueue Include="$(HelixQueueAlmaLinux8)" Platform="Linux" />

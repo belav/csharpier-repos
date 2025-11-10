@@ -4446,7 +4446,8 @@
     <Kind Name="BadNamespaceMemberDeclaration"/>
     <Field Name="Nodes" Type="SyntaxNodeOrTokenList"/>
   </Node>
-  --><!-- Xml -->
+  -->
+  <!-- Xml -->
   <Node Name="DocumentationCommentTriviaSyntax" Base="StructuredTriviaSyntax">
     <Kind Name="SingleLineDocumentationCommentTrivia" />
     <Kind Name="MultiLineDocumentationCommentTrivia" />
@@ -4845,7 +4846,8 @@
     <Field Name="TextTokens" Type="SyntaxList&lt;SyntaxToken&gt;"/>
     <Field Name="QuestionGreaterThanToken" Type="SyntaxToken"/>
   </Node>
-  --><!-- Preprocessor -->
+  -->
+  <!-- Preprocessor -->
   <AbstractNode Name="DirectiveTriviaSyntax" Base="StructuredTriviaSyntax">
     <Field Name="IsActive" Type="bool" />
     <Field Name="HashToken" Type="SyntaxToken">

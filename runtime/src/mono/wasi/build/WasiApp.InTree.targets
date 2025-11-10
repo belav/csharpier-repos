@@ -3,7 +3,8 @@
   <UsingTask TaskName="MonoAOTCompiler" AssemblyFile="$(MonoAOTCompilerTasksAssemblyPath)" />
   <UsingTask TaskName="RuntimeConfigParserTask" AssemblyFile="$(MonoTargetsTasksAssemblyPath)" />
 
-  <!-- TODO: this breaks runtime tests on Helix due to the file not being there for some reason. Once this is fixed we can remove the UpdateRuntimePack target here --><!--<Import Project="$(RepositoryEngineeringDir)targetingpacks.targets" Condition="'$(TargetingpacksTargetsImported)' != 'true'"/>-->
+  <!-- TODO: this breaks runtime tests on Helix due to the file not being there for some reason. Once this is fixed we can remove the UpdateRuntimePack target here -->
+  <!--<Import Project="$(RepositoryEngineeringDir)targetingpacks.targets" Condition="'$(TargetingpacksTargetsImported)' != 'true'"/>-->
   <Import Project="$(MSBuildThisFileDirectory)WasiApp.targets" />
 
   <!-- FIXME: use proper dependency -->
@@ -71,7 +72,8 @@
       <WasmHelixTestAppRelativeDir Condition="'$(WasmHelixTestAppRelativeDir)' == ''"
         >$(MSBuildProjectName)</WasmHelixTestAppRelativeDir
       >
-      <!-- Helix properties --><!-- AnyCPU as Platform-->
+      <!-- Helix properties -->
+      <!-- AnyCPU as Platform-->
       <OSPlatformConfig>$(TargetOS).AnyCPU.$(Configuration)</OSPlatformConfig>
       <HelixArchiveRoot>$([MSBuild]::NormalizeDirectory($(ArtifactsDir), 'helix'))</HelixArchiveRoot>
       <HelixArchiveRunOnlyRoot>$([MSBuild]::NormalizeDirectory($(HelixArchiveRoot), 'runonly'))</HelixArchiveRunOnlyRoot>

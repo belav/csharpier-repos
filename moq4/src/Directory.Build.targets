@@ -22,7 +22,8 @@
     <IsPackable Condition="'$(PackageId)' != ''">true</IsPackable>
   </PropertyGroup>
   <ItemGroup Condition="'$(IsPackable)' == 'true'" Label="NuGet">
-    <!-- This is compatible with nugetizer and SDK pack --><!-- Project-level icon/readme will already be part of None items -->
+    <!-- This is compatible with nugetizer and SDK pack -->
+    <!-- Project-level icon/readme will already be part of None items -->
     <None
       Update="@(None -&gt; WithMetadataValue('Filename', 'icon'))"
       Pack="true"

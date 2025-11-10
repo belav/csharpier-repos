@@ -86,7 +86,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <!-- When OnlyPackPlatformSpecificPackages is set, only produce packages for projects which set RuntimeIdentifier. --><!-- Keep this below where we set "IsPackageInThisPatch" -->
+    <!-- When OnlyPackPlatformSpecificPackages is set, only produce packages for projects which set RuntimeIdentifier. -->
+    <!-- Keep this below where we set "IsPackageInThisPatch" -->
     <IsPackable
       Condition=" '$(OnlyPackPlatformSpecificPackages)' == 'true' AND '$(RuntimeIdentifier)' == '' "
       >false</IsPackable

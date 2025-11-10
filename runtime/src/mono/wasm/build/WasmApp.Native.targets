@@ -728,7 +728,8 @@
       <_EmccExportedFunctions>@(EmccExportedFunction -> '%(Identity)',',')</_EmccExportedFunctions>
     </PropertyGroup>
     <ItemGroup>
-      <!-- order matters --><!-- some flags will be duplicated on the commandline and in the .rsp file. The last wins. -->
+      <!-- order matters -->
+      <!-- some flags will be duplicated on the commandline and in the .rsp file. The last wins. -->
       <_EmccLDSFlags Include="-s INITIAL_MEMORY=$(EmccInitialHeapSize)" />
       <_EmccLDSFlags Include="-s STACK_SIZE=$(EmccStackSize)" />
       <_EmccLDSFlags Include="-s WASM_BIGINT=1" />
@@ -1138,7 +1139,8 @@
       />
     </ItemGroup>
 
-    <!-- Run mono-cil-strip on the assemblies --><!-- TODO: replace this with a linker task -->
+    <!-- Run mono-cil-strip on the assemblies -->
+    <!-- TODO: replace this with a linker task -->
     <MakeDir Directories="$(_WasmStrippedAssembliesPath)" />
     <Exec Command="mono-cil-strip -q &quot;%(_WasmStrippedAssemblies.OriginalPath)&quot; &quot;%(_WasmStrippedAssemblies.Identity)&quot;" />
 
