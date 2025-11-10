@@ -1,5 +1,4 @@
 <Project>
-
   <Import Project="..\Directory.Build.props" />
 
   <PropertyGroup>
@@ -12,5 +11,4 @@
   <PropertyGroup Condition="'$(IsReferenceAssembly)' == 'true'">
     <ProduceOnlyReferenceAssembly>true</ProduceOnlyReferenceAssembly>
   </PropertyGroup>
-
 </Project>

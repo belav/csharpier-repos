@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetFxTargetFramework)</TargetFramework>
   </PropertyGroup>
@@ -29,5 +28,4 @@
   <ItemGroup>
     <Reference Include="Microsoft.Web.Xdt.Extensions" />
   </ItemGroup>
-
 </Project>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <AnalyzerRoslynVersion>4.0</AnalyzerRoslynVersion>
     <RoslynApiVersion>$(MicrosoftCodeAnalysisVersion_4_0)</RoslynApiVersion>
@@ -11,19 +10,39 @@
   <ItemGroup>
     <Compile Include="$(CommonPath)Roslyn\Hash.cs" Link="Common\Roslyn\Hash.cs" />
     <Compile Include="$(CommonPath)Roslyn\ISyntaxHelper.cs" Link="Common\Roslyn\ISyntaxHelper.cs" />
-    <Compile Include="$(CommonPath)Roslyn\CSharpSyntaxHelper.cs" Link="Common\Roslyn\CSharpSyntaxHelper.cs" />
+    <Compile
+      Include="$(CommonPath)Roslyn\CSharpSyntaxHelper.cs"
+      Link="Common\Roslyn\CSharpSyntaxHelper.cs"
+    />
     <Compile Include="$(CommonPath)Roslyn\GlobalAliases.cs" Link="Common\Roslyn\GlobalAliases.cs" />
-    <Compile Include="$(CommonPath)Roslyn\SyntaxNodeGrouping.cs" Link="Common\Roslyn\SyntaxNodeGrouping.cs" />
-    <Compile Include="$(CommonPath)Roslyn\SyntaxValueProvider.ImmutableArrayValueComparer.cs" Link="Common\Roslyn\SyntaxValueProvider.ImmutableArrayValueComparer.cs" />
-    <Compile Include="$(CommonPath)Roslyn\SyntaxValueProvider_ForAttributeWithMetadataName.cs" Link="Common\Roslyn\SyntaxValueProvider_ForAttributeWithMetadataName.cs" />
-    <Compile Include="$(CommonPath)Roslyn\SyntaxValueProvider_ForAttributeWithSimpleName.cs" Link="Common\Roslyn\SyntaxValueProvider_ForAttributeWithSimpleName.cs" />
+    <Compile
+      Include="$(CommonPath)Roslyn\SyntaxNodeGrouping.cs"
+      Link="Common\Roslyn\SyntaxNodeGrouping.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Roslyn\SyntaxValueProvider.ImmutableArrayValueComparer.cs"
+      Link="Common\Roslyn\SyntaxValueProvider.ImmutableArrayValueComparer.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Roslyn\SyntaxValueProvider_ForAttributeWithMetadataName.cs"
+      Link="Common\Roslyn\SyntaxValueProvider_ForAttributeWithMetadataName.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Roslyn\SyntaxValueProvider_ForAttributeWithSimpleName.cs"
+      Link="Common\Roslyn\SyntaxValueProvider_ForAttributeWithSimpleName.cs"
+    />
 
-    <Compile Include="$(CoreLibSharedDir)System\Collections\Generic\ValueListBuilder.cs" Link="Production\ValueListBuilder.cs" />
-    <Compile Include="$(CoreLibSharedDir)System\Collections\Generic\ValueListBuilder.Pop.cs" Link="Production\ValueListBuilder.Pop.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Collections\Generic\ValueListBuilder.cs"
+      Link="Production\ValueListBuilder.cs"
+    />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Collections\Generic\ValueListBuilder.Pop.cs"
+      Link="Production\ValueListBuilder.Pop.cs"
+    />
   </ItemGroup>
-  
+
   <ItemGroup>
     <Compile Remove="LoggerMessageGenerator.Roslyn3.11.cs" />
   </ItemGroup>
-
 </Project>

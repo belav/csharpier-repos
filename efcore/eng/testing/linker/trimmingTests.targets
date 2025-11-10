@@ -1,7 +1,14 @@
 <Project>
   <ItemGroup>
-    <_additionalSourceFiles Condition="'@(TestConsoleAppSourceFiles)' == ''" Include="$(MSBuildProjectDirectory)\**\*.cs" Exclude="$(MSBuildProjectDirectory)\*.cs" />
-    <TestConsoleAppSourceFiles Condition="'@(TestConsoleAppSourceFiles)' == ''" Include="$(MSBuildProjectDirectory)\*.cs">
+    <_additionalSourceFiles
+      Condition="'@(TestConsoleAppSourceFiles)' == ''"
+      Include="$(MSBuildProjectDirectory)\**\*.cs"
+      Exclude="$(MSBuildProjectDirectory)\*.cs"
+    />
+    <TestConsoleAppSourceFiles
+      Condition="'@(TestConsoleAppSourceFiles)' == ''"
+      Include="$(MSBuildProjectDirectory)\*.cs"
+    >
       <AdditionalSourceFiles>@(_additionalSourceFiles)</AdditionalSourceFiles>
     </TestConsoleAppSourceFiles>
 
@@ -10,13 +17,17 @@
     </TestSupportFiles>
   </ItemGroup>
 
-  <Target Name="CreateTestDir"
-          Inputs="@(TestSupportFiles)"
-          Outputs="@(TestSupportFiles->'%(DestinationFolder)\%(FileName)%(Extension)')">
+  <Target
+    Name="CreateTestDir"
+    Inputs="@(TestSupportFiles)"
+    Outputs="@(TestSupportFiles->'%(DestinationFolder)\%(FileName)%(Extension)')"
+  >
     <MakeDir Directories="%(TestSupportFiles.DestinationFolder)" />
-    <Copy SourceFiles="@(TestSupportFiles)"
-          DestinationFolder="%(TestSupportFiles.DestinationFolder)"
-          SkipUnchangedFiles="true" />
+    <Copy
+      SourceFiles="@(TestSupportFiles)"
+      DestinationFolder="%(TestSupportFiles.DestinationFolder)"
+      SkipUnchangedFiles="true"
+    />
   </Target>
 
   <Target Name="GetTestConsoleApps">
@@ -25,7 +36,9 @@
         <ProjectDir>$([MSBuild]::NormalizeDirectory('$(TrimmingTestProjectsDir)', '$(MSBuildProjectName)', '%(Filename)', '$(PackageRID)'))</ProjectDir>
         <TestRuntimeIdentifier>$(TargetRuntimeIdentifier)</TestRuntimeIdentifier>
         <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
-        <TargetFramework Condition="'%(TestConsoleAppSourceFiles.TargetOS)' != ''">$(DefaultNetCoreTargetFramework)-%(TestConsoleAppSourceFiles.TargetOS)</TargetFramework>
+        <TargetFramework Condition="'%(TestConsoleAppSourceFiles.TargetOS)' != ''"
+          >$(DefaultNetCoreTargetFramework)-%(TestConsoleAppSourceFiles.TargetOS)</TargetFramework
+        >
       </TestConsoleAppSourceFiles>
       <!-- We need to separate Item metadata declaration in two in order to be able to use ProjectDir and TestRuntimeIdentifier below -->
       <TestConsoleAppSourceFiles>
@@ -40,23 +53,28 @@
         <ProjectCompileItems>%(FullPath)</ProjectCompileItems>
         <AdditionalSourceFiles>%(AdditionalSourceFiles)</AdditionalSourceFiles>
       </TestConsoleApps>
-      <TestConsoleApps AdditionalProperties="MSBuildEnableWorkloadResolver=$(MSBuildEnableWorkloadResolver)" Condition="'$(MSBuildEnableWorkloadResolver)' != ''" />
-      <GenerateProjectsInputs Include="@(TestConsoleAppSourceFiles)"/>
-      <GenerateProjectsInputs Include="%(TestConsoleAppSourceFiles.AdditionalSourceFiles)"/>
-      <GenerateProjectsInputs Include="$(ProjectTemplate)"/>
-      <GenerateProjectsInputs Include="@(TestSupportFiles)"/>
+      <TestConsoleApps
+        AdditionalProperties="MSBuildEnableWorkloadResolver=$(MSBuildEnableWorkloadResolver)"
+        Condition="'$(MSBuildEnableWorkloadResolver)' != ''"
+      />
+      <GenerateProjectsInputs Include="@(TestConsoleAppSourceFiles)" />
+      <GenerateProjectsInputs Include="%(TestConsoleAppSourceFiles.AdditionalSourceFiles)" />
+      <GenerateProjectsInputs Include="$(ProjectTemplate)" />
+      <GenerateProjectsInputs Include="@(TestSupportFiles)" />
     </ItemGroup>
   </Target>
 
-  <Target Name="GenerateProjects"
-          DependsOnTargets="GetTestConsoleApps;CreateTestDir"
-          Inputs="@(GenerateProjectsInputs)"
-          Outputs="%(TestConsoleApps.ProjectFile)">
+  <Target
+    Name="GenerateProjects"
+    DependsOnTargets="GetTestConsoleApps;CreateTestDir"
+    Inputs="@(GenerateProjectsInputs)"
+    Outputs="%(TestConsoleApps.ProjectFile)"
+  >
     <PropertyGroup>
       <_projectDir>%(TestConsoleApps.ProjectDir)\</_projectDir>
       <_projectFile>%(TestConsoleApps.ProjectFile)</_projectFile>
       <_projectSourceFile>%(TestConsoleApps.ProjectCompileItems)</_projectSourceFile>
-    </PropertyGroup>    
+    </PropertyGroup>
 
     <ItemGroup Condition="'$(AdditionalProjectReferences)' == '' AND '@(ProjectReference)' != ''">
       <_additionalProjectReference Include="&lt;ProjectReference Include=&quot;%(ProjectReference.FullPath)&quot; SkipUseReferenceAssembly=&quot;true&quot; /&gt;" />
@@ -78,7 +96,10 @@
     </ItemGroup>
 
     <ItemGroup Condition="'@(PackageReference)' != ''">
-      <_packageReferences Include="@(PackageReference)" Exclude="Microsoft.DotNet.ILCompiler;Microsoft.NET.ILLink.Tasks" />
+      <_packageReferences
+        Include="@(PackageReference)"
+        Exclude="Microsoft.DotNet.ILCompiler;Microsoft.NET.ILLink.Tasks"
+      />
     </ItemGroup>
 
     <ItemGroup Condition="'@(_packageReferences)' != ''">
@@ -107,8 +128,9 @@
     </PropertyGroup>
 
     <MakeDir Directories="$(_projectDir)" />
-    <WriteLinesToFile File="$(_projectFile)"
-                      Lines="$([System.IO.File]::ReadAllText('$(ProjectTemplate)')
+    <WriteLinesToFile
+      File="$(_projectFile)"
+      Lines="$([System.IO.File]::ReadAllText('$(ProjectTemplate)')
                                                  .Replace('{TargetFramework}', '%(TestConsoleApps.TargetFramework)')
                                                  .Replace('{RuntimeIdentifier}','%(TestConsoleApps.TestRuntimeIdentifier)')
                                                  .Replace('{PublishAot}','$(IsNativeAotTestProject)')
@@ -118,43 +140,59 @@
                                                  .Replace('{AdditionalProjectReferences}', '$(_additionalProjectReferencesString)')
                                                  .Replace('{AdditionalPackageReferences}', '$(_additionalPackageReferencesString)')
                                                  )"
-                      Overwrite="true" />
-    <Copy SourceFiles="$(_projectSourceFile);
+      Overwrite="true"
+    />
+    <Copy
+      SourceFiles="$(_projectSourceFile);
                        @(_additionalProjectSourceFiles)"
-          DestinationFolder="$(_projectDir)" />
+      DestinationFolder="$(_projectDir)"
+    />
     <Message Text="Generated $(_projectFile)" />
   </Target>
 
-  <Target Name="PublishTrimmedProjects"
-          DependsOnTargets="GenerateProjects">
+  <Target Name="PublishTrimmedProjects" DependsOnTargets="GenerateProjects">
     <PropertyGroup>
       <_RemoveProps>TreatWarningsAsErrors;BuildingSolutionFile;SolutionPath;SolutionFileName;SolutionExt;SolutionDir;CurrentSolutionConfigurationContents;Platform</_RemoveProps>
     </PropertyGroup>
 
-    <MSBuild Projects="@(TestConsoleApps)"
-             Targets="Restore"
-             Condition="'$(SkipTrimmingProjectsRestore)' != 'true'"
-             Properties="MSBuildRestoreSessionId=$([System.Guid]::NewGuid());Configuration=$(Configuration)" 
-             RemoveProperties="$(_RemoveProps)" />
+    <MSBuild
+      Projects="@(TestConsoleApps)"
+      Targets="Restore"
+      Condition="'$(SkipTrimmingProjectsRestore)' != 'true'"
+      Properties="MSBuildRestoreSessionId=$([System.Guid]::NewGuid());Configuration=$(Configuration)"
+      RemoveProperties="$(_RemoveProps)"
+    />
 
-    <MSBuild Projects="@(TestConsoleApps)"
-             Targets="Publish"
-             Properties="Configuration=$(Configuration);BuildProjectReferences=false"
-             RemoveProperties="$(_RemoveProps)" />
+    <MSBuild
+      Projects="@(TestConsoleApps)"
+      Targets="Publish"
+      Properties="Configuration=$(Configuration);BuildProjectReferences=false"
+      RemoveProperties="$(_RemoveProps)"
+    />
   </Target>
 
-  <Target Name="ExecuteApplications"
-          DependsOnTargets="PublishTrimmedProjects"
-          AfterTargets="Test;VSTest"
-          Inputs="%(TestConsoleApps.Identity)"
-          Outputs="_unused">
-
+  <Target
+    Name="ExecuteApplications"
+    DependsOnTargets="PublishTrimmedProjects"
+    AfterTargets="Test;VSTest"
+    Inputs="%(TestConsoleApps.Identity)"
+    Outputs="_unused"
+  >
     <Message Text="[Trimming Tests] Running test: %(TestConsoleApps.ProjectCompileItems) ..." />
-    <Exec IgnoreExitCode="true" Command="%(TestConsoleApps.TestCommand)" StandardOutputImportance="Normal" WorkingDirectory="%(TestConsoleApps.TestExecutionDirectory)">
+    <Exec
+      IgnoreExitCode="true"
+      Command="%(TestConsoleApps.TestCommand)"
+      StandardOutputImportance="Normal"
+      WorkingDirectory="%(TestConsoleApps.TestExecutionDirectory)"
+    >
       <Output TaskParameter="ExitCode" PropertyName="ExecutionExitCode" />
     </Exec>
 
-    <Error Condition="'$(ExecutionExitCode)' != '100'" Text="Error: [Failed Test]: %(TestConsoleApps.ProjectCompileItems). The Command %(TestConsoleApps.TestCommand) returned a non-success exit code: $(ExecutionExitCode)." ContinueOnError="ErrorAndContinue" />
+    <Error
+      Condition="'$(ExecutionExitCode)' != '100'"
+      Text="Error: [Failed Test]: %(TestConsoleApps.ProjectCompileItems). The Command %(TestConsoleApps.TestCommand) returned a non-success exit code: $(ExecutionExitCode)."
+      ContinueOnError="ErrorAndContinue"
+    />
   </Target>
 
   <Target Name="CleanProjects" AfterTargets="Clean">
@@ -163,7 +201,7 @@
 
   <!-- define build to do nothing -->
   <Target Name="Build" />
-  
+
   <Target Name="Test" DependsOnTargets="ExecuteApplications" />
   <Target Name="VSTest" DependsOnTargets="ExecuteApplications" />
 </Project>

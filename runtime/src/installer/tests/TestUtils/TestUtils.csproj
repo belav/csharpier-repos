@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(TestInfraTargetFramework)</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -13,9 +12,14 @@
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="$(FluentAssertionsVersion)" />
-    <PackageReference Include="Microsoft.DotNet.XUnitExtensions" Version="$(MicrosoftDotNetXUnitExtensionsVersion)" />
+    <PackageReference
+      Include="Microsoft.DotNet.XUnitExtensions"
+      Version="$(MicrosoftDotNetXUnitExtensionsVersion)"
+    />
     <PackageReference Include="xunit.core" Version="$(XUnitVersion)" ExcludeAssets="build" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="$(MicrosoftExtensionsDependencyModelVersion)" />
+    <PackageReference
+      Include="Microsoft.Extensions.DependencyModel"
+      Version="$(MicrosoftExtensionsDependencyModelVersion)"
+    />
   </ItemGroup>
-
 </Project>

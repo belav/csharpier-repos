@@ -1,5 +1,4 @@
 <linker>
-
   <!-- Internal implementation details that are always fine to strip -->
   <assembly fullname="System.Private.CoreLib">
     <type fullname="System.Runtime.CompilerServices.IntrinsicAttribute">
@@ -21,7 +20,11 @@
   </assembly>
 
   <!-- Public attributes that need to be interpreted by the compiler, fine to strip afterwards -->
-  <assembly fullname="System.Private.CoreLib" feature="System.AggressiveAttributeTrimming" featurevalue="true">
+  <assembly
+    fullname="System.Private.CoreLib"
+    feature="System.AggressiveAttributeTrimming"
+    featurevalue="true"
+  >
     <type fullname="System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
@@ -32,5 +35,4 @@
       <attribute internal="RemoveAttributeInstances" />
     </type>
   </assembly>
-
 </linker>

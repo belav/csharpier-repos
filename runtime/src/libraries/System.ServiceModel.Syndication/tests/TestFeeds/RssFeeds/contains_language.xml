@@ -3,11 +3,12 @@
   Expect:       !MissingDCLanguage
 -->
 
+
 <rss version="2.0">
-<channel>
-<title>Missing dc:language</title>
-<link>http://contoso.com/rss/2.0/</link>
-<description>channel should include dc:language</description>
-<language>en-us</language>
-</channel>
+  <channel>
+    <title>Missing dc:language</title>
+    <link>http://contoso.com/rss/2.0/</link>
+    <description>channel should include dc:language</description>
+    <language>en-us</language>
+  </channel>
 </rss>

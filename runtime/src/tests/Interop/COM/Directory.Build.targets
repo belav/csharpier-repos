@@ -1,5 +1,4 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
   <!-- Managed clients include an app manifest, making them incompatible with some test scenarios -->
   <PropertyGroup Condition="'$(IsManagedCOMClient)' == 'true'">
     <!-- Tests would require the runincontext.exe to include a manifest describing the COM interfaces -->

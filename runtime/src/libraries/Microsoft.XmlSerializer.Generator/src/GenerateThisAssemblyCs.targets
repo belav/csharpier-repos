@@ -1,12 +1,14 @@
 <Project>
   <ItemGroup>
-    <Compile Include="$(IntermediateOutputPath)ThisAssembly.cs"/>
+    <Compile Include="$(IntermediateOutputPath)ThisAssembly.cs" />
   </ItemGroup>
 
-  <Target Name="GenerateThisAssemblyCs"
-          Inputs="$(MSBuildThisFileFullPath)"
-          Outputs="$(IntermediateOutputPath)ThisAssembly.cs"
-          BeforeTargets="CoreCompile">
+  <Target
+    Name="GenerateThisAssemblyCs"
+    Inputs="$(MSBuildThisFileFullPath)"
+    Outputs="$(IntermediateOutputPath)ThisAssembly.cs"
+    BeforeTargets="CoreCompile"
+  >
     <PropertyGroup>
       <ThisAssemblyCsContents>
 // Licensed to the .NET Foundation under one or more agreements.
@@ -46,6 +48,7 @@ namespace Microsoft.XmlSerializer.Generator
       File="$(IntermediateOutputPath)ThisAssembly.cs"
       Lines="$(ThisAssemblyCsContents)"
       Overwrite="true"
-      Encoding="Unicode" />
+      Encoding="Unicode"
+    />
   </Target>
 </Project>

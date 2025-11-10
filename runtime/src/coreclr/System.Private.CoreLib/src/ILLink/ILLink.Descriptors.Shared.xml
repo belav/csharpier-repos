@@ -25,8 +25,12 @@
   </assembly>
 
   <!-- The private Event methods are accessed by private reflection in the base EventSource class. -->
-  <assembly fullname="System.Private.CoreLib" feature="System.Diagnostics.Tracing.EventSource.IsSupported" featurevalue="true" featuredefault="true">
+  <assembly
+    fullname="System.Private.CoreLib"
+    feature="System.Diagnostics.Tracing.EventSource.IsSupported"
+    featurevalue="true"
+    featuredefault="true"
+  >
     <type fullname="System.Diagnostics.Tracing.NativeRuntimeEventSource" />
   </assembly>
-
 </linker>

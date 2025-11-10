@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core support for JSON PATCH.</Description>
     <TargetFrameworks>$(DefaultNetCoreTargetFramework);$(DefaultNetFxTargetFramework);netstandard2.0</TargetFrameworks>
@@ -12,8 +11,14 @@
 
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)ClosedGenericMatcher\*.cs" />
-    <Compile Include="$(SharedSourceRoot)ThrowHelpers\ArgumentNullThrowHelper.cs" LinkBase="Shared" />
-    <Compile Include="$(SharedSourceRoot)CallerArgument\CallerArgumentExpressionAttribute.cs" LinkBase="Shared" />
+    <Compile
+      Include="$(SharedSourceRoot)ThrowHelpers\ArgumentNullThrowHelper.cs"
+      LinkBase="Shared"
+    />
+    <Compile
+      Include="$(SharedSourceRoot)CallerArgument\CallerArgumentExpressionAttribute.cs"
+      LinkBase="Shared"
+    />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' != '$(DefaultNetCoreTargetFramework)'">

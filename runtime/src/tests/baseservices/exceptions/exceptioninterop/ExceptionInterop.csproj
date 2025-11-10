@@ -1,11 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-      <NativeAotIncompatible>true</NativeAotIncompatible>
-    </PropertyGroup>
-    <ItemGroup>
-      <CMakeProjectReference Include="CMakeLists.txt" />
-      <Compile Include="ExceptionInterop.cs" />
-    </ItemGroup>
-  </Project>
-  
+  <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NativeAotIncompatible>true</NativeAotIncompatible>
+  </PropertyGroup>
+  <ItemGroup>
+    <CMakeProjectReference Include="CMakeLists.txt" />
+    <Compile Include="ExceptionInterop.cs" />
+  </ItemGroup>
+</Project>

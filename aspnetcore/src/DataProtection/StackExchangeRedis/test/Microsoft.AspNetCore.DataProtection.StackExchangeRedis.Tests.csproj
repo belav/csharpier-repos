@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(DefaultNetFxTargetFramework);$(DefaultNetCoreTargetFramework)</TargetFrameworks>
   </PropertyGroup>
@@ -17,5 +16,4 @@
     <Reference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" />
     <Reference Include="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
-
 </Project>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -15,20 +14,44 @@
     <Compile Include="$(KestrelSharedSourceRoot)test\Http3\Http3InMemory.cs" />
     <Compile Include="$(KestrelSharedSourceRoot)\CompletionPipeReader.cs" />
     <Compile Include="$(KestrelSharedSourceRoot)\CompletionPipeWriter.cs" />
-    <Compile Include="$(KestrelSharedSourceRoot)test\PipeWriterHttp2FrameExtensions.cs" Link="Internal\PipeWriterHttp2FrameExtensions.cs" />
-    <Compile Include="$(KestrelSharedSourceRoot)\HPackHeaderWriter.cs" Link="Http2\HPackHeaderWriter.cs" />
-    <Compile Include="$(KestrelSharedSourceRoot)\Http2HeadersEnumerator.cs" Link="Http2\Http2HeadersEnumerator.cs" />
+    <Compile
+      Include="$(KestrelSharedSourceRoot)test\PipeWriterHttp2FrameExtensions.cs"
+      Link="Internal\PipeWriterHttp2FrameExtensions.cs"
+    />
+    <Compile
+      Include="$(KestrelSharedSourceRoot)\HPackHeaderWriter.cs"
+      Link="Http2\HPackHeaderWriter.cs"
+    />
+    <Compile
+      Include="$(KestrelSharedSourceRoot)\Http2HeadersEnumerator.cs"
+      Link="Http2\Http2HeadersEnumerator.cs"
+    />
     <Compile Include="$(RepoRoot)src\Shared\Buffers.MemoryPool\*.cs" LinkBase="MemoryPool" />
     <Compile Include="$(KestrelSharedSourceRoot)test\KestrelTestLoggerProvider.cs" />
     <Compile Include="$(KestrelSharedSourceRoot)test\TestApplicationErrorLogger.cs" />
     <Compile Include="$(KestrelSharedSourceRoot)test\TestHttp1Connection.cs" />
     <Compile Include="$(KestrelSharedSourceRoot)test\TestContextFactory.cs" />
     <Compile Include="..\..\Transport.Sockets\src\Internal\IOQueue.cs" Link="Internal\IOQueue.cs" />
-    <Compile Include="$(KestrelSharedSourceRoot)\ConnectionCompletion.cs" Link="Internal\ConnectionCompletion.cs" />
-    <Compile Include="$(KestrelSharedSourceRoot)\CorrelationIdGenerator.cs" Link="Internal\CorrelationIdGenerator.cs" />
-    <Compile Include="$(KestrelSharedSourceRoot)\TransportConnection.cs" Link="Internal\TransportConnection.cs" />
-    <Compile Include="$(KestrelSharedSourceRoot)\TransportConnection.Generated.cs" Link="Internal\TransportConnection.Generated.cs" />
-    <Compile Include="$(KestrelSharedSourceRoot)\TransportConnection.FeatureCollection.cs" Link="Internal\TransportConnection.FeatureCollection.cs" />
+    <Compile
+      Include="$(KestrelSharedSourceRoot)\ConnectionCompletion.cs"
+      Link="Internal\ConnectionCompletion.cs"
+    />
+    <Compile
+      Include="$(KestrelSharedSourceRoot)\CorrelationIdGenerator.cs"
+      Link="Internal\CorrelationIdGenerator.cs"
+    />
+    <Compile
+      Include="$(KestrelSharedSourceRoot)\TransportConnection.cs"
+      Link="Internal\TransportConnection.cs"
+    />
+    <Compile
+      Include="$(KestrelSharedSourceRoot)\TransportConnection.Generated.cs"
+      Link="Internal\TransportConnection.Generated.cs"
+    />
+    <Compile
+      Include="$(KestrelSharedSourceRoot)\TransportConnection.FeatureCollection.cs"
+      Link="Internal\TransportConnection.FeatureCollection.cs"
+    />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,5 +63,4 @@
 
     <Compile Include="$(SharedSourceRoot)BenchmarkRunner\*.cs" />
   </ItemGroup>
-
 </Project>

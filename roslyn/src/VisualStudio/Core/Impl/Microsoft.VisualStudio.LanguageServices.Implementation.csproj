@@ -28,10 +28,26 @@
     <InternalsVisibleTo Include="Microsoft.VisualStudio.LanguageServices.Test.Utilities2" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.ExternalAccess.FSharp" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.ExternalAccess.FSharp.UnitTests" />
-    <InternalsVisibleTo Include="Microsoft.VisualStudio.LanguageServices.TypeScript" Key="$(TypeScriptKey)" WorkItem="https://github.com/dotnet/roslyn/issues/35077" />
-    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.TypeScript.EditorFeatures" Key="$(TypeScriptKey)" WorkItem="https://github.com/dotnet/roslyn/issues/35077" />
-    <InternalsVisibleTo Include="FSharp.Editor" Key="$(FSharpKey)" WorkItem="https://github.com/dotnet/roslyn/issues/35076" />
-    <InternalsVisibleTo Include="FSharp.LanguageService" Key="$(FSharpKey)" WorkItem="https://github.com/dotnet/roslyn/issues/35076" />
+    <InternalsVisibleTo
+      Include="Microsoft.VisualStudio.LanguageServices.TypeScript"
+      Key="$(TypeScriptKey)"
+      WorkItem="https://github.com/dotnet/roslyn/issues/35077"
+    />
+    <InternalsVisibleTo
+      Include="Microsoft.CodeAnalysis.TypeScript.EditorFeatures"
+      Key="$(TypeScriptKey)"
+      WorkItem="https://github.com/dotnet/roslyn/issues/35077"
+    />
+    <InternalsVisibleTo
+      Include="FSharp.Editor"
+      Key="$(FSharpKey)"
+      WorkItem="https://github.com/dotnet/roslyn/issues/35076"
+    />
+    <InternalsVisibleTo
+      Include="FSharp.LanguageService"
+      Key="$(FSharpKey)"
+      WorkItem="https://github.com/dotnet/roslyn/issues/35076"
+    />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Design" />
@@ -39,17 +55,50 @@
     <Reference Include="WindowsFormsIntegration" />
     <EmbeddedResource Update="SolutionExplorerShim.resx" GenerateSource="true" />
     <PackageReference Include="Microsoft.CSharp" Version="$(MicrosoftCSharpVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime" Version="$(MicrosoftVisualStudioImagingInterop140DesignTimeVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Interop" Version="$(MicrosoftVisualStudioInteropVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Shell.15.0" Version="$(MicrosoftVisualStudioShell150Version)" />
-    <PackageReference Include="Microsoft.VisualStudio.Shell.Framework" Version="$(MicrosoftVisualStudioShellFrameworkVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.CodeAnalysis.Sdk.UI" Version="$(MicrosoftVisualStudioCodeAnalysisSdkUIVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Composition" Version="$(MicrosoftVisualStudioCompositionVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.ComponentModelHost" Version="$(MicrosoftVisualStudioComponentModelHostVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Text.UI" Version="$(MicrosoftVisualStudioTextUIVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Text.UI.Wpf" Version="$(MicrosoftVisualStudioTextUIWpfVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Threading" Version="$(MicrosoftVisualStudioThreadingVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Validation" Version="$(MicrosoftVisualStudioValidationVersion)" />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime"
+      Version="$(MicrosoftVisualStudioImagingInterop140DesignTimeVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Interop"
+      Version="$(MicrosoftVisualStudioInteropVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Shell.15.0"
+      Version="$(MicrosoftVisualStudioShell150Version)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Shell.Framework"
+      Version="$(MicrosoftVisualStudioShellFrameworkVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.CodeAnalysis.Sdk.UI"
+      Version="$(MicrosoftVisualStudioCodeAnalysisSdkUIVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Composition"
+      Version="$(MicrosoftVisualStudioCompositionVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.ComponentModelHost"
+      Version="$(MicrosoftVisualStudioComponentModelHostVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Text.UI"
+      Version="$(MicrosoftVisualStudioTextUIVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Text.UI.Wpf"
+      Version="$(MicrosoftVisualStudioTextUIWpfVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Threading"
+      Version="$(MicrosoftVisualStudioThreadingVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Validation"
+      Version="$(MicrosoftVisualStudioValidationVersion)"
+    />
     <PackageReference Include="StreamJsonRpc" Version="$(StreamJsonRpcVersion)" />
     <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
   </ItemGroup>

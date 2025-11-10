@@ -1,6 +1,12 @@
 <Type Name="AppDomainCreateEvent" FullName="Mono.Debugger.Soft.AppDomainCreateEvent">
-  <TypeSignature Language="C#" Value="public class AppDomainCreateEvent : Mono.Debugger.Soft.Event" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit AppDomainCreateEvent extends Mono.Debugger.Soft.Event" />
+  <TypeSignature
+    Language="C#"
+    Value="public class AppDomainCreateEvent : Mono.Debugger.Soft.Event"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit AppDomainCreateEvent extends Mono.Debugger.Soft.Event"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Debugger.Soft</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -15,8 +21,14 @@
   </Docs>
   <Members>
     <Member MemberName="Domain">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.AppDomainMirror Domain { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Debugger.Soft.AppDomainMirror Domain" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.AppDomainMirror Domain { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Debugger.Soft.AppDomainMirror Domain"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>

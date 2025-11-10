@@ -16,7 +16,7 @@
         hardware accelerated by mapping the classes and the actual
         operations to native SIMD instructions on a processor. 
       </para>
-      
+
       <para>
         When the Mono runtime's SIMD optimization are active the
         operations on the structures defined in this namespace are
@@ -33,7 +33,7 @@
         as it currently does not have support for hardware accelerated
         SIMD operations.
       </para>
-      
+
       <para>
         You can control whether the runtime will map the operations to
         SIMD primitives by using the -O command line option and

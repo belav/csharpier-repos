@@ -14,8 +14,12 @@
     <UseVSTestRunner>true</UseVSTestRunner>
     <!-- Prohibit the usage of .NET Standard 1.x dependencies. -->
     <FlagNetStandard1XDependencies>true</FlagNetStandard1XDependencies>
-    <StabilizePackageVersion Condition="'$(StabilizePackageVersion)' == ''">false</StabilizePackageVersion>
-    <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'">release</DotNetFinalVersionKind>
+    <StabilizePackageVersion Condition="'$(StabilizePackageVersion)' == ''"
+      >false</StabilizePackageVersion
+    >
+    <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'"
+      >release</DotNetFinalVersionKind
+    >
   </PropertyGroup>
   <PropertyGroup>
     <!-- command-line-api -->
@@ -27,8 +31,7 @@
     <MicrosoftBuildVersion>17.3.2</MicrosoftBuildVersion>
     <!-- netstandard -->
     <NETStandardLibraryVersion>2.0.3</NETStandardLibraryVersion>
-    <!-- nuget -->
-    <!-- In order tests against the same version of NuGet as the SDK. We have to set this to match. -->
+    <!-- nuget --><!-- In order tests against the same version of NuGet as the SDK. We have to set this to match. -->
     <NuGetVersion>6.8.0-rc.122</NuGetVersion>
     <!-- roslyn -->
     <MicrosoftCodeAnalysisVersion>4.9.0-1.23520.1</MicrosoftCodeAnalysisVersion>

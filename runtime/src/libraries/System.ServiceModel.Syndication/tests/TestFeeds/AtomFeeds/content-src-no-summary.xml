@@ -3,10 +3,10 @@ Description:  entry with an atom:content that has a src attribute but with no su
 Expect:       MissingSummary{element:entry,parent:feed}
 -->
 
-<feed xmlns="http://www.w3.org/2005/Atom">
 
+<feed xmlns="http://www.w3.org/2005/Atom">
   <title>Example Feed</title>
-  <link href="http://contoso.com/"/>
+  <link href="http://contoso.com/" />
   <updated>2003-12-13T18:30:02Z</updated>
   <author>
     <name>Author Name</name>
@@ -15,10 +15,9 @@ Expect:       MissingSummary{element:entry,parent:feed}
 
   <entry>
     <title>Atom-Powered Robots Run Amok</title>
-    <link href="http://contoso.com/2003/12/13/atom03"/>
+    <link href="http://contoso.com/2003/12/13/atom03" />
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
     <updated>2003-12-13T18:30:02Z</updated>
-    <content src="http://contoso.com/2003/12/13/atom03"/>
+    <content src="http://contoso.com/2003/12/13/atom03" />
   </entry>
-
 </feed>

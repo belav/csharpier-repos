@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
@@ -18,5 +17,4 @@
     <Compile Include="..\..\Mvc.ViewFeatures\test\Infrastructure\TempDataSerializerTestBase.cs" />
     <Compile Include="..\..\Mvc.ViewFeatures\test\Rendering\JsonHelperTestBase.cs" />
   </ItemGroup>
-
 </Project>

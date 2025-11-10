@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -8,5 +7,4 @@
   <ItemGroup>
     <ProjectReference Include="..\AutoMapper\AutoMapper.csproj" />
   </ItemGroup>
-
 </Project>

@@ -5,8 +5,8 @@
 
 -->
 
-<Project>
 
+<Project>
   <ItemGroup Condition=" '$(TargetOS)' == 'windows' ">
     <!-- Set variables needed by the test wrapper scripts to do SuperPMI collection -->
     <HelixPreCommand Include="set spmi_enable_collection=1" />
@@ -55,5 +55,4 @@
     <HelixPostCommand Include="export spmi_log_file=$spmi_upload_dir/$spmi_output_base_name.log" />
     <HelixPostCommand Include="$HELIX_PYTHONPATH $spmi_superpmi_py collect -log_level DEBUG -core_root $spmi_core_root --skip_cleanup --clean --ci --skip_collection_step --skip_toc_step -temp_dir $spmi_collect_dir -output_mch_path $spmi_finalmch -log_file $spmi_log_file" />
   </ItemGroup>
-
 </Project>

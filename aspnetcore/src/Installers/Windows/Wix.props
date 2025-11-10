@@ -1,5 +1,4 @@
 <Project>
-
   <PropertyGroup>
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
     <Platform Condition="'$(Platform)' == ''">x64</Platform>
@@ -36,5 +35,4 @@
     <!-- Directory for the zipped up wixpack command package -->
     <WixCommandPackagesDir>$(InstallersOutputPath)</WixCommandPackagesDir>
   </PropertyGroup>
-
 </Project>

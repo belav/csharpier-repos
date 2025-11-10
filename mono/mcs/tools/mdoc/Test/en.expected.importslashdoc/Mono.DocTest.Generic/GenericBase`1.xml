@@ -1,6 +1,9 @@
 <Type Name="GenericBase&lt;U&gt;" FullName="Mono.DocTest.Generic.GenericBase&lt;U&gt;">
   <TypeSignature Language="C#" Value="public class GenericBase&lt;U&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit GenericBase`1&lt;U&gt; extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit GenericBase`1&lt;U&gt; extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>DocTest</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -15,13 +18,15 @@
   <Docs>
     <typeparam name="U">Insert <c>text</c> here.</typeparam>
     <summary>To be added.</summary>
-    <remarks>
-      <c>T:Mono.DocTest.Generic.GenericBase`1</c>.</remarks>
+    <remarks><c>T:Mono.DocTest.Generic.GenericBase`1</c>.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public GenericBase ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -34,7 +39,10 @@
     </Member>
     <Member MemberName="BaseMethod&lt;S&gt;">
       <MemberSignature Language="C#" Value="public U BaseMethod&lt;S&gt; (S genericParameter);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !U BaseMethod&lt;S&gt;(!!S genericParameter) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance !U BaseMethod&lt;S&gt;(!!S genericParameter) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -59,8 +67,7 @@
         <param name="genericParameter">Something</param>
         <summary>To be added.</summary>
         <returns>The default value.</returns>
-        <remarks>
-          <c>M:Mono.DocTest.GenericBase`1.BaseMethod``1(``0)</c>.</remarks>
+        <remarks><c>M:Mono.DocTest.GenericBase`1.BaseMethod``1(``0)</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ConstField1">
@@ -81,8 +88,14 @@
       </Docs>
     </Member>
     <Member MemberName="ItemChanged">
-      <MemberSignature Language="C#" Value="public event Action&lt;Mono.DocTest.Generic.MyList&lt;U&gt;,Mono.DocTest.Generic.MyList&lt;U&gt;.Helper&lt;U,U&gt;&gt; ItemChanged;" />
-      <MemberSignature Language="ILAsm" Value=".event class System.Action`2&lt;class Mono.DocTest.Generic.MyList`1&lt;!U&gt;, class Mono.DocTest.Generic.MyList`1/Helper`2&lt;!U, !U, !U&gt;&gt; ItemChanged" />
+      <MemberSignature
+        Language="C#"
+        Value="public event Action&lt;Mono.DocTest.Generic.MyList&lt;U&gt;,Mono.DocTest.Generic.MyList&lt;U&gt;.Helper&lt;U,U&gt;&gt; ItemChanged;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".event class System.Action`2&lt;class Mono.DocTest.Generic.MyList`1&lt;!U&gt;, class Mono.DocTest.Generic.MyList`1/Helper`2&lt;!U, !U, !U&gt;&gt; ItemChanged"
+      />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -96,8 +109,14 @@
       </Docs>
     </Member>
     <Member MemberName="MyEvent">
-      <MemberSignature Language="C#" Value="public event EventHandler&lt;Mono.DocTest.Generic.GenericBase&lt;U&gt;.FooEventArgs&gt; MyEvent;" />
-      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class Mono.DocTest.Generic.GenericBase`1/FooEventArgs&lt;!U&gt;&gt; MyEvent" />
+      <MemberSignature
+        Language="C#"
+        Value="public event EventHandler&lt;Mono.DocTest.Generic.GenericBase&lt;U&gt;.FooEventArgs&gt; MyEvent;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".event class System.EventHandler`1&lt;class Mono.DocTest.Generic.GenericBase`1/FooEventArgs&lt;!U&gt;&gt; MyEvent"
+      />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -111,8 +130,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static explicit operator U (Mono.DocTest.Generic.GenericBase&lt;U&gt; list);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname !U op_Explicit(class Mono.DocTest.Generic.GenericBase`1&lt;!U&gt; list) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static explicit operator U (Mono.DocTest.Generic.GenericBase&lt;U&gt; list);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname !U op_Explicit(class Mono.DocTest.Generic.GenericBase`1&lt;!U&gt; list) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -133,8 +158,14 @@
       </Docs>
     </Member>
     <Member MemberName="StaticField1">
-      <MemberSignature Language="C#" Value="public static readonly Mono.DocTest.Generic.GenericBase&lt;U&gt; StaticField1;" />
-      <MemberSignature Language="ILAsm" Value=".field public static initonly class Mono.DocTest.Generic.GenericBase`1&lt;!U&gt; StaticField1" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Mono.DocTest.Generic.GenericBase&lt;U&gt; StaticField1;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static initonly class Mono.DocTest.Generic.GenericBase`1&lt;!U&gt; StaticField1"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>

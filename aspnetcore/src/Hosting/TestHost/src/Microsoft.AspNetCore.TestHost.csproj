@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core web server for writing and running tests.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>

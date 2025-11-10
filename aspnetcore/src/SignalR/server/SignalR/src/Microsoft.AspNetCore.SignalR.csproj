@@ -11,5 +11,4 @@
     <Reference Include="Microsoft.AspNetCore.SignalR.Core" />
     <Reference Include="Microsoft.AspNetCore.Http.Connections" />
   </ItemGroup>
-
 </Project>

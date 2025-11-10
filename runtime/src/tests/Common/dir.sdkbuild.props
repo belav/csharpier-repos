@@ -14,5 +14,4 @@
     <!-- [ARCADE REMOVE] This line should be removed we use the Arcade Sdk. -->
     <DeterministicSourcePaths>false</DeterministicSourcePaths>
   </PropertyGroup>
-
 </Project>

@@ -1,1 +1,2 @@
-﻿<?xml version="1.0" encoding="utf-8"?><MailPriority xmlns="http://schemas.datacontract.org/2004/07/System.Net.Mail">Normal</MailPriority>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MailPriority xmlns="http://schemas.datacontract.org/2004/07/System.Net.Mail">Normal</MailPriority>

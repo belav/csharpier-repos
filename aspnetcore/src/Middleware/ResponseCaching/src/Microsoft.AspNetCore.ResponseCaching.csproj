@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core middleware for caching HTTP responses on the server.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -21,7 +20,10 @@
 
   <ItemGroup>
     <Compile Include="$(RepoRoot)src\Shared\TaskToApm.cs" Link="Streams\TaskToApm.cs" />
-    <Compile Include="$(RepoRoot)src\Shared\SegmentWriteStream.cs" Link="Streams\SegmentWriteStream.cs" />
+    <Compile
+      Include="$(RepoRoot)src\Shared\SegmentWriteStream.cs"
+      Link="Streams\SegmentWriteStream.cs"
+    />
   </ItemGroup>
 
   <ItemGroup>

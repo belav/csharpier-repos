@@ -15,7 +15,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public XcbSurface (IntPtr connection, uint drawable, IntPtr visual, int width, int height);" />
+      <MemberSignature
+        Language="C#"
+        Value="public XcbSurface (IntPtr connection, uint drawable, IntPtr visual, int width, int height);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="connection" Type="System.IntPtr" />
@@ -39,7 +42,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="FromBitmap">
-      <MemberSignature Language="C#" Value="public static Cairo.XcbSurface FromBitmap (IntPtr connection, uint bitmap, IntPtr screen, int width, int height);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Cairo.XcbSurface FromBitmap (IntPtr connection, uint bitmap, IntPtr screen, int width, int height);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Cairo.XcbSurface</ReturnType>

@@ -236,24 +236,75 @@
         </Method>
       </Type>
 
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Nullable`1[[System.Int32,System.Private.CoreLib]],System.Private.CoreLib]]" Dynamic="Required All" />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Nullable`1[[System.Int32,System.Private.CoreLib]],System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
 
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Byte, System.Private.CoreLib]]" Dynamic="Required All" />
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.SByte, System.Private.CoreLib]]" Dynamic="Required All" />
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.UInt16, System.Private.CoreLib]]" Dynamic="Required All" />
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Int16, System.Private.CoreLib]]" Dynamic="Required All" />
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.UInt32, System.Private.CoreLib]]" Dynamic="Required All" />
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Int32, System.Private.CoreLib]]" Dynamic="Required All" />
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.UInt64, System.Private.CoreLib]]" Dynamic="Required All" />
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Int64, System.Private.CoreLib]]" Dynamic="Required All" />
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.IntPtr, System.Private.CoreLib]]" Dynamic="Required All" />
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.UIntPtr, System.Private.CoreLib]]" Dynamic="Required All" />
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Char, System.Private.CoreLib]]" Dynamic="Required All" />
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Boolean, System.Private.CoreLib]]" Dynamic="Required All" />
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Single, System.Private.CoreLib]]" Dynamic="Required All" />
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Double, System.Private.CoreLib]]" Dynamic="Required All" />
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Decimal, System.Private.CoreLib]]" Dynamic="Required All" />
-      <Type Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Reflection.BindingFlags, System.Private.CoreLib]]" Dynamic="Required All" />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Byte, System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.SByte, System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.UInt16, System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Int16, System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.UInt32, System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Int32, System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.UInt64, System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Int64, System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.IntPtr, System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.UIntPtr, System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Char, System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Boolean, System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Single, System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Double, System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Decimal, System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
+      <Type
+        Name="System.Reflection.Tests.InvokeRefReturnNetcoreTests+TestClass`1[[System.Reflection.BindingFlags, System.Private.CoreLib]]"
+        Dynamic="Required All"
+      />
 
       <Type Name="System.Reflection.Tests.MethodBaseTests">
         <Method Name="MyFakeGenericMethod" Dynamic="Required All">
@@ -311,13 +362,22 @@
           <GenericArgument Name="System.Double, System.Private.CoreLib" />
         </Method>
 
-        <Method Name="BinarySearch_TypesNotIComparable_ThrowsInvalidOperationException" Dynamic="Required All">
+        <Method
+          Name="BinarySearch_TypesNotIComparable_ThrowsInvalidOperationException"
+          Dynamic="Required All"
+        >
           <GenericArgument Name="System.Int32, System.Private.CoreLib" />
         </Method>
-        <Method Name="BinarySearch_TypesNotIComparable_ThrowsInvalidOperationException" Dynamic="Required All">
+        <Method
+          Name="BinarySearch_TypesNotIComparable_ThrowsInvalidOperationException"
+          Dynamic="Required All"
+        >
           <GenericArgument Name="System.SByte, System.Private.CoreLib" />
         </Method>
-        <Method Name="BinarySearch_TypesNotIComparable_ThrowsInvalidOperationException" Dynamic="Required All">
+        <Method
+          Name="BinarySearch_TypesNotIComparable_ThrowsInvalidOperationException"
+          Dynamic="Required All"
+        >
           <GenericArgument Name="System.Char, System.Private.CoreLib" />
         </Method>
 
@@ -506,7 +566,10 @@
         </Method>
       </Type>
 
-      <Type Name="System.Tests.ArrayTests+GenericStruct`1[[System.Int32,System.Private.CoreLib]][]" Dynamic="Required All" />
+      <Type
+        Name="System.Tests.ArrayTests+GenericStruct`1[[System.Int32,System.Private.CoreLib]][]"
+        Dynamic="Required All"
+      />
     </Assembly>
 
     <Assembly Name="System.Private.CoreLib">
@@ -517,7 +580,10 @@
       </Type>
       <Type Name="System.Int128" Dynamic="Required All" />
       <Type Name="System.Half" Dynamic="Required All" />
-      <Type Name="System.Collections.Generic.NonRandomizedStringEqualityComparer" Dynamic="Required All" />
+      <Type
+        Name="System.Collections.Generic.NonRandomizedStringEqualityComparer"
+        Dynamic="Required All"
+      />
     </Assembly>
   </Application>
 </Directives>

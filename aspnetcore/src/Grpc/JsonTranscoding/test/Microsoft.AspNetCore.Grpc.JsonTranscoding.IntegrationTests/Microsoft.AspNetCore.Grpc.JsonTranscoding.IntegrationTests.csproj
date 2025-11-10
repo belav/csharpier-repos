@@ -5,7 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\Shared\TestGrpcServiceActivator.cs" Link="Infrastructure\TestGrpcServiceActivator.cs" />
+    <Compile
+      Include="..\Shared\TestGrpcServiceActivator.cs"
+      Link="Infrastructure\TestGrpcServiceActivator.cs"
+    />
 
     <ProjectReference Include="..\testassets\IntegrationTestsWebsite\IntegrationTestsWebsite.csproj" />
 

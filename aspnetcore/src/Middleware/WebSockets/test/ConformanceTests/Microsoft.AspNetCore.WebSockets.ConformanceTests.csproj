@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <DefaultItemExcludes>$(DefaultItemExcludes);AutobahnTestApp\**\*</DefaultItemExcludes>
@@ -10,5 +9,4 @@
     <Reference Include="Microsoft.Extensions.Logging" />
     <Reference Include="Microsoft.Extensions.Logging.Console" />
   </ItemGroup>
-
 </Project>

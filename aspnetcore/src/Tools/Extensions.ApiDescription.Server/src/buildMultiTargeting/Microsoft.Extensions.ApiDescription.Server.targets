@@ -10,13 +10,17 @@
         .Replace('netcoreapp1.1', '')
         .Replace('netcoreapp2.0', '')
         .Trim(';'))</_Temporary>
-    <_OpenApiGenerateDocumentsTFM
-        Condition=" '$(_Temporary)' != '' ">$(_Temporary.Split(';')[0])</_OpenApiGenerateDocumentsTFM>
+    <_OpenApiGenerateDocumentsTFM Condition=" '$(_Temporary)' != '' "
+      >$(_Temporary.Split(';')[0])</_OpenApiGenerateDocumentsTFM
+    >
 
     <OpenApiGenerateDocuments
-        Condition=" '$(OpenApiGenerateDocuments)' == '' AND '$(_Temporary)' != '' ">true</OpenApiGenerateDocuments>
-    <OpenApiGenerateDocumentsOnBuild
-        Condition=" '$(OpenApiGenerateDocumentsOnBuild)' == '' ">$(OpenApiGenerateDocuments)</OpenApiGenerateDocumentsOnBuild>
+      Condition=" '$(OpenApiGenerateDocuments)' == '' AND '$(_Temporary)' != '' "
+      >true</OpenApiGenerateDocuments
+    >
+    <OpenApiGenerateDocumentsOnBuild Condition=" '$(OpenApiGenerateDocumentsOnBuild)' == '' "
+      >$(OpenApiGenerateDocuments)</OpenApiGenerateDocumentsOnBuild
+    >
 
     <_Temporary />
   </PropertyGroup>
@@ -26,22 +30,28 @@
   </ItemGroup>
 
   <Target Name="GenerateOpenApiDocuments">
-    <MSBuild Projects="$(MSBuildProjectFile)"
-        Targets="GenerateOpenApiDocuments"
-        Properties="TargetFramework=$(_OpenApiGenerateDocumentsTFM)"
-        RemoveProperties="RuntimeIdentifier" />
+    <MSBuild
+      Projects="$(MSBuildProjectFile)"
+      Targets="GenerateOpenApiDocuments"
+      Properties="TargetFramework=$(_OpenApiGenerateDocumentsTFM)"
+      RemoveProperties="RuntimeIdentifier"
+    />
   </Target>
 
-  <Target Name="_GenerateOpenApiDocuments"
-      BeforeTargets="Build"
-      Condition=" '$(OpenApiGenerateDocumentsOnBuild)' == 'true' "
-      DependsOnTargets="GenerateOpenApiDocuments" />
+  <Target
+    Name="_GenerateOpenApiDocuments"
+    BeforeTargets="Build"
+    Condition=" '$(OpenApiGenerateDocumentsOnBuild)' == 'true' "
+    DependsOnTargets="GenerateOpenApiDocuments"
+  />
 
   <Target Name="OpenApiGetDocuments" Returns="@(_OpenApiProjectDocuments)">
-    <MSBuild Projects="$(MSBuildProjectFile)"
-        Targets="OpenApiGetDocuments"
-        Properties="TargetFramework=$(_OpenApiGenerateDocumentsTFM)"
-        RemoveProperties="RuntimeIdentifier">
+    <MSBuild
+      Projects="$(MSBuildProjectFile)"
+      Targets="OpenApiGetDocuments"
+      Properties="TargetFramework=$(_OpenApiGenerateDocumentsTFM)"
+      RemoveProperties="RuntimeIdentifier"
+    >
       <Output TaskParameter="TargetOutputs" ItemName="_OpenApiProjectDocuments" />
     </MSBuild>
   </Target>

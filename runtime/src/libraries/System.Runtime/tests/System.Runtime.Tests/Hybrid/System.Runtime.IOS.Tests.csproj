@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <WithoutCategories Condition="'$(EnableAdditionalTimezoneChecks)' != 'true'">$(WithoutCategories);AdditionalTimezoneChecks</WithoutCategories>
+    <WithoutCategories Condition="'$(EnableAdditionalTimezoneChecks)' != 'true'"
+      >$(WithoutCategories);AdditionalTimezoneChecks</WithoutCategories
+    >
   </PropertyGroup>
 
   <ItemGroup>

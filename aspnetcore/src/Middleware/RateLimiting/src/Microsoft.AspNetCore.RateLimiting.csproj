@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core middleware for enforcing rate limiting in an application</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>

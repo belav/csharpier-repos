@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppCurrent)-browser</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -10,8 +9,14 @@
     <Compile Include="System\Net\IWebProxyScript.cs" />
     <Compile Include="System\Net\WebProxy.cs" />
     <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
-    <Compile Condition="'$(TargetPlatformIdentifier)' == 'browser'" Include="System\Net\WebProxy.Browser.cs" />
-    <Compile Condition="'$(TargetPlatformIdentifier)' != 'browser'" Include="System\Net\WebProxy.NonBrowser.cs" />
+    <Compile
+      Condition="'$(TargetPlatformIdentifier)' == 'browser'"
+      Include="System\Net\WebProxy.Browser.cs"
+    />
+    <Compile
+      Condition="'$(TargetPlatformIdentifier)' != 'browser'"
+      Include="System\Net\WebProxy.NonBrowser.cs"
+    />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,5 +28,4 @@
     <Reference Include="System.Text.RegularExpressions" />
     <Reference Include="System.Threading" />
   </ItemGroup>
-
 </Project>

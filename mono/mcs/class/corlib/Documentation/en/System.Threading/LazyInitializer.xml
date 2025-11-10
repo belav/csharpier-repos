@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="LazyInitializer" FullName="System.Threading.LazyInitializer">
   <TypeSignature Language="C#" Value="public static class LazyInitializer" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit LazyInitializer extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract sealed beforefieldinit LazyInitializer extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -22,8 +25,14 @@
   </Docs>
   <Members>
     <Member MemberName="EnsureInitialized&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public static T EnsureInitialized&lt;T&gt; (ref T target) where T : class;" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig !!T EnsureInitialized&lt;class T&gt;(!!T target) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static T EnsureInitialized&lt;T&gt; (ref T target) where T : class;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig !!T EnsureInitialized&lt;class T&gt;(!!T target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -50,8 +59,14 @@
       </Docs>
     </Member>
     <Member MemberName="EnsureInitialized&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public static T EnsureInitialized&lt;T&gt; (ref T target, Func&lt;T&gt; valueFactory) where T : class;" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig !!T EnsureInitialized&lt;class T&gt;(!!T target, class System.Func`1&lt;!!T&gt; valueFactory) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static T EnsureInitialized&lt;T&gt; (ref T target, Func&lt;T&gt; valueFactory) where T : class;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig !!T EnsureInitialized&lt;class T&gt;(!!T target, class System.Func`1&lt;!!T&gt; valueFactory) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -80,8 +95,14 @@
       </Docs>
     </Member>
     <Member MemberName="EnsureInitialized&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public static T EnsureInitialized&lt;T&gt; (ref T target, ref bool initialized, ref object syncLock);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig !!T EnsureInitialized&lt;T&gt;(!!T target, bool initialized, object syncLock) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static T EnsureInitialized&lt;T&gt; (ref T target, ref bool initialized, ref object syncLock);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig !!T EnsureInitialized&lt;T&gt;(!!T target, bool initialized, object syncLock) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -108,8 +129,14 @@
       </Docs>
     </Member>
     <Member MemberName="EnsureInitialized&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public static T EnsureInitialized&lt;T&gt; (ref T target, ref bool initialized, ref object syncLock, Func&lt;T&gt; valueFactory);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig !!T EnsureInitialized&lt;T&gt;(!!T target, bool initialized, object syncLock, class System.Func`1&lt;!!T&gt; valueFactory) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static T EnsureInitialized&lt;T&gt; (ref T target, ref bool initialized, ref object syncLock, Func&lt;T&gt; valueFactory);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig !!T EnsureInitialized&lt;T&gt;(!!T target, bool initialized, object syncLock, class System.Func`1&lt;!!T&gt; valueFactory) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

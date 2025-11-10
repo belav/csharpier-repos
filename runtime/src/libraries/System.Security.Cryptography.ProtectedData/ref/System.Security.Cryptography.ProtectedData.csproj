@@ -4,8 +4,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="System.Security.Cryptography.ProtectedData.cs" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'" />
-    <Compile Include="System.Security.Cryptography.ProtectedData.netframework.cs" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" />
+    <Compile
+      Include="System.Security.Cryptography.ProtectedData.cs"
+      Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'"
+    />
+    <Compile
+      Include="System.Security.Cryptography.ProtectedData.netframework.cs"
+      Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
+    />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">

@@ -1,6 +1,9 @@
 <Type Name="Widget+IMenuItem" FullName="Mono.DocTest.Widget+IMenuItem">
   <TypeSignature Language="C#" Value="public interface Widget.IMenuItem" />
-  <TypeSignature Language="ILAsm" Value=".class nested public interface auto ansi abstract Widget/IMenuItem" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class nested public interface auto ansi abstract Widget/IMenuItem"
+  />
   <AssemblyInfo>
     <AssemblyName>DocTest</AssemblyName>
   </AssemblyInfo>
@@ -12,7 +15,10 @@
   <Members>
     <Member MemberName="A">
       <MemberSignature Language="C#" Value="public void A ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void A() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void A() cil managed"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

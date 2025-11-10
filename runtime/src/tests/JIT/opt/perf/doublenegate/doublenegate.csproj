@@ -2,8 +2,7 @@
   <PropertyGroup>
     <DebugType>None</DebugType>
   </PropertyGroup>
-  <PropertyGroup>
-  </PropertyGroup>
+  <PropertyGroup></PropertyGroup>
   <ItemGroup>
     <Compile Include="doublenegate.cs" />
   </ItemGroup>

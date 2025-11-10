@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <IsPartialFacadeAssembly>true</IsPartialFacadeAssembly>
@@ -188,8 +187,7 @@
     <Compile Include="System\Web\AspNetHostingPermission.cs" />
     <Compile Include="System\Web\AspNetHostingPermissionAttribute.cs" />
     <Compile Include="System\Web\AspNetHostingPermissionLevel.cs" />
-    <Compile Include="$(CommonPath)System\Obsoletions.cs"
-             Link="Common\System\Obsoletions.cs" />
+    <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
@@ -197,16 +195,25 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <Compile Include="$(LibrariesProjectRoot)System.Private.CoreLib\src\System\Security\IStackWalk.cs"
-             Link="System\Security\IStackWalk.cs" />
-    <Compile Include="$(LibrariesProjectRoot)System.Private.CoreLib\src\System\Security\PermissionSet.cs"
-             Link="System\Security\PermissionSet.cs" />
-    <Compile Include="$(LibrariesProjectRoot)System.Private.CoreLib\src\System\Security\Permissions\PermissionState.cs"
-             Link="System\Security\Permissions\PermissionState.cs" />
+    <Compile
+      Include="$(LibrariesProjectRoot)System.Private.CoreLib\src\System\Security\IStackWalk.cs"
+      Link="System\Security\IStackWalk.cs"
+    />
+    <Compile
+      Include="$(LibrariesProjectRoot)System.Private.CoreLib\src\System\Security\PermissionSet.cs"
+      Link="System\Security\PermissionSet.cs"
+    />
+    <Compile
+      Include="$(LibrariesProjectRoot)System.Private.CoreLib\src\System\Security\Permissions\PermissionState.cs"
+      Link="System\Security\Permissions\PermissionState.cs"
+    />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
-    <PackageReference Include="System.Security.AccessControl" Version="$(SystemSecurityAccessControlVersion)" />
+    <PackageReference
+      Include="System.Security.AccessControl"
+      Version="$(SystemSecurityAccessControlVersion)"
+    />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
@@ -223,5 +230,4 @@
     <Reference Include="System.Transactions" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
-
 </Project>
