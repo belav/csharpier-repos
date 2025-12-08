@@ -13,9 +13,9 @@
 //
 // devnote: This methods on this class are expected to behave exactly
 //          like the ObjectContext methods to which they delegate. Therefore,
-//          they should do very little, if any, extra work aside from a 
+//          they should do very little, if any, extra work aside from a
 //          single call to delegate to the appropriate ObjectContext method.
-//          The only exceptions to this are cases where we need to do 
+//          The only exceptions to this are cases where we need to do
 //          additional validation that is specific to ObjectSet, such as
 //          verifying that an object is in the appropriate EntitySet during
 //          DeleteObject and Detach operations. We also should not override
@@ -28,12 +28,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Metadata.Edm;
-using System.Globalization;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace System.Data.Objects
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix"
+    )]
     public class ObjectSet<TEntity> : ObjectQuery<TEntity>, IObjectSet<TEntity>
         where TEntity : class
     {
@@ -42,7 +45,7 @@ namespace System.Data.Objects
         #region Internal Constructors
         /// <summary>
         /// Creates a new ObjectSet that has a base ObjectQuery with the CommandText that represents
-        /// all of the entities in the specified EntitySet. 
+        /// all of the entities in the specified EntitySet.
         /// Sets the query's command text to the fully-qualified, quoted, EntitySet name, i.e. [EntityContainerName].[EntitySetName]
         /// Explicitly set MergeOption to AppendOnly in order to mirror CreateQuery behavior
         /// </summary>
@@ -52,7 +55,10 @@ namespace System.Data.Objects
             : base(entitySet, context, MergeOption.AppendOnly)
         {
             Debug.Assert(entitySet != null, "ObjectSet constructor requires a non-null EntitySet");
-            Debug.Assert(context != null, "ObjectSet constructor requires a non-null ObjectContext");
+            Debug.Assert(
+                context != null,
+                "ObjectSet constructor requires a non-null ObjectContext"
+            );
             _entitySet = entitySet;
         }
         #endregion
@@ -63,10 +69,7 @@ namespace System.Data.Objects
         /// </summary>
         public EntitySet EntitySet
         {
-            get
-            {
-                return _entitySet;
-            }
+            get { return _entitySet; }
         }
         #endregion
 
@@ -86,7 +89,7 @@ namespace System.Data.Objects
         /// Attaches an object to the ObjectContext using the EntitySet referenced by this ObjectSet.
         /// See ObjectContext.AttachTo for more details.
         /// </summary>
-        /// <param name="entity">Entity to be attached</param>       
+        /// <param name="entity">Entity to be attached</param>
         public void Attach(TEntity entity)
         {
             // this method is expected to behave exactly like ObjectContext.AttachTo -- see devnote at the top of this class
@@ -111,7 +114,7 @@ namespace System.Data.Objects
         /// Detaches an object from the ObjectContext. Validates that the object is in the referenced EntitySet in the context.
         /// See ObjectContext.Detach for more details.
         /// </summary>
-        /// <param name="entity">Entity to be detached.</param>        
+        /// <param name="entity">Entity to be detached.</param>
         /// <exception cref="InvalidOperationException">Throws if the specified object is not in the EntitySet.</exception>
         public void Detach(TEntity entity)
         {
@@ -129,7 +132,10 @@ namespace System.Data.Objects
         public TEntity ApplyCurrentValues(TEntity currentEntity)
         {
             // this method is expected to behave exactly like ObjectContext.ApplyCurrentValues -- see devnote at the top of this class
-            return this.Context.ApplyCurrentValues<TEntity>(FullyQualifiedEntitySetName, currentEntity);
+            return this.Context.ApplyCurrentValues<TEntity>(
+                FullyQualifiedEntitySetName,
+                currentEntity
+            );
         }
 
         /// <summary>
@@ -140,7 +146,10 @@ namespace System.Data.Objects
         public TEntity ApplyOriginalValues(TEntity originalEntity)
         {
             // this method is expected to behave exactly like ObjectContext.ApplyOriginalValues -- see devnote at the top of this class
-            return this.Context.ApplyOriginalValues<TEntity>(FullyQualifiedEntitySetName, originalEntity);
+            return this.Context.ApplyOriginalValues<TEntity>(
+                FullyQualifiedEntitySetName,
+                originalEntity
+            );
         }
 
         /// <summary>
@@ -164,11 +173,12 @@ namespace System.Data.Objects
         /// The object will either be an instance of the exact type <typeparamref name="TEntity"/>,
         /// or possibly an instance of the proxy type that corresponds to <typeparamref name="TEntity"/>.
         /// </returns>
-        public T CreateObject<T>() where T : class, TEntity
+        public T CreateObject<T>()
+            where T : class, TEntity
         {
             return this.Context.CreateObject<T>();
         }
-        
+
         #endregion
 
         #region Private Properties
@@ -179,7 +189,12 @@ namespace System.Data.Objects
             {
                 // Fully-qualified name is used to ensure the ObjectContext can always resolve the EntitySet name
                 // The identifiers used here should not be escaped with brackets ("[]") because the ObjectContext does not allow escaping for the EntitySet name
-                return string.Format(CultureInfo.InvariantCulture, "{0}.{1}", _entitySet.EntityContainer.Name, _entitySet.Name);
+                return string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}.{1}",
+                    _entitySet.EntityContainer.Name,
+                    _entitySet.Name
+                );
             }
         }
         #endregion

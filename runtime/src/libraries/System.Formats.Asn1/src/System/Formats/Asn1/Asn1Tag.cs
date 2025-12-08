@@ -63,9 +63,11 @@ namespace System.Formats.Asn1
             // T-REC-X.680-201508 sec 8.6 (Table 1)
             const UniversalTagNumber ReservedIndex = (UniversalTagNumber)15;
 
-            if (universalTagNumber < UniversalTagNumber.EndOfContents ||
-                universalTagNumber > UniversalTagNumber.RelativeObjectIdentifierIRI ||
-                universalTagNumber == ReservedIndex)
+            if (
+                universalTagNumber < UniversalTagNumber.EndOfContents
+                || universalTagNumber > UniversalTagNumber.RelativeObjectIdentifierIRI
+                || universalTagNumber == ReservedIndex
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(universalTagNumber));
             }
@@ -155,7 +157,11 @@ namespace System.Formats.Asn1
         /// <returns>
         ///   <see langword="true" /> if a tag was correctly decoded; otherwise, <see langword="false" />.
         /// </returns>
-        public static bool TryDecode(ReadOnlySpan<byte> source, out Asn1Tag tag, out int bytesConsumed)
+        public static bool TryDecode(
+            ReadOnlySpan<byte> source,
+            out Asn1Tag tag,
+            out int bytesConsumed
+        )
         {
             tag = default(Asn1Tag);
             bytesConsumed = 0;
@@ -210,8 +216,7 @@ namespace System.Formats.Asn1
                         bytesConsumed = 0;
                         return false;
                     }
-                }
-                while ((current & ContinuationFlag) == ContinuationFlag);
+                } while ((current & ContinuationFlag) == ContinuationFlag);
 
                 // This encoding is only valid for tag values greater than 30.
                 // (T-REC-X.690-201508 sec 8.1.2.3, 8.1.2.4)

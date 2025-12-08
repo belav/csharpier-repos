@@ -35,20 +35,22 @@ namespace RenderingPlayground
             int top = 0,
             int left = 0,
             string text = null,
-            bool overwrite = true)
+            bool overwrite = true
+        )
 #pragma warning restore CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
         {
             // Should this have a concrete reference to Console?
-            var region = new Region(left,
-                                    top,
-                                    width ?? Console.WindowWidth,
-                                    height ?? Console.WindowHeight,
-                                    overwrite);
-            
+            var region = new Region(
+                left,
+                top,
+                width ?? Console.WindowWidth,
+                height ?? Console.WindowHeight,
+                overwrite
+            );
+
             var console = new SystemConsole();
 
-            if (overwrite && 
-                console is ITerminal terminal)
+            if (overwrite && console is ITerminal terminal)
             {
                 terminal.Clear();
             }
@@ -56,23 +58,25 @@ namespace RenderingPlayground
             var consoleRenderer = new ConsoleRenderer(
                 console,
                 mode: OutputMode.Auto,
-                resetAfterRender: true);
+                resetAfterRender: true
+            );
 
             switch (sample)
             {
                 case SampleName.Colors:
-                {
-                    var screen = new ScreenView(renderer: consoleRenderer, console);
-                    screen.Child = new ColorsView(text ?? "*");
+                    {
+                        var screen = new ScreenView(renderer: consoleRenderer, console);
+                        screen.Child = new ColorsView(text ?? "*");
 
-                    screen.Render(region);
-                }
+                        screen.Render(region);
+                    }
                     break;
 
                 case SampleName.Dir:
-                    
+
                     var directoryTableView = new DirectoryTableView(
-                        new DirectoryInfo(Directory.GetCurrentDirectory()));
+                        new DirectoryInfo(Directory.GetCurrentDirectory())
+                    );
 
                     console.Append(directoryTableView);
 
@@ -81,103 +85,116 @@ namespace RenderingPlayground
                 case SampleName.Moby:
                     consoleRenderer.RenderToRegion(
                         $"Call me {StyleSpan.BoldOn()}{StyleSpan.UnderlinedOn()}Ishmael{StyleSpan.UnderlinedOff()}{StyleSpan.BoldOff()}. Some years ago -- never mind how long precisely -- having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. It is a way I have of driving off the spleen and regulating the circulation. Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul; whenever I find myself involuntarily pausing before coffin warehouses, and bringing up the rear of every funeral I meet; and especially whenever my hypos get such an upper hand of me, that it requires a strong moral principle to prevent me from deliberately stepping into the street, and {ForegroundColorSpan.Rgb(60, 0, 0)}methodically{ForegroundColorSpan.Reset()} {ForegroundColorSpan.Rgb(90, 0, 0)}knocking{ForegroundColorSpan.Reset()} {ForegroundColorSpan.Rgb(120, 0, 0)}people's{ForegroundColorSpan.Reset()} {ForegroundColorSpan.Rgb(160, 0, 0)}hats{ForegroundColorSpan.Reset()} {ForegroundColorSpan.Rgb(220, 0, 0)}off{ForegroundColorSpan.Reset()} then, I account it high time to get to sea as soon as I can. This is my substitute for pistol and ball. With a philosophical flourish Cato throws himself upon his sword; I quietly take to the ship. There is nothing surprising in this. If they but knew it, almost all men in their degree, some time or other, cherish very nearly the same feelings towards the ocean with me.",
-                        region);
+                        region
+                    );
                     break;
 
                 case SampleName.Processes:
-                {
-                    var view = new ProcessesView(Process.GetProcesses());
-                    view.Render(consoleRenderer, region);
-                }
+                    {
+                        var view = new ProcessesView(Process.GetProcesses());
+                        view.Render(consoleRenderer, region);
+                    }
 
                     break;
 
                 case SampleName.TableView:
-                {
-                    var table = new TableView<Process>
-                                {
-                                    Items = Process.GetProcesses().Where(x => !string.IsNullOrEmpty(x.MainWindowTitle)).OrderBy(p => p.ProcessName).ToList()
-                                };
-                    table.AddColumn(process => $"{process.ProcessName} ", "Name");
-                    table.AddColumn(process => ContentView.FromObservable(process.TrackCpuUsage(), x => $"{x.UsageTotal:P}"), "CPU", ColumnDefinition.Star(1));
+                    {
+                        var table = new TableView<Process>
+                        {
+                            Items = Process
+                                .GetProcesses()
+                                .Where(x => !string.IsNullOrEmpty(x.MainWindowTitle))
+                                .OrderBy(p => p.ProcessName)
+                                .ToList(),
+                        };
+                        table.AddColumn(process => $"{process.ProcessName} ", "Name");
+                        table.AddColumn(
+                            process =>
+                                ContentView.FromObservable(
+                                    process.TrackCpuUsage(),
+                                    x => $"{x.UsageTotal:P}"
+                                ),
+                            "CPU",
+                            ColumnDefinition.Star(1)
+                        );
 
-                    var screen = new ScreenView(renderer: consoleRenderer, console) { Child = table };
-                    screen.Render();
-                }
+                        var screen = new ScreenView(renderer: consoleRenderer, console)
+                        {
+                            Child = table,
+                        };
+                        screen.Render();
+                    }
                     break;
 
                 case SampleName.Clock:
-                {
-                    var screen = new ScreenView(renderer: consoleRenderer, console);
-                    var lastTime = DateTime.Now;
-                    var clockObservable = new BehaviorSubject<DateTime>(lastTime);
-                    var clockView = ContentView.FromObservable(clockObservable, x => $"{x:T}");
-                    screen.Child = clockView;
-                    screen.Render();
-
-                    while (!Console.KeyAvailable)
                     {
-                        if (DateTime.Now - lastTime > TimeSpan.FromSeconds(1))
+                        var screen = new ScreenView(renderer: consoleRenderer, console);
+                        var lastTime = DateTime.Now;
+                        var clockObservable = new BehaviorSubject<DateTime>(lastTime);
+                        var clockView = ContentView.FromObservable(clockObservable, x => $"{x:T}");
+                        screen.Child = clockView;
+                        screen.Render();
+
+                        while (!Console.KeyAvailable)
                         {
-                            lastTime = DateTime.Now;
-                            clockObservable.OnNext(lastTime);
+                            if (DateTime.Now - lastTime > TimeSpan.FromSeconds(1))
+                            {
+                                lastTime = DateTime.Now;
+                                clockObservable.OnNext(lastTime);
+                            }
                         }
                     }
-                }
                     break;
 
                 case SampleName.GridLayout:
-                {
-                    var screen = new ScreenView(renderer: consoleRenderer, console);
-                    var content = new ContentView(
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum for Kevin.");
-                    var smallContent = new ContentView("Kevin Bost");
-                    var longContent = new ContentView("Hacking on System.CommandLine");
+                    {
+                        var screen = new ScreenView(renderer: consoleRenderer, console);
+                        var content = new ContentView(
+                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum for Kevin."
+                        );
+                        var smallContent = new ContentView("Kevin Bost");
+                        var longContent = new ContentView("Hacking on System.CommandLine");
 
-                    var gridView = new GridView();
-                    gridView.SetColumns(
-                        ColumnDefinition.SizeToContent(),
-                        ColumnDefinition.Star(1),
-                        ColumnDefinition.Star(0.5)
-                    );
-                    gridView.SetRows(
-                        RowDefinition.Star(0.5),
-                        RowDefinition.Star(0.5)
-                    );
+                        var gridView = new GridView();
+                        gridView.SetColumns(
+                            ColumnDefinition.SizeToContent(),
+                            ColumnDefinition.Star(1),
+                            ColumnDefinition.Star(0.5)
+                        );
+                        gridView.SetRows(RowDefinition.Star(0.5), RowDefinition.Star(0.5));
 
-                    gridView.SetChild(smallContent, 0, 0);
-                    gridView.SetChild(longContent, 0, 1);
-                    //gridView.SetChild(content, 0, 0);
-                    gridView.SetChild(content, 1, 1);
-                    gridView.SetChild(content, 2, 0);
+                        gridView.SetChild(smallContent, 0, 0);
+                        gridView.SetChild(longContent, 0, 1);
+                        //gridView.SetChild(content, 0, 0);
+                        gridView.SetChild(content, 1, 1);
+                        gridView.SetChild(content, 2, 0);
 
-                    screen.Child = gridView;
+                        screen.Child = gridView;
 
-                    screen.Render();
-                }
+                        screen.Render();
+                    }
                     break;
 
                 case SampleName.Cursor:
                     {
                         var gridView = new GridView();
                         gridView.SetColumns(ColumnDefinition.SizeToContent());
-                        gridView.SetRows(
-                            RowDefinition.SizeToContent(),
-                            RowDefinition.Star(1)
+                        gridView.SetRows(RowDefinition.SizeToContent(), RowDefinition.Star(1));
+                        var content = new ContentView(
+                            "Instructions:\n"
+                                + $"DIRECTION ARROWS move the cursor; CTRL moves 2 instead of 1.\n"
+                                + "PAGE UP/DOWN scrolls up/down.\n"
+                                + "S saves the cursor position, R restores it.\n"
+                                + "ENTER navigates to the start of the next line; CTRL moves 2 instead of 1.\n"
+                                + "L moves to location (3, 9).\n"
+                                + "ESC quits."
                         );
-                        var content = new ContentView("Instructions:\n" +
-                            $"DIRECTION ARROWS move the cursor; CTRL moves 2 instead of 1.\n" +
-                            "PAGE UP/DOWN scrolls up/down.\n" +
-                            "S saves the cursor position, R restores it.\n" +
-                            "ENTER navigates to the start of the next line; CTRL moves 2 instead of 1.\n" +
-                            "L moves to location (3, 9).\n" +
-                            "ESC quits.");
                         gridView.SetChild(content, 0, 0);
                         gridView.SetChild(new ColorsView("#"), 0, 1);
 
                         var screen = new ScreenView(renderer: consoleRenderer, console)
                         {
-                            Child = gridView
+                            Child = gridView,
                         };
                         screen.Render(region);
 
@@ -192,7 +209,9 @@ namespace RenderingPlayground
                         Console.TreatControlCAsInput = true;
                         while (key.Key != ConsoleKey.Escape)
                         {
-                            var lines = !key.Modifiers.HasFlag(ConsoleModifiers.Control) ? default : 2;
+                            var lines = !key.Modifiers.HasFlag(ConsoleModifiers.Control)
+                                ? default
+                                : 2;
                             switch (key.Key)
                             {
                                 case ConsoleKey.DownArrow:
@@ -258,9 +277,7 @@ namespace RenderingPlayground
                 default:
                     if (!string.IsNullOrWhiteSpace(text))
                     {
-                        consoleRenderer.RenderToRegion(
-                            text,
-                            region);
+                        consoleRenderer.RenderToRegion(text, region);
                     }
                     else
                     {
@@ -268,7 +285,8 @@ namespace RenderingPlayground
                         var stackLayout = new StackLayoutView();
                         var content1 = new ContentView("Hello World!");
                         var content2 = new ContentView(
-                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum for Kevin.");
+                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum for Kevin."
+                        );
                         stackLayout.Add(content2);
                         stackLayout.Add(content1);
                         stackLayout.Add(content2);

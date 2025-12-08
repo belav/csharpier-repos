@@ -20,17 +20,42 @@ namespace System.Net.Security.Tests
 
         protected virtual SslProtocols GetSslProtocols() => SslProtocols.None;
 
-        protected override async Task<StreamPair> CreateWrappedConnectedStreamsAsync(StreamPair wrapped, bool leaveOpen = false)
+        protected override async Task<StreamPair> CreateWrappedConnectedStreamsAsync(
+            StreamPair wrapped,
+            bool leaveOpen = false
+        )
         {
-            using X509Certificate2 cert = Test.Common.Configuration.Certificates.GetServerCertificate();
-            var ssl1 = new SslStream(wrapped.Stream1, leaveOpen, delegate { return true; });
-            var ssl2 = new SslStream(wrapped.Stream2, leaveOpen, delegate { return true; });
+            using X509Certificate2 cert =
+                Test.Common.Configuration.Certificates.GetServerCertificate();
+            var ssl1 = new SslStream(
+                wrapped.Stream1,
+                leaveOpen,
+                delegate
+                {
+                    return true;
+                }
+            );
+            var ssl2 = new SslStream(
+                wrapped.Stream2,
+                leaveOpen,
+                delegate
+                {
+                    return true;
+                }
+            );
 
             await new[]
             {
-                ssl1.AuthenticateAsClientAsync(cert.GetNameInfo(X509NameType.SimpleName, false), null, GetSslProtocols(), false),
-                ssl2.AuthenticateAsServerAsync(cert, false, GetSslProtocols(), false)
-            }.WhenAllOrAnyFailed().ConfigureAwait(false);
+                ssl1.AuthenticateAsClientAsync(
+                    cert.GetNameInfo(X509NameType.SimpleName, false),
+                    null,
+                    GetSslProtocols(),
+                    false
+                ),
+                ssl2.AuthenticateAsServerAsync(cert, false, GetSslProtocols(), false),
+            }
+                .WhenAllOrAnyFailed()
+                .ConfigureAwait(false);
 
             if (GetSslProtocols() == SslProtocols.Tls13)
             {
@@ -65,7 +90,8 @@ namespace System.Net.Security.Tests
     }
 
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.SupportsTls11))]
-    public sealed class SslStreamTls11NetworkConformanceTests : SslStreamDefaultNetworkConformanceTests
+    public sealed class SslStreamTls11NetworkConformanceTests
+        : SslStreamDefaultNetworkConformanceTests
     {
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
         protected override SslProtocols GetSslProtocols() => SslProtocols.Tls11;
@@ -73,13 +99,15 @@ namespace System.Net.Security.Tests
     }
 
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.SupportsTls12))]
-    public sealed class SslStreamTls12NetworkConformanceTests : SslStreamDefaultNetworkConformanceTests
+    public sealed class SslStreamTls12NetworkConformanceTests
+        : SslStreamDefaultNetworkConformanceTests
     {
         protected override SslProtocols GetSslProtocols() => SslProtocols.Tls12;
     }
 
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.SupportsTls13))]
-    public sealed class SslStreamTls13NetworkConformanceTests : SslStreamDefaultNetworkConformanceTests
+    public sealed class SslStreamTls13NetworkConformanceTests
+        : SslStreamDefaultNetworkConformanceTests
     {
         protected override SslProtocols GetSslProtocols() => SslProtocols.Tls13;
     }

@@ -4,12 +4,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
-    public interface IPersistedSelector {
-
+namespace System.Web.UI.WebControls
+{
+    public interface IPersistedSelector
+    {
         DataKey DataKey { get; set; }
-
     }
-
 }

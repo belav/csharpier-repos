@@ -19,10 +19,9 @@ public class SqlServerParameterBasedSqlProcessor : RelationalParameterBasedSqlPr
     /// </summary>
     public SqlServerParameterBasedSqlProcessor(
         RelationalParameterBasedSqlProcessorDependencies dependencies,
-        bool useRelationalNulls)
-        : base(dependencies, useRelationalNulls)
-    {
-    }
+        bool useRelationalNulls
+    )
+        : base(dependencies, useRelationalNulls) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,28 +32,40 @@ public class SqlServerParameterBasedSqlProcessor : RelationalParameterBasedSqlPr
     public override Expression Optimize(
         Expression queryExpression,
         IReadOnlyDictionary<string, object?> parametersValues,
-        out bool canCache)
+        out bool canCache
+    )
     {
-        var optimizedQueryExpression = base.Optimize(queryExpression, parametersValues, out canCache);
+        var optimizedQueryExpression = base.Optimize(
+            queryExpression,
+            parametersValues,
+            out canCache
+        );
 
-        optimizedQueryExpression = new SkipTakeCollapsingExpressionVisitor(Dependencies.SqlExpressionFactory)
-            .Process(optimizedQueryExpression, parametersValues, out var canCache2);
+        optimizedQueryExpression = new SkipTakeCollapsingExpressionVisitor(
+            Dependencies.SqlExpressionFactory
+        ).Process(optimizedQueryExpression, parametersValues, out var canCache2);
 
         canCache &= canCache2;
 
-        return new SearchConditionConvertingExpressionVisitor(Dependencies.SqlExpressionFactory).Visit(optimizedQueryExpression);
+        return new SearchConditionConvertingExpressionVisitor(
+            Dependencies.SqlExpressionFactory
+        ).Visit(optimizedQueryExpression);
     }
 
     /// <inheritdoc />
     protected override Expression ProcessSqlNullability(
         Expression selectExpression,
         IReadOnlyDictionary<string, object?> parametersValues,
-        out bool canCache)
+        out bool canCache
+    )
     {
         Check.NotNull(selectExpression, nameof(selectExpression));
         Check.NotNull(parametersValues, nameof(parametersValues));
 
         return new SqlServerSqlNullabilityProcessor(Dependencies, UseRelationalNulls).Process(
-            selectExpression, parametersValues, out canCache);
+            selectExpression,
+            parametersValues,
+            out canCache
+        );
     }
 }

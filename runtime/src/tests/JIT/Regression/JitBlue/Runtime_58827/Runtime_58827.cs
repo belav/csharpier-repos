@@ -9,7 +9,9 @@ using Xunit;
 public class B
 {
     public B z() => this;
+
     public bool T() => true;
+
     public virtual bool F(B b, int x) => x == 0;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -20,8 +22,11 @@ public class B
     }
 
     public bool H(B b, int x) => G(b, x);
+
     public bool I(B b, int x) => F(b, x + 1);
+
     public bool J(B b, int x) => I(b, x);
+
     public bool K(B b, int x) => J(b, x);
 }
 
@@ -31,7 +36,8 @@ public class X : B
 
     public override bool F(B b, int x)
     {
-        if (x == 0) return true;
+        if (x == 0)
+            return true;
         return b.H(b, x - 1);
     }
 

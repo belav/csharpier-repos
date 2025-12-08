@@ -28,16 +28,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     [Shared]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal partial class DeclarationNameCompletionProvider([ImportMany] IEnumerable<Lazy<IDeclarationNameRecommender, OrderableMetadata>> recommenders) : LSPCompletionProvider
+    internal partial class DeclarationNameCompletionProvider(
+        [ImportMany] IEnumerable<Lazy<IDeclarationNameRecommender, OrderableMetadata>> recommenders
+    ) : LSPCompletionProvider
     {
-        private ImmutableArray<Lazy<IDeclarationNameRecommender, OrderableMetadata>> Recommenders { get; } = ExtensionOrderer.Order(recommenders).ToImmutableArray();
+        private ImmutableArray<
+            Lazy<IDeclarationNameRecommender, OrderableMetadata>
+        > Recommenders { get; } = ExtensionOrderer.Order(recommenders).ToImmutableArray();
 
         internal override string Language => LanguageNames.CSharp;
 
-        public override bool IsInsertionTrigger(SourceText text, int insertedCharacterPosition, CompletionOptions options)
-            => CompletionUtilities.IsTriggerAfterSpaceOrStartOfWordCharacter(text, insertedCharacterPosition, options);
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int insertedCharacterPosition,
+            CompletionOptions options
+        ) =>
+            CompletionUtilities.IsTriggerAfterSpaceOrStartOfWordCharacter(
+                text,
+                insertedCharacterPosition,
+                options
+            );
 
-        public override ImmutableHashSet<char> TriggerCharacters { get; } = CompletionUtilities.SpaceTriggerCharacter;
+        public override ImmutableHashSet<char> TriggerCharacters { get; } =
+            CompletionUtilities.SpaceTriggerCharacter;
 
         public override async Task ProvideCompletionsAsync(CompletionContext completionContext)
         {
@@ -52,7 +65,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     return;
                 }
 
-                var context = (CSharpSyntaxContext)await completionContext.GetSyntaxContextWithExistingSpeculativeModelAsync(document, cancellationToken).ConfigureAwait(false);
+                var context = (CSharpSyntaxContext)
+                    await completionContext
+                        .GetSyntaxContextWithExistingSpeculativeModelAsync(
+                            document,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 if (context.IsInNonUserCode)
                 {
                     return;
@@ -60,29 +79,46 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
                 // Do not show name suggestions for unbound "async" or "yield" identifier.
                 // Most likely user is using it as keyword, so name suggestion will just interfere them
-                if (context.TargetToken.IsKindOrHasMatchingText(SyntaxKind.AsyncKeyword) ||
-                    context.TargetToken.IsKindOrHasMatchingText(SyntaxKind.YieldKeyword))
+                if (
+                    context.TargetToken.IsKindOrHasMatchingText(SyntaxKind.AsyncKeyword)
+                    || context.TargetToken.IsKindOrHasMatchingText(SyntaxKind.YieldKeyword)
+                )
                 {
-                    if (context.SemanticModel.GetSymbolInfo(context.TargetToken).GetAnySymbol() is null)
+                    if (
+                        context.SemanticModel.GetSymbolInfo(context.TargetToken).GetAnySymbol()
+                        is null
+                    )
                     {
                         return;
                     }
                 }
 
-                var nameInfo = await NameDeclarationInfo.GetDeclarationInfoAsync(document, position, cancellationToken).ConfigureAwait(false);
+                var nameInfo = await NameDeclarationInfo
+                    .GetDeclarationInfoAsync(document, position, cancellationToken)
+                    .ConfigureAwait(false);
                 using var _ = PooledHashSet<string>.GetInstance(out var suggestedNames);
 
                 var sortValue = 0;
                 foreach (var recommender in Recommenders)
                 {
-                    var names = await recommender.Value.ProvideRecommendedNamesAsync(completionContext, document, context, nameInfo, cancellationToken).ConfigureAwait(false);
+                    var names = await recommender
+                        .Value.ProvideRecommendedNamesAsync(
+                            completionContext,
+                            document,
+                            context,
+                            nameInfo,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                     foreach (var (name, glyph) in names)
                     {
                         if (suggestedNames.Add(name))
                         {
                             // We've produced items in the desired order, add a sort text to each item to prevent alphabetization
-                            completionContext.AddItem(CreateCompletionItem(name, glyph, sortValue.ToString("D8")));
+                            completionContext.AddItem(
+                                CreateCompletionItem(name, glyph, sortValue.ToString("D8"))
+                            );
                             sortValue++;
                         }
                     }
@@ -92,15 +128,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     return;
 
                 completionContext.SuggestionModeItem = CommonCompletionItem.Create(
-                    CSharpFeaturesResources.Name, displayTextSuffix: "", CompletionItemRules.Default);
+                    CSharpFeaturesResources.Name,
+                    displayTextSuffix: "",
+                    CompletionItemRules.Default
+                );
             }
-            catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, ErrorSeverity.General))
+            catch (Exception e)
+                when (FatalError.ReportAndCatchUnlessCanceled(e, ErrorSeverity.General))
             {
                 // nop
             }
         }
 
-        private static CompletionItem CreateCompletionItem(string name, Glyph glyph, string sortText)
+        private static CompletionItem CreateCompletionItem(
+            string name,
+            Glyph glyph,
+            string sortText
+        )
         {
             return CommonCompletionItem.Create(
                 name,
@@ -108,7 +152,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 CompletionItemRules.Default,
                 glyph: glyph,
                 sortText: sortText,
-                description: CSharpFeaturesResources.Suggested_name.ToSymbolDisplayParts());
+                description: CSharpFeaturesResources.Suggested_name.ToSymbolDisplayParts()
+            );
         }
     }
 }

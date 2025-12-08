@@ -14,15 +14,13 @@ using static Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers.View.ColumnDefinitions
 {
     [Export(typeof(IDefaultColumnGroup))]
-    [Name(nameof(AnalyzerCategoryGroupingSet))]    // Required, name of the default group
+    [Name(nameof(AnalyzerCategoryGroupingSet))] // Required, name of the default group
     [GroupColumns(Category)] // Required, the names of the columns in the grouping
     internal class AnalyzerCategoryGroupingSet : IDefaultColumnGroup
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AnalyzerCategoryGroupingSet()
-        {
-        }
+        public AnalyzerCategoryGroupingSet() { }
     }
 
     [Export(typeof(ITableColumnDefinition))]
@@ -31,9 +29,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AnalyzerCategoryColumnDefinition()
-        {
-        }
+        public AnalyzerCategoryColumnDefinition() { }
 
         public override string Name => Category;
         public override string DisplayName => ServicesVSResources.Category;
@@ -43,15 +39,15 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
         public override bool IsSortable => true;
         public override TextWrapping TextWrapping => TextWrapping.NoWrap;
 
-        private static string? GetCategoryName(ITableEntryHandle entry)
-            => entry.TryGetValue(Category, out string? categoryName)
-                ? categoryName
-                : null;
+        private static string? GetCategoryName(ITableEntryHandle entry) =>
+            entry.TryGetValue(Category, out string? categoryName) ? categoryName : null;
 
         public override IEntryBucket? CreateBucketForEntry(ITableEntryHandle entry)
         {
             var categoryName = GetCategoryName(entry);
-            return categoryName is not null ? new StringEntryBucket(categoryName, tooltip: categoryName) : null;
+            return categoryName is not null
+                ? new StringEntryBucket(categoryName, tooltip: categoryName)
+                : null;
         }
     }
 }

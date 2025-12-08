@@ -15,29 +15,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseObjectInitializerDiagnosticAnalyzer,
-        CSharpUseObjectInitializerCodeFixProvider>;
+        CSharpUseObjectInitializerCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
     public partial class UseObjectInitializerTests
     {
-        private static async Task TestInRegularAndScriptAsync(string testCode, string fixedCode, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+        private static async Task TestInRegularAndScriptAsync(
+            string testCode,
+            string fixedCode,
+            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp12,
-                TestState = { OutputKind = outputKind }
+                TestState = { OutputKind = outputKind },
             }.RunAsync();
         }
 
-        private static async Task TestMissingInRegularAndScriptAsync(string testCode, LanguageVersion? languageVersion = null)
+        private static async Task TestMissingInRegularAndScriptAsync(
+            string testCode,
+            LanguageVersion? languageVersion = null
+        )
         {
-            var test = new VerifyCS.Test
-            {
-                TestCode = testCode,
-                FixedCode = testCode,
-            };
+            var test = new VerifyCS.Test { TestCode = testCode, FixedCode = testCode };
 
             if (languageVersion != null)
                 test.LanguageVersion = languageVersion.Value;
@@ -74,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -86,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                 {
                     C c = new C();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -98,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                 {
                     C c = new C() { };
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -110,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                 {
                     C c = new C { };
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -123,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                     int P;
                     C c = new C() { P = 1 };
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -136,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                     int P;
                     C c = new C { P = 1 };
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -170,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         c.i = c.i + 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -188,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         c.i = c.i + 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -224,7 +236,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         c.i = c.i + 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -243,7 +256,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         c.i = c.i + 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -277,7 +291,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -311,7 +326,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         c.i = 2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -347,7 +363,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -383,7 +400,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         c.j += 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39146")]
@@ -418,7 +436,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39146")]
@@ -456,7 +475,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39146")]
@@ -496,7 +516,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         c.i = 2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -515,7 +536,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         c.j = 1;
                     }
                 }
-                """, LanguageVersion.CSharp2);
+                """,
+                LanguageVersion.CSharp2
+            );
         }
 
         [Fact]
@@ -564,7 +587,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -607,7 +631,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -651,7 +676,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -685,7 +711,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46670")]
@@ -726,7 +753,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/15459")]
@@ -742,7 +770,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                 		return c;
                 	}
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17853")]
@@ -760,7 +789,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         body.content = new ExpandoObject();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17953")]
@@ -780,7 +810,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
 
                     public string Value { get; set; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17953")]
@@ -816,7 +847,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
 
                     public string Value { get; set; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/19253")]
@@ -858,7 +890,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         int horse = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23368")]
@@ -882,7 +915,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         e.Name = string.Empty;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23368")]
@@ -909,7 +943,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         e.LastName = string.Empty;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23368")]
@@ -959,7 +994,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         e.Name = string.Empty;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37675")]
@@ -981,7 +1017,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1013,7 +1050,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61066")]
@@ -1039,7 +1077,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
                 {
                     public int MyProperty { get; set; }
                 }
-                """, OutputKind.ConsoleApplication);
+                """,
+                OutputKind.ConsoleApplication
+            );
         }
     }
 }

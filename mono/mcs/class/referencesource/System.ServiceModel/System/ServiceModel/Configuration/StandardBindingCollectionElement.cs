@@ -10,15 +10,22 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    public partial class StandardBindingCollectionElement<TStandardBinding, TBindingConfiguration> : BindingCollectionElement
+    public partial class StandardBindingCollectionElement<TStandardBinding, TBindingConfiguration>
+        : BindingCollectionElement
         where TStandardBinding : Binding
         where TBindingConfiguration : StandardBindingElement, new()
     {
-
-        [ConfigurationProperty(ConfigurationStrings.DefaultCollectionName, Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DefaultCollectionName,
+            Options = ConfigurationPropertyOptions.IsDefaultCollection
+        )]
         public StandardBindingElementCollection<TBindingConfiguration> Bindings
         {
-            get { return (StandardBindingElementCollection<TBindingConfiguration>)base[ConfigurationStrings.DefaultCollectionName]; }
+            get
+            {
+                return (StandardBindingElementCollection<TBindingConfiguration>)
+                    base[ConfigurationStrings.DefaultCollectionName];
+            }
         }
 
         public override Type BindingType
@@ -30,7 +37,8 @@ namespace System.ServiceModel.Configuration
         {
             get
             {
-                List<IBindingConfigurationElement> configuredBindings = new List<IBindingConfigurationElement>();
+                List<IBindingConfigurationElement> configuredBindings =
+                    new List<IBindingConfigurationElement>();
                 foreach (IBindingConfigurationElement configuredBinding in this.Bindings)
                 {
                     configuredBindings.Add(configuredBinding);
@@ -43,10 +51,12 @@ namespace System.ServiceModel.Configuration
         public override bool ContainsKey(string name)
         {
             // This line needed because of the IBindingSection implementation
-            StandardBindingCollectionElement<TStandardBinding, TBindingConfiguration> me = (StandardBindingCollectionElement<TStandardBinding, TBindingConfiguration>)this;
+            StandardBindingCollectionElement<TStandardBinding, TBindingConfiguration> me =
+                (StandardBindingCollectionElement<TStandardBinding, TBindingConfiguration>)this;
 #pragma warning suppress 56506 //Microsoft; me.Bindings can never be null (underlying configuration system guarantees)
             return me.Bindings.ContainsKey(name);
         }
+
         protected internal override Binding GetDefault()
         {
             return System.Activator.CreateInstance<TStandardBinding>();
@@ -56,8 +66,9 @@ namespace System.ServiceModel.Configuration
         {
             // The configuration item needs to understand the BindingType && be of type CustomBindingConfigurationElement
             // or StandardBindingConfigurationElement
-            bool retval = (binding.GetType() == typeof(TStandardBinding)) &&
-                typeof(StandardBindingElement).IsAssignableFrom(typeof(TBindingConfiguration));
+            bool retval =
+                (binding.GetType() == typeof(TStandardBinding))
+                && typeof(StandardBindingElement).IsAssignableFrom(typeof(TBindingConfiguration));
             if (retval)
             {
                 TBindingConfiguration bindingConfig = new TBindingConfiguration();

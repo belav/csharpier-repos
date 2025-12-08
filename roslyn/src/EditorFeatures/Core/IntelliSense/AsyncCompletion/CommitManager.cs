@@ -32,8 +32,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 {
     internal sealed class CommitManager : IAsyncCompletionCommitManager
     {
-        private static readonly AsyncCompletionData.CommitResult CommitResultUnhandled =
-            new(isHandled: false, AsyncCompletionData.CommitBehavior.None);
+        private static readonly AsyncCompletionData.CommitResult CommitResultUnhandled = new(
+            isHandled: false,
+            AsyncCompletionData.CommitBehavior.None
+        );
 
         private readonly RecentItemsManager _recentItemsManager;
         private readonly ITextView _textView;
@@ -45,7 +47,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         {
             get
             {
-                if (_textView.Properties.TryGetProperty(CompletionSource.PotentialCommitCharacters, out ImmutableArray<char> potentialCommitCharacters))
+                if (
+                    _textView.Properties.TryGetProperty(
+                        CompletionSource.PotentialCommitCharacters,
+                        out ImmutableArray<char> potentialCommitCharacters
+                    )
+                )
                 {
                     return potentialCommitCharacters;
                 }
@@ -62,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             RecentItemsManager recentItemsManager,
             IGlobalOptionService globalOptions,
             IThreadingContext threadingContext,
-            ILanguageServerSnippetExpander? languageServerSnippetExpander)
+            ILanguageServerSnippetExpander? languageServerSnippetExpander
+        )
         {
             _globalOptions = globalOptions;
             _threadingContext = threadingContext;
@@ -74,15 +82,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         /// <summary>
         /// The method performs a preliminarily filtering of commit availability.
         /// In case of a doubt, it should respond with true.
-        /// We will be able to cancel later in 
-        /// <see cref="TryCommit(IAsyncCompletionSession, ITextBuffer, VSCompletionItem, char, CancellationToken)"/> 
+        /// We will be able to cancel later in
+        /// <see cref="TryCommit(IAsyncCompletionSession, ITextBuffer, VSCompletionItem, char, CancellationToken)"/>
         /// based on <see cref="VSCompletionItem"/> item, e.g. based on <see cref="CompletionItemRules"/>.
         /// </summary>
         public bool ShouldCommitCompletion(
             IAsyncCompletionSession session,
             SnapshotPoint location,
             char typedChar,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // this is called only when the typedChar is in the list returned by PotentialCommitCharacters.
             // It's possible typedChar is intended to be a filter char for some items (either currently considered for commit of not)
@@ -95,12 +104,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             ITextBuffer subjectBuffer,
             VSCompletionItem item,
             char typedChar,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // We can make changes to buffers. We would like to be sure nobody can change them at the same time.
             _threadingContext.ThrowIfNotOnUIThread();
 
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return CommitResultUnhandled;
@@ -119,24 +130,41 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             }
 
             var roslynItem = itemData.RoslynItem;
-            var filterText = session.ApplicableToSpan.GetText(session.ApplicableToSpan.TextBuffer.CurrentSnapshot) + typedChar;
+            var filterText =
+                session.ApplicableToSpan.GetText(
+                    session.ApplicableToSpan.TextBuffer.CurrentSnapshot
+                ) + typedChar;
 
             if (Helpers.IsFilterCharacter(roslynItem, typedChar, filterText))
             {
                 // Returning Cancel means we keep the current session and consider the character for further filtering.
-                return new AsyncCompletionData.CommitResult(isHandled: true, AsyncCompletionData.CommitBehavior.CancelCommit);
+                return new AsyncCompletionData.CommitResult(
+                    isHandled: true,
+                    AsyncCompletionData.CommitBehavior.CancelCommit
+                );
             }
 
             // typedChar could be a filter character for another item. If we find such an item that the current filter
             // text matches its start, then we should cancel commit and give ItemManager a chance to handle it.
             // This is done here instead of in `ShouldCommitCompletion` because `ShouldCommitCompletion` might be called before
             // CompletionSource add the `excludedCommitCharactersMap` to the session property bag.
-            if (session.Properties.TryGetProperty(CompletionSource.ExcludedCommitCharactersMap, out MultiDictionary<char, RoslynCompletionItem> excludedCommitCharactersMap))
+            if (
+                session.Properties.TryGetProperty(
+                    CompletionSource.ExcludedCommitCharactersMap,
+                    out MultiDictionary<char, RoslynCompletionItem> excludedCommitCharactersMap
+                )
+            )
             {
                 foreach (var potentialItemForSelection in excludedCommitCharactersMap[typedChar])
                 {
-                    if (potentialItemForSelection != roslynItem && Helpers.TextTypedSoFarMatchesItem(potentialItemForSelection, filterText))
-                        return new AsyncCompletionData.CommitResult(isHandled: true, AsyncCompletionData.CommitBehavior.CancelCommit);
+                    if (
+                        potentialItemForSelection != roslynItem
+                        && Helpers.TextTypedSoFarMatchesItem(potentialItemForSelection, filterText)
+                    )
+                        return new AsyncCompletionData.CommitResult(
+                            isHandled: true,
+                            AsyncCompletionData.CommitBehavior.CancelCommit
+                        );
                 }
             }
 
@@ -146,11 +174,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             // We can be called before for ShouldCommitCompletion. However, that call does not provide rules applied for the completion item.
             // Now we check for the commit character in the context of Rules that could change the list of commit characters.
 
-            if (!Helpers.IsStandardCommitCharacter(typedChar) && !IsCommitCharacter(serviceRules, roslynItem, typedChar))
+            if (
+                !Helpers.IsStandardCommitCharacter(typedChar)
+                && !IsCommitCharacter(serviceRules, roslynItem, typedChar)
+            )
             {
-                // Returning None means we complete the current session with a void commit. 
+                // Returning None means we complete the current session with a void commit.
                 // The Editor then will try to trigger a new completion session for the character.
-                return new AsyncCompletionData.CommitResult(isHandled: true, AsyncCompletionData.CommitBehavior.None);
+                return new AsyncCompletionData.CommitResult(
+                    isHandled: true,
+                    AsyncCompletionData.CommitBehavior.None
+                );
             }
 
             if (!itemData.TriggerLocation.HasValue)
@@ -161,7 +195,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 return CommitResultUnhandled;
             }
 
-            var triggerDocument = itemData.TriggerLocation.Value.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var triggerDocument =
+                itemData.TriggerLocation.Value.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (triggerDocument == null)
             {
                 return CommitResultUnhandled;
@@ -176,9 +211,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             // Commit with completion service assumes that null is provided is case of invoke. VS provides '\0' in the case.
             var commitChar = typedChar == '\0' ? null : (char?)typedChar;
             return Commit(
-                session, triggerDocument, completionService, subjectBuffer,
-                roslynItem, sessionData.CompletionListSpan.Value, commitChar, itemData.TriggerLocation.Value.Snapshot, serviceRules,
-                filterText, cancellationToken);
+                session,
+                triggerDocument,
+                completionService,
+                subjectBuffer,
+                roslynItem,
+                sessionData.CompletionListSpan.Value,
+                commitChar,
+                itemData.TriggerLocation.Value.Snapshot,
+                serviceRules,
+                filterText,
+                cancellationToken
+            );
         }
 
         private AsyncCompletionData.CommitResult Commit(
@@ -192,7 +236,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             ITextSnapshot triggerSnapshot,
             CompletionRules rules,
             string filterText,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             _threadingContext.ThrowIfNotOnUIThread();
 
@@ -200,14 +245,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             if (!subjectBuffer.CheckEditAccess())
             {
                 // We are on the wrong thread.
-                FatalError.ReportAndCatch(new InvalidOperationException("Subject buffer did not provide Edit Access"), ErrorSeverity.Critical);
-                return new AsyncCompletionData.CommitResult(isHandled: true, AsyncCompletionData.CommitBehavior.None);
+                FatalError.ReportAndCatch(
+                    new InvalidOperationException("Subject buffer did not provide Edit Access"),
+                    ErrorSeverity.Critical
+                );
+                return new AsyncCompletionData.CommitResult(
+                    isHandled: true,
+                    AsyncCompletionData.CommitBehavior.None
+                );
             }
 
             if (subjectBuffer.EditInProgress)
             {
-                FatalError.ReportAndCatch(new InvalidOperationException("Subject buffer is editing by someone else."), ErrorSeverity.Critical);
-                return new AsyncCompletionData.CommitResult(isHandled: true, AsyncCompletionData.CommitBehavior.None);
+                FatalError.ReportAndCatch(
+                    new InvalidOperationException("Subject buffer is editing by someone else."),
+                    ErrorSeverity.Critical
+                );
+                return new AsyncCompletionData.CommitResult(
+                    isHandled: true,
+                    AsyncCompletionData.CommitBehavior.None
+                );
             }
 
             // This might be an item promoted by us, make sure we restore it to the original state first.
@@ -219,7 +276,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             // See https://github.com/dotnet/roslyn/issues/38455.
             try
             {
-                // Cached items have a span computed at the point they were created.  This span may no 
+                // Cached items have a span computed at the point they were created.  This span may no
                 // longer be valid when used again.  In that case, override the span with the latest span
                 // for the completion list itself.
                 if (roslynItem.Flags.IsCached())
@@ -229,9 +286,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 if (_textView is IDebuggerTextView)
                     roslynItem = ImportCompletionItem.MarkItemToAlwaysFullyQualify(roslynItem);
 
-                change = completionService.GetChangeAsync(document, roslynItem, commitCharacter, cancellationToken).WaitAndGetResult(cancellationToken);
+                change = completionService
+                    .GetChangeAsync(document, roslynItem, commitCharacter, cancellationToken)
+                    .WaitAndGetResult(cancellationToken);
             }
-            catch (OperationCanceledException e) when (e.CancellationToken != cancellationToken && FatalError.ReportAndCatch(e))
+            catch (OperationCanceledException e)
+                when (e.CancellationToken != cancellationToken && FatalError.ReportAndCatch(e))
             {
                 return CommitResultUnhandled;
             }
@@ -243,13 +303,25 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             var provider = completionService.GetProvider(roslynItem, document.Project);
             if (provider is ICustomCommitCompletionProvider customCommitProvider)
             {
-                customCommitProvider.Commit(roslynItem, view, subjectBuffer, triggerSnapshot, commitCharacter);
-                return new AsyncCompletionData.CommitResult(isHandled: true, AsyncCompletionData.CommitBehavior.None);
+                customCommitProvider.Commit(
+                    roslynItem,
+                    view,
+                    subjectBuffer,
+                    triggerSnapshot,
+                    commitCharacter
+                );
+                return new AsyncCompletionData.CommitResult(
+                    isHandled: true,
+                    AsyncCompletionData.CommitBehavior.None
+                );
             }
 
             var textChange = change.TextChange;
             var triggerSnapshotSpan = new SnapshotSpan(triggerSnapshot, textChange.Span.ToSpan());
-            var mappedSpan = triggerSnapshotSpan.TranslateTo(subjectBuffer.CurrentSnapshot, SpanTrackingMode.EdgeInclusive);
+            var mappedSpan = triggerSnapshotSpan.TranslateTo(
+                subjectBuffer.CurrentSnapshot,
+                SpanTrackingMode.EdgeInclusive
+            );
 
             // Specifically for snippets, we check to see if the associated completion item is a snippet,
             // and if so, we call upon the LanguageServerSnippetExpander's TryExpand to insert the snippet.
@@ -260,16 +332,32 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 var lspSnippetText = change.Properties[SnippetCompletionItem.LSPSnippetKey];
 
                 Contract.ThrowIfNull(lspSnippetText);
-                if (!_languageServerSnippetExpander.TryExpand(lspSnippetText, mappedSpan, _textView))
+                if (
+                    !_languageServerSnippetExpander.TryExpand(lspSnippetText, mappedSpan, _textView)
+                )
                 {
-                    FatalError.ReportAndCatch(new InvalidOperationException("The invoked LSP snippet expander came back as false."), ErrorSeverity.Critical);
+                    FatalError.ReportAndCatch(
+                        new InvalidOperationException(
+                            "The invoked LSP snippet expander came back as false."
+                        ),
+                        ErrorSeverity.Critical
+                    );
                 }
 
-                return new AsyncCompletionData.CommitResult(isHandled: true, AsyncCompletionData.CommitBehavior.None);
+                return new AsyncCompletionData.CommitResult(
+                    isHandled: true,
+                    AsyncCompletionData.CommitBehavior.None
+                );
             }
 
             ITextSnapshot updatedCurrentSnapshot;
-            using (var edit = subjectBuffer.CreateEdit(EditOptions.DefaultMinimalChange, reiteratedVersionNumber: null, editTag: null))
+            using (
+                var edit = subjectBuffer.CreateEdit(
+                    EditOptions.DefaultMinimalChange,
+                    reiteratedVersionNumber: null,
+                    editTag: null
+                )
+            )
             {
                 edit.Replace(mappedSpan.Span, change.TextChange.NewText);
 
@@ -282,22 +370,32 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             {
                 // Roslyn knows how to position the caret in the snapshot we just created.
                 // If there were more edits made by extensions, TryMoveCaretToAndEnsureVisible maps the snapshot point to the most recent one.
-                view.TryMoveCaretToAndEnsureVisible(new SnapshotPoint(updatedCurrentSnapshot, change.NewPosition.Value));
+                view.TryMoveCaretToAndEnsureVisible(
+                    new SnapshotPoint(updatedCurrentSnapshot, change.NewPosition.Value)
+                );
             }
             else
             {
-                // Or, If we're doing a minimal change, then the edit that we make to the 
-                // buffer may not make the total text change that places the caret where we 
-                // would expect it to go based on the requested change. In this case, 
+                // Or, If we're doing a minimal change, then the edit that we make to the
+                // buffer may not make the total text change that places the caret where we
+                // would expect it to go based on the requested change. In this case,
                 // determine where the item should go and set the care manually.
 
-                // Note: we only want to move the caret if the caret would have been moved 
-                // by the edit.  i.e. if the caret was actually in the mapped span that 
+                // Note: we only want to move the caret if the caret would have been moved
+                // by the edit.  i.e. if the caret was actually in the mapped span that
                 // we're replacing.
                 var caretPositionInBuffer = view.GetCaretPoint(subjectBuffer);
-                if (caretPositionInBuffer.HasValue && mappedSpan.IntersectsWith(caretPositionInBuffer.Value))
+                if (
+                    caretPositionInBuffer.HasValue
+                    && mappedSpan.IntersectsWith(caretPositionInBuffer.Value)
+                )
                 {
-                    view.TryMoveCaretToAndEnsureVisible(new SnapshotPoint(subjectBuffer.CurrentSnapshot, mappedSpan.Start.Position + textChange.NewText?.Length ?? 0));
+                    view.TryMoveCaretToAndEnsureVisible(
+                        new SnapshotPoint(
+                            subjectBuffer.CurrentSnapshot,
+                            mappedSpan.Start.Position + textChange.NewText?.Length ?? 0
+                        )
+                    );
                 }
                 else
                 {
@@ -311,15 +409,27 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             {
                 // The edit updates the snapshot however other extensions may make changes there.
                 // Therefore, it is required to use subjectBuffer.CurrentSnapshot for further calculations rather than the updated current snapshot defined above.
-                var currentDocument = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
-                var formattingService = currentDocument?.GetRequiredLanguageService<IFormattingInteractionService>();
+                var currentDocument =
+                    subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                var formattingService =
+                    currentDocument?.GetRequiredLanguageService<IFormattingInteractionService>();
 
                 if (currentDocument != null && formattingService != null)
                 {
-                    var spanToFormat = triggerSnapshotSpan.TranslateTo(subjectBuffer.CurrentSnapshot, SpanTrackingMode.EdgeInclusive);
+                    var spanToFormat = triggerSnapshotSpan.TranslateTo(
+                        subjectBuffer.CurrentSnapshot,
+                        SpanTrackingMode.EdgeInclusive
+                    );
 
                     // Note: C# always completes synchronously, TypeScript is async
-                    var changes = formattingService.GetFormattingChangesAsync(currentDocument, subjectBuffer, spanToFormat.Span.ToTextSpan(), cancellationToken).WaitAndGetResult(cancellationToken);
+                    var changes = formattingService
+                        .GetFormattingChangesAsync(
+                            currentDocument,
+                            subjectBuffer,
+                            spanToFormat.Span.ToTextSpan(),
+                            cancellationToken
+                        )
+                        .WaitAndGetResult(cancellationToken);
                     subjectBuffer.ApplyChanges(changes);
                 }
             }
@@ -332,24 +442,44 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 {
                     // Make sure the notification isn't sent on UI thread.
                     await TaskScheduler.Default;
-                    _ = notifyProvider.NotifyCommittingItemAsync(document, roslynItem, commitCharacter, cancellationToken).ReportNonFatalErrorAsync();
+                    _ = notifyProvider
+                        .NotifyCommittingItemAsync(
+                            document,
+                            roslynItem,
+                            commitCharacter,
+                            cancellationToken
+                        )
+                        .ReportNonFatalErrorAsync();
                 });
             }
 
             if (includesCommitCharacter)
             {
-                return new AsyncCompletionData.CommitResult(isHandled: true, AsyncCompletionData.CommitBehavior.SuppressFurtherTypeCharCommandHandlers);
+                return new AsyncCompletionData.CommitResult(
+                    isHandled: true,
+                    AsyncCompletionData.CommitBehavior.SuppressFurtherTypeCharCommandHandlers
+                );
             }
 
             if (commitCharacter == '\n' && SendEnterThroughToEditor(rules, roslynItem, filterText))
             {
-                return new AsyncCompletionData.CommitResult(isHandled: true, AsyncCompletionData.CommitBehavior.RaiseFurtherReturnKeyAndTabKeyCommandHandlers);
+                return new AsyncCompletionData.CommitResult(
+                    isHandled: true,
+                    AsyncCompletionData.CommitBehavior.RaiseFurtherReturnKeyAndTabKeyCommandHandlers
+                );
             }
 
-            return new AsyncCompletionData.CommitResult(isHandled: true, AsyncCompletionData.CommitBehavior.None);
+            return new AsyncCompletionData.CommitResult(
+                isHandled: true,
+                AsyncCompletionData.CommitBehavior.None
+            );
         }
 
-        internal static bool IsCommitCharacter(CompletionRules completionRules, CompletionItem item, char ch)
+        internal static bool IsCommitCharacter(
+            CompletionRules completionRules,
+            CompletionItem item,
+            char ch
+        )
         {
             // First see if the item has any specific commit rules it wants followed.
             foreach (var rule in item.Rules.CommitCharacterRules)
@@ -381,7 +511,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             return completionRules.DefaultCommitCharacters.IndexOf(ch) >= 0;
         }
 
-        internal static bool SendEnterThroughToEditor(CompletionRules rules, RoslynCompletionItem item, string textTypedSoFar)
+        internal static bool SendEnterThroughToEditor(
+            CompletionRules rules,
+            RoslynCompletionItem item,
+            string textTypedSoFar
+        )
         {
             var rule = item.Rules.EnterKeyRule;
             if (rule == EnterKeyRule.Default)

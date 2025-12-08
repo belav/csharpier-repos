@@ -3,9 +3,11 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
+
     public class App
     {
         [Fact]

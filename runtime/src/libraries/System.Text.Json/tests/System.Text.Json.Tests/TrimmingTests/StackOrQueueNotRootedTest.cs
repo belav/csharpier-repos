@@ -31,8 +31,13 @@ class Program
             return -1;
         }
 
-        Type stackOrQueueType = GetTypeIfExists("System.Collections.Stack, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089") ??
-            GetTypeIfExists("System.Collections.Queue, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089");
+        Type stackOrQueueType =
+            GetTypeIfExists(
+                "System.Collections.Stack, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+            )
+            ?? GetTypeIfExists(
+                "System.Collections.Queue, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+            );
 
         return stackOrQueueType == null ? 100 : -1;
     }

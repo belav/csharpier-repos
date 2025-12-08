@@ -7,11 +7,12 @@
 // <owner current="false" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
-    using System.Diagnostics;
     using System.Collections;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
 
     /// <devdoc>
@@ -20,13 +21,18 @@ namespace System.Data {
     ///    </para>
     /// </devdoc>
     [
-    DefaultEvent("CollectionChanged"),
-    Editor("Microsoft.VSDesigner.Data.Design.TablesCollectionEditor, " + AssemblyRef.MicrosoftVSDesigner, "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing),
-    ListBindable(false),
+        DefaultEvent("CollectionChanged"),
+        Editor(
+            "Microsoft.VSDesigner.Data.Design.TablesCollectionEditor, "
+                + AssemblyRef.MicrosoftVSDesigner,
+            "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing
+        ),
+        ListBindable(false),
     ]
-    public sealed class DataTableCollection : InternalDataCollectionBase {
+    public sealed class DataTableCollection : InternalDataCollectionBase
+    {
+        private readonly DataSet dataSet = null;
 
-        private readonly DataSet dataSet      = null;
         // private DataTable[] tables   = new DataTable[2];
         // private int tableCount       = 0;
         private readonly ArrayList _list = new ArrayList();
@@ -37,13 +43,20 @@ namespace System.Data {
         private CollectionChangeEventHandler onCollectionChangingDelegate = null;
 
         private static int _objectTypeCount; // Bid counter
-        private readonly int _objectID = System.Threading.Interlocked.Increment(ref _objectTypeCount);
+        private readonly int _objectID = System.Threading.Interlocked.Increment(
+            ref _objectTypeCount
+        );
 
         /// <devdoc>
         /// DataTableCollection constructor.  Used only by DataSet.
         /// </devdoc>
-        internal DataTableCollection(DataSet dataSet) {
-            Bid.Trace("<ds.DataTableCollection.DataTableCollection|INFO> %d#, dataSet=%d\n", ObjectID, (dataSet != null) ? dataSet.ObjectID : 0);
+        internal DataTableCollection(DataSet dataSet)
+        {
+            Bid.Trace(
+                "<ds.DataTableCollection.DataTableCollection|INFO> %d#, dataSet=%d\n",
+                ObjectID,
+                (dataSet != null) ? dataSet.ObjectID : 0
+            );
             this.dataSet = dataSet;
         }
 
@@ -53,27 +66,29 @@ namespace System.Data {
         ///       in the collection as an object.
         ///    </para>
         /// </devdoc>
-        protected override ArrayList List {
-            get {
-                return _list;
-            }
+        protected override ArrayList List
+        {
+            get { return _list; }
         }
 
-        internal int ObjectID {
-            get {
-                return _objectID;
-            }
+        internal int ObjectID
+        {
+            get { return _objectID; }
         }
 
         /// <devdoc>
         ///    <para>Gets the table specified by its index.</para>
         /// </devdoc>
-        public DataTable this[int index] {
-            get {
-                try { // Perf: use the readonly _list field directly and let ArrayList check the range
-                    return(DataTable) _list[index];
+        public DataTable this[int index]
+        {
+            get
+            {
+                try
+                { // Perf: use the readonly _list field directly and let ArrayList check the range
+                    return (DataTable)_list[index];
                 }
-                catch(ArgumentOutOfRangeException) {
+                catch (ArgumentOutOfRangeException)
+                {
                     throw ExceptionBuilder.TableOutOfRange(index);
                 }
             }
@@ -82,25 +97,32 @@ namespace System.Data {
         /// <devdoc>
         ///    <para>Gets the table in the collection with the given name (not case-sensitive).</para>
         /// </devdoc>
-        public DataTable this[string name] {
-            get {
+        public DataTable this[string name]
+        {
+            get
+            {
                 int index = InternalIndexOf(name);
-                if (index == -2) {
+                if (index == -2)
+                {
                     throw ExceptionBuilder.CaseInsensitiveNameConflict(name);
                 }
-                if (index == -3) {
+                if (index == -3)
+                {
                     throw ExceptionBuilder.NamespaceNameConflict(name);
                 }
                 return (index < 0) ? null : (DataTable)_list[index];
             }
         }
 
-        public DataTable this[string name, string tableNamespace] {
-            get {
+        public DataTable this[string name, string tableNamespace]
+        {
+            get
+            {
                 if (tableNamespace == null)
                     throw ExceptionBuilder.ArgumentNull("tableNamespace");
                 int index = InternalIndexOf(name, tableNamespace);
-                if (index == -2) {
+                if (index == -2)
+                {
                     throw ExceptionBuilder.CaseInsensitiveNameConflict(name);
                 }
                 return (index < 0) ? null : (DataTable)_list[index];
@@ -110,8 +132,9 @@ namespace System.Data {
         // Case-sensitive search in Schema, data and diffgram loading
         internal DataTable GetTable(string name, string ns)
         {
-            for (int i = 0; i < _list.Count; i++) {
-                DataTable   table = (DataTable) _list[i];
+            for (int i = 0; i < _list.Count; i++)
+            {
+                DataTable table = (DataTable)_list[i];
                 if (table.TableName == name && table.Namespace == ns)
                     return table;
             }
@@ -120,12 +143,15 @@ namespace System.Data {
 
         // Case-sensitive smart search: it will look for a table using the ns only if required to
         // resolve a conflict
-        internal DataTable GetTableSmart(string name, string ns){
+        internal DataTable GetTableSmart(string name, string ns)
+        {
             int fCount = 0;
             DataTable fTable = null;
-            for (int i = 0; i < _list.Count; i++) {
-                DataTable   table = (DataTable) _list[i];
-                if (table.TableName == name) {
+            for (int i = 0; i < _list.Count; i++)
+            {
+                DataTable table = (DataTable)_list[i];
+                if (table.TableName == name)
+                {
                     if (table.Namespace == ns)
                         return table;
                     fCount++;
@@ -136,27 +162,43 @@ namespace System.Data {
             // so return the table only if fCount==1 (it's the only one)
             return (fCount == 1) ? fTable : null;
         }
+
         /// <devdoc>
         ///    <para>
         ///       Adds
         ///       the specified table to the collection.
         ///    </para>
         /// </devdoc>
-        public void Add(DataTable table) {
+        public void Add(DataTable table)
+        {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataTableCollection.Add|API> %d#, table=%d\n", ObjectID, (table!= null) ?  table.ObjectID : 0);
-            try {
-                OnCollectionChanging(new CollectionChangeEventArgs(CollectionChangeAction.Add, table));
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTableCollection.Add|API> %d#, table=%d\n",
+                ObjectID,
+                (table != null) ? table.ObjectID : 0
+            );
+            try
+            {
+                OnCollectionChanging(
+                    new CollectionChangeEventArgs(CollectionChangeAction.Add, table)
+                );
                 BaseAdd(table);
                 ArrayAdd(table);
 
-                if (table.SetLocaleValue(dataSet.Locale, false, false) || 
-                    table.SetCaseSensitiveValue(dataSet.CaseSensitive, false, false)) {
+                if (
+                    table.SetLocaleValue(dataSet.Locale, false, false)
+                    || table.SetCaseSensitiveValue(dataSet.CaseSensitive, false, false)
+                )
+                {
                     table.ResetIndexes();
                 }
-                OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Add, table));
+                OnCollectionChanged(
+                    new CollectionChangeEventArgs(CollectionChangeAction.Add, table)
+                );
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -164,24 +206,31 @@ namespace System.Data {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void AddRange(DataTable[] tables) {
+        public void AddRange(DataTable[] tables)
+        {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataTableCollection.AddRange|API> %d#\n", ObjectID);
-            try {
-                if (dataSet.fInitInProgress) {
+            try
+            {
+                if (dataSet.fInitInProgress)
+                {
                     delayedAddRangeTables = tables;
                     return;
                 }
 
-                if (tables != null) {
-                    foreach(DataTable table in tables) {
-                        if (table != null) {
+                if (tables != null)
+                {
+                    foreach (DataTable table in tables)
+                    {
+                        if (table != null)
+                        {
                             Add(table);
                         }
                     }
                 }
             }
-            finally{
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -192,26 +241,30 @@ namespace System.Data {
         ///       collection.
         ///    </para>
         /// </devdoc>
-        public DataTable Add(string name) {
+        public DataTable Add(string name)
+        {
             DataTable table = new DataTable(name);
             // fxcop: new DataTable should inherit the CaseSensitive, Locale, Namespace from DataSet
             Add(table);
             return table;
         }
 
-        public DataTable Add(string name, string tableNamespace) {
+        public DataTable Add(string name, string tableNamespace)
+        {
             DataTable table = new DataTable(name, tableNamespace);
             // fxcop: new DataTable should inherit the CaseSensitive, Locale from DataSet
             Add(table);
             return table;
         }
+
         /// <devdoc>
         ///    <para>
         ///       Creates a new table with a default name and adds it to
         ///       the collection.
         ///    </para>
         /// </devdoc>
-        public DataTable Add() {
+        public DataTable Add()
+        {
             DataTable table = new DataTable();
             // fxcop: new DataTable should inherit the CaseSensitive, Locale, Namespace from DataSet
             Add(table);
@@ -224,12 +277,15 @@ namespace System.Data {
         ///    </para>
         /// </devdoc>
         [ResDescriptionAttribute(Res.collectionChangedEventDescr)]
-        public event CollectionChangeEventHandler CollectionChanged {
-            add {
+        public event CollectionChangeEventHandler CollectionChanged
+        {
+            add
+            {
                 Bid.Trace("<ds.DataTableCollection.add_CollectionChanged|API> %d#\n", ObjectID);
                 onCollectionChangedDelegate += value;
             }
-            remove {
+            remove
+            {
                 Bid.Trace("<ds.DataTableCollection.remove_CollectionChanged|API> %d#\n", ObjectID);
                 onCollectionChangedDelegate -= value;
             }
@@ -238,12 +294,15 @@ namespace System.Data {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public event CollectionChangeEventHandler CollectionChanging {
-            add {
+        public event CollectionChangeEventHandler CollectionChanging
+        {
+            add
+            {
                 Bid.Trace("<ds.DataTableCollection.add_CollectionChanging|API> %d#\n", ObjectID);
                 onCollectionChangingDelegate += value;
             }
-            remove {
+            remove
+            {
                 Bid.Trace("<ds.DataTableCollection.remove_CollectionChanging|API> %d#\n", ObjectID);
                 onCollectionChangingDelegate -= value;
             }
@@ -252,17 +311,19 @@ namespace System.Data {
         /// <devdoc>
         ///  Adds the table to the tables array.
         /// </devdoc>
-        private void ArrayAdd(DataTable table) {
+        private void ArrayAdd(DataTable table)
+        {
             _list.Add(table);
         }
 
         /// <devdoc>
         /// Creates a new default name.
         /// </devdoc>
-        internal string AssignName() {
+        internal string AssignName()
+        {
             string newName = null;
             // RAIDBUG: 91671
-            while(this.Contains( newName = MakeName(defaultNameIndex)))
+            while (this.Contains(newName = MakeName(defaultNameIndex)))
                 defaultNameIndex++;
             return newName;
         }
@@ -274,7 +335,8 @@ namespace System.Data {
         /// A DuplicateNameException is thrown if this collection already has a table with the same
         /// name (case insensitive).
         /// </devdoc>
-        private void BaseAdd(DataTable table) {
+        private void BaseAdd(DataTable table)
+        {
             if (table == null)
                 throw ExceptionBuilder.ArgumentNull("table");
             if (table.DataSet == dataSet)
@@ -284,9 +346,13 @@ namespace System.Data {
 
             if (table.TableName.Length == 0)
                 table.TableName = AssignName();
-            else {
-                if (NamesEqual(table.TableName, dataSet.DataSetName, false, dataSet.Locale) != 0 && !table.fNestedInDataset)
-                   throw ExceptionBuilder.DatasetConflictingName(dataSet.DataSetName);
+            else
+            {
+                if (
+                    NamesEqual(table.TableName, dataSet.DataSetName, false, dataSet.Locale) != 0
+                    && !table.fNestedInDataset
+                )
+                    throw ExceptionBuilder.DatasetConflictingName(dataSet.DataSetName);
                 RegisterName(table.TableName, table.Namespace);
             }
 
@@ -301,34 +367,48 @@ namespace System.Data {
         /// <devdoc>
         /// BaseGroupSwitch will intelligently remove and add tables from the collection.
         /// </devdoc>
-        private void BaseGroupSwitch(DataTable[] oldArray, int oldLength, DataTable[] newArray, int newLength) {
+        private void BaseGroupSwitch(
+            DataTable[] oldArray,
+            int oldLength,
+            DataTable[] newArray,
+            int newLength
+        )
+        {
             // We're doing a smart diff of oldArray and newArray to find out what
             // should be removed.  We'll pass through oldArray and see if it exists
             // in newArray, and if not, do remove work.  newBase is an opt. in case
             // the arrays have similar prefixes.
             int newBase = 0;
-            for (int oldCur = 0; oldCur < oldLength; oldCur++) {
+            for (int oldCur = 0; oldCur < oldLength; oldCur++)
+            {
                 bool found = false;
-                for (int newCur = newBase; newCur < newLength; newCur++) {
-                    if (oldArray[oldCur] == newArray[newCur]) {
-                        if (newBase == newCur) {
+                for (int newCur = newBase; newCur < newLength; newCur++)
+                {
+                    if (oldArray[oldCur] == newArray[newCur])
+                    {
+                        if (newBase == newCur)
+                        {
                             newBase++;
                         }
                         found = true;
                         break;
                     }
                 }
-                if (!found) {
+                if (!found)
+                {
                     // This means it's in oldArray and not newArray.  Remove it.
-                    if (oldArray[oldCur].DataSet == dataSet) {
+                    if (oldArray[oldCur].DataSet == dataSet)
+                    {
                         BaseRemove(oldArray[oldCur]);
                     }
                 }
             }
 
             // Now, let's pass through news and those that don't belong, add them.
-            for (int newCur = 0; newCur < newLength; newCur++) {
-                if (newArray[newCur].DataSet != dataSet) {
+            for (int newCur = 0; newCur < newLength; newCur++)
+            {
+                if (newArray[newCur].DataSet != dataSet)
+                {
                     BaseAdd(newArray[newCur]);
                     _list.Add(newArray[newCur]);
                 }
@@ -340,11 +420,12 @@ namespace System.Data {
         /// An ArgumentNullException is thrown if this table is null.  An ArgumentException is thrown
         /// if this table doesn't belong to this collection or if this table is part of a relationship.
         /// </devdoc>
-        private void BaseRemove(DataTable table) {
-            if (CanRemove(table, true)) {
+        private void BaseRemove(DataTable table)
+        {
+            if (CanRemove(table, true))
+            {
                 UnregisterName(table.TableName);
                 table.SetDataSet(null);
-
             }
             _list.Remove(table);
             dataSet.OnRemovedTable(table);
@@ -355,21 +436,32 @@ namespace System.Data {
         ///       Verifies if a given table can be removed from the collection.
         ///    </para>
         /// </devdoc>
-        public bool CanRemove(DataTable table) {
+        public bool CanRemove(DataTable table)
+        {
             return CanRemove(table, false);
         }
 
-        internal bool CanRemove(DataTable table, bool fThrowException) {
+        internal bool CanRemove(DataTable table, bool fThrowException)
+        {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataTableCollection.CanRemove|INFO> %d#, table=%d, fThrowException=%d{bool}\n", ObjectID, (table != null)? table.ObjectID : 0 , fThrowException);
-            try {
-                if (table == null) {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTableCollection.CanRemove|INFO> %d#, table=%d, fThrowException=%d{bool}\n",
+                ObjectID,
+                (table != null) ? table.ObjectID : 0,
+                fThrowException
+            );
+            try
+            {
+                if (table == null)
+                {
                     if (!fThrowException)
                         return false;
                     else
                         throw ExceptionBuilder.ArgumentNull("table");
                 }
-                if (table.DataSet != dataSet) {
+                if (table.DataSet != dataSet)
+                {
                     if (!fThrowException)
                         return false;
                     else
@@ -379,14 +471,21 @@ namespace System.Data {
                 // allow subclasses to throw.
                 dataSet.OnRemoveTable(table);
 
-                if (table.ChildRelations.Count != 0 || table.ParentRelations.Count != 0) {
+                if (table.ChildRelations.Count != 0 || table.ParentRelations.Count != 0)
+                {
                     if (!fThrowException)
                         return false;
                     else
                         throw ExceptionBuilder.TableInRelation();
                 }
 
-                for (ParentForeignKeyConstraintEnumerator constraints = new ParentForeignKeyConstraintEnumerator(dataSet, table); constraints.GetNext();) {
+                for (
+                    ParentForeignKeyConstraintEnumerator constraints =
+                        new ParentForeignKeyConstraintEnumerator(dataSet, table);
+                    constraints.GetNext();
+
+                )
+                {
                     ForeignKeyConstraint constraint = constraints.GetForeignKeyConstraint();
                     if (constraint.Table == table && constraint.RelatedTable == table) // we can go with (constraint.Table ==  constraint.RelatedTable)
                         continue;
@@ -396,7 +495,13 @@ namespace System.Data {
                         throw ExceptionBuilder.TableInConstraint(table, constraint);
                 }
 
-                for (ChildForeignKeyConstraintEnumerator constraints = new ChildForeignKeyConstraintEnumerator(dataSet, table); constraints.GetNext();) {
+                for (
+                    ChildForeignKeyConstraintEnumerator constraints =
+                        new ChildForeignKeyConstraintEnumerator(dataSet, table);
+                    constraints.GetNext();
+
+                )
+                {
                     ForeignKeyConstraint constraint = constraints.GetForeignKeyConstraint();
                     if (constraint.Table == table && constraint.RelatedTable == table) // bug 97670
                         continue;
@@ -409,7 +514,8 @@ namespace System.Data {
 
                 return true;
             }
-            finally{
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -419,17 +525,20 @@ namespace System.Data {
         ///       Clears the collection of any tables.
         ///    </para>
         /// </devdoc>
-        public void Clear() {
+        public void Clear()
+        {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataTableCollection.Clear|API> %d#\n", ObjectID);
-            try {
+            try
+            {
                 int oldLength = _list.Count;
                 DataTable[] tables = new DataTable[_list.Count];
                 _list.CopyTo(tables, 0);
 
                 OnCollectionChanging(RefreshEventArgs);
 
-                if (dataSet.fInitInProgress && delayedAddRangeTables != null) {
+                if (dataSet.fInitInProgress && delayedAddRangeTables != null)
+                {
                     delayedAddRangeTables = null;
                 }
 
@@ -437,8 +546,9 @@ namespace System.Data {
                 _list.Clear();
 
                 OnCollectionChanged(RefreshEventArgs);
-                }
-            finally {
+            }
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -448,11 +558,13 @@ namespace System.Data {
         ///       Checks if a table, specified by name, exists in the collection.
         ///    </para>
         /// </devdoc>
-        public bool Contains(string name) {
+        public bool Contains(string name)
+        {
             return (InternalIndexOf(name) >= 0);
         }
 
-        public bool Contains(string name, string tableNamespace) {
+        public bool Contains(string name, string tableNamespace)
+        {
             if (name == null)
                 throw ExceptionBuilder.ArgumentNull("name");
 
@@ -462,44 +574,58 @@ namespace System.Data {
             return (InternalIndexOf(name, tableNamespace) >= 0);
         }
 
-        internal bool Contains(string name, string tableNamespace, bool checkProperty, bool caseSensitive) {
+        internal bool Contains(
+            string name,
+            string tableNamespace,
+            bool checkProperty,
+            bool caseSensitive
+        )
+        {
             if (!caseSensitive)
                 return (InternalIndexOf(name) >= 0);
 
             // Case-Sensitive compare
             int count = _list.Count;
-            for (int i = 0; i < count; i++) {
-                DataTable table = (DataTable) _list[i];
+            for (int i = 0; i < count; i++)
+            {
+                DataTable table = (DataTable)_list[i];
                 // this may be needed to check wether the cascading is creating some conflicts
-                string ns = checkProperty ? table.Namespace : table.tableNamespace ;
-                if (NamesEqual(table.TableName, name, true, dataSet.Locale) == 1 && (ns == tableNamespace))
+                string ns = checkProperty ? table.Namespace : table.tableNamespace;
+                if (
+                    NamesEqual(table.TableName, name, true, dataSet.Locale) == 1
+                    && (ns == tableNamespace)
+                )
                     return true;
             }
             return false;
         }
 
-        internal bool Contains(string name, bool caseSensitive) {
+        internal bool Contains(string name, bool caseSensitive)
+        {
             if (!caseSensitive)
                 return (InternalIndexOf(name) >= 0);
 
             // Case-Sensitive compare
             int count = _list.Count;
-            for (int i = 0; i < count; i++) {
-                DataTable table = (DataTable) _list[i];
-                if (NamesEqual(table.TableName, name, true, dataSet.Locale) == 1 )
+            for (int i = 0; i < count; i++)
+            {
+                DataTable table = (DataTable)_list[i];
+                if (NamesEqual(table.TableName, name, true, dataSet.Locale) == 1)
                     return true;
             }
             return false;
         }
 
-        public void CopyTo(DataTable[] array, int index) {
-            if (array==null)
+        public void CopyTo(DataTable[] array, int index)
+        {
+            if (array == null)
                 throw ExceptionBuilder.ArgumentNull("array");
             if (index < 0)
                 throw ExceptionBuilder.ArgumentOutOfRange("index");
             if (array.Length - index < _list.Count)
                 throw ExceptionBuilder.InvalidOffsetLength();
-            for(int i = 0; i < _list.Count; ++i) {
+            for (int i = 0; i < _list.Count; ++i)
+            {
                 array[index + i] = (DataTable)_list[i];
             }
         }
@@ -509,10 +635,13 @@ namespace System.Data {
         ///       Returns the index of a specified <see cref='System.Data.DataTable'/>.
         ///    </para>
         /// </devdoc>
-        public int IndexOf(DataTable table) {
+        public int IndexOf(DataTable table)
+        {
             int tableCount = _list.Count;
-            for (int i = 0; i < tableCount; ++i) {
-                if (table == (DataTable) _list[i]) {
+            for (int i = 0; i < tableCount; ++i)
+            {
+                if (table == (DataTable)_list[i])
+                {
                     return i;
                 }
             }
@@ -526,17 +655,21 @@ namespace System.Data {
         ///       doesn't exist in the collection.
         ///    </para>
         /// </devdoc>
-        public int IndexOf(string tableName) {
+        public int IndexOf(string tableName)
+        {
             int index = InternalIndexOf(tableName);
             return (index < 0) ? -1 : index;
         }
 
-        public int IndexOf(string tableName, string tableNamespace) {
-            return IndexOf( tableName, tableNamespace, true);
+        public int IndexOf(string tableName, string tableNamespace)
+        {
+            return IndexOf(tableName, tableNamespace, true);
         }
 
-        internal int IndexOf(string tableName, string tableNamespace, bool chekforNull) { // this should be public! why it is missing?
-            if (chekforNull) {
+        internal int IndexOf(string tableName, string tableNamespace, bool chekforNull)
+        { // this should be public! why it is missing?
+            if (chekforNull)
+            {
                 if (tableName == null)
                     throw ExceptionBuilder.ArgumentNull("tableName");
                 if (tableNamespace == null)
@@ -546,10 +679,14 @@ namespace System.Data {
             return (index < 0) ? -1 : index;
         }
 
-        internal void ReplaceFromInference(System.Collections.Generic.List<DataTable> tableList) {
-            Debug.Assert(_list.Count == tableList.Count, "Both lists should have equal numbers of tables");
+        internal void ReplaceFromInference(System.Collections.Generic.List<DataTable> tableList)
+        {
+            Debug.Assert(
+                _list.Count == tableList.Count,
+                "Both lists should have equal numbers of tables"
+            );
             _list.Clear();
-            _list.AddRange(tableList);            
+            _list.AddRange(tableList);
         }
 
         // Return value:
@@ -557,24 +694,32 @@ namespace System.Data {
         //        -1: No match
         //        -2: At least two matches with different cases
         //        -3: At least two matches with different namespaces
-        internal int InternalIndexOf(string tableName) {
+        internal int InternalIndexOf(string tableName)
+        {
             int cachedI = -1;
-            if ((null != tableName) && (0 < tableName.Length)) {
+            if ((null != tableName) && (0 < tableName.Length))
+            {
                 int count = _list.Count;
                 int result = 0;
-                for (int i = 0; i < count; i++) {
-                    DataTable table = (DataTable) _list[i];
+                for (int i = 0; i < count; i++)
+                {
+                    DataTable table = (DataTable)_list[i];
                     result = NamesEqual(table.TableName, tableName, false, dataSet.Locale);
-                    if (result == 1) {
+                    if (result == 1)
+                    {
                         // ok, we have found a table with the same name.
                         // let's see if there are any others with the same name
                         // if any let's return (-3) otherwise...
-                        for (int j=i+1;j<count;j++) {
-                            DataTable dupTable = (DataTable) _list[j];
-                            if (NamesEqual(dupTable.TableName, tableName, false, dataSet.Locale) == 1)
+                        for (int j = i + 1; j < count; j++)
+                        {
+                            DataTable dupTable = (DataTable)_list[j];
+                            if (
+                                NamesEqual(dupTable.TableName, tableName, false, dataSet.Locale)
+                                == 1
+                            )
                                 return -3;
                         }
-                       //... let's just return i
+                        //... let's just return i
                         return i;
                     }
 
@@ -589,29 +734,35 @@ namespace System.Data {
         //      >= 0: find the match
         //        -1: No match
         //        -2: At least two matches with different cases
-        internal int InternalIndexOf(string tableName, string tableNamespace) {
+        internal int InternalIndexOf(string tableName, string tableNamespace)
+        {
             int cachedI = -1;
-            if ((null != tableName) && (0 < tableName.Length)) {
+            if ((null != tableName) && (0 < tableName.Length))
+            {
                 int count = _list.Count;
                 int result = 0;
-                for (int i = 0; i < count; i++) {
-                    DataTable table = (DataTable) _list[i];
+                for (int i = 0; i < count; i++)
+                {
+                    DataTable table = (DataTable)_list[i];
                     result = NamesEqual(table.TableName, tableName, false, dataSet.Locale);
                     if ((result == 1) && (table.Namespace == tableNamespace))
                         return i;
 
-                    if ((result == -1)  && (table.Namespace == tableNamespace))
+                    if ((result == -1) && (table.Namespace == tableNamespace))
                         cachedI = (cachedI == -1) ? i : -2;
                 }
             }
             return cachedI;
-
         }
 
-        internal void FinishInitCollection() {
-            if (delayedAddRangeTables != null) {
-                foreach(DataTable table in delayedAddRangeTables) {
-                    if (table != null) {
+        internal void FinishInitCollection()
+        {
+            if (delayedAddRangeTables != null)
+            {
+                foreach (DataTable table in delayedAddRangeTables)
+                {
+                    if (table != null)
+                    {
                         Add(table);
                     }
                 }
@@ -622,8 +773,10 @@ namespace System.Data {
         /// <devdoc>
         /// Makes a default name with the given index.  e.g. Table1, Table2, ... Tablei
         /// </devdoc>
-        private string MakeName(int index) {
-            if (1 == index) {
+        private string MakeName(int index)
+        {
+            if (1 == index)
+            {
                 return "Table1";
             }
             return "Table" + index.ToString(System.Globalization.CultureInfo.InvariantCulture);
@@ -634,8 +787,10 @@ namespace System.Data {
         ///       Raises the <see cref='System.Data.DataTableCollection.OnCollectionChanged'/> event.
         ///    </para>
         /// </devdoc>
-        private void OnCollectionChanged(CollectionChangeEventArgs ccevent) {
-            if (onCollectionChangedDelegate != null) {
+        private void OnCollectionChanged(CollectionChangeEventArgs ccevent)
+        {
+            if (onCollectionChangedDelegate != null)
+            {
                 Bid.Trace("<ds.DataTableCollection.OnCollectionChanged|INFO> %d#\n", ObjectID);
                 onCollectionChangedDelegate(this, ccevent);
             }
@@ -644,8 +799,10 @@ namespace System.Data {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        private void OnCollectionChanging(CollectionChangeEventArgs ccevent) {
-            if (onCollectionChangingDelegate != null) {
+        private void OnCollectionChanging(CollectionChangeEventArgs ccevent)
+        {
+            if (onCollectionChangingDelegate != null)
+            {
                 Bid.Trace("<ds.DataTableCollection.OnCollectionChanging|INFO> %d#\n", ObjectID);
                 onCollectionChangingDelegate(this, ccevent);
             }
@@ -656,19 +813,31 @@ namespace System.Data {
         /// if the name is already being used.  Called by Add, All property, and Table.TableName property.
         /// if the name is equivalent to the next default name to hand out, we increment our defaultNameIndex.
         /// </devdoc>
-        internal void RegisterName(string name, string tbNamespace) {
-            Bid.Trace("<ds.DataTableCollection.RegisterName|INFO> %d#, name='%ls', tbNamespace='%ls'\n", ObjectID, name, tbNamespace);
-            Debug.Assert (name != null);
+        internal void RegisterName(string name, string tbNamespace)
+        {
+            Bid.Trace(
+                "<ds.DataTableCollection.RegisterName|INFO> %d#, name='%ls', tbNamespace='%ls'\n",
+                ObjectID,
+                name,
+                tbNamespace
+            );
+            Debug.Assert(name != null);
 
             CultureInfo locale = dataSet.Locale;
             int tableCount = _list.Count;
-            for (int i = 0; i < tableCount; i++) {
-                DataTable table = (DataTable) _list[i];
-                if (NamesEqual(name, table.TableName, true, locale) != 0 && (tbNamespace == table.Namespace)) {
-                    throw ExceptionBuilder.DuplicateTableName(((DataTable) _list[i]).TableName);
+            for (int i = 0; i < tableCount; i++)
+            {
+                DataTable table = (DataTable)_list[i];
+                if (
+                    NamesEqual(name, table.TableName, true, locale) != 0
+                    && (tbNamespace == table.Namespace)
+                )
+                {
+                    throw ExceptionBuilder.DuplicateTableName(((DataTable)_list[i]).TableName);
                 }
             }
-            if (NamesEqual(name, MakeName(defaultNameIndex), true, locale) != 0) {
+            if (NamesEqual(name, MakeName(defaultNameIndex), true, locale) != 0)
+            {
                 defaultNameIndex++;
             }
         }
@@ -678,15 +847,27 @@ namespace System.Data {
         ///       Removes the specified table from the collection.
         ///    </para>
         /// </devdoc>
-        public void Remove(DataTable table) {
+        public void Remove(DataTable table)
+        {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataTableCollection.Remove|API> %d#, table=%d\n", ObjectID, (table != null) ? table.ObjectID : 0);
-            try {
-                OnCollectionChanging(new CollectionChangeEventArgs(CollectionChangeAction.Remove, table));
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTableCollection.Remove|API> %d#, table=%d\n",
+                ObjectID,
+                (table != null) ? table.ObjectID : 0
+            );
+            try
+            {
+                OnCollectionChanging(
+                    new CollectionChangeEventArgs(CollectionChangeAction.Remove, table)
+                );
                 BaseRemove(table);
-                OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Remove, table));
+                OnCollectionChanged(
+                    new CollectionChangeEventArgs(CollectionChangeAction.Remove, table)
+                );
             }
-            finally{
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -697,16 +878,24 @@ namespace System.Data {
         ///       table at the given index from the collection
         ///    </para>
         /// </devdoc>
-        public void RemoveAt(int index) {
+        public void RemoveAt(int index)
+        {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataTableCollection.RemoveAt|API> %d#, index=%d\n", ObjectID, index);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTableCollection.RemoveAt|API> %d#, index=%d\n",
+                ObjectID,
+                index
+            );
+            try
+            {
                 DataTable dt = this[index];
                 if (dt == null)
                     throw ExceptionBuilder.TableOutOfRange(index);
                 Remove(dt);
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -717,21 +906,30 @@ namespace System.Data {
         ///       collection.
         ///    </para>
         /// </devdoc>
-        public void Remove(string name) {
+        public void Remove(string name)
+        {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataTableCollection.Remove|API> %d#, name='%ls'\n", ObjectID, name);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTableCollection.Remove|API> %d#, name='%ls'\n",
+                ObjectID,
+                name
+            );
+            try
+            {
                 DataTable dt = this[name];
                 if (dt == null)
                     throw ExceptionBuilder.TableNotInTheDataSet(name);
                 Remove(dt);
             }
-            finally{
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        public void Remove(string name, string tableNamespace) {
+        public void Remove(string name, string tableNamespace)
+        {
             if (name == null)
                 throw ExceptionBuilder.ArgumentNull("name");
             if (tableNamespace == null)
@@ -742,19 +940,24 @@ namespace System.Data {
             Remove(dt);
         }
 
-
         /// <devdoc>
         /// Unregisters this name as no longer being used in the collection.  Called by Remove, All property, and
         /// Table.TableName property.  If the name is equivalent to the last proposed default name, we walk backwards
         /// to find the next proper default name to  use.
         /// </devdoc>
-        internal void UnregisterName(string name) {
-            Bid.Trace("<ds.DataTableCollection.UnregisterName|INFO> %d#, name='%ls'\n", ObjectID, name);
-            if (NamesEqual(name, MakeName(defaultNameIndex - 1), true, dataSet.Locale) != 0) {
-                do {
+        internal void UnregisterName(string name)
+        {
+            Bid.Trace(
+                "<ds.DataTableCollection.UnregisterName|INFO> %d#, name='%ls'\n",
+                ObjectID,
+                name
+            );
+            if (NamesEqual(name, MakeName(defaultNameIndex - 1), true, dataSet.Locale) != 0)
+            {
+                do
+                {
                     defaultNameIndex--;
-                } while (defaultNameIndex > 1 &&
-                         !Contains(MakeName(defaultNameIndex - 1)));
+                } while (defaultNameIndex > 1 && !Contains(MakeName(defaultNameIndex - 1)));
             }
         }
     }

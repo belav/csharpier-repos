@@ -14,22 +14,27 @@
  */
 
 using System;
-using System.IO;
-using System.Text;
-using System.Linq;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace BenchmarksGame
 {
-    class Wrapper { public int v = 1; }
+    class Wrapper
+    {
+        public int v = 1;
+    }
+
     public class KNucleotide_9
     {
         const int BLOCK_SIZE = 1024 * 1024 * 8;
         static List<byte[]> threeBlocks = new List<byte[]>();
-        static int threeStart, threeEnd;
+        static int threeStart,
+            threeEnd;
         static byte[] tonum = new byte[256];
         static char[] tochar = new char[] { 'A', 'C', 'G', 'T' };
 
@@ -37,8 +42,8 @@ namespace BenchmarksGame
         {
             var bytesRead = stream.Read(buffer, offset, count);
             return bytesRead == count ? offset + count
-                 : bytesRead == 0 ? offset
-                 : read(stream, buffer, offset + bytesRead, count - bytesRead);
+                : bytesRead == 0 ? offset
+                : read(stream, buffer, offset + bytesRead, count - bytesRead);
         }
 
         static int find(byte[] buffer, byte[] toFind, int i, ref int matchIndex)
@@ -46,13 +51,15 @@ namespace BenchmarksGame
             if (matchIndex == 0)
             {
                 i = Array.IndexOf(buffer, toFind[0], i);
-                if (i == -1) return -1;
+                if (i == -1)
+                    return -1;
                 matchIndex = 1;
                 return find(buffer, toFind, i + 1, ref matchIndex);
             }
             else
             {
-                int bl = buffer.Length, fl = toFind.Length;
+                int bl = buffer.Length,
+                    fl = toFind.Length;
                 while (i < bl && matchIndex < fl)
                 {
                     if (buffer[i++] != toFind[matchIndex++])
@@ -106,24 +113,33 @@ namespace BenchmarksGame
             {
                 buffer = new byte[BLOCK_SIZE];
                 var bytesRead = read(stream, buffer, 0, BLOCK_SIZE);
-                threeEnd = bytesRead == BLOCK_SIZE ? find(buffer, toFind, 0, ref matchIndex)
-                            : bytesRead;
+                threeEnd =
+                    bytesRead == BLOCK_SIZE ? find(buffer, toFind, 0, ref matchIndex) : bytesRead;
                 threeBlocks.Add(buffer);
             }
 
             if (threeStart + 18 > BLOCK_SIZE) // Key needs to be in the first block
             {
-                byte[] block0 = threeBlocks[0], block1 = threeBlocks[1];
-                Buffer.BlockCopy(block0, threeStart, block0, threeStart - 18, BLOCK_SIZE - threeStart);
+                byte[] block0 = threeBlocks[0],
+                    block1 = threeBlocks[1];
+                Buffer.BlockCopy(
+                    block0,
+                    threeStart,
+                    block0,
+                    threeStart - 18,
+                    BLOCK_SIZE - threeStart
+                );
                 Buffer.BlockCopy(block1, 0, block0, BLOCK_SIZE - 18, 18);
-                for (int i = 0; i < 18; i++) block1[i] = 255;
+                for (int i = 0; i < 18; i++)
+                    block1[i] = 255;
             }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static void check(Dictionary<long, Wrapper> dict, ref long rollingKey, byte nb, long mask)
         {
-            if (nb == 255) return;
+            if (nb == 255)
+                return;
             rollingKey = ((rollingKey & mask) << 2) | nb;
             Wrapper w;
             if (dict.TryGetValue(rollingKey, out w))
@@ -133,7 +149,13 @@ namespace BenchmarksGame
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static void checkEnding(Dictionary<long, Wrapper> dict, ref long rollingKey, byte b, byte nb, long mask)
+        static void checkEnding(
+            Dictionary<long, Wrapper> dict,
+            ref long rollingKey,
+            byte b,
+            byte nb,
+            long mask
+        )
         {
             if (nb == b)
             {
@@ -157,7 +179,8 @@ namespace BenchmarksGame
                 long rollingKey = 0;
                 var firstBlock = threeBlocks[0];
                 var start = threeStart;
-                while (--l > 0) rollingKey = (rollingKey << 2) | firstBlock[start++];
+                while (--l > 0)
+                    rollingKey = (rollingKey << 2) | firstBlock[start++];
                 var dict = new Dictionary<long, Wrapper>();
                 for (int i = start; i < firstBlock.Length; i++)
                     check(dict, ref rollingKey, firstBlock[i], mask);
@@ -182,7 +205,8 @@ namespace BenchmarksGame
             long rollingKey = 0;
             var firstBlock = threeBlocks[0];
             var start = threeStart;
-            while (--l > 0) rollingKey = (rollingKey << 2) | firstBlock[start++];
+            while (--l > 0)
+                rollingKey = (rollingKey << 2) | firstBlock[start++];
             var dict = new Dictionary<long, Wrapper>();
             for (int i = start; i < firstBlock.Length; i++)
                 checkEnding(dict, ref rollingKey, b, firstBlock[i], mask);
@@ -201,26 +225,37 @@ namespace BenchmarksGame
             return dict;
         }
 
-        static Task<string> count4(int l, long mask, Func<Dictionary<long, Wrapper>, string> summary)
+        static Task<string> count4(
+            int l,
+            long mask,
+            Func<Dictionary<long, Wrapper>, string> summary
+        )
         {
             return Task.Factory.ContinueWhenAll(
-                new[] {
-                Task.Run(() => countEnding(l, mask, 0)),
-                Task.Run(() => countEnding(l, mask, 1)),
-                Task.Run(() => countEnding(l, mask, 2)),
-                Task.Run(() => countEnding(l, mask, 3))
-                }
-                , dicts =>
+                new[]
+                {
+                    Task.Run(() => countEnding(l, mask, 0)),
+                    Task.Run(() => countEnding(l, mask, 1)),
+                    Task.Run(() => countEnding(l, mask, 2)),
+                    Task.Run(() => countEnding(l, mask, 3)),
+                },
+                dicts =>
                 {
                     var d = new Dictionary<long, Wrapper>(dicts.Sum(i => i.Result.Count));
                     for (int i = 0; i < dicts.Length; i++)
                         foreach (var kv in dicts[i].Result)
                             d[(kv.Key << 2) | (long)i] = kv.Value;
                     return summary(d);
-                });
+                }
+            );
         }
 
-        static string writeFrequencies(Dictionary<long, Wrapper> freq, int fragmentLength, int[] expected, ref bool ok)
+        static string writeFrequencies(
+            Dictionary<long, Wrapper> freq,
+            int fragmentLength,
+            int[] expected,
+            ref bool ok
+        )
         {
             var sb = new StringBuilder();
             double percent = 100.0 / freq.Values.Sum(i => i.v);
@@ -242,7 +277,12 @@ namespace BenchmarksGame
             return sb.ToString();
         }
 
-        static string writeCount(Dictionary<long, Wrapper> dictionary, string fragment, int expected, ref bool ok)
+        static string writeCount(
+            Dictionary<long, Wrapper> dictionary,
+            string fragment,
+            int expected,
+            ref bool ok
+        )
         {
             long key = 0;
             for (int i = 0; i < fragment.Length; ++i)
@@ -269,31 +309,67 @@ namespace BenchmarksGame
             threeStart = 0;
             threeEnd = 0;
 
-            tonum['c'] = 1; tonum['C'] = 1;
-            tonum['g'] = 2; tonum['G'] = 2;
-            tonum['t'] = 3; tonum['T'] = 3;
-            tonum['\n'] = 255; tonum['>'] = 255; tonum[255] = 255;
+            tonum['c'] = 1;
+            tonum['C'] = 1;
+            tonum['g'] = 2;
+            tonum['G'] = 2;
+            tonum['t'] = 3;
+            tonum['T'] = 3;
+            tonum['\n'] = 255;
+            tonum['>'] = 255;
+            tonum[255] = 255;
 
             using (var inputStream = helpers.GetInputStream())
             {
                 loadThreeData(inputStream);
             }
 
-            Parallel.ForEach(threeBlocks, bytes =>
-            {
-                for (int i = 0; i < bytes.Length; i++)
-                    bytes[i] = tonum[bytes[i]];
-            });
+            Parallel.ForEach(
+                threeBlocks,
+                bytes =>
+                {
+                    for (int i = 0; i < bytes.Length; i++)
+                        bytes[i] = tonum[bytes[i]];
+                }
+            );
 
             bool ok = true;
 
-            var task18 = count4(18, 0x7FFFFFFFF, d => writeCount(d, "GGTATTTTAATTTATAGT", helpers.expectedCountFragments[4], ref ok));
-            var task12 = count4(12, 0x7FFFFF, d => writeCount(d, "GGTATTTTAATT", helpers.expectedCountFragments[3], ref ok));
-            var task6 = count(6, 0x3FF, d => writeCount(d, "GGTATT", helpers.expectedCountFragments[2], ref ok));
-            var task4 = count(4, 0x3F, d => writeCount(d, "GGTA", helpers.expectedCountFragments[1], ref ok));
-            var task3 = count(3, 0xF, d => writeCount(d, "GGT", helpers.expectedCountFragments[0], ref ok));
-            var task2 = count(2, 0x3, d => writeFrequencies(d, 2, helpers.expectedFrequencies[1], ref ok));
-            var task1 = count(1, 0, d => writeFrequencies(d, 1, helpers.expectedFrequencies[0], ref ok));
+            var task18 = count4(
+                18,
+                0x7FFFFFFFF,
+                d => writeCount(d, "GGTATTTTAATTTATAGT", helpers.expectedCountFragments[4], ref ok)
+            );
+            var task12 = count4(
+                12,
+                0x7FFFFF,
+                d => writeCount(d, "GGTATTTTAATT", helpers.expectedCountFragments[3], ref ok)
+            );
+            var task6 = count(
+                6,
+                0x3FF,
+                d => writeCount(d, "GGTATT", helpers.expectedCountFragments[2], ref ok)
+            );
+            var task4 = count(
+                4,
+                0x3F,
+                d => writeCount(d, "GGTA", helpers.expectedCountFragments[1], ref ok)
+            );
+            var task3 = count(
+                3,
+                0xF,
+                d => writeCount(d, "GGT", helpers.expectedCountFragments[0], ref ok)
+            );
+            var task2 = count(
+                2,
+                0x3,
+                d => writeFrequencies(d, 2, helpers.expectedFrequencies[1], ref ok)
+            );
+            var task1 = count(
+                1,
+                0,
+                d => writeFrequencies(d, 1, helpers.expectedFrequencies[0], ref ok)
+            );
 
             if (verbose)
             {

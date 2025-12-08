@@ -10,7 +10,6 @@ namespace System.Runtime
 
     class NameGenerator
     {
-
         static NameGenerator nameGenerator = new NameGenerator();
         long id;
         string prefix;

@@ -6,37 +6,47 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Data.Common;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
     using System.Text;
     using System.Threading;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System.Data.Common;
-    using System.Runtime.Versioning;
-    using System.Runtime.CompilerServices;
 
     /// <devdoc>
     ///    <para>Represents one table of in-memory data.</para>
     /// </devdoc>
     [
-    ToolboxItem(false),
-    DesignTimeVisible(false),
-    DefaultProperty("TableName"),
-    Editor("Microsoft.VSDesigner.Data.Design.DataTableEditor, " + AssemblyRef.MicrosoftVSDesigner, "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing),
-    DefaultEvent("RowChanging"),
-    XmlSchemaProvider("GetDataTableSchema"),
-    Serializable
+        ToolboxItem(false),
+        DesignTimeVisible(false),
+        DefaultProperty("TableName"),
+        Editor(
+            "Microsoft.VSDesigner.Data.Design.DataTableEditor, " + AssemblyRef.MicrosoftVSDesigner,
+            "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing
+        ),
+        DefaultEvent("RowChanging"),
+        XmlSchemaProvider("GetDataTableSchema"),
+        Serializable
     ]
-    public class DataTable : MarshalByValueComponent, System.ComponentModel.IListSource, ISupportInitializeNotification, ISerializable, IXmlSerializable{
+    public class DataTable
+        : MarshalByValueComponent,
+            System.ComponentModel.IListSource,
+            ISupportInitializeNotification,
+            ISerializable,
+            IXmlSerializable
+    {
         private DataSet dataSet;
         private DataView defaultView = null;
 
@@ -82,28 +92,29 @@ namespace System.Data {
         private CultureInfo _culture;
         private bool _cultureUserSet;
         private CompareInfo _compareInfo;
-        private CompareOptions _compareFlags = CompareOptions.IgnoreCase | CompareOptions.IgnoreKanaType | CompareOptions.IgnoreWidth;
+        private CompareOptions _compareFlags =
+            CompareOptions.IgnoreCase | CompareOptions.IgnoreKanaType | CompareOptions.IgnoreWidth;
         private IFormatProvider _formatProvider;
         private StringComparer _hashCodeProvider;
         private bool _caseSensitive;
         private bool _caseSensitiveUserSet;
 
         // XML properties
-        internal string encodedTableName;           // For XmlDataDocument only
-        internal DataColumn xmlText;            // text values of a complex xml element
+        internal string encodedTableName; // For XmlDataDocument only
+        internal DataColumn xmlText; // text values of a complex xml element
         internal DataColumn _colUnique;
-        internal bool textOnly = false;         // the table has only text value with possible attributes
-        internal decimal minOccurs = 1;    // default = 1
-        internal decimal maxOccurs = 1;    // default = 1
+        internal bool textOnly = false; // the table has only text value with possible attributes
+        internal decimal minOccurs = 1; // default = 1
+        internal decimal maxOccurs = 1; // default = 1
         internal bool repeatableElement = false;
         private object typeName = null;
 
         // primary key info
         private readonly static Int32[] zeroIntegers = new Int32[0];
-        internal readonly static DataColumn[] zeroColumns = new DataColumn[0];
-        internal readonly static DataRow[] zeroRows = new DataRow[0];
+        internal static readonly DataColumn[] zeroColumns = new DataColumn[0];
+        internal static readonly DataRow[] zeroRows = new DataRow[0];
         internal UniqueConstraint primaryKey;
-        internal readonly static IndexField[] zeroIndexField = new IndexField[0];
+        internal static readonly IndexField[] zeroIndexField = new IndexField[0];
         internal IndexField[] _primaryIndex = zeroIndexField;
         private DataColumn[] delayedSetPrimaryKey = null;
 
@@ -126,7 +137,6 @@ namespace System.Data {
 
         private byte _isTypedDataTable; // 0 == unknown, 1 = yes, 2 = No
         private DataRow[] EmptyDataRowArray;
-
 
         // Property Descriptor Cache for DataBinding
         private PropertyDescriptorCollection propertyDescriptorCollectionCache = null;
@@ -153,8 +163,7 @@ namespace System.Data {
 
         private PropertyChangedEventHandler onPropertyChangingDelegate;
 
-        private System.EventHandler  onInitialized;
-
+        private System.EventHandler onInitialized;
 
         // misc
         private readonly DataRowBuilder rowBuilder;
@@ -165,21 +174,24 @@ namespace System.Data {
         internal readonly List<DataView> delayedViews = new List<DataView>();
         private readonly List<DataViewListener> _dataViewListeners = new List<DataViewListener>();
 
-//        private bool serializeHierarchy = false;
+        //        private bool serializeHierarchy = false;
         internal Hashtable rowDiffId = null;
         internal readonly ReaderWriterLock indexesLock = new ReaderWriterLock();
-        internal int ukColumnPositionForInference= -1;
+        internal int ukColumnPositionForInference = -1;
 
         // default remoting format is Xml
         private SerializationFormat _remotingFormat = SerializationFormat.Xml;
 
         private static int _objectTypeCount; // Bid counter
-        private readonly int _objectID = System.Threading.Interlocked.Increment(ref _objectTypeCount);
+        private readonly int _objectID = System.Threading.Interlocked.Increment(
+            ref _objectTypeCount
+        );
 
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Data.DataTable'/> class with no arguments.</para>
         /// </devdoc>
-        public DataTable() {
+        public DataTable()
+        {
             GC.SuppressFinalize(this);
             Bid.Trace("<ds.DataTable.DataTable|API> %d#\n", ObjectID);
             nextRowID = 1;
@@ -198,57 +210,86 @@ namespace System.Data {
         /// <para>Intitalizes a new instance of the <see cref='System.Data.DataTable'/> class with the specified table
         ///    name.</para>
         /// </devdoc>
-        public DataTable(string tableName) : this() {
+        public DataTable(string tableName)
+            : this()
+        {
             this.tableName = tableName == null ? "" : tableName;
         }
 
-        public DataTable(string tableName, string tableNamespace) : this(tableName) {
+        public DataTable(string tableName, string tableNamespace)
+            : this(tableName)
+        {
             this.Namespace = tableNamespace;
         }
 
-//        Deserialize the table from binary/xml stream.
-        protected DataTable(SerializationInfo info, StreamingContext context) : this()
+        //        Deserialize the table from binary/xml stream.
+        protected DataTable(SerializationInfo info, StreamingContext context)
+            : this()
         {
-            bool isSingleTable = context.Context != null ? Convert.ToBoolean(context.Context, CultureInfo.InvariantCulture) : true;
+            bool isSingleTable =
+                context.Context != null
+                    ? Convert.ToBoolean(context.Context, CultureInfo.InvariantCulture)
+                    : true;
             SerializationFormat remotingFormat = SerializationFormat.Xml;
             SerializationInfoEnumerator e = info.GetEnumerator();
-            while (e.MoveNext()) {
-                switch(e.Name) {
-                    case "DataTable.RemotingFormat" : //DataTable.RemotingFormat does not exist in V1/V1.1 versions
-                    remotingFormat = (SerializationFormat)e.Value;
-                    break;
+            while (e.MoveNext())
+            {
+                switch (e.Name)
+                {
+                    case "DataTable.RemotingFormat": //DataTable.RemotingFormat does not exist in V1/V1.1 versions
+                        remotingFormat = (SerializationFormat)e.Value;
+                        break;
                 }
             }
 
             DeserializeDataTable(info, context, isSingleTable, remotingFormat);
         }
 
-        [System.Security.Permissions.SecurityPermissionAttribute(System.Security.Permissions.SecurityAction.LinkDemand, Flags=System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter)]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context) {
+        [System.Security.Permissions.SecurityPermissionAttribute(
+            System.Security.Permissions.SecurityAction.LinkDemand,
+            Flags = System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter
+        )]
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
             SerializationFormat remotingFormat = RemotingFormat;
-            bool isSingleTable = context.Context != null ? Convert.ToBoolean(context.Context, CultureInfo.InvariantCulture) : true;
+            bool isSingleTable =
+                context.Context != null
+                    ? Convert.ToBoolean(context.Context, CultureInfo.InvariantCulture)
+                    : true;
             SerializeDataTable(info, context, isSingleTable, remotingFormat);
         }
 
-//        Serialize the table schema and data.
-        private void SerializeDataTable(SerializationInfo info, StreamingContext context, bool isSingleTable, SerializationFormat remotingFormat) {
+        //        Serialize the table schema and data.
+        private void SerializeDataTable(
+            SerializationInfo info,
+            StreamingContext context,
+            bool isSingleTable,
+            SerializationFormat remotingFormat
+        )
+        {
             info.AddValue("DataTable.RemotingVersion", new Version(2, 0));
 
             // SqlHotFix 299, SerializationFormat enumeration types don't exist in V1.1 SP1
-            if (SerializationFormat.Xml != remotingFormat) {
+            if (SerializationFormat.Xml != remotingFormat)
+            {
                 info.AddValue("DataTable.RemotingFormat", remotingFormat);
             }
 
-            if (remotingFormat != SerializationFormat.Xml) {//Binary
+            if (remotingFormat != SerializationFormat.Xml)
+            { //Binary
                 SerializeTableSchema(info, context, isSingleTable);
-                if (isSingleTable) {
+                if (isSingleTable)
+                {
                     SerializeTableData(info, context, 0);
                 }
-            } else {//XML/V1.0/V1.1
+            }
+            else
+            { //XML/V1.0/V1.1
                 string tempDSNamespace = "";
                 Boolean fCreatedDataSet = false;
 
-                if (dataSet == null) {
+                if (dataSet == null)
+                {
                     DataSet ds = new DataSet("tmpDataSet");
                     // if user set values on DataTable, it isn't necessary
                     // to set them on the DataSet because they won't be inherited
@@ -259,11 +300,16 @@ namespace System.Data {
                     // the value already on the Datatable
                     ds.SetLocaleValue(_culture, _cultureUserSet);
                     ds.CaseSensitive = this.CaseSensitive;
-                    ds.namespaceURI  = this.Namespace;
-                    Debug.Assert(ds.RemotingFormat == SerializationFormat.Xml, "RemotingFormat must be SerializationFormat.Xml");
+                    ds.namespaceURI = this.Namespace;
+                    Debug.Assert(
+                        ds.RemotingFormat == SerializationFormat.Xml,
+                        "RemotingFormat must be SerializationFormat.Xml"
+                    );
                     ds.Tables.Add(this);
                     fCreatedDataSet = true;
-                } else {
+                }
+                else
+                {
                     tempDSNamespace = this.DataSet.Namespace;
                     this.DataSet.namespaceURI = this.Namespace; //this.DataSet.Namespace = this.Namespace; ??
                 }
@@ -271,50 +317,72 @@ namespace System.Data {
                 info.AddValue(KEY_XMLSCHEMA, dataSet.GetXmlSchemaForRemoting(this));
                 info.AddValue(KEY_XMLDIFFGRAM, dataSet.GetRemotingDiffGram(this));
 
-                if (fCreatedDataSet) {
+                if (fCreatedDataSet)
+                {
                     dataSet.Tables.Remove(this);
                 }
-                else{
-                    dataSet.namespaceURI  = tempDSNamespace;
+                else
+                {
+                    dataSet.namespaceURI = tempDSNamespace;
                 }
             }
         }
 
-//        Deserialize the table schema and data.
-        internal void DeserializeDataTable(SerializationInfo info, StreamingContext context, bool isSingleTable, SerializationFormat remotingFormat) {
-            if (remotingFormat != SerializationFormat.Xml) {//Binary
+        //        Deserialize the table schema and data.
+        internal void DeserializeDataTable(
+            SerializationInfo info,
+            StreamingContext context,
+            bool isSingleTable,
+            SerializationFormat remotingFormat
+        )
+        {
+            if (remotingFormat != SerializationFormat.Xml)
+            { //Binary
                 DeserializeTableSchema(info, context, isSingleTable);
-                if (isSingleTable) {
+                if (isSingleTable)
+                {
                     DeserializeTableData(info, context, 0);
                     this.ResetIndexes();
                 }
-            } else {//XML/V1.0/V1.1
+            }
+            else
+            { //XML/V1.0/V1.1
                 string strSchema = (String)info.GetValue(KEY_XMLSCHEMA, typeof(System.String));
                 string strData = (String)info.GetValue(KEY_XMLDIFFGRAM, typeof(System.String));
 
-                if (strSchema != null) {
+                if (strSchema != null)
+                {
                     DataSet ds = new DataSet();
                     // fxcop: ReadXmlSchema will provide the CaseSensitive, Locale, Namespace information
-                    ds.ReadXmlSchema(new XmlTextReader( new StringReader( strSchema ) ) );
+                    ds.ReadXmlSchema(new XmlTextReader(new StringReader(strSchema)));
 
                     Debug.Assert(ds.Tables.Count == 1, "There should be exactly 1 table here");
                     DataTable table = ds.Tables[0];
-                    table.CloneTo(this, null, false);// WebData 111656
+                    table.CloneTo(this, null, false); // WebData 111656
                     //this is to avoid the cascading rules in the namespace
                     this.Namespace = table.Namespace;
 
-                    if (strData != null) {
+                    if (strData != null)
+                    {
                         ds.Tables.Remove(ds.Tables[0]);
                         ds.Tables.Add(this);
-                        ds.ReadXml(new XmlTextReader( new StringReader( strData ) ), XmlReadMode.DiffGram);
+                        ds.ReadXml(
+                            new XmlTextReader(new StringReader(strData)),
+                            XmlReadMode.DiffGram
+                        );
                         ds.Tables.Remove(this);
                     }
                 }
             }
         }
 
-//        Serialize the columns
-        internal void SerializeTableSchema(SerializationInfo info, StreamingContext context, bool isSingleTable) {
+        //        Serialize the columns
+        internal void SerializeTableSchema(
+            SerializationInfo info,
+            StreamingContext context,
+            bool isSingleTable
+        )
+        {
             //DataTable basic  properties
             info.AddValue("DataTable.TableName", TableName);
             info.AddValue("DataTable.Namespace", Namespace);
@@ -330,7 +398,6 @@ namespace System.Data {
             info.AddValue("DataTable.TypeName", TypeName.ToString());
             info.AddValue("DataTable.RepeatableElement", repeatableElement);
 
-
             //ExtendedProperties
             info.AddValue("DataTable.ExtendedProperties", ExtendedProperties);
 
@@ -338,7 +405,8 @@ namespace System.Data {
             info.AddValue("DataTable.Columns.Count", Columns.Count);
 
             //Check for closure of expression in case of single table.
-            if (isSingleTable) {
+            if (isSingleTable)
+            {
                 List<DataTable> list = new List<DataTable>();
                 list.Add(this);
                 if (!CheckForClosureOnExpressionTables(list))
@@ -346,47 +414,116 @@ namespace System.Data {
             }
 
             IFormatProvider formatProvider = CultureInfo.InvariantCulture;
-            for (int i = 0; i < Columns.Count; i++) {
+            for (int i = 0; i < Columns.Count; i++)
+            {
                 //DataColumn basic properties
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.ColumnName", i), Columns[i].ColumnName);
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.Namespace", i), Columns[i]._columnUri);
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.Prefix", i), Columns[i].Prefix);
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.ColumnMapping", i), Columns[i].ColumnMapping);
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.AllowDBNull", i), Columns[i].AllowDBNull);
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.AutoIncrement", i), Columns[i].AutoIncrement);
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.AutoIncrementStep", i), Columns[i].AutoIncrementStep);
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.AutoIncrementSeed", i), Columns[i].AutoIncrementSeed);
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.Caption", i), Columns[i].Caption);
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.DefaultValue", i), Columns[i].DefaultValue);
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.ReadOnly", i), Columns[i].ReadOnly);
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.MaxLength", i), Columns[i].MaxLength);
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.DataType", i), Columns[i].DataType);
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.ColumnName", i),
+                    Columns[i].ColumnName
+                );
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.Namespace", i),
+                    Columns[i]._columnUri
+                );
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.Prefix", i),
+                    Columns[i].Prefix
+                );
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.ColumnMapping", i),
+                    Columns[i].ColumnMapping
+                );
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.AllowDBNull", i),
+                    Columns[i].AllowDBNull
+                );
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.AutoIncrement", i),
+                    Columns[i].AutoIncrement
+                );
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.AutoIncrementStep", i),
+                    Columns[i].AutoIncrementStep
+                );
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.AutoIncrementSeed", i),
+                    Columns[i].AutoIncrementSeed
+                );
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.Caption", i),
+                    Columns[i].Caption
+                );
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.DefaultValue", i),
+                    Columns[i].DefaultValue
+                );
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.ReadOnly", i),
+                    Columns[i].ReadOnly
+                );
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.MaxLength", i),
+                    Columns[i].MaxLength
+                );
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.DataType", i),
+                    Columns[i].DataType
+                );
 
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.XmlDataType", i), Columns[i].XmlDataType);
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.SimpleType", i), Columns[i].SimpleType);
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.XmlDataType", i),
+                    Columns[i].XmlDataType
+                );
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.SimpleType", i),
+                    Columns[i].SimpleType
+                );
 
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.DateTimeMode", i), Columns[i].DateTimeMode);
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.DateTimeMode", i),
+                    Columns[i].DateTimeMode
+                );
 
                 //DataColumn internal state properties
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.AutoIncrementCurrent", i), Columns[i].AutoIncrementCurrent);
+                info.AddValue(
+                    String.Format(
+                        formatProvider,
+                        "DataTable.DataColumn_{0}.AutoIncrementCurrent",
+                        i
+                    ),
+                    Columns[i].AutoIncrementCurrent
+                );
 
                 //Expression
-                if (isSingleTable) {
-                    info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.Expression", i), Columns[i].Expression);
+                if (isSingleTable)
+                {
+                    info.AddValue(
+                        String.Format(formatProvider, "DataTable.DataColumn_{0}.Expression", i),
+                        Columns[i].Expression
+                    );
                 }
 
                 //ExtendedProperties
-                info.AddValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.ExtendedProperties", i), Columns[i].extendedProperties);
+                info.AddValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.ExtendedProperties", i),
+                    Columns[i].extendedProperties
+                );
             }
 
             //Constraints
-            if (isSingleTable) {
+            if (isSingleTable)
+            {
                 SerializeConstraints(info, context, 0, false);
             }
         }
 
-//        Deserialize all the Columns
-        internal void DeserializeTableSchema(SerializationInfo info, StreamingContext context, bool isSingleTable) {
+        //        Deserialize all the Columns
+        internal void DeserializeTableSchema(
+            SerializationInfo info,
+            StreamingContext context,
+            bool isSingleTable
+        )
+        {
             //DataTable basic properties
             tableName = info.GetString("DataTable.TableName");
             tableNamespace = info.GetString("DataTable.Namespace");
@@ -401,96 +538,177 @@ namespace System.Data {
             SetLocaleValue(culture, true, false);
             _cultureUserSet = true;
 
-
             MinimumCapacity = info.GetInt32("DataTable.MinimumCapacity");
             //DisplayExpression = info.GetString("DataTable.DisplayExpression");
 
             //DataTable state internal properties
-            fNestedInDataset = (bool) info.GetBoolean("DataTable.NestedInDataSet");
+            fNestedInDataset = (bool)info.GetBoolean("DataTable.NestedInDataSet");
             string tName = info.GetString("DataTable.TypeName");
-            typeName =  new XmlQualifiedName(tName);
+            typeName = new XmlQualifiedName(tName);
             repeatableElement = info.GetBoolean("DataTable.RepeatableElement");
 
             //ExtendedProperties
-            extendedProperties = (PropertyCollection) info.GetValue("DataTable.ExtendedProperties", typeof(PropertyCollection));
+            extendedProperties = (PropertyCollection)
+                info.GetValue("DataTable.ExtendedProperties", typeof(PropertyCollection));
 
             //Columns
             int colCount = info.GetInt32("DataTable.Columns.Count");
-            string [] expressions = new string[colCount];
+            string[] expressions = new string[colCount];
             Debug.Assert(Columns.Count == 0, "There is column in Table");
 
             IFormatProvider formatProvider = CultureInfo.InvariantCulture;
-            for (int i = 0; i < colCount; i++) {
+            for (int i = 0; i < colCount; i++)
+            {
                 DataColumn dc = new DataColumn();
 
                 //DataColumn public state properties
-                dc.ColumnName = info.GetString(String.Format(formatProvider, "DataTable.DataColumn_{0}.ColumnName", i));
-                dc._columnUri = info.GetString(String.Format(formatProvider, "DataTable.DataColumn_{0}.Namespace", i));
-                dc.Prefix = info.GetString(String.Format(formatProvider, "DataTable.DataColumn_{0}.Prefix", i));
+                dc.ColumnName = info.GetString(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.ColumnName", i)
+                );
+                dc._columnUri = info.GetString(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.Namespace", i)
+                );
+                dc.Prefix = info.GetString(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.Prefix", i)
+                );
 
-                dc.DataType = (Type) info.GetValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.DataType", i), typeof(Type));
-                dc.XmlDataType = (string) info.GetValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.XmlDataType", i), typeof(string));
-                dc.SimpleType = (SimpleType) info.GetValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.SimpleType", i), typeof(SimpleType));
+                dc.DataType = (Type)
+                    info.GetValue(
+                        String.Format(formatProvider, "DataTable.DataColumn_{0}.DataType", i),
+                        typeof(Type)
+                    );
+                dc.XmlDataType = (string)
+                    info.GetValue(
+                        String.Format(formatProvider, "DataTable.DataColumn_{0}.XmlDataType", i),
+                        typeof(string)
+                    );
+                dc.SimpleType = (SimpleType)
+                    info.GetValue(
+                        String.Format(formatProvider, "DataTable.DataColumn_{0}.SimpleType", i),
+                        typeof(SimpleType)
+                    );
 
-                dc.ColumnMapping = (MappingType) info.GetValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.ColumnMapping", i), typeof(MappingType));
-                dc.DateTimeMode = (DataSetDateTime) info.GetValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.DateTimeMode", i), typeof(DataSetDateTime));
+                dc.ColumnMapping = (MappingType)
+                    info.GetValue(
+                        String.Format(formatProvider, "DataTable.DataColumn_{0}.ColumnMapping", i),
+                        typeof(MappingType)
+                    );
+                dc.DateTimeMode = (DataSetDateTime)
+                    info.GetValue(
+                        String.Format(formatProvider, "DataTable.DataColumn_{0}.DateTimeMode", i),
+                        typeof(DataSetDateTime)
+                    );
 
-                dc.AllowDBNull = info.GetBoolean(String.Format(formatProvider, "DataTable.DataColumn_{0}.AllowDBNull", i));
-                dc.AutoIncrement = info.GetBoolean(String.Format(formatProvider, "DataTable.DataColumn_{0}.AutoIncrement", i));
-                dc.AutoIncrementStep = info.GetInt64(String.Format(formatProvider, "DataTable.DataColumn_{0}.AutoIncrementStep", i));
-                dc.AutoIncrementSeed = info.GetInt64(String.Format(formatProvider, "DataTable.DataColumn_{0}.AutoIncrementSeed", i));
-                dc.Caption = info.GetString(String.Format(formatProvider, "DataTable.DataColumn_{0}.Caption", i));
-                dc.DefaultValue = info.GetValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.DefaultValue", i), typeof(object));
-                dc.ReadOnly = info.GetBoolean(String.Format(formatProvider, "DataTable.DataColumn_{0}.ReadOnly", i));
-                dc.MaxLength= info.GetInt32(String.Format(formatProvider, "DataTable.DataColumn_{0}.MaxLength", i));
+                dc.AllowDBNull = info.GetBoolean(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.AllowDBNull", i)
+                );
+                dc.AutoIncrement = info.GetBoolean(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.AutoIncrement", i)
+                );
+                dc.AutoIncrementStep = info.GetInt64(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.AutoIncrementStep", i)
+                );
+                dc.AutoIncrementSeed = info.GetInt64(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.AutoIncrementSeed", i)
+                );
+                dc.Caption = info.GetString(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.Caption", i)
+                );
+                dc.DefaultValue = info.GetValue(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.DefaultValue", i),
+                    typeof(object)
+                );
+                dc.ReadOnly = info.GetBoolean(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.ReadOnly", i)
+                );
+                dc.MaxLength = info.GetInt32(
+                    String.Format(formatProvider, "DataTable.DataColumn_{0}.MaxLength", i)
+                );
 
                 //DataColumn internal state properties
-                dc.AutoIncrementCurrent = info.GetValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.AutoIncrementCurrent", i), typeof(object));
+                dc.AutoIncrementCurrent = info.GetValue(
+                    String.Format(
+                        formatProvider,
+                        "DataTable.DataColumn_{0}.AutoIncrementCurrent",
+                        i
+                    ),
+                    typeof(object)
+                );
 
                 //Expression
-                if (isSingleTable) {
-                    expressions[i] = info.GetString(String.Format(formatProvider, "DataTable.DataColumn_{0}.Expression", i));
+                if (isSingleTable)
+                {
+                    expressions[i] = info.GetString(
+                        String.Format(formatProvider, "DataTable.DataColumn_{0}.Expression", i)
+                    );
                 }
 
                 //ExtendedProperties
-                dc.extendedProperties = (PropertyCollection) info.GetValue(String.Format(formatProvider, "DataTable.DataColumn_{0}.ExtendedProperties", i), typeof(PropertyCollection));
+                dc.extendedProperties = (PropertyCollection)
+                    info.GetValue(
+                        String.Format(
+                            formatProvider,
+                            "DataTable.DataColumn_{0}.ExtendedProperties",
+                            i
+                        ),
+                        typeof(PropertyCollection)
+                    );
                 Columns.Add(dc);
             }
-            if (isSingleTable) {
-                for(int i = 0; i < colCount; i++) {
-                    if (expressions[i] != null) {
+            if (isSingleTable)
+            {
+                for (int i = 0; i < colCount; i++)
+                {
+                    if (expressions[i] != null)
+                    {
                         Columns[i].Expression = expressions[i];
                     }
                 }
             }
 
             //Constraints
-            if (isSingleTable) {
-                DeserializeConstraints(info, context, /*table index */ 0, /* serialize all constraints */false);// since single table, send table index as 0, meanwhile passing
+            if (isSingleTable)
+            {
+                DeserializeConstraints(
+                    info,
+                    context, /*table index */
+                    0, /* serialize all constraints */
+                    false
+                ); // since single table, send table index as 0, meanwhile passing
                 // false for 'allConstraints' means, handle all the constraint related to the table
             }
         }
 
-/*
-        Serialize constraints availabe on the table - note this function is marked internal because it is called by the DataSet deserializer.
-        ***Schema for Serializing ArrayList of Constraints***
-        Unique Constraint - ["U"]->[constraintName]->[columnIndexes]->[IsPrimaryKey]->[extendedProperties]
-        Foriegn Key Constraint - ["F"]->[constraintName]->[parentTableIndex, parentcolumnIndexes]->[childTableIndex, childColumnIndexes]->[AcceptRejectRule, UpdateRule, DeleteRule]->[extendedProperties]
-*/
-        internal void SerializeConstraints(SerializationInfo info, StreamingContext context, int serIndex, bool allConstraints) {
-            if (allConstraints) {
+        /*
+                Serialize constraints availabe on the table - note this function is marked internal because it is called by the DataSet deserializer.
+                ***Schema for Serializing ArrayList of Constraints***
+                Unique Constraint - ["U"]->[constraintName]->[columnIndexes]->[IsPrimaryKey]->[extendedProperties]
+                Foriegn Key Constraint - ["F"]->[constraintName]->[parentTableIndex, parentcolumnIndexes]->[childTableIndex, childColumnIndexes]->[AcceptRejectRule, UpdateRule, DeleteRule]->[extendedProperties]
+        */
+        internal void SerializeConstraints(
+            SerializationInfo info,
+            StreamingContext context,
+            int serIndex,
+            bool allConstraints
+        )
+        {
+            if (allConstraints)
+            {
                 Debug.Assert(DataSet != null);
             }
 
             ArrayList constraintList = new ArrayList();
 
-            for (int i = 0; i < Constraints.Count; i++) {
+            for (int i = 0; i < Constraints.Count; i++)
+            {
                 Constraint c = Constraints[i];
 
                 UniqueConstraint uc = c as UniqueConstraint;
-                if (uc != null) {
+                if (uc != null)
+                {
                     int[] colInfo = new int[uc.Columns.Length];
-                    for (int j = 0; j < colInfo.Length; j++) {
+                    for (int j = 0; j < colInfo.Length; j++)
+                    {
                         colInfo[j] = uc.Columns[j].Ordinal;
                     }
 
@@ -502,21 +720,29 @@ namespace System.Data {
                     list.Add(uc.ExtendedProperties);
 
                     constraintList.Add(list);
-                } else {
+                }
+                else
+                {
                     ForeignKeyConstraint fk = c as ForeignKeyConstraint;
                     Debug.Assert(fk != null);
-                    bool shouldSerialize = (allConstraints == true) || (fk.Table == this && fk.RelatedTable == this);
+                    bool shouldSerialize =
+                        (allConstraints == true) || (fk.Table == this && fk.RelatedTable == this);
 
-                    if (shouldSerialize) {
+                    if (shouldSerialize)
+                    {
                         int[] parentInfo = new int[fk.RelatedColumns.Length + 1];
-                        parentInfo[0] = allConstraints ? this.DataSet.Tables.IndexOf(fk.RelatedTable) : 0;
-                        for (int j = 1; j < parentInfo.Length; j++) {
+                        parentInfo[0] = allConstraints
+                            ? this.DataSet.Tables.IndexOf(fk.RelatedTable)
+                            : 0;
+                        for (int j = 1; j < parentInfo.Length; j++)
+                        {
                             parentInfo[j] = fk.RelatedColumns[j - 1].Ordinal;
                         }
 
                         int[] childInfo = new int[fk.Columns.Length + 1];
-                        childInfo[0] = allConstraints ? this.DataSet.Tables.IndexOf(fk.Table) : 0 ;   //Since the constraint is on the current table, this is the child table.
-                        for (int j = 1; j < childInfo.Length; j++) {
+                        childInfo[0] = allConstraints ? this.DataSet.Tables.IndexOf(fk.Table) : 0; //Since the constraint is on the current table, this is the child table.
+                        for (int j = 1; j < childInfo.Length; j++)
+                        {
                             childInfo[j] = fk.Columns[j - 1].Ordinal;
                         }
 
@@ -525,74 +751,115 @@ namespace System.Data {
                         list.Add(fk.ConstraintName);
                         list.Add(parentInfo);
                         list.Add(childInfo);
-                        list.Add(new int[] { (int) fk.AcceptRejectRule, (int) fk.UpdateRule, (int) fk.DeleteRule });
+                        list.Add(
+                            new int[]
+                            {
+                                (int)fk.AcceptRejectRule,
+                                (int)fk.UpdateRule,
+                                (int)fk.DeleteRule,
+                            }
+                        );
                         list.Add(fk.ExtendedProperties);
 
                         constraintList.Add(list);
                     }
                 }
             }
-            info.AddValue(String.Format(CultureInfo.InvariantCulture, "DataTable_{0}.Constraints", serIndex), constraintList);
+            info.AddValue(
+                String.Format(CultureInfo.InvariantCulture, "DataTable_{0}.Constraints", serIndex),
+                constraintList
+            );
         }
 
-/*
-        Deserialize the constraints on the table.
-        ***Schema for Serializing ArrayList of Constraints***
-        Unique Constraint - ["U"]->[constraintName]->[columnIndexes]->[IsPrimaryKey]->[extendedProperties]
-        Foriegn Key Constraint - ["F"]->[constraintName]->[parentTableIndex, parentcolumnIndexes]->[childTableIndex, childColumnIndexes]->[AcceptRejectRule, UpdateRule, DeleteRule]->[extendedProperties]
-*/
-        internal void DeserializeConstraints(SerializationInfo info, StreamingContext context, int serIndex, bool allConstraints) {
-            ArrayList constraintList = (ArrayList) info.GetValue(String.Format(CultureInfo.InvariantCulture, "DataTable_{0}.Constraints", serIndex), typeof(ArrayList));
+        /*
+                Deserialize the constraints on the table.
+                ***Schema for Serializing ArrayList of Constraints***
+                Unique Constraint - ["U"]->[constraintName]->[columnIndexes]->[IsPrimaryKey]->[extendedProperties]
+                Foriegn Key Constraint - ["F"]->[constraintName]->[parentTableIndex, parentcolumnIndexes]->[childTableIndex, childColumnIndexes]->[AcceptRejectRule, UpdateRule, DeleteRule]->[extendedProperties]
+        */
+        internal void DeserializeConstraints(
+            SerializationInfo info,
+            StreamingContext context,
+            int serIndex,
+            bool allConstraints
+        )
+        {
+            ArrayList constraintList = (ArrayList)
+                info.GetValue(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        "DataTable_{0}.Constraints",
+                        serIndex
+                    ),
+                    typeof(ArrayList)
+                );
 
-            foreach (ArrayList list in constraintList) {
-                string con = (string) list[0];
+            foreach (ArrayList list in constraintList)
+            {
+                string con = (string)list[0];
 
-                if (con.Equals("U")) { //Unique Constraints
-                    string constraintName = (string) list[1];
+                if (con.Equals("U"))
+                { //Unique Constraints
+                    string constraintName = (string)list[1];
 
-                    int[] keyColumnIndexes = (int[]) list[2];
-                    bool isPrimaryKey = (bool) list[3];
-                    PropertyCollection extendedProperties = (PropertyCollection) list[4];
+                    int[] keyColumnIndexes = (int[])list[2];
+                    bool isPrimaryKey = (bool)list[3];
+                    PropertyCollection extendedProperties = (PropertyCollection)list[4];
 
                     DataColumn[] keyColumns = new DataColumn[keyColumnIndexes.Length];
-                    for (int i = 0; i < keyColumnIndexes.Length; i++) {
+                    for (int i = 0; i < keyColumnIndexes.Length; i++)
+                    {
                         keyColumns[i] = Columns[keyColumnIndexes[i]];
                     }
 
                     //Create the constraint.
-                    UniqueConstraint uc = new UniqueConstraint(constraintName, keyColumns, isPrimaryKey);
+                    UniqueConstraint uc = new UniqueConstraint(
+                        constraintName,
+                        keyColumns,
+                        isPrimaryKey
+                    );
                     uc.extendedProperties = extendedProperties;
 
                     //Add the unique constraint and it will in turn set the primary keys also if needed.
                     Constraints.Add(uc);
-                } else { //ForeignKeyConstraints
+                }
+                else
+                { //ForeignKeyConstraints
                     Debug.Assert(con.Equals("F"));
 
-                    string constraintName = (string) list[1];
-                    int[] parentInfo = (int[]) list[2];
-                    int[] childInfo = (int[]) list[3];
-                    int[] rules = (int[]) list[4];
-                    PropertyCollection extendedProperties = (PropertyCollection) list[5];
+                    string constraintName = (string)list[1];
+                    int[] parentInfo = (int[])list[2];
+                    int[] childInfo = (int[])list[3];
+                    int[] rules = (int[])list[4];
+                    PropertyCollection extendedProperties = (PropertyCollection)list[5];
 
                     //ParentKey Columns.
-                    DataTable parentTable = (allConstraints == false) ? this : this.DataSet.Tables[parentInfo[0]];
+                    DataTable parentTable =
+                        (allConstraints == false) ? this : this.DataSet.Tables[parentInfo[0]];
                     DataColumn[] parentkeyColumns = new DataColumn[parentInfo.Length - 1];
-                    for (int i = 0; i < parentkeyColumns.Length; i++) {
+                    for (int i = 0; i < parentkeyColumns.Length; i++)
+                    {
                         parentkeyColumns[i] = parentTable.Columns[parentInfo[i + 1]];
                     }
 
                     //ChildKey Columns.
-                    DataTable childTable = (allConstraints == false) ? this : this.DataSet.Tables[childInfo[0]];
+                    DataTable childTable =
+                        (allConstraints == false) ? this : this.DataSet.Tables[childInfo[0]];
                     DataColumn[] childkeyColumns = new DataColumn[childInfo.Length - 1];
-                    for (int i = 0; i < childkeyColumns.Length; i++) {
+                    for (int i = 0; i < childkeyColumns.Length; i++)
+                    {
                         childkeyColumns[i] = childTable.Columns[childInfo[i + 1]];
                     }
 
                     //Create the Constraint.
-                    ForeignKeyConstraint fk = new ForeignKeyConstraint(constraintName, parentkeyColumns, childkeyColumns);
-                    fk.AcceptRejectRule = (AcceptRejectRule) rules[0];
-                    fk.UpdateRule = (Rule) rules[1];
-                    fk.DeleteRule = (Rule) rules[2];
+                    ForeignKeyConstraint fk = new ForeignKeyConstraint(
+                        constraintName,
+                        parentkeyColumns,
+                        childkeyColumns
+                    );
+                    fk.AcceptRejectRule = (AcceptRejectRule)rules[0];
+                    fk.UpdateRule = (Rule)rules[1];
+                    fk.DeleteRule = (Rule)rules[2];
                     fk.extendedProperties = extendedProperties;
 
                     //Add just the foreign key constraint without creating unique constraint.
@@ -601,27 +868,60 @@ namespace System.Data {
             }
         }
 
-//        Serialize the expressions on the table - Marked internal so that DataSet deserializer can call into this
-        internal void SerializeExpressionColumns(SerializationInfo info, StreamingContext context, int serIndex) {
+        //        Serialize the expressions on the table - Marked internal so that DataSet deserializer can call into this
+        internal void SerializeExpressionColumns(
+            SerializationInfo info,
+            StreamingContext context,
+            int serIndex
+        )
+        {
             int colCount = Columns.Count;
-            for (int i = 0; i < colCount; i++) {
-                info.AddValue(String.Format(CultureInfo.InvariantCulture, "DataTable_{0}.DataColumn_{1}.Expression", serIndex, i), Columns[i].Expression);
+            for (int i = 0; i < colCount; i++)
+            {
+                info.AddValue(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        "DataTable_{0}.DataColumn_{1}.Expression",
+                        serIndex,
+                        i
+                    ),
+                    Columns[i].Expression
+                );
             }
         }
 
-//        Deserialize the expressions on the table - Marked internal so that DataSet deserializer can call into this
-        internal void DeserializeExpressionColumns(SerializationInfo info, StreamingContext context, int serIndex) {
+        //        Deserialize the expressions on the table - Marked internal so that DataSet deserializer can call into this
+        internal void DeserializeExpressionColumns(
+            SerializationInfo info,
+            StreamingContext context,
+            int serIndex
+        )
+        {
             int colCount = Columns.Count;
-            for (int i = 0; i < colCount; i++) {
-                string expr = info.GetString(String.Format(CultureInfo.InvariantCulture, "DataTable_{0}.DataColumn_{1}.Expression", serIndex, i));
-                if (0 != expr.Length) {
+            for (int i = 0; i < colCount; i++)
+            {
+                string expr = info.GetString(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        "DataTable_{0}.DataColumn_{1}.Expression",
+                        serIndex,
+                        i
+                    )
+                );
+                if (0 != expr.Length)
+                {
                     Columns[i].Expression = expr;
                 }
             }
         }
 
-//        Serialize all the Rows.
-        internal void SerializeTableData(SerializationInfo info, StreamingContext context, int serIndex) {
+        //        Serialize all the Rows.
+        internal void SerializeTableData(
+            SerializationInfo info,
+            StreamingContext context,
+            int serIndex
+        )
+        {
             //Cache all the column count, row count
             int colCount = Columns.Count;
             int rowCount = Rows.Count;
@@ -630,11 +930,13 @@ namespace System.Data {
 
             //Compute row states and assign the bits accordingly - 00[Unchanged], 01[Added], 10[Modifed], 11[Deleted]
             BitArray rowStates = new BitArray(rowCount * 3, false); //All bit flags are set to false on initialization of the BitArray.
-            for (int i = 0; i < rowCount; i++) {
+            for (int i = 0; i < rowCount; i++)
+            {
                 int bitIndex = i * 3;
                 DataRow row = Rows[i];
                 DataRowState rowState = row.RowState;
-                switch (rowState) {
+                switch (rowState)
+                {
                     case DataRowState.Unchanged:
                         //rowStates[bitIndex] = false;
                         //rowStates[bitIndex + 1] = false;
@@ -655,7 +957,8 @@ namespace System.Data {
                     default:
                         throw ExceptionBuilder.InvalidRowState(rowState);
                 }
-                if (-1 != row.tempRecord) {
+                if (-1 != row.tempRecord)
+                {
                     rowStates[bitIndex + 2] = true;
                     editRowCount++;
                 }
@@ -667,8 +970,10 @@ namespace System.Data {
             //Create column storages.
             ArrayList storeList = new ArrayList();
             ArrayList nullbitList = new ArrayList();
-            if (recordCount > 0) { //Create the storage only if have records.
-                for (int i = 0; i < colCount; i++) {
+            if (recordCount > 0)
+            { //Create the storage only if have records.
+                for (int i = 0; i < colCount; i++)
+                {
                     object store = Columns[i].GetEmptyColumnStore(recordCount);
                     storeList.Add(store);
                     BitArray nullbits = new BitArray(recordCount);
@@ -680,62 +985,117 @@ namespace System.Data {
             int recordsConsumed = 0;
             Hashtable rowErrors = new Hashtable();
             Hashtable colErrors = new Hashtable();
-            for (int i = 0; i < rowCount; i++) {
-                int recordsPerRow = Rows[i].CopyValuesIntoStore(storeList, nullbitList, recordsConsumed);
+            for (int i = 0; i < rowCount; i++)
+            {
+                int recordsPerRow = Rows[i]
+                    .CopyValuesIntoStore(storeList, nullbitList, recordsConsumed);
                 GetRowAndColumnErrors(i, rowErrors, colErrors);
                 recordsConsumed += recordsPerRow;
             }
 
             IFormatProvider formatProvider = CultureInfo.InvariantCulture;
             //Serialize all the computed values.
-            info.AddValue(String.Format(formatProvider, "DataTable_{0}.Rows.Count", serIndex), rowCount);
-            info.AddValue(String.Format(formatProvider, "DataTable_{0}.Records.Count", serIndex), recordCount);
-            info.AddValue(String.Format(formatProvider, "DataTable_{0}.RowStates", serIndex), rowStates);
-            info.AddValue(String.Format(formatProvider, "DataTable_{0}.Records", serIndex), storeList);
-            info.AddValue(String.Format(formatProvider, "DataTable_{0}.NullBits", serIndex), nullbitList);
-            info.AddValue(String.Format(formatProvider, "DataTable_{0}.RowErrors", serIndex), rowErrors);
-            info.AddValue(String.Format(formatProvider, "DataTable_{0}.ColumnErrors", serIndex), colErrors);
+            info.AddValue(
+                String.Format(formatProvider, "DataTable_{0}.Rows.Count", serIndex),
+                rowCount
+            );
+            info.AddValue(
+                String.Format(formatProvider, "DataTable_{0}.Records.Count", serIndex),
+                recordCount
+            );
+            info.AddValue(
+                String.Format(formatProvider, "DataTable_{0}.RowStates", serIndex),
+                rowStates
+            );
+            info.AddValue(
+                String.Format(formatProvider, "DataTable_{0}.Records", serIndex),
+                storeList
+            );
+            info.AddValue(
+                String.Format(formatProvider, "DataTable_{0}.NullBits", serIndex),
+                nullbitList
+            );
+            info.AddValue(
+                String.Format(formatProvider, "DataTable_{0}.RowErrors", serIndex),
+                rowErrors
+            );
+            info.AddValue(
+                String.Format(formatProvider, "DataTable_{0}.ColumnErrors", serIndex),
+                colErrors
+            );
         }
 
-//        Deserialize all the Rows.
-        internal void DeserializeTableData(SerializationInfo info, StreamingContext context, int serIndex) {
+        //        Deserialize all the Rows.
+        internal void DeserializeTableData(
+            SerializationInfo info,
+            StreamingContext context,
+            int serIndex
+        )
+        {
             bool enforceConstraintsOrg = enforceConstraints;
             bool inDataLoadOrg = inDataLoad;
 
-
-            try {
+            try
+            {
                 enforceConstraints = false;
                 inDataLoad = true;
                 IFormatProvider formatProvider = CultureInfo.InvariantCulture;
-                int rowCount = info.GetInt32(String.Format(formatProvider, "DataTable_{0}.Rows.Count", serIndex));
-                int recordCount = info.GetInt32(String.Format(formatProvider, "DataTable_{0}.Records.Count", serIndex));
-                BitArray rowStates = (BitArray) info.GetValue(String.Format(formatProvider, "DataTable_{0}.RowStates", serIndex), typeof(BitArray));
-                ArrayList storeList = (ArrayList) info.GetValue(String.Format(formatProvider, "DataTable_{0}.Records", serIndex), typeof(ArrayList));
-                ArrayList nullbitList = (ArrayList) info.GetValue(String.Format(formatProvider, "DataTable_{0}.NullBits", serIndex), typeof(ArrayList));
-                Hashtable rowErrors = (Hashtable) info.GetValue(String.Format(formatProvider, "DataTable_{0}.RowErrors", serIndex), typeof(Hashtable));
-                rowErrors.OnDeserialization(this);//OnDeSerialization must be called since the hashtable gets deserialized after the whole graph gets deserialized
-                Hashtable colErrors = (Hashtable) info.GetValue(String.Format(formatProvider, "DataTable_{0}.ColumnErrors", serIndex), typeof(Hashtable));
-                colErrors.OnDeserialization(this);//OnDeSerialization must be called since the hashtable gets deserialized after the whole graph gets deserialized
+                int rowCount = info.GetInt32(
+                    String.Format(formatProvider, "DataTable_{0}.Rows.Count", serIndex)
+                );
+                int recordCount = info.GetInt32(
+                    String.Format(formatProvider, "DataTable_{0}.Records.Count", serIndex)
+                );
+                BitArray rowStates = (BitArray)
+                    info.GetValue(
+                        String.Format(formatProvider, "DataTable_{0}.RowStates", serIndex),
+                        typeof(BitArray)
+                    );
+                ArrayList storeList = (ArrayList)
+                    info.GetValue(
+                        String.Format(formatProvider, "DataTable_{0}.Records", serIndex),
+                        typeof(ArrayList)
+                    );
+                ArrayList nullbitList = (ArrayList)
+                    info.GetValue(
+                        String.Format(formatProvider, "DataTable_{0}.NullBits", serIndex),
+                        typeof(ArrayList)
+                    );
+                Hashtable rowErrors = (Hashtable)
+                    info.GetValue(
+                        String.Format(formatProvider, "DataTable_{0}.RowErrors", serIndex),
+                        typeof(Hashtable)
+                    );
+                rowErrors.OnDeserialization(this); //OnDeSerialization must be called since the hashtable gets deserialized after the whole graph gets deserialized
+                Hashtable colErrors = (Hashtable)
+                    info.GetValue(
+                        String.Format(formatProvider, "DataTable_{0}.ColumnErrors", serIndex),
+                        typeof(Hashtable)
+                    );
+                colErrors.OnDeserialization(this); //OnDeSerialization must be called since the hashtable gets deserialized after the whole graph gets deserialized
 
-
-                if (recordCount <= 0) { //No need for deserialization of the storage and errors if there are no records.
+                if (recordCount <= 0)
+                { //No need for deserialization of the storage and errors if there are no records.
                     return;
                 }
 
                 //Point the record manager storage to the deserialized values.
-                for (int i = 0; i < Columns.Count; i++) {
-                    Columns[i].SetStorage(storeList[i], (BitArray) nullbitList[i]);
+                for (int i = 0; i < Columns.Count; i++)
+                {
+                    Columns[i].SetStorage(storeList[i], (BitArray)nullbitList[i]);
                 }
 
                 //Create rows and set the records appropriately.
                 int recordIndex = 0;
                 DataRow[] rowArr = new DataRow[recordCount];
-                for (int i = 0; i < rowCount; i++) {
+                for (int i = 0; i < rowCount; i++)
+                {
                     //Create a new row which sets old and new records to -1.
                     DataRow row = NewEmptyRow();
                     rowArr[recordIndex] = row;
                     int bitIndex = i * 3;
-                    switch (ConvertToRowState(rowStates, bitIndex)) {
+                    switch (ConvertToRowState(rowStates, bitIndex))
+                    {
                         case DataRowState.Unchanged:
                             row.oldRecord = recordIndex;
                             row.newRecord = recordIndex;
@@ -758,11 +1118,14 @@ namespace System.Data {
                             recordIndex += 1;
                             break;
                     }
-                    if (rowStates[bitIndex + 2]) {
+                    if (rowStates[bitIndex + 2])
+                    {
                         row.tempRecord = recordIndex;
                         rowArr[recordIndex] = row;
                         recordIndex += 1;
-                    } else {
+                    }
+                    else
+                    {
                         row.tempRecord = -1;
                     }
                     Rows.ArrayAdd(row);
@@ -772,48 +1135,64 @@ namespace System.Data {
                 }
                 recordManager.SetRowCache(rowArr);
                 ResetIndexes();
-            } finally {
+            }
+            finally
+            {
                 enforceConstraints = enforceConstraintsOrg;
                 inDataLoad = inDataLoadOrg;
             }
         }
 
-//        Constructs the RowState from the two bits in the bitarray.
-        private DataRowState ConvertToRowState(BitArray bitStates, int bitIndex) {
+        //        Constructs the RowState from the two bits in the bitarray.
+        private DataRowState ConvertToRowState(BitArray bitStates, int bitIndex)
+        {
             Debug.Assert(bitStates != null);
             Debug.Assert(bitStates.Length > bitIndex);
 
             bool b1 = bitStates[bitIndex];
             bool b2 = bitStates[bitIndex + 1];
 
-            if (!b1 && !b2) {
+            if (!b1 && !b2)
+            {
                 return DataRowState.Unchanged;
-            } else if (!b1 && b2) {
+            }
+            else if (!b1 && b2)
+            {
                 return DataRowState.Added;
-            } else if (b1 && !b2) {
+            }
+            else if (b1 && !b2)
+            {
                 return DataRowState.Modified;
-            } else if (b1 && b2) {
+            }
+            else if (b1 && b2)
+            {
                 return DataRowState.Deleted;
-            } else {
+            }
+            else
+            {
                 throw ExceptionBuilder.InvalidRowBitPattern();
             }
         }
 
-//        Get the error on the row and columns - Marked internal so that DataSet deserializer can call into this
-        internal void GetRowAndColumnErrors(int rowIndex, Hashtable rowErrors, Hashtable colErrors) {
+        //        Get the error on the row and columns - Marked internal so that DataSet deserializer can call into this
+        internal void GetRowAndColumnErrors(int rowIndex, Hashtable rowErrors, Hashtable colErrors)
+        {
             Debug.Assert(Rows.Count > rowIndex);
             Debug.Assert(rowErrors != null);
             Debug.Assert(colErrors != null);
 
             DataRow row = Rows[rowIndex];
 
-            if (row.HasErrors) {
+            if (row.HasErrors)
+            {
                 rowErrors.Add(rowIndex, row.RowError);
                 DataColumn[] dcArr = row.GetColumnsInError();
-                if (dcArr.Length > 0) {
+                if (dcArr.Length > 0)
+                {
                     int[] columnsInError = new int[dcArr.Length];
                     string[] columnErrors = new string[dcArr.Length];
-                    for (int i = 0; i < dcArr.Length; i++) {
+                    for (int i = 0; i < dcArr.Length; i++)
+                    {
                         columnsInError[i] = dcArr[i].Ordinal;
                         columnErrors[i] = row.GetColumnError(dcArr[i]);
                     }
@@ -825,23 +1204,27 @@ namespace System.Data {
             }
         }
 
-//        Set the row and columns in error..
-        private void ConvertToRowError(int rowIndex, Hashtable rowErrors, Hashtable colErrors) {
+        //        Set the row and columns in error..
+        private void ConvertToRowError(int rowIndex, Hashtable rowErrors, Hashtable colErrors)
+        {
             Debug.Assert(Rows.Count > rowIndex);
             Debug.Assert(rowErrors != null);
             Debug.Assert(colErrors != null);
 
             DataRow row = Rows[rowIndex];
 
-            if (rowErrors.ContainsKey(rowIndex)) {
-                row.RowError = (string) rowErrors[rowIndex];
+            if (rowErrors.ContainsKey(rowIndex))
+            {
+                row.RowError = (string)rowErrors[rowIndex];
             }
-            if (colErrors.ContainsKey(rowIndex)) {
-                ArrayList list = (ArrayList) colErrors[rowIndex];
-                int[] columnsInError = (int[]) list[0];
-                string[] columnErrors = (string[]) list[1];
+            if (colErrors.ContainsKey(rowIndex))
+            {
+                ArrayList list = (ArrayList)colErrors[rowIndex];
+                int[] columnsInError = (int[])list[0];
+                string[] columnErrors = (string[])list[1];
                 Debug.Assert(columnsInError.Length == columnErrors.Length);
-                for (int i = 0; i < columnsInError.Length; i++) {
+                for (int i = 0; i < columnsInError.Length; i++)
+                {
                     row.SetColumnError(columnsInError[i], columnErrors[i]);
                 }
             }
@@ -851,20 +1234,25 @@ namespace System.Data {
         ///    <para>Indicates whether string comparisons within the table are case-sensitive.</para>
         /// </devdoc>
         [ResDescriptionAttribute(Res.DataTableCaseSensitiveDescr)]
-        public bool CaseSensitive {
-            get {
+        public bool CaseSensitive
+        {
+            get
+            {
                 //The following assert is valid except when calling DataSet.set_CaseSensitive which Validates constraints and failing here
                 //Debug.Assert(_caseSensitiveUserSet || (null == dataSet) || (dataSet.CaseSensitive == _caseSensitive), "CaseSensitive mismatch");
                 return _caseSensitive;
             }
-            set {
-                if (_caseSensitive != value) {
+            set
+            {
+                if (_caseSensitive != value)
+                {
                     bool oldValue = _caseSensitive;
                     bool oldUserSet = _caseSensitiveUserSet;
                     _caseSensitive = value;
                     _caseSensitiveUserSet = true;
 
-                    if (DataSet != null && !DataSet.ValidateCaseConstraint()) {
+                    if (DataSet != null && !DataSet.ValidateCaseConstraint())
+                    {
                         _caseSensitive = oldValue;
                         _caseSensitiveUserSet = oldUserSet;
                         throw ExceptionBuilder.CannotChangeCaseLocale();
@@ -875,92 +1263,126 @@ namespace System.Data {
             }
         }
 
-        internal bool AreIndexEventsSuspended {
+        internal bool AreIndexEventsSuspended
+        {
             get { return (0 < _suspendIndexEvents); }
         }
 
-        internal void RestoreIndexEvents(bool forceReset) {
-            Bid.Trace("<ds.DataTable.RestoreIndexEvents|Info> %d#, %d\n", ObjectID, _suspendIndexEvents);
-            if (0 < _suspendIndexEvents) {
+        internal void RestoreIndexEvents(bool forceReset)
+        {
+            Bid.Trace(
+                "<ds.DataTable.RestoreIndexEvents|Info> %d#, %d\n",
+                ObjectID,
+                _suspendIndexEvents
+            );
+            if (0 < _suspendIndexEvents)
+            {
                 _suspendIndexEvents--;
-                if (0 == _suspendIndexEvents) {
+                if (0 == _suspendIndexEvents)
+                {
                     Exception first = null;
                     SetShadowIndexes();
-                    try{
-                    // the length of shadowIndexes will not change
-                    // but the array instance may change during
-                    // events during Index.Reset
+                    try
+                    {
+                        // the length of shadowIndexes will not change
+                        // but the array instance may change during
+                        // events during Index.Reset
                         int numIndexes = shadowIndexes.Count;
-                        for (int i = 0; i < numIndexes; i++) {
-                            Index ndx = shadowIndexes[i];// shadowindexes may change, see ShadowIndexCopy()
-                            try {
-                                if (forceReset || ndx.HasRemoteAggregate) {
+                        for (int i = 0; i < numIndexes; i++)
+                        {
+                            Index ndx = shadowIndexes[i]; // shadowindexes may change, see ShadowIndexCopy()
+                            try
+                            {
+                                if (forceReset || ndx.HasRemoteAggregate)
+                                {
                                     ndx.Reset(); // resets & fires
                                 }
-                                else {
+                                else
+                                {
                                     ndx.FireResetEvent(); // fire the Reset event we were firing
                                 }
                             }
-                            catch(Exception e) {
-                                if (!ADP.IsCatchableExceptionType (e)) {
+                            catch (Exception e)
+                            {
+                                if (!ADP.IsCatchableExceptionType(e))
+                                {
                                     throw;
                                 }
                                 ExceptionBuilder.TraceExceptionWithoutRethrow(e);
-                                if (null == first) {
+                                if (null == first)
+                                {
                                     first = e;
                                 }
                             }
                         }
-                        if (null != first) {
+                        if (null != first)
+                        {
                             throw first;
                         }
                     }
-                   finally {
-                       RestoreShadowIndexes();
-                   }
+                    finally
+                    {
+                        RestoreShadowIndexes();
+                    }
                 }
             }
         }
 
-        internal void SuspendIndexEvents() {
-            Bid.Trace("<ds.DataTable.SuspendIndexEvents|Info> %d#, %d\n", ObjectID, _suspendIndexEvents);
+        internal void SuspendIndexEvents()
+        {
+            Bid.Trace(
+                "<ds.DataTable.SuspendIndexEvents|Info> %d#, %d\n",
+                ObjectID,
+                _suspendIndexEvents
+            );
             _suspendIndexEvents++;
         }
 
         [Browsable(false)]
-        public bool IsInitialized {
-            get {
-                return !fInitInProgress;
-            }
+        public bool IsInitialized
+        {
+            get { return !fInitInProgress; }
         }
 
-        private bool IsTypedDataTable {
-            get {
-                switch (_isTypedDataTable) {
-                case 0:
-                    _isTypedDataTable = (byte)((this.GetType() != typeof(DataTable))? 1 : 2);
-                    return (1 == _isTypedDataTable);
-                case 1:
-                    return true;
-                default:
-                    return false;
+        private bool IsTypedDataTable
+        {
+            get
+            {
+                switch (_isTypedDataTable)
+                {
+                    case 0:
+                        _isTypedDataTable = (byte)((this.GetType() != typeof(DataTable)) ? 1 : 2);
+                        return (1 == _isTypedDataTable);
+                    case 1:
+                        return true;
+                    default:
+                        return false;
                 }
             }
         }
 
-        internal bool SetCaseSensitiveValue(bool isCaseSensitive, bool userSet, bool resetIndexes) {
-            if (userSet || (!_caseSensitiveUserSet && (_caseSensitive != isCaseSensitive))) {
+        internal bool SetCaseSensitiveValue(bool isCaseSensitive, bool userSet, bool resetIndexes)
+        {
+            if (userSet || (!_caseSensitiveUserSet && (_caseSensitive != isCaseSensitive)))
+            {
                 _caseSensitive = isCaseSensitive;
-                if (isCaseSensitive) {
+                if (isCaseSensitive)
+                {
                     _compareFlags = CompareOptions.None;
                 }
-                else {
-                    _compareFlags = CompareOptions.IgnoreCase | CompareOptions.IgnoreKanaType | CompareOptions.IgnoreWidth;
+                else
+                {
+                    _compareFlags =
+                        CompareOptions.IgnoreCase
+                        | CompareOptions.IgnoreKanaType
+                        | CompareOptions.IgnoreWidth;
                 }
-                if (resetIndexes) {
+                if (resetIndexes)
+                {
                     ResetIndexes();
-                    foreach (Constraint constraint in Constraints) {
-                       constraint.CheckConstraint();
+                    foreach (Constraint constraint in Constraints)
+                    {
+                        constraint.CheckConstraint();
                     }
                 }
                 return true;
@@ -968,46 +1390,57 @@ namespace System.Data {
             return false;
         }
 
-
-        private void ResetCaseSensitive() {
+        private void ResetCaseSensitive()
+        {
             // this method is used design-time scenarios via reflection
             //   by the property grid context menu to show the Reset option or not
             SetCaseSensitiveValue((null != dataSet) && dataSet.CaseSensitive, true, true);
             _caseSensitiveUserSet = false;
         }
 
-        internal bool ShouldSerializeCaseSensitive() {
+        internal bool ShouldSerializeCaseSensitive()
+        {
             // this method is used design-time scenarios via reflection
             //   by the property grid to show the CaseSensitive property in bold or not
             //   by the code dom for persisting the CaseSensitive property or not
             return _caseSensitiveUserSet;
         }
 
-        internal bool SelfNested {
-            get {
+        internal bool SelfNested
+        {
+            get
+            {
                 // Is this correct? if ((top[i].nestedParentRelation!= null) && (top[i].nestedParentRelation.ParentTable == top[i]))
-                foreach(DataRelation rel in ParentRelations) {
-                    if (rel.Nested && rel.ParentTable == this) {
+                foreach (DataRelation rel in ParentRelations)
+                {
+                    if (rel.Nested && rel.ParentTable == this)
+                    {
                         return true;
                     }
                 }
                 return false;
             }
         }
-/*        internal bool SelfNestedWithOneRelation {
-            get {
-                return (this.ParentRelations.Count == 1 && (this.ParentRelations[0].ParentTable == this));
-            }
-        }
-*/
+
+        /*        internal bool SelfNestedWithOneRelation {
+                    get {
+                        return (this.ParentRelations.Count == 1 && (this.ParentRelations[0].ParentTable == this));
+                    }
+                }
+        */
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // don't have debugger view expand this
-        internal List<Index> LiveIndexes {
-            get {
-                if (!AreIndexEventsSuspended) {
-                    for (int i = indexes.Count-1; 0 <= i; --i) {
+        internal List<Index> LiveIndexes
+        {
+            get
+            {
+                if (!AreIndexEventsSuspended)
+                {
+                    for (int i = indexes.Count - 1; 0 <= i; --i)
+                    {
                         Index index = indexes[i];
-                        if (index.RefCount <= 1) {
+                        if (index.RefCount <= 1)
+                        {
                             index.RemoveRef();
                         }
                     }
@@ -1016,47 +1449,47 @@ namespace System.Data {
             }
         }
 
-        [
-        DefaultValue(SerializationFormat.Xml)
-        ]
-        public SerializationFormat RemotingFormat {
-            get {
-                return _remotingFormat;
-            }
-            set {
-                if (value != SerializationFormat.Binary && value != SerializationFormat.Xml) {
+        [DefaultValue(SerializationFormat.Xml)]
+        public SerializationFormat RemotingFormat
+        {
+            get { return _remotingFormat; }
+            set
+            {
+                if (value != SerializationFormat.Binary && value != SerializationFormat.Xml)
+                {
                     throw ExceptionBuilder.InvalidRemotingFormat(value);
                 }
                 // table can not have different format than its dataset, unless it is stand alone datatable
-                if (this.DataSet != null && value != this.DataSet.RemotingFormat) {
+                if (this.DataSet != null && value != this.DataSet.RemotingFormat)
+                {
                     throw ExceptionBuilder.CanNotSetRemotingFormat();
                 }
                 _remotingFormat = value;
             }
         }
 
-// used to keep temporary state of unique Key posiotion to be added for inference only
-        internal int UKColumnPositionForInference {
-            get {
-                return ukColumnPositionForInference;
-            }
-            set{
-                ukColumnPositionForInference= value;
-            }
+        // used to keep temporary state of unique Key posiotion to be added for inference only
+        internal int UKColumnPositionForInference
+        {
+            get { return ukColumnPositionForInference; }
+            set { ukColumnPositionForInference = value; }
         }
 
         /// <devdoc>
         /// <para>Gets the collection of child relations for this <see cref='System.Data.DataTable'/>.</para>
         /// </devdoc>
         [
-        Browsable(false),
-        ResDescriptionAttribute(Res.DataTableChildRelationsDescr),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            Browsable(false),
+            ResDescriptionAttribute(Res.DataTableChildRelationsDescr),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public DataRelationCollection ChildRelations {
-            get {
+        public DataRelationCollection ChildRelations
+        {
+            get
+            {
                 if (childRelationsCollection == null)
-                    childRelationsCollection = new DataRelationCollection.DataTableRelationCollection(this, false);
+                    childRelationsCollection =
+                        new DataRelationCollection.DataTableRelationCollection(this, false);
                 return childRelationsCollection;
             }
         }
@@ -1065,25 +1498,28 @@ namespace System.Data {
         ///    <para>Gets the collection of columns that belong to this table.</para>
         /// </devdoc>
         [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.DataTableColumnsDescr)
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataTableColumnsDescr)
         ]
-        public DataColumnCollection Columns {
-            get {
-                return columnCollection;
-            }
+        public DataColumnCollection Columns
+        {
+            get { return columnCollection; }
         }
 
-        private void ResetColumns() {
+        private void ResetColumns()
+        {
             // this method is used design-time scenarios via reflection
             //   by the property grid context menu to show the Reset option or not
             Columns.Clear();
         }
 
-        private CompareInfo CompareInfo {
-            get {
-                if (null == _compareInfo) {
+        private CompareInfo CompareInfo
+        {
+            get
+            {
+                if (null == _compareInfo)
+                {
                     _compareInfo = Locale.CompareInfo;
                 }
                 return _compareInfo;
@@ -1094,14 +1530,13 @@ namespace System.Data {
         ///    <para>Gets the collection of constraints maintained by this table.</para>
         /// </devdoc>
         [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.DataTableConstraintsDescr)
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataTableConstraintsDescr)
         ]
-        public ConstraintCollection Constraints {
-            get {
-                return constraintCollection;
-            }
+        public ConstraintCollection Constraints
+        {
+            get { return constraintCollection; }
         }
 
         /// <devdoc>
@@ -1109,37 +1544,45 @@ namespace System.Data {
         ///       Resets the <see cref='System.Data.DataTable.Constraints'/> property to its default state.
         ///    </para>
         /// </devdoc>
-        private void ResetConstraints() {
+        private void ResetConstraints()
+        {
             Constraints.Clear();
         }
 
         /// <devdoc>
         /// <para>Gets the <see cref='System.Data.DataSet'/> that this table belongs to.</para>
         /// </devdoc>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), ResDescriptionAttribute(Res.DataTableDataSetDescr)]
-        public DataSet DataSet {
-            get {
-                return dataSet;
-            }
+        [
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            Browsable(false),
+            ResDescriptionAttribute(Res.DataTableDataSetDescr)
+        ]
+        public DataSet DataSet
+        {
+            get { return dataSet; }
         }
 
         /// <devdoc>
         /// Internal method for setting the DataSet pointer.
         /// </devdoc>
-        internal void SetDataSet(DataSet dataSet) {
-            if (this.dataSet != dataSet) {
+        internal void SetDataSet(DataSet dataSet)
+        {
+            if (this.dataSet != dataSet)
+            {
                 this.dataSet = dataSet;
 
                 // Inform all the columns of the dataset being set.
-                DataColumnCollection   cols = Columns;
+                DataColumnCollection cols = Columns;
                 for (int i = 0; i < cols.Count; i++)
                     cols[i].OnSetDataSet();
 
-                if (this.DataSet != null) {
+                if (this.DataSet != null)
+                {
                     defaultView = null;
                 }
                 //Set the remoting format variable directly
-                if (dataSet != null) {
+                if (dataSet != null)
+                {
                     _remotingFormat = dataSet.RemotingFormat;
                 }
             }
@@ -1150,20 +1593,26 @@ namespace System.Data {
         ///       filtered view, or a cursor position.</para>
         /// </devdoc>
         [Browsable(false), ResDescriptionAttribute(Res.DataTableDefaultViewDescr)]
-        public DataView DefaultView {
-            get {
+        public DataView DefaultView
+        {
+            get
+            {
                 DataView view = defaultView;
-                if (null == view) {
-                    if (null != dataSet) {
+                if (null == view)
+                {
+                    if (null != dataSet)
+                    {
                         view = dataSet.DefaultViewManager.CreateDataView(this);
                     }
-                    else {
+                    else
+                    {
                         view = new DataView(this, true);
                         view.SetIndex2("", DataViewRowState.CurrentRows, null, true);
                     }
                     // avoid HostProtectionAttribute(Synchronization=true) by not calling virtual methods from inside a lock
                     view = Interlocked.CompareExchange<DataView>(ref defaultView, view, null);
-                    if (null == view) {
+                    if (null == view)
+                    {
                         view = defaultView;
                     }
                 }
@@ -1176,32 +1625,36 @@ namespace System.Data {
         ///       this table in UI.</para>
         /// </devdoc>
         [
-        DefaultValue(""),
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.DataTableDisplayExpressionDescr)
+            DefaultValue(""),
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataTableDisplayExpressionDescr)
         ]
-        public string DisplayExpression {
-            get {
-                return DisplayExpressionInternal;
-            }
-            set {
-                if (value != null && value.Length > 0) {
+        public string DisplayExpression
+        {
+            get { return DisplayExpressionInternal; }
+            set
+            {
+                if (value != null && value.Length > 0)
+                {
                     this.displayExpression = new DataExpression(this, value);
                 }
-                else {
+                else
+                {
                     this.displayExpression = null;
                 }
             }
         }
-        internal string DisplayExpressionInternal {
-            get {
-                return(displayExpression != null ? displayExpression.Expression : "");
-            }
+        internal string DisplayExpressionInternal
+        {
+            get { return (displayExpression != null ? displayExpression.Expression : ""); }
         }
 
-        internal bool EnforceConstraints {
-            get {
-                if (SuspendEnforceConstraints) {
+        internal bool EnforceConstraints
+        {
+            get
+            {
+                if (SuspendEnforceConstraints)
+                {
                     return false;
                 }
                 if (dataSet != null)
@@ -1209,8 +1662,10 @@ namespace System.Data {
 
                 return this.enforceConstraints;
             }
-            set {
-                if (dataSet == null && this.enforceConstraints != value) {
+            set
+            {
+                if (dataSet == null && this.enforceConstraints != value)
+                {
                     if (value)
                         EnableConstraints();
 
@@ -1219,13 +1674,10 @@ namespace System.Data {
             }
         }
 
-        internal bool SuspendEnforceConstraints {
-            get {
-                return _suspendEnforceConstraints ;
-            }
-            set {
-                _suspendEnforceConstraints = value;
-            }
+        internal bool SuspendEnforceConstraints
+        {
+            get { return _suspendEnforceConstraints; }
+            set { _suspendEnforceConstraints = value; }
         }
 
         internal void EnableConstraints()
@@ -1237,16 +1689,20 @@ namespace System.Data {
                     errors |= constr.IsConstraintViolated();
             }
 
-            foreach (DataColumn column in Columns) {
-                if (!column.AllowDBNull) {
+            foreach (DataColumn column in Columns)
+            {
+                if (!column.AllowDBNull)
+                {
                     errors |= column.IsNotAllowDBNullViolated();
                 }
-                if (column.MaxLength >= 0) {
+                if (column.MaxLength >= 0)
+                {
                     errors |= column.IsMaxLengthViolated();
                 }
             }
 
-            if (errors) {
+            if (errors)
+            {
                 this.EnforceConstraints = false;
                 throw ExceptionBuilder.EnforceConstraint();
             }
@@ -1256,26 +1712,33 @@ namespace System.Data {
         ///    <para>Gets the collection of customized user information.</para>
         /// </devdoc>
         [
-        ResCategoryAttribute(Res.DataCategory_Data),
-        Browsable(false),
-        ResDescriptionAttribute(Res.ExtendedPropertiesDescr)
+            ResCategoryAttribute(Res.DataCategory_Data),
+            Browsable(false),
+            ResDescriptionAttribute(Res.ExtendedPropertiesDescr)
         ]
-        public PropertyCollection ExtendedProperties {
-            get {
-                if (extendedProperties == null) {
+        public PropertyCollection ExtendedProperties
+        {
+            get
+            {
+                if (extendedProperties == null)
+                {
                     extendedProperties = new PropertyCollection();
                 }
                 return extendedProperties;
             }
         }
 
-        internal IFormatProvider FormatProvider {
-            get {
+        internal IFormatProvider FormatProvider
+        {
+            get
+            {
                 // used for Formating/Parsing
                 // http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpref/html/frlrfsystemglobalizationcultureinfoclassisneutralculturetopic.asp
-                if (null == _formatProvider) {
+                if (null == _formatProvider)
+                {
                     CultureInfo culture = Locale;
-                    if (culture.IsNeutralCulture) {
+                    if (culture.IsNeutralCulture)
+                    {
                         culture = CultureInfo.InvariantCulture;
                     }
                     _formatProvider = (IFormatProvider)culture;
@@ -1289,10 +1752,14 @@ namespace System.Data {
         ///       the tables of the <see cref='System.Data.DataSet'/> to which the table belongs.</para>
         /// </devdoc>
         [Browsable(false), ResDescriptionAttribute(Res.DataTableHasErrorsDescr)]
-        public bool HasErrors {
-            get {
-                for (int i = 0; i < Rows.Count; i++) {
-                    if (Rows[i].HasErrors) {
+        public bool HasErrors
+        {
+            get
+            {
+                for (int i = 0; i < Rows.Count; i++)
+                {
+                    if (Rows[i].HasErrors)
+                    {
                         return true;
                     }
                 }
@@ -1306,54 +1773,72 @@ namespace System.Data {
         ///    <para>Also used for converting values to and from string</para>
         /// </devdoc>
         [ResDescriptionAttribute(Res.DataTableLocaleDescr)]
-        public CultureInfo Locale {
-            get {
+        public CultureInfo Locale
+        {
+            get
+            {
                 // used for Comparing not Formatting/Parsing
                 Debug.Assert(null != _culture, "null culture");
-                Debug.Assert(_cultureUserSet || (null == dataSet) || _culture.Equals(dataSet.Locale), "Locale mismatch");
+                Debug.Assert(
+                    _cultureUserSet || (null == dataSet) || _culture.Equals(dataSet.Locale),
+                    "Locale mismatch"
+                );
                 return _culture;
             }
-            set {
+            set
+            {
                 IntPtr hscp;
                 Bid.ScopeEnter(out hscp, "<ds.DataTable.set_Locale|API> %d#\n", ObjectID);
-                try {
+                try
+                {
                     bool userSet = true;
-                    if (null == value)  {
+                    if (null == value)
+                    {
                         // reset Locale to inherit from DataSet
                         userSet = false;
                         value = (null != dataSet) ? dataSet.Locale : _culture;
                     }
-                    if (_culture != value && !_culture.Equals(value)) {
+                    if (_culture != value && !_culture.Equals(value))
+                    {
                         bool flag = false;
                         bool exceptionThrown = false;
                         CultureInfo oldLocale = _culture;
                         bool oldUserSet = _cultureUserSet;
-                        try {
+                        try
+                        {
                             _cultureUserSet = true;
                             SetLocaleValue(value, true, false);
-                            if ((null == DataSet) || DataSet.ValidateLocaleConstraint()) {
+                            if ((null == DataSet) || DataSet.ValidateLocaleConstraint())
+                            {
                                 flag = false;
                                 SetLocaleValue(value, true, true);
                                 flag = true;
                             }
                         }
-                        catch {
+                        catch
+                        {
                             exceptionThrown = true;
                             throw;
                         }
-                        finally {
-                            if (!flag) { // reset old locale if ValidationFailed or exception thrown
-                                try {
+                        finally
+                        {
+                            if (!flag)
+                            { // reset old locale if ValidationFailed or exception thrown
+                                try
+                                {
                                     SetLocaleValue(oldLocale, true, true);
                                 }
-                                catch(Exception e) { // failed to reset all indexes for all constraints
-                                    if (!Common.ADP.IsCatchableExceptionType(e)) {
+                                catch (Exception e)
+                                { // failed to reset all indexes for all constraints
+                                    if (!Common.ADP.IsCatchableExceptionType(e))
+                                    {
                                         throw;
                                     }
                                     Common.ADP.TraceExceptionWithoutRethrow(e);
                                 }
                                 _cultureUserSet = oldUserSet;
-                                if (!exceptionThrown) {
+                                if (!exceptionThrown)
+                                {
                                     throw ExceptionBuilder.CannotChangeCaseLocale(null);
                                 }
                             }
@@ -1362,26 +1847,32 @@ namespace System.Data {
                     }
                     _cultureUserSet = userSet;
                 }
-                finally{
+                finally
+                {
                     Bid.ScopeLeave(ref hscp);
                 }
             }
         }
 
-        internal bool SetLocaleValue(CultureInfo culture, bool userSet, bool resetIndexes) {
+        internal bool SetLocaleValue(CultureInfo culture, bool userSet, bool resetIndexes)
+        {
             Debug.Assert(null != culture, "SetLocaleValue: no locale");
-            if (userSet || resetIndexes || (!_cultureUserSet && !_culture.Equals(culture))) {
+            if (userSet || resetIndexes || (!_cultureUserSet && !_culture.Equals(culture)))
+            {
                 _culture = culture;
                 _compareInfo = null;
                 _formatProvider = null;
                 _hashCodeProvider = null;
 
-                foreach(DataColumn column in Columns) {
+                foreach (DataColumn column in Columns)
+                {
                     column._hashCode = GetSpecialHashCode(column.ColumnName);
                 }
-                if (resetIndexes) {
+                if (resetIndexes)
+                {
                     ResetIndexes();
-                    foreach (Constraint constraint in Constraints) {
+                    foreach (Constraint constraint in Constraints)
+                    {
                         constraint.CheckConstraint();
                     }
                 }
@@ -1390,7 +1881,8 @@ namespace System.Data {
             return false;
         }
 
-        internal bool ShouldSerializeLocale() {
+        internal bool ShouldSerializeLocale()
+        {
             // this method is used design-time scenarios via reflection
             //   by the property grid to show the Locale property in bold or not
             //   by the code dom for persisting the Locale property or not
@@ -1404,36 +1896,36 @@ namespace System.Data {
         ///    <para>Gets or sets the initial starting size for this table.</para>
         /// </devdoc>
         [
-        DefaultValue(50),
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.DataTableMinimumCapacityDescr)
+            DefaultValue(50),
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataTableMinimumCapacityDescr)
         ]
-        public int MinimumCapacity {
-            get {
-                return recordManager.MinimumCapacity;
-            }
-            set {
-                if (value != recordManager.MinimumCapacity) {
+        public int MinimumCapacity
+        {
+            get { return recordManager.MinimumCapacity; }
+            set
+            {
+                if (value != recordManager.MinimumCapacity)
+                {
                     recordManager.MinimumCapacity = value;
                 }
             }
         }
 
-        internal int RecordCapacity {
-            get {
-                return recordManager.RecordCapacity;
-            }
+        internal int RecordCapacity
+        {
+            get { return recordManager.RecordCapacity; }
         }
 
-
-        internal int ElementColumnCount {
-            get {
-                return elementColumnCount;
-            }
-            set {
+        internal int ElementColumnCount
+        {
+            get { return elementColumnCount; }
+            set
+            {
                 if ((value > 0) && (xmlText != null))
                     throw ExceptionBuilder.TableCannotAddToSimpleContent();
-                else elementColumnCount = value;
+                else
+                    elementColumnCount = value;
             }
         }
 
@@ -1441,33 +1933,39 @@ namespace System.Data {
         /// <para>Gets the collection of parent relations for this <see cref='System.Data.DataTable'/>.</para>
         /// </devdoc>
         [
-        Browsable(false),
-        ResDescriptionAttribute(Res.DataTableParentRelationsDescr),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            Browsable(false),
+            ResDescriptionAttribute(Res.DataTableParentRelationsDescr),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public DataRelationCollection ParentRelations {
-            get {
+        public DataRelationCollection ParentRelations
+        {
+            get
+            {
                 if (parentRelationsCollection == null)
-                    parentRelationsCollection = new DataRelationCollection.DataTableRelationCollection(this, true);
+                    parentRelationsCollection =
+                        new DataRelationCollection.DataTableRelationCollection(this, true);
                 return parentRelationsCollection;
             }
         }
 
-        internal bool MergingData {
-            get {
-                return mergingData;
-            }
-            set {
-                mergingData = value;
-            }
+        internal bool MergingData
+        {
+            get { return mergingData; }
+            set { mergingData = value; }
         }
 
-        internal DataRelation[] NestedParentRelations {
-            get {
+        internal DataRelation[] NestedParentRelations
+        {
+            get
+            {
 #if DEBUG
                 DataRelation[] nRel = FindNestedParentRelations();
-                Debug.Assert(nRel.Length == _nestedParentRelations.Length, "nestedParent cache is broken");
-                for(int i = 0; i < nRel.Length; i++) {
+                Debug.Assert(
+                    nRel.Length == _nestedParentRelations.Length,
+                    "nestedParent cache is broken"
+                );
+                for (int i = 0; i < nRel.Length; i++)
+                {
                     Debug.Assert(null != nRel[i], "null relation");
                     Debug.Assert(null != _nestedParentRelations[i], "null relation");
                     Debug.Assert(nRel[i] == _nestedParentRelations[i], "unequal relations");
@@ -1477,39 +1975,45 @@ namespace System.Data {
             }
         }
 
-        internal bool SchemaLoading {
-            get {
-                return schemaLoading;
-            }
+        internal bool SchemaLoading
+        {
+            get { return schemaLoading; }
         }
 
-
-        internal void CacheNestedParent() {
+        internal void CacheNestedParent()
+        {
             _nestedParentRelations = FindNestedParentRelations();
         }
 
-        private DataRelation[] FindNestedParentRelations() {
+        private DataRelation[] FindNestedParentRelations()
+        {
             List<DataRelation> nestedParents = null;
-            foreach(DataRelation relation in this.ParentRelations) {
-                if(relation.Nested) {
-                    if (null == nestedParents) {
+            foreach (DataRelation relation in this.ParentRelations)
+            {
+                if (relation.Nested)
+                {
+                    if (null == nestedParents)
+                    {
                         nestedParents = new List<DataRelation>();
                     }
                     nestedParents.Add(relation);
                 }
             }
-            if ((null == nestedParents) || (nestedParents.Count == 0)) {
+            if ((null == nestedParents) || (nestedParents.Count == 0))
+            {
                 return EmptyArrayDataRelation;
             }
             return nestedParents.ToArray();
         }
 
-
-        internal int NestedParentsCount {
-            get {
+        internal int NestedParentsCount
+        {
+            get
+            {
                 int count = 0;
-                foreach(DataRelation relation in this.ParentRelations) {
-                    if(relation.Nested)
+                foreach (DataRelation relation in this.ParentRelations)
+                {
+                    if (relation.Nested)
                         count++;
                 }
                 return count;
@@ -1521,42 +2025,58 @@ namespace System.Data {
         ///       table.</para>
         /// </devdoc>
         [
-        TypeConverter(typeof(PrimaryKeyTypeConverter)),
-        ResDescriptionAttribute(Res.DataTablePrimaryKeyDescr),
-        ResCategoryAttribute(Res.DataCategory_Data),
-        Editor("Microsoft.VSDesigner.Data.Design.PrimaryKeyEditor, " + AssemblyRef.MicrosoftVSDesigner, "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing)
+            TypeConverter(typeof(PrimaryKeyTypeConverter)),
+            ResDescriptionAttribute(Res.DataTablePrimaryKeyDescr),
+            ResCategoryAttribute(Res.DataCategory_Data),
+            Editor(
+                "Microsoft.VSDesigner.Data.Design.PrimaryKeyEditor, "
+                    + AssemblyRef.MicrosoftVSDesigner,
+                "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing
+            )
         ]
-        public DataColumn[] PrimaryKey {
-            get {
+        public DataColumn[] PrimaryKey
+        {
+            get
+            {
                 UniqueConstraint primayKeyConstraint = primaryKey;
-                if (null != primayKeyConstraint) {
-                    Debug.Assert(2 <= primaryKey.ConstraintIndex.RefCount, "bad primaryKey index RefCount");
+                if (null != primayKeyConstraint)
+                {
+                    Debug.Assert(
+                        2 <= primaryKey.ConstraintIndex.RefCount,
+                        "bad primaryKey index RefCount"
+                    );
                     return primayKeyConstraint.Key.ToArray();
                 }
                 return zeroColumns;
             }
-            set {
+            set
+            {
                 UniqueConstraint key = null;
                 UniqueConstraint existingKey = null;
 
                 // Loading with persisted property
-                if (fInitInProgress && value != null) {
+                if (fInitInProgress && value != null)
+                {
                     delayedSetPrimaryKey = value;
                     return;
                 }
 
-                if ((value != null) && (value.Length != 0)) {
+                if ((value != null) && (value.Length != 0))
+                {
                     int count = 0;
-                    for (int i = 0; i < value.Length; i++) {
+                    for (int i = 0; i < value.Length; i++)
+                    {
                         if (value[i] != null)
                             count++;
                         else
                             break;
                     }
 
-                    if (count != 0) {
+                    if (count != 0)
+                    {
                         DataColumn[] newValue = value;
-                        if (count != value.Length) {
+                        if (count != value.Length)
+                        {
                             newValue = new DataColumn[count];
                             for (int i = 0; i < count; i++)
                                 newValue[i] = value[i];
@@ -1571,26 +2091,31 @@ namespace System.Data {
                     return;
 
                 // Use an existing UniqueConstraint that matches if one exists
-                if ((existingKey = (UniqueConstraint)Constraints.FindConstraint(key)) != null) {
+                if ((existingKey = (UniqueConstraint)Constraints.FindConstraint(key)) != null)
+                {
                     key.ColumnsReference.CopyTo(existingKey.Key.ColumnsReference, 0);
                     key = existingKey;
                 }
 
                 UniqueConstraint oldKey = primaryKey;
                 primaryKey = null;
-                if (oldKey != null) {
+                if (oldKey != null)
+                {
                     oldKey.ConstraintIndex.RemoveRef();
 
                     // SQLBU 429176: if PrimaryKey is removed, reset LoadDataRow indexes
-                    if (null != loadIndex) {
+                    if (null != loadIndex)
+                    {
                         loadIndex.RemoveRef();
                         loadIndex = null;
                     }
-                    if (null != loadIndexwithOriginalAdded) {
+                    if (null != loadIndexwithOriginalAdded)
+                    {
                         loadIndexwithOriginalAdded.RemoveRef();
                         loadIndexwithOriginalAdded = null;
                     }
-                    if (null != loadIndexwithCurrentDeleted) {
+                    if (null != loadIndexwithCurrentDeleted)
+                    {
                         loadIndexwithCurrentDeleted.RemoveRef();
                         loadIndexwithCurrentDeleted = null;
                     }
@@ -1603,10 +2128,14 @@ namespace System.Data {
 
                 primaryKey = key;
 
-                Debug.Assert(Constraints.FindConstraint(primaryKey) == primaryKey, "PrimaryKey is not in ConstraintCollection");
+                Debug.Assert(
+                    Constraints.FindConstraint(primaryKey) == primaryKey,
+                    "PrimaryKey is not in ConstraintCollection"
+                );
                 _primaryIndex = (key != null) ? key.Key.GetIndexDesc() : zeroIndexField;
 
-                if (primaryKey != null) {
+                if (primaryKey != null)
+                {
                     // must set index for DataView.Sort before setting AllowDBNull which can fail
                     key.ConstraintIndex.AddRef();
 
@@ -1621,8 +2150,9 @@ namespace System.Data {
         ///       Indicates whether the <see cref='System.Data.DataTable.PrimaryKey'/> property should be persisted.
         ///    </para>
         /// </devdoc>
-        private bool ShouldSerializePrimaryKey() {
-            return(primaryKey != null);
+        private bool ShouldSerializePrimaryKey()
+        {
+            return (primaryKey != null);
         }
 
         /// <devdoc>
@@ -1630,7 +2160,8 @@ namespace System.Data {
         ///       Resets the <see cref='System.Data.DataTable.PrimaryKey'/> property to its default state.
         ///    </para>
         /// </devdoc>
-        private void ResetPrimaryKey() {
+        private void ResetPrimaryKey()
+        {
             PrimaryKey = null;
         }
 
@@ -1638,60 +2169,84 @@ namespace System.Data {
         ///    <para>Gets the collection of rows that belong to this table.</para>
         /// </devdoc>
         [Browsable(false), ResDescriptionAttribute(Res.DataTableRowsDescr)]
-        public DataRowCollection Rows {
-            get {
-                return rowCollection;
-            }
+        public DataRowCollection Rows
+        {
+            get { return rowCollection; }
         }
 
         /// <devdoc>
         ///    <para>Gets or sets the name of the table.</para>
         /// </devdoc>
         [
-        RefreshProperties(RefreshProperties.All),
-        DefaultValue(""),
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.DataTableTableNameDescr)
+            RefreshProperties(RefreshProperties.All),
+            DefaultValue(""),
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataTableTableNameDescr)
         ]
-        public string TableName {
-            get {
-                return tableName;
-            }
-            set {
+        public string TableName
+        {
+            get { return tableName; }
+            set
+            {
                 IntPtr hscp;
-                Bid.ScopeEnter(out hscp, "<ds.DataTable.set_TableName|API> %d#, value='%ls'\n", ObjectID, value);
-                try {
-                    if (value == null) {
+                Bid.ScopeEnter(
+                    out hscp,
+                    "<ds.DataTable.set_TableName|API> %d#, value='%ls'\n",
+                    ObjectID,
+                    value
+                );
+                try
+                {
+                    if (value == null)
+                    {
                         value = "";
                     }
                     CultureInfo currentLocale = this.Locale;
-                    if (String.Compare(tableName, value, true, currentLocale) != 0) {
-                        if (dataSet != null) {
+                    if (String.Compare(tableName, value, true, currentLocale) != 0)
+                    {
+                        if (dataSet != null)
+                        {
                             if (value.Length == 0)
                                 throw ExceptionBuilder.NoTableName();
-                            if ((0 == String.Compare(value, dataSet.DataSetName, true, dataSet.Locale)) && !fNestedInDataset)
-                               throw ExceptionBuilder.DatasetConflictingName(dataSet.DataSetName);
+                            if (
+                                (
+                                    0
+                                    == String.Compare(
+                                        value,
+                                        dataSet.DataSetName,
+                                        true,
+                                        dataSet.Locale
+                                    )
+                                ) && !fNestedInDataset
+                            )
+                                throw ExceptionBuilder.DatasetConflictingName(dataSet.DataSetName);
 
                             DataRelation[] nestedRelations = NestedParentRelations;
-                            if (nestedRelations.Length == 0) {
+                            if (nestedRelations.Length == 0)
+                            {
                                 dataSet.Tables.RegisterName(value, this.Namespace);
                             }
-                            else {
-                                foreach(DataRelation rel in nestedRelations) {
-                                    if (!rel.ParentTable.Columns.CanRegisterName(value)) {
+                            else
+                            {
+                                foreach (DataRelation rel in nestedRelations)
+                                {
+                                    if (!rel.ParentTable.Columns.CanRegisterName(value))
+                                    {
                                         throw ExceptionBuilder.CannotAddDuplicate2(value);
                                     }
                                 }
                                 // if it cannot register the following line will throw exception
                                 dataSet.Tables.RegisterName(value, this.Namespace);
 
-                                foreach(DataRelation rel in nestedRelations) {
+                                foreach (DataRelation rel in nestedRelations)
+                                {
                                     rel.ParentTable.Columns.RegisterColumnName(value, null);
                                     rel.ParentTable.Columns.UnregisterName(this.TableName);
                                 }
                             }
 
-                            if (tableName.Length != 0) {
+                            if (tableName.Length != 0)
+                            {
                                 dataSet.Tables.UnregisterName(tableName);
                             }
                         }
@@ -1699,60 +2254,78 @@ namespace System.Data {
                         tableName = value;
                         encodedTableName = null;
                     }
-                    else if (String.Compare(tableName, value, false, currentLocale) != 0) {
+                    else if (String.Compare(tableName, value, false, currentLocale) != 0)
+                    {
                         RaisePropertyChanging("TableName");
                         tableName = value;
                         encodedTableName = null;
                     }
                 }
-                finally {
+                finally
+                {
                     Bid.ScopeLeave(ref hscp);
                 }
             }
         }
 
-
-        internal string EncodedTableName {
-            get {
+        internal string EncodedTableName
+        {
+            get
+            {
                 string encodedTblName = this.encodedTableName;
-                if (null == encodedTblName) {
-                    encodedTblName = XmlConvert.EncodeLocalName( this.TableName );
+                if (null == encodedTblName)
+                {
+                    encodedTblName = XmlConvert.EncodeLocalName(this.TableName);
                     this.encodedTableName = encodedTblName;
                 }
                 return encodedTblName;
             }
         }
-        private string GetInheritedNamespace(List<DataTable> visitedTables){
+
+        private string GetInheritedNamespace(List<DataTable> visitedTables)
+        {
             // if there is nested relation: ie: this table is nested child of a another table and
             // if it is not self nested, return parent tables NS: Meanwhile make sure SQLBUDT 240219 is FIXED
             DataRelation[] nestedRelations = NestedParentRelations;
-            if (nestedRelations.Length > 0) {
-                for(int i =0; i < nestedRelations.Length; i++) {
+            if (nestedRelations.Length > 0)
+            {
+                for (int i = 0; i < nestedRelations.Length; i++)
+                {
                     DataRelation rel = nestedRelations[i];
-                    if (rel.ParentTable.tableNamespace != null) {
+                    if (rel.ParentTable.tableNamespace != null)
+                    {
                         return rel.ParentTable.tableNamespace; // if parent table has a non-null NS, return it
                     }
                 }
                 // Assumption, in hierarchy of multiple nested relation, a child table with no NS, has DataRelation
                 // only and only with parent DataTable witin the same namespace
                 int j = 0;
-                while(j < nestedRelations.Length &&((nestedRelations[j].ParentTable == this)||(visitedTables.Contains(nestedRelations[j].ParentTable)))) {
+                while (
+                    j < nestedRelations.Length
+                    && (
+                        (nestedRelations[j].ParentTable == this)
+                        || (visitedTables.Contains(nestedRelations[j].ParentTable))
+                    )
+                )
+                {
                     j++;
                 }
-                if (j < nestedRelations.Length) {
+                if (j < nestedRelations.Length)
+                {
                     DataTable parentTable = nestedRelations[j].ParentTable;
                     if (!visitedTables.Contains(parentTable))
                         visitedTables.Add(parentTable);
-                        return parentTable.GetInheritedNamespace(visitedTables);// this is the same as return parentTable.Namespace
+                    return parentTable.GetInheritedNamespace(visitedTables); // this is the same as return parentTable.Namespace
                 }
             } // dont put else
-            if (DataSet != null) { // if it cant return from parent tables, return NS from dataset, if exists
-                return  DataSet.Namespace;
+            if (DataSet != null)
+            { // if it cant return from parent tables, return NS from dataset, if exists
+                return DataSet.Namespace;
             }
-            else {
+            else
+            {
                 return string.Empty;
             }
-
         }
 
         /// <devdoc>
@@ -1761,28 +2334,53 @@ namespace System.Data {
         ///    </para>
         /// </devdoc>
         [
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.DataTableNamespaceDescr)
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataTableNamespaceDescr)
         ]
-        public string Namespace {
-            get {
-                if (tableNamespace == null) {
+        public string Namespace
+        {
+            get
+            {
+                if (tableNamespace == null)
+                {
                     return GetInheritedNamespace(new List<DataTable>());
                 }
                 return tableNamespace;
             }
-            set {
+            set
+            {
                 IntPtr hscp;
-                Bid.ScopeEnter(out hscp, "<ds.DataTable.set_Namespace|API> %d#, value='%ls'\n", ObjectID, value);
-                try {
-                    if(value != tableNamespace) {
-                        if (dataSet != null) {
-                            string realNamespace = (value == null ? GetInheritedNamespace(new List<DataTable>()) : value);
-                            if (realNamespace != Namespace) {
+                Bid.ScopeEnter(
+                    out hscp,
+                    "<ds.DataTable.set_Namespace|API> %d#, value='%ls'\n",
+                    ObjectID,
+                    value
+                );
+                try
+                {
+                    if (value != tableNamespace)
+                    {
+                        if (dataSet != null)
+                        {
+                            string realNamespace = (
+                                value == null ? GetInheritedNamespace(new List<DataTable>()) : value
+                            );
+                            if (realNamespace != Namespace)
+                            {
                                 // do this extra check only if the namespace is really going to change
                                 // inheritance-wise.
-                                if (dataSet.Tables.Contains( this.TableName, realNamespace, true, true))
-                                    throw ExceptionBuilder.DuplicateTableName2(this.TableName, realNamespace);
+                                if (
+                                    dataSet.Tables.Contains(
+                                        this.TableName,
+                                        realNamespace,
+                                        true,
+                                        true
+                                    )
+                                )
+                                    throw ExceptionBuilder.DuplicateTableName2(
+                                        this.TableName,
+                                        realNamespace
+                                    );
 
                                 CheckCascadingNamespaceConflict(realNamespace);
                             }
@@ -1792,55 +2390,85 @@ namespace System.Data {
                     }
                     tableNamespace = value;
                 }
-                finally{
+                finally
+                {
                     Bid.ScopeLeave(ref hscp);
                 }
             }
         }
-        internal bool IsNamespaceInherited() {
+
+        internal bool IsNamespaceInherited()
+        {
             return (null == tableNamespace);
         }
 
-        internal void CheckCascadingNamespaceConflict(string realNamespace){
+        internal void CheckCascadingNamespaceConflict(string realNamespace)
+        {
             foreach (DataRelation rel in ChildRelations)
-                if ((rel.Nested) && (rel.ChildTable != this) && (rel.ChildTable.tableNamespace == null)) {
+                if (
+                    (rel.Nested)
+                    && (rel.ChildTable != this)
+                    && (rel.ChildTable.tableNamespace == null)
+                )
+                {
                     DataTable childTable = rel.ChildTable;
-                    if (dataSet.Tables.Contains( childTable.TableName, realNamespace, false, true))
+                    if (dataSet.Tables.Contains(childTable.TableName, realNamespace, false, true))
                         throw ExceptionBuilder.DuplicateTableName2(this.TableName, realNamespace);
 
                     childTable.CheckCascadingNamespaceConflict(realNamespace);
                 }
-
         }
 
-        internal void CheckNamespaceValidityForNestedRelations(string realNamespace){
-            foreach(DataRelation rel in ChildRelations) {
-                if (rel.Nested) {
-                    if (realNamespace != null) {
-                        rel.ChildTable.CheckNamespaceValidityForNestedParentRelations(realNamespace, this);
+        internal void CheckNamespaceValidityForNestedRelations(string realNamespace)
+        {
+            foreach (DataRelation rel in ChildRelations)
+            {
+                if (rel.Nested)
+                {
+                    if (realNamespace != null)
+                    {
+                        rel.ChildTable.CheckNamespaceValidityForNestedParentRelations(
+                            realNamespace,
+                            this
+                        );
                     }
-                    else{
-                        rel.ChildTable.CheckNamespaceValidityForNestedParentRelations(GetInheritedNamespace(new List<DataTable>()), this);
+                    else
+                    {
+                        rel.ChildTable.CheckNamespaceValidityForNestedParentRelations(
+                            GetInheritedNamespace(new List<DataTable>()),
+                            this
+                        );
                     }
                 }
             }
-            if (realNamespace == null) { // this will affect this table if it has parent relations
-                this.CheckNamespaceValidityForNestedParentRelations(GetInheritedNamespace(new List<DataTable>()), this);
+            if (realNamespace == null)
+            { // this will affect this table if it has parent relations
+                this.CheckNamespaceValidityForNestedParentRelations(
+                    GetInheritedNamespace(new List<DataTable>()),
+                    this
+                );
             }
-
         }
-        internal void CheckNamespaceValidityForNestedParentRelations(string ns, DataTable parentTable) {
-            foreach(DataRelation rel in ParentRelations){
-                if (rel.Nested) {
-                    if (rel.ParentTable != parentTable && rel.ParentTable.Namespace != ns) {
+
+        internal void CheckNamespaceValidityForNestedParentRelations(
+            string ns,
+            DataTable parentTable
+        )
+        {
+            foreach (DataRelation rel in ParentRelations)
+            {
+                if (rel.Nested)
+                {
+                    if (rel.ParentTable != parentTable && rel.ParentTable.Namespace != ns)
+                    {
                         throw ExceptionBuilder.InValidNestedRelation(this.TableName);
                     }
                 }
             }
-
         }
 
-        internal void DoRaiseNamespaceChange(){
+        internal void DoRaiseNamespaceChange()
+        {
             RaisePropertyChanging("Namespace");
             // raise column Namespace change
 
@@ -1849,19 +2477,22 @@ namespace System.Data {
                     col.RaisePropertyChanging("Namespace");
 
             foreach (DataRelation rel in ChildRelations)
-                if ((rel.Nested) && (rel.ChildTable != this)) {
+                if ((rel.Nested) && (rel.ChildTable != this))
+                {
                     DataTable childTable = rel.ChildTable;
 
                     rel.ChildTable.DoRaiseNamespaceChange();
                 }
         }
+
         /// <devdoc>
         ///    <para>
         ///       Indicates whether the <see cref='System.Data.DataTable.Namespace'/> property should be persisted.
         ///    </para>
         /// </devdoc>
-        private bool ShouldSerializeNamespace() {
-            return(tableNamespace != null);
+        private bool ShouldSerializeNamespace()
+        {
+            return (tableNamespace != null);
         }
 
         /// <devdoc>
@@ -1869,37 +2500,46 @@ namespace System.Data {
         ///       Resets the <see cref='System.Data.DataTable.Namespace'/> property to its default state.
         ///    </para>
         /// </devdoc>
-        private void ResetNamespace() {
+        private void ResetNamespace()
+        {
             this.Namespace = null;
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        virtual public void BeginInit() {
+        virtual public void BeginInit()
+        {
             fInitInProgress = true;
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        virtual public void EndInit() {
-            if (dataSet == null || !dataSet.fInitInProgress) {
+        virtual public void EndInit()
+        {
+            if (dataSet == null || !dataSet.fInitInProgress)
+            {
                 Columns.FinishInitCollection();
                 Constraints.FinishInitConstraints();
-                foreach(DataColumn dc in Columns){
-                    if (dc.Computed) {
+                foreach (DataColumn dc in Columns)
+                {
+                    if (dc.Computed)
+                    {
                         dc.Expression = dc.Expression;
                     }
                 }
             }
             fInitInProgress = false; // Microsoft : 77890. It is must that we set off this flag after calling FinishInitxxx();
-            if (delayedSetPrimaryKey != null) {
+            if (delayedSetPrimaryKey != null)
+            {
                 PrimaryKey = delayedSetPrimaryKey;
                 delayedSetPrimaryKey = null;
             }
-            if (delayedViews.Count > 0) {
-                foreach(DataView dv in delayedViews) {
+            if (delayedViews.Count > 0)
+            {
+                foreach (DataView dv in delayedViews)
+                {
                     dv.EndInit();
                 }
                 delayedViews.Clear();
@@ -1911,41 +2551,52 @@ namespace System.Data {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [
-        DefaultValue(""),
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.DataTablePrefixDescr)
+            DefaultValue(""),
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataTablePrefixDescr)
         ]
-        public string Prefix {
-            get { return tablePrefix;}
-            set {
-                if (value == null) {
+        public string Prefix
+        {
+            get { return tablePrefix; }
+            set
+            {
+                if (value == null)
+                {
                     value = "";
                 }
                 Bid.Trace("<ds.DataTable.set_Prefix|API> %d#, value='%ls'\n", ObjectID, value);
-                if ((XmlConvert.DecodeName(value) == value) &&
-                    (XmlConvert.EncodeName(value) != value))
+                if (
+                    (XmlConvert.DecodeName(value) == value)
+                    && (XmlConvert.EncodeName(value) != value)
+                )
                     throw ExceptionBuilder.InvalidPrefix(value);
-
 
                 tablePrefix = value;
             }
         }
 
-        internal DataColumn XmlText {
-            get {
-                return xmlText;
-            }
-            set {
-                if (xmlText != value) {
-                    if (xmlText != null) {
-                        if (value != null) {
+        internal DataColumn XmlText
+        {
+            get { return xmlText; }
+            set
+            {
+                if (xmlText != value)
+                {
+                    if (xmlText != null)
+                    {
+                        if (value != null)
+                        {
                             throw ExceptionBuilder.MultipleTextOnlyColumns();
                         }
                         Columns.Remove(xmlText);
                     }
-                    else {
+                    else
+                    {
                         Debug.Assert(value != null, "Value shoud not be null ??");
-                        Debug.Assert(value.ColumnMapping == MappingType.SimpleContent, "should be text node here");
+                        Debug.Assert(
+                            value.ColumnMapping == MappingType.SimpleContent,
+                            "should be text node here"
+                        );
                         if (value != Columns[value.ColumnName])
                             Columns.Add(value);
                     }
@@ -1954,151 +2605,234 @@ namespace System.Data {
             }
         }
 
-        internal decimal MaxOccurs {
-            get {
-                return maxOccurs;
-            }
-            set {
-                maxOccurs = value;
-            }
+        internal decimal MaxOccurs
+        {
+            get { return maxOccurs; }
+            set { maxOccurs = value; }
         }
 
-        internal decimal MinOccurs {
-            get {
-                return minOccurs;
-            }
-            set {
-                minOccurs = value;
-            }
+        internal decimal MinOccurs
+        {
+            get { return minOccurs; }
+            set { minOccurs = value; }
         }
 
-        internal void SetKeyValues(DataKey key, object[] keyValues, int record) {
-            for (int i = 0; i < keyValues.Length; i++) {
+        internal void SetKeyValues(DataKey key, object[] keyValues, int record)
+        {
+            for (int i = 0; i < keyValues.Length; i++)
+            {
                 key.ColumnsReference[i][record] = keyValues[i];
             }
         }
 
-        internal DataRow FindByIndex(Index ndx, object[] key) {
+        internal DataRow FindByIndex(Index ndx, object[] key)
+        {
             Range range = ndx.FindRecords(key);
-            if (range.IsNull) {
+            if (range.IsNull)
+            {
                 return null;
             }
             return this.recordManager[ndx.GetRecord(range.Min)];
         }
 
-        internal DataRow FindMergeTarget(DataRow row, DataKey key, Index ndx) {
+        internal DataRow FindMergeTarget(DataRow row, DataKey key, Index ndx)
+        {
             DataRow targetRow = null;
 
             // Primary key match
-            if (key.HasValue) {
+            if (key.HasValue)
+            {
                 Debug.Assert(ndx != null);
-                int   findRecord = (row.oldRecord == -1) ? row.newRecord : row.oldRecord;
+                int findRecord = (row.oldRecord == -1) ? row.newRecord : row.oldRecord;
                 object[] values = key.GetKeyValues(findRecord);
                 targetRow = FindByIndex(ndx, values);
             }
             return targetRow;
         }
 
-        private void SetMergeRecords(DataRow row, int newRecord, int oldRecord, DataRowAction action) {
-            if (newRecord != -1) {
+        private void SetMergeRecords(
+            DataRow row,
+            int newRecord,
+            int oldRecord,
+            DataRowAction action
+        )
+        {
+            if (newRecord != -1)
+            {
                 SetNewRecord(row, newRecord, action, true, true);
                 SetOldRecord(row, oldRecord);
             }
-            else {
+            else
+            {
                 SetOldRecord(row, oldRecord);
-                if (row.newRecord != -1) {
-                    Debug.Assert(action == DataRowAction.Delete, "Unexpected SetNewRecord action in merge function.");
+                if (row.newRecord != -1)
+                {
+                    Debug.Assert(
+                        action == DataRowAction.Delete,
+                        "Unexpected SetNewRecord action in merge function."
+                    );
                     SetNewRecord(row, newRecord, action, true, true);
                 }
             }
         }
 
-        internal DataRow MergeRow(DataRow row, DataRow targetRow, bool preserveChanges, Index idxSearch) {
-             if (targetRow == null) {
+        internal DataRow MergeRow(
+            DataRow row,
+            DataRow targetRow,
+            bool preserveChanges,
+            Index idxSearch
+        )
+        {
+            if (targetRow == null)
+            {
                 targetRow = this.NewEmptyRow();
                 targetRow.oldRecord = recordManager.ImportRecord(row.Table, row.oldRecord);
                 targetRow.newRecord = targetRow.oldRecord;
-                if(row.oldRecord != row.newRecord) {
+                if (row.oldRecord != row.newRecord)
+                {
                     targetRow.newRecord = recordManager.ImportRecord(row.Table, row.newRecord);
                 }
                 InsertRow(targetRow, -1);
             }
-            else {
+            else
+            {
                 // SQLBU 500789: Record Manager corruption during Merge when target row in edit state
                 // the newRecord would be freed and overwrite tempRecord (which became the newRecord)
                 // this would leave the DataRow referencing a freed record and leaking memory for the now lost record
                 int proposedRecord = targetRow.tempRecord; // by saving off the tempRecord, EndEdit won't free newRecord
                 targetRow.tempRecord = -1;
-                try {
+                try
+                {
                     DataRowState saveRowState = targetRow.RowState;
-                    int saveIdxRecord = (saveRowState == DataRowState.Added) ? targetRow.newRecord : saveIdxRecord = targetRow.oldRecord;
-                     int newRecord;
-                     int oldRecord;
-                    if (targetRow.RowState == DataRowState.Unchanged && row.RowState == DataRowState.Unchanged) {
+                    int saveIdxRecord =
+                        (saveRowState == DataRowState.Added)
+                            ? targetRow.newRecord
+                            : saveIdxRecord = targetRow.oldRecord;
+                    int newRecord;
+                    int oldRecord;
+                    if (
+                        targetRow.RowState == DataRowState.Unchanged
+                        && row.RowState == DataRowState.Unchanged
+                    )
+                    {
                         // unchanged row merging with unchanged row
                         oldRecord = targetRow.oldRecord;
-                        newRecord = (preserveChanges) ? recordManager.CopyRecord(this, oldRecord, -1) : targetRow.newRecord;
-                        oldRecord = recordManager.CopyRecord(row.Table, row.oldRecord, targetRow.oldRecord);
+                        newRecord =
+                            (preserveChanges)
+                                ? recordManager.CopyRecord(this, oldRecord, -1)
+                                : targetRow.newRecord;
+                        oldRecord = recordManager.CopyRecord(
+                            row.Table,
+                            row.oldRecord,
+                            targetRow.oldRecord
+                        );
                         SetMergeRecords(targetRow, newRecord, oldRecord, DataRowAction.Change);
                     }
-                    else if (row.newRecord == -1) {
+                    else if (row.newRecord == -1)
+                    {
                         // Incoming row is deleted
                         oldRecord = targetRow.oldRecord;
-                        if (preserveChanges) {
-                          newRecord = (targetRow.RowState == DataRowState.Unchanged)? recordManager.CopyRecord(this, oldRecord, -1) : targetRow.newRecord;
+                        if (preserveChanges)
+                        {
+                            newRecord =
+                                (targetRow.RowState == DataRowState.Unchanged)
+                                    ? recordManager.CopyRecord(this, oldRecord, -1)
+                                    : targetRow.newRecord;
                         }
                         else
                             newRecord = -1;
                         oldRecord = recordManager.CopyRecord(row.Table, row.oldRecord, oldRecord);
 
                         // Change index record, need to update index
-                        if (saveIdxRecord != ((saveRowState == DataRowState.Added) ? newRecord : oldRecord)) {
-                            SetMergeRecords(targetRow, newRecord, oldRecord, (newRecord == -1) ? DataRowAction.Delete : DataRowAction.Change);
+                        if (
+                            saveIdxRecord
+                            != ((saveRowState == DataRowState.Added) ? newRecord : oldRecord)
+                        )
+                        {
+                            SetMergeRecords(
+                                targetRow,
+                                newRecord,
+                                oldRecord,
+                                (newRecord == -1) ? DataRowAction.Delete : DataRowAction.Change
+                            );
                             idxSearch.Reset();
-                            saveIdxRecord = ((saveRowState == DataRowState.Added) ? newRecord : oldRecord);
-                        } else {
-                            SetMergeRecords(targetRow, newRecord, oldRecord, (newRecord == -1) ? DataRowAction.Delete : DataRowAction.Change);
+                            saveIdxRecord = (
+                                (saveRowState == DataRowState.Added) ? newRecord : oldRecord
+                            );
+                        }
+                        else
+                        {
+                            SetMergeRecords(
+                                targetRow,
+                                newRecord,
+                                oldRecord,
+                                (newRecord == -1) ? DataRowAction.Delete : DataRowAction.Change
+                            );
                         }
                     }
-                    else {
+                    else
+                    {
                         // incoming row is added, modified or unchanged (targetRow is not unchanged)
                         oldRecord = targetRow.oldRecord;
                         newRecord = targetRow.newRecord;
-                        if (targetRow.RowState == DataRowState.Unchanged) {
+                        if (targetRow.RowState == DataRowState.Unchanged)
+                        {
                             newRecord = recordManager.CopyRecord(this, oldRecord, -1);
                         }
                         oldRecord = recordManager.CopyRecord(row.Table, row.oldRecord, oldRecord);
 
-                        if (!preserveChanges) {
-                            newRecord = recordManager.CopyRecord(row.Table, row.newRecord, newRecord);
+                        if (!preserveChanges)
+                        {
+                            newRecord = recordManager.CopyRecord(
+                                row.Table,
+                                row.newRecord,
+                                newRecord
+                            );
                         }
                         SetMergeRecords(targetRow, newRecord, oldRecord, DataRowAction.Change);
                     }
 
                     if (saveRowState == DataRowState.Added && targetRow.oldRecord != -1)
                         idxSearch.Reset();
-                    Debug.Assert(saveIdxRecord == ((saveRowState == DataRowState.Added) ? targetRow.newRecord : targetRow.oldRecord), "oops, you change index record without noticing it");
+                    Debug.Assert(
+                        saveIdxRecord
+                            == (
+                                (saveRowState == DataRowState.Added)
+                                    ? targetRow.newRecord
+                                    : targetRow.oldRecord
+                            ),
+                        "oops, you change index record without noticing it"
+                    );
                 }
-                finally {
+                finally
+                {
                     targetRow.tempRecord = proposedRecord;
                 }
             }
 
             // Merge all errors
-            if (row.HasErrors) {
-                if (targetRow.RowError.Length == 0) {
+            if (row.HasErrors)
+            {
+                if (targetRow.RowError.Length == 0)
+                {
                     targetRow.RowError = row.RowError;
-                } else {
+                }
+                else
+                {
                     targetRow.RowError += " ]:[ " + row.RowError;
                 }
                 DataColumn[] cols = row.GetColumnsInError();
 
-                for (int i = 0; i < cols.Length; i++) {
+                for (int i = 0; i < cols.Length; i++)
+                {
                     DataColumn col = targetRow.Table.Columns[cols[i].ColumnName];
                     targetRow.SetColumnError(col, row.GetColumnError(cols[i]));
                 }
-            }else {
-                if (!preserveChanges) {
+            }
+            else
+            {
+                if (!preserveChanges)
+                {
                     targetRow.ClearErrors();
                 }
             }
@@ -2109,60 +2843,79 @@ namespace System.Data {
         /// <devdoc>
         /// <para>Commits all the changes made to this table since the last time <see cref='System.Data.DataTable.AcceptChanges'/> was called.</para>
         /// </devdoc>
-        public void AcceptChanges() {
+        public void AcceptChanges()
+        {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataTable.AcceptChanges|API> %d#\n", ObjectID);
-            try {
+            try
+            {
                 DataRow[] oldRows = new DataRow[Rows.Count];
                 Rows.CopyTo(oldRows, 0);
 
                 // delay updating of indexes until after all
                 // AcceptChange calls have been completed
                 SuspendIndexEvents();
-                try {
-                    for (int i = 0; i < oldRows.Length; ++i) {
-                        if (oldRows[i].rowID != -1) {
+                try
+                {
+                    for (int i = 0; i < oldRows.Length; ++i)
+                    {
+                        if (oldRows[i].rowID != -1)
+                        {
                             oldRows[i].AcceptChanges();
                         }
                     }
                 }
-                finally {
+                finally
+                {
                     RestoreIndexEvents(false);
                 }
             }
-            finally{
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
-             }
+            }
         }
 
         // Prevent inlining so that reflection calls are not moved to caller that may be in a different assembly that may have a different grant set.
-        [MethodImpl(MethodImplOptions.NoInlining)] 
-        protected virtual DataTable CreateInstance() {
-            return (DataTable) Activator.CreateInstance(this.GetType(), true);
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        protected virtual DataTable CreateInstance()
+        {
+            return (DataTable)Activator.CreateInstance(this.GetType(), true);
         }
 
-        public virtual DataTable Clone() {
+        public virtual DataTable Clone()
+        {
             return Clone(null);
         }
 
-        internal DataTable Clone(DataSet cloneDS) {
+        internal DataTable Clone(DataSet cloneDS)
+        {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataTable.Clone|INFO> %d#, cloneDS=%d\n", ObjectID, (cloneDS != null) ? cloneDS.ObjectID : 0);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTable.Clone|INFO> %d#, cloneDS=%d\n",
+                ObjectID,
+                (cloneDS != null) ? cloneDS.ObjectID : 0
+            );
+            try
+            {
                 DataTable clone = CreateInstance();
                 if (clone.Columns.Count > 0) // Microsoft : To clean up all the schema in strong typed dataset.
                     clone.Reset();
                 return CloneTo(clone, cloneDS, false);
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-
-        private DataTable IncrementalCloneTo (DataTable sourceTable, DataTable targetTable) {
-            foreach(DataColumn dc in sourceTable.Columns) {
-                if (targetTable.Columns[dc.ColumnName] == null) {
+        private DataTable IncrementalCloneTo(DataTable sourceTable, DataTable targetTable)
+        {
+            foreach (DataColumn dc in sourceTable.Columns)
+            {
+                if (targetTable.Columns[dc.ColumnName] == null)
+                {
                     targetTable.Columns.Add(dc.Clone());
                 }
             }
@@ -2170,21 +2923,24 @@ namespace System.Data {
             return targetTable;
         }
 
-        private DataTable CloneHierarchy (DataTable sourceTable, DataSet ds, Hashtable visitedMap) {
+        private DataTable CloneHierarchy(DataTable sourceTable, DataSet ds, Hashtable visitedMap)
+        {
             if (visitedMap == null)
                 visitedMap = new Hashtable();
             if (visitedMap.Contains(sourceTable))
                 return ((DataTable)visitedMap[sourceTable]);
 
-
             DataTable destinationTable = ds.Tables[sourceTable.TableName, sourceTable.Namespace];
 
-            if ((destinationTable != null && destinationTable.Columns.Count > 0)) {
-                destinationTable = IncrementalCloneTo(sourceTable,destinationTable);
-                   // get extra columns from source into destination , increamental read
+            if ((destinationTable != null && destinationTable.Columns.Count > 0))
+            {
+                destinationTable = IncrementalCloneTo(sourceTable, destinationTable);
+                // get extra columns from source into destination , increamental read
             }
-            else {
-                if (destinationTable == null) {
+            else
+            {
+                if (destinationTable == null)
+                {
                     destinationTable = new DataTable();
                     // fxcop: new DataTable values for CaseSensitive, Locale, Namespace will come from CloneTo
                     ds.Tables.Add(destinationTable);
@@ -2193,20 +2949,23 @@ namespace System.Data {
             }
             visitedMap[sourceTable] = destinationTable;
 
-
             // start cloning relation
-            foreach( DataRelation r in sourceTable.ChildRelations ) {
+            foreach (DataRelation r in sourceTable.ChildRelations)
+            {
                 DataTable childTable = CloneHierarchy((DataTable)r.ChildTable, ds, visitedMap);
-             }
+            }
 
             return destinationTable;
-         }
+        }
 
-
-        private DataTable CloneTo(DataTable clone, DataSet cloneDS, bool skipExpressionColumns) {
-// we do clone datatables while we do readxmlschema, so we do not want to clone columnexpressions if we call this from ReadXmlSchema
-// it will cause exception to be thrown in cae expression refers to a table that is not in hirerachy or not created yet
-            Debug.Assert(clone != null, "The table passed in has to be newly created empty DataTable.");
+        private DataTable CloneTo(DataTable clone, DataSet cloneDS, bool skipExpressionColumns)
+        {
+            // we do clone datatables while we do readxmlschema, so we do not want to clone columnexpressions if we call this from ReadXmlSchema
+            // it will cause exception to be thrown in cae expression refers to a table that is not in hirerachy or not created yet
+            Debug.Assert(
+                clone != null,
+                "The table passed in has to be newly created empty DataTable."
+            );
 
             // set All properties
             clone.tableName = tableName;
@@ -2229,26 +2988,31 @@ namespace System.Data {
             clone.repeatableElement = repeatableElement; //Microsoft
             clone.MinimumCapacity = MinimumCapacity;
             clone.RemotingFormat = RemotingFormat;
-//            clone.SerializeHierarchy = SerializeHierarchy;
+            //            clone.SerializeHierarchy = SerializeHierarchy;
 
             // add all columns
             DataColumnCollection clmns = this.Columns;
-            for (int i = 0; i < clmns.Count; i++) {
+            for (int i = 0; i < clmns.Count; i++)
+            {
                 clone.Columns.Add(clmns[i].Clone());
             }
 
             // add all expressions if Clone is invoked only on DataTable otherwise DataSet.Clone will assign expressions after creating all relationships.
-            if (!skipExpressionColumns && cloneDS == null) {
-                for (int i = 0; i < clmns.Count; i++) {
+            if (!skipExpressionColumns && cloneDS == null)
+            {
+                for (int i = 0; i < clmns.Count; i++)
+                {
                     clone.Columns[clmns[i].ColumnName].Expression = clmns[i].Expression;
                 }
             }
 
             // Create PrimaryKey
             DataColumn[] pkey = PrimaryKey;
-            if (pkey.Length > 0) {
+            if (pkey.Length > 0)
+            {
                 DataColumn[] key = new DataColumn[pkey.Length];
-                for (int i = 0; i < pkey.Length; i++) {
+                for (int i = 0; i < pkey.Length; i++)
+                {
                     key[i] = clone.Columns[pkey[i].Ordinal];
                 }
                 clone.PrimaryKey = key;
@@ -2256,65 +3020,84 @@ namespace System.Data {
 
             // now clone all unique constraints
             // Rename first
-            for (int j = 0; j < Constraints.Count; j++)  {
+            for (int j = 0; j < Constraints.Count; j++)
+            {
                 ForeignKeyConstraint foreign = Constraints[j] as ForeignKeyConstraint;
                 UniqueConstraint unique = Constraints[j] as UniqueConstraint;
-                if (foreign  != null) {
-                    if (foreign.Table == foreign.RelatedTable) {
+                if (foreign != null)
+                {
+                    if (foreign.Table == foreign.RelatedTable)
+                    {
                         ForeignKeyConstraint clonedConstraint = foreign.Clone(clone);
-                        Constraint oldConstraint = clone.Constraints.FindConstraint(clonedConstraint);
-                        if (oldConstraint != null) {
+                        Constraint oldConstraint = clone.Constraints.FindConstraint(
+                            clonedConstraint
+                        );
+                        if (oldConstraint != null)
+                        {
                             oldConstraint.ConstraintName = Constraints[j].ConstraintName;
                         }
                     }
                 }
-                else if (unique != null) {
+                else if (unique != null)
+                {
                     UniqueConstraint clonedConstraint = unique.Clone(clone);
                     Constraint oldConstraint = clone.Constraints.FindConstraint(clonedConstraint);
-                    if (oldConstraint != null) {
+                    if (oldConstraint != null)
+                    {
                         oldConstraint.ConstraintName = Constraints[j].ConstraintName;
-                        foreach (Object key in clonedConstraint.ExtendedProperties.Keys) {
-                            oldConstraint.ExtendedProperties[key] = clonedConstraint.ExtendedProperties[key];
+                        foreach (Object key in clonedConstraint.ExtendedProperties.Keys)
+                        {
+                            oldConstraint.ExtendedProperties[key] =
+                                clonedConstraint.ExtendedProperties[key];
                         }
                     }
                 }
             }
 
             // then add
-            for (int j = 0; j < Constraints.Count; j++)  {
-                if (! clone.Constraints.Contains(Constraints[j].ConstraintName, true)) {
+            for (int j = 0; j < Constraints.Count; j++)
+            {
+                if (!clone.Constraints.Contains(Constraints[j].ConstraintName, true))
+                {
                     ForeignKeyConstraint foreign = Constraints[j] as ForeignKeyConstraint;
                     UniqueConstraint unique = Constraints[j] as UniqueConstraint;
-                    if (foreign  != null) {
-                        if (foreign.Table == foreign.RelatedTable) {
+                    if (foreign != null)
+                    {
+                        if (foreign.Table == foreign.RelatedTable)
+                        {
                             ForeignKeyConstraint newforeign = foreign.Clone(clone);
-                            if (newforeign != null) { // we cant make sure that we recieve a cloned FKC,since it depends if table and relatedtable be the same
+                            if (newforeign != null)
+                            { // we cant make sure that we recieve a cloned FKC,since it depends if table and relatedtable be the same
                                 clone.Constraints.Add(newforeign);
                             }
                         }
                     }
-                    else if (unique != null) {
+                    else if (unique != null)
+                    {
                         clone.Constraints.Add(unique.Clone(clone));
                     }
-                 }
+                }
             }
 
             // ...Extended Properties...
 
-            if (this.extendedProperties != null) {
-                foreach(Object key in this.extendedProperties.Keys) {
-                    clone.ExtendedProperties[key]=this.extendedProperties[key];
+            if (this.extendedProperties != null)
+            {
+                foreach (Object key in this.extendedProperties.Keys)
+                {
+                    clone.ExtendedProperties[key] = this.extendedProperties[key];
                 }
             }
 
             return clone;
         }
 
-
-        public DataTable Copy(){
+        public DataTable Copy()
+        {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataTable.Copy|API> %d#\n", ObjectID);
-            try {
+            try
+            {
                 DataTable destTable = this.Clone();
 
                 foreach (DataRow row in Rows)
@@ -2322,7 +3105,8 @@ namespace System.Data {
 
                 return destTable;
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -2330,13 +3114,19 @@ namespace System.Data {
         /// <devdoc>
         ///    <para>Occurs when a value has been submitted for this column.</para>
         /// </devdoc>
-        [ResCategoryAttribute(Res.DataCategory_Data), ResDescriptionAttribute(Res.DataTableColumnChangingDescr)]
-        public event DataColumnChangeEventHandler ColumnChanging {
-            add {
+        [
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataTableColumnChangingDescr)
+        ]
+        public event DataColumnChangeEventHandler ColumnChanging
+        {
+            add
+            {
                 Bid.Trace("<ds.DataTable.add_ColumnChanging|API> %d#\n", ObjectID);
                 onColumnChangingDelegate += value;
             }
-            remove {
+            remove
+            {
                 Bid.Trace("<ds.DataTable.remove_ColumnChanging|API> %d#\n", ObjectID);
                 onColumnChangingDelegate -= value;
             }
@@ -2345,13 +3135,19 @@ namespace System.Data {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [ResCategoryAttribute(Res.DataCategory_Data), ResDescriptionAttribute(Res.DataTableColumnChangedDescr)]
-        public event DataColumnChangeEventHandler ColumnChanged {
-            add  {
+        [
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataTableColumnChangedDescr)
+        ]
+        public event DataColumnChangeEventHandler ColumnChanged
+        {
+            add
+            {
                 Bid.Trace("<ds.DataTable.add_ColumnChanged|API> %d#\n", ObjectID);
                 onColumnChangedDelegate += value;
             }
-            remove {
+            remove
+            {
                 Bid.Trace("<ds.DataTable.remove_ColumnChanged|API> %d#\n", ObjectID);
                 onColumnChangedDelegate -= value;
             }
@@ -2361,21 +3157,21 @@ namespace System.Data {
             ResCategoryAttribute(Res.DataCategory_Action),
             ResDescriptionAttribute(Res.DataSetInitializedDescr)
         ]
-        public event System.EventHandler  Initialized {
-            add {
-                onInitialized += value;
-            }
-            remove {
-                onInitialized -= value;
-            }
+        public event System.EventHandler Initialized
+        {
+            add { onInitialized += value; }
+            remove { onInitialized -= value; }
         }
 
-        internal event PropertyChangedEventHandler PropertyChanging {
-            add {
+        internal event PropertyChangedEventHandler PropertyChanging
+        {
+            add
+            {
                 Bid.Trace("<ds.DataTable.add_PropertyChanging|INFO> %d#\n", ObjectID);
                 onPropertyChangingDelegate += value;
             }
-            remove {
+            remove
+            {
                 Bid.Trace("<ds.DataTable.remove_PropertyChanging|INFO> %d#\n", ObjectID);
                 onPropertyChangingDelegate -= value;
             }
@@ -2386,13 +3182,19 @@ namespace System.Data {
         ///       Occurs after a row in the table has been successfully edited.
         ///    </para>
         /// </devdoc>
-        [ResCategoryAttribute(Res.DataCategory_Data), ResDescriptionAttribute(Res.DataTableRowChangedDescr)]
-        public event DataRowChangeEventHandler RowChanged {
-            add {
+        [
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataTableRowChangedDescr)
+        ]
+        public event DataRowChangeEventHandler RowChanged
+        {
+            add
+            {
                 Bid.Trace("<ds.DataTable.add_RowChanged|API> %d#\n", ObjectID);
                 onRowChangedDelegate += value;
             }
-            remove {
+            remove
+            {
                 Bid.Trace("<ds.DataTable.remove_RowChanged|API> %d#\n", ObjectID);
                 onRowChangedDelegate -= value;
             }
@@ -2403,13 +3205,19 @@ namespace System.Data {
         ///       Occurs when the <see cref='System.Data.DataRow'/> is changing.
         ///    </para>
         /// </devdoc>
-        [ResCategoryAttribute(Res.DataCategory_Data), ResDescriptionAttribute(Res.DataTableRowChangingDescr)]
-        public event DataRowChangeEventHandler RowChanging {
-            add {
+        [
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataTableRowChangingDescr)
+        ]
+        public event DataRowChangeEventHandler RowChanging
+        {
+            add
+            {
                 Bid.Trace("<ds.DataTable.add_RowChanging|API> %d#\n", ObjectID);
                 onRowChangingDelegate += value;
             }
-            remove {
+            remove
+            {
                 Bid.Trace("<ds.DataTable.remove_RowChanging|API> %d#\n", ObjectID);
                 onRowChangingDelegate -= value;
             }
@@ -2421,13 +3229,19 @@ namespace System.Data {
         ///       about to be deleted.
         ///    </para>
         /// </devdoc>
-        [ResCategoryAttribute(Res.DataCategory_Data), ResDescriptionAttribute(Res.DataTableRowDeletingDescr)]
-        public event DataRowChangeEventHandler RowDeleting {
-            add {
+        [
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataTableRowDeletingDescr)
+        ]
+        public event DataRowChangeEventHandler RowDeleting
+        {
+            add
+            {
                 Bid.Trace("<ds.DataTable.add_RowDeleting|API> %d#\n", ObjectID);
                 onRowDeletingDelegate += value;
             }
-            remove {
+            remove
+            {
                 Bid.Trace("<ds.DataTable.remove_RowDeleting|API> %d#\n", ObjectID);
                 onRowDeletingDelegate -= value;
             }
@@ -2439,65 +3253,87 @@ namespace System.Data {
         ///       table has been deleted.
         ///    </para>
         /// </devdoc>
-        [ResCategoryAttribute(Res.DataCategory_Data), ResDescriptionAttribute(Res.DataTableRowDeletedDescr)]
-        public event DataRowChangeEventHandler RowDeleted {
-            add {
+        [
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataTableRowDeletedDescr)
+        ]
+        public event DataRowChangeEventHandler RowDeleted
+        {
+            add
+            {
                 Bid.Trace("<ds.DataTable.add_RowDeleted|API> %d#\n", ObjectID);
                 onRowDeletedDelegate += value;
             }
-            remove {
+            remove
+            {
                 Bid.Trace("<ds.DataTable.remove_RowDeleted|API> %d#\n", ObjectID);
                 onRowDeletedDelegate -= value;
             }
         }
 
-        [ResCategoryAttribute(Res.DataCategory_Data), ResDescriptionAttribute(Res.DataTableRowsClearingDescr)]
-        public event DataTableClearEventHandler TableClearing {
-            add {
+        [
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataTableRowsClearingDescr)
+        ]
+        public event DataTableClearEventHandler TableClearing
+        {
+            add
+            {
                 Bid.Trace("<ds.DataTable.add_TableClearing|API> %d#\n", ObjectID);
                 onTableClearingDelegate += value;
             }
-            remove {
+            remove
+            {
                 Bid.Trace("<ds.DataTable.remove_TableClearing|API> %d#\n", ObjectID);
                 onTableClearingDelegate -= value;
             }
         }
 
-        [ResCategoryAttribute(Res.DataCategory_Data), ResDescriptionAttribute(Res.DataTableRowsClearedDescr)]
-        public event DataTableClearEventHandler TableCleared {
-            add {
+        [
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataTableRowsClearedDescr)
+        ]
+        public event DataTableClearEventHandler TableCleared
+        {
+            add
+            {
                 Bid.Trace("<ds.DataTable.add_TableCleared|API> %d#\n", ObjectID);
                 onTableClearedDelegate += value;
             }
-            remove {
+            remove
+            {
                 Bid.Trace("<ds.DataTable.remove_TableCleared|API> %d#\n", ObjectID);
                 onTableClearedDelegate -= value;
             }
         }
 
-        [ResCategoryAttribute(Res.DataCategory_Data), ResDescriptionAttribute(Res.DataTableRowsNewRowDescr)]
-        public event DataTableNewRowEventHandler TableNewRow {
-            add {
-                onTableNewRowDelegate += value;
-            }
-            remove {
-                onTableNewRowDelegate -= value;
-            }
+        [
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.DataTableRowsNewRowDescr)
+        ]
+        public event DataTableNewRowEventHandler TableNewRow
+        {
+            add { onTableNewRowDelegate += value; }
+            remove { onTableNewRowDelegate -= value; }
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public override ISite Site {
-            get {
-                return base.Site;
-            }
-            set {
+        public override ISite Site
+        {
+            get { return base.Site; }
+            set
+            {
                 ISite oldSite = Site;
-                if (value == null && oldSite != null) {
+                if (value == null && oldSite != null)
+                {
                     IContainer cont = oldSite.Container;
 
-                    if (cont != null) {
-                        for (int i = 0; i < Columns.Count; i++) {
-                            if (Columns[i].Site != null) {
+                    if (cont != null)
+                    {
+                        for (int i = 0; i < Columns.Count; i++)
+                        {
+                            if (Columns[i].Site != null)
+                            {
                                 cont.Remove(Columns[i]);
                             }
                         }
@@ -2507,7 +3343,8 @@ namespace System.Data {
             }
         }
 
-        internal DataRow AddRecords(int oldRecord, int newRecord) {
+        internal DataRow AddRecords(int oldRecord, int newRecord)
+        {
             DataRow row;
             if (oldRecord == -1 && newRecord == -1)
             {
@@ -2524,52 +3361,79 @@ namespace System.Data {
             return row;
         }
 
-        internal void AddRow(DataRow row) {
+        internal void AddRow(DataRow row)
+        {
             AddRow(row, -1);
         }
 
-        internal void AddRow(DataRow row, int proposedID) {
+        internal void AddRow(DataRow row, int proposedID)
+        {
             InsertRow(row, proposedID, -1);
         }
 
-        internal void InsertRow(DataRow row, int proposedID, int pos) {
-            InsertRow(row, proposedID, pos, /*fireEvent*/true);
+        internal void InsertRow(DataRow row, int proposedID, int pos)
+        {
+            InsertRow(
+                row,
+                proposedID,
+                pos, /*fireEvent*/
+                true
+            );
         }
 
-        internal void InsertRow(DataRow row, long proposedID, int pos, bool fireEvent) {
+        internal void InsertRow(DataRow row, long proposedID, int pos, bool fireEvent)
+        {
             Exception deferredException = null;
 
-            if (row == null) {
+            if (row == null)
+            {
                 throw ExceptionBuilder.ArgumentNull("row");
             }
-            if (row.Table != this) {
+            if (row.Table != this)
+            {
                 throw ExceptionBuilder.RowAlreadyInOtherCollection();
             }
-            if (row.rowID != -1) {
+            if (row.rowID != -1)
+            {
                 throw ExceptionBuilder.RowAlreadyInTheCollection();
             }
-            row.BeginEdit(); // ensure something's there.            
+            row.BeginEdit(); // ensure something's there.
 
             int record = row.tempRecord;
             row.tempRecord = -1;
 
-            if (proposedID == -1) {
+            if (proposedID == -1)
+            {
                 proposedID = this.nextRowID;
             }
 
             bool rollbackOnException;
-            if (rollbackOnException = (nextRowID <= proposedID)) { // WebData 109005
+            if (rollbackOnException = (nextRowID <= proposedID))
+            { // WebData 109005
                 nextRowID = checked(proposedID + 1);
             }
 
-            try {
-                try {
+            try
+            {
+                try
+                {
                     row.rowID = proposedID;
                     // this method may cause DataView.OnListChanged in which another row may be added
-                    SetNewRecordWorker(row, record, DataRowAction.Add, false, false, pos, fireEvent, out deferredException); // now we do add the row to collection before OnRowChanged (RaiseRowChanged)
+                    SetNewRecordWorker(
+                        row,
+                        record,
+                        DataRowAction.Add,
+                        false,
+                        false,
+                        pos,
+                        fireEvent,
+                        out deferredException
+                    ); // now we do add the row to collection before OnRowChanged (RaiseRowChanged)
                 }
-                catch {
-                    if (rollbackOnException && (nextRowID == proposedID+1)) {
+                catch
+                {
+                    if (rollbackOnException && (nextRowID == proposedID + 1))
+                    {
                         nextRowID = proposedID;
                     }
                     row.rowID = -1;
@@ -2582,23 +3446,29 @@ namespace System.Data {
                 if (deferredException != null)
                     throw deferredException;
 
-                if (EnforceConstraints && !inLoad ) { // if we are evaluating expression, we need to validate constraints
+                if (EnforceConstraints && !inLoad)
+                { // if we are evaluating expression, we need to validate constraints
                     int columnCount = columnCollection.Count;
-                    for (int i = 0; i < columnCount; ++i) {
+                    for (int i = 0; i < columnCount; ++i)
+                    {
                         DataColumn column = columnCollection[i];
-                        if (column.Computed) {
+                        if (column.Computed)
+                        {
                             column.CheckColumnConstraint(row, DataRowAction.Add);
                         }
                     }
                 }
             }
-            finally {
-                row.ResetLastChangedColumn();// if expression is evaluated while adding, before  return, we want to clear it
+            finally
+            {
+                row.ResetLastChangedColumn(); // if expression is evaluated while adding, before  return, we want to clear it
             }
         }
 
-        internal void CheckNotModifying(DataRow row) {
-            if (row.tempRecord != -1) {
+        internal void CheckNotModifying(DataRow row)
+        {
+            if (row.tempRecord != -1)
+            {
                 row.EndEdit();
                 //throw ExceptionBuilder.ModifyingRow();
             }
@@ -2608,15 +3478,23 @@ namespace System.Data {
         ///    <para>
         ///       Clears the table of all data.</para>
         /// </devdoc>
-
-        public void Clear() {
+        public void Clear()
+        {
             Clear(true);
         }
-        internal void Clear(bool clearAll) {
-            IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataTable.Clear|INFO> %d#, clearAll=%d{bool}\n", ObjectID, clearAll);
 
-            try {
+        internal void Clear(bool clearAll)
+        {
+            IntPtr hscp;
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTable.Clear|INFO> %d#, clearAll=%d{bool}\n",
+                ObjectID,
+                clearAll
+            );
+
+            try
+            {
                 Debug.Assert(null == rowDiffId, "wasn't previously cleared");
                 rowDiffId = null;
 
@@ -2625,14 +3503,21 @@ namespace System.Data {
                 bool shouldFireClearEvents = (this.Rows.Count != 0); // if Rows is already empty, this is noop
 
                 DataTableClearEventArgs e = null;
-                if (shouldFireClearEvents) {
-                    e = new DataTableClearEventArgs (this);
+                if (shouldFireClearEvents)
+                {
+                    e = new DataTableClearEventArgs(this);
                     OnTableClearing(e);
                 }
 
-                if (dataSet != null && dataSet.EnforceConstraints) {
+                if (dataSet != null && dataSet.EnforceConstraints)
+                {
+                    for (
+                        ParentForeignKeyConstraintEnumerator constraints =
+                            new ParentForeignKeyConstraintEnumerator(dataSet, this);
+                        constraints.GetNext();
 
-                    for (ParentForeignKeyConstraintEnumerator constraints = new ParentForeignKeyConstraintEnumerator(dataSet, this); constraints.GetNext();) {
+                    )
+                    {
                         ForeignKeyConstraint constraint = constraints.GetForeignKeyConstraint();
                         constraint.CheckCanClearParentTable(this);
                     }
@@ -2642,7 +3527,8 @@ namespace System.Data {
 
                 // SQLBU 415729: Serious performance issue when calling Clear()
                 // this improves performance by iterating over rows instead of computing by index
-                foreach(DataRow row in Rows) {
+                foreach (DataRow row in Rows)
+                {
                     row.oldRecord = -1;
                     row.newRecord = -1;
                     row.tempRecord = -1;
@@ -2653,29 +3539,41 @@ namespace System.Data {
 
                 ResetIndexes();
 
-                if (shouldFireClearEvents) {
+                if (shouldFireClearEvents)
+                {
                     OnTableCleared(e);
                 }
 
                 // SQLBU 501916 - DataTable internal index is corrupted:'5'
-                foreach(DataColumn column in Columns) {
+                foreach (DataColumn column in Columns)
+                {
                     EvaluateDependentExpressions(column);
                 }
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        internal void CascadeAll(DataRow row, DataRowAction action) {
-            if (DataSet != null && DataSet.fEnableCascading) {
-                for (ParentForeignKeyConstraintEnumerator constraints = new ParentForeignKeyConstraintEnumerator(dataSet, this); constraints.GetNext();) {
+        internal void CascadeAll(DataRow row, DataRowAction action)
+        {
+            if (DataSet != null && DataSet.fEnableCascading)
+            {
+                for (
+                    ParentForeignKeyConstraintEnumerator constraints =
+                        new ParentForeignKeyConstraintEnumerator(dataSet, this);
+                    constraints.GetNext();
+
+                )
+                {
                     constraints.GetForeignKeyConstraint().CheckCascade(row, action);
                 }
             }
         }
 
-        internal void CommitRow(DataRow row) {
+        internal void CommitRow(DataRow row)
+        {
             // Fire Changing event
             DataRowChangeEventArgs drcevent = OnRowChanging(null, row, DataRowAction.Commit);
 
@@ -2687,11 +3585,13 @@ namespace System.Data {
             OnRowChanged(drcevent, row, DataRowAction.Commit);
         }
 
-        internal int Compare(string s1, string s2) {
+        internal int Compare(string s1, string s2)
+        {
             return Compare(s1, s2, null);
         }
 
-        internal int Compare(string s1, string s2, CompareInfo comparer) {
+        internal int Compare(string s1, string s2, CompareInfo comparer)
+        {
             object obj1 = s1;
             object obj2 = s2;
             if (obj1 == obj2)
@@ -2704,53 +3604,69 @@ namespace System.Data {
             int leng1 = s1.Length;
             int leng2 = s2.Length;
 
-            for (; leng1 > 0; leng1--) {
-                if (s1[leng1-1] != 0x20 && s1[leng1-1] != 0x3000) // 0x3000 is Ideographic Whitespace
+            for (; leng1 > 0; leng1--)
+            {
+                if (s1[leng1 - 1] != 0x20 && s1[leng1 - 1] != 0x3000) // 0x3000 is Ideographic Whitespace
                     break;
             }
-            for (; leng2 > 0; leng2--) {
-                if (s2[leng2-1] != 0x20 && s2[leng2-1] != 0x3000)
+            for (; leng2 > 0; leng2--)
+            {
+                if (s2[leng2 - 1] != 0x20 && s2[leng2 - 1] != 0x3000)
                     break;
             }
 
-            return (comparer ?? this.CompareInfo).Compare(s1, 0, leng1, s2, 0, leng2, _compareFlags);
+            return (comparer ?? this.CompareInfo).Compare(
+                s1,
+                0,
+                leng1,
+                s2,
+                0,
+                leng2,
+                _compareFlags
+            );
         }
 
-        internal int IndexOf(string s1, string s2) {
+        internal int IndexOf(string s1, string s2)
+        {
             return CompareInfo.IndexOf(s1, s2, _compareFlags);
         }
 
-        internal bool IsSuffix(string s1, string s2) {
+        internal bool IsSuffix(string s1, string s2)
+        {
             return CompareInfo.IsSuffix(s1, s2, _compareFlags);
         }
 
         /// <devdoc>
         ///    <para>Computes the given expression on the current rows that pass the filter criteria.</para>
         /// </devdoc>
-        public object Compute(string expression, string filter) {
+        public object Compute(string expression, string filter)
+        {
             DataRow[] rows = Select(filter, "", DataViewRowState.CurrentRows);
             DataExpression expr = new DataExpression(this, expression);
             return expr.Evaluate(rows);
         }
 
-        bool System.ComponentModel.IListSource.ContainsListCollection {
-            get {
-                return false;
-            }
+        bool System.ComponentModel.IListSource.ContainsListCollection
+        {
+            get { return false; }
         }
 
         internal void CopyRow(DataTable table, DataRow row)
         {
-            int oldRecord = -1, newRecord = -1;
+            int oldRecord = -1,
+                newRecord = -1;
 
             if (row == null)
                 return;
 
-            if (row.oldRecord != -1) {
+            if (row.oldRecord != -1)
+            {
                 oldRecord = table.recordManager.ImportRecord(row.Table, row.oldRecord);
             }
-            if (row.newRecord != -1) {
-                if (row.newRecord != row.oldRecord) {
+            if (row.newRecord != -1)
+            {
+                if (row.newRecord != row.oldRecord)
+                {
                     newRecord = table.recordManager.ImportRecord(row.Table, row.newRecord);
                 }
                 else
@@ -2759,22 +3675,24 @@ namespace System.Data {
 
             DataRow targetRow = table.AddRecords(oldRecord, newRecord);
 
-            if (row.HasErrors) {
+            if (row.HasErrors)
+            {
                 targetRow.RowError = row.RowError;
 
                 DataColumn[] cols = row.GetColumnsInError();
 
-                for (int i = 0; i < cols.Length; i++) {
+                for (int i = 0; i < cols.Length; i++)
+                {
                     DataColumn col = targetRow.Table.Columns[cols[i].ColumnName];
                     targetRow.SetColumnError(col, row.GetColumnError(cols[i]));
                 }
             }
+        }
 
-       }
-
-
-        internal void DeleteRow(DataRow row) {
-            if (row.newRecord == -1) {
+        internal void DeleteRow(DataRow row)
+        {
+            if (row.newRecord == -1)
+            {
                 throw ExceptionBuilder.RowAlreadyDeleted();
             }
 
@@ -2782,21 +3700,26 @@ namespace System.Data {
             SetNewRecord(row, -1, DataRowAction.Delete, false, true);
         }
 
-        private void CheckPrimaryKey() {
-            if (primaryKey == null) throw ExceptionBuilder.TableMissingPrimaryKey();
+        private void CheckPrimaryKey()
+        {
+            if (primaryKey == null)
+                throw ExceptionBuilder.TableMissingPrimaryKey();
         }
 
-        internal DataRow FindByPrimaryKey(object[] values) {
+        internal DataRow FindByPrimaryKey(object[] values)
+        {
             CheckPrimaryKey();
             return FindRow(primaryKey.Key, values);
         }
 
-        internal DataRow FindByPrimaryKey(object value) {
+        internal DataRow FindByPrimaryKey(object value)
+        {
             CheckPrimaryKey();
             return FindRow(primaryKey.Key, value);
         }
 
-        private DataRow FindRow(DataKey key, object[] values) {
+        private DataRow FindRow(DataKey key, object[] values)
+        {
             Index index = GetIndex(NewIndexDesc(key));
             Range range = index.FindRecords(values);
             if (range.IsNull)
@@ -2804,7 +3727,8 @@ namespace System.Data {
             return recordManager[index.GetRecord(range.Min)];
         }
 
-        private DataRow FindRow(DataKey key, object value) {
+        private DataRow FindRow(DataKey key, object value)
+        {
             Index index = GetIndex(NewIndexDesc(key));
             Range range = index.FindRecords(value);
             if (range.IsNull)
@@ -2812,32 +3736,40 @@ namespace System.Data {
             return recordManager[index.GetRecord(range.Min)];
         }
 
-        internal string FormatSortString(IndexField[] indexDesc) {
+        internal string FormatSortString(IndexField[] indexDesc)
+        {
             StringBuilder builder = new StringBuilder();
-            foreach (IndexField field in indexDesc) {
-                if (0 < builder.Length) {
+            foreach (IndexField field in indexDesc)
+            {
+                if (0 < builder.Length)
+                {
                     builder.Append(", ");
                 }
                 builder.Append(field.Column.ColumnName);
-                if (field.IsDescending) {
+                if (field.IsDescending)
+                {
                     builder.Append(" DESC");
                 }
             }
             return builder.ToString();
         }
 
-        internal void FreeRecord(ref int record) {
+        internal void FreeRecord(ref int record)
+        {
             recordManager.FreeRecord(ref record);
         }
 
-        public DataTable GetChanges() {
+        public DataTable GetChanges()
+        {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataTable.GetChanges|API> %d#\n", ObjectID);
-            try {
+            try
+            {
                 DataTable dtChanges = this.Clone();
                 DataRow row = null;
 
-                for (int i = 0; i < Rows.Count; i++) {
+                for (int i = 0; i < Rows.Count; i++)
+                {
                     row = Rows[i];
                     if (row.oldRecord != row.newRecord)
                         dtChanges.ImportRow(row);
@@ -2848,7 +3780,8 @@ namespace System.Data {
 
                 return dtChanges;
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -2856,15 +3789,25 @@ namespace System.Data {
         public DataTable GetChanges(DataRowState rowStates)
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataTable.GetChanges|API> %d#, rowStates=%d{ds.DataRowState}\n", ObjectID, (int)rowStates);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTable.GetChanges|API> %d#, rowStates=%d{ds.DataRowState}\n",
+                ObjectID,
+                (int)rowStates
+            );
+            try
+            {
                 DataTable dtChanges = this.Clone();
                 DataRow row = null;
 
                 // check that rowStates is valid DataRowState
-                Debug.Assert(Enum.GetUnderlyingType(typeof(DataRowState)) == typeof(Int32), "Invalid DataRowState type");
+                Debug.Assert(
+                    Enum.GetUnderlyingType(typeof(DataRowState)) == typeof(Int32),
+                    "Invalid DataRowState type"
+                );
 
-                for (int i = 0; i < Rows.Count; i++) {
+                for (int i = 0; i < Rows.Count; i++)
+                {
                     row = Rows[i];
                     if ((row.RowState & rowStates) != 0)
                         dtChanges.ImportRow(row);
@@ -2875,7 +3818,8 @@ namespace System.Data {
 
                 return dtChanges;
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -2883,12 +3827,15 @@ namespace System.Data {
         /// <devdoc>
         /// <para>Returns an array of <see cref='System.Data.DataRow'/> objects that contain errors.</para>
         /// </devdoc>
-        public DataRow[] GetErrors() {
+        public DataRow[] GetErrors()
+        {
             List<DataRow> errorList = new List<DataRow>();
 
-            for (int i = 0; i < Rows.Count; i++) {
+            for (int i = 0; i < Rows.Count; i++)
+            {
                 DataRow row = Rows[i];
-                if (row.HasErrors) {
+                if (row.HasErrors)
+                {
                     errorList.Add(row);
                 }
             }
@@ -2897,27 +3844,39 @@ namespace System.Data {
             return temp;
         }
 
-        internal Index GetIndex(IndexField[] indexDesc) {
+        internal Index GetIndex(IndexField[] indexDesc)
+        {
             return GetIndex(indexDesc, DataViewRowState.CurrentRows, (IFilter)null);
         }
 
-        internal Index GetIndex(string sort, DataViewRowState recordStates, IFilter rowFilter) {
+        internal Index GetIndex(string sort, DataViewRowState recordStates, IFilter rowFilter)
+        {
             return GetIndex(ParseSortString(sort), recordStates, rowFilter);
         }
 
-        internal Index GetIndex(IndexField[] indexDesc, DataViewRowState recordStates, IFilter rowFilter) {
+        internal Index GetIndex(
+            IndexField[] indexDesc,
+            DataViewRowState recordStates,
+            IFilter rowFilter
+        )
+        {
             indexesLock.AcquireReaderLock(-1);
-            try {
-                for (int i = 0; i < indexes.Count; i++) {
+            try
+            {
+                for (int i = 0; i < indexes.Count; i++)
+                {
                     Index index = indexes[i];
-                    if (index != null) {
-                        if (index.Equal(indexDesc, recordStates, rowFilter)) {
+                    if (index != null)
+                    {
+                        if (index.Equal(indexDesc, recordStates, rowFilter))
+                        {
                             return index;
                         }
                     }
                 }
             }
-            finally {
+            finally
+            {
                 indexesLock.ReleaseReaderLock();
             }
             Index ndx = new Index(this, indexDesc, recordStates, rowFilter);
@@ -2925,28 +3884,34 @@ namespace System.Data {
             return ndx;
         }
 
-        IList System.ComponentModel.IListSource.GetList() {
+        IList System.ComponentModel.IListSource.GetList()
+        {
             return DefaultView;
         }
 
-
-        internal List<DataViewListener> GetListeners() {
+        internal List<DataViewListener> GetListeners()
+        {
             return _dataViewListeners;
         }
 
         // We need a HashCodeProvider for Case, Kana and Width insensitive
-        internal int GetSpecialHashCode(string name) {
+        internal int GetSpecialHashCode(string name)
+        {
             int i;
-            for (i = 0; (i < name.Length) && (0x3000 > name[i]); ++i);
+            for (i = 0; (i < name.Length) && (0x3000 > name[i]); ++i)
+                ;
 
-            if (name.Length == i) {
-                if (null == _hashCodeProvider) {
+            if (name.Length == i)
+            {
+                if (null == _hashCodeProvider)
+                {
                     // it should use the CaseSensitive property, but V1 shipped this way
                     _hashCodeProvider = StringComparer.Create(Locale, true);
                 }
                 return _hashCodeProvider.GetHashCode(name);
             }
-            else {
+            else
+            {
                 return 0;
             }
         }
@@ -2955,56 +3920,74 @@ namespace System.Data {
         {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataTable.ImportRow|API> %d#\n", ObjectID);
-            try {
-                int oldRecord = -1, newRecord = -1;
+            try
+            {
+                int oldRecord = -1,
+                    newRecord = -1;
 
                 if (row == null)
                     return;
 
-                if (row.oldRecord != -1) {
+                if (row.oldRecord != -1)
+                {
                     oldRecord = recordManager.ImportRecord(row.Table, row.oldRecord);
                 }
-                if (row.newRecord != -1) {  // row not deleted
-                    if (row.RowState != DataRowState.Unchanged) { // not unchanged, it means Added or modified
+                if (row.newRecord != -1)
+                { // row not deleted
+                    if (row.RowState != DataRowState.Unchanged)
+                    { // not unchanged, it means Added or modified
                         newRecord = recordManager.ImportRecord(row.Table, row.newRecord);
                     }
                     else
                         newRecord = oldRecord;
                 }
 
-                if (oldRecord != -1 || newRecord != -1) {
+                if (oldRecord != -1 || newRecord != -1)
+                {
                     DataRow targetRow = AddRecords(oldRecord, newRecord);
 
-                    if (row.HasErrors) {
+                    if (row.HasErrors)
+                    {
                         targetRow.RowError = row.RowError;
 
                         DataColumn[] cols = row.GetColumnsInError();
 
-                        for (int i = 0; i < cols.Length; i++) {
+                        for (int i = 0; i < cols.Length; i++)
+                        {
                             DataColumn col = targetRow.Table.Columns[cols[i].ColumnName];
                             targetRow.SetColumnError(col, row.GetColumnError(cols[i]));
                         }
                     }
                 }
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
+        }
 
-       }
-
-        internal void InsertRow(DataRow row, long proposedID) {
+        internal void InsertRow(DataRow row, long proposedID)
+        {
             IntPtr hscp;
 
-            Bid.ScopeEnter(out hscp, "<ds.DataTable.InsertRow|INFO> %d#, row=%d\n", ObjectID, row.ObjectID);
-            try {
-                if (row.Table != this) {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTable.InsertRow|INFO> %d#, row=%d\n",
+                ObjectID,
+                row.ObjectID
+            );
+            try
+            {
+                if (row.Table != this)
+                {
                     throw ExceptionBuilder.RowAlreadyInOtherCollection();
                 }
-                if (row.rowID != -1) {
+                if (row.rowID != -1)
+                {
                     throw ExceptionBuilder.RowAlreadyInTheCollection();
                 }
-                if (row.oldRecord == -1 && row.newRecord == -1) {
+                if (row.oldRecord == -1 && row.newRecord == -1)
+                {
                     throw ExceptionBuilder.RowEmpty();
                 }
 
@@ -3017,15 +4000,17 @@ namespace System.Data {
 
                 DataRowChangeEventArgs drcevent = null;
 
-
-                if (row.newRecord != -1) {
+                if (row.newRecord != -1)
+                {
                     row.tempRecord = row.newRecord;
                     row.newRecord = -1;
 
-                    try {
+                    try
+                    {
                         drcevent = RaiseRowChanging(null, row, DataRowAction.Add, true);
                     }
-                    catch {
+                    catch
+                    {
                         row.tempRecord = -1;
                         throw;
                     }
@@ -3041,14 +4026,26 @@ namespace System.Data {
                     recordManager[row.newRecord] = row;
 
                 Rows.ArrayAdd(row); // SQL BU Defect Tracking 247738, 323482 row should be in the
-                                    // collection when maintaining the indexes                  
+                // collection when maintaining the indexes
 
-                if (row.RowState == DataRowState.Unchanged){ //  how about row.oldRecord == row.newRecord both == -1
-                    RecordStateChanged(row.oldRecord, DataViewRowState.None, DataViewRowState.Unchanged);
+                if (row.RowState == DataRowState.Unchanged)
+                { //  how about row.oldRecord == row.newRecord both == -1
+                    RecordStateChanged(
+                        row.oldRecord,
+                        DataViewRowState.None,
+                        DataViewRowState.Unchanged
+                    );
                 }
-                else {
-                    RecordStateChanged(row.oldRecord, DataViewRowState.None, row.GetRecordState(row.oldRecord),
-                                       row.newRecord, DataViewRowState.None, row.GetRecordState(row.newRecord));
+                else
+                {
+                    RecordStateChanged(
+                        row.oldRecord,
+                        DataViewRowState.None,
+                        row.GetRecordState(row.oldRecord),
+                        row.newRecord,
+                        DataViewRowState.None,
+                        row.GetRecordState(row.newRecord)
+                    );
                 }
 
                 if (dependentColumns != null && dependentColumns.Count > 0)
@@ -3056,12 +4053,14 @@ namespace System.Data {
 
                 RaiseRowChanged(drcevent, row, DataRowAction.Add);
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        private IndexField [] NewIndexDesc(DataKey key) {
+        private IndexField[] NewIndexDesc(DataKey key)
+        {
             Debug.Assert(key.HasValue);
             IndexField[] indexDesc = key.GetIndexDesc();
             IndexField[] newIndexDesc = new IndexField[indexDesc.Length];
@@ -3069,70 +4068,89 @@ namespace System.Data {
             return newIndexDesc;
         }
 
-        internal int NewRecord() {
+        internal int NewRecord()
+        {
             return NewRecord(-1);
         }
 
-        internal int NewUninitializedRecord() {
+        internal int NewUninitializedRecord()
+        {
             return recordManager.NewRecordBase();
         }
 
-        internal int NewRecordFromArray(object[] value) {
+        internal int NewRecordFromArray(object[] value)
+        {
             int colCount = columnCollection.Count; // Perf: use the readonly columnCollection field directly
-            if (colCount < value.Length) {
+            if (colCount < value.Length)
+            {
                 throw ExceptionBuilder.ValueArrayLength();
             }
             int record = recordManager.NewRecordBase();
-            try {
-                for (int i = 0; i < value.Length; i++) {
-                    if (null != value[i]) {
+            try
+            {
+                for (int i = 0; i < value.Length; i++)
+                {
+                    if (null != value[i])
+                    {
                         columnCollection[i][record] = value[i];
                     }
-                    else {
-                        columnCollection[i].Init(record);  // Increase AutoIncrementCurrent
+                    else
+                    {
+                        columnCollection[i].Init(record); // Increase AutoIncrementCurrent
                     }
                 }
-                for (int i = value.Length; i < colCount; i++) {
+                for (int i = value.Length; i < colCount; i++)
+                {
                     columnCollection[i].Init(record);
                 }
                 return record;
             }
-            catch (Exception e) {
-                // 
-                if (Common.ADP.IsCatchableOrSecurityExceptionType (e)) {
+            catch (Exception e)
+            {
+                //
+                if (Common.ADP.IsCatchableOrSecurityExceptionType(e))
+                {
                     FreeRecord(ref record); // WebData 104246
                 }
                 throw;
             }
         }
 
-        internal int NewRecord(int sourceRecord) {
+        internal int NewRecord(int sourceRecord)
+        {
             int record = recordManager.NewRecordBase();
 
             int count = columnCollection.Count;
-            if (-1 == sourceRecord) {
-                for (int i = 0; i < count; ++i) {
+            if (-1 == sourceRecord)
+            {
+                for (int i = 0; i < count; ++i)
+                {
                     columnCollection[i].Init(record);
                 }
             }
-            else {
-                for (int i = 0; i < count; ++i) {
+            else
+            {
+                for (int i = 0; i < count; ++i)
+                {
                     columnCollection[i].Copy(sourceRecord, record);
                 }
             }
             return record;
         }
 
-        internal DataRow NewEmptyRow() {
+        internal DataRow NewEmptyRow()
+        {
             rowBuilder._record = -1;
-            DataRow dr = NewRowFromBuilder( rowBuilder );
-            if (dataSet != null) {
-                DataSet.OnDataRowCreated( dr );
+            DataRow dr = NewRowFromBuilder(rowBuilder);
+            if (dataSet != null)
+            {
+                DataSet.OnDataRowCreated(dr);
             }
             return dr;
         }
 
-        private DataRow NewUninitializedRow() {
+        private DataRow NewUninitializedRow()
+        {
             DataRow dr = NewRow(NewUninitializedRecord());
             return dr;
         }
@@ -3141,27 +4159,35 @@ namespace System.Data {
         /// <para>Creates a new <see cref='System.Data.DataRow'/>
         /// with the same schema as the table.</para>
         /// </devdoc>
-        public DataRow NewRow() {
+        public DataRow NewRow()
+        {
             DataRow dr = NewRow(-1);
             NewRowCreated(dr); // this is the only API we want this event to be fired
             return dr;
         }
 
         // Only initialize DataRelation mapping columns (approximately hidden columns)
-        internal DataRow CreateEmptyRow() {
+        internal DataRow CreateEmptyRow()
+        {
             DataRow row = this.NewUninitializedRow();
 
-            foreach( DataColumn c in this.Columns ) {
-                if (!XmlToDatasetMap.IsMappedColumn(c)) {
-                    if (!c.AutoIncrement) {
-                        if (c.AllowDBNull) {
+            foreach (DataColumn c in this.Columns)
+            {
+                if (!XmlToDatasetMap.IsMappedColumn(c))
+                {
+                    if (!c.AutoIncrement)
+                    {
+                        if (c.AllowDBNull)
+                        {
                             row[c] = DBNull.Value;
                         }
-                        else if(c.DefaultValue!=null){
+                        else if (c.DefaultValue != null)
+                        {
                             row[c] = c.DefaultValue;
                         }
                     }
-                    else {
+                    else
+                    {
                         c.Init(row.tempRecord);
                     }
                 }
@@ -3169,88 +4195,112 @@ namespace System.Data {
             return row;
         }
 
-        private void NewRowCreated(DataRow row) {
-            if (null != onTableNewRowDelegate) {
-                DataTableNewRowEventArgs eventArg =  new DataTableNewRowEventArgs(row);
+        private void NewRowCreated(DataRow row)
+        {
+            if (null != onTableNewRowDelegate)
+            {
+                DataTableNewRowEventArgs eventArg = new DataTableNewRowEventArgs(row);
                 OnTableNewRow(eventArg);
             }
         }
 
-        internal DataRow NewRow(int record) {
-            if (-1 == record) {
+        internal DataRow NewRow(int record)
+        {
+            if (-1 == record)
+            {
                 record = NewRecord(-1);
             }
 
             rowBuilder._record = record;
-            DataRow row = NewRowFromBuilder( rowBuilder );
+            DataRow row = NewRowFromBuilder(rowBuilder);
             recordManager[record] = row;
 
             if (dataSet != null)
-                DataSet.OnDataRowCreated( row );
+                DataSet.OnDataRowCreated(row);
 
             return row;
         }
 
         // This is what a subclassed dataSet overrides to create a new row.
-        protected virtual DataRow NewRowFromBuilder(DataRowBuilder builder) {
+        protected virtual DataRow NewRowFromBuilder(DataRowBuilder builder)
+        {
             return new DataRow(builder);
         }
 
         /// <devdoc>
         ///    <para>Gets the row type.</para>
         /// </devdoc>
-        protected virtual Type GetRowType() {
+        protected virtual Type GetRowType()
+        {
             return typeof(DataRow);
         }
 
         // Prevent inlining so that reflection calls are not moved to caller that may be in a different assembly that may have a different grant set.
-        [MethodImpl(MethodImplOptions.NoInlining)] 
-        protected internal DataRow[] NewRowArray(int size) {
-            if (IsTypedDataTable) {
-                if (0 == size) {
-                    if (null == EmptyDataRowArray) {
-                        EmptyDataRowArray = (DataRow[]) Array.CreateInstance(GetRowType(), 0);
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        protected internal DataRow[] NewRowArray(int size)
+        {
+            if (IsTypedDataTable)
+            {
+                if (0 == size)
+                {
+                    if (null == EmptyDataRowArray)
+                    {
+                        EmptyDataRowArray = (DataRow[])Array.CreateInstance(GetRowType(), 0);
                     }
                     return EmptyDataRowArray;
                 }
-                return (DataRow[]) Array.CreateInstance(GetRowType(), size);
+                return (DataRow[])Array.CreateInstance(GetRowType(), size);
             }
-            else {
+            else
+            {
                 return ((0 == size) ? DataTable.zeroRows : new DataRow[size]);
             }
         }
 
-        internal bool NeedColumnChangeEvents {
-            get {
-                return (IsTypedDataTable || (null != onColumnChangingDelegate) || (null != onColumnChangedDelegate));
+        internal bool NeedColumnChangeEvents
+        {
+            get
+            {
+                return (
+                    IsTypedDataTable
+                    || (null != onColumnChangingDelegate)
+                    || (null != onColumnChangedDelegate)
+                );
             }
         }
 
-        protected internal virtual void OnColumnChanging(DataColumnChangeEventArgs e) {
+        protected internal virtual void OnColumnChanging(DataColumnChangeEventArgs e)
+        {
             // intentionally allow exceptions to bubble up.  We haven't committed anything yet.
             Debug.Assert(e != null, "e should not be null");
-            if (onColumnChangingDelegate != null) {
+            if (onColumnChangingDelegate != null)
+            {
                 Bid.Trace("<ds.DataTable.OnColumnChanging|INFO> %d#\n", ObjectID);
                 onColumnChangingDelegate(this, e);
             }
         }
 
-        protected internal virtual void OnColumnChanged(DataColumnChangeEventArgs e) {
+        protected internal virtual void OnColumnChanged(DataColumnChangeEventArgs e)
+        {
             Debug.Assert(e != null, "e should not be null");
-            if (onColumnChangedDelegate != null) {
+            if (onColumnChangedDelegate != null)
+            {
                 Bid.Trace("<ds.DataTable.OnColumnChanged|INFO> %d#\n", ObjectID);
                 onColumnChangedDelegate(this, e);
             }
         }
 
-        protected virtual void OnPropertyChanging(PropertyChangedEventArgs pcevent) {
-            if (onPropertyChangingDelegate != null) {
+        protected virtual void OnPropertyChanging(PropertyChangedEventArgs pcevent)
+        {
+            if (onPropertyChangingDelegate != null)
+            {
                 Bid.Trace("<ds.DataTable.OnPropertyChanging|INFO> %d#\n", ObjectID);
                 onPropertyChangingDelegate(this, pcevent);
             }
         }
 
-        internal void OnRemoveColumnInternal(DataColumn column) {
+        internal void OnRemoveColumnInternal(DataColumn column)
+        {
             OnRemoveColumn(column);
         }
 
@@ -3258,12 +4308,18 @@ namespace System.Data {
         /// <para>Notifies the <see cref='System.Data.DataTable'/> that a <see cref='System.Data.DataColumn'/> is
         ///    being removed.</para>
         /// </devdoc>
-        protected virtual void OnRemoveColumn(DataColumn column) {
-        }
+        protected virtual void OnRemoveColumn(DataColumn column) { }
 
-        private DataRowChangeEventArgs OnRowChanged(DataRowChangeEventArgs args, DataRow eRow, DataRowAction eAction) {
-            if ((null != onRowChangedDelegate) || IsTypedDataTable) {
-                if (null == args) {
+        private DataRowChangeEventArgs OnRowChanged(
+            DataRowChangeEventArgs args,
+            DataRow eRow,
+            DataRowAction eAction
+        )
+        {
+            if ((null != onRowChangedDelegate) || IsTypedDataTable)
+            {
+                if (null == args)
+                {
                     args = new DataRowChangeEventArgs(eRow, eAction);
                 }
                 OnRowChanged(args);
@@ -3271,9 +4327,16 @@ namespace System.Data {
             return args;
         }
 
-        private DataRowChangeEventArgs OnRowChanging(DataRowChangeEventArgs args, DataRow eRow, DataRowAction eAction) {
-            if ((null != onRowChangingDelegate) || IsTypedDataTable) {
-                if (null == args) {
+        private DataRowChangeEventArgs OnRowChanging(
+            DataRowChangeEventArgs args,
+            DataRow eRow,
+            DataRowAction eAction
+        )
+        {
+            if ((null != onRowChangingDelegate) || IsTypedDataTable)
+            {
+                if (null == args)
+                {
                     args = new DataRowChangeEventArgs(eRow, eAction);
                 }
                 OnRowChanging(args);
@@ -3286,9 +4349,14 @@ namespace System.Data {
         ///       Raises the <see cref='System.Data.DataTable.RowChanged'/> event.
         ///    </para>
         /// </devdoc>
-        protected virtual void OnRowChanged(DataRowChangeEventArgs e) {
-            Debug.Assert((null != e) && ((null != onRowChangedDelegate) || IsTypedDataTable), "OnRowChanged arguments");
-            if (onRowChangedDelegate != null) {
+        protected virtual void OnRowChanged(DataRowChangeEventArgs e)
+        {
+            Debug.Assert(
+                (null != e) && ((null != onRowChangedDelegate) || IsTypedDataTable),
+                "OnRowChanged arguments"
+            );
+            if (onRowChangedDelegate != null)
+            {
                 Bid.Trace("<ds.DataTable.OnRowChanged|INFO> %d#\n", ObjectID);
                 onRowChangedDelegate(this, e);
             }
@@ -3299,12 +4367,17 @@ namespace System.Data {
         ///       Raises the <see cref='System.Data.DataTable.RowChanging'/> event.
         ///    </para>
         /// </devdoc>
-        protected virtual void OnRowChanging(DataRowChangeEventArgs e) {
-            Debug.Assert((null != e) && ((null != onRowChangingDelegate) || IsTypedDataTable), "OnRowChanging arguments");
-            if (onRowChangingDelegate != null) {
+        protected virtual void OnRowChanging(DataRowChangeEventArgs e)
+        {
+            Debug.Assert(
+                (null != e) && ((null != onRowChangingDelegate) || IsTypedDataTable),
+                "OnRowChanging arguments"
+            );
+            if (onRowChangingDelegate != null)
+            {
                 Bid.Trace("<ds.DataTable.OnRowChanging|INFO> %d#\n", ObjectID);
                 onRowChangingDelegate(this, e);
-           }
+            }
         }
 
         /// <devdoc>
@@ -3312,9 +4385,14 @@ namespace System.Data {
         ///       Raises the <see cref='System.Data.DataTable.OnRowDeleting'/> event.
         ///    </para>
         /// </devdoc>
-        protected virtual void OnRowDeleting(DataRowChangeEventArgs e) {
-            Debug.Assert((null != e) && ((null != onRowDeletingDelegate) || IsTypedDataTable), "OnRowDeleting arguments");
-            if (onRowDeletingDelegate != null) {
+        protected virtual void OnRowDeleting(DataRowChangeEventArgs e)
+        {
+            Debug.Assert(
+                (null != e) && ((null != onRowDeletingDelegate) || IsTypedDataTable),
+                "OnRowDeleting arguments"
+            );
+            if (onRowDeletingDelegate != null)
+            {
                 Bid.Trace("<ds.DataTable.OnRowDeleting|INFO> %d#\n", ObjectID);
                 onRowDeletingDelegate(this, e);
             }
@@ -3325,76 +4403,117 @@ namespace System.Data {
         ///       Raises the <see cref='System.Data.DataTable.OnRowDeleted'/> event.
         ///    </para>
         /// </devdoc>
-        protected virtual void OnRowDeleted(DataRowChangeEventArgs e) {
-            Debug.Assert((null != e) && ((null != onRowDeletedDelegate) || IsTypedDataTable), "OnRowDeleted arguments");
-            if (onRowDeletedDelegate != null) {
+        protected virtual void OnRowDeleted(DataRowChangeEventArgs e)
+        {
+            Debug.Assert(
+                (null != e) && ((null != onRowDeletedDelegate) || IsTypedDataTable),
+                "OnRowDeleted arguments"
+            );
+            if (onRowDeletedDelegate != null)
+            {
                 Bid.Trace("<ds.DataTable.OnRowDeleted|INFO> %d#\n", ObjectID);
                 onRowDeletedDelegate(this, e);
             }
         }
 
-        protected virtual void OnTableCleared(DataTableClearEventArgs e) {
-            if (onTableClearedDelegate != null) {
+        protected virtual void OnTableCleared(DataTableClearEventArgs e)
+        {
+            if (onTableClearedDelegate != null)
+            {
                 Bid.Trace("<ds.DataTable.OnTableCleared|INFO> %d#\n", ObjectID);
                 onTableClearedDelegate(this, e);
             }
         }
 
-        protected virtual void OnTableClearing(DataTableClearEventArgs e) {
-            if (onTableClearingDelegate != null) {
+        protected virtual void OnTableClearing(DataTableClearEventArgs e)
+        {
+            if (onTableClearingDelegate != null)
+            {
                 Bid.Trace("<ds.DataTable.OnTableClearing|INFO> %d#\n", ObjectID);
                 onTableClearingDelegate(this, e);
             }
         }
 
-        protected virtual void OnTableNewRow(DataTableNewRowEventArgs  e) {
-            if (onTableNewRowDelegate != null) {
+        protected virtual void OnTableNewRow(DataTableNewRowEventArgs e)
+        {
+            if (onTableNewRowDelegate != null)
+            {
                 Bid.Trace("<ds.DataTable.OnTableNewRow|INFO> %d#\n", ObjectID);
                 onTableNewRowDelegate(this, e);
             }
         }
 
-        private void OnInitialized() {
-            if (onInitialized != null) {
+        private void OnInitialized()
+        {
+            if (onInitialized != null)
+            {
                 Bid.Trace("<ds.DataTable.OnInitialized|INFO> %d#\n", ObjectID);
                 onInitialized(this, EventArgs.Empty);
             }
         }
 
-
-        internal IndexField[] ParseSortString(string sortString) {
+        internal IndexField[] ParseSortString(string sortString)
+        {
             IndexField[] indexDesc = zeroIndexField;
-            if ((null != sortString) && (0 < sortString.Length)) {
-                string[] split = sortString.Split(new char[] { ','});
+            if ((null != sortString) && (0 < sortString.Length))
+            {
+                string[] split = sortString.Split(new char[] { ',' });
                 indexDesc = new IndexField[split.Length];
 
-                for (int i = 0; i < split.Length; i++) {
+                for (int i = 0; i < split.Length; i++)
+                {
                     string current = split[i].Trim();
 
                     // handle ASC and DESC.
                     int length = current.Length;
                     bool descending = false;
-                    if (length >= 5 && String.Compare(current, length - 4, " ASC", 0, 4, StringComparison.OrdinalIgnoreCase) == 0) {
+                    if (
+                        length >= 5
+                        && String.Compare(
+                            current,
+                            length - 4,
+                            " ASC",
+                            0,
+                            4,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
+                    {
                         current = current.Substring(0, length - 4).Trim();
                     }
-                    else if (length >= 6 && String.Compare(current, length - 5, " DESC", 0, 5, StringComparison.OrdinalIgnoreCase) == 0) {
+                    else if (
+                        length >= 6
+                        && String.Compare(
+                            current,
+                            length - 5,
+                            " DESC",
+                            0,
+                            5,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
+                    {
                         descending = true;
                         current = current.Substring(0, length - 5).Trim();
                     }
 
                     // handle brackets.
-                    if (current.StartsWith("[", StringComparison.Ordinal)) {
-                        if (current.EndsWith("]", StringComparison.Ordinal)) {
+                    if (current.StartsWith("[", StringComparison.Ordinal))
+                    {
+                        if (current.EndsWith("]", StringComparison.Ordinal))
+                        {
                             current = current.Substring(1, current.Length - 2);
                         }
-                        else {
+                        else
+                        {
                             throw ExceptionBuilder.InvalidSortString(split[i]);
                         }
                     }
 
                     // find the column.
                     DataColumn column = Columns[current];
-                    if(column == null) {
+                    if (column == null)
+                    {
                         throw ExceptionBuilder.ColumnOutOfRange(current);
                     }
                     indexDesc[i] = new IndexField(column, descending);
@@ -3403,80 +4522,120 @@ namespace System.Data {
             return indexDesc;
         }
 
-        internal void RaisePropertyChanging(string name) {
+        internal void RaisePropertyChanging(string name)
+        {
             OnPropertyChanging(new PropertyChangedEventArgs(name));
         }
 
         // Notify all indexes that record changed.
         // Only called when Error was changed.
-        internal void RecordChanged(int record) {
-            Debug.Assert (record != -1, "Record number must be given");
+        internal void RecordChanged(int record)
+        {
+            Debug.Assert(record != -1, "Record number must be given");
             SetShadowIndexes(); // how about new assert?
-            try {
+            try
+            {
                 int numIndexes = shadowIndexes.Count;
-                for (int i = 0; i < numIndexes; i++) {
-                    Index ndx = shadowIndexes[i];// shadowindexes may change, see ShadowIndexCopy()
-                    if (0 < ndx.RefCount) {
+                for (int i = 0; i < numIndexes; i++)
+                {
+                    Index ndx = shadowIndexes[i]; // shadowindexes may change, see ShadowIndexCopy()
+                    if (0 < ndx.RefCount)
+                    {
                         ndx.RecordChanged(record);
                     }
                 }
             }
-            finally{
+            finally
+            {
                 RestoreShadowIndexes();
             }
         }
 
-// for each index in liveindexes invok RecordChanged
-// oldIndex and newIndex keeps  position of record before delete and after insert in each index in order
-// LiveIndexes[n-m] will have its information in oldIndex[n-m] and  newIndex[n-m]
-        internal void RecordChanged(int[] oldIndex, int[] newIndex) {
+        // for each index in liveindexes invok RecordChanged
+        // oldIndex and newIndex keeps  position of record before delete and after insert in each index in order
+        // LiveIndexes[n-m] will have its information in oldIndex[n-m] and  newIndex[n-m]
+        internal void RecordChanged(int[] oldIndex, int[] newIndex)
+        {
             SetShadowIndexes();
-            Debug.Assert (oldIndex.Length == newIndex.Length,  "Size oldIndexes and newIndexes should be the same");
-            Debug.Assert (oldIndex.Length == shadowIndexes.Count, "Size of OldIndexes should be the same as size of Live indexes");
-            try{
+            Debug.Assert(
+                oldIndex.Length == newIndex.Length,
+                "Size oldIndexes and newIndexes should be the same"
+            );
+            Debug.Assert(
+                oldIndex.Length == shadowIndexes.Count,
+                "Size of OldIndexes should be the same as size of Live indexes"
+            );
+            try
+            {
                 int numIndexes = shadowIndexes.Count;
-                for (int i = 0; i < numIndexes; i++) {
-                    Index ndx = shadowIndexes[i];// shadowindexes may change, see ShadowIndexCopy()
-                    if (0 < ndx.RefCount) {
+                for (int i = 0; i < numIndexes; i++)
+                {
+                    Index ndx = shadowIndexes[i]; // shadowindexes may change, see ShadowIndexCopy()
+                    if (0 < ndx.RefCount)
+                    {
                         ndx.RecordChanged(oldIndex[i], newIndex[i]);
                     }
                 }
-
             }
-            finally{
+            finally
+            {
                 RestoreShadowIndexes();
             }
         }
 
-        internal void RecordStateChanged(int record, DataViewRowState oldState, DataViewRowState newState) {
+        internal void RecordStateChanged(
+            int record,
+            DataViewRowState oldState,
+            DataViewRowState newState
+        )
+        {
             SetShadowIndexes();
-            try{
+            try
+            {
                 int numIndexes = shadowIndexes.Count;
-                for (int i = 0; i < numIndexes; i++) {
-                    Index ndx = shadowIndexes[i];// shadowindexes may change, see ShadowIndexCopy()
-                    if (0 < ndx.RefCount) {
+                for (int i = 0; i < numIndexes; i++)
+                {
+                    Index ndx = shadowIndexes[i]; // shadowindexes may change, see ShadowIndexCopy()
+                    if (0 < ndx.RefCount)
+                    {
                         ndx.RecordStateChanged(record, oldState, newState);
                     }
                 }
             }
-            finally{
+            finally
+            {
                 RestoreShadowIndexes();
             }
             // System.Data.XML.Store.Store.OnROMChanged(record, oldState, newState);
         }
 
-
-        internal void RecordStateChanged(int record1, DataViewRowState oldState1, DataViewRowState newState1,
-                                         int record2, DataViewRowState oldState2, DataViewRowState newState2) {
+        internal void RecordStateChanged(
+            int record1,
+            DataViewRowState oldState1,
+            DataViewRowState newState1,
+            int record2,
+            DataViewRowState oldState2,
+            DataViewRowState newState2
+        )
+        {
             SetShadowIndexes();
-            try{
+            try
+            {
                 int numIndexes = shadowIndexes.Count;
-                for (int i = 0; i < numIndexes; i++) {
-                    Index ndx = shadowIndexes[i];// shadowindexes may change, see ShadowIndexCopy()
-                    if (0 < ndx.RefCount) {
+                for (int i = 0; i < numIndexes; i++)
+                {
+                    Index ndx = shadowIndexes[i]; // shadowindexes may change, see ShadowIndexCopy()
+                    if (0 < ndx.RefCount)
+                    {
                         if (record1 != -1 && record2 != -1)
-                            ndx.RecordStateChanged(record1, oldState1, newState1,
-                                                   record2, oldState2, newState2);
+                            ndx.RecordStateChanged(
+                                record1,
+                                oldState1,
+                                newState1,
+                                record2,
+                                oldState2,
+                                newState2
+                            );
                         else if (record1 != -1)
                             ndx.RecordStateChanged(record1, oldState1, newState1);
                         else if (record2 != -1)
@@ -3484,123 +4643,167 @@ namespace System.Data {
                     }
                 }
             }
-            finally {
+            finally
+            {
                 RestoreShadowIndexes();
             }
             // System.Data.XML.Store.Store.OnROMChanged(record1, oldState1, newState1, record2, oldState2, newState2);
         }
 
-
-// RemoveRecordFromIndexes removes the given record (using row and version) from all indexes and it  stores and returns the position of deleted
-// record from each index
-// IT SHOULD NOT CAUSE ANY EVENT TO BE FIRED
-        internal int[] RemoveRecordFromIndexes(DataRow row, DataRowVersion  version) {
-            int    indexCount          =  LiveIndexes.Count;
-            int [] positionIndexes =  new int[indexCount];
+        // RemoveRecordFromIndexes removes the given record (using row and version) from all indexes and it  stores and returns the position of deleted
+        // record from each index
+        // IT SHOULD NOT CAUSE ANY EVENT TO BE FIRED
+        internal int[] RemoveRecordFromIndexes(DataRow row, DataRowVersion version)
+        {
+            int indexCount = LiveIndexes.Count;
+            int[] positionIndexes = new int[indexCount];
 
             int recordNo = row.GetRecordFromVersion(version);
             DataViewRowState states = row.GetRecordState(recordNo);
 
-            while (--indexCount >= 0) {
-                if (row.HasVersion(version) && ((states & indexes[indexCount].RecordStates) != DataViewRowState.None)) {
+            while (--indexCount >= 0)
+            {
+                if (
+                    row.HasVersion(version)
+                    && ((states & indexes[indexCount].RecordStates) != DataViewRowState.None)
+                )
+                {
                     int index = indexes[indexCount].GetIndex(recordNo);
-                    if (index > -1) {
-                        positionIndexes [indexCount] = index;
+                    if (index > -1)
+                    {
+                        positionIndexes[indexCount] = index;
                         indexes[indexCount].DeleteRecordFromIndex(index); // this will delete the record from index and MUSt not fire event
                     }
-                    else {
-                        positionIndexes [indexCount] = -1; // this means record was not in index
+                    else
+                    {
+                        positionIndexes[indexCount] = -1; // this means record was not in index
                     }
                 }
-                else {
-                    positionIndexes [indexCount] = -1; // this means record was not in index
+                else
+                {
+                    positionIndexes[indexCount] = -1; // this means record was not in index
                 }
             }
             return positionIndexes;
         }
 
-// InsertRecordToIndexes inserts the given record (using row and version) to all indexes and it  stores and returns the position of inserted
-// record to each index
-// IT SHOULD NOT CAUSE ANY EVENT TO BE FIRED
-        internal int[] InsertRecordToIndexes(DataRow row, DataRowVersion  version) {
-            int    indexCount          =  LiveIndexes.Count;
-            int [] positionIndexes =  new int[indexCount];
+        // InsertRecordToIndexes inserts the given record (using row and version) to all indexes and it  stores and returns the position of inserted
+        // record to each index
+        // IT SHOULD NOT CAUSE ANY EVENT TO BE FIRED
+        internal int[] InsertRecordToIndexes(DataRow row, DataRowVersion version)
+        {
+            int indexCount = LiveIndexes.Count;
+            int[] positionIndexes = new int[indexCount];
 
             int recordNo = row.GetRecordFromVersion(version);
             DataViewRowState states = row.GetRecordState(recordNo);
 
-            while (--indexCount >= 0) {
-                if (row.HasVersion(version)) {
-                    if ((states & indexes[indexCount].RecordStates) != DataViewRowState.None) {
-                        positionIndexes [indexCount] = indexes[indexCount].InsertRecordToIndex(recordNo);
+            while (--indexCount >= 0)
+            {
+                if (row.HasVersion(version))
+                {
+                    if ((states & indexes[indexCount].RecordStates) != DataViewRowState.None)
+                    {
+                        positionIndexes[indexCount] = indexes[indexCount]
+                            .InsertRecordToIndex(recordNo);
                     }
-                    else {
-                        positionIndexes [indexCount] = -1;
+                    else
+                    {
+                        positionIndexes[indexCount] = -1;
                     }
                 }
             }
             return positionIndexes;
         }
 
-        internal void SilentlySetValue(DataRow dr, DataColumn dc, DataRowVersion version, object newValue) {
+        internal void SilentlySetValue(
+            DataRow dr,
+            DataColumn dc,
+            DataRowVersion version,
+            object newValue
+        )
+        {
             // get record for version
             int record = dr.GetRecordFromVersion(version);
 
             bool equalValues = false;
-            if (DataStorage.IsTypeCustomType(dc.DataType) && newValue != dc[record]) {
+            if (DataStorage.IsTypeCustomType(dc.DataType) && newValue != dc[record])
+            {
                 // if UDT storage, need to check if reference changed. See bug 385182
                 equalValues = false;
             }
-            else {
+            else
+            {
                 equalValues = dc.CompareValueTo(record, newValue, true);
             }
 
             // if expression has changed
-            if (!equalValues) {
-                int[] oldIndex = dr.Table.RemoveRecordFromIndexes(dr, version);// conditional, if it exists it will try to remove with no event fired
+            if (!equalValues)
+            {
+                int[] oldIndex = dr.Table.RemoveRecordFromIndexes(dr, version); // conditional, if it exists it will try to remove with no event fired
                 dc.SetValue(record, newValue);
-                int[] newIndex = dr.Table.InsertRecordToIndexes(dr, version);// conditional, it will insert if it qualifies, no event will be fired
-                if (dr.HasVersion(version)) {
-                    if (version != DataRowVersion.Original) {
+                int[] newIndex = dr.Table.InsertRecordToIndexes(dr, version); // conditional, it will insert if it qualifies, no event will be fired
+                if (dr.HasVersion(version))
+                {
+                    if (version != DataRowVersion.Original)
+                    {
                         dr.Table.RecordChanged(oldIndex, newIndex);
                     }
-                    if (dc.dependentColumns != null) {
+                    if (dc.dependentColumns != null)
+                    {
                         //BugBug - passing in null for cachedRows.  This means expression columns as keys does not work when key changes.
-                        dc.Table.EvaluateDependentExpressions(dc.dependentColumns, dr, version, null);
+                        dc.Table.EvaluateDependentExpressions(
+                            dc.dependentColumns,
+                            dr,
+                            version,
+                            null
+                        );
                     }
                 }
-             }
-             dr.ResetLastChangedColumn();
+            }
+            dr.ResetLastChangedColumn();
         }
 
         /// <devdoc>
         ///    <para>Rolls back all changes that have been made to the table
         ///       since it was loaded, or the last time <see cref='System.Data.DataTable.AcceptChanges'/> was called.</para>
         /// </devdoc>
-        public void RejectChanges() {
+        public void RejectChanges()
+        {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataTable.RejectChanges|API> %d#\n", ObjectID);
-            try{
+            try
+            {
                 DataRow[] oldRows = new DataRow[Rows.Count];
                 Rows.CopyTo(oldRows, 0);
 
-                for (int i = 0; i < oldRows.Length; i++) {
+                for (int i = 0; i < oldRows.Length; i++)
+                {
                     RollbackRow(oldRows[i]);
                 }
             }
-            finally{
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
-
         }
 
-        internal void RemoveRow(DataRow row, bool check) {
-            if (row.rowID == -1) {
+        internal void RemoveRow(DataRow row, bool check)
+        {
+            if (row.rowID == -1)
+            {
                 throw ExceptionBuilder.RowAlreadyRemoved();
             }
 
-            if (check && dataSet != null) {
-                for (ParentForeignKeyConstraintEnumerator constraints = new ParentForeignKeyConstraintEnumerator(dataSet, this); constraints.GetNext();) {
+            if (check && dataSet != null)
+            {
+                for (
+                    ParentForeignKeyConstraintEnumerator constraints =
+                        new ParentForeignKeyConstraintEnumerator(dataSet, this);
+                    constraints.GetNext();
+
+                )
+                {
                     constraints.GetForeignKeyConstraint().CheckCanRemoveParentRow(row);
                 }
             }
@@ -3614,12 +4817,19 @@ namespace System.Data {
             row.oldRecord = -1;
             row.newRecord = -1;
 
-            if (oldRecord == newRecord) {
+            if (oldRecord == newRecord)
+            {
                 oldRecord = -1;
             }
 
-            RecordStateChanged(oldRecord, oldRecordStatePre, DataViewRowState.None,
-                               newRecord, newRecordStatePre, DataViewRowState.None);
+            RecordStateChanged(
+                oldRecord,
+                oldRecordStatePre,
+                DataViewRowState.None,
+                newRecord,
+                newRecordStatePre,
+                DataViewRowState.None
+            );
 
             FreeRecord(ref oldRecord);
             FreeRecord(ref newRecord);
@@ -3629,159 +4839,228 @@ namespace System.Data {
         }
 
         // Resets the table back to its original state.
-        public virtual void Reset() {
+        public virtual void Reset()
+        {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataTable.Reset|API> %d#\n", ObjectID);
-            try {
+            try
+            {
                 Clear();
                 ResetConstraints();
 
                 DataRelationCollection dr = this.ParentRelations;
                 int count = dr.Count;
-                  while (count > 0) {
-                   count--;
-                   dr.RemoveAt(count);
+                while (count > 0)
+                {
+                    count--;
+                    dr.RemoveAt(count);
                 }
 
                 dr = this.ChildRelations;
                 count = dr.Count;
-                  while (count > 0) {
-                   count--;
-                   dr.RemoveAt(count);
+                while (count > 0)
+                {
+                    count--;
+                    dr.RemoveAt(count);
                 }
 
                 Columns.Clear();
                 indexes.Clear();
             }
-            finally{
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        internal void ResetIndexes() {
+        internal void ResetIndexes()
+        {
             ResetInternalIndexes(null);
         }
 
-        internal void ResetInternalIndexes(DataColumn column) {
+        internal void ResetInternalIndexes(DataColumn column)
+        {
             Debug.Assert(null != indexes, "unexpected null indexes");
             SetShadowIndexes();
-            try{
+            try
+            {
                 // the length of shadowIndexes will not change
                 // but the array instance may change during
                 // events during Index.Reset
                 int numIndexes = shadowIndexes.Count;
-                for (int i = 0; i < numIndexes; i++) {
-                    Index ndx = shadowIndexes[i];// shadowindexes may change, see ShadowIndexCopy()
-                    if (0 < ndx.RefCount) {
-                        if (null == column) {
+                for (int i = 0; i < numIndexes; i++)
+                {
+                    Index ndx = shadowIndexes[i]; // shadowindexes may change, see ShadowIndexCopy()
+                    if (0 < ndx.RefCount)
+                    {
+                        if (null == column)
+                        {
                             ndx.Reset();
                         }
-                        else {
+                        else
+                        {
                             // SQLBU 501916: DataTable internal index is corrupted:'5'
                             bool found = false;
-                            foreach(IndexField field in ndx.IndexFields) {
-                                if (Object.ReferenceEquals(column, field.Column)) {
+                            foreach (IndexField field in ndx.IndexFields)
+                            {
+                                if (Object.ReferenceEquals(column, field.Column))
+                                {
                                     found = true;
                                     break;
-                                    
                                 }
                             }
-                            if (found) {
+                            if (found)
+                            {
                                 ndx.Reset();
                             }
                         }
                     }
                 }
             }
-            finally {
+            finally
+            {
                 RestoreShadowIndexes();
             }
         }
 
-        internal void RollbackRow(DataRow row) {
+        internal void RollbackRow(DataRow row)
+        {
             row.CancelEdit();
             SetNewRecord(row, row.oldRecord, DataRowAction.Rollback, false, true);
         }
 
-        private DataRowChangeEventArgs RaiseRowChanged(DataRowChangeEventArgs args, DataRow eRow, DataRowAction eAction) {
-            try {
-                if (UpdatingCurrent(eRow, eAction) && (IsTypedDataTable || (null != onRowChangedDelegate))) {
+        private DataRowChangeEventArgs RaiseRowChanged(
+            DataRowChangeEventArgs args,
+            DataRow eRow,
+            DataRowAction eAction
+        )
+        {
+            try
+            {
+                if (
+                    UpdatingCurrent(eRow, eAction)
+                    && (IsTypedDataTable || (null != onRowChangedDelegate))
+                )
+                {
                     args = OnRowChanged(args, eRow, eAction);
                 }
                 // check if we deleting good row
-                else if (DataRowAction.Delete == eAction && eRow.newRecord == -1 && (IsTypedDataTable || (null != onRowDeletedDelegate))) {
-                    if (null == args) {
+                else if (
+                    DataRowAction.Delete == eAction
+                    && eRow.newRecord == -1
+                    && (IsTypedDataTable || (null != onRowDeletedDelegate))
+                )
+                {
+                    if (null == args)
+                    {
                         args = new DataRowChangeEventArgs(eRow, eAction);
                     }
                     OnRowDeleted(args);
                 }
             }
-            catch (Exception f) {
-               // 
-               if (!Common.ADP.IsCatchableExceptionType(f)) {
-                 throw;
-               }
-               ExceptionBuilder.TraceExceptionWithoutRethrow(f);
-               // ignore the exception
+            catch (Exception f)
+            {
+                //
+                if (!Common.ADP.IsCatchableExceptionType(f))
+                {
+                    throw;
+                }
+                ExceptionBuilder.TraceExceptionWithoutRethrow(f);
+                // ignore the exception
             }
             return args;
         }
 
-        private DataRowChangeEventArgs RaiseRowChanging(DataRowChangeEventArgs args, DataRow eRow, DataRowAction eAction) {
-            if (UpdatingCurrent(eRow, eAction) && (IsTypedDataTable || (null != onRowChangingDelegate))) {
+        private DataRowChangeEventArgs RaiseRowChanging(
+            DataRowChangeEventArgs args,
+            DataRow eRow,
+            DataRowAction eAction
+        )
+        {
+            if (
+                UpdatingCurrent(eRow, eAction)
+                && (IsTypedDataTable || (null != onRowChangingDelegate))
+            )
+            {
                 eRow.inChangingEvent = true;
 
                 // don't catch
-                try {
+                try
+                {
                     args = OnRowChanging(args, eRow, eAction);
                 }
-                finally {
+                finally
+                {
                     eRow.inChangingEvent = false;
                 }
             }
             // check if we deleting good row
-            else if (DataRowAction.Delete == eAction && eRow.newRecord != -1 && (IsTypedDataTable || (null != onRowDeletingDelegate))) {
+            else if (
+                DataRowAction.Delete == eAction
+                && eRow.newRecord != -1
+                && (IsTypedDataTable || (null != onRowDeletingDelegate))
+            )
+            {
                 eRow.inDeletingEvent = true;
                 // don't catch
-                try {
-                    if (null == args) {
+                try
+                {
+                    if (null == args)
+                    {
                         args = new DataRowChangeEventArgs(eRow, eAction);
                     }
                     OnRowDeleting(args);
                 }
-                finally {
+                finally
+                {
                     eRow.inDeletingEvent = false;
                 }
             }
             return args;
         }
 
-        private DataRowChangeEventArgs RaiseRowChanging(DataRowChangeEventArgs args, DataRow eRow, DataRowAction eAction, bool fireEvent) {
-
+        private DataRowChangeEventArgs RaiseRowChanging(
+            DataRowChangeEventArgs args,
+            DataRow eRow,
+            DataRowAction eAction,
+            bool fireEvent
+        )
+        {
             // check all constraints
-            if (EnforceConstraints && !inLoad ) {
+            if (EnforceConstraints && !inLoad)
+            {
                 int columnCount = columnCollection.Count;
-                for(int i = 0; i < columnCount; ++i) {
+                for (int i = 0; i < columnCount; ++i)
+                {
                     DataColumn column = columnCollection[i];
-                    if (!column.Computed || eAction != DataRowAction.Add) {
+                    if (!column.Computed || eAction != DataRowAction.Add)
+                    {
                         column.CheckColumnConstraint(eRow, eAction);
                     }
                 }
 
                 int constraintCount = constraintCollection.Count;
-                for(int i = 0; i < constraintCount; ++i) {
+                for (int i = 0; i < constraintCount; ++i)
+                {
                     constraintCollection[i].CheckConstraint(eRow, eAction);
                 }
             }
 
             // $$anandra.  Check this event out. May be an issue.
-            if (fireEvent) {
+            if (fireEvent)
+            {
                 args = RaiseRowChanging(args, eRow, eAction);
             }
 
-            if (!inDataLoad) {
+            if (!inDataLoad)
+            {
                 // cascade things...
-                if (!MergingData && eAction != DataRowAction.Nothing && eAction != DataRowAction.ChangeOriginal) {
+                if (
+                    !MergingData
+                    && eAction != DataRowAction.Nothing
+                    && eAction != DataRowAction.ChangeOriginal
+                )
+                {
                     CascadeAll(eRow, eAction);
                 }
             }
@@ -3791,7 +5070,8 @@ namespace System.Data {
         /// <devdoc>
         /// <para>Returns an array of all <see cref='System.Data.DataRow'/> objects.</para>
         /// </devdoc>
-        public DataRow[] Select() {
+        public DataRow[] Select()
+        {
             Bid.Trace("<ds.DataTable.Select|API> %d#\n", ObjectID);
             return new Select(this, "", "", DataViewRowState.CurrentRows).SelectRows();
         }
@@ -3800,40 +5080,94 @@ namespace System.Data {
         /// <para>Returns an array of all <see cref='System.Data.DataRow'/> objects that match the filter criteria in order of
         ///    primary key (or lacking one, order of addition.)</para>
         /// </devdoc>
-        public DataRow[] Select(string filterExpression) {
-            Bid.Trace("<ds.DataTable.Select|API> %d#, filterExpression='%ls'\n", ObjectID, filterExpression);
-            return new Select(this, filterExpression, "", DataViewRowState.CurrentRows).SelectRows();
+        public DataRow[] Select(string filterExpression)
+        {
+            Bid.Trace(
+                "<ds.DataTable.Select|API> %d#, filterExpression='%ls'\n",
+                ObjectID,
+                filterExpression
+            );
+            return new Select(
+                this,
+                filterExpression,
+                "",
+                DataViewRowState.CurrentRows
+            ).SelectRows();
         }
 
         /// <devdoc>
         /// <para>Returns an array of all <see cref='System.Data.DataRow'/> objects that match the filter criteria, in the the
         ///    specified sort order.</para>
         /// </devdoc>
-        public DataRow[] Select(string filterExpression, string sort) {
-            Bid.Trace("<ds.DataTable.Select|API> %d#, filterExpression='%ls', sort='%ls'\n", ObjectID, filterExpression, sort);
-            return new Select(this, filterExpression, sort, DataViewRowState.CurrentRows).SelectRows();
+        public DataRow[] Select(string filterExpression, string sort)
+        {
+            Bid.Trace(
+                "<ds.DataTable.Select|API> %d#, filterExpression='%ls', sort='%ls'\n",
+                ObjectID,
+                filterExpression,
+                sort
+            );
+            return new Select(
+                this,
+                filterExpression,
+                sort,
+                DataViewRowState.CurrentRows
+            ).SelectRows();
         }
 
         /// <devdoc>
         /// <para>Returns an array of all <see cref='System.Data.DataRow'/> objects that match the filter in the order of the
         ///    sort, that match the specified state.</para>
         /// </devdoc>
-        public DataRow[] Select(string filterExpression, string sort, DataViewRowState recordStates) {
-            Bid.Trace("<ds.DataTable.Select|API> %d#, filterExpression='%ls', sort='%ls', recordStates=%d{ds.DataViewRowState}\n", ObjectID, filterExpression, sort, (int)recordStates);
+        public DataRow[] Select(string filterExpression, string sort, DataViewRowState recordStates)
+        {
+            Bid.Trace(
+                "<ds.DataTable.Select|API> %d#, filterExpression='%ls', sort='%ls', recordStates=%d{ds.DataViewRowState}\n",
+                ObjectID,
+                filterExpression,
+                sort,
+                (int)recordStates
+            );
             return new Select(this, filterExpression, sort, recordStates).SelectRows();
         }
 
-        internal void SetNewRecord(DataRow row, int proposedRecord, DataRowAction action = DataRowAction.Change, bool isInMerge = false, bool fireEvent = true, bool suppressEnsurePropertyChanged = false) {
+        internal void SetNewRecord(
+            DataRow row,
+            int proposedRecord,
+            DataRowAction action = DataRowAction.Change,
+            bool isInMerge = false,
+            bool fireEvent = true,
+            bool suppressEnsurePropertyChanged = false
+        )
+        {
             Exception deferredException = null;
-            SetNewRecordWorker(row, proposedRecord, action, isInMerge, suppressEnsurePropertyChanged, -1, fireEvent, out deferredException); // we are going to call below overload from insert
-            if (deferredException != null) {
+            SetNewRecordWorker(
+                row,
+                proposedRecord,
+                action,
+                isInMerge,
+                suppressEnsurePropertyChanged,
+                -1,
+                fireEvent,
+                out deferredException
+            ); // we are going to call below overload from insert
+            if (deferredException != null)
+            {
                 throw deferredException;
             }
         }
 
-        private void SetNewRecordWorker(DataRow row, int proposedRecord, DataRowAction action, bool isInMerge, bool suppressEnsurePropertyChanged,
-            int position, bool fireEvent, out Exception deferredException) {
-
+        private void SetNewRecordWorker(
+            DataRow row,
+            int proposedRecord,
+            DataRowAction action,
+            bool isInMerge,
+            bool suppressEnsurePropertyChanged,
+            int position,
+            bool fireEvent,
+            out Exception deferredException
+        )
+        {
             // this is the event workhorse... it will throw the changing/changed events
             // and update the indexes. Used by change, add, delete, revert.
 
@@ -3850,15 +5184,19 @@ namespace System.Data {
 
             Debug.Assert(row != null, "Row can't be null.");
             deferredException = null;
-            
-            if (row.tempRecord != proposedRecord) {
+
+            if (row.tempRecord != proposedRecord)
+            {
                 // $HACK: for performance reasons, EndUpdate calls SetNewRecord with tempRecord == proposedRecord
-                if (!inDataLoad) {
+                if (!inDataLoad)
+                {
                     row.CheckInTable();
                     CheckNotModifying(row);
                 }
-                if (proposedRecord == row.newRecord) {
-                    if (isInMerge) {
+                if (proposedRecord == row.newRecord)
+                {
+                    if (isInMerge)
+                    {
                         Debug.Assert(fireEvent, "SetNewRecord is called with wrong parameter");
                         RaiseRowChanged(null, row, action);
                     }
@@ -3871,15 +5209,18 @@ namespace System.Data {
             }
             DataRowChangeEventArgs drcevent = null;
 
-            try {
+            try
+            {
                 row._action = action;
                 drcevent = RaiseRowChanging(null, row, action, fireEvent);
             }
-            catch {
+            catch
+            {
                 row.tempRecord = -1;
                 throw;
             }
-            finally {
+            finally
+            {
                 row._action = DataRowAction.Nothing;
             }
 
@@ -3888,13 +5229,14 @@ namespace System.Data {
             int currentRecord = row.newRecord;
 
             // if we're deleting, then the oldRecord value will change, so need to track that if it's distinct from the newRecord.
-            int secondRecord = (proposedRecord != -1 ?
-                                proposedRecord :
-                                (row.RowState != DataRowState.Unchanged ?
-                                 row.oldRecord :
-                                 -1));
+            int secondRecord = (
+                proposedRecord != -1
+                    ? proposedRecord
+                    : (row.RowState != DataRowState.Unchanged ? row.oldRecord : -1)
+            );
 
-            if (action == DataRowAction.Add) { //if we come here from insert we do insert the row to collection
+            if (action == DataRowAction.Add)
+            { //if we come here from insert we do insert the row to collection
                 if (position == -1)
                     Rows.ArrayAdd(row);
                 else
@@ -3902,22 +5244,30 @@ namespace System.Data {
             }
 
             List<DataRow> cachedRows = null;
-            if ((action == DataRowAction.Delete || action == DataRowAction.Change)
-                && dependentColumns != null && dependentColumns.Count > 0) {
+            if (
+                (action == DataRowAction.Delete || action == DataRowAction.Change)
+                && dependentColumns != null
+                && dependentColumns.Count > 0
+            )
+            {
                 // if there are expression columns, need to cache related rows for deletes and updates (key changes)
                 // before indexes are modified.
                 cachedRows = new List<DataRow>();
-                for (int j = 0; j < ParentRelations.Count; j++) {
+                for (int j = 0; j < ParentRelations.Count; j++)
+                {
                     DataRelation relation = ParentRelations[j];
-                    if (relation.ChildTable != row.Table) {
+                    if (relation.ChildTable != row.Table)
+                    {
                         continue;
                     }
                     cachedRows.InsertRange(cachedRows.Count, row.GetParentRows(relation));
                 }
 
-                for (int j = 0; j < ChildRelations.Count; j++) {
+                for (int j = 0; j < ChildRelations.Count; j++)
+                {
                     DataRelation relation = ChildRelations[j];
-                    if (relation.ParentTable != row.Table) {
+                    if (relation.ParentTable != row.Table)
+                    {
                         continue;
                     }
                     cachedRows.InsertRange(cachedRows.Count, row.GetChildRows(relation));
@@ -3927,9 +5277,13 @@ namespace System.Data {
             // Dev10 Bug 688779: DataRowView.PropertyChanged are not raised on RejectChanges
             // if the newRecord is changing, the propertychanged event should be allowed to triggered for ListChangedType.Changed or .Moved
             // unless the specific condition is known that no data has changed, like DataRow.SetModified()
-            if (!suppressEnsurePropertyChanged && !row.HasPropertyChanged && (row.newRecord != proposedRecord)
+            if (
+                !suppressEnsurePropertyChanged
+                && !row.HasPropertyChanged
+                && (row.newRecord != proposedRecord)
                 && (-1 != proposedRecord) // explictly not fixing Dev10 Bug 692044: DataRowView.PropertyChanged are not raised on DataTable.Delete when mixing current and original records in RowStateFilter
-                && (-1 != row.newRecord)) // explictly not fixing parts of Dev10 Bug 697909: when mixing current and original records in RowStateFilter
+                && (-1 != row.newRecord)
+            ) // explictly not fixing parts of Dev10 Bug 697909: when mixing current and original records in RowStateFilter
             {
                 // DataRow will believe multiple edits occured and
                 // DataView.ListChanged event w/ ListChangedType.ItemChanged will raise DataRowView.PropertyChanged event and
@@ -3939,86 +5293,114 @@ namespace System.Data {
                 row.LastChangedColumn = null;
             }
 
-                // Check whether we need to update indexes
-                if (LiveIndexes.Count != 0) {
-
-                    // Dev10 bug #463087: DataTable internal index is currupted: '5'
-                    if ((-1 == currentRecord) && (-1 != proposedRecord) && (-1 != row.oldRecord) && (proposedRecord != row.oldRecord)) {
-                        // the transition from DataRowState.Deleted -> DataRowState.Modified
-                        // with same orginal record but new current record
-                        // needs to raise an ItemChanged or ItemMoved instead of ItemAdded in the ListChanged event.
-                        // for indexes/views listening for both DataViewRowState.Deleted | DataViewRowState.ModifiedCurrent
-                        currentRecord = row.oldRecord;
-                    }
-
-                    DataViewRowState currentRecordStatePre = row.GetRecordState(currentRecord);
-                    DataViewRowState secondRecordStatePre = row.GetRecordState(secondRecord);
-
-                    row.newRecord = proposedRecord;
-                    if (proposedRecord != -1)
-                        this.recordManager[proposedRecord] = row;
-
-                    DataViewRowState currentRecordStatePost = row.GetRecordState(currentRecord);
-                    DataViewRowState secondRecordStatePost = row.GetRecordState(secondRecord);
-
-                    // may raise DataView.ListChanged event
-                    RecordStateChanged(currentRecord, currentRecordStatePre, currentRecordStatePost,
-                        secondRecord, secondRecordStatePre, secondRecordStatePost);
-                }
-                else {
-                    row.newRecord = proposedRecord;
-                    if (proposedRecord != -1)
-                        this.recordManager[proposedRecord] = row;
+            // Check whether we need to update indexes
+            if (LiveIndexes.Count != 0)
+            {
+                // Dev10 bug #463087: DataTable internal index is currupted: '5'
+                if (
+                    (-1 == currentRecord)
+                    && (-1 != proposedRecord)
+                    && (-1 != row.oldRecord)
+                    && (proposedRecord != row.oldRecord)
+                )
+                {
+                    // the transition from DataRowState.Deleted -> DataRowState.Modified
+                    // with same orginal record but new current record
+                    // needs to raise an ItemChanged or ItemMoved instead of ItemAdded in the ListChanged event.
+                    // for indexes/views listening for both DataViewRowState.Deleted | DataViewRowState.ModifiedCurrent
+                    currentRecord = row.oldRecord;
                 }
 
-                // Dev10 Bug 461199 - reset the last changed column here, after all
-                // DataViews have raised their DataRowView.PropertyChanged event
-                row.ResetLastChangedColumn();
+                DataViewRowState currentRecordStatePre = row.GetRecordState(currentRecord);
+                DataViewRowState secondRecordStatePre = row.GetRecordState(secondRecord);
 
-                // SQLBU 278737: Record manager corruption when reentrant write operations
-                // free the 'currentRecord' only after all the indexes have been updated.
-                // Corruption! { if (currentRecord != row.oldRecord) { FreeRecord(ref currentRecord); } }
-                // RecordStateChanged raises ListChanged event at which time user may do work
-                if (-1 != currentRecord) {
-                    if (currentRecord != row.oldRecord)
+                row.newRecord = proposedRecord;
+                if (proposedRecord != -1)
+                    this.recordManager[proposedRecord] = row;
+
+                DataViewRowState currentRecordStatePost = row.GetRecordState(currentRecord);
+                DataViewRowState secondRecordStatePost = row.GetRecordState(secondRecord);
+
+                // may raise DataView.ListChanged event
+                RecordStateChanged(
+                    currentRecord,
+                    currentRecordStatePre,
+                    currentRecordStatePost,
+                    secondRecord,
+                    secondRecordStatePre,
+                    secondRecordStatePost
+                );
+            }
+            else
+            {
+                row.newRecord = proposedRecord;
+                if (proposedRecord != -1)
+                    this.recordManager[proposedRecord] = row;
+            }
+
+            // Dev10 Bug 461199 - reset the last changed column here, after all
+            // DataViews have raised their DataRowView.PropertyChanged event
+            row.ResetLastChangedColumn();
+
+            // SQLBU 278737: Record manager corruption when reentrant write operations
+            // free the 'currentRecord' only after all the indexes have been updated.
+            // Corruption! { if (currentRecord != row.oldRecord) { FreeRecord(ref currentRecord); } }
+            // RecordStateChanged raises ListChanged event at which time user may do work
+            if (-1 != currentRecord)
+            {
+                if (currentRecord != row.oldRecord)
+                {
+                    if (
+                        (currentRecord != row.tempRecord)
+                        && // Delete, AcceptChanges, BeginEdit
+                        (currentRecord != row.newRecord)
+                        && // RejectChanges & SetAdded
+                        (row == recordManager[currentRecord])
+                    ) // AcceptChanges, NewRow
                     {
-                        if ((currentRecord != row.tempRecord) &&   // Delete, AcceptChanges, BeginEdit
-                            (currentRecord != row.newRecord) &&    // RejectChanges & SetAdded
-                            (row == recordManager[currentRecord])) // AcceptChanges, NewRow
-                        {
-                            FreeRecord(ref currentRecord);
-                        }
+                        FreeRecord(ref currentRecord);
                     }
                 }
+            }
 
-            if (row.RowState == DataRowState.Detached && row.rowID != -1) {
+            if (row.RowState == DataRowState.Detached && row.rowID != -1)
+            {
                 RemoveRow(row, false);
             }
 
-            if (dependentColumns != null && dependentColumns.Count > 0) {
-                try {
+            if (dependentColumns != null && dependentColumns.Count > 0)
+            {
+                try
+                {
                     EvaluateExpressions(row, action, cachedRows);
                 }
-                catch (Exception exc) {
+                catch (Exception exc)
+                {
                     // For DataRows being added, throwing of exception from expression evaluation is
                     // deferred until after the row has been completely added.
-                    if (action != DataRowAction.Add) {
+                    if (action != DataRowAction.Add)
+                    {
                         throw exc;
                     }
-                    else {
+                    else
+                    {
                         deferredException = exc;
                     }
                 }
             }
 
-            try {
-                if (fireEvent) {
+            try
+            {
+                if (fireEvent)
+                {
                     RaiseRowChanged(drcevent, row, action);
                 }
             }
-            catch (Exception e) {
-                // 
-                if (!Common.ADP.IsCatchableExceptionType(e)) {
+            catch (Exception e)
+            {
+                //
+                if (!Common.ADP.IsCatchableExceptionType(e))
+                {
                     throw;
                 }
                 ExceptionBuilder.TraceExceptionWithoutRethrow(e);
@@ -4028,23 +5410,33 @@ namespace System.Data {
 
         // this is the event workhorse... it will throw the changing/changed events
         // and update the indexes.
-        internal void SetOldRecord(DataRow row, int proposedRecord) {
-            if (!inDataLoad) {
+        internal void SetOldRecord(DataRow row, int proposedRecord)
+        {
+            if (!inDataLoad)
+            {
                 row.CheckInTable();
                 CheckNotModifying(row);
             }
 
-            if (proposedRecord == row.oldRecord) {
+            if (proposedRecord == row.oldRecord)
+            {
                 return;
             }
 
             int originalRecord = row.oldRecord; // cache old record after potential RowChanging event
-            try {
+            try
+            {
                 // Check whether we need to update indexes
-                if (LiveIndexes.Count != 0) {
-
+                if (LiveIndexes.Count != 0)
+                {
                     // Dev10 bug #463087: DataTable internal index is currupted: '5'
-                    if ((-1 == originalRecord) && (-1 != proposedRecord) && (-1 != row.newRecord) && (proposedRecord != row.newRecord)) {
+                    if (
+                        (-1 == originalRecord)
+                        && (-1 != proposedRecord)
+                        && (-1 != row.newRecord)
+                        && (proposedRecord != row.newRecord)
+                    )
+                    {
                         // the transition from DataRowState.Added -> DataRowState.Modified
                         // with same current record but new original record
                         // needs to raise an ItemChanged or ItemMoved instead of ItemAdded in the ListChanged event.
@@ -4062,51 +5454,71 @@ namespace System.Data {
                     DataViewRowState originalRecordStatePost = row.GetRecordState(originalRecord);
                     DataViewRowState proposedRecordStatePost = row.GetRecordState(proposedRecord);
 
-                    RecordStateChanged(originalRecord, originalRecordStatePre, originalRecordStatePost,
-                                       proposedRecord, proposedRecordStatePre, proposedRecordStatePost);
+                    RecordStateChanged(
+                        originalRecord,
+                        originalRecordStatePre,
+                        originalRecordStatePost,
+                        proposedRecord,
+                        proposedRecordStatePre,
+                        proposedRecordStatePost
+                    );
                 }
-                else {
+                else
+                {
                     row.oldRecord = proposedRecord;
                     if (proposedRecord != -1)
                         this.recordManager[proposedRecord] = row;
                 }
             }
-            finally {
-                if ((originalRecord != -1) && (originalRecord != row.tempRecord) &&
-                    (originalRecord != row.oldRecord) && (originalRecord != row.newRecord)) {
-
+            finally
+            {
+                if (
+                    (originalRecord != -1)
+                    && (originalRecord != row.tempRecord)
+                    && (originalRecord != row.oldRecord)
+                    && (originalRecord != row.newRecord)
+                )
+                {
                     FreeRecord(ref originalRecord);
                 }
                 // else during an event 'row.AcceptChanges(); row.BeginEdit(); row.EndEdit();'
 
-                if (row.RowState == DataRowState.Detached && row.rowID != -1) {
+                if (row.RowState == DataRowState.Detached && row.rowID != -1)
+                {
                     RemoveRow(row, false);
                 }
             }
         }
 
-        private void RestoreShadowIndexes() {
+        private void RestoreShadowIndexes()
+        {
             Debug.Assert(1 <= shadowCount, "unexpected negative shadow count");
             shadowCount--;
-            if (0 == shadowCount) {
+            if (0 == shadowCount)
+            {
                 shadowIndexes = null;
             }
         }
 
-        private void SetShadowIndexes() {
-            if (null == shadowIndexes) {
+        private void SetShadowIndexes()
+        {
+            if (null == shadowIndexes)
+            {
                 Debug.Assert(0 == shadowCount, "unexpected count");
                 shadowIndexes = LiveIndexes;
                 shadowCount = 1;
             }
-            else {
+            else
+            {
                 Debug.Assert(1 <= shadowCount, "unexpected negative shadow count");
                 shadowCount++;
             }
         }
 
-        internal void ShadowIndexCopy(){
-            if (shadowIndexes == indexes) {
+        internal void ShadowIndexCopy()
+        {
+            if (shadowIndexes == indexes)
+            {
                 Debug.Assert(0 < indexes.Count, "unexpected");
                 shadowIndexes = new List<Index>(indexes);
             }
@@ -4115,7 +5527,8 @@ namespace System.Data {
         /// <devdoc>
         /// <para>Returns the <see cref='System.Data.DataTable.TableName'/> and <see cref='System.Data.DataTable.DisplayExpression'/>, if there is one as a concatenated string.</para>
         /// </devdoc>
-        public override string ToString() {
+        public override string ToString()
+        {
             if (this.displayExpression == null)
                 return this.TableName;
             else
@@ -4125,40 +5538,50 @@ namespace System.Data {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void BeginLoadData() {
+        public void BeginLoadData()
+        {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataTable.BeginLoadData|API> %d#\n", ObjectID);
-            try {
+            try
+            {
                 if (inDataLoad)
                     return;
 
                 inDataLoad = true;
                 Debug.Assert(null == loadIndex, "loadIndex should already be null");
-                loadIndex  = null;
+                loadIndex = null;
                 // LoadDataRow may have been called before BeginLoadData and already
-                // initialized loadIndexwithOriginalAdded & loadIndexwithCurrentDeleted 
+                // initialized loadIndexwithOriginalAdded & loadIndexwithCurrentDeleted
 
                 initialLoad = (Rows.Count == 0);
-                if(initialLoad) {
+                if (initialLoad)
+                {
                     SuspendIndexEvents();
-                } else {
-                    if (primaryKey != null) {
+                }
+                else
+                {
+                    if (primaryKey != null)
+                    {
                         loadIndex = primaryKey.Key.GetSortIndex(DataViewRowState.OriginalRows);
                     }
-                    if(loadIndex != null) {
+                    if (loadIndex != null)
+                    {
                         loadIndex.AddRef();
                     }
                 }
 
-                if (DataSet != null) {
+                if (DataSet != null)
+                {
                     savedEnforceConstraints = DataSet.EnforceConstraints;
                     DataSet.EnforceConstraints = false;
                 }
-                else {
+                else
+                {
                     this.EnforceConstraints = false;
                 }
             }
-            finally{
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -4166,24 +5589,29 @@ namespace System.Data {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void EndLoadData() {
+        public void EndLoadData()
+        {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataTable.EndLoadData|API> %d#\n", ObjectID);
-            try {
+            try
+            {
                 if (!inDataLoad)
                     return;
 
-                if(loadIndex != null) {
+                if (loadIndex != null)
+                {
                     loadIndex.RemoveRef();
                 }
-                if (loadIndexwithOriginalAdded  != null) {
+                if (loadIndexwithOriginalAdded != null)
+                {
                     loadIndexwithOriginalAdded.RemoveRef();
                 }
-                if (loadIndexwithCurrentDeleted  != null) {
+                if (loadIndexwithCurrentDeleted != null)
+                {
                     loadIndexwithCurrentDeleted.RemoveRef();
                 }
 
-                loadIndex  = null;
+                loadIndex = null;
                 loadIndexwithOriginalAdded = null;
                 loadIndexwithCurrentDeleted = null;
 
@@ -4196,7 +5624,8 @@ namespace System.Data {
                 else
                     this.EnforceConstraints = true;
             }
-            finally{
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -4205,25 +5634,41 @@ namespace System.Data {
         ///    <para>Finds and updates a specific row. If no matching
         ///       row is found, a new row is created using the given values.</para>
         /// </devdoc>
-        public DataRow LoadDataRow(object[] values, bool fAcceptChanges) {
+        public DataRow LoadDataRow(object[] values, bool fAcceptChanges)
+        {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataTable.LoadDataRow|API> %d#, fAcceptChanges=%d{bool}\n", ObjectID, fAcceptChanges);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTable.LoadDataRow|API> %d#, fAcceptChanges=%d{bool}\n",
+                ObjectID,
+                fAcceptChanges
+            );
+            try
+            {
                 DataRow row;
-                if (inDataLoad) {
+                if (inDataLoad)
+                {
                     int record = NewRecordFromArray(values);
-                    if (loadIndex != null) {
+                    if (loadIndex != null)
+                    {
                         // not expecting LiveIndexes to clear the index we use between calls to LoadDataRow
                         Debug.Assert(2 <= loadIndex.RefCount, "bad loadIndex.RefCount");
 
                         int result = loadIndex.FindRecord(record);
-                        if (result != -1) {
+                        if (result != -1)
+                        {
                             int resultRecord = loadIndex.GetRecord(result);
                             row = recordManager[resultRecord];
-                            Debug.Assert (row != null, "Row can't be null for index record");
+                            Debug.Assert(row != null, "Row can't be null for index record");
                             row.CancelEdit();
                             if (row.RowState == DataRowState.Deleted)
-                                SetNewRecord(row, row.oldRecord, DataRowAction.Rollback, false, true);
+                                SetNewRecord(
+                                    row,
+                                    row.oldRecord,
+                                    DataRowAction.Rollback,
+                                    false,
+                                    true
+                                );
                             SetNewRecord(row, record, DataRowAction.Change, false, true);
                             if (fAcceptChanges)
                                 row.AcceptChanges();
@@ -4236,7 +5681,8 @@ namespace System.Data {
                         row.AcceptChanges();
                     return row;
                 }
-                else {
+                else
+                {
                     // In case, BeginDataLoad is not called yet
                     row = UpdatingAdd(values);
                     if (fAcceptChanges)
@@ -4244,7 +5690,8 @@ namespace System.Data {
                     return row;
                 }
             }
-            finally{
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -4253,27 +5700,51 @@ namespace System.Data {
         ///    <para>Finds and updates a specific row. If no matching
         ///       row is found, a new row is created using the given values.</para>
         /// </devdoc>
-        public DataRow LoadDataRow(object[] values, LoadOption loadOption) {
+        public DataRow LoadDataRow(object[] values, LoadOption loadOption)
+        {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataTable.LoadDataRow|API> %d#, loadOption=%d{ds.LoadOption}\n", ObjectID,  (int)loadOption);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTable.LoadDataRow|API> %d#, loadOption=%d{ds.LoadOption}\n",
+                ObjectID,
+                (int)loadOption
+            );
+            try
+            {
                 Index indextoUse = null;
-                if (this.primaryKey != null) {
-                    if (loadOption == LoadOption.Upsert) { // CurrentVersion, and Deleted
-                        if (loadIndexwithCurrentDeleted == null) {
-                            loadIndexwithCurrentDeleted = this.primaryKey.Key.GetSortIndex(DataViewRowState.CurrentRows |DataViewRowState.Deleted);
-                            Debug.Assert(loadIndexwithCurrentDeleted != null, "loadIndexwithCurrentDeleted should not be null" );
-                            if (loadIndexwithCurrentDeleted != null) {
+                if (this.primaryKey != null)
+                {
+                    if (loadOption == LoadOption.Upsert)
+                    { // CurrentVersion, and Deleted
+                        if (loadIndexwithCurrentDeleted == null)
+                        {
+                            loadIndexwithCurrentDeleted = this.primaryKey.Key.GetSortIndex(
+                                DataViewRowState.CurrentRows | DataViewRowState.Deleted
+                            );
+                            Debug.Assert(
+                                loadIndexwithCurrentDeleted != null,
+                                "loadIndexwithCurrentDeleted should not be null"
+                            );
+                            if (loadIndexwithCurrentDeleted != null)
+                            {
                                 loadIndexwithCurrentDeleted.AddRef();
                             }
                         }
                         indextoUse = loadIndexwithCurrentDeleted;
                     }
-                    else {// CurrentVersion, and Deleted : OverwriteRow, PreserveCurrentValues
-                        if (loadIndexwithOriginalAdded == null) {
-                            loadIndexwithOriginalAdded  = this.primaryKey.Key.GetSortIndex(DataViewRowState.OriginalRows |DataViewRowState.Added);
-                            Debug.Assert(loadIndexwithOriginalAdded != null, "loadIndexwithOriginalAdded should not be null");
-                            if (loadIndexwithOriginalAdded != null) {
+                    else
+                    { // CurrentVersion, and Deleted : OverwriteRow, PreserveCurrentValues
+                        if (loadIndexwithOriginalAdded == null)
+                        {
+                            loadIndexwithOriginalAdded = this.primaryKey.Key.GetSortIndex(
+                                DataViewRowState.OriginalRows | DataViewRowState.Added
+                            );
+                            Debug.Assert(
+                                loadIndexwithOriginalAdded != null,
+                                "loadIndexwithOriginalAdded should not be null"
+                            );
+                            if (loadIndexwithOriginalAdded != null)
+                            {
                                 loadIndexwithOriginalAdded.AddRef();
                             }
                         }
@@ -4282,33 +5753,39 @@ namespace System.Data {
                     // not expecting LiveIndexes to clear the index we use between calls to LoadDataRow
                     Debug.Assert(2 <= indextoUse.RefCount, "bad indextoUse.RefCount");
                 }
-                if(inDataLoad && !AreIndexEventsSuspended) { // we do not want to fire any listchanged in new Load/Fill
-                    SuspendIndexEvents();// so suspend events here(not suspended == table already has some rows initially)
+                if (inDataLoad && !AreIndexEventsSuspended)
+                { // we do not want to fire any listchanged in new Load/Fill
+                    SuspendIndexEvents(); // so suspend events here(not suspended == table already has some rows initially)
                 }
 
-                DataRow dataRow = LoadRow(values, loadOption, indextoUse);// if indextoUse == null, it means we dont have PK,
-                                                                          // so LoadRow will take care of just adding the row to end
+                DataRow dataRow = LoadRow(values, loadOption, indextoUse); // if indextoUse == null, it means we dont have PK,
+                // so LoadRow will take care of just adding the row to end
 
                 return dataRow;
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        internal DataRow UpdatingAdd(object[] values) {
+        internal DataRow UpdatingAdd(object[] values)
+        {
             Index index = null;
-            if (this.primaryKey != null) {
+            if (this.primaryKey != null)
+            {
                 index = this.primaryKey.Key.GetSortIndex(DataViewRowState.OriginalRows);
             }
 
-            if (index != null) {
+            if (index != null)
+            {
                 int record = NewRecordFromArray(values);
                 int result = index.FindRecord(record);
-                if (result != -1) {
+                if (result != -1)
+                {
                     int resultRecord = index.GetRecord(result);
                     DataRow row = this.recordManager[resultRecord];
-                    Debug.Assert (row != null, "Row can't be null for index record");
+                    Debug.Assert(row != null, "Row can't be null for index record");
                     row.RejectChanges();
                     this.SetNewRecord(row, record);
                     return row;
@@ -4321,14 +5798,20 @@ namespace System.Data {
             return Rows.Add(values);
         }
 
-        internal bool UpdatingCurrent(DataRow row, DataRowAction action) {
-            return(action == DataRowAction.Add || action == DataRowAction.Change ||
-                   action == DataRowAction.Rollback || action == DataRowAction.ChangeOriginal ||
-                   action == DataRowAction.ChangeCurrentAndOriginal);
-//                (action == DataRowAction.Rollback && row.tempRecord != -1));
-}
+        internal bool UpdatingCurrent(DataRow row, DataRowAction action)
+        {
+            return (
+                action == DataRowAction.Add
+                || action == DataRowAction.Change
+                || action == DataRowAction.Rollback
+                || action == DataRowAction.ChangeOriginal
+                || action == DataRowAction.ChangeCurrentAndOriginal
+            );
+            //                (action == DataRowAction.Rollback && row.tempRecord != -1));
+        }
 
-        internal DataColumn AddUniqueKey(int position) {
+        internal DataColumn AddUniqueKey(int position)
+        {
             if (_colUnique != null)
                 return _colUnique;
 
@@ -4349,38 +5832,49 @@ namespace System.Data {
 
             if (position == -1)
                 Columns.Add(key);
-            else { // we do have a problem and Imy idea is it is bug. Ask Enzo while Code review. Why we do not set ordinal when we call AddAt?
-                for(int i = Columns.Count -1; i >= position; i--) {
-                    this.Columns[i].SetOrdinalInternal(i+1);
+            else
+            { // we do have a problem and Imy idea is it is bug. Ask Enzo while Code review. Why we do not set ordinal when we call AddAt?
+                for (int i = Columns.Count - 1; i >= position; i--)
+                {
+                    this.Columns[i].SetOrdinalInternal(i + 1);
                 }
                 Columns.AddAt(position, key);
                 key.SetOrdinalInternal(position);
             }
 
             if (pkey.Length == 0)
-                PrimaryKey = new DataColumn[] {
-                    key
-                };
+                PrimaryKey = new DataColumn[] { key };
 
             _colUnique = key;
             return _colUnique;
         }
 
-        internal DataColumn AddUniqueKey() {
+        internal DataColumn AddUniqueKey()
+        {
             return AddUniqueKey(-1);
         }
 
-        internal DataColumn AddForeignKey(DataColumn parentKey) {
-            Debug.Assert(parentKey != null, "AddForeignKey: Invalid paramter.. related primary key is null");
+        internal DataColumn AddForeignKey(DataColumn parentKey)
+        {
+            Debug.Assert(
+                parentKey != null,
+                "AddForeignKey: Invalid paramter.. related primary key is null"
+            );
 
-            string      keyName = XMLSchema.GenUniqueColumnName(parentKey.ColumnName, this);
-            DataColumn  foreignKey = new DataColumn(keyName, parentKey.DataType, null, MappingType.Hidden);
+            string keyName = XMLSchema.GenUniqueColumnName(parentKey.ColumnName, this);
+            DataColumn foreignKey = new DataColumn(
+                keyName,
+                parentKey.DataType,
+                null,
+                MappingType.Hidden
+            );
             Columns.Add(foreignKey);
 
             return foreignKey;
         }
 
-        internal void UpdatePropertyDescriptorCollectionCache() {
+        internal void UpdatePropertyDescriptorCollectionCache()
+        {
             propertyDescriptorCollectionCache = null;
         }
 
@@ -4391,16 +5885,25 @@ namespace System.Data {
         ///     additional properties.  The returned array of properties will be
         ///     filtered by the given set of attributes.
         /// </devdoc>
-        internal PropertyDescriptorCollection GetPropertyDescriptorCollection(Attribute[] attributes) {
-            if (propertyDescriptorCollectionCache == null) {
-                int columnsCount   = Columns.Count;
+        internal PropertyDescriptorCollection GetPropertyDescriptorCollection(
+            Attribute[] attributes
+        )
+        {
+            if (propertyDescriptorCollectionCache == null)
+            {
+                int columnsCount = Columns.Count;
                 int relationsCount = ChildRelations.Count;
-                PropertyDescriptor[] props = new PropertyDescriptor[columnsCount + relationsCount]; {
-                    for (int i = 0; i < columnsCount; i++) {
+                PropertyDescriptor[] props = new PropertyDescriptor[columnsCount + relationsCount];
+                {
+                    for (int i = 0; i < columnsCount; i++)
+                    {
                         props[i] = new DataColumnPropertyDescriptor(Columns[i]);
                     }
-                    for (int i = 0; i < relationsCount; i++) {
-                        props[columnsCount + i] = new DataRelationPropertyDescriptor(ChildRelations[i]);
+                    for (int i = 0; i < relationsCount; i++)
+                    {
+                        props[columnsCount + i] = new DataRelationPropertyDescriptor(
+                            ChildRelations[i]
+                        );
                     }
                 }
                 propertyDescriptorCollectionCache = new PropertyDescriptorCollection(props);
@@ -4408,13 +5911,13 @@ namespace System.Data {
             return propertyDescriptorCollectionCache;
         }
 
-        internal XmlQualifiedName TypeName {
-            get {
+        internal XmlQualifiedName TypeName
+        {
+            get
+            {
                 return ((typeName == null) ? XmlQualifiedName.Empty : (XmlQualifiedName)typeName);
             }
-            set {
-                typeName = value;
-            }
+            set { typeName = value; }
         }
 
         public void Merge(DataTable table)
@@ -4427,44 +5930,72 @@ namespace System.Data {
             Merge(table, preserveChanges, MissingSchemaAction.Add);
         }
 
-        public void Merge(DataTable table, bool preserveChanges, MissingSchemaAction missingSchemaAction)
+        public void Merge(
+            DataTable table,
+            bool preserveChanges,
+            MissingSchemaAction missingSchemaAction
+        )
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataTable.Merge|API> %d#, table=%d, preserveChanges=%d{bool}, missingSchemaAction=%d{ds.MissingSchemaAction}\n", ObjectID, (table != null) ? table.ObjectID : 0, preserveChanges, (int)missingSchemaAction);
-            try{
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTable.Merge|API> %d#, table=%d, preserveChanges=%d{bool}, missingSchemaAction=%d{ds.MissingSchemaAction}\n",
+                ObjectID,
+                (table != null) ? table.ObjectID : 0,
+                preserveChanges,
+                (int)missingSchemaAction
+            );
+            try
+            {
                 if (table == null)
                     throw ExceptionBuilder.ArgumentNull("table");
 
-                switch(missingSchemaAction) { // @perfnote: Enum.IsDefined
-                case MissingSchemaAction.Add:
-                case MissingSchemaAction.Ignore:
-                case MissingSchemaAction.Error:
-                case MissingSchemaAction.AddWithKey:
-                    Merger merger = new Merger(this, preserveChanges, missingSchemaAction);
-                    merger.MergeTable(table);
-                    break;
-                default:
-                    throw Common.ADP.InvalidMissingSchemaAction(missingSchemaAction);
+                switch (missingSchemaAction)
+                { // @perfnote: Enum.IsDefined
+                    case MissingSchemaAction.Add:
+                    case MissingSchemaAction.Ignore:
+                    case MissingSchemaAction.Error:
+                    case MissingSchemaAction.AddWithKey:
+                        Merger merger = new Merger(this, preserveChanges, missingSchemaAction);
+                        merger.MergeTable(table);
+                        break;
+                    default:
+                        throw Common.ADP.InvalidMissingSchemaAction(missingSchemaAction);
                 }
             }
-            finally{
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        public void Load (IDataReader reader){
+        public void Load(IDataReader reader)
+        {
             Load(reader, LoadOption.PreserveChanges, null);
         }
 
-        public void Load (IDataReader reader, LoadOption loadOption) {
+        public void Load(IDataReader reader, LoadOption loadOption)
+        {
             Load(reader, loadOption, null);
         }
 
-        public virtual void Load (IDataReader reader, LoadOption loadOption, FillErrorEventHandler errorHandler){
+        public virtual void Load(
+            IDataReader reader,
+            LoadOption loadOption,
+            FillErrorEventHandler errorHandler
+        )
+        {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataTable.Load|API> %d#, loadOption=%d{ds.LoadOption}\n", ObjectID, (int)loadOption);
-            try {
-                if (this.PrimaryKey.Length == 0) {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTable.Load|API> %d#, loadOption=%d{ds.LoadOption}\n",
+                ObjectID,
+                (int)loadOption
+            );
+            try
+            {
+                if (this.PrimaryKey.Length == 0)
+                {
                     DataTableReader dtReader = reader as DataTableReader;
                     if (dtReader != null && dtReader.CurrentDataTable == this)
                         return; // if not return, it will go to infinite loop
@@ -4472,66 +6003,85 @@ namespace System.Data {
                 Common.LoadAdapter adapter = new Common.LoadAdapter();
                 adapter.FillLoadOption = loadOption;
                 adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-                if (null != errorHandler) {
+                if (null != errorHandler)
+                {
                     adapter.FillError += errorHandler;
                 }
                 adapter.FillFromReader(new DataTable[] { this }, reader, 0, 0);
 
-                if (!reader.IsClosed && !reader.NextResult()) { // 
+                if (!reader.IsClosed && !reader.NextResult())
+                { //
                     reader.Close();
                 }
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        private DataRow LoadRow(object[] values, LoadOption loadOption, Index searchIndex) {
+        private DataRow LoadRow(object[] values, LoadOption loadOption, Index searchIndex)
+        {
             int recordNo;
             DataRow dataRow = null;
 
-            if (searchIndex != null) {
+            if (searchIndex != null)
+            {
                 int[] primaryKeyIndex = new int[0];
-                if (this.primaryKey != null) { // I do check above for PK, but in case if someone else gives me some index unrelated to PK
+                if (this.primaryKey != null)
+                { // I do check above for PK, but in case if someone else gives me some index unrelated to PK
                     primaryKeyIndex = new int[this.primaryKey.ColumnsReference.Length];
-                    for(int i = 0; i < this.primaryKey.ColumnsReference.Length; i++) {
+                    for (int i = 0; i < this.primaryKey.ColumnsReference.Length; i++)
+                    {
                         primaryKeyIndex[i] = this.primaryKey.ColumnsReference[i].Ordinal;
                     }
                 }
 
                 object[] keys = new object[primaryKeyIndex.Length];
-                for(int i = 0; i < primaryKeyIndex.Length; i++) {
+                for (int i = 0; i < primaryKeyIndex.Length; i++)
+                {
                     keys[i] = values[primaryKeyIndex[i]];
                 }
 
                 Range result = searchIndex.FindRecords(keys);
 
-                if (!result.IsNull) {
+                if (!result.IsNull)
+                {
                     int deletedRowUpsertCount = 0;
-                    for(int i = result.Min; i <= result.Max; i++) {
+                    for (int i = result.Min; i <= result.Max; i++)
+                    {
                         int resultRecord = searchIndex.GetRecord(i);
                         dataRow = this.recordManager[resultRecord];
                         recordNo = NewRecordFromArray(values);
 
                         //SQLBU DT 33648
                         // values array is being reused by DataAdapter, do not modify the values array
-                        for(int count = 0; count < values.Length; count++) {
-                            if (null == values[count]) {
+                        for (int count = 0; count < values.Length; count++)
+                        {
+                            if (null == values[count])
+                            {
                                 columnCollection[count].Copy(resultRecord, recordNo);
                             }
                         }
-                        for(int count = values.Length; count < columnCollection.Count ; count++) {
+                        for (int count = values.Length; count < columnCollection.Count; count++)
+                        {
                             columnCollection[count].Copy(resultRecord, recordNo); // if there are missing values
                         }
 
-                        if (loadOption != LoadOption.Upsert || dataRow.RowState != DataRowState.Deleted) {
-                            SetDataRowWithLoadOption(dataRow , recordNo, loadOption, true);
+                        if (
+                            loadOption != LoadOption.Upsert
+                            || dataRow.RowState != DataRowState.Deleted
+                        )
+                        {
+                            SetDataRowWithLoadOption(dataRow, recordNo, loadOption, true);
                         }
-                        else {
+                        else
+                        {
                             deletedRowUpsertCount++;
                         }
                     }
-                    if (0 == deletedRowUpsertCount) {
+                    if (0 == deletedRowUpsertCount)
+                    {
                         return dataRow;
                     }
                 }
@@ -4542,7 +6092,8 @@ namespace System.Data {
             // fire rowChanging event here
             DataRowAction action;
             DataRowChangeEventArgs drcevent = null;
-            switch(loadOption) {
+            switch (loadOption)
+            {
                 case LoadOption.OverwriteChanges:
                 case LoadOption.PreserveChanges:
                     action = DataRowAction.ChangeCurrentAndOriginal;
@@ -4556,11 +6107,12 @@ namespace System.Data {
 
             drcevent = RaiseRowChanging(null, dataRow, action);
 
-            this.InsertRow (dataRow, -1, -1, false);
-            switch(loadOption) {
+            this.InsertRow(dataRow, -1, -1, false);
+            switch (loadOption)
+            {
                 case LoadOption.OverwriteChanges:
                 case LoadOption.PreserveChanges:
-                    this.SetOldRecord(dataRow,  recordNo);
+                    this.SetOldRecord(dataRow, recordNo);
                     break;
                 case LoadOption.Upsert:
                     break;
@@ -4572,14 +6124,27 @@ namespace System.Data {
             return dataRow;
         }
 
-        private void SetDataRowWithLoadOption (DataRow dataRow, int recordNo, LoadOption loadOption, bool checkReadOnly) {
+        private void SetDataRowWithLoadOption(
+            DataRow dataRow,
+            int recordNo,
+            LoadOption loadOption,
+            bool checkReadOnly
+        )
+        {
             bool hasError = false;
-            if (checkReadOnly) {
-                foreach(DataColumn dc in this.Columns) {
-                    if (dc.ReadOnly && !dc.Computed) {
-                        switch(loadOption) {
+            if (checkReadOnly)
+            {
+                foreach (DataColumn dc in this.Columns)
+                {
+                    if (dc.ReadOnly && !dc.Computed)
+                    {
+                        switch (loadOption)
+                        {
                             case LoadOption.OverwriteChanges:
-                                if ((dataRow[dc, DataRowVersion.Current] != dc[recordNo]) ||(dataRow[dc, DataRowVersion.Original] != dc[recordNo]))
+                                if (
+                                    (dataRow[dc, DataRowVersion.Current] != dc[recordNo])
+                                    || (dataRow[dc, DataRowVersion.Original] != dc[recordNo])
+                                )
                                     hasError = true;
                                 break;
                             case LoadOption.Upsert:
@@ -4601,31 +6166,39 @@ namespace System.Data {
             int cacheTempRecord = dataRow.tempRecord;
             dataRow.tempRecord = recordNo;
 
-            switch(loadOption) {
+            switch (loadOption)
+            {
                 case LoadOption.OverwriteChanges:
                     action = DataRowAction.ChangeCurrentAndOriginal;
                     break;
                 case LoadOption.Upsert:
-                    switch(dataRow.RowState) {
+                    switch (dataRow.RowState)
+                    {
                         case DataRowState.Unchanged:
                             // let see if the incomming value has the same values as existing row, so compare records
-                            foreach(DataColumn dc in dataRow.Table.Columns) {
-                                if (0 != dc.Compare(dataRow.newRecord, recordNo)) {
+                            foreach (DataColumn dc in dataRow.Table.Columns)
+                            {
+                                if (0 != dc.Compare(dataRow.newRecord, recordNo))
+                                {
                                     action = DataRowAction.Change;
                                     break;
                                 }
                             }
                             break;
                         case DataRowState.Deleted:
-                            Debug.Assert(false, "LoadOption.Upsert with deleted row, should not be here");
+                            Debug.Assert(
+                                false,
+                                "LoadOption.Upsert with deleted row, should not be here"
+                            );
                             break;
-                        default :
+                        default:
                             action = DataRowAction.Change;
                             break;
                     }
                     break;
                 case LoadOption.PreserveChanges:
-                    switch(dataRow.RowState) {
+                    switch (dataRow.RowState)
+                    {
                         case DataRowState.Unchanged:
                             action = DataRowAction.ChangeCurrentAndOriginal;
                             break;
@@ -4638,111 +6211,139 @@ namespace System.Data {
                     throw ExceptionBuilder.ArgumentOutOfRange("LoadOption");
             }
 
-            try {
+            try
+            {
                 drcevent = RaiseRowChanging(null, dataRow, action);
-                if (action == DataRowAction.Nothing) { // RaiseRowChanging does not fire for DataRowAction.Nothing
+                if (action == DataRowAction.Nothing)
+                { // RaiseRowChanging does not fire for DataRowAction.Nothing
                     dataRow.inChangingEvent = true;
-                    try {
+                    try
+                    {
                         drcevent = OnRowChanging(drcevent, dataRow, action);
                     }
-                    finally {
+                    finally
+                    {
                         dataRow.inChangingEvent = false;
                     }
                 }
             }
-            finally {
-                Debug.Assert(dataRow.tempRecord == recordNo, "tempRecord has been changed in event handler");
-                if (DataRowState.Detached == dataRow.RowState) {
+            finally
+            {
+                Debug.Assert(
+                    dataRow.tempRecord == recordNo,
+                    "tempRecord has been changed in event handler"
+                );
+                if (DataRowState.Detached == dataRow.RowState)
+                {
                     // 'row.Table.Remove(row);'
-                    if (-1 != cacheTempRecord) {
+                    if (-1 != cacheTempRecord)
+                    {
                         FreeRecord(ref cacheTempRecord);
                     }
                 }
-                else {
-                    if (dataRow.tempRecord != recordNo) {
+                else
+                {
+                    if (dataRow.tempRecord != recordNo)
+                    {
                         // 'row.EndEdit(); row.BeginEdit(); '
-                        if (-1 != cacheTempRecord) {
+                        if (-1 != cacheTempRecord)
+                        {
                             FreeRecord(ref cacheTempRecord);
                         }
-                        if (-1 != recordNo) {
+                        if (-1 != recordNo)
+                        {
                             FreeRecord(ref recordNo);
                         }
                         recordNo = dataRow.tempRecord;
                     }
-                    else {
+                    else
+                    {
                         dataRow.tempRecord = cacheTempRecord;
                     }
                 }
             }
-            if (dataRow.tempRecord != -1) {
+            if (dataRow.tempRecord != -1)
+            {
                 dataRow.CancelEdit();
             }
 
-            switch(loadOption) {
+            switch (loadOption)
+            {
                 case LoadOption.OverwriteChanges:
-                     this.SetNewRecord(dataRow,  recordNo, DataRowAction.Change, false, false);
-                     this.SetOldRecord(dataRow,  recordNo);
-                     break;
+                    this.SetNewRecord(dataRow, recordNo, DataRowAction.Change, false, false);
+                    this.SetOldRecord(dataRow, recordNo);
+                    break;
                 case LoadOption.Upsert:
-                     if (dataRow.RowState == DataRowState.Unchanged) {
-                         this.SetNewRecord(dataRow,  recordNo, DataRowAction.Change, false, false);
-                         if (!dataRow.HasChanges()) {
-                             this.SetOldRecord(dataRow, recordNo);
-                         }
-                     }
-                     else {
-                         if (dataRow.RowState == DataRowState.Deleted)
-                             dataRow.RejectChanges();
-                         this.SetNewRecord(dataRow,  recordNo, DataRowAction.Change, false, false);
-                     }
-                     break;
+                    if (dataRow.RowState == DataRowState.Unchanged)
+                    {
+                        this.SetNewRecord(dataRow, recordNo, DataRowAction.Change, false, false);
+                        if (!dataRow.HasChanges())
+                        {
+                            this.SetOldRecord(dataRow, recordNo);
+                        }
+                    }
+                    else
+                    {
+                        if (dataRow.RowState == DataRowState.Deleted)
+                            dataRow.RejectChanges();
+                        this.SetNewRecord(dataRow, recordNo, DataRowAction.Change, false, false);
+                    }
+                    break;
                 case LoadOption.PreserveChanges:
-                     if (dataRow.RowState == DataRowState.Unchanged) {
-                         // SQLBU 500706: DataTable internal index is corrupted: '8'
-                         // if ListChanged event deletes dataRow
-                         this.SetOldRecord(dataRow,  recordNo); // do not fire event
-                         this.SetNewRecord(dataRow, recordNo, DataRowAction.Change, false, false);
-                     }
-                     else { // if modified/ added / deleted we want this operation to fire event (just for LoadOption.PreserveCurrentValues)
-                        this.SetOldRecord(dataRow,  recordNo);
-                     }
-                     break;
+                    if (dataRow.RowState == DataRowState.Unchanged)
+                    {
+                        // SQLBU 500706: DataTable internal index is corrupted: '8'
+                        // if ListChanged event deletes dataRow
+                        this.SetOldRecord(dataRow, recordNo); // do not fire event
+                        this.SetNewRecord(dataRow, recordNo, DataRowAction.Change, false, false);
+                    }
+                    else
+                    { // if modified/ added / deleted we want this operation to fire event (just for LoadOption.PreserveCurrentValues)
+                        this.SetOldRecord(dataRow, recordNo);
+                    }
+                    break;
                 default:
                     throw ExceptionBuilder.ArgumentOutOfRange("LoadOption");
             }
 
-            if (hasError) {
+            if (hasError)
+            {
                 string error = Res.GetString(Res.Load_ReadOnlyDataModified);
-                if (dataRow.RowError.Length == 0) { // WebData 112272, append the row error
+                if (dataRow.RowError.Length == 0)
+                { // WebData 112272, append the row error
                     dataRow.RowError = error;
                 }
-                else {
-                    dataRow.RowError += " ]:[ " + error ;
+                else
+                {
+                    dataRow.RowError += " ]:[ " + error;
                 }
 
-                foreach(DataColumn dc in this.Columns) {
+                foreach (DataColumn dc in this.Columns)
+                {
                     if (dc.ReadOnly && !dc.Computed)
                         dataRow.SetColumnError(dc, error);
                 }
             }
 
             drcevent = RaiseRowChanged(drcevent, dataRow, action);
-            if (action == DataRowAction.Nothing) { // RaiseRowChanged does not fire for DataRowAction.Nothing
+            if (action == DataRowAction.Nothing)
+            { // RaiseRowChanged does not fire for DataRowAction.Nothing
                 dataRow.inChangingEvent = true;
-                try {
+                try
+                {
                     OnRowChanged(drcevent, dataRow, action);
                 }
-                finally {
+                finally
+                {
                     dataRow.inChangingEvent = false;
                 }
             }
-
         }
 
-        public  DataTableReader CreateDataReader() {
+        public DataTableReader CreateDataReader()
+        {
             return new DataTableReader(this);
         }
-
 
         public void WriteXml(Stream stream)
         {
@@ -4795,11 +6396,12 @@ namespace System.Data {
 
         public void WriteXml(Stream stream, XmlWriteMode mode, bool writeHierarchy)
         {
-            if (stream != null) {
-                XmlTextWriter w =  new XmlTextWriter(stream, null) ;
+            if (stream != null)
+            {
+                XmlTextWriter w = new XmlTextWriter(stream, null);
                 w.Formatting = Formatting.Indented;
 
-                WriteXml( w, mode, writeHierarchy);
+                WriteXml(w, mode, writeHierarchy);
             }
         }
 
@@ -4810,8 +6412,9 @@ namespace System.Data {
 
         public void WriteXml(TextWriter writer, XmlWriteMode mode, bool writeHierarchy)
         {
-            if (writer != null) {
-                XmlTextWriter w =  new XmlTextWriter(writer) ;
+            if (writer != null)
+            {
+                XmlTextWriter w = new XmlTextWriter(writer);
                 w.Formatting = Formatting.Indented;
 
                 WriteXml(w, mode, writeHierarchy);
@@ -4822,27 +6425,39 @@ namespace System.Data {
         {
             WriteXml(writer, mode, false);
         }
+
         public void WriteXml(XmlWriter writer, XmlWriteMode mode, bool writeHierarchy)
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataTable.WriteXml|API> %d#, mode=%d{ds.XmlWriteMode}\n", ObjectID,  (int)mode);
-            try{
-                if (this.tableName.Length == 0) {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTable.WriteXml|API> %d#, mode=%d{ds.XmlWriteMode}\n",
+                ObjectID,
+                (int)mode
+            );
+            try
+            {
+                if (this.tableName.Length == 0)
+                {
                     throw ExceptionBuilder.CanNotSerializeDataTableWithEmptyName();
                 }
                 // Generate SchemaTree and write it out
-                if (writer != null) {
-
-                    if (mode == XmlWriteMode.DiffGram) { // FIX THIS
+                if (writer != null)
+                {
+                    if (mode == XmlWriteMode.DiffGram)
+                    { // FIX THIS
                         // Create and save the updates
                         new NewDiffgramGen(this, writeHierarchy).Save(writer, this);
                     }
-                    else {
+                    else
+                    {
                         // Create and save xml data
-                        if (mode == XmlWriteMode.WriteSchema) {
+                        if (mode == XmlWriteMode.WriteSchema)
+                        {
                             DataSet ds = null;
                             string tablenamespace = this.tableNamespace;
-                            if (null == this.DataSet) {
+                            if (null == this.DataSet)
+                            {
                                 ds = new DataSet();
                                 // if user set values on DataTable, it isn't necessary
                                 // to set them on the DataSet because they won't be inherited
@@ -4858,23 +6473,39 @@ namespace System.Data {
                                 ds.Tables.Add(this);
                             }
 
-                            if (writer != null) {
-                                XmlDataTreeWriter xmldataWriter = new XmlDataTreeWriter(this, writeHierarchy);
-                                xmldataWriter.Save(writer, /*mode == XmlWriteMode.WriteSchema*/true);
+                            if (writer != null)
+                            {
+                                XmlDataTreeWriter xmldataWriter = new XmlDataTreeWriter(
+                                    this,
+                                    writeHierarchy
+                                );
+                                xmldataWriter.Save(
+                                    writer, /*mode == XmlWriteMode.WriteSchema*/
+                                    true
+                                );
                             }
-                            if (null != ds) {
+                            if (null != ds)
+                            {
                                 ds.Tables.Remove(this);
                                 this.tableNamespace = tablenamespace;
                             }
                         }
-                        else {
-                            XmlDataTreeWriter xmldataWriter = new XmlDataTreeWriter(this, writeHierarchy);
-                            xmldataWriter.Save(writer,/*mode == XmlWriteMode.WriteSchema*/ false);
+                        else
+                        {
+                            XmlDataTreeWriter xmldataWriter = new XmlDataTreeWriter(
+                                this,
+                                writeHierarchy
+                            );
+                            xmldataWriter.Save(
+                                writer, /*mode == XmlWriteMode.WriteSchema*/
+                                false
+                            );
                         }
                     }
                 }
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -4891,9 +6522,17 @@ namespace System.Data {
         public void WriteXml(String fileName, XmlWriteMode mode, bool writeHierarchy)
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataTable.WriteXml|API> %d#, fileName='%ls', mode=%d{ds.XmlWriteMode}\n", ObjectID, fileName, (int)mode);
-            try {
-                using(XmlTextWriter xw = new XmlTextWriter( fileName, null )) {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTable.WriteXml|API> %d#, fileName='%ls', mode=%d{ds.XmlWriteMode}\n",
+                ObjectID,
+                fileName,
+                (int)mode
+            );
+            try
+            {
+                using (XmlTextWriter xw = new XmlTextWriter(fileName, null))
+                {
                     xw.Formatting = Formatting.Indented;
                     xw.WriteStartDocument(true);
 
@@ -4902,12 +6541,14 @@ namespace System.Data {
                     xw.WriteEndDocument();
                 }
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        public void WriteXmlSchema(Stream stream) {
+        public void WriteXmlSchema(Stream stream)
+        {
             WriteXmlSchema(stream, false);
         }
 
@@ -4916,46 +6557,54 @@ namespace System.Data {
             if (stream == null)
                 return;
 
-            XmlTextWriter w =  new XmlTextWriter(stream, null) ;
+            XmlTextWriter w = new XmlTextWriter(stream, null);
             w.Formatting = Formatting.Indented;
 
-            WriteXmlSchema( w, writeHierarchy );
+            WriteXmlSchema(w, writeHierarchy);
         }
 
-        public void WriteXmlSchema( TextWriter writer ) {
-            WriteXmlSchema( writer, false );
-        }
-
-        public void WriteXmlSchema( TextWriter writer, bool writeHierarchy )
+        public void WriteXmlSchema(TextWriter writer)
         {
+            WriteXmlSchema(writer, false);
+        }
 
+        public void WriteXmlSchema(TextWriter writer, bool writeHierarchy)
+        {
             if (writer == null)
                 return;
 
-            XmlTextWriter w =  new XmlTextWriter(writer);
+            XmlTextWriter w = new XmlTextWriter(writer);
             w.Formatting = Formatting.Indented;
 
-            WriteXmlSchema( w, writeHierarchy );
+            WriteXmlSchema(w, writeHierarchy);
         }
 
-        private  bool CheckForClosureOnExpressions(DataTable dt, bool writeHierarchy) {
+        private bool CheckForClosureOnExpressions(DataTable dt, bool writeHierarchy)
+        {
             List<DataTable> tableList = new List<DataTable>();
             tableList.Add(dt);
-            if (writeHierarchy) { // WebData 112161
+            if (writeHierarchy)
+            { // WebData 112161
                 CreateTableList(dt, tableList);
             }
             return CheckForClosureOnExpressionTables(tableList);
         }
 
-        private bool CheckForClosureOnExpressionTables(List<DataTable> tableList) {
+        private bool CheckForClosureOnExpressionTables(List<DataTable> tableList)
+        {
             Debug.Assert(tableList != null, "tableList shouldnot be null");
 
-            foreach(DataTable datatable in tableList) {
-                foreach(DataColumn dc in datatable.Columns) {
-                    if (dc.Expression.Length != 0)  {
+            foreach (DataTable datatable in tableList)
+            {
+                foreach (DataColumn dc in datatable.Columns)
+                {
+                    if (dc.Expression.Length != 0)
+                    {
                         DataColumn[] dependency = dc.DataExpression.GetDependency();
-                        for (int j = 0; j < dependency.Length; j++) {
-                            if (!(tableList.Contains(dependency[j].Table))) {
+                        for (int j = 0; j < dependency.Length; j++)
+                        {
+                            if (!(tableList.Contains(dependency[j].Table)))
+                            {
                                 return false;
                             }
                         }
@@ -4965,8 +6614,8 @@ namespace System.Data {
             return true;
         }
 
-
-        public void WriteXmlSchema(XmlWriter writer) {
+        public void WriteXmlSchema(XmlWriter writer)
+        {
             WriteXmlSchema(writer, false);
         }
 
@@ -4974,20 +6623,24 @@ namespace System.Data {
         {
             IntPtr hscp;
             Bid.ScopeEnter(out hscp, "<ds.DataTable.WriteXmlSchema|API> %d#\n", ObjectID);
-            try{
-                if (this.tableName.Length == 0) {
+            try
+            {
+                if (this.tableName.Length == 0)
+                {
                     throw ExceptionBuilder.CanNotSerializeDataTableWithEmptyName();
                 }
 
-                if (!CheckForClosureOnExpressions(this, writeHierarchy)) {
+                if (!CheckForClosureOnExpressions(this, writeHierarchy))
+                {
                     throw ExceptionBuilder.CanNotSerializeDataTableHierarchy();
                 }
 
                 DataSet ds = null;
-                string tablenamespace = this.tableNamespace;//SQL BU Defect Tracking 286968
+                string tablenamespace = this.tableNamespace; //SQL BU Defect Tracking 286968
 
                 // Generate SchemaTree and write it out
-                if (null == this.DataSet) {
+                if (null == this.DataSet)
+                {
                     ds = new DataSet();
                     // if user set values on DataTable, it isn't necessary
                     // to set them on the DataSet because they won't be inherited
@@ -5003,23 +6656,27 @@ namespace System.Data {
                     ds.Tables.Add(this);
                 }
 
-                if (writer != null) {
+                if (writer != null)
+                {
                     XmlTreeGen treeGen = new XmlTreeGen(SchemaFormat.Public);
                     treeGen.Save(null, this, writer, writeHierarchy);
                 }
-                if (null != ds) {
+                if (null != ds)
+                {
                     ds.Tables.Remove(this);
                     this.tableNamespace = tablenamespace;
                 }
             }
-            finally {
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public void WriteXmlSchema(String fileName) {
+        public void WriteXmlSchema(String fileName)
+        {
             WriteXmlSchema(fileName, false);
         }
 
@@ -5027,14 +6684,16 @@ namespace System.Data {
         [ResourceConsumption(ResourceScope.Machine)]
         public void WriteXmlSchema(String fileName, bool writeHierarchy)
         {
-            XmlTextWriter xw = new XmlTextWriter( fileName, null );
-            try {
+            XmlTextWriter xw = new XmlTextWriter(fileName, null);
+            try
+            {
                 xw.Formatting = Formatting.Indented;
                 xw.WriteStartDocument(true);
                 WriteXmlSchema(xw, writeHierarchy);
                 xw.WriteEndDocument();
             }
-            finally {
+            finally
+            {
                 xw.Close();
             }
         }
@@ -5046,7 +6705,7 @@ namespace System.Data {
 
             XmlTextReader xr = new XmlTextReader(stream);
 
-            // Prevent Dtd entity in DataTable 
+            // Prevent Dtd entity in DataTable
             xr.XmlResolver = null;
 
             return ReadXml(xr, false);
@@ -5059,7 +6718,7 @@ namespace System.Data {
 
             XmlTextReader xr = new XmlTextReader(reader);
 
-            // Prevent Dtd entity in DataTable 
+            // Prevent Dtd entity in DataTable
             xr.XmlResolver = null;
 
             return ReadXml(xr, false);
@@ -5071,14 +6730,15 @@ namespace System.Data {
         {
             XmlTextReader xr = new XmlTextReader(fileName);
 
-            // Prevent Dtd entity in DataTable 
+            // Prevent Dtd entity in DataTable
             xr.XmlResolver = null;
 
             try
             {
-                return ReadXml( xr , false);
+                return ReadXml(xr, false);
             }
-            finally {
+            finally
+            {
                 xr.Close();
             }
         }
@@ -5088,27 +6748,42 @@ namespace System.Data {
             return ReadXml(reader, false);
         }
 
-        private void RestoreConstraint(bool originalEnforceConstraint) {
-            if (this.DataSet != null) {
+        private void RestoreConstraint(bool originalEnforceConstraint)
+        {
+            if (this.DataSet != null)
+            {
                 this.DataSet.EnforceConstraints = originalEnforceConstraint;
             }
-            else {
+            else
+            {
                 this.EnforceConstraints = originalEnforceConstraint;
             }
         }
 
-        private bool IsEmptyXml(XmlReader reader) {
-            if (reader.IsEmptyElement) {
-                if (reader.AttributeCount == 0 || (reader.LocalName == Keywords.DIFFGRAM && reader.NamespaceURI == Keywords.DFFNS)) {
+        private bool IsEmptyXml(XmlReader reader)
+        {
+            if (reader.IsEmptyElement)
+            {
+                if (
+                    reader.AttributeCount == 0
+                    || (
+                        reader.LocalName == Keywords.DIFFGRAM
+                        && reader.NamespaceURI == Keywords.DFFNS
+                    )
+                )
+                {
                     return true;
                 }
-                if (reader.AttributeCount == 1) {
+                if (reader.AttributeCount == 1)
+                {
                     reader.MoveToAttribute(0);
-                    if ((this.Namespace == reader.Value) &&
-                        (this.Prefix == reader.LocalName) &&
-                        (reader.Prefix == Keywords.XMLNS) &&
-                        (reader.NamespaceURI == Keywords.XSD_XMLNS_NS))
-                    return true;
+                    if (
+                        (this.Namespace == reader.Value)
+                        && (this.Prefix == reader.LocalName)
+                        && (reader.Prefix == Keywords.XMLNS)
+                        && (reader.NamespaceURI == Keywords.XSD_XMLNS_NS)
+                    )
+                        return true;
                 }
             }
             return false;
@@ -5117,205 +6792,282 @@ namespace System.Data {
         internal XmlReadMode ReadXml(XmlReader reader, bool denyResolving)
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataTable.ReadXml|INFO> %d#, denyResolving=%d{bool}\n", ObjectID, denyResolving);
-            try {
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTable.ReadXml|INFO> %d#, denyResolving=%d{bool}\n",
+                ObjectID,
+                denyResolving
+            );
+            try
+            {
+                DataTable.RowDiffIdUsageSection rowDiffIdUsage =
+                    new DataTable.RowDiffIdUsageSection();
+                try
+                {
+                    bool fDataFound = false;
+                    bool fSchemaFound = false;
+                    bool fDiffsFound = false;
+                    bool fIsXdr = false;
+                    int iCurrentDepth = -1;
+                    XmlReadMode ret = XmlReadMode.Auto;
 
-              DataTable.RowDiffIdUsageSection rowDiffIdUsage = new DataTable.RowDiffIdUsageSection();
-              try {
-                bool fDataFound = false;
-                bool fSchemaFound = false;
-                bool fDiffsFound = false;
-                bool fIsXdr = false;
-                int iCurrentDepth = -1;
-                XmlReadMode ret = XmlReadMode.Auto;
+                    // clear the hashtable to avoid conflicts between diffgrams, SqlHotFix 782
+                    rowDiffIdUsage.Prepare(this);
 
-                // clear the hashtable to avoid conflicts between diffgrams, SqlHotFix 782
-                rowDiffIdUsage.Prepare(this);
-
-                if (reader == null)
-                    return ret;
-                bool originalEnforceConstraint = false;
-                if (this.DataSet != null) {
-                    originalEnforceConstraint = this.DataSet.EnforceConstraints;
-                    this.DataSet.EnforceConstraints = false;
-                }
-                else {
-                    originalEnforceConstraint = this.EnforceConstraints;
-                    this.EnforceConstraints = false;
-                }
-
-                if (reader is XmlTextReader)
-                    ((XmlTextReader) reader).WhitespaceHandling = WhitespaceHandling.Significant;
-
-                XmlDocument xdoc = new XmlDocument(); // we may need this to infer the schema
-                XmlDataLoader xmlload = null;
-
-
-                reader.MoveToContent();
-                if (Columns.Count == 0) {
-                    if (IsEmptyXml(reader)) {
-                        reader.Read();
+                    if (reader == null)
                         return ret;
+                    bool originalEnforceConstraint = false;
+                    if (this.DataSet != null)
+                    {
+                        originalEnforceConstraint = this.DataSet.EnforceConstraints;
+                        this.DataSet.EnforceConstraints = false;
                     }
-                }
+                    else
+                    {
+                        originalEnforceConstraint = this.EnforceConstraints;
+                        this.EnforceConstraints = false;
+                    }
 
-                if (reader.NodeType == XmlNodeType.Element) {
-                    iCurrentDepth = reader.Depth;
+                    if (reader is XmlTextReader)
+                        ((XmlTextReader)reader).WhitespaceHandling = WhitespaceHandling.Significant;
 
-                    if ((reader.LocalName == Keywords.DIFFGRAM) && (reader.NamespaceURI == Keywords.DFFNS)) {
-                        if (Columns.Count == 0) {
-                            if (reader.IsEmptyElement) {
-                                reader.Read();
-                                return XmlReadMode.DiffGram;
+                    XmlDocument xdoc = new XmlDocument(); // we may need this to infer the schema
+                    XmlDataLoader xmlload = null;
+
+                    reader.MoveToContent();
+                    if (Columns.Count == 0)
+                    {
+                        if (IsEmptyXml(reader))
+                        {
+                            reader.Read();
+                            return ret;
+                        }
+                    }
+
+                    if (reader.NodeType == XmlNodeType.Element)
+                    {
+                        iCurrentDepth = reader.Depth;
+
+                        if (
+                            (reader.LocalName == Keywords.DIFFGRAM)
+                            && (reader.NamespaceURI == Keywords.DFFNS)
+                        )
+                        {
+                            if (Columns.Count == 0)
+                            {
+                                if (reader.IsEmptyElement)
+                                {
+                                    reader.Read();
+                                    return XmlReadMode.DiffGram;
+                                }
+                                throw ExceptionBuilder.DataTableInferenceNotSupported();
                             }
-                            throw ExceptionBuilder.DataTableInferenceNotSupported();
-                        }
-                        this.ReadXmlDiffgram(reader);
-                        // read the closing tag of the current element
-                        ReadEndElement(reader);
-
-                        RestoreConstraint(originalEnforceConstraint);
-                        return XmlReadMode.DiffGram;
-                    }
-
-                    // if reader points to the schema load it
-                    if (reader.LocalName == Keywords.XDR_SCHEMA && reader.NamespaceURI==Keywords.XDRNS) {
-                        // load XDR schema and exit
-                        ReadXDRSchema(reader);
-
-                        RestoreConstraint(originalEnforceConstraint);
-                        return XmlReadMode.ReadSchema; //since the top level element is a schema return
-                    }
-
-                    if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI==Keywords.XSDNS) {
-                        // load XSD schema and exit
-                        ReadXmlSchema(reader, denyResolving);
-                        RestoreConstraint(originalEnforceConstraint);
-                        return XmlReadMode.ReadSchema; //since the top level element is a schema return
-                    }
-
-                    if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI.StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)) {
-                        if (this.DataSet != null) { // we should not throw for constraint, we already will throw for unsupported schema, so restore enforce cost, but not via property
-                            this.DataSet.RestoreEnforceConstraints(originalEnforceConstraint);
-                        }
-                        else {
-                            this.enforceConstraints = originalEnforceConstraint;
-                        }
-
-                        throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
-                    }
-
-                    // now either the top level node is a table and we load it through dataReader...
-
-                    // ... or backup the top node and all its attributes because we may need to InferSchema
-                    XmlElement topNode = xdoc.CreateElement(reader.Prefix, reader.LocalName, reader.NamespaceURI);
-                    if (reader.HasAttributes) {
-                        int attrCount = reader.AttributeCount;
-                        for (int i=0;i<attrCount;i++) {
-                            reader.MoveToAttribute(i);
-                            if (reader.NamespaceURI.Equals(Keywords.XSD_XMLNS_NS))
-                                topNode.SetAttribute(reader.Name, reader.GetAttribute(i));
-                            else {
-                                XmlAttribute attr = topNode.SetAttributeNode(reader.LocalName, reader.NamespaceURI);
-                                attr.Prefix = reader.Prefix;
-                                attr.Value = reader.GetAttribute(i);
-                            }
-                        }
-                    }
-                    reader.Read();
-
-                    while(MoveToElement(reader, iCurrentDepth)) {
-
-                        if ((reader.LocalName == Keywords.DIFFGRAM) && (reader.NamespaceURI == Keywords.DFFNS)) {
                             this.ReadXmlDiffgram(reader);
                             // read the closing tag of the current element
                             ReadEndElement(reader);
+
                             RestoreConstraint(originalEnforceConstraint);
                             return XmlReadMode.DiffGram;
                         }
 
-                        // if reader points to the schema load it...
-
-
-                        if (!fSchemaFound && !fDataFound && reader.LocalName == Keywords.XDR_SCHEMA && reader.NamespaceURI==Keywords.XDRNS) {
+                        // if reader points to the schema load it
+                        if (
+                            reader.LocalName == Keywords.XDR_SCHEMA
+                            && reader.NamespaceURI == Keywords.XDRNS
+                        )
+                        {
                             // load XDR schema and exit
                             ReadXDRSchema(reader);
-                            fSchemaFound = true;
-                            fIsXdr = true;
-                            continue;
+
+                            RestoreConstraint(originalEnforceConstraint);
+                            return XmlReadMode.ReadSchema; //since the top level element is a schema return
                         }
 
-                        if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI==Keywords.XSDNS) {
+                        if (
+                            reader.LocalName == Keywords.XSD_SCHEMA
+                            && reader.NamespaceURI == Keywords.XSDNS
+                        )
+                        {
                             // load XSD schema and exit
                             ReadXmlSchema(reader, denyResolving);
-                            fSchemaFound = true;
-                            continue;
+                            RestoreConstraint(originalEnforceConstraint);
+                            return XmlReadMode.ReadSchema; //since the top level element is a schema return
                         }
 
-                        if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI.StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal))  {
-                            if (this.DataSet != null) { // we should not throw for constraint, we already will throw for unsupported schema, so restore enforce cost, but not via property
+                        if (
+                            reader.LocalName == Keywords.XSD_SCHEMA
+                            && reader.NamespaceURI.StartsWith(
+                                Keywords.XSD_NS_START,
+                                StringComparison.Ordinal
+                            )
+                        )
+                        {
+                            if (this.DataSet != null)
+                            { // we should not throw for constraint, we already will throw for unsupported schema, so restore enforce cost, but not via property
                                 this.DataSet.RestoreEnforceConstraints(originalEnforceConstraint);
                             }
-                            else {
+                            else
+                            {
                                 this.enforceConstraints = originalEnforceConstraint;
                             }
+
                             throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
                         }
 
-                        if ((reader.LocalName == Keywords.DIFFGRAM) && (reader.NamespaceURI == Keywords.DFFNS)) {
-                            this.ReadXmlDiffgram(reader);
-                            fDiffsFound = true;
-                            ret = XmlReadMode.DiffGram;
-                        }
-                        else {
-                            // we found data here
-                            fDataFound = true;
+                        // now either the top level node is a table and we load it through dataReader...
 
-                            if (!fSchemaFound && Columns.Count == 0) {
-                                XmlNode node = xdoc.ReadNode(reader);
-                                topNode.AppendChild(node);
-                            }
-                            else {
-                                if (xmlload == null)
-                                    xmlload = new XmlDataLoader(this, fIsXdr, topNode, false);
-                                xmlload.LoadData(reader);
-                                if (fSchemaFound)
-                                    ret = XmlReadMode.ReadSchema;
+                        // ... or backup the top node and all its attributes because we may need to InferSchema
+                        XmlElement topNode = xdoc.CreateElement(
+                            reader.Prefix,
+                            reader.LocalName,
+                            reader.NamespaceURI
+                        );
+                        if (reader.HasAttributes)
+                        {
+                            int attrCount = reader.AttributeCount;
+                            for (int i = 0; i < attrCount; i++)
+                            {
+                                reader.MoveToAttribute(i);
+                                if (reader.NamespaceURI.Equals(Keywords.XSD_XMLNS_NS))
+                                    topNode.SetAttribute(reader.Name, reader.GetAttribute(i));
                                 else
-                                    ret = XmlReadMode.IgnoreSchema;
+                                {
+                                    XmlAttribute attr = topNode.SetAttributeNode(
+                                        reader.LocalName,
+                                        reader.NamespaceURI
+                                    );
+                                    attr.Prefix = reader.Prefix;
+                                    attr.Value = reader.GetAttribute(i);
+                                }
                             }
                         }
+                        reader.Read();
 
-                    }
-                    // read the closing tag of the current element
-                    ReadEndElement(reader);
+                        while (MoveToElement(reader, iCurrentDepth))
+                        {
+                            if (
+                                (reader.LocalName == Keywords.DIFFGRAM)
+                                && (reader.NamespaceURI == Keywords.DFFNS)
+                            )
+                            {
+                                this.ReadXmlDiffgram(reader);
+                                // read the closing tag of the current element
+                                ReadEndElement(reader);
+                                RestoreConstraint(originalEnforceConstraint);
+                                return XmlReadMode.DiffGram;
+                            }
 
-                    // now top node contains the data part
-                    xdoc.AppendChild(topNode);
+                            // if reader points to the schema load it...
 
-                    if (!fSchemaFound && Columns.Count == 0) {
-                        if (IsEmptyXml(reader)) {
-                            reader.Read();
-                            return ret;
+                            if (
+                                !fSchemaFound
+                                && !fDataFound
+                                && reader.LocalName == Keywords.XDR_SCHEMA
+                                && reader.NamespaceURI == Keywords.XDRNS
+                            )
+                            {
+                                // load XDR schema and exit
+                                ReadXDRSchema(reader);
+                                fSchemaFound = true;
+                                fIsXdr = true;
+                                continue;
+                            }
+
+                            if (
+                                reader.LocalName == Keywords.XSD_SCHEMA
+                                && reader.NamespaceURI == Keywords.XSDNS
+                            )
+                            {
+                                // load XSD schema and exit
+                                ReadXmlSchema(reader, denyResolving);
+                                fSchemaFound = true;
+                                continue;
+                            }
+
+                            if (
+                                reader.LocalName == Keywords.XSD_SCHEMA
+                                && reader.NamespaceURI.StartsWith(
+                                    Keywords.XSD_NS_START,
+                                    StringComparison.Ordinal
+                                )
+                            )
+                            {
+                                if (this.DataSet != null)
+                                { // we should not throw for constraint, we already will throw for unsupported schema, so restore enforce cost, but not via property
+                                    this.DataSet.RestoreEnforceConstraints(originalEnforceConstraint);
+                                }
+                                else
+                                {
+                                    this.enforceConstraints = originalEnforceConstraint;
+                                }
+                                throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
+                            }
+
+                            if (
+                                (reader.LocalName == Keywords.DIFFGRAM)
+                                && (reader.NamespaceURI == Keywords.DFFNS)
+                            )
+                            {
+                                this.ReadXmlDiffgram(reader);
+                                fDiffsFound = true;
+                                ret = XmlReadMode.DiffGram;
+                            }
+                            else
+                            {
+                                // we found data here
+                                fDataFound = true;
+
+                                if (!fSchemaFound && Columns.Count == 0)
+                                {
+                                    XmlNode node = xdoc.ReadNode(reader);
+                                    topNode.AppendChild(node);
+                                }
+                                else
+                                {
+                                    if (xmlload == null)
+                                        xmlload = new XmlDataLoader(this, fIsXdr, topNode, false);
+                                    xmlload.LoadData(reader);
+                                    if (fSchemaFound)
+                                        ret = XmlReadMode.ReadSchema;
+                                    else
+                                        ret = XmlReadMode.IgnoreSchema;
+                                }
+                            }
                         }
-                        throw ExceptionBuilder.DataTableInferenceNotSupported();
-                    }
+                        // read the closing tag of the current element
+                        ReadEndElement(reader);
 
-                    if (xmlload == null)
-                        xmlload = new XmlDataLoader(this, fIsXdr, false);
+                        // now top node contains the data part
+                        xdoc.AppendChild(topNode);
 
-                    // so we InferSchema
-                    if (!fDiffsFound) {// we need to add support for inference here
+                        if (!fSchemaFound && Columns.Count == 0)
+                        {
+                            if (IsEmptyXml(reader))
+                            {
+                                reader.Read();
+                                return ret;
+                            }
+                            throw ExceptionBuilder.DataTableInferenceNotSupported();
+                        }
+
+                        if (xmlload == null)
+                            xmlload = new XmlDataLoader(this, fIsXdr, false);
+
+                        // so we InferSchema
+                        if (!fDiffsFound)
+                        { // we need to add support for inference here
+                        }
                     }
+                    RestoreConstraint(originalEnforceConstraint);
+                    return ret;
                 }
-                RestoreConstraint(originalEnforceConstraint);
-                return ret;
-              }
-              finally {
-                rowDiffIdUsage.Cleanup();
-              }
+                finally
+                {
+                    rowDiffIdUsage.Cleanup();
+                }
             }
-            finally{
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
@@ -5323,7 +7075,8 @@ namespace System.Data {
         internal XmlReadMode ReadXml(XmlReader reader, XmlReadMode mode, bool denyResolving)
         {
             DataTable.RowDiffIdUsageSection rowDiffIdUsage = new DataTable.RowDiffIdUsageSection();
-            try {
+            try
+            {
                 bool fSchemaFound = false;
                 bool fDataFound = false;
                 bool fIsXdr = false;
@@ -5336,18 +7089,20 @@ namespace System.Data {
                 if (reader == null)
                     return ret;
 
-                bool originalEnforceConstraint  = false;
-                if (this.DataSet != null) {
-                    originalEnforceConstraint  = this.DataSet.EnforceConstraints;
+                bool originalEnforceConstraint = false;
+                if (this.DataSet != null)
+                {
+                    originalEnforceConstraint = this.DataSet.EnforceConstraints;
                     this.DataSet.EnforceConstraints = false;
                 }
-                else {
-                    originalEnforceConstraint  = this.EnforceConstraints;
+                else
+                {
+                    originalEnforceConstraint = this.EnforceConstraints;
                     this.EnforceConstraints = false;
                 }
 
                 if (reader is XmlTextReader)
-                    ((XmlTextReader) reader).WhitespaceHandling = WhitespaceHandling.Significant;
+                    ((XmlTextReader)reader).WhitespaceHandling = WhitespaceHandling.Significant;
 
                 XmlDocument xdoc = new XmlDocument(); // we may need this to infer the schema
 
@@ -5355,8 +7110,10 @@ namespace System.Data {
                     iCurrentDepth = reader.Depth;
 
                 reader.MoveToContent();
-                if (Columns.Count == 0) {
-                    if (IsEmptyXml(reader)) {
+                if (Columns.Count == 0)
+                {
+                    if (IsEmptyXml(reader))
+                    {
                         reader.Read();
                         return ret;
                     }
@@ -5364,17 +7121,29 @@ namespace System.Data {
 
                 XmlDataLoader xmlload = null;
 
-                if (reader.NodeType == XmlNodeType.Element) {
+                if (reader.NodeType == XmlNodeType.Element)
+                {
                     XmlElement topNode = null;
-                    if (mode == XmlReadMode.Fragment) {
+                    if (mode == XmlReadMode.Fragment)
+                    {
                         xdoc.AppendChild(xdoc.CreateElement("ds_sqlXmlWraPPeR"));
                         topNode = xdoc.DocumentElement;
                     }
-                    else { //handle the top node
-                        if ((reader.LocalName == Keywords.DIFFGRAM) && (reader.NamespaceURI == Keywords.DFFNS)) {
-                            if ((mode == XmlReadMode.DiffGram) || (mode == XmlReadMode.IgnoreSchema)) {
-                                if (Columns.Count == 0) {
-                                    if(reader.IsEmptyElement) {
+                    else
+                    { //handle the top node
+                        if (
+                            (reader.LocalName == Keywords.DIFFGRAM)
+                            && (reader.NamespaceURI == Keywords.DFFNS)
+                        )
+                        {
+                            if (
+                                (mode == XmlReadMode.DiffGram) || (mode == XmlReadMode.IgnoreSchema)
+                            )
+                            {
+                                if (Columns.Count == 0)
+                                {
+                                    if (reader.IsEmptyElement)
+                                    {
                                         reader.Read();
                                         return XmlReadMode.DiffGram;
                                     }
@@ -5384,28 +7153,46 @@ namespace System.Data {
                                 // read the closing tag of the current element
                                 ReadEndElement(reader);
                             }
-                            else {
+                            else
+                            {
                                 reader.Skip();
                             }
                             RestoreConstraint(originalEnforceConstraint);
                             return ret;
                         }
 
-                        if (reader.LocalName == Keywords.XDR_SCHEMA && reader.NamespaceURI==Keywords.XDRNS) {
+                        if (
+                            reader.LocalName == Keywords.XDR_SCHEMA
+                            && reader.NamespaceURI == Keywords.XDRNS
+                        )
+                        {
                             // load XDR schema and exit
-                            if ((mode != XmlReadMode.IgnoreSchema) && (mode != XmlReadMode.InferSchema)) {
+                            if (
+                                (mode != XmlReadMode.IgnoreSchema)
+                                && (mode != XmlReadMode.InferSchema)
+                            )
+                            {
                                 ReadXDRSchema(reader);
                             }
-                            else {
+                            else
+                            {
                                 reader.Skip();
                             }
                             RestoreConstraint(originalEnforceConstraint);
                             return ret; //since the top level element is a schema return
                         }
 
-                        if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI==Keywords.XSDNS) {
+                        if (
+                            reader.LocalName == Keywords.XSD_SCHEMA
+                            && reader.NamespaceURI == Keywords.XSDNS
+                        )
+                        {
                             // load XSD schema and exit
-                            if ((mode != XmlReadMode.IgnoreSchema) && (mode != XmlReadMode.InferSchema))  {
+                            if (
+                                (mode != XmlReadMode.IgnoreSchema)
+                                && (mode != XmlReadMode.InferSchema)
+                            )
+                            {
                                 ReadXmlSchema(reader, denyResolving);
                             }
                             else
@@ -5414,11 +7201,20 @@ namespace System.Data {
                             return ret; //since the top level element is a schema return
                         }
 
-                        if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI.StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal))  {
-                             if (this.DataSet != null) { // we should not throw for constraint, we already will throw for unsupported schema, so restore enforce cost, but not via property
-                                 this.DataSet.RestoreEnforceConstraints(originalEnforceConstraint);
-                             }
-                             else {
+                        if (
+                            reader.LocalName == Keywords.XSD_SCHEMA
+                            && reader.NamespaceURI.StartsWith(
+                                Keywords.XSD_NS_START,
+                                StringComparison.Ordinal
+                            )
+                        )
+                        {
+                            if (this.DataSet != null)
+                            { // we should not throw for constraint, we already will throw for unsupported schema, so restore enforce cost, but not via property
+                                this.DataSet.RestoreEnforceConstraints(originalEnforceConstraint);
+                            }
+                            else
+                            {
                                 this.enforceConstraints = originalEnforceConstraint;
                             }
                             throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
@@ -5426,15 +7222,25 @@ namespace System.Data {
 
                         // now either the top level node is a table and we load it through dataReader...
                         // ... or backup the top node and all its attributes
-                        topNode = xdoc.CreateElement(reader.Prefix, reader.LocalName, reader.NamespaceURI);
-                        if (reader.HasAttributes) {
+                        topNode = xdoc.CreateElement(
+                            reader.Prefix,
+                            reader.LocalName,
+                            reader.NamespaceURI
+                        );
+                        if (reader.HasAttributes)
+                        {
                             int attrCount = reader.AttributeCount;
-                            for (int i=0;i<attrCount;i++) {
+                            for (int i = 0; i < attrCount; i++)
+                            {
                                 reader.MoveToAttribute(i);
                                 if (reader.NamespaceURI.Equals(Keywords.XSD_XMLNS_NS))
                                     topNode.SetAttribute(reader.Name, reader.GetAttribute(i));
-                                else {
-                                    XmlAttribute attr = topNode.SetAttributeNode(reader.LocalName, reader.NamespaceURI);
+                                else
+                                {
+                                    XmlAttribute attr = topNode.SetAttributeNode(
+                                        reader.LocalName,
+                                        reader.NamespaceURI
+                                    );
                                     attr.Prefix = reader.Prefix;
                                     attr.Value = reader.GetAttribute(i);
                                 }
@@ -5443,37 +7249,66 @@ namespace System.Data {
                         reader.Read();
                     }
 
-                    while(MoveToElement(reader, iCurrentDepth)) {
-
-                        if (reader.LocalName == Keywords.XDR_SCHEMA && reader.NamespaceURI==Keywords.XDRNS) {
+                    while (MoveToElement(reader, iCurrentDepth))
+                    {
+                        if (
+                            reader.LocalName == Keywords.XDR_SCHEMA
+                            && reader.NamespaceURI == Keywords.XDRNS
+                        )
+                        {
                             // load XDR schema
-                       	    if (!fSchemaFound && !fDataFound && (mode != XmlReadMode.IgnoreSchema) && (mode != XmlReadMode.InferSchema))  {
+                            if (
+                                !fSchemaFound
+                                && !fDataFound
+                                && (mode != XmlReadMode.IgnoreSchema)
+                                && (mode != XmlReadMode.InferSchema)
+                            )
+                            {
                                 ReadXDRSchema(reader);
                                 fSchemaFound = true;
                                 fIsXdr = true;
                             }
-                            else {
+                            else
+                            {
                                 reader.Skip();
                             }
                             continue;
                         }
 
-                        if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI==Keywords.XSDNS) {
-                        // load XSD schema and exit
-                            if ((mode != XmlReadMode.IgnoreSchema) && (mode != XmlReadMode.InferSchema))  {
+                        if (
+                            reader.LocalName == Keywords.XSD_SCHEMA
+                            && reader.NamespaceURI == Keywords.XSDNS
+                        )
+                        {
+                            // load XSD schema and exit
+                            if (
+                                (mode != XmlReadMode.IgnoreSchema)
+                                && (mode != XmlReadMode.InferSchema)
+                            )
+                            {
                                 ReadXmlSchema(reader, denyResolving);
                                 fSchemaFound = true;
                             }
-                            else {
+                            else
+                            {
                                 reader.Skip();
                             }
                             continue;
                         }
 
-                        if ((reader.LocalName == Keywords.DIFFGRAM) && (reader.NamespaceURI == Keywords.DFFNS)) {
-                            if ((mode == XmlReadMode.DiffGram) || (mode == XmlReadMode.IgnoreSchema)) {
-                                if (Columns.Count == 0) {
-                                    if(reader.IsEmptyElement) {
+                        if (
+                            (reader.LocalName == Keywords.DIFFGRAM)
+                            && (reader.NamespaceURI == Keywords.DFFNS)
+                        )
+                        {
+                            if (
+                                (mode == XmlReadMode.DiffGram) || (mode == XmlReadMode.IgnoreSchema)
+                            )
+                            {
+                                if (Columns.Count == 0)
+                                {
+                                    if (reader.IsEmptyElement)
+                                    {
                                         reader.Read();
                                         return XmlReadMode.DiffGram;
                                     }
@@ -5482,23 +7317,34 @@ namespace System.Data {
                                 this.ReadXmlDiffgram(reader);
                                 ret = XmlReadMode.DiffGram;
                             }
-                            else {
+                            else
+                            {
                                 reader.Skip();
                             }
                             continue;
                         }
 
-                        if (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI.StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal))  {
-                            if (this.DataSet != null) { // we should not throw for constraint, we already will throw for unsupported schema, so restore enforce cost, but not via property
-                                 this.DataSet.RestoreEnforceConstraints(originalEnforceConstraint);
+                        if (
+                            reader.LocalName == Keywords.XSD_SCHEMA
+                            && reader.NamespaceURI.StartsWith(
+                                Keywords.XSD_NS_START,
+                                StringComparison.Ordinal
+                            )
+                        )
+                        {
+                            if (this.DataSet != null)
+                            { // we should not throw for constraint, we already will throw for unsupported schema, so restore enforce cost, but not via property
+                                this.DataSet.RestoreEnforceConstraints(originalEnforceConstraint);
                             }
-                            else {
+                            else
+                            {
                                 this.enforceConstraints = originalEnforceConstraint;
                             }
                             throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
                         }
 
-                        if (mode == XmlReadMode.DiffGram) {
+                        if (mode == XmlReadMode.DiffGram)
+                        {
                             reader.Skip();
                             continue; // we do not read data in diffgram mode
                         }
@@ -5506,16 +7352,24 @@ namespace System.Data {
                         // if we are here we found some data
                         fDataFound = true;
 
-                        if (mode == XmlReadMode.InferSchema) { //save the node in DOM until the end;
+                        if (mode == XmlReadMode.InferSchema)
+                        { //save the node in DOM until the end;
                             XmlNode node = xdoc.ReadNode(reader);
                             topNode.AppendChild(node);
                         }
-                        else {
-                            if (Columns.Count == 0) {
+                        else
+                        {
+                            if (Columns.Count == 0)
+                            {
                                 throw ExceptionBuilder.DataTableInferenceNotSupported();
                             }
                             if (xmlload == null)
-                                xmlload = new XmlDataLoader(this, fIsXdr, topNode,  mode == XmlReadMode.IgnoreSchema);
+                                xmlload = new XmlDataLoader(
+                                    this,
+                                    fIsXdr,
+                                    topNode,
+                                    mode == XmlReadMode.IgnoreSchema
+                                );
                             xmlload.LoadData(reader);
                         }
                     } //end of the while
@@ -5529,68 +7383,89 @@ namespace System.Data {
                     if (xmlload == null)
                         xmlload = new XmlDataLoader(this, fIsXdr, mode == XmlReadMode.IgnoreSchema);
 
-                    if (mode == XmlReadMode.DiffGram) {
+                    if (mode == XmlReadMode.DiffGram)
+                    {
                         // we already got the diffs through XmlReader interface
                         RestoreConstraint(originalEnforceConstraint);
                         return ret;
                     }
-    //todo
+                    //todo
                     // Load Data
-                    if (mode == XmlReadMode.InferSchema) {
-                        if (Columns.Count == 0) {
+                    if (mode == XmlReadMode.InferSchema)
+                    {
+                        if (Columns.Count == 0)
+                        {
                             throw ExceptionBuilder.DataTableInferenceNotSupported();
                         }
 
-    // Microsoft                    xmlload.InferSchema(xdoc, null);
-    // Microsoft                    xmlload.LoadData(xdoc);
+                        // Microsoft                    xmlload.InferSchema(xdoc, null);
+                        // Microsoft                    xmlload.LoadData(xdoc);
                     }
                 }
                 RestoreConstraint(originalEnforceConstraint);
 
                 return ret;
             }
-            finally {
+            finally
+            {
                 // Dev11 904428: prepare and cleanup rowDiffId hashtable
                 rowDiffIdUsage.Cleanup();
             }
         }
 
-
-        internal void ReadEndElement(XmlReader reader) {
-            while (reader.NodeType == XmlNodeType.Whitespace) {
+        internal void ReadEndElement(XmlReader reader)
+        {
+            while (reader.NodeType == XmlNodeType.Whitespace)
+            {
                 reader.Skip();
             }
-            if (reader.NodeType == XmlNodeType.None) {
+            if (reader.NodeType == XmlNodeType.None)
+            {
                 reader.Skip();
             }
-            else if (reader.NodeType == XmlNodeType.EndElement) {
+            else if (reader.NodeType == XmlNodeType.EndElement)
+            {
                 reader.ReadEndElement();
             }
         }
-        internal void ReadXDRSchema(XmlReader reader) {
+
+        internal void ReadXDRSchema(XmlReader reader)
+        {
             XmlDocument xdoc = new XmlDocument(); // we may need this to infer the schema
-            XmlNode schNode = xdoc.ReadNode(reader);;
+            XmlNode schNode = xdoc.ReadNode(reader);
+            ;
             //consume and ignore it - No support
         }
 
-        internal bool MoveToElement(XmlReader reader, int depth) {
-            while (!reader.EOF && reader.NodeType != XmlNodeType.EndElement && reader.NodeType != XmlNodeType.Element && reader.Depth > depth) {
+        internal bool MoveToElement(XmlReader reader, int depth)
+        {
+            while (
+                !reader.EOF
+                && reader.NodeType != XmlNodeType.EndElement
+                && reader.NodeType != XmlNodeType.Element
+                && reader.Depth > depth
+            )
+            {
                 reader.Read();
             }
             return (reader.NodeType == XmlNodeType.Element);
         }
-        private void ReadXmlDiffgram(XmlReader reader) { // fill correctly
+
+        private void ReadXmlDiffgram(XmlReader reader)
+        { // fill correctly
             int d = reader.Depth;
             bool fEnforce = this.EnforceConstraints;
-            this.EnforceConstraints =false;
+            this.EnforceConstraints = false;
             DataTable newDt;
             bool isEmpty;
 
-            if (this.Rows.Count == 0) {
+            if (this.Rows.Count == 0)
+            {
                 isEmpty = true;
                 newDt = this;
             }
-            else {
+            else
+            {
                 isEmpty = false;
                 newDt = this.Clone();
                 newDt.EnforceConstraints = false;
@@ -5603,28 +7478,49 @@ namespace System.Data {
             if ((reader.LocalName != Keywords.DIFFGRAM) && (reader.NamespaceURI != Keywords.DFFNS))
                 return;
             reader.Read();
-            if (reader.NodeType == XmlNodeType.Whitespace) {
-                MoveToElement(reader, reader.Depth - 1 /*iCurrentDepth*/); // skip over whitespaces.
+            if (reader.NodeType == XmlNodeType.Whitespace)
+            {
+                MoveToElement(
+                    reader,
+                    reader.Depth - 1 /*iCurrentDepth*/
+                ); // skip over whitespaces.
             }
 
             newDt.fInLoadDiffgram = true;
 
-            if (reader.Depth > d) {
-                if ((reader.NamespaceURI != Keywords.DFFNS) && (reader.NamespaceURI != Keywords.MSDNS)) {
+            if (reader.Depth > d)
+            {
+                if (
+                    (reader.NamespaceURI != Keywords.DFFNS)
+                    && (reader.NamespaceURI != Keywords.MSDNS)
+                )
+                {
                     //we should be inside the dataset part
                     XmlDocument xdoc = new XmlDocument();
-                    XmlElement node = xdoc.CreateElement(reader.Prefix, reader.LocalName, reader.NamespaceURI);
+                    XmlElement node = xdoc.CreateElement(
+                        reader.Prefix,
+                        reader.LocalName,
+                        reader.NamespaceURI
+                    );
                     reader.Read();
-                    if (reader.Depth-1 > d) {
+                    if (reader.Depth - 1 > d)
+                    {
                         XmlDataLoader xmlload = new XmlDataLoader(newDt, false, node, false);
                         xmlload.isDiffgram = true; // turn on the special processing
                         xmlload.LoadData(reader);
                     }
                     ReadEndElement(reader);
                 }
-                if (((reader.LocalName == Keywords.SQL_BEFORE) && (reader.NamespaceURI == Keywords.DFFNS)) ||
-                    ((reader.LocalName == Keywords.MSD_ERRORS) && (reader.NamespaceURI == Keywords.DFFNS)))
-
+                if (
+                    (
+                        (reader.LocalName == Keywords.SQL_BEFORE)
+                        && (reader.NamespaceURI == Keywords.DFFNS)
+                    )
+                    || (
+                        (reader.LocalName == Keywords.MSD_ERRORS)
+                        && (reader.NamespaceURI == Keywords.DFFNS)
+                    )
+                )
                 {
                     //this will consume the changes and the errors part
                     XMLDiffLoader diffLoader = new XMLDiffLoader();
@@ -5632,7 +7528,8 @@ namespace System.Data {
                 }
 
                 // get to the closing diff tag
-                while(reader.Depth > d) {
+                while (reader.Depth > d)
+                {
                     reader.Read();
                 }
                 // read the closing tag
@@ -5642,19 +7539,23 @@ namespace System.Data {
             if (newDt.Rows.nullInList > 0)
                 throw ExceptionBuilder.RowInsertMissing(newDt.TableName);
 
-
             newDt.fInLoadDiffgram = false;
             List<DataTable> tableList = new List<DataTable>();
             tableList.Add(this);
             CreateTableList(this, tableList);
 
-// this is terrible, optimize it
-            for (int i = 0; i < tableList.Count ; i++) {
+            // this is terrible, optimize it
+            for (int i = 0; i < tableList.Count; i++)
+            {
                 DataRelation[] relations = tableList[i].NestedParentRelations;
-                foreach(DataRelation rel in relations) {
-                    if (rel != null && rel.ParentTable == tableList[i]) {
-                        foreach (DataRow r in tableList[i].Rows) {
-                            foreach (DataRelation rel2 in relations) {
+                foreach (DataRelation rel in relations)
+                {
+                    if (rel != null && rel.ParentTable == tableList[i])
+                    {
+                        foreach (DataRow r in tableList[i].Rows)
+                        {
+                            foreach (DataRelation rel2 in relations)
+                            {
                                 r.CheckForLoops(rel2);
                             }
                         }
@@ -5662,15 +7563,18 @@ namespace System.Data {
                 }
             }
 
-            if (!isEmpty) {
+            if (!isEmpty)
+            {
                 this.Merge(newDt);
             }
             this.EnforceConstraints = fEnforce;
         }
 
-        internal void ReadXSDSchema(XmlReader reader, bool denyResolving) {
+        internal void ReadXSDSchema(XmlReader reader, bool denyResolving)
+        {
             XmlSchemaSet sSet = new XmlSchemaSet();
-            while (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI==Keywords.XSDNS) {
+            while (reader.LocalName == Keywords.XSD_SCHEMA && reader.NamespaceURI == Keywords.XSDNS)
+            {
                 XmlSchema s = XmlSchema.Read(reader, null);
                 sSet.Add(s);
                 //read the end tag
@@ -5682,13 +7586,12 @@ namespace System.Data {
             schema.LoadSchema(sSet, this);
         }
 
-
         public void ReadXmlSchema(Stream stream)
         {
             if (stream == null)
                 return;
 
-            ReadXmlSchema( new XmlTextReader( stream ), false );
+            ReadXmlSchema(new XmlTextReader(stream), false);
         }
 
         public void ReadXmlSchema(TextReader reader)
@@ -5696,7 +7599,7 @@ namespace System.Data {
             if (reader == null)
                 return;
 
-            ReadXmlSchema( new XmlTextReader( reader ), false );
+            ReadXmlSchema(new XmlTextReader(reader), false);
         }
 
         [ResourceExposure(ResourceScope.Machine)]
@@ -5704,10 +7607,12 @@ namespace System.Data {
         public void ReadXmlSchema(String fileName)
         {
             XmlTextReader xr = new XmlTextReader(fileName);
-            try {
-                ReadXmlSchema( xr, false );
+            try
+            {
+                ReadXmlSchema(xr, false);
             }
-            finally {
+            finally
+            {
                 xr.Close();
             }
         }
@@ -5720,8 +7625,14 @@ namespace System.Data {
         internal void ReadXmlSchema(XmlReader reader, bool denyResolving)
         {
             IntPtr hscp;
-            Bid.ScopeEnter(out hscp, "<ds.DataTable.ReadXmlSchema|INFO> %d#, denyResolving=%d{bool}\n", ObjectID, denyResolving);
-            try{
+            Bid.ScopeEnter(
+                out hscp,
+                "<ds.DataTable.ReadXmlSchema|INFO> %d#, denyResolving=%d{bool}\n",
+                ObjectID,
+                denyResolving
+            );
+            try
+            {
                 DataSet ds = new DataSet();
                 SerializationFormat cachedRemotingFormat = this.RemotingFormat;
                 // fxcop: ReadXmlSchema will provide the CaseSensitive, Locale, Namespace information
@@ -5734,35 +7645,50 @@ namespace System.Data {
 
                 DataTable currentTable = null;
 
-                if (!Common.ADP.IsEmpty(this.tableName)) {
-                    if (!Common.ADP.IsEmpty(this.Namespace)) {
+                if (!Common.ADP.IsEmpty(this.tableName))
+                {
+                    if (!Common.ADP.IsEmpty(this.Namespace))
+                    {
                         currentTable = ds.Tables[this.tableName, this.Namespace];
                     }
-                    else {//SQL BU defect tracking 240293
+                    else
+                    { //SQL BU defect tracking 240293
                         int tableIndex = ds.Tables.InternalIndexOf(this.tableName);
-                        if (tableIndex  > -1) {
+                        if (tableIndex > -1)
+                        {
                             currentTable = ds.Tables[tableIndex];
                         }
                     }
                 }
-                else{  //!Common.ADP.IsEmpty(CurrentTableFullName)
+                else
+                { //!Common.ADP.IsEmpty(CurrentTableFullName)
                     string CurrentTableNamespace = "";
                     int nsSeperator = CurrentTableFullName.IndexOf(':');
-                    if (nsSeperator > -1) {
+                    if (nsSeperator > -1)
+                    {
                         CurrentTableNamespace = CurrentTableFullName.Substring(0, nsSeperator);
                     }
-                    string CurrentTableName = CurrentTableFullName.Substring(nsSeperator + 1, CurrentTableFullName.Length - nsSeperator -1);
+                    string CurrentTableName = CurrentTableFullName.Substring(
+                        nsSeperator + 1,
+                        CurrentTableFullName.Length - nsSeperator - 1
+                    );
 
                     currentTable = ds.Tables[CurrentTableName, CurrentTableNamespace];
                 }
 
-                if (currentTable == null) { // bug fix :99186
+                if (currentTable == null)
+                { // bug fix :99186
                     string qTableName = string.Empty;
-                    if (!Common.ADP.IsEmpty(this.tableName)) {
-                        qTableName = (this.Namespace.Length > 0)? (this.Namespace + ":" + this.tableName):this.tableName;
+                    if (!Common.ADP.IsEmpty(this.tableName))
+                    {
+                        qTableName =
+                            (this.Namespace.Length > 0)
+                                ? (this.Namespace + ":" + this.tableName)
+                                : this.tableName;
                     }
-                    else {
-                        qTableName = CurrentTableFullName ;
+                    else
+                    {
+                        qTableName = CurrentTableFullName;
                     }
                     throw ExceptionBuilder.TableNotFound(qTableName);
                 }
@@ -5775,28 +7701,35 @@ namespace System.Data {
                 List<DataRelation> relationList = new List<DataRelation>();
                 CreateRelationList(tableList, relationList);
 
-                if (relationList.Count == 0) {
-                    if (this.Columns.Count == 0) {
+                if (relationList.Count == 0)
+                {
+                    if (this.Columns.Count == 0)
+                    {
                         DataTable tempTable = currentTable;
                         if (tempTable != null)
                             tempTable.CloneTo(this, null, false); // we may have issue Amir
-                        if (this.DataSet == null && this.tableNamespace == null) { // webdata 105506
-// for standalone table, clone wont get these correctly, since they may come with inheritance
-                            this.tableNamespace =  tempTable.Namespace;
+                        if (this.DataSet == null && this.tableNamespace == null)
+                        { // webdata 105506
+                            // for standalone table, clone wont get these correctly, since they may come with inheritance
+                            this.tableNamespace = tempTable.Namespace;
                         }
                     }
                     return;
                 }
-                else {
-                    if (Common.ADP.IsEmpty(this.TableName)) {
+                else
+                {
+                    if (Common.ADP.IsEmpty(this.TableName))
+                    {
                         this.TableName = currentTable.TableName;
-                        if (!Common.ADP.IsEmpty(currentTable.Namespace)) {
+                        if (!Common.ADP.IsEmpty(currentTable.Namespace))
+                        {
                             this.Namespace = currentTable.Namespace;
                         }
                     }
-                    if (this.DataSet == null) {
+                    if (this.DataSet == null)
+                    {
                         DataSet dataset = new DataSet(ds.DataSetName);
-// webdata 105506
+                        // webdata 105506
                         // if user set values on DataTable, it isn't necessary
                         // to set them on the DataSet because they won't be inherited
                         // but it is simpler to set them in both places
@@ -5815,67 +7748,101 @@ namespace System.Data {
 
                     DataTable targetTable = CloneHierarchy(currentTable, this.DataSet, null);
 
-                    foreach(DataTable tempTable in tableList) {
-                        DataTable destinationTable = this.DataSet.Tables[tempTable.tableName, tempTable.Namespace];
+                    foreach (DataTable tempTable in tableList)
+                    {
+                        DataTable destinationTable = this.DataSet.Tables[
+                            tempTable.tableName,
+                            tempTable.Namespace
+                        ];
                         DataTable sourceTable = ds.Tables[tempTable.tableName, tempTable.Namespace];
-                        foreach(Constraint tempConstrain in sourceTable.Constraints) {
-                            ForeignKeyConstraint fkc = tempConstrain as ForeignKeyConstraint;  // we have already cloned the UKC when cloning the datatable
-                            if (fkc != null) {
-                                if (fkc.Table != fkc.RelatedTable)  {
-                                    if (tableList.Contains(fkc.Table) && tableList.Contains(fkc.RelatedTable)) {
-                                        ForeignKeyConstraint newFKC = (ForeignKeyConstraint)fkc.Clone(destinationTable.DataSet);
-                                        if (!destinationTable.Constraints.Contains(newFKC.ConstraintName))
+                        foreach (Constraint tempConstrain in sourceTable.Constraints)
+                        {
+                            ForeignKeyConstraint fkc = tempConstrain as ForeignKeyConstraint; // we have already cloned the UKC when cloning the datatable
+                            if (fkc != null)
+                            {
+                                if (fkc.Table != fkc.RelatedTable)
+                                {
+                                    if (
+                                        tableList.Contains(fkc.Table)
+                                        && tableList.Contains(fkc.RelatedTable)
+                                    )
+                                    {
+                                        ForeignKeyConstraint newFKC = (ForeignKeyConstraint)
+                                            fkc.Clone(destinationTable.DataSet);
+                                        if (
+                                            !destinationTable.Constraints.Contains(
+                                                newFKC.ConstraintName
+                                            )
+                                        )
                                             destinationTable.Constraints.Add(newFKC); // we know that the dest table is already in the table
                                     }
                                 }
-                           }
+                            }
                         }
                     }
-                    foreach(DataRelation rel in relationList) {
+                    foreach (DataRelation rel in relationList)
+                    {
                         if (!this.DataSet.Relations.Contains(rel.RelationName))
                             this.DataSet.Relations.Add(rel.Clone(this.DataSet));
                     }
 
                     bool hasExternaldependency = false;
 
-                    foreach(DataTable tempTable in tableList) {
-                        foreach(DataColumn dc in tempTable.Columns) {
+                    foreach (DataTable tempTable in tableList)
+                    {
+                        foreach (DataColumn dc in tempTable.Columns)
+                        {
                             hasExternaldependency = false;
-                            if (dc.Expression.Length  != 0) {
+                            if (dc.Expression.Length != 0)
+                            {
                                 DataColumn[] dependency = dc.DataExpression.GetDependency();
-                                for (int j = 0; j < dependency.Length; j++) {
-                                    if (!tableList.Contains(dependency[j].Table)) {
+                                for (int j = 0; j < dependency.Length; j++)
+                                {
+                                    if (!tableList.Contains(dependency[j].Table))
+                                    {
                                         hasExternaldependency = true;
                                         break;
                                     }
                                 }
                             }
-                            if (!hasExternaldependency) {
-                                this.DataSet.Tables[tempTable.TableName, tempTable.Namespace].Columns[dc.ColumnName].Expression = dc.Expression;
+                            if (!hasExternaldependency)
+                            {
+                                this.DataSet
+                                    .Tables[tempTable.TableName, tempTable.Namespace]
+                                    .Columns[dc.ColumnName]
+                                    .Expression = dc.Expression;
                             }
                         }
                         hasExternaldependency = false;
                     }
-
                 }
             }
-            finally{
+            finally
+            {
                 Bid.ScopeLeave(ref hscp);
             }
         }
 
-        private void CreateTableList(DataTable currentTable, List<DataTable> tableList) {
-            foreach( DataRelation r in currentTable.ChildRelations ) {
-                if (! tableList.Contains(r.ChildTable)) {
+        private void CreateTableList(DataTable currentTable, List<DataTable> tableList)
+        {
+            foreach (DataRelation r in currentTable.ChildRelations)
+            {
+                if (!tableList.Contains(r.ChildTable))
+                {
                     tableList.Add(r.ChildTable);
                     CreateTableList(r.ChildTable, tableList);
                 }
             }
         }
-        private void CreateRelationList(List<DataTable> tableList,  List<DataRelation> relationList) {
-            foreach(DataTable table in tableList) {
-                foreach( DataRelation r in table.ChildRelations) {
-                    if (tableList.Contains(r.ChildTable) && tableList.Contains(r.ParentTable)) {
+
+        private void CreateRelationList(List<DataTable> tableList, List<DataRelation> relationList)
+        {
+            foreach (DataTable table in tableList)
+            {
+                foreach (DataRelation r in table.ChildRelations)
+                {
+                    if (tableList.Contains(r.ChildTable) && tableList.Contains(r.ParentTable))
+                    {
                         relationList.Add(r);
                     }
                 }
@@ -5886,7 +7853,7 @@ namespace System.Data {
         The V2.0 (no V1.0 or V1.1) WSDL for Untyped DataTable being returned as a result (no parameters)
         <s:element name="anyUserSpecifiedMethodName">
             <!--  This is where parameters go -->
-            <s:complexType /> 
+            <s:complexType />
         </s:element>
         <s:element name="anyUserSpecifiedMethodName"+"Response">
             <s:complexType>
@@ -5894,8 +7861,8 @@ namespace System.Data {
                     <s:element minOccurs="0" maxOccurs="1" name="anyUserSpecifiedMethodName"+"Result">
                         <s:complexType>
                             <s:sequence>
-                                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" /> 
-                                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" /> 
+                                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
                             </s:sequence>
                         </s:complexType>
                     </s:element>
@@ -5913,7 +7880,8 @@ namespace System.Data {
         or System.InvalidOperationException: Schema Id is missing. The schema returned from WebServiceDataSetServer.Service+StudentsDataTable.GetSchema() must have an Id.
            at System.Xml.Serialization.SerializableMapping.RetrieveSerializableSchema()
         *****************************************************************************/
-        public static XmlSchemaComplexType GetDataTableSchema(XmlSchemaSet schemaSet) {
+        public static XmlSchemaComplexType GetDataTableSchema(XmlSchemaSet schemaSet)
+        {
             XmlSchemaComplexType type = new XmlSchemaComplexType();
             XmlSchemaSequence sequence = new XmlSchemaSequence();
             XmlSchemaAny any = new XmlSchemaAny();
@@ -5934,62 +7902,71 @@ namespace System.Data {
             return type;
         }
 
-        XmlSchema IXmlSerializable.GetSchema() {
+        XmlSchema IXmlSerializable.GetSchema()
+        {
             return GetSchema();
         }
 
-        protected virtual XmlSchema GetSchema() {
-            if (GetType() == typeof(DataTable)) {
+        protected virtual XmlSchema GetSchema()
+        {
+            if (GetType() == typeof(DataTable))
+            {
                 return null;
             }
             MemoryStream stream = new MemoryStream();
 
             XmlWriter writer = new XmlTextWriter(stream, null);
-            if (writer != null) {
-                 (new XmlTreeGen(SchemaFormat.WebService)).Save(this, writer);
+            if (writer != null)
+            {
+                (new XmlTreeGen(SchemaFormat.WebService)).Save(this, writer);
             }
             stream.Position = 0;
             return XmlSchema.Read(new XmlTextReader(stream), null);
         }
 
-        void IXmlSerializable.ReadXml(XmlReader reader) {
+        void IXmlSerializable.ReadXml(XmlReader reader)
+        {
             IXmlTextParser textReader = reader as IXmlTextParser;
             bool fNormalization = true;
-            if (textReader != null) {
+            if (textReader != null)
+            {
                 fNormalization = textReader.Normalized;
                 textReader.Normalized = false;
             }
             ReadXmlSerializable(reader);
 
-            if (textReader != null) {
+            if (textReader != null)
+            {
                 textReader.Normalized = fNormalization;
             }
         }
 
-        void IXmlSerializable.WriteXml(XmlWriter writer) {
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
             WriteXmlSchema(writer, false);
             WriteXml(writer, XmlWriteMode.DiffGram, false);
         }
 
-         protected virtual void ReadXmlSerializable(XmlReader reader) {
+        protected virtual void ReadXmlSerializable(XmlReader reader)
+        {
             ReadXml(reader, XmlReadMode.DiffGram, true);
         }
 
-/*
-        [
-        DefaultValue(false),
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.DataTableSerializeHierarchy)
-        ]
-        public bool SerializeHierarchy {
-            get {
-                return this.serializeHierarchy;
-            }
-            set {
-                this.serializeHierarchy = value;
-            }
-        }
-*/
+        /*
+                [
+                DefaultValue(false),
+                ResCategoryAttribute(Res.DataCategory_Data),
+                ResDescriptionAttribute(Res.DataTableSerializeHierarchy)
+                ]
+                public bool SerializeHierarchy {
+                    get {
+                        return this.serializeHierarchy;
+                    }
+                    set {
+                        this.serializeHierarchy = value;
+                    }
+                }
+        */
 
         // RowDiffIdUsageSection & DSRowDiffIdUsageSection Usage:
         //
@@ -6003,8 +7980,8 @@ namespace System.Data {
         //        finally {
         //            rowDiffIdUsage.Cleanup();
         //        }
-        // 
-        // Nested calls are allowed on different tables. For example, user can register to row change events and trigger 
+        //
+        // Nested calls are allowed on different tables. For example, user can register to row change events and trigger
         // ReadXml on different table/ds). But, if user code will try to call ReadXml on table that is already in the scope,
         // this code will assert since nested calls on same table are unsupported.
         internal struct RowDiffIdUsageSection
@@ -6016,7 +7993,7 @@ namespace System.Data {
             // * in case of ReadXml on empty DataSet, this list can be initialized as empty (so empty list != null).
             // * only one scope is allowed on single thread, either for datatable or dataset
             // * assert is triggered if same table is added to this list twice
-            // 
+            //
             // do not allocate TLS data in RETAIL bits!
             [ThreadStatic]
             internal static List<DataTable> s_usedTables;
@@ -6030,8 +8007,10 @@ namespace System.Data {
                 Debug.Assert(table != null);
                 Debug.Assert(table.rowDiffId == null, "rowDiffId wasn't previously cleared");
 #if DEBUG
-                Debug.Assert(s_usedTables == null || !s_usedTables.Contains(table), 
-                    "Nested call with same table can cause data corruption!");
+                Debug.Assert(
+                    s_usedTables == null || !s_usedTables.Contains(table),
+                    "Nested call with same table can cause data corruption!"
+                );
 #endif //DEBUG
 
 #if DEBUG
@@ -6050,7 +8029,10 @@ namespace System.Data {
                 if (_targetTable != null)
                 {
 #if DEBUG
-                    Debug.Assert(s_usedTables != null && s_usedTables.Contains(_targetTable), "missing Prepare before Cleanup");
+                    Debug.Assert(
+                        s_usedTables != null && s_usedTables.Contains(_targetTable),
+                        "missing Prepare before Cleanup"
+                    );
                     if (s_usedTables != null)
                     {
                         s_usedTables.Remove(_targetTable);
@@ -6093,7 +8075,10 @@ namespace System.Data {
                 {
                     DataTable table = ds.Tables[tableIndex];
 #if DEBUG
-                    Debug.Assert(!RowDiffIdUsageSection.s_usedTables.Contains(table), "Nested call with same table can cause data corruption!");
+                    Debug.Assert(
+                        !RowDiffIdUsageSection.s_usedTables.Contains(table),
+                        "Nested call with same table can cause data corruption!"
+                    );
                     RowDiffIdUsageSection.s_usedTables.Add(table);
 #endif //DEBUG
                     Debug.Assert(table.rowDiffId == null, "rowDiffId wasn't previously cleared");
@@ -6108,14 +8093,17 @@ namespace System.Data {
                 if (_targetDS != null)
                 {
 #if DEBUG
-                    Debug.Assert(RowDiffIdUsageSection.s_usedTables != null, "missing Prepare before Cleanup");
+                    Debug.Assert(
+                        RowDiffIdUsageSection.s_usedTables != null,
+                        "missing Prepare before Cleanup"
+                    );
 #endif //DEBUG
 
                     for (int tableIndex = 0; tableIndex < _targetDS.Tables.Count; ++tableIndex)
                     {
                         DataTable table = _targetDS.Tables[tableIndex];
 #if DEBUG
-                        // cannot assert that table exists in the usedTables - new tables might be 
+                        // cannot assert that table exists in the usedTables - new tables might be
                         // created during diffgram processing in DataSet.ReadXml.
                         if (RowDiffIdUsageSection.s_usedTables != null)
                             RowDiffIdUsageSection.s_usedTables.Remove(table);
@@ -6123,17 +8111,24 @@ namespace System.Data {
                         table.rowDiffId = null;
                     }
 #if DEBUG
-                    if (RowDiffIdUsageSection.s_usedTables != null && RowDiffIdUsageSection.s_usedTables.Count == 0)
+                    if (
+                        RowDiffIdUsageSection.s_usedTables != null
+                        && RowDiffIdUsageSection.s_usedTables.Count == 0
+                    )
                         RowDiffIdUsageSection.s_usedTables = null; // out-of-scope
 #endif //DEBUG
                 }
             }
         }
 
-        internal Hashtable RowDiffId {
-            get {
+        internal Hashtable RowDiffId
+        {
+            get
+            {
                 // assert scope has been created either with RowDiffIdUsageSection.Prepare or DSRowDiffIdUsageSection.Prepare
-                RowDiffIdUsageSection.Assert("missing call to RowDiffIdUsageSection.Prepare or DSRowDiffIdUsageSection.Prepare");
+                RowDiffIdUsageSection.Assert(
+                    "missing call to RowDiffIdUsageSection.Prepare or DSRowDiffIdUsageSection.Prepare"
+                );
 
                 if (rowDiffId == null)
                     rowDiffId = new Hashtable();
@@ -6141,84 +8136,168 @@ namespace System.Data {
             }
         }
 
-        internal int ObjectID {
-            get {
-                return _objectID;
-            }
+        internal int ObjectID
+        {
+            get { return _objectID; }
         }
 
-        internal void AddDependentColumn(DataColumn expressionColumn) {
+        internal void AddDependentColumn(DataColumn expressionColumn)
+        {
             if (dependentColumns == null)
                 dependentColumns = new List<DataColumn>();
 
-            if (!dependentColumns.Contains(expressionColumn)) {
+            if (!dependentColumns.Contains(expressionColumn))
+            {
                 // only remember unique columns but expect non-unique columns to be added
                 dependentColumns.Add(expressionColumn);
             }
         }
 
-        internal void RemoveDependentColumn(DataColumn expressionColumn) {
-            if (dependentColumns != null && dependentColumns.Contains(expressionColumn)) {
+        internal void RemoveDependentColumn(DataColumn expressionColumn)
+        {
+            if (dependentColumns != null && dependentColumns.Contains(expressionColumn))
+            {
                 dependentColumns.Remove(expressionColumn);
             }
         }
 
-        internal void EvaluateExpressions() {
+        internal void EvaluateExpressions()
+        {
             //evaluates all expressions for all rows in table
             // SQLBU 414992: Serious performance issue when calling Merge
             // this improves performance by only computing expressions when they are present
             // and iterating over the rows instead of computing their position multiple times
-            if ((null != dependentColumns) && (0 < dependentColumns.Count)) {
-                foreach(DataRow row in Rows) {
+            if ((null != dependentColumns) && (0 < dependentColumns.Count))
+            {
+                foreach (DataRow row in Rows)
+                {
                     // only evaluate original values if different from current.
-                    if (row.oldRecord != -1 && row.oldRecord != row.newRecord) {
-                        EvaluateDependentExpressions(dependentColumns, row, DataRowVersion.Original, null);
+                    if (row.oldRecord != -1 && row.oldRecord != row.newRecord)
+                    {
+                        EvaluateDependentExpressions(
+                            dependentColumns,
+                            row,
+                            DataRowVersion.Original,
+                            null
+                        );
                     }
-                    if (row.newRecord != -1) {
-                        EvaluateDependentExpressions(dependentColumns, row, DataRowVersion.Current, null);
+                    if (row.newRecord != -1)
+                    {
+                        EvaluateDependentExpressions(
+                            dependentColumns,
+                            row,
+                            DataRowVersion.Current,
+                            null
+                        );
                     }
-                    if (row.tempRecord != -1) {
-                        EvaluateDependentExpressions(dependentColumns, row, DataRowVersion.Proposed, null);
+                    if (row.tempRecord != -1)
+                    {
+                        EvaluateDependentExpressions(
+                            dependentColumns,
+                            row,
+                            DataRowVersion.Proposed,
+                            null
+                        );
                     }
                 }
             }
         }
 
-        internal void EvaluateExpressions(DataRow row, DataRowAction action, List<DataRow> cachedRows) {
+        internal void EvaluateExpressions(
+            DataRow row,
+            DataRowAction action,
+            List<DataRow> cachedRows
+        )
+        {
             // evaluate all expressions for specified row
-            if (action == DataRowAction.Add ||
-                action == DataRowAction.Change||
-                (action == DataRowAction.Rollback && (row.oldRecord!=-1 || row.newRecord!=-1))) {
-                 // only evaluate original values if different from current.
-                if (row.oldRecord != -1 && row.oldRecord != row.newRecord) {
-                    EvaluateDependentExpressions(dependentColumns, row, DataRowVersion.Original, cachedRows);
+            if (
+                action == DataRowAction.Add
+                || action == DataRowAction.Change
+                || (
+                    action == DataRowAction.Rollback && (row.oldRecord != -1 || row.newRecord != -1)
+                )
+            )
+            {
+                // only evaluate original values if different from current.
+                if (row.oldRecord != -1 && row.oldRecord != row.newRecord)
+                {
+                    EvaluateDependentExpressions(
+                        dependentColumns,
+                        row,
+                        DataRowVersion.Original,
+                        cachedRows
+                    );
                 }
-                if (row.newRecord != -1) {
-                    EvaluateDependentExpressions(dependentColumns, row, DataRowVersion.Current, cachedRows);
+                if (row.newRecord != -1)
+                {
+                    EvaluateDependentExpressions(
+                        dependentColumns,
+                        row,
+                        DataRowVersion.Current,
+                        cachedRows
+                    );
                 }
-                if (row.tempRecord != -1) {
-                    EvaluateDependentExpressions(dependentColumns, row, DataRowVersion.Proposed, cachedRows);
+                if (row.tempRecord != -1)
+                {
+                    EvaluateDependentExpressions(
+                        dependentColumns,
+                        row,
+                        DataRowVersion.Proposed,
+                        cachedRows
+                    );
                 }
                 return;
             }
-            else if ((action == DataRowAction.Delete || (action==DataRowAction.Rollback && row.oldRecord==-1 && row.newRecord==-1)) && dependentColumns != null) {
-                foreach(DataColumn col in dependentColumns) {                    
-                    if (col.DataExpression != null && col.DataExpression.HasLocalAggregate() && col.Table == this) {
-                        for (int j = 0; j < Rows.Count; j++) {
+            else if (
+                (
+                    action == DataRowAction.Delete
+                    || (
+                        action == DataRowAction.Rollback
+                        && row.oldRecord == -1
+                        && row.newRecord == -1
+                    )
+                )
+                && dependentColumns != null
+            )
+            {
+                foreach (DataColumn col in dependentColumns)
+                {
+                    if (
+                        col.DataExpression != null
+                        && col.DataExpression.HasLocalAggregate()
+                        && col.Table == this
+                    )
+                    {
+                        for (int j = 0; j < Rows.Count; j++)
+                        {
                             DataRow tableRow = Rows[j];
 
-                            if (tableRow.oldRecord != -1 && tableRow.oldRecord != tableRow.newRecord) {
-                                EvaluateDependentExpressions(dependentColumns, tableRow, DataRowVersion.Original, null);
-                            }                          
+                            if (
+                                tableRow.oldRecord != -1
+                                && tableRow.oldRecord != tableRow.newRecord
+                            )
+                            {
+                                EvaluateDependentExpressions(
+                                    dependentColumns,
+                                    tableRow,
+                                    DataRowVersion.Original,
+                                    null
+                                );
+                            }
                         }
                         for (int j = 0; j < Rows.Count; j++)
                         {
                             DataRow tableRow = Rows[j];
-                         
+
                             if (tableRow.tempRecord != -1)
                             {
-                                EvaluateDependentExpressions(dependentColumns, tableRow, DataRowVersion.Proposed, null);
-                            }                           
+                                EvaluateDependentExpressions(
+                                    dependentColumns,
+                                    tableRow,
+                                    DataRowVersion.Proposed,
+                                    null
+                                );
+                            }
                         }
                         // VSTFDEVDIV911434: Order is important here - we need to update proposed before current
                         // Oherwise rows that are in edit state will get ListChanged/PropertyChanged event before default value is changed
@@ -6227,65 +8306,113 @@ namespace System.Data {
                         for (int j = 0; j < Rows.Count; j++)
                         {
                             DataRow tableRow = Rows[j];
-                                                     
+
                             if (tableRow.newRecord != -1)
                             {
-                                EvaluateDependentExpressions(dependentColumns, tableRow, DataRowVersion.Current, null);
+                                EvaluateDependentExpressions(
+                                    dependentColumns,
+                                    tableRow,
+                                    DataRowVersion.Current,
+                                    null
+                                );
                             }
                         }
                         break;
                     }
                 }
 
-                if (cachedRows != null) {
-                    foreach (DataRow relatedRow in cachedRows) {
-                        if (relatedRow.oldRecord != -1 && relatedRow.oldRecord != relatedRow.newRecord) {
-                            relatedRow.Table.EvaluateDependentExpressions(relatedRow.Table.dependentColumns, relatedRow, DataRowVersion.Original, null);
+                if (cachedRows != null)
+                {
+                    foreach (DataRow relatedRow in cachedRows)
+                    {
+                        if (
+                            relatedRow.oldRecord != -1
+                            && relatedRow.oldRecord != relatedRow.newRecord
+                        )
+                        {
+                            relatedRow.Table.EvaluateDependentExpressions(
+                                relatedRow.Table.dependentColumns,
+                                relatedRow,
+                                DataRowVersion.Original,
+                                null
+                            );
                         }
-                        if (relatedRow.newRecord != -1) {
-                            relatedRow.Table.EvaluateDependentExpressions(relatedRow.Table.dependentColumns, relatedRow, DataRowVersion.Current, null);
+                        if (relatedRow.newRecord != -1)
+                        {
+                            relatedRow.Table.EvaluateDependentExpressions(
+                                relatedRow.Table.dependentColumns,
+                                relatedRow,
+                                DataRowVersion.Current,
+                                null
+                            );
                         }
-                        if (relatedRow.tempRecord != -1) {
-                            relatedRow.Table.EvaluateDependentExpressions(relatedRow.Table.dependentColumns, relatedRow, DataRowVersion.Proposed, null);
+                        if (relatedRow.tempRecord != -1)
+                        {
+                            relatedRow.Table.EvaluateDependentExpressions(
+                                relatedRow.Table.dependentColumns,
+                                relatedRow,
+                                DataRowVersion.Proposed,
+                                null
+                            );
                         }
                     }
                 }
             }
         }
 
-        internal void EvaluateExpressions(DataColumn column) {
+        internal void EvaluateExpressions(DataColumn column)
+        {
             // evaluates all rows for expression from specified column
             Debug.Assert(column.Computed, "Only computed columns should be re-evaluated.");
             int count = column.table.Rows.Count;
-            if (column.DataExpression.IsTableAggregate() && count > 0) {
+            if (column.DataExpression.IsTableAggregate() && count > 0)
+            {
                 // this value is a constant across the table.
                 object aggCurrent = column.DataExpression.Evaluate();
-                for (int j = 0; j < count; j++) {
+                for (int j = 0; j < count; j++)
+                {
                     DataRow row = column.table.Rows[j];
                     // only evaluate original values if different from current.
-                    if (row.oldRecord != -1 && row.oldRecord != row.newRecord) {
+                    if (row.oldRecord != -1 && row.oldRecord != row.newRecord)
+                    {
                         column[row.oldRecord] = aggCurrent;
                     }
-                    if (row.newRecord != -1) {
+                    if (row.newRecord != -1)
+                    {
                         column[row.newRecord] = aggCurrent;
                     }
-                    if (row.tempRecord != -1) {
+                    if (row.tempRecord != -1)
+                    {
                         column[row.tempRecord] = aggCurrent;
                     }
                 }
             }
-            else {
-                for (int j = 0; j < count; j++) {
+            else
+            {
+                for (int j = 0; j < count; j++)
+                {
                     DataRow row = column.table.Rows[j];
 
-                    if (row.oldRecord != -1 && row.oldRecord != row.newRecord) {
-                        column[row.oldRecord] = column.DataExpression.Evaluate(row, DataRowVersion.Original);
+                    if (row.oldRecord != -1 && row.oldRecord != row.newRecord)
+                    {
+                        column[row.oldRecord] = column.DataExpression.Evaluate(
+                            row,
+                            DataRowVersion.Original
+                        );
                     }
-                    if (row.newRecord != -1) {
-                        column[row.newRecord] = column.DataExpression.Evaluate(row, DataRowVersion.Current);
+                    if (row.newRecord != -1)
+                    {
+                        column[row.newRecord] = column.DataExpression.Evaluate(
+                            row,
+                            DataRowVersion.Current
+                        );
                     }
-                    if (row.tempRecord != -1) {
-                        column[row.tempRecord] = column.DataExpression.Evaluate(row, DataRowVersion.Proposed);
+                    if (row.tempRecord != -1)
+                    {
+                        column[row.tempRecord] = column.DataExpression.Evaluate(
+                            row,
+                            DataRowVersion.Proposed
+                        );
                     }
                 }
             }
@@ -6295,76 +8422,132 @@ namespace System.Data {
             EvaluateDependentExpressions(column);
         }
 
-        internal void EvaluateDependentExpressions(DataColumn column) {
+        internal void EvaluateDependentExpressions(DataColumn column)
+        {
             // DataTable.Clear(), DataRowCollection.Clear() & DataColumn.set_Expression
-            if (column.dependentColumns != null) {
-                foreach (DataColumn dc in column.dependentColumns) {
-                    if ((dc.table != null) && !Object.ReferenceEquals(column, dc)) { // SQLBU 502736
+            if (column.dependentColumns != null)
+            {
+                foreach (DataColumn dc in column.dependentColumns)
+                {
+                    if ((dc.table != null) && !Object.ReferenceEquals(column, dc))
+                    { // SQLBU 502736
                         EvaluateExpressions(dc);
                     }
                 }
             }
         }
 
-        internal void EvaluateDependentExpressions(List<DataColumn> columns, DataRow row, DataRowVersion version, List<DataRow> cachedRows) {
+        internal void EvaluateDependentExpressions(
+            List<DataColumn> columns,
+            DataRow row,
+            DataRowVersion version,
+            List<DataRow> cachedRows
+        )
+        {
             if (columns == null)
                 return;
             //Expression evaluation is done first over same table expressions.
             int count = columns.Count;
-            for(int i = 0; i < count; i++) {
-                if (columns[i].Table == this) {// if this column is in my table
+            for (int i = 0; i < count; i++)
+            {
+                if (columns[i].Table == this)
+                { // if this column is in my table
                     DataColumn dc = columns[i];
-                    if (dc.DataExpression != null && dc.DataExpression.HasLocalAggregate()) {
-                    // if column expression references a local Table aggregate we need to recalc it for the each row in the local table
-                        DataRowVersion expressionVersion  = (version == DataRowVersion.Proposed) ? DataRowVersion.Default : version;
+                    if (dc.DataExpression != null && dc.DataExpression.HasLocalAggregate())
+                    {
+                        // if column expression references a local Table aggregate we need to recalc it for the each row in the local table
+                        DataRowVersion expressionVersion =
+                            (version == DataRowVersion.Proposed) ? DataRowVersion.Default : version;
                         bool isConst = dc.DataExpression.IsTableAggregate(); //is expression constant for entire table?
                         object newValue = null;
-                        if (isConst) {  //if new value, just compute once
+                        if (isConst)
+                        { //if new value, just compute once
                             newValue = dc.DataExpression.Evaluate(row, expressionVersion);
                         }
-                        for (int j = 0; j < Rows.Count; j++) { //evaluate for all rows in the table
+                        for (int j = 0; j < Rows.Count; j++)
+                        { //evaluate for all rows in the table
                             DataRow dr = Rows[j];
-                            if (dr.RowState == DataRowState.Deleted) {
+                            if (dr.RowState == DataRowState.Deleted)
+                            {
                                 continue;
                             }
-                            else if (expressionVersion == DataRowVersion.Original && (dr.oldRecord == -1 || dr.oldRecord == dr.newRecord)) {
+                            else if (
+                                expressionVersion == DataRowVersion.Original
+                                && (dr.oldRecord == -1 || dr.oldRecord == dr.newRecord)
+                            )
+                            {
                                 continue;
                             }
 
-                            if (!isConst) {
+                            if (!isConst)
+                            {
                                 newValue = dc.DataExpression.Evaluate(dr, expressionVersion);
                             }
                             SilentlySetValue(dr, dc, expressionVersion, newValue);
                         }
                     }
-                    else {
-                        if (row.RowState == DataRowState.Deleted) {
+                    else
+                    {
+                        if (row.RowState == DataRowState.Deleted)
+                        {
                             continue;
                         }
-                        else if (version == DataRowVersion.Original && (row.oldRecord == -1 || row.oldRecord == row.newRecord)) {
+                        else if (
+                            version == DataRowVersion.Original
+                            && (row.oldRecord == -1 || row.oldRecord == row.newRecord)
+                        )
+                        {
                             continue;
                         }
-                        SilentlySetValue(row, dc, version, dc.DataExpression == null ? dc.DefaultValue : dc.DataExpression.Evaluate(row, version));
+                        SilentlySetValue(
+                            row,
+                            dc,
+                            version,
+                            dc.DataExpression == null
+                                ? dc.DefaultValue
+                                : dc.DataExpression.Evaluate(row, version)
+                        );
                     }
                 }
             }
             // now do expression evaluation for expression columns other tables.
             count = columns.Count;
-            for(int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++)
+            {
                 DataColumn dc = columns[i];
                 // if this column is NOT in my table or it is in the table and is not a local aggregate (self refs)
-                if (dc.Table != this || (dc.DataExpression != null && !dc.DataExpression.HasLocalAggregate())) {
-                    DataRowVersion foreignVer = (version == DataRowVersion.Proposed) ? DataRowVersion.Default : version;
+                if (
+                    dc.Table != this
+                    || (dc.DataExpression != null && !dc.DataExpression.HasLocalAggregate())
+                )
+                {
+                    DataRowVersion foreignVer =
+                        (version == DataRowVersion.Proposed) ? DataRowVersion.Default : version;
 
                     // first - evaluate expressions for cachedRows (deletes & updates)
-                    if (cachedRows != null) {
-                        foreach (DataRow cachedRow in cachedRows) {
+                    if (cachedRows != null)
+                    {
+                        foreach (DataRow cachedRow in cachedRows)
+                        {
                             if (cachedRow.Table != dc.Table)
                                 continue;
-                             // don't update original version if child row doesn't have an oldRecord.
-                            if (foreignVer == DataRowVersion.Original && cachedRow.newRecord == cachedRow.oldRecord)
-                                 continue;
-                            if (cachedRow != null && ((cachedRow.RowState != DataRowState.Deleted) && (version != DataRowVersion.Original || cachedRow.oldRecord != -1))) {// if deleted GetRecordFromVersion will throw
+                            // don't update original version if child row doesn't have an oldRecord.
+                            if (
+                                foreignVer == DataRowVersion.Original
+                                && cachedRow.newRecord == cachedRow.oldRecord
+                            )
+                                continue;
+                            if (
+                                cachedRow != null
+                                && (
+                                    (cachedRow.RowState != DataRowState.Deleted)
+                                    && (
+                                        version != DataRowVersion.Original
+                                        || cachedRow.oldRecord != -1
+                                    )
+                                )
+                            )
+                            { // if deleted GetRecordFromVersion will throw
                                 object newValue = dc.DataExpression.Evaluate(cachedRow, foreignVer);
                                 SilentlySetValue(cachedRow, dc, foreignVer, newValue);
                             }
@@ -6372,34 +8555,64 @@ namespace System.Data {
                     }
 
                     // next check parent relations
-                    for (int j = 0; j < ParentRelations.Count; j++) {
+                    for (int j = 0; j < ParentRelations.Count; j++)
+                    {
                         DataRelation relation = ParentRelations[j];
                         if (relation.ParentTable != dc.Table)
                             continue;
-                        foreach (DataRow parentRow in row.GetParentRows(relation, version)) {
+                        foreach (DataRow parentRow in row.GetParentRows(relation, version))
+                        {
                             if (cachedRows != null && cachedRows.Contains(parentRow))
                                 continue;
-                             // don't update original version if child row doesn't have an oldRecord.
-                            if (foreignVer == DataRowVersion.Original && parentRow.newRecord == parentRow.oldRecord)
-                                 continue;
-                            if (parentRow != null && ((parentRow.RowState != DataRowState.Deleted) && (version != DataRowVersion.Original || parentRow.oldRecord != -1))) {// if deleted GetRecordFromVersion will throw
+                            // don't update original version if child row doesn't have an oldRecord.
+                            if (
+                                foreignVer == DataRowVersion.Original
+                                && parentRow.newRecord == parentRow.oldRecord
+                            )
+                                continue;
+                            if (
+                                parentRow != null
+                                && (
+                                    (parentRow.RowState != DataRowState.Deleted)
+                                    && (
+                                        version != DataRowVersion.Original
+                                        || parentRow.oldRecord != -1
+                                    )
+                                )
+                            )
+                            { // if deleted GetRecordFromVersion will throw
                                 object newValue = dc.DataExpression.Evaluate(parentRow, foreignVer);
                                 SilentlySetValue(parentRow, dc, foreignVer, newValue);
                             }
                         }
                     }
                     // next check child relations
-                    for (int j = 0; j < ChildRelations.Count; j++) {
+                    for (int j = 0; j < ChildRelations.Count; j++)
+                    {
                         DataRelation relation = ChildRelations[j];
                         if (relation.ChildTable != dc.Table)
                             continue;
-                        foreach (DataRow childRow in row.GetChildRows(relation, version)) {
+                        foreach (DataRow childRow in row.GetChildRows(relation, version))
+                        {
                             // don't update original version if child row doesn't have an oldRecord.
                             if (cachedRows != null && cachedRows.Contains(childRow))
                                 continue;
-                            if (foreignVer == DataRowVersion.Original && childRow.newRecord == childRow.oldRecord)
+                            if (
+                                foreignVer == DataRowVersion.Original
+                                && childRow.newRecord == childRow.oldRecord
+                            )
                                 continue;
-                            if (childRow != null && ((childRow.RowState != DataRowState.Deleted) && (version != DataRowVersion.Original || childRow.oldRecord != -1))) { // if deleted GetRecordFromVersion will throw
+                            if (
+                                childRow != null
+                                && (
+                                    (childRow.RowState != DataRowState.Deleted)
+                                    && (
+                                        version != DataRowVersion.Original
+                                        || childRow.oldRecord != -1
+                                    )
+                                )
+                            )
+                            { // if deleted GetRecordFromVersion will throw
                                 object newValue = dc.DataExpression.Evaluate(childRow, foreignVer);
                                 SilentlySetValue(childRow, dc, foreignVer, newValue);
                             }
@@ -6410,4 +8623,3 @@ namespace System.Data {
         }
     }
 }
-

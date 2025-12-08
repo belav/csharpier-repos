@@ -10,10 +10,10 @@ namespace System.Activities
     using System.Activities.XamlIntegration;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq.Expressions;
     using System.Runtime;
     using System.Windows.Markup;
-    using System.Diagnostics.CodeAnalysis;
 
     public abstract class InArgument : Argument
     {
@@ -23,9 +23,15 @@ namespace System.Activities
             this.Direction = ArgumentDirection.In;
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Subclass needed to enforce rules about which directions can be referenced.")]
-        public static InArgument CreateReference(InArgument argumentToReference, string referencedArgumentName)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Subclass needed to enforce rules about which directions can be referenced."
+        )]
+        public static InArgument CreateReference(
+            InArgument argumentToReference,
+            string referencedArgumentName
+        )
         {
             if (argumentToReference == null)
             {
@@ -37,12 +43,23 @@ namespace System.Activities
                 throw FxTrace.Exception.ArgumentNullOrEmpty("referencedArgumentName");
             }
 
-            return (InArgument)ActivityUtilities.CreateReferenceArgument(argumentToReference.ArgumentType, ArgumentDirection.In, referencedArgumentName);
+            return (InArgument)
+                ActivityUtilities.CreateReferenceArgument(
+                    argumentToReference.ArgumentType,
+                    ArgumentDirection.In,
+                    referencedArgumentName
+                );
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Subclass needed to enforce rules about which directions can be referenced.")]
-        public static InArgument CreateReference(InOutArgument argumentToReference, string referencedArgumentName)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Subclass needed to enforce rules about which directions can be referenced."
+        )]
+        public static InArgument CreateReference(
+            InOutArgument argumentToReference,
+            string referencedArgumentName
+        )
         {
             if (argumentToReference == null)
             {
@@ -55,7 +72,12 @@ namespace System.Activities
             }
 
             // Note that we explicitly pass In since we want an InArgument created
-            return (InArgument)ActivityUtilities.CreateReferenceArgument(argumentToReference.ArgumentType, ArgumentDirection.In, referencedArgumentName);
+            return (InArgument)
+                ActivityUtilities.CreateReferenceArgument(
+                    argumentToReference.ArgumentType,
+                    ArgumentDirection.In,
+                    referencedArgumentName
+                );
         }
     }
 
@@ -78,21 +100,24 @@ namespace System.Activities
         {
             if (delegateArgument != null)
             {
-                this.Expression = new DelegateArgumentValue<T> { DelegateArgument = delegateArgument };
+                this.Expression = new DelegateArgumentValue<T>
+                {
+                    DelegateArgument = delegateArgument,
+                };
             }
         }
 
         public InArgument(T constValue)
             : this()
         {
-            this.Expression = new Literal<T> { Value = constValue }; 
+            this.Expression = new Literal<T> { Value = constValue };
         }
 
         public InArgument(Expression<Func<ActivityContext, T>> expression)
             : this()
         {
             if (expression != null)
-            {                
+            {
                 this.Expression = new LambdaValue<T>(expression);
             }
         }
@@ -103,7 +128,6 @@ namespace System.Activities
             this.Expression = expression;
         }
 
-
         public InArgument()
             : base()
         {
@@ -111,18 +135,11 @@ namespace System.Activities
         }
 
         [DefaultValue(null)]
-        public new Activity<T> Expression
-        {
-            get;
-            set;
-        }
+        public new Activity<T> Expression { get; set; }
 
         internal override ActivityWithResult ExpressionCore
         {
-            get
-            {
-                return this.Expression;
-            }
+            get { return this.Expression; }
             set
             {
                 if (value == null)
@@ -194,10 +211,7 @@ namespace System.Activities
 
         public static InArgument<T> FromValue(T constValue)
         {
-            return new InArgument<T>
-                {
-                    Expression = new Literal<T> { Value = constValue }
-                };
+            return new InArgument<T> { Expression = new Literal<T> { Value = constValue } };
         }
 
         // Soft-Link: This method is referenced through reflection by
@@ -223,7 +237,11 @@ namespace System.Activities
             return Argument.CreateLocation<T>();
         }
 
-        internal override bool TryPopulateValue(LocationEnvironment targetEnvironment, ActivityInstance activityInstance, ActivityExecutor executor)
+        internal override bool TryPopulateValue(
+            LocationEnvironment targetEnvironment,
+            ActivityInstance activityInstance,
+            ActivityExecutor executor
+        )
         {
             Fx.Assert(this.Expression != null, "This should only be called for non-empty bindings");
 
@@ -232,7 +250,10 @@ namespace System.Activities
 
             if (this.Expression.UseOldFastPath)
             {
-                location.Value = executor.ExecuteInResolutionContext<T>(activityInstance, this.Expression);
+                location.Value = executor.ExecuteInResolutionContext<T>(
+                    activityInstance,
+                    this.Expression
+                );
                 return true;
             }
             else
@@ -241,9 +262,16 @@ namespace System.Activities
             }
         }
 
-        internal override void Declare(LocationEnvironment targetEnvironment, ActivityInstance targetActivityInstance)
+        internal override void Declare(
+            LocationEnvironment targetEnvironment,
+            ActivityInstance targetActivityInstance
+        )
         {
-            targetEnvironment.Declare(this.RuntimeArgument, CreateDefaultLocation(), targetActivityInstance);
+            targetEnvironment.Declare(
+                this.RuntimeArgument,
+                CreateDefaultLocation(),
+                targetActivityInstance
+            );
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         public void OptionalParaInCompAssignOperator()
         {
             var text =
-@"
+                @"
 delegate void MyDelegate1(int x, float y);
 class C
 {
@@ -35,7 +35,8 @@ class C
     }
 }
 ";
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size       65 (0x41)
   .maxstack  4
   .locals init (C V_0) //mc
@@ -74,7 +75,7 @@ class C
         public void ObjectOfCompAssignOperator()
         {
             var text =
-@"
+                @"
 delegate void boo();
 public class abc
 {
@@ -95,7 +96,8 @@ class C
     }
 }
 ";
-            var expectedOutput = @"bar
+            var expectedOutput =
+                @"bar
 bar";
             CompileAndVerify(text, expectedOutput: expectedOutput);
         }
@@ -105,7 +107,7 @@ bar";
         public void ObjectOfCompAssignOperatorIsNull()
         {
             var text =
-@"
+                @"
 delegate void boo();
 class C
 {
@@ -119,7 +121,8 @@ class C
     }
 }
 ";
-            var expectedIL = @"{
+            var expectedIL =
+                @"{
   // Code size       47 (0x2f)
   .maxstack  2
   IL_0000:  ldnull
@@ -146,7 +149,7 @@ class C
         public void ObjectOfCompAssignOperatorIsObjectOfDelegate()
         {
             var text =
-@"
+                @"
 using System;
 delegate void boo();
 public class abc
@@ -171,7 +174,8 @@ class C
     }
 }
 ";
-            var expectedOutput = @"
+            var expectedOutput =
+                @"
 far
 bar
 far
@@ -184,7 +188,8 @@ far";
         [Fact]
         public void AnonymousMethodToRemovalOrConcatenation()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 delegate void boo(int x);
 class C
@@ -202,7 +207,10 @@ class C
     }
 }
 ";
-            CompileAndVerify(text, expectedOutput: "10").VerifyIL("C.Main", @"
+            CompileAndVerify(text, expectedOutput: "10")
+                .VerifyIL(
+                    "C.Main",
+                    @"
 {
   // Code size       77 (0x4d)
   .maxstack  3
@@ -234,13 +242,15 @@ class C
   IL_004b:  pop
   IL_004c:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void LambdaMethodToRemovalOrConcatenation()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 delegate void boo(string x);
 class C
@@ -258,7 +268,10 @@ class C
     }
 }
 ";
-            CompileAndVerify(text, expectedOutput: "Hello").VerifyIL("C.Main()", @"
+            CompileAndVerify(text, expectedOutput: "Hello")
+                .VerifyIL(
+                    "C.Main()",
+                    @"
 {
   // Code size       80 (0x50)
   .maxstack  3
@@ -290,7 +303,8 @@ class C
   IL_004e:  pop
   IL_004f:  ret
 }
-");
+"
+                );
         }
 
         // Mixed named method and Lambda expression to removal or concatenation
@@ -298,7 +312,7 @@ class C
         public void MixedNamedMethodAndLambdaToRemovalOrConcatenation()
         {
             var text =
-@"
+                @"
 using System;
 delegate void boo(int x);
 class C
@@ -316,7 +330,8 @@ class C
     }
 }
 ";
-            var expectedOutPut = @"far:10
+            var expectedOutPut =
+                @"far:10
 lambda:10
 lambda:20";
             CompileAndVerify(text, expectedOutput: expectedOutPut);
@@ -327,7 +342,7 @@ lambda:20";
         public void MixedNamedMethodAndAnonymousToRemovalOrConcatenation()
         {
             var text =
-@"
+                @"
 using System;
 delegate void boo(int x);
 class C
@@ -347,7 +362,8 @@ class C
     }
 }
 ";
-            var expectedOutPut = @"far:10
+            var expectedOutPut =
+                @"far:10
 Anonymous:10
 Anonymous:20";
             CompileAndVerify(text, expectedOutput: expectedOutPut);
@@ -358,7 +374,7 @@ Anonymous:20";
         public void MixedAnonymousAndLambdaToRemovalOrConcatenation()
         {
             var text =
-@"
+                @"
 using System;
 delegate void boo(int x);
 class C
@@ -382,7 +398,8 @@ class C
     }
 }
 ";
-            var expectedOutPut = @"far:10
+            var expectedOutPut =
+                @"far:10
 Lambda:10
 Anonymous:10
 Lambda:20
@@ -395,7 +412,7 @@ Anonymous:20";
         public void RemoveSameMethodMultiTime()
         {
             var text =
-@"
+                @"
 using System;
 delegate void D(ref int x);
 class C
@@ -426,7 +443,8 @@ class C
     }
 }
 ";
-            var expectedOutPut = @"M1: 0
+            var expectedOutPut =
+                @"M1: 0
 M2: 1
 M1: 2
 M1: 1
@@ -441,7 +459,7 @@ M2: 2
         public void RemoveNotExistMethod()
         {
             var text =
-@"
+                @"
 using System;
 delegate void D(ref int x);
 class C
@@ -471,12 +489,12 @@ class C
             CompileAndVerify(text, expectedOutput: expectedOutPut);
         }
 
-        // Removal and concatenation works on both static and instance methods 
+        // Removal and concatenation works on both static and instance methods
         [Fact]
         public void RemoveBothStaticAndInstanceMethod()
         {
             var text =
-@"
+                @"
 delegate void boo();
 public class abc
 {
@@ -501,7 +519,8 @@ class C
     }
 }
 ";
-            var expectedOutPut = @"bar
+            var expectedOutPut =
+                @"bar
 far
 bar
 far";
@@ -513,7 +532,7 @@ far";
         public void RemoveDelegateIsMemberOfClass()
         {
             var text =
-@"
+                @"
 public delegate void boo();
 public class abc
 {
@@ -536,7 +555,8 @@ class C
     }
 }
 ";
-            var expectedOutPut = @"far
+            var expectedOutPut =
+                @"far
 bar
 ";
             CompileAndVerify(text, expectedOutput: expectedOutPut);
@@ -547,7 +567,7 @@ bar
         public void CompAssignWorksOnTernaryOperator()
         {
             var text =
-@"
+                @"
 delegate void boo();
 public class abc
 {
@@ -577,7 +597,8 @@ class C
     }
 }
 ";
-            var expectedOutPut = @"bar
+            var expectedOutPut =
+                @"bar
 bar
 ";
             CompileAndVerify(text, expectedOutput: expectedOutPut);
@@ -588,7 +609,7 @@ bar
         public void DelegateWithNineArgs()
         {
             var text =
-@"
+                @"
 delegate void boo(out int i, double d, ref float f, string s, char c, decimal dc, C client, byte b, short sh);
 
 class C
@@ -608,7 +629,8 @@ class C
     }
 }
 ";
-            var expectedOutPut = @"Hello
+            var expectedOutPut =
+                @"Hello
 ";
             CompileAndVerify(text, expectedOutput: expectedOutPut);
         }
@@ -619,7 +641,7 @@ class C
         public void DelegateWithStructMethods()
         {
             var text =
-@"
+                @"
 delegate int boo();
 
 interface I
@@ -641,10 +663,12 @@ class C
     }
 }
 ";
-            var expectedOutPut = @"bar
+            var expectedOutPut =
+                @"bar
 ";
 
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size       44 (0x2c)
   .maxstack  3
@@ -672,7 +696,7 @@ class C
         public void AddMethodThatInBaseClass()
         {
             var text =
-@"
+                @"
 delegate double MyDelegate(int integerPortion, float fraction);
 
 public class BaseClass
@@ -705,7 +729,8 @@ public class DerivedClass : BaseClass
     }
 }
 ";
-            var expectedOutPut = @"Derived
+            var expectedOutPut =
+                @"Derived
 Base
 Base
 Derived
@@ -719,7 +744,7 @@ Derived
         public void CompAssignOperatorForGenericClass()
         {
             var text =
-@"
+                @"
 delegate void boo(short x);
 class C<T>
 {
@@ -741,7 +766,8 @@ class D
     }
 }
 ";
-            var expectedOutPut = @"bar
+            var expectedOutPut =
+                @"bar
 par
 far
 ";
@@ -753,7 +779,7 @@ far
         public void CompAssignOperatorForInherit01()
         {
             var text =
-@"
+                @"
 delegate BaseClass MyBaseDelegate(BaseClass x);
 delegate DerivedClass MyDerivedDelegate(DerivedClass x);
 public class BaseClass
@@ -785,7 +811,8 @@ public class DerivedClass : BaseClass
     }
 }
 ";
-            var expectedOutPut = @"Base
+            var expectedOutPut =
+                @"Base
 Base
 Base
 Base
@@ -799,7 +826,7 @@ Derived
         public void CompAssignOperatorForInherit02()
         {
             var text =
-@"
+                @"
 delegate T MyDelegate<T>(T x);
 public class BaseClass
 {
@@ -841,7 +868,8 @@ public class DerivedClass : BaseClass
     }
 }
 ";
-            var expectedOutPut = @"Base1
+            var expectedOutPut =
+                @"Base1
 Derived2
 Base1
 Derived2
@@ -857,7 +885,7 @@ Derived1
         public void CompAssignOperatorForInherit03()
         {
             var text =
-@"
+                @"
 delegate T MyDelegate<T>(T x);
 public class BaseClass
 {
@@ -900,7 +928,8 @@ public class DerivedClass : BaseClass
     }
 }
 ";
-            var expectedOutPut = @"Base
+            var expectedOutPut =
+                @"Base
 Derived
 Base
 Derived
@@ -919,7 +948,7 @@ Derived
         public void CompAssignOperatorForInherit04()
         {
             var text =
-@"
+                @"
 
 delegate double MyDelegate(double x);
 public class BaseClass
@@ -957,7 +986,8 @@ public class DerivedClass : BaseClass
     }
 }
 ";
-            var expectedOutPut = @"Base
+            var expectedOutPut =
+                @"Base
 double
 Derived
 Base

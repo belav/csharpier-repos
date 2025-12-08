@@ -33,7 +33,9 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             // Assert
             Assert.NotNull(serviceProviderIsService);
             Assert.True(serviceProviderIsService.IsKeyedService(typeof(IFakeService), key));
-            Assert.False(serviceProviderIsService.IsKeyedService(typeof(FakeService), new object()));
+            Assert.False(
+                serviceProviderIsService.IsKeyedService(typeof(FakeService), new object())
+            );
         }
 
         [Fact]
@@ -47,7 +49,11 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             // Arrange
             var key = new object();
             var collection = new TestServiceCollection();
-            collection.AddKeyedTransient(typeof(IFakeOpenGenericService<>), key, typeof(FakeOpenGenericService<>));
+            collection.AddKeyedTransient(
+                typeof(IFakeOpenGenericService<>),
+                key,
+                typeof(FakeOpenGenericService<>)
+            );
             var provider = CreateServiceProvider(collection);
 
             // Act
@@ -55,8 +61,18 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
             // Assert
             Assert.NotNull(serviceProviderIsService);
-            Assert.True(serviceProviderIsService.IsKeyedService(typeof(IFakeOpenGenericService<IFakeService>), key));
-            Assert.False(serviceProviderIsService.IsKeyedService(typeof(IFakeOpenGenericService<>), new object()));
+            Assert.True(
+                serviceProviderIsService.IsKeyedService(
+                    typeof(IFakeOpenGenericService<IFakeService>),
+                    key
+                )
+            );
+            Assert.False(
+                serviceProviderIsService.IsKeyedService(
+                    typeof(IFakeOpenGenericService<>),
+                    new object()
+                )
+            );
         }
 
         [Fact]
@@ -70,7 +86,11 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             // Arrange
             var key = new object();
             var collection = new TestServiceCollection();
-            collection.AddKeyedTransient(typeof(IFakeOpenGenericService<IFakeService>), key, typeof(FakeOpenGenericService<IFakeService>));
+            collection.AddKeyedTransient(
+                typeof(IFakeOpenGenericService<IFakeService>),
+                key,
+                typeof(FakeOpenGenericService<IFakeService>)
+            );
             var provider = CreateServiceProvider(collection);
 
             // Act
@@ -78,7 +98,12 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
             // Assert
             Assert.NotNull(serviceProviderIsService);
-            Assert.True(serviceProviderIsService.IsKeyedService(typeof(IFakeOpenGenericService<IFakeService>), key));
+            Assert.True(
+                serviceProviderIsService.IsKeyedService(
+                    typeof(IFakeOpenGenericService<IFakeService>),
+                    key
+                )
+            );
         }
 
         [Fact]
@@ -100,9 +125,15 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
             // Assert
             Assert.NotNull(serviceProviderIsService);
-            Assert.True(serviceProviderIsService.IsKeyedService(typeof(IEnumerable<IFakeService>), key));
-            Assert.True(serviceProviderIsService.IsKeyedService(typeof(IEnumerable<FakeService>), key));
-            Assert.False(serviceProviderIsService.IsKeyedService(typeof(IEnumerable<>), new object()));
+            Assert.True(
+                serviceProviderIsService.IsKeyedService(typeof(IEnumerable<IFakeService>), key)
+            );
+            Assert.True(
+                serviceProviderIsService.IsKeyedService(typeof(IEnumerable<FakeService>), key)
+            );
+            Assert.False(
+                serviceProviderIsService.IsKeyedService(typeof(IEnumerable<>), new object())
+            );
         }
 
         [Fact]

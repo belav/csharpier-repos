@@ -22,7 +22,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly ImmutableArray<NamedTypeSymbol> _interfaces;
         internal readonly TypeSymbol IteratorElementType; // only for async-iterators
 
-        public AsyncStateMachine(VariableSlotAllocator variableAllocatorOpt, TypeCompilationState compilationState, MethodSymbol asyncMethod, int asyncMethodOrdinal, TypeKind typeKind)
+        public AsyncStateMachine(
+            VariableSlotAllocator variableAllocatorOpt,
+            TypeCompilationState compilationState,
+            MethodSymbol asyncMethod,
+            int asyncMethodOrdinal,
+            TypeKind typeKind
+        )
             : base(variableAllocatorOpt, compilationState, asyncMethod, asyncMethodOrdinal)
         {
             _typeKind = typeKind;
@@ -32,33 +38,63 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isIterator = asyncMethod.IsIterator;
             if (isIterator)
             {
-                var elementType = TypeMap.SubstituteType(asyncMethod.IteratorElementTypeWithAnnotations).Type;
+                var elementType = TypeMap
+                    .SubstituteType(asyncMethod.IteratorElementTypeWithAnnotations)
+                    .Type;
                 this.IteratorElementType = elementType;
 
                 bool isEnumerable = asyncMethod.IsAsyncReturningIAsyncEnumerable(compilation);
                 if (isEnumerable)
                 {
                     // IAsyncEnumerable<TResult>
-                    interfaces.Add(compilation.GetWellKnownType(WellKnownType.System_Collections_Generic_IAsyncEnumerable_T).Construct(elementType));
+                    interfaces.Add(
+                        compilation
+                            .GetWellKnownType(
+                                WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
+                            )
+                            .Construct(elementType)
+                    );
                 }
 
                 // IAsyncEnumerator<TResult>
-                interfaces.Add(compilation.GetWellKnownType(WellKnownType.System_Collections_Generic_IAsyncEnumerator_T).Construct(elementType));
+                interfaces.Add(
+                    compilation
+                        .GetWellKnownType(
+                            WellKnownType.System_Collections_Generic_IAsyncEnumerator_T
+                        )
+                        .Construct(elementType)
+                );
 
                 // IValueTaskSource<bool>
-                interfaces.Add(compilation.GetWellKnownType(WellKnownType.System_Threading_Tasks_Sources_IValueTaskSource_T).Construct(compilation.GetSpecialType(SpecialType.System_Boolean)));
+                interfaces.Add(
+                    compilation
+                        .GetWellKnownType(
+                            WellKnownType.System_Threading_Tasks_Sources_IValueTaskSource_T
+                        )
+                        .Construct(compilation.GetSpecialType(SpecialType.System_Boolean))
+                );
 
                 // IValueTaskSource
-                interfaces.Add(compilation.GetWellKnownType(WellKnownType.System_Threading_Tasks_Sources_IValueTaskSource));
+                interfaces.Add(
+                    compilation.GetWellKnownType(
+                        WellKnownType.System_Threading_Tasks_Sources_IValueTaskSource
+                    )
+                );
 
                 // IAsyncDisposable
                 interfaces.Add(compilation.GetWellKnownType(WellKnownType.System_IAsyncDisposable));
             }
 
-            interfaces.Add(compilation.GetWellKnownType(WellKnownType.System_Runtime_CompilerServices_IAsyncStateMachine));
+            interfaces.Add(
+                compilation.GetWellKnownType(
+                    WellKnownType.System_Runtime_CompilerServices_IAsyncStateMachine
+                )
+            );
             _interfaces = interfaces.ToImmutableAndFree();
 
-            _constructor = isIterator ? (MethodSymbol)new IteratorConstructor(this) : new AsyncConstructor(this);
+            _constructor = isIterator
+                ? (MethodSymbol)new IteratorConstructor(this)
+                : new AsyncConstructor(this);
         }
 
         public override TypeKind TypeKind
@@ -73,9 +109,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override bool IsRecord => false;
         internal override bool IsRecordStruct => false;
+
         internal override bool HasPossibleWellKnownCloneMethod() => false;
 
-        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(ConsList<TypeSymbol> basesBeingResolved)
+        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             return _interfaces;
         }

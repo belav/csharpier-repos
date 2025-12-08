@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <summary>
         /// An optional delegate to be invoked when an analyzer throws an exception.
         /// </summary>
-        public Action<Exception, DiagnosticAnalyzer, Diagnostic>? OnAnalyzerException => _onAnalyzerException;
+        public Action<Exception, DiagnosticAnalyzer, Diagnostic>? OnAnalyzerException =>
+            _onAnalyzerException;
 
         /// <summary>
         /// An optional delegate to be invoked when an analyzer throws an exception as an exception filter.
@@ -59,10 +60,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             AnalyzerOptions options,
             Action<Exception, DiagnosticAnalyzer, Diagnostic>? onAnalyzerException,
             bool concurrentAnalysis,
-            bool logAnalyzerExecutionTime)
-            : this(options, onAnalyzerException, concurrentAnalysis, logAnalyzerExecutionTime, reportSuppressedDiagnostics: false)
-        {
-        }
+            bool logAnalyzerExecutionTime
+        )
+            : this(
+                options,
+                onAnalyzerException,
+                concurrentAnalysis,
+                logAnalyzerExecutionTime,
+                reportSuppressedDiagnostics: false
+            ) { }
 
         /// <summary>
         /// Creates a new <see cref="CompilationWithAnalyzersOptions"/>.
@@ -77,10 +83,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<Exception, DiagnosticAnalyzer, Diagnostic>? onAnalyzerException,
             bool concurrentAnalysis,
             bool logAnalyzerExecutionTime,
-            bool reportSuppressedDiagnostics)
-            : this(options, onAnalyzerException, concurrentAnalysis, logAnalyzerExecutionTime, reportSuppressedDiagnostics, analyzerExceptionFilter: null)
-        {
-        }
+            bool reportSuppressedDiagnostics
+        )
+            : this(
+                options,
+                onAnalyzerException,
+                concurrentAnalysis,
+                logAnalyzerExecutionTime,
+                reportSuppressedDiagnostics,
+                analyzerExceptionFilter: null
+            ) { }
 
         /// <summary>
         /// Creates a new <see cref="CompilationWithAnalyzersOptions"/>.
@@ -97,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             bool concurrentAnalysis,
             bool logAnalyzerExecutionTime,
             bool reportSuppressedDiagnostics,
-            Func<Exception, bool>? analyzerExceptionFilter)
+            Func<Exception, bool>? analyzerExceptionFilter
+        )
         {
             _options = options;
             _onAnalyzerException = onAnalyzerException;

@@ -55,11 +55,18 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(@"(abc)?(?(xyz)d|f*)", 0, null)]
         public void FindFirstCharClass(string pattern, int options, string? expectedSet)
         {
-            RegexTree tree = RegexParser.Parse(pattern, (RegexOptions)options, CultureInfo.InvariantCulture);
+            RegexTree tree = RegexParser.Parse(
+                pattern,
+                (RegexOptions)options,
+                CultureInfo.InvariantCulture
+            );
             string actualSet = RegexPrefixAnalyzer.FindFirstCharClass(tree.Root);
             if (expectedSet != actualSet)
             {
-                throw TrueException.ForNonTrueValue($"Expected {FormatSet(expectedSet)}, got {FormatSet(actualSet)}", true);
+                throw TrueException.ForNonTrueValue(
+                    $"Expected {FormatSet(expectedSet)}, got {FormatSet(actualSet)}",
+                    true
+                );
             }
         }
 
@@ -67,7 +74,13 @@ namespace System.Text.RegularExpressions.Tests
         public void FindFirstCharClass_StressDeep()
         {
             int nesting = 8000;
-            FindFirstCharClass(string.Concat(Enumerable.Repeat($"(a?", nesting).Concat(Enumerable.Repeat(")*", nesting))), 0, null);
+            FindFirstCharClass(
+                string.Concat(
+                    Enumerable.Repeat($"(a?", nesting).Concat(Enumerable.Repeat(")*", nesting))
+                ),
+                0,
+                null
+            );
         }
 
         private static string FormatSet(string set)

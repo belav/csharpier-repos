@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,40 +26,39 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.ComponentModel;
-using System.Windows.Forms.Design;
-using System.Data.Common;
 using System.Data;
+using System.Data.Common;
+using System.Windows.Forms.Design;
 
-namespace System.Web.UI.Design.WebControls {
+namespace System.Web.UI.Design.WebControls
+{
+    public class DataProviderNameConverter : StringConverter
+    {
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            DataTable table = DbProviderFactories.GetFactoryClasses();
+            if (table == null)
+                return new StandardValuesCollection(new string[0]);
 
-	public class DataProviderNameConverter : StringConverter
-	{
-		public override StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
-		{
-			DataTable table = DbProviderFactories.GetFactoryClasses();
-			if (table == null)
-				return new StandardValuesCollection (new string[0]);
+            string[] names = new string[table.Rows.Count];
+            int i = 0;
+            foreach (DataRow row in table.Rows)
+            {
+                names[i++] = (string)row["Name"];
+            }
 
-			string[] names = new string[table.Rows.Count];
-			int i = 0;
-			foreach (DataRow row in table.Rows) {
-				names[i++] = (string)row ["Name"];
-			}
+            return new StandardValuesCollection(names);
+        }
 
-			return new StandardValuesCollection (names);
-		}
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+        {
+            return true;
+        }
 
-		public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
-		{
-			return true;
-		}
-
-		public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
-		{
-			return false;
-		}
-	}
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+        {
+            return false;
+        }
+    }
 }
-

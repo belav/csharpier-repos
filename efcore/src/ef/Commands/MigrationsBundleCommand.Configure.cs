@@ -20,7 +20,10 @@ internal partial class MigrationsBundleCommand : ContextCommandBase
         _output = command.Option("-o|--output <FILE>", Resources.MigrationsBundleOutputDescription);
         _force = command.Option("-f|--force", Resources.DbContextScaffoldForceDescription);
         _selfContained = command.Option("--self-contained", Resources.SelfContainedDescription);
-        _runtime = command.Option("-r|--target-runtime <RUNTIME_IDENTIFIER>", Resources.MigrationsBundleRuntimeDescription);
+        _runtime = command.Option(
+            "-r|--target-runtime <RUNTIME_IDENTIFIER>",
+            Resources.MigrationsBundleRuntimeDescription
+        );
 
         base.Configure(command);
     }

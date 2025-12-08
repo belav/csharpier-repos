@@ -67,9 +67,12 @@ namespace System.Xml
             throw new InvalidOperationException(SR.Xml_InvalidOperation);
         }
 
-        public override void WriteDocType(string name, string? pubid, string? sysid, string? subset)
-        {
-        }
+        public override void WriteDocType(
+            string name,
+            string? pubid,
+            string? sysid,
+            string? subset
+        ) { }
 
         // Raw writers do not have to keep a stack of element names.
         public override void WriteEndElement()
@@ -101,10 +104,7 @@ namespace System.Xml
         // Raw writers do not have to keep track of write states.
         public override WriteState WriteState
         {
-            get
-            {
-                throw new InvalidOperationException(SR.Xml_InvalidOperation);
-            }
+            get { throw new InvalidOperationException(SR.Xml_InvalidOperation); }
         }
 
         // Raw writers do not have to keep track of xml:space.
@@ -223,24 +223,14 @@ namespace System.Xml
         // Get and set the namespace resolver that's used by this RawWriter to resolve prefixes.
         internal virtual IXmlNamespaceResolver? NamespaceResolver
         {
-            get
-            {
-                return _resolver;
-            }
-            set
-            {
-                _resolver = value;
-            }
+            get { return _resolver; }
+            set { _resolver = value; }
         }
 
         // Write the xml declaration.  This must be the first call.
-        internal virtual void WriteXmlDeclaration(XmlStandalone standalone)
-        {
-        }
+        internal virtual void WriteXmlDeclaration(XmlStandalone standalone) { }
 
-        internal virtual void WriteXmlDeclaration(string xmldecl)
-        {
-        }
+        internal virtual void WriteXmlDeclaration(string xmldecl) { }
 
         // Called after an element's attributes have been enumerated, but before any children have been
         // enumerated.  This method must always be called, even for empty elements.
@@ -286,10 +276,7 @@ namespace System.Xml
         // This feature will be supported by raw writers serializing to text that wish to preserve the attribute value escaping and entities.
         internal virtual bool SupportsNamespaceDeclarationInChunks
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal virtual void WriteStartNamespaceDeclaration(string prefix)

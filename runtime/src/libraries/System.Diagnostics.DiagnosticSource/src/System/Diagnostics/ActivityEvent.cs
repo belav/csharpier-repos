@@ -11,16 +11,16 @@ namespace System.Diagnostics
     /// </summary>
     public readonly struct ActivityEvent
     {
-        private static readonly IEnumerable<KeyValuePair<string, object?>> s_emptyTags = Array.Empty<KeyValuePair<string, object?>>();
+        private static readonly IEnumerable<KeyValuePair<string, object?>> s_emptyTags =
+            Array.Empty<KeyValuePair<string, object?>>();
         private readonly Activity.TagsLinkedList? _tags;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ActivityEvent"/> class.
         /// </summary>
         /// <param name="name">Event name.</param>
-        public ActivityEvent(string name) : this(name, DateTimeOffset.UtcNow, tags: null)
-        {
-        }
+        public ActivityEvent(string name)
+            : this(name, DateTimeOffset.UtcNow, tags: null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ActivityEvent"/> class.
@@ -28,7 +28,11 @@ namespace System.Diagnostics
         /// <param name="name">Event name.</param>
         /// <param name="timestamp">Event timestamp. Timestamp MUST only be used for the events that happened in the past, not at the moment of this call.</param>
         /// <param name="tags">Event Tags.</param>
-        public ActivityEvent(string name, DateTimeOffset timestamp = default, ActivityTagsCollection? tags = null)
+        public ActivityEvent(
+            string name,
+            DateTimeOffset timestamp = default,
+            ActivityTagsCollection? tags = null
+        )
         {
             Name = name ?? string.Empty;
             Timestamp = timestamp != default ? timestamp : DateTimeOffset.UtcNow;
@@ -55,6 +59,7 @@ namespace System.Diagnostics
         /// Enumerate the tags attached to this <see cref="ActivityEvent"/> object.
         /// </summary>
         /// <returns><see cref="Activity.Enumerator{T}"/>.</returns>
-        public Activity.Enumerator<KeyValuePair<string, object?>> EnumerateTagObjects() => new Activity.Enumerator<KeyValuePair<string, object?>>(_tags?.First);
+        public Activity.Enumerator<KeyValuePair<string, object?>> EnumerateTagObjects() =>
+            new Activity.Enumerator<KeyValuePair<string, object?>>(_tags?.First);
     }
 }

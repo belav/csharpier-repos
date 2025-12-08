@@ -21,27 +21,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         internal static readonly SyntaxTrivia Space = Whitespace(" ");
         internal static readonly SyntaxTrivia Tab = Whitespace("\t");
 
-        internal static readonly SyntaxTrivia ElasticCarriageReturnLineFeed = EndOfLine(CrLf, elastic: true);
+        internal static readonly SyntaxTrivia ElasticCarriageReturnLineFeed = EndOfLine(
+            CrLf,
+            elastic: true
+        );
         internal static readonly SyntaxTrivia ElasticLineFeed = EndOfLine("\n", elastic: true);
-        internal static readonly SyntaxTrivia ElasticCarriageReturn = EndOfLine("\r", elastic: true);
+        internal static readonly SyntaxTrivia ElasticCarriageReturn = EndOfLine(
+            "\r",
+            elastic: true
+        );
         internal static readonly SyntaxTrivia ElasticSpace = Whitespace(" ", elastic: true);
         internal static readonly SyntaxTrivia ElasticTab = Whitespace("\t", elastic: true);
 
-        internal static readonly SyntaxTrivia ElasticZeroSpace = Whitespace(string.Empty, elastic: true);
+        internal static readonly SyntaxTrivia ElasticZeroSpace = Whitespace(
+            string.Empty,
+            elastic: true
+        );
 
         private static SyntaxToken s_xmlCarriageReturnLineFeed;
         private static SyntaxToken XmlCarriageReturnLineFeed
         {
             get
             {
-                return s_xmlCarriageReturnLineFeed ?? (s_xmlCarriageReturnLineFeed = XmlTextNewLine(CrLf));
+                return s_xmlCarriageReturnLineFeed
+                    ?? (s_xmlCarriageReturnLineFeed = XmlTextNewLine(CrLf));
             }
         }
 
         // NOTE: it would be nice to have constants for OmittedArraySizeException and OmittedTypeArgument,
         // but it's non-trivial to introduce such constants, since they would make this class take a dependency
         // on the static fields of SyntaxToken (specifically, TokensWithNoTrivia via SyntaxToken.Create).  That
-        // could cause unpredictable behavior, since SyntaxToken's static constructor already depends on the 
+        // could cause unpredictable behavior, since SyntaxToken's static constructor already depends on the
         // static fields of this class (specifically, ElasticZeroSpace).
 
         internal static SyntaxTrivia EndOfLine(string text, bool elastic = false)
@@ -52,13 +62,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             switch (text)
             {
                 case "\r":
-                    trivia = elastic ? SyntaxFactory.ElasticCarriageReturn : SyntaxFactory.CarriageReturn;
+                    trivia = elastic
+                        ? SyntaxFactory.ElasticCarriageReturn
+                        : SyntaxFactory.CarriageReturn;
                     break;
                 case "\n":
                     trivia = elastic ? SyntaxFactory.ElasticLineFeed : SyntaxFactory.LineFeed;
                     break;
                 case "\r\n":
-                    trivia = elastic ? SyntaxFactory.ElasticCarriageReturnLineFeed : SyntaxFactory.CarriageReturnLineFeed;
+                    trivia = elastic
+                        ? SyntaxFactory.ElasticCarriageReturnLineFeed
+                        : SyntaxFactory.CarriageReturnLineFeed;
                     break;
             }
 
@@ -100,8 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             }
         }
 
-        internal static SyntaxTrivia ConflictMarker(string text)
-            => SyntaxTrivia.Create(SyntaxKind.ConflictMarkerTrivia, text);
+        internal static SyntaxTrivia ConflictMarker(string text) =>
+            SyntaxTrivia.Create(SyntaxKind.ConflictMarkerTrivia, text);
 
         internal static SyntaxTrivia DisabledText(string text)
         {
@@ -126,12 +140,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// <summary>
         /// Creates a token whose <see cref="SyntaxToken.Text"/> and <see cref="SyntaxToken.ValueText"/> are the same.
         /// </summary>
-        internal static SyntaxToken Token(GreenNode leading, SyntaxKind kind, string text, GreenNode trailing)
+        internal static SyntaxToken Token(
+            GreenNode leading,
+            SyntaxKind kind,
+            string text,
+            GreenNode trailing
+        )
         {
             return Token(leading, kind, text, text, trailing);
         }
 
-        internal static SyntaxToken Token(GreenNode leading, SyntaxKind kind, string text, string valueText, GreenNode trailing)
+        internal static SyntaxToken Token(
+            GreenNode leading,
+            SyntaxKind kind,
+            string text,
+            string valueText,
+            GreenNode trailing
+        )
         {
             Debug.Assert(SyntaxFacts.IsAnyToken(kind));
             Debug.Assert(kind != SyntaxKind.IdentifierToken);
@@ -139,7 +164,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             Debug.Assert(kind != SyntaxKind.NumericLiteralToken);
 
             string defaultText = SyntaxFacts.GetText(kind);
-            return kind >= SyntaxToken.FirstTokenWithWellKnownText && kind <= SyntaxToken.LastTokenWithWellKnownText && text == defaultText && valueText == defaultText
+            return
+                kind >= SyntaxToken.FirstTokenWithWellKnownText
+                && kind <= SyntaxToken.LastTokenWithWellKnownText
+                && text == defaultText
+                && valueText == defaultText
                 ? Token(leading, kind, trailing)
                 : SyntaxToken.WithValue(kind, leading, text, valueText, trailing);
         }
@@ -149,7 +178,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return SyntaxToken.CreateMissing(kind, null, null);
         }
 
-        internal static SyntaxToken MissingToken(GreenNode leading, SyntaxKind kind, GreenNode trailing)
+        internal static SyntaxToken MissingToken(
+            GreenNode leading,
+            SyntaxKind kind,
+            GreenNode trailing
+        )
         {
             return SyntaxToken.CreateMissing(kind, leading, trailing);
         }
@@ -164,59 +197,170 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return Identifier(SyntaxKind.IdentifierToken, leading, text, text, trailing);
         }
 
-        internal static SyntaxToken Identifier(SyntaxKind contextualKind, GreenNode leading, string text, string valueText, GreenNode trailing)
+        internal static SyntaxToken Identifier(
+            SyntaxKind contextualKind,
+            GreenNode leading,
+            string text,
+            string valueText,
+            GreenNode trailing
+        )
         {
             return SyntaxToken.Identifier(contextualKind, leading, text, valueText, trailing);
         }
 
-        internal static SyntaxToken Literal(GreenNode leading, string text, int value, GreenNode trailing)
+        internal static SyntaxToken Literal(
+            GreenNode leading,
+            string text,
+            int value,
+            GreenNode trailing
+        )
         {
-            return SyntaxToken.WithValue(SyntaxKind.NumericLiteralToken, leading, text, value, trailing);
+            return SyntaxToken.WithValue(
+                SyntaxKind.NumericLiteralToken,
+                leading,
+                text,
+                value,
+                trailing
+            );
         }
 
-        internal static SyntaxToken Literal(GreenNode leading, string text, uint value, GreenNode trailing)
+        internal static SyntaxToken Literal(
+            GreenNode leading,
+            string text,
+            uint value,
+            GreenNode trailing
+        )
         {
-            return SyntaxToken.WithValue(SyntaxKind.NumericLiteralToken, leading, text, value, trailing);
+            return SyntaxToken.WithValue(
+                SyntaxKind.NumericLiteralToken,
+                leading,
+                text,
+                value,
+                trailing
+            );
         }
 
-        internal static SyntaxToken Literal(GreenNode leading, string text, long value, GreenNode trailing)
+        internal static SyntaxToken Literal(
+            GreenNode leading,
+            string text,
+            long value,
+            GreenNode trailing
+        )
         {
-            return SyntaxToken.WithValue(SyntaxKind.NumericLiteralToken, leading, text, value, trailing);
+            return SyntaxToken.WithValue(
+                SyntaxKind.NumericLiteralToken,
+                leading,
+                text,
+                value,
+                trailing
+            );
         }
 
-        internal static SyntaxToken Literal(GreenNode leading, string text, ulong value, GreenNode trailing)
+        internal static SyntaxToken Literal(
+            GreenNode leading,
+            string text,
+            ulong value,
+            GreenNode trailing
+        )
         {
-            return SyntaxToken.WithValue(SyntaxKind.NumericLiteralToken, leading, text, value, trailing);
+            return SyntaxToken.WithValue(
+                SyntaxKind.NumericLiteralToken,
+                leading,
+                text,
+                value,
+                trailing
+            );
         }
 
-        internal static SyntaxToken Literal(GreenNode leading, string text, float value, GreenNode trailing)
+        internal static SyntaxToken Literal(
+            GreenNode leading,
+            string text,
+            float value,
+            GreenNode trailing
+        )
         {
-            return SyntaxToken.WithValue(SyntaxKind.NumericLiteralToken, leading, text, value, trailing);
+            return SyntaxToken.WithValue(
+                SyntaxKind.NumericLiteralToken,
+                leading,
+                text,
+                value,
+                trailing
+            );
         }
 
-        internal static SyntaxToken Literal(GreenNode leading, string text, double value, GreenNode trailing)
+        internal static SyntaxToken Literal(
+            GreenNode leading,
+            string text,
+            double value,
+            GreenNode trailing
+        )
         {
-            return SyntaxToken.WithValue(SyntaxKind.NumericLiteralToken, leading, text, value, trailing);
+            return SyntaxToken.WithValue(
+                SyntaxKind.NumericLiteralToken,
+                leading,
+                text,
+                value,
+                trailing
+            );
         }
 
-        internal static SyntaxToken Literal(GreenNode leading, string text, decimal value, GreenNode trailing)
+        internal static SyntaxToken Literal(
+            GreenNode leading,
+            string text,
+            decimal value,
+            GreenNode trailing
+        )
         {
-            return SyntaxToken.WithValue(SyntaxKind.NumericLiteralToken, leading, text, value, trailing);
+            return SyntaxToken.WithValue(
+                SyntaxKind.NumericLiteralToken,
+                leading,
+                text,
+                value,
+                trailing
+            );
         }
 
-        internal static SyntaxToken Literal(GreenNode leading, string text, string value, GreenNode trailing)
+        internal static SyntaxToken Literal(
+            GreenNode leading,
+            string text,
+            string value,
+            GreenNode trailing
+        )
         {
-            return SyntaxToken.WithValue(SyntaxKind.StringLiteralToken, leading, text, value, trailing);
+            return SyntaxToken.WithValue(
+                SyntaxKind.StringLiteralToken,
+                leading,
+                text,
+                value,
+                trailing
+            );
         }
 
-        internal static SyntaxToken Literal(GreenNode leading, string text, SyntaxKind kind, string value, GreenNode trailing)
+        internal static SyntaxToken Literal(
+            GreenNode leading,
+            string text,
+            SyntaxKind kind,
+            string value,
+            GreenNode trailing
+        )
         {
             return SyntaxToken.WithValue(kind, leading, text, value, trailing);
         }
 
-        internal static SyntaxToken Literal(GreenNode leading, string text, char value, GreenNode trailing)
+        internal static SyntaxToken Literal(
+            GreenNode leading,
+            string text,
+            char value,
+            GreenNode trailing
+        )
         {
-            return SyntaxToken.WithValue(SyntaxKind.CharacterLiteralToken, leading, text, value, trailing);
+            return SyntaxToken.WithValue(
+                SyntaxKind.CharacterLiteralToken,
+                leading,
+                text,
+                value,
+                trailing
+            );
         }
 
         internal static SyntaxToken BadToken(GreenNode leading, string text, GreenNode trailing)
@@ -224,29 +368,68 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return SyntaxToken.WithValue(SyntaxKind.BadToken, leading, text, text, trailing);
         }
 
-        internal static SyntaxToken XmlTextLiteral(GreenNode leading, string text, string value, GreenNode trailing)
+        internal static SyntaxToken XmlTextLiteral(
+            GreenNode leading,
+            string text,
+            string value,
+            GreenNode trailing
+        )
         {
-            return SyntaxToken.WithValue(SyntaxKind.XmlTextLiteralToken, leading, text, value, trailing);
+            return SyntaxToken.WithValue(
+                SyntaxKind.XmlTextLiteralToken,
+                leading,
+                text,
+                value,
+                trailing
+            );
         }
 
-        internal static SyntaxToken XmlTextNewLine(GreenNode leading, string text, string value, GreenNode trailing)
+        internal static SyntaxToken XmlTextNewLine(
+            GreenNode leading,
+            string text,
+            string value,
+            GreenNode trailing
+        )
         {
             if (leading == null && trailing == null && text == CrLf && value == CrLf)
             {
                 return XmlCarriageReturnLineFeed;
             }
 
-            return SyntaxToken.WithValue(SyntaxKind.XmlTextLiteralNewLineToken, leading, text, value, trailing);
+            return SyntaxToken.WithValue(
+                SyntaxKind.XmlTextLiteralNewLineToken,
+                leading,
+                text,
+                value,
+                trailing
+            );
         }
 
         internal static SyntaxToken XmlTextNewLine(string text)
         {
-            return SyntaxToken.WithValue(SyntaxKind.XmlTextLiteralNewLineToken, null, text, text, null);
+            return SyntaxToken.WithValue(
+                SyntaxKind.XmlTextLiteralNewLineToken,
+                null,
+                text,
+                text,
+                null
+            );
         }
 
-        internal static SyntaxToken XmlEntity(GreenNode leading, string text, string value, GreenNode trailing)
+        internal static SyntaxToken XmlEntity(
+            GreenNode leading,
+            string text,
+            string value,
+            GreenNode trailing
+        )
         {
-            return SyntaxToken.WithValue(SyntaxKind.XmlEntityLiteralToken, leading, text, value, trailing);
+            return SyntaxToken.WithValue(
+                SyntaxKind.XmlEntityLiteralToken,
+                leading,
+                text,
+                value,
+                trailing
+            );
         }
 
         internal static SyntaxTrivia DocumentationCommentExteriorTrivia(string text)
@@ -254,17 +437,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return SyntaxTrivia.Create(SyntaxKind.DocumentationCommentExteriorTrivia, text);
         }
 
-        public static SyntaxList<TNode> List<TNode>() where TNode : CSharpSyntaxNode
+        public static SyntaxList<TNode> List<TNode>()
+            where TNode : CSharpSyntaxNode
         {
             return default(SyntaxList<TNode>);
         }
 
-        public static SyntaxList<TNode> List<TNode>(TNode node) where TNode : CSharpSyntaxNode
+        public static SyntaxList<TNode> List<TNode>(TNode node)
+            where TNode : CSharpSyntaxNode
         {
             return new SyntaxList<TNode>(SyntaxList.List(node));
         }
 
-        public static SyntaxList<TNode> List<TNode>(TNode node0, TNode node1) where TNode : CSharpSyntaxNode
+        public static SyntaxList<TNode> List<TNode>(TNode node0, TNode node1)
+            where TNode : CSharpSyntaxNode
         {
             return new SyntaxList<TNode>(SyntaxList.List(node0, node1));
         }
@@ -274,17 +460,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return SyntaxList.List(node0, node1);
         }
 
-        public static SyntaxList<TNode> List<TNode>(TNode node0, TNode node1, TNode node2) where TNode : CSharpSyntaxNode
+        public static SyntaxList<TNode> List<TNode>(TNode node0, TNode node1, TNode node2)
+            where TNode : CSharpSyntaxNode
         {
             return new SyntaxList<TNode>(SyntaxList.List(node0, node1, node2));
         }
 
-        internal static GreenNode ListNode(CSharpSyntaxNode node0, CSharpSyntaxNode node1, CSharpSyntaxNode node2)
+        internal static GreenNode ListNode(
+            CSharpSyntaxNode node0,
+            CSharpSyntaxNode node1,
+            CSharpSyntaxNode node2
+        )
         {
             return SyntaxList.List(node0, node1, node2);
         }
 
-        public static SyntaxList<TNode> List<TNode>(params TNode[] nodes) where TNode : CSharpSyntaxNode
+        public static SyntaxList<TNode> List<TNode>(params TNode[] nodes)
+            where TNode : CSharpSyntaxNode
         {
             if (nodes != null)
             {
@@ -299,22 +491,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return SyntaxList.List(nodes);
         }
 
-        public static SeparatedSyntaxList<TNode> SeparatedList<TNode>(TNode node) where TNode : CSharpSyntaxNode
+        public static SeparatedSyntaxList<TNode> SeparatedList<TNode>(TNode node)
+            where TNode : CSharpSyntaxNode
         {
             return new SeparatedSyntaxList<TNode>(new SyntaxList<CSharpSyntaxNode>(node));
         }
 
-        public static SeparatedSyntaxList<TNode> SeparatedList<TNode>(SyntaxToken token) where TNode : CSharpSyntaxNode
+        public static SeparatedSyntaxList<TNode> SeparatedList<TNode>(SyntaxToken token)
+            where TNode : CSharpSyntaxNode
         {
             return new SeparatedSyntaxList<TNode>(new SyntaxList<CSharpSyntaxNode>(token));
         }
 
-        public static SeparatedSyntaxList<TNode> SeparatedList<TNode>(TNode node1, SyntaxToken token, TNode node2) where TNode : CSharpSyntaxNode
+        public static SeparatedSyntaxList<TNode> SeparatedList<TNode>(
+            TNode node1,
+            SyntaxToken token,
+            TNode node2
+        )
+            where TNode : CSharpSyntaxNode
         {
-            return new SeparatedSyntaxList<TNode>(new SyntaxList<CSharpSyntaxNode>(SyntaxList.List(node1, token, node2)));
+            return new SeparatedSyntaxList<TNode>(
+                new SyntaxList<CSharpSyntaxNode>(SyntaxList.List(node1, token, node2))
+            );
         }
 
-        public static SeparatedSyntaxList<TNode> SeparatedList<TNode>(params CSharpSyntaxNode[] nodes) where TNode : CSharpSyntaxNode
+        public static SeparatedSyntaxList<TNode> SeparatedList<TNode>(
+            params CSharpSyntaxNode[] nodes
+        )
+            where TNode : CSharpSyntaxNode
         {
             if (nodes != null)
             {

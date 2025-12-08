@@ -34,7 +34,9 @@ namespace System.Web.WebPages.Test
             var virtualPath = "~/index.cshtml";
             var mockPage = Utils.CreatePage(_ => { }, virtualPath);
             var factory1 = new HashVirtualPathFactory(mockPage);
-            var factory2 = new HashVirtualPathFactory(Utils.CreatePage(null, "~/_admin/index.cshtml"));
+            var factory2 = new HashVirtualPathFactory(
+                Utils.CreatePage(null, "~/_admin/index.cshtml")
+            );
 
             // Act
             var factoryManager = new VirtualPathFactoryManager(factory2);
@@ -50,7 +52,9 @@ namespace System.Web.WebPages.Test
         {
             // Arrange
             var factory1 = new HashVirtualPathFactory(Utils.CreatePage(_ => { }, "~/index.cshtml"));
-            var factory2 = new HashVirtualPathFactory(Utils.CreatePage(null, "~/_admin/index.cshtml"));
+            var factory2 = new HashVirtualPathFactory(
+                Utils.CreatePage(null, "~/_admin/index.cshtml")
+            );
 
             // Act
             var factoryManager = new VirtualPathFactoryManager(factory2);

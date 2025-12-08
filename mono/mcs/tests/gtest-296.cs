@@ -11,5 +11,5 @@ public class MyCollection<T> : Collection<T>
 
 public class C
 {
-    public static void Main () {}
+    public static void Main() { }
 }

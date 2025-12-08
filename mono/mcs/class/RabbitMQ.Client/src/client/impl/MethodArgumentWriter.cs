@@ -55,9 +55,9 @@
 //
 //---------------------------------------------------------------------------
 using System;
+using System.Collections;
 using System.IO;
 using System.Text;
-using System.Collections;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Exceptions;
 using RabbitMQ.Util;
@@ -70,7 +70,7 @@ namespace RabbitMQ.Client.Impl
         private bool m_needBitFlush;
         private byte m_bitAccumulator;
         private int m_bitMask;
-        
+
         public MethodArgumentWriter(NetworkBinaryWriter writer)
         {
             m_writer = writer;
@@ -81,12 +81,17 @@ namespace RabbitMQ.Client.Impl
 
                 // Only really a problem if we try to write a table,
                 // but complain anyway. See WireFormatting.WriteTable
-                throw new NotSupportedException("Cannot write method arguments to non-positionable stream");
+                throw new NotSupportedException(
+                    "Cannot write method arguments to non-positionable stream"
+                );
             }
             ResetBitAccumulator();
         }
 
-        public NetworkBinaryWriter BaseWriter { get { return m_writer; } }
+        public NetworkBinaryWriter BaseWriter
+        {
+            get { return m_writer; }
+        }
 
         private void ResetBitAccumulator()
         {

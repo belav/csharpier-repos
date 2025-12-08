@@ -5,22 +5,24 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 
-using System.Reflection.PortableExecutable;
-using System.Reflection.Metadata.Ecma335;
-using System.Reflection;
-
 namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 {
-    partial class TypeRefTypeSystemContext : MetadataTypeSystemContext, IMetadataStringDecoderProvider
+    partial class TypeRefTypeSystemContext
+        : MetadataTypeSystemContext,
+            IMetadataStringDecoderProvider
     {
         PEReader[] _refReaders;
-        Dictionary<string, TypeRefTypeSystemModule> _typeRefModules = new Dictionary<string, TypeRefTypeSystemModule>();
+        Dictionary<string, TypeRefTypeSystemModule> _typeRefModules =
+            new Dictionary<string, TypeRefTypeSystemModule>();
 
         class PEInfo
         {
@@ -34,15 +36,22 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             public readonly string Name;
             public readonly PEReader pe;
             public readonly MetadataReader reader;
-            public readonly Dictionary<TypeReferenceHandle, TypeRefTypeSystemType> handleLookup = new Dictionary<TypeReferenceHandle, TypeRefTypeSystemType>();
-            public readonly Dictionary<AssemblyReferenceHandle, TypeRefTypeSystemModule> assemblyLookup = new Dictionary<AssemblyReferenceHandle, TypeRefTypeSystemModule>();
+            public readonly Dictionary<TypeReferenceHandle, TypeRefTypeSystemType> handleLookup =
+                new Dictionary<TypeReferenceHandle, TypeRefTypeSystemType>();
+            public readonly Dictionary<
+                AssemblyReferenceHandle,
+                TypeRefTypeSystemModule
+            > assemblyLookup = new Dictionary<AssemblyReferenceHandle, TypeRefTypeSystemModule>();
         }
 
         public TypeRefTypeSystemContext(IEnumerable<PEReader> refReaders)
         {
             _refReaders = refReaders.ToArray();
 
-            TypeRefTypeSystemModule coreLibModule = new TypeRefTypeSystemModule(this, new System.Reflection.AssemblyName("System.Private.CoreLib"));
+            TypeRefTypeSystemModule coreLibModule = new TypeRefTypeSystemModule(
+                this,
+                new System.Reflection.AssemblyName("System.Private.CoreLib")
+            );
             foreach (string name in MetadataTypeSystemContext.WellKnownTypeNames)
             {
                 coreLibModule.GetOrAddType("System", name);
@@ -62,7 +71,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             // Walk all signature blobs and find out which types are valuetypes/generic
             foreach (PEInfo peInfo in peInfos)
             {
-                TypeRefSignatureParserProvider parserHelper = new TypeRefSignatureParserProvider(this, peInfo.handleLookup);
+                TypeRefSignatureParserProvider parserHelper = new TypeRefSignatureParserProvider(
+                    this,
+                    peInfo.handleLookup
+                );
                 // Resolve every type ref, so that the full set of type refs is known
                 foreach (var typeRefHandle in peInfo.reader.TypeReferences)
                 {
@@ -77,7 +89,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
                     typeSpec.DecodeSignature(parserHelper, null);
                 }
 
-                int standAloneSigRowCount = peInfo.reader.GetTableRowCount(TableIndex.StandAloneSig);
+                int standAloneSigRowCount = peInfo.reader.GetTableRowCount(
+                    TableIndex.StandAloneSig
+                );
                 for (int row = 1; row <= standAloneSigRowCount; row++)
                 {
                     var handle = MetadataTokens.StandaloneSignatureHandle(row);
@@ -119,9 +133,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             // Walk all memberrefs, and attach fields/methods to types
             foreach (PEInfo peInfo in peInfos)
             {
-                TypeRefSignatureParserProvider parserHelper = new TypeRefSignatureParserProvider(this, peInfo.handleLookup);
+                TypeRefSignatureParserProvider parserHelper = new TypeRefSignatureParserProvider(
+                    this,
+                    peInfo.handleLookup
+                );
 
-                Func<EntityHandle, NotFoundBehavior, TypeDesc> resolverFunc = ResolveTypeRefForPeInfo;
+                Func<EntityHandle, NotFoundBehavior, TypeDesc> resolverFunc =
+                    ResolveTypeRefForPeInfo;
                 int memberRefRowCount = peInfo.reader.GetTableRowCount(TableIndex.MemberRef);
                 for (int row = 1; row <= memberRefRowCount; row++)
                 {
@@ -135,7 +153,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
                     }
                     else if (memberRef.Parent.Kind == HandleKind.TypeSpecification)
                     {
-                        TypeDesc t = parserHelper.GetTypeFromSpecification(peInfo.reader, null, (TypeSpecificationHandle)memberRef.Parent, 0);
+                        TypeDesc t = parserHelper.GetTypeFromSpecification(
+                            peInfo.reader,
+                            null,
+                            (TypeSpecificationHandle)memberRef.Parent,
+                            0
+                        );
                         ownerType = t.GetTypeDefinition() as TypeRefTypeSystemType;
                     }
                     if (ownerType == null)
@@ -143,7 +166,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
                         continue;
                     }
 
-                    EcmaSignatureParser ecmaSigParse = new EcmaSignatureParser(this, ResolveTypeRefForPeInfo, peInfo.reader.GetBlobReader(memberRef.Signature), NotFoundBehavior.ReturnNull);
+                    EcmaSignatureParser ecmaSigParse = new EcmaSignatureParser(
+                        this,
+                        ResolveTypeRefForPeInfo,
+                        peInfo.reader.GetBlobReader(memberRef.Signature),
+                        NotFoundBehavior.ReturnNull
+                    );
                     string name = peInfo.reader.GetString(memberRef.Name);
 
                     if (memberRef.GetKind() == MemberReferenceKind.Method)
@@ -158,7 +186,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
                     }
                 }
 
-                TypeDesc ResolveTypeRefForPeInfo(EntityHandle handle, NotFoundBehavior notFoundBehavior)
+                TypeDesc ResolveTypeRefForPeInfo(
+                    EntityHandle handle,
+                    NotFoundBehavior notFoundBehavior
+                )
                 {
                     Debug.Assert(notFoundBehavior == NotFoundBehavior.ReturnNull);
                     TypeRefTypeSystemType type = null;
@@ -180,7 +211,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             var typeReference = peInfo.reader.GetTypeReference(handle);
             if (typeReference.ResolutionScope.Kind == HandleKind.TypeReference)
             {
-                var containingType = ResolveTypeRef(peInfo, (TypeReferenceHandle)typeReference.ResolutionScope);
+                var containingType = ResolveTypeRef(
+                    peInfo,
+                    (TypeReferenceHandle)typeReference.ResolutionScope
+                );
 
                 string typeName = peInfo.reader.GetString(typeReference.Name);
                 if (!typeReference.Namespace.IsNil)
@@ -189,7 +223,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             }
             else if (typeReference.ResolutionScope.Kind == HandleKind.AssemblyReference)
             {
-                AssemblyReferenceHandle asmRefHandle = (AssemblyReferenceHandle)typeReference.ResolutionScope;
+                AssemblyReferenceHandle asmRefHandle = (AssemblyReferenceHandle)
+                    typeReference.ResolutionScope;
                 TypeRefTypeSystemModule module;
 
                 if (!peInfo.assemblyLookup.TryGetValue(asmRefHandle, out module))
@@ -198,13 +233,21 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
                     string assemblyName = peInfo.reader.GetString(assemblyReference.Name);
                     if (!_typeRefModules.TryGetValue(assemblyName, out module))
                     {
-                        module = new TypeRefTypeSystemModule(this, new System.Reflection.AssemblyName(assemblyName));
+                        module = new TypeRefTypeSystemModule(
+                            this,
+                            new System.Reflection.AssemblyName(assemblyName)
+                        );
                         _typeRefModules.Add(module.Assembly.GetName().Name, module);
                     }
                     peInfo.assemblyLookup.Add(asmRefHandle, module);
                 }
-                
-                type = module.GetOrAddType(!typeReference.Namespace.IsNil ? peInfo.reader.GetString(typeReference.Namespace) : null, peInfo.reader.GetString(typeReference.Name));
+
+                type = module.GetOrAddType(
+                    !typeReference.Namespace.IsNil
+                        ? peInfo.reader.GetString(typeReference.Namespace)
+                        : null,
+                    peInfo.reader.GetString(typeReference.Name)
+                );
             }
             else
             {

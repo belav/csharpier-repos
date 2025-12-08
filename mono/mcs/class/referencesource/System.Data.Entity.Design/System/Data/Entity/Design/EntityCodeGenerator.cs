@@ -31,7 +31,10 @@ namespace System.Data.Entity.Design
 
         public EntityCodeGenerator(LanguageOption languageOption)
         {
-            _languageOption = EDesignUtil.CheckLanguageOptionArgument(languageOption, "languageOption");
+            _languageOption = EDesignUtil.CheckLanguageOptionArgument(
+                languageOption,
+                "languageOption"
+            );
         }
 
         public LanguageOption LanguageOption
@@ -44,7 +47,11 @@ namespace System.Data.Entity.Design
         /// Gets the map entries use to customize the namespace of .net types that are generated
         /// and referenced by the generated code
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         public EdmToObjectNamespaceMap EdmToObjectNamespaceMap
         {
             get { return _edmToObjectNamespaceMap; }
@@ -64,36 +71,78 @@ namespace System.Data.Entity.Design
         /// </param>
         /// <param name="targetEntityFrameworkVersion">The internal Entity Framework version that is being targeted.</param>
         /// <returns>A list of <see cref="EdmSchemaError"/> objects that contains any generated errors.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         [ResourceExposure(ResourceScope.Machine)] // for sourceEdmSchemaFilePath, targetPath and additionalEdmSchema which are machine resources
         [ResourceConsumption(ResourceScope.Machine)] // for InternalGenerateCode method call. But the path is not created in this method.
-        public IList<EdmSchemaError> GenerateCode(string sourceEdmSchemaFilePath, string targetPath, IEnumerable<string> additionalEdmSchemaFilePaths, Version targetEntityFrameworkVersion)
+        public IList<EdmSchemaError> GenerateCode(
+            string sourceEdmSchemaFilePath,
+            string targetPath,
+            IEnumerable<string> additionalEdmSchemaFilePaths,
+            Version targetEntityFrameworkVersion
+        )
         {
-            EDesignUtil.CheckTargetEntityFrameworkVersionArgument(targetEntityFrameworkVersion, "targetEntityFrameworkVersion");
+            EDesignUtil.CheckTargetEntityFrameworkVersionArgument(
+                targetEntityFrameworkVersion,
+                "targetEntityFrameworkVersion"
+            );
 
             EntityUtil.CheckStringArgument(sourceEdmSchemaFilePath, "sourceEdmSchemaFilePath");
-            EDesignUtil.CheckArgumentNull(additionalEdmSchemaFilePaths, "additionalEdmSchemaFilePaths");
+            EDesignUtil.CheckArgumentNull(
+                additionalEdmSchemaFilePaths,
+                "additionalEdmSchemaFilePaths"
+            );
             EntityUtil.CheckStringArgument(targetPath, "targetPath");
-            EDesignUtil.CheckTargetEntityFrameworkVersionArgument(targetEntityFrameworkVersion, "targetEntityFrameworkVersion");
+            EDesignUtil.CheckTargetEntityFrameworkVersionArgument(
+                targetEntityFrameworkVersion,
+                "targetEntityFrameworkVersion"
+            );
 
-            return InternalGenerateCode(sourceEdmSchemaFilePath, new LazyTextWriterCreator(targetPath), additionalEdmSchemaFilePaths, targetEntityFrameworkVersion);
+            return InternalGenerateCode(
+                sourceEdmSchemaFilePath,
+                new LazyTextWriterCreator(targetPath),
+                additionalEdmSchemaFilePaths,
+                targetEntityFrameworkVersion
+            );
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         [ResourceExposure(ResourceScope.Machine)] // for sourceEdmSchemaFilePath, targetPath and additionalEdmSchema which are machine resources
         [ResourceConsumption(ResourceScope.Machine)] // for InternalGenerateCode method call. But the path is not created in this method.
-        public IList<EdmSchemaError> GenerateCode(string sourceEdmSchemaFilePath, string targetPath, IEnumerable<string> additionalEdmSchemaFilePaths)
+        public IList<EdmSchemaError> GenerateCode(
+            string sourceEdmSchemaFilePath,
+            string targetPath,
+            IEnumerable<string> additionalEdmSchemaFilePaths
+        )
         {
             Version targetFrameworkVersion;
-            IList<EdmSchemaError> errors = GetMinimumTargetFrameworkVersion(sourceEdmSchemaFilePath, out targetFrameworkVersion);
+            IList<EdmSchemaError> errors = GetMinimumTargetFrameworkVersion(
+                sourceEdmSchemaFilePath,
+                out targetFrameworkVersion
+            );
 
             if (errors.Where(e => e.Severity == EdmSchemaErrorSeverity.Error).Any())
             {
                 return errors;
             }
 
-            return errors.Concat(GenerateCode(sourceEdmSchemaFilePath, targetPath, additionalEdmSchemaFilePaths,
-                targetFrameworkVersion)).ToList();
+            return errors
+                .Concat(
+                    GenerateCode(
+                        sourceEdmSchemaFilePath,
+                        targetPath,
+                        additionalEdmSchemaFilePaths,
+                        targetFrameworkVersion
+                    )
+                )
+                .ToList();
         }
 
         /// <summary>
@@ -105,32 +154,57 @@ namespace System.Data.Entity.Design
         /// <param name="targetPath">The path of the file that contains the generated object layer code.</param>
         /// <param name="targetEntityFrameworkVersion">The internal Entity Framework version that is being targeted.</param>
         /// <returns>A list of <see cref="EdmSchemaError"/> objects that contains any generated errors.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         [ResourceExposure(ResourceScope.Machine)] // for sourceEdmSchemaFilePath and targetPath which are Machine resources
         [ResourceConsumption(ResourceScope.Machine)] // for InternalGenerateCode method call. But the path is not created in this method.
-        public IList<EdmSchemaError> GenerateCode(string sourceEdmSchemaFilePath, string targetPath, Version targetEntityFrameworkVersion)
+        public IList<EdmSchemaError> GenerateCode(
+            string sourceEdmSchemaFilePath,
+            string targetPath,
+            Version targetEntityFrameworkVersion
+        )
         {
             EntityUtil.CheckStringArgument(sourceEdmSchemaFilePath, "sourceEdmSchemaFilePath");
             EntityUtil.CheckStringArgument(targetPath, "targetPath");
-            EDesignUtil.CheckTargetEntityFrameworkVersionArgument(targetEntityFrameworkVersion, "targetEntityFrameworkVersion");
+            EDesignUtil.CheckTargetEntityFrameworkVersionArgument(
+                targetEntityFrameworkVersion,
+                "targetEntityFrameworkVersion"
+            );
 
-            return InternalGenerateCode(sourceEdmSchemaFilePath, new LazyTextWriterCreator(targetPath), null, targetEntityFrameworkVersion);
+            return InternalGenerateCode(
+                sourceEdmSchemaFilePath,
+                new LazyTextWriterCreator(targetPath),
+                null,
+                targetEntityFrameworkVersion
+            );
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         [ResourceExposure(ResourceScope.Machine)] // for sourceEdmSchemaFilePath and targetPath which are Machine resources
         [ResourceConsumption(ResourceScope.Machine)] // for InternalGenerateCode method call. But the path is not created in this method.
         public IList<EdmSchemaError> GenerateCode(string sourceEdmSchemaFilePath, string targetPath)
         {
             Version targetFrameworkVersion;
-            IList<EdmSchemaError> errors = GetMinimumTargetFrameworkVersion(sourceEdmSchemaFilePath, out targetFrameworkVersion);
+            IList<EdmSchemaError> errors = GetMinimumTargetFrameworkVersion(
+                sourceEdmSchemaFilePath,
+                out targetFrameworkVersion
+            );
 
             if (errors.Where(e => e.Severity == EdmSchemaErrorSeverity.Error).Any())
             {
                 return errors;
             }
 
-            return errors.Concat(GenerateCode(sourceEdmSchemaFilePath, targetPath, targetFrameworkVersion)).ToList();
+            return errors
+                .Concat(GenerateCode(sourceEdmSchemaFilePath, targetPath, targetFrameworkVersion))
+                .ToList();
         }
 
         /// <summary>
@@ -143,13 +217,24 @@ namespace System.Data.Entity.Design
         /// <param name="target">The TextWriter to which the object layer code is written.</param>
         /// <param name="targetEntityFrameworkVersion">The internal Entity Framework version that is being targeted.</param>
         /// <returns>A list of <see cref="EdmSchemaError"/> objects that contains any generated errors.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         [ResourceConsumption(ResourceScope.Machine)] // temp file creation, and passing to InternalGenerateCode
-        public IList<EdmSchemaError> GenerateCode(XmlReader sourceEdmSchema, TextWriter target, Version targetEntityFrameworkVersion)
+        public IList<EdmSchemaError> GenerateCode(
+            XmlReader sourceEdmSchema,
+            TextWriter target,
+            Version targetEntityFrameworkVersion
+        )
         {
             EDesignUtil.CheckArgumentNull(sourceEdmSchema, "sourceEdmSchema");
             EDesignUtil.CheckArgumentNull(target, "target");
-            EDesignUtil.CheckTargetEntityFrameworkVersionArgument(targetEntityFrameworkVersion, "targetEntityFrameworkVersion");
+            EDesignUtil.CheckTargetEntityFrameworkVersionArgument(
+                targetEntityFrameworkVersion,
+                "targetEntityFrameworkVersion"
+            );
 
             Version schemaVersion;
             if (!IsValidSchema(sourceEdmSchema, out schemaVersion))
@@ -159,26 +244,43 @@ namespace System.Data.Entity.Design
 
             using (TempFileCollection collection = new TempFileCollection())
             {
-                string tempSourceEdmSchemaPath = collection.AddExtension(XmlConstants.CSpaceSchemaExtension);
+                string tempSourceEdmSchemaPath = collection.AddExtension(
+                    XmlConstants.CSpaceSchemaExtension
+                );
                 SaveXmlReaderToFile(sourceEdmSchema, tempSourceEdmSchemaPath);
 
-                return InternalGenerateCode(tempSourceEdmSchemaPath, schemaVersion, new LazyTextWriterCreator(target), null, targetEntityFrameworkVersion);
+                return InternalGenerateCode(
+                    tempSourceEdmSchemaPath,
+                    schemaVersion,
+                    new LazyTextWriterCreator(target),
+                    null,
+                    targetEntityFrameworkVersion
+                );
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         [ResourceConsumption(ResourceScope.Machine)] // temp file creation, and passing to InternalGenerateCode
         public IList<EdmSchemaError> GenerateCode(XmlReader sourceEdmSchema, TextWriter target)
         {
             Version targetFrameworkVersion;
-            IList<EdmSchemaError> errors = GetMinimumTargetFrameworkVersion(sourceEdmSchema, out targetFrameworkVersion);
+            IList<EdmSchemaError> errors = GetMinimumTargetFrameworkVersion(
+                sourceEdmSchema,
+                out targetFrameworkVersion
+            );
 
             if (errors.Where(e => e.Severity == EdmSchemaErrorSeverity.Error).Any())
             {
                 return errors;
             }
 
-            return errors.Concat(GenerateCode(sourceEdmSchema, target, targetFrameworkVersion)).ToList();
+            return errors
+                .Concat(GenerateCode(sourceEdmSchema, target, targetFrameworkVersion))
+                .ToList();
         }
 
         /// <summary>
@@ -194,14 +296,26 @@ namespace System.Data.Entity.Design
         /// </param>
         /// <param name="targetEntityFrameworkVersion">The internal Entity Framework version that is being targeted.</param>
         /// <returns>A list of <see cref="EdmSchemaError"/> objects that contains any generated errors.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         [ResourceConsumption(ResourceScope.Machine)] //Temp file creation, and passing to InternalGenerateCode
-        public IList<EdmSchemaError> GenerateCode(XmlReader sourceEdmSchema, TextWriter target, IEnumerable<XmlReader> additionalEdmSchemas, Version targetEntityFrameworkVersion)
+        public IList<EdmSchemaError> GenerateCode(
+            XmlReader sourceEdmSchema,
+            TextWriter target,
+            IEnumerable<XmlReader> additionalEdmSchemas,
+            Version targetEntityFrameworkVersion
+        )
         {
             EDesignUtil.CheckArgumentNull(sourceEdmSchema, "sourceEdmSchema");
             EDesignUtil.CheckArgumentNull(additionalEdmSchemas, "additionalEdmSchemas");
             EDesignUtil.CheckArgumentNull(target, "target");
-            EDesignUtil.CheckTargetEntityFrameworkVersionArgument(targetEntityFrameworkVersion, "targetEntityFrameworkVersion");
+            EDesignUtil.CheckTargetEntityFrameworkVersionArgument(
+                targetEntityFrameworkVersion,
+                "targetEntityFrameworkVersion"
+            );
 
             Version schemaVersion;
             if (!IsValidSchema(sourceEdmSchema, out schemaVersion))
@@ -211,45 +325,86 @@ namespace System.Data.Entity.Design
 
             using (TempFileCollection collection = new TempFileCollection())
             {
-
-                string tempSourceEdmSchemaPath = collection.AddExtension(XmlConstants.CSpaceSchemaExtension);
+                string tempSourceEdmSchemaPath = collection.AddExtension(
+                    XmlConstants.CSpaceSchemaExtension
+                );
                 SaveXmlReaderToFile(sourceEdmSchema, tempSourceEdmSchemaPath);
                 List<string> additionalTempPaths = new List<string>();
                 foreach (XmlReader reader in additionalEdmSchemas)
                 {
-
                     string temp = Path.GetTempFileName() + XmlConstants.CSpaceSchemaExtension;
                     SaveXmlReaderToFile(reader, temp);
                     additionalTempPaths.Add(temp);
                     collection.AddFile(temp, false);
                 }
-                return InternalGenerateCode(tempSourceEdmSchemaPath, schemaVersion, new LazyTextWriterCreator(target), additionalTempPaths, targetEntityFrameworkVersion);
+                return InternalGenerateCode(
+                    tempSourceEdmSchemaPath,
+                    schemaVersion,
+                    new LazyTextWriterCreator(target),
+                    additionalTempPaths,
+                    targetEntityFrameworkVersion
+                );
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         [ResourceConsumption(ResourceScope.Machine)] //Temp file creation, and passing to InternalGenerateCode
-        public IList<EdmSchemaError> GenerateCode(XmlReader sourceEdmSchema, TextWriter target, IEnumerable<XmlReader> additionalEdmSchemas)
+        public IList<EdmSchemaError> GenerateCode(
+            XmlReader sourceEdmSchema,
+            TextWriter target,
+            IEnumerable<XmlReader> additionalEdmSchemas
+        )
         {
             Version targetFrameworkVersion;
-            IList<EdmSchemaError> errors = GetMinimumTargetFrameworkVersion(sourceEdmSchema, out targetFrameworkVersion);
+            IList<EdmSchemaError> errors = GetMinimumTargetFrameworkVersion(
+                sourceEdmSchema,
+                out targetFrameworkVersion
+            );
 
             if (errors.Where(e => e.Severity == EdmSchemaErrorSeverity.Error).Any())
             {
                 return errors;
             }
 
-            return errors.Concat(GenerateCode(sourceEdmSchema, target, additionalEdmSchemas, targetFrameworkVersion)).ToList();
+            return errors
+                .Concat(
+                    GenerateCode(
+                        sourceEdmSchema,
+                        target,
+                        additionalEdmSchemas,
+                        targetFrameworkVersion
+                    )
+                )
+                .ToList();
         }
 
         // this overload is for entry points that don't pass in readers, so we need to actually create a reader to get the schemaVersion out
-        private IList<EdmSchemaError> InternalGenerateCode(string sourceEdmSchemaFilePath, LazyTextWriterCreator textWriter, IEnumerable<string> additionalEdmSchemaFilePaths, Version targetFrameworkVersion)
+        private IList<EdmSchemaError> InternalGenerateCode(
+            string sourceEdmSchemaFilePath,
+            LazyTextWriterCreator textWriter,
+            IEnumerable<string> additionalEdmSchemaFilePaths,
+            Version targetFrameworkVersion
+        )
         {
-            // do this check to maintain backwards compatibility with the behavior shipped in 
+            // do this check to maintain backwards compatibility with the behavior shipped in
             // framework v4
             if (!File.Exists(sourceEdmSchemaFilePath))
             {
-                return new List<EdmSchemaError>() { new EdmSchemaError(Strings.EdmSchemaFileNotFound(sourceEdmSchemaFilePath), (int)ModelBuilderErrorCode.FileNotFound, EdmSchemaErrorSeverity.Error, sourceEdmSchemaFilePath, 0, 0) };
+                return new List<EdmSchemaError>()
+                {
+                    new EdmSchemaError(
+                        Strings.EdmSchemaFileNotFound(sourceEdmSchemaFilePath),
+                        (int)ModelBuilderErrorCode.FileNotFound,
+                        EdmSchemaErrorSeverity.Error,
+                        sourceEdmSchemaFilePath,
+                        0,
+                        0
+                    ),
+                };
             }
 
             using (XmlReader reader = XmlReader.Create(sourceEdmSchemaFilePath))
@@ -260,7 +415,13 @@ namespace System.Data.Entity.Design
                     return new List<EdmSchemaError>() { CreateSourceEdmSchemaNotValidError() };
                 }
 
-                return InternalGenerateCode(sourceEdmSchemaFilePath, schemaVersion, textWriter, additionalEdmSchemaFilePaths, targetFrameworkVersion);
+                return InternalGenerateCode(
+                    sourceEdmSchemaFilePath,
+                    schemaVersion,
+                    textWriter,
+                    additionalEdmSchemaFilePaths,
+                    targetFrameworkVersion
+                );
             }
         }
 
@@ -268,10 +429,18 @@ namespace System.Data.Entity.Design
         {
             double schemaVersion;
             DataSpace dataSpace;
-            if (System.Data.EntityModel.SchemaObjectModel.SchemaManager.TryGetSchemaVersion(reader, out schemaVersion, out dataSpace) &&
-                dataSpace == DataSpace.CSpace)
+            if (
+                System.Data.EntityModel.SchemaObjectModel.SchemaManager.TryGetSchemaVersion(
+                    reader,
+                    out schemaVersion,
+                    out dataSpace
+                )
+                && dataSpace == DataSpace.CSpace
+            )
             {
-                entityFrameworkVersion = EntityFrameworkVersionsUtil.ConvertToVersion(schemaVersion);
+                entityFrameworkVersion = EntityFrameworkVersionsUtil.ConvertToVersion(
+                    schemaVersion
+                );
                 return true;
             }
             else if (EntityFrameworkVersions.TryGetEdmxVersion(reader, out entityFrameworkVersion))
@@ -282,7 +451,10 @@ namespace System.Data.Entity.Design
             return false;
         }
 
-        private IList<EdmSchemaError> GetMinimumTargetFrameworkVersion(string sourceEdmSchemaFilePath, out Version targetFrameworkVersion)
+        private IList<EdmSchemaError> GetMinimumTargetFrameworkVersion(
+            string sourceEdmSchemaFilePath,
+            out Version targetFrameworkVersion
+        )
         {
             targetFrameworkVersion = null;
             try
@@ -294,11 +466,20 @@ namespace System.Data.Entity.Design
             }
             catch (System.IO.FileNotFoundException ex)
             {
-                return new List<EdmSchemaError>() { EntityClassGenerator.CreateErrorForException(ModelBuilderErrorCode.FileNotFound, ex) };
+                return new List<EdmSchemaError>()
+                {
+                    EntityClassGenerator.CreateErrorForException(
+                        ModelBuilderErrorCode.FileNotFound,
+                        ex
+                    ),
+                };
             }
         }
 
-        private IList<EdmSchemaError> GetMinimumTargetFrameworkVersion(XmlReader sourceEdmSchemaXmlReader, out Version targetFrameworkVersion)
+        private IList<EdmSchemaError> GetMinimumTargetFrameworkVersion(
+            XmlReader sourceEdmSchemaXmlReader,
+            out Version targetFrameworkVersion
+        )
         {
             List<EdmSchemaError> errorList = new List<EdmSchemaError>();
             if (!IsValidSchema(sourceEdmSchemaXmlReader, out targetFrameworkVersion))
@@ -314,34 +495,68 @@ namespace System.Data.Entity.Design
 
             if (targetFrameworkVersion > EntityFrameworkVersions.Default)
             {
-                errorList.Add(new EdmSchemaError(Strings.DefaultTargetVersionTooLow(EntityFrameworkVersions.Default, targetFrameworkVersion), (int)ModelBuilderErrorCode.SchemaVersionHigherThanTargetVersion, EdmSchemaErrorSeverity.Warning));
+                errorList.Add(
+                    new EdmSchemaError(
+                        Strings.DefaultTargetVersionTooLow(
+                            EntityFrameworkVersions.Default,
+                            targetFrameworkVersion
+                        ),
+                        (int)ModelBuilderErrorCode.SchemaVersionHigherThanTargetVersion,
+                        EdmSchemaErrorSeverity.Warning
+                    )
+                );
             }
 
             return errorList;
         }
 
-        private IList<EdmSchemaError> InternalGenerateCode(string sourceEdmSchemaFilePath, Version schemaVersion, LazyTextWriterCreator textWriter, IEnumerable<string> additionalEdmSchemaFilePaths, Version targetFrameworkVersion)
+        private IList<EdmSchemaError> InternalGenerateCode(
+            string sourceEdmSchemaFilePath,
+            Version schemaVersion,
+            LazyTextWriterCreator textWriter,
+            IEnumerable<string> additionalEdmSchemaFilePaths,
+            Version targetFrameworkVersion
+        )
         {
             List<EdmSchemaError> errors = new List<EdmSchemaError>();
             try
             {
                 if (targetFrameworkVersion == EntityFrameworkVersions.Version1)
                 {
-                    errors.Add(new EdmSchemaError(Strings.EntityCodeGenTargetTooLow, (int)ModelBuilderErrorCode.TargetVersionNotSupported, EdmSchemaErrorSeverity.Error));
+                    errors.Add(
+                        new EdmSchemaError(
+                            Strings.EntityCodeGenTargetTooLow,
+                            (int)ModelBuilderErrorCode.TargetVersionNotSupported,
+                            EdmSchemaErrorSeverity.Error
+                        )
+                    );
                     return errors;
                 }
 
-                if (!MetadataItemCollectionFactory.ValidateActualVersionAgainstTarget(targetFrameworkVersion, schemaVersion, errors))
+                if (
+                    !MetadataItemCollectionFactory.ValidateActualVersionAgainstTarget(
+                        targetFrameworkVersion,
+                        schemaVersion,
+                        errors
+                    )
+                )
                 {
                     return errors;
                 }
 
                 if (schemaVersion == EntityFrameworkVersions.EdmVersion1_1)
                 {
-                    return GenerateCodeFor1_1Schema(sourceEdmSchemaFilePath, textWriter, additionalEdmSchemaFilePaths);
+                    return GenerateCodeFor1_1Schema(
+                        sourceEdmSchemaFilePath,
+                        textWriter,
+                        additionalEdmSchemaFilePaths
+                    );
                 }
 
-                ReflectionAdapter codeGenerator = ReflectionAdapter.Create(_languageOption, targetFrameworkVersion);
+                ReflectionAdapter codeGenerator = ReflectionAdapter.Create(
+                    _languageOption,
+                    targetFrameworkVersion
+                );
                 codeGenerator.SourceCsdlPath = sourceEdmSchemaFilePath;
                 codeGenerator.ReferenceCsdlPaths = additionalEdmSchemaFilePaths;
                 codeGenerator.EdmToObjectNamespaceMap = _edmToObjectNamespaceMap.AsDictionary();
@@ -350,8 +565,13 @@ namespace System.Data.Entity.Design
 
                 if (codeGenerator.Errors.Count != 0)
                 {
-                    ModelBuilderErrorCode errorCode = ModelBuilderErrorCode.PreprocessTemplateTransformationError;
-                    errors.AddRange(codeGenerator.Errors.OfType<CompilerError>().Select(c => ConvertToEdmSchemaError(c, errorCode)));
+                    ModelBuilderErrorCode errorCode =
+                        ModelBuilderErrorCode.PreprocessTemplateTransformationError;
+                    errors.AddRange(
+                        codeGenerator
+                            .Errors.OfType<CompilerError>()
+                            .Select(c => ConvertToEdmSchemaError(c, errorCode))
+                    );
 
                     if (codeGenerator.Errors.HasErrors)
                         return errors;
@@ -364,29 +584,60 @@ namespace System.Data.Entity.Design
             }
             catch (System.UnauthorizedAccessException ex)
             {
-                errors.Add(EntityClassGenerator.CreateErrorForException(ModelBuilderErrorCode.SecurityError, ex));
+                errors.Add(
+                    EntityClassGenerator.CreateErrorForException(
+                        ModelBuilderErrorCode.SecurityError,
+                        ex
+                    )
+                );
             }
             catch (System.IO.FileNotFoundException ex)
             {
-                errors.Add(EntityClassGenerator.CreateErrorForException(ModelBuilderErrorCode.FileNotFound, ex));
+                errors.Add(
+                    EntityClassGenerator.CreateErrorForException(
+                        ModelBuilderErrorCode.FileNotFound,
+                        ex
+                    )
+                );
             }
             catch (System.Security.SecurityException ex)
             {
-                errors.Add(EntityClassGenerator.CreateErrorForException(ModelBuilderErrorCode.SecurityError, ex));
+                errors.Add(
+                    EntityClassGenerator.CreateErrorForException(
+                        ModelBuilderErrorCode.SecurityError,
+                        ex
+                    )
+                );
             }
             catch (System.IO.DirectoryNotFoundException ex)
             {
-                errors.Add(EntityClassGenerator.CreateErrorForException(ModelBuilderErrorCode.DirectoryNotFound, ex));
+                errors.Add(
+                    EntityClassGenerator.CreateErrorForException(
+                        ModelBuilderErrorCode.DirectoryNotFound,
+                        ex
+                    )
+                );
             }
             catch (System.IO.IOException ex)
             {
-                errors.Add(EntityClassGenerator.CreateErrorForException(ModelBuilderErrorCode.IOException, ex));
+                errors.Add(
+                    EntityClassGenerator.CreateErrorForException(
+                        ModelBuilderErrorCode.IOException,
+                        ex
+                    )
+                );
             }
             catch (Exception e)
             {
                 if (MetadataUtil.IsCatchableExceptionType(e))
                 {
-                    errors.Add(EntityClassGenerator.CreateErrorForException(ModelBuilderErrorCode.PreprocessTemplateTransformationError, e, sourceEdmSchemaFilePath));
+                    errors.Add(
+                        EntityClassGenerator.CreateErrorForException(
+                            ModelBuilderErrorCode.PreprocessTemplateTransformationError,
+                            e,
+                            sourceEdmSchemaFilePath
+                        )
+                    );
                 }
                 else
                 {
@@ -399,10 +650,18 @@ namespace System.Data.Entity.Design
 
         private static EdmSchemaError CreateSourceEdmSchemaNotValidError()
         {
-            return new EdmSchemaError(Strings.EdmSchemaNotValid, (int)ModelBuilderErrorCode.SourceSchemaIsInvalid, EdmSchemaErrorSeverity.Error);
+            return new EdmSchemaError(
+                Strings.EdmSchemaNotValid,
+                (int)ModelBuilderErrorCode.SourceSchemaIsInvalid,
+                EdmSchemaErrorSeverity.Error
+            );
         }
 
-        private IList<EdmSchemaError> GenerateCodeFor1_1Schema(string sourceEdmSchemaFilePath, LazyTextWriterCreator textWriter, IEnumerable<string> additionalEdmSchemaFilePaths)
+        private IList<EdmSchemaError> GenerateCodeFor1_1Schema(
+            string sourceEdmSchemaFilePath,
+            LazyTextWriterCreator textWriter,
+            IEnumerable<string> additionalEdmSchemaFilePaths
+        )
         {
             EntityClassGenerator generator = new EntityClassGenerator(_languageOption);
             string target = textWriter.TargetFilePath;
@@ -413,12 +672,20 @@ namespace System.Data.Entity.Design
                 {
                     cleanUpTarget = true;
                     target = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
-
                 }
 
-                IList<EdmSchemaError> errors = generator.GenerateCode(sourceEdmSchemaFilePath, target, additionalEdmSchemaFilePaths != null ? additionalEdmSchemaFilePaths : Enumerable.Empty<string>());
+                IList<EdmSchemaError> errors = generator.GenerateCode(
+                    sourceEdmSchemaFilePath,
+                    target,
+                    additionalEdmSchemaFilePaths != null
+                        ? additionalEdmSchemaFilePaths
+                        : Enumerable.Empty<string>()
+                );
 
-                if (textWriter.IsUserSuppliedTextWriter && !errors.Any(e => e.Severity == EdmSchemaErrorSeverity.Error))
+                if (
+                    textWriter.IsUserSuppliedTextWriter
+                    && !errors.Any(e => e.Severity == EdmSchemaErrorSeverity.Error)
+                )
                 {
                     textWriter.GetOrCreateTextWriter().Write(File.ReadAllText(target));
                 }
@@ -432,7 +699,6 @@ namespace System.Data.Entity.Design
                     File.Delete(target);
                 }
             }
-
         }
 
         private static void SaveXmlReaderToFile(XmlReader schema, string tempSchemaPath)
@@ -443,12 +709,17 @@ namespace System.Data.Entity.Design
             }
         }
 
-        private static EdmSchemaError ConvertToEdmSchemaError(CompilerError error, ModelBuilderErrorCode defaultErrorCode)
+        private static EdmSchemaError ConvertToEdmSchemaError(
+            CompilerError error,
+            ModelBuilderErrorCode defaultErrorCode
+        )
         {
             int errorNumber;
             string message = error.ErrorText;
             bool usePositionInfo = true;
-            EdmSchemaErrorSeverity severity = error.IsWarning ? EdmSchemaErrorSeverity.Warning : EdmSchemaErrorSeverity.Error;
+            EdmSchemaErrorSeverity severity = error.IsWarning
+                ? EdmSchemaErrorSeverity.Warning
+                : EdmSchemaErrorSeverity.Error;
             if (int.TryParse(error.ErrorNumber, out errorNumber))
             {
                 if (error.Line == -1 && error.Column == -1)
@@ -458,39 +729,47 @@ namespace System.Data.Entity.Design
             }
             else
             {
-                message = String.Format(CultureInfo.InvariantCulture, "{0}({1})", error.ErrorText, error.ErrorNumber);
+                message = String.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}({1})",
+                    error.ErrorText,
+                    error.ErrorNumber
+                );
                 errorNumber = (int)defaultErrorCode;
             }
 
             if (usePositionInfo)
             {
-                return new EdmSchemaError(message,
-                                        errorNumber,
-                                        severity,
-                                        error.FileName,
-                                        error.Line,
-                                        error.Column);
+                return new EdmSchemaError(
+                    message,
+                    errorNumber,
+                    severity,
+                    error.FileName,
+                    error.Line,
+                    error.Column
+                );
             }
             else
             {
-                return new EdmSchemaError(message,
-                                        errorNumber,
-                                        severity);
+                return new EdmSchemaError(message, errorNumber, severity);
             }
         }
-
 
         static Type _vbCodeGeneratorTypeV2 = null;
         static Type _vbCodeGeneratorTypeV3 = null;
         static Type _csharpCodeGeneratorTypeV2 = null;
         static Type _csharpCodeGeneratorTypeV3 = null;
 
-        private const string CSharpTemplateCodeGenTypeName = "TemplateCodeGenerators.CSharpCodeGenTemplate";
+        private const string CSharpTemplateCodeGenTypeName =
+            "TemplateCodeGenerators.CSharpCodeGenTemplate";
         private const string VBTemplateCodeGenTypeName = "TemplateCodeGenerators.VBCodeGenTemplate";
-        private const string CSharpTemplateCodeGenV3TypeName = CSharpTemplateCodeGenTypeName + "V50";
+        private const string CSharpTemplateCodeGenV3TypeName =
+            CSharpTemplateCodeGenTypeName + "V50";
         private const string VBTemplateCodeGenV3TypeName = VBTemplateCodeGenTypeName + "V50";
-        private const string CSharpTemplateCodeGenResourceV2 = CSharpTemplateCodeGenTypeName + ".cs";
-        private const string CSharpTemplateCodeGenResourceV3 = CSharpTemplateCodeGenTypeName + "V5.0.cs";
+        private const string CSharpTemplateCodeGenResourceV2 =
+            CSharpTemplateCodeGenTypeName + ".cs";
+        private const string CSharpTemplateCodeGenResourceV3 =
+            CSharpTemplateCodeGenTypeName + "V5.0.cs";
         private const string VBTemplateCodeGenResourceV2 = VBTemplateCodeGenTypeName + ".vb";
         private const string VBTemplateCodeGenResourceV3 = VBTemplateCodeGenTypeName + "V5.0.vb";
 
@@ -498,7 +777,11 @@ namespace System.Data.Entity.Design
         {
             if (_csharpCodeGeneratorTypeV2 == null)
             {
-                Type type = CreateCodeGeneratorType(new Microsoft.CSharp.CSharpCodeProvider(), CSharpTemplateCodeGenResourceV2, CSharpTemplateCodeGenTypeName);
+                Type type = CreateCodeGeneratorType(
+                    new Microsoft.CSharp.CSharpCodeProvider(),
+                    CSharpTemplateCodeGenResourceV2,
+                    CSharpTemplateCodeGenTypeName
+                );
                 Interlocked.Exchange(ref _csharpCodeGeneratorTypeV2, type);
             }
 
@@ -509,7 +792,11 @@ namespace System.Data.Entity.Design
         {
             if (_csharpCodeGeneratorTypeV3 == null)
             {
-                Type type = CreateCodeGeneratorType(new Microsoft.CSharp.CSharpCodeProvider(), CSharpTemplateCodeGenResourceV3, CSharpTemplateCodeGenV3TypeName);
+                Type type = CreateCodeGeneratorType(
+                    new Microsoft.CSharp.CSharpCodeProvider(),
+                    CSharpTemplateCodeGenResourceV3,
+                    CSharpTemplateCodeGenV3TypeName
+                );
                 Interlocked.Exchange(ref _csharpCodeGeneratorTypeV3, type);
             }
 
@@ -520,7 +807,11 @@ namespace System.Data.Entity.Design
         {
             if (_vbCodeGeneratorTypeV2 == null)
             {
-                Type type = CreateCodeGeneratorType(new Microsoft.VisualBasic.VBCodeProvider(), VBTemplateCodeGenResourceV2, VBTemplateCodeGenTypeName);
+                Type type = CreateCodeGeneratorType(
+                    new Microsoft.VisualBasic.VBCodeProvider(),
+                    VBTemplateCodeGenResourceV2,
+                    VBTemplateCodeGenTypeName
+                );
                 Interlocked.Exchange(ref _vbCodeGeneratorTypeV2, type);
             }
 
@@ -531,17 +822,29 @@ namespace System.Data.Entity.Design
         {
             if (_vbCodeGeneratorTypeV3 == null)
             {
-                Type type = CreateCodeGeneratorType(new Microsoft.VisualBasic.VBCodeProvider(), VBTemplateCodeGenResourceV3, VBTemplateCodeGenV3TypeName);
+                Type type = CreateCodeGeneratorType(
+                    new Microsoft.VisualBasic.VBCodeProvider(),
+                    VBTemplateCodeGenResourceV3,
+                    VBTemplateCodeGenV3TypeName
+                );
                 Interlocked.Exchange(ref _vbCodeGeneratorTypeV3, type);
             }
 
             return Activator.CreateInstance(_vbCodeGeneratorTypeV3);
         }
 
-        private static Type CreateCodeGeneratorType(System.CodeDom.Compiler.CodeDomProvider compilerProvider, string resourceName, string typeName)
+        private static Type CreateCodeGeneratorType(
+            System.CodeDom.Compiler.CodeDomProvider compilerProvider,
+            string resourceName,
+            string typeName
+        )
         {
             string sourceCode = null;
-            using (Stream sourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
+            using (
+                Stream sourceStream = Assembly
+                    .GetExecutingAssembly()
+                    .GetManifestResourceStream(resourceName)
+            )
             using (StreamReader reader = new StreamReader(sourceStream))
             {
                 sourceCode = reader.ReadToEnd();
@@ -552,41 +855,61 @@ namespace System.Data.Entity.Design
             compilerParams.GenerateInMemory = true;
             compilerParams.GenerateExecutable = false;
             // grab the assemblies by location so that we don't compile against one that we didn't reference
-            compilerParams.ReferencedAssemblies.AddRange(new string[] {
-                        typeof(System.CodeDom.Compiler.CodeDomProvider).Assembly.Location,              // System.dll
-                        typeof(System.Linq.Enumerable).Assembly.Location,                               // System.Core.dll
-                        typeof(System.Data.Objects.ObjectContext).Assembly.Location,                    // System.Data.Entity.dll
-                        typeof(System.Data.Entity.Design.EntityCodeGenerator).Assembly.Location,        // System.Data.Entity.Design.dll
-                        typeof(System.Data.DbType).Assembly.Location,                                   // System.Data.dll
-                        typeof(System.Xml.XmlAttribute).Assembly.Location,                              // System.Xml.dll
-                        typeof(System.Xml.Linq.XElement).Assembly.Location,                             // System.Xml.Linq.dll
-                });
+            compilerParams.ReferencedAssemblies.AddRange(
+                new string[]
+                {
+                    typeof(System.CodeDom.Compiler.CodeDomProvider).Assembly.Location, // System.dll
+                    typeof(System.Linq.Enumerable).Assembly.Location, // System.Core.dll
+                    typeof(System.Data.Objects.ObjectContext).Assembly.Location, // System.Data.Entity.dll
+                    typeof(System.Data.Entity.Design.EntityCodeGenerator).Assembly.Location, // System.Data.Entity.Design.dll
+                    typeof(System.Data.DbType).Assembly.Location, // System.Data.dll
+                    typeof(System.Xml.XmlAttribute).Assembly.Location, // System.Xml.dll
+                    typeof(System.Xml.Linq.XElement).Assembly.Location, // System.Xml.Linq.dll
+                }
+            );
 
 #if !ENABLE_TEMPLATE_DEBUGGING
-            CompilerResults results = compilerProvider.CompileAssemblyFromSource(compilerParams, sourceCode);
+            CompilerResults results = compilerProvider.CompileAssemblyFromSource(
+                compilerParams,
+                sourceCode
+            );
 #else
             // enables debugging
             compilerParams.GenerateInMemory = false;
             compilerParams.IncludeDebugInformation = true;
             string baseName = Path.GetFileNameWithoutExtension(Path.GetTempFileName()) + ".";
-            compilerParams.OutputAssembly = Path.Combine(Path.GetTempPath(), baseName + typeName + ".Assembly.dll");
-            string sourceFileName = Path.Combine(Path.GetTempPath(), baseName + typeName + ".Source." + compilerProvider.FileExtension);
+            compilerParams.OutputAssembly = Path.Combine(
+                Path.GetTempPath(),
+                baseName + typeName + ".Assembly.dll"
+            );
+            string sourceFileName = Path.Combine(
+                Path.GetTempPath(),
+                baseName + typeName + ".Source." + compilerProvider.FileExtension
+            );
             File.WriteAllText(sourceFileName, sourceCode);
-            CompilerResults results = compilerProvider.CompileAssemblyFromFile(compilerParams, sourceFileName);
+            CompilerResults results = compilerProvider.CompileAssemblyFromFile(
+                compilerParams,
+                sourceFileName
+            );
 #warning DO NOT CHECK IN LIKE THIS, Dynamic Assembly Debugging is enabled
 #endif
 
-
             if (results.Errors.HasErrors)
             {
-                string message = results.Errors.OfType<CompilerError>().Aggregate(string.Empty, (accumulated, input) => accumulated == string.Empty ? input.ToString() : accumulated + Environment.NewLine + input.ToString());
+                string message = results
+                    .Errors.OfType<CompilerError>()
+                    .Aggregate(
+                        string.Empty,
+                        (accumulated, input) =>
+                            accumulated == string.Empty
+                                ? input.ToString()
+                                : accumulated + Environment.NewLine + input.ToString()
+                    );
                 throw EDesignUtil.InvalidOperation(message);
             }
 
             return results.CompiledAssembly.GetType(typeName);
         }
-
-
 
         private class ReflectionAdapter
         {
@@ -601,21 +924,68 @@ namespace System.Data.Entity.Design
             {
                 _instance = instance;
                 Type type = _instance.GetType();
-                BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy;
+                BindingFlags flags =
+                    BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.FlattenHierarchy;
                 _transformText = type.GetMethod("TransformText", flags, null, new Type[0], null);
-                Debug.Assert(_transformText != null, "Unable to find method, did the signature or name change?");
+                Debug.Assert(
+                    _transformText != null,
+                    "Unable to find method, did the signature or name change?"
+                );
 
-                _sourceCsdlPath = type.GetProperty("SourceCsdlPath", flags, null, typeof(String), new Type[0], null);
-                Debug.Assert(_sourceCsdlPath != null, "Unable to find property, did the signature or name change?");
+                _sourceCsdlPath = type.GetProperty(
+                    "SourceCsdlPath",
+                    flags,
+                    null,
+                    typeof(String),
+                    new Type[0],
+                    null
+                );
+                Debug.Assert(
+                    _sourceCsdlPath != null,
+                    "Unable to find property, did the signature or name change?"
+                );
 
-                _referenceCsdlPaths = type.GetProperty("ReferenceCsdlPaths", flags, null, typeof(IEnumerable<String>), new Type[0], null);
-                Debug.Assert(_referenceCsdlPaths != null, "Unable to find property, did the signature or name change?");
+                _referenceCsdlPaths = type.GetProperty(
+                    "ReferenceCsdlPaths",
+                    flags,
+                    null,
+                    typeof(IEnumerable<String>),
+                    new Type[0],
+                    null
+                );
+                Debug.Assert(
+                    _referenceCsdlPaths != null,
+                    "Unable to find property, did the signature or name change?"
+                );
 
-                _errors = type.GetProperty("Errors", flags, null, typeof(CompilerErrorCollection), new Type[0], null);
-                Debug.Assert(_errors != null, "Unable to find property, did the signature or name change?");
+                _errors = type.GetProperty(
+                    "Errors",
+                    flags,
+                    null,
+                    typeof(CompilerErrorCollection),
+                    new Type[0],
+                    null
+                );
+                Debug.Assert(
+                    _errors != null,
+                    "Unable to find property, did the signature or name change?"
+                );
 
-                _edmToObjectNamespaceMap = type.GetProperty("EdmToObjectNamespaceMap", flags, null, typeof(Dictionary<string, string>), new Type[0], null);
-                Debug.Assert(_edmToObjectNamespaceMap != null, "Unable to find property, did the signature or name change?");
+                _edmToObjectNamespaceMap = type.GetProperty(
+                    "EdmToObjectNamespaceMap",
+                    flags,
+                    null,
+                    typeof(Dictionary<string, string>),
+                    new Type[0],
+                    null
+                );
+                Debug.Assert(
+                    _edmToObjectNamespaceMap != null,
+                    "Unable to find property, did the signature or name change?"
+                );
             }
 
             internal CompilerErrorCollection Errors
@@ -625,22 +995,13 @@ namespace System.Data.Entity.Design
 
             internal IEnumerable<String> ReferenceCsdlPaths
             {
-                set
-                {
-                    _referenceCsdlPaths.SetValue(_instance, value, null);
-                }
+                set { _referenceCsdlPaths.SetValue(_instance, value, null); }
             }
 
             internal string SourceCsdlPath
             {
-                get
-                {
-                    return (String)_sourceCsdlPath.GetValue(_instance, null);
-                }
-                set
-                {
-                    _sourceCsdlPath.SetValue(_instance, value, null);
-                }
+                get { return (String)_sourceCsdlPath.GetValue(_instance, null); }
+                set { _sourceCsdlPath.SetValue(_instance, value, null); }
             }
 
             internal Dictionary<string, string> EdmToObjectNamespaceMap
@@ -658,7 +1019,8 @@ namespace System.Data.Entity.Design
                 {
                     Exception actual = e.InnerException != null ? e.InnerException : e;
 
-                    System.CodeDom.Compiler.CompilerError error = new System.CodeDom.Compiler.CompilerError();
+                    System.CodeDom.Compiler.CompilerError error =
+                        new System.CodeDom.Compiler.CompilerError();
                     error.ErrorText = actual.Message;
                     error.IsWarning = false;
                     error.FileName = SourceCsdlPath;
@@ -666,10 +1028,12 @@ namespace System.Data.Entity.Design
 
                     return string.Empty;
                 }
-
             }
 
-            internal static ReflectionAdapter Create(LanguageOption language, Version targetEntityFrameworkVersion)
+            internal static ReflectionAdapter Create(
+                LanguageOption language,
+                Version targetEntityFrameworkVersion
+            )
             {
                 if (language == LanguageOption.GenerateCSharpCode)
                 {
@@ -684,7 +1048,10 @@ namespace System.Data.Entity.Design
                 }
                 else
                 {
-                    Debug.Assert(language == LanguageOption.GenerateVBCode, "Did you add a new option?");
+                    Debug.Assert(
+                        language == LanguageOption.GenerateVBCode,
+                        "Did you add a new option?"
+                    );
                     if (targetEntityFrameworkVersion >= EntityFrameworkVersions.Latest)
                     {
                         return new ReflectionAdapter(CreateVBCodeGeneratorV3());

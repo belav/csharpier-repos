@@ -8,7 +8,11 @@ namespace Microsoft.Data.Sqlite
         private SqliteConnectionPool? _pool;
         private State _state = State.Active;
 
-        public SqliteConnectionPoolGroup(SqliteConnectionStringBuilder connectionOptions, string connectionString, bool isNonPooled)
+        public SqliteConnectionPoolGroup(
+            SqliteConnectionStringBuilder connectionOptions,
+            string connectionString,
+            bool isNonPooled
+        )
         {
             ConnectionOptions = connectionOptions;
             ConnectionString = connectionString;
@@ -19,8 +23,7 @@ namespace Microsoft.Data.Sqlite
         public string ConnectionString { get; }
         public bool IsNonPooled { get; }
 
-        public bool IsDisabled
-            => _state == State.Disabled;
+        public bool IsDisabled => _state == State.Disabled;
 
         public SqliteConnectionPool? GetPool()
         {
@@ -38,8 +41,7 @@ namespace Microsoft.Data.Sqlite
             {
                 lock (this)
                 {
-                    if (_pool == null
-                        && KeepAlive())
+                    if (_pool == null && KeepAlive())
                     {
                         _pool = new SqliteConnectionPool(ConnectionOptions);
                     }
@@ -103,7 +105,7 @@ namespace Microsoft.Data.Sqlite
         {
             Active,
             Idle,
-            Disabled
+            Disabled,
         }
     }
 }

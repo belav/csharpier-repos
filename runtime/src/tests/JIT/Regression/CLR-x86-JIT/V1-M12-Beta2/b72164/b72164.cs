@@ -3,6 +3,7 @@
 
 using System;
 using Xunit;
+
 public unsafe class bug1
 {
     internal static void Func1(double* a01)

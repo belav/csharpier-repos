@@ -6,14 +6,10 @@ public class Program
 {
     private static int Main(string[] args)
     {
-        CliOption<bool> boolOption = new ("--bool", "-b") { Description = "Bool option" };
-        CliOption<string> stringOption = new ("--string", "-s") { Description = "String option" };
+        CliOption<bool> boolOption = new("--bool", "-b") { Description = "Bool option" };
+        CliOption<string> stringOption = new("--string", "-s") { Description = "String option" };
 
-        CliRootCommand command = new ()
-        {
-            boolOption,
-            stringOption
-        };
+        CliRootCommand command = new() { boolOption, stringOption };
 
         command.SetAction(Run);
 

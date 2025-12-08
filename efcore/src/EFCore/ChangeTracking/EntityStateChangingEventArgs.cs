@@ -23,7 +23,8 @@ public class EntityStateChangingEventArgs : EntityEntryEventArgs
     public EntityStateChangingEventArgs(
         InternalEntityEntry internalEntityEntry,
         EntityState oldState,
-        EntityState newState)
+        EntityState newState
+    )
         : base(internalEntityEntry)
     {
         OldState = oldState;

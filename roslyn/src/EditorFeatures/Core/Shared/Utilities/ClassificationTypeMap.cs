@@ -37,7 +37,10 @@ internal sealed class ClassificationTypeMap : AbstractClassificationTypeMap
 
         // Prepopulate the identity map with the constant string values from ClassificationTypeNames
         var fields = typeof(ClassificationTypeNames).GetFields();
-        _identityMap = new Dictionary<string, IClassificationType>(fields.Length, ReferenceEqualityComparer.Instance);
+        _identityMap = new Dictionary<string, IClassificationType>(
+            fields.Length,
+            ReferenceEqualityComparer.Instance
+        );
 
         foreach (var field in fields)
         {
@@ -47,7 +50,10 @@ internal sealed class ClassificationTypeMap : AbstractClassificationTypeMap
             Contract.ThrowIfNull(rawValue);
             var value = string.Intern(rawValue);
 
-            _identityMap.Add(value, registryService.GetClassificationType(ClassificationLayer.Semantic, value));
+            _identityMap.Add(
+                value,
+                registryService.GetClassificationType(ClassificationLayer.Semantic, value)
+            );
         }
     }
 
@@ -56,7 +62,9 @@ internal sealed class ClassificationTypeMap : AbstractClassificationTypeMap
         var type = GetClassificationTypeWorker(name);
         if (type == null)
         {
-            FatalError.ReportAndCatch(new Exception($"classification type doesn't exist for {name}"));
+            FatalError.ReportAndCatch(
+                new Exception($"classification type doesn't exist for {name}")
+            );
         }
 
         return type ?? GetClassificationTypeWorker(ClassificationTypeNames.Text);

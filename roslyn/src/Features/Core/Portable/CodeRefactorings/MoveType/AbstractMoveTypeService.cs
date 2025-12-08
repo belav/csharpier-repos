@@ -28,24 +28,58 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
         /// <summary>
         /// Annotation to mark the namespace encapsulating the type that has been moved
         /// </summary>
-        public static SyntaxAnnotation NamespaceScopeMovedAnnotation = new(nameof(MoveTypeOperationKind.MoveTypeNamespaceScope));
+        public static SyntaxAnnotation NamespaceScopeMovedAnnotation = new(
+            nameof(MoveTypeOperationKind.MoveTypeNamespaceScope)
+        );
 
-        public abstract Task<Solution> GetModifiedSolutionAsync(Document document, TextSpan textSpan, MoveTypeOperationKind operationKind, CodeCleanupOptionsProvider fallbackOptions, CancellationToken cancellationToken);
-        public abstract Task<ImmutableArray<CodeAction>> GetRefactoringAsync(Document document, TextSpan textSpan, CodeCleanupOptionsProvider fallbackOptions, CancellationToken cancellationToken);
+        public abstract Task<Solution> GetModifiedSolutionAsync(
+            Document document,
+            TextSpan textSpan,
+            MoveTypeOperationKind operationKind,
+            CodeCleanupOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        );
+        public abstract Task<ImmutableArray<CodeAction>> GetRefactoringAsync(
+            Document document,
+            TextSpan textSpan,
+            CodeCleanupOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        );
     }
 
-    internal abstract partial class AbstractMoveTypeService<TService, TTypeDeclarationSyntax, TNamespaceDeclarationSyntax, TMemberDeclarationSyntax, TCompilationUnitSyntax> :
-        AbstractMoveTypeService
-        where TService : AbstractMoveTypeService<TService, TTypeDeclarationSyntax, TNamespaceDeclarationSyntax, TMemberDeclarationSyntax, TCompilationUnitSyntax>
+    internal abstract partial class AbstractMoveTypeService<
+        TService,
+        TTypeDeclarationSyntax,
+        TNamespaceDeclarationSyntax,
+        TMemberDeclarationSyntax,
+        TCompilationUnitSyntax
+    > : AbstractMoveTypeService
+        where TService : AbstractMoveTypeService<
+                TService,
+                TTypeDeclarationSyntax,
+                TNamespaceDeclarationSyntax,
+                TMemberDeclarationSyntax,
+                TCompilationUnitSyntax
+            >
         where TTypeDeclarationSyntax : SyntaxNode
         where TNamespaceDeclarationSyntax : SyntaxNode
         where TMemberDeclarationSyntax : SyntaxNode
         where TCompilationUnitSyntax : SyntaxNode
     {
         public override async Task<ImmutableArray<CodeAction>> GetRefactoringAsync(
-            Document document, TextSpan textSpan, CodeCleanupOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            TextSpan textSpan,
+            CodeCleanupOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var state = await CreateStateAsync(document, textSpan, fallbackOptions, cancellationToken).ConfigureAwait(false);
+            var state = await CreateStateAsync(
+                    document,
+                    textSpan,
+                    fallbackOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (state == null)
             {
@@ -56,9 +90,21 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             return actions;
         }
 
-        public override async Task<Solution> GetModifiedSolutionAsync(Document document, TextSpan textSpan, MoveTypeOperationKind operationKind, CodeCleanupOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+        public override async Task<Solution> GetModifiedSolutionAsync(
+            Document document,
+            TextSpan textSpan,
+            MoveTypeOperationKind operationKind,
+            CodeCleanupOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var state = await CreateStateAsync(document, textSpan, fallbackOptions, cancellationToken).ConfigureAwait(false);
+            var state = await CreateStateAsync(
+                    document,
+                    textSpan,
+                    fallbackOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (state == null)
             {
@@ -71,35 +117,63 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 state.TypeName,
                 state.SemanticDocument.Document.Name,
                 state.SemanticDocument.SemanticModel,
-                cancellationToken);
+                cancellationToken
+            );
 
-            var editor = Editor.GetEditor(operationKind, (TService)this, state, suggestedFileNames.FirstOrDefault(), cancellationToken);
+            var editor = Editor.GetEditor(
+                operationKind,
+                (TService)this,
+                state,
+                suggestedFileNames.FirstOrDefault(),
+                cancellationToken
+            );
             var modifiedSolution = await editor.GetModifiedSolutionAsync().ConfigureAwait(false);
             return modifiedSolution ?? document.Project.Solution;
         }
 
-        protected abstract Task<TTypeDeclarationSyntax> GetRelevantNodeAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken);
+        protected abstract Task<TTypeDeclarationSyntax> GetRelevantNodeAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        );
 
-        private async Task<State> CreateStateAsync(Document document, TextSpan textSpan, CodeCleanupOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+        private async Task<State> CreateStateAsync(
+            Document document,
+            TextSpan textSpan,
+            CodeCleanupOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var nodeToAnalyze = await GetRelevantNodeAsync(document, textSpan, cancellationToken).ConfigureAwait(false);
+            var nodeToAnalyze = await GetRelevantNodeAsync(document, textSpan, cancellationToken)
+                .ConfigureAwait(false);
             if (nodeToAnalyze == null)
             {
                 return null;
             }
 
-            var semanticDocument = await SemanticDocument.CreateAsync(document, cancellationToken).ConfigureAwait(false);
-            return State.Generate(semanticDocument, nodeToAnalyze, fallbackOptions, cancellationToken);
+            var semanticDocument = await SemanticDocument
+                .CreateAsync(document, cancellationToken)
+                .ConfigureAwait(false);
+            return State.Generate(
+                semanticDocument,
+                nodeToAnalyze,
+                fallbackOptions,
+                cancellationToken
+            );
         }
 
-        private ImmutableArray<CodeAction> CreateActions(State state, CancellationToken cancellationToken)
+        private ImmutableArray<CodeAction> CreateActions(
+            State state,
+            CancellationToken cancellationToken
+        )
         {
             var typeMatchesDocumentName = TypeMatchesDocumentName(
                 state.TypeNode,
                 state.TypeName,
                 state.DocumentNameWithoutExtension,
                 state.SemanticDocument.SemanticModel,
-                cancellationToken);
+                cancellationToken
+            );
 
             if (typeMatchesDocumentName)
             {
@@ -108,10 +182,13 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             }
 
             using var _ = ArrayBuilder<CodeAction>.GetInstance(out var actions);
-            var manyTypes = MultipleTopLevelTypeDeclarationInSourceDocument(state.SemanticDocument.Root);
+            var manyTypes = MultipleTopLevelTypeDeclarationInSourceDocument(
+                state.SemanticDocument.Root
+            );
             var isNestedType = IsNestedType(state.TypeNode);
 
-            var syntaxFacts = state.SemanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+            var syntaxFacts =
+                state.SemanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
             var isClassNextToGlobalStatements = manyTypes
                 ? false
                 : ClassNextToGlobalStatements(state.SemanticDocument.Root, syntaxFacts);
@@ -122,7 +199,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 state.TypeName,
                 state.SemanticDocument.Document.Name,
                 state.SemanticDocument.SemanticModel,
-                cancellationToken);
+                cancellationToken
+            );
 
             // (1) Add Move type to new file code action:
             // case 1: There are multiple type declarations in current document. offer, move to new file.
@@ -135,7 +213,13 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             {
                 foreach (var fileName in suggestedFileNames)
                 {
-                    actions.Add(GetCodeAction(state, fileName, operationKind: MoveTypeOperationKind.MoveType));
+                    actions.Add(
+                        GetCodeAction(
+                            state,
+                            fileName,
+                            operationKind: MoveTypeOperationKind.MoveType
+                        )
+                    );
                 }
             }
 
@@ -145,16 +229,26 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             {
                 foreach (var fileName in suggestedFileNames)
                 {
-                    actions.Add(GetCodeAction(state, fileName, operationKind: MoveTypeOperationKind.RenameFile));
+                    actions.Add(
+                        GetCodeAction(
+                            state,
+                            fileName,
+                            operationKind: MoveTypeOperationKind.RenameFile
+                        )
+                    );
                 }
 
                 // only if the document name can be legal identifier in the language,
                 // offer to rename type with document name
                 if (state.IsDocumentNameAValidIdentifier)
                 {
-                    actions.Add(GetCodeAction(
-                        state, fileName: state.DocumentNameWithoutExtension,
-                        operationKind: MoveTypeOperationKind.RenameType));
+                    actions.Add(
+                        GetCodeAction(
+                            state,
+                            fileName: state.DocumentNameWithoutExtension,
+                            operationKind: MoveTypeOperationKind.RenameType
+                        )
+                    );
                 }
             }
 
@@ -163,14 +257,19 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             return actions.ToImmutable();
         }
 
-        private static bool ClassNextToGlobalStatements(SyntaxNode root, ISyntaxFactsService syntaxFacts)
-            => syntaxFacts.ContainsGlobalStatement(root);
+        private static bool ClassNextToGlobalStatements(
+            SyntaxNode root,
+            ISyntaxFactsService syntaxFacts
+        ) => syntaxFacts.ContainsGlobalStatement(root);
 
-        private CodeAction GetCodeAction(State state, string fileName, MoveTypeOperationKind operationKind)
-            => new MoveTypeCodeAction((TService)this, state, operationKind, fileName);
+        private CodeAction GetCodeAction(
+            State state,
+            string fileName,
+            MoveTypeOperationKind operationKind
+        ) => new MoveTypeCodeAction((TService)this, state, operationKind, fileName);
 
-        private static bool IsNestedType(TTypeDeclarationSyntax typeNode)
-            => typeNode.Parent is TTypeDeclarationSyntax;
+        private static bool IsNestedType(TTypeDeclarationSyntax typeNode) =>
+            typeNode.Parent is TTypeDeclarationSyntax;
 
         /// <summary>
         /// checks if there is a single top level type declaration in a document
@@ -178,25 +277,36 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
         /// <remarks>
         /// optimized for perf, uses Skip(1).Any() instead of Count() > 1
         /// </remarks>
-        private static bool MultipleTopLevelTypeDeclarationInSourceDocument(SyntaxNode root)
-            => TopLevelTypeDeclarations(root).Skip(1).Any();
+        private static bool MultipleTopLevelTypeDeclarationInSourceDocument(SyntaxNode root) =>
+            TopLevelTypeDeclarations(root).Skip(1).Any();
 
-        private static IEnumerable<TTypeDeclarationSyntax> TopLevelTypeDeclarations(SyntaxNode root)
-            => root.DescendantNodes(n => n is TCompilationUnitSyntax or TNamespaceDeclarationSyntax)
+        private static IEnumerable<TTypeDeclarationSyntax> TopLevelTypeDeclarations(
+            SyntaxNode root
+        ) =>
+            root.DescendantNodes(n => n is TCompilationUnitSyntax or TNamespaceDeclarationSyntax)
                 .OfType<TTypeDeclarationSyntax>();
 
-        private static bool AnyTopLevelTypeMatchesDocumentName(State state, CancellationToken cancellationToken)
+        private static bool AnyTopLevelTypeMatchesDocumentName(
+            State state,
+            CancellationToken cancellationToken
+        )
         {
             var root = state.SemanticDocument.Root;
             var semanticModel = state.SemanticDocument.SemanticModel;
 
-            return TopLevelTypeDeclarations(root).Any(
-                typeDeclaration =>
+            return TopLevelTypeDeclarations(root)
+                .Any(typeDeclaration =>
                 {
-                    var typeName = semanticModel.GetDeclaredSymbol(typeDeclaration, cancellationToken).Name;
+                    var typeName = semanticModel
+                        .GetDeclaredSymbol(typeDeclaration, cancellationToken)
+                        .Name;
                     return TypeMatchesDocumentName(
-                        typeDeclaration, typeName, state.DocumentNameWithoutExtension,
-                        semanticModel, cancellationToken);
+                        typeDeclaration,
+                        typeName,
+                        state.DocumentNameWithoutExtension,
+                        semanticModel,
+                        cancellationToken
+                    );
                 });
         }
 
@@ -212,14 +322,22 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             string typeName,
             string documentNameWithoutExtension,
             SemanticModel semanticModel,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // If it is not a nested type, we compare the unqualified type name with the document name.
             // If it is a nested type, the type name `Outer.Inner` matches file names `Inner.cs` and `Outer.Inner.cs`
-            var namesMatch = typeName.Equals(documentNameWithoutExtension, StringComparison.CurrentCulture);
+            var namesMatch = typeName.Equals(
+                documentNameWithoutExtension,
+                StringComparison.CurrentCulture
+            );
             if (!namesMatch)
             {
-                var typeNameParts = GetTypeNamePartsForNestedTypeNode(typeNode, semanticModel, cancellationToken);
+                var typeNameParts = GetTypeNamePartsForNestedTypeNode(
+                    typeNode,
+                    semanticModel,
+                    cancellationToken
+                );
                 var fileNameParts = documentNameWithoutExtension.Split('.');
 
                 // qualified type name `Outer.Inner` matches file names `Inner.cs` and `Outer.Inner.cs`
@@ -235,7 +353,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             string typeName,
             string documentNameWithExtension,
             SemanticModel semanticModel,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var fileExtension = Path.GetExtension(documentNameWithExtension);
 
@@ -244,7 +363,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             // If it is a nested type, we should match type hierarchy's name parts with the file name.
             if (isNestedType)
             {
-                var typeNameParts = GetTypeNamePartsForNestedTypeNode(typeNode, semanticModel, cancellationToken);
+                var typeNameParts = GetTypeNamePartsForNestedTypeNode(
+                    typeNode,
+                    semanticModel,
+                    cancellationToken
+                );
                 var dottedName = typeNameParts.Join(".") + fileExtension;
 
                 return ImmutableArray.Create(standaloneName, dottedName);
@@ -256,10 +379,14 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
         }
 
         private static IEnumerable<string> GetTypeNamePartsForNestedTypeNode(
-            TTypeDeclarationSyntax typeNode, SemanticModel semanticModel, CancellationToken cancellationToken)
-                => typeNode.AncestorsAndSelf()
-                        .OfType<TTypeDeclarationSyntax>()
-                        .Select(n => semanticModel.GetDeclaredSymbol(n, cancellationToken).Name)
-                        .Reverse();
+            TTypeDeclarationSyntax typeNode,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        ) =>
+            typeNode
+                .AncestorsAndSelf()
+                .OfType<TTypeDeclarationSyntax>()
+                .Select(n => semanticModel.GetDeclaredSymbol(n, cancellationToken).Name)
+                .Reverse();
     }
 }

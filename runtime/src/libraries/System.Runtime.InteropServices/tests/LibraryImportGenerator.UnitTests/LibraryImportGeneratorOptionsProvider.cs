@@ -16,16 +16,24 @@ namespace LibraryImportGenerator.UnitTests
     /// </summary>
     internal sealed class LibraryImportGeneratorOptionsProvider : GlobalOptionsOnlyProvider
     {
-        public LibraryImportGeneratorOptionsProvider(TestTargetFramework targetFramework, bool useMarshalType, bool generateForwarders)
-            :base(new GlobalGeneratorOptions(targetFramework, useMarshalType, generateForwarders))
-        {
-        }
+        public LibraryImportGeneratorOptionsProvider(
+            TestTargetFramework targetFramework,
+            bool useMarshalType,
+            bool generateForwarders
+        )
+            : base(new GlobalGeneratorOptions(targetFramework, useMarshalType, generateForwarders))
+        { }
 
         private sealed class GlobalGeneratorOptions : TargetFrameworkConfigOptions
         {
             private readonly bool _useMarshalType = false;
             private readonly bool _generateForwarders = false;
-            public GlobalGeneratorOptions(TestTargetFramework targetFramework, bool useMarshalType, bool generateForwarders)
+
+            public GlobalGeneratorOptions(
+                TestTargetFramework targetFramework,
+                bool useMarshalType,
+                bool generateForwarders
+            )
                 : base(targetFramework)
             {
                 _useMarshalType = useMarshalType;

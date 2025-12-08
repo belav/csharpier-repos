@@ -27,7 +27,8 @@ public class ConflictingValueGenerationStrategiesEventData : EventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         SqlServerValueGenerationStrategy sqlServerValueGenerationStrategy,
         string otherValueGenerationStrategy,
-        IReadOnlyProperty property)
+        IReadOnlyProperty property
+    )
         : base(eventDefinition, messageGenerator)
     {
         SqlServerValueGenerationStrategy = sqlServerValueGenerationStrategy;

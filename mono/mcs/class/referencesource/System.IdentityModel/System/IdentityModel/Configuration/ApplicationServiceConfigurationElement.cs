@@ -6,8 +6,6 @@ namespace System.IdentityModel.Configuration
 {
     internal class ApplicationServiceConfigurationElement : ConfigurationElementInterceptor
     {
-        public ApplicationServiceConfigurationElement()
-        {
-        }
+        public ApplicationServiceConfigurationElement() { }
     }
 }

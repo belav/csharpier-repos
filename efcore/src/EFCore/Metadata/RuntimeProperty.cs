@@ -64,7 +64,8 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
         ValueComparer? providerValueComparer,
         JsonValueReaderWriter? jsonValueReaderWriter,
         CoreTypeMapping? typeMapping,
-        object? sentinel)
+        object? sentinel
+    )
         : base(name, propertyInfo, fieldInfo, propertyAccessMode)
     {
         DeclaringType = declaringType;
@@ -114,8 +115,8 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
     ///     Sets the <see cref="Sentinel"/> value, converting from the provider type if needed.
     /// </summary>
     /// <param name="providerValue">The value, as a provider value if a value converter is being used.</param>
-    public virtual void SetSentinelFromProviderValue(object? providerValue)
-        => _sentinel = _typeMapping?.Converter?.ConvertFromProvider(providerValue) ?? providerValue;
+    public virtual void SetSentinelFromProviderValue(object? providerValue) =>
+        _sentinel = _typeMapping?.Converter?.ConvertFromProvider(providerValue) ?? providerValue;
 
     /// <summary>
     ///     Sets the element type for this property.
@@ -147,7 +148,8 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
         ValueComparer? valueComparer = null,
         JsonValueReaderWriter? jsonValueReaderWriter = null,
         CoreTypeMapping? typeMapping = null,
-        bool primitiveCollection = false)
+        bool primitiveCollection = false
+    )
     {
         var elementType = new RuntimeElementType(
             clrType,
@@ -161,7 +163,8 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
             valueConverter,
             valueComparer,
             jsonValueReaderWriter,
-            typeMapping);
+            typeMapping
+        );
 
         SetAnnotation(CoreAnnotationNames.ElementType, elementType);
 
@@ -197,8 +200,7 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
     [EntityFrameworkInternal]
     public virtual List<RuntimeKey>? Keys { get; set; }
 
-    private IEnumerable<RuntimeKey> GetContainingKeys()
-        => Keys ?? Enumerable.Empty<RuntimeKey>();
+    private IEnumerable<RuntimeKey> GetContainingKeys() => Keys ?? Enumerable.Empty<RuntimeKey>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -209,8 +211,8 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
     [EntityFrameworkInternal]
     public virtual List<RuntimeForeignKey>? ForeignKeys { get; set; }
 
-    private IEnumerable<RuntimeForeignKey> GetContainingForeignKeys()
-        => ForeignKeys ?? Enumerable.Empty<RuntimeForeignKey>();
+    private IEnumerable<RuntimeForeignKey> GetContainingForeignKeys() =>
+        ForeignKeys ?? Enumerable.Empty<RuntimeForeignKey>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -221,8 +223,8 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
     [EntityFrameworkInternal]
     public virtual List<RuntimeIndex>? Indexes { get; set; }
 
-    private IEnumerable<RuntimeIndex> GetContainingIndexes()
-        => Indexes ?? Enumerable.Empty<RuntimeIndex>();
+    private IEnumerable<RuntimeIndex> GetContainingIndexes() =>
+        Indexes ?? Enumerable.Empty<RuntimeIndex>();
 
     /// <summary>
     ///     Gets or sets the type mapping for this property.
@@ -230,29 +232,34 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
     /// <returns>The type mapping.</returns>
     public virtual CoreTypeMapping TypeMapping
     {
-        get => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _typeMapping, (IProperty)this,
-            static property =>
-                RuntimeFeature.IsDynamicCodeSupported
-                    ? property.DeclaringType.Model.GetModelDependencies().TypeMappingSource.FindMapping(property)!
-                    : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel));
+        get =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _typeMapping,
+                (IProperty)this,
+                static property =>
+                    RuntimeFeature.IsDynamicCodeSupported
+                        ? property
+                            .DeclaringType.Model.GetModelDependencies()
+                            .TypeMappingSource.FindMapping(property)!
+                        : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel)
+            );
         set => _typeMapping = value;
     }
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IComparer<IUpdateEntry> IProperty.GetCurrentValueComparer()
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _currentValueComparer, this, static property =>
-                new CurrentValueComparerFactory().Create(property));
+    IComparer<IUpdateEntry> IProperty.GetCurrentValueComparer() =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _currentValueComparer,
+            this,
+            static property => new CurrentValueComparerFactory().Create(property)
+        );
 
-    private ValueComparer GetValueComparer()
-        => (GetValueComparer(null) ?? TypeMapping.Comparer)
-            .ToNullableComparer(ClrType)!;
+    private ValueComparer GetValueComparer() =>
+        (GetValueComparer(null) ?? TypeMapping.Comparer).ToNullableComparer(ClrType)!;
 
-    private ValueComparer GetKeyValueComparer()
-        => (GetKeyValueComparer(null) ?? TypeMapping.KeyComparer)
-            .ToNullableComparer(ClrType)!;
+    private ValueComparer GetKeyValueComparer() =>
+        (GetKeyValueComparer(null) ?? TypeMapping.KeyComparer).ToNullableComparer(ClrType)!;
 
     private ValueComparer? GetValueComparer(HashSet<IReadOnlyProperty>? checkedProperties)
     {
@@ -307,22 +314,20 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
     }
 
     /// <inheritdoc />
-    public override object? Sentinel
-        => _sentinel;
+    public override object? Sentinel => _sentinel;
 
     /// <summary>
     ///     Gets the <see cref="JsonValueReaderWriter" /> for this property, or <see langword="null" /> if none is set.
     /// </summary>
     /// <returns>The reader/writer, or <see langword="null" /> if none has been set.</returns>
-    public virtual JsonValueReaderWriter? GetJsonValueReaderWriter()
-        => _jsonValueReaderWriter;
+    public virtual JsonValueReaderWriter? GetJsonValueReaderWriter() => _jsonValueReaderWriter;
 
     /// <summary>
     ///     Gets the configuration for elements of the primitive collection represented by this property.
     /// </summary>
     /// <returns>The configuration for the elements.</returns>
-    public virtual IElementType? GetElementType()
-        => (IElementType?)this[CoreAnnotationNames.ElementType];
+    public virtual IElementType? GetElementType() =>
+        (IElementType?)this[CoreAnnotationNames.ElementType];
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -338,10 +343,11 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IReadOnlyProperty)this).ToDebugString(),
-            () => ((IReadOnlyProperty)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((IReadOnlyProperty)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -349,12 +355,11 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IReadOnlyProperty)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IReadOnlyProperty)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <inheritdoc />
-    IReadOnlyElementType? IReadOnlyProperty.GetElementType()
-        => GetElementType();
+    IReadOnlyElementType? IReadOnlyProperty.GetElementType() => GetElementType();
 
     /// <inheritdoc />
     bool IReadOnlyProperty.IsNullable
@@ -379,139 +384,130 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    int? IReadOnlyProperty.GetMaxLength()
-        => (int?)this[CoreAnnotationNames.MaxLength];
+    int? IReadOnlyProperty.GetMaxLength() => (int?)this[CoreAnnotationNames.MaxLength];
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool? IReadOnlyProperty.IsUnicode()
-        => (bool?)this[CoreAnnotationNames.Unicode];
+    bool? IReadOnlyProperty.IsUnicode() => (bool?)this[CoreAnnotationNames.Unicode];
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    int? IReadOnlyProperty.GetPrecision()
-        => (int?)this[CoreAnnotationNames.Precision];
+    int? IReadOnlyProperty.GetPrecision() => (int?)this[CoreAnnotationNames.Precision];
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    int? IReadOnlyProperty.GetScale()
-        => (int?)this[CoreAnnotationNames.Scale];
+    int? IReadOnlyProperty.GetScale() => (int?)this[CoreAnnotationNames.Scale];
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    PropertySaveBehavior IReadOnlyProperty.GetBeforeSaveBehavior()
-        => _beforeSaveBehavior;
+    PropertySaveBehavior IReadOnlyProperty.GetBeforeSaveBehavior() => _beforeSaveBehavior;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    PropertySaveBehavior IReadOnlyProperty.GetAfterSaveBehavior()
-        => _afterSaveBehavior;
+    PropertySaveBehavior IReadOnlyProperty.GetAfterSaveBehavior() => _afterSaveBehavior;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    Func<IProperty, ITypeBase, ValueGenerator>? IReadOnlyProperty.GetValueGeneratorFactory()
-        => _valueGeneratorFactory;
+    Func<IProperty, ITypeBase, ValueGenerator>? IReadOnlyProperty.GetValueGeneratorFactory() =>
+        _valueGeneratorFactory;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    ValueConverter? IReadOnlyProperty.GetValueConverter()
-        => _valueConverter;
+    ValueConverter? IReadOnlyProperty.GetValueConverter() => _valueConverter;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    Type? IReadOnlyProperty.GetProviderClrType()
-        => (Type?)this[CoreAnnotationNames.ProviderClrType];
+    Type? IReadOnlyProperty.GetProviderClrType() =>
+        (Type?)this[CoreAnnotationNames.ProviderClrType];
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    CoreTypeMapping? IReadOnlyProperty.FindTypeMapping()
-        => TypeMapping;
+    CoreTypeMapping? IReadOnlyProperty.FindTypeMapping() => TypeMapping;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    ValueComparer? IReadOnlyProperty.GetValueComparer()
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _valueComparer, this,
-            static property => property.GetValueComparer());
+    ValueComparer? IReadOnlyProperty.GetValueComparer() =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _valueComparer,
+            this,
+            static property => property.GetValueComparer()
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    ValueComparer IProperty.GetValueComparer()
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _valueComparer, this,
-            static property => property.GetValueComparer());
+    ValueComparer IProperty.GetValueComparer() =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _valueComparer,
+            this,
+            static property => property.GetValueComparer()
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    ValueComparer? IReadOnlyProperty.GetKeyValueComparer()
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _keyValueComparer, this,
-            static property => property.GetKeyValueComparer());
+    ValueComparer? IReadOnlyProperty.GetKeyValueComparer() =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _keyValueComparer,
+            this,
+            static property => property.GetKeyValueComparer()
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    ValueComparer IProperty.GetKeyValueComparer()
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _keyValueComparer, this,
-            static property => property.GetKeyValueComparer());
+    ValueComparer IProperty.GetKeyValueComparer() =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _keyValueComparer,
+            this,
+            static property => property.GetKeyValueComparer()
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    ValueComparer? IReadOnlyProperty.GetProviderValueComparer()
-        => _providerValueComparer ??= TypeMapping.ProviderValueComparer;
+    ValueComparer? IReadOnlyProperty.GetProviderValueComparer() =>
+        _providerValueComparer ??= TypeMapping.ProviderValueComparer;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    ValueComparer IProperty.GetProviderValueComparer()
-        => _providerValueComparer ??= TypeMapping.ProviderValueComparer;
+    ValueComparer IProperty.GetProviderValueComparer() =>
+        _providerValueComparer ??= TypeMapping.ProviderValueComparer;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool IReadOnlyProperty.IsForeignKey()
-        => ForeignKeys != null;
+    bool IReadOnlyProperty.IsForeignKey() => ForeignKeys != null;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyForeignKey> IReadOnlyProperty.GetContainingForeignKeys()
-        => GetContainingForeignKeys();
+    IEnumerable<IReadOnlyForeignKey> IReadOnlyProperty.GetContainingForeignKeys() =>
+        GetContainingForeignKeys();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IForeignKey> IProperty.GetContainingForeignKeys()
-        => GetContainingForeignKeys();
+    IEnumerable<IForeignKey> IProperty.GetContainingForeignKeys() => GetContainingForeignKeys();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool IReadOnlyProperty.IsIndex()
-        => Indexes != null;
+    bool IReadOnlyProperty.IsIndex() => Indexes != null;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyIndex> IReadOnlyProperty.GetContainingIndexes()
-        => GetContainingIndexes();
+    IEnumerable<IReadOnlyIndex> IReadOnlyProperty.GetContainingIndexes() => GetContainingIndexes();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IIndex> IProperty.GetContainingIndexes()
-        => GetContainingIndexes();
+    IEnumerable<IIndex> IProperty.GetContainingIndexes() => GetContainingIndexes();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool IReadOnlyProperty.IsKey()
-        => Keys != null;
+    bool IReadOnlyProperty.IsKey() => Keys != null;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyKey> IReadOnlyProperty.GetContainingKeys()
-        => GetContainingKeys();
+    IEnumerable<IReadOnlyKey> IReadOnlyProperty.GetContainingKeys() => GetContainingKeys();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IKey> IProperty.GetContainingKeys()
-        => GetContainingKeys();
+    IEnumerable<IKey> IProperty.GetContainingKeys() => GetContainingKeys();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IReadOnlyKey? IReadOnlyProperty.FindContainingPrimaryKey()
-        => PrimaryKey;
+    IReadOnlyKey? IReadOnlyProperty.FindContainingPrimaryKey() => PrimaryKey;
 }

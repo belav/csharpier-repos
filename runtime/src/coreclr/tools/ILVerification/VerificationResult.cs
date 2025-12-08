@@ -22,7 +22,7 @@ namespace ILVerify
             return argumentValue;
         }
 
-        public bool TryGetArgumentValue<T>(string name,out T argumentValue)
+        public bool TryGetArgumentValue<T>(string name, out T argumentValue)
         {
             argumentValue = default;
 

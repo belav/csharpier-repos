@@ -38,7 +38,6 @@ namespace Roslyn.Utilities
             return StartNewCore();
         }
 
-        private static SharedStopwatch StartNewCore()
-            => new SharedStopwatch(s_stopwatch.Elapsed);
+        private static SharedStopwatch StartNewCore() => new SharedStopwatch(s_stopwatch.Elapsed);
     }
 }

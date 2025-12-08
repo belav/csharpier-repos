@@ -12,14 +12,13 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class MtomMessageEncodingElement : BindingElementExtensionElement
     {
-        public MtomMessageEncodingElement() 
-        {
-        }
+        public MtomMessageEncodingElement() { }
 
         public override void ApplyConfiguration(BindingElement bindingElement)
         {
             base.ApplyConfiguration(bindingElement);
-            MtomMessageEncodingBindingElement binding = (MtomMessageEncodingBindingElement)bindingElement;
+            MtomMessageEncodingBindingElement binding =
+                (MtomMessageEncodingBindingElement)bindingElement;
             binding.MessageVersion = this.MessageVersion;
             binding.WriteEncoding = this.WriteEncoding;
             binding.MaxReadPoolSize = this.MaxReadPoolSize;
@@ -57,16 +56,35 @@ namespace System.ServiceModel.Configuration
         protected internal override void InitializeFrom(BindingElement bindingElement)
         {
             base.InitializeFrom(bindingElement);
-            MtomMessageEncodingBindingElement binding = (MtomMessageEncodingBindingElement)bindingElement;
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MessageVersion, binding.MessageVersion);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.WriteEncoding, binding.WriteEncoding);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxReadPoolSize, binding.MaxReadPoolSize);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxWritePoolSize, binding.MaxWritePoolSize);
+            MtomMessageEncodingBindingElement binding =
+                (MtomMessageEncodingBindingElement)bindingElement;
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MessageVersion,
+                binding.MessageVersion
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.WriteEncoding,
+                binding.WriteEncoding
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxReadPoolSize,
+                binding.MaxReadPoolSize
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxWritePoolSize,
+                binding.MaxWritePoolSize
+            );
             this.ReaderQuotas.InitializeFrom(binding.ReaderQuotas);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxBufferSize, binding.MaxBufferSize);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxBufferSize,
+                binding.MaxBufferSize
+            );
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxReadPoolSize, DefaultValue = EncoderDefaults.MaxReadPoolSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxReadPoolSize,
+            DefaultValue = EncoderDefaults.MaxReadPoolSize
+        )]
         [IntegerValidator(MinValue = 1)]
         public int MaxReadPoolSize
         {
@@ -74,7 +92,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxReadPoolSize] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxWritePoolSize, DefaultValue = EncoderDefaults.MaxWritePoolSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxWritePoolSize,
+            DefaultValue = EncoderDefaults.MaxWritePoolSize
+        )]
         [IntegerValidator(MinValue = 1)]
         public int MaxWritePoolSize
         {
@@ -82,7 +103,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxWritePoolSize] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MessageVersion, DefaultValue = TextEncoderDefaults.MessageVersionString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MessageVersion,
+            DefaultValue = TextEncoderDefaults.MessageVersionString
+        )]
         [TypeConverter(typeof(MessageVersionConverter))]
         public MessageVersion MessageVersion
         {
@@ -93,10 +117,16 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.ReaderQuotas)]
         public XmlDictionaryReaderQuotasElement ReaderQuotas
         {
-            get { return (XmlDictionaryReaderQuotasElement) base[ConfigurationStrings.ReaderQuotas]; }
+            get
+            {
+                return (XmlDictionaryReaderQuotasElement)base[ConfigurationStrings.ReaderQuotas];
+            }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxBufferSize, DefaultValue = MtomEncoderDefaults.MaxBufferSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxBufferSize,
+            DefaultValue = MtomEncoderDefaults.MaxBufferSize
+        )]
         [IntegerValidator(MinValue = 1)]
         public int MaxBufferSize
         {
@@ -104,7 +134,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxBufferSize] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.WriteEncoding, DefaultValue = TextEncoderDefaults.EncodingString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.WriteEncoding,
+            DefaultValue = TextEncoderDefaults.EncodingString
+        )]
         [TypeConverter(typeof(EncodingConverter))]
         public Encoding WriteEncoding
         {

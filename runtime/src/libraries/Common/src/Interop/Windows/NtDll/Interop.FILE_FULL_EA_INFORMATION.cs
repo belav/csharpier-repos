@@ -34,7 +34,6 @@ internal static partial class Interop
             /// The length in bytes of each EA value in the array.
             /// </summary>
             internal ushort EaValueLength;
-
         }
     }
 }

@@ -29,11 +29,18 @@ namespace System.Web.Http.Results
         /// <param name="contentNegotiator">The content negotiator to handle content negotiation.</param>
         /// <param name="request">The request message which led to this result.</param>
         /// <param name="formatters">The formatters to use to negotiate and format the content.</param>
-        public NegotiatedContentResult(HttpStatusCode statusCode, T content, IContentNegotiator contentNegotiator,
-            HttpRequestMessage request, IEnumerable<MediaTypeFormatter> formatters)
-            : this(statusCode, content, new DirectDependencyProvider(contentNegotiator, request, formatters))
-        {
-        }
+        public NegotiatedContentResult(
+            HttpStatusCode statusCode,
+            T content,
+            IContentNegotiator contentNegotiator,
+            HttpRequestMessage request,
+            IEnumerable<MediaTypeFormatter> formatters
+        )
+            : this(
+                statusCode,
+                content,
+                new DirectDependencyProvider(contentNegotiator, request, formatters)
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NegotiatedContentResult{T}"/> class with the values provided.
@@ -41,12 +48,18 @@ namespace System.Web.Http.Results
         /// <param name="statusCode">The HTTP status code for the response message.</param>
         /// <param name="content">The content value to negotiate and format in the entity body.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
-        public NegotiatedContentResult(HttpStatusCode statusCode, T content, ApiController controller)
-            : this(statusCode, content, new ApiControllerDependencyProvider(controller))
-        {
-        }
+        public NegotiatedContentResult(
+            HttpStatusCode statusCode,
+            T content,
+            ApiController controller
+        )
+            : this(statusCode, content, new ApiControllerDependencyProvider(controller)) { }
 
-        private NegotiatedContentResult(HttpStatusCode statusCode, T content, IDependencyProvider dependencies)
+        private NegotiatedContentResult(
+            HttpStatusCode statusCode,
+            T content,
+            IDependencyProvider dependencies
+        )
         {
             Contract.Assert(dependencies != null);
 
@@ -93,20 +106,33 @@ namespace System.Web.Http.Results
 
         private HttpResponseMessage Execute()
         {
-            return Execute(_statusCode, _content, _dependencies.ContentNegotiator, _dependencies.Request,
-                _dependencies.Formatters);
+            return Execute(
+                _statusCode,
+                _content,
+                _dependencies.ContentNegotiator,
+                _dependencies.Request,
+                _dependencies.Formatters
+            );
         }
 
-        internal static HttpResponseMessage Execute(HttpStatusCode statusCode, T content,
-            IContentNegotiator contentNegotiator, HttpRequestMessage request,
-            IEnumerable<MediaTypeFormatter> formatters)
+        internal static HttpResponseMessage Execute(
+            HttpStatusCode statusCode,
+            T content,
+            IContentNegotiator contentNegotiator,
+            HttpRequestMessage request,
+            IEnumerable<MediaTypeFormatter> formatters
+        )
         {
             Contract.Assert(contentNegotiator != null);
             Contract.Assert(request != null);
             Contract.Assert(formatters != null);
 
             // Run content negotiation.
-            ContentNegotiationResult result = contentNegotiator.Negotiate(typeof(T), request, formatters);
+            ContentNegotiationResult result = contentNegotiator.Negotiate(
+                typeof(T),
+                request,
+                formatters
+            );
 
             HttpResponseMessage response = new HttpResponseMessage();
 
@@ -123,7 +149,11 @@ namespace System.Web.Http.Results
                     Contract.Assert(result.Formatter != null);
                     // At this point mediaType should be a cloned value. (The content negotiator is responsible for
                     // returning a new copy.)
-                    response.Content = new ObjectContent<T>(content, result.Formatter, result.MediaType);
+                    response.Content = new ObjectContent<T>(
+                        content,
+                        result.Formatter,
+                        result.MediaType
+                    );
                 }
 
                 response.RequestMessage = request;
@@ -158,8 +188,11 @@ namespace System.Web.Http.Results
             private readonly HttpRequestMessage _request;
             private readonly IEnumerable<MediaTypeFormatter> _formatters;
 
-            public DirectDependencyProvider(IContentNegotiator contentNegotiator, HttpRequestMessage request,
-                IEnumerable<MediaTypeFormatter> formatters)
+            public DirectDependencyProvider(
+                IContentNegotiator contentNegotiator,
+                HttpRequestMessage request,
+                IEnumerable<MediaTypeFormatter> formatters
+            )
             {
                 if (contentNegotiator == null)
                 {
@@ -249,7 +282,8 @@ namespace System.Web.Http.Results
                     if (configuration == null)
                     {
                         throw new InvalidOperationException(
-                            SRResources.HttpControllerContext_ConfigurationMustNotBeNull);
+                            SRResources.HttpControllerContext_ConfigurationMustNotBeNull
+                        );
                     }
 
                     ServicesContainer services = configuration.Services;
@@ -258,21 +292,31 @@ namespace System.Web.Http.Results
 
                     if (contentNegotiator == null)
                     {
-                        throw new InvalidOperationException(Error.Format(
-                            SRResources.HttpRequestMessageExtensions_NoContentNegotiator, typeof(IContentNegotiator)));
+                        throw new InvalidOperationException(
+                            Error.Format(
+                                SRResources.HttpRequestMessageExtensions_NoContentNegotiator,
+                                typeof(IContentNegotiator)
+                            )
+                        );
                     }
 
                     HttpRequestMessage request = _controller.Request;
 
                     if (request == null)
                     {
-                        throw new InvalidOperationException(SRResources.ApiController_RequestMustNotBeNull);
+                        throw new InvalidOperationException(
+                            SRResources.ApiController_RequestMustNotBeNull
+                        );
                     }
 
                     IEnumerable<MediaTypeFormatter> formatters = configuration.Formatters;
                     Contract.Assert(formatters != null);
 
-                    _resolvedDependencies = new DirectDependencyProvider(contentNegotiator, request, formatters);
+                    _resolvedDependencies = new DirectDependencyProvider(
+                        contentNegotiator,
+                        request,
+                        formatters
+                    );
                 }
             }
         }

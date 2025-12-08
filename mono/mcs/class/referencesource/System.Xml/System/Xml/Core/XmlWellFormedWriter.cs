@@ -6,20 +6,21 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Xml;
-using System.Diagnostics;
-using System.Collections;
-using System.Globalization;
-using System.Collections.Generic;
 
 // OpenIssue : is it better to cache the current namespace decls for each elem
 //  as the current code does, or should it just always walk the namespace stack?
 
-namespace System.Xml {
-
-    internal partial class XmlWellFormedWriter : XmlWriter {
+namespace System.Xml
+{
+    internal partial class XmlWellFormedWriter : XmlWriter
+    {
         //
         // Private types used by the XmlWellFormedWriter are defined in XmlWellFormedWriterHelpers.cs
         //
@@ -29,7 +30,7 @@ namespace System.Xml {
         //
         // underlying writer
         XmlWriter writer;
-        XmlRawWriter rawWriter;  // writer as XmlRawWriter
+        XmlRawWriter rawWriter; // writer as XmlRawWriter
         IXmlNamespaceResolver predefinedNamespaces; // writer as IXmlNamespaceResolver
 
         // namespace management
@@ -74,7 +75,6 @@ namespace System.Xml {
         // hash randomizer
         SecureStringHasher hasher;
 
-
         //
         // Constants
         //
@@ -92,7 +92,8 @@ namespace System.Xml {
         //
         // State tables
         //
-        enum State {
+        enum State
+        {
             Start = 0,
             TopLevel = 1,
             Document = 2,
@@ -129,7 +130,8 @@ namespace System.Xml {
             StartRootLevelAttr = 118,
         }
 
-        enum Token {
+        enum Token
+        {
             StartDocument,
             EndDocument,
             PI,
@@ -147,106 +149,562 @@ namespace System.Xml {
             Whitespace,
         }
 
-        internal static readonly string[] stateName = {
-            "Start",                     // State.Start                             
-            "TopLevel",                  // State.TopLevel       
-            "Document",                  // State.Document       
-            "Element Start Tag",         // State.Element        
-            "Element Content",           // State.Content        
-            "Element Content",           // State.B64Content        
-            "Attribute",                 // State.B64Attribute   
-            "EndRootElement",            // State.AfterRootEle   
-            "Attribute",                 // State.Attribute      
-            "Special Attribute",         // State.SpecialAttr
-            "End Document",              // State.EndDocument
-            "Root Level Attribute Value",           // State.RootLevelAttr
-            "Root Level Special Attribute Value",   // State.RootLevelSpecAttr
-            "Root Level Base64 Attribute Value",    // State.RootLevelB64Attr
-            "After Root Level Attribute",           // State.AfterRootLevelAttr
-            "Closed",                    // State.Closed
-            "Error",                     // State.Error
+        internal static readonly string[] stateName =
+        {
+            "Start", // State.Start
+            "TopLevel", // State.TopLevel
+            "Document", // State.Document
+            "Element Start Tag", // State.Element
+            "Element Content", // State.Content
+            "Element Content", // State.B64Content
+            "Attribute", // State.B64Attribute
+            "EndRootElement", // State.AfterRootEle
+            "Attribute", // State.Attribute
+            "Special Attribute", // State.SpecialAttr
+            "End Document", // State.EndDocument
+            "Root Level Attribute Value", // State.RootLevelAttr
+            "Root Level Special Attribute Value", // State.RootLevelSpecAttr
+            "Root Level Base64 Attribute Value", // State.RootLevelB64Attr
+            "After Root Level Attribute", // State.AfterRootLevelAttr
+            "Closed", // State.Closed
+            "Error", // State.Error
         };
 
-        internal static readonly string[] tokenName = {
-            "StartDocument",            // Token.StartDocument
-            "EndDocument",              // Token.EndDocument
-            "PI",                       // Token.PI
-            "Comment",                  // Token.Comment
-            "DTD",                      // Token.Dtd
-            "StartElement",             // Token.StartElement
-            "EndElement",               // Token.EndElement
-            "StartAttribute",           // Token.StartAttribut
-            "EndAttribute",             // Token.EndAttribute
-            "Text",                     // Token.Text
-            "CDATA",                    // Token.CData
-            "Atomic value",             // Token.AtomicValue
-            "Base64",                   // Token.Base64
-            "RawData",                  // Token.RawData
-            "Whitespace",               // Token.Whitespace
+        internal static readonly string[] tokenName =
+        {
+            "StartDocument", // Token.StartDocument
+            "EndDocument", // Token.EndDocument
+            "PI", // Token.PI
+            "Comment", // Token.Comment
+            "DTD", // Token.Dtd
+            "StartElement", // Token.StartElement
+            "EndElement", // Token.EndElement
+            "StartAttribute", // Token.StartAttribut
+            "EndAttribute", // Token.EndAttribute
+            "Text", // Token.Text
+            "CDATA", // Token.CData
+            "Atomic value", // Token.AtomicValue
+            "Base64", // Token.Base64
+            "RawData", // Token.RawData
+            "Whitespace", // Token.Whitespace
         };
 
-        private static WriteState[] state2WriteState = {    
-            WriteState.Start,       // State.Start       
-            WriteState.Prolog,      // State.TopLevel       
-            WriteState.Prolog,      // State.Document       
-            WriteState.Element,     // State.Element        
-            WriteState.Content,     // State.Content        
-            WriteState.Content,     // State.B64Content        
-            WriteState.Attribute,   // State.B64Attribute   
-            WriteState.Content,     // State.AfterRootEle   
-            WriteState.Attribute,   // State.Attribute      
-            WriteState.Attribute,   // State.SpecialAttr
-            WriteState.Content,     // State.EndDocument
-            WriteState.Attribute,   // State.RootLevelAttr
-            WriteState.Attribute,   // State.RootLevelSpecAttr
-            WriteState.Attribute,   // State.RootLevelB64Attr
-            WriteState.Attribute,   // State.AfterRootLevelAttr
-            WriteState.Closed,      // State.Closed
-            WriteState.Error,       // State.Error
+        private static WriteState[] state2WriteState =
+        {
+            WriteState.Start, // State.Start
+            WriteState.Prolog, // State.TopLevel
+            WriteState.Prolog, // State.Document
+            WriteState.Element, // State.Element
+            WriteState.Content, // State.Content
+            WriteState.Content, // State.B64Content
+            WriteState.Attribute, // State.B64Attribute
+            WriteState.Content, // State.AfterRootEle
+            WriteState.Attribute, // State.Attribute
+            WriteState.Attribute, // State.SpecialAttr
+            WriteState.Content, // State.EndDocument
+            WriteState.Attribute, // State.RootLevelAttr
+            WriteState.Attribute, // State.RootLevelSpecAttr
+            WriteState.Attribute, // State.RootLevelB64Attr
+            WriteState.Attribute, // State.AfterRootLevelAttr
+            WriteState.Closed, // State.Closed
+            WriteState.Error, // State.Error
         };
 
-        private static readonly State[] StateTableDocument = {
-    //                         State.Start           State.TopLevel   State.Document     State.Element          State.Content     State.B64Content      State.B64Attribute   State.AfterRootEle    State.Attribute,      State.SpecialAttr,   State.EndDocument,  State.RootLevelAttr,      State.RootLevelSpecAttr,  State.RootLevelB64Attr   State.AfterRootLevelAttr, // 16
-    /* Token.StartDocument  */ State.Document,       State.Error,     State.Error,       State.Error,           State.Error,      State.PostB64Cont,    State.Error,         State.Error,          State.Error,          State.Error,         State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.EndDocument    */ State.Error,          State.Error,     State.Error,       State.Error,           State.Error,      State.PostB64Cont,    State.Error,         State.EndDocument,    State.Error,          State.Error,         State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.PI             */ State.StartDoc,       State.TopLevel,  State.Document,    State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.AfterRootEle,   State.EndAttrSCont,   State.EndAttrSCont,  State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.Comment        */ State.StartDoc,       State.TopLevel,  State.Document,    State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.AfterRootEle,   State.EndAttrSCont,   State.EndAttrSCont,  State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.Dtd            */ State.StartDoc,       State.TopLevel,  State.Document,    State.Error,           State.Error,      State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.Error,          State.Error,         State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.StartElement   */ State.StartDocEle,    State.Element,   State.Element,     State.StartContentEle, State.Element,    State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.EndAttrSEle,    State.EndAttrSEle,   State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.EndElement     */ State.Error,          State.Error,     State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.EndAttrEEle,    State.EndAttrEEle,   State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.StartAttribute */ State.Error,          State.Error,     State.Error,       State.Attribute,       State.Error,      State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.EndAttrSAttr,   State.EndAttrSAttr,  State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.EndAttribute   */ State.Error,          State.Error,     State.Error,       State.Error,           State.Error,      State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.Element,        State.Element,       State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.Text           */ State.Error,          State.Error,     State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.Attribute,      State.SpecialAttr,   State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.CData          */ State.Error,          State.Error,     State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.EndAttrSCont,   State.EndAttrSCont,  State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.AtomicValue    */ State.Error,          State.Error,     State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.Attribute,      State.Error,         State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.Base64         */ State.Error,          State.Error,     State.Error,       State.StartContentB64, State.B64Content, State.B64Content,     State.B64Attribute,  State.Error,          State.B64Attribute,   State.Error,         State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.RawData        */ State.StartDoc,       State.Error,     State.Document,    State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.AfterRootEle,   State.Attribute,      State.SpecialAttr,   State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.Whitespace     */ State.StartDoc,       State.TopLevel,  State.Document,    State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.AfterRootEle,   State.Attribute,      State.SpecialAttr,   State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error
+        private static readonly State[] StateTableDocument =
+        {
+            //                         State.Start           State.TopLevel   State.Document     State.Element          State.Content     State.B64Content      State.B64Attribute   State.AfterRootEle    State.Attribute,      State.SpecialAttr,   State.EndDocument,  State.RootLevelAttr,      State.RootLevelSpecAttr,  State.RootLevelB64Attr   State.AfterRootLevelAttr, // 16
+            /* Token.StartDocument  */State.Document,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.PostB64Cont,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.EndDocument    */State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.PostB64Cont,
+            State.Error,
+            State.EndDocument,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.PI             */State.StartDoc,
+            State.TopLevel,
+            State.Document,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.AfterRootEle,
+            State.EndAttrSCont,
+            State.EndAttrSCont,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.Comment        */State.StartDoc,
+            State.TopLevel,
+            State.Document,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.AfterRootEle,
+            State.EndAttrSCont,
+            State.EndAttrSCont,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.Dtd            */State.StartDoc,
+            State.TopLevel,
+            State.Document,
+            State.Error,
+            State.Error,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.StartElement   */State.StartDocEle,
+            State.Element,
+            State.Element,
+            State.StartContentEle,
+            State.Element,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.EndAttrSEle,
+            State.EndAttrSEle,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.EndElement     */State.Error,
+            State.Error,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.EndAttrEEle,
+            State.EndAttrEEle,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.StartAttribute */State.Error,
+            State.Error,
+            State.Error,
+            State.Attribute,
+            State.Error,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.EndAttrSAttr,
+            State.EndAttrSAttr,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.EndAttribute   */State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.Element,
+            State.Element,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.Text           */State.Error,
+            State.Error,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.Attribute,
+            State.SpecialAttr,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.CData          */State.Error,
+            State.Error,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.EndAttrSCont,
+            State.EndAttrSCont,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.AtomicValue    */State.Error,
+            State.Error,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.Attribute,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.Base64         */State.Error,
+            State.Error,
+            State.Error,
+            State.StartContentB64,
+            State.B64Content,
+            State.B64Content,
+            State.B64Attribute,
+            State.Error,
+            State.B64Attribute,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.RawData        */State.StartDoc,
+            State.Error,
+            State.Document,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.AfterRootEle,
+            State.Attribute,
+            State.SpecialAttr,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.Whitespace     */State.StartDoc,
+            State.TopLevel,
+            State.Document,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.AfterRootEle,
+            State.Attribute,
+            State.SpecialAttr,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
         };
 
-        private static readonly State[] StateTableAuto = {                                                                                                                                                                                                                                                                                                                                      
-    //                         State.Start           State.TopLevel       State.Document     State.Element          State.Content     State.B64Content      State.B64Attribute   State.AfterRootEle    State.Attribute,      State.SpecialAttr,   State.EndDocument,  State.RootLevelAttr,      State.RootLevelSpecAttr,  State.RootLevelB64Attr,  State.AfterRootLevelAttr  // 16
-    /* Token.StartDocument  */ State.Document,       State.Error,         State.Error,       State.Error,           State.Error,      State.PostB64Cont,    State.Error,         State.Error,          State.Error,          State.Error,         State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error, /* Token.StartDocument  */
-    /* Token.EndDocument    */ State.Error,          State.Error,         State.Error,       State.Error,           State.Error,      State.PostB64Cont,    State.Error,         State.EndDocument,    State.Error,          State.Error,         State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error, /* Token.EndDocument    */
-    /* Token.PI             */ State.TopLevel,       State.TopLevel,      State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.AfterRootEle,   State.EndAttrSCont,   State.EndAttrSCont,  State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error, /* Token.PI             */
-    /* Token.Comment        */ State.TopLevel,       State.TopLevel,      State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.AfterRootEle,   State.EndAttrSCont,   State.EndAttrSCont,  State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error, /* Token.Comment        */
-    /* Token.Dtd            */ State.StartDoc,       State.TopLevel,      State.Error,       State.Error,           State.Error,      State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.Error,          State.Error,         State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error, /* Token.Dtd            */
-    /* Token.StartElement   */ State.StartFragEle,   State.Element,       State.Error,       State.StartContentEle, State.Element,    State.PostB64Cont,    State.PostB64Attr,   State.Element,        State.EndAttrSEle,    State.EndAttrSEle,   State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error, /* Token.StartElement   */
-    /* Token.EndElement     */ State.Error,          State.Error,         State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.EndAttrEEle,    State.EndAttrEEle,   State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error, /* Token.EndElement     */
-    /* Token.StartAttribute */ State.RootLevelAttr,  State.Error,         State.Error,       State.Attribute,       State.Error,      State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.EndAttrSAttr,   State.EndAttrSAttr,  State.Error,        State.StartRootLevelAttr, State.StartRootLevelAttr, State.PostB64RootAttr,   State.RootLevelAttr,      State.Error, /* Token.StartAttribute */
-    /* Token.EndAttribute   */ State.Error,          State.Error,         State.Error,       State.Error,           State.Error,      State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.Element,        State.Element,       State.Error,        State.AfterRootLevelAttr, State.AfterRootLevelAttr, State.PostB64RootAttr,   State.Error,              State.Error, /* Token.EndAttribute   */
-    /* Token.Text           */ State.StartFragCont,  State.StartFragCont, State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Content,        State.Attribute,      State.SpecialAttr,   State.Error,        State.RootLevelAttr,      State.RootLevelSpecAttr,  State.PostB64RootAttr,   State.Error,              State.Error, /* Token.Text           */
-    /* Token.CData          */ State.StartFragCont,  State.StartFragCont, State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Content,        State.EndAttrSCont,   State.EndAttrSCont,  State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error, /* Token.CData          */
-    /* Token.AtomicValue    */ State.StartFragCont,  State.StartFragCont, State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Content,        State.Attribute,      State.Error,         State.Error,        State.RootLevelAttr,      State.Error,              State.PostB64RootAttr,   State.Error,              State.Error, /* Token.AtomicValue    */
-    /* Token.Base64         */ State.StartFragB64,   State.StartFragB64,  State.Error,       State.StartContentB64, State.B64Content, State.B64Content,     State.B64Attribute,  State.B64Content,     State.B64Attribute,   State.Error,         State.Error,        State.RootLevelB64Attr,   State.Error,              State.RootLevelB64Attr,  State.Error,              State.Error, /* Token.Base64         */
-    /* Token.RawData        */ State.StartFragCont,  State.TopLevel,      State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Content,        State.Attribute,      State.SpecialAttr,   State.Error,        State.RootLevelAttr,      State.RootLevelSpecAttr,  State.PostB64RootAttr,   State.AfterRootLevelAttr, State.Error, /* Token.RawData        */
-    /* Token.Whitespace     */ State.TopLevel,       State.TopLevel,      State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.AfterRootEle,   State.Attribute,      State.SpecialAttr,   State.Error,        State.RootLevelAttr,      State.RootLevelSpecAttr,  State.PostB64RootAttr,   State.AfterRootLevelAttr, State.Error, /* Token.Whitespace     */
+        private static readonly State[] StateTableAuto =
+        {
+            //                         State.Start           State.TopLevel       State.Document     State.Element          State.Content     State.B64Content      State.B64Attribute   State.AfterRootEle    State.Attribute,      State.SpecialAttr,   State.EndDocument,  State.RootLevelAttr,      State.RootLevelSpecAttr,  State.RootLevelB64Attr,  State.AfterRootLevelAttr  // 16
+            /* Token.StartDocument  */State.Document,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.PostB64Cont,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error, /* Token.StartDocument  */
+            /* Token.EndDocument    */State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.PostB64Cont,
+            State.Error,
+            State.EndDocument,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error, /* Token.EndDocument    */
+            /* Token.PI             */State.TopLevel,
+            State.TopLevel,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.AfterRootEle,
+            State.EndAttrSCont,
+            State.EndAttrSCont,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error, /* Token.PI             */
+            /* Token.Comment        */State.TopLevel,
+            State.TopLevel,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.AfterRootEle,
+            State.EndAttrSCont,
+            State.EndAttrSCont,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error, /* Token.Comment        */
+            /* Token.Dtd            */State.StartDoc,
+            State.TopLevel,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error, /* Token.Dtd            */
+            /* Token.StartElement   */State.StartFragEle,
+            State.Element,
+            State.Error,
+            State.StartContentEle,
+            State.Element,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Element,
+            State.EndAttrSEle,
+            State.EndAttrSEle,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error, /* Token.StartElement   */
+            /* Token.EndElement     */State.Error,
+            State.Error,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.EndAttrEEle,
+            State.EndAttrEEle,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error, /* Token.EndElement     */
+            /* Token.StartAttribute */State.RootLevelAttr,
+            State.Error,
+            State.Error,
+            State.Attribute,
+            State.Error,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.EndAttrSAttr,
+            State.EndAttrSAttr,
+            State.Error,
+            State.StartRootLevelAttr,
+            State.StartRootLevelAttr,
+            State.PostB64RootAttr,
+            State.RootLevelAttr,
+            State.Error, /* Token.StartAttribute */
+            /* Token.EndAttribute   */State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.Element,
+            State.Element,
+            State.Error,
+            State.AfterRootLevelAttr,
+            State.AfterRootLevelAttr,
+            State.PostB64RootAttr,
+            State.Error,
+            State.Error, /* Token.EndAttribute   */
+            /* Token.Text           */State.StartFragCont,
+            State.StartFragCont,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Content,
+            State.Attribute,
+            State.SpecialAttr,
+            State.Error,
+            State.RootLevelAttr,
+            State.RootLevelSpecAttr,
+            State.PostB64RootAttr,
+            State.Error,
+            State.Error, /* Token.Text           */
+            /* Token.CData          */State.StartFragCont,
+            State.StartFragCont,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Content,
+            State.EndAttrSCont,
+            State.EndAttrSCont,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error, /* Token.CData          */
+            /* Token.AtomicValue    */State.StartFragCont,
+            State.StartFragCont,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Content,
+            State.Attribute,
+            State.Error,
+            State.Error,
+            State.RootLevelAttr,
+            State.Error,
+            State.PostB64RootAttr,
+            State.Error,
+            State.Error, /* Token.AtomicValue    */
+            /* Token.Base64         */State.StartFragB64,
+            State.StartFragB64,
+            State.Error,
+            State.StartContentB64,
+            State.B64Content,
+            State.B64Content,
+            State.B64Attribute,
+            State.B64Content,
+            State.B64Attribute,
+            State.Error,
+            State.Error,
+            State.RootLevelB64Attr,
+            State.Error,
+            State.RootLevelB64Attr,
+            State.Error,
+            State.Error, /* Token.Base64         */
+            /* Token.RawData        */State.StartFragCont,
+            State.TopLevel,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Content,
+            State.Attribute,
+            State.SpecialAttr,
+            State.Error,
+            State.RootLevelAttr,
+            State.RootLevelSpecAttr,
+            State.PostB64RootAttr,
+            State.AfterRootLevelAttr,
+            State.Error, /* Token.RawData        */
+            /* Token.Whitespace     */State.TopLevel,
+            State.TopLevel,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.AfterRootEle,
+            State.Attribute,
+            State.SpecialAttr,
+            State.Error,
+            State.RootLevelAttr,
+            State.RootLevelSpecAttr,
+            State.PostB64RootAttr,
+            State.AfterRootLevelAttr,
+            State.Error, /* Token.Whitespace     */
         };
 
         //
         // Constructor & finalizer
         //
-        internal XmlWellFormedWriter(XmlWriter writer, XmlWriterSettings settings) {
+        internal XmlWellFormedWriter(XmlWriter writer, XmlWriterSettings settings)
+        {
             Debug.Assert(writer != null);
             Debug.Assert(settings != null);
             Debug.Assert(MaxNamespacesWalkCount <= 3);
@@ -255,28 +713,40 @@ namespace System.Xml {
 
             rawWriter = writer as XmlRawWriter;
             predefinedNamespaces = writer as IXmlNamespaceResolver;
-            if (rawWriter != null) {
+            if (rawWriter != null)
+            {
                 rawWriter.NamespaceResolver = new NamespaceResolverProxy(this);
             }
 
             checkCharacters = settings.CheckCharacters;
-            omitDuplNamespaces = (settings.NamespaceHandling & NamespaceHandling.OmitDuplicates) != 0;
+            omitDuplNamespaces =
+                (settings.NamespaceHandling & NamespaceHandling.OmitDuplicates) != 0;
             writeEndDocumentOnClose = settings.WriteEndDocumentOnClose;
 
             conformanceLevel = settings.ConformanceLevel;
-            stateTable = (conformanceLevel == ConformanceLevel.Document) ? StateTableDocument : StateTableAuto;
+            stateTable =
+                (conformanceLevel == ConformanceLevel.Document)
+                    ? StateTableDocument
+                    : StateTableAuto;
 
             currentState = State.Start;
 
             nsStack = new Namespace[NamespaceStackInitialSize];
             nsStack[0].Set("xmlns", XmlReservedNs.NsXmlNs, NamespaceKind.Special);
             nsStack[1].Set("xml", XmlReservedNs.NsXml, NamespaceKind.Special);
-            if (predefinedNamespaces == null) {
+            if (predefinedNamespaces == null)
+            {
                 nsStack[2].Set(string.Empty, string.Empty, NamespaceKind.Implied);
             }
-            else {
+            else
+            {
                 string defaultNs = predefinedNamespaces.LookupNamespace(string.Empty);
-                nsStack[2].Set(string.Empty, (defaultNs == null ? string.Empty : defaultNs), NamespaceKind.Implied);
+                nsStack[2]
+                    .Set(
+                        string.Empty,
+                        (defaultNs == null ? string.Empty : defaultNs),
+                        NamespaceKind.Implied
+                    );
             }
             nsTop = 2;
 
@@ -294,24 +764,31 @@ namespace System.Xml {
         //
         // XmlWriter implementation
         //
-        public override WriteState WriteState {
-            get {
-                if ((int)currentState <= (int)State.Error) {
+        public override WriteState WriteState
+        {
+            get
+            {
+                if ((int)currentState <= (int)State.Error)
+                {
                     return state2WriteState[(int)currentState];
                 }
-                else {
+                else
+                {
                     Debug.Assert(false, "Expected currentState <= State.Error ");
                     return WriteState.Error;
                 }
             }
         }
 
-        public override XmlWriterSettings Settings {
-            get {
+        public override XmlWriterSettings Settings
+        {
+            get
+            {
                 XmlWriterSettings settings = writer.Settings;
                 settings.ReadOnly = false;
                 settings.ConformanceLevel = conformanceLevel;
-                if (omitDuplNamespaces) {
+                if (omitDuplNamespaces)
+                {
                     settings.NamespaceHandling |= NamespaceHandling.OmitDuplicates;
                 }
                 settings.WriteEndDocumentOnClose = writeEndDocumentOnClose;
@@ -320,54 +797,70 @@ namespace System.Xml {
             }
         }
 
-        public override void WriteStartDocument() {
+        public override void WriteStartDocument()
+        {
             WriteStartDocumentImpl(XmlStandalone.Omit);
         }
 
-        public override void WriteStartDocument(bool standalone) {
+        public override void WriteStartDocument(bool standalone)
+        {
             WriteStartDocumentImpl(standalone ? XmlStandalone.Yes : XmlStandalone.No);
         }
 
-        public override void WriteEndDocument() {
-            try {
+        public override void WriteEndDocument()
+        {
+            try
+            {
                 // auto-close all elements
-                while (elemTop > 0) {
+                while (elemTop > 0)
+                {
                     WriteEndElement();
                 }
                 State prevState = currentState;
                 AdvanceState(Token.EndDocument);
 
-                if (prevState != State.AfterRootEle) {
+                if (prevState != State.AfterRootEle)
+                {
                     throw new ArgumentException(Res.GetString(Res.Xml_NoRoot));
                 }
-                if (rawWriter == null) {
+                if (rawWriter == null)
+                {
                     writer.WriteEndDocument();
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteDocType(string name, string pubid, string sysid, string subset) {
-            try {
-                if (name == null || name.Length == 0) {
+        public override void WriteDocType(string name, string pubid, string sysid, string subset)
+        {
+            try
+            {
+                if (name == null || name.Length == 0)
+                {
                     throw new ArgumentException(Res.GetString(Res.Xml_EmptyName));
                 }
                 XmlConvert.VerifyQName(name, ExceptionType.XmlException);
 
-                if (conformanceLevel == ConformanceLevel.Fragment) {
-                    throw new InvalidOperationException(Res.GetString(Res.Xml_DtdNotAllowedInFragment));
+                if (conformanceLevel == ConformanceLevel.Fragment)
+                {
+                    throw new InvalidOperationException(
+                        Res.GetString(Res.Xml_DtdNotAllowedInFragment)
+                    );
                 }
 
                 AdvanceState(Token.Dtd);
-                if (dtdWritten) {
+                if (dtdWritten)
+                {
                     currentState = State.Error;
                     throw new InvalidOperationException(Res.GetString(Res.Xml_DtdAlreadyWritten));
                 }
 
-                if (conformanceLevel == ConformanceLevel.Auto) {
+                if (conformanceLevel == ConformanceLevel.Auto)
+                {
                     conformanceLevel = ConformanceLevel.Document;
                     stateTable = StateTableDocument;
                 }
@@ -375,20 +868,45 @@ namespace System.Xml {
                 int i;
 
                 // check characters
-                if (checkCharacters) {
-                    if (pubid != null) {
-                        if ((i = xmlCharType.IsPublicId(pubid)) >= 0) {
-                            throw new ArgumentException(Res.GetString(Res.Xml_InvalidCharacter, XmlException.BuildCharExceptionArgs(pubid, i)), "pubid");
+                if (checkCharacters)
+                {
+                    if (pubid != null)
+                    {
+                        if ((i = xmlCharType.IsPublicId(pubid)) >= 0)
+                        {
+                            throw new ArgumentException(
+                                Res.GetString(
+                                    Res.Xml_InvalidCharacter,
+                                    XmlException.BuildCharExceptionArgs(pubid, i)
+                                ),
+                                "pubid"
+                            );
                         }
                     }
-                    if (sysid != null) {
-                        if ((i = xmlCharType.IsOnlyCharData(sysid)) >= 0) {
-                            throw new ArgumentException(Res.GetString(Res.Xml_InvalidCharacter, XmlException.BuildCharExceptionArgs(sysid, i)), "sysid");
+                    if (sysid != null)
+                    {
+                        if ((i = xmlCharType.IsOnlyCharData(sysid)) >= 0)
+                        {
+                            throw new ArgumentException(
+                                Res.GetString(
+                                    Res.Xml_InvalidCharacter,
+                                    XmlException.BuildCharExceptionArgs(sysid, i)
+                                ),
+                                "sysid"
+                            );
                         }
                     }
-                    if (subset != null) {
-                        if ((i = xmlCharType.IsOnlyCharData(subset)) >= 0) {
-                            throw new ArgumentException(Res.GetString(Res.Xml_InvalidCharacter, XmlException.BuildCharExceptionArgs(subset, i)), "subset");
+                    if (subset != null)
+                    {
+                        if ((i = xmlCharType.IsOnlyCharData(subset)) >= 0)
+                        {
+                            throw new ArgumentException(
+                                Res.GetString(
+                                    Res.Xml_InvalidCharacter,
+                                    XmlException.BuildCharExceptionArgs(subset, i)
+                                ),
+                                "subset"
+                            );
                         }
                     }
                 }
@@ -397,49 +915,62 @@ namespace System.Xml {
                 writer.WriteDocType(name, pubid, sysid, subset);
                 dtdWritten = true;
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteStartElement(string prefix, string localName, string ns) {
-            try {
+        public override void WriteStartElement(string prefix, string localName, string ns)
+        {
+            try
+            {
                 // check local name
-                if (localName == null || localName.Length == 0) {
+                if (localName == null || localName.Length == 0)
+                {
                     throw new ArgumentException(Res.GetString(Res.Xml_EmptyLocalName));
                 }
                 CheckNCName(localName);
 
                 AdvanceState(Token.StartElement);
 
-                // lookup prefix / namespace  
-                if (prefix == null) {
-                    if (ns != null) {
+                // lookup prefix / namespace
+                if (prefix == null)
+                {
+                    if (ns != null)
+                    {
                         prefix = LookupPrefix(ns);
                     }
-                    if (prefix == null) {
+                    if (prefix == null)
+                    {
                         prefix = string.Empty;
                     }
                 }
-                else if (prefix.Length > 0) {
+                else if (prefix.Length > 0)
+                {
                     CheckNCName(prefix);
-                    if (ns == null) {
+                    if (ns == null)
+                    {
                         ns = LookupNamespace(prefix);
                     }
-                    if (ns == null || (ns != null && ns.Length == 0)) {
+                    if (ns == null || (ns != null && ns.Length == 0))
+                    {
                         throw new ArgumentException(Res.GetString(Res.Xml_PrefixForEmptyNs));
                     }
                 }
-                if (ns == null) {
+                if (ns == null)
+                {
                     ns = LookupNamespace(prefix);
-                    if (ns == null) {
+                    if (ns == null)
+                    {
                         Debug.Assert(prefix.Length == 0);
                         ns = string.Empty;
                     }
                 }
 
-                if (elemTop == 0 && rawWriter != null) {
+                if (elemTop == 0 && rawWriter != null)
+                {
                     // notify the underlying raw writer about the root level element
                     rawWriter.OnRootElement(conformanceLevel);
                 }
@@ -449,7 +980,8 @@ namespace System.Xml {
 
                 // push element on stack and add/check namespace
                 int top = ++elemTop;
-                if (top == elemScopeStack.Length) {
+                if (top == elemScopeStack.Length)
+                {
                     ElementScope[] newStack = new ElementScope[top * 2];
                     Array.Copy(elemScopeStack, newStack, top);
                     elemScopeStack = newStack;
@@ -458,110 +990,139 @@ namespace System.Xml {
 
                 PushNamespaceImplicit(prefix, ns);
 
-                if (attrCount >= MaxAttrDuplWalkCount) {
+                if (attrCount >= MaxAttrDuplWalkCount)
+                {
                     attrHashTable.Clear();
                 }
                 attrCount = 0;
-
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-
-        public override void WriteEndElement() {
-            try {
+        public override void WriteEndElement()
+        {
+            try
+            {
                 AdvanceState(Token.EndElement);
 
                 int top = elemTop;
-                if (top == 0) {
+                if (top == 0)
+                {
                     throw new XmlException(Res.Xml_NoStartTag, string.Empty);
                 }
 
                 // write end tag
-                if (rawWriter != null) {
+                if (rawWriter != null)
+                {
                     elemScopeStack[top].WriteEndElement(rawWriter);
                 }
-                else {
+                else
+                {
                     writer.WriteEndElement();
                 }
 
                 // pop namespaces
                 int prevNsTop = elemScopeStack[top].prevNSTop;
-                if (useNsHashtable && prevNsTop < nsTop) {
+                if (useNsHashtable && prevNsTop < nsTop)
+                {
                     PopNamespaces(prevNsTop + 1, nsTop);
                 }
                 nsTop = prevNsTop;
                 elemTop = --top;
 
                 // check "one root element" condition for ConformanceLevel.Document
-                if (top == 0) {
-                    if (conformanceLevel == ConformanceLevel.Document) {
+                if (top == 0)
+                {
+                    if (conformanceLevel == ConformanceLevel.Document)
+                    {
                         currentState = State.AfterRootEle;
                     }
-                    else {
+                    else
+                    {
                         currentState = State.TopLevel;
                     }
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteFullEndElement() {
-            try {
+        public override void WriteFullEndElement()
+        {
+            try
+            {
                 AdvanceState(Token.EndElement);
 
                 int top = elemTop;
-                if (top == 0) {
+                if (top == 0)
+                {
                     throw new XmlException(Res.Xml_NoStartTag, string.Empty);
                 }
 
                 // write end tag
-                if (rawWriter != null) {
+                if (rawWriter != null)
+                {
                     elemScopeStack[top].WriteFullEndElement(rawWriter);
                 }
-                else {
+                else
+                {
                     writer.WriteFullEndElement();
                 }
 
                 // pop namespaces
                 int prevNsTop = elemScopeStack[top].prevNSTop;
-                if (useNsHashtable && prevNsTop < nsTop) {
+                if (useNsHashtable && prevNsTop < nsTop)
+                {
                     PopNamespaces(prevNsTop + 1, nsTop);
                 }
                 nsTop = prevNsTop;
                 elemTop = --top;
 
                 // check "one root element" condition for ConformanceLevel.Document
-                if (top == 0) {
-                    if (conformanceLevel == ConformanceLevel.Document) {
+                if (top == 0)
+                {
+                    if (conformanceLevel == ConformanceLevel.Document)
+                    {
                         currentState = State.AfterRootEle;
                     }
-                    else {
+                    else
+                    {
                         currentState = State.TopLevel;
                     }
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteStartAttribute(string prefix, string localName, string namespaceName) {
-            try {
+        public override void WriteStartAttribute(
+            string prefix,
+            string localName,
+            string namespaceName
+        )
+        {
+            try
+            {
                 // check local name
-                if (localName == null || localName.Length == 0) {
-                    if (prefix == "xmlns") {
+                if (localName == null || localName.Length == 0)
+                {
+                    if (prefix == "xmlns")
+                    {
                         localName = "xmlns";
                         prefix = string.Empty;
                     }
-                    else {
+                    else
+                    {
                         throw new ArgumentException(Res.GetString(Res.Xml_EmptyLocalName));
                     }
                 }
@@ -569,57 +1130,75 @@ namespace System.Xml {
 
                 AdvanceState(Token.StartAttribute);
 
-                // lookup prefix / namespace  
-                if (prefix == null) {
-                    if (namespaceName != null) {
+                // lookup prefix / namespace
+                if (prefix == null)
+                {
+                    if (namespaceName != null)
+                    {
                         // special case prefix=null/localname=xmlns
                         if (!(localName == "xmlns" && namespaceName == XmlReservedNs.NsXmlNs))
                             prefix = LookupPrefix(namespaceName);
                     }
-                    if (prefix == null) {
+                    if (prefix == null)
+                    {
                         prefix = string.Empty;
                     }
                 }
-                if (namespaceName == null) {
-                    if (prefix != null && prefix.Length > 0) {
+                if (namespaceName == null)
+                {
+                    if (prefix != null && prefix.Length > 0)
+                    {
                         namespaceName = LookupNamespace(prefix);
                     }
-                    if (namespaceName == null) {
+                    if (namespaceName == null)
+                    {
                         namespaceName = string.Empty;
                     }
                 }
 
-                if (prefix.Length == 0) {
-                    if (localName[0] == 'x' && localName == "xmlns") {
-                        if (namespaceName.Length > 0 && namespaceName != XmlReservedNs.NsXmlNs) {
+                if (prefix.Length == 0)
+                {
+                    if (localName[0] == 'x' && localName == "xmlns")
+                    {
+                        if (namespaceName.Length > 0 && namespaceName != XmlReservedNs.NsXmlNs)
+                        {
                             throw new ArgumentException(Res.GetString(Res.Xml_XmlnsPrefix));
                         }
                         curDeclPrefix = String.Empty;
                         SetSpecialAttribute(SpecialAttribute.DefaultXmlns);
                         goto SkipPushAndWrite;
                     }
-                    else if (namespaceName.Length > 0) {
+                    else if (namespaceName.Length > 0)
+                    {
                         prefix = LookupPrefix(namespaceName);
-                        if (prefix == null || prefix.Length == 0) {
+                        if (prefix == null || prefix.Length == 0)
+                        {
                             prefix = GeneratePrefix();
                         }
                     }
                 }
-                else {
-                    if (prefix[0] == 'x') {
-                        if (prefix == "xmlns") {
-                            if (namespaceName.Length > 0 && namespaceName != XmlReservedNs.NsXmlNs) {
+                else
+                {
+                    if (prefix[0] == 'x')
+                    {
+                        if (prefix == "xmlns")
+                        {
+                            if (namespaceName.Length > 0 && namespaceName != XmlReservedNs.NsXmlNs)
+                            {
                                 throw new ArgumentException(Res.GetString(Res.Xml_XmlnsPrefix));
                             }
                             curDeclPrefix = localName;
                             SetSpecialAttribute(SpecialAttribute.PrefixedXmlns);
                             goto SkipPushAndWrite;
                         }
-                        else if (prefix == "xml") {
-                            if (namespaceName.Length > 0 && namespaceName != XmlReservedNs.NsXml) {
+                        else if (prefix == "xml")
+                        {
+                            if (namespaceName.Length > 0 && namespaceName != XmlReservedNs.NsXml)
+                            {
                                 throw new ArgumentException(Res.GetString(Res.Xml_XmlPrefix));
                             }
-                            switch (localName) {
+                            switch (localName)
+                            {
                                 case "space":
                                     SetSpecialAttribute(SpecialAttribute.XmlSpace);
                                     goto SkipPushAndWrite;
@@ -632,61 +1211,80 @@ namespace System.Xml {
 
                     CheckNCName(prefix);
 
-                    if (namespaceName.Length == 0) {
+                    if (namespaceName.Length == 0)
+                    {
                         // attributes cannot have default namespace
                         prefix = string.Empty;
                     }
-                    else {
+                    else
+                    {
                         string definedNs = LookupLocalNamespace(prefix);
-                        if (definedNs != null && definedNs != namespaceName) {
+                        if (definedNs != null && definedNs != namespaceName)
+                        {
                             prefix = GeneratePrefix();
                         }
                     }
                 }
 
-                if (prefix.Length != 0) {
+                if (prefix.Length != 0)
+                {
                     PushNamespaceImplicit(prefix, namespaceName);
                 }
 
-            SkipPushAndWrite:
+                SkipPushAndWrite:
 
                 // add attribute to the list and check for duplicates
-                AddAttribute( prefix, localName, namespaceName );
+                AddAttribute(prefix, localName, namespaceName);
 
-                if (specAttr == SpecialAttribute.No) {
+                if (specAttr == SpecialAttribute.No)
+                {
                     // write attribute name
-                    writer.WriteStartAttribute( prefix, localName, namespaceName );
+                    writer.WriteStartAttribute(prefix, localName, namespaceName);
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteEndAttribute() {
-            try {
+        public override void WriteEndAttribute()
+        {
+            try
+            {
                 AdvanceState(Token.EndAttribute);
 
-                if (specAttr != SpecialAttribute.No) {
+                if (specAttr != SpecialAttribute.No)
+                {
                     string value;
 
-                    switch (specAttr) {
+                    switch (specAttr)
+                    {
                         case SpecialAttribute.DefaultXmlns:
                             value = attrValueCache.StringValue;
-                            if (PushNamespaceExplicit(string.Empty, value)) { // returns true if the namespace declaration should be written out
-                                if (rawWriter != null) {
-                                    if (rawWriter.SupportsNamespaceDeclarationInChunks) {
+                            if (PushNamespaceExplicit(string.Empty, value))
+                            { // returns true if the namespace declaration should be written out
+                                if (rawWriter != null)
+                                {
+                                    if (rawWriter.SupportsNamespaceDeclarationInChunks)
+                                    {
                                         rawWriter.WriteStartNamespaceDeclaration(string.Empty);
                                         attrValueCache.Replay(rawWriter);
                                         rawWriter.WriteEndNamespaceDeclaration();
                                     }
-                                    else {
+                                    else
+                                    {
                                         rawWriter.WriteNamespaceDeclaration(string.Empty, value);
                                     }
                                 }
-                                else {
-                                    writer.WriteStartAttribute(string.Empty, "xmlns", XmlReservedNs.NsXmlNs);
+                                else
+                                {
+                                    writer.WriteStartAttribute(
+                                        string.Empty,
+                                        "xmlns",
+                                        XmlReservedNs.NsXmlNs
+                                    );
                                     attrValueCache.Replay(writer);
                                     writer.WriteEndAttribute();
                                 }
@@ -695,25 +1293,43 @@ namespace System.Xml {
                             break;
                         case SpecialAttribute.PrefixedXmlns:
                             value = attrValueCache.StringValue;
-                            if (value.Length == 0) {
-                                throw new ArgumentException(Res.GetString(Res.Xml_PrefixForEmptyNs));
+                            if (value.Length == 0)
+                            {
+                                throw new ArgumentException(
+                                    Res.GetString(Res.Xml_PrefixForEmptyNs)
+                                );
                             }
-                            if (value == XmlReservedNs.NsXmlNs || (value == XmlReservedNs.NsXml && curDeclPrefix != "xml")) {
-                                throw new ArgumentException(Res.GetString(Res.Xml_CanNotBindToReservedNamespace));
+                            if (
+                                value == XmlReservedNs.NsXmlNs
+                                || (value == XmlReservedNs.NsXml && curDeclPrefix != "xml")
+                            )
+                            {
+                                throw new ArgumentException(
+                                    Res.GetString(Res.Xml_CanNotBindToReservedNamespace)
+                                );
                             }
-                            if (PushNamespaceExplicit(curDeclPrefix, value)) { // returns true if the namespace declaration should be written out
-                                if (rawWriter != null) {
-                                    if (rawWriter.SupportsNamespaceDeclarationInChunks) {
+                            if (PushNamespaceExplicit(curDeclPrefix, value))
+                            { // returns true if the namespace declaration should be written out
+                                if (rawWriter != null)
+                                {
+                                    if (rawWriter.SupportsNamespaceDeclarationInChunks)
+                                    {
                                         rawWriter.WriteStartNamespaceDeclaration(curDeclPrefix);
                                         attrValueCache.Replay(rawWriter);
                                         rawWriter.WriteEndNamespaceDeclaration();
                                     }
-                                    else {
+                                    else
+                                    {
                                         rawWriter.WriteNamespaceDeclaration(curDeclPrefix, value);
                                     }
                                 }
-                                else {
-                                    writer.WriteStartAttribute("xmlns", curDeclPrefix, XmlReservedNs.NsXmlNs);
+                                else
+                                {
+                                    writer.WriteStartAttribute(
+                                        "xmlns",
+                                        curDeclPrefix,
+                                        XmlReservedNs.NsXmlNs
+                                    );
                                     attrValueCache.Replay(writer);
                                     writer.WriteEndAttribute();
                                 }
@@ -724,14 +1340,19 @@ namespace System.Xml {
                             attrValueCache.Trim();
                             value = attrValueCache.StringValue;
 
-                            if (value == "default") {
+                            if (value == "default")
+                            {
                                 elemScopeStack[elemTop].xmlSpace = XmlSpace.Default;
                             }
-                            else if (value == "preserve") {
+                            else if (value == "preserve")
+                            {
                                 elemScopeStack[elemTop].xmlSpace = XmlSpace.Preserve;
                             }
-                            else {
-                                throw new ArgumentException(Res.GetString(Res.Xml_InvalidXmlSpace, value));
+                            else
+                            {
+                                throw new ArgumentException(
+                                    Res.GetString(Res.Xml_InvalidXmlSpace, value)
+                                );
                             }
                             writer.WriteStartAttribute("xml", "space", XmlReservedNs.NsXml);
                             attrValueCache.Replay(writer);
@@ -748,400 +1369,537 @@ namespace System.Xml {
                     specAttr = SpecialAttribute.No;
                     attrValueCache.Clear();
                 }
-                else {
+                else
+                {
                     writer.WriteEndAttribute();
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteCData(string text) {
-            try {
-                if (text == null) {
+        public override void WriteCData(string text)
+        {
+            try
+            {
+                if (text == null)
+                {
                     text = string.Empty;
                 }
                 AdvanceState(Token.CData);
                 writer.WriteCData(text);
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteComment(string text) {
-            try {
-                if (text == null) {
+        public override void WriteComment(string text)
+        {
+            try
+            {
+                if (text == null)
+                {
                     text = string.Empty;
                 }
                 AdvanceState(Token.Comment);
                 writer.WriteComment(text);
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteProcessingInstruction(string name, string text) {
-            try {
+        public override void WriteProcessingInstruction(string name, string text)
+        {
+            try
+            {
                 // check name
-                if (name == null || name.Length == 0) {
+                if (name == null || name.Length == 0)
+                {
                     throw new ArgumentException(Res.GetString(Res.Xml_EmptyName));
                 }
                 CheckNCName(name);
 
                 // check text
-                if (text == null) {
+                if (text == null)
+                {
                     text = string.Empty;
                 }
 
                 // xml declaration is a special case (not a processing instruction, but we allow WriteProcessingInstruction as a convenience)
-                if (name.Length == 3 && string.Compare(name, "xml", StringComparison.OrdinalIgnoreCase) == 0) {
-                    if (currentState != State.Start) {
-                        throw new ArgumentException(Res.GetString(conformanceLevel == ConformanceLevel.Document ? Res.Xml_DupXmlDecl : Res.Xml_CannotWriteXmlDecl));
+                if (
+                    name.Length == 3
+                    && string.Compare(name, "xml", StringComparison.OrdinalIgnoreCase) == 0
+                )
+                {
+                    if (currentState != State.Start)
+                    {
+                        throw new ArgumentException(
+                            Res.GetString(
+                                conformanceLevel == ConformanceLevel.Document
+                                    ? Res.Xml_DupXmlDecl
+                                    : Res.Xml_CannotWriteXmlDecl
+                            )
+                        );
                     }
 
                     xmlDeclFollows = true;
                     AdvanceState(Token.PI);
 
-                    if (rawWriter != null) {
+                    if (rawWriter != null)
+                    {
                         // Translate PI into an xml declaration
                         rawWriter.WriteXmlDeclaration(text);
                     }
-                    else {
+                    else
+                    {
                         writer.WriteProcessingInstruction(name, text);
                     }
                 }
-                else {
+                else
+                {
                     AdvanceState(Token.PI);
                     writer.WriteProcessingInstruction(name, text);
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteEntityRef(string name) {
-            try {
+        public override void WriteEntityRef(string name)
+        {
+            try
+            {
                 // check name
-                if (name == null || name.Length == 0) {
+                if (name == null || name.Length == 0)
+                {
                     throw new ArgumentException(Res.GetString(Res.Xml_EmptyName));
                 }
                 CheckNCName(name);
 
                 AdvanceState(Token.Text);
-                if (SaveAttrValue) {
+                if (SaveAttrValue)
+                {
                     attrValueCache.WriteEntityRef(name);
                 }
-                else {
+                else
+                {
                     writer.WriteEntityRef(name);
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteCharEntity(char ch) {
-            try {
-                if (Char.IsSurrogate(ch)) {
-                    throw new ArgumentException(Res.GetString(Res.Xml_InvalidSurrogateMissingLowChar));
+        public override void WriteCharEntity(char ch)
+        {
+            try
+            {
+                if (Char.IsSurrogate(ch))
+                {
+                    throw new ArgumentException(
+                        Res.GetString(Res.Xml_InvalidSurrogateMissingLowChar)
+                    );
                 }
 
                 AdvanceState(Token.Text);
-                if (SaveAttrValue) {
+                if (SaveAttrValue)
+                {
                     attrValueCache.WriteCharEntity(ch);
                 }
-                else {
+                else
+                {
                     writer.WriteCharEntity(ch);
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteSurrogateCharEntity(char lowChar, char highChar) {
-            try {
-                if (!Char.IsSurrogatePair(highChar, lowChar)) {
+        public override void WriteSurrogateCharEntity(char lowChar, char highChar)
+        {
+            try
+            {
+                if (!Char.IsSurrogatePair(highChar, lowChar))
+                {
                     throw XmlConvert.CreateInvalidSurrogatePairException(lowChar, highChar);
                 }
 
                 AdvanceState(Token.Text);
-                if (SaveAttrValue) {
+                if (SaveAttrValue)
+                {
                     attrValueCache.WriteSurrogateCharEntity(lowChar, highChar);
                 }
-                else {
+                else
+                {
                     writer.WriteSurrogateCharEntity(lowChar, highChar);
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteWhitespace(string ws) {
-            try {
-                if (ws == null) {
+        public override void WriteWhitespace(string ws)
+        {
+            try
+            {
+                if (ws == null)
+                {
                     ws = string.Empty;
                 }
-                if (!XmlCharType.Instance.IsOnlyWhitespace(ws)) {
+                if (!XmlCharType.Instance.IsOnlyWhitespace(ws))
+                {
                     throw new ArgumentException(Res.GetString(Res.Xml_NonWhitespace));
                 }
 
                 AdvanceState(Token.Whitespace);
-                if (SaveAttrValue) {
+                if (SaveAttrValue)
+                {
                     attrValueCache.WriteWhitespace(ws);
                 }
-                else {
+                else
+                {
                     writer.WriteWhitespace(ws);
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteString(string text) {
-            try {
-                if (text == null) {
+        public override void WriteString(string text)
+        {
+            try
+            {
+                if (text == null)
+                {
                     return;
                 }
 
                 AdvanceState(Token.Text);
-                if (SaveAttrValue) {
+                if (SaveAttrValue)
+                {
                     attrValueCache.WriteString(text);
                 }
-                else {
+                else
+                {
                     writer.WriteString(text);
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteChars(char[] buffer, int index, int count) {
-            try {
-                if (buffer == null) {
+        public override void WriteChars(char[] buffer, int index, int count)
+        {
+            try
+            {
+                if (buffer == null)
+                {
                     throw new ArgumentNullException("buffer");
                 }
-                if (index < 0) {
+                if (index < 0)
+                {
                     throw new ArgumentOutOfRangeException("index");
                 }
-                if (count < 0) {
+                if (count < 0)
+                {
                     throw new ArgumentOutOfRangeException("count");
                 }
-                if (count > buffer.Length - index) {
+                if (count > buffer.Length - index)
+                {
                     throw new ArgumentOutOfRangeException("count");
                 }
 
                 AdvanceState(Token.Text);
-                if (SaveAttrValue) {
+                if (SaveAttrValue)
+                {
                     attrValueCache.WriteChars(buffer, index, count);
                 }
-                else {
+                else
+                {
                     writer.WriteChars(buffer, index, count);
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteRaw(char[] buffer, int index, int count) {
-            try {
-                if (buffer == null) {
+        public override void WriteRaw(char[] buffer, int index, int count)
+        {
+            try
+            {
+                if (buffer == null)
+                {
                     throw new ArgumentNullException("buffer");
                 }
-                if (index < 0) {
+                if (index < 0)
+                {
                     throw new ArgumentOutOfRangeException("index");
                 }
-                if (count < 0) {
+                if (count < 0)
+                {
                     throw new ArgumentOutOfRangeException("count");
                 }
-                if (count > buffer.Length - index) {
+                if (count > buffer.Length - index)
+                {
                     throw new ArgumentOutOfRangeException("count");
                 }
 
                 AdvanceState(Token.RawData);
-                if (SaveAttrValue) {
+                if (SaveAttrValue)
+                {
                     attrValueCache.WriteRaw(buffer, index, count);
                 }
-                else {
+                else
+                {
                     writer.WriteRaw(buffer, index, count);
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteRaw(string data) {
-            try {
-                if (data == null) {
+        public override void WriteRaw(string data)
+        {
+            try
+            {
+                if (data == null)
+                {
                     return;
                 }
 
                 AdvanceState(Token.RawData);
-                if (SaveAttrValue) {
+                if (SaveAttrValue)
+                {
                     attrValueCache.WriteRaw(data);
                 }
-                else {
+                else
+                {
                     writer.WriteRaw(data);
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteBase64(byte[] buffer, int index, int count) {
-            try {
-                if (buffer == null) {
+        public override void WriteBase64(byte[] buffer, int index, int count)
+        {
+            try
+            {
+                if (buffer == null)
+                {
                     throw new ArgumentNullException("buffer");
                 }
-                if (index < 0) {
+                if (index < 0)
+                {
                     throw new ArgumentOutOfRangeException("index");
                 }
-                if (count < 0) {
+                if (count < 0)
+                {
                     throw new ArgumentOutOfRangeException("count");
                 }
-                if (count > buffer.Length - index) {
+                if (count > buffer.Length - index)
+                {
                     throw new ArgumentOutOfRangeException("count");
                 }
 
                 AdvanceState(Token.Base64);
                 writer.WriteBase64(buffer, index, count);
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void Close() {
-            if (currentState != State.Closed) {
-                try {
-                    if (writeEndDocumentOnClose) {
-                        while (currentState != State.Error && elemTop > 0) {
+        public override void Close()
+        {
+            if (currentState != State.Closed)
+            {
+                try
+                {
+                    if (writeEndDocumentOnClose)
+                    {
+                        while (currentState != State.Error && elemTop > 0)
+                        {
                             WriteEndElement();
                         }
                     }
-                    else {
-                        if (currentState != State.Error && elemTop > 0) {
+                    else
+                    {
+                        if (currentState != State.Error && elemTop > 0)
+                        {
                             //finish the start element tag '>'
-                            try {
+                            try
+                            {
                                 AdvanceState(Token.EndElement);
                             }
-                            catch {
+                            catch
+                            {
                                 currentState = State.Error;
                                 throw;
                             }
                         }
                     }
 
-                    if (InBase64 && rawWriter != null) {
+                    if (InBase64 && rawWriter != null)
+                    {
                         rawWriter.WriteEndBase64();
                     }
 
                     writer.Flush();
                 }
-                finally {
-                    try {
-                        if (rawWriter != null) {
+                finally
+                {
+                    try
+                    {
+                        if (rawWriter != null)
+                        {
                             rawWriter.Close(WriteState);
                         }
-                        else {
+                        else
+                        {
                             writer.Close();
                         }
                     }
-                    finally {
+                    finally
+                    {
                         currentState = State.Closed;
                     }
                 }
             }
         }
 
-        public override void Flush() {
-            try {
+        public override void Flush()
+        {
+            try
+            {
                 writer.Flush();
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override string LookupPrefix(string ns) {
-            try {
-                if (ns == null) {
+        public override string LookupPrefix(string ns)
+        {
+            try
+            {
+                if (ns == null)
+                {
                     throw new ArgumentNullException("ns");
                 }
-                for (int i = nsTop; i >= 0; i--) {
-                    if (nsStack[i].namespaceUri == ns) {
+                for (int i = nsTop; i >= 0; i--)
+                {
+                    if (nsStack[i].namespaceUri == ns)
+                    {
                         string prefix = nsStack[i].prefix;
-                        for (i++; i <= nsTop; i++) {
-                            if (nsStack[i].prefix == prefix) {
+                        for (i++; i <= nsTop; i++)
+                        {
+                            if (nsStack[i].prefix == prefix)
+                            {
                                 return null;
                             }
                         }
                         return prefix;
                     }
                 }
-                return (predefinedNamespaces != null) ? predefinedNamespaces.LookupPrefix(ns) : null;
+                return (predefinedNamespaces != null)
+                    ? predefinedNamespaces.LookupPrefix(ns)
+                    : null;
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override XmlSpace XmlSpace {
-            get {
+        public override XmlSpace XmlSpace
+        {
+            get
+            {
                 int i;
-                for (i = elemTop; i >= 0 && elemScopeStack[i].xmlSpace == (System.Xml.XmlSpace)(int)-1; i--) ;
+                for (
+                    i = elemTop;
+                    i >= 0 && elemScopeStack[i].xmlSpace == (System.Xml.XmlSpace)(int)-1;
+                    i--
+                )
+                    ;
                 Debug.Assert(i >= 0);
                 return elemScopeStack[i].xmlSpace;
             }
         }
 
-        public override string XmlLang {
-            get {
+        public override string XmlLang
+        {
+            get
+            {
                 int i;
-                for (i = elemTop; i > 0 && elemScopeStack[i].xmlLang == null; i--) ;
+                for (i = elemTop; i > 0 && elemScopeStack[i].xmlLang == null; i--)
+                    ;
                 Debug.Assert(i >= 0);
                 return elemScopeStack[i].xmlLang;
             }
         }
 
-        public override void WriteQualifiedName(string localName, string ns) {
-            try {
-                if (localName == null || localName.Length == 0) {
+        public override void WriteQualifiedName(string localName, string ns)
+        {
+            try
+            {
+                if (localName == null || localName.Length == 0)
+                {
                     throw new ArgumentException(Res.GetString(Res.Xml_EmptyLocalName));
                 }
                 CheckNCName(localName);
 
                 AdvanceState(Token.Text);
                 string prefix = String.Empty;
-                if (ns != null && ns.Length != 0) {
+                if (ns != null && ns.Length != 0)
+                {
                     prefix = LookupPrefix(ns);
-                    if (prefix == null) {
-                        if (currentState != State.Attribute) {
+                    if (prefix == null)
+                    {
+                        if (currentState != State.Attribute)
+                        {
                             throw new ArgumentException(Res.GetString(Res.Xml_UndefNamespace, ns));
                         }
                         prefix = GeneratePrefix();
@@ -1150,157 +1908,200 @@ namespace System.Xml {
                 }
                 // if this is a special attribute, then just convert this to text
                 // otherwise delegate to raw-writer
-                if (SaveAttrValue || rawWriter == null) {
-                    if (prefix.Length != 0) {
+                if (SaveAttrValue || rawWriter == null)
+                {
+                    if (prefix.Length != 0)
+                    {
                         WriteString(prefix);
                         WriteString(":");
                     }
                     WriteString(localName);
                 }
-                else {
+                else
+                {
                     rawWriter.WriteQualifiedName(prefix, localName, ns);
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteValue(bool value) {
-            try {
+        public override void WriteValue(bool value)
+        {
+            try
+            {
                 AdvanceState(Token.AtomicValue);
                 writer.WriteValue(value);
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteValue(DateTime value) {
-            try {
+        public override void WriteValue(DateTime value)
+        {
+            try
+            {
                 AdvanceState(Token.AtomicValue);
                 writer.WriteValue(value);
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteValue(DateTimeOffset value) {
-            try {
+        public override void WriteValue(DateTimeOffset value)
+        {
+            try
+            {
                 AdvanceState(Token.AtomicValue);
                 writer.WriteValue(value);
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteValue(double value) {
-            try {
+        public override void WriteValue(double value)
+        {
+            try
+            {
                 AdvanceState(Token.AtomicValue);
                 writer.WriteValue(value);
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteValue(float value) {
-            try {
+        public override void WriteValue(float value)
+        {
+            try
+            {
                 AdvanceState(Token.AtomicValue);
                 writer.WriteValue(value);
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteValue(decimal value) {
-            try {
+        public override void WriteValue(decimal value)
+        {
+            try
+            {
                 AdvanceState(Token.AtomicValue);
                 writer.WriteValue(value);
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteValue(int value) {
-            try {
+        public override void WriteValue(int value)
+        {
+            try
+            {
                 AdvanceState(Token.AtomicValue);
                 writer.WriteValue(value);
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteValue(long value) {
-            try {
+        public override void WriteValue(long value)
+        {
+            try
+            {
                 AdvanceState(Token.AtomicValue);
                 writer.WriteValue(value);
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteValue(string value) {
-            try {
-                if (value == null) {
+        public override void WriteValue(string value)
+        {
+            try
+            {
+                if (value == null)
+                {
                     return;
                 }
-                if (SaveAttrValue) {
+                if (SaveAttrValue)
+                {
                     AdvanceState(Token.Text);
                     attrValueCache.WriteValue(value);
                 }
-                else {
+                else
+                {
                     AdvanceState(Token.AtomicValue);
                     writer.WriteValue(value);
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteValue(object value) {
-            try {
-                if (SaveAttrValue && value is string) {
+        public override void WriteValue(object value)
+        {
+            try
+            {
+                if (SaveAttrValue && value is string)
+                {
                     AdvanceState(Token.Text);
                     attrValueCache.WriteValue((string)value);
                 }
-                else {
+                else
+                {
                     AdvanceState(Token.AtomicValue);
                     writer.WriteValue(value);
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        public override void WriteBinHex(byte[] buffer, int index, int count) {
-            if (IsClosedOrErrorState) {
+        public override void WriteBinHex(byte[] buffer, int index, int count)
+        {
+            if (IsClosedOrErrorState)
+            {
                 throw new InvalidOperationException(Res.GetString(Res.Xml_ClosedOrError));
             }
-            try {
+            try
+            {
                 AdvanceState(Token.Text);
                 base.WriteBinHex(buffer, index, count);
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
@@ -1310,137 +2111,181 @@ namespace System.Xml {
         // Internal methods
         //
 #if !SILVERLIGHT
-        internal XmlWriter InnerWriter {
-            get {
-                return this.writer;
-            }
+        internal XmlWriter InnerWriter
+        {
+            get { return this.writer; }
         }
 
-        internal XmlRawWriter RawWriter {
-            get {
-                return rawWriter;
-            }
+        internal XmlRawWriter RawWriter
+        {
+            get { return rawWriter; }
         }
 #endif
 
         //
         // Private methods
         //
-        private bool SaveAttrValue {
-            get {
-                return specAttr != SpecialAttribute.No;
+        private bool SaveAttrValue
+        {
+            get { return specAttr != SpecialAttribute.No; }
+        }
+
+        private bool InBase64
+        {
+            get
+            {
+                return (
+                    currentState == State.B64Content
+                    || currentState == State.B64Attribute
+                    || currentState == State.RootLevelB64Attr
+                );
             }
         }
 
-        private bool InBase64 {
-            get {
-                return (currentState == State.B64Content || currentState == State.B64Attribute || currentState == State.RootLevelB64Attr);
-            }
-        }
-
-        private void SetSpecialAttribute(SpecialAttribute special) {
+        private void SetSpecialAttribute(SpecialAttribute special)
+        {
             specAttr = special;
             if (State.Attribute == currentState)
                 currentState = State.SpecialAttr;
             else if (State.RootLevelAttr == currentState)
                 currentState = State.RootLevelSpecAttr;
             else
-                Debug.Assert(false, "State.Attribute == currentState || State.RootLevelAttr == currentState");
+                Debug.Assert(
+                    false,
+                    "State.Attribute == currentState || State.RootLevelAttr == currentState"
+                );
 
-            if (attrValueCache == null) {
+            if (attrValueCache == null)
+            {
                 attrValueCache = new AttributeValueCache();
             }
         }
 
-        private void WriteStartDocumentImpl(XmlStandalone standalone) {
-            try {
+        private void WriteStartDocumentImpl(XmlStandalone standalone)
+        {
+            try
+            {
                 AdvanceState(Token.StartDocument);
 
-                if (conformanceLevel == ConformanceLevel.Auto) {
+                if (conformanceLevel == ConformanceLevel.Auto)
+                {
                     conformanceLevel = ConformanceLevel.Document;
                     stateTable = StateTableDocument;
                 }
-                else if (conformanceLevel == ConformanceLevel.Fragment) {
-                    throw new InvalidOperationException(Res.GetString(Res.Xml_CannotStartDocumentOnFragment));
+                else if (conformanceLevel == ConformanceLevel.Fragment)
+                {
+                    throw new InvalidOperationException(
+                        Res.GetString(Res.Xml_CannotStartDocumentOnFragment)
+                    );
                 }
 
-                if (rawWriter != null) {
-                    if (!xmlDeclFollows) {
+                if (rawWriter != null)
+                {
+                    if (!xmlDeclFollows)
+                    {
                         rawWriter.WriteXmlDeclaration(standalone);
                     }
                 }
-                else {
+                else
+                {
                     // We do not pass the standalone value here - Dev10 Bug #479769
                     writer.WriteStartDocument();
                 }
             }
-            catch {
+            catch
+            {
                 currentState = State.Error;
                 throw;
             }
         }
 
-        private void StartFragment() {
+        private void StartFragment()
+        {
             conformanceLevel = ConformanceLevel.Fragment;
             Debug.Assert(stateTable == StateTableAuto);
         }
 
         // PushNamespaceImplicit is called when a prefix/namespace pair is used in an element name, attribute name or some other qualified name.
-        private void PushNamespaceImplicit(string prefix, string ns) {
+        private void PushNamespaceImplicit(string prefix, string ns)
+        {
             NamespaceKind kind;
 
             // See if the prefix is already defined
             int existingNsIndex = LookupNamespaceIndex(prefix);
 
             // Prefix is already defined
-            if (existingNsIndex != -1) {
+            if (existingNsIndex != -1)
+            {
                 // It is defined in the current scope
-                if (existingNsIndex > elemScopeStack[elemTop].prevNSTop) {
+                if (existingNsIndex > elemScopeStack[elemTop].prevNSTop)
+                {
                     // The new namespace Uri needs to be the same as the one that is already declared
-                    if (nsStack[existingNsIndex].namespaceUri != ns) {
-                        throw new XmlException(Res.Xml_RedefinePrefix, new string[] { prefix, nsStack[existingNsIndex].namespaceUri, ns });
+                    if (nsStack[existingNsIndex].namespaceUri != ns)
+                    {
+                        throw new XmlException(
+                            Res.Xml_RedefinePrefix,
+                            new string[] { prefix, nsStack[existingNsIndex].namespaceUri, ns }
+                        );
                     }
                     // No additional work needed
                     return;
                 }
                 // The prefix is defined but in a different scope
-                else {
-                    // existing declaration is special one (xml, xmlns) -> validate that the new one is the same and can be declared 
-                    if (nsStack[existingNsIndex].kind == NamespaceKind.Special) {
-                        if (prefix == "xml") {
-                            if (ns != nsStack[existingNsIndex].namespaceUri) {
+                else
+                {
+                    // existing declaration is special one (xml, xmlns) -> validate that the new one is the same and can be declared
+                    if (nsStack[existingNsIndex].kind == NamespaceKind.Special)
+                    {
+                        if (prefix == "xml")
+                        {
+                            if (ns != nsStack[existingNsIndex].namespaceUri)
+                            {
                                 throw new ArgumentException(Res.GetString(Res.Xml_XmlPrefix));
                             }
-                            else {
+                            else
+                            {
                                 kind = NamespaceKind.Implied;
                             }
                         }
-                        else {
+                        else
+                        {
                             Debug.Assert(prefix == "xmlns");
                             throw new ArgumentException(Res.GetString(Res.Xml_XmlnsPrefix));
                         }
                     }
                     // regular namespace declaration -> compare the namespace Uris to decide if the prefix is redefined
-                    else {
-                        kind = (nsStack[existingNsIndex].namespaceUri == ns) ? NamespaceKind.Implied : NamespaceKind.NeedToWrite;
+                    else
+                    {
+                        kind =
+                            (nsStack[existingNsIndex].namespaceUri == ns)
+                                ? NamespaceKind.Implied
+                                : NamespaceKind.NeedToWrite;
                     }
                 }
             }
             // No existing declaration found in the namespace stack
-            else {
+            else
+            {
                 // validate special declaration (xml, xmlns)
-                if ((ns == XmlReservedNs.NsXml && prefix != "xml") ||
-                     (ns == XmlReservedNs.NsXmlNs && prefix != "xmlns")) {
-                    throw new ArgumentException(Res.GetString(Res.Xml_NamespaceDeclXmlXmlns, prefix));
+                if (
+                    (ns == XmlReservedNs.NsXml && prefix != "xml")
+                    || (ns == XmlReservedNs.NsXmlNs && prefix != "xmlns")
+                )
+                {
+                    throw new ArgumentException(
+                        Res.GetString(Res.Xml_NamespaceDeclXmlXmlns, prefix)
+                    );
                 }
 
                 // check if it can be found in the predefinedNamespaces (which are provided by the user)
-                if (predefinedNamespaces != null) {
+                if (predefinedNamespaces != null)
+                {
                     string definedNs = predefinedNamespaces.LookupNamespace(prefix);
                     // compare the namespace Uri to decide if the prefix is redefined
                     kind = (definedNs == ns) ? NamespaceKind.Implied : NamespaceKind.NeedToWrite;
                 }
-                else {
+                else
+                {
                     // Namespace not declared anywhere yet, we need to write it out
                     kind = NamespaceKind.NeedToWrite;
                 }
@@ -1451,27 +2296,39 @@ namespace System.Xml {
 
         // PushNamespaceExplicit is called when a namespace declaration is written out;
         // It returs true if the namespace declaration should we written out, false if it should be omited (if OmitDuplicateNamespaceDeclarations is true)
-        private bool PushNamespaceExplicit(string prefix, string ns) {
+        private bool PushNamespaceExplicit(string prefix, string ns)
+        {
             bool writeItOut = true;
 
             // See if the prefix is already defined
             int existingNsIndex = LookupNamespaceIndex(prefix);
 
             // Existing declaration in the current scope
-            if (existingNsIndex != -1) {
+            if (existingNsIndex != -1)
+            {
                 // It is defined in the current scope
-                if (existingNsIndex > elemScopeStack[elemTop].prevNSTop) {
+                if (existingNsIndex > elemScopeStack[elemTop].prevNSTop)
+                {
                     // The new namespace Uri needs to be the same as the one that is already declared
-                    if (nsStack[existingNsIndex].namespaceUri != ns) {
-                        throw new XmlException(Res.Xml_RedefinePrefix, new string[] { prefix, nsStack[existingNsIndex].namespaceUri, ns });
+                    if (nsStack[existingNsIndex].namespaceUri != ns)
+                    {
+                        throw new XmlException(
+                            Res.Xml_RedefinePrefix,
+                            new string[] { prefix, nsStack[existingNsIndex].namespaceUri, ns }
+                        );
                     }
                     // Check for duplicate declarations
                     NamespaceKind existingNsKind = nsStack[existingNsIndex].kind;
-                    if (existingNsKind == NamespaceKind.Written) {
-                        throw DupAttrException((prefix.Length == 0) ? string.Empty : "xmlns", (prefix.Length == 0) ? "xmlns" : prefix);
+                    if (existingNsKind == NamespaceKind.Written)
+                    {
+                        throw DupAttrException(
+                            (prefix.Length == 0) ? string.Empty : "xmlns",
+                            (prefix.Length == 0) ? "xmlns" : prefix
+                        );
                     }
                     // Check if it can be omitted
-                    if (omitDuplNamespaces && existingNsKind != NamespaceKind.NeedToWrite) {
+                    if (omitDuplNamespaces && existingNsKind != NamespaceKind.NeedToWrite)
+                    {
                         writeItOut = false;
                     }
                     nsStack[existingNsIndex].kind = NamespaceKind.Written;
@@ -1479,37 +2336,49 @@ namespace System.Xml {
                     return writeItOut;
                 }
                 // The prefix is defined but in a different scope
-                else {
+                else
+                {
                     // check if is the same and can be omitted
-                    if (nsStack[existingNsIndex].namespaceUri == ns && omitDuplNamespaces) {
+                    if (nsStack[existingNsIndex].namespaceUri == ns && omitDuplNamespaces)
+                    {
                         writeItOut = false;
                     }
                 }
             }
             // No existing declaration found in the namespace stack
-            else {
+            else
+            {
                 // check if it can be found in the predefinedNamespaces (which are provided by the user)
-                if (predefinedNamespaces != null) {
+                if (predefinedNamespaces != null)
+                {
                     string definedNs = predefinedNamespaces.LookupNamespace(prefix);
                     // compare the namespace Uri to decide if the prefix is redefined
-                    if (definedNs == ns && omitDuplNamespaces) {
+                    if (definedNs == ns && omitDuplNamespaces)
+                    {
                         writeItOut = false;
                     }
                 }
             }
 
             // validate special declaration (xml, xmlns)
-            if ((ns == XmlReservedNs.NsXml && prefix != "xml") ||
-                 (ns == XmlReservedNs.NsXmlNs && prefix != "xmlns")) {
+            if (
+                (ns == XmlReservedNs.NsXml && prefix != "xml")
+                || (ns == XmlReservedNs.NsXmlNs && prefix != "xmlns")
+            )
+            {
                 throw new ArgumentException(Res.GetString(Res.Xml_NamespaceDeclXmlXmlns, prefix));
             }
-            if (prefix.Length > 0 && prefix[0] == 'x') {
-                if (prefix == "xml") {
-                    if (ns != XmlReservedNs.NsXml) {
+            if (prefix.Length > 0 && prefix[0] == 'x')
+            {
+                if (prefix == "xml")
+                {
+                    if (ns != XmlReservedNs.NsXml)
+                    {
                         throw new ArgumentException(Res.GetString(Res.Xml_XmlPrefix));
                     }
                 }
-                else if (prefix == "xmlns") {
+                else if (prefix == "xmlns")
+                {
                     throw new ArgumentException(Res.GetString(Res.Xml_XmlnsPrefix));
                 }
             }
@@ -1519,48 +2388,61 @@ namespace System.Xml {
             return writeItOut;
         }
 
-        private void AddNamespace(string prefix, string ns, NamespaceKind kind) {
+        private void AddNamespace(string prefix, string ns, NamespaceKind kind)
+        {
             int top = ++nsTop;
-            if (top == nsStack.Length) {
+            if (top == nsStack.Length)
+            {
                 Namespace[] newStack = new Namespace[top * 2];
                 Array.Copy(nsStack, newStack, top);
                 nsStack = newStack;
             }
             nsStack[top].Set(prefix, ns, kind);
 
-            if (useNsHashtable) {
+            if (useNsHashtable)
+            {
                 // add last
                 AddToNamespaceHashtable(nsTop);
             }
-            else if (nsTop == MaxNamespacesWalkCount) {
+            else if (nsTop == MaxNamespacesWalkCount)
+            {
                 // add all
                 nsHashtable = new Dictionary<string, int>(hasher);
-                for (int i = 0; i <= nsTop; i++) {
+                for (int i = 0; i <= nsTop; i++)
+                {
                     AddToNamespaceHashtable(i);
                 }
                 useNsHashtable = true;
             }
         }
 
-        private void AddToNamespaceHashtable(int namespaceIndex) {
+        private void AddToNamespaceHashtable(int namespaceIndex)
+        {
             string prefix = nsStack[namespaceIndex].prefix;
             int existingNsIndex;
-            if (nsHashtable.TryGetValue(prefix, out existingNsIndex)) {
+            if (nsHashtable.TryGetValue(prefix, out existingNsIndex))
+            {
                 nsStack[namespaceIndex].prevNsIndex = existingNsIndex;
             }
             nsHashtable[prefix] = namespaceIndex;
         }
 
-        private int LookupNamespaceIndex(string prefix) {
+        private int LookupNamespaceIndex(string prefix)
+        {
             int index;
-            if (useNsHashtable) {
-                if (nsHashtable.TryGetValue(prefix, out index)) {
+            if (useNsHashtable)
+            {
+                if (nsHashtable.TryGetValue(prefix, out index))
+                {
                     return index;
                 }
             }
-            else {
-                for (int i = nsTop; i >= 0; i--) {
-                    if (nsStack[i].prefix == prefix) {
+            else
+            {
+                for (int i = nsTop; i >= 0; i--)
+                {
+                    if (nsStack[i].prefix == prefix)
+                    {
                         return i;
                     }
                 }
@@ -1568,23 +2450,29 @@ namespace System.Xml {
             return -1;
         }
 
-        private void PopNamespaces(int indexFrom, int indexTo) {
+        private void PopNamespaces(int indexFrom, int indexTo)
+        {
             Debug.Assert(useNsHashtable);
             Debug.Assert(indexFrom <= indexTo);
-            for (int i = indexTo; i >= indexFrom; i--) {
+            for (int i = indexTo; i >= indexFrom; i--)
+            {
                 Debug.Assert(nsHashtable.ContainsKey(nsStack[i].prefix));
-                if (nsStack[i].prevNsIndex == -1) {
+                if (nsStack[i].prevNsIndex == -1)
+                {
                     nsHashtable.Remove(nsStack[i].prefix);
                 }
-                else {
+                else
+                {
                     nsHashtable[nsStack[i].prefix] = nsStack[i].prevNsIndex;
                 }
             }
         }
 
-        static private XmlException DupAttrException(string prefix, string localName) {
+        private static XmlException DupAttrException(string prefix, string localName)
+        {
             StringBuilder sb = new StringBuilder();
-            if (prefix.Length > 0) {
+            if (prefix.Length > 0)
+            {
                 sb.Append(prefix);
                 sb.Append(':');
             }
@@ -1593,22 +2481,34 @@ namespace System.Xml {
         }
 
         // Advance the state machine
-        private void AdvanceState(Token token) {
-            if ((int)currentState >= (int)State.Closed) {
-                if (currentState == State.Closed || currentState == State.Error) {
+        private void AdvanceState(Token token)
+        {
+            if ((int)currentState >= (int)State.Closed)
+            {
+                if (currentState == State.Closed || currentState == State.Error)
+                {
                     throw new InvalidOperationException(Res.GetString(Res.Xml_ClosedOrError));
                 }
-                else {
-                    throw new InvalidOperationException(Res.GetString(Res.Xml_WrongToken, tokenName[(int)token], GetStateName(currentState)));
+                else
+                {
+                    throw new InvalidOperationException(
+                        Res.GetString(
+                            Res.Xml_WrongToken,
+                            tokenName[(int)token],
+                            GetStateName(currentState)
+                        )
+                    );
                 }
             }
 
-        Advance:
+            Advance:
             State newState = stateTable[((int)token << 4) + (int)currentState];
             //                         [ (int)token * 16 + (int)currentState ];
 
-            if ((int)newState >= (int)State.Error) {
-                switch (newState) {
+            if ((int)newState >= (int)State.Error)
+            {
+                switch (newState)
+                {
                     case State.Error:
                         ThrowInvalidStateTransition(token, currentState);
                         break;
@@ -1662,21 +2562,24 @@ namespace System.Xml {
                         break;
 
                     case State.PostB64Cont:
-                        if (rawWriter != null) {
+                        if (rawWriter != null)
+                        {
                             rawWriter.WriteEndBase64();
                         }
                         currentState = State.Content;
                         goto Advance;
 
                     case State.PostB64Attr:
-                        if (rawWriter != null) {
+                        if (rawWriter != null)
+                        {
                             rawWriter.WriteEndBase64();
                         }
                         currentState = State.Attribute;
                         goto Advance;
 
                     case State.PostB64RootAttr:
-                        if (rawWriter != null) {
+                        if (rawWriter != null)
+                        {
                             rawWriter.WriteEndBase64();
                         }
                         currentState = State.RootLevelAttr;
@@ -1711,57 +2614,75 @@ namespace System.Xml {
             currentState = newState;
         }
 
-        private void StartElementContent() {
+        private void StartElementContent()
+        {
             // write namespace declarations
             int start = elemScopeStack[elemTop].prevNSTop;
-            for (int i = nsTop; i > start; i--) {
-                if (nsStack[i].kind == NamespaceKind.NeedToWrite) {
+            for (int i = nsTop; i > start; i--)
+            {
+                if (nsStack[i].kind == NamespaceKind.NeedToWrite)
+                {
                     nsStack[i].WriteDecl(writer, rawWriter);
                 }
             }
 
-            if (rawWriter != null) {
+            if (rawWriter != null)
+            {
                 rawWriter.StartElementContent();
             }
         }
 
-        private static string GetStateName(State state) {
-            if (state >= State.Error) {
+        private static string GetStateName(State state)
+        {
+            if (state >= State.Error)
+            {
                 Debug.Assert(false, "We should never get to this point. State = " + state);
                 return "Error";
             }
-            else {
+            else
+            {
                 return stateName[(int)state];
             }
         }
 
-        internal string LookupNamespace(string prefix) {
-            for (int i = nsTop; i >= 0; i--) {
-                if (nsStack[i].prefix == prefix) {
+        internal string LookupNamespace(string prefix)
+        {
+            for (int i = nsTop; i >= 0; i--)
+            {
+                if (nsStack[i].prefix == prefix)
+                {
                     return nsStack[i].namespaceUri;
                 }
             }
-            return (predefinedNamespaces != null) ? predefinedNamespaces.LookupNamespace(prefix) : null;
+            return (predefinedNamespaces != null)
+                ? predefinedNamespaces.LookupNamespace(prefix)
+                : null;
         }
 
-        private string LookupLocalNamespace(string prefix) {
-            for (int i = nsTop; i > elemScopeStack[elemTop].prevNSTop; i--) {
-                if (nsStack[i].prefix == prefix) {
+        private string LookupLocalNamespace(string prefix)
+        {
+            for (int i = nsTop; i > elemScopeStack[elemTop].prevNSTop; i--)
+            {
+                if (nsStack[i].prefix == prefix)
+                {
                     return nsStack[i].namespaceUri;
                 }
             }
             return null;
         }
 
-        private string GeneratePrefix() {
+        private string GeneratePrefix()
+        {
             string genPrefix = "p" + (nsTop - 2).ToString("d", CultureInfo.InvariantCulture);
-            if (LookupNamespace(genPrefix) == null) {
+            if (LookupNamespace(genPrefix) == null)
+            {
                 return genPrefix;
             }
             int i = 0;
 
             string s;
-            do {
+            do
+            {
                 s = string.Concat(genPrefix, i.ToString(CultureInfo.InvariantCulture));
                 i++;
             } while (LookupNamespace(s) != null);
@@ -1771,42 +2692,51 @@ namespace System.Xml {
 #if SILVERLIGHT && !SILVERLIGHT_DISABLE_SECURITY && XMLCHARTYPE_USE_RESOURCE
         [System.Security.SecuritySafeCritical]
 #endif
-        private unsafe void CheckNCName(string ncname) {
+        private unsafe void CheckNCName(string ncname)
+        {
             Debug.Assert(ncname != null && ncname.Length > 0);
 
             int i;
             int endPos = ncname.Length;
 
             // Check if first character is StartNCName (inc. surrogates)
-            if ((xmlCharType.charProperties[ncname[0]] & XmlCharType.fNCStartNameSC) != 0) { // if ( xmlCharType.IsStartNCNameChar( ncname[0] ) ) {
+            if ((xmlCharType.charProperties[ncname[0]] & XmlCharType.fNCStartNameSC) != 0)
+            { // if ( xmlCharType.IsStartNCNameChar( ncname[0] ) ) {
                 i = 1;
             }
 #if XML10_FIFTH_EDITION
-            else if (xmlCharType.IsNCNameSurrogateChar(ncname, 0)) { // surrogate ranges are same for NCName and StartNCName
+            else if (xmlCharType.IsNCNameSurrogateChar(ncname, 0))
+            { // surrogate ranges are same for NCName and StartNCName
                 i = 2;
             }
 #endif
-            else {
+            else
+            {
                 throw InvalidCharsException(ncname, 0);
             }
 
             // Check if following characters are NCName (inc. surrogates)
-            while (i < endPos) {
-                if ((xmlCharType.charProperties[ncname[i]] & XmlCharType.fNCNameSC) != 0) { // if ( xmlCharType.IsNCNameChar( ncname[i] ) ) {
+            while (i < endPos)
+            {
+                if ((xmlCharType.charProperties[ncname[i]] & XmlCharType.fNCNameSC) != 0)
+                { // if ( xmlCharType.IsNCNameChar( ncname[i] ) ) {
                     i++;
                 }
 #if XML10_FIFTH_EDITION
-                else if (xmlCharType.IsNCNameSurrogateChar(ncname, i)) {
+                else if (xmlCharType.IsNCNameSurrogateChar(ncname, i))
+                {
                     i += 2;
                 }
 #endif
-                else {
+                else
+                {
                     throw InvalidCharsException(ncname, i);
                 }
             }
         }
 
-        private static Exception InvalidCharsException(string name, int badCharIndex) {
+        private static Exception InvalidCharsException(string name, int badCharIndex)
+        {
             string[] badCharArgs = XmlException.BuildCharExceptionArgs(name, badCharIndex);
             string[] args = new string[3];
             args[0] = name;
@@ -1816,50 +2746,69 @@ namespace System.Xml {
         }
 
         // This method translates speficic state transition errors in more friendly error messages
-        private void ThrowInvalidStateTransition(Token token, State currentState) {
-            string wrongTokenMessage = Res.GetString(Res.Xml_WrongToken, tokenName[(int)token], GetStateName(currentState));
-            switch (currentState) {
+        private void ThrowInvalidStateTransition(Token token, State currentState)
+        {
+            string wrongTokenMessage = Res.GetString(
+                Res.Xml_WrongToken,
+                tokenName[(int)token],
+                GetStateName(currentState)
+            );
+            switch (currentState)
+            {
                 case State.AfterRootEle:
                 case State.Start:
-                    if (conformanceLevel == ConformanceLevel.Document) {
-                        throw new InvalidOperationException(wrongTokenMessage + ' ' + Res.GetString(Res.Xml_ConformanceLevelFragment));
+                    if (conformanceLevel == ConformanceLevel.Document)
+                    {
+                        throw new InvalidOperationException(
+                            wrongTokenMessage
+                                + ' '
+                                + Res.GetString(Res.Xml_ConformanceLevelFragment)
+                        );
                     }
                     break;
             }
             throw new InvalidOperationException(wrongTokenMessage);
         }
 
-        private bool IsClosedOrErrorState {
-            get {
-                return (int)currentState >= (int)State.Closed;
-            }
+        private bool IsClosedOrErrorState
+        {
+            get { return (int)currentState >= (int)State.Closed; }
         }
 
-        private void AddAttribute(string prefix, string localName, string namespaceName) {
+        private void AddAttribute(string prefix, string localName, string namespaceName)
+        {
             int top = attrCount++;
-            if (top == attrStack.Length) {
+            if (top == attrStack.Length)
+            {
                 AttrName[] newStack = new AttrName[top * 2];
                 Array.Copy(attrStack, newStack, top);
                 attrStack = newStack;
             }
             attrStack[top].Set(prefix, localName, namespaceName);
 
-            if (attrCount < MaxAttrDuplWalkCount) {
+            if (attrCount < MaxAttrDuplWalkCount)
+            {
                 // check for duplicates
-                for (int i = 0; i < top; i++) {
-                    if (attrStack[i].IsDuplicate(prefix, localName, namespaceName)) {
+                for (int i = 0; i < top; i++)
+                {
+                    if (attrStack[i].IsDuplicate(prefix, localName, namespaceName))
+                    {
                         throw DupAttrException(prefix, localName);
                     }
                 }
             }
-            else {
+            else
+            {
                 // reached the threshold -> add all attributes to hash table
-                if (attrCount == MaxAttrDuplWalkCount) {
-                    if (attrHashTable == null) {
+                if (attrCount == MaxAttrDuplWalkCount)
+                {
+                    if (attrHashTable == null)
+                    {
                         attrHashTable = new Dictionary<string, int>(hasher);
                     }
                     Debug.Assert(attrHashTable.Count == 0);
-                    for (int i = 0; i < top; i++) {
+                    for (int i = 0; i < top; i++)
+                    {
                         AddToAttrHashTable(i);
                     }
                 }
@@ -1867,10 +2816,12 @@ namespace System.Xml {
                 // add last attribute to hash table and check for duplicates
                 AddToAttrHashTable(top);
                 int prev = attrStack[top].prev;
-                while (prev > 0) {
+                while (prev > 0)
+                {
                     // indexes are stored incremented by 1, 0 means no entry
                     prev--;
-                    if (attrStack[prev].IsDuplicate(prefix, localName, namespaceName)) {
+                    if (attrStack[prev].IsDuplicate(prefix, localName, namespaceName))
+                    {
                         throw DupAttrException(prefix, localName);
                     }
                     prev = attrStack[prev].prev;
@@ -1878,24 +2829,27 @@ namespace System.Xml {
             }
         }
 
-        private void AddToAttrHashTable(int attributeIndex) {
+        private void AddToAttrHashTable(int attributeIndex)
+        {
             string localName = attrStack[attributeIndex].localName;
             int count = attrHashTable.Count;
             attrHashTable[localName] = 0; // overwrite on collision
-            if (count != attrHashTable.Count) {
+            if (count != attrHashTable.Count)
+            {
                 return;
             }
             // chain to previous attribute in stack with the same localName
             int prev = attributeIndex - 1;
-            while (prev >= 0) {
-                if (attrStack[prev].localName == localName) {
+            while (prev >= 0)
+            {
+                if (attrStack[prev].localName == localName)
+                {
                     break;
                 }
                 prev--;
             }
             Debug.Assert(prev >= 0 && attrStack[prev].localName == localName);
-            attrStack[attributeIndex].prev = prev + 1; // indexes are stored incremented by 1 
+            attrStack[attributeIndex].prev = prev + 1; // indexes are stored incremented by 1
         }
-
     }
 }

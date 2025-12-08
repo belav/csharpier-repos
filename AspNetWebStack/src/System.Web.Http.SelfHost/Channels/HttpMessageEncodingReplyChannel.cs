@@ -8,12 +8,17 @@ using System.Web.Http.SelfHost.ServiceModel.Channels;
 
 namespace System.Web.Http.SelfHost.Channels
 {
-    internal class HttpMessageEncodingReplyChannel : LayeredChannel<IReplyChannel>, IReplyChannel, IChannel, ICommunicationObject
+    internal class HttpMessageEncodingReplyChannel
+        : LayeredChannel<IReplyChannel>,
+            IReplyChannel,
+            IChannel,
+            ICommunicationObject
     {
-        public HttpMessageEncodingReplyChannel(ChannelManagerBase channelManager, IReplyChannel innerChannel)
-            : base(channelManager, innerChannel)
-        {
-        }
+        public HttpMessageEncodingReplyChannel(
+            ChannelManagerBase channelManager,
+            IReplyChannel innerChannel
+        )
+            : base(channelManager, innerChannel) { }
 
         public EndpointAddress LocalAddress
         {
@@ -25,17 +30,29 @@ namespace System.Web.Http.SelfHost.Channels
             return InnerChannel.BeginReceiveRequest(callback, state);
         }
 
-        public IAsyncResult BeginReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginReceiveRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return InnerChannel.BeginReceiveRequest(timeout, callback, state);
         }
 
-        public IAsyncResult BeginTryReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginTryReceiveRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return InnerChannel.BeginTryReceiveRequest(timeout, callback, state);
         }
 
-        public IAsyncResult BeginWaitForRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return InnerChannel.BeginWaitForRequest(timeout, callback, state);
         }
@@ -94,12 +111,16 @@ namespace System.Web.Http.SelfHost.Channels
             return InnerChannel.WaitForRequest(timeout);
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "disposed later.")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "disposed later."
+        )]
         private static RequestContext WrapRequestContext(RequestContext innerContext)
         {
             return (innerContext != null)
-                       ? new HttpMessageEncodingRequestContext(innerContext)
-                       : (RequestContext)null;
+                ? new HttpMessageEncodingRequestContext(innerContext)
+                : (RequestContext)null;
         }
     }
 }

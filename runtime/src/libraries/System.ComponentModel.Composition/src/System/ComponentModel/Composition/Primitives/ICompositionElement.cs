@@ -20,10 +20,7 @@ namespace System.ComponentModel.Composition.Primitives
         ///         string ("").
         ///     </note>
         /// </remarks>
-        string DisplayName
-        {
-            get;
-        }
+        string DisplayName { get; }
 
         /// <summary>
         ///     Gets the composition element from which the current composition element
@@ -34,9 +31,6 @@ namespace System.ComponentModel.Composition.Primitives
         ///     <see cref="ICompositionElement"/> originated, or <see langword="null"/>
         ///     if the <see cref="ICompositionElement"/> is the root composition element.
         /// </value>
-        ICompositionElement? Origin
-        {
-            get;
-        }
+        ICompositionElement? Origin { get; }
     }
 }

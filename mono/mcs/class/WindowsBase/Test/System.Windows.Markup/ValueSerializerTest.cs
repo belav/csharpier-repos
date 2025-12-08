@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,64 +30,71 @@ using System.Windows.Converters;
 using System.Windows.Markup;
 using NUnit.Framework;
 
-namespace MonoTests.System.Windows.Markup {
+namespace MonoTests.System.Windows.Markup
+{
+    [TestFixture]
+    public class ValueSerializerTest
+    {
+        class Context : IValueSerializerContext
+        {
+            public ValueSerializer GetValueSerializerFor(PropertyDescriptor descriptor)
+            {
+                Console.WriteLine("GetValueSerializerFor ({0})", descriptor);
+                return null;
+            }
 
-	[TestFixture]
-	public class ValueSerializerTest
-	{
-		class Context : IValueSerializerContext {
-			public ValueSerializer GetValueSerializerFor (PropertyDescriptor descriptor)
-			{
-				Console.WriteLine ("GetValueSerializerFor ({0})", descriptor);
-				return null;
-			}
+            public ValueSerializer GetValueSerializerFor(Type type)
+            {
+                Console.WriteLine("GetValueSerializerFor ({0})", type);
+                return null;
+            }
 
-			public ValueSerializer GetValueSerializerFor (Type type)
-			{
-				Console.WriteLine ("GetValueSerializerFor ({0})", type);
-				return null;
-			}
+            public void OnComponentChanged() { }
 
-			public void OnComponentChanged ()
-			{
-			}
+            public bool OnComponentChanging()
+            {
+                return false;
+            }
 
-			public bool OnComponentChanging ()
-			{
-				return false;
-			}
+            public IContainer Container
+            {
+                get { return null; }
+            }
 
-			public IContainer Container {
-				get { return null; }
-			}
+            public object Instance
+            {
+                get { return null; }
+            }
 
-			public object Instance {
-				get { return null; }
-			}
+            public PropertyDescriptor PropertyDescriptor
+            {
+                get { return null; }
+            }
 
-			public PropertyDescriptor PropertyDescriptor {
-				get { return null; }
-			}
+            public object GetService(Type serviceType)
+            {
+                return null;
+            }
+        }
 
-			public object GetService (Type serviceType)
-			{
-				return null;
-			}
-		}
+        [Test]
+        [NUnit.Framework.CategoryAttribute("NotWorking")]
+        // Since ValueSerializer has moved to System.Xaml.dll while the type
+        // this test expects is in WindowsBase, there should be some additional
+        // support code in this assembly. Until someone does that job, this
+        // test won't pass.
+        public void GetSerializerForType()
+        {
+            Assert.IsNull(ValueSerializer.GetSerializerFor(typeof(DependencyObject)));
 
-		[Test]
-		[NUnit.Framework.CategoryAttribute ("NotWorking")]
-		// Since ValueSerializer has moved to System.Xaml.dll while the type
-		// this test expects is in WindowsBase, there should be some additional
-		// support code in this assembly. Until someone does that job, this
-		// test won't pass.
-		public void GetSerializerForType ()
-		{
-			Assert.IsNull (ValueSerializer.GetSerializerFor (typeof (DependencyObject)));
-
-			Assert.AreEqual ("VectorValueSerializer", ValueSerializer.GetSerializerFor (typeof (Vector)).GetType().Name);
-			Assert.AreEqual ("Int32RectValueSerializer", ValueSerializer.GetSerializerFor (typeof (Int32Rect)).GetType().Name);
-		}
-	}
+            Assert.AreEqual(
+                "VectorValueSerializer",
+                ValueSerializer.GetSerializerFor(typeof(Vector)).GetType().Name
+            );
+            Assert.AreEqual(
+                "Int32RectValueSerializer",
+                ValueSerializer.GetSerializerFor(typeof(Int32Rect)).GetType().Name
+            );
+        }
+    }
 }
-

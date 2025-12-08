@@ -63,11 +63,7 @@ namespace System.Activities
 
         public Activity Activity
         {
-            get
-            {
-                return this.activity;
-            }
-
+            get { return this.activity; }
             internal set
             {
                 Fx.Assert(value != null || this.state == ActivityInstanceState.Closed, "");
@@ -77,18 +73,12 @@ namespace System.Activities
 
         Activity ActivityInstanceMap.IActivityReference.Activity
         {
-            get
-            {
-                return this.Activity;
-            }
+            get { return this.Activity; }
         }
 
         internal Substate SubState
         {
-            get
-            {
-                return this.substate;
-            }
+            get { return this.substate; }
         }
 
         [DataMember(EmitDefaultValue = false)]
@@ -187,39 +177,30 @@ namespace System.Activities
 
         internal ActivityInstanceMap InstanceMap
         {
-            get
-            {
-                return this.instanceMap;
-            }
+            get { return this.instanceMap; }
         }
 
         public bool IsCompleted
         {
-            get
-            {
-                return ActivityUtilities.IsCompletedState(this.State);
-            }
+            get { return ActivityUtilities.IsCompletedState(this.State); }
         }
 
         public ActivityInstanceState State
         {
-            get
-            {
-                return this.state;
-            }
+            get { return this.state; }
         }
 
         internal bool IsCancellationRequested
         {
-            get
-            {
-                return this.isCancellationRequested;
-            }
+            get { return this.isCancellationRequested; }
             set
             {
                 // This is set at the time of scheduling the cancelation work item
 
-                Fx.Assert(!this.isCancellationRequested, "We should not set this if we have already requested cancel.");
+                Fx.Assert(
+                    !this.isCancellationRequested,
+                    "We should not set this if we have already requested cancel."
+                );
                 Fx.Assert(value != false, "We should only set this to true.");
 
                 this.isCancellationRequested = value;
@@ -228,50 +209,32 @@ namespace System.Activities
 
         internal bool IsPerformingDefaultCancelation
         {
-            get
-            {
-                return this.performingDefaultCancelation;
-            }
+            get { return this.performingDefaultCancelation; }
         }
 
         public string Id
         {
-            get
-            {
-                return this.id.ToString(CultureInfo.InvariantCulture);
-            }
+            get { return this.id.ToString(CultureInfo.InvariantCulture); }
         }
 
         internal long InternalId
         {
-            get
-            {
-                return this.id;
-            }
+            get { return this.id; }
         }
 
         internal bool IsEnvironmentOwner
         {
-            get
-            {
-                return !this.noSymbols;
-            }
+            get { return !this.noSymbols; }
         }
 
         internal bool IsResolvingArguments
         {
-            get
-            {
-                return this.substate == Substate.ResolvingArguments;
-            }
+            get { return this.substate == Substate.ResolvingArguments; }
         }
 
         internal bool HasNotExecuted
         {
-            get
-            {
-                return (this.substate & Substate.PreExecuting) != 0;
-            }
+            get { return (this.substate & Substate.PreExecuting) != 0; }
         }
 
         internal bool HasPendingWork
@@ -299,16 +262,15 @@ namespace System.Activities
             {
                 // If our whole busy count is because of blocking bookmarks then
                 // we should return true
-                return !this.HasChildren && this.extendedData != null && (this.extendedData.BlockingBookmarkCount == this.busyCount);
+                return !this.HasChildren
+                    && this.extendedData != null
+                    && (this.extendedData.BlockingBookmarkCount == this.busyCount);
             }
         }
 
         internal ActivityInstance Parent
         {
-            get
-            {
-                return this.parent;
-            }
+            get { return this.parent; }
         }
 
         internal bool WaitingForTransactionContext
@@ -335,15 +297,8 @@ namespace System.Activities
         [DataMember(EmitDefaultValue = false)]
         internal CompletionBookmark CompletionBookmark
         {
-            get
-            {
-                return this.completionBookmark;
-            }
-
-            set
-            {
-                this.completionBookmark = value;
-            }
+            get { return this.completionBookmark; }
+            set { this.completionBookmark = value; }
         }
 
         internal FaultBookmark FaultBookmark
@@ -357,10 +312,13 @@ namespace System.Activities
 
                 return this.extendedData.FaultBookmark;
             }
-
             set
             {
-                Fx.Assert(value != null || (this.extendedData == null || this.extendedData.FaultBookmark == null), "cannot go from non-null to null");
+                Fx.Assert(
+                    value != null
+                        || (this.extendedData == null || this.extendedData.FaultBookmark == null),
+                    "cannot go from non-null to null"
+                );
                 if (value != null)
                 {
                     EnsureExtendedData();
@@ -371,22 +329,13 @@ namespace System.Activities
 
         internal bool HasChildren
         {
-            get
-            {
-                return (this.childList != null && this.childList.Count > 0);
-            }
+            get { return (this.childList != null && this.childList.Count > 0); }
         }
 
         internal ExecutionPropertyManager PropertyManager
         {
-            get
-            {
-                return this.propertyManager;
-            }
-            set
-            {
-                this.propertyManager = value;
-            }
+            get { return this.propertyManager; }
+            set { this.propertyManager = value; }
         }
 
         internal WorkflowDataContext DataContext
@@ -406,28 +355,21 @@ namespace System.Activities
             }
         }
 
-        internal object CompiledDataContexts
-        {
-            get;
-            set;
-        }
+        internal object CompiledDataContexts { get; set; }
 
-        internal object CompiledDataContextsForImplementation
-        {
-            get;
-            set;
-        }
+        internal object CompiledDataContextsForImplementation { get; set; }
 
         internal bool HasActivityReferences
         {
-            get
-            {
-                return this.extendedData != null && this.extendedData.HasActivityReferences;
-            }
+            get { return this.extendedData != null && this.extendedData.HasActivityReferences; }
         }
 
         [DataMember(Name = XD.ActivityInstance.PropertyManager, EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called from Serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Called from Serialization"
+        )]
         internal ExecutionPropertyManager SerializedPropertyManager
         {
             get
@@ -443,7 +385,10 @@ namespace System.Activities
             }
             set
             {
-                Fx.Assert(value != null, "We don't emit the default value so this should never be null.");
+                Fx.Assert(
+                    value != null,
+                    "We don't emit the default value so this should never be null."
+                );
                 this.propertyManager = value;
             }
         }
@@ -461,7 +406,6 @@ namespace System.Activities
 
                 return null;
             }
-
             set
             {
                 Fx.Assert(value != null, "value from Serialization should not be null");
@@ -488,11 +432,7 @@ namespace System.Activities
         }
 
         [DataMember(EmitDefaultValue = false)]
-        public Version ImplementationVersion
-        {
-            get;
-            internal set;
-        }
+        public Version ImplementationVersion { get; internal set; }
 
         internal static ActivityInstance CreateCompletedInstance(Activity activity)
         {
@@ -592,7 +532,10 @@ namespace System.Activities
             this.extendedData.RemoveBookmark(bookmark, affectsBusyCount);
         }
 
-        internal void RemoveAllBookmarks(BookmarkScopeManager bookmarkScopeManager, BookmarkManager bookmarkManager)
+        internal void RemoveAllBookmarks(
+            BookmarkScopeManager bookmarkScopeManager,
+            BookmarkManager bookmarkManager
+        )
         {
             if (this.extendedData != null)
             {
@@ -607,7 +550,10 @@ namespace System.Activities
 
         internal void MarkCanceled()
         {
-            Fx.Assert(this.substate == Substate.Executing || this.substate == Substate.Canceling, "called from an unexpected state");
+            Fx.Assert(
+                this.substate == Substate.Executing || this.substate == Substate.Canceling,
+                "called from an unexpected state"
+            );
             this.substate = Substate.Canceling;
         }
 
@@ -616,7 +562,10 @@ namespace System.Activities
             this.substate = Substate.Executing;
         }
 
-        internal void MarkAsComplete(BookmarkScopeManager bookmarkScopeManager, BookmarkManager bookmarkManager)
+        internal void MarkAsComplete(
+            BookmarkScopeManager bookmarkScopeManager,
+            BookmarkManager bookmarkManager
+        )
         {
             if (this.extendedData != null)
             {
@@ -644,7 +593,12 @@ namespace System.Activities
             }
         }
 
-        internal void Abort(ActivityExecutor executor, BookmarkManager bookmarkManager, Exception terminationReason, bool isTerminate)
+        internal void Abort(
+            ActivityExecutor executor,
+            BookmarkManager bookmarkManager,
+            Exception terminationReason,
+            bool isTerminate
+        )
         {
             // This is a gentle abort where we try to keep the runtime in a
             // usable state.
@@ -656,13 +610,21 @@ namespace System.Activities
 
                 if (!currentInstance.HasNotExecuted)
                 {
-                    currentInstance.Activity.InternalAbort(currentInstance, executor, terminationReason);
+                    currentInstance.Activity.InternalAbort(
+                        currentInstance,
+                        executor,
+                        terminationReason
+                    );
                     executor.DebugActivityCompleted(currentInstance);
                 }
 
                 if (currentInstance.PropertyManager != null)
                 {
-                    currentInstance.PropertyManager.UnregisterProperties(currentInstance, currentInstance.Activity.MemberOf, true);
+                    currentInstance.PropertyManager.UnregisterProperties(
+                        currentInstance,
+                        currentInstance.Activity.MemberOf,
+                        true
+                    );
                 }
 
                 executor.TerminateSpecialExecutionBlocks(currentInstance, terminationReason);
@@ -711,7 +673,9 @@ namespace System.Activities
         {
             if (this.initializationIncomplete)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InitializationIncomplete));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.InitializationIncomplete)
+                );
             }
 
             MarkExecuted();
@@ -737,14 +701,24 @@ namespace System.Activities
         }
 
         // called by ActivityUtilities tree-walk
-        internal void AppendChildren(ActivityUtilities.TreeProcessingList nextInstanceList, ref Queue<IList<ActivityInstance>> instancesRemaining)
+        internal void AppendChildren(
+            ActivityUtilities.TreeProcessingList nextInstanceList,
+            ref Queue<IList<ActivityInstance>> instancesRemaining
+        )
         {
-            Fx.Assert(this.HasChildren, "AppendChildren is tuned to only be called when HasChildren is true");
+            Fx.Assert(
+                this.HasChildren,
+                "AppendChildren is tuned to only be called when HasChildren is true"
+            );
             this.childList.AppendChildren(nextInstanceList, ref instancesRemaining);
         }
 
         // called after deserialization of the workflow instance
-        internal void FixupInstance(ActivityInstance parent, ActivityInstanceMap instanceMap, ActivityExecutor executor)
+        internal void FixupInstance(
+            ActivityInstance parent,
+            ActivityInstanceMap instanceMap,
+            ActivityExecutor executor
+        )
         {
             if (this.IsCompleted)
             {
@@ -757,7 +731,9 @@ namespace System.Activities
 
             if (this.Activity == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ActivityInstanceFixupFailed));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.ActivityInstanceFixupFailed)
+                );
             }
 
             this.parent = parent;
@@ -802,11 +778,18 @@ namespace System.Activities
                 return;
             }
 
-            Fx.Assert(this.instanceMap == null, "We should never call this unless the current map is null.");
+            Fx.Assert(
+                this.instanceMap == null,
+                "We should never call this unless the current map is null."
+            );
             Fx.Assert(this.Parent == null, "Can only generate a map from a root instance.");
 
             this.instanceMap = instanceMap;
-            ActivityUtilities.ProcessActivityInstanceTree(this, null, new Func<ActivityInstance, ActivityExecutor, bool>(GenerateInstanceMapCallback));
+            ActivityUtilities.ProcessActivityInstanceTree(
+                this,
+                null,
+                new Func<ActivityInstance, ActivityExecutor, bool>(GenerateInstanceMapCallback)
+            );
         }
 
         bool GenerateInstanceMapCallback(ActivityInstance instance, ActivityExecutor executor)
@@ -818,16 +801,29 @@ namespace System.Activities
             {
                 instance.extendedData.FillInstanceMap(instance.instanceMap);
             }
-         
+
             return true;
         }
 
-        internal bool Initialize(ActivityInstance parent, ActivityInstanceMap instanceMap, LocationEnvironment parentEnvironment, long instanceId, ActivityExecutor executor)
+        internal bool Initialize(
+            ActivityInstance parent,
+            ActivityInstanceMap instanceMap,
+            LocationEnvironment parentEnvironment,
+            long instanceId,
+            ActivityExecutor executor
+        )
         {
             return this.Initialize(parent, instanceMap, parentEnvironment, instanceId, executor, 0);
         }
 
-        internal bool Initialize(ActivityInstance parent, ActivityInstanceMap instanceMap, LocationEnvironment parentEnvironment, long instanceId, ActivityExecutor executor, int delegateParameterCount)
+        internal bool Initialize(
+            ActivityInstance parent,
+            ActivityInstanceMap instanceMap,
+            LocationEnvironment parentEnvironment,
+            long instanceId,
+            ActivityExecutor executor,
+            int delegateParameterCount
+        )
         {
             this.parent = parent;
             this.instanceMap = instanceMap;
@@ -873,16 +869,27 @@ namespace System.Activities
             }
             else
             {
-                this.environment = new LocationEnvironment(executor, this.Activity, parentEnvironment, symbolCount);
+                this.environment = new LocationEnvironment(
+                    executor,
+                    this.Activity,
+                    parentEnvironment,
+                    symbolCount
+                );
                 this.substate = Substate.ResolvingArguments;
                 return true;
             }
         }
 
-        internal void ResolveNewArgumentsDuringDynamicUpdate(ActivityExecutor executor, IList<int> dynamicUpdateArgumentIndexes)
+        internal void ResolveNewArgumentsDuringDynamicUpdate(
+            ActivityExecutor executor,
+            IList<int> dynamicUpdateArgumentIndexes
+        )
         {
             Fx.Assert(!this.noSymbols, "Can only resolve arguments if we created an environment");
-            Fx.Assert(this.substate == Substate.Executing, "Dynamically added arguments are to be resolved only in Substate.Executing.");
+            Fx.Assert(
+                this.substate == Substate.Executing,
+                "Dynamically added arguments are to be resolved only in Substate.Executing."
+            );
 
             if (this.Activity.SkipArgumentResolution)
             {
@@ -894,13 +901,30 @@ namespace System.Activities
             for (int i = 0; i < dynamicUpdateArgumentIndexes.Count; i++)
             {
                 RuntimeArgument argument = runtimeArguments[dynamicUpdateArgumentIndexes[i]];
-                Fx.Assert(this.Environment.GetSpecificLocation(argument.Id) == null, "This is a newly added argument so the location should be null");
+                Fx.Assert(
+                    this.Environment.GetSpecificLocation(argument.Id) == null,
+                    "This is a newly added argument so the location should be null"
+                );
 
-                this.InternalTryPopulateArgumentValueOrScheduleExpression(argument, -1, executor, null, null, true);
+                this.InternalTryPopulateArgumentValueOrScheduleExpression(
+                    argument,
+                    -1,
+                    executor,
+                    null,
+                    null,
+                    true
+                );
             }
         }
 
-        private bool InternalTryPopulateArgumentValueOrScheduleExpression(RuntimeArgument argument, int nextArgumentIndex, ActivityExecutor executor, IDictionary<string, object> argumentValueOverrides, Location resultLocation, bool isDynamicUpdate)
+        private bool InternalTryPopulateArgumentValueOrScheduleExpression(
+            RuntimeArgument argument,
+            int nextArgumentIndex,
+            ActivityExecutor executor,
+            IDictionary<string, object> argumentValueOverrides,
+            Location resultLocation,
+            bool isDynamicUpdate
+        )
         {
             object overrideValue = null;
             if (argumentValueOverrides != null)
@@ -908,7 +932,16 @@ namespace System.Activities
                 argumentValueOverrides.TryGetValue(argument.Name, out overrideValue);
             }
 
-            if (argument.TryPopulateValue(this.environment, this, executor, overrideValue, resultLocation, isDynamicUpdate))
+            if (
+                argument.TryPopulateValue(
+                    this.environment,
+                    this,
+                    executor,
+                    overrideValue,
+                    resultLocation,
+                    isDynamicUpdate
+                )
+            )
             {
                 return true;
             }
@@ -922,7 +955,9 @@ namespace System.Activities
                 if (location.TemporaryResolutionEnvironment != null)
                 {
                     // 2. Add a workitem to collapse the temporary location
-                    executor.ScheduleItem(new CollapseTemporaryResolutionLocationWorkItem(location, this));
+                    executor.ScheduleItem(
+                        new CollapseTemporaryResolutionLocationWorkItem(location, this)
+                    );
                 }
             }
             else
@@ -931,24 +966,40 @@ namespace System.Activities
                 nextArgumentIndex = nextArgumentIndex + 1;
 
                 // 2. Add a workitem to resume argument resolution when
-                // work related to 3 below either completes or it hits an async point.           
+                // work related to 3 below either completes or it hits an async point.
                 int totalArgumentCount = this.Activity.RuntimeArguments.Count;
 
                 if (nextArgumentIndex < totalArgumentCount)
                 {
                     workItem = executor.ResolveNextArgumentWorkItemPool.Acquire();
-                    workItem.Initialize(this, nextArgumentIndex, argumentValueOverrides, resultLocation);
+                    workItem.Initialize(
+                        this,
+                        nextArgumentIndex,
+                        argumentValueOverrides,
+                        resultLocation
+                    );
                 }
             }
 
             // 3. Schedule the argument expression.
-            executor.ScheduleExpression(argument.BoundArgument.Expression, this, this.Environment, location, workItem);
+            executor.ScheduleExpression(
+                argument.BoundArgument.Expression,
+                this,
+                this.Environment,
+                location,
+                workItem
+            );
 
             return false;
         }
 
         // return true if arguments were resolved synchronously
-        internal bool ResolveArguments(ActivityExecutor executor, IDictionary<string, object> argumentValueOverrides, Location resultLocation, int startIndex = 0)
+        internal bool ResolveArguments(
+            ActivityExecutor executor,
+            IDictionary<string, object> argumentValueOverrides,
+            Location resultLocation,
+            int startIndex = 0
+        )
         {
             Fx.Assert(!this.noSymbols, "Can only resolve arguments if we created an environment");
             Fx.Assert(this.substate == Substate.ResolvingArguments, "Invalid sub-state machine");
@@ -959,16 +1010,36 @@ namespace System.Activities
             {
                 // We still need to resolve the result argument
                 Fx.Assert(argumentValueOverrides == null, "We shouldn't have any overrides.");
-                Fx.Assert(((ActivityWithResult)this.Activity).ResultRuntimeArgument != null, "We should have a result argument");
+                Fx.Assert(
+                    ((ActivityWithResult)this.Activity).ResultRuntimeArgument != null,
+                    "We should have a result argument"
+                );
 
-                RuntimeArgument argument = ((ActivityWithResult)this.Activity).ResultRuntimeArgument;
+                RuntimeArgument argument = (
+                    (ActivityWithResult)this.Activity
+                ).ResultRuntimeArgument;
 
-                if (!argument.TryPopulateValue(this.environment, this, executor, null, resultLocation, false))
+                if (
+                    !argument.TryPopulateValue(
+                        this.environment,
+                        this,
+                        executor,
+                        null,
+                        resultLocation,
+                        false
+                    )
+                )
                 {
                     completedSynchronously = false;
 
                     Location location = this.environment.GetSpecificLocation(argument.Id);
-                    executor.ScheduleExpression(argument.BoundArgument.Expression, this, this.Environment, location, null);
+                    executor.ScheduleExpression(
+                        argument.BoundArgument.Expression,
+                        this,
+                        this.Environment,
+                        location,
+                        null
+                    );
                 }
             }
             else if (!this.Activity.SkipArgumentResolution)
@@ -983,7 +1054,16 @@ namespace System.Activities
                     {
                         RuntimeArgument argument = runtimeArguments[i];
 
-                        if (!this.InternalTryPopulateArgumentValueOrScheduleExpression(argument, i, executor, argumentValueOverrides, resultLocation, false))
+                        if (
+                            !this.InternalTryPopulateArgumentValueOrScheduleExpression(
+                                argument,
+                                i,
+                                executor,
+                                argumentValueOverrides,
+                                resultLocation,
+                                false
+                            )
+                        )
                         {
                             completedSynchronously = false;
                             break;
@@ -1005,10 +1085,20 @@ namespace System.Activities
             return completedSynchronously;
         }
 
-        internal void ResolveNewVariableDefaultsDuringDynamicUpdate(ActivityExecutor executor, IList<int> dynamicUpdateVariableIndexes, bool forImplementation)
+        internal void ResolveNewVariableDefaultsDuringDynamicUpdate(
+            ActivityExecutor executor,
+            IList<int> dynamicUpdateVariableIndexes,
+            bool forImplementation
+        )
         {
-            Fx.Assert(!this.noSymbols, "Can only resolve variable default if we created an environment");
-            Fx.Assert(this.substate == Substate.Executing, "Dynamically added variable default expressions are to be resolved only in Substate.Executing.");
+            Fx.Assert(
+                !this.noSymbols,
+                "Can only resolve variable default if we created an environment"
+            );
+            Fx.Assert(
+                this.substate == Substate.Executing,
+                "Dynamically added variable default expressions are to be resolved only in Substate.Executing."
+            );
 
             IList<Variable> runtimeVariables;
             if (forImplementation)
@@ -1092,7 +1182,11 @@ namespace System.Activities
             return completedSynchronously;
         }
 
-        void EnqueueVariableDefault(ActivityExecutor executor, Variable variable, Location variableLocation)
+        void EnqueueVariableDefault(
+            ActivityExecutor executor,
+            Variable variable,
+            Location variableLocation
+        )
         {
             // Incomplete initialization detection logic relies on the fact that we
             // don't specify a completion callback.  If this changes we need to modify
@@ -1103,20 +1197,40 @@ namespace System.Activities
                 variableLocation = this.environment.GetSpecificLocation(variable.Id);
             }
             variable.SetIsWaitingOnDefaultValue(variableLocation);
-            executor.ScheduleExpression(variable.Default, this, this.environment, variableLocation, null);
+            executor.ScheduleExpression(
+                variable.Default,
+                this,
+                this.environment,
+                variableLocation,
+                null
+            );
         }
 
-        void ActivityInstanceMap.IActivityReference.Load(Activity activity, ActivityInstanceMap instanceMap)
+        void ActivityInstanceMap.IActivityReference.Load(
+            Activity activity,
+            ActivityInstanceMap instanceMap
+        )
         {
             if (activity.GetType().Name != this.OwnerName)
             {
                 throw FxTrace.Exception.AsError(
-                    new ValidationException(SR.ActivityTypeMismatch(activity.DisplayName, this.OwnerName)));
+                    new ValidationException(
+                        SR.ActivityTypeMismatch(activity.DisplayName, this.OwnerName)
+                    )
+                );
             }
 
             if (activity.ImplementationVersion != this.ImplementationVersion)
             {
-                throw FxTrace.Exception.AsError(new VersionMismatchException(SR.ImplementationVersionMismatch(this.ImplementationVersion, activity.ImplementationVersion, activity)));
+                throw FxTrace.Exception.AsError(
+                    new VersionMismatchException(
+                        SR.ImplementationVersionMismatch(
+                            this.ImplementationVersion,
+                            activity.ImplementationVersion,
+                            activity
+                        )
+                    )
+                );
             }
 
             this.Activity = activity;
@@ -1135,7 +1249,10 @@ namespace System.Activities
                     {
                         foreach (ActivityInstance child in this.GetChildren())
                         {
-                            Fx.Assert(child.State == ActivityInstanceState.Executing, "should only have children if they're still executing");
+                            Fx.Assert(
+                                child.State == ActivityInstanceState.Executing,
+                                "should only have children if they're still executing"
+                            );
                             executor.CancelActivity(child);
                         }
                     }
@@ -1168,7 +1285,10 @@ namespace System.Activities
                     }
                 }
 
-                Fx.Assert(this.HasPendingWork || activityCompleted, "should have scheduled work pending if we're not complete");
+                Fx.Assert(
+                    this.HasPendingWork || activityCompleted,
+                    "should have scheduled work pending if we're not complete"
+                );
             }
             else if (!this.HasPendingWork)
             {
@@ -1183,13 +1303,16 @@ namespace System.Activities
                     {
                         SetClosed();
                     }
-                } 
+                }
             }
             else if (this.performingDefaultCancelation)
             {
                 if (this.OnlyHasOutstandingBookmarks)
                 {
-                    RemoveAllBookmarks(executor.RawBookmarkScopeManager, executor.RawBookmarkManager);
+                    RemoveAllBookmarks(
+                        executor.RawBookmarkScopeManager,
+                        executor.RawBookmarkManager
+                    );
                     MarkCanceled();
 
                     Fx.Assert(!this.HasPendingWork, "Shouldn't have pending work here.");
@@ -1212,13 +1335,18 @@ namespace System.Activities
 
         internal void SetInitializedSubstate(ActivityExecutor executor)
         {
-            Fx.Assert(this.substate != Substate.Initialized, "SetInitializedSubstate called when substate is already Initialized.");
+            Fx.Assert(
+                this.substate != Substate.Initialized,
+                "SetInitializedSubstate called when substate is already Initialized."
+            );
             this.substate = Substate.Initialized;
             if (executor.ShouldTrackActivityStateRecordsExecutingState)
             {
                 if (executor.ShouldTrackActivity(this.Activity.DisplayName))
                 {
-                    executor.AddTrackingRecord(new ActivityStateRecord(executor.WorkflowInstanceId, this, this.state));
+                    executor.AddTrackingRecord(
+                        new ActivityStateRecord(executor.WorkflowInstanceId, this, this.state)
+                    );
                 }
             }
 
@@ -1234,7 +1362,13 @@ namespace System.Activities
                         if (ArgumentDirectionHelper.IsIn(argument.Direction))
                         {
                             Location location;
-                            if (this.environment.TryGetLocation(argument.Id, this.Activity, out location))
+                            if (
+                                this.environment.TryGetLocation(
+                                    argument.Id,
+                                    this.Activity,
+                                    out location
+                                )
+                            )
                             {
                                 string argumentValue = null;
 
@@ -1247,7 +1381,13 @@ namespace System.Activities
                                     argumentValue = "'" + location.Value.ToString() + "'";
                                 }
 
-                                TD.InArgumentBound(argument.Name, this.Activity.GetType().ToString(), this.Activity.DisplayName, this.Id, argumentValue);
+                                TD.InArgumentBound(
+                                    argument.Name,
+                                    this.Activity.GetType().ToString(),
+                                    this.Activity.DisplayName,
+                                    this.Id,
+                                    argumentValue
+                                );
                             }
                         }
                     }
@@ -1260,7 +1400,11 @@ namespace System.Activities
             FinalizeState(executor, faultActivity, false);
         }
 
-        internal void FinalizeState(ActivityExecutor executor, bool faultActivity, bool skipTracking)
+        internal void FinalizeState(
+            ActivityExecutor executor,
+            bool faultActivity,
+            bool skipTracking
+        )
         {
             if (faultActivity)
             {
@@ -1270,7 +1414,10 @@ namespace System.Activities
                 this.state = ActivityInstanceState.Faulted;
             }
 
-            Fx.Assert(this.state != ActivityInstanceState.Executing, "We must be in a completed state at this point.");
+            Fx.Assert(
+                this.state != ActivityInstanceState.Executing,
+                "We must be in a completed state at this point."
+            );
 
             if (this.state == ActivityInstanceState.Closed)
             {
@@ -1278,7 +1425,9 @@ namespace System.Activities
                 {
                     if (executor.ShouldTrackActivity(this.Activity.DisplayName))
                     {
-                        executor.AddTrackingRecord(new ActivityStateRecord(executor.WorkflowInstanceId, this, this.state));
+                        executor.AddTrackingRecord(
+                            new ActivityStateRecord(executor.WorkflowInstanceId, this, this.state)
+                        );
                     }
                 }
             }
@@ -1286,15 +1435,21 @@ namespace System.Activities
             {
                 if (executor.ShouldTrackActivityStateRecords && !skipTracking)
                 {
-                    executor.AddTrackingRecord(new ActivityStateRecord(executor.WorkflowInstanceId, this, this.state));
+                    executor.AddTrackingRecord(
+                        new ActivityStateRecord(executor.WorkflowInstanceId, this, this.state)
+                    );
                 }
             }
 
             if (TD.ActivityCompletedIsEnabled())
             {
-                TD.ActivityCompleted(this.Activity.GetType().ToString(), this.Activity.DisplayName, this.Id, this.State.GetStateName());
+                TD.ActivityCompleted(
+                    this.Activity.GetType().ToString(),
+                    this.Activity.DisplayName,
+                    this.Id,
+                    this.State.GetStateName()
+                );
             }
-
         }
 
         void SetCanceled()
@@ -1313,9 +1468,16 @@ namespace System.Activities
             this.state = ActivityInstanceState.Closed;
         }
 
-        static void UpdateLocationEnvironmentHierarchy(LocationEnvironment oldParentEnvironment, LocationEnvironment newEnvironment, ActivityInstance currentInstance)
+        static void UpdateLocationEnvironmentHierarchy(
+            LocationEnvironment oldParentEnvironment,
+            LocationEnvironment newEnvironment,
+            ActivityInstance currentInstance
+        )
         {
-            Func<ActivityInstance, ActivityExecutor, bool> processInstanceCallback = delegate(ActivityInstance instance, ActivityExecutor executor)
+            Func<ActivityInstance, ActivityExecutor, bool> processInstanceCallback = delegate(
+                ActivityInstance instance,
+                ActivityExecutor executor
+            )
             {
                 if (instance == currentInstance)
                 {
@@ -1343,13 +1505,26 @@ namespace System.Activities
                 return true;
             };
 
-            ActivityUtilities.ProcessActivityInstanceTree(currentInstance, null, processInstanceCallback);
+            ActivityUtilities.ProcessActivityInstanceTree(
+                currentInstance,
+                null,
+                processInstanceCallback
+            );
         }
 
-        void ActivityInstanceMap.IActivityReferenceWithEnvironment.UpdateEnvironment(EnvironmentUpdateMap map, Activity activity)
-        {            
-            Fx.Assert(this.substate != Substate.ResolvingVariables, "We must have already performed the same validations in advance.");
-            Fx.Assert(this.substate != Substate.ResolvingArguments, "We must have already performed the same validations in advance.");
+        void ActivityInstanceMap.IActivityReferenceWithEnvironment.UpdateEnvironment(
+            EnvironmentUpdateMap map,
+            Activity activity
+        )
+        {
+            Fx.Assert(
+                this.substate != Substate.ResolvingVariables,
+                "We must have already performed the same validations in advance."
+            );
+            Fx.Assert(
+                this.substate != Substate.ResolvingArguments,
+                "We must have already performed the same validations in advance."
+            );
 
             if (this.noSymbols)
             {
@@ -1358,7 +1533,13 @@ namespace System.Activities
 
                 Fx.Assert(oldParentEnvironment != null, "environment must never be null.");
 
-                this.environment = new LocationEnvironment(oldParentEnvironment, map.NewArgumentCount + map.NewVariableCount + map.NewPrivateVariableCount + map.RuntimeDelegateArgumentCount);
+                this.environment = new LocationEnvironment(
+                    oldParentEnvironment,
+                    map.NewArgumentCount
+                        + map.NewVariableCount
+                        + map.NewPrivateVariableCount
+                        + map.RuntimeDelegateArgumentCount
+                );
                 this.noSymbols = false;
 
                 // traverse the activity instance chain.
@@ -1376,8 +1557,10 @@ namespace System.Activities
             PreExecuting = 0x80, // used for all states prior to "core execution"
             Created = 1 | Substate.PreExecuting,
             ResolvingArguments = 2 | Substate.PreExecuting,
+
             // ResolvedArguments = 2,
             ResolvingVariables = 3 | Substate.PreExecuting,
+
             // ResolvedVariables = 3,
             Initialized = 4 | Substate.PreExecuting,
             Canceling = 5,
@@ -1391,41 +1574,24 @@ namespace System.Activities
             ActivityReferenceList activityReferences;
             int blockingBookmarkCount;
 
-            public ExtendedData()
-            {
-            }
-                        
+            public ExtendedData() { }
+
             public int BlockingBookmarkCount
             {
-                get
-                {
-                    return blockingBookmarkCount;
-                }
-                private set
-                {
-                    blockingBookmarkCount = value;
-                }
+                get { return blockingBookmarkCount; }
+                private set { blockingBookmarkCount = value; }
             }
 
-            [DataMember(Name = XD.ActivityInstance.WaitingForTransactionContext, EmitDefaultValue = false)]
-            public bool WaitingForTransactionContext
-            {
-                get;
-                set;
-            }
+            [DataMember(
+                Name = XD.ActivityInstance.WaitingForTransactionContext,
+                EmitDefaultValue = false
+            )]
+            public bool WaitingForTransactionContext { get; set; }
 
             [DataMember(Name = XD.ActivityInstance.FaultBookmark, EmitDefaultValue = false)]
-            public FaultBookmark FaultBookmark
-            {
-                get;
-                set;
-            }
+            public FaultBookmark FaultBookmark { get; set; }
 
-            public WorkflowDataContext DataContext
-            {
-                get;
-                set;
-            }
+            public WorkflowDataContext DataContext { get; set; }
 
             [DataMember(Name = XD.ActivityInstance.BlockingBookmarkCount, EmitDefaultValue = false)]
             internal int SerializedBlockingBookmarkCount
@@ -1435,7 +1601,11 @@ namespace System.Activities
             }
 
             [DataMember(Name = XD.ActivityInstance.Bookmarks, EmitDefaultValue = false)]
-            [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called from Serialization")]
+            [SuppressMessage(
+                FxCop.Category.Performance,
+                FxCop.Rule.AvoidUncalledPrivateCode,
+                Justification = "Called from Serialization"
+            )]
             internal BookmarkList Bookmarks
             {
                 get
@@ -1451,13 +1621,20 @@ namespace System.Activities
                 }
                 set
                 {
-                    Fx.Assert(value != null, "We don't emit the default value so this should never be null.");
+                    Fx.Assert(
+                        value != null,
+                        "We don't emit the default value so this should never be null."
+                    );
                     this.bookmarks = value;
                 }
             }
 
             [DataMember(Name = XD.ActivityInstance.ActivityReferences, EmitDefaultValue = false)]
-            [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called from Serialization")]
+            [SuppressMessage(
+                FxCop.Category.Performance,
+                FxCop.Rule.AvoidUncalledPrivateCode,
+                Justification = "Called from Serialization"
+            )]
             internal ActivityReferenceList ActivityReferences
             {
                 get
@@ -1473,17 +1650,17 @@ namespace System.Activities
                 }
                 set
                 {
-                    Fx.Assert(value != null && value.Count > 0, "We shouldn't emit the default value or empty lists");
+                    Fx.Assert(
+                        value != null && value.Count > 0,
+                        "We shouldn't emit the default value or empty lists"
+                    );
                     this.activityReferences = value;
                 }
             }
 
             public bool HasActivityReferences
             {
-                get
-                {
-                    return this.activityReferences != null && this.activityReferences.Count > 0;
-                }
+                get { return this.activityReferences != null && this.activityReferences.Count > 0; }
             }
 
             public void AddBookmark(Bookmark bookmark, bool affectsBusyCount)
@@ -1503,11 +1680,17 @@ namespace System.Activities
 
             public void RemoveBookmark(Bookmark bookmark, bool affectsBusyCount)
             {
-                Fx.Assert(this.bookmarks != null, "The bookmark list should have been initialized if we are trying to remove one.");
+                Fx.Assert(
+                    this.bookmarks != null,
+                    "The bookmark list should have been initialized if we are trying to remove one."
+                );
 
                 if (affectsBusyCount)
                 {
-                    Fx.Assert(this.BlockingBookmarkCount > 0, "We should never decrement below zero.");
+                    Fx.Assert(
+                        this.BlockingBookmarkCount > 0,
+                        "We should never decrement below zero."
+                    );
 
                     this.BlockingBookmarkCount = this.BlockingBookmarkCount - 1;
                 }
@@ -1515,7 +1698,11 @@ namespace System.Activities
                 this.bookmarks.Remove(bookmark);
             }
 
-            public void PurgeBookmarks(BookmarkScopeManager bookmarkScopeManager, BookmarkManager bookmarkManager, ActivityInstance owningInstance)
+            public void PurgeBookmarks(
+                BookmarkScopeManager bookmarkScopeManager,
+                BookmarkManager bookmarkManager,
+                ActivityInstance owningInstance
+            )
             {
                 if (this.bookmarks != null)
                 {
@@ -1528,7 +1715,11 @@ namespace System.Activities
 
                         if (bookmarkScopeManager != null)
                         {
-                            bookmarkScopeManager.PurgeBookmarks(bookmarkManager, singleBookmark, multipleBookmarks);
+                            bookmarkScopeManager.PurgeBookmarks(
+                                bookmarkManager,
+                                singleBookmark,
+                                multipleBookmarks
+                            );
                         }
                         else
                         {
@@ -1570,9 +1761,7 @@ namespace System.Activities
             internal class ActivityReferenceList : HybridCollection<ActivityInstanceReference>
             {
                 public ActivityReferenceList()
-                    : base()
-                {
-                }
+                    : base() { }
 
                 public void FillInstanceMap(ActivityInstanceMap instanceMap)
                 {
@@ -1618,9 +1807,7 @@ namespace System.Activities
             static ReadOnlyCollection<ActivityInstance> emptyChildren;
 
             public ChildList()
-                : base()
-            {
-            }
+                : base() { }
 
             public static ReadOnlyCollection<ActivityInstance> Empty
             {
@@ -1628,14 +1815,19 @@ namespace System.Activities
                 {
                     if (emptyChildren == null)
                     {
-                        emptyChildren = new ReadOnlyCollection<ActivityInstance>(new ActivityInstance[0]);
+                        emptyChildren = new ReadOnlyCollection<ActivityInstance>(
+                            new ActivityInstance[0]
+                        );
                     }
 
                     return emptyChildren;
                 }
             }
 
-            public void AppendChildren(ActivityUtilities.TreeProcessingList nextInstanceList, ref Queue<IList<ActivityInstance>> instancesRemaining)
+            public void AppendChildren(
+                ActivityUtilities.TreeProcessingList nextInstanceList,
+                ref Queue<IList<ActivityInstance>> instancesRemaining
+            )
             {
                 // This is only called if there is at least one item in the list.
 
@@ -1661,7 +1853,11 @@ namespace System.Activities
                 }
             }
 
-            public void FixupList(ActivityInstance parent, ActivityInstanceMap instanceMap, ActivityExecutor executor)
+            public void FixupList(
+                ActivityInstance parent,
+                ActivityInstanceMap instanceMap,
+                ActivityExecutor executor
+            )
             {
                 if (base.SingleItem != null)
                 {
@@ -1693,18 +1889,12 @@ namespace System.Activities
 
             public ActivityInstance Current
             {
-                get
-                {
-                    return this.current;
-                }
+                get { return this.current; }
             }
 
             object IEnumerator.Current
             {
-                get
-                {
-                    return this.Current;
-                }
+                get { return this.Current; }
             }
 
             public bool MoveNext()
@@ -1733,7 +1923,10 @@ namespace System.Activities
                     }
                     else
                     {
-                        Fx.Assert(!this.current.Parent.GetChildren().Contains(this.current), "We should always have removed the current one from the parent's list by now.");
+                        Fx.Assert(
+                            !this.current.Parent.GetChildren().Contains(this.current),
+                            "We should always have removed the current one from the parent's list by now."
+                        );
 
                         this.current = this.current.Parent;
 
@@ -1759,5 +1952,5 @@ namespace System.Activities
                 // no op
             }
         }
-    }    
+    }
 }

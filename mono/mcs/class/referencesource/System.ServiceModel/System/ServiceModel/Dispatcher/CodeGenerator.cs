@@ -16,8 +16,10 @@ namespace System.ServiceModel.Dispatcher
     using System.Security;
     using System.ServiceModel.Diagnostics;
 
-    [Fx.Tag.SecurityNote(Critical = "Generates IL into an ILGenerator that was created under an Assert."
-        + "Generated IL must be correct and must not subvert the type system.")]
+    [Fx.Tag.SecurityNote(
+        Critical = "Generates IL into an ILGenerator that was created under an Assert."
+            + "Generated IL must be correct and must not subvert the type system."
+    )]
 #pragma warning disable 618 // have not moved to the v4 security model yet
     [SecurityCritical(SecurityCriticalScope.Everything)]
 #pragma warning restore 618
@@ -36,7 +38,7 @@ namespace System.ServiceModel.Dispatcher
         static int typeCounter;
         MethodBuilder methodBuilder;
 #else
-        static Module SerializationModule = typeof(CodeGenerator).Module;   // Can be replaced by different assembly with SkipVerification set to false
+        static Module SerializationModule = typeof(CodeGenerator).Module; // Can be replaced by different assembly with SkipVerification set to false
         DynamicMethod dynamicMethod;
 
 #if DEBUG
@@ -52,7 +54,14 @@ namespace System.ServiceModel.Dispatcher
 
         Hashtable localNames;
         int lineNo = 1;
-        enum CodeGenTrace { None, Save, Tron };
+
+        enum CodeGenTrace
+        {
+            None,
+            Save,
+            Tron,
+        };
+
         CodeGenTrace codeGenTrace;
 
         internal CodeGenerator()
@@ -81,7 +90,10 @@ namespace System.ServiceModel.Dispatcher
             get
             {
                 if (stringConcat2 == null)
-                    stringConcat2 = typeof(string).GetMethod("Concat", new Type[] { typeof(string), typeof(string) });
+                    stringConcat2 = typeof(string).GetMethod(
+                        "Concat",
+                        new Type[] { typeof(string), typeof(string) }
+                    );
                 return stringConcat2;
             }
         }
@@ -116,7 +128,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        internal void BeginMethod(string methodName, Type delegateType, bool allowPrivateMemberAccess)
+        internal void BeginMethod(
+            string methodName,
+            Type delegateType,
+            bool allowPrivateMemberAccess
+        )
         {
             MethodInfo signature = delegateType.GetMethod("Invoke");
             ParameterInfo[] parameters = signature.GetParameters();
@@ -127,16 +143,32 @@ namespace System.ServiceModel.Dispatcher
             this.delegateType = delegateType;
         }
 
-        void BeginMethod(Type returnType, string methodName, Type[] argTypes, bool allowPrivateMemberAccess)
+        void BeginMethod(
+            Type returnType,
+            string methodName,
+            Type[] argTypes,
+            bool allowPrivateMemberAccess
+        )
         {
 #if USE_REFEMIT
             string typeName = "Type" + (typeCounter++);
             InitAssemblyBuilder(typeName + "." + methodName);
             this.typeBuilder = moduleBuilder.DefineType(typeName, TypeAttributes.Public);
-            this.methodBuilder = typeBuilder.DefineMethod(methodName, MethodAttributes.Public|MethodAttributes.Static, returnType, argTypes);
+            this.methodBuilder = typeBuilder.DefineMethod(
+                methodName,
+                MethodAttributes.Public | MethodAttributes.Static,
+                returnType,
+                argTypes
+            );
             this.ilGen = this.methodBuilder.GetILGenerator();
 #else
-            this.dynamicMethod = new DynamicMethod(methodName, returnType, argTypes, SerializationModule, allowPrivateMemberAccess);
+            this.dynamicMethod = new DynamicMethod(
+                methodName,
+                returnType,
+                argTypes,
+                SerializationModule,
+                allowPrivateMemberAccess
+            );
             this.ilGen = this.dynamicMethod.GetILGenerator();
 #if DEBUG
             this.allowPrivateMemberAccess = allowPrivateMemberAccess;
@@ -163,7 +195,7 @@ namespace System.ServiceModel.Dispatcher
 #if USE_REFEMIT
             Type type = typeBuilder.CreateType();
             if (codeGenTrace != CodeGenTrace.None)
-                assemblyBuilder.Save(assemblyBuilder.GetName().Name+".dll");
+                assemblyBuilder.Save(assemblyBuilder.GetName().Name + ".dll");
 
             MethodInfo method = type.GetMethod(methodBuilder.Name);
             retVal = Delegate.CreateDelegate(delegateType, method);
@@ -256,19 +288,34 @@ namespace System.ServiceModel.Dispatcher
             if (methodInfo.IsVirtual)
             {
                 if (codeGenTrace != CodeGenTrace.None)
-                    EmitSourceInstruction("Callvirt " + methodInfo.ToString() + " on type " + methodInfo.DeclaringType.ToString());
+                    EmitSourceInstruction(
+                        "Callvirt "
+                            + methodInfo.ToString()
+                            + " on type "
+                            + methodInfo.DeclaringType.ToString()
+                    );
                 ilGen.Emit(OpCodes.Callvirt, methodInfo);
             }
             else if (methodInfo.IsStatic)
             {
                 if (codeGenTrace != CodeGenTrace.None)
-                    EmitSourceInstruction("Static Call " + methodInfo.ToString() + " on type " + methodInfo.DeclaringType.ToString());
+                    EmitSourceInstruction(
+                        "Static Call "
+                            + methodInfo.ToString()
+                            + " on type "
+                            + methodInfo.DeclaringType.ToString()
+                    );
                 ilGen.Emit(OpCodes.Call, methodInfo);
             }
             else
             {
                 if (codeGenTrace != CodeGenTrace.None)
-                    EmitSourceInstruction("Call " + methodInfo.ToString() + " on type " + methodInfo.DeclaringType.ToString());
+                    EmitSourceInstruction(
+                        "Call "
+                            + methodInfo.ToString()
+                            + " on type "
+                            + methodInfo.DeclaringType.ToString()
+                    );
                 ilGen.Emit(OpCodes.Call, methodInfo);
             }
         }
@@ -276,7 +323,12 @@ namespace System.ServiceModel.Dispatcher
         internal void New(ConstructorInfo constructor)
         {
             if (codeGenTrace != CodeGenTrace.None)
-                EmitSourceInstruction("Newobj " + constructor.ToString() + " on type " + constructor.DeclaringType.ToString());
+                EmitSourceInstruction(
+                    "Newobj "
+                        + constructor.ToString()
+                        + " on type "
+                        + constructor.DeclaringType.ToString()
+                );
             ilGen.Emit(OpCodes.Newobj, constructor);
         }
 
@@ -344,7 +396,14 @@ namespace System.ServiceModel.Dispatcher
             else if (var is LocalBuilder)
                 Stloc((LocalBuilder)var);
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCodeGenCanOnlyStoreIntoArgOrLocGot0, var.GetType().FullName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxCodeGenCanOnlyStoreIntoArgOrLocGot0,
+                            var.GetType().FullName
+                        )
+                    )
+                );
         }
 
         internal void LoadAddress(object obj)
@@ -468,7 +527,11 @@ namespace System.ServiceModel.Dispatcher
                     case TypeCode.Empty:
                     case TypeCode.DBNull:
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCodeGenUnknownConstantType, valueType.FullName)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxCodeGenUnknownConstantType, valueType.FullName)
+                            )
+                        );
                 }
             }
         }
@@ -715,7 +778,14 @@ namespace System.ServiceModel.Dispatcher
             {
                 OpCode opCode = GetLdelemOpCode(Type.GetTypeCode(arrayElementType));
                 if (opCode.Equals(OpCodes.Nop))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCodeGenArrayTypeIsNotSupported, arrayElementType.FullName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxCodeGenArrayTypeIsNotSupported,
+                                arrayElementType.FullName
+                            )
+                        )
+                    );
                 if (codeGenTrace != CodeGenTrace.None)
                     EmitSourceInstruction(opCode.ToString());
                 ilGen.Emit(opCode);
@@ -741,7 +811,14 @@ namespace System.ServiceModel.Dispatcher
             {
                 OpCode opCode = GetStelemOpCode(Type.GetTypeCode(arrayElementType));
                 if (opCode.Equals(OpCodes.Nop))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCodeGenArrayTypeIsNotSupported, arrayElementType.FullName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxCodeGenArrayTypeIsNotSupported,
+                                arrayElementType.FullName
+                            )
+                        )
+                    );
                 if (codeGenTrace != CodeGenTrace.None)
                     EmitSourceInstruction(opCode.ToString());
                 EmitStackTop(arrayElementType);
@@ -825,7 +902,11 @@ namespace System.ServiceModel.Dispatcher
                 {
                     OpCode opCode = GetConvOpCode(Type.GetTypeCode(target));
                     if (opCode.Equals(OpCodes.Nop))
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCodeGenNoConversionPossibleTo, target.FullName)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxCodeGenNoConversionPossibleTo, target.FullName)
+                            )
+                        );
                     else
                     {
                         if (codeGenTrace != CodeGenTrace.None)
@@ -840,7 +921,15 @@ namespace System.ServiceModel.Dispatcher
                         Ldobj(target);
                 }
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCodeGenIsNotAssignableFrom, target.FullName, source.FullName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxCodeGenIsNotAssignableFrom,
+                                target.FullName,
+                                source.FullName
+                            )
+                        )
+                    );
             }
             else if (target.IsPointer)
             {
@@ -870,7 +959,15 @@ namespace System.ServiceModel.Dispatcher
                 Castclass(target);
             }
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCodeGenIsNotAssignableFrom, target.FullName, source.FullName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxCodeGenIsNotAssignableFrom,
+                            target.FullName,
+                            source.FullName
+                        )
+                    )
+                );
         }
 
         IfState PopIfState()
@@ -887,7 +984,7 @@ namespace System.ServiceModel.Dispatcher
         {
             //if (assemblyBuilder == null) {
             AssemblyName name = new AssemblyName();
-            name.Name = "Microsoft.GeneratedCode."+methodName;
+            name.Name = "Microsoft.GeneratedCode." + methodName;
             bool saveAssembly = false;
 
             if (codeGenTrace != CodeGenTrace.None)
@@ -895,12 +992,22 @@ namespace System.ServiceModel.Dispatcher
 
             if (saveAssembly)
             {
-                assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(name, AssemblyBuilderAccess.RunAndSave);
-                moduleBuilder = assemblyBuilder.DefineDynamicModule(name.Name, name.Name + ".dll", false);
+                assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                    name,
+                    AssemblyBuilderAccess.RunAndSave
+                );
+                moduleBuilder = assemblyBuilder.DefineDynamicModule(
+                    name.Name,
+                    name.Name + ".dll",
+                    false
+                );
             }
             else
             {
-                assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(name, AssemblyBuilderAccess.Run);
+                assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                    name,
+                    AssemblyBuilderAccess.Run
+                );
                 moduleBuilder = assemblyBuilder.DefineDynamicModule(name.Name, false);
             }
             //}
@@ -909,7 +1016,11 @@ namespace System.ServiceModel.Dispatcher
 
         void ThrowMismatchException(object expected)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCodeGenExpectingEnd, expected.ToString())));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(SR.SFxCodeGenExpectingEnd, expected.ToString())
+                )
+            );
         }
 
         Hashtable LocalNames
@@ -988,7 +1099,7 @@ namespace System.ServiceModel.Dispatcher
                 default:
                     return OpCodes.Nop;
             }
-            // 
+            //
         }
 
         OpCode GetLdelemOpCode(TypeCode typeCode)
@@ -1086,7 +1197,10 @@ namespace System.ServiceModel.Dispatcher
                 OperationInvokerTrace.WriteInstruction(lineNo++, line);
             if (ilGen != null && codeGenTrace == CodeGenTrace.Tron)
             {
-                ilGen.Emit(OpCodes.Ldstr, string.Format(CultureInfo.InvariantCulture, "{0:00000}: {1}", lineNo - 1, line));
+                ilGen.Emit(
+                    OpCodes.Ldstr,
+                    string.Format(CultureInfo.InvariantCulture, "{0:00000}: {1}", lineNo - 1, line)
+                );
                 ilGen.Emit(OpCodes.Call, OperationInvokerTrace.TraceInstructionMethod);
             }
         }
@@ -1182,6 +1296,7 @@ namespace System.ServiceModel.Dispatcher
     {
         internal int Index;
         internal Type ArgType;
+
         internal ArgBuilder(int index, Type argType)
         {
             this.Index = index;
@@ -1196,30 +1311,14 @@ namespace System.ServiceModel.Dispatcher
 
         internal Label EndIf
         {
-            get
-            {
-                return this.endIf;
-            }
-            set
-            {
-                this.endIf = value;
-            }
+            get { return this.endIf; }
+            set { this.endIf = value; }
         }
 
         internal Label ElseBegin
         {
-            get
-            {
-                return this.elseBegin;
-            }
-            set
-            {
-                this.elseBegin = value;
-            }
+            get { return this.elseBegin; }
+            set { this.elseBegin = value; }
         }
-
     }
-
 }
-
-

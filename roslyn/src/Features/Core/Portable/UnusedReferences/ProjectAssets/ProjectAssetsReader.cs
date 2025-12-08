@@ -22,44 +22,56 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
         /// </summary>
         public static ImmutableArray<ReferenceInfo> AddDependencyHierarchies(
             ImmutableArray<ReferenceInfo> projectReferences,
-            ProjectAssetsFile? projectAssets)
+            ProjectAssetsFile? projectAssets
+        )
         {
-            if (projectAssets is null ||
-                projectAssets.Version != 3)
+            if (projectAssets is null || projectAssets.Version != 3)
             {
                 return ImmutableArray<ReferenceInfo>.Empty;
             }
 
-            if (projectAssets.Targets is null ||
-                projectAssets.Targets.Count == 0)
+            if (projectAssets.Targets is null || projectAssets.Targets.Count == 0)
             {
                 return ImmutableArray<ReferenceInfo>.Empty;
             }
 
-            if (projectAssets.Libraries is null ||
-                projectAssets.Libraries.Count == 0)
+            if (projectAssets.Libraries is null || projectAssets.Libraries.Count == 0)
             {
                 return ImmutableArray<ReferenceInfo>.Empty;
             }
 
             // We keep a list of references that were automatically added by SDKs or other sources so that we can ignore them
             // since they can't be removed even if they were unused.
-            var autoReferences = projectAssets.Project?.Frameworks?.Values
-                .Where(framework => framework.Dependencies != null)
-                .SelectMany(framework => framework.Dependencies!.Keys.Where(key => framework.Dependencies[key].AutoReferenced))
+            var autoReferences = projectAssets
+                .Project?.Frameworks?.Values.Where(framework => framework.Dependencies != null)
+                .SelectMany(framework =>
+                    framework.Dependencies!.Keys.Where(key =>
+                        framework.Dependencies[key].AutoReferenced
+                    )
+                )
                 .Distinct()
                 .ToImmutableHashSet();
             autoReferences ??= ImmutableHashSet<string>.Empty;
 
             // Targets contain a hashmap of Libraries keyed by `{LibraryName}/{LibraryVersion}` we need to split these keys
             // and create a mapping of LibraryName to the complete library key.
-            var targetLibraryKeys = projectAssets.Targets
-                .ToImmutableDictionary(t => t.Key, t => t.Value.ToImmutableDictionary(l => l.Key.Split('/')[0], l => l.Key));
+            var targetLibraryKeys = projectAssets.Targets.ToImmutableDictionary(
+                t => t.Key,
+                t => t.Value.ToImmutableDictionary(l => l.Key.Split('/')[0], l => l.Key)
+            );
 
             var builtReferences = new Dictionary<string, ReferenceInfo?>();
 
             var references = projectReferences
-                .Select(projectReference => EnhanceReference(projectAssets, projectReference, autoReferences, targetLibraryKeys, builtReferences))
+                .Select(projectReference =>
+                    EnhanceReference(
+                        projectAssets,
+                        projectReference,
+                        autoReferences,
+                        targetLibraryKeys,
+                        builtReferences
+                    )
+                )
                 .WhereNotNull()
                 .ToImmutableArray();
 
@@ -71,18 +83,26 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
             ReferenceInfo referenceInfo,
             ImmutableHashSet<string> autoReferences,
             ImmutableDictionary<string, ImmutableDictionary<string, string>> targetLibraryKeys,
-            Dictionary<string, ReferenceInfo?> builtReferences)
+            Dictionary<string, ReferenceInfo?> builtReferences
+        )
         {
-            var referenceName = referenceInfo.ReferenceType == ReferenceType.Project
-                ? Path.GetFileNameWithoutExtension(referenceInfo.ItemSpecification)
-                : referenceInfo.ItemSpecification;
+            var referenceName =
+                referenceInfo.ReferenceType == ReferenceType.Project
+                    ? Path.GetFileNameWithoutExtension(referenceInfo.ItemSpecification)
+                    : referenceInfo.ItemSpecification;
 
             if (autoReferences.Contains(referenceName))
             {
                 return null;
             }
 
-            var reference = BuildReference(projectAssets, referenceName, referenceInfo.TreatAsUsed, targetLibraryKeys, builtReferences);
+            var reference = BuildReference(
+                projectAssets,
+                referenceName,
+                referenceInfo.TreatAsUsed,
+                targetLibraryKeys,
+                builtReferences
+            );
 
             // Since the reference being enhanced was provided by the Project System we should always return an
             // enhanced reference with its original ItemSpecification. The project assets file typically works with
@@ -96,7 +116,8 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
             string referenceName,
             bool treatAsUsed,
             ImmutableDictionary<string, ImmutableDictionary<string, string>> targetLibraryKeys,
-            Dictionary<string, ReferenceInfo?> builtReferences)
+            Dictionary<string, ReferenceInfo?> builtReferences
+        )
         {
             var dependencyNames = new HashSet<string>();
             var compilationAssemblies = ImmutableArray.CreateBuilder<string>();
@@ -110,8 +131,10 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
 
             foreach (var (targetName, libraryKeys) in targetLibraryKeys)
             {
-                if (!libraryKeys.TryGetValue(referenceName, out var key) ||
-                    !projectAssets.Libraries.TryGetValue(key, out var library))
+                if (
+                    !libraryKeys.TryGetValue(referenceName, out var key)
+                    || !projectAssets.Libraries.TryGetValue(key, out var library)
+                )
                 {
                     continue;
                 }
@@ -123,11 +146,10 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
                 {
                     "package" => ReferenceType.Package,
                     "project" => ReferenceType.Project,
-                    _ => ReferenceType.Assembly
+                    _ => ReferenceType.Assembly,
                 };
 
-                if (referenceType == ReferenceType.Project &&
-                    library.Path is not null)
+                if (referenceType == ReferenceType.Project && library.Path is not null)
                 {
                     // Project references are keyed by their filename but the
                     // item specification should be the path to the project file
@@ -146,7 +168,11 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
                     {
                         if (!assemblyPath.EndsWith(NuGetEmptyFileName))
                         {
-                            compilationAssemblies.Add(Path.GetFullPath(Path.Combine(packagesPath, library.Path ?? "", assemblyPath)));
+                            compilationAssemblies.Add(
+                                Path.GetFullPath(
+                                    Path.Combine(packagesPath, library.Path ?? "", assemblyPath)
+                                )
+                            );
                         }
                     }
                 }
@@ -157,7 +183,10 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
                 return null;
             }
 
-            if (referenceType == ReferenceType.Package && itemSpecification == ".NETStandard.Library")
+            if (
+                referenceType == ReferenceType.Package
+                && itemSpecification == ".NETStandard.Library"
+            )
             {
                 // Referencing .NETStandard.Library brings along references to a number of common .NET libraries
                 // for which the .NET SDK already brings into the compilation. This makes it very easy for
@@ -171,11 +200,25 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
             }
 
             var dependencies = dependencyNames
-                .Select(dependency => BuildReference(projectAssets, dependency, treatAsUsed: false, targetLibraryKeys, builtReferences))
+                .Select(dependency =>
+                    BuildReference(
+                        projectAssets,
+                        dependency,
+                        treatAsUsed: false,
+                        targetLibraryKeys,
+                        builtReferences
+                    )
+                )
                 .WhereNotNull()
                 .ToImmutableArray();
 
-            var reference = new ReferenceInfo(referenceType, itemSpecification, treatAsUsed, compilationAssemblies.ToImmutable(), dependencies);
+            var reference = new ReferenceInfo(
+                referenceType,
+                itemSpecification,
+                treatAsUsed,
+                compilationAssemblies.ToImmutable(),
+                dependencies
+            );
 
             builtReferences.Add(reference.ItemSpecification, reference);
 

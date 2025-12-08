@@ -9,9 +9,8 @@ namespace System.Net.Http.Functional.Tests
 {
     public sealed class RepeatedFlushContent : StringContent
     {
-        public RepeatedFlushContent(string content) : base(content)
-        {
-        }
+        public RepeatedFlushContent(string content)
+            : base(content) { }
 
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
         {

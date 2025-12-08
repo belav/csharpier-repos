@@ -186,80 +186,93 @@ FROM [Person] AS [p]
 LEFT JOIN [Person] AS [p0] ON [p].[ParentId] = [p0].[PersonId]
 LEFT JOIN [Person] AS [p1] ON [p0].[ParentId] = [p1].[PersonId]
 LEFT JOIN [Person] AS [p2] ON [p1].[ParentId] = [p2].[PersonId]
-""");
+"""
+        );
     }
 
     public override void Identifiers_are_generated_correctly()
     {
         using var context = CreateContext();
         var entityType = context.Model.FindEntityType(
-            typeof(
-                LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly
-            ))!;
+            typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly)
+        )!;
         Assert.Equal(
             "LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorking~",
-            entityType.GetTableName());
+            entityType.GetTableName()
+        );
         Assert.Equal(
             "PK_LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWork~",
-            entityType.GetKeys().Single().GetName());
+            entityType.GetKeys().Single().GetName()
+        );
         Assert.Equal(
             "FK_LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWork~",
-            entityType.GetForeignKeys().Single().GetConstraintName());
+            entityType.GetForeignKeys().Single().GetConstraintName()
+        );
         Assert.Equal(
             "IX_LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWork~",
-            entityType.GetIndexes().Single().GetDatabaseName());
+            entityType.GetIndexes().Single().GetDatabaseName()
+        );
 
         var entityType2 = context.Model.FindEntityType(
-            typeof(
-                LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectlyDetails
-            ))!;
+            typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectlyDetails)
+        )!;
 
         Assert.Equal(
             "LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkin~1",
-            entityType2.GetTableName());
-        Assert.Equal(
-            "PK_LoginDetails",
-            entityType2.GetKeys().Single().GetName());
+            entityType2.GetTableName()
+        );
+        Assert.Equal("PK_LoginDetails", entityType2.GetKeys().Single().GetName());
         Assert.Equal(
             "ExtraPropertyWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCo~",
-            entityType2.GetProperties().ElementAt(1).GetColumnName(StoreObjectIdentifier.Table(entityType2.GetTableName()!)));
+            entityType2
+                .GetProperties()
+                .ElementAt(1)
+                .GetColumnName(StoreObjectIdentifier.Table(entityType2.GetTableName()!))
+        );
         Assert.Equal(
             "ExtraPropertyWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingC~1",
-            entityType2.GetProperties().ElementAt(2).GetColumnName(StoreObjectIdentifier.Table(entityType2.GetTableName()!)));
+            entityType2
+                .GetProperties()
+                .ElementAt(2)
+                .GetColumnName(StoreObjectIdentifier.Table(entityType2.GetTableName()!))
+        );
         Assert.Equal(
             "IX_LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWork~",
-            entityType2.GetIndexes().Single().GetDatabaseName());
+            entityType2.GetIndexes().Single().GetDatabaseName()
+        );
     }
 
-    protected void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    protected void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    protected void AssertContainsSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected, assertOrder: false);
+    protected void AssertContainsSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected, assertOrder: false);
 
     public abstract class UpdatesSqlServerFixtureBase : UpdatesRelationalFixture
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).ConfigureWarnings(
-                w =>
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
+                .ConfigureWarnings(w =>
                 {
                     w.Log(SqlServerEventId.DecimalTypeKeyWarning);
                 });
 
-        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
-            => configurationBuilder.Properties<decimal>().HaveColumnType("decimal(18, 2)");
+        protected override void ConfigureConventions(
+            ModelConfigurationBuilder configurationBuilder
+        ) => configurationBuilder.Properties<decimal>().HaveColumnType("decimal(18, 2)");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
             base.OnModelCreating(modelBuilder, context);
 
-            modelBuilder.Entity<ProductBase>()
-                .Property(p => p.Id).HasDefaultValueSql("NEWID()");
+            modelBuilder.Entity<ProductBase>().Property(p => p.Id).HasDefaultValueSql("NEWID()");
 
-            modelBuilder.Entity<Product>().HasIndex(p => new { p.Name, p.Price }).HasFilter("Name IS NOT NULL");
+            modelBuilder
+                .Entity<Product>()
+                .HasIndex(p => new { p.Name, p.Price })
+                .HasFilter("Name IS NOT NULL");
         }
 
         public virtual void ResetIdentity()
@@ -269,7 +282,8 @@ LEFT JOIN [Person] AS [p2] ON [p1].[ParentId] = [p2].[PersonId]
             TestSqlLoggerFactory.Clear();
         }
 
-        private const string ResetIdentitySql = @"
+        private const string ResetIdentitySql =
+            @"
 -- We can't use TRUNCATE on tables with foreign keys, so we DELETE and reset IDENTITY manually.
 -- DBCC CHECKIDENT resets IDENTITY, but behaves differently based on whether whether rows were ever inserted (seed+1) or not (seed).
 -- So we insert a dummy row before deleting everything to make sure we get the seed value 1.

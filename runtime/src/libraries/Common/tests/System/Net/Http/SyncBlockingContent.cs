@@ -12,7 +12,8 @@ namespace System.Net.Http.Functional.Tests
     {
         byte[] _content;
 
-        public SyncBlockingContent(string content) : base(content)
+        public SyncBlockingContent(string content)
+            : base(content)
         {
             _content = Encoding.UTF8.GetBytes(content);
         }

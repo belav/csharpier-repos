@@ -159,6 +159,6 @@ namespace Microsoft.CodeAnalysis
         System_Runtime_CompilerServices_PreserveBaseOverridesAttribute__ctor,
         System_Runtime_CompilerServices_InlineArrayAttribute__ctor,
 
-        Count
+        Count,
     }
 }

@@ -63,7 +63,8 @@ namespace System.Data.Common
     {
         // for Whidbey 40426, searching down the Type[] is about 20% faster than using a Dictionary
         // must keep in same order as enum StorageType
-        private static readonly Type?[] s_storageClassType = new Type?[] {
+        private static readonly Type?[] s_storageClassType = new Type?[]
+        {
             null,
             typeof(object),
             typeof(DBNull),
@@ -84,14 +85,12 @@ namespace System.Data.Common
             typeof(TimeSpan),
             typeof(string),
             typeof(Guid),
-
             typeof(byte[]),
             typeof(char[]),
             typeof(Type),
             typeof(DateTimeOffset),
             typeof(System.Numerics.BigInteger),
             typeof(Uri),
-
             typeof(SqlBinary),
             typeof(SqlBoolean),
             typeof(SqlByte),
@@ -107,14 +106,14 @@ namespace System.Data.Common
             typeof(SqlMoney),
             typeof(SqlSingle),
             typeof(SqlString),
-//            typeof(SqlXml),
+            //            typeof(SqlXml),
         };
 
         internal readonly DataColumn _column;
         internal readonly DataTable _table;
         internal readonly Type _dataType;
         internal readonly StorageType _storageTypeCode;
-        private System.Collections.BitArray _dbNullBits = default!;  // Late-initialized
+        private System.Collections.BitArray _dbNullBits = default!; // Late-initialized
 
         private readonly object? _defaultValue;
         internal readonly object _nullValue;
@@ -124,20 +123,41 @@ namespace System.Data.Common
         internal readonly bool _isStringType;
         internal readonly bool _isValueType;
 
-        private static readonly Func<Type, Tuple<bool, bool, bool, bool>> s_inspectTypeForInterfaces = InspectTypeForInterfaces;
-        private static readonly ConcurrentDictionary<Type, Tuple<bool, bool, bool, bool>> s_typeImplementsInterface = new ConcurrentDictionary<Type, Tuple<bool, bool, bool, bool>>();
+        private static readonly Func<
+            Type,
+            Tuple<bool, bool, bool, bool>
+        > s_inspectTypeForInterfaces = InspectTypeForInterfaces;
+        private static readonly ConcurrentDictionary<
+            Type,
+            Tuple<bool, bool, bool, bool>
+        > s_typeImplementsInterface =
+            new ConcurrentDictionary<Type, Tuple<bool, bool, bool, bool>>();
 
-        protected DataStorage(DataColumn column, Type type, object? defaultValue, StorageType storageType)
-            : this(column, type, defaultValue, DBNull.Value, false, storageType)
-        {
-        }
+        protected DataStorage(
+            DataColumn column,
+            Type type,
+            object? defaultValue,
+            StorageType storageType
+        )
+            : this(column, type, defaultValue, DBNull.Value, false, storageType) { }
 
-        protected DataStorage(DataColumn column, Type type, object? defaultValue, object nullValue, StorageType storageType)
-            : this(column, type, defaultValue, nullValue, false, storageType)
-        {
-        }
+        protected DataStorage(
+            DataColumn column,
+            Type type,
+            object? defaultValue,
+            object nullValue,
+            StorageType storageType
+        )
+            : this(column, type, defaultValue, nullValue, false, storageType) { }
 
-        protected DataStorage(DataColumn column, Type type, object? defaultValue, object nullValue, bool isICloneable, StorageType storageType)
+        protected DataStorage(
+            DataColumn column,
+            Type type,
+            object? defaultValue,
+            object nullValue,
+            bool isICloneable,
+            StorageType storageType
+        )
         {
             Debug.Assert(storageType == GetStorageType(type), "Incorrect storage type specified");
             _column = column;
@@ -148,24 +168,21 @@ namespace System.Data.Common
             _nullValue = nullValue;
             _isCloneable = isICloneable;
             _isCustomDefinedType = IsTypeCustomType(_storageTypeCode);
-            _isStringType = ((StorageType.String == _storageTypeCode) || (StorageType.SqlString == _storageTypeCode));
+            _isStringType = (
+                (StorageType.String == _storageTypeCode)
+                || (StorageType.SqlString == _storageTypeCode)
+            );
             _isValueType = DetermineIfValueType(_storageTypeCode, type);
         }
 
         internal DataSetDateTime DateTimeMode
         {
-            get
-            {
-                return _column.DateTimeMode;
-            }
+            get { return _column.DateTimeMode; }
         }
 
         internal IFormatProvider FormatProvider
         {
-            get
-            {
-                return _table.FormatProvider;
-            }
+            get { return _table.FormatProvider; }
         }
 
         public virtual object Aggregate(int[] recordNos, AggregateType kind)
@@ -283,12 +300,24 @@ namespace System.Data.Common
         public abstract string ConvertObjectToXml(object value);
 
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
-        public virtual void ConvertObjectToXml(object value, XmlWriter xmlWriter, XmlRootAttribute? xmlAttrib)
+        public virtual void ConvertObjectToXml(
+            object value,
+            XmlWriter xmlWriter,
+            XmlRootAttribute? xmlAttrib
+        )
         {
             xmlWriter.WriteString(ConvertObjectToXml(value)); // should it be NO OP?
         }
 
-        public static DataStorage CreateStorage(DataColumn column, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)] Type dataType, StorageType typeCode)
+        public static DataStorage CreateStorage(
+            DataColumn column,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
+                Type dataType,
+            StorageType typeCode
+        )
         {
             Debug.Assert(typeCode == GetStorageType(dataType), "Incorrect storage type specified");
             if ((StorageType.Empty == typeCode) && (null != dataType))
@@ -305,49 +334,90 @@ namespace System.Data.Common
 
             switch (typeCode)
             {
-                case StorageType.Empty: throw ExceptionBuilder.InvalidStorageType(TypeCode.Empty);
-                case StorageType.DBNull: throw ExceptionBuilder.InvalidStorageType((TypeCode)2); // TypeCode.DBNull);
-                case StorageType.Object: return new ObjectStorage(column, dataType!);
-                case StorageType.Boolean: return new BooleanStorage(column);
-                case StorageType.Char: return new CharStorage(column);
-                case StorageType.SByte: return new SByteStorage(column);
-                case StorageType.Byte: return new ByteStorage(column);
-                case StorageType.Int16: return new Int16Storage(column);
-                case StorageType.UInt16: return new UInt16Storage(column);
-                case StorageType.Int32: return new Int32Storage(column);
-                case StorageType.UInt32: return new UInt32Storage(column);
-                case StorageType.Int64: return new Int64Storage(column);
-                case StorageType.UInt64: return new UInt64Storage(column);
-                case StorageType.Single: return new SingleStorage(column);
-                case StorageType.Double: return new DoubleStorage(column);
-                case StorageType.Decimal: return new DecimalStorage(column);
-                case StorageType.DateTime: return new DateTimeStorage(column);
-                case StorageType.TimeSpan: return new TimeSpanStorage(column);
-                case StorageType.String: return new StringStorage(column);
-                case StorageType.Guid: return new ObjectStorage(column, dataType!);
+                case StorageType.Empty:
+                    throw ExceptionBuilder.InvalidStorageType(TypeCode.Empty);
+                case StorageType.DBNull:
+                    throw ExceptionBuilder.InvalidStorageType((TypeCode)2); // TypeCode.DBNull);
+                case StorageType.Object:
+                    return new ObjectStorage(column, dataType!);
+                case StorageType.Boolean:
+                    return new BooleanStorage(column);
+                case StorageType.Char:
+                    return new CharStorage(column);
+                case StorageType.SByte:
+                    return new SByteStorage(column);
+                case StorageType.Byte:
+                    return new ByteStorage(column);
+                case StorageType.Int16:
+                    return new Int16Storage(column);
+                case StorageType.UInt16:
+                    return new UInt16Storage(column);
+                case StorageType.Int32:
+                    return new Int32Storage(column);
+                case StorageType.UInt32:
+                    return new UInt32Storage(column);
+                case StorageType.Int64:
+                    return new Int64Storage(column);
+                case StorageType.UInt64:
+                    return new UInt64Storage(column);
+                case StorageType.Single:
+                    return new SingleStorage(column);
+                case StorageType.Double:
+                    return new DoubleStorage(column);
+                case StorageType.Decimal:
+                    return new DecimalStorage(column);
+                case StorageType.DateTime:
+                    return new DateTimeStorage(column);
+                case StorageType.TimeSpan:
+                    return new TimeSpanStorage(column);
+                case StorageType.String:
+                    return new StringStorage(column);
+                case StorageType.Guid:
+                    return new ObjectStorage(column, dataType!);
 
-                case StorageType.ByteArray: return new ObjectStorage(column, dataType!);
-                case StorageType.CharArray: return new ObjectStorage(column, dataType!);
-                case StorageType.Type: return new ObjectStorage(column, dataType!);
-                case StorageType.DateTimeOffset: return new DateTimeOffsetStorage(column);
-                case StorageType.BigInteger: return new BigIntegerStorage(column);
-                case StorageType.Uri: return new ObjectStorage(column, dataType!);
+                case StorageType.ByteArray:
+                    return new ObjectStorage(column, dataType!);
+                case StorageType.CharArray:
+                    return new ObjectStorage(column, dataType!);
+                case StorageType.Type:
+                    return new ObjectStorage(column, dataType!);
+                case StorageType.DateTimeOffset:
+                    return new DateTimeOffsetStorage(column);
+                case StorageType.BigInteger:
+                    return new BigIntegerStorage(column);
+                case StorageType.Uri:
+                    return new ObjectStorage(column, dataType!);
 
-                case StorageType.SqlBinary: return new SqlBinaryStorage(column);
-                case StorageType.SqlBoolean: return new SqlBooleanStorage(column);
-                case StorageType.SqlByte: return new SqlByteStorage(column);
-                case StorageType.SqlBytes: return new SqlBytesStorage(column);
-                case StorageType.SqlChars: return new SqlCharsStorage(column);
-                case StorageType.SqlDateTime: return new SqlDateTimeStorage(column);
-                case StorageType.SqlDecimal: return new SqlDecimalStorage(column);
-                case StorageType.SqlDouble: return new SqlDoubleStorage(column);
-                case StorageType.SqlGuid: return new SqlGuidStorage(column);
-                case StorageType.SqlInt16: return new SqlInt16Storage(column);
-                case StorageType.SqlInt32: return new SqlInt32Storage(column);
-                case StorageType.SqlInt64: return new SqlInt64Storage(column);
-                case StorageType.SqlMoney: return new SqlMoneyStorage(column);
-                case StorageType.SqlSingle: return new SqlSingleStorage(column);
-                case StorageType.SqlString: return new SqlStringStorage(column);
+                case StorageType.SqlBinary:
+                    return new SqlBinaryStorage(column);
+                case StorageType.SqlBoolean:
+                    return new SqlBooleanStorage(column);
+                case StorageType.SqlByte:
+                    return new SqlByteStorage(column);
+                case StorageType.SqlBytes:
+                    return new SqlBytesStorage(column);
+                case StorageType.SqlChars:
+                    return new SqlCharsStorage(column);
+                case StorageType.SqlDateTime:
+                    return new SqlDateTimeStorage(column);
+                case StorageType.SqlDecimal:
+                    return new SqlDecimalStorage(column);
+                case StorageType.SqlDouble:
+                    return new SqlDoubleStorage(column);
+                case StorageType.SqlGuid:
+                    return new SqlGuidStorage(column);
+                case StorageType.SqlInt16:
+                    return new SqlInt16Storage(column);
+                case StorageType.SqlInt32:
+                    return new SqlInt32Storage(column);
+                case StorageType.SqlInt64:
+                    return new SqlInt64Storage(column);
+                case StorageType.SqlMoney:
+                    return new SqlMoneyStorage(column);
+                case StorageType.SqlSingle:
+                    return new SqlSingleStorage(column);
+                case StorageType.SqlString:
+                    return new SqlStringStorage(column);
 
                 default:
                     Debug.Fail("shouldn't be here");
@@ -385,7 +455,11 @@ namespace System.Data.Common
 
         internal static bool IsTypeCustomType(StorageType typeCode)
         {
-            return ((StorageType.Object == typeCode) || (StorageType.Empty == typeCode) || (StorageType.CharArray == typeCode));
+            return (
+                (StorageType.Object == typeCode)
+                || (StorageType.Empty == typeCode)
+                || (StorageType.CharArray == typeCode)
+            );
         }
 
         internal static bool IsSqlType(StorageType storageType)
@@ -463,13 +537,14 @@ namespace System.Data.Common
         }
 
         internal static void ImplementsInterfaces(
-                                    StorageType typeCode,
-                                    Type dataType,
-                                    out bool sqlType,
-                                    out bool nullable,
-                                    out bool xmlSerializable,
-                                    out bool changeTracking,
-                                    out bool revertibleChangeTracking)
+            StorageType typeCode,
+            Type dataType,
+            out bool sqlType,
+            out bool nullable,
+            out bool xmlSerializable,
+            out bool changeTracking,
+            out bool revertibleChangeTracking
+        )
         {
             Debug.Assert(typeCode == GetStorageType(dataType), "typeCode mismatches dataType");
             if (IsSqlType(typeCode))
@@ -491,7 +566,10 @@ namespace System.Data.Common
             else
             {
                 // Non-standard type - look it up in the dictionary or add it if not found
-                Tuple<bool, bool, bool, bool> interfaces = s_typeImplementsInterface.GetOrAdd(dataType, s_inspectTypeForInterfaces);
+                Tuple<bool, bool, bool, bool> interfaces = s_typeImplementsInterface.GetOrAdd(
+                    dataType,
+                    s_inspectTypeForInterfaces
+                );
                 sqlType = false;
                 nullable = interfaces.Item1;
                 changeTracking = interfaces.Item2;
@@ -499,9 +577,22 @@ namespace System.Data.Common
                 xmlSerializable = interfaces.Item4;
             }
             Debug.Assert(nullable == typeof(INullable).IsAssignableFrom(dataType), "INullable");
-            Debug.Assert(changeTracking == typeof(System.ComponentModel.IChangeTracking).IsAssignableFrom(dataType), "IChangeTracking");
-            Debug.Assert(revertibleChangeTracking == typeof(System.ComponentModel.IRevertibleChangeTracking).IsAssignableFrom(dataType), "IRevertibleChangeTracking");
-            Debug.Assert(xmlSerializable == typeof(IXmlSerializable).IsAssignableFrom(dataType), "IXmlSerializable");
+            Debug.Assert(
+                changeTracking
+                    == typeof(System.ComponentModel.IChangeTracking).IsAssignableFrom(dataType),
+                "IChangeTracking"
+            );
+            Debug.Assert(
+                revertibleChangeTracking
+                    == typeof(System.ComponentModel.IRevertibleChangeTracking).IsAssignableFrom(
+                        dataType
+                    ),
+                "IRevertibleChangeTracking"
+            );
+            Debug.Assert(
+                xmlSerializable == typeof(IXmlSerializable).IsAssignableFrom(dataType),
+                "IXmlSerializable"
+            );
         }
 
         private static Tuple<bool, bool, bool, bool> InspectTypeForInterfaces(Type dataType)
@@ -512,13 +603,18 @@ namespace System.Data.Common
                 typeof(INullable).IsAssignableFrom(dataType),
                 typeof(System.ComponentModel.IChangeTracking).IsAssignableFrom(dataType),
                 typeof(System.ComponentModel.IRevertibleChangeTracking).IsAssignableFrom(dataType),
-                typeof(IXmlSerializable).IsAssignableFrom(dataType));
+                typeof(IXmlSerializable).IsAssignableFrom(dataType)
+            );
         }
 
         internal static bool ImplementsINullableValue(StorageType typeCode, Type dataType)
         {
             Debug.Assert(typeCode == GetStorageType(dataType), "typeCode mismatches dataType");
-            return ((StorageType.Empty == typeCode) && dataType.IsGenericType && (dataType.GetGenericTypeDefinition() == typeof(System.Nullable<>)));
+            return (
+                (StorageType.Empty == typeCode)
+                && dataType.IsGenericType
+                && (dataType.GetGenericTypeDefinition() == typeof(System.Nullable<>))
+            );
         }
 
         public static bool IsObjectNull(object value)
@@ -548,8 +644,14 @@ namespace System.Data.Common
         }
 
         protected abstract object GetEmptyStorage(int recordCount);
-        protected abstract void CopyValue(int record, object store, BitArray nullbits, int storeIndex);
+        protected abstract void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        );
         protected abstract void SetStorage(object store, BitArray nullbits);
+
         protected void SetNullStorage(BitArray nullbits)
         {
             _dbNullBits = nullbits;

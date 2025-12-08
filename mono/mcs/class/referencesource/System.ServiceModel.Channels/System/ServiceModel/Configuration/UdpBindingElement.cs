@@ -14,29 +14,34 @@ namespace System.ServiceModel.Configuration
     public partial class UdpBindingElement : StandardBindingElement
     {
         public UdpBindingElement(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public UdpBindingElement()
-            : this(null)
-        {
-        }
-        
+            : this(null) { }
+
         protected override Type BindingElementType
         {
             get { return typeof(UdpBinding); }
         }
 
-        [ConfigurationProperty(UdpTransportConfigurationStrings.DuplicateMessageHistoryLength, DefaultValue = UdpConstants.Defaults.DuplicateMessageHistoryLength)]
+        [ConfigurationProperty(
+            UdpTransportConfigurationStrings.DuplicateMessageHistoryLength,
+            DefaultValue = UdpConstants.Defaults.DuplicateMessageHistoryLength
+        )]
         [IntegerValidator(MinValue = 0)]
         public int DuplicateMessageHistoryLength
         {
-            get { return (int)base[UdpTransportConfigurationStrings.DuplicateMessageHistoryLength]; }
+            get
+            {
+                return (int)base[UdpTransportConfigurationStrings.DuplicateMessageHistoryLength];
+            }
             set { base[UdpTransportConfigurationStrings.DuplicateMessageHistoryLength] = value; }
         }
 
-        [ConfigurationProperty(UdpTransportConfigurationStrings.MaxBufferPoolSize, DefaultValue = TransportDefaults.MaxBufferPoolSize)]
+        [ConfigurationProperty(
+            UdpTransportConfigurationStrings.MaxBufferPoolSize,
+            DefaultValue = TransportDefaults.MaxBufferPoolSize
+        )]
         [LongValidator(MinValue = 0)]
         public long MaxBufferPoolSize
         {
@@ -44,7 +49,10 @@ namespace System.ServiceModel.Configuration
             set { base[UdpTransportConfigurationStrings.MaxBufferPoolSize] = value; }
         }
 
-        [ConfigurationProperty(UdpTransportConfigurationStrings.MaxRetransmitCount, DefaultValue = UdpConstants.Defaults.MaxRetransmitCount)]
+        [ConfigurationProperty(
+            UdpTransportConfigurationStrings.MaxRetransmitCount,
+            DefaultValue = UdpConstants.Defaults.MaxRetransmitCount
+        )]
         [IntegerValidator(MinValue = 0)]
         public int MaxRetransmitCount
         {
@@ -52,7 +60,10 @@ namespace System.ServiceModel.Configuration
             set { base[UdpTransportConfigurationStrings.MaxRetransmitCount] = value; }
         }
 
-        [ConfigurationProperty(UdpTransportConfigurationStrings.MaxPendingMessagesTotalSize, DefaultValue = UdpConstants.Defaults.DefaultMaxPendingMessagesTotalSize)]
+        [ConfigurationProperty(
+            UdpTransportConfigurationStrings.MaxPendingMessagesTotalSize,
+            DefaultValue = UdpConstants.Defaults.DefaultMaxPendingMessagesTotalSize
+        )]
         [LongValidator(MinValue = UdpConstants.MinPendingMessagesTotalSize)]
         public long MaxPendingMessagesTotalSize
         {
@@ -61,7 +72,10 @@ namespace System.ServiceModel.Configuration
         }
 
         // Min value has to be 1, because it's 1 in the TransportBindingElement
-        [ConfigurationProperty(UdpTransportConfigurationStrings.MaxReceivedMessageSize, DefaultValue = UdpConstants.Defaults.MaxReceivedMessageSize)]
+        [ConfigurationProperty(
+            UdpTransportConfigurationStrings.MaxReceivedMessageSize,
+            DefaultValue = UdpConstants.Defaults.MaxReceivedMessageSize
+        )]
         [LongValidator(MinValue = 1)]
         public long MaxReceivedMessageSize
         {
@@ -69,7 +83,10 @@ namespace System.ServiceModel.Configuration
             set { this[UdpTransportConfigurationStrings.MaxReceivedMessageSize] = value; }
         }
 
-        [ConfigurationProperty(UdpTransportConfigurationStrings.MulticastInterfaceId, DefaultValue = UdpConstants.Defaults.MulticastInterfaceId)]
+        [ConfigurationProperty(
+            UdpTransportConfigurationStrings.MulticastInterfaceId,
+            DefaultValue = UdpConstants.Defaults.MulticastInterfaceId
+        )]
         [StringValidator()]
         public string MulticastInterfaceId
         {
@@ -80,20 +97,37 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(UdpTransportConfigurationStrings.ReaderQuotas)]
         public XmlDictionaryReaderQuotasElement ReaderQuotas
         {
-            get { return (XmlDictionaryReaderQuotasElement)base[UdpTransportConfigurationStrings.ReaderQuotas]; }
+            get
+            {
+                return (XmlDictionaryReaderQuotasElement)
+                    base[UdpTransportConfigurationStrings.ReaderQuotas];
+            }
         }
 
-        [ConfigurationProperty(UdpTransportConfigurationStrings.TextEncoding, DefaultValue = UdpConstants.Defaults.EncodingString)]
+        [ConfigurationProperty(
+            UdpTransportConfigurationStrings.TextEncoding,
+            DefaultValue = UdpConstants.Defaults.EncodingString
+        )]
         [TypeConverter(typeof(EncodingConverter))]
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationValidatorAttributeRule, Justification = "this property not a configuration property")]
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationValidatorAttributeRule,
+            Justification = "this property not a configuration property"
+        )]
         public Encoding TextEncoding
         {
             get { return (Encoding)base[UdpTransportConfigurationStrings.TextEncoding]; }
             set { base[UdpTransportConfigurationStrings.TextEncoding] = value; }
         }
 
-        [ConfigurationProperty(UdpTransportConfigurationStrings.TimeToLive, DefaultValue = UdpConstants.Defaults.TimeToLive)]
-        [IntegerValidator(MinValue = UdpConstants.MinTimeToLive, MaxValue = UdpConstants.MaxTimeToLive)]
+        [ConfigurationProperty(
+            UdpTransportConfigurationStrings.TimeToLive,
+            DefaultValue = UdpConstants.Defaults.TimeToLive
+        )]
+        [IntegerValidator(
+            MinValue = UdpConstants.MinTimeToLive,
+            MaxValue = UdpConstants.MaxTimeToLive
+        )]
         public int TimeToLive
         {
             get { return (int)base[UdpTransportConfigurationStrings.TimeToLive]; }
@@ -105,13 +139,34 @@ namespace System.ServiceModel.Configuration
             base.InitializeFrom(binding);
             UdpBinding udpBinding = (UdpBinding)binding;
 
-            this.SetPropertyValueIfNotDefaultValue(UdpTransportConfigurationStrings.DuplicateMessageHistoryLength, udpBinding.DuplicateMessageHistoryLength);
-            this.SetPropertyValueIfNotDefaultValue(UdpTransportConfigurationStrings.MaxBufferPoolSize, udpBinding.MaxBufferPoolSize);
-            this.SetPropertyValueIfNotDefaultValue(UdpTransportConfigurationStrings.MaxRetransmitCount, udpBinding.MaxRetransmitCount);
-            this.SetPropertyValueIfNotDefaultValue(UdpTransportConfigurationStrings.MaxPendingMessagesTotalSize, udpBinding.MaxPendingMessagesTotalSize);
-            this.SetPropertyValueIfNotDefaultValue(UdpTransportConfigurationStrings.MaxReceivedMessageSize, udpBinding.MaxReceivedMessageSize);
-            this.SetPropertyValueIfNotDefaultValue(UdpTransportConfigurationStrings.MulticastInterfaceId, udpBinding.MulticastInterfaceId);
-            this.SetPropertyValueIfNotDefaultValue(UdpTransportConfigurationStrings.TimeToLive, udpBinding.TimeToLive);
+            this.SetPropertyValueIfNotDefaultValue(
+                UdpTransportConfigurationStrings.DuplicateMessageHistoryLength,
+                udpBinding.DuplicateMessageHistoryLength
+            );
+            this.SetPropertyValueIfNotDefaultValue(
+                UdpTransportConfigurationStrings.MaxBufferPoolSize,
+                udpBinding.MaxBufferPoolSize
+            );
+            this.SetPropertyValueIfNotDefaultValue(
+                UdpTransportConfigurationStrings.MaxRetransmitCount,
+                udpBinding.MaxRetransmitCount
+            );
+            this.SetPropertyValueIfNotDefaultValue(
+                UdpTransportConfigurationStrings.MaxPendingMessagesTotalSize,
+                udpBinding.MaxPendingMessagesTotalSize
+            );
+            this.SetPropertyValueIfNotDefaultValue(
+                UdpTransportConfigurationStrings.MaxReceivedMessageSize,
+                udpBinding.MaxReceivedMessageSize
+            );
+            this.SetPropertyValueIfNotDefaultValue(
+                UdpTransportConfigurationStrings.MulticastInterfaceId,
+                udpBinding.MulticastInterfaceId
+            );
+            this.SetPropertyValueIfNotDefaultValue(
+                UdpTransportConfigurationStrings.TimeToLive,
+                udpBinding.TimeToLive
+            );
         }
 
         protected override void OnApplyConfiguration(Binding binding)

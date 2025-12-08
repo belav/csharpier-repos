@@ -51,7 +51,10 @@ namespace System.ComponentModel.Composition
 
                 // Properties
                 EnumerableAssert.AreEqual(IEnumerableOfTProperty, expectedValues);
-                EnumerableAssert.AreEqual(IEnumerableOfObjectProperty, expectedValues.Cast<object>());
+                EnumerableAssert.AreEqual(
+                    IEnumerableOfObjectProperty,
+                    expectedValues.Cast<object>()
+                );
                 EnumerableAssert.AreEqual(ArrayOfTProperty, expectedValues);
                 EnumerableAssert.AreEqual(ArrayOfObjectProperty, expectedValues.Cast<object>());
             }
@@ -112,21 +115,30 @@ namespace System.ComponentModel.Composition
             public readonly Collection<T> CollectionOfTReadOnlyField;
 
             [ImportMany("Value")]
-            public ICollection<T> ICollectionOfTReadOnlyProperty { get { return _iCollectionOfTReadOnlyProperty; } }
+            public ICollection<T> ICollectionOfTReadOnlyProperty
+            {
+                get { return _iCollectionOfTReadOnlyProperty; }
+            }
             private ICollection<T> _iCollectionOfTReadOnlyProperty;
 
             [ImportMany("Value")]
             public List<T> ListOfTProperty { get; set; }
 
             [ImportMany("Value")]
-            public List<T> ListOfTReadOnlyProperty { get { return _listOfTReadOnlyProperty; } }
+            public List<T> ListOfTReadOnlyProperty
+            {
+                get { return _listOfTReadOnlyProperty; }
+            }
             private readonly List<T> _listOfTReadOnlyProperty;
 
             [ImportMany("Value")]
             public Collection<T> CollectionOfTProperty { get; set; }
 
             [ImportMany("Value")]
-            public Collection<T> CollectionOfTReadOnlyProperty { get { return _collectionOfTReadOnlyProperty; } }
+            public Collection<T> CollectionOfTReadOnlyProperty
+            {
+                get { return _collectionOfTReadOnlyProperty; }
+            }
             private readonly Collection<T> _collectionOfTReadOnlyProperty;
 
             [ImportMany("Value")]
@@ -139,7 +151,10 @@ namespace System.ComponentModel.Composition
             public ObservableCollection<T> ObservableCollectionOfTProperty { get; set; }
 
             [ImportMany("Value")]
-            public ObservableCollection<T> ObservableCollectionOfTReadOnlyProperty { get { return _observableCollectionOfTReadOnlyProperty; } }
+            public ObservableCollection<T> ObservableCollectionOfTReadOnlyProperty
+            {
+                get { return _observableCollectionOfTReadOnlyProperty; }
+            }
             private readonly ObservableCollection<T> _observableCollectionOfTReadOnlyProperty;
 
             public void VerifyImports(params T[] expectedValues)
@@ -230,18 +245,17 @@ namespace System.ComponentModel.Composition
             [ImportMany("Value")]
             public IEnumerable<int> ReadOnlyEnumerable
             {
-                get
-                {
-                    return readOnlyEnumerable;
-                }
+                get { return readOnlyEnumerable; }
             }
         }
 
         [Fact]
         public void ImportCollectionsExceptionReadOnlyEnumerable()
         {
-            ExpectedErrorOnPartActivate(new InvalidImporterReadOnlyEnumerable(),
-                ErrorId.ReflectionModel_ImportCollectionNotWritable);
+            ExpectedErrorOnPartActivate(
+                new InvalidImporterReadOnlyEnumerable(),
+                ErrorId.ReflectionModel_ImportCollectionNotWritable
+            );
         }
 
         public class ImporterWriteOnlyExportCollection
@@ -270,7 +284,10 @@ namespace System.ComponentModel.Composition
 
             container.Compose(batch);
 
-            EnumerableAssert.AreEqual(values, importer.PublicExportCollection.Select(export => export.Value));
+            EnumerableAssert.AreEqual(
+                values,
+                importer.PublicExportCollection.Select(export => export.Value)
+            );
         }
 
         public class ImporterWriteOnlyIEnumerableOfT
@@ -340,8 +357,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void ImportCollectionsExceptionNonCollection()
         {
-            ExpectedChangeRejectedErrorOnSetImport(new InvalidImporterNonCollection(),
-                ErrorId.ImportEngine_ImportCardinalityMismatch);
+            ExpectedChangeRejectedErrorOnSetImport(
+                new InvalidImporterNonCollection(),
+                ErrorId.ImportEngine_ImportCardinalityMismatch
+            );
         }
 
         public class InvalidImporterNonAssignableCollection
@@ -353,8 +372,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void ImportCollectionsExceptionNonAssignableCollection()
         {
-            ExpectedErrorOnSetImport(new InvalidImporterNonAssignableCollection(),
-                ErrorId.ReflectionModel_ImportNotAssignableFromExport);
+            ExpectedErrorOnSetImport(
+                new InvalidImporterNonAssignableCollection(),
+                ErrorId.ReflectionModel_ImportNotAssignableFromExport
+            );
         }
 
         public class InvalidImporterNullReadOnlyICollection
@@ -362,14 +383,19 @@ namespace System.ComponentModel.Composition
             ICollection<int> readOnlyICollection = null;
 
             [ImportMany("Value")]
-            public ICollection<int> Values { get { return readOnlyICollection; } }
+            public ICollection<int> Values
+            {
+                get { return readOnlyICollection; }
+            }
         }
 
         [Fact]
         public void ImportCollectionsExceptionNullReadOnlyICollection()
         {
-            ExpectedErrorOnPartActivate(new InvalidImporterNullReadOnlyICollection(),
-                ErrorId.ReflectionModel_ImportCollectionNull);
+            ExpectedErrorOnPartActivate(
+                new InvalidImporterNullReadOnlyICollection(),
+                ErrorId.ReflectionModel_ImportCollectionNull
+            );
         }
 
         public class ImporterWeakIEnumerable
@@ -385,18 +411,36 @@ namespace System.ComponentModel.Composition
             public class IntCollection : IEnumerable
             {
                 List<int> ints = new List<int>();
-                public void Add(int item) { ints.Add(item); }
-                public void Clear() { ints.Clear(); }
-                public bool Remove(int item) { return ints.Remove(item); }
-                public IEnumerator GetEnumerator() { return ints.GetEnumerator(); }
+
+                public void Add(int item)
+                {
+                    ints.Add(item);
+                }
+
+                public void Clear()
+                {
+                    ints.Clear();
+                }
+
+                public bool Remove(int item)
+                {
+                    return ints.Remove(item);
+                }
+
+                public IEnumerator GetEnumerator()
+                {
+                    return ints.GetEnumerator();
+                }
             }
         }
 
         [Fact]
         public void ImportCollectionsExceptionWeakCollectionNotSupportingICollectionOfT()
         {
-            ExpectedErrorOnPartActivate(new ImporterWeakIEnumerable(),
-                ErrorId.ReflectionModel_ImportCollectionNotWritable);
+            ExpectedErrorOnPartActivate(
+                new ImporterWeakIEnumerable(),
+                ErrorId.ReflectionModel_ImportCollectionNotWritable
+            );
         }
 
         public class ImporterThrowsOnGetting
@@ -404,10 +448,7 @@ namespace System.ComponentModel.Composition
             [ImportMany("Value")]
             public List<int> Value
             {
-                get
-                {
-                    throw new NotSupportedException();
-                }
+                get { throw new NotSupportedException(); }
             }
         }
 
@@ -421,11 +462,15 @@ namespace System.ComponentModel.Composition
             batch.AddExportedValue("Value", 42);
             batch.AddExportedValue("Value", 0);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotActivate,
-                                          ErrorId.ReflectionModel_ImportCollectionGetThrewException, RetryMode.DoNotRetry, () =>
-                                          {
-                                              container.Compose(batch);
-                                          });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotActivate,
+                ErrorId.ReflectionModel_ImportCollectionGetThrewException,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         public class CustomCollectionThrowsDuringConstruction : Collection<int>
@@ -438,9 +483,7 @@ namespace System.ComponentModel.Composition
 
         public class ImportCustomCollectionThrowsDuringConstruction
         {
-            public ImportCustomCollectionThrowsDuringConstruction()
-            {
-            }
+            public ImportCustomCollectionThrowsDuringConstruction() { }
 
             [ImportMany("Value")]
             public CustomCollectionThrowsDuringConstruction Values { get; set; }
@@ -449,8 +492,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void ImportCollections_ImportTypeThrowsOnConstruction()
         {
-            ExpectedErrorOnPartActivate(new ImportCustomCollectionThrowsDuringConstruction(),
-                ErrorId.ReflectionModel_ImportCollectionConstructionThrewException);
+            ExpectedErrorOnPartActivate(
+                new ImportCustomCollectionThrowsDuringConstruction(),
+                ErrorId.ReflectionModel_ImportCollectionConstructionThrewException
+            );
         }
 
         public class CustomCollectionThrowsDuringClear : Collection<int>
@@ -463,9 +508,7 @@ namespace System.ComponentModel.Composition
 
         public class ImportCustomCollectionThrowsDuringClear
         {
-            public ImportCustomCollectionThrowsDuringClear()
-            {
-            }
+            public ImportCustomCollectionThrowsDuringClear() { }
 
             [ImportMany("Value")]
             public CustomCollectionThrowsDuringClear Values { get; set; }
@@ -474,8 +517,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void ImportCollections_ImportTypeThrowsOnClear()
         {
-            ExpectedErrorOnPartActivate(new ImportCustomCollectionThrowsDuringClear(),
-                ErrorId.ReflectionModel_ImportCollectionClearThrewException);
+            ExpectedErrorOnPartActivate(
+                new ImportCustomCollectionThrowsDuringClear(),
+                ErrorId.ReflectionModel_ImportCollectionClearThrewException
+            );
         }
 
         public class CustomCollectionThrowsDuringAdd : Collection<int>
@@ -488,9 +533,7 @@ namespace System.ComponentModel.Composition
 
         public class ImportCustomCollectionThrowsDuringAdd
         {
-            public ImportCustomCollectionThrowsDuringAdd()
-            {
-            }
+            public ImportCustomCollectionThrowsDuringAdd() { }
 
             [ImportMany("Value")]
             public CustomCollectionThrowsDuringAdd Values { get; set; }
@@ -499,8 +542,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void ImportCollections_ImportTypeThrowsOnAdd()
         {
-            ExpectedErrorOnPartActivate(new ImportCustomCollectionThrowsDuringAdd(),
-                ErrorId.ReflectionModel_ImportCollectionAddThrewException);
+            ExpectedErrorOnPartActivate(
+                new ImportCustomCollectionThrowsDuringAdd(),
+                ErrorId.ReflectionModel_ImportCollectionAddThrewException
+            );
         }
 
         public class CustomCollectionThrowsDuringIsReadOnly : ICollection<int>
@@ -565,17 +610,17 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void ImportCollections_ImportTypeThrowsOnIsReadOnly()
         {
-            ExpectedErrorOnPartActivate(new ImportCustomCollectionThrowsDuringIsReadOnly(),
-                ErrorId.ReflectionModel_ImportCollectionIsReadOnlyThrewException);
+            ExpectedErrorOnPartActivate(
+                new ImportCustomCollectionThrowsDuringIsReadOnly(),
+                ErrorId.ReflectionModel_ImportCollectionIsReadOnlyThrewException
+            );
         }
 
         public class CollectionTypeWithNoIList<T> : ICollection<T>
         {
             private int _count = 0;
-            public CollectionTypeWithNoIList()
-            {
 
-            }
+            public CollectionTypeWithNoIList() { }
 
             public void Add(T item)
             {
@@ -645,12 +690,9 @@ namespace System.ComponentModel.Composition
             Assert.Equal(2, importer.Values.Count);
         }
 
-        public class CollectionWithMultipleInterfaces :  ICollection<int>, ICollection<string>
+        public class CollectionWithMultipleInterfaces : ICollection<int>, ICollection<string>
         {
-            public CollectionWithMultipleInterfaces()
-            {
-
-            }
+            public CollectionWithMultipleInterfaces() { }
 
             #region ICollection<int> Members
 
@@ -759,8 +801,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void ImportCollections_MultipleICollections_ShouldCauseNotWriteable()
         {
-            ExpectedErrorOnPartActivate(new ImportCollectionWithMultipleInterfaces(),
-                ErrorId.ReflectionModel_ImportCollectionNotWritable);
+            ExpectedErrorOnPartActivate(
+                new ImportCollectionWithMultipleInterfaces(),
+                ErrorId.ReflectionModel_ImportCollectionNotWritable
+            );
         }
 
         public class ImportManyNonCollectionTypeString
@@ -772,8 +816,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void ImportManyOnNonCollectionTypeString_ShouldCauseNotWritable()
         {
-            ExpectedErrorOnPartActivate(new ImportManyNonCollectionTypeString(),
-                ErrorId.ReflectionModel_ImportCollectionNotWritable);
+            ExpectedErrorOnPartActivate(
+                new ImportManyNonCollectionTypeString(),
+                ErrorId.ReflectionModel_ImportCollectionNotWritable
+            );
         }
 
         public class ImportManyNonCollectionTypeObject
@@ -785,8 +831,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void ImportManyOnNonCollectionTypeObject_ShouldCauseNotWritable()
         {
-            ExpectedErrorOnPartActivate(new ImportManyNonCollectionTypeObject(),
-                ErrorId.ReflectionModel_ImportCollectionNotWritable);
+            ExpectedErrorOnPartActivate(
+                new ImportManyNonCollectionTypeObject(),
+                ErrorId.ReflectionModel_ImportCollectionNotWritable
+            );
         }
 
         public class ExportADictionaryObject
@@ -869,11 +917,15 @@ namespace System.ComponentModel.Composition
             batch.AddExportedValue("Value", 42);
             batch.AddExportedValue("Value", 0);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotActivate,
-              expectedErrorId, RetryMode.DoNotRetry, () =>
-              {
-                  container.Compose(batch);
-              });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotActivate,
+                expectedErrorId,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         private static void ExpectedErrorOnSetImport(object importer, ErrorId expectedErrorId)
@@ -884,14 +936,21 @@ namespace System.ComponentModel.Composition
             batch.AddExportedValue("Value", 42);
             batch.AddExportedValue("Value", 0);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotSetImport,
-              expectedErrorId, RetryMode.DoNotRetry, () =>
-              {
-                  container.Compose(batch);
-              });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                expectedErrorId,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
-        private static void ExpectedChangeRejectedErrorOnSetImport(object importer, ErrorId expectedErrorId)
+        private static void ExpectedChangeRejectedErrorOnSetImport(
+            object importer,
+            ErrorId expectedErrorId
+        )
         {
             var container = ContainerFactory.Create();
             var batch = new CompositionBatch();
@@ -899,11 +958,15 @@ namespace System.ComponentModel.Composition
             batch.AddExportedValue("Value", 42);
             batch.AddExportedValue("Value", 0);
 
-            CompositionAssert.ThrowsChangeRejectedError(ErrorId.ImportEngine_PartCannotSetImport,
-              expectedErrorId, RetryMode.DoNotRetry, () =>
-              {
-                  container.Compose(batch);
-              });
+            CompositionAssert.ThrowsChangeRejectedError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                expectedErrorId,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
     }
 }

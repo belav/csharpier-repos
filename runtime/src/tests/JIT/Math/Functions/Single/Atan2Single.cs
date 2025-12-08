@@ -17,11 +17,14 @@ namespace System.MathBenchmarks
 
         public static void Atan2Test()
         {
-            float result = 0.0f, valueX = 1.0f, valueY = -1.0f;
+            float result = 0.0f,
+                valueX = 1.0f,
+                valueY = -1.0f;
 
             for (int iteration = 0; iteration < MathTests.Iterations; iteration++)
             {
-                valueX += atan2DeltaX; valueY += atan2DeltaY;
+                valueX += atan2DeltaX;
+                valueY += atan2DeltaY;
                 result += MathF.Atan2(valueY, valueX);
             }
 
@@ -29,7 +32,9 @@ namespace System.MathBenchmarks
 
             if (diff > MathTests.SingleEpsilon)
             {
-                throw new Exception($"Expected Result {atan2ExpectedResult,10:g9}; Actual Result {result,10:g9}");
+                throw new Exception(
+                    $"Expected Result {atan2ExpectedResult, 10:g9}; Actual Result {result, 10:g9}"
+                );
             }
         }
     }

@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var builder = ImmutableSegmentedHashSet.CreateBuilder<string>();
             Assert.Same(EqualityComparer<string>.Default, builder.KeyComparer);
 
-            builder = ImmutableSegmentedHashSet.CreateBuilder<string>(StringComparer.OrdinalIgnoreCase);
+            builder = ImmutableSegmentedHashSet.CreateBuilder<string>(
+                StringComparer.OrdinalIgnoreCase
+            );
             Assert.Same(StringComparer.OrdinalIgnoreCase, builder.KeyComparer);
         }
 
@@ -78,7 +80,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void EnumerateBuilderWhileMutating()
         {
-            var builder = ImmutableSegmentedHashSet<int>.Empty.Union(Enumerable.Range(1, 10)).ToBuilder();
+            var builder = ImmutableSegmentedHashSet<int>
+                .Empty.Union(Enumerable.Range(1, 10))
+                .ToBuilder();
             CollectionAssertAreEquivalent(Enumerable.Range(1, 10).ToArray(), builder.ToArray());
 
             var enumerator = builder.GetEnumerator();
@@ -312,13 +316,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/54716")]
         public void DebuggerAttributesValid()
         {
-            DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableSegmentedHashSet.CreateBuilder<int>());
+            DebuggerAttributes.ValidateDebuggerDisplayReferences(
+                ImmutableSegmentedHashSet.CreateBuilder<int>()
+            );
         }
 
         [Fact]
         public void ToImmutableHashSet()
         {
-            ImmutableSegmentedHashSet<int>.Builder builder = ImmutableSegmentedHashSet.CreateBuilder<int>();
+            ImmutableSegmentedHashSet<int>.Builder builder =
+                ImmutableSegmentedHashSet.CreateBuilder<int>();
             builder.Add(1);
             builder.Add(2);
             builder.Add(3);
@@ -337,7 +344,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.False(set.IsEmpty);
 
             ImmutableSegmentedHashSet<int>.Builder? nullBuilder = null;
-            Assert.Throws<ArgumentNullException>("builder", () => nullBuilder!.ToImmutableSegmentedHashSet());
+            Assert.Throws<ArgumentNullException>(
+                "builder",
+                () => nullBuilder!.ToImmutableSegmentedHashSet()
+            );
         }
 
         [Fact]
@@ -346,7 +356,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var builder = ImmutableSegmentedHashSet.Create(1, 2, 3).ToBuilder();
             Assert.True(builder.TryGetValue(2, out _));
 
-            builder = ImmutableSegmentedHashSet.Create(CustomEqualityComparer.Instance, 1, 2, 3, 4).ToBuilder();
+            builder = ImmutableSegmentedHashSet
+                .Create(CustomEqualityComparer.Instance, 1, 2, 3, 4)
+                .ToBuilder();
             var existing = 0;
             Assert.True(builder.TryGetValue(5, out existing));
             Assert.Equal(4, existing);
@@ -354,9 +366,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         private class CustomEqualityComparer : IEqualityComparer<int>
         {
-            private CustomEqualityComparer()
-            {
-            }
+            private CustomEqualityComparer() { }
 
             public static CustomEqualityComparer Instance { get; } = new CustomEqualityComparer();
 

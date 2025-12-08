@@ -60,8 +60,10 @@ namespace System.Threading.Tasks
 
         /// <summary>null if representing a successful synchronous completion, otherwise a <see cref="Task"/> or a <see cref="IValueTaskSource"/>.</summary>
         internal readonly object? _obj;
+
         /// <summary>Opaque value passed through to the <see cref="IValueTaskSource"/>.</summary>
         internal readonly short _token;
+
         /// <summary>true to continue on the captured context; otherwise, false.</summary>
         /// <remarks>Stored in the <see cref="ValueTask"/> rather than in the configured awaiter to utilize otherwise padding space.</remarks>
         internal readonly bool _continueOnCapturedContext;
@@ -128,8 +130,9 @@ namespace System.Threading.Tasks
         /// <summary>Creates a <see cref="ValueTask{TResult}"/> that has completed due to cancellation with the specified cancellation token.</summary>
         /// <param name="cancellationToken">The cancellation token with which to complete the task.</param>
         /// <returns>The canceled task.</returns>
-        public static ValueTask<TResult> FromCanceled<TResult>(CancellationToken cancellationToken) =>
-            new ValueTask<TResult>(Task.FromCanceled<TResult>(cancellationToken));
+        public static ValueTask<TResult> FromCanceled<TResult>(
+            CancellationToken cancellationToken
+        ) => new ValueTask<TResult>(Task.FromCanceled<TResult>(cancellationToken));
 
         /// <summary>Creates a <see cref="ValueTask"/> that has completed with the specified exception.</summary>
         /// <param name="exception">The exception with which to complete the task.</param>
@@ -148,19 +151,16 @@ namespace System.Threading.Tasks
 
         /// <summary>Returns a value indicating whether this value is equal to a specified <see cref="object"/>.</summary>
         public override bool Equals([NotNullWhen(true)] object? obj) =>
-            obj is ValueTask &&
-            Equals((ValueTask)obj);
+            obj is ValueTask && Equals((ValueTask)obj);
 
         /// <summary>Returns a value indicating whether this value is equal to a specified <see cref="ValueTask"/> value.</summary>
         public bool Equals(ValueTask other) => _obj == other._obj && _token == other._token;
 
         /// <summary>Returns a value indicating whether two <see cref="ValueTask"/> values are equal.</summary>
-        public static bool operator ==(ValueTask left, ValueTask right) =>
-            left.Equals(right);
+        public static bool operator ==(ValueTask left, ValueTask right) => left.Equals(right);
 
         /// <summary>Returns a value indicating whether two <see cref="ValueTask"/> values are not equal.</summary>
-        public static bool operator !=(ValueTask left, ValueTask right) =>
-            !left.Equals(right);
+        public static bool operator !=(ValueTask left, ValueTask right) => !left.Equals(right);
 
         /// <summary>
         /// Gets a <see cref="Task"/> object to represent this ValueTask.
@@ -173,10 +173,9 @@ namespace System.Threading.Tasks
         {
             object? obj = _obj;
             Debug.Assert(obj == null || obj is Task || obj is IValueTaskSource);
-            return
-                obj == null ? Task.CompletedTask :
-                obj as Task ??
-                GetTaskForValueTaskSource(Unsafe.As<IValueTaskSource>(obj));
+            return obj == null
+                ? Task.CompletedTask
+                : obj as Task ?? GetTaskForValueTaskSource(Unsafe.As<IValueTaskSource>(obj));
         }
 
         /// <summary>Gets a <see cref="ValueTask"/> that may be used at any point in the future.</summary>
@@ -216,7 +215,9 @@ namespace System.Threading.Tasks
                         }
 
                         // Benign race condition to initialize cached task, as identity doesn't matter.
-                        return s_canceledTask ??= Task.FromCanceled(new CancellationToken(canceled: true));
+                        return s_canceledTask ??= Task.FromCanceled(
+                            new CancellationToken(canceled: true)
+                        );
                     }
                     else
                     {
@@ -233,8 +234,10 @@ namespace System.Threading.Tasks
         {
             private static readonly Action<object?> s_completionAction = static state =>
             {
-                if (!(state is ValueTaskSourceAsTask vtst) ||
-                    !(vtst._source is IValueTaskSource source))
+                if (
+                    !(state is ValueTaskSourceAsTask vtst)
+                    || !(vtst._source is IValueTaskSource source)
+                )
                 {
                     // This could only happen if the IValueTaskSource passed the wrong state
                     // or if this callback were invoked multiple times such that the state
@@ -245,10 +248,11 @@ namespace System.Threading.Tasks
                     static void ThrowUnexpectedStateForKnownCallback(object? state) =>
                         throw new ArgumentOutOfRangeException(
                             nameof(state),
-                            state is ValueTaskSourceAsTask vsts ?
-                                $"{nameof(ValueTaskSourceAsTask)}.{nameof(_source)} : {vsts._source}" :
-                                $"{nameof(state)} : {state}",
-                            SR.Argument_UnexpectedStateForKnownCallback);
+                            state is ValueTaskSourceAsTask vsts
+                                ? $"{nameof(ValueTaskSourceAsTask)}.{nameof(_source)} : {vsts._source}"
+                                : $"{nameof(state)} : {state}",
+                            SR.Argument_UnexpectedStateForKnownCallback
+                        );
                 }
 
                 vtst._source = null;
@@ -280,6 +284,7 @@ namespace System.Threading.Tasks
 
             /// <summary>The associated <see cref="IValueTaskSource"/>.</summary>
             private IValueTaskSource? _source;
+
             /// <summary>The token to pass through to operations on <see cref="_source"/></summary>
             private readonly short _token;
 
@@ -287,7 +292,12 @@ namespace System.Threading.Tasks
             {
                 _token = token;
                 _source = source;
-                source.OnCompleted(s_completionAction, this, token, ValueTaskSourceOnCompletedFlags.None);
+                source.OnCompleted(
+                    s_completionAction,
+                    this,
+                    token,
+                    ValueTaskSourceOnCompletedFlags.None
+                );
             }
         }
 
@@ -310,7 +320,8 @@ namespace System.Threading.Tasks
                     return t.IsCompleted;
                 }
 
-                return Unsafe.As<IValueTaskSource>(obj).GetStatus(_token) != ValueTaskSourceStatus.Pending;
+                return Unsafe.As<IValueTaskSource>(obj).GetStatus(_token)
+                    != ValueTaskSourceStatus.Pending;
             }
         }
 
@@ -333,7 +344,8 @@ namespace System.Threading.Tasks
                     return t.IsCompletedSuccessfully;
                 }
 
-                return Unsafe.As<IValueTaskSource>(obj).GetStatus(_token) == ValueTaskSourceStatus.Succeeded;
+                return Unsafe.As<IValueTaskSource>(obj).GetStatus(_token)
+                    == ValueTaskSourceStatus.Succeeded;
             }
         }
 
@@ -355,7 +367,8 @@ namespace System.Threading.Tasks
                     return t.IsFaulted;
                 }
 
-                return Unsafe.As<IValueTaskSource>(obj).GetStatus(_token) == ValueTaskSourceStatus.Faulted;
+                return Unsafe.As<IValueTaskSource>(obj).GetStatus(_token)
+                    == ValueTaskSourceStatus.Faulted;
             }
         }
 
@@ -382,7 +395,8 @@ namespace System.Threading.Tasks
                     return t.IsCanceled;
                 }
 
-                return Unsafe.As<IValueTaskSource>(obj).GetStatus(_token) == ValueTaskSourceStatus.Canceled;
+                return Unsafe.As<IValueTaskSource>(obj).GetStatus(_token)
+                    == ValueTaskSourceStatus.Canceled;
             }
         }
 
@@ -411,11 +425,20 @@ namespace System.Threading.Tasks
         ///
         /// The <see cref="ValueTask{TResult}"/> should not be used after calling this method.
         /// </summary>
-        internal static ValueTask DangerousCreateFromTypedValueTask<TResult>(ValueTask<TResult> valueTask)
+        internal static ValueTask DangerousCreateFromTypedValueTask<TResult>(
+            ValueTask<TResult> valueTask
+        )
         {
-            Debug.Assert(valueTask._obj is null or Task or IValueTaskSource, "If the ValueTask<>'s backing object is an IValueTaskSource<TResult>, it must also be IValueTaskSource.");
+            Debug.Assert(
+                valueTask._obj is null or Task or IValueTaskSource,
+                "If the ValueTask<>'s backing object is an IValueTaskSource<TResult>, it must also be IValueTaskSource."
+            );
 
-            return new ValueTask(valueTask._obj, valueTask._token, valueTask._continueOnCapturedContext);
+            return new ValueTask(
+                valueTask._obj,
+                valueTask._token,
+                valueTask._continueOnCapturedContext
+            );
         }
 
         /// <summary>Gets an awaiter for this <see cref="ValueTask"/>.</summary>
@@ -427,7 +450,9 @@ namespace System.Threading.Tasks
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ConfiguredValueTaskAwaitable ConfigureAwait(bool continueOnCapturedContext) =>
-            new ConfiguredValueTaskAwaitable(new ValueTask(_obj, _token, continueOnCapturedContext));
+            new ConfiguredValueTaskAwaitable(
+                new ValueTask(_obj, _token, continueOnCapturedContext)
+            );
     }
 
     /// <summary>Provides a value type that can represent a synchronously available value or a task object.</summary>
@@ -462,12 +487,16 @@ namespace System.Threading.Tasks
     {
         /// <summary>A task canceled using `new CancellationToken(true)`. Lazily created only when first needed.</summary>
         private static volatile Task<TResult>? s_canceledTask;
+
         /// <summary>null if <see cref="_result"/> has the result, otherwise a <see cref="Task{TResult}"/> or a <see cref="IValueTaskSource{TResult}"/>.</summary>
         internal readonly object? _obj;
+
         /// <summary>The result to be used if the operation completed successfully synchronously.</summary>
         internal readonly TResult? _result;
+
         /// <summary>Opaque value passed through to the <see cref="IValueTaskSource{TResult}"/>.</summary>
         internal readonly short _token;
+
         /// <summary>true to continue on the captured context; otherwise, false.</summary>
         /// <remarks>Stored in the <see cref="ValueTask{TResult}"/> rather than in the configured awaiter to utilize otherwise padding space.</remarks>
         internal readonly bool _continueOnCapturedContext;
@@ -536,23 +565,21 @@ namespace System.Threading.Tasks
             _continueOnCapturedContext = continueOnCapturedContext;
         }
 
-
         /// <summary>Returns the hash code for this instance.</summary>
         public override int GetHashCode() =>
-            _obj != null ? _obj.GetHashCode() :
-            _result != null ? _result.GetHashCode() :
-            0;
+            _obj != null ? _obj.GetHashCode()
+            : _result != null ? _result.GetHashCode()
+            : 0;
 
         /// <summary>Returns a value indicating whether this value is equal to a specified <see cref="object"/>.</summary>
         public override bool Equals([NotNullWhen(true)] object? obj) =>
-            obj is ValueTask<TResult> &&
-            Equals((ValueTask<TResult>)obj);
+            obj is ValueTask<TResult> && Equals((ValueTask<TResult>)obj);
 
         /// <summary>Returns a value indicating whether this value is equal to a specified <see cref="ValueTask{TResult}"/> value.</summary>
         public bool Equals(ValueTask<TResult> other) =>
-            _obj != null || other._obj != null ?
-                _obj == other._obj && _token == other._token :
-                EqualityComparer<TResult>.Default.Equals(_result, other._result);
+            _obj != null || other._obj != null
+                ? _obj == other._obj && _token == other._token
+                : EqualityComparer<TResult>.Default.Equals(_result, other._result);
 
         /// <summary>Returns a value indicating whether two <see cref="ValueTask{TResult}"/> values are equal.</summary>
         public static bool operator ==(ValueTask<TResult> left, ValueTask<TResult> right) =>
@@ -588,7 +615,8 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>Gets a <see cref="ValueTask{TResult}"/> that may be used at any point in the future.</summary>
-        public ValueTask<TResult> Preserve() => _obj == null ? this : new ValueTask<TResult>(AsTask());
+        public ValueTask<TResult> Preserve() =>
+            _obj == null ? this : new ValueTask<TResult>(AsTask());
 
         /// <summary>Creates a <see cref="Task{TResult}"/> to represent the <see cref="IValueTaskSource{TResult}"/>.</summary>
         /// <remarks>
@@ -623,7 +651,9 @@ namespace System.Threading.Tasks
                         }
 
                         // Benign race condition to initialize cached task, as identity doesn't matter.
-                        return s_canceledTask ??= Task.FromCanceled<TResult>(new CancellationToken(true));
+                        return s_canceledTask ??= Task.FromCanceled<TResult>(
+                            new CancellationToken(true)
+                        );
                     }
                     else
                     {
@@ -640,8 +670,10 @@ namespace System.Threading.Tasks
         {
             private static readonly Action<object?> s_completionAction = static state =>
             {
-                if (!(state is ValueTaskSourceAsTask vtst) ||
-                    !(vtst._source is IValueTaskSource<TResult> source))
+                if (
+                    !(state is ValueTaskSourceAsTask vtst)
+                    || !(vtst._source is IValueTaskSource<TResult> source)
+                )
                 {
                     // This could only happen if the IValueTaskSource<TResult> passed the wrong state
                     // or if this callback were invoked multiple times such that the state
@@ -652,10 +684,11 @@ namespace System.Threading.Tasks
                     static void ThrowUnexpectedStateForKnownCallback(object? state) =>
                         throw new ArgumentOutOfRangeException(
                             nameof(state),
-                            state is ValueTaskSourceAsTask vsts ?
-                                $"{nameof(ValueTaskSourceAsTask)}.{nameof(_source)} : {vsts._source}" :
-                                $"{nameof(state)} : {state}",
-                            SR.Argument_UnexpectedStateForKnownCallback);
+                            state is ValueTaskSourceAsTask vsts
+                                ? $"{nameof(ValueTaskSourceAsTask)}.{nameof(_source)} : {vsts._source}"
+                                : $"{nameof(state)} : {state}",
+                            SR.Argument_UnexpectedStateForKnownCallback
+                        );
                 }
 
                 vtst._source = null;
@@ -686,6 +719,7 @@ namespace System.Threading.Tasks
 
             /// <summary>The associated <see cref="IValueTaskSource"/>.</summary>
             private IValueTaskSource<TResult>? _source;
+
             /// <summary>The token to pass through to operations on <see cref="_source"/></summary>
             private readonly short _token;
 
@@ -693,7 +727,12 @@ namespace System.Threading.Tasks
             {
                 _source = source;
                 _token = token;
-                source.OnCompleted(s_completionAction, this, token, ValueTaskSourceOnCompletedFlags.None);
+                source.OnCompleted(
+                    s_completionAction,
+                    this,
+                    token,
+                    ValueTaskSourceOnCompletedFlags.None
+                );
             }
         }
 
@@ -704,7 +743,9 @@ namespace System.Threading.Tasks
             get
             {
                 object? obj = _obj;
-                Debug.Assert(obj == null || obj is Task<TResult> || obj is IValueTaskSource<TResult>);
+                Debug.Assert(
+                    obj == null || obj is Task<TResult> || obj is IValueTaskSource<TResult>
+                );
 
                 if (obj == null)
                 {
@@ -716,7 +757,8 @@ namespace System.Threading.Tasks
                     return t.IsCompleted;
                 }
 
-                return Unsafe.As<IValueTaskSource<TResult>>(obj).GetStatus(_token) != ValueTaskSourceStatus.Pending;
+                return Unsafe.As<IValueTaskSource<TResult>>(obj).GetStatus(_token)
+                    != ValueTaskSourceStatus.Pending;
             }
         }
 
@@ -727,7 +769,9 @@ namespace System.Threading.Tasks
             get
             {
                 object? obj = _obj;
-                Debug.Assert(obj == null || obj is Task<TResult> || obj is IValueTaskSource<TResult>);
+                Debug.Assert(
+                    obj == null || obj is Task<TResult> || obj is IValueTaskSource<TResult>
+                );
 
                 if (obj == null)
                 {
@@ -739,7 +783,8 @@ namespace System.Threading.Tasks
                     return t.IsCompletedSuccessfully;
                 }
 
-                return Unsafe.As<IValueTaskSource<TResult>>(obj).GetStatus(_token) == ValueTaskSourceStatus.Succeeded;
+                return Unsafe.As<IValueTaskSource<TResult>>(obj).GetStatus(_token)
+                    == ValueTaskSourceStatus.Succeeded;
             }
         }
 
@@ -749,7 +794,9 @@ namespace System.Threading.Tasks
             get
             {
                 object? obj = _obj;
-                Debug.Assert(obj == null || obj is Task<TResult> || obj is IValueTaskSource<TResult>);
+                Debug.Assert(
+                    obj == null || obj is Task<TResult> || obj is IValueTaskSource<TResult>
+                );
 
                 if (obj == null)
                 {
@@ -761,7 +808,8 @@ namespace System.Threading.Tasks
                     return t.IsFaulted;
                 }
 
-                return Unsafe.As<IValueTaskSource<TResult>>(obj).GetStatus(_token) == ValueTaskSourceStatus.Faulted;
+                return Unsafe.As<IValueTaskSource<TResult>>(obj).GetStatus(_token)
+                    == ValueTaskSourceStatus.Faulted;
             }
         }
 
@@ -776,7 +824,9 @@ namespace System.Threading.Tasks
             get
             {
                 object? obj = _obj;
-                Debug.Assert(obj == null || obj is Task<TResult> || obj is IValueTaskSource<TResult>);
+                Debug.Assert(
+                    obj == null || obj is Task<TResult> || obj is IValueTaskSource<TResult>
+                );
 
                 if (obj == null)
                 {
@@ -788,7 +838,8 @@ namespace System.Threading.Tasks
                     return t.IsCanceled;
                 }
 
-                return Unsafe.As<IValueTaskSource<TResult>>(obj).GetStatus(_token) == ValueTaskSourceStatus.Canceled;
+                return Unsafe.As<IValueTaskSource<TResult>>(obj).GetStatus(_token)
+                    == ValueTaskSourceStatus.Canceled;
             }
         }
 
@@ -800,7 +851,9 @@ namespace System.Threading.Tasks
             get
             {
                 object? obj = _obj;
-                Debug.Assert(obj == null || obj is Task<TResult> || obj is IValueTaskSource<TResult>);
+                Debug.Assert(
+                    obj == null || obj is Task<TResult> || obj is IValueTaskSource<TResult>
+                );
 
                 if (obj == null)
                 {
@@ -826,8 +879,12 @@ namespace System.Threading.Tasks
         /// true to attempt to marshal the continuation back to the captured context; otherwise, false.
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public ConfiguredValueTaskAwaitable<TResult> ConfigureAwait(bool continueOnCapturedContext) =>
-            new ConfiguredValueTaskAwaitable<TResult>(new ValueTask<TResult>(_obj, _result, _token, continueOnCapturedContext));
+        public ConfiguredValueTaskAwaitable<TResult> ConfigureAwait(
+            bool continueOnCapturedContext
+        ) =>
+            new ConfiguredValueTaskAwaitable<TResult>(
+                new ValueTask<TResult>(_obj, _result, _token, continueOnCapturedContext)
+            );
 
         /// <summary>Gets a string-representation of this <see cref="ValueTask{TResult}"/>.</summary>
         public override string? ToString()

@@ -31,11 +31,14 @@ namespace System.DirectoryServices.ActiveDirectory
 
         #region constructors
         internal AdamInstance(DirectoryContext context, string adamInstanceName)
-            : this(context, adamInstanceName, new DirectoryEntryManager(context), true)
-        {
-        }
+            : this(context, adamInstanceName, new DirectoryEntryManager(context), true) { }
 
-        internal AdamInstance(DirectoryContext context, string adamInstanceName, DirectoryEntryManager directoryEntryMgr, bool nameIncludesPort)
+        internal AdamInstance(
+            DirectoryContext context,
+            string adamInstanceName,
+            DirectoryEntryManager directoryEntryMgr,
+            bool nameIncludesPort
+        )
         {
             this.context = context;
             this.replicaName = adamInstanceName;
@@ -50,7 +53,11 @@ namespace System.DirectoryServices.ActiveDirectory
             _syncAllFunctionPointer = new SyncReplicaFromAllServersCallback(SyncAllCallbackRoutine);
         }
 
-        internal AdamInstance(DirectoryContext context, string adamHostName, DirectoryEntryManager directoryEntryMgr)
+        internal AdamInstance(
+            DirectoryContext context,
+            string adamHostName,
+            DirectoryEntryManager directoryEntryMgr
+        )
         {
             this.context = context;
 
@@ -128,7 +135,11 @@ namespace System.DirectoryServices.ActiveDirectory
             // target must be a server
             if ((!context.isServer()))
             {
-                throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.AINotFound, context.Name), typeof(AdamInstance), context.Name);
+                throw new ActiveDirectoryObjectNotFoundException(
+                    SR.Format(SR.AINotFound, context.Name),
+                    typeof(AdamInstance),
+                    context.Name
+                );
             }
 
             //  work with copy of the context
@@ -138,14 +149,25 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 directoryEntryMgr = new DirectoryEntryManager(context);
-                DirectoryEntry rootDSE = directoryEntryMgr.GetCachedDirectoryEntry(WellKnownDN.RootDSE);
+                DirectoryEntry rootDSE = directoryEntryMgr.GetCachedDirectoryEntry(
+                    WellKnownDN.RootDSE
+                );
 
                 // This will ensure that we are talking to ADAM instance only
                 if (!Utils.CheckCapability(rootDSE, Capability.ActiveDirectoryApplicationMode))
                 {
-                    throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.AINotFound, context.Name), typeof(AdamInstance), context.Name);
+                    throw new ActiveDirectoryObjectNotFoundException(
+                        SR.Format(SR.AINotFound, context.Name),
+                        typeof(AdamInstance),
+                        context.Name
+                    );
                 }
-                dnsHostName = (string)PropertyManager.GetPropertyValue(context, rootDSE, PropertyManager.DnsHostName)!;
+                dnsHostName = (string)
+                    PropertyManager.GetPropertyValue(
+                        context,
+                        rootDSE,
+                        PropertyManager.DnsHostName
+                    )!;
             }
             catch (COMException e)
             {
@@ -153,7 +175,11 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 if (errorCode == unchecked((int)0x8007203a))
                 {
-                    throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.AINotFound, context.Name), typeof(AdamInstance), context.Name);
+                    throw new ActiveDirectoryObjectNotFoundException(
+                        SR.Format(SR.AINotFound, context.Name),
+                        typeof(AdamInstance),
+                        context.Name
+                    );
                 }
                 else
                 {
@@ -225,7 +251,11 @@ namespace System.DirectoryServices.ActiveDirectory
 
             try
             {
-                adamInstanceCollection = ConfigurationSet.FindAdamInstances(context, partitionName, null);
+                adamInstanceCollection = ConfigurationSet.FindAdamInstances(
+                    context,
+                    partitionName,
+                    null
+                );
             }
             catch (ActiveDirectoryObjectNotFoundException)
             {
@@ -248,7 +278,9 @@ namespace System.DirectoryServices.ActiveDirectory
             // set the appropriate attribute on the root dse
             try
             {
-                DirectoryEntry rootDSE = directoryEntryMgr.GetCachedDirectoryEntry(WellKnownDN.RootDSE);
+                DirectoryEntry rootDSE = directoryEntryMgr.GetCachedDirectoryEntry(
+                    WellKnownDN.RootDSE
+                );
                 rootDSE.Properties[_becomeRoleOwnerAttrs[(int)role]].Value = 1;
                 rootDSE.CommitChanges();
             }
@@ -272,19 +304,27 @@ namespace System.DirectoryServices.ActiveDirectory
             switch (role)
             {
                 case AdamRole.SchemaRole:
-                    {
-                        roleObjectDN = directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.SchemaNamingContext);
-                        break;
-                    }
+                {
+                    roleObjectDN = directoryEntryMgr.ExpandWellKnownDN(
+                        WellKnownDN.SchemaNamingContext
+                    );
+                    break;
+                }
                 case AdamRole.NamingRole:
-                    {
-                        roleObjectDN = directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.PartitionsContainer);
-                        break;
-                    }
+                {
+                    roleObjectDN = directoryEntryMgr.ExpandWellKnownDN(
+                        WellKnownDN.PartitionsContainer
+                    );
+                    break;
+                }
                 default:
-                    {
-                        throw new InvalidEnumArgumentException(nameof(role), (int)role, typeof(AdamRole));
-                    }
+                {
+                    throw new InvalidEnumArgumentException(
+                        nameof(role),
+                        (int)role,
+                        typeof(AdamRole)
+                    );
+                }
             }
 
             DirectoryEntry? roleObjectEntry = null;
@@ -336,8 +376,23 @@ namespace System.DirectoryServices.ActiveDirectory
 
             // get the handle
             GetADAMHandle();
-            info = GetReplicationInfoHelper(_ADAMHandle, (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_CURSORS_3_FOR_NC, (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_CURSORS_FOR_NC, partition, ref advanced, context, DirectoryContext.ADAMHandle);
-            return ConstructReplicationCursors(_ADAMHandle, advanced, info, partition, this, DirectoryContext.ADAMHandle);
+            info = GetReplicationInfoHelper(
+                _ADAMHandle,
+                (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_CURSORS_3_FOR_NC,
+                (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_CURSORS_FOR_NC,
+                partition,
+                ref advanced,
+                context,
+                DirectoryContext.ADAMHandle
+            );
+            return ConstructReplicationCursors(
+                _ADAMHandle,
+                advanced,
+                info,
+                partition,
+                this,
+                DirectoryContext.ADAMHandle
+            );
         }
 
         public override ReplicationOperationInformation GetReplicationOperationInformation()
@@ -350,7 +405,15 @@ namespace System.DirectoryServices.ActiveDirectory
 
             // get the handle
             GetADAMHandle();
-            info = GetReplicationInfoHelper(_ADAMHandle, (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_PENDING_OPS, (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_PENDING_OPS, null, ref advanced, 0, DirectoryContext.ADAMHandle);
+            info = GetReplicationInfoHelper(
+                _ADAMHandle,
+                (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_PENDING_OPS,
+                (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_PENDING_OPS,
+                null,
+                ref advanced,
+                0,
+                DirectoryContext.ADAMHandle
+            );
             return ConstructPendingOperations(info, this, DirectoryContext.ADAMHandle);
         }
 
@@ -370,7 +433,15 @@ namespace System.DirectoryServices.ActiveDirectory
 
             // get the handle
             GetADAMHandle();
-            info = GetReplicationInfoHelper(_ADAMHandle, (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_NEIGHBORS, (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_NEIGHBORS, partition, ref advanced, 0, DirectoryContext.ADAMHandle);
+            info = GetReplicationInfoHelper(
+                _ADAMHandle,
+                (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_NEIGHBORS,
+                (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_NEIGHBORS,
+                partition,
+                ref advanced,
+                0,
+                DirectoryContext.ADAMHandle
+            );
             return ConstructNeighbors(info, this, DirectoryContext.ADAMHandle);
         }
 
@@ -384,7 +455,15 @@ namespace System.DirectoryServices.ActiveDirectory
 
             // get the handle
             GetADAMHandle();
-            info = GetReplicationInfoHelper(_ADAMHandle, (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_NEIGHBORS, (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_NEIGHBORS, null, ref advanced, 0, DirectoryContext.ADAMHandle);
+            info = GetReplicationInfoHelper(
+                _ADAMHandle,
+                (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_NEIGHBORS,
+                (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_NEIGHBORS,
+                null,
+                ref advanced,
+                0,
+                DirectoryContext.ADAMHandle
+            );
             return ConstructNeighbors(info, this, DirectoryContext.ADAMHandle);
         }
 
@@ -409,7 +488,15 @@ namespace System.DirectoryServices.ActiveDirectory
 
             // get the handle
             GetADAMHandle();
-            info = GetReplicationInfoHelper(_ADAMHandle, (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_METADATA_2_FOR_OBJ, (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_METADATA_FOR_OBJ, objectPath, ref advanced, 0, DirectoryContext.ADAMHandle);
+            info = GetReplicationInfoHelper(
+                _ADAMHandle,
+                (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_METADATA_2_FOR_OBJ,
+                (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_METADATA_FOR_OBJ,
+                objectPath,
+                ref advanced,
+                0,
+                DirectoryContext.ADAMHandle
+            );
             return ConstructMetaData(advanced, info, this, DirectoryContext.ADAMHandle);
         }
 
@@ -432,7 +519,14 @@ namespace System.DirectoryServices.ActiveDirectory
 
             // get the dsHandle
             GetADAMHandle();
-            SyncReplicaHelper(_ADAMHandle, true, partition, sourceServer, 0, DirectoryContext.ADAMHandle);
+            SyncReplicaHelper(
+                _ADAMHandle,
+                true,
+                partition,
+                sourceServer,
+                0,
+                DirectoryContext.ADAMHandle
+            );
         }
 
         public override void TriggerSyncReplicaFromNeighbors(string partition)
@@ -448,10 +542,20 @@ namespace System.DirectoryServices.ActiveDirectory
 
             // get the dsHandle
             GetADAMHandle();
-            SyncReplicaHelper(_ADAMHandle, true, partition, null, DS_REPSYNC_ASYNCHRONOUS_OPERATION | DS_REPSYNC_ALL_SOURCES, DirectoryContext.ADAMHandle);
+            SyncReplicaHelper(
+                _ADAMHandle,
+                true,
+                partition,
+                null,
+                DS_REPSYNC_ASYNCHRONOUS_OPERATION | DS_REPSYNC_ALL_SOURCES,
+                DirectoryContext.ADAMHandle
+            );
         }
 
-        public override void SyncReplicaFromAllServers(string partition, SyncFromAllServersOptions options)
+        public override void SyncReplicaFromAllServers(
+            string partition,
+            SyncFromAllServersOptions options
+        )
         {
             if (_disposed)
                 throw new ObjectDisposedException(GetType().Name);
@@ -464,7 +568,14 @@ namespace System.DirectoryServices.ActiveDirectory
 
             // get the dsHandle
             GetADAMHandle();
-            SyncReplicaAllHelper(_ADAMHandle, _syncAllFunctionPointer, partition, options, SyncFromAllServersCallback, DirectoryContext.ADAMHandle);
+            SyncReplicaAllHelper(
+                _ADAMHandle,
+                _syncAllFunctionPointer,
+                partition,
+                options,
+                SyncFromAllServersCallback,
+                DirectoryContext.ADAMHandle
+            );
         }
 
         public void Save()
@@ -474,7 +585,9 @@ namespace System.DirectoryServices.ActiveDirectory
             // only thing to be saved is the ntdsa entry (for default partition)
             if (_defaultPartitionModified)
             {
-                DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(NtdsaObjectName);
+                DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
+                    NtdsaObjectName
+                );
                 try
                 {
                     ntdsaEntry.CommitChanges();
@@ -501,7 +614,11 @@ namespace System.DirectoryServices.ActiveDirectory
                 CheckIfDisposed();
                 if (_currentConfigSet == null)
                 {
-                    DirectoryContext configSetContext = Utils.GetNewDirectoryContext(Name, DirectoryContextType.DirectoryServer, context);
+                    DirectoryContext configSetContext = Utils.GetNewDirectoryContext(
+                        Name,
+                        DirectoryContextType.DirectoryServer,
+                        context
+                    );
                     _currentConfigSet = ConfigurationSet.GetConfigurationSet(configSetContext);
                 }
                 return _currentConfigSet;
@@ -515,8 +632,15 @@ namespace System.DirectoryServices.ActiveDirectory
                 CheckIfDisposed();
                 if (_cachedHostName == null)
                 {
-                    DirectoryEntry serverEntry = directoryEntryMgr.GetCachedDirectoryEntry(ServerObjectName);
-                    _cachedHostName = (string)PropertyManager.GetPropertyValue(context, serverEntry, PropertyManager.DnsHostName)!;
+                    DirectoryEntry serverEntry = directoryEntryMgr.GetCachedDirectoryEntry(
+                        ServerObjectName
+                    );
+                    _cachedHostName = (string)
+                        PropertyManager.GetPropertyValue(
+                            context,
+                            serverEntry,
+                            PropertyManager.DnsHostName
+                        )!;
                 }
                 return _cachedHostName;
             }
@@ -529,8 +653,15 @@ namespace System.DirectoryServices.ActiveDirectory
                 CheckIfDisposed();
                 if (_cachedLdapPort == -1)
                 {
-                    DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(NtdsaObjectName);
-                    _cachedLdapPort = (int)PropertyManager.GetPropertyValue(context, ntdsaEntry, PropertyManager.MsDSPortLDAP)!;
+                    DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
+                        NtdsaObjectName
+                    );
+                    _cachedLdapPort = (int)
+                        PropertyManager.GetPropertyValue(
+                            context,
+                            ntdsaEntry,
+                            PropertyManager.MsDSPortLDAP
+                        )!;
                 }
                 return _cachedLdapPort;
             }
@@ -543,8 +674,15 @@ namespace System.DirectoryServices.ActiveDirectory
                 CheckIfDisposed();
                 if (_cachedSslPort == -1)
                 {
-                    DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(NtdsaObjectName);
-                    _cachedSslPort = (int)PropertyManager.GetPropertyValue(context, ntdsaEntry, PropertyManager.MsDSPortSSL)!;
+                    DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
+                        NtdsaObjectName
+                    );
+                    _cachedSslPort = (int)
+                        PropertyManager.GetPropertyValue(
+                            context,
+                            ntdsaEntry,
+                            PropertyManager.MsDSPortSSL
+                        )!;
                 }
                 return _cachedSslPort;
             }
@@ -566,16 +704,40 @@ namespace System.DirectoryServices.ActiveDirectory
                     {
                         // check for the fsmoRoleOwner attribute on the Config and Schema objects
                         ArrayList roleList = new ArrayList();
-                        schemaEntry = DirectoryEntryManager.GetDirectoryEntry(context, directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.SchemaNamingContext));
+                        schemaEntry = DirectoryEntryManager.GetDirectoryEntry(
+                            context,
+                            directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.SchemaNamingContext)
+                        );
 
-                        if (NtdsaObjectName.Equals((string)PropertyManager.GetPropertyValue(context, schemaEntry, PropertyManager.FsmoRoleOwner)!))
+                        if (
+                            NtdsaObjectName.Equals(
+                                (string)
+                                    PropertyManager.GetPropertyValue(
+                                        context,
+                                        schemaEntry,
+                                        PropertyManager.FsmoRoleOwner
+                                    )!
+                            )
+                        )
                         {
                             roleList.Add(AdamRole.SchemaRole);
                         }
 
-                        partitionsEntry = DirectoryEntryManager.GetDirectoryEntry(context, directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.PartitionsContainer));
+                        partitionsEntry = DirectoryEntryManager.GetDirectoryEntry(
+                            context,
+                            directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.PartitionsContainer)
+                        );
 
-                        if (NtdsaObjectName.Equals((string)PropertyManager.GetPropertyValue(context, partitionsEntry, PropertyManager.FsmoRoleOwner)!))
+                        if (
+                            NtdsaObjectName.Equals(
+                                (string)
+                                    PropertyManager.GetPropertyValue(
+                                        context,
+                                        partitionsEntry,
+                                        PropertyManager.FsmoRoleOwner
+                                    )!
+                            )
+                        )
                         {
                             roleList.Add(AdamRole.NamingRole);
                         }
@@ -603,18 +765,28 @@ namespace System.DirectoryServices.ActiveDirectory
                 CheckIfDisposed();
                 if (!_defaultPartitionInitialized || _defaultPartitionModified)
                 {
-                    DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(NtdsaObjectName);
+                    DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
+                        NtdsaObjectName
+                    );
                     try
                     {
                         ntdsaEntry.RefreshCache();
-                        if (ntdsaEntry.Properties[PropertyManager.MsDSDefaultNamingContext].Value == null)
+                        if (
+                            ntdsaEntry.Properties[PropertyManager.MsDSDefaultNamingContext].Value
+                            == null
+                        )
                         {
                             // property has not been set
                             _cachedDefaultPartition = null;
                         }
                         else
                         {
-                            _cachedDefaultPartition = (string)PropertyManager.GetPropertyValue(context, ntdsaEntry, PropertyManager.MsDSDefaultNamingContext)!;
+                            _cachedDefaultPartition = (string)
+                                PropertyManager.GetPropertyValue(
+                                    context,
+                                    ntdsaEntry,
+                                    PropertyManager.MsDSDefaultNamingContext
+                                )!;
                         }
                     }
                     catch (COMException e)
@@ -629,7 +801,9 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 CheckIfDisposed();
 
-                DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(NtdsaObjectName);
+                DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
+                    NtdsaObjectName
+                );
                 if (value == null)
                 {
                     if (ntdsaEntry.Properties.Contains(PropertyManager.MsDSDefaultNamingContext))
@@ -651,7 +825,10 @@ namespace System.DirectoryServices.ActiveDirectory
                     // this adam instance
                     if (!Partitions.Contains(value))
                     {
-                        throw new ArgumentException(SR.Format(SR.ServerNotAReplica, value), nameof(value));
+                        throw new ArgumentException(
+                            SR.Format(SR.ServerNotAReplica, value),
+                            nameof(value)
+                        );
                     }
                     ntdsaEntry.Properties[PropertyManager.MsDSDefaultNamingContext].Value = value;
                 }
@@ -684,10 +861,18 @@ namespace System.DirectoryServices.ActiveDirectory
                 CheckIfDisposed();
                 if (cachedSiteName == null)
                 {
-                    DirectoryEntry siteEntry = DirectoryEntryManager.GetDirectoryEntry(context, SiteObjectName);
+                    DirectoryEntry siteEntry = DirectoryEntryManager.GetDirectoryEntry(
+                        context,
+                        SiteObjectName
+                    );
                     try
                     {
-                        cachedSiteName = (string)PropertyManager.GetPropertyValue(context, siteEntry, PropertyManager.Cn)!;
+                        cachedSiteName = (string)
+                            PropertyManager.GetPropertyValue(
+                                context,
+                                siteEntry,
+                                PropertyManager.Cn
+                            )!;
                     }
                     finally
                     {
@@ -731,10 +916,18 @@ namespace System.DirectoryServices.ActiveDirectory
                 CheckIfDisposed();
                 if (cachedServerObjectName == null)
                 {
-                    DirectoryEntry rootDSE = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
+                    DirectoryEntry rootDSE = DirectoryEntryManager.GetDirectoryEntry(
+                        context,
+                        WellKnownDN.RootDSE
+                    );
                     try
                     {
-                        cachedServerObjectName = (string)PropertyManager.GetPropertyValue(context, rootDSE, PropertyManager.ServerName)!;
+                        cachedServerObjectName = (string)
+                            PropertyManager.GetPropertyValue(
+                                context,
+                                rootDSE,
+                                PropertyManager.ServerName
+                            )!;
                     }
                     catch (COMException e)
                     {
@@ -756,10 +949,18 @@ namespace System.DirectoryServices.ActiveDirectory
                 CheckIfDisposed();
                 if (cachedNtdsaObjectName == null)
                 {
-                    DirectoryEntry rootDSE = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
+                    DirectoryEntry rootDSE = DirectoryEntryManager.GetDirectoryEntry(
+                        context,
+                        WellKnownDN.RootDSE
+                    );
                     try
                     {
-                        cachedNtdsaObjectName = (string)PropertyManager.GetPropertyValue(context, rootDSE, PropertyManager.DsServiceName)!;
+                        cachedNtdsaObjectName = (string)
+                            PropertyManager.GetPropertyValue(
+                                context,
+                                rootDSE,
+                                PropertyManager.DsServiceName
+                            )!;
                     }
                     catch (COMException e)
                     {
@@ -781,8 +982,15 @@ namespace System.DirectoryServices.ActiveDirectory
                 CheckIfDisposed();
                 if (cachedNtdsaObjectGuid == Guid.Empty)
                 {
-                    DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(NtdsaObjectName);
-                    byte[] guidByteArray = (byte[])PropertyManager.GetPropertyValue(context, ntdsaEntry, PropertyManager.ObjectGuid)!;
+                    DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
+                        NtdsaObjectName
+                    );
+                    byte[] guidByteArray = (byte[])
+                        PropertyManager.GetPropertyValue(
+                            context,
+                            ntdsaEntry,
+                            PropertyManager.ObjectGuid
+                        )!;
                     cachedNtdsaObjectGuid = new Guid(guidByteArray);
                 }
                 return cachedNtdsaObjectGuid;
@@ -798,7 +1006,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 return _userDelegate;
             }
-
             set
             {
                 if (_disposed)
@@ -808,9 +1015,11 @@ namespace System.DirectoryServices.ActiveDirectory
             }
         }
 
-        public override ReplicationConnectionCollection InboundConnections => GetInboundConnectionsHelper();
+        public override ReplicationConnectionCollection InboundConnections =>
+            GetInboundConnectionsHelper();
 
-        public override ReplicationConnectionCollection OutboundConnections => GetOutboundConnectionsHelper();
+        public override ReplicationConnectionCollection OutboundConnections =>
+            GetOutboundConnectionsHelper();
 
         #endregion public properties
 
@@ -826,7 +1035,15 @@ namespace System.DirectoryServices.ActiveDirectory
 
             // get the handle
             GetADAMHandle();
-            info = GetReplicationInfoHelper(_ADAMHandle, (int)type, (int)type, null, ref advanced, 0, DirectoryContext.ADAMHandle);
+            info = GetReplicationInfoHelper(
+                _ADAMHandle,
+                (int)type,
+                (int)type,
+                null,
+                ref advanced,
+                0,
+                DirectoryContext.ADAMHandle
+            );
             return ConstructFailures(info, this, DirectoryContext.ADAMHandle);
         }
 
@@ -846,7 +1063,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     // DSBind, but we need to have port as annotation specified
                     string bindingString = HostName + ":" + LdapPort;
 
-                    _ADAMHandle = Utils.GetDSHandle(bindingString, null, _authIdentity, DirectoryContext.ADAMHandle);
+                    _ADAMHandle = Utils.GetDSHandle(
+                        bindingString,
+                        null,
+                        _authIdentity,
+                        DirectoryContext.ADAMHandle
+                    );
                 }
             }
         }

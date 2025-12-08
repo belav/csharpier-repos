@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,8 +23,8 @@
 
 using System;
 using System.IO;
-using NUnitLite.Runner;
 using NUnit.Framework.Internal;
+using NUnitLite.Runner;
 
 namespace NUnitLite
 {
@@ -60,16 +60,16 @@ namespace NUnitLite
         //
         //    -wait             Wait for a keypress before exiting.
         //
-        //    -include:categorylist 
-        //             If specified, nunitlite will only run the tests with a category 
-        //             that is in the comma separated list of category names. 
+        //    -include:categorylist
+        //             If specified, nunitlite will only run the tests with a category
+        //             that is in the comma separated list of category names.
         //             Example usage: -include:category1,category2 this command can be used
         //             in combination with the -exclude option also note that exlude takes priority
         //             over all includes.
         //
-        //    -exclude:categorylist 
-        //             If specified, nunitlite will not run any of the tests with a category 
-        //             that is in the comma separated list of category names. 
+        //    -exclude:categorylist
+        //             If specified, nunitlite will not run any of the tests with a category
+        //             that is in the comma separated list of category names.
         //             Example usage: -exclude:category1,category2 this command can be used
         //             in combination with the -include option also note that exclude takes priority
         //             over all includes
@@ -77,7 +77,7 @@ namespace NUnitLite
         {
             var runner = new TextUI();
             runner.Execute(args);
-            
+
             return (runner.Failure ? 1 : 0);
         }
     }

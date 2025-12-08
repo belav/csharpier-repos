@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -37,29 +37,42 @@ namespace DbLinq.Ingres
 #endif
     class IngresSqlProvider : SqlProvider
     {
-        public override SqlStatement GetInsertIds(SqlStatement table, IList<SqlStatement> autoPKColumn, IList<SqlStatement> inputPKColumns, IList<SqlStatement> inputPKValues, IList<SqlStatement> outputColumns, IList<SqlStatement> outputParameters, IList<SqlStatement> outputExpressions)
+        public override SqlStatement GetInsertIds(
+            SqlStatement table,
+            IList<SqlStatement> autoPKColumn,
+            IList<SqlStatement> inputPKColumns,
+            IList<SqlStatement> inputPKValues,
+            IList<SqlStatement> outputColumns,
+            IList<SqlStatement> outputParameters,
+            IList<SqlStatement> outputExpressions
+        )
         {
             // no parameters? no need to get them back
             if (outputParameters.Count == 0)
                 return "";
             // otherwise we keep track of the new values
-            return SqlStatement.Format("SELECT {0}",
-                SqlStatement.Join(", ", (from outputExpression in outputExpressions
-                                         select outputExpression.Replace("next value", "current value", true)).ToArray())
-                );
+            return SqlStatement.Format(
+                "SELECT {0}",
+                SqlStatement.Join(
+                    ", ",
+                    (
+                        from outputExpression in outputExpressions
+                        select outputExpression.Replace("next value", "current value", true)
+                    ).ToArray()
+                )
+            );
         }
-		
-		public override string GetTableAlias (string nameBase)
-		{
-			return nameBase + "$";
-		}
-		
-		public override SqlStatement GetLiteral (bool literal)
-		{
-			return literal == true ? "'Y'" : "'N'";
-		}
 
-		
+        public override string GetTableAlias(string nameBase)
+        {
+            return nameBase + "$";
+        }
+
+        public override SqlStatement GetLiteral(bool literal)
+        {
+            return literal == true ? "'Y'" : "'N'";
+        }
+
         protected override SqlStatement GetLiteralCount(SqlStatement a)
         {
             return "COUNT(*)";
@@ -84,12 +97,21 @@ namespace DbLinq.Ingres
                 var selectBuilder = new SqlStatementBuilder(select);
                 var remaining = select[0].Sql.Substring(trimSelect.Length);
                 selectBuilder.Parts[0] = new SqlLiteralPart(remaining);
-                return SqlStatement.Format("SELECT FIRST {0} {1}", limit, selectBuilder.ToSqlStatement());
+                return SqlStatement.Format(
+                    "SELECT FIRST {0} {1}",
+                    limit,
+                    selectBuilder.ToSqlStatement()
+                );
             }
             throw new ArgumentException("Invalid SELECT format");
         }
 
-        public override SqlStatement GetLiteralLimit(SqlStatement select, SqlStatement limit, SqlStatement offset, SqlStatement offsetAndLimit)
+        public override SqlStatement GetLiteralLimit(
+            SqlStatement select,
+            SqlStatement limit,
+            SqlStatement offset,
+            SqlStatement offsetAndLimit
+        )
         {
             // Ingres 9.2 and above support offset clauses now
             return SqlStatement.Format("{0} OFFSET {1}", GetLiteralLimit(select, limit), offset);

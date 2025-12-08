@@ -27,7 +27,10 @@ namespace System.Net
         // before an object (HttpListenerRequest) which closes the RequestContext on demand is returned to the application.
         internal void ReleasePins()
         {
-            Debug.Assert(_memoryBlob != null || _backingBuffer == IntPtr.Zero, "RequestContextBase::ReleasePins()|ReleasePins() called twice.");
+            Debug.Assert(
+                _memoryBlob != null || _backingBuffer == IntPtr.Zero,
+                "RequestContextBase::ReleasePins()|ReleasePins() called twice."
+            );
             _originalBlobAddress = _memoryBlob;
             UnsetBlob();
             OnReleasePins();
@@ -42,7 +45,10 @@ namespace System.Net
 
         public void Dispose()
         {
-            Debug.Assert(_memoryBlob == null, "RequestContextBase::Dispose()|Dispose() called before ReleasePins().");
+            Debug.Assert(
+                _memoryBlob == null,
+                "RequestContextBase::Dispose()|Dispose() called before ReleasePins()."
+            );
             Dispose(true);
             GC.SuppressFinalize(this);
         }
@@ -65,25 +71,22 @@ namespace System.Net
         {
             get
             {
-                Debug.Assert(_memoryBlob != null || _backingBuffer == IntPtr.Zero, "RequestContextBase::Dispose()|RequestBlob requested after ReleasePins().");
+                Debug.Assert(
+                    _memoryBlob != null || _backingBuffer == IntPtr.Zero,
+                    "RequestContextBase::Dispose()|RequestBlob requested after ReleasePins()."
+                );
                 return _memoryBlob;
             }
         }
 
         internal IntPtr RequestBuffer
         {
-            get
-            {
-                return _backingBuffer;
-            }
+            get { return _backingBuffer; }
         }
 
         internal uint Size
         {
-            get
-            {
-                return (uint)_backingBufferLength;
-            }
+            get { return (uint)_backingBufferLength; }
         }
 
         internal IntPtr OriginalBlobAddress
@@ -97,7 +100,10 @@ namespace System.Net
 
         protected void SetBlob(Interop.HttpApi.HTTP_REQUEST* requestBlob)
         {
-            Debug.Assert(_memoryBlob != null || _backingBuffer == IntPtr.Zero, "RequestContextBase::Dispose()|SetBlob() called after ReleasePins().");
+            Debug.Assert(
+                _memoryBlob != null || _backingBuffer == IntPtr.Zero,
+                "RequestContextBase::Dispose()|SetBlob() called after ReleasePins()."
+            );
             if (requestBlob == null)
             {
                 UnsetBlob();

@@ -30,7 +30,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         #region constructor
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parentElement"></param>
         internal ReturnType(Function parentElement)
@@ -138,7 +138,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
             return false;
         }
 
-        internal bool ResolveNestedTypeNames(Converter.ConversionCache convertedItemCache, Dictionary<Som.SchemaElement, GlobalItem> newGlobalItems)
+        internal bool ResolveNestedTypeNames(
+            Converter.ConversionCache convertedItemCache,
+            Dictionary<Som.SchemaElement, GlobalItem> newGlobalItems
+        )
         {
             Debug.Assert(_typeSubElement != null, "Nested type expected.");
             return _typeSubElement.ResolveNameAndSetTypeUsage(convertedItemCache, newGlobalItems);
@@ -147,7 +150,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         #region Private Methods
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         private void HandleTypeAttribute(XmlReader reader)
@@ -159,7 +162,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
             if (!Utils.GetString(Schema, reader, out type))
                 return;
             TypeModifier typeModifier;
-            
+
             Function.RemoveTypeModifier(ref type, out typeModifier, out _isRefType);
 
             switch (typeModifier)
@@ -168,7 +171,15 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     _collectionKind = CollectionKind.Bag;
                     break;
                 default:
-                    Debug.Assert(typeModifier == TypeModifier.None, string.Format(CultureInfo.CurrentCulture, "Type is not valid for property {0}: {1}. The modifier for the type cannot be used in this context.", FQName, reader.Value));
+                    Debug.Assert(
+                        typeModifier == TypeModifier.None,
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            "Type is not valid for property {0}: {1}. The modifier for the type cannot be used in this context.",
+                            FQName,
+                            reader.Value
+                        )
+                    );
                     break;
             }
 
@@ -278,13 +289,20 @@ namespace System.Data.EntityModel.SchemaObjectModel
             // If type was defined as a subelement: <ReturnType><CollectionType>...</CollectionType></ReturnType>
             if (_typeSubElement != null)
             {
-                Debug.Assert(!this.ParentElement.IsFunctionImport, "FunctionImports can't have sub elements in their return types, so we should NEVER see them here");
+                Debug.Assert(
+                    !this.ParentElement.IsFunctionImport,
+                    "FunctionImports can't have sub elements in their return types, so we should NEVER see them here"
+                );
                 _typeSubElement.ResolveTopLevelNames();
             }
 
             if (this.ParentElement.IsFunctionImport && _unresolvedEntitySet != null)
             {
-                ((FunctionImportElement)this.ParentElement).ResolveEntitySet(this, _unresolvedEntitySet, ref _entitySet);
+                ((FunctionImportElement)this.ParentElement).ResolveEntitySet(
+                    this,
+                    _unresolvedEntitySet,
+                    ref _entitySet
+                );
             }
         }
 
@@ -301,33 +319,54 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             if (Schema.DataModel != SchemaDataModelOption.EntityDataModel)
             {
-                Debug.Assert(Schema.DataModel == SchemaDataModelOption.ProviderDataModel ||
-                             Schema.DataModel == SchemaDataModelOption.ProviderManifestModel, "Unexpected data model");
+                Debug.Assert(
+                    Schema.DataModel == SchemaDataModelOption.ProviderDataModel
+                        || Schema.DataModel == SchemaDataModelOption.ProviderManifestModel,
+                    "Unexpected data model"
+                );
 
                 if (Schema.DataModel == SchemaDataModelOption.ProviderManifestModel)
                 {
                     // Only scalar return type is allowed for functions in provider manifest.
-                    if (_type != null && (_type is ScalarType == false || _collectionKind != CollectionKind.None) ||
-                        _typeSubElement != null && _typeSubElement.Type is ScalarType == false)
+                    if (
+                        _type != null
+                            && (
+                                _type is ScalarType == false
+                                || _collectionKind != CollectionKind.None
+                            )
+                        || _typeSubElement != null && _typeSubElement.Type is ScalarType == false
+                    )
                     {
                         string typeName = "";
                         if (_type != null)
                         {
-                            typeName = Function.GetTypeNameForErrorMessage(_type, _collectionKind, _isRefType);
+                            typeName = Function.GetTypeNameForErrorMessage(
+                                _type,
+                                _collectionKind,
+                                _isRefType
+                            );
                         }
                         else if (_typeSubElement != null)
                         {
                             typeName = _typeSubElement.FQName;
                         }
-                        AddError(ErrorCode.FunctionWithNonEdmTypeNotSupported,
-                                 EdmSchemaErrorSeverity.Error,
-                                 this,
-                                 System.Data.Entity.Strings.FunctionWithNonEdmPrimitiveTypeNotSupported(typeName, this.ParentElement.FQName));
+                        AddError(
+                            ErrorCode.FunctionWithNonEdmTypeNotSupported,
+                            EdmSchemaErrorSeverity.Error,
+                            this,
+                            System.Data.Entity.Strings.FunctionWithNonEdmPrimitiveTypeNotSupported(
+                                typeName,
+                                this.ParentElement.FQName
+                            )
+                        );
                     }
                 }
                 else // SchemaDataModelOption.ProviderDataModel
                 {
-                    Debug.Assert(Schema.DataModel == SchemaDataModelOption.ProviderDataModel, "Unexpected data model");
+                    Debug.Assert(
+                        Schema.DataModel == SchemaDataModelOption.ProviderDataModel,
+                        "Unexpected data model"
+                    );
 
                     // In SSDL, function may only return a primitive type or a collection of rows.
                     if (_type != null)
@@ -335,10 +374,15 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         // It is not possible to define a collection of rows via a type attribute, hence any collection is not allowed.
                         if (_type is ScalarType == false || _collectionKind != CollectionKind.None)
                         {
-                            AddError(ErrorCode.FunctionWithNonPrimitiveTypeNotSupported,
-                                     EdmSchemaErrorSeverity.Error,
-                                     this,
-                                     System.Data.Entity.Strings.FunctionWithNonPrimitiveTypeNotSupported(_isRefType ? _unresolvedType : _type.FQName, this.ParentElement.FQName));
+                            AddError(
+                                ErrorCode.FunctionWithNonPrimitiveTypeNotSupported,
+                                EdmSchemaErrorSeverity.Error,
+                                this,
+                                System.Data.Entity.Strings.FunctionWithNonPrimitiveTypeNotSupported(
+                                    _isRefType ? _unresolvedType : _type.FQName,
+                                    this.ParentElement.FQName
+                                )
+                            );
                         }
                     }
                     else if (_typeSubElement != null)
@@ -348,10 +392,15 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             if (Schema.SchemaVersion < XmlConstants.StoreVersionForV3)
                             {
                                 // Before V3 provider model functions only supported scalar return types.
-                                AddError(ErrorCode.FunctionWithNonPrimitiveTypeNotSupported,
-                                         EdmSchemaErrorSeverity.Error,
-                                         this,
-                                         System.Data.Entity.Strings.FunctionWithNonPrimitiveTypeNotSupported(_typeSubElement.FQName, this.ParentElement.FQName));
+                                AddError(
+                                    ErrorCode.FunctionWithNonPrimitiveTypeNotSupported,
+                                    EdmSchemaErrorSeverity.Error,
+                                    this,
+                                    System.Data.Entity.Strings.FunctionWithNonPrimitiveTypeNotSupported(
+                                        _typeSubElement.FQName,
+                                        this.ParentElement.FQName
+                                    )
+                                );
                             }
                             else
                             {
@@ -359,24 +408,35 @@ namespace System.Data.EntityModel.SchemaObjectModel
                                 // The "collection of rows" is the only option in SSDL function ReturnType subelement thus it's enforced on the XSD level,
                                 // so we can assume it here. The only thing we need to check is the type of the row properties.
                                 var collection = _typeSubElement as CollectionTypeElement;
-                                Debug.Assert(collection != null, "Can't find <CollectionType> inside TVF <ReturnType> element");
+                                Debug.Assert(
+                                    collection != null,
+                                    "Can't find <CollectionType> inside TVF <ReturnType> element"
+                                );
                                 if (collection != null)
                                 {
                                     var row = collection.SubElement as RowTypeElement;
-                                    Debug.Assert(row != null, "Can't find <RowType> inside TVF <ReturnType><CollectionType> element");
+                                    Debug.Assert(
+                                        row != null,
+                                        "Can't find <RowType> inside TVF <ReturnType><CollectionType> element"
+                                    );
                                     if (row != null)
                                     {
                                         if (row.Properties.Any(p => !p.ValidateIsScalar()))
                                         {
-                                            AddError(ErrorCode.TVFReturnTypeRowHasNonScalarProperty,
-                                                     EdmSchemaErrorSeverity.Error,
-                                                     this,
-                                                     System.Data.Entity.Strings.TVFReturnTypeRowHasNonScalarProperty);
+                                            AddError(
+                                                ErrorCode.TVFReturnTypeRowHasNonScalarProperty,
+                                                EdmSchemaErrorSeverity.Error,
+                                                this,
+                                                System
+                                                    .Data
+                                                    .Entity
+                                                    .Strings
+                                                    .TVFReturnTypeRowHasNonScalarProperty
+                                            );
                                         }
                                     }
                                 }
                             }
-
                         }
                         // else type is ScalarType which is supported in all version
                     }
@@ -396,9 +456,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
             return TypeUsage;
         }
 
-        internal override bool ResolveNameAndSetTypeUsage(Converter.ConversionCache convertedItemCache, Dictionary<Som.SchemaElement, GlobalItem> newGlobalItems)
+        internal override bool ResolveNameAndSetTypeUsage(
+            Converter.ConversionCache convertedItemCache,
+            Dictionary<Som.SchemaElement, GlobalItem> newGlobalItems
+        )
         {
-            Debug.Fail("This method was not called from anywhere in the code before. If you got here you need to update this method and possibly ResolveNestedTypeNames()"); 
+            Debug.Fail(
+                "This method was not called from anywhere in the code before. If you got here you need to update this method and possibly ResolveNestedTypeNames()"
+            );
 
             return false;
         }

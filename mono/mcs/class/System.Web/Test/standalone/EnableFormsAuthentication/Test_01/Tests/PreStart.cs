@@ -4,11 +4,11 @@ using System.Web.Security;
 
 namespace Test_01.Tests
 {
-	public class PreStart
-	{
-		public static void FormsAuthenticationSetUp ()
-		{
-			FormsAuthentication.EnableFormsAuthentication (null);
-		}
-	}
+    public class PreStart
+    {
+        public static void FormsAuthenticationSetUp()
+        {
+            FormsAuthentication.EnableFormsAuthentication(null);
+        }
+    }
 }

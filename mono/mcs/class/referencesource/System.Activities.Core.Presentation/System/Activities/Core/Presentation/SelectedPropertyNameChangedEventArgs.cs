@@ -6,7 +6,10 @@
 
 namespace System.Activities.Core.Presentation
 {
-    internal delegate void SelectedPropertyNameChangedEventHandler(object sender, SelectedPropertyNameChangedEventArgs e);
+    internal delegate void SelectedPropertyNameChangedEventHandler(
+        object sender,
+        SelectedPropertyNameChangedEventArgs e
+    );
 
     internal sealed class SelectedPropertyNameChangedEventArgs : EventArgs
     {
@@ -15,10 +18,6 @@ namespace System.Activities.Core.Presentation
             this.PropertyName = propertyName;
         }
 
-        public string PropertyName
-        {
-            get;
-            private set;
-        }
-    }   
+        public string PropertyName { get; private set; }
+    }
 }

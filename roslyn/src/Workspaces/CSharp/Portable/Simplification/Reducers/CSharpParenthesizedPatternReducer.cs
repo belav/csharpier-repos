@@ -18,23 +18,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
     internal partial class CSharpParenthesizedPatternReducer : AbstractCSharpReducer
     {
-        private static readonly ObjectPool<IReductionRewriter> s_pool = new(
-            () => new Rewriter(s_pool));
+        private static readonly ObjectPool<IReductionRewriter> s_pool = new(() =>
+            new Rewriter(s_pool)
+        );
 
-        private static readonly Func<ParenthesizedPatternSyntax, SemanticModel, SimplifierOptions, CancellationToken, SyntaxNode> s_simplifyParentheses = SimplifyParentheses;
+        private static readonly Func<
+            ParenthesizedPatternSyntax,
+            SemanticModel,
+            SimplifierOptions,
+            CancellationToken,
+            SyntaxNode
+        > s_simplifyParentheses = SimplifyParentheses;
 
-        public CSharpParenthesizedPatternReducer() : base(s_pool)
-        {
-        }
+        public CSharpParenthesizedPatternReducer()
+            : base(s_pool) { }
 
-        protected override bool IsApplicable(CSharpSimplifierOptions options)
-           => true;
+        protected override bool IsApplicable(CSharpSimplifierOptions options) => true;
 
         private static SyntaxNode SimplifyParentheses(
             ParenthesizedPatternSyntax node,
             SemanticModel semanticModel,
             SimplifierOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (node.CanRemoveParentheses())
             {

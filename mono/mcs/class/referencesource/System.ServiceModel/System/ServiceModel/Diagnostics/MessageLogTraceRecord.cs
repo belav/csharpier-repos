@@ -21,7 +21,8 @@ namespace System.ServiceModel.Diagnostics
         internal const string BodyElementName = "Body";
         internal const string HttpRequestMessagePropertyElementName = "HttpRequest";
         internal const string HttpResponseMessagePropertyElementName = "HttpResponse";
-        internal const string NamespaceUri = "http://schemas.microsoft.com/2004/06/ServiceModel/Management/MessageTrace";
+        internal const string NamespaceUri =
+            "http://schemas.microsoft.com/2004/06/ServiceModel/Management/MessageTrace";
         internal const string NamespacePrefix = "";
         internal const string MessageHeaderElementName = "Header";
         internal const string MessageHeadersElementName = "MessageHeaders";
@@ -33,7 +34,6 @@ namespace System.ServiceModel.Diagnostics
         internal const string TraceTimeAttributeName = "Time";
         internal const string TypeElementName = "Type";
         internal const string WebHeadersElementName = "WebHeaders";
-
 
         Message message;
         XmlReader reader;
@@ -53,7 +53,11 @@ namespace System.ServiceModel.Diagnostics
             : this(source)
         {
             this.type = null;
-            this.messageString = System.Text.Encoding.UTF8.GetString(buffer.Array, buffer.Offset, buffer.Count);
+            this.messageString = System.Text.Encoding.UTF8.GetString(
+                buffer.Array,
+                buffer.Offset,
+                buffer.Count
+            );
         }
 
         internal MessageLogTraceRecord(string message, MessageLoggingSource source)
@@ -94,16 +98,21 @@ namespace System.ServiceModel.Diagnostics
 
             streamReader.Close();
 
-            this.messageString = stringBuilder.ToString(); 
+            this.messageString = stringBuilder.ToString();
         }
 
-        internal MessageLogTraceRecord(ref Message message, XmlReader reader, MessageLoggingSource source, bool logMessageBody)
+        internal MessageLogTraceRecord(
+            ref Message message,
+            XmlReader reader,
+            MessageLoggingSource source,
+            bool logMessageBody
+        )
             : this(source)
         {
             Fx.Assert(message != null, "");
 
             MessageBuffer buffer = null;
-            
+
             try
             {
                 this.logMessageBody = logMessageBody;
@@ -132,17 +141,29 @@ namespace System.ServiceModel.Diagnostics
 
         internal override void WriteTo(XmlWriter writer)
         {
-            writer.WriteStartElement(MessageLogTraceRecord.NamespacePrefix, MessageLogTraceRecord.MessageLogTraceRecordElementName, MessageLogTraceRecord.NamespaceUri); // <MessageLogTraceRecord>
-            writer.WriteAttributeString(MessageLogTraceRecord.TraceTimeAttributeName, this.timestamp.ToString("o", CultureInfo.InvariantCulture));
+            writer.WriteStartElement(
+                MessageLogTraceRecord.NamespacePrefix,
+                MessageLogTraceRecord.MessageLogTraceRecordElementName,
+                MessageLogTraceRecord.NamespaceUri
+            ); // <MessageLogTraceRecord>
+            writer.WriteAttributeString(
+                MessageLogTraceRecord.TraceTimeAttributeName,
+                this.timestamp.ToString("o", CultureInfo.InvariantCulture)
+            );
             writer.WriteAttributeString(DiagnosticStrings.SourceTag, this.source.ToString());
-            
+
             if (null != this.type)
             {
                 Fx.Assert(this.message != null, "");
 
-                XmlDictionaryWriter dictionaryWriter = XmlDictionaryWriter.CreateDictionaryWriter(writer);
-                dictionaryWriter.WriteAttributeString(MessageLogTraceRecord.TypeElementName, this.type.ToString());
-                
+                XmlDictionaryWriter dictionaryWriter = XmlDictionaryWriter.CreateDictionaryWriter(
+                    writer
+                );
+                dictionaryWriter.WriteAttributeString(
+                    MessageLogTraceRecord.TypeElementName,
+                    this.type.ToString()
+                );
+
 #if DEBUG
                 MessageProperties properties = this.message.Properties;
                 dictionaryWriter.WriteStartElement("Properties");
@@ -171,9 +192,12 @@ namespace System.ServiceModel.Diagnostics
 
                         if (this.message is SecurityVerifiedMessage)
                         {
-                            SecurityVerifiedMessage verifiedMessage = this.message as SecurityVerifiedMessage;
-                            ReceiveSecurityHeader receivedHeader = verifiedMessage.ReceivedSecurityHeader;
-                            hasAtLeastOneItemInsideSecurityHeaderEncrypted = receivedHeader.HasAtLeastOneItemInsideSecurityHeaderEncrypted;
+                            SecurityVerifiedMessage verifiedMessage =
+                                this.message as SecurityVerifiedMessage;
+                            ReceiveSecurityHeader receivedHeader =
+                                verifiedMessage.ReceivedSecurityHeader;
+                            hasAtLeastOneItemInsideSecurityHeaderEncrypted =
+                                receivedHeader.HasAtLeastOneItemInsideSecurityHeaderEncrypted;
                         }
 
                         if (!hasAtLeastOneItemInsideSecurityHeaderEncrypted)
@@ -184,7 +208,11 @@ namespace System.ServiceModel.Diagnostics
                         {
                             if (this.message.Version.Envelope != EnvelopeVersion.None)
                             {
-                                dictionaryWriter.WriteStartElement(XD.MessageDictionary.Prefix.Value, XD.MessageDictionary.Envelope, this.message.Version.Envelope.DictionaryNamespace);
+                                dictionaryWriter.WriteStartElement(
+                                    XD.MessageDictionary.Prefix.Value,
+                                    XD.MessageDictionary.Envelope,
+                                    this.message.Version.Envelope.DictionaryNamespace
+                                );
                                 WriteHeader(dictionaryWriter);
                                 this.message.WriteStartBody(writer);
                             }
@@ -203,7 +231,11 @@ namespace System.ServiceModel.Diagnostics
                 {
                     if (null != this.reader)
                     {
-                        dictionaryWriter.WriteStartElement(reader.Prefix, reader.LocalName, reader.NamespaceURI);
+                        dictionaryWriter.WriteStartElement(
+                            reader.Prefix,
+                            reader.LocalName,
+                            reader.NamespaceURI
+                        );
                         this.reader.Read();
                         if (0 == String.CompareOrdinal(reader.LocalName, "Header"))
                         {
@@ -213,7 +245,11 @@ namespace System.ServiceModel.Diagnostics
                     }
                     else
                     {
-                        dictionaryWriter.WriteStartElement(XD.MessageDictionary.Prefix.Value, XD.MessageDictionary.Envelope, this.message.Version.Envelope.DictionaryNamespace);
+                        dictionaryWriter.WriteStartElement(
+                            XD.MessageDictionary.Prefix.Value,
+                            XD.MessageDictionary.Envelope,
+                            this.message.Version.Envelope.DictionaryNamespace
+                        );
                         WriteHeader(dictionaryWriter);
                         dictionaryWriter.WriteEndElement(); // </Envelope>
                     }
@@ -233,7 +269,11 @@ namespace System.ServiceModel.Diagnostics
 
         void WriteHeader(XmlDictionaryWriter dictionaryWriter)
         {
-            dictionaryWriter.WriteStartElement(XD.MessageDictionary.Prefix.Value, XD.MessageDictionary.Header, this.message.Version.Envelope.DictionaryNamespace);
+            dictionaryWriter.WriteStartElement(
+                XD.MessageDictionary.Prefix.Value,
+                XD.MessageDictionary.Header,
+                this.message.Version.Envelope.DictionaryNamespace
+            );
             MessageHeaders headers = this.message.Headers;
             Security.ReceiveSecurityHeader receivedHeader = null;
 
@@ -245,10 +285,14 @@ namespace System.ServiceModel.Diagnostics
 
             for (int i = 0; i < headers.Count; ++i)
             {
-                if (receivedHeader != null && receivedHeader.HasAtLeastOneItemInsideSecurityHeaderEncrypted && receivedHeader.HeaderIndex == i)
+                if (
+                    receivedHeader != null
+                    && receivedHeader.HasAtLeastOneItemInsideSecurityHeaderEncrypted
+                    && receivedHeader.HeaderIndex == i
+                )
                 {
                     //
-                    // if this is the security header and we found at least one item 
+                    // if this is the security header and we found at least one item
                     // was encrypted inside the security header
                     //
                     receivedHeader.WriteStartHeader(dictionaryWriter, headers.MessageVersion);
@@ -263,7 +307,6 @@ namespace System.ServiceModel.Diagnostics
             dictionaryWriter.WriteEndElement(); // </Headers>
         }
 
-
         void WriteAddressingProperties(XmlWriter dictionaryWriter)
         {
             Fx.Assert(this.message != null, "");
@@ -274,18 +317,30 @@ namespace System.ServiceModel.Diagnostics
 
                 dictionaryWriter.WriteStartElement(MessageLogTraceRecord.AddressingElementName);
 
-                dictionaryWriter.WriteElementString(AddressingStrings.Action, addressingProperty.Action);
+                dictionaryWriter.WriteElementString(
+                    AddressingStrings.Action,
+                    addressingProperty.Action
+                );
                 if (null != addressingProperty.ReplyTo)
                 {
-                    dictionaryWriter.WriteElementString(AddressingStrings.ReplyTo, addressingProperty.ReplyTo.ToString());
+                    dictionaryWriter.WriteElementString(
+                        AddressingStrings.ReplyTo,
+                        addressingProperty.ReplyTo.ToString()
+                    );
                 }
                 if (null != addressingProperty.To)
                 {
-                    dictionaryWriter.WriteElementString(AddressingStrings.To, addressingProperty.To.AbsoluteUri);
+                    dictionaryWriter.WriteElementString(
+                        AddressingStrings.To,
+                        addressingProperty.To.AbsoluteUri
+                    );
                 }
                 if (null != addressingProperty.MessageId)
                 {
-                    dictionaryWriter.WriteElementString(AddressingStrings.MessageId, addressingProperty.MessageId.ToString());
+                    dictionaryWriter.WriteElementString(
+                        AddressingStrings.MessageId,
+                        addressingProperty.MessageId.ToString()
+                    );
                 }
 
                 dictionaryWriter.WriteEndElement(); // Addressing
@@ -300,14 +355,23 @@ namespace System.ServiceModel.Diagnostics
             object property;
             if (this.message.Properties.TryGetValue(HttpResponseMessageProperty.Name, out property))
             {
-                HttpResponseMessageProperty responseProperty = (HttpResponseMessageProperty)property;
+                HttpResponseMessageProperty responseProperty =
+                    (HttpResponseMessageProperty)property;
 
-                dictionaryWriter.WriteStartElement(MessageLogTraceRecord.HttpResponseMessagePropertyElementName);
+                dictionaryWriter.WriteStartElement(
+                    MessageLogTraceRecord.HttpResponseMessagePropertyElementName
+                );
 
-                dictionaryWriter.WriteElementString(MessageLogTraceRecord.StatusCodeElementName, responseProperty.StatusCode.ToString());
+                dictionaryWriter.WriteElementString(
+                    MessageLogTraceRecord.StatusCodeElementName,
+                    responseProperty.StatusCode.ToString()
+                );
                 if (responseProperty.StatusDescription != null)
                 {
-                    dictionaryWriter.WriteElementString(MessageLogTraceRecord.StatusDescriptionElementName, responseProperty.StatusDescription);
+                    dictionaryWriter.WriteElementString(
+                        MessageLogTraceRecord.StatusDescriptionElementName,
+                        responseProperty.StatusDescription
+                    );
                 }
 
                 dictionaryWriter.WriteStartElement(MessageLogTraceRecord.WebHeadersElementName);
@@ -318,7 +382,7 @@ namespace System.ServiceModel.Diagnostics
                     string value = responseHeaders[i];
                     dictionaryWriter.WriteElementString(name, value);
                 }
-                dictionaryWriter.WriteEndElement(); // 
+                dictionaryWriter.WriteEndElement(); //
 
                 dictionaryWriter.WriteEndElement(); // </HttpResponseMessageProperty>
             }
@@ -327,10 +391,18 @@ namespace System.ServiceModel.Diagnostics
             {
                 HttpRequestMessageProperty requestProperty = (HttpRequestMessageProperty)property;
 
-                dictionaryWriter.WriteStartElement(MessageLogTraceRecord.HttpRequestMessagePropertyElementName);
+                dictionaryWriter.WriteStartElement(
+                    MessageLogTraceRecord.HttpRequestMessagePropertyElementName
+                );
 
-                dictionaryWriter.WriteElementString(MessageLogTraceRecord.MethodElementName, requestProperty.Method);
-                dictionaryWriter.WriteElementString(MessageLogTraceRecord.QueryStringElementName, requestProperty.QueryString);
+                dictionaryWriter.WriteElementString(
+                    MessageLogTraceRecord.MethodElementName,
+                    requestProperty.Method
+                );
+                dictionaryWriter.WriteElementString(
+                    MessageLogTraceRecord.QueryStringElementName,
+                    requestProperty.QueryString
+                );
 
                 dictionaryWriter.WriteStartElement(MessageLogTraceRecord.WebHeadersElementName);
                 WebHeaderCollection responseHeaders = requestProperty.Headers;
@@ -340,7 +412,7 @@ namespace System.ServiceModel.Diagnostics
                     string value = responseHeaders[i];
                     dictionaryWriter.WriteElementString(name, value);
                 }
-                dictionaryWriter.WriteEndElement(); // 
+                dictionaryWriter.WriteEndElement(); //
 
                 dictionaryWriter.WriteEndElement(); // </HttpResponseMessageProperty>
             }

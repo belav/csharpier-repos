@@ -11,12 +11,21 @@ namespace System.CommandLine
 
         private static bool GetColorsAreSupported()
 #if NET7_0_OR_GREATER
-            => !(OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid() || OperatingSystem.IsIOS() || OperatingSystem.IsTvOS())
+            =>
+            !(
+                OperatingSystem.IsBrowser()
+                || OperatingSystem.IsAndroid()
+                || OperatingSystem.IsIOS()
+                || OperatingSystem.IsTvOS()
+            )
 #else
-            => !(RuntimeInformation.IsOSPlatform(OSPlatform.Create("BROWSER"))
-                    || RuntimeInformation.IsOSPlatform(OSPlatform.Create("ANDROID"))
-                    || RuntimeInformation.IsOSPlatform(OSPlatform.Create("IOS"))
-                    || RuntimeInformation.IsOSPlatform(OSPlatform.Create("TVOS")))
+            =>
+            !(
+                RuntimeInformation.IsOSPlatform(OSPlatform.Create("BROWSER"))
+                || RuntimeInformation.IsOSPlatform(OSPlatform.Create("ANDROID"))
+                || RuntimeInformation.IsOSPlatform(OSPlatform.Create("IOS"))
+                || RuntimeInformation.IsOSPlatform(OSPlatform.Create("TVOS"))
+            )
 #endif
             && !Console.IsOutputRedirected;
 

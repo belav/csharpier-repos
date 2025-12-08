@@ -10,6 +10,9 @@ namespace nwind
     /// </summary>
     public enum DbLinq_EnumTest
     {
-        AA, BB, CC, DD
+        AA,
+        BB,
+        CC,
+        DD,
     }
 }

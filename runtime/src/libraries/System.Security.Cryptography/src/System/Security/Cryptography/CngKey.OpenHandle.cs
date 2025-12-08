@@ -16,7 +16,10 @@ namespace System.Security.Cryptography
         ///     Wrap an existing key handle with a CngKey object
         /// </summary>
         [SupportedOSPlatform("windows")]
-        public static CngKey Open(SafeNCryptKeyHandle keyHandle, CngKeyHandleOpenOptions keyHandleOpenOptions)
+        public static CngKey Open(
+            SafeNCryptKeyHandle keyHandle,
+            CngKeyHandleOpenOptions keyHandleOpenOptions
+        )
         {
             ArgumentNullException.ThrowIfNull(keyHandle);
 
@@ -27,14 +30,20 @@ namespace System.Security.Cryptography
         }
 
         [SupportedOSPlatform("windows")]
-        internal static CngKey OpenNoDuplicate(SafeNCryptKeyHandle keyHandle, CngKeyHandleOpenOptions keyHandleOpenOptions)
+        internal static CngKey OpenNoDuplicate(
+            SafeNCryptKeyHandle keyHandle,
+            CngKeyHandleOpenOptions keyHandleOpenOptions
+        )
         {
             SafeNCryptProviderHandle? providerHandle = null;
             try
             {
                 // Get a handle to the key's provider.
                 providerHandle = new SafeNCryptProviderHandle();
-                IntPtr rawProviderHandle = keyHandle.GetPropertyAsIntPtr(KeyPropertyName.ProviderHandle, CngPropertyOptions.None);
+                IntPtr rawProviderHandle = keyHandle.GetPropertyAsIntPtr(
+                    KeyPropertyName.ProviderHandle,
+                    CngPropertyOptions.None
+                );
                 Marshal.InitHandle(providerHandle, rawProviderHandle);
 
                 // If we're wrapping a handle to an ephemeral key, we need to make sure that IsEphemeral is
@@ -54,7 +63,9 @@ namespace System.Security.Cryptography
 
                 var key = new CngKey(providerHandle, keyHandle);
 
-                bool openingEphemeralKey = (keyHandleOpenOptions & CngKeyHandleOpenOptions.EphemeralKey) == CngKeyHandleOpenOptions.EphemeralKey;
+                bool openingEphemeralKey =
+                    (keyHandleOpenOptions & CngKeyHandleOpenOptions.EphemeralKey)
+                    == CngKeyHandleOpenOptions.EphemeralKey;
                 if (!key.IsEphemeral)
                 {
                     if (openingEphemeralKey)
@@ -64,7 +75,10 @@ namespace System.Security.Cryptography
                 }
                 else if (!openingEphemeralKey)
                 {
-                    throw new ArgumentException(SR.Cryptography_OpenEphemeralKeyHandleWithoutEphemeralFlag, nameof(keyHandleOpenOptions));
+                    throw new ArgumentException(
+                        SR.Cryptography_OpenEphemeralKeyHandleWithoutEphemeralFlag,
+                        nameof(keyHandleOpenOptions)
+                    );
                 }
 
                 return key;

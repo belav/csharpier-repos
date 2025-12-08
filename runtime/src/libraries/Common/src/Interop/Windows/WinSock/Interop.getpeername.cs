@@ -13,6 +13,7 @@ internal static partial class Interop
         internal static unsafe partial SocketError getpeername(
             SafeSocketHandle socketHandle,
             byte* socketAddress,
-            ref int socketAddressSize);
+            ref int socketAddressSize
+        );
     }
 }

@@ -18,18 +18,39 @@ namespace System.Linq.Expressions
     /// </summary>
     public abstract partial class Expression
     {
-        internal const string ExpressionRequiresUnreferencedCode = "Creating Expressions requires unreferenced code because the members being referenced by the Expression may be trimmed.";
-        internal const string PropertyFromAccessorRequiresUnreferencedCode = "The Property metadata or other accessor may be trimmed.";
-        internal const string GenericMethodRequiresUnreferencedCode = "Calling a generic method cannot be statically analyzed. It's not possible to guarantee the availability of requirements of the generic method. This can be suppressed if the method is not generic.";
-        internal const string GenericMethodRequiresDynamicCode = "Calling a generic method requires dynamic code generation. This can be suppressed if the method is not generic.";
-        internal const string CallSiteRequiresDynamicCode = "Creating a call site may require dynamic code generation.";
-        internal const string LambdaCompilerRequiresDynamicCode = "Compiling a lambda expression requires dynamic code generation.";
-        internal const string StrongBoxRequiresDynamicCode = "Creating a StrongBox requires dynamic code generation.";
-        internal const string NewArrayRequiresDynamicCode = "Creating arrays at runtime requires dynamic code generation.";
-        internal const string DelegateCreationRequiresDynamicCode = "Delegate creation requires dynamic code generation.";
+        internal const string ExpressionRequiresUnreferencedCode =
+            "Creating Expressions requires unreferenced code because the members being referenced by the Expression may be trimmed.";
+        internal const string PropertyFromAccessorRequiresUnreferencedCode =
+            "The Property metadata or other accessor may be trimmed.";
+        internal const string GenericMethodRequiresUnreferencedCode =
+            "Calling a generic method cannot be statically analyzed. It's not possible to guarantee the availability of requirements of the generic method. This can be suppressed if the method is not generic.";
+        internal const string GenericMethodRequiresDynamicCode =
+            "Calling a generic method requires dynamic code generation. This can be suppressed if the method is not generic.";
+        internal const string CallSiteRequiresDynamicCode =
+            "Creating a call site may require dynamic code generation.";
+        internal const string LambdaCompilerRequiresDynamicCode =
+            "Compiling a lambda expression requires dynamic code generation.";
+        internal const string StrongBoxRequiresDynamicCode =
+            "Creating a StrongBox requires dynamic code generation.";
+        internal const string NewArrayRequiresDynamicCode =
+            "Creating arrays at runtime requires dynamic code generation.";
+        internal const string DelegateCreationRequiresDynamicCode =
+            "Delegate creation requires dynamic code generation.";
 
-        private static readonly CacheDict<Type, MethodInfo> s_lambdaDelegateCache = new CacheDict<Type, MethodInfo>(40);
-        private static volatile CacheDict<Type, Func<Expression, string?, bool, ReadOnlyCollection<ParameterExpression>, LambdaExpression>>? s_lambdaFactories;
+        private static readonly CacheDict<Type, MethodInfo> s_lambdaDelegateCache = new CacheDict<
+            Type,
+            MethodInfo
+        >(40);
+        private static volatile CacheDict<
+            Type,
+            Func<
+                Expression,
+                string?,
+                bool,
+                ReadOnlyCollection<ParameterExpression>,
+                LambdaExpression
+            >
+        >? s_lambdaFactories;
 
         // For 4.0, many frequently used Expression nodes have had their memory
         // footprint reduced by removing the Type and NodeType fields. This has
@@ -57,7 +78,9 @@ namespace System.Linq.Expressions
         /// </summary>
         /// <param name="nodeType">The <see ctype="ExpressionType"/> of the <see cref="Expression"/>.</param>
         /// <param name="type">The <see cref="Type"/> of the <see cref="Expression"/>.</param>
-        [Obsolete("This constructor has been deprecated. Use a different constructor that does not take ExpressionType. Then override NodeType and Type properties to provide the values that would be specified to this constructor.")]
+        [Obsolete(
+            "This constructor has been deprecated. Use a different constructor that does not take ExpressionType. Then override NodeType and Type properties to provide the values that would be specified to this constructor."
+        )]
         protected Expression(ExpressionType nodeType, Type type)
         {
             // Can't enforce anything that V1 didn't
@@ -66,7 +89,7 @@ namespace System.Linq.Expressions
                 Interlocked.CompareExchange(
                     ref s_legacyCtorSupportTable,
                     new ConditionalWeakTable<Expression, ExtensionInfo>(),
-comparand: null
+                    comparand: null
                 );
             }
 
@@ -76,9 +99,7 @@ comparand: null
         /// <summary>
         /// Constructs a new instance of <see cref="Expression"/>.
         /// </summary>
-        protected Expression()
-        {
-        }
+        protected Expression() { }
 
         /// <summary>
         /// The <see cref="ExpressionType"/> of the <see cref="Expression"/>.
@@ -87,7 +108,10 @@ comparand: null
         {
             get
             {
-                if (s_legacyCtorSupportTable != null && s_legacyCtorSupportTable.TryGetValue(this, out ExtensionInfo? extInfo))
+                if (
+                    s_legacyCtorSupportTable != null
+                    && s_legacyCtorSupportTable.TryGetValue(this, out ExtensionInfo? extInfo)
+                )
                 {
                     return extInfo.NodeType;
                 }
@@ -97,7 +121,6 @@ comparand: null
             }
         }
 
-
         /// <summary>
         /// The <see cref="Type"/> of the value represented by this <see cref="Expression"/>.
         /// </summary>
@@ -105,7 +128,10 @@ comparand: null
         {
             get
             {
-                if (s_legacyCtorSupportTable != null && s_legacyCtorSupportTable.TryGetValue(this, out ExtensionInfo? extInfo))
+                if (
+                    s_legacyCtorSupportTable != null
+                    && s_legacyCtorSupportTable.TryGetValue(this, out ExtensionInfo? extInfo)
+                )
                 {
                     return extInfo.Type;
                 }
@@ -129,7 +155,8 @@ comparand: null
         /// <returns>The reduced expression.</returns>
         public virtual Expression Reduce()
         {
-            if (CanReduce) throw Error.ReducibleMustOverrideReduce();
+            if (CanReduce)
+                throw Error.ReducibleMustOverrideReduce();
             return this;
         }
 
@@ -147,7 +174,8 @@ comparand: null
         /// </remarks>
         protected internal virtual Expression VisitChildren(ExpressionVisitor visitor)
         {
-            if (!CanReduce) throw Error.MustBeReducible();
+            if (!CanReduce)
+                throw Error.MustBeReducible();
             return visitor.Visit(ReduceAndCheck());
         }
 
@@ -182,14 +210,17 @@ comparand: null
         /// </remarks>
         public Expression ReduceAndCheck()
         {
-            if (!CanReduce) throw Error.MustBeReducible();
+            if (!CanReduce)
+                throw Error.MustBeReducible();
 
             Expression newNode = Reduce();
 
             // 1. Reduction must return a new, non-null node
             // 2. Reduction must return a new node whose result type can be assigned to the type of the original node
-            if (newNode == null || newNode == this) throw Error.MustReduceToDifferent();
-            if (!TypeUtils.AreReferenceAssignable(Type, newNode.Type)) throw Error.ReducedNotCompatible();
+            if (newNode == null || newNode == this)
+                throw Error.MustReduceToDifferent();
+            if (!TypeUtils.AreReferenceAssignable(Type, newNode.Type))
+                throw Error.ReducedNotCompatible();
             return newNode;
         }
 
@@ -227,7 +258,11 @@ comparand: null
             // might surmise from its being internal, and removing it requires greater caution than with other internal methods.
             get
             {
-                using (System.IO.StringWriter writer = new System.IO.StringWriter(CultureInfo.CurrentCulture))
+                using (
+                    System.IO.StringWriter writer = new System.IO.StringWriter(
+                        CultureInfo.CurrentCulture
+                    )
+                )
                 {
                     DebugViewWriter.WriteTo(this, writer);
                     return writer.ToString();
@@ -301,8 +336,11 @@ comparand: null
         /// result will be inferred from the types of the arguments and the specified return type.
         /// </remarks>
         [RequiresDynamicCode(Expression.DelegateCreationRequiresDynamicCode)]
-        public static DynamicExpression Dynamic(CallSiteBinder binder, Type returnType, IEnumerable<Expression> arguments) =>
-            DynamicExpression.Dynamic(binder, returnType, arguments);
+        public static DynamicExpression Dynamic(
+            CallSiteBinder binder,
+            Type returnType,
+            IEnumerable<Expression> arguments
+        ) => DynamicExpression.Dynamic(binder, returnType, arguments);
 
         /// <summary>
         /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" />.
@@ -321,8 +359,11 @@ comparand: null
         /// result will be inferred from the types of the arguments and the specified return type.
         /// </remarks>
         [RequiresDynamicCode(Expression.DelegateCreationRequiresDynamicCode)]
-        public static DynamicExpression Dynamic(CallSiteBinder binder, Type returnType, Expression arg0) =>
-            DynamicExpression.Dynamic(binder, returnType, arg0);
+        public static DynamicExpression Dynamic(
+            CallSiteBinder binder,
+            Type returnType,
+            Expression arg0
+        ) => DynamicExpression.Dynamic(binder, returnType, arg0);
 
         /// <summary>
         /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" />.
@@ -342,8 +383,12 @@ comparand: null
         /// result will be inferred from the types of the arguments and the specified return type.
         /// </remarks>
         [RequiresDynamicCode(Expression.DelegateCreationRequiresDynamicCode)]
-        public static DynamicExpression Dynamic(CallSiteBinder binder, Type returnType, Expression arg0, Expression arg1) =>
-            DynamicExpression.Dynamic(binder, returnType, arg0, arg1);
+        public static DynamicExpression Dynamic(
+            CallSiteBinder binder,
+            Type returnType,
+            Expression arg0,
+            Expression arg1
+        ) => DynamicExpression.Dynamic(binder, returnType, arg0, arg1);
 
         /// <summary>
         /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" />.
@@ -364,8 +409,13 @@ comparand: null
         /// result will be inferred from the types of the arguments and the specified return type.
         /// </remarks>
         [RequiresDynamicCode(Expression.DelegateCreationRequiresDynamicCode)]
-        public static DynamicExpression Dynamic(CallSiteBinder binder, Type returnType, Expression arg0, Expression arg1, Expression arg2) =>
-            DynamicExpression.Dynamic(binder, returnType, arg0, arg1, arg2);
+        public static DynamicExpression Dynamic(
+            CallSiteBinder binder,
+            Type returnType,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2
+        ) => DynamicExpression.Dynamic(binder, returnType, arg0, arg1, arg2);
 
         /// <summary>
         /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" />.
@@ -387,8 +437,14 @@ comparand: null
         /// result will be inferred from the types of the arguments and the specified return type.
         /// </remarks>
         [RequiresDynamicCode(Expression.DelegateCreationRequiresDynamicCode)]
-        public static DynamicExpression Dynamic(CallSiteBinder binder, Type returnType, Expression arg0, Expression arg1, Expression arg2, Expression arg3) =>
-            DynamicExpression.Dynamic(binder, returnType, arg0, arg1, arg2, arg3);
+        public static DynamicExpression Dynamic(
+            CallSiteBinder binder,
+            Type returnType,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2,
+            Expression arg3
+        ) => DynamicExpression.Dynamic(binder, returnType, arg0, arg1, arg2, arg3);
 
         /// <summary>
         /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" />.
@@ -407,8 +463,11 @@ comparand: null
         /// result will be inferred from the types of the arguments and the specified return type.
         /// </remarks>
         [RequiresDynamicCode(Expression.DelegateCreationRequiresDynamicCode)]
-        public static DynamicExpression Dynamic(CallSiteBinder binder, Type returnType, params Expression[] arguments) =>
-            DynamicExpression.Dynamic(binder, returnType, arguments);
+        public static DynamicExpression Dynamic(
+            CallSiteBinder binder,
+            Type returnType,
+            params Expression[] arguments
+        ) => DynamicExpression.Dynamic(binder, returnType, arguments);
 
         /// <summary>
         /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" />.
@@ -424,8 +483,11 @@ comparand: null
         /// <see cref="DynamicExpression.Arguments">Arguments</see> set to the specified values.
         /// </returns>
         [RequiresDynamicCode(Expression.DelegateCreationRequiresDynamicCode)]
-        public static DynamicExpression MakeDynamic(Type delegateType, CallSiteBinder binder, IEnumerable<Expression>? arguments) =>
-            DynamicExpression.MakeDynamic(delegateType, binder, arguments);
+        public static DynamicExpression MakeDynamic(
+            Type delegateType,
+            CallSiteBinder binder,
+            IEnumerable<Expression>? arguments
+        ) => DynamicExpression.MakeDynamic(delegateType, binder, arguments);
 
         /// <summary>
         /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" /> and one argument.
@@ -441,8 +503,11 @@ comparand: null
         /// <see cref="DynamicExpression.Arguments">Arguments</see> set to the specified values.
         /// </returns>
         [RequiresDynamicCode(Expression.DelegateCreationRequiresDynamicCode)]
-        public static DynamicExpression MakeDynamic(Type delegateType, CallSiteBinder binder, Expression arg0) =>
-            DynamicExpression.MakeDynamic(delegateType, binder, arg0);
+        public static DynamicExpression MakeDynamic(
+            Type delegateType,
+            CallSiteBinder binder,
+            Expression arg0
+        ) => DynamicExpression.MakeDynamic(delegateType, binder, arg0);
 
         /// <summary>
         /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" /> and two arguments.
@@ -459,8 +524,12 @@ comparand: null
         /// <see cref="DynamicExpression.Arguments">Arguments</see> set to the specified values.
         /// </returns>
         [RequiresDynamicCode(Expression.DelegateCreationRequiresDynamicCode)]
-        public static DynamicExpression MakeDynamic(Type delegateType, CallSiteBinder binder, Expression arg0, Expression arg1) =>
-            DynamicExpression.MakeDynamic(delegateType, binder, arg0, arg1);
+        public static DynamicExpression MakeDynamic(
+            Type delegateType,
+            CallSiteBinder binder,
+            Expression arg0,
+            Expression arg1
+        ) => DynamicExpression.MakeDynamic(delegateType, binder, arg0, arg1);
 
         /// <summary>
         /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" /> and three arguments.
@@ -478,8 +547,13 @@ comparand: null
         /// <see cref="DynamicExpression.Arguments">Arguments</see> set to the specified values.
         /// </returns>
         [RequiresDynamicCode(Expression.DelegateCreationRequiresDynamicCode)]
-        public static DynamicExpression MakeDynamic(Type delegateType, CallSiteBinder binder, Expression arg0, Expression arg1, Expression arg2) =>
-            DynamicExpression.MakeDynamic(delegateType, binder, arg0, arg1, arg2);
+        public static DynamicExpression MakeDynamic(
+            Type delegateType,
+            CallSiteBinder binder,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2
+        ) => DynamicExpression.MakeDynamic(delegateType, binder, arg0, arg1, arg2);
 
         /// <summary>
         /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" /> and four arguments.
@@ -498,8 +572,14 @@ comparand: null
         /// <see cref="DynamicExpression.Arguments">Arguments</see> set to the specified values.
         /// </returns>
         [RequiresDynamicCode(Expression.DelegateCreationRequiresDynamicCode)]
-        public static DynamicExpression MakeDynamic(Type delegateType, CallSiteBinder binder, Expression arg0, Expression arg1, Expression arg2, Expression arg3) =>
-            DynamicExpression.MakeDynamic(delegateType, binder, arg0, arg1, arg2, arg3);
+        public static DynamicExpression MakeDynamic(
+            Type delegateType,
+            CallSiteBinder binder,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2,
+            Expression arg3
+        ) => DynamicExpression.MakeDynamic(delegateType, binder, arg0, arg1, arg2, arg3);
 
         /// <summary>
         /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" />.
@@ -515,7 +595,10 @@ comparand: null
         /// <see cref="DynamicExpression.Arguments">Arguments</see> set to the specified values.
         /// </returns>
         [RequiresDynamicCode(Expression.DelegateCreationRequiresDynamicCode)]
-        public static DynamicExpression MakeDynamic(Type delegateType, CallSiteBinder binder, params Expression[]? arguments) =>
-            MakeDynamic(delegateType, binder, (IEnumerable<Expression>?)arguments);
+        public static DynamicExpression MakeDynamic(
+            Type delegateType,
+            CallSiteBinder binder,
+            params Expression[]? arguments
+        ) => MakeDynamic(delegateType, binder, (IEnumerable<Expression>?)arguments);
     }
 }

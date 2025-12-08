@@ -28,7 +28,11 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("Get") });
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("Get"),
+                }
+            );
             CancellationToken cancellationToken = new CancellationToken();
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -47,13 +51,22 @@ namespace System.Web.Http.ModelBinding
         public async Task BindValuesAsync_WithObjectContentInRequest_Works()
         {
             // Arrange
-            ActionValueItem cust = new ActionValueItem() { FirstName = "FirstName", LastName = "LastName", Id = 1 };
+            ActionValueItem cust = new ActionValueItem()
+            {
+                FirstName = "FirstName",
+                LastName = "LastName",
+                Id = 1,
+            };
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType") });
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
+                }
+            );
             context.ControllerContext.Request = new HttpRequestMessage
             {
-                Content = new ObjectContent<ActionValueItem>(cust, new JsonMediaTypeFormatter())
+                Content = new ObjectContent<ActionValueItem>(cust, new JsonMediaTypeFormatter()),
             };
             CancellationToken cancellationToken = new CancellationToken();
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
@@ -76,12 +89,18 @@ namespace System.Web.Http.ModelBinding
         public async Task BindValuesAsync_ConvertEmptyString()
         {
             HttpActionContext actionContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri("http://localhost?A1=&A2=&A3=&A4="),
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri("http://localhost?A1=&A2=&A3=&A4=")
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("GetTestEmptyString") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetTestEmptyString"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -89,7 +108,8 @@ namespace System.Web.Http.ModelBinding
             await provider.BindValuesAsync(actionContext, CancellationToken.None);
 
             // Assert
-            ConvertEmptyStringContainer arg = (ConvertEmptyStringContainer)actionContext.ActionArguments["x"];
+            ConvertEmptyStringContainer arg = (ConvertEmptyStringContainer)
+                actionContext.ActionArguments["x"];
 
             Assert.NotNull(arg);
             Assert.Equal(String.Empty, arg.A1);
@@ -104,12 +124,20 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             HttpActionContext actionContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri(
+                            "http://localhost?id=5&firstName=queryFirstName&lastName=queryLastName"
+                        ),
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri("http://localhost?id=5&firstName=queryFirstName&lastName=queryLastName")
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("Get") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("Get"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -121,7 +149,11 @@ namespace System.Web.Http.ModelBinding
             expectedResult["id"] = 5;
             expectedResult["firstName"] = "queryFirstName";
             expectedResult["lastName"] = "queryLastName";
-            Assert.Equal(expectedResult, actionContext.ActionArguments, new DictionaryEqualityComparer());
+            Assert.Equal(
+                expectedResult,
+                actionContext.ActionArguments,
+                new DictionaryEqualityComparer()
+            );
         }
 
         [Fact]
@@ -130,12 +162,20 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             HttpActionContext actionContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri(
+                            "http://localhost?id=5&firstName=queryFirstName&lastName=queryLastName"
+                        ),
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri("http://localhost?id=5&firstName=queryFirstName&lastName=queryLastName")
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("GetFromUri") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetFromUri"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -147,7 +187,11 @@ namespace System.Web.Http.ModelBinding
             expectedResult["id"] = 5;
             expectedResult["firstName"] = "queryFirstName";
             expectedResult["lastName"] = "queryLastName";
-            Assert.Equal(expectedResult, actionContext.ActionArguments, new DictionaryEqualityComparer());
+            Assert.Equal(
+                expectedResult,
+                actionContext.ActionArguments,
+                new DictionaryEqualityComparer()
+            );
         }
 
         [Fact]
@@ -156,12 +200,20 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             HttpActionContext actionContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri(
+                            "http://localhost?id=5&firstName=queryFirstName&lastName=queryLastName"
+                        ),
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri("http://localhost?id=5&firstName=queryFirstName&lastName=queryLastName")
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("GetItem") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetItem"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -170,8 +222,12 @@ namespace System.Web.Http.ModelBinding
 
             // Assert
             Assert.True(actionContext.ModelState.IsValid);
-            KeyValuePair<string, object> actionArgument = Assert.Single(actionContext.ActionArguments);
-            ActionValueItem deserializedActionValueItem = Assert.IsType<ActionValueItem>(actionArgument.Value);
+            KeyValuePair<string, object> actionArgument = Assert.Single(
+                actionContext.ActionArguments
+            );
+            ActionValueItem deserializedActionValueItem = Assert.IsType<ActionValueItem>(
+                actionArgument.Value
+            );
             Assert.Equal(5, deserializedActionValueItem.Id);
             Assert.Equal("queryFirstName", deserializedActionValueItem.FirstName);
             Assert.Equal("queryLastName", deserializedActionValueItem.LastName);
@@ -183,12 +239,20 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             HttpActionContext actionContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri(
+                            "http://localhost?id=5&firstName=queryFirstName&lastName=queryLastName"
+                        ),
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri("http://localhost?id=5&firstName=queryFirstName&lastName=queryLastName")
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostComplexTypeUri") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexTypeUri"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -197,8 +261,12 @@ namespace System.Web.Http.ModelBinding
 
             // Assert
             Assert.True(actionContext.ModelState.IsValid);
-            KeyValuePair<string, object> actionArgument = Assert.Single(actionContext.ActionArguments);
-            ActionValueItem deserializedActionValueItem = Assert.IsType<ActionValueItem>(actionArgument.Value);
+            KeyValuePair<string, object> actionArgument = Assert.Single(
+                actionContext.ActionArguments
+            );
+            ActionValueItem deserializedActionValueItem = Assert.IsType<ActionValueItem>(
+                actionArgument.Value
+            );
             Assert.Equal(5, deserializedActionValueItem.Id);
             Assert.Equal("queryFirstName", deserializedActionValueItem.FirstName);
             Assert.Equal("queryLastName", deserializedActionValueItem.LastName);
@@ -210,12 +278,20 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             HttpActionContext actionContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri(
+                            "http://localhost?items[0].id=5&items[0].firstName=queryFirstName&items[0].lastName=queryLastName"
+                        ),
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri("http://localhost?items[0].id=5&items[0].firstName=queryFirstName&items[0].lastName=queryLastName")
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostEnumerableUri") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostEnumerableUri"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -224,8 +300,12 @@ namespace System.Web.Http.ModelBinding
 
             // Assert
             Assert.True(actionContext.ModelState.IsValid);
-            KeyValuePair<string, object> keyValuePair = Assert.Single(actionContext.ActionArguments);
-            IEnumerable<ActionValueItem> items = Assert.IsAssignableFrom<IEnumerable<ActionValueItem>>(keyValuePair.Value);
+            KeyValuePair<string, object> keyValuePair = Assert.Single(
+                actionContext.ActionArguments
+            );
+            IEnumerable<ActionValueItem> items = Assert.IsAssignableFrom<
+                IEnumerable<ActionValueItem>
+            >(keyValuePair.Value);
             ActionValueItem deserializedActionValueItem = items.First();
             Assert.Equal(5, deserializedActionValueItem.Id);
             Assert.Equal("queryFirstName", deserializedActionValueItem.FirstName);
@@ -238,12 +318,20 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             HttpActionContext actionContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri(
+                            "http://localhost?id=5&firstName=queryFirstName&items.lastName=queryLastName"
+                        ),
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri("http://localhost?id=5&firstName=queryFirstName&items.lastName=queryLastName")
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostEnumerableUri") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostEnumerableUri"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -252,9 +340,13 @@ namespace System.Web.Http.ModelBinding
 
             // Assert
             Assert.True(actionContext.ModelState.IsValid);
-            KeyValuePair<string, object> keyValuePair = Assert.Single(actionContext.ActionArguments);
-            IEnumerable<ActionValueItem> items = Assert.IsAssignableFrom<IEnumerable<ActionValueItem>>(keyValuePair.Value);
-            Assert.Empty(items);     // expect unsuccessful bind but proves we don't loop infinitely
+            KeyValuePair<string, object> keyValuePair = Assert.Single(
+                actionContext.ActionArguments
+            );
+            IEnumerable<ActionValueItem> items = Assert.IsAssignableFrom<
+                IEnumerable<ActionValueItem>
+            >(keyValuePair.Value);
+            Assert.Empty(items); // expect unsuccessful bind but proves we don't loop infinitely
         }
 
         [Fact]
@@ -263,12 +355,20 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             HttpActionContext actionContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri(
+                            "http://localhost?item.id=5&item.firstName=queryFirstName&item.lastName=queryLastName"
+                        ),
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri("http://localhost?item.id=5&item.firstName=queryFirstName&item.lastName=queryLastName")
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("GetItem") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetItem"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -276,8 +376,12 @@ namespace System.Web.Http.ModelBinding
             await provider.BindValuesAsync(actionContext, cancellationToken);
 
             // Assert
-            KeyValuePair<string, object> keyValuePair = Assert.Single(actionContext.ActionArguments);
-            ActionValueItem deserializedActionValueItem = Assert.IsType<ActionValueItem>(keyValuePair.Value);
+            KeyValuePair<string, object> keyValuePair = Assert.Single(
+                actionContext.ActionArguments
+            );
+            ActionValueItem deserializedActionValueItem = Assert.IsType<ActionValueItem>(
+                keyValuePair.Value
+            );
             Assert.Equal(5, deserializedActionValueItem.Id);
             Assert.Equal("queryFirstName", deserializedActionValueItem.FirstName);
             Assert.Equal("queryLastName", deserializedActionValueItem.LastName);
@@ -289,12 +393,20 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             HttpActionContext actionContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri(
+                            "http://localhost?item.id=5&item.firstName=queryFirstName&item.lastName=queryLastName"
+                        ),
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri("http://localhost?item.id=5&item.firstName=queryFirstName&item.lastName=queryLastName")
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("GetItemFromUri") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetItemFromUri"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -302,8 +414,12 @@ namespace System.Web.Http.ModelBinding
             await provider.BindValuesAsync(actionContext, cancellationToken);
 
             // Assert
-            KeyValuePair<string, object> keyValuePair = Assert.Single(actionContext.ActionArguments);
-            ActionValueItem deserializedActionValueItem = Assert.IsType<ActionValueItem>(keyValuePair.Value);
+            KeyValuePair<string, object> keyValuePair = Assert.Single(
+                actionContext.ActionArguments
+            );
+            ActionValueItem deserializedActionValueItem = Assert.IsType<ActionValueItem>(
+                keyValuePair.Value
+            );
             Assert.Equal(5, deserializedActionValueItem.Id);
             Assert.Equal("queryFirstName", deserializedActionValueItem.FirstName);
             Assert.Equal("queryLastName", deserializedActionValueItem.LastName);
@@ -315,11 +431,14 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             HttpActionContext actionContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    new HttpRequestMessage() { Method = HttpMethod.Get }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("GetFromCustom") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetFromCustom"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -331,7 +450,11 @@ namespace System.Web.Http.ModelBinding
             expectedResult["id"] = 99;
             expectedResult["firstName"] = "99";
             expectedResult["lastName"] = "99";
-            Assert.Equal(expectedResult, actionContext.ActionArguments, new DictionaryEqualityComparer());
+            Assert.Equal(
+                expectedResult,
+                actionContext.ActionArguments,
+                new DictionaryEqualityComparer()
+            );
         }
 
         [Fact]
@@ -340,13 +463,21 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             HttpActionContext actionContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri(
+                            "http://localhost?custid=5&first=renamedFirstName&last=renamedLastName"
+                        ),
+                        // notice the query string names match the prefixes in GetFromNamed() and not the actual parameter names
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri("http://localhost?custid=5&first=renamedFirstName&last=renamedLastName")
-                    // notice the query string names match the prefixes in GetFromNamed() and not the actual parameter names
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("GetFromNamed") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetFromNamed"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -358,7 +489,11 @@ namespace System.Web.Http.ModelBinding
             expectedResult["id"] = 5;
             expectedResult["firstName"] = "renamedFirstName";
             expectedResult["lastName"] = "renamedLastName";
-            Assert.Equal(expectedResult, actionContext.ActionArguments, new DictionaryEqualityComparer());
+            Assert.Equal(
+                expectedResult,
+                actionContext.ActionArguments,
+                new DictionaryEqualityComparer()
+            );
         }
 
         [Fact]
@@ -367,12 +502,20 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             HttpActionContext actionContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri(
+                            "http://localhost?id=100&firstName=queryFirstName&lastName=queryLastName"
+                        ),
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri("http://localhost?id=100&firstName=queryFirstName&lastName=queryLastName")
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("GetItem") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetItem"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -398,12 +541,19 @@ namespace System.Web.Http.ModelBinding
             route.Values.Add("lastName", "routeLastName");
 
             HttpActionContext controllerContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(route, new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    route,
+                    new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri("http://localhost"),
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri("http://localhost")
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("Get") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("Get"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -415,7 +565,11 @@ namespace System.Web.Http.ModelBinding
             expectedResult["id"] = 6;
             expectedResult["firstName"] = "routeFirstName";
             expectedResult["lastName"] = "routeLastName";
-            Assert.Equal(expectedResult, controllerContext.ActionArguments, new DictionaryEqualityComparer());
+            Assert.Equal(
+                expectedResult,
+                controllerContext.ActionArguments,
+                new DictionaryEqualityComparer()
+            );
         }
 
         [Fact]
@@ -429,12 +583,19 @@ namespace System.Web.Http.ModelBinding
             route.Values.Add("lastName", "routeLastName");
 
             HttpActionContext controllerContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(route, new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    route,
+                    new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri("http://localhost"),
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri("http://localhost")
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("Get") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("Get"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -446,7 +607,11 @@ namespace System.Web.Http.ModelBinding
             expectedResult["id"] = 6;
             expectedResult["firstName"] = "routeFirstName";
             expectedResult["lastName"] = "routeLastName";
-            Assert.Equal(expectedResult, controllerContext.ActionArguments, new DictionaryEqualityComparer());
+            Assert.Equal(
+                expectedResult,
+                controllerContext.ActionArguments,
+                new DictionaryEqualityComparer()
+            );
         }
 
         [Fact]
@@ -460,12 +625,19 @@ namespace System.Web.Http.ModelBinding
             route.Values.Add("lastName", "routeLastName");
 
             HttpActionContext controllerContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(route, new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    route,
+                    new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri("http://localhost"),
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri("http://localhost")
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("GetItem") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetItem"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -473,8 +645,12 @@ namespace System.Web.Http.ModelBinding
             await provider.BindValuesAsync(controllerContext, cancellationToken);
 
             // Assert
-            KeyValuePair<string, object> keyValuePair = Assert.Single(controllerContext.ActionArguments);
-            ActionValueItem deserializedActionValueItem = Assert.IsType<ActionValueItem>(keyValuePair.Value);
+            KeyValuePair<string, object> keyValuePair = Assert.Single(
+                controllerContext.ActionArguments
+            );
+            ActionValueItem deserializedActionValueItem = Assert.IsType<ActionValueItem>(
+                keyValuePair.Value
+            );
             Assert.Equal(6, deserializedActionValueItem.Id);
             Assert.Equal("routeFirstName", deserializedActionValueItem.FirstName);
             Assert.Equal("routeLastName", deserializedActionValueItem.LastName);
@@ -491,12 +667,19 @@ namespace System.Web.Http.ModelBinding
             route.Values.Add("lastName", "routeLastName");
 
             HttpActionContext controllerContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(route, new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    route,
+                    new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri("http://localhost"),
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri("http://localhost")
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("GetItemFromUri") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetItemFromUri"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -504,8 +687,12 @@ namespace System.Web.Http.ModelBinding
             await provider.BindValuesAsync(controllerContext, cancellationToken);
 
             // Assert
-            KeyValuePair<string, object> keyValuePair = Assert.Single(controllerContext.ActionArguments);
-            ActionValueItem deserializedActionValueItem = Assert.IsType<ActionValueItem>(keyValuePair.Value);
+            KeyValuePair<string, object> keyValuePair = Assert.Single(
+                controllerContext.ActionArguments
+            );
+            ActionValueItem deserializedActionValueItem = Assert.IsType<ActionValueItem>(
+                keyValuePair.Value
+            );
             Assert.Equal(6, deserializedActionValueItem.Id);
             Assert.Equal("routeFirstName", deserializedActionValueItem.FirstName);
             Assert.Equal("routeLastName", deserializedActionValueItem.LastName);
@@ -520,11 +707,16 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             HttpActionContext actionContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    new HttpRequestMessage() { Method = HttpMethod.Get }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = HttpMethod.Get
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("GetFromCancellationToken") });
+                    MethodInfo = typeof(ActionValueController).GetMethod(
+                        "GetFromCancellationToken"
+                    ),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -532,7 +724,9 @@ namespace System.Web.Http.ModelBinding
             await provider.BindValuesAsync(actionContext, cancellationToken);
 
             // Assert
-            KeyValuePair<string, object> keyValuePair = Assert.Single(actionContext.ActionArguments);
+            KeyValuePair<string, object> keyValuePair = Assert.Single(
+                actionContext.ActionArguments
+            );
             Assert.Equal(cancellationToken, keyValuePair.Value);
         }
         #endregion ControllerContext
@@ -544,13 +738,22 @@ namespace System.Web.Http.ModelBinding
         {
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
-            string jsonString = "{\"Id\":\"7\",\"FirstName\":\"testFirstName\",\"LastName\":\"testLastName\"}";
-            StringContent stringContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            string jsonString =
+                "{\"Id\":\"7\",\"FirstName\":\"testFirstName\",\"LastName\":\"testLastName\"}";
+            StringContent stringContent = new StringContent(
+                jsonString,
+                Encoding.UTF8,
+                "application/json"
+            );
 
             HttpRequestMessage request = new HttpRequestMessage() { Content = stringContent };
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(request),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType") });
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -559,7 +762,9 @@ namespace System.Web.Http.ModelBinding
 
             // Assert
             KeyValuePair<string, object> keyValuePair = Assert.Single(context.ActionArguments);
-            ActionValueItem deserializedActionValueItem = Assert.IsAssignableFrom<ActionValueItem>(keyValuePair.Value);
+            ActionValueItem deserializedActionValueItem = Assert.IsAssignableFrom<ActionValueItem>(
+                keyValuePair.Value
+            );
             Assert.Equal(7, deserializedActionValueItem.Id);
             Assert.Equal("testFirstName", deserializedActionValueItem.FirstName);
             Assert.Equal("testLastName", deserializedActionValueItem.LastName);
@@ -570,13 +775,22 @@ namespace System.Web.Http.ModelBinding
         {
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
-            string jsonString = "{\"Id\":\"100\",\"FirstName\":\"testFirstName\",\"LastName\":\"testLastName\"}";
-            StringContent stringContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            string jsonString =
+                "{\"Id\":\"100\",\"FirstName\":\"testFirstName\",\"LastName\":\"testLastName\"}";
+            StringContent stringContent = new StringContent(
+                jsonString,
+                Encoding.UTF8,
+                "application/json"
+            );
 
             HttpRequestMessage request = new HttpRequestMessage() { Content = stringContent };
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(request),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType") });
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -593,12 +807,20 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             string formUrlEncodedString = "Id=7&FirstName=testFirstName&LastName=testLastName";
-            StringContent stringContent = new StringContent(formUrlEncodedString, Encoding.UTF8, "application/x-www-form-urlencoded");
+            StringContent stringContent = new StringContent(
+                formUrlEncodedString,
+                Encoding.UTF8,
+                "application/x-www-form-urlencoded"
+            );
 
             HttpRequestMessage request = new HttpRequestMessage() { Content = stringContent };
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(request),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType") });
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -607,7 +829,9 @@ namespace System.Web.Http.ModelBinding
 
             // Assert
             KeyValuePair<string, object> keyValuePair = Assert.Single(context.ActionArguments);
-            ActionValueItem deserializedActionValueItem = Assert.IsAssignableFrom<ActionValueItem>(keyValuePair.Value);
+            ActionValueItem deserializedActionValueItem = Assert.IsAssignableFrom<ActionValueItem>(
+                keyValuePair.Value
+            );
             Assert.Equal(7, deserializedActionValueItem.Id);
             Assert.Equal("testFirstName", deserializedActionValueItem.FirstName);
             Assert.Equal("testLastName", deserializedActionValueItem.LastName);
@@ -619,12 +843,20 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             string formUrlEncodedString = "Id=101&FirstName=testFirstName&LastName=testLastName";
-            StringContent stringContent = new StringContent(formUrlEncodedString, Encoding.UTF8, "application/x-www-form-urlencoded");
+            StringContent stringContent = new StringContent(
+                formUrlEncodedString,
+                Encoding.UTF8,
+                "application/x-www-form-urlencoded"
+            );
 
             HttpRequestMessage request = new HttpRequestMessage() { Content = stringContent };
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(request),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType") });
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -641,14 +873,26 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             MediaTypeHeaderValue mediaType = new MediaTypeHeaderValue("application/xml");
-            ActionValueItem item = new ActionValueItem() { Id = 7, FirstName = "testFirstName", LastName = "testLastName" };
-            ObjectContent<ActionValueItem> tempContent = new ObjectContent<ActionValueItem>(item, new XmlMediaTypeFormatter());
+            ActionValueItem item = new ActionValueItem()
+            {
+                Id = 7,
+                FirstName = "testFirstName",
+                LastName = "testLastName",
+            };
+            ObjectContent<ActionValueItem> tempContent = new ObjectContent<ActionValueItem>(
+                item,
+                new XmlMediaTypeFormatter()
+            );
             StringContent stringContent = new StringContent(await tempContent.ReadAsStringAsync());
             stringContent.Headers.ContentType = mediaType;
             HttpRequestMessage request = new HttpRequestMessage() { Content = stringContent };
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(request),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType") });
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -657,7 +901,9 @@ namespace System.Web.Http.ModelBinding
 
             // Assert
             KeyValuePair<string, object> keyValuePair = Assert.Single(context.ActionArguments);
-            ActionValueItem deserializedActionValueItem = Assert.IsAssignableFrom<ActionValueItem>(keyValuePair.Value);
+            ActionValueItem deserializedActionValueItem = Assert.IsAssignableFrom<ActionValueItem>(
+                keyValuePair.Value
+            );
             Assert.Equal(item.Id, deserializedActionValueItem.Id);
             Assert.Equal(item.FirstName, deserializedActionValueItem.FirstName);
             Assert.Equal(item.LastName, deserializedActionValueItem.LastName);
@@ -684,7 +930,11 @@ namespace System.Web.Http.ModelBinding
             HttpRequestMessage request = new HttpRequestMessage() { Content = stringContent };
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(request),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType") });
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -693,7 +943,9 @@ namespace System.Web.Http.ModelBinding
 
             // Assert
             KeyValuePair<string, object> keyValuePair = Assert.Single(context.ActionArguments);
-            ActionValueItem deserializedActionValueItem = Assert.IsAssignableFrom<ActionValueItem>(keyValuePair.Value);
+            ActionValueItem deserializedActionValueItem = Assert.IsAssignableFrom<ActionValueItem>(
+                keyValuePair.Value
+            );
             Assert.Equal(7, deserializedActionValueItem.Id);
             Assert.Equal("testFirstName", deserializedActionValueItem.FirstName);
             Assert.Equal("testLastName", deserializedActionValueItem.LastName);
@@ -705,14 +957,23 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             MediaTypeHeaderValue mediaType = new MediaTypeHeaderValue("application/xml");
-            ActionValueItem item = new ActionValueItem() { Id = 101, FirstName = "testFirstName", LastName = "testLastName" };
+            ActionValueItem item = new ActionValueItem()
+            {
+                Id = 101,
+                FirstName = "testFirstName",
+                LastName = "testLastName",
+            };
             var tempContent = new ObjectContent<ActionValueItem>(item, new XmlMediaTypeFormatter());
             StringContent stringContent = new StringContent(await tempContent.ReadAsStringAsync());
             stringContent.Headers.ContentType = mediaType;
             HttpRequestMessage request = new HttpRequestMessage() { Content = stringContent };
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(request),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType") });
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -730,7 +991,11 @@ namespace System.Web.Http.ModelBinding
             HttpRequestMessage request = new HttpRequestMessage() { Content = null };
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(request),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType") });
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -747,18 +1012,27 @@ namespace System.Web.Http.ModelBinding
         public async Task BindValuesAsync_Body_To_Complex_And_Uri_To_Simple()
         {
             // Arrange
-            string jsonString = "{\"Id\":\"7\",\"FirstName\":\"testFirstName\",\"LastName\":\"testLastName\"}";
-            StringContent stringContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            string jsonString =
+                "{\"Id\":\"7\",\"FirstName\":\"testFirstName\",\"LastName\":\"testLastName\"}";
+            StringContent stringContent = new StringContent(
+                jsonString,
+                Encoding.UTF8,
+                "application/json"
+            );
 
             HttpRequestMessage request = new HttpRequestMessage()
             {
                 RequestUri = new Uri("http://localhost/ActionValueController/PostFromBody?id=123"),
-                Content = stringContent
+                Content = stringContent,
             };
 
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(request),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostFromBodyAndUri") });
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostFromBodyAndUri"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -769,7 +1043,9 @@ namespace System.Web.Http.ModelBinding
             Assert.Equal(2, context.ActionArguments.Count);
             Assert.Equal(123, context.ActionArguments["id"]);
 
-            ActionValueItem deserializedActionValueItem = Assert.IsAssignableFrom<ActionValueItem>(context.ActionArguments["item"]);
+            ActionValueItem deserializedActionValueItem = Assert.IsAssignableFrom<ActionValueItem>(
+                context.ActionArguments["item"]
+            );
             Assert.Equal(7, deserializedActionValueItem.Id);
             Assert.Equal("testFirstName", deserializedActionValueItem.FirstName);
             Assert.Equal("testLastName", deserializedActionValueItem.LastName);
@@ -780,14 +1056,23 @@ namespace System.Web.Http.ModelBinding
         {
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
-            string jsonString = "{\"Id\":\"7\",\"FirstName\":\"testFirstName\",\"LastName\":\"testLastName\"}";
-            StringContent stringContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            string jsonString =
+                "{\"Id\":\"7\",\"FirstName\":\"testFirstName\",\"LastName\":\"testLastName\"}";
+            StringContent stringContent = new StringContent(
+                jsonString,
+                Encoding.UTF8,
+                "application/json"
+            );
 
             HttpRequestMessage request = new HttpRequestMessage() { Content = stringContent };
 
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(request),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostFromBody") });
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostFromBody"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -796,7 +1081,9 @@ namespace System.Web.Http.ModelBinding
 
             // Assert
             KeyValuePair<string, object> keyValuePair = Assert.Single(context.ActionArguments);
-            ActionValueItem deserializedActionValueItem = Assert.IsAssignableFrom<ActionValueItem>(keyValuePair.Value);
+            ActionValueItem deserializedActionValueItem = Assert.IsAssignableFrom<ActionValueItem>(
+                keyValuePair.Value
+            );
             Assert.Equal(7, deserializedActionValueItem.Id);
             Assert.Equal("testFirstName", deserializedActionValueItem.FirstName);
             Assert.Equal("testLastName", deserializedActionValueItem.LastName);
@@ -807,13 +1094,22 @@ namespace System.Web.Http.ModelBinding
         {
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
-            string jsonString = "{\"Id\":\"7\",\"FirstName\":\"testFirstName\",\"LastName\":\"testLastName\"}";
-            StringContent stringContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            string jsonString =
+                "{\"Id\":\"7\",\"FirstName\":\"testFirstName\",\"LastName\":\"testLastName\"}";
+            StringContent stringContent = new StringContent(
+                jsonString,
+                Encoding.UTF8,
+                "application/json"
+            );
 
             HttpRequestMessage request = new HttpRequestMessage() { Content = stringContent };
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(request),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType") });
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
+                }
+            );
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
             // Act
@@ -821,12 +1117,13 @@ namespace System.Web.Http.ModelBinding
 
             // Assert
             KeyValuePair<string, object> keyValuePair = Assert.Single(context.ActionArguments);
-            ActionValueItem deserializedActionValueItem = Assert.IsAssignableFrom<ActionValueItem>(keyValuePair.Value);
+            ActionValueItem deserializedActionValueItem = Assert.IsAssignableFrom<ActionValueItem>(
+                keyValuePair.Value
+            );
             Assert.Equal(7, deserializedActionValueItem.Id);
             Assert.Equal("testFirstName", deserializedActionValueItem.FirstName);
             Assert.Equal("testLastName", deserializedActionValueItem.LastName);
         }
-
 
         [Fact]
         public async Task BindValuesAsync_Body_To_IEnumerable_Complex_Type_Json()
@@ -834,13 +1131,22 @@ namespace System.Web.Http.ModelBinding
             // ModelBinding will bind T to IEnumerable<T>, but JSON.Net won't. So enclose JSON in [].
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
-            string jsonString = "[{\"Id\":\"7\",\"FirstName\":\"testFirstName\",\"LastName\":\"testLastName\"}]";
-            StringContent stringContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            string jsonString =
+                "[{\"Id\":\"7\",\"FirstName\":\"testFirstName\",\"LastName\":\"testLastName\"}]";
+            StringContent stringContent = new StringContent(
+                jsonString,
+                Encoding.UTF8,
+                "application/json"
+            );
 
             HttpRequestMessage request = new HttpRequestMessage() { Content = stringContent };
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(request),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostEnumerable") });
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostEnumerable"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -849,7 +1155,9 @@ namespace System.Web.Http.ModelBinding
 
             // Assert
             KeyValuePair<string, object> keyValuePair = Assert.Single(context.ActionArguments);
-            IEnumerable<ActionValueItem> items = Assert.IsAssignableFrom<IEnumerable<ActionValueItem>>(keyValuePair.Value);
+            IEnumerable<ActionValueItem> items = Assert.IsAssignableFrom<
+                IEnumerable<ActionValueItem>
+            >(keyValuePair.Value);
             ActionValueItem deserializedActionValueItem = items.First();
             Assert.Equal(7, deserializedActionValueItem.Id);
             Assert.Equal("testFirstName", deserializedActionValueItem.FirstName);
@@ -862,7 +1170,12 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             MediaTypeHeaderValue mediaType = new MediaTypeHeaderValue("application/json");
-            ActionValueItem item = new ActionValueItem() { Id = 7, FirstName = "testFirstName", LastName = "testLastName" };
+            ActionValueItem item = new ActionValueItem()
+            {
+                Id = 7,
+                FirstName = "testFirstName",
+                LastName = "testLastName",
+            };
             string json = "{\"a\":123,\"b\":[false,null,12.34]}";
             JToken jt = JToken.Parse(json);
             var tempContent = new ObjectContent<JToken>(jt, new JsonMediaTypeFormatter());
@@ -871,7 +1184,11 @@ namespace System.Web.Http.ModelBinding
             HttpRequestMessage request = new HttpRequestMessage() { Content = stringContent };
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(request),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostJsonValue") });
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostJsonValue"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -893,12 +1210,20 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             HttpActionContext actionContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    new HttpRequestMessage()
+                    {
+                        Method = new HttpMethod("Patch"),
+                        RequestUri = new Uri(
+                            "http://localhost?x=123&y=456&data.description=mypoint"
+                        ),
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = new HttpMethod("Patch"),
-                    RequestUri = new Uri("http://localhost?x=123&y=456&data.description=mypoint")
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("Patch") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("Patch"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -907,8 +1232,17 @@ namespace System.Web.Http.ModelBinding
 
             // Assert
             Dictionary<string, object> expectedResult = new Dictionary<string, object>();
-            expectedResult["point"] = new Point { X = 123, Y = 456, Data = new Data { Description = "mypoint" } };
-            Assert.Equal(expectedResult, actionContext.ActionArguments, new DictionaryEqualityComparer());
+            expectedResult["point"] = new Point
+            {
+                X = 123,
+                Y = 456,
+                Data = new Data { Description = "mypoint" },
+            };
+            Assert.Equal(
+                expectedResult,
+                actionContext.ActionArguments,
+                new DictionaryEqualityComparer()
+            );
         }
 
         [Fact]
@@ -917,12 +1251,20 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             CancellationToken cancellationToken = new CancellationToken();
             HttpActionContext actionContext = ContextUtil.CreateActionContext(
-                ContextUtil.CreateControllerContext(new HttpRequestMessage()
+                ContextUtil.CreateControllerContext(
+                    new HttpRequestMessage()
+                    {
+                        Method = new HttpMethod("Options"),
+                        RequestUri = new Uri(
+                            "http://localhost?x=123&y=456&data.description=mypoint"
+                        ),
+                    }
+                ),
+                new ReflectedHttpActionDescriptor()
                 {
-                    Method = new HttpMethod("Options"),
-                    RequestUri = new Uri("http://localhost?x=123&y=456&data.description=mypoint")
-                }),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("Options") });
+                    MethodInfo = typeof(ActionValueController).GetMethod("Options"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -931,8 +1273,17 @@ namespace System.Web.Http.ModelBinding
 
             // Assert
             Dictionary<string, object> expectedResult = new Dictionary<string, object>();
-            expectedResult["data"] = new Point { X = 123, Y = 456, Data = new Data { Description = "mypoint" } };
-            Assert.Equal(expectedResult, actionContext.ActionArguments, new DictionaryEqualityComparer());
+            expectedResult["data"] = new Point
+            {
+                X = 123,
+                Y = 456,
+                Data = new Data { Description = "mypoint" },
+            };
+            Assert.Equal(
+                expectedResult,
+                actionContext.ActionArguments,
+                new DictionaryEqualityComparer()
+            );
         }
 
         [Fact]
@@ -943,13 +1294,21 @@ namespace System.Web.Http.ModelBinding
             config.BindParameter(typeof(Data), new CustomModelBinder());
 
             HttpRequestMessage request = new HttpRequestMessage()
-                {
-                    RequestUri = new Uri("http://localhost")
-                };
+            {
+                RequestUri = new Uri("http://localhost"),
+            };
 
-            HttpControllerContext controllerContext = ContextUtil.CreateControllerContext(config, request);
-            HttpActionContext actionContext = ContextUtil.CreateActionContext(controllerContext,
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("GetData") });
+            HttpControllerContext controllerContext = ContextUtil.CreateControllerContext(
+                config,
+                request
+            );
+            HttpActionContext actionContext = ContextUtil.CreateActionContext(
+                controllerContext,
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetData"),
+                }
+            );
 
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
@@ -969,14 +1328,27 @@ namespace System.Web.Http.ModelBinding
             HttpConfiguration config = new HttpConfiguration();
             config.BindParameter(typeof(Data), new CustomModelBinder());
 
-            ActionValueItem item = new ActionValueItem() { Id = 7, FirstName = "testFirstName", LastName = "testLastName" };
+            ActionValueItem item = new ActionValueItem()
+            {
+                Id = 7,
+                FirstName = "testFirstName",
+                LastName = "testLastName",
+            };
             HttpRequestMessage request = new HttpRequestMessage()
             {
-                Content = new ObjectContent(typeof(ActionValueItem), item, config.Formatters.JsonFormatter)
+                Content = new ObjectContent(
+                    typeof(ActionValueItem),
+                    item,
+                    config.Formatters.JsonFormatter
+                ),
             };
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(config, request),
-                new ReflectedHttpActionDescriptor() { MethodInfo = typeof(ActionValueController).GetMethod("PostItem") });
+                new ReflectedHttpActionDescriptor()
+                {
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostItem"),
+                }
+            );
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
 
             // Act
@@ -1003,7 +1375,9 @@ namespace System.Web.Http.ModelBinding
             Point other = obj as Point;
             if (other != null)
             {
-                return other.X == X && other.Y == Y && other.Data.Description == other.Data.Description;
+                return other.X == X
+                    && other.Y == Y
+                    && other.Data.Description == other.Data.Description;
             }
             return false;
         }
@@ -1032,34 +1406,45 @@ namespace System.Web.Http.ModelBinding
 
     public class ActionValueController : ApiController
     {
-        public void GetData(Data data)
-        {
-        }
+        public void GetData(Data data) { }
 
-        public void PostItem(ActionValueItem item)
-        {
-        }
+        public void PostItem(ActionValueItem item) { }
 
         // Demonstrates the use of ModelBinderAttribute with empty name
-        public void Options([FromUri(Name = "")]Point data) { }
+        public void Options([FromUri(Name = "")] Point data) { }
 
         // Demonstrates complex parameter that has FromUri declared on the type
         public void Patch(Point point) { }
 
         // Demonstrates parameter that can come from route, query string, or defaults
-        public ActionValueItem Get(int id = 0, string firstName = "DefaultFirstName", string lastName = "DefaultLastName")
+        public ActionValueItem Get(
+            int id = 0,
+            string firstName = "DefaultFirstName",
+            string lastName = "DefaultLastName"
+        )
         {
-            return new ActionValueItem() { Id = id, FirstName = firstName, LastName = lastName };
+            return new ActionValueItem()
+            {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName,
+            };
         }
 
         // Demonstrates an explicit override to obtain parameters from URL
-        public ActionValueItem GetFromUri([FromUri] int id = 0,
-                                   [FromUri] string firstName = "DefaultFirstName",
-                                   [FromUri] string lastName = "DefaultLastName")
+        public ActionValueItem GetFromUri(
+            [FromUri] int id = 0,
+            [FromUri] string firstName = "DefaultFirstName",
+            [FromUri] string lastName = "DefaultLastName"
+        )
         {
-            return new ActionValueItem() { Id = id, FirstName = firstName, LastName = lastName };
+            return new ActionValueItem()
+            {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName,
+            };
         }
-
 
         // Complex objects default to body. But we can bind from URI with an attribute.
         public ActionValueItem GetItem([FromUri] ActionValueItem item)
@@ -1074,24 +1459,43 @@ namespace System.Web.Http.ModelBinding
         }
 
         // Demonstrates use of renaming parameters via name
-        public ActionValueItem GetFromNamed([FromUri(Name = "custID")] int id,
-                                     [FromUri(Name = "first")] string firstName,
-                                     [FromUri(Name = "last")] string lastName)
+        public ActionValueItem GetFromNamed(
+            [FromUri(Name = "custID")] int id,
+            [FromUri(Name = "first")] string firstName,
+            [FromUri(Name = "last")] string lastName
+        )
         {
-            return new ActionValueItem() { Id = id, FirstName = firstName, LastName = lastName };
+            return new ActionValueItem()
+            {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName,
+            };
         }
 
-
-        public void GetTestEmptyString([FromUri] ConvertEmptyStringContainer x)
-        {
-        }
+        public void GetTestEmptyString([FromUri] ConvertEmptyStringContainer x) { }
 
         // Demonstrates use of custom ValueProvider via attribute
-        public ActionValueItem GetFromCustom([ValueProvider(typeof(ActionValueControllerValueProviderFactory), Name = "id")] int id,
-                                      [ValueProvider(typeof(ActionValueControllerValueProviderFactory), Name = "customFirstName")] string firstName,
-                                      [ValueProvider(typeof(ActionValueControllerValueProviderFactory), Name = "customLastName")] string lastName)
+        public ActionValueItem GetFromCustom(
+            [ValueProvider(typeof(ActionValueControllerValueProviderFactory), Name = "id")] int id,
+            [ValueProvider(
+                typeof(ActionValueControllerValueProviderFactory),
+                Name = "customFirstName"
+            )]
+                string firstName,
+            [ValueProvider(
+                typeof(ActionValueControllerValueProviderFactory),
+                Name = "customLastName"
+            )]
+                string lastName
+        )
         {
-            return new ActionValueItem() { Id = id, FirstName = firstName, LastName = lastName };
+            return new ActionValueItem()
+            {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName,
+            };
         }
 
         // Demonstrates ModelBinding to the CancellationToken of the current request
@@ -1152,11 +1556,18 @@ namespace System.Web.Http.ModelBinding
         // Demonstrates how body can be shredded to name/value pairs to bind to simple types
         public ActionValueItem PostToSimpleTypes(int id, string firstName, string lastName)
         {
-            return new ActionValueItem() { Id = id, FirstName = firstName, LastName = lastName };
+            return new ActionValueItem()
+            {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName,
+            };
         }
 
         // Demonstrates binding to ObjectContent<T> from request body
-        public Task<ActionValueItem> PostObjectContentOfItemAsync(ObjectContent<ActionValueItem> item)
+        public Task<ActionValueItem> PostObjectContentOfItemAsync(
+            ObjectContent<ActionValueItem> item
+        )
         {
             return item.ReadAsAsync<ActionValueItem>();
         }
@@ -1185,7 +1596,11 @@ namespace System.Web.Http.ModelBinding
 
     static class DefaultActionValueBinderExtensions
     {
-        public static Task BindValuesAsync(this DefaultActionValueBinder binder, HttpActionContext actionContext, CancellationToken cancellationToken)
+        public static Task BindValuesAsync(
+            this DefaultActionValueBinder binder,
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken
+        )
         {
             HttpActionBinding binding = binder.GetBinding(actionContext.ActionDescriptor);
             return binding.ExecuteBindingAsync(actionContext, cancellationToken);

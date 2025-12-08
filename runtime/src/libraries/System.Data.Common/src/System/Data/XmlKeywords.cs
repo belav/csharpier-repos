@@ -18,10 +18,8 @@ namespace System.Data
         internal const string CHANGES = "changes";
         internal const string MODIFIED = "modified";
         internal const string INSERTED = "inserted";
+
         //internal const string DESCENDENT            = "descendent";
-
-
-
 
         internal const string MSD = "msdata";
         internal const string MSDNS = "urn:schemas-microsoft-com:xml-msdata";
@@ -33,6 +31,7 @@ namespace System.Data
         internal const string MSD_COLUMNNAME = "ColumnName";
         internal const string MSD_CONSTRAINTNAME = "ConstraintName";
         internal const string MSD_CONSTRAINTONLY = "ConstraintOnly";
+
         //     internal const string MSD_CREATECONSTRAINTS = "CreateConstraints";
         internal const string MSD_CASESENSITIVE = "CaseSensitive";
         internal const string MSD_DATASETNAME = "DataSetName";
@@ -67,8 +66,6 @@ namespace System.Data
         internal const string MSD_FRAGMENTCOUNT = "schemafragmentcount";
 
         internal const string MSD_SCHEMASERIALIZATIONMODE = "SchemaSerializationMode";
-
-
 
         // Keywords for datatype namespace
         internal const string DTNS = "urn:schemas-microsoft-com:datatypes";
@@ -180,7 +177,6 @@ namespace System.Data
         internal const string NEGATIVEINFINITY = "-INF";
         internal const string QUALIFIED = "qualified";
         internal const string UNQUALIFIED = "unqualified";
-
 
         // Keywords that are not atomized, just strings
         // they are mostly legal values for an attribute

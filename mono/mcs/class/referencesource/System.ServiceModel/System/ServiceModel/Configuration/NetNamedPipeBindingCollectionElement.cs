@@ -5,15 +5,18 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
-    using System.ServiceModel;
     using System.Globalization;
+    using System.ServiceModel;
 
-    public partial class NetNamedPipeBindingCollectionElement : StandardBindingCollectionElement<NetNamedPipeBinding, NetNamedPipeBindingElement>
+    public partial class NetNamedPipeBindingCollectionElement
+        : StandardBindingCollectionElement<NetNamedPipeBinding, NetNamedPipeBindingElement>
     {
         internal static NetNamedPipeBindingCollectionElement GetBindingCollectionElement()
         {
-            return (NetNamedPipeBindingCollectionElement)ConfigurationHelpers.GetBindingCollectionElement(ConfigurationStrings.NetNamedPipeBindingCollectionElementName);
+            return (NetNamedPipeBindingCollectionElement)
+                ConfigurationHelpers.GetBindingCollectionElement(
+                    ConfigurationStrings.NetNamedPipeBindingCollectionElementName
+                );
         }
-
     }
 }

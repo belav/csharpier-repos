@@ -55,21 +55,23 @@ namespace System.ComponentModel.Composition
                 typeof(ScopeAComponent1),
                 typeof(ScopeAComponent2),
                 typeof(ScopeBComponent),
-                typeof(ScopeCComponent));
+                typeof(ScopeCComponent)
+            );
         }
 
         private ComposablePartCatalog ScopeCatalog(ComposablePartCatalog catalog, string scope)
         {
-            return CatalogFactory.CreateFiltered(catalog,
-                         partDef => partDef.Metadata.ContainsKey("Scope") &&
-                                    partDef.Metadata["Scope"].ToString() == scope);
+            return CatalogFactory.CreateFiltered(
+                catalog,
+                partDef =>
+                    partDef.Metadata.ContainsKey("Scope")
+                    && partDef.Metadata["Scope"].ToString() == scope
+            );
         }
 
         [Export]
         [PartMetadata("Scope", "A")]
-        public class ScopeAComponent1
-        {
-        }
+        public class ScopeAComponent1 { }
 
         [Export]
         [PartMetadata("Scope", "A")]

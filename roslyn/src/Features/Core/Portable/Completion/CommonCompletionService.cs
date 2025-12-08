@@ -13,16 +13,20 @@ namespace Microsoft.CodeAnalysis.Completion
 {
     internal abstract partial class CommonCompletionService : CompletionService
     {
-        protected CommonCompletionService(SolutionServices services, IAsynchronousOperationListenerProvider listenerProvider)
-            : base(services, listenerProvider)
-        {
-        }
+        protected CommonCompletionService(
+            SolutionServices services,
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(services, listenerProvider) { }
 
-        protected override CompletionItem GetBetterItem(CompletionItem item, CompletionItem existingItem)
+        protected override CompletionItem GetBetterItem(
+            CompletionItem item,
+            CompletionItem existingItem
+        )
         {
-            // We've constructed the export order of completion providers so 
+            // We've constructed the export order of completion providers so
             // that snippets are exported after everything else. That way,
-            // when we choose a single item per display text, snippet 
+            // when we choose a single item per display text, snippet
             // glyphs appear by snippets. This breaks pre-selection of items
             // whose display text is also a snippet (workitem 852578),
             // the snippet item doesn't have its preselect bit set.
@@ -36,19 +40,25 @@ namespace Microsoft.CodeAnalysis.Completion
             return base.GetBetterItem(item, existingItem);
         }
 
-        protected static bool IsKeywordItem(CompletionItem item)
-            => item.Tags.Contains(WellKnownTags.Keyword);
+        protected static bool IsKeywordItem(CompletionItem item) =>
+            item.Tags.Contains(WellKnownTags.Keyword);
 
-        protected static bool IsSnippetItem(CompletionItem item)
-            => item.Tags.Contains(WellKnownTags.Snippet);
+        protected static bool IsSnippetItem(CompletionItem item) =>
+            item.Tags.Contains(WellKnownTags.Snippet);
 
         internal override void FilterItems(
-           Document document,
-           IReadOnlyList<MatchResult> matchResults,
-           string filterText,
-           IList<MatchResult> builder)
+            Document document,
+            IReadOnlyList<MatchResult> matchResults,
+            string filterText,
+            IList<MatchResult> builder
+        )
         {
-            CompletionService.FilterItems(CompletionHelper.GetHelper(document), matchResults, filterText, builder);
+            CompletionService.FilterItems(
+                CompletionHelper.GetHelper(document),
+                matchResults,
+                filterText,
+                builder
+            );
         }
     }
 }

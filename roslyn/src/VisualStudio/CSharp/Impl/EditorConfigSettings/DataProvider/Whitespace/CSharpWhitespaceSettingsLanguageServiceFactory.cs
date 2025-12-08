@@ -13,7 +13,13 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.DataProvider.Whitespace
 {
-    [ExportLanguageServiceFactory(typeof(ILanguageSettingsProviderFactory<Setting>), LanguageNames.CSharp), Shared]
+    [
+        ExportLanguageServiceFactory(
+            typeof(ILanguageSettingsProviderFactory<Setting>),
+            LanguageNames.CSharp
+        ),
+        Shared
+    ]
     internal sealed class CSharpWhitespaceSettingsLanguageServiceFactory : ILanguageServiceFactory
     {
         private readonly IGlobalOptionService _globalOptions;

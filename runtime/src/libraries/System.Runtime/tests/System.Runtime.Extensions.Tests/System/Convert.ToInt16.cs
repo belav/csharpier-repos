@@ -26,7 +26,7 @@ namespace System.Tests
         [Fact]
         public void FromChar()
         {
-            char[] testValues = { 'A', char.MinValue, };
+            char[] testValues = { 'A', char.MinValue };
             short[] expectedValues = { 65, (short)char.MinValue };
             Verify(Convert.ToInt16, testValues, expectedValues);
         }
@@ -91,7 +91,11 @@ namespace System.Tests
             VerifyFromObject(Convert.ToInt16, Convert.ToInt16, testValues, expectedValues);
 
             object[] invalidValues = { new object(), DateTime.Now };
-            VerifyFromObjectThrows<InvalidCastException>(Convert.ToInt16, Convert.ToInt16, invalidValues);
+            VerifyFromObjectThrows<InvalidCastException>(
+                Convert.ToInt16,
+                Convert.ToInt16,
+                invalidValues
+            );
         }
 
         [Fact]
@@ -105,8 +109,8 @@ namespace System.Tests
         [Fact]
         public void FromSingle()
         {
-            float[] testValues = { 100.0f, -100.0f, 0.0f, };
-            short[] expectedValues = { 100, -100, 0, };
+            float[] testValues = { 100.0f, -100.0f, 0.0f };
+            short[] expectedValues = { 100, -100, 0 };
             Verify(Convert.ToInt16, testValues, expectedValues);
 
             float[] overflowValues = { float.MaxValue, float.MinValue };
@@ -116,36 +120,92 @@ namespace System.Tests
         [Fact]
         public void FromString()
         {
-            string[] testValues = { "100", "-100", "0", Int16.MinValue.ToString(), Int16.MaxValue.ToString(), null };
+            string[] testValues =
+            {
+                "100",
+                "-100",
+                "0",
+                Int16.MinValue.ToString(),
+                Int16.MaxValue.ToString(),
+                null,
+            };
             short[] expectedValues = { 100, -100, 0, short.MinValue, short.MaxValue, 0 };
             VerifyFromString(Convert.ToInt16, Convert.ToInt16, testValues, expectedValues);
 
             string[] overflowValues = { Int32.MinValue.ToString(), Int32.MaxValue.ToString() };
-            VerifyFromStringThrows<OverflowException>(Convert.ToInt16, Convert.ToInt16, overflowValues);
+            VerifyFromStringThrows<OverflowException>(
+                Convert.ToInt16,
+                Convert.ToInt16,
+                overflowValues
+            );
 
             string[] formatExceptionValues = { "abba" };
-            VerifyFromStringThrows<FormatException>(Convert.ToInt16, Convert.ToInt16, formatExceptionValues);
+            VerifyFromStringThrows<FormatException>(
+                Convert.ToInt16,
+                Convert.ToInt16,
+                formatExceptionValues
+            );
         }
 
         [Fact]
         public void FromStringWithBase()
         {
-            string[] testValues = { null, null, null, null, "7fff", "32767", "77777", "111111111111111", "8000", "-32768", "100000", "1000000000000000" };
+            string[] testValues =
+            {
+                null,
+                null,
+                null,
+                null,
+                "7fff",
+                "32767",
+                "77777",
+                "111111111111111",
+                "8000",
+                "-32768",
+                "100000",
+                "1000000000000000",
+            };
             int[] testBases = { 10, 2, 8, 16, 16, 10, 8, 2, 16, 10, 8, 2 };
-            short[] expectedValues = { 0, 0, 0, 0, short.MaxValue, short.MaxValue, short.MaxValue, short.MaxValue, short.MinValue, short.MinValue, short.MinValue, short.MinValue };
+            short[] expectedValues =
+            {
+                0,
+                0,
+                0,
+                0,
+                short.MaxValue,
+                short.MaxValue,
+                short.MaxValue,
+                short.MaxValue,
+                short.MinValue,
+                short.MinValue,
+                short.MinValue,
+                short.MinValue,
+            };
             VerifyFromStringWithBase(Convert.ToInt16, testValues, testBases, expectedValues);
 
             string[] overflowValues = { "32768", "-32769", "11111111111111111", "1FFFF", "777777" };
             int[] overflowBases = { 10, 10, 2, 16, 8 };
-            VerifyFromStringWithBaseThrows<OverflowException>(Convert.ToInt16, overflowValues, overflowBases);
+            VerifyFromStringWithBaseThrows<OverflowException>(
+                Convert.ToInt16,
+                overflowValues,
+                overflowBases
+            );
 
             string[] formatExceptionValues = { "12", "ffffffffffffffffffff" };
             int[] formatExceptionBases = { 2, 8 };
-            VerifyFromStringWithBaseThrows<FormatException>(Convert.ToInt16, formatExceptionValues, formatExceptionBases);
+            VerifyFromStringWithBaseThrows<FormatException>(
+                Convert.ToInt16,
+                formatExceptionValues,
+                formatExceptionBases
+            );
 
             string[] argumentExceptionValues = { "10", "11", "abba", "-ab" };
             int[] argumentExceptionBases = { -1, 3, 0, 16 };
-            VerifyFromStringWithBaseThrows<ArgumentException>(Convert.ToInt16, argumentExceptionValues, argumentExceptionBases);
+            VerifyFromStringWithBaseThrows<ArgumentException>(
+                Convert.ToInt16,
+                argumentExceptionValues,
+                argumentExceptionBases
+            );
         }
 
         [Fact]

@@ -3,21 +3,25 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class ComplexTypesTrackingInMemoryTest : ComplexTypesTrackingTestBase<ComplexTypesTrackingInMemoryTest.InMemoryFixture>
+public class ComplexTypesTrackingInMemoryTest
+    : ComplexTypesTrackingTestBase<ComplexTypesTrackingInMemoryTest.InMemoryFixture>
 {
     public ComplexTypesTrackingInMemoryTest(InMemoryFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     protected override void ExecuteWithStrategyInTransaction(
         Action<DbContext> testOperation,
         Action<DbContext> nestedTestOperation1 = null,
-        Action<DbContext> nestedTestOperation2 = null)
+        Action<DbContext> nestedTestOperation2 = null
+    )
     {
         try
         {
-            base.ExecuteWithStrategyInTransaction(testOperation, nestedTestOperation1, nestedTestOperation2);
+            base.ExecuteWithStrategyInTransaction(
+                testOperation,
+                nestedTestOperation1,
+                nestedTestOperation2
+            );
         }
         finally
         {
@@ -28,11 +32,16 @@ public class ComplexTypesTrackingInMemoryTest : ComplexTypesTrackingTestBase<Com
     protected override async Task ExecuteWithStrategyInTransactionAsync(
         Func<DbContext, Task> testOperation,
         Func<DbContext, Task> nestedTestOperation1 = null,
-        Func<DbContext, Task> nestedTestOperation2 = null)
+        Func<DbContext, Task> nestedTestOperation2 = null
+    )
     {
         try
         {
-            await base.ExecuteWithStrategyInTransactionAsync(testOperation, nestedTestOperation1, nestedTestOperation2);
+            await base.ExecuteWithStrategyInTransactionAsync(
+                testOperation,
+                nestedTestOperation1,
+                nestedTestOperation2
+            );
         }
         finally
         {
@@ -42,11 +51,11 @@ public class ComplexTypesTrackingInMemoryTest : ComplexTypesTrackingTestBase<Com
 
     public class InMemoryFixture : FixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).ConfigureWarnings(w => w.Log(InMemoryEventId.TransactionIgnoredWarning));
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
+                .ConfigureWarnings(w => w.Log(InMemoryEventId.TransactionIgnoredWarning));
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {

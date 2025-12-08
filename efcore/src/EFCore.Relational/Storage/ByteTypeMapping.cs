@@ -34,27 +34,26 @@ public class ByteTypeMapping : RelationalTypeMapping
     /// </summary>
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
-    public ByteTypeMapping(
-        string storeType,
-        DbType? dbType = System.Data.DbType.Byte)
-        : base(storeType, typeof(byte), dbType, jsonValueReaderWriter: JsonByteReaderWriter.Instance)
-    {
-    }
+    public ByteTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Byte)
+        : base(
+            storeType,
+            typeof(byte),
+            dbType,
+            jsonValueReaderWriter: JsonByteReaderWriter.Instance
+        ) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="ByteTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
     protected ByteTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new ByteTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new ByteTypeMapping(parameters);
 }

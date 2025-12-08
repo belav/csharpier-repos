@@ -3,19 +3,25 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.WebAssembly.AppHost;
 
 public static class FileUtils
 {
-    private static readonly string[] s_extensions = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                                                        ? new[] { ".exe", ".cmd", ".bat" }
-                                                        : new[] { "" };
+    private static readonly string[] s_extensions = RuntimeInformation.IsOSPlatform(
+        OSPlatform.Windows
+    )
+        ? new[] { ".exe", ".cmd", ".bat" }
+        : new[] { "" };
 
-    public static bool TryFindExecutableInPATH(string filename, [NotNullWhen(true)] out string? fullPath, [NotNullWhen(false)] out string? errorMessage)
+    public static bool TryFindExecutableInPATH(
+        string filename,
+        [NotNullWhen(true)] out string? fullPath,
+        [NotNullWhen(false)] out string? errorMessage
+    )
     {
         errorMessage = null;
         fullPath = null;
@@ -38,7 +44,10 @@ public static class FileUtils
             return false;
         }
 
-        string[] searchPaths = path.Split(new[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries);
+        string[] searchPaths = path.Split(
+            new[] { Path.PathSeparator },
+            StringSplitOptions.RemoveEmptyEntries
+        );
         if (searchPaths.Length == 0)
         {
             errorMessage = $"No paths set in environment variable PATH";
@@ -62,7 +71,8 @@ public static class FileUtils
         }
 
         // Could not find the path
-        errorMessage = $"Tried to look for {string.Join(", ", filenamesTried)} in PATH: {string.Join(", ", searchPaths)} .";
+        errorMessage =
+            $"Tried to look for {string.Join(", ", filenamesTried)} in PATH: {string.Join(", ", searchPaths)} .";
         return false;
     }
 }

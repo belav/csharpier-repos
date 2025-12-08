@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,251 +32,264 @@
 
 #if MONO_SECURITY_ALIAS
 extern alias MonoSecurity;
-using MonoSecurity::Mono.Security;
-using MonoSecurity::Mono.Security.Cryptography;
 #else
-using Mono.Security;
-using Mono.Security.Cryptography;
+using Mono.Security;using Mono.Security.Cryptography;
 #endif
 
-using System.Text;
+using System.Text;using MonoSecurity::Mono.Security;
+using MonoSecurity::Mono.Security.Cryptography;
 
-namespace System.Security.Cryptography.X509Certificates {
+namespace System.Security.Cryptography.X509Certificates
+{
+    public sealed class X509SubjectKeyIdentifierExtension : X509Extension
+    {
+        internal const string oid = "2.5.29.14";
+        internal const string friendlyName = "Subject Key Identifier";
 
-	public sealed class X509SubjectKeyIdentifierExtension : X509Extension {
+        private byte[] _subjectKeyIdentifier;
+        private string _ski;
+        private AsnDecodeStatus _status;
 
-		internal const string oid = "2.5.29.14";
-		internal const string friendlyName = "Subject Key Identifier";
+        // constructors
 
-		private byte[] _subjectKeyIdentifier;
-		private string _ski;
-		private AsnDecodeStatus _status;
+        public X509SubjectKeyIdentifierExtension()
+        {
+            _oid = new Oid(oid, friendlyName);
+        }
 
-		// constructors
+        public X509SubjectKeyIdentifierExtension(
+            AsnEncodedData encodedSubjectKeyIdentifier,
+            bool critical
+        )
+        {
+            // ignore the Oid provided by encodedKeyUsage (our rules!)
+            _oid = new Oid(oid, friendlyName);
+            _raw = encodedSubjectKeyIdentifier.RawData;
+            base.Critical = critical;
+            _status = Decode(this.RawData);
+        }
 
-		public X509SubjectKeyIdentifierExtension ()
-		{
-			_oid = new Oid (oid, friendlyName);
-		}
+        public X509SubjectKeyIdentifierExtension(byte[] subjectKeyIdentifier, bool critical)
+        {
+            if (subjectKeyIdentifier == null)
+                throw new ArgumentNullException("subjectKeyIdentifier");
+            if (subjectKeyIdentifier.Length == 0)
+                throw new ArgumentException("subjectKeyIdentifier");
 
-		public X509SubjectKeyIdentifierExtension (AsnEncodedData encodedSubjectKeyIdentifier, bool critical)
-		{
-			// ignore the Oid provided by encodedKeyUsage (our rules!)
-			_oid = new Oid (oid, friendlyName);
-			_raw = encodedSubjectKeyIdentifier.RawData;
-			base.Critical = critical;
-			_status = Decode (this.RawData);
-		}
+            _oid = new Oid(oid, friendlyName);
+            base.Critical = critical;
+            _subjectKeyIdentifier = (byte[])subjectKeyIdentifier.Clone();
+            RawData = Encode();
+        }
 
-		public X509SubjectKeyIdentifierExtension (byte[] subjectKeyIdentifier, bool critical)
-		{
-			if (subjectKeyIdentifier == null)
-				throw new ArgumentNullException ("subjectKeyIdentifier");
-			if (subjectKeyIdentifier.Length == 0)
-				throw new ArgumentException ("subjectKeyIdentifier");
+        public X509SubjectKeyIdentifierExtension(string subjectKeyIdentifier, bool critical)
+        {
+            if (subjectKeyIdentifier == null)
+                throw new ArgumentNullException("subjectKeyIdentifier");
+            if (subjectKeyIdentifier.Length < 2)
+                throw new ArgumentException("subjectKeyIdentifier");
 
-			_oid = new Oid (oid, friendlyName);
-			base.Critical = critical;
-			_subjectKeyIdentifier = (byte[])subjectKeyIdentifier.Clone ();
-			RawData = Encode ();
-		}
+            _oid = new Oid(oid, friendlyName);
+            base.Critical = critical;
+            _subjectKeyIdentifier = FromHex(subjectKeyIdentifier);
+            RawData = Encode();
+        }
 
-		public X509SubjectKeyIdentifierExtension (string subjectKeyIdentifier, bool critical)
-		{
-			if (subjectKeyIdentifier == null)
-				throw new ArgumentNullException ("subjectKeyIdentifier");
-			if (subjectKeyIdentifier.Length < 2)
-				throw new ArgumentException ("subjectKeyIdentifier");
+        public X509SubjectKeyIdentifierExtension(PublicKey key, bool critical)
+            : this(key, X509SubjectKeyIdentifierHashAlgorithm.Sha1, critical) { }
 
-			_oid = new Oid (oid, friendlyName);
-			base.Critical = critical;
-			_subjectKeyIdentifier = FromHex (subjectKeyIdentifier);
-			RawData = Encode ();
-		}
+        public X509SubjectKeyIdentifierExtension(
+            PublicKey key,
+            X509SubjectKeyIdentifierHashAlgorithm algorithm,
+            bool critical
+        )
+        {
+            if (key == null)
+                throw new ArgumentNullException("key");
 
-		public X509SubjectKeyIdentifierExtension (PublicKey key, bool critical)
-			: this (key, X509SubjectKeyIdentifierHashAlgorithm.Sha1, critical)
-		{
-		}
+            byte[] pkraw = key.EncodedKeyValue.RawData;
+            // compute SKI
+            switch (algorithm)
+            {
+                // hash of the public key, excluding Tag, Length and unused bits values
+                case X509SubjectKeyIdentifierHashAlgorithm.Sha1:
+                    _subjectKeyIdentifier = SHA1.Create().ComputeHash(pkraw);
+                    break;
+                // 0100 bit pattern followed by the 60 last bit of the hash
+                case X509SubjectKeyIdentifierHashAlgorithm.ShortSha1:
+                    byte[] hash = SHA1.Create().ComputeHash(pkraw);
+                    _subjectKeyIdentifier = new byte[8];
+                    Buffer.BlockCopy(hash, 12, _subjectKeyIdentifier, 0, 8);
+                    _subjectKeyIdentifier[0] = (byte)(0x40 | (_subjectKeyIdentifier[0] & 0x0F));
+                    break;
+                // hash of the public key, including Tag, Length and unused bits values
+                case X509SubjectKeyIdentifierHashAlgorithm.CapiSha1:
+                    // CryptoAPI does that hash on the complete subjectPublicKeyInfo (unlike PKIX)
+                    // http://groups.google.ca/groups?selm=e7RqM%24plCHA.1488%40tkmsftngp02&oe=UTF-8&output=gplain
+                    ASN1 subjectPublicKeyInfo = new ASN1(0x30);
+                    ASN1 algo = subjectPublicKeyInfo.Add(new ASN1(0x30));
+                    algo.Add(new ASN1(CryptoConfig.EncodeOID(key.Oid.Value)));
+                    algo.Add(new ASN1(key.EncodedParameters.RawData));
+                    // add an extra byte for the unused bits (none)
+                    byte[] full = new byte[pkraw.Length + 1];
+                    Buffer.BlockCopy(pkraw, 0, full, 1, pkraw.Length);
+                    subjectPublicKeyInfo.Add(new ASN1(0x03, full));
+                    _subjectKeyIdentifier = SHA1.Create()
+                        .ComputeHash(subjectPublicKeyInfo.GetBytes());
+                    break;
+                default:
+                    throw new ArgumentException("algorithm");
+            }
 
-		public X509SubjectKeyIdentifierExtension (PublicKey key, X509SubjectKeyIdentifierHashAlgorithm algorithm, bool critical)
-		{
-			if (key == null)
-				throw new ArgumentNullException ("key");
+            _oid = new Oid(oid, friendlyName);
+            base.Critical = critical;
+            RawData = Encode();
+        }
 
-			byte[] pkraw = key.EncodedKeyValue.RawData;
-			// compute SKI
-			switch (algorithm) {
-			// hash of the public key, excluding Tag, Length and unused bits values
-			case X509SubjectKeyIdentifierHashAlgorithm.Sha1:
-				_subjectKeyIdentifier = SHA1.Create ().ComputeHash (pkraw);
-				break;
-			// 0100 bit pattern followed by the 60 last bit of the hash
-			case X509SubjectKeyIdentifierHashAlgorithm.ShortSha1:
-				byte[] hash = SHA1.Create ().ComputeHash (pkraw);
-				_subjectKeyIdentifier = new byte [8];
-				Buffer.BlockCopy (hash, 12, _subjectKeyIdentifier, 0, 8);
-				_subjectKeyIdentifier [0] = (byte) (0x40 | (_subjectKeyIdentifier [0] & 0x0F));
-				break;
-			// hash of the public key, including Tag, Length and unused bits values
-			case X509SubjectKeyIdentifierHashAlgorithm.CapiSha1:
-				// CryptoAPI does that hash on the complete subjectPublicKeyInfo (unlike PKIX)
-				// http://groups.google.ca/groups?selm=e7RqM%24plCHA.1488%40tkmsftngp02&oe=UTF-8&output=gplain
-				ASN1 subjectPublicKeyInfo = new ASN1 (0x30);
-				ASN1 algo = subjectPublicKeyInfo.Add (new ASN1 (0x30));
-				algo.Add (new ASN1 (CryptoConfig.EncodeOID (key.Oid.Value)));
-				algo.Add (new ASN1 (key.EncodedParameters.RawData)); 
-				// add an extra byte for the unused bits (none)
-				byte[] full = new byte [pkraw.Length + 1];
-				Buffer.BlockCopy (pkraw, 0, full, 1, pkraw.Length);
-				subjectPublicKeyInfo.Add (new ASN1 (0x03, full));
-				_subjectKeyIdentifier = SHA1.Create ().ComputeHash (subjectPublicKeyInfo.GetBytes ());
-				break;
-			default:
-				throw new ArgumentException ("algorithm");
-			}
+        // properties
 
-			_oid = new Oid (oid, friendlyName);
-			base.Critical = critical;
-			RawData = Encode ();
-		}
+        public string SubjectKeyIdentifier
+        {
+            get
+            {
+                switch (_status)
+                {
+                    case AsnDecodeStatus.Ok:
+                    case AsnDecodeStatus.InformationNotAvailable:
+                        if (_subjectKeyIdentifier != null)
+                            _ski = CryptoConvert.ToHex(_subjectKeyIdentifier);
+                        return _ski;
+                    default:
+                        throw new CryptographicException("Badly encoded extension.");
+                }
+            }
+        }
 
-		// properties
+        // methods
 
-		public string SubjectKeyIdentifier {
-			get {
-				switch (_status) {
-				case AsnDecodeStatus.Ok:
-				case AsnDecodeStatus.InformationNotAvailable:
-					if (_subjectKeyIdentifier != null)
-						_ski = CryptoConvert.ToHex (_subjectKeyIdentifier);
-					return _ski;
-				default:
-					throw new CryptographicException ("Badly encoded extension.");
-				}
-			}
-		}
+        public override void CopyFrom(AsnEncodedData asnEncodedData)
+        {
+            if (asnEncodedData == null)
+                throw new ArgumentNullException("asnEncodedData");
 
-		// methods
+            X509Extension ex = (asnEncodedData as X509Extension);
+            if (ex == null)
+                throw new ArgumentException(Locale.GetText("Wrong type."), "asnEncodedData");
 
-		public override void CopyFrom (AsnEncodedData asnEncodedData)
-		{
-			if (asnEncodedData == null)
-				throw new ArgumentNullException ("asnEncodedData");
+            if (ex._oid == null)
+                _oid = new Oid(oid, friendlyName);
+            else
+                _oid = new Oid(ex._oid);
 
-			X509Extension ex = (asnEncodedData as X509Extension);
-			if (ex == null)
-				throw new ArgumentException (Locale.GetText ("Wrong type."), "asnEncodedData");
+            RawData = ex.RawData;
+            base.Critical = ex.Critical;
+            // and we deal with the rest later
+            _status = Decode(this.RawData);
+        }
 
-			if (ex._oid == null)
-				_oid = new Oid (oid, friendlyName);
-			else 
-				_oid = new Oid (ex._oid);
+        // internal
 
-			RawData = ex.RawData;
-			base.Critical = ex.Critical;
-			// and we deal with the rest later
-			_status = Decode (this.RawData);
-		}
+        static internal byte FromHexChar(char c)
+        {
+            if ((c >= 'a') && (c <= 'f'))
+                return (byte)(c - 'a' + 10);
+            if ((c >= 'A') && (c <= 'F'))
+                return (byte)(c - 'A' + 10);
+            if ((c >= '0') && (c <= '9'))
+                return (byte)(c - '0');
+            return 255; // F
+        }
 
-		// internal
+        internal static byte FromHexChars(char c1, char c2)
+        {
+            byte result = FromHexChar(c1);
+            if (result < 255)
+                result = (byte)((result << 4) | FromHexChar(c2));
+            return result;
+        }
 
-		static internal byte FromHexChar (char c) 
-		{
-			if ((c >= 'a') && (c <= 'f'))
-				return (byte) (c - 'a' + 10);
-			if ((c >= 'A') && (c <= 'F'))
-				return (byte) (c - 'A' + 10);
-			if ((c >= '0') && (c <= '9'))
-				return (byte) (c - '0');
-			return 255;	// F
-		}
+        internal static byte[] FromHex(string hex)
+        {
+            // here we can't use CryptoConvert.FromHex because we
+            // must convert any *illegal* (non hex) 2 characters
+            // to 'FF' and ignore last char on odd length
+            if (hex == null)
+                return null;
 
-		static internal byte FromHexChars (char c1, char c2)
-		{
-			byte result = FromHexChar (c1);
-			if (result < 255)
-				result = (byte) ((result << 4) | FromHexChar (c2));
-			return result;
-		}
+            int length = hex.Length >> 1;
 
-		static internal byte[] FromHex (string hex)
-		{
-			// here we can't use CryptoConvert.FromHex because we
-			// must convert any *illegal* (non hex) 2 characters 
-			// to 'FF' and ignore last char on odd length
-			if (hex == null)
-				return null;
+            byte[] result = new byte[length]; // + (odd ? 1 : 0)];
+            int n = 0;
+            int i = 0;
+            while (n < length)
+            {
+                result[n++] = FromHexChars(hex[i++], hex[i++]);
+            }
+            return result;
+        }
 
-			int length = hex.Length >> 1;
+        internal AsnDecodeStatus Decode(byte[] extension)
+        {
+            if ((extension == null) || (extension.Length == 0))
+                return AsnDecodeStatus.BadAsn;
+            _ski = String.Empty;
+            if (extension[0] != 0x04)
+                return AsnDecodeStatus.BadTag;
+            if (extension.Length == 2)
+                return AsnDecodeStatus.InformationNotAvailable;
+            if (extension.Length < 3)
+                return AsnDecodeStatus.BadLength;
 
-			byte[] result = new byte [length]; // + (odd ? 1 : 0)];
-			int n = 0;
-			int i = 0;
-			while (n < length) {
-				result [n++] = FromHexChars (hex [i++], hex [i++]);
-			}
-			return result;
-		}
+            try
+            {
+                ASN1 ex = new ASN1(extension);
+                _subjectKeyIdentifier = ex.Value;
+            }
+            catch
+            {
+                return AsnDecodeStatus.BadAsn;
+            }
 
-		internal AsnDecodeStatus Decode (byte[] extension)
-		{
-			if ((extension == null) || (extension.Length == 0))
-				return AsnDecodeStatus.BadAsn;
-			_ski = String.Empty;
-			if (extension [0] != 0x04)
-				return AsnDecodeStatus.BadTag;
-			if (extension.Length == 2)
-				return AsnDecodeStatus.InformationNotAvailable;
-			if (extension.Length < 3)
-				return AsnDecodeStatus.BadLength;
+            return AsnDecodeStatus.Ok;
+        }
 
-			try {
-				ASN1 ex = new ASN1 (extension);
-				_subjectKeyIdentifier = ex.Value;
-			}
-			catch {
-				return AsnDecodeStatus.BadAsn;
-			}
+        internal byte[] Encode()
+        {
+            ASN1 ex = new ASN1(0x04, _subjectKeyIdentifier);
+            return ex.GetBytes();
+        }
 
-			return AsnDecodeStatus.Ok;
-		}
+        internal override string ToString(bool multiLine)
+        {
+            switch (_status)
+            {
+                case AsnDecodeStatus.BadAsn:
+                    return String.Empty;
+                case AsnDecodeStatus.BadTag:
+                case AsnDecodeStatus.BadLength:
+                    return FormatUnkownData(_raw);
+                case AsnDecodeStatus.InformationNotAvailable:
+                    return "Information Not Available";
+            }
 
-		internal byte[] Encode ()
-		{
-			ASN1 ex = new ASN1 (0x04, _subjectKeyIdentifier);
-			return ex.GetBytes ();
-		}
+            if (_oid.Value != oid)
+                return String.Format("Unknown Key Usage ({0})", _oid.Value);
 
-		internal override string ToString (bool multiLine)
-		{
-			switch (_status) {
-			case AsnDecodeStatus.BadAsn:
-				return String.Empty;
-			case AsnDecodeStatus.BadTag:
-			case AsnDecodeStatus.BadLength:
-				return FormatUnkownData (_raw);
-			case AsnDecodeStatus.InformationNotAvailable:
-				return "Information Not Available";
-			}
+            StringBuilder sb = new StringBuilder();
 
-			if (_oid.Value != oid)
-				return String.Format ("Unknown Key Usage ({0})", _oid.Value);
+            for (int i = 0; i < _subjectKeyIdentifier.Length; i++)
+            {
+                sb.Append(_subjectKeyIdentifier[i].ToString("x2"));
+                if (i != _subjectKeyIdentifier.Length - 1)
+                    sb.Append(" ");
+            }
 
-			StringBuilder sb = new StringBuilder ();
+            if (multiLine)
+                sb.Append(Environment.NewLine);
 
-			for (int i=0; i < _subjectKeyIdentifier.Length; i++) {
-				sb.Append (_subjectKeyIdentifier [i].ToString ("x2"));
-				if (i != _subjectKeyIdentifier.Length - 1)
-					sb.Append (" ");
-			}
-
-			if (multiLine)
-				sb.Append (Environment.NewLine);
-
-			return sb.ToString ();
-		}
-	}
+            return sb.ToString();
+        }
+    }
 }
 
 #endif

@@ -11,6 +11,6 @@ namespace System.Activities
     {
         None = 0X00,
         ReadOnly = 0X01,
-        Mapped = 0X02        
+        Mapped = 0X02,
     }
 }

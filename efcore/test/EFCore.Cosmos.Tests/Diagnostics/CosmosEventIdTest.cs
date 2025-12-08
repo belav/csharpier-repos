@@ -15,17 +15,21 @@ public class CosmosEventIdTest : EventIdTestBase
         var fakeFactories = new Dictionary<Type, Func<object>>
         {
             {
-                typeof(CosmosSqlQuery), () => new CosmosSqlQuery(
-                    "Some SQL...",
-                    new[] { new SqlParameter("P1", "V1"), new SqlParameter("P2", "V2") })
+                typeof(CosmosSqlQuery),
+                () =>
+                    new CosmosSqlQuery(
+                        "Some SQL...",
+                        new[] { new SqlParameter("P1", "V1"), new SqlParameter("P2", "V2") }
+                    )
             },
-            { typeof(string), () => "Fake" }
+            { typeof(string), () => "Fake" },
         };
 
         TestEventLogging(
             typeof(CosmosEventId),
             typeof(CosmosLoggerExtensions),
             new CosmosLoggingDefinitions(),
-            fakeFactories);
+            fakeFactories
+        );
     }
 }

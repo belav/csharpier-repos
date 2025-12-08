@@ -19,10 +19,7 @@ namespace System.Net.Http
 
         private static Uri GetProxyUri(string scheme, CFProxy proxy)
         {
-            var uriBuilder = new UriBuilder(
-                scheme,
-                proxy.HostName,
-                proxy.PortNumber);
+            var uriBuilder = new UriBuilder(scheme, proxy.HostName, proxy.PortNumber);
 
             // TODO https://github.com/dotnet/runtime/issues/24799 - Credentials are not propagated
 
@@ -35,7 +32,11 @@ namespace System.Net.Http
             CFRunLoopRef runLoop = CFRunLoopGetCurrent();
 
             // Callback that will be called after executing the configuration script
-            CFProxyAutoConfigurationResultCallback cb = (IntPtr client, IntPtr proxyListHandle, IntPtr error) =>
+            CFProxyAutoConfigurationResultCallback cb = (
+                IntPtr client,
+                IntPtr proxyListHandle,
+                IntPtr error
+            ) =>
             {
                 if (proxyListHandle != IntPtr.Zero)
                 {
@@ -45,10 +46,18 @@ namespace System.Net.Http
                         for (int i = 0; i < proxyCount; i++)
                         {
                             IntPtr proxyValue = CFArrayGetValueAtIndex(proxyList, i);
-                            using (SafeCFDictionaryHandle proxyDict = new SafeCFDictionaryHandle(proxyValue, false))
+                            using (
+                                SafeCFDictionaryHandle proxyDict = new SafeCFDictionaryHandle(
+                                    proxyValue,
+                                    false
+                                )
+                            )
                             {
                                 CFProxy proxy = new CFProxy(proxyDict);
-                                if (proxy.ProxyType == CFProxy.kCFProxyTypeHTTP || proxy.ProxyType == CFProxy.kCFProxyTypeHTTPS)
+                                if (
+                                    proxy.ProxyType == CFProxy.kCFProxyTypeHTTP
+                                    || proxy.ProxyType == CFProxy.kCFProxyTypeHTTPS
+                                )
                                 {
                                     result = GetProxyUri("http", proxy);
                                     break;
@@ -62,9 +71,19 @@ namespace System.Net.Http
 
             CFStreamClientContext clientContext = default;
             CFRunLoopSourceRef loopSource =
-                proxy.ProxyType == CFProxy.kCFProxyTypeAutoConfigurationURL ?
-                CFNetworkExecuteProxyAutoConfigurationURL(proxy.AutoConfigurationURL, cfurl, cb, ref clientContext) :
-                CFNetworkExecuteProxyAutoConfigurationScript(proxy.AutoConfigurationJavaScript, cfurl, cb, ref clientContext);
+                proxy.ProxyType == CFProxy.kCFProxyTypeAutoConfigurationURL
+                    ? CFNetworkExecuteProxyAutoConfigurationURL(
+                        proxy.AutoConfigurationURL,
+                        cfurl,
+                        cb,
+                        ref clientContext
+                    )
+                    : CFNetworkExecuteProxyAutoConfigurationScript(
+                        proxy.AutoConfigurationJavaScript,
+                        cfurl,
+                        cb,
+                        ref clientContext
+                    );
 
             using (var mode = CFStringCreateWithCString(typeof(MacProxy).FullName!))
             {
@@ -83,23 +102,36 @@ namespace System.Net.Http
         {
             using (SafeCFDictionaryHandle systemProxySettings = CFNetworkCopySystemProxySettings())
             using (SafeCreateHandle cfurl = CFURLCreateWithString(targetUri.AbsoluteUri))
-            using (SafeCFArrayHandle proxies = CFNetworkCopyProxiesForURL(cfurl, systemProxySettings))
+            using (
+                SafeCFArrayHandle proxies = CFNetworkCopyProxiesForURL(cfurl, systemProxySettings)
+            )
             {
                 long proxyCount = CFArrayGetCount(proxies);
                 for (int i = 0; i < proxyCount; i++)
                 {
                     IntPtr proxyValue = CFArrayGetValueAtIndex(proxies, i);
-                    using (SafeCFDictionaryHandle proxyDict = new SafeCFDictionaryHandle(proxyValue, false))
+                    using (
+                        SafeCFDictionaryHandle proxyDict = new SafeCFDictionaryHandle(
+                            proxyValue,
+                            false
+                        )
+                    )
                     {
                         CFProxy proxy = new CFProxy(proxyDict);
 
-                        if (proxy.ProxyType == CFProxy.kCFProxyTypeAutoConfigurationURL || proxy.ProxyType == CFProxy.kCFProxyTypeAutoConfigurationJavaScript)
+                        if (
+                            proxy.ProxyType == CFProxy.kCFProxyTypeAutoConfigurationURL
+                            || proxy.ProxyType == CFProxy.kCFProxyTypeAutoConfigurationJavaScript
+                        )
                         {
                             Uri? result = ExecuteProxyAutoConfiguration(cfurl, proxy);
                             if (result != null)
                                 return result;
                         }
-                        else if (proxy.ProxyType == CFProxy.kCFProxyTypeHTTP || proxy.ProxyType == CFProxy.kCFProxyTypeHTTPS)
+                        else if (
+                            proxy.ProxyType == CFProxy.kCFProxyTypeHTTP
+                            || proxy.ProxyType == CFProxy.kCFProxyTypeHTTPS
+                        )
                         {
                             return GetProxyUri("http", proxy);
                         }

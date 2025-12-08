@@ -27,10 +27,13 @@ namespace System.Web.Http.Results
             using (HttpRequestMessage request = CreateRequest())
             {
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() =>
-                {
-                    CreateProductUnderTest(content, serializerSettings, encoding, request);
-                }, "serializerSettings");
+                Assert.ThrowsArgumentNull(
+                    () =>
+                    {
+                        CreateProductUnderTest(content, serializerSettings, encoding, request);
+                    },
+                    "serializerSettings"
+                );
             }
         }
 
@@ -45,10 +48,13 @@ namespace System.Web.Http.Results
             using (HttpRequestMessage request = CreateRequest())
             {
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() =>
-                {
-                    CreateProductUnderTest(content, serializerSettings, encoding, request);
-                }, "encoding");
+                Assert.ThrowsArgumentNull(
+                    () =>
+                    {
+                        CreateProductUnderTest(content, serializerSettings, encoding, request);
+                    },
+                    "encoding"
+                );
             }
         }
 
@@ -62,10 +68,13 @@ namespace System.Web.Http.Results
             HttpRequestMessage request = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() =>
-            {
-                CreateProductUnderTest(content, serializerSettings, encoding, request);
-            }, "request");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CreateProductUnderTest(content, serializerSettings, encoding, request);
+                },
+                "request"
+            );
         }
 
         [Fact]
@@ -78,8 +87,12 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                JsonResult<object> result = CreateProductUnderTest(expectedContent, serializerSettings, encoding,
-                    request);
+                JsonResult<object> result = CreateProductUnderTest(
+                    expectedContent,
+                    serializerSettings,
+                    encoding,
+                    request
+                );
 
                 // Act
                 object content = result.Content;
@@ -99,8 +112,12 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                JsonResult<object> result = CreateProductUnderTest(content, expectedSerializerSettings, encoding,
-                    request);
+                JsonResult<object> result = CreateProductUnderTest(
+                    content,
+                    expectedSerializerSettings,
+                    encoding,
+                    request
+                );
 
                 // Act
                 JsonSerializerSettings serializerSettings = result.SerializerSettings;
@@ -120,8 +137,12 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                JsonResult<object> result = CreateProductUnderTest(content, serializerSettings, expectedEncoding,
-                    request);
+                JsonResult<object> result = CreateProductUnderTest(
+                    content,
+                    serializerSettings,
+                    expectedEncoding,
+                    request
+                );
 
                 // Act
                 Encoding encoding = result.Encoding;
@@ -141,8 +162,12 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                JsonResult<object> result = CreateProductUnderTest(content, serializerSettings, encoding,
-                    expectedRequest);
+                JsonResult<object> result = CreateProductUnderTest(
+                    content,
+                    serializerSettings,
+                    encoding,
+                    expectedRequest
+                );
 
                 // Act
                 HttpRequestMessage request = result.Request;
@@ -162,8 +187,12 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                IHttpActionResult result = CreateProductUnderTest(content, serializerSettings, encoding,
-                    expectedRequest);
+                IHttpActionResult result = CreateProductUnderTest(
+                    content,
+                    serializerSettings,
+                    encoding,
+                    expectedRequest
+                );
 
                 // Act
                 Task<HttpResponseMessage> task = result.ExecuteAsync(CancellationToken.None);
@@ -177,11 +206,19 @@ namespace System.Web.Http.Results
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                     Assert.NotNull(response.Content);
                     Assert.NotNull(response.Content.Headers.ContentType);
-                    Assert.Equal("application/json", response.Content.Headers.ContentType.MediaType);
+                    Assert.Equal(
+                        "application/json",
+                        response.Content.Headers.ContentType.MediaType
+                    );
                     Assert.Equal(encoding.WebName, response.Content.Headers.ContentType.CharSet);
                     Assert.IsType<ByteArrayContent>(response.Content);
                     StringBuilder expectedBuilder = new StringBuilder();
-                    using (TextWriter textWriter = new StringWriter(expectedBuilder, CultureInfo.InvariantCulture))
+                    using (
+                        TextWriter textWriter = new StringWriter(
+                            expectedBuilder,
+                            CultureInfo.InvariantCulture
+                        )
+                    )
                     {
                         JsonSerializer serializer = JsonSerializer.Create(serializerSettings);
 
@@ -195,7 +232,10 @@ namespace System.Web.Http.Results
                     byte[] contents = await response.Content.ReadAsByteArrayAsync();
                     Assert.Equal(expectedContents, contents);
                     Assert.True(response.Content.Headers.ContentLength.HasValue);
-                    Assert.Equal((long)expectedContents.Length, response.Content.Headers.ContentLength.Value);
+                    Assert.Equal(
+                        (long)expectedContents.Length,
+                        response.Content.Headers.ContentLength.Value
+                    );
                     Assert.Same(expectedRequest, response.RequestMessage);
                 }
             }
@@ -211,10 +251,13 @@ namespace System.Web.Http.Results
             ApiController controller = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() =>
-            {
-                CreateProductUnderTest(content, serializerSettings, encoding, controller);
-            }, "controller");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CreateProductUnderTest(content, serializerSettings, encoding, controller);
+                },
+                "controller"
+            );
         }
 
         [Fact]
@@ -229,7 +272,12 @@ namespace System.Web.Http.Results
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
                 controller.Request = expectedRequest;
-                IHttpActionResult result = CreateProductUnderTest(content, serializerSettings, encoding, controller);
+                IHttpActionResult result = CreateProductUnderTest(
+                    content,
+                    serializerSettings,
+                    encoding,
+                    controller
+                );
 
                 // Act
                 Task<HttpResponseMessage> task = result.ExecuteAsync(CancellationToken.None);
@@ -243,11 +291,19 @@ namespace System.Web.Http.Results
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                     Assert.NotNull(response.Content);
                     Assert.NotNull(response.Content.Headers.ContentType);
-                    Assert.Equal("application/json", response.Content.Headers.ContentType.MediaType);
+                    Assert.Equal(
+                        "application/json",
+                        response.Content.Headers.ContentType.MediaType
+                    );
                     Assert.Equal(encoding.WebName, response.Content.Headers.ContentType.CharSet);
                     Assert.IsType<ByteArrayContent>(response.Content);
                     StringBuilder expectedBuilder = new StringBuilder();
-                    using (TextWriter textWriter = new StringWriter(expectedBuilder, CultureInfo.InvariantCulture))
+                    using (
+                        TextWriter textWriter = new StringWriter(
+                            expectedBuilder,
+                            CultureInfo.InvariantCulture
+                        )
+                    )
                     {
                         JsonSerializer serializer = JsonSerializer.Create(serializerSettings);
 
@@ -261,7 +317,10 @@ namespace System.Web.Http.Results
                     byte[] contents = await response.Content.ReadAsByteArrayAsync();
                     Assert.Equal(expectedContents, contents);
                     Assert.True(response.Content.Headers.ContentLength.HasValue);
-                    Assert.Equal((long)expectedContents.Length, response.Content.Headers.ContentLength.Value);
+                    Assert.Equal(
+                        (long)expectedContents.Length,
+                        response.Content.Headers.ContentLength.Value
+                    );
                     Assert.Same(expectedRequest, response.RequestMessage);
                 }
             }
@@ -275,7 +334,12 @@ namespace System.Web.Http.Results
             JsonSerializerSettings serializerSettings = CreateSerializerSettings();
             Encoding encoding = CreateDummyEncoding();
             ApiController controller = CreateController();
-            JsonResult<object> result = CreateProductUnderTest(content, serializerSettings, encoding, controller);
+            JsonResult<object> result = CreateProductUnderTest(
+                content,
+                serializerSettings,
+                encoding,
+                controller
+            );
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
@@ -297,7 +361,12 @@ namespace System.Web.Http.Results
             JsonSerializerSettings serializerSettings = CreateSerializerSettings();
             Encoding encoding = CreateDummyEncoding();
             ApiController controller = CreateController();
-            JsonResult<object> result = CreateProductUnderTest(content, serializerSettings, encoding, controller);
+            JsonResult<object> result = CreateProductUnderTest(
+                content,
+                serializerSettings,
+                encoding,
+                controller
+            );
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
@@ -326,11 +395,21 @@ namespace System.Web.Http.Results
             Encoding encoding = CreateDummyEncoding();
             ApiController controller = CreateController();
             Assert.Null(controller.Request);
-            JsonResult<object> result = CreateProductUnderTest(content, serializerSettings, encoding, controller);
+            JsonResult<object> result = CreateProductUnderTest(
+                content,
+                serializerSettings,
+                encoding,
+                controller
+            );
 
             // Act & Assert
-            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() =>
-                { HttpRequestMessage ignore = result.Request; }, "ApiController.Request must not be null.");
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    HttpRequestMessage ignore = result.Request;
+                },
+                "ApiController.Request must not be null."
+            );
         }
 
         [Fact]
@@ -343,7 +422,11 @@ namespace System.Web.Http.Results
             ApiController controller = CreateController();
 
             // Act
-            JsonResult<object> result = controller.Json(expectedContent, expectedSerializerSettings, expectedEncoding);
+            JsonResult<object> result = controller.Json(
+                expectedContent,
+                expectedSerializerSettings,
+                expectedEncoding
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -367,14 +450,19 @@ namespace System.Web.Http.Results
             ApiController controller = CreateController();
 
             // Act
-            JsonResult<object> result = controller.Json(expectedContent, expectedSerializerSettings);
+            JsonResult<object> result = controller.Json(
+                expectedContent,
+                expectedSerializerSettings
+            );
 
             // Assert
             Assert.NotNull(result);
             Assert.Same(expectedContent, result.Content);
             Assert.Same(expectedSerializerSettings, result.SerializerSettings);
-            Encoding expectedEncoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false,
-                throwOnInvalidBytes: true);
+            Encoding expectedEncoding = new UTF8Encoding(
+                encoderShouldEmitUTF8Identifier: false,
+                throwOnInvalidBytes: true
+            );
             Assert.Equal(expectedEncoding, result.Encoding);
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
@@ -398,8 +486,10 @@ namespace System.Web.Http.Results
             Assert.NotNull(result);
             Assert.Same(expectedContent, result.Content);
             Assert.NotNull(result.SerializerSettings);
-            Encoding expectedEncoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false,
-                throwOnInvalidBytes: true);
+            Encoding expectedEncoding = new UTF8Encoding(
+                encoderShouldEmitUTF8Identifier: false,
+                throwOnInvalidBytes: true
+            );
             Assert.Equal(expectedEncoding, result.Encoding);
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
@@ -429,14 +519,22 @@ namespace System.Web.Http.Results
             return new ASCIIEncoding();
         }
 
-        private static JsonResult<T> CreateProductUnderTest<T>(T content, JsonSerializerSettings serializerSettings,
-            Encoding encoding, HttpRequestMessage request)
+        private static JsonResult<T> CreateProductUnderTest<T>(
+            T content,
+            JsonSerializerSettings serializerSettings,
+            Encoding encoding,
+            HttpRequestMessage request
+        )
         {
             return new JsonResult<T>(content, serializerSettings, encoding, request);
         }
 
-        private static JsonResult<T> CreateProductUnderTest<T>(T content, JsonSerializerSettings serializerSettings,
-            Encoding encoding, ApiController controller)
+        private static JsonResult<T> CreateProductUnderTest<T>(
+            T content,
+            JsonSerializerSettings serializerSettings,
+            Encoding encoding,
+            ApiController controller
+        )
         {
             return new JsonResult<T>(content, serializerSettings, encoding, controller);
         }
@@ -451,8 +549,6 @@ namespace System.Web.Http.Results
             return new JsonSerializerSettings();
         }
 
-        private class FakeController : ApiController
-        {
-        }
+        private class FakeController : ApiController { }
     }
 }

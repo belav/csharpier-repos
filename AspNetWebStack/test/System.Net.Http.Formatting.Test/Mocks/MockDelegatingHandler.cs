@@ -29,7 +29,10 @@ namespace System.Net.Http.Mocks
 
         public Exception SendAsyncException { get; private set; }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             WasInvoked = true;
             Request = request;

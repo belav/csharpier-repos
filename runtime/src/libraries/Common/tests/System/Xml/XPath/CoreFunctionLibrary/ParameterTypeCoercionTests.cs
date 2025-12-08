@@ -25,8 +25,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"count(string('book'))";
 
-            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -43,8 +47,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"count(true())";
 
-            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -61,8 +69,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"count(10)";
 
-            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -79,8 +91,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"count()";
 
-            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -98,7 +114,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"count(//foo)";
             var expected = 0d;
 
-            Utils.XPathNumberTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNumberTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -115,8 +137,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"local-name(string('book'))";
 
-            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -133,8 +159,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"local-name(true())";
 
-            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -151,8 +181,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"local-name(10)";
 
-            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -170,7 +204,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"local-name()";
             var expected = @"bookstore";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -188,7 +228,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"local-name(//foo)";
             var expected = @"";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -205,8 +251,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"name(string('book'))";
 
-            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -223,8 +273,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"name(true())";
 
-            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -241,8 +295,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"name(10)";
 
-            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -260,7 +318,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"name(//foo)";
             var expected = @"";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -277,8 +341,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"namespace-uri(string('book'))";
 
-            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -295,8 +363,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"namespace-uri(true())";
 
-            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -313,8 +385,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"namespace-uri(10)";
 
-            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -332,7 +408,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"namespace-uri(//foo)";
             var expected = @"";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -349,8 +431,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"position(string('book'))";
 
-            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -367,8 +453,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"position(true())";
 
-            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -385,8 +475,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"position(10)";
 
-            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -403,8 +497,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"position(//foo)";
 
-            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -421,8 +519,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"last(string('book'))";
 
-            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -439,8 +541,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"last(true())";
 
-            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -457,8 +563,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"last(10)";
 
-            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -475,8 +585,12 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var startingNodePath = "/bookstore";
             var testExpression = @"last(//foo)";
 
-            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathNumberTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
     }
 }

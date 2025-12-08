@@ -11,16 +11,24 @@ namespace Microsoft.Diagnostics.NETCore.Client
     internal enum EventPipeSerializationFormat
     {
         NetPerf,
-        NetTrace
+        NetTrace,
     }
 
     internal class EventPipeSessionConfiguration
     {
-        public EventPipeSessionConfiguration(int circularBufferSizeMB, EventPipeSerializationFormat format, IEnumerable<EventPipeProvider> providers, bool requestRundown=true)
+        public EventPipeSessionConfiguration(
+            int circularBufferSizeMB,
+            EventPipeSerializationFormat format,
+            IEnumerable<EventPipeProvider> providers,
+            bool requestRundown = true
+        )
         {
             if (circularBufferSizeMB == 0)
                 throw new ArgumentException($"Buffer size cannot be zero.");
-            if (format != EventPipeSerializationFormat.NetPerf && format != EventPipeSerializationFormat.NetTrace)
+            if (
+                format != EventPipeSerializationFormat.NetPerf
+                && format != EventPipeSerializationFormat.NetTrace
+            )
                 throw new ArgumentException("Unrecognized format");
             if (providers == null)
                 throw new ArgumentNullException(nameof(providers));
@@ -65,7 +73,5 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
             return serializedData;
         }
-
-
     }
 }

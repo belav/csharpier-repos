@@ -8,13 +8,13 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.Metadata.Edm;
+using System.Data.Objects;
 using System.Linq;
 using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data.Objects;
-using System.ComponentModel;
-using System.Data.Metadata.Edm;
 
 namespace System.Web.UI.WebControls
 {
@@ -23,7 +23,10 @@ namespace System.Web.UI.WebControls
         private readonly EntityDataSource _dataSource;
         private readonly DataSourceSelectArguments _selectArguments;
 
-        internal EntityDataSourceSelectingEventArgs(EntityDataSource dataSource, DataSourceSelectArguments selectArgs)
+        internal EntityDataSourceSelectingEventArgs(
+            EntityDataSource dataSource,
+            DataSourceSelectArguments selectArgs
+        )
         {
             _dataSource = dataSource;
             _selectArguments = selectArgs;
@@ -38,6 +41,5 @@ namespace System.Web.UI.WebControls
         {
             get { return _selectArguments; }
         }
-
-     }
+    }
 }

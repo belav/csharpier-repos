@@ -3,12 +3,11 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class FieldMappingInMemoryTest : FieldMappingTestBase<FieldMappingInMemoryTest.FieldMappingInMemoryFixture>
+public class FieldMappingInMemoryTest
+    : FieldMappingTestBase<FieldMappingInMemoryTest.FieldMappingInMemoryFixture>
 {
     public FieldMappingInMemoryTest(FieldMappingInMemoryFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     protected override void Update<TBlog>(string navigation)
     {
@@ -19,10 +18,10 @@ public class FieldMappingInMemoryTest : FieldMappingTestBase<FieldMappingInMemor
 
     public class FieldMappingInMemoryFixture : FieldMappingFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).ConfigureWarnings(w => w.Log(InMemoryEventId.TransactionIgnoredWarning));
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
+                .ConfigureWarnings(w => w.Log(InMemoryEventId.TransactionIgnoredWarning));
     }
 }

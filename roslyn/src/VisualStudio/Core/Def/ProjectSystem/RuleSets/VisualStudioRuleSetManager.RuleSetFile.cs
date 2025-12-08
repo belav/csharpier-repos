@@ -62,7 +62,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             // so we can surface the error later, and subscribe to file change notifications
                             // so that we'll automatically reload the file if the user can fix the issue.
                             _optionsRead = true;
-                            _specificDiagnosticOptions = ImmutableDictionary<string, ReportDiagnostic>.Empty;
+                            _specificDiagnosticOptions = ImmutableDictionary<
+                                string,
+                                ReportDiagnostic
+                            >.Empty;
                             _exception = e;
 
                             includes = ImmutableArray.Create(FilePath);
@@ -137,7 +140,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                                 specificDiagnosticOptions.Add(rule.Key, rule.Value);
                             }
 
-                            _specificDiagnosticOptions = specificDiagnosticOptions.ToImmutableDictionary();
+                            _specificDiagnosticOptions =
+                                specificDiagnosticOptions.ToImmutableDictionary();
                         }
                         catch (Exception e)
                         {
@@ -184,7 +188,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 _ruleSetManager._threadingContext.JoinableTaskFactory.RunAsync(async () =>
                 {
                     using var _ = _ruleSetManager._listener.BeginAsyncOperation("IncludeUpdated");
-                    await _ruleSetManager._threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, _disposalToken);
+                    await _ruleSetManager._threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                        alwaysYield: true,
+                        _disposalToken
+                    );
                     IncludeUpdateCore();
                 });
             }

@@ -11,6 +11,6 @@ namespace System.Security.Cryptography
         /// <summary>
         ///     Use the format described in RFC 4050
         /// </summary>
-        Rfc4050
+        Rfc4050,
     }
 }

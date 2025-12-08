@@ -10,6 +10,6 @@ namespace Microsoft.TestCommon.Types
     {
         One = 0x1,
         Two = 0x2,
-        Four = 0x4
+        Four = 0x4,
     }
 }

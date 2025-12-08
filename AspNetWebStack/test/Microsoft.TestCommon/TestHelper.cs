@@ -13,10 +13,16 @@ namespace System.Web.TestUtil
         {
             get
             {
-                bool englishBuild = String.Equals(CultureInfo.CurrentCulture.TwoLetterISOLanguageName, "en",
-                                                  StringComparison.OrdinalIgnoreCase);
-                bool englishOS = String.Equals(CultureInfo.CurrentCulture.TwoLetterISOLanguageName, "en",
-                                               StringComparison.OrdinalIgnoreCase);
+                bool englishBuild = String.Equals(
+                    CultureInfo.CurrentCulture.TwoLetterISOLanguageName,
+                    "en",
+                    StringComparison.OrdinalIgnoreCase
+                );
+                bool englishOS = String.Equals(
+                    CultureInfo.CurrentCulture.TwoLetterISOLanguageName,
+                    "en",
+                    StringComparison.OrdinalIgnoreCase
+                );
                 return englishBuild && englishOS;
             }
         }

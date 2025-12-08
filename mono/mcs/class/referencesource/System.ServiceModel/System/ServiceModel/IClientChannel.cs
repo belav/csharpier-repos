@@ -5,11 +5,11 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.Net.Security;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security.Tokens;
 
     public interface IClientChannel : IContextChannel, IDisposable

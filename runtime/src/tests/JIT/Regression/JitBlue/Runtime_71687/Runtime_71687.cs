@@ -41,8 +41,23 @@ public class Runtime_71687
         Test(ref (new Struct8[10])[0], 5);
     }
 
-    private struct Struct1 { public byte Field; }
-    private struct Struct2 { public short Field; }
-    private struct Struct4 { public int Field; }
-    private struct Struct8 { public long Field; }
+    private struct Struct1
+    {
+        public byte Field;
+    }
+
+    private struct Struct2
+    {
+        public short Field;
+    }
+
+    private struct Struct4
+    {
+        public int Field;
+    }
+
+    private struct Struct8
+    {
+        public long Field;
+    }
 }

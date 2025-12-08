@@ -15,59 +15,61 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
     [Fact]
     public async Task TestNotAtRoot_Interactive()
     {
-        await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+        await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
     }
 
     [Fact]
     public async Task TestNotAfterClass_Interactive()
     {
-        await VerifyAbsenceAsync(SourceCodeKind.Script,
+        await VerifyAbsenceAsync(
+            SourceCodeKind.Script,
             """
             class C { }
             $$
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TestNotAfterGlobalStatement_Interactive()
     {
-        await VerifyAbsenceAsync(SourceCodeKind.Script,
+        await VerifyAbsenceAsync(
+            SourceCodeKind.Script,
             """
             System.Console.WriteLine();
             $$
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
     {
-        await VerifyAbsenceAsync(SourceCodeKind.Script,
+        await VerifyAbsenceAsync(
+            SourceCodeKind.Script,
             """
             int i = 0;
             $$
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TestNotInUsingAlias()
     {
-        await VerifyAbsenceAsync(
-@"using Goo = $$");
+        await VerifyAbsenceAsync(@"using Goo = $$");
     }
 
     [Fact]
     public async Task TestNotInGlobalUsingAlias()
     {
-        await VerifyAbsenceAsync(
-@"global using Goo = $$");
+        await VerifyAbsenceAsync(@"global using Goo = $$");
     }
 
     [Fact]
     public async Task TestNotInEmptyStatement()
     {
-        await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+        await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
     }
 
     [Fact]
@@ -77,7 +79,8 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
             """
             class C {
                 [$$
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -88,7 +91,8 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
             class C {
                 [Goo]
                 [$$
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -100,7 +104,8 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
                 void Goo() {
                 }
                 [$$
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -113,7 +118,8 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
                     get;
                 }
                 [$$
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -124,7 +130,8 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
             class C {
                 int Goo;
                 [$$
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -135,14 +142,14 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
             class C {
                 event Action<int> Goo;
                 [$$
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TestNotInOuterAttribute()
     {
-        await VerifyAbsenceAsync(
-@"[$$");
+        await VerifyAbsenceAsync(@"[$$");
     }
 
     [Fact]
@@ -152,7 +159,8 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
             """
             class C {
                 void Goo([$$
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -162,7 +170,8 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
             """
             class C {
                 int Goo { [$$
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -172,7 +181,8 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
             """
             class C {
                 int Goo { get { } [$$
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -182,7 +192,8 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
             """
             class C {
                 event Action<int> Goo { [$$
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -192,14 +203,14 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
             """
             class C {
                 event Action<int> Goo { add { } [$$
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TestNotInTypeParameters()
     {
-        await VerifyAbsenceAsync(
-@"class C<[$$");
+        await VerifyAbsenceAsync(@"class C<[$$");
     }
 
     [Fact]
@@ -209,7 +220,8 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
             """
             interface I {
                 [$$
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -219,7 +231,8 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
             """
             struct S {
                 [$$
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -229,35 +242,41 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
             """
             enum E {
                 [$$
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TestPrimaryConstructor1()
     {
-        await VerifyKeywordAsync("""
+        await VerifyKeywordAsync(
+            """
             [$$
             class C()
             {
             }
-            """);
+            """
+        );
     }
 
     [Fact]
     public async Task TestPrimaryConstructor2()
     {
-        await VerifyKeywordAsync("""
+        await VerifyKeywordAsync(
+            """
             [$$
             struct C()
             {
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70077")]
     public async Task TestLocalFunction()
     {
-        await VerifyKeywordAsync("""
+        await VerifyKeywordAsync(
+            """
             class C
             {
                 void M()
@@ -268,6 +287,7 @@ public class MethodKeywordRecommenderTests : KeywordRecommenderTests
                     }
                 }
             }
-            """);
+            """
+        );
     }
 }

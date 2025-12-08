@@ -13,10 +13,10 @@ namespace System.Web.Http.Dispatcher
     /// <summary>
     /// Default implementation of an <see cref="IHttpControllerActivator"/>.
     /// A different implementation can be registered via the <see cref="T:System.Web.Http.Services.DependencyResolver"/>.
-    /// We optimize for the case where we have an <see cref="Controllers.ApiControllerActionInvoker"/> 
+    /// We optimize for the case where we have an <see cref="Controllers.ApiControllerActionInvoker"/>
     /// instance per <see cref="HttpControllerDescriptor"/> instance but can support cases where there are
-    /// many <see cref="HttpControllerDescriptor"/> instances for one <see cref="System.Web.Http.Controllers.ApiControllerActionInvoker"/> 
-    /// as well. In the latter case the lookup is slightly slower because it goes through the 
+    /// many <see cref="HttpControllerDescriptor"/> instances for one <see cref="System.Web.Http.Controllers.ApiControllerActionInvoker"/>
+    /// as well. In the latter case the lookup is slightly slower because it goes through the
     /// <see cref="P:HttpControllerDescriptor.Properties"/> dictionary.
     /// </summary>
     public class DefaultHttpControllerActivator : IHttpControllerActivator
@@ -31,7 +31,11 @@ namespace System.Web.Http.Dispatcher
         /// <param name="controllerType">Type of the controller.</param>
         /// <param name="controllerDescriptor">The controller descriptor</param>
         /// <returns>An instance of type <paramref name="controllerType"/>.</returns>
-        public IHttpController Create(HttpRequestMessage request, HttpControllerDescriptor controllerDescriptor, Type controllerType)
+        public IHttpController Create(
+            HttpRequestMessage request,
+            HttpControllerDescriptor controllerDescriptor,
+            Type controllerType
+        )
         {
             if (request == null)
             {
@@ -52,11 +56,15 @@ namespace System.Web.Http.Dispatcher
             {
                 Func<IHttpController> activator;
 
-                // First check in the local fast cache and if not a match then look in the broader 
+                // First check in the local fast cache and if not a match then look in the broader
                 // HttpControllerDescriptor.Properties cache
                 if (_fastCache == null)
                 {
-                    IHttpController controller = GetInstanceOrActivator(request, controllerType, out activator);
+                    IHttpController controller = GetInstanceOrActivator(
+                        request,
+                        controllerType,
+                        out activator
+                    );
                     if (controller != null)
                     {
                         // we have a controller registered with the dependency resolver for this controller type
@@ -64,7 +72,8 @@ namespace System.Web.Http.Dispatcher
                     }
                     else
                     {
-                        Tuple<HttpControllerDescriptor, Func<IHttpController>> cacheItem = Tuple.Create(controllerDescriptor, activator);
+                        Tuple<HttpControllerDescriptor, Func<IHttpController>> cacheItem =
+                            Tuple.Create(controllerDescriptor, activator);
                         Interlocked.CompareExchange(ref _fastCache, cacheItem, null);
                     }
                 }
@@ -84,7 +93,11 @@ namespace System.Web.Http.Dispatcher
                     }
                     else
                     {
-                        IHttpController controller = GetInstanceOrActivator(request, controllerType, out activator);
+                        IHttpController controller = GetInstanceOrActivator(
+                            request,
+                            controllerType,
+                            out activator
+                        );
                         if (controller != null)
                         {
                             // we have a controller registered with the dependency resolver for this controller type
@@ -101,19 +114,28 @@ namespace System.Web.Http.Dispatcher
             }
             catch (Exception ex)
             {
-                throw Error.InvalidOperation(ex, SRResources.DefaultControllerFactory_ErrorCreatingController, controllerType.Name);
+                throw Error.InvalidOperation(
+                    ex,
+                    SRResources.DefaultControllerFactory_ErrorCreatingController,
+                    controllerType.Name
+                );
             }
         }
 
         // Returns the controller instance from the dependency resolver if there is one registered
         // else returns the activator that calls the default ctor for the give controllerType.
-        private static IHttpController GetInstanceOrActivator(HttpRequestMessage request, Type controllerType, out Func<IHttpController> activator)
+        private static IHttpController GetInstanceOrActivator(
+            HttpRequestMessage request,
+            Type controllerType,
+            out Func<IHttpController> activator
+        )
         {
             Contract.Assert(request != null);
             Contract.Assert(controllerType != null);
 
             // If dependency resolver returns controller object then use it.
-            IHttpController instance = (IHttpController)request.GetDependencyScope().GetService(controllerType);
+            IHttpController instance = (IHttpController)
+                request.GetDependencyScope().GetService(controllerType);
             if (instance != null)
             {
                 activator = null;

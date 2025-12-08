@@ -40,7 +40,7 @@ namespace System.Activities.Statements
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.variables;
@@ -49,21 +49,16 @@ namespace System.Activities.Statements
 
         [DefaultValue(null)]
         [DependsOn("Variables")]
-        public Activity Body
-        {
-            get;
-            set;
-        }
+        public Activity Body { get; set; }
 
         [DefaultValue(null)]
         [DependsOn("Body")]
-        public Activity CancellationHandler
-        {
-            get;
-            set;
-        }
+        public Activity CancellationHandler { get; set; }
 
-        protected override void OnCreateDynamicUpdateMap(NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+        protected override void OnCreateDynamicUpdateMap(
+            NativeActivityUpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             metadata.AllowUpdateInsideThisActivity();
         }
@@ -88,8 +83,13 @@ namespace System.Activities.Statements
         {
             // Determine whether to run the Cancel based on whether the body
             // canceled rather than whether cancel had been requested.
-            if (completedInstance.State == ActivityInstanceState.Canceled ||
-                (context.IsCancellationRequested && completedInstance.State == ActivityInstanceState.Faulted))
+            if (
+                completedInstance.State == ActivityInstanceState.Canceled
+                || (
+                    context.IsCancellationRequested
+                    && completedInstance.State == ActivityInstanceState.Faulted
+                )
+            )
             {
                 // We don't cancel the cancel handler
                 this.suppressCancel.Set(context, true);
@@ -98,7 +98,10 @@ namespace System.Activities.Statements
 
                 if (this.CancellationHandler != null)
                 {
-                    context.ScheduleActivity(this.CancellationHandler, onFaulted: new FaultCallback(OnExceptionFromCancelHandler));
+                    context.ScheduleActivity(
+                        this.CancellationHandler,
+                        onFaulted: new FaultCallback(OnExceptionFromCancelHandler)
+                    );
                 }
             }
         }
@@ -112,7 +115,11 @@ namespace System.Activities.Statements
             }
         }
 
-        void OnExceptionFromCancelHandler(NativeActivityFaultContext context, Exception propagatedException, ActivityInstance propagatedFrom)
+        void OnExceptionFromCancelHandler(
+            NativeActivityFaultContext context,
+            Exception propagatedException,
+            ActivityInstance propagatedFrom
+        )
         {
             this.suppressCancel.Set(context, false);
         }

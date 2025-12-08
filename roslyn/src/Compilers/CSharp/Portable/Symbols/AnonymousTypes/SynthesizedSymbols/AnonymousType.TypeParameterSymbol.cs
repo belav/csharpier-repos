@@ -33,10 +33,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public override TypeParameterKind TypeParameterKind
             {
-                get
-                {
-                    return TypeParameterKind.Type;
-                }
+                get { return TypeParameterKind.Type; }
             }
 
             public override ImmutableArray<Location> Locations
@@ -46,10 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
             {
-                get
-                {
-                    return ImmutableArray<SyntaxReference>.Empty;
-                }
+                get { return ImmutableArray<SyntaxReference>.Empty; }
             }
 
             public override int Ordinal
@@ -111,11 +105,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return VarianceKind.None; }
             }
 
-            internal override void EnsureAllConstraintsAreResolved()
-            {
-            }
+            internal override void EnsureAllConstraintsAreResolved() { }
 
-            internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(ConsList<TypeParameterSymbol> inProgress)
+            internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(
+                ConsList<TypeParameterSymbol> inProgress
+            )
             {
                 return ImmutableArray<TypeWithAnnotations>.Empty;
             }
@@ -125,17 +119,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return _container; }
             }
 
-            internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(ConsList<TypeParameterSymbol> inProgress)
+            internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(
+                ConsList<TypeParameterSymbol> inProgress
+            )
             {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
 
-            internal override NamedTypeSymbol GetEffectiveBaseClass(ConsList<TypeParameterSymbol> inProgress)
+            internal override NamedTypeSymbol GetEffectiveBaseClass(
+                ConsList<TypeParameterSymbol> inProgress
+            )
             {
                 return null;
             }
 
-            internal override TypeSymbol GetDeducedBaseType(ConsList<TypeParameterSymbol> inProgress)
+            internal override TypeSymbol GetDeducedBaseType(
+                ConsList<TypeParameterSymbol> inProgress
+            )
             {
                 return null;
             }

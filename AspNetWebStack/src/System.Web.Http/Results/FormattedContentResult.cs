@@ -32,11 +32,20 @@ namespace System.Web.Http.Results
         /// value.
         /// </param>
         /// <param name="request">The request message which led to this result.</param>
-        public FormattedContentResult(HttpStatusCode statusCode, T content, MediaTypeFormatter formatter,
-            MediaTypeHeaderValue mediaType, HttpRequestMessage request)
-            : this(statusCode, content, formatter, mediaType, new StatusCodeResult.DirectDependencyProvider(request))
-        {
-        }
+        public FormattedContentResult(
+            HttpStatusCode statusCode,
+            T content,
+            MediaTypeFormatter formatter,
+            MediaTypeHeaderValue mediaType,
+            HttpRequestMessage request
+        )
+            : this(
+                statusCode,
+                content,
+                formatter,
+                mediaType,
+                new StatusCodeResult.DirectDependencyProvider(request)
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FormattedContentResult{T}"/> class with the values provided.
@@ -49,15 +58,28 @@ namespace System.Web.Http.Results
         /// value.
         /// </param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
-        public FormattedContentResult(HttpStatusCode statusCode, T content, MediaTypeFormatter formatter,
-            MediaTypeHeaderValue mediaType, ApiController controller)
-            : this(statusCode, content, formatter, mediaType, new StatusCodeResult.ApiControllerDependencyProvider(
-                controller))
-        {
-        }
+        public FormattedContentResult(
+            HttpStatusCode statusCode,
+            T content,
+            MediaTypeFormatter formatter,
+            MediaTypeHeaderValue mediaType,
+            ApiController controller
+        )
+            : this(
+                statusCode,
+                content,
+                formatter,
+                mediaType,
+                new StatusCodeResult.ApiControllerDependencyProvider(controller)
+            ) { }
 
-        private FormattedContentResult(HttpStatusCode statusCode, T content, MediaTypeFormatter formatter,
-            MediaTypeHeaderValue mediaType, StatusCodeResult.IDependencyProvider dependencies)
+        private FormattedContentResult(
+            HttpStatusCode statusCode,
+            T content,
+            MediaTypeFormatter formatter,
+            MediaTypeHeaderValue mediaType,
+            StatusCodeResult.IDependencyProvider dependencies
+        )
         {
             if (formatter == null)
             {
@@ -117,8 +139,13 @@ namespace System.Web.Http.Results
             return Execute(_statusCode, _content, _formatter, _mediaType, _dependencies.Request);
         }
 
-        internal static HttpResponseMessage Execute(HttpStatusCode statusCode, T content, MediaTypeFormatter formatter,
-            MediaTypeHeaderValue mediaType, HttpRequestMessage request)
+        internal static HttpResponseMessage Execute(
+            HttpStatusCode statusCode,
+            T content,
+            MediaTypeFormatter formatter,
+            MediaTypeHeaderValue mediaType,
+            HttpRequestMessage request
+        )
         {
             HttpResponseMessage response = new HttpResponseMessage(statusCode);
 

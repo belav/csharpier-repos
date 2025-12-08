@@ -29,23 +29,17 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
-	[ComVisibleAttribute(false)]
-	public class DesignerNamespaceResolveEventArgs : EventArgs
-	{
-		public DesignerNamespaceResolveEventArgs (string namespaceName)
-		{
-			NamespaceName = namespaceName;
-			ResolvedAssemblyFiles = new Collection<string> ();
-		}
+    [ComVisibleAttribute(false)]
+    public class DesignerNamespaceResolveEventArgs : EventArgs
+    {
+        public DesignerNamespaceResolveEventArgs(string namespaceName)
+        {
+            NamespaceName = namespaceName;
+            ResolvedAssemblyFiles = new Collection<string>();
+        }
 
-		public string NamespaceName {
-			get;
-			private set;
-		}
+        public string NamespaceName { get; private set; }
 
-		public Collection<string> ResolvedAssemblyFiles {
-			get;
-			private set;
-		}
-	}
+        public Collection<string> ResolvedAssemblyFiles { get; private set; }
+    }
 }

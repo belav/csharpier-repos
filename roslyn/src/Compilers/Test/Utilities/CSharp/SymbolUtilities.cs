@@ -13,8 +13,7 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
-    internal class NameAndArityComparer
-        : IComparer<NamedTypeSymbol>
+    internal class NameAndArityComparer : IComparer<NamedTypeSymbol>
     {
         public int Compare(NamedTypeSymbol x, NamedTypeSymbol y) // Implements IComparer<NamedTypeSymbol).Compare
         {
@@ -33,24 +32,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     {
         public static NamespaceSymbol ChildNamespace(this NamespaceSymbol ns, string name)
         {
-            return ns.GetMembers()
-                   .Where(n => n.Name.Equals(name))
-                   .Cast<NamespaceSymbol>()
-                   .Single();
+            return ns.GetMembers().Where(n => n.Name.Equals(name)).Cast<NamespaceSymbol>().Single();
         }
 
         public static NamedTypeSymbol ChildType(this NamespaceSymbol ns, string name)
         {
-            return ns.GetMembers()
-                   .OfType<NamedTypeSymbol>()
-                   .Single(n => n.Name.Equals(name));
+            return ns.GetMembers().OfType<NamedTypeSymbol>().Single(n => n.Name.Equals(name));
         }
 
         public static NamedTypeSymbol ChildType(this NamespaceSymbol ns, string name, int arity)
         {
             return ns.GetMembers()
-                   .OfType<NamedTypeSymbol>()
-                   .Single(n => n.Name.Equals(name) && n.Arity == arity);
+                .OfType<NamedTypeSymbol>()
+                .Single(n => n.Name.Equals(name) && n.Arity == arity);
         }
 
         public static Symbol ChildSymbol(this NamespaceOrTypeSymbol parent, string name)
@@ -58,9 +52,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return parent.GetMembers(name).First();
         }
 
-        public static T GetIndexer<T>(this NamespaceOrTypeSymbol type, string name) where T : PropertySymbol
+        public static T GetIndexer<T>(this NamespaceOrTypeSymbol type, string name)
+            where T : PropertySymbol
         {
-            T member = type.GetMembers(WellKnownMemberNames.Indexer).Where(i => i.MetadataName == name).Single() as T;
+            T member =
+                type.GetMembers(WellKnownMemberNames.Indexer)
+                    .Where(i => i.MetadataName == name)
+                    .Single() as T;
             Assert.NotNull(member);
             return member;
         }
@@ -77,10 +75,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return text;
         }
 
-        public static string ListToSortedString<TSymbol>(this List<TSymbol> listOfSymbols) where TSymbol : ISymbol
+        public static string ListToSortedString<TSymbol>(this List<TSymbol> listOfSymbols)
+            where TSymbol : ISymbol
         {
             string text = "";
-            List<string> listOfSymbolString = listOfSymbols.Select(e => e.ToTestDisplayString()).ToList();
+            List<string> listOfSymbolString = listOfSymbols
+                .Select(e => e.ToTestDisplayString())
+                .ToList();
             listOfSymbolString.Sort();
 
             foreach (var symbolString in listOfSymbolString)
@@ -95,14 +96,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var format = SymbolDisplayFormat.TestFormat;
             if (includeNonNullable)
             {
-                format = format.AddMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier)
+                format = format
+                    .AddMiscellaneousOptions(
+                        SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
+                    )
                     .WithCompilerInternalOptions(SymbolDisplayCompilerInternalOptions.None);
             }
 
             return format;
         }
 
-        public static string ToTestDisplayString(this TypeWithAnnotations type, bool includeNonNullable = false)
+        public static string ToTestDisplayString(
+            this TypeWithAnnotations type,
+            bool includeNonNullable = false
+        )
         {
             SymbolDisplayFormat format = GetDisplayFormat(includeNonNullable);
             return type.ToDisplayString(format);
@@ -118,7 +125,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return symbols.Select(s => s.ToTestDisplayString()).ToArray();
         }
 
-        public static string[] ToTestDisplayStrings(this IEnumerable<Symbol> symbols, SymbolDisplayFormat format = null)
+        public static string[] ToTestDisplayStrings(
+            this IEnumerable<Symbol> symbols,
+            SymbolDisplayFormat format = null
+        )
         {
             format ??= SymbolDisplayFormat.TestFormat;
             return symbols.Select(s => s.ToDisplayString(format)).ToArray();

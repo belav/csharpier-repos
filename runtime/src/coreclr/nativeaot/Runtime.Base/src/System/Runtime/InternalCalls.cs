@@ -7,7 +7,6 @@
 
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using Internal.Runtime;
 
 #pragma warning disable SYSLIB1054 // Use DllImport here instead of LibraryImport because this file is used by Test.CoreLib
@@ -38,8 +37,10 @@ namespace System.Runtime
     {
         GetRuntimeException = 0,
         FailFast = 1,
+
         // UnhandledExceptionHandler = 2, // unused
         AppendExceptionStackFrame = 3,
+
         // unused = 4,
         GetSystemArrayEEType = 5,
         OnFirstChance = 6,
@@ -60,14 +61,22 @@ namespace System.Runtime
 
         // Force a garbage collection.
         [RuntimeExport("RhCollect")]
-        internal static void RhCollect(int generation, InternalGCCollectionMode mode, bool lowMemoryP = false)
+        internal static void RhCollect(
+            int generation,
+            InternalGCCollectionMode mode,
+            bool lowMemoryP = false
+        )
         {
             RhpCollect(generation, mode, lowMemoryP ? Interop.BOOL.TRUE : Interop.BOOL.FALSE);
         }
 
         [DllImport(Redhawk.BaseName)]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        private static extern void RhpCollect(int generation, InternalGCCollectionMode mode, Interop.BOOL lowMemoryP);
+        private static extern void RhpCollect(
+            int generation,
+            InternalGCCollectionMode mode,
+            Interop.BOOL lowMemoryP
+        );
 
         [RuntimeExport("RhGetGcTotalMemory")]
         internal static long RhGetGcTotalMemory()
@@ -80,9 +89,19 @@ namespace System.Runtime
         private static extern long RhpGetGcTotalMemory();
 
         [RuntimeExport("RhStartNoGCRegion")]
-        internal static int RhStartNoGCRegion(long totalSize, bool hasLohSize, long lohSize, bool disallowFullBlockingGC)
+        internal static int RhStartNoGCRegion(
+            long totalSize,
+            bool hasLohSize,
+            long lohSize,
+            bool disallowFullBlockingGC
+        )
         {
-            return RhpStartNoGCRegion(totalSize, hasLohSize ? Interop.BOOL.TRUE : Interop.BOOL.FALSE, lohSize, disallowFullBlockingGC ? Interop.BOOL.TRUE : Interop.BOOL.FALSE);
+            return RhpStartNoGCRegion(
+                totalSize,
+                hasLohSize ? Interop.BOOL.TRUE : Interop.BOOL.FALSE,
+                lohSize,
+                disallowFullBlockingGC ? Interop.BOOL.TRUE : Interop.BOOL.FALSE
+            );
         }
 
         [RuntimeExport("RhEndNoGCRegion")]
@@ -122,7 +141,7 @@ namespace System.Runtime
         //
         [RuntimeImport(Redhawk.BaseName, "RhpNewFast")]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern unsafe object RhpNewFast(MethodTable* pEEType);  // BEWARE: not for finalizable objects!
+        internal static extern unsafe object RhpNewFast(MethodTable* pEEType); // BEWARE: not for finalizable objects!
 
         [RuntimeImport(Redhawk.BaseName, "RhpNewFinalizable")]
         [MethodImpl(MethodImplOptions.InternalCall)]
@@ -135,7 +154,7 @@ namespace System.Runtime
 #if FEATURE_64BIT_ALIGNMENT
         [RuntimeImport(Redhawk.BaseName, "RhpNewFastAlign8")]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern unsafe object RhpNewFastAlign8(MethodTable * pEEType);  // BEWARE: not for finalizable objects!
+        internal static extern unsafe object RhpNewFastAlign8(MethodTable* pEEType); // BEWARE: not for finalizable objects!
 
         [RuntimeImport(Redhawk.BaseName, "RhpNewFinalizableAlign8")]
         [MethodImpl(MethodImplOptions.InternalCall)]
@@ -147,7 +166,7 @@ namespace System.Runtime
 
         [RuntimeImport(Redhawk.BaseName, "RhpNewFastMisalign")]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern unsafe object RhpNewFastMisalign(MethodTable * pEEType);
+        internal static extern unsafe object RhpNewFastMisalign(MethodTable* pEEType);
 #endif // FEATURE_64BIT_ALIGNMENT
 
         [RuntimeImport(Redhawk.BaseName, "RhpAssignRef")]
@@ -164,7 +183,11 @@ namespace System.Runtime
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(Redhawk.BaseName, "RhBulkMoveWithWriteBarrier")]
-        internal static extern unsafe void RhBulkMoveWithWriteBarrier(ref byte dmem, ref byte smem, nuint size);
+        internal static extern unsafe void RhBulkMoveWithWriteBarrier(
+            ref byte dmem,
+            ref byte smem,
+            nuint size
+        );
 
 #if FEATURE_GC_STRESS
         //
@@ -177,7 +200,11 @@ namespace System.Runtime
 
         [RuntimeImport(Redhawk.BaseName, "RhpEHEnumInitFromStackFrameIterator")]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern unsafe bool RhpEHEnumInitFromStackFrameIterator(ref StackFrameIterator pFrameIter, byte** pMethodStartAddress, void* pEHEnum);
+        internal static extern unsafe bool RhpEHEnumInitFromStackFrameIterator(
+            ref StackFrameIterator pFrameIter,
+            byte** pMethodStartAddress,
+            void* pEHEnum
+        );
 
         [RuntimeImport(Redhawk.BaseName, "RhpEHEnumNext")]
         [MethodImpl(MethodImplOptions.InternalCall)]
@@ -185,23 +212,40 @@ namespace System.Runtime
 
         [RuntimeImport(Redhawk.BaseName, "RhpGetDispatchCellInfo")]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern unsafe void RhpGetDispatchCellInfo(IntPtr pCell, out DispatchCellInfo newCellInfo);
+        internal static extern unsafe void RhpGetDispatchCellInfo(
+            IntPtr pCell,
+            out DispatchCellInfo newCellInfo
+        );
 
         [RuntimeImport(Redhawk.BaseName, "RhpSearchDispatchCellCache")]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern unsafe IntPtr RhpSearchDispatchCellCache(IntPtr pCell, MethodTable* pInstanceType);
+        internal static extern unsafe IntPtr RhpSearchDispatchCellCache(
+            IntPtr pCell,
+            MethodTable* pInstanceType
+        );
 
         [RuntimeImport(Redhawk.BaseName, "RhpUpdateDispatchCellCache")]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern unsafe IntPtr RhpUpdateDispatchCellCache(IntPtr pCell, IntPtr pTargetCode, MethodTable* pInstanceType, ref DispatchCellInfo newCellInfo);
+        internal static extern unsafe IntPtr RhpUpdateDispatchCellCache(
+            IntPtr pCell,
+            IntPtr pTargetCode,
+            MethodTable* pInstanceType,
+            ref DispatchCellInfo newCellInfo
+        );
 
         [RuntimeImport(Redhawk.BaseName, "RhpGetClasslibFunctionFromCodeAddress")]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern unsafe void* RhpGetClasslibFunctionFromCodeAddress(IntPtr address, ClassLibFunctionId id);
+        internal static extern unsafe void* RhpGetClasslibFunctionFromCodeAddress(
+            IntPtr address,
+            ClassLibFunctionId id
+        );
 
         [RuntimeImport(Redhawk.BaseName, "RhpGetClasslibFunctionFromEEType")]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern unsafe void* RhpGetClasslibFunctionFromEEType(MethodTable* pEEType, ClassLibFunctionId id);
+        internal static extern unsafe void* RhpGetClasslibFunctionFromEEType(
+            MethodTable* pEEType,
+            ClassLibFunctionId id
+        );
 
         //
         // StackFrameIterator
@@ -209,11 +253,19 @@ namespace System.Runtime
 
         [RuntimeImport(Redhawk.BaseName, "RhpSfiInit")]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern unsafe bool RhpSfiInit(ref StackFrameIterator pThis, void* pStackwalkCtx, bool instructionFault);
+        internal static extern unsafe bool RhpSfiInit(
+            ref StackFrameIterator pThis,
+            void* pStackwalkCtx,
+            bool instructionFault
+        );
 
         [RuntimeImport(Redhawk.BaseName, "RhpSfiNext")]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern unsafe bool RhpSfiNext(ref StackFrameIterator pThis, uint* uExCollideClauseIdx, bool* fUnwoundReversePInvoke);
+        internal static extern unsafe bool RhpSfiNext(
+            ref StackFrameIterator pThis,
+            uint* uExCollideClauseIdx,
+            bool* fUnwoundReversePInvoke
+        );
 
         //
         // Miscellaneous helpers.
@@ -222,22 +274,37 @@ namespace System.Runtime
         [RuntimeImport(Redhawk.BaseName, "RhpCallCatchFunclet")]
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern unsafe IntPtr RhpCallCatchFunclet(
-            object exceptionObj, byte* pHandlerIP, void* pvRegDisplay, ref EH.ExInfo exInfo);
+            object exceptionObj,
+            byte* pHandlerIP,
+            void* pvRegDisplay,
+            ref EH.ExInfo exInfo
+        );
 
         [RuntimeImport(Redhawk.BaseName, "RhpCallFinallyFunclet")]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern unsafe void RhpCallFinallyFunclet(byte* pHandlerIP, void* pvRegDisplay);
+        internal static extern unsafe void RhpCallFinallyFunclet(
+            byte* pHandlerIP,
+            void* pvRegDisplay
+        );
 
         [RuntimeImport(Redhawk.BaseName, "RhpCallFilterFunclet")]
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern unsafe bool RhpCallFilterFunclet(
-            object exceptionObj, byte* pFilterIP, void* pvRegDisplay);
+            object exceptionObj,
+            byte* pFilterIP,
+            void* pvRegDisplay
+        );
 
 #if FEATURE_OBJCMARSHAL
         [RuntimeImport(Redhawk.BaseName, "RhpCallPropagateExceptionCallback")]
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern unsafe IntPtr RhpCallPropagateExceptionCallback(
-            IntPtr callbackContext, IntPtr callback, void* pvRegDisplay, ref EH.ExInfo exInfo, IntPtr pPreviousTransitionFrame);
+            IntPtr callbackContext,
+            IntPtr callback,
+            void* pvRegDisplay,
+            ref EH.ExInfo exInfo,
+            IntPtr pPreviousTransitionFrame
+        );
 #endif // FEATURE_OBJCMARSHAL
 
         [RuntimeImport(Redhawk.BaseName, "RhpFallbackFailFast")]
@@ -255,7 +322,11 @@ namespace System.Runtime
 
         [RuntimeImport(Redhawk.BaseName, "RhpCopyContextFromExInfo")]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern unsafe void RhpCopyContextFromExInfo(void* pOSContext, int cbOSContext, EH.PAL_LIMITED_CONTEXT* pPalContext);
+        internal static extern unsafe void RhpCopyContextFromExInfo(
+            void* pOSContext,
+            int cbOSContext,
+            EH.PAL_LIMITED_CONTEXT* pPalContext
+        );
 
         [RuntimeImport(Redhawk.BaseName, "RhpGetThreadAbortException")]
         [MethodImpl(MethodImplOptions.InternalCall)]
@@ -294,7 +365,12 @@ namespace System.Runtime
         // memory available to satisfy the caller's request.
         [DllImport(Redhawk.BaseName)]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        internal static extern int RhpStartNoGCRegion(long totalSize, Interop.BOOL hasLohSize, long lohSize, Interop.BOOL disallowFullBlockingGC);
+        internal static extern int RhpStartNoGCRegion(
+            long totalSize,
+            Interop.BOOL hasLohSize,
+            long lohSize,
+            Interop.BOOL disallowFullBlockingGC
+        );
 
         // Exits a no GC region, possibly doing a GC to clean up the garbage that
         // the caller allocated.

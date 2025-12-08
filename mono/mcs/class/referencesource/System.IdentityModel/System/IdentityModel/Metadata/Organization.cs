@@ -12,17 +12,21 @@ namespace System.IdentityModel.Metadata
         //
         // We do not support extensions as yet. So on receive, we should skip parsing it.
         //
-        LocalizedEntryCollection<LocalizedName> displayNames = new LocalizedEntryCollection<LocalizedName>();
-        LocalizedEntryCollection<LocalizedName> names = new LocalizedEntryCollection<LocalizedName>();
+        LocalizedEntryCollection<LocalizedName> displayNames =
+            new LocalizedEntryCollection<LocalizedName>();
+        LocalizedEntryCollection<LocalizedName> names =
+            new LocalizedEntryCollection<LocalizedName>();
         LocalizedEntryCollection<LocalizedUri> urls = new LocalizedEntryCollection<LocalizedUri>();
 
         /// <summary>
         /// Empty constructor.
         /// </summary>
         public Organization()
-            : this(new LocalizedEntryCollection<LocalizedName>(), new LocalizedEntryCollection<LocalizedName>(), new LocalizedEntryCollection<LocalizedUri>())
-        {
-        }
+            : this(
+                new LocalizedEntryCollection<LocalizedName>(),
+                new LocalizedEntryCollection<LocalizedName>(),
+                new LocalizedEntryCollection<LocalizedUri>()
+            ) { }
 
         /// <summary>
         /// Creates an organization with collections of names, display names, and URIs
@@ -31,7 +35,11 @@ namespace System.IdentityModel.Metadata
         /// <param name="displayNames">A collection of <see cref="LocalizedName"/> for this instance representing the display names.</param>
         /// <param name="urls">A collection of <see cref="LocalizedUri"/> for this instance.</param>
         /// <exception cref="System.ArgumentNullException">If any of the input parameters is null.</exception>
-        public Organization(LocalizedEntryCollection<LocalizedName> names, LocalizedEntryCollection<LocalizedName> displayNames, LocalizedEntryCollection<LocalizedUri> urls)
+        public Organization(
+            LocalizedEntryCollection<LocalizedName> names,
+            LocalizedEntryCollection<LocalizedName> displayNames,
+            LocalizedEntryCollection<LocalizedUri> urls
+        )
         {
             if (names == null)
             {
@@ -47,7 +55,6 @@ namespace System.IdentityModel.Metadata
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("urls");
             }
-
 
             this.names = names;
             this.displayNames = displayNames;

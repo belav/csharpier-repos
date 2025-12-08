@@ -26,8 +26,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// ctor for a schema function
         /// </summary>
         public ModelFunction(Schema parentElement)
-            :
-            base(parentElement)
+            : base(parentElement)
         {
             _isComposable = true;
             _typeUsageBuilder = new TypeUsageBuilder(this);
@@ -37,10 +36,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         public override SchemaType Type
         {
-            get
-            {
-                return this._type;
-            }
+            get { return this._type; }
         }
 
         internal TypeUsage TypeUsage
@@ -124,7 +120,6 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         _typeUsageBuilder.ValidateAndSetTypeUsage(_type as ScalarType, false);
                     }
                 }
-
             }
 
             foreach (Parameter parameter in this.Parameters)
@@ -134,7 +129,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             if (ReturnTypeList != null)
             {
-                Debug.Assert(ReturnTypeList.Count == 1, "returnTypeList should always be non-empty.  Multiple ReturnTypes are only possible on FunctionImports.");
+                Debug.Assert(
+                    ReturnTypeList.Count == 1,
+                    "returnTypeList should always be non-empty.  Multiple ReturnTypes are only possible on FunctionImports."
+                );
                 ReturnTypeList[0].ResolveTopLevelNames();
             }
         }

@@ -35,18 +35,25 @@ namespace Generators
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            const string EventSourceAutoGenerateAttribute = "System.Diagnostics.Tracing.EventSourceAutoGenerateAttribute";
+            const string EventSourceAutoGenerateAttribute =
+                "System.Diagnostics.Tracing.EventSourceAutoGenerateAttribute";
 
-            IncrementalValuesProvider<EventSourceClass> eventSourceClasses =
-                context.SyntaxProvider.ForAttributeWithMetadataName(
+            IncrementalValuesProvider<EventSourceClass> eventSourceClasses = context
+                .SyntaxProvider.ForAttributeWithMetadataName(
                     EventSourceAutoGenerateAttribute,
                     (node, _) => node is ClassDeclarationSyntax,
-                    GetSemanticTargetForGeneration)
+                    GetSemanticTargetForGeneration
+                )
                 .Where(x => x is not null);
 
             context.RegisterSourceOutput(eventSourceClasses, EmitSourceFile);
         }
 
-        private sealed record EventSourceClass(string Namespace, string ClassName, string SourceName, Guid Guid);
+        private sealed record EventSourceClass(
+            string Namespace,
+            string ClassName,
+            string SourceName,
+            Guid Guid
+        );
     }
 }

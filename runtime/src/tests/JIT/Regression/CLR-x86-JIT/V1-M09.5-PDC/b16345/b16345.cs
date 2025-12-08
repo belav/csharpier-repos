@@ -3,6 +3,7 @@
 
 using System;
 using Xunit;
+
 public class ReproBoxProblem
 {
     [Fact]

@@ -44,9 +44,7 @@ namespace System.Net.Http.Functional.Tests
             get { return false; }
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override long Length
         {
@@ -55,14 +53,8 @@ namespace System.Net.Http.Functional.Tests
 
         public override long Position
         {
-            get
-            {
-                return _position;
-            }
-            set
-            {
-                throw new NotSupportedException();
-            }
+            get { return _position; }
+            set { throw new NotSupportedException(); }
         }
 
         public override int Read(byte[] buffer, int offset, int count)
@@ -137,10 +129,7 @@ namespace System.Net.Http.Functional.Tests
 
         ulong IRandomAccessStream.Position
         {
-            get
-            {
-                return (ulong)_position;
-            }
+            get { return (ulong)_position; }
         }
 
         void IRandomAccessStream.Seek(ulong position)
@@ -150,19 +139,11 @@ namespace System.Net.Http.Functional.Tests
 
         ulong IRandomAccessStream.Size
         {
-            get
-            {
-                return (ulong)_bytes.Length;
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return (ulong)_bytes.Length; }
+            set { throw new NotImplementedException(); }
         }
 
-        void IDisposable.Dispose()
-        {
-        }
+        void IDisposable.Dispose() { }
 
         byte[] ReadInternal(int count)
         {
@@ -183,17 +164,22 @@ namespace System.Net.Http.Functional.Tests
             return dataBytes;
         }
 
-        IAsyncOperationWithProgress<IBuffer, uint> IInputStream.ReadAsync(IBuffer buffer, uint count, InputStreamOptions options)
+        IAsyncOperationWithProgress<IBuffer, uint> IInputStream.ReadAsync(
+            IBuffer buffer,
+            uint count,
+            InputStreamOptions options
+        )
         {
             byte[] dataBytes = ReadInternal((int)count);
 
             var ibuffer = dataBytes.AsBuffer();
 
             return AsyncInfo.Run(
-                delegate (CancellationToken cancellationToken, IProgress<uint> progress)
+                delegate(CancellationToken cancellationToken, IProgress<uint> progress)
                 {
                     return Task.FromResult<IBuffer>(ibuffer);
-                });
+                }
+            );
         }
 
         IAsyncOperation<bool> IOutputStream.FlushAsync()

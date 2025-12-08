@@ -38,7 +38,7 @@ namespace System.ServiceModel.Channels
         string meshId;
         PeerMessagePropagationFilter messagePropagationFilter;
         SynchronizationContext messagePropagationFilterContext;
-        int maintainerInterval = PeerTransportConstants.MaintainerInterval;          // milliseconds before a maintainer kicks in
+        int maintainerInterval = PeerTransportConstants.MaintainerInterval; // milliseconds before a maintainer kicks in
         PeerResolver resolver;
 
         PeerNodeConfig config;
@@ -58,12 +58,12 @@ namespace System.ServiceModel.Channels
         SimpleStateManager stateManager; // manages open/close operations
         object thisLock = new Object();
         PeerNodeTraceRecord traceRecord;
-        PeerNodeTraceRecord completeTraceRecord;    // contains address info as well
+        PeerNodeTraceRecord completeTraceRecord; // contains address info as well
 
         // primary infrastructure components
-        internal PeerConnector connector;                           // Purely for testing do not take a internal dependency on this
+        internal PeerConnector connector; // Purely for testing do not take a internal dependency on this
         PeerMaintainer maintainer;
-        internal PeerFlooder flooder;                               // Purely for testing do not take an internal dependency on this
+        internal PeerFlooder flooder; // Purely for testing do not take an internal dependency on this
         PeerNeighborManager neighborManager;
         PeerIPHelper ipHelper;
         PeerService service;
@@ -79,9 +79,8 @@ namespace System.ServiceModel.Channels
         internal static byte[] DefaultId = new byte[0];
         XmlDictionaryReaderQuotas readerQuotas;
         long maxBufferPoolSize;
-        internal int MaxSendQueue = 128, MaxReceiveQueue = 128;
-
-
+        internal int MaxSendQueue = 128,
+            MaxReceiveQueue = 128;
 
         public PeerNodeImplementation()
         {
@@ -96,7 +95,9 @@ namespace System.ServiceModel.Channels
 
             // initialize internal state
             connectCompletedEvent = new ManualResetEvent(false);
-            encoder = new BinaryMessageEncodingBindingElement().CreateMessageEncoderFactory().Encoder;
+            encoder = new BinaryMessageEncodingBindingElement()
+                .CreateMessageEncoderFactory()
+                .Encoder;
             messageFilters = new Dictionary<object, MessageFilterRegistration>();
             stateManager = new SimpleStateManager(this);
             uri2SecurityProtocol = new Dictionary<Uri, RefCountedSecurityProtocol>();
@@ -114,10 +115,7 @@ namespace System.ServiceModel.Channels
 
         public PeerNodeConfig Config
         {
-            get
-            {
-                return this.config;
-            }
+            get { return this.config; }
             private set
             {
                 Fx.Assert(value != null, "PeerNodeImplementation.Config can not be set to null");
@@ -168,8 +166,10 @@ namespace System.ServiceModel.Channels
 
                 if (value.Scheme != PeerStrings.Scheme)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.InvalidUriScheme,
-                        value.Scheme, PeerStrings.Scheme));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.InvalidUriScheme, value.Scheme, PeerStrings.Scheme)
+                    );
                 }
 
                 Fx.Assert(value.PathAndQuery == "/", "PeerUriCannotContainPath");
@@ -234,7 +234,8 @@ namespace System.ServiceModel.Channels
                 {
                     // null is ok and causes optimised flooding codepath
                     messagePropagationFilter = value;
-                    messagePropagationFilterContext = ThreadBehavior.GetCurrentSynchronizationContext();
+                    messagePropagationFilterContext =
+                        ThreadBehavior.GetCurrentSynchronizationContext();
                 }
             }
         }
@@ -278,10 +279,7 @@ namespace System.ServiceModel.Channels
 
         public XmlDictionaryReaderQuotas ReaderQuotas
         {
-            get
-            {
-                return this.readerQuotas;
-            }
+            get { return this.readerQuotas; }
         }
 
         public PeerResolver Resolver
@@ -307,10 +305,7 @@ namespace System.ServiceModel.Channels
 
         internal PeerService Service
         {
-            get
-            {
-                return this.service;
-            }
+            get { return this.service; }
             set
             {
                 lock (ThisLock)
@@ -336,7 +331,12 @@ namespace System.ServiceModel.Channels
             return stateManager.BeginClose(timeout, callback, state);
         }
 
-        public IAsyncResult BeginOpen(TimeSpan timeout, AsyncCallback callback, object state, bool waitForOnline)
+        public IAsyncResult BeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state,
+            bool waitForOnline
+        )
         {
             return stateManager.BeginOpen(timeout, callback, state, waitForOnline);
         }
@@ -348,21 +348,45 @@ namespace System.ServiceModel.Channels
             if (-1 != message.Headers.FindHeader(PeerStrings.MessageId, PeerStrings.Namespace))
                 PeerExceptionHelper.ThrowInvalidOperation_ConflictingHeader(PeerStrings.MessageId);
             if (-1 != message.Headers.FindHeader(PeerOperationNames.PeerTo, PeerStrings.Namespace))
-                PeerExceptionHelper.ThrowInvalidOperation_ConflictingHeader(PeerOperationNames.PeerTo);
+                PeerExceptionHelper.ThrowInvalidOperation_ConflictingHeader(
+                    PeerOperationNames.PeerTo
+                );
             if (-1 != message.Headers.FindHeader(PeerOperationNames.PeerVia, PeerStrings.Namespace))
-                PeerExceptionHelper.ThrowInvalidOperation_ConflictingHeader(PeerOperationNames.PeerVia);
-            if (-1 != message.Headers.FindHeader(PeerOperationNames.Flood, PeerStrings.Namespace, PeerOperationNames.Demuxer))
-                PeerExceptionHelper.ThrowInvalidOperation_ConflictingHeader(PeerOperationNames.Flood);
+                PeerExceptionHelper.ThrowInvalidOperation_ConflictingHeader(
+                    PeerOperationNames.PeerVia
+                );
+            if (
+                -1
+                != message.Headers.FindHeader(
+                    PeerOperationNames.Flood,
+                    PeerStrings.Namespace,
+                    PeerOperationNames.Demuxer
+                )
+            )
+                PeerExceptionHelper.ThrowInvalidOperation_ConflictingHeader(
+                    PeerOperationNames.Flood
+                );
 
             message.Headers.Add(PeerDictionaryHeader.CreateMessageIdHeader(messageId));
             message.Properties.Via = via;
-            message.Headers.Add(MessageHeader.CreateHeader(PeerOperationNames.PeerTo, PeerStrings.Namespace, message.Headers.To));
+            message.Headers.Add(
+                MessageHeader.CreateHeader(
+                    PeerOperationNames.PeerTo,
+                    PeerStrings.Namespace,
+                    message.Headers.To
+                )
+            );
             message.Headers.Add(PeerDictionaryHeader.CreateViaHeader(via));
             message.Headers.Add(PeerDictionaryHeader.CreateFloodRole());
             return result;
         }
 
-        public void SecureOutgoingMessage(ref Message message, Uri via, TimeSpan timeout, SecurityProtocol securityProtocol)
+        public void SecureOutgoingMessage(
+            ref Message message,
+            Uri via,
+            TimeSpan timeout,
+            SecurityProtocol securityProtocol
+        )
         {
             if (securityProtocol != null)
             {
@@ -370,8 +394,16 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public IAsyncResult BeginSend(object registrant, Message message, Uri via,
-            ITransportFactorySettings settings, TimeSpan timeout, AsyncCallback callback, object state, SecurityProtocol securityProtocol)
+        public IAsyncResult BeginSend(
+            object registrant,
+            Message message,
+            Uri via,
+            ITransportFactorySettings settings,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state,
+            SecurityProtocol securityProtocol
+        )
         {
             PeerFlooder localFlooder;
             int factoryMaxReceivedMessageSize;
@@ -384,7 +416,9 @@ namespace System.ServiceModel.Channels
             int messageSize = (int)-1;
             byte[] id;
             SendAsyncResult result = new SendAsyncResult(callback, state);
-            AsyncCallback onFloodComplete = Fx.ThunkCallback(new AsyncCallback(result.OnFloodComplete));
+            AsyncCallback onFloodComplete = Fx.ThunkCallback(
+                new AsyncCallback(result.OnFloodComplete)
+            );
 
             try
             {
@@ -395,12 +429,17 @@ namespace System.ServiceModel.Channels
                 }
 
                 // we know this will fit in an int because of our MaxReceivedMessageSize restrictions
-                factoryMaxReceivedMessageSize = (int)Math.Min(maxReceivedMessageSize, settings.MaxReceivedMessageSize);
+                factoryMaxReceivedMessageSize = (int)
+                    Math.Min(maxReceivedMessageSize, settings.MaxReceivedMessageSize);
                 Guid guid = ProcessOutgoingMessage(message, via);
                 SecureOutgoingMessage(ref message, via, timeout, securityProtocol);
                 if ((message is SecurityAppliedMessage))
                 {
-                    ArraySegment<byte> buffer = encoder.WriteMessage(message, int.MaxValue, bufferManager);
+                    ArraySegment<byte> buffer = encoder.WriteMessage(
+                        message,
+                        int.MaxValue,
+                        bufferManager
+                    );
                     securedMessage = encoder.ReadMessage(buffer, bufferManager);
                     id = (message as SecurityAppliedMessage).PrimarySignatureValue;
                     messageSize = (int)buffer.Count;
@@ -417,7 +456,9 @@ namespace System.ServiceModel.Channels
                 {
                     using (Message filterMessage = messageBuffer.CreateMessage())
                     {
-                        propagateFlags = ((IPeerNodeMessageHandling)this).DetermineMessagePropagation(filterMessage, PeerMessageOrigination.Local);
+                        propagateFlags = (
+                            (IPeerNodeMessageHandling)this
+                        ).DetermineMessagePropagation(filterMessage, PeerMessageOrigination.Local);
                     }
                 }
 
@@ -431,10 +472,22 @@ namespace System.ServiceModel.Channels
                 IAsyncResult ar = null;
                 if ((propagateFlags & PeerMessagePropagation.Remote) != 0)
                 {
-                    ar = localFlooder.BeginFloodEncodedMessage(id, messageBuffer, timeoutHelper.RemainingTime(), onFloodComplete, null);
+                    ar = localFlooder.BeginFloodEncodedMessage(
+                        id,
+                        messageBuffer,
+                        timeoutHelper.RemainingTime(),
+                        onFloodComplete,
+                        null
+                    );
                     if (DiagnosticUtility.ShouldTraceVerbose)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.PeerChannelMessageSent, SR.GetString(SR.TraceCodePeerChannelMessageSent), this, message);
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Verbose,
+                            TraceCode.PeerChannelMessageSent,
+                            SR.GetString(SR.TraceCodePeerChannelMessageSent),
+                            this,
+                            message
+                        );
                     }
                 }
                 else
@@ -451,14 +504,30 @@ namespace System.ServiceModel.Channels
                 {
                     using (Message msg = messageBuffer.CreateMessage())
                     {
-                        int i = msg.Headers.FindHeader(SecurityJan2004Strings.Security, SecurityJan2004Strings.Namespace);
+                        int i = msg.Headers.FindHeader(
+                            SecurityJan2004Strings.Security,
+                            SecurityJan2004Strings.Namespace
+                        );
                         if (i >= 0)
                         {
                             msg.Headers.AddUnderstood(i);
                         }
-                        using (MessageBuffer clientBuffer = msg.CreateBufferedCopy(factoryMaxReceivedMessageSize))
+                        using (
+                            MessageBuffer clientBuffer = msg.CreateBufferedCopy(
+                                factoryMaxReceivedMessageSize
+                            )
+                        )
                         {
-                            DeliverMessageToClientChannels(registrant, clientBuffer, via, message.Headers.To, contentType, messageSize, -1, null);
+                            DeliverMessageToClientChannels(
+                                registrant,
+                                clientBuffer,
+                                via,
+                                message.Headers.To,
+                                contentType,
+                                messageSize,
+                                -1,
+                                null
+                            );
                         }
                     }
                 }
@@ -495,7 +564,14 @@ namespace System.ServiceModel.Channels
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerNodeClosing, SR.GetString(SR.TraceCodePeerNodeClosing), this.traceRecord, this, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.PeerNodeClosing,
+                    SR.GetString(SR.TraceCodePeerNodeClosing),
+                    this.traceRecord,
+                    this,
+                    null
+                );
             }
 
             lock (ThisLock)
@@ -521,15 +597,20 @@ namespace System.ServiceModel.Channels
                 {
                     if (lclConfig != null)
                     {
-                        ActionItem.Schedule(new Action<object>(UnregisterAddress), lclConfig.UnregisterTimeout);
+                        ActionItem.Schedule(
+                            new Action<object>(UnregisterAddress),
+                            lclConfig.UnregisterTimeout
+                        );
                     }
                 }
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
-                if (exception == null) exception = e;
+                if (exception == null)
+                    exception = e;
             }
 
             try
@@ -545,9 +626,11 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
-                        if (exception == null) exception = e;
+                        if (exception == null)
+                            exception = e;
                     }
                 }
 
@@ -559,9 +642,11 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
-                        if (exception == null) exception = e;
+                        if (exception == null)
+                            exception = e;
                     }
                 }
 
@@ -570,20 +655,28 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         lclIPHelper.Close();
-                        lclIPHelper.AddressChanged -= new EventHandler(stateManager.OnIPAddressesChanged);
+                        lclIPHelper.AddressChanged -= new EventHandler(
+                            stateManager.OnIPAddressesChanged
+                        );
                     }
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
-                        if (exception == null) exception = e;
+                        if (exception == null)
+                            exception = e;
                     }
                 }
                 if (lclNeighborManager != null)
                 {
                     lclNeighborManager.NeighborConnected -= new EventHandler(OnNeighborConnected);
-                    lclNeighborManager.NeighborOpened -= new EventHandler(this.securityManager.OnNeighborOpened);
-                    this.securityManager.OnNeighborAuthenticated -= new EventHandler(this.OnNeighborAuthenticated);
+                    lclNeighborManager.NeighborOpened -= new EventHandler(
+                        this.securityManager.OnNeighborOpened
+                    );
+                    this.securityManager.OnNeighborAuthenticated -= new EventHandler(
+                        this.OnNeighborAuthenticated
+                    );
                     lclNeighborManager.Online -= new EventHandler(FireOnline);
                     lclNeighborManager.Offline -= new EventHandler(FireOffline);
                     try
@@ -592,14 +685,18 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
-                        if (exception == null) exception = e;
+                        if (exception == null)
+                            exception = e;
                     }
 
                     // unregister for neighbor close events once shutdown has completed
-                    lclNeighborManager.NeighborClosed -= new EventHandler<PeerNeighborCloseEventArgs>(OnNeighborClosed);
-                    lclNeighborManager.NeighborClosing -= new EventHandler<PeerNeighborCloseEventArgs>(OnNeighborClosing);
+                    lclNeighborManager.NeighborClosed -=
+                        new EventHandler<PeerNeighborCloseEventArgs>(OnNeighborClosed);
+                    lclNeighborManager.NeighborClosing -=
+                        new EventHandler<PeerNeighborCloseEventArgs>(OnNeighborClosing);
                     lclNeighborManager.Close();
                 }
 
@@ -611,9 +708,11 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
-                        if (exception == null) exception = e;
+                        if (exception == null)
+                            exception = e;
                     }
                 }
 
@@ -625,17 +724,20 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
-                        if (exception == null) exception = e;
+                        if (exception == null)
+                            exception = e;
                     }
                 }
-
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
-                if (exception == null) exception = e;
+                if (Fx.IsFatal(e))
+                    throw;
+                if (exception == null)
+                    exception = e;
             }
 
             // reset object for next call to open
@@ -656,7 +758,7 @@ namespace System.ServiceModel.Channels
                 abortedHandler = Aborted;
             }
 
-            // Notify anyone who is interested that abort has occured 
+            // Notify anyone who is interested that abort has occured
             if (!graceful && abortedHandler != null)
             {
                 try
@@ -665,17 +767,26 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
-                    if (exception == null) exception = e;
+                    if (exception == null)
+                        exception = e;
                 }
             }
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerNodeClosed, SR.GetString(SR.TraceCodePeerNodeClosed), this.traceRecord, this, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.PeerNodeClosed,
+                    SR.GetString(SR.TraceCodePeerNodeClosed),
+                    this.traceRecord,
+                    this,
+                    null
+                );
             }
-            if (exception != null && graceful == true)                          // Swallows all non fatal exceptions during Abort
+            if (exception != null && graceful == true) // Swallows all non fatal exceptions during Abort
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(exception);
             }
@@ -684,9 +795,21 @@ namespace System.ServiceModel.Channels
         // Performs case-insensitive comparison of two vias
         bool CompareVia(Uri via1, Uri via2)
         {
-            return (Uri.Compare(via1, via2,
-                (UriComponents.Scheme | UriComponents.UserInfo | UriComponents.Host | UriComponents.Port | UriComponents.Path),
-                UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase) == 0);
+            return (
+                Uri.Compare(
+                    via1,
+                    via2,
+                    (
+                        UriComponents.Scheme
+                        | UriComponents.UserInfo
+                        | UriComponents.Host
+                        | UriComponents.Port
+                        | UriComponents.Path
+                    ),
+                    UriFormat.SafeUnescaped,
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            );
         }
 
         public static void EndClose(IAsyncResult result)
@@ -744,7 +867,8 @@ namespace System.ServiceModel.Channels
         }
 
         // static Uri -> PeerNode mapping
-        static internal Dictionary<Uri, PeerNodeImplementation> peerNodes = new Dictionary<Uri, PeerNodeImplementation>();
+        static internal Dictionary<Uri, PeerNodeImplementation> peerNodes =
+            new Dictionary<Uri, PeerNodeImplementation>();
 
         internal static PeerNodeImplementation Get(Uri listenUri)
         {
@@ -752,12 +876,15 @@ namespace System.ServiceModel.Channels
             if (!TryGet(listenUri, out node))
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.NoTransportManagerForUri, listenUri)));
+                    new InvalidOperationException(
+                        SR.GetString(SR.NoTransportManagerForUri, listenUri)
+                    )
+                );
             }
             return node;
         }
 
-        internal protected static bool TryGet(Uri listenUri, out PeerNodeImplementation result)
+        protected internal static bool TryGet(Uri listenUri, out PeerNodeImplementation result)
         {
             if (listenUri == null)
             {
@@ -766,8 +893,10 @@ namespace System.ServiceModel.Channels
 
             if (listenUri.Scheme != PeerStrings.Scheme)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("listenUri", SR.GetString(SR.InvalidUriScheme,
-                    listenUri.Scheme, PeerStrings.Scheme));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "listenUri",
+                    SR.GetString(SR.InvalidUriScheme, listenUri.Scheme, PeerStrings.Scheme)
+                );
             }
             result = null;
             bool success = false;
@@ -802,8 +931,10 @@ namespace System.ServiceModel.Channels
 
             if (listenUri.Scheme != PeerStrings.Scheme)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("listenUri", SR.GetString(SR.InvalidUriScheme,
-                    listenUri.Scheme, PeerStrings.Scheme));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "listenUri",
+                    SR.GetString(SR.InvalidUriScheme, listenUri.Scheme, PeerStrings.Scheme)
+                );
             }
 
             // build base uri
@@ -861,11 +992,25 @@ namespace System.ServiceModel.Channels
 
             if (openException == null && DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerNodeOpened, SR.GetString(SR.TraceCodePeerNodeOpened), this.completeTraceRecord, this, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.PeerNodeOpened,
+                    SR.GetString(SR.TraceCodePeerNodeOpened),
+                    this.completeTraceRecord,
+                    this,
+                    null
+                );
             }
             else if (openException != null && DiagnosticUtility.ShouldTraceError)
             {
-                TraceUtility.TraceEvent(TraceEventType.Error, TraceCode.PeerNodeOpenFailed, SR.GetString(SR.TraceCodePeerNodeOpenFailed), this.completeTraceRecord, this, e);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Error,
+                    TraceCode.PeerNodeOpenFailed,
+                    SR.GetString(SR.TraceCodePeerNodeOpenFailed),
+                    this.completeTraceRecord,
+                    this,
+                    e
+                );
             }
 
             connectCompletedEvent.Set();
@@ -878,7 +1023,11 @@ namespace System.ServiceModel.Channels
             if (via == null)
             {
                 Fx.Assert("FloodMessage doesn't contain Via header!");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PeerMessageMustHaveVia, message.Headers.Action)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.PeerMessageMustHaveVia, message.Headers.Action)
+                    )
+                );
             }
             if (TryGetSecurityProtocol(via, out protocol))
             {
@@ -904,12 +1053,25 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        void IPeerNodeMessageHandling.HandleIncomingMessage(MessageBuffer messageBuffer, PeerMessagePropagation propagateFlags,
-            int index, MessageHeader hopHeader, Uri via, Uri to)
+        void IPeerNodeMessageHandling.HandleIncomingMessage(
+            MessageBuffer messageBuffer,
+            PeerMessagePropagation propagateFlags,
+            int index,
+            MessageHeader hopHeader,
+            Uri via,
+            Uri to
+        )
         {
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
-                TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.PeerFloodedMessageReceived, SR.GetString(SR.TraceCodePeerFloodedMessageReceived), this.traceRecord, this, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    TraceCode.PeerFloodedMessageReceived,
+                    SR.GetString(SR.TraceCodePeerFloodedMessageReceived),
+                    this.traceRecord,
+                    this,
+                    null
+                );
             }
 
             if (via == null)
@@ -917,12 +1079,25 @@ namespace System.ServiceModel.Channels
                 Fx.Assert("No VIA in the forwarded message!");
                 using (Message message = messageBuffer.CreateMessage())
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PeerMessageMustHaveVia, message.Headers.Action)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.PeerMessageMustHaveVia, message.Headers.Action)
+                        )
+                    );
                 }
             }
             if ((propagateFlags & PeerMessagePropagation.Local) != 0)
             {
-                DeliverMessageToClientChannels(null, messageBuffer, via, to, messageBuffer.MessageContentType, (int)maxReceivedMessageSize, index, hopHeader);
+                DeliverMessageToClientChannels(
+                    null,
+                    messageBuffer,
+                    via,
+                    to,
+                    messageBuffer.MessageContentType,
+                    (int)maxReceivedMessageSize,
+                    index,
+                    hopHeader
+                );
                 messageBuffer = null;
             }
             else
@@ -931,13 +1106,24 @@ namespace System.ServiceModel.Channels
                 {
                     using (Message traceMessage = messageBuffer.CreateMessage())
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.PeerFloodedMessageNotPropagated, SR.GetString(SR.TraceCodePeerFloodedMessageNotPropagated), this.traceRecord, this, null, traceMessage);
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Verbose,
+                            TraceCode.PeerFloodedMessageNotPropagated,
+                            SR.GetString(SR.TraceCodePeerFloodedMessageNotPropagated),
+                            this.traceRecord,
+                            this,
+                            null,
+                            traceMessage
+                        );
                     }
                 }
             }
         }
 
-        PeerMessagePropagation IPeerNodeMessageHandling.DetermineMessagePropagation(Message message, PeerMessageOrigination origination)
+        PeerMessagePropagation IPeerNodeMessageHandling.DetermineMessagePropagation(
+            Message message,
+            PeerMessageOrigination origination
+        )
         {
             PeerMessagePropagation propagateFlags = PeerMessagePropagation.LocalAndRemote;
             PeerMessagePropagationFilter filter = MessagePropagationFilter;
@@ -948,7 +1134,16 @@ namespace System.ServiceModel.Channels
                     SynchronizationContext context = messagePropagationFilterContext;
                     if (context != null)
                     {
-                        context.Send(delegate(object state) { propagateFlags = filter.ShouldMessagePropagate(message, origination); }, null);
+                        context.Send(
+                            delegate(object state)
+                            {
+                                propagateFlags = filter.ShouldMessagePropagate(
+                                    message,
+                                    origination
+                                );
+                            },
+                            null
+                        );
                     }
                     else
                     {
@@ -957,8 +1152,12 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(SR.GetString(SR.MessagePropagationException), e);
+                    if (Fx.IsFatal(e))
+                        throw;
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(
+                        SR.GetString(SR.MessagePropagationException),
+                        e
+                    );
                 }
             }
 
@@ -971,11 +1170,10 @@ namespace System.ServiceModel.Channels
             return propagateFlags;
         }
 
-
         // Queued callback to actually process the address change
         // The design is such that any address change notifications are queued just like Open/Close operations.
         // So, we need not worry about address changes racing with other address changes or Open/Close operations.
-        // Abort can happen at any time. However, Abort skips unregistering addresses, so this method doesn't have 
+        // Abort can happen at any time. However, Abort skips unregistering addresses, so this method doesn't have
         // to worry about undoing its work if Abort happens.
         void OnIPAddressChange()
         {
@@ -989,7 +1187,7 @@ namespace System.ServiceModel.Channels
             TimeoutHelper timeoutHelper = new TimeoutHelper(ServiceDefaults.SendTimeout);
 
             // Determine if IP addresses have really changed before notifying the resolver
-            // since it is possible that another change notification ahead of this one in the queue 
+            // since it is possible that another change notification ahead of this one in the queue
             // may have already completed notifying the resolver of the most current change.
             if (lclIPHelper != null && config != null)
             {
@@ -999,7 +1197,9 @@ namespace System.ServiceModel.Channels
                 {
                     // Build the nodeAddress with the updated IP addresses
                     nodeAddress = new PeerNodeAddress(
-                        nodeAddress.EndpointAddress, lclIPHelper.GetLocalAddresses());
+                        nodeAddress.EndpointAddress,
+                        lclIPHelper.GetLocalAddresses()
+                    );
                 }
             }
 
@@ -1012,7 +1212,11 @@ namespace System.ServiceModel.Channels
                     lclResolverRegistrationId = resolverRegistrationId;
                     lclRegistered = registered;
                     config.SetListenAddress(nodeAddress);
-                    completeTraceRecord = new PeerNodeTraceRecord(config.NodeId, meshId, nodeAddress);
+                    completeTraceRecord = new PeerNodeTraceRecord(
+                        config.NodeId,
+                        meshId,
+                        nodeAddress
+                    );
                 }
                 else
                 {
@@ -1027,7 +1231,11 @@ namespace System.ServiceModel.Channels
                 {
                     if (lclRegistered)
                     {
-                        resolver.Update(lclResolverRegistrationId, nodeAddress, timeoutHelper.RemainingTime());
+                        resolver.Update(
+                            lclResolverRegistrationId,
+                            nodeAddress,
+                            timeoutHelper.RemainingTime()
+                        );
                     }
                     else
                     {
@@ -1041,14 +1249,22 @@ namespace System.ServiceModel.Channels
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Warning);
             }
             PingConnections();
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerNodeAddressChanged, SR.GetString(SR.TraceCodePeerNodeAddressChanged), this.completeTraceRecord, this, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.PeerNodeAddressChanged,
+                    SR.GetString(SR.TraceCodePeerNodeAddressChanged),
+                    this.completeTraceRecord,
+                    this,
+                    null
+                );
             }
         }
 
@@ -1065,8 +1281,11 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.ResolverException), e));
+                    if (Fx.IsFatal(e))
+                        throw;
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CommunicationException(SR.GetString(SR.ResolverException), e)
+                    );
                 }
                 lock (ThisLock)
                 {
@@ -1091,7 +1310,8 @@ namespace System.ServiceModel.Channels
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Warning);
             }
         }
@@ -1106,7 +1326,7 @@ namespace System.ServiceModel.Channels
                 {
                     needToUnregister = true;
                     lclResolverRegistrationId = resolverRegistrationId;
-                    registered = false;                 // this ensures that the current thread will do unregistration
+                    registered = false; // this ensures that the current thread will do unregistration
                 }
                 resolverRegistrationId = null;
             }
@@ -1118,8 +1338,11 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.ResolverException), e));
+                    if (Fx.IsFatal(e))
+                        throw;
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CommunicationException(SR.GetString(SR.ResolverException), e)
+                    );
                 }
             }
         }
@@ -1199,7 +1422,7 @@ namespace System.ServiceModel.Channels
             IPeerNeighbor n = (IPeerNeighbor)sender;
 
             //hand the authenticated neighbor over to connector.
-            //If neighbor is aborted before 
+            //If neighbor is aborted before
             PeerConnector localConnector = connector;
             if (localConnector != null)
                 connector.OnNeighborAuthenticated(n);
@@ -1216,9 +1439,16 @@ namespace System.ServiceModel.Channels
         void OnOpen(TimeSpan timeout, bool waitForOnline)
         {
             bool aborted = false;
-            EventHandler connectedHandler = delegate(object source, EventArgs args) { connectCompletedEvent.Set(); };
-            EventHandler abortHandler = delegate(object source, EventArgs args) { aborted = true; connectCompletedEvent.Set(); };
-            openException = null;                                               // clear out the open exception from the last Open attempt
+            EventHandler connectedHandler = delegate(object source, EventArgs args)
+            {
+                connectCompletedEvent.Set();
+            };
+            EventHandler abortHandler = delegate(object source, EventArgs args)
+            {
+                aborted = true;
+                connectCompletedEvent.Set();
+            };
+            openException = null; // clear out the open exception from the last Open attempt
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
 
             try
@@ -1229,15 +1459,21 @@ namespace System.ServiceModel.Channels
 
                 if (waitForOnline)
                 {
-                    if (!TimeoutHelper.WaitOne(connectCompletedEvent, timeoutHelper.RemainingTime()))
+                    if (
+                        !TimeoutHelper.WaitOne(connectCompletedEvent, timeoutHelper.RemainingTime())
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new TimeoutException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new TimeoutException()
+                        );
                     }
                 }
 
                 if (aborted)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationObjectAbortedException(SR.GetString(SR.PeerNodeAborted)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CommunicationObjectAbortedException(SR.GetString(SR.PeerNodeAborted))
+                    );
                 }
 
                 // retrieve listen addresses and register with the resolver
@@ -1259,13 +1495,18 @@ namespace System.ServiceModel.Channels
 
                         // The design is such that any address change notifications are queued behind Open operation
                         // So, we need not worry about address changes racing with the initial registration.
-                        RegisterAddress(lclMeshId, lclConfig.GetListenAddress(false), timeoutHelper.RemainingTime());
+                        RegisterAddress(
+                            lclMeshId,
+                            lclConfig.GetListenAddress(false),
+                            timeoutHelper.RemainingTime()
+                        );
                     }
                 }
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 CloseCore(TimeSpan.FromTicks(0), false);
                 throw;
             }
@@ -1293,7 +1534,11 @@ namespace System.ServiceModel.Channels
             {
                 if (ListenUri == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ListenUriNotSet, this.GetType())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ListenUriNotSet, this.GetType())
+                        )
+                    );
                 }
 
                 // extract mesh id from listen uri
@@ -1307,40 +1552,56 @@ namespace System.ServiceModel.Channels
                     System.ServiceModel.Security.CryptoHelper.FillRandomBytes(bytes);
                     for (int i = 0; i < sizeof(ulong); i++)
                         nodeId |= ((ulong)bytes[i]) << i * 8;
-                }
-                while (nodeId == PeerTransportConstants.InvalidNodeId);
+                } while (nodeId == PeerTransportConstants.InvalidNodeId);
 
                 // now that the node id has been generated, create the trace record that describes this
                 traceRecord = new PeerNodeTraceRecord(nodeId, meshId);
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerNodeOpening, SR.GetString(SR.TraceCodePeerNodeOpening), this.traceRecord, this, null);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.PeerNodeOpening,
+                        SR.GetString(SR.TraceCodePeerNodeOpening),
+                        this.traceRecord,
+                        this,
+                        null
+                    );
                 }
 
                 // create the node configuration
-                config = new PeerNodeConfig(meshId,
-                                                nodeId,
-                                                resolver,
-                                                messagePropagationFilter,
-                                                encoder,
-                                                ListenUri, listenIPAddress, port,
-                                                maxReceivedMessageSize, minNeighbors, idealNeighbors, maxNeighbors, maxReferrals,
-                                                connectTimeout, maintainerInterval,
-                                                securityManager,
-                                                this.readerQuotas,
-                                                this.maxBufferPoolSize,
-                                                this.MaxSendQueue,
-                                                this.MaxReceiveQueue);
+                config = new PeerNodeConfig(
+                    meshId,
+                    nodeId,
+                    resolver,
+                    messagePropagationFilter,
+                    encoder,
+                    ListenUri,
+                    listenIPAddress,
+                    port,
+                    maxReceivedMessageSize,
+                    minNeighbors,
+                    idealNeighbors,
+                    maxNeighbors,
+                    maxReferrals,
+                    connectTimeout,
+                    maintainerInterval,
+                    securityManager,
+                    this.readerQuotas,
+                    this.maxBufferPoolSize,
+                    this.MaxSendQueue,
+                    this.MaxReceiveQueue
+                );
 
                 // create components
                 if (listenIPAddress != null)
                     ipHelper = new PeerIPHelper(listenIPAddress);
                 else
                     ipHelper = new PeerIPHelper();
-                bufferManager = BufferManager.CreateBufferManager(64 * config.MaxReceivedMessageSize, (int)config.MaxReceivedMessageSize);
-                neighborManager = new PeerNeighborManager(ipHelper,
-                                                            config,
-                                                            this);
+                bufferManager = BufferManager.CreateBufferManager(
+                    64 * config.MaxReceivedMessageSize,
+                    (int)config.MaxReceivedMessageSize
+                );
+                neighborManager = new PeerNeighborManager(ipHelper, config, this);
                 flooder = PeerFlooder.CreateFlooder(config, neighborManager, this);
                 maintainer = new PeerMaintainer(config, neighborManager, flooder);
                 connector = new PeerConnector(config, neighborManager, maintainer);
@@ -1352,20 +1613,30 @@ namespace System.ServiceModel.Channels
                     services.Add(typeof(IPeerConnectorContract), connector);
                     services.Add(typeof(IPeerFlooderContract<Message, UtilityInfo>), flooder);
                 }
-                service = new PeerService(this.config,
-                                        neighborManager.ProcessIncomingChannel,
-                                        neighborManager.GetNeighborFromProxy,
-                                        services,
-                                        this);
+                service = new PeerService(
+                    this.config,
+                    neighborManager.ProcessIncomingChannel,
+                    neighborManager.GetNeighborFromProxy,
+                    services,
+                    this
+                );
                 this.securityManager.MeshId = this.meshId;
                 service.Open(timeoutHelper.RemainingTime());
 
                 // register for events
-                neighborManager.NeighborClosed += new EventHandler<PeerNeighborCloseEventArgs>(OnNeighborClosed);
-                neighborManager.NeighborClosing += new EventHandler<PeerNeighborCloseEventArgs>(OnNeighborClosing);
+                neighborManager.NeighborClosed += new EventHandler<PeerNeighborCloseEventArgs>(
+                    OnNeighborClosed
+                );
+                neighborManager.NeighborClosing += new EventHandler<PeerNeighborCloseEventArgs>(
+                    OnNeighborClosing
+                );
                 neighborManager.NeighborConnected += new EventHandler(OnNeighborConnected);
-                neighborManager.NeighborOpened += new EventHandler(this.SecurityManager.OnNeighborOpened);
-                this.securityManager.OnNeighborAuthenticated += new EventHandler(this.OnNeighborAuthenticated);
+                neighborManager.NeighborOpened += new EventHandler(
+                    this.SecurityManager.OnNeighborOpened
+                );
+                this.securityManager.OnNeighborAuthenticated += new EventHandler(
+                    this.OnNeighborAuthenticated
+                );
                 neighborManager.Online += new EventHandler(FireOnline);
                 neighborManager.Offline += new EventHandler(FireOffline);
                 ipHelper.AddressChanged += new EventHandler(stateManager.OnIPAddressesChanged);
@@ -1374,7 +1645,10 @@ namespace System.ServiceModel.Channels
                 ipHelper.Open();
 
                 // Set the listen address before opening any more components
-                PeerNodeAddress nodeAddress = new PeerNodeAddress(service.GetListenAddress(), ipHelper.GetLocalAddresses());
+                PeerNodeAddress nodeAddress = new PeerNodeAddress(
+                    service.GetListenAddress(),
+                    ipHelper.GetLocalAddresses()
+                );
                 config.SetListenAddress(nodeAddress);
 
                 neighborManager.Open(service.Binding, service);
@@ -1391,26 +1665,28 @@ namespace System.ServiceModel.Channels
                 lclMeshId = meshId;
                 lclConfig = config;
                 openException = null;
-
             }
 
             // retrieve listen addresses and register with the resolver
             if (isOpen)
             {
                 // attempt to connect to the mesh
-                lclMaintainer.ScheduleConnect(new PeerMaintainer.ConnectCallback(OnConnectionAttemptCompleted));
+                lclMaintainer.ScheduleConnect(
+                    new PeerMaintainer.ConnectCallback(OnConnectionAttemptCompleted)
+                );
             }
         }
 
         void DeliverMessageToClientChannels(
-                                object registrant,
-                                MessageBuffer messageBuffer,
-                                Uri via,
-                                Uri peerTo,
-                                string contentType,
-                                int messageSize,
-                                int index,
-                                MessageHeader hopHeader)
+            object registrant,
+            MessageBuffer messageBuffer,
+            Uri via,
+            Uri peerTo,
+            string contentType,
+            int messageSize,
+            int index,
+            MessageHeader hopHeader
+        )
         {
             Message message = null;
             try
@@ -1436,19 +1712,30 @@ namespace System.ServiceModel.Channels
                                     if (message == null)
                                     {
                                         message = messageBuffer.CreateMessage();
-                                        Fx.Assert(message.Headers.To == to, "To Header is inconsistent in Send() case!");
-                                        Fx.Assert(message.Properties.Via == via, "Via property is inconsistent in Send() case!");
+                                        Fx.Assert(
+                                            message.Headers.To == to,
+                                            "To Header is inconsistent in Send() case!"
+                                        );
+                                        Fx.Assert(
+                                            message.Properties.Via == via,
+                                            "Via property is inconsistent in Send() case!"
+                                        );
                                     }
                                     //incoming message need not be verified MaxReceivedSize
                                     //only do this for local channels
                                     if (registrant != null)
                                     {
-                                        ArraySegment<byte> buffer = encoder.WriteMessage(message, int.MaxValue, bufferManager);
+                                        ArraySegment<byte> buffer = encoder.WriteMessage(
+                                            message,
+                                            int.MaxValue,
+                                            bufferManager
+                                        );
                                         messageSize = (int)buffer.Count;
                                     }
                                 }
                                 // only queue the message for registrants expecting this size
-                                match = match && (messageSize <= mfr.settings.MaxReceivedMessageSize);
+                                match =
+                                    match && (messageSize <= mfr.settings.MaxReceivedMessageSize);
 
                                 // if a filter is specified, it must match as well
                                 if (match && mfr.filters != null)
@@ -1479,7 +1766,10 @@ namespace System.ServiceModel.Channels
                         //mark security header as understood.
                         try
                         {
-                            int i = localCopy.Headers.FindHeader(SecurityJan2004Strings.Security, SecurityJan2004Strings.Namespace);
+                            int i = localCopy.Headers.FindHeader(
+                                SecurityJan2004Strings.Security,
+                                SecurityJan2004Strings.Namespace
+                            );
                             if (i >= 0)
                             {
                                 localCopy.Headers.AddUnderstood(i);
@@ -1558,15 +1848,18 @@ namespace System.ServiceModel.Channels
         {
             int refCount;
             public SecurityProtocol Protocol;
+
             public RefCountedSecurityProtocol(SecurityProtocol securityProtocol)
             {
                 this.Protocol = securityProtocol;
                 this.refCount = 1;
             }
+
             public int AddRef()
             {
                 return ++refCount;
             }
+
             public int Release()
             {
                 return --refCount;
@@ -1574,8 +1867,14 @@ namespace System.ServiceModel.Channels
         }
 
         // internal message filtering
-        internal void RegisterMessageFilter(object registrant, Uri via, PeerMessageFilter[] filters,
-            ITransportFactorySettings settings, MessageAvailableCallback callback, SecurityProtocol securityProtocol)
+        internal void RegisterMessageFilter(
+            object registrant,
+            Uri via,
+            PeerMessageFilter[] filters,
+            ITransportFactorySettings settings,
+            MessageAvailableCallback callback,
+            SecurityProtocol securityProtocol
+        )
         {
             MessageFilterRegistration registration = new MessageFilterRegistration();
             registration.registrant = registrant;
@@ -1628,7 +1927,9 @@ namespace System.ServiceModel.Channels
         {
             if (!isOpen)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.TransportManagerNotOpen)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.TransportManagerNotOpen))
+                );
             }
         }
 
@@ -1636,8 +1937,9 @@ namespace System.ServiceModel.Channels
         {
             if (isOpen)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                    SR.TransportManagerOpen)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.TransportManagerOpen))
+                );
             }
         }
 
@@ -1647,8 +1949,12 @@ namespace System.ServiceModel.Channels
             {
                 // if open return the mesh id, otherwise return the type
                 if (isOpen)
-                    return string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        "{0} ({1})", MeshId, NodeId);
+                    return string.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        "{0} ({1})",
+                        MeshId,
+                        NodeId
+                    );
                 else
                     return this.GetType().ToString();
             }
@@ -1674,8 +1980,11 @@ namespace System.ServiceModel.Channels
         {
             int viaSize = Encoding.UTF8.GetByteCount(uri.OriginalString);
             if (viaSize > maxViaSize)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataException(SR.GetString(
-                    SR.PeerChannelViaTooLong, uri, viaSize, maxViaSize)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidDataException(
+                        SR.GetString(SR.PeerChannelViaTooLong, uri, viaSize, maxViaSize)
+                    )
+                );
         }
 
         internal class ChannelRegistration
@@ -1685,7 +1994,6 @@ namespace System.ServiceModel.Channels
             public ITransportFactorySettings settings;
             public SecurityProtocol securityProtocol;
             public Type channelType;
-
         }
 
         // holds the registration information passed in by channels and listeners. This informtaion is used
@@ -1714,7 +2022,8 @@ namespace System.ServiceModel.Channels
                 if (factory.Resolver == null)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.PeerResolverRequired)));
+                        new InvalidOperationException(SR.GetString(SR.PeerResolverRequired))
+                    );
                 }
                 if (factory.ListenIPAddress != null)
                 {
@@ -1730,7 +2039,11 @@ namespace System.ServiceModel.Channels
                 this.maxBufferPoolSize = factory.MaxBufferPoolSize;
             }
 
-            bool HasMismatchedReaderQuotas(XmlDictionaryReaderQuotas existingOne, XmlDictionaryReaderQuotas newOne, out string result)
+            bool HasMismatchedReaderQuotas(
+                XmlDictionaryReaderQuotas existingOne,
+                XmlDictionaryReaderQuotas newOne,
+                out string result
+            )
             {
                 //check for properties that affect the message
                 result = null;
@@ -1760,23 +2073,27 @@ namespace System.ServiceModel.Channels
                     mismatch = PeerBindingPropertyNames.MaxReceivedMessageSize;
                 else if (maxBufferPoolSize != peerNode.MaxBufferPoolSize)
                     mismatch = PeerBindingPropertyNames.MaxBufferPoolSize;
-                else if (HasMismatchedReaderQuotas(peerNode.ReaderQuotas, readerQuotas, out mismatch))
-                { }
+                else if (
+                    HasMismatchedReaderQuotas(peerNode.ReaderQuotas, readerQuotas, out mismatch)
+                ) { }
                 else if (resolver.GetType() != peerNode.Resolver.GetType())
                     mismatch = PeerBindingPropertyNames.Resolver;
                 else if (!resolver.Equals(peerNode.Resolver))
                     mismatch = PeerBindingPropertyNames.ResolverSettings;
                 else if (listenIPAddress != peerNode.ListenIPAddress)
                 {
-                    if ((listenIPAddress == null || peerNode.ListenIPAddress == null)
-                        ||
-                        (!listenIPAddress.Equals(peerNode.ListenIPAddress)))
+                    if (
+                        (listenIPAddress == null || peerNode.ListenIPAddress == null)
+                        || (!listenIPAddress.Equals(peerNode.ListenIPAddress))
+                    )
                         mismatch = PeerBindingPropertyNames.ListenIPAddress;
                 }
                 else if ((securityManager == null) && (peerNode.SecurityManager != null))
                     mismatch = PeerBindingPropertyNames.Security;
                 if (mismatch != null)
-                    PeerExceptionHelper.ThrowInvalidOperation_PeerConflictingPeerNodeSettings(mismatch);
+                    PeerExceptionHelper.ThrowInvalidOperation_PeerConflictingPeerNodeSettings(
+                        mismatch
+                    );
                 securityManager.CheckIfCompatibleNodeSettings(peerNode.SecurityManager);
             }
 
@@ -1801,10 +2118,14 @@ namespace System.ServiceModel.Channels
             bool localDispatchComplete = false;
 
             object thisLock = new object();
-            object ThisLock { get { return thisLock; } }
+            object ThisLock
+            {
+                get { return thisLock; }
+            }
             Exception floodException = null;
 
-            public SendAsyncResult(AsyncCallback callback, object state) : base(callback, state) { }
+            public SendAsyncResult(AsyncCallback callback, object state)
+                : base(callback, state) { }
 
             public void OnFloodComplete(IAsyncResult result)
             {
@@ -1824,7 +2145,8 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                     floodException = e;
                 }
@@ -1862,10 +2184,7 @@ namespace System.ServiceModel.Channels
 
         bool IPeerNodeMessageHandling.HasMessagePropagation
         {
-            get
-            {
-                return this.messagePropagationFilter != null;
-            }
+            get { return this.messagePropagationFilter != null; }
         }
 
         bool IPeerNodeMessageHandling.IsKnownVia(Uri via)
@@ -1878,33 +2197,44 @@ namespace System.ServiceModel.Channels
             return result;
         }
 
-        bool IPeerNodeMessageHandling.IsNotSeenBefore(Message message, out byte[] id, out int cacheMiss)
+        bool IPeerNodeMessageHandling.IsNotSeenBefore(
+            Message message,
+            out byte[] id,
+            out int cacheMiss
+        )
         {
             PeerFlooder lclFlooder = flooder;
             id = DefaultId;
             cacheMiss = -1;
-            return (lclFlooder != null && lclFlooder.IsNotSeenBefore(message, out id, out cacheMiss));
+            return (
+                lclFlooder != null && lclFlooder.IsNotSeenBefore(message, out id, out cacheMiss)
+            );
         }
 
         public MessageEncodingBindingElement EncodingBindingElement
         {
-            get
-            {
-                return this.EncodingElement;
-            }
+            get { return this.EncodingElement; }
         }
-
     }
 
     interface IPeerNodeMessageHandling
     {
-        void HandleIncomingMessage(MessageBuffer messageBuffer, PeerMessagePropagation propagateFlags, int index, MessageHeader header, Uri via, Uri to);
-        PeerMessagePropagation DetermineMessagePropagation(Message message, PeerMessageOrigination origination);
+        void HandleIncomingMessage(
+            MessageBuffer messageBuffer,
+            PeerMessagePropagation propagateFlags,
+            int index,
+            MessageHeader header,
+            Uri via,
+            Uri to
+        );
+        PeerMessagePropagation DetermineMessagePropagation(
+            Message message,
+            PeerMessageOrigination origination
+        );
         bool HasMessagePropagation { get; }
         bool ValidateIncomingMessage(ref Message data, Uri via);
         bool IsKnownVia(Uri via);
         bool IsNotSeenBefore(Message message, out byte[] id, out int cacheMiss);
         MessageEncodingBindingElement EncodingBindingElement { get; }
     }
-
 }

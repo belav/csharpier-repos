@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         /// char of the tokens <see cref="SyntaxToken.ValueText"/>.  In other words, for each char
         /// in ValueText there will be a VirtualChar in the resultant array.  Each VirtualChar will
         /// specify what char the language considers them to represent, as well as the span of text
-        /// in the original <see cref="SourceText"/> that the language created that char from. 
+        /// in the original <see cref="SourceText"/> that the language created that char from.
         /// </para>
         /// <para>
         /// For most chars this will be a single character span.  i.e. 'c' -> 'c'.  However, for

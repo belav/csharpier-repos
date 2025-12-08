@@ -338,8 +338,8 @@ public partial class HttpConnectionTests
                 CreateConnection(),
                 async (connection) =>
                 {
-                    var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => connection.Transport.Output.WriteAsync(new byte[0]).DefaultTimeout()
+                    var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        connection.Transport.Output.WriteAsync(new byte[0]).DefaultTimeout()
                     );
                     Assert.Equal(
                         $"Cannot access the {nameof(Transport)} pipe before the connection has started.",
@@ -359,8 +359,8 @@ public partial class HttpConnectionTests
                     await connection.StartAsync().DefaultTimeout();
                     await connection.DisposeAsync().DefaultTimeout();
 
-                    var exception = await Assert.ThrowsAsync<ObjectDisposedException>(
-                        () => connection.Transport.Output.WriteAsync(new byte[0]).DefaultTimeout()
+                    var exception = await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                        connection.Transport.Output.WriteAsync(new byte[0]).DefaultTimeout()
                     );
                     Assert.Equal(typeof(HttpConnection).FullName, exception.ObjectName);
                 }
@@ -430,8 +430,8 @@ public partial class HttpConnectionTests
                 ),
                 async (connection) =>
                 {
-                    await Assert.ThrowsAsync<HttpRequestException>(
-                        async () => await connection.StartAsync().DefaultTimeout()
+                    await Assert.ThrowsAsync<HttpRequestException>(async () =>
+                        await connection.StartAsync().DefaultTimeout()
                     );
                 }
             );
@@ -577,8 +577,8 @@ public partial class HttpConnectionTests
                 async (connection) =>
                 {
                     await connection.StartAsync().DefaultTimeout();
-                    await Assert.ThrowsAsync<HttpRequestException>(
-                        async () => await connection.Transport.Input.ReadAllAsync()
+                    await Assert.ThrowsAsync<HttpRequestException>(async () =>
+                        await connection.Transport.Input.ReadAllAsync()
                     );
                 }
             );
@@ -726,8 +726,8 @@ public partial class HttpConnectionTests
                     await connection.Transport.Output.WriteAsync(
                         Encoding.UTF8.GetBytes("Hello world 1")
                     );
-                    await Assert.ThrowsAsync<HttpRequestException>(
-                        async () => await connection.Transport.Input.ReadAllAsync()
+                    await Assert.ThrowsAsync<HttpRequestException>(async () =>
+                        await connection.Transport.Input.ReadAllAsync()
                     );
                 }
             );

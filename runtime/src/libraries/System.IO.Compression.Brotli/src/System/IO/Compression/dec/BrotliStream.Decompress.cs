@@ -95,8 +95,18 @@ namespace System.IO.Compression
         /// <exception cref="System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
         /// <exception cref="System.NotSupportedException">The current <see cref="System.IO.Compression.BrotliStream" /> implementation does not support the read operation.</exception>
         /// <exception cref="System.InvalidOperationException">This call cannot be completed.</exception>
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? asyncCallback, object? asyncState) =>
-            TaskToAsyncResult.Begin(ReadAsync(buffer, offset, count, CancellationToken.None), asyncCallback, asyncState);
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        ) =>
+            TaskToAsyncResult.Begin(
+                ReadAsync(buffer, offset, count, CancellationToken.None),
+                asyncCallback,
+                asyncState
+            );
 
         /// <summary>Waits for the pending asynchronous read to complete. (Consider using the <see cref="System.IO.Stream.ReadAsync(byte[],int,int)" /> method instead.)</summary>
         /// <param name="asyncResult">The reference to the pending asynchronous request to finish.</param>
@@ -116,7 +126,12 @@ namespace System.IO.Compression
         /// <remarks><para>This method enables you to perform resource-intensive I/O operations without blocking the main thread. This performance consideration is particularly important in apps where a time-consuming stream operation can block the UI thread and make your app appear as if it is not working. The async methods are used in conjunction with the <see langword="async" /> and <see langword="await" /> keywords in Visual Basic and C#.</para>
         /// <para>Use the <see cref="System.IO.Compression.BrotliStream.CanRead" /> property to determine whether the current instance supports reading.</para>
         /// <para>If the operation is canceled before it completes, the returned task contains the <see cref="System.Threading.Tasks.TaskStatus.Canceled" /> value for the <see cref="System.Threading.Tasks.Task.Status" /> property.</para></remarks>
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
             return ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
@@ -129,7 +144,10 @@ namespace System.IO.Compression
         /// <remarks><para>This method enables you to perform resource-intensive I/O operations without blocking the main thread. This performance consideration is particularly important in apps where a time-consuming stream operation can block the UI thread and make your app appear as if it is not working. The async methods are used in conjunction with the <see langword="async" /> and <see langword="await" /> keywords in Visual Basic and C#.</para>
         /// <para>Use the <see cref="System.IO.Compression.BrotliStream.CanRead" /> property to determine whether the current instance supports reading.</para>
         /// <para>If the operation is canceled before it completes, the returned task contains the <see cref="System.Threading.Tasks.TaskStatus.Canceled" /> value for the <see cref="System.Threading.Tasks.Task.Status" /> property.</para></remarks>
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default(CancellationToken))
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             if (_mode != CompressionMode.Decompress)
                 throw new InvalidOperationException(SR.BrotliStream_Compress_UnsupportedOperation);
@@ -151,7 +169,9 @@ namespace System.IO.Compression
                     int bytesWritten;
                     while (!TryDecompress(buffer.Span, out bytesWritten))
                     {
-                        int bytesRead = await _stream.ReadAsync(_buffer.AsMemory(_bufferCount), cancellationToken).ConfigureAwait(false);
+                        int bytesRead = await _stream
+                            .ReadAsync(_buffer.AsMemory(_bufferCount), cancellationToken)
+                            .ConfigureAwait(false);
                         if (bytesRead <= 0)
                         {
                             if (s_useStrictValidation && _nonEmptyInput && !buffer.IsEmpty)
@@ -184,7 +204,12 @@ namespace System.IO.Compression
         private bool TryDecompress(Span<byte> destination, out int bytesWritten)
         {
             // Decompress any data we may have in our buffer.
-            OperationStatus lastResult = _decoder.Decompress(new ReadOnlySpan<byte>(_buffer, _bufferOffset, _bufferCount), destination, out int bytesConsumed, out bytesWritten);
+            OperationStatus lastResult = _decoder.Decompress(
+                new ReadOnlySpan<byte>(_buffer, _bufferOffset, _bufferCount),
+                destination,
+                out int bytesConsumed,
+                out bytesWritten
+            );
             if (lastResult == OperationStatus.InvalidData)
             {
                 throw new InvalidOperationException(SR.BrotliStream_Decompress_InvalidData);
@@ -221,8 +246,14 @@ namespace System.IO.Compression
             }
 
             Debug.Assert(
-                lastResult == OperationStatus.NeedMoreData ||
-                (lastResult == OperationStatus.DestinationTooSmall && destination.IsEmpty && _bufferCount == 0), $"{nameof(lastResult)} == {lastResult}, {nameof(destination.Length)} == {destination.Length}");
+                lastResult == OperationStatus.NeedMoreData
+                    || (
+                        lastResult == OperationStatus.DestinationTooSmall
+                        && destination.IsEmpty
+                        && _bufferCount == 0
+                    ),
+                $"{nameof(lastResult)} == {lastResult}, {nameof(destination.Length)} == {destination.Length}"
+            );
 
             // Ensure any left over data is at the beginning of the array so we can fill the remainder.
             if (_bufferCount != 0 && _bufferOffset != 0)
@@ -234,8 +265,12 @@ namespace System.IO.Compression
             return false;
         }
 
-        private static readonly bool s_useStrictValidation =
-            AppContext.TryGetSwitch("System.IO.Compression.UseStrictValidation", out bool strictValidation) ? strictValidation : false;
+        private static readonly bool s_useStrictValidation = AppContext.TryGetSwitch(
+            "System.IO.Compression.UseStrictValidation",
+            out bool strictValidation
+        )
+            ? strictValidation
+            : false;
 
         private static void ThrowInvalidStream() =>
             // The stream is either malicious or poorly implemented and returned a number of

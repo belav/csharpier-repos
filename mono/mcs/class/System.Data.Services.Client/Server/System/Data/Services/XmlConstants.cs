@@ -1,14 +1,13 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
-
 
 namespace System.Data.Services.Client
 {
@@ -288,7 +287,7 @@ namespace System.Data.Services.Client
         internal const string AtomNullAttributeName = "null";
 
         internal const string AtomETagAttributeName = "etag";
-        
+
         internal const string AtomInlineElementName = "inline";
 
         internal const string AtomPropertiesElementName = "properties";
@@ -302,7 +301,7 @@ namespace System.Data.Services.Client
         internal const string XmlCollectionItemElementName = "element";
 
         internal const string XmlErrorElementName = "error";
-        
+
         internal const string XmlErrorCodeElementName = "code";
 
         internal const string XmlErrorInnerElementName = "innererror";
@@ -312,9 +311,9 @@ namespace System.Data.Services.Client
         internal const string XmlErrorTypeElementName = "type";
 
         internal const string XmlErrorStackTraceElementName = "stacktrace";
-        
+
         internal const string XmlErrorMessageElementName = "message";
-        
+
         internal const string XmlFalseLiteral = "false";
 
         internal const string XmlTrueLiteral = "true";
@@ -343,13 +342,17 @@ namespace System.Data.Services.Client
 
         internal const string EdmV1dot2Namespace = "http://schemas.microsoft.com/ado/2008/01/edm";
 
-        internal const string DataWebNamespace = "http://schemas.microsoft.com/ado/2007/08/dataservices";
+        internal const string DataWebNamespace =
+            "http://schemas.microsoft.com/ado/2007/08/dataservices";
 
-        internal const string DataWebMetadataNamespace = "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata";
+        internal const string DataWebMetadataNamespace =
+            "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata";
 
-        internal const string DataWebRelatedNamespace = "http://schemas.microsoft.com/ado/2007/08/dataservices/related/";
+        internal const string DataWebRelatedNamespace =
+            "http://schemas.microsoft.com/ado/2007/08/dataservices/related/";
 
-        internal const string DataWebSchemeNamespace = "http://schemas.microsoft.com/ado/2007/08/dataservices/scheme";
+        internal const string DataWebSchemeNamespace =
+            "http://schemas.microsoft.com/ado/2007/08/dataservices/scheme";
 
         internal const string AppNamespace = "http://www.w3.org/2007/app";
 
@@ -429,7 +432,7 @@ namespace System.Data.Services.Client
 
         internal const string EdmxVersionValue = "1.0";
 
-        #endregion 
+        #endregion
 
         #region const attribute names in the CDM schema XML
 
@@ -454,7 +457,7 @@ namespace System.Data.Services.Client
         internal const string Type = "Type";
 
         internal const string Relationship = "Relationship";
-        #endregion 
+        #endregion
 
         #region values for multiplicity in Edm
 
@@ -492,7 +495,7 @@ namespace System.Data.Services.Client
         internal const string ServiceOperationHttpMethodName = "HttpMethod";
 
         internal const string UriElementName = "uri";
-        
+
         internal const string NextElementName = "next";
 
         internal const string LinkCollectionElementName = "links";
@@ -538,8 +541,8 @@ namespace System.Data.Services.Client
         internal const string JsonRowCountString = "__count";
 
         internal const string JsonNextString = "__next";
-        
-        #endregion 
+
+        #endregion
 
         #region Edm Primitive Type Names
         internal const string EdmNamespace = "Edm";
@@ -588,7 +591,7 @@ namespace System.Data.Services.Client
         internal const string LiteralPrefixDateTime = "datetime";
 
         internal const string LiteralPrefixGuid = "guid";
-        
+
         internal const string XmlBinaryPrefix = "X";
 
         internal const string XmlDecimalLiteralSuffix = "M";
@@ -605,6 +608,6 @@ namespace System.Data.Services.Client
 
         internal const string MicrosoftDataServicesRootUri = "MicrosoftDataServicesRootUri";
 
-        #endregion 
+        #endregion
     }
 }

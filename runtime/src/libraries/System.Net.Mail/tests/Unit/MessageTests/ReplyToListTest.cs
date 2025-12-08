@@ -91,7 +91,10 @@ namespace System.Net.Mail.Tests
 
             _message.PrepareHeaders(false);
 
-            Assert.True(_message.ReplyToList.Count == 3, "ReplyToList did not contain all email addresses");
+            Assert.True(
+                _message.ReplyToList.Count == 3,
+                "ReplyToList did not contain all email addresses"
+            );
 
             string[] s = _message.Headers.GetValues("Reply-To");
             Assert.Equal(1, s.Length);

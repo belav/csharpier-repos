@@ -25,7 +25,8 @@ namespace System.Runtime.InteropServices.JavaScript
                 this.GCVHandle = gcvHandle;
 #if FEATURE_WASM_THREADS
                 this.OwnerThreadId = Thread.CurrentThread.ManagedThreadId;
-                this.SynchronizationContext = SynchronizationContext.Current ?? new SynchronizationContext();
+                this.SynchronizationContext =
+                    SynchronizationContext.Current ?? new SynchronizationContext();
 #endif
             }
         }

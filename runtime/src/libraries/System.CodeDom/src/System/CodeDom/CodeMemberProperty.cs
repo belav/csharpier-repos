@@ -12,7 +12,8 @@ namespace System.CodeDom
 
         public CodeTypeReference PrivateImplementationType { get; set; }
 
-        public CodeTypeReferenceCollection ImplementationTypes => _implementationTypes ??= new CodeTypeReferenceCollection();
+        public CodeTypeReferenceCollection ImplementationTypes =>
+            _implementationTypes ??= new CodeTypeReferenceCollection();
 
         public CodeTypeReference Type
         {
@@ -50,6 +51,7 @@ namespace System.CodeDom
 
         public CodeStatementCollection SetStatements { get; } = new CodeStatementCollection();
 
-        public CodeParameterDeclarationExpressionCollection Parameters { get; } = new CodeParameterDeclarationExpressionCollection();
+        public CodeParameterDeclarationExpressionCollection Parameters { get; } =
+            new CodeParameterDeclarationExpressionCollection();
     }
 }

@@ -16,19 +16,18 @@
 //
 ////////////////////////////////////////////////////////////////////////////
 
-namespace System.Globalization {
-
+namespace System.Globalization
+{
     //This class has only static members and therefore doesn't need to be serialized.
 
     using System;
-    using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Versioning;
-    using System.Reflection;
-    using System.Security;
     using System.Diagnostics.Contracts;
-
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Threading;
 
     public static class CharUnicodeInfo
     {
@@ -39,10 +38,10 @@ namespace System.Globalization {
         //
         // Native methods to access the Unicode category data tables in charinfo.nlp.
         //
-        internal const char  HIGH_SURROGATE_START  = '\ud800';
-        internal const char  HIGH_SURROGATE_END    = '\udbff';
-        internal const char  LOW_SURROGATE_START   = '\udc00';
-        internal const char  LOW_SURROGATE_END     = '\udfff';
+        internal const char HIGH_SURROGATE_START = '\ud800';
+        internal const char HIGH_SURROGATE_END = '\udbff';
+        internal const char LOW_SURROGATE_START = '\udc00';
+        internal const char LOW_SURROGATE_END = '\udfff';
 
         internal const int UNICODE_CATEGORY_OFFSET = 0;
         internal const int BIDI_CATEGORY_OFFSET = 1;
@@ -53,14 +52,15 @@ namespace System.Globalization {
 
         // The native pointer to the 12:4:4 index table of the Unicode cateogry data.
         [SecurityCritical]
-        unsafe static ushort* s_pCategoryLevel1Index;
+        static unsafe ushort* s_pCategoryLevel1Index;
+
         [SecurityCritical]
-        unsafe static byte* s_pCategoriesValue;
+        static unsafe byte* s_pCategoriesValue;
 
         // The native pointer to the 12:4:4 index table of the Unicode numeric data.
         // The value of this index table is an index into the real value table stored in s_pNumericValues.
         [SecurityCritical]
-        unsafe static ushort* s_pNumericLevel1Index;
+        static unsafe ushort* s_pNumericLevel1Index;
 
         // The numeric value table, which is indexed by s_pNumericLevel1Index.
         // Every item contains the value for numeric value.
@@ -68,139 +68,163 @@ namespace System.Globalization {
         // To get around the IA64 alignment issue.  Our double data is aligned in 8-byte boundary, but loader loads the embeded table starting
         // at 4-byte boundary.  This cause a alignment issue since double is 8-byte.
         [SecurityCritical]
-        unsafe static byte* s_pNumericValues;
+        static unsafe byte* s_pNumericValues;
 
         // The digit value table, which is indexed by s_pNumericLevel1Index.  It shares the same indice as s_pNumericValues.
         // Every item contains the value for decimal digit/digit value.
         [SecurityCritical]
-        unsafe static DigitValues* s_pDigitValues;
+        static unsafe DigitValues* s_pDigitValues;
 
         internal const String UNICODE_INFO_FILE_NAME = "charinfo.nlp";
+
         // The starting codepoint for Unicode plane 1.  Plane 1 contains 0x010000 ~ 0x01ffff.
         internal const int UNICODE_PLANE01_START = 0x10000;
-
 
         //
         // This is the header for the native data table that we load from UNICODE_INFO_FILE_NAME.
         //
         // Excplicit layout is used here since a syntax like char[16] can not be used in sequential layout.
         [StructLayout(LayoutKind.Explicit)]
-        internal unsafe struct UnicodeDataHeader {
+        internal unsafe struct UnicodeDataHeader
+        {
             [FieldOffset(0)]
-            internal char TableName;    // WCHAR[16]
+            internal char TableName; // WCHAR[16]
+
             [FieldOffset(0x20)]
-            internal ushort version;    // WORD[4]
+            internal ushort version; // WORD[4]
+
             [FieldOffset(0x28)]
             internal uint OffsetToCategoriesIndex; // DWORD
+
             [FieldOffset(0x2c)]
             internal uint OffsetToCategoriesValue; // DWORD
+
             [FieldOffset(0x30)]
             internal uint OffsetToNumbericIndex; // DWORD
+
             [FieldOffset(0x34)]
             internal uint OffsetToDigitValue; // DWORD
+
             [FieldOffset(0x38)]
             internal uint OffsetToNumbericValue; // DWORD
-
         }
 
         // NOTE: It's important to specify pack size here, since the size of the structure is 2 bytes.  Otherwise,
         // the default pack size will be 4.
 
-        [StructLayout(LayoutKind.Sequential, Pack=2)]
-        internal struct DigitValues {
+        [StructLayout(LayoutKind.Sequential, Pack = 2)]
+        internal struct DigitValues
+        {
             internal sbyte decimalDigit;
             internal sbyte digit;
         }
 
-        unsafe private static int EndianSwap(int value)
+        private static unsafe int EndianSwap(int value)
         {
-            if (!BitConverter.IsLittleEndian) {
-                byte *ptr = (byte *) &value;
+            if (!BitConverter.IsLittleEndian)
+            {
+                byte* ptr = (byte*)&value;
                 int res;
-                byte *buf = (byte *) &res;
+                byte* buf = (byte*)&res;
                 int t = sizeof(int) - 1;
 
-                for (int i = 0; i < sizeof(int); i++) 
-                    buf[t-i] = ptr[i];
-                
-                return(res);
-            } else
-                return(value);
+                for (int i = 0; i < sizeof(int); i++)
+                    buf[t - i] = ptr[i];
+
+                return (res);
+            }
+            else
+                return (value);
         }
 
-        unsafe private static uint EndianSwap(uint value)
+        private static unsafe uint EndianSwap(uint value)
         {
-            if (!BitConverter.IsLittleEndian) {
-                byte *ptr = (byte *) &value;
+            if (!BitConverter.IsLittleEndian)
+            {
+                byte* ptr = (byte*)&value;
                 uint res;
-                byte *buf = (byte *) &res;
+                byte* buf = (byte*)&res;
                 uint t = sizeof(uint) - 1;
 
-                for (uint i = 0; i < sizeof(uint); i++) 
-                    buf[t-i] = ptr[i];
-                
-                return(res);
-            } else
-                return(value);
+                for (uint i = 0; i < sizeof(uint); i++)
+                    buf[t - i] = ptr[i];
+
+                return (res);
+            }
+            else
+                return (value);
         }
 
-        unsafe private static ushort EndianSwap(ushort value)
+        private static unsafe ushort EndianSwap(ushort value)
         {
-            if (!BitConverter.IsLittleEndian) {
-                byte *ptr = (byte *) &value;
+            if (!BitConverter.IsLittleEndian)
+            {
+                byte* ptr = (byte*)&value;
                 ushort res;
-                byte *buf = (byte *) &res;
+                byte* buf = (byte*)&res;
                 ushort t = sizeof(ushort) - 1;
 
-                for (ushort i = 0; i < sizeof(ushort); i++) 
-                    buf[t-i] = ptr[i];
-                
-                return(res);
-            } else
-                return(value);
+                for (ushort i = 0; i < sizeof(ushort); i++)
+                    buf[t - i] = ptr[i];
+
+                return (res);
+            }
+            else
+                return (value);
         }
 
-        unsafe private static double EndianSwap(double value)
+        private static unsafe double EndianSwap(double value)
         {
-            if (!BitConverter.IsLittleEndian) {
-                byte *ptr = (byte *) &value;
+            if (!BitConverter.IsLittleEndian)
+            {
+                byte* ptr = (byte*)&value;
                 double res;
-                byte *buf = (byte *) &res;
+                byte* buf = (byte*)&res;
                 ushort t = sizeof(double) - 1;
 
                 for (ushort i = 0; i < sizeof(double); i++)
-                    buf[t-i] = ptr[i];
+                    buf[t - i] = ptr[i];
 
-                return(res);
-            } else
-                return(value);
+                return (res);
+            }
+            else
+                return (value);
         }
-
 
         //We need to allocate the underlying table that provides us with the information that we
         //use.  We allocate this once in the class initializer and then we don't need to worry
         //about it again.
         //
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
-        unsafe static bool InitTable() {
-
+        static unsafe bool InitTable()
+        {
             // Go to native side and get pointer to the native table
-            byte * pDataTable = GlobalizationAssembly.GetGlobalizationResourceBytePtr(typeof(CharUnicodeInfo).Assembly, UNICODE_INFO_FILE_NAME);
+            byte* pDataTable = GlobalizationAssembly.GetGlobalizationResourceBytePtr(
+                typeof(CharUnicodeInfo).Assembly,
+                UNICODE_INFO_FILE_NAME
+            );
 
             UnicodeDataHeader* mainHeader = (UnicodeDataHeader*)pDataTable;
 
             // Set up the native pointer to different part of the tables.
-            s_pCategoryLevel1Index = (ushort*) (pDataTable + EndianSwap(mainHeader->OffsetToCategoriesIndex));
-            s_pCategoriesValue = (byte*) (pDataTable + EndianSwap(mainHeader->OffsetToCategoriesValue));
-            s_pNumericLevel1Index = (ushort*) (pDataTable + EndianSwap(mainHeader->OffsetToNumbericIndex));
-            s_pNumericValues = (byte*) (pDataTable + EndianSwap(mainHeader->OffsetToNumbericValue));
-            s_pDigitValues = (DigitValues*) (pDataTable + EndianSwap(mainHeader->OffsetToDigitValue));
+            s_pCategoryLevel1Index = (ushort*)(
+                pDataTable + EndianSwap(mainHeader->OffsetToCategoriesIndex)
+            );
+            s_pCategoriesValue = (byte*)(
+                pDataTable + EndianSwap(mainHeader->OffsetToCategoriesValue)
+            );
+            s_pNumericLevel1Index = (ushort*)(
+                pDataTable + EndianSwap(mainHeader->OffsetToNumbericIndex)
+            );
+            s_pNumericValues = (byte*)(pDataTable + EndianSwap(mainHeader->OffsetToNumbericValue));
+            s_pDigitValues = (DigitValues*)(
+                pDataTable + EndianSwap(mainHeader->OffsetToDigitValue)
+            );
 
             return true;
         }
-
 
         ////////////////////////////////////////////////////////////////////////
         //
@@ -214,14 +238,18 @@ namespace System.Globalization {
         //
         ////////////////////////////////////////////////////////////////////////
 
-        internal static int InternalConvertToUtf32(String s, int index) {
+        internal static int InternalConvertToUtf32(String s, int index)
+        {
             Contract.Assert(s != null, "s != null");
             Contract.Assert(index >= 0 && index < s.Length, "index < s.Length");
-            if (index < s.Length - 1) {
+            if (index < s.Length - 1)
+            {
                 int temp1 = (int)s[index] - HIGH_SURROGATE_START;
-                if (temp1 >= 0 && temp1 <= 0x3ff) {
-                    int temp2 = (int)s[index+1] - LOW_SURROGATE_START;
-                    if (temp2 >= 0 && temp2 <= 0x3ff) {
+                if (temp1 >= 0 && temp1 <= 0x3ff)
+                {
+                    int temp2 = (int)s[index + 1] - LOW_SURROGATE_START;
+                    if (temp2 >= 0 && temp2 <= 0x3ff)
+                    {
                         // Convert the surrogate to UTF32 and get the result.
                         return ((temp1 * 0x400) + temp2 + UNICODE_PLANE01_START);
                     }
@@ -252,16 +280,20 @@ namespace System.Globalization {
         //
         ////////////////////////////////////////////////////////////////////////
 
-        internal static int InternalConvertToUtf32(String s, int index, out int charLength) {
+        internal static int InternalConvertToUtf32(String s, int index, out int charLength)
+        {
             Contract.Assert(s != null, "s != null");
             Contract.Assert(s.Length > 0, "s.Length > 0");
             Contract.Assert(index >= 0 && index < s.Length, "index >= 0 && index < s.Length");
             charLength = 1;
-            if (index < s.Length - 1) {
+            if (index < s.Length - 1)
+            {
                 int temp1 = (int)s[index] - HIGH_SURROGATE_START;
-                if (temp1 >= 0 && temp1 <= 0x3ff) {
-                    int temp2 = (int)s[index+1] - LOW_SURROGATE_START;
-                    if (temp2 >= 0 && temp2 <= 0x3ff) {
+                if (temp1 >= 0 && temp1 <= 0x3ff)
+                {
+                    int temp2 = (int)s[index + 1] - LOW_SURROGATE_START;
+                    if (temp2 >= 0 && temp2 <= 0x3ff)
+                    {
                         // Convert the surrogate to UTF32 and get the result.
                         charLength++;
                         return ((temp1 * 0x400) + temp2 + UNICODE_PLANE01_START);
@@ -287,7 +319,8 @@ namespace System.Globalization {
             UnicodeCategory uc = GetUnicodeCategory(s, index);
             // In Unicode 3.0, U+2028 is the only character which is under the category "LineSeparator".
             // And U+2029 is th eonly character which is under the category "ParagraphSeparator".
-            switch (uc) {
+            switch (uc)
+            {
                 case (UnicodeCategory.SpaceSeparator):
                 case (UnicodeCategory.LineSeparator):
                 case (UnicodeCategory.ParagraphSeparator):
@@ -296,13 +329,13 @@ namespace System.Globalization {
             return (false);
         }
 
-
         internal static bool IsWhiteSpace(char c)
         {
             UnicodeCategory uc = GetUnicodeCategory(c);
             // In Unicode 3.0, U+2028 is the only character which is under the category "LineSeparator".
             // And U+2029 is th eonly character which is under the category "ParagraphSeparator".
-            switch (uc) {
+            switch (uc)
+            {
                 case (UnicodeCategory.SpaceSeparator):
                 case (UnicodeCategory.LineSeparator):
                 case (UnicodeCategory.ParagraphSeparator):
@@ -317,8 +350,9 @@ namespace System.Globalization {
         //
         // Note that for ch in the range D800-DFFF we just treat it as any other non-numeric character
         //
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        internal unsafe static double InternalGetNumericValue(int ch) {
+        [System.Security.SecuritySafeCritical] // auto-generated
+        internal static unsafe double InternalGetNumericValue(int ch)
+        {
             Contract.Assert(ch >= 0 && ch <= 0x10ffff, "ch is not in valid Unicode range.");
             // Get the level 2 item from the highest 12 bit (8 - 19) of ch.
             ushort index = EndianSwap(s_pNumericLevel1Index[ch >> 8]);
@@ -332,7 +366,8 @@ namespace System.Globalization {
             // To get around the IA64 alignment issue.  Our double data is aligned in 8-byte boundary, but loader loads the embeded table starting
             // at 4-byte boundary.  This cause a alignment issue since double is 8-byte.
             byte* pSourcePtr = &(s_pNumericValues[pBytePtr[(ch & 0x000f)] * sizeof(double)]);
-            if (((long)pSourcePtr % 8) != 0) {
+            if (((long)pSourcePtr % 8) != 0)
+            {
                 // We are not aligned in 8-byte boundary.  Do a copy.
                 double ret;
                 byte* retPtr = (byte*)&ret;
@@ -349,9 +384,10 @@ namespace System.Globalization {
         // This is called by the public char and string, index versions
         //
         // Note that for ch in the range D800-DFFF we just treat it as any other non-numeric character
-        //        
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        internal unsafe static DigitValues* InternalGetDigitValues(int ch) {
+        //
+        [System.Security.SecuritySafeCritical] // auto-generated
+        internal static unsafe DigitValues* InternalGetDigitValues(int ch)
+        {
             Contract.Assert(ch >= 0 && ch <= 0x10ffff, "ch is not in valid Unicode range.");
             // Get the level 2 item from the highest 12 bit (8 - 19) of ch.
             ushort index = s_pNumericLevel1Index[ch >> 8];
@@ -364,16 +400,17 @@ namespace System.Globalization {
             return &(s_pDigitValues[pBytePtr[(ch & 0x000f)]]);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        internal unsafe static sbyte InternalGetDecimalDigitValue(int ch) {
+        [System.Security.SecuritySafeCritical] // auto-generated
+        internal static unsafe sbyte InternalGetDecimalDigitValue(int ch)
+        {
             return (InternalGetDigitValues(ch)->decimalDigit);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        internal unsafe static sbyte InternalGetDigitValue(int ch) {
+        [System.Security.SecuritySafeCritical] // auto-generated
+        internal static unsafe sbyte InternalGetDigitValue(int ch)
+        {
             return (InternalGetDigitValues(ch)->digit);
         }
-
 
         ////////////////////////////////////////////////////////////////////////
         //
@@ -390,22 +427,26 @@ namespace System.Globalization {
         //
         ////////////////////////////////////////////////////////////////////////
 
-
-        public static double GetNumericValue(char ch) {
+        public static double GetNumericValue(char ch)
+        {
             return (InternalGetNumericValue(ch));
         }
 
-
-        public static double GetNumericValue(String s, int index) {
-            if (s == null) {
+        public static double GetNumericValue(String s, int index)
+        {
+            if (s == null)
+            {
                 throw new ArgumentNullException("s");
             }
-            if (index < 0 || index >= s.Length) {
-                throw new ArgumentOutOfRangeException("index", Environment.GetResourceString("ArgumentOutOfRange_Index"));
+            if (index < 0 || index >= s.Length)
+            {
+                throw new ArgumentOutOfRangeException(
+                    "index",
+                    Environment.GetResourceString("ArgumentOutOfRange_Index")
+                );
             }
             Contract.EndContractBlock();
             return (InternalGetNumericValue(InternalConvertToUtf32(s, index)));
-
         }
 
         ////////////////////////////////////////////////////////////////////////
@@ -425,18 +466,23 @@ namespace System.Globalization {
         //
         ////////////////////////////////////////////////////////////////////////
 
-
-        public static int GetDecimalDigitValue(char ch) {
+        public static int GetDecimalDigitValue(char ch)
+        {
             return (InternalGetDecimalDigitValue(ch));
         }
 
-
-        public static int GetDecimalDigitValue(String s, int index) {
-            if (s == null) {
+        public static int GetDecimalDigitValue(String s, int index)
+        {
+            if (s == null)
+            {
                 throw new ArgumentNullException("s");
             }
-            if (index < 0 || index >= s.Length) {
-                throw new ArgumentOutOfRangeException("index", Environment.GetResourceString("ArgumentOutOfRange_Index"));
+            if (index < 0 || index >= s.Length)
+            {
+                throw new ArgumentOutOfRangeException(
+                    "index",
+                    Environment.GetResourceString("ArgumentOutOfRange_Index")
+                );
             }
             Contract.EndContractBlock();
 
@@ -462,18 +508,23 @@ namespace System.Globalization {
         //
         ////////////////////////////////////////////////////////////////////////
 
-
-        public static int GetDigitValue(char ch) {
+        public static int GetDigitValue(char ch)
+        {
             return (InternalGetDigitValue(ch));
         }
 
-
-        public static int GetDigitValue(String s, int index) {
-            if (s == null) {
+        public static int GetDigitValue(String s, int index)
+        {
+            if (s == null)
+            {
                 throw new ArgumentNullException("s");
             }
-            if (index < 0 || index >= s.Length) {
-                throw new ArgumentOutOfRangeException("index", Environment.GetResourceString("ArgumentOutOfRange_Index"));
+            if (index < 0 || index >= s.Length)
+            {
+                throw new ArgumentOutOfRangeException(
+                    "index",
+                    Environment.GetResourceString("ArgumentOutOfRange_Index")
+                );
             }
             Contract.EndContractBlock();
             return (InternalGetDigitValue(InternalConvertToUtf32(s, index)));
@@ -481,25 +532,28 @@ namespace System.Globalization {
 
         public static UnicodeCategory GetUnicodeCategory(char ch)
         {
-            return (InternalGetUnicodeCategory(ch)) ;
+            return (InternalGetUnicodeCategory(ch));
         }
 
 #if MONO
-        public static UnicodeCategory GetUnicodeCategory(int codePoint) => GetUnicodeCategory((char)codePoint);
+        public static UnicodeCategory GetUnicodeCategory(int codePoint) =>
+            GetUnicodeCategory((char)codePoint);
 #endif
 
         public static UnicodeCategory GetUnicodeCategory(String s, int index)
         {
-            if (s==null)
+            if (s == null)
                 throw new ArgumentNullException("s");
-            if (((uint)index)>=((uint)s.Length)) {
+            if (((uint)index) >= ((uint)s.Length))
+            {
                 throw new ArgumentOutOfRangeException("index");
             }
             Contract.EndContractBlock();
             return InternalGetUnicodeCategory(s, index);
         }
 
-        internal unsafe static UnicodeCategory InternalGetUnicodeCategory(int ch) {
+        internal static unsafe UnicodeCategory InternalGetUnicodeCategory(int ch)
+        {
             return ((UnicodeCategory)InternalGetCategoryValue(ch, UNICODE_CATEGORY_OFFSET));
         }
 
@@ -517,9 +571,9 @@ namespace System.Globalization {
         //
         ////////////////////////////////////////////////////////////////////////
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        internal unsafe static byte InternalGetCategoryValue(int ch, int offset) {
-
+        [System.Security.SecuritySafeCritical] // auto-generated
+        internal static unsafe byte InternalGetCategoryValue(int ch, int offset)
+        {
             Contract.Assert(ch >= 0 && ch <= 0x10ffff, "ch is not in valid Unicode range.");
             // Get the level 2 item from the highest 12 bit (8 - 19) of ch.
             ushort index = EndianSwap(s_pCategoryLevel1Index[ch >> 8]);
@@ -538,18 +592,25 @@ namespace System.Globalization {
             return (uc);
         }
 
-//      internal static BidiCategory GetBidiCategory(char ch) {
-//          return ((BidiCategory)InternalGetCategoryValue(c, BIDI_CATEGORY_OFFSET));
-//      }
+        //      internal static BidiCategory GetBidiCategory(char ch) {
+        //          return ((BidiCategory)InternalGetCategoryValue(c, BIDI_CATEGORY_OFFSET));
+        //      }
 
-        internal static BidiCategory GetBidiCategory(String s, int index) {
-            if (s==null)
+        internal static BidiCategory GetBidiCategory(String s, int index)
+        {
+            if (s == null)
                 throw new ArgumentNullException("s");
-            if (((uint)index)>=((uint)s.Length)) {
+            if (((uint)index) >= ((uint)s.Length))
+            {
                 throw new ArgumentOutOfRangeException("index");
             }
             Contract.EndContractBlock();
-            return ((BidiCategory)InternalGetCategoryValue(InternalConvertToUtf32(s, index), BIDI_CATEGORY_OFFSET));
+            return (
+                (BidiCategory)InternalGetCategoryValue(
+                    InternalConvertToUtf32(s, index),
+                    BIDI_CATEGORY_OFFSET
+                )
+            );
         }
 
         ////////////////////////////////////////////////////////////////////////
@@ -565,7 +626,8 @@ namespace System.Globalization {
         //
         ////////////////////////////////////////////////////////////////////////
 
-        internal static UnicodeCategory InternalGetUnicodeCategory(String value, int index) {
+        internal static UnicodeCategory InternalGetUnicodeCategory(String value, int index)
+        {
             Contract.Assert(value != null, "value can not be null");
             Contract.Assert(index < value.Length, "index < value.Length");
 
@@ -579,20 +641,27 @@ namespace System.Globalization {
         //
         ////////////////////////////////////////////////////////////////////////
 
-        internal static UnicodeCategory InternalGetUnicodeCategory(String str, int index, out int charLength) {
+        internal static UnicodeCategory InternalGetUnicodeCategory(
+            String str,
+            int index,
+            out int charLength
+        )
+        {
             Contract.Assert(str != null, "str can not be null");
-            Contract.Assert(str.Length > 0, "str.Length > 0");;
+            Contract.Assert(str.Length > 0, "str.Length > 0");
+            ;
             Contract.Assert(index >= 0 && index < str.Length, "index >= 0 && index < str.Length");
 
             return (InternalGetUnicodeCategory(InternalConvertToUtf32(str, index, out charLength)));
         }
 
-        internal static bool IsCombiningCategory(UnicodeCategory uc) {
+        internal static bool IsCombiningCategory(UnicodeCategory uc)
+        {
             Contract.Assert(uc >= 0, "uc >= 0");
             return (
-                uc == UnicodeCategory.NonSpacingMark ||
-                uc == UnicodeCategory.SpacingCombiningMark ||
-                uc == UnicodeCategory.EnclosingMark
+                uc == UnicodeCategory.NonSpacingMark
+                || uc == UnicodeCategory.SpacingCombiningMark
+                || uc == UnicodeCategory.EnclosingMark
             );
         }
     }

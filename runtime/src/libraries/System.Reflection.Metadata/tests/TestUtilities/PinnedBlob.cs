@@ -12,9 +12,7 @@ namespace System.Reflection.Metadata.Tests
         private readonly byte[] _blob;
 
         public PinnedBlob(ImmutableArray<byte> blob)
-            : this(ImmutableCollectionsMarshal.AsArray(blob))
-        {
-        }
+            : this(ImmutableCollectionsMarshal.AsArray(blob)) { }
 
         public unsafe PinnedBlob(byte[] blob)
         {

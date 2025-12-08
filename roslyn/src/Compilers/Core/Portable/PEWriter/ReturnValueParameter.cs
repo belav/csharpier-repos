@@ -50,9 +50,7 @@ namespace Microsoft.Cci
             return null;
         }
 
-        public void Dispatch(MetadataVisitor visitor)
-        {
-        }
+        public void Dispatch(MetadataVisitor visitor) { }
 
         public bool HasDefaultValue
         {

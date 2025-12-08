@@ -25,8 +25,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             }
         }
 
-        public ExpressionStatementSyntax Update(ExpressionSyntax expression, SyntaxToken semicolonToken)
-            => Update(AttributeLists, expression, semicolonToken);
+        public ExpressionStatementSyntax Update(
+            ExpressionSyntax expression,
+            SyntaxToken semicolonToken
+        ) => Update(AttributeLists, expression, semicolonToken);
     }
 }
 
@@ -34,7 +36,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     public partial class SyntaxFactory
     {
-        public static ExpressionStatementSyntax ExpressionStatement(ExpressionSyntax expression, SyntaxToken semicolonToken)
-            => ExpressionStatement(attributeLists: default, expression, semicolonToken);
+        public static ExpressionStatementSyntax ExpressionStatement(
+            ExpressionSyntax expression,
+            SyntaxToken semicolonToken
+        ) => ExpressionStatement(attributeLists: default, expression, semicolonToken);
     }
 }

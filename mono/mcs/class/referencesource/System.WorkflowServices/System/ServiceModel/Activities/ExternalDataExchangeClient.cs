@@ -18,12 +18,20 @@ namespace System.ServiceModel.Activities
             ContractDescription contractDescription = this.Endpoint.Contract;
             foreach (OperationDescription opDesc in contractDescription.Operations)
             {
-                NetDataContractSerializerOperationBehavior netDataContractSerializerOperationBehavior = NetDataContractSerializerOperationBehavior.ApplyTo(opDesc);
-                Fx.Assert(netDataContractSerializerOperationBehavior != null, "IExternalDataExchange must use NetDataContractSerializer.");
+                NetDataContractSerializerOperationBehavior netDataContractSerializerOperationBehavior =
+                    NetDataContractSerializerOperationBehavior.ApplyTo(opDesc);
+                Fx.Assert(
+                    netDataContractSerializerOperationBehavior != null,
+                    "IExternalDataExchange must use NetDataContractSerializer."
+                );
             }
         }
 
-        public void RaiseEvent(ExternalDataEventArgs eventArgs, IComparable queueName, object message)
+        public void RaiseEvent(
+            ExternalDataEventArgs eventArgs,
+            IComparable queueName,
+            object message
+        )
         {
             base.Channel.RaiseEvent(eventArgs, queueName, message);
         }

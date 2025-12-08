@@ -67,6 +67,7 @@ namespace System.Text.RegularExpressions
         /// handle its own data.
         /// </remarks>
         protected internal int[]? runtrack;
+
         /// <summary>Backtracking stack position</summary>
         protected internal int runtrackpos;
 
@@ -81,6 +82,7 @@ namespace System.Text.RegularExpressions
         /// that this stack is empty.
         /// </remarks>
         protected internal int[]? runstack;
+
         /// <summary>Utility stack position</summary>
         protected internal int runstackpos;
 
@@ -90,6 +92,7 @@ namespace System.Text.RegularExpressions
         /// In the case of a balanced match, we push BOTH groups onto the stack.
         /// </remarks>
         protected internal int[]? runcrawl;
+
         /// <summary>Crawl stack position</summary>
         protected internal int runcrawlpos;
 
@@ -98,6 +101,7 @@ namespace System.Text.RegularExpressions
 
         /// <summary>Result object</summary>
         protected internal Match? runmatch;
+
         /// <summary>Regex object</summary>
         protected internal Regex? runregex;
 
@@ -159,20 +163,46 @@ namespace System.Text.RegularExpressions
             InternalScan(runregex!, beginning, beginning + text.Length);
         }
 
-        [Obsolete(Obsoletions.RegexExtensibilityImplMessage, DiagnosticId = Obsoletions.RegexExtensibilityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        protected Match? Scan(Regex regex, string text, int textbeg, int textend, int textstart, int prevlen, bool quick) =>
-            Scan(regex, text, textbeg, textend, textstart, prevlen, quick, regex.MatchTimeout);
+        [Obsolete(
+            Obsoletions.RegexExtensibilityImplMessage,
+            DiagnosticId = Obsoletions.RegexExtensibilityDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        protected Match? Scan(
+            Regex regex,
+            string text,
+            int textbeg,
+            int textend,
+            int textstart,
+            int prevlen,
+            bool quick
+        ) => Scan(regex, text, textbeg, textend, textstart, prevlen, quick, regex.MatchTimeout);
 
         /// <summary>
         /// This method's body is only kept since it is a protected member that could be called by someone outside
         /// the assembly.
         /// </summary>
-        [Obsolete(Obsoletions.RegexExtensibilityImplMessage, DiagnosticId = Obsoletions.RegexExtensibilityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        protected internal Match? Scan(Regex regex, string text, int textbeg, int textend, int textstart, int prevlen, bool quick, TimeSpan timeout)
+        [Obsolete(
+            Obsoletions.RegexExtensibilityImplMessage,
+            DiagnosticId = Obsoletions.RegexExtensibilityDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        protected internal Match? Scan(
+            Regex regex,
+            string text,
+            int textbeg,
+            int textend,
+            int textstart,
+            int prevlen,
+            bool quick,
+            TimeSpan timeout
+        )
         {
             InitializeTimeout(timeout);
 
-            RegexRunnerMode mode = quick ? RegexRunnerMode.ExistenceRequired : RegexRunnerMode.FullMatchRequired;
+            RegexRunnerMode mode = quick
+                ? RegexRunnerMode.ExistenceRequired
+                : RegexRunnerMode.FullMatchRequired;
 
             // We set runtext before calling InitializeForScan so that runmatch object is initialized with the text
             runtext = text;
@@ -188,7 +218,8 @@ namespace System.Text.RegularExpressions
             // to call FindFirstChar again, as well as the stopping position for the loop.  We generally
             // bump by 1 and stop at textend, but if we're examining right-to-left, we instead bump
             // by -1 and stop at textbeg.
-            int bump = 1, stoppos = textend;
+            int bump = 1,
+                stoppos = textend;
             if (regex.RightToLeft)
             {
                 bump = -1;
@@ -225,7 +256,6 @@ namespace System.Text.RegularExpressions
             }
 
             return match;
-
         }
 
         private Match InternalScan(Regex regex, int textbeg, int textend)
@@ -234,7 +264,8 @@ namespace System.Text.RegularExpressions
             // to call FindFirstChar again, as well as the stopping position for the loop.  We generally
             // bump by 1 and stop at textend, but if we're examining right-to-left, we instead bump
             // by -1 and stop at textbeg.
-            int bump = 1, stoppos = textend;
+            int bump = 1,
+                stoppos = textend;
             if (regex.RightToLeft)
             {
                 bump = -1;
@@ -273,7 +304,12 @@ namespace System.Text.RegularExpressions
             }
         }
 
-        internal void InitializeForScan(Regex regex, ReadOnlySpan<char> text, int textstart, RegexRunnerMode mode)
+        internal void InitializeForScan(
+            Regex regex,
+            ReadOnlySpan<char> text,
+            int textstart,
+            RegexRunnerMode mode
+        )
         {
             // Store remaining arguments into fields now that we're going to start the scan.
             // These are referenced by the derived runner.
@@ -288,9 +324,15 @@ namespace System.Text.RegularExpressions
             if (m is null)
             {
                 // Use a hashtabled Match object if the capture numbers are sparse
-                runmatch = runregex!.caps is null ?
-                    new Match(runregex, runregex.capsize, runtext, text.Length) :
-                    new MatchSparse(runregex, runregex.caps, runregex.capsize, runtext, text.Length);
+                runmatch = runregex!.caps is null
+                    ? new Match(runregex, runregex.capsize, runtext, text.Length)
+                    : new MatchSparse(
+                        runregex,
+                        runregex.caps,
+                        runregex.capsize,
+                        runtext,
+                        text.Length
+                    );
             }
             else
             {
@@ -361,7 +403,12 @@ namespace System.Text.RegularExpressions
                 ThrowRegexTimeout();
             }
 
-            void ThrowRegexTimeout() => throw new RegexMatchTimeoutException(runtext ?? string.Empty, runregex!.pattern!, TimeSpan.FromMilliseconds(_timeout));
+            void ThrowRegexTimeout() =>
+                throw new RegexMatchTimeoutException(
+                    runtext ?? string.Empty,
+                    runregex!.pattern!,
+                    TimeSpan.FromMilliseconds(_timeout)
+                );
         }
 
         /// <summary>
@@ -407,15 +454,21 @@ namespace System.Text.RegularExpressions
         /// </summary>
         protected bool IsBoundary(int index, int startpos, int endpos)
         {
-            return (index > startpos && RegexCharClass.IsBoundaryWordChar(runtext![index - 1])) !=
-                   (index < endpos && RegexCharClass.IsBoundaryWordChar(runtext![index]));
+            return (index > startpos && RegexCharClass.IsBoundaryWordChar(runtext![index - 1]))
+                != (index < endpos && RegexCharClass.IsBoundaryWordChar(runtext![index]));
         }
 
         internal static bool IsBoundary(ReadOnlySpan<char> inputSpan, int index)
         {
             int indexM1 = index - 1;
-            return ((uint)indexM1 < (uint)inputSpan.Length && RegexCharClass.IsBoundaryWordChar(inputSpan[indexM1])) !=
-                   ((uint)index < (uint)inputSpan.Length && RegexCharClass.IsBoundaryWordChar(inputSpan[index]));
+            return (
+                    (uint)indexM1 < (uint)inputSpan.Length
+                    && RegexCharClass.IsBoundaryWordChar(inputSpan[indexM1])
+                )
+                != (
+                    (uint)index < (uint)inputSpan.Length
+                    && RegexCharClass.IsBoundaryWordChar(inputSpan[index])
+                );
         }
 
         /// <summary>Called to determine a char's inclusion in the \w set.</summary>
@@ -423,18 +476,28 @@ namespace System.Text.RegularExpressions
 
         protected bool IsECMABoundary(int index, int startpos, int endpos)
         {
-            return (index > startpos && RegexCharClass.IsECMAWordChar(runtext![index - 1])) !=
-                   (index < endpos && RegexCharClass.IsECMAWordChar(runtext![index]));
+            return (index > startpos && RegexCharClass.IsECMAWordChar(runtext![index - 1]))
+                != (index < endpos && RegexCharClass.IsECMAWordChar(runtext![index]));
         }
 
         internal static bool IsECMABoundary(ReadOnlySpan<char> inputSpan, int index)
         {
             int indexM1 = index - 1;
-            return ((uint)indexM1 < (uint)inputSpan.Length && RegexCharClass.IsECMAWordChar(inputSpan[indexM1])) !=
-                   ((uint)index < (uint)inputSpan.Length && RegexCharClass.IsECMAWordChar(inputSpan[index]));
+            return (
+                    (uint)indexM1 < (uint)inputSpan.Length
+                    && RegexCharClass.IsECMAWordChar(inputSpan[indexM1])
+                )
+                != (
+                    (uint)index < (uint)inputSpan.Length
+                    && RegexCharClass.IsECMAWordChar(inputSpan[index])
+                );
         }
 
-        [Obsolete(Obsoletions.RegexExtensibilityImplMessage, DiagnosticId = Obsoletions.RegexExtensibilityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.RegexExtensibilityImplMessage,
+            DiagnosticId = Obsoletions.RegexExtensibilityDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         protected static bool CharInSet(char ch, string set, string category)
         {
             string charClass = RegexCharClass.ConvertOldStringsToClass(set, category);

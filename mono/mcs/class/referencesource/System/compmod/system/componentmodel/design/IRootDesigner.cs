@@ -1,15 +1,16 @@
 //------------------------------------------------------------------------------
 // <copyright file="IRootDesigner.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
-    using System.Diagnostics;
+namespace System.ComponentModel.Design
+{
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
     using Microsoft.Win32;
 
     /// <devdoc>
@@ -19,8 +20,8 @@ namespace System.ComponentModel.Design {
     ///     It does this through the View property.
     /// </devdoc>
     [System.Runtime.InteropServices.ComVisible(true)]
-    public interface IRootDesigner : IDesigner {
-    
+    public interface IRootDesigner : IDesigner
+    {
         /// <devdoc>
         ///     The list of technologies that this designer can support
         ///     for its view.  Examples of different technologies are
@@ -39,4 +40,3 @@ namespace System.ComponentModel.Design {
         object GetView(ViewTechnology technology);
     }
 }
-

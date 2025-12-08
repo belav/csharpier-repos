@@ -15,6 +15,6 @@ namespace Microsoft.VisualStudio.Debugger.Clr
         None = 0,
         ConditionalCast = 1,
         ParenthesizeArgument = 2,
-        ParenthesizeEntireExpression = 4
+        ParenthesizeEntireExpression = 4,
     }
 }

@@ -21,9 +21,14 @@ namespace Microsoft.CodeAnalysis.Snippets.SnippetProviders
 
         public override string Description => FeaturesResources.else_statement;
 
-        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(ISyntaxFacts syntaxFacts) => syntaxFacts.IsElseClause;
+        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(
+            ISyntaxFacts syntaxFacts
+        ) => syntaxFacts.IsElseClause;
 
-        protected override ImmutableArray<SnippetPlaceholder> GetPlaceHolderLocationsList(SyntaxNode node, ISyntaxFacts syntaxFacts, CancellationToken cancellationToken)
-            => ImmutableArray<SnippetPlaceholder>.Empty;
+        protected override ImmutableArray<SnippetPlaceholder> GetPlaceHolderLocationsList(
+            SyntaxNode node,
+            ISyntaxFacts syntaxFacts,
+            CancellationToken cancellationToken
+        ) => ImmutableArray<SnippetPlaceholder>.Empty;
     }
 }

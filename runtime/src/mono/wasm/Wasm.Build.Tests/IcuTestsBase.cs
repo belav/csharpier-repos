@@ -28,29 +28,52 @@ public abstract class IcuTestsBase : TestMainJsTestBase
     }
 
     // custom file contains only locales "cy-GB", "is-IS", "bs-BA", "lb-LU" and fallback locale: "en-US":
-    public static string CustomIcuPath = Path.Combine(BuildEnvironment.TestAssetsPath, "icudt_custom.dat");
+    public static string CustomIcuPath = Path.Combine(
+        BuildEnvironment.TestAssetsPath,
+        "icudt_custom.dat"
+    );
 
-    protected static readonly string s_customIcuTestedLocales = $@"new Locale[] {{
+    protected static readonly string s_customIcuTestedLocales =
+        $@"new Locale[] {{
         new Locale(""cy-GB"",  ""Dydd Sul""), new Locale(""is-IS"",  ""sunnudagur""), new Locale(""bs-BA"",  ""nedjelja""), new Locale(""lb-LU"",  ""Sonndeg""),
         new Locale(""fr-FR"", null), new Locale(""hr-HR"", null), new Locale(""ko-KR"", null)
     }}";
-    protected static string GetEfigsTestedLocales(string fallbackSundayName=_fallbackSundayNameEnUS) =>  $@"new Locale[] {{
+
+    protected static string GetEfigsTestedLocales(
+        string fallbackSundayName = _fallbackSundayNameEnUS
+    ) =>
+        $@"new Locale[] {{
         new Locale(""en-US"", ""{SundayNames.English}""), new Locale(""fr-FR"", ""{SundayNames.French}""), new Locale(""es-ES"", ""{SundayNames.Spanish}""),
         new Locale(""pl-PL"", ""{fallbackSundayName}""), new Locale(""ko-KR"", ""{fallbackSundayName}""), new Locale(""cs-CZ"", ""{fallbackSundayName}"")
     }}";
-    protected static string GetCjkTestedLocales(string fallbackSundayName=_fallbackSundayNameEnUS) =>  $@"new Locale[] {{
+
+    protected static string GetCjkTestedLocales(
+        string fallbackSundayName = _fallbackSundayNameEnUS
+    ) =>
+        $@"new Locale[] {{
         new Locale(""en-GB"", ""{SundayNames.English}""), new Locale(""zh-CN"", ""{SundayNames.Chinese}""), new Locale(""ja-JP"", ""{SundayNames.Japanese}""),
         new Locale(""fr-FR"", ""{fallbackSundayName}""), new Locale(""hr-HR"", ""{fallbackSundayName}""), new Locale(""it-IT"", ""{fallbackSundayName}"")
     }}";
-    protected static string GetNocjkTestedLocales(string fallbackSundayName=_fallbackSundayNameEnUS) =>  $@"new Locale[] {{
+
+    protected static string GetNocjkTestedLocales(
+        string fallbackSundayName = _fallbackSundayNameEnUS
+    ) =>
+        $@"new Locale[] {{
         new Locale(""en-AU"", ""{SundayNames.English}""), new Locale(""fr-FR"", ""{SundayNames.French}""), new Locale(""sk-SK"", ""{SundayNames.Slovak}""),
         new Locale(""ja-JP"", ""{fallbackSundayName}""), new Locale(""ko-KR"", ""{fallbackSundayName}""), new Locale(""zh-CN"", ""{fallbackSundayName}"")
     }}";
-    protected static readonly string s_fullIcuTestedLocales = $@"new Locale[] {{
+
+    protected static readonly string s_fullIcuTestedLocales =
+        $@"new Locale[] {{
         new Locale(""en-GB"", ""{SundayNames.English}""), new Locale(""sk-SK"", ""{SundayNames.Slovak}""), new Locale(""zh-CN"", ""{SundayNames.Chinese}"")
     }}";
 
-    protected string GetProgramText(string testedLocales, bool onlyPredefinedCultures=false, string fallbackSundayName=_fallbackSundayNameEnUS) => $@"
+    protected string GetProgramText(
+        string testedLocales,
+        bool onlyPredefinedCultures = false,
+        string fallbackSundayName = _fallbackSundayNameEnUS
+    ) =>
+        $@"
         #nullable enable
 
         using System;
@@ -102,28 +125,50 @@ public abstract class IcuTestsBase : TestMainJsTestBase
         public record Locale(string Code, string? SundayName);
         ";
 
-    protected void TestIcuShards(BuildArgs buildArgs, string shardName, string testedLocales, RunHost host, string id, bool onlyPredefinedCultures=false)
+    protected void TestIcuShards(
+        BuildArgs buildArgs,
+        string shardName,
+        string testedLocales,
+        RunHost host,
+        string id,
+        bool onlyPredefinedCultures = false
+    )
     {
-        string projectName = $"shard_{Path.GetFileName(shardName)}_{buildArgs.Config}_{buildArgs.AOT}";
+        string projectName =
+            $"shard_{Path.GetFileName(shardName)}_{buildArgs.Config}_{buildArgs.AOT}";
         bool dotnetWasmFromRuntimePack = !(buildArgs.AOT || buildArgs.Config == "Release");
 
         buildArgs = buildArgs with { ProjectName = projectName };
         // by default, we remove resource strings from an app. ICU tests are checking exception messages contents -> resource string keys are not enough
-        string extraProperties = $"<WasmIcuDataFileName>{shardName}</WasmIcuDataFileName><UseSystemResourceKeys>false</UseSystemResourceKeys>";
+        string extraProperties =
+            $"<WasmIcuDataFileName>{shardName}</WasmIcuDataFileName><UseSystemResourceKeys>false</UseSystemResourceKeys>";
         if (onlyPredefinedCultures)
-            extraProperties = $"{extraProperties}<PredefinedCulturesOnly>true</PredefinedCulturesOnly>";
+            extraProperties =
+                $"{extraProperties}<PredefinedCulturesOnly>true</PredefinedCulturesOnly>";
         buildArgs = ExpandBuildArgs(buildArgs, extraProperties: extraProperties);
 
         string programText = GetProgramText(testedLocales, onlyPredefinedCultures);
-        _testOutput.WriteLine($"----- Program: -----{Environment.NewLine}{programText}{Environment.NewLine}-------");
-        (_, string output) = BuildProject(buildArgs,
-                        id: id,
-                        new BuildProjectOptions(
-                            InitProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText),
-                            DotnetWasmFromRuntimePack: dotnetWasmFromRuntimePack,
-                            GlobalizationMode: GlobalizationMode.PredefinedIcu,
-                            PredefinedIcudt: shardName));
+        _testOutput.WriteLine(
+            $"----- Program: -----{Environment.NewLine}{programText}{Environment.NewLine}-------"
+        );
+        (_, string output) = BuildProject(
+            buildArgs,
+            id: id,
+            new BuildProjectOptions(
+                InitProject: () =>
+                    File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText),
+                DotnetWasmFromRuntimePack: dotnetWasmFromRuntimePack,
+                GlobalizationMode: GlobalizationMode.PredefinedIcu,
+                PredefinedIcudt: shardName
+            )
+        );
 
-        string runOutput = RunAndTestWasmApp(buildArgs, buildDir: _projectDir, expectedExitCode: 42, host: host, id: id);
+        string runOutput = RunAndTestWasmApp(
+            buildArgs,
+            buildDir: _projectDir,
+            expectedExitCode: 42,
+            host: host,
+            id: id
+        );
     }
 }

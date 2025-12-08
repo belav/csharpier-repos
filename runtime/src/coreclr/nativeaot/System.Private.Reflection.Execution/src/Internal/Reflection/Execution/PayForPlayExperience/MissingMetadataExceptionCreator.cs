@@ -11,7 +11,9 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
     {
         internal static NotSupportedException Create(Type pertainant)
         {
-            return new NotSupportedException(SR.Format(SR.Reflection_InsufficientMetadata_EdbNeeded, pertainant));
+            return new NotSupportedException(
+                SR.Format(SR.Reflection_InsufficientMetadata_EdbNeeded, pertainant)
+            );
         }
 
         public static string ComputeUsefulPertainantIfPossible(MemberInfo memberInfo)

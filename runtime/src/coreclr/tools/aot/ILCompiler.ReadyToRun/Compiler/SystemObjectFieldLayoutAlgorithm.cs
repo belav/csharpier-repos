@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
@@ -20,14 +19,21 @@ namespace ILCompiler
             _fallbackAlgorithm = fallbackAlgorithm;
         }
 
-        public override ComputedInstanceFieldLayout ComputeInstanceLayout(DefType defType, InstanceLayoutKind layoutKind)
+        public override ComputedInstanceFieldLayout ComputeInstanceLayout(
+            DefType defType,
+            InstanceLayoutKind layoutKind
+        )
         {
             TargetDetails targetDetails = defType.Context.Target;
-            ComputedInstanceFieldLayout layoutFromMetadata = _fallbackAlgorithm.ComputeInstanceLayout(defType, layoutKind);
+            ComputedInstanceFieldLayout layoutFromMetadata =
+                _fallbackAlgorithm.ComputeInstanceLayout(defType, layoutKind);
 
             // System.Object has an MethodTable field in the standard AOT version used in this repo.
             // Make sure that we always use the CoreCLR version which (currently) has no fields.
-            Debug.Assert(0 == layoutFromMetadata.Offsets.Length, "Incompatible system library. The CoreCLR System.Private.CoreLib must be used when compiling in ready-to-run mode.");
+            Debug.Assert(
+                0 == layoutFromMetadata.Offsets.Length,
+                "Incompatible system library. The CoreCLR System.Private.CoreLib must be used when compiling in ready-to-run mode."
+            );
 
             return new ComputedInstanceFieldLayout
             {
@@ -40,7 +46,10 @@ namespace ILCompiler
             };
         }
 
-        public unsafe override ComputedStaticFieldLayout ComputeStaticFieldLayout(DefType defType, StaticLayoutKind layoutKind)
+        public override unsafe ComputedStaticFieldLayout ComputeStaticFieldLayout(
+            DefType defType,
+            StaticLayoutKind layoutKind
+        )
         {
             return _fallbackAlgorithm.ComputeStaticFieldLayout(defType, layoutKind);
         }
@@ -55,7 +64,9 @@ namespace ILCompiler
             return false;
         }
 
-        public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(DefType type)
+        public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(
+            DefType type
+        )
         {
             return _fallbackAlgorithm.ComputeValueTypeShapeCharacteristics(type);
         }

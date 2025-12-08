@@ -12,13 +12,22 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 {
     internal sealed class XunitDisposeHook : MarshalByRefObject
     {
-        [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Invoked across app domains")]
+        [SuppressMessage(
+            "Performance",
+            "CA1822:Mark members as static",
+            Justification = "Invoked across app domains"
+        )]
         public void Execute()
         {
             if (!AppDomain.CurrentDomain.IsDefaultAppDomain())
                 throw new InvalidOperationException();
 
-            var xunitUtilities = AppDomain.CurrentDomain.GetAssemblies().Where(static assembly => assembly.GetName().Name.StartsWith("xunit.runner.utility")).ToArray();
+            var xunitUtilities = AppDomain
+                .CurrentDomain.GetAssemblies()
+                .Where(static assembly =>
+                    assembly.GetName().Name.StartsWith("xunit.runner.utility")
+                )
+                .ToArray();
             foreach (var xunitUtility in xunitUtilities)
             {
                 var appDomainManagerType = xunitUtility.GetType("Xunit.AppDomainManager_AppDomain");

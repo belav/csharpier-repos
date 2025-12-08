@@ -145,7 +145,13 @@ namespace Newtonsoft.Json.Utilities
         {
             if (_leftOverBytesCount > 0)
             {
-                int count = Convert.ToBase64CharArray(_leftOverBytes!, 0, _leftOverBytesCount, _charsLine, 0);
+                int count = Convert.ToBase64CharArray(
+                    _leftOverBytes!,
+                    0,
+                    _leftOverBytesCount,
+                    _charsLine,
+                    0
+                );
                 WriteChars(_charsLine, 0, count);
                 _leftOverBytesCount = 0;
             }
@@ -158,7 +164,12 @@ namespace Newtonsoft.Json.Utilities
 
 #if HAVE_ASYNC
 
-        public async Task EncodeAsync(byte[] buffer, int index, int count, CancellationToken cancellationToken)
+        public async Task EncodeAsync(
+            byte[] buffer,
+            int index,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateEncode(buffer, index, count);
 
@@ -189,7 +200,12 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
-        private Task WriteCharsAsync(char[] chars, int index, int count, CancellationToken cancellationToken)
+        private Task WriteCharsAsync(
+            char[] chars,
+            int index,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             return _writer.WriteAsync(chars, index, count, cancellationToken);
         }
@@ -203,7 +219,13 @@ namespace Newtonsoft.Json.Utilities
 
             if (_leftOverBytesCount > 0)
             {
-                int count = Convert.ToBase64CharArray(_leftOverBytes!, 0, _leftOverBytesCount, _charsLine, 0);
+                int count = Convert.ToBase64CharArray(
+                    _leftOverBytes!,
+                    0,
+                    _leftOverBytesCount,
+                    _charsLine,
+                    0
+                );
                 _leftOverBytesCount = 0;
                 return WriteCharsAsync(_charsLine, 0, count, cancellationToken);
             }
@@ -212,6 +234,5 @@ namespace Newtonsoft.Json.Utilities
         }
 
 #endif
-
     }
 }

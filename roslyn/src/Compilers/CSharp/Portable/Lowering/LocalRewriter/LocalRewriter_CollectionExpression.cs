@@ -22,7 +22,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             throw ExceptionUtilities.Unreachable();
         }
 
-        private BoundExpression RewriteCollectionExpressionConversion(Conversion conversion, BoundCollectionExpression node)
+        private BoundExpression RewriteCollectionExpressionConversion(
+            Conversion conversion,
+            BoundCollectionExpression node
+        )
         {
             Debug.Assert(conversion.Kind == ConversionKind.CollectionExpression);
             Debug.Assert(!_inExpressionLambda);
@@ -33,7 +36,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             _factory.Syntax = node.Syntax;
             try
             {
-                var collectionTypeKind = conversion.GetCollectionExpressionTypeKind(out var elementType);
+                var collectionTypeKind = conversion.GetCollectionExpressionTypeKind(
+                    out var elementType
+                );
                 switch (collectionTypeKind)
                 {
                     case CollectionExpressionTypeKind.ImplementsIEnumerableT:
@@ -43,7 +48,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case CollectionExpressionTypeKind.Span:
                     case CollectionExpressionTypeKind.ReadOnlySpan:
                         Debug.Assert(elementType is { });
-                        return VisitArrayOrSpanCollectionExpression(node, collectionTypeKind, node.Type, TypeWithAnnotations.Create(elementType));
+                        return VisitArrayOrSpanCollectionExpression(
+                            node,
+                            collectionTypeKind,
+                            node.Type,
+                            TypeWithAnnotations.Create(elementType)
+                        );
                     case CollectionExpressionTypeKind.ImmutableArray:
                         Debug.Assert(elementType is { });
                         return VisitImmutableArrayCollectionExpression(node, elementType);
@@ -63,20 +73,35 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private BoundExpression VisitImmutableArrayCollectionExpression(BoundCollectionExpression node, TypeSymbol elementType)
+        private BoundExpression VisitImmutableArrayCollectionExpression(
+            BoundCollectionExpression node,
+            TypeSymbol elementType
+        )
         {
             var elementTypeWithAnnotations = TypeWithAnnotations.Create(elementType);
             var arrayCreation = VisitArrayOrSpanCollectionExpression(
                 node,
                 CollectionExpressionTypeKind.Array,
                 ArrayTypeSymbol.CreateSZArray(_compilation.Assembly, elementTypeWithAnnotations),
-                elementTypeWithAnnotations);
-            var asImmutableArray = (MethodSymbol)_compilation.GetWellKnownTypeMember(WellKnownMember.System_Runtime_InteropServices_ImmutableCollectionsMarshal__AsImmutableArray_T)!;
+                elementTypeWithAnnotations
+            );
+            var asImmutableArray = (MethodSymbol)
+                _compilation.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_InteropServices_ImmutableCollectionsMarshal__AsImmutableArray_T
+                )!;
             // ImmutableCollectionsMarshal.AsImmutableArray(arrayCreation)
-            return _factory.StaticCall(asImmutableArray.Construct(elementType), ImmutableArray.Create(arrayCreation));
+            return _factory.StaticCall(
+                asImmutableArray.Construct(elementType),
+                ImmutableArray.Create(arrayCreation)
+            );
         }
 
-        private BoundExpression VisitArrayOrSpanCollectionExpression(BoundCollectionExpression node, CollectionExpressionTypeKind collectionTypeKind, TypeSymbol collectionType, TypeWithAnnotations elementType)
+        private BoundExpression VisitArrayOrSpanCollectionExpression(
+            BoundCollectionExpression node,
+            CollectionExpressionTypeKind collectionTypeKind,
+            TypeSymbol collectionType,
+            TypeWithAnnotations elementType
+        )
         {
             Debug.Assert(!_inExpressionLambda);
             Debug.Assert(_additionalLocals is { });
@@ -93,10 +118,27 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var spanType = (NamedTypeSymbol)collectionType;
                 var elements = node.Elements;
 
-                Debug.Assert(collectionTypeKind is CollectionExpressionTypeKind.Span or CollectionExpressionTypeKind.ReadOnlySpan);
-                Debug.Assert(spanType.OriginalDefinition.Equals(_compilation.GetWellKnownType(
-                    collectionTypeKind == CollectionExpressionTypeKind.Span ? WellKnownType.System_Span_T : WellKnownType.System_ReadOnlySpan_T), TypeCompareKind.AllIgnoreOptions));
-                Debug.Assert(elementType.Equals(spanType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0], TypeCompareKind.AllIgnoreOptions));
+                Debug.Assert(
+                    collectionTypeKind
+                        is CollectionExpressionTypeKind.Span
+                            or CollectionExpressionTypeKind.ReadOnlySpan
+                );
+                Debug.Assert(
+                    spanType.OriginalDefinition.Equals(
+                        _compilation.GetWellKnownType(
+                            collectionTypeKind == CollectionExpressionTypeKind.Span
+                                ? WellKnownType.System_Span_T
+                                : WellKnownType.System_ReadOnlySpan_T
+                        ),
+                        TypeCompareKind.AllIgnoreOptions
+                    )
+                );
+                Debug.Assert(
+                    elementType.Equals(
+                        spanType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0],
+                        TypeCompareKind.AllIgnoreOptions
+                    )
+                );
 
                 if (elements.Length == 0)
                 {
@@ -104,32 +146,74 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return _factory.Default(collectionType);
                 }
 
-                if (collectionTypeKind == CollectionExpressionTypeKind.ReadOnlySpan &&
-                    ShouldUseRuntimeHelpersCreateSpan(node, elementType.Type))
+                if (
+                    collectionTypeKind == CollectionExpressionTypeKind.ReadOnlySpan
+                    && ShouldUseRuntimeHelpersCreateSpan(node, elementType.Type)
+                )
                 {
                     // Assert that binding layer agrees with lowering layer about whether this collection-expr will allocate.
-                    Debug.Assert(!IsAllocatingRefStructCollectionExpression(node, collectionTypeKind, elementType.Type, _compilation));
-                    var constructor = ((MethodSymbol)_factory.WellKnownMember(WellKnownMember.System_ReadOnlySpan_T__ctor_Array)).AsMember(spanType);
-                    var rewrittenElements = elements.SelectAsArray(static (element, rewriter) => rewriter.VisitExpression((BoundExpression)element), this);
-                    return _factory.New(constructor, _factory.Array(elementType.Type, rewrittenElements));
+                    Debug.Assert(
+                        !IsAllocatingRefStructCollectionExpression(
+                            node,
+                            collectionTypeKind,
+                            elementType.Type,
+                            _compilation
+                        )
+                    );
+                    var constructor = (
+                        (MethodSymbol)
+                            _factory.WellKnownMember(
+                                WellKnownMember.System_ReadOnlySpan_T__ctor_Array
+                            )
+                    ).AsMember(spanType);
+                    var rewrittenElements = elements.SelectAsArray(
+                        static (element, rewriter) =>
+                            rewriter.VisitExpression((BoundExpression)element),
+                        this
+                    );
+                    return _factory.New(
+                        constructor,
+                        _factory.Array(elementType.Type, rewrittenElements)
+                    );
                 }
 
-                if (ShouldUseInlineArray(node, _compilation) &&
-                    _additionalLocals is { })
+                if (ShouldUseInlineArray(node, _compilation) && _additionalLocals is { })
                 {
-                    Debug.Assert(!IsAllocatingRefStructCollectionExpression(node, collectionTypeKind, elementType.Type, _compilation));
+                    Debug.Assert(
+                        !IsAllocatingRefStructCollectionExpression(
+                            node,
+                            collectionTypeKind,
+                            elementType.Type,
+                            _compilation
+                        )
+                    );
                     return CreateAndPopulateSpanFromInlineArray(
                         syntax,
                         elementType,
                         elements,
-                        asReadOnlySpan: collectionTypeKind == CollectionExpressionTypeKind.ReadOnlySpan,
-                        _additionalLocals);
+                        asReadOnlySpan: collectionTypeKind
+                            == CollectionExpressionTypeKind.ReadOnlySpan,
+                        _additionalLocals
+                    );
                 }
 
-                Debug.Assert(IsAllocatingRefStructCollectionExpression(node, collectionTypeKind, elementType.Type, _compilation));
+                Debug.Assert(
+                    IsAllocatingRefStructCollectionExpression(
+                        node,
+                        collectionTypeKind,
+                        elementType.Type,
+                        _compilation
+                    )
+                );
                 arrayType = ArrayTypeSymbol.CreateSZArray(_compilation.Assembly, elementType);
-                spanConstructor = ((MethodSymbol)_compilation.GetWellKnownTypeMember(
-                    collectionTypeKind == CollectionExpressionTypeKind.Span ? WellKnownMember.System_Span_T__ctor_Array : WellKnownMember.System_ReadOnlySpan_T__ctor_Array)!).AsMember(spanType);
+                spanConstructor = (
+                    (MethodSymbol)
+                        _compilation.GetWellKnownTypeMember(
+                            collectionTypeKind == CollectionExpressionTypeKind.Span
+                                ? WellKnownMember.System_Span_T__ctor_Array
+                                : WellKnownMember.System_ReadOnlySpan_T__ctor_Array
+                        )!
+                ).AsMember(spanType);
             }
 
             BoundExpression array;
@@ -144,9 +228,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var list = CreateAndPopulateList(node, elementType);
 
                 Debug.Assert(list.Type is { });
-                Debug.Assert(list.Type.OriginalDefinition.Equals(_compilation.GetWellKnownType(WellKnownType.System_Collections_Generic_List_T), TypeCompareKind.AllIgnoreOptions));
+                Debug.Assert(
+                    list.Type.OriginalDefinition.Equals(
+                        _compilation.GetWellKnownType(
+                            WellKnownType.System_Collections_Generic_List_T
+                        ),
+                        TypeCompareKind.AllIgnoreOptions
+                    )
+                );
 
-                var listToArray = ((MethodSymbol)_compilation.GetWellKnownTypeMember(WellKnownMember.System_Collections_Generic_List_T__ToArray)!).AsMember((NamedTypeSymbol)list.Type);
+                var listToArray = (
+                    (MethodSymbol)
+                        _compilation.GetWellKnownTypeMember(
+                            WellKnownMember.System_Collections_Generic_List_T__ToArray
+                        )!
+                ).AsMember((NamedTypeSymbol)list.Type);
                 array = _factory.Call(list, listToArray);
             }
 
@@ -155,11 +251,20 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return array;
             }
 
-            Debug.Assert(TypeSymbol.Equals(array.Type, spanConstructor.Parameters[0].Type, TypeCompareKind.AllIgnoreOptions));
+            Debug.Assert(
+                TypeSymbol.Equals(
+                    array.Type,
+                    spanConstructor.Parameters[0].Type,
+                    TypeCompareKind.AllIgnoreOptions
+                )
+            );
             return new BoundObjectCreationExpression(syntax, spanConstructor, array);
         }
 
-        private BoundExpression VisitCollectionInitializerCollectionExpression(BoundCollectionExpression node, TypeSymbol collectionType)
+        private BoundExpression VisitCollectionInitializerCollectionExpression(
+            BoundCollectionExpression node,
+            TypeSymbol collectionType
+        )
         {
             Debug.Assert(!_inExpressionLambda);
 
@@ -170,7 +275,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // Create a temp for the collection.
             BoundAssignmentOperator assignmentToTemp;
-            BoundLocal temp = _factory.StoreToTemp(rewrittenReceiver, out assignmentToTemp, isKnownToReferToTempIfReferenceType: true);
+            BoundLocal temp = _factory.StoreToTemp(
+                rewrittenReceiver,
+                out assignmentToTemp,
+                isKnownToReferToTempIfReferenceType: true
+            );
             var sideEffects = ArrayBuilder<BoundExpression>.GetInstance(elements.Length + 1);
             sideEffects.Add(assignmentToTemp);
 
@@ -181,20 +290,25 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             foreach (var element in elements)
             {
-                var rewrittenElement = element is BoundCollectionExpressionSpreadElement spreadElement ?
-                    MakeCollectionExpressionSpreadElement(
+                var rewrittenElement = element
+                    is BoundCollectionExpressionSpreadElement spreadElement
+                    ? MakeCollectionExpressionSpreadElement(
                         spreadElement,
                         VisitExpression(spreadElement.Expression),
                         iteratorBody =>
                         {
                             var syntax = iteratorBody.Syntax;
-                            var rewrittenValue = rewriteCollectionInitializer(temp, ((BoundExpressionStatement)iteratorBody).Expression);
+                            var rewrittenValue = rewriteCollectionInitializer(
+                                temp,
+                                ((BoundExpressionStatement)iteratorBody).Expression
+                            );
                             // MakeCollectionInitializer() may return null if Add() is marked [Conditional].
-                            return rewrittenValue is { } ?
-                                new BoundExpressionStatement(syntax, rewrittenValue) :
-                                new BoundNoOpStatement(syntax, NoOpStatementFlavor.Default);
-                        }) :
-                    rewriteCollectionInitializer(temp, (BoundExpression)element);
+                            return rewrittenValue is { }
+                                ? new BoundExpressionStatement(syntax, rewrittenValue)
+                                : new BoundNoOpStatement(syntax, NoOpStatementFlavor.Default);
+                        }
+                    )
+                    : rewriteCollectionInitializer(temp, (BoundExpression)element);
                 if (rewrittenElement != null)
                 {
                     sideEffects.Add(rewrittenElement);
@@ -208,20 +322,28 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableArray.Create(temp.LocalSymbol),
                 sideEffects.ToImmutableAndFree(),
                 temp,
-                collectionType);
+                collectionType
+            );
 
-            BoundExpression? rewriteCollectionInitializer(BoundLocal rewrittenReceiver, BoundExpression expressionElement)
+            BoundExpression? rewriteCollectionInitializer(
+                BoundLocal rewrittenReceiver,
+                BoundExpression expressionElement
+            )
             {
                 return expressionElement switch
                 {
-                    BoundCollectionElementInitializer collectionInitializer => MakeCollectionInitializer(rewrittenReceiver, collectionInitializer),
-                    BoundDynamicCollectionElementInitializer dynamicInitializer => MakeDynamicCollectionInitializer(rewrittenReceiver, dynamicInitializer),
-                    var e => throw ExceptionUtilities.UnexpectedValue(e)
+                    BoundCollectionElementInitializer collectionInitializer =>
+                        MakeCollectionInitializer(rewrittenReceiver, collectionInitializer),
+                    BoundDynamicCollectionElementInitializer dynamicInitializer =>
+                        MakeDynamicCollectionInitializer(rewrittenReceiver, dynamicInitializer),
+                    var e => throw ExceptionUtilities.UnexpectedValue(e),
                 };
             }
         }
 
-        private BoundExpression VisitListInterfaceCollectionExpression(BoundCollectionExpression node)
+        private BoundExpression VisitListInterfaceCollectionExpression(
+            BoundCollectionExpression node
+        )
         {
             Debug.Assert(!_inExpressionLambda);
             Debug.Assert(_factory.ModuleBuilderOpt is { });
@@ -232,13 +354,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var syntax = node.Syntax;
             var collectionType = (NamedTypeSymbol)node.Type;
-            var elementType = collectionType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Single();
+            var elementType =
+                collectionType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Single();
             BoundExpression arrayOrList;
 
-            if (collectionType.OriginalDefinition.SpecialType is
-                SpecialType.System_Collections_Generic_IEnumerable_T or
-                SpecialType.System_Collections_Generic_IReadOnlyCollection_T or
-                SpecialType.System_Collections_Generic_IReadOnlyList_T)
+            if (
+                collectionType.OriginalDefinition.SpecialType
+                is SpecialType.System_Collections_Generic_IEnumerable_T
+                    or SpecialType.System_Collections_Generic_IReadOnlyCollection_T
+                    or SpecialType.System_Collections_Generic_IReadOnlyList_T
+            )
             {
                 int numberIncludingLastSpread;
                 bool useKnownLength = ShouldUseKnownLength(node, out numberIncludingLastSpread);
@@ -246,12 +371,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (numberIncludingLastSpread == 0 && node.Elements.Length == 0)
                 {
                     // arrayOrList = Array.Empty<ElementType>();
-                    arrayOrList = CreateEmptyArray(syntax, ArrayTypeSymbol.CreateSZArray(_compilation.Assembly, elementType));
+                    arrayOrList = CreateEmptyArray(
+                        syntax,
+                        ArrayTypeSymbol.CreateSZArray(_compilation.Assembly, elementType)
+                    );
                 }
                 else
                 {
                     var typeArgs = ImmutableArray.Create(elementType);
-                    var synthesizedType = _factory.ModuleBuilderOpt.EnsureReadOnlyListTypeExists(syntax, hasKnownLength: useKnownLength, _diagnostics.DiagnosticBag).Construct(typeArgs);
+                    var synthesizedType = _factory
+                        .ModuleBuilderOpt.EnsureReadOnlyListTypeExists(
+                            syntax,
+                            hasKnownLength: useKnownLength,
+                            _diagnostics.DiagnosticBag
+                        )
+                        .Construct(typeArgs);
                     if (synthesizedType.IsErrorType())
                     {
                         return BadExpression(node);
@@ -261,7 +395,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (useKnownLength)
                     {
                         // fieldValue = new ElementType[] { e1, ..., eN };
-                        var arrayType = ArrayTypeSymbol.CreateSZArray(_compilation.Assembly, elementType);
+                        var arrayType = ArrayTypeSymbol.CreateSZArray(
+                            _compilation.Assembly,
+                            elementType
+                        );
                         fieldValue = CreateAndPopulateArray(node, arrayType);
                     }
                     else
@@ -271,7 +408,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     // arrayOrList = new <>z__ReadOnlyList<ElementType>(fieldValue);
-                    arrayOrList = new BoundObjectCreationExpression(syntax, synthesizedType.Constructors.Single(), fieldValue) { WasCompilerGenerated = true };
+                    arrayOrList = new BoundObjectCreationExpression(
+                        syntax,
+                        synthesizedType.Constructors.Single(),
+                        fieldValue
+                    )
+                    {
+                        WasCompilerGenerated = true,
+                    };
                 }
             }
             else
@@ -282,7 +426,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return _factory.Convert(collectionType, arrayOrList);
         }
 
-        private BoundExpression VisitCollectionBuilderCollectionExpression(BoundCollectionExpression node)
+        private BoundExpression VisitCollectionBuilderCollectionExpression(
+            BoundCollectionExpression node
+        )
         {
             Debug.Assert(!_inExpressionLambda);
             Debug.Assert(node.Type is { });
@@ -295,10 +441,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             var constructMethod = node.CollectionBuilderMethod;
 
             var spanType = (NamedTypeSymbol)constructMethod.Parameters[0].Type;
-            Debug.Assert(spanType.OriginalDefinition.Equals(_compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T), TypeCompareKind.AllIgnoreOptions));
+            Debug.Assert(
+                spanType.OriginalDefinition.Equals(
+                    _compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
+                    TypeCompareKind.AllIgnoreOptions
+                )
+            );
 
             var elementType = spanType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0];
-            BoundExpression span = VisitArrayOrSpanCollectionExpression(node, CollectionExpressionTypeKind.ReadOnlySpan, spanType, elementType);
+            BoundExpression span = VisitArrayOrSpanCollectionExpression(
+                node,
+                CollectionExpressionTypeKind.ReadOnlySpan,
+                spanType,
+                elementType
+            );
 
             var invocation = new BoundCall(
                 node.Syntax,
@@ -314,7 +470,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 argsToParamsOpt: default,
                 defaultArguments: default,
                 resultKind: LookupResultKind.Viable,
-                type: constructMethod.ReturnType);
+                type: constructMethod.ReturnType
+            );
 
             var invocationPlaceholder = node.CollectionBuilderInvocationPlaceholder;
             AddPlaceholderReplacement(invocationPlaceholder, invocation);
@@ -323,28 +480,46 @@ namespace Microsoft.CodeAnalysis.CSharp
             return result;
         }
 
-        internal static bool IsAllocatingRefStructCollectionExpression(BoundCollectionExpressionBase node, CollectionExpressionTypeKind collectionKind, TypeSymbol? elementType, CSharpCompilation compilation)
+        internal static bool IsAllocatingRefStructCollectionExpression(
+            BoundCollectionExpressionBase node,
+            CollectionExpressionTypeKind collectionKind,
+            TypeSymbol? elementType,
+            CSharpCompilation compilation
+        )
         {
-            return collectionKind is CollectionExpressionTypeKind.Span or CollectionExpressionTypeKind.ReadOnlySpan
+            return collectionKind
+                    is CollectionExpressionTypeKind.Span
+                        or CollectionExpressionTypeKind.ReadOnlySpan
                 && node.Elements.Length > 0
                 && elementType is not null
-                && !(collectionKind == CollectionExpressionTypeKind.ReadOnlySpan && ShouldUseRuntimeHelpersCreateSpan(node, elementType))
+                && !(
+                    collectionKind == CollectionExpressionTypeKind.ReadOnlySpan
+                    && ShouldUseRuntimeHelpersCreateSpan(node, elementType)
+                )
                 && !ShouldUseInlineArray(node, compilation);
         }
 
-        internal static bool ShouldUseRuntimeHelpersCreateSpan(BoundCollectionExpressionBase node, TypeSymbol elementType)
+        internal static bool ShouldUseRuntimeHelpersCreateSpan(
+            BoundCollectionExpressionBase node,
+            TypeSymbol elementType
+        )
         {
-            return !node.HasSpreadElements(out _, out _) &&
-                node.Elements.Length > 0 &&
-                CodeGenerator.IsTypeAllowedInBlobWrapper(elementType.EnumUnderlyingTypeOrSelf().SpecialType) &&
-                node.Elements.All(e => ((BoundExpression)e).ConstantValueOpt is { });
+            return !node.HasSpreadElements(out _, out _)
+                && node.Elements.Length > 0
+                && CodeGenerator.IsTypeAllowedInBlobWrapper(
+                    elementType.EnumUnderlyingTypeOrSelf().SpecialType
+                )
+                && node.Elements.All(e => ((BoundExpression)e).ConstantValueOpt is { });
         }
 
-        private static bool ShouldUseInlineArray(BoundCollectionExpressionBase node, CSharpCompilation compilation)
+        private static bool ShouldUseInlineArray(
+            BoundCollectionExpressionBase node,
+            CSharpCompilation compilation
+        )
         {
-            return !node.HasSpreadElements(out _, out _) &&
-                node.Elements.Length > 0 &&
-                compilation.Assembly.RuntimeSupportsInlineArrayTypes;
+            return !node.HasSpreadElements(out _, out _)
+                && node.Elements.Length > 0
+                && compilation.Assembly.RuntimeSupportsInlineArrayTypes;
         }
 
         private BoundExpression CreateAndPopulateSpanFromInlineArray(
@@ -352,7 +527,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations elementType,
             ImmutableArray<BoundNode> elements,
             bool asReadOnlySpan,
-            ArrayBuilder<LocalSymbol> locals)
+            ArrayBuilder<LocalSymbol> locals
+        )
         {
             Debug.Assert(elements.Length > 0);
             Debug.Assert(elements.All(e => e is BoundExpression));
@@ -361,17 +537,38 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(_compilation.Assembly.RuntimeSupportsInlineArrayTypes);
 
             int arrayLength = elements.Length;
-            var inlineArrayType = _factory.ModuleBuilderOpt.EnsureInlineArrayTypeExists(syntax, _factory, arrayLength, _diagnostics.DiagnosticBag).Construct(ImmutableArray.Create(elementType));
-            Debug.Assert(inlineArrayType.HasInlineArrayAttribute(out int inlineArrayLength) && inlineArrayLength == arrayLength);
+            var inlineArrayType = _factory
+                .ModuleBuilderOpt.EnsureInlineArrayTypeExists(
+                    syntax,
+                    _factory,
+                    arrayLength,
+                    _diagnostics.DiagnosticBag
+                )
+                .Construct(ImmutableArray.Create(elementType));
+            Debug.Assert(
+                inlineArrayType.HasInlineArrayAttribute(out int inlineArrayLength)
+                    && inlineArrayLength == arrayLength
+            );
 
             var intType = _factory.SpecialType(SpecialType.System_Int32);
-            MethodSymbol elementRef = _factory.ModuleBuilderOpt.EnsureInlineArrayElementRefExists(syntax, intType, _diagnostics.DiagnosticBag).
-                Construct(ImmutableArray.Create(TypeWithAnnotations.Create(inlineArrayType), elementType));
+            MethodSymbol elementRef = _factory
+                .ModuleBuilderOpt.EnsureInlineArrayElementRefExists(
+                    syntax,
+                    intType,
+                    _diagnostics.DiagnosticBag
+                )
+                .Construct(
+                    ImmutableArray.Create(TypeWithAnnotations.Create(inlineArrayType), elementType)
+                );
 
             // Create an inline array and assign to a local.
             // var tmp = new <>y__InlineArrayN<ElementType>();
             BoundAssignmentOperator assignmentToTemp;
-            BoundLocal inlineArrayLocal = _factory.StoreToTemp(new BoundDefaultExpression(syntax, inlineArrayType), out assignmentToTemp, isKnownToReferToTempIfReferenceType: true);
+            BoundLocal inlineArrayLocal = _factory.StoreToTemp(
+                new BoundDefaultExpression(syntax, inlineArrayType),
+                out assignmentToTemp,
+                isKnownToReferToTempIfReferenceType: true
+            );
             var sideEffects = ArrayBuilder<BoundExpression>.GetInstance();
             sideEffects.Add(assignmentToTemp);
             locals.Add(inlineArrayLocal.LocalSymbol);
@@ -383,8 +580,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             for (int i = 0; i < arrayLength; i++)
             {
                 var element = VisitExpression((BoundExpression)elements[i]);
-                var call = _factory.Call(null, elementRef, inlineArrayLocal, _factory.Literal(i), useStrictArgumentRefKinds: true);
-                var assignment = new BoundAssignmentOperator(syntax, call, element, type: call.Type) { WasCompilerGenerated = true };
+                var call = _factory.Call(
+                    null,
+                    elementRef,
+                    inlineArrayLocal,
+                    _factory.Literal(i),
+                    useStrictArgumentRefKinds: true
+                );
+                var assignment = new BoundAssignmentOperator(syntax, call, element, type: call.Type)
+                {
+                    WasCompilerGenerated = true,
+                };
                 sideEffects.Add(assignment);
             }
 
@@ -392,16 +598,29 @@ namespace Microsoft.CodeAnalysis.CSharp
             // ... InlineArrayAsReadOnlySpan<<>y__InlineArrayN<ElementType>, ElementType>(in tmp, N)
             // or
             // ... InlineArrayAsSpan<<>y__InlineArrayN<ElementType>, ElementType>(ref tmp, N)
-            MethodSymbol inlineArrayAsSpan = asReadOnlySpan ?
-                _factory.ModuleBuilderOpt.EnsureInlineArrayAsReadOnlySpanExists(syntax, _factory.WellKnownType(WellKnownType.System_ReadOnlySpan_T), intType, _diagnostics.DiagnosticBag) :
-                _factory.ModuleBuilderOpt.EnsureInlineArrayAsSpanExists(syntax, _factory.WellKnownType(WellKnownType.System_Span_T), intType, _diagnostics.DiagnosticBag);
-            inlineArrayAsSpan = inlineArrayAsSpan.Construct(ImmutableArray.Create(TypeWithAnnotations.Create(inlineArrayType), elementType));
+            MethodSymbol inlineArrayAsSpan = asReadOnlySpan
+                ? _factory.ModuleBuilderOpt.EnsureInlineArrayAsReadOnlySpanExists(
+                    syntax,
+                    _factory.WellKnownType(WellKnownType.System_ReadOnlySpan_T),
+                    intType,
+                    _diagnostics.DiagnosticBag
+                )
+                : _factory.ModuleBuilderOpt.EnsureInlineArrayAsSpanExists(
+                    syntax,
+                    _factory.WellKnownType(WellKnownType.System_Span_T),
+                    intType,
+                    _diagnostics.DiagnosticBag
+                );
+            inlineArrayAsSpan = inlineArrayAsSpan.Construct(
+                ImmutableArray.Create(TypeWithAnnotations.Create(inlineArrayType), elementType)
+            );
             var span = _factory.Call(
                 receiver: null,
                 inlineArrayAsSpan,
                 inlineArrayLocal,
                 _factory.Literal(arrayLength),
-                useStrictArgumentRefKinds: true);
+                useStrictArgumentRefKinds: true
+            );
 
             Debug.Assert(span.Type is { });
             return new BoundSequence(
@@ -409,7 +628,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 locals: ImmutableArray<LocalSymbol>.Empty,
                 sideEffects.ToImmutableAndFree(),
                 span,
-                span.Type);
+                span.Type
+            );
         }
 
         /// <summary>
@@ -420,7 +640,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// evaluated, to determine the overall length of the collection. Therefore, this method only returns
         /// true if the number of preceding elements is below a maximum.
         /// </summary>
-        private static bool ShouldUseKnownLength(BoundCollectionExpression node, out int numberIncludingLastSpread)
+        private static bool ShouldUseKnownLength(
+            BoundCollectionExpression node,
+            out int numberIncludingLastSpread
+        )
         {
             // The maximum number of collection expression elements that will be rewritten into temporaries.
             // The value is arbitrary but small to avoid significant stack size for the containing method
@@ -444,7 +667,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Create and populate an array from a collection expression where the
         /// collection has a known length, although possibly including spreads.
         /// </summary>
-        private BoundExpression CreateAndPopulateArray(BoundCollectionExpression node, ArrayTypeSymbol arrayType)
+        private BoundExpression CreateAndPopulateArray(
+            BoundCollectionExpression node,
+            ArrayTypeSymbol arrayType
+        )
         {
             var syntax = node.Syntax;
             var elements = node.Elements;
@@ -467,41 +693,62 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var initialization = new BoundArrayInitialization(
                     syntax,
                     isInferred: false,
-                    elements.SelectAsArray(static (element, rewriter) => rewriter.VisitExpression((BoundExpression)element), this));
+                    elements.SelectAsArray(
+                        static (element, rewriter) =>
+                            rewriter.VisitExpression((BoundExpression)element),
+                        this
+                    )
+                );
                 return new BoundArrayCreation(
                     syntax,
                     ImmutableArray.Create<BoundExpression>(
                         new BoundLiteral(
                             syntax,
                             ConstantValue.Create(knownLength),
-                            _compilation.GetSpecialType(SpecialType.System_Int32))),
+                            _compilation.GetSpecialType(SpecialType.System_Int32)
+                        )
+                    ),
                     initialization,
-                    arrayType)
-                { WasCompilerGenerated = true };
+                    arrayType
+                )
+                {
+                    WasCompilerGenerated = true,
+                };
             }
 
             BoundAssignmentOperator assignmentToTemp;
             var localsBuilder = ArrayBuilder<BoundLocal>.GetInstance();
             var sideEffects = ArrayBuilder<BoundExpression>.GetInstance();
 
-            RewriteCollectionExpressionElementsIntoTemporaries(elements, numberIncludingLastSpread, localsBuilder, sideEffects);
+            RewriteCollectionExpressionElementsIntoTemporaries(
+                elements,
+                numberIncludingLastSpread,
+                localsBuilder,
+                sideEffects
+            );
 
             // int index = 0;
             BoundLocal indexTemp = _factory.StoreToTemp(
                 _factory.Literal(0),
                 out assignmentToTemp,
-                isKnownToReferToTempIfReferenceType: true);
+                isKnownToReferToTempIfReferenceType: true
+            );
             localsBuilder.Add(indexTemp);
             sideEffects.Add(assignmentToTemp);
 
             // ElementType[] array = new ElementType[N + s1.Length + ...];
             BoundLocal arrayTemp = _factory.StoreToTemp(
-                new BoundArrayCreation(syntax,
-                    ImmutableArray.Create(GetKnownLengthExpression(elements, numberIncludingLastSpread, localsBuilder)),
+                new BoundArrayCreation(
+                    syntax,
+                    ImmutableArray.Create(
+                        GetKnownLengthExpression(elements, numberIncludingLastSpread, localsBuilder)
+                    ),
                     initializerOpt: null,
-                    arrayType),
+                    arrayType
+                ),
                 out assignmentToTemp,
-                isKnownToReferToTempIfReferenceType: true);
+                isKnownToReferToTempIfReferenceType: true
+            );
             localsBuilder.Add(arrayTemp);
             sideEffects.Add(assignmentToTemp);
 
@@ -511,7 +758,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 localsBuilder,
                 numberIncludingLastSpread,
                 sideEffects,
-                (ArrayBuilder<BoundExpression> expressions, BoundExpression arrayTemp, BoundExpression rewrittenValue) =>
+                (
+                    ArrayBuilder<BoundExpression> expressions,
+                    BoundExpression arrayTemp,
+                    BoundExpression rewrittenValue
+                ) =>
                 {
                     Debug.Assert(arrayTemp.Type is ArrayTypeSymbol);
                     Debug.Assert(indexTemp.Type is { SpecialType: SpecialType.System_Int32 });
@@ -526,16 +777,26 @@ namespace Microsoft.CodeAnalysis.CSharp
                             _factory.ArrayAccess(arrayTemp, indexTemp),
                             rewrittenValue,
                             isRef: false,
-                            elementType));
+                            elementType
+                        )
+                    );
                     // index = index + 1;
                     expressions.Add(
                         new BoundAssignmentOperator(
                             expressionSyntax,
                             indexTemp,
-                            _factory.Binary(BinaryOperatorKind.Addition, indexTemp.Type, indexTemp, _factory.Literal(1)),
+                            _factory.Binary(
+                                BinaryOperatorKind.Addition,
+                                indexTemp.Type,
+                                indexTemp,
+                                _factory.Literal(1)
+                            ),
                             isRef: false,
-                            indexTemp.Type));
-                });
+                            indexTemp.Type
+                        )
+                    );
+                }
+            );
 
             var locals = localsBuilder.SelectAsArray(l => l.LocalSymbol);
             localsBuilder.Free();
@@ -545,14 +806,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 locals,
                 sideEffects.ToImmutableAndFree(),
                 arrayTemp,
-                arrayType);
+                arrayType
+            );
         }
 
         /// <summary>
         /// Create and populate an list from a collection expression.
         /// The collection may or may not have a known length.
         /// </summary>
-        private BoundExpression CreateAndPopulateList(BoundCollectionExpression node, TypeWithAnnotations elementType)
+        private BoundExpression CreateAndPopulateList(
+            BoundCollectionExpression node,
+            TypeWithAnnotations elementType
+        )
         {
             Debug.Assert(!_inExpressionLambda);
             Debug.Assert(node.CollectionCreation is null);
@@ -560,14 +825,21 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var elements = node.Elements;
             var typeArguments = ImmutableArray.Create(elementType);
-            var collectionType = _factory.WellKnownType(WellKnownType.System_Collections_Generic_List_T).Construct(typeArguments);
+            var collectionType = _factory
+                .WellKnownType(WellKnownType.System_Collections_Generic_List_T)
+                .Construct(typeArguments);
 
             var localsBuilder = ArrayBuilder<BoundLocal>.GetInstance();
             var sideEffects = ArrayBuilder<BoundExpression>.GetInstance(elements.Length + 1);
 
             int numberIncludingLastSpread;
             bool useKnownLength = ShouldUseKnownLength(node, out numberIncludingLastSpread);
-            RewriteCollectionExpressionElementsIntoTemporaries(elements, numberIncludingLastSpread, localsBuilder, sideEffects);
+            RewriteCollectionExpressionElementsIntoTemporaries(
+                elements,
+                numberIncludingLastSpread,
+                localsBuilder,
+                sideEffects
+            );
 
             bool useOptimizations = false;
             MethodSymbol? setCount = null;
@@ -576,8 +848,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Do not use optimizations in async method since the optimizations require Span<T>.
             if (useKnownLength && elements.Length > 0 && _factory.CurrentFunction?.IsAsync == false)
             {
-                setCount = ((MethodSymbol?)_compilation.GetWellKnownTypeMember(WellKnownMember.System_Runtime_InteropServices_CollectionsMarshal__SetCount_T))?.Construct(typeArguments);
-                asSpan = ((MethodSymbol?)_compilation.GetWellKnownTypeMember(WellKnownMember.System_Runtime_InteropServices_CollectionsMarshal__AsSpan_T))?.Construct(typeArguments);
+                setCount = (
+                    (MethodSymbol?)
+                        _compilation.GetWellKnownTypeMember(
+                            WellKnownMember.System_Runtime_InteropServices_CollectionsMarshal__SetCount_T
+                        )
+                )?.Construct(typeArguments);
+                asSpan = (
+                    (MethodSymbol?)
+                        _compilation.GetWellKnownTypeMember(
+                            WellKnownMember.System_Runtime_InteropServices_CollectionsMarshal__AsSpan_T
+                        )
+                )?.Construct(typeArguments);
 
                 if (setCount is { } && asSpan is { })
                 {
@@ -589,19 +871,41 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (useKnownLength && elements.Length > 0 && !useOptimizations)
             {
                 // List<ElementType> list = new(N + s1.Length + ...);
-                var constructor = ((MethodSymbol)_factory.WellKnownMember(WellKnownMember.System_Collections_Generic_List_T__ctorInt32)).AsMember(collectionType);
-                rewrittenReceiver = _factory.New(constructor, ImmutableArray.Create(GetKnownLengthExpression(elements, numberIncludingLastSpread, localsBuilder)));
+                var constructor = (
+                    (MethodSymbol)
+                        _factory.WellKnownMember(
+                            WellKnownMember.System_Collections_Generic_List_T__ctorInt32
+                        )
+                ).AsMember(collectionType);
+                rewrittenReceiver = _factory.New(
+                    constructor,
+                    ImmutableArray.Create(
+                        GetKnownLengthExpression(elements, numberIncludingLastSpread, localsBuilder)
+                    )
+                );
             }
             else
             {
                 // List<ElementType> list = new();
-                var constructor = ((MethodSymbol)_factory.WellKnownMember(WellKnownMember.System_Collections_Generic_List_T__ctor)).AsMember(collectionType);
-                rewrittenReceiver = _factory.New(constructor, ImmutableArray<BoundExpression>.Empty);
+                var constructor = (
+                    (MethodSymbol)
+                        _factory.WellKnownMember(
+                            WellKnownMember.System_Collections_Generic_List_T__ctor
+                        )
+                ).AsMember(collectionType);
+                rewrittenReceiver = _factory.New(
+                    constructor,
+                    ImmutableArray<BoundExpression>.Empty
+                );
             }
 
             // Create a temp for the list.
             BoundAssignmentOperator assignmentToTemp;
-            BoundLocal listTemp = _factory.StoreToTemp(rewrittenReceiver, out assignmentToTemp, isKnownToReferToTempIfReferenceType: true);
+            BoundLocal listTemp = _factory.StoreToTemp(
+                rewrittenReceiver,
+                out assignmentToTemp,
+                isKnownToReferToTempIfReferenceType: true
+            );
             localsBuilder.Add(listTemp);
             sideEffects.Add(assignmentToTemp);
 
@@ -613,21 +917,35 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(asSpan is { });
 
                 // CollectionsMarshal.SetCount<ElementType>(list, N + s1.Length + ...);
-                sideEffects.Add(_factory.Call(receiver: null, setCount, listTemp, GetKnownLengthExpression(elements, numberIncludingLastSpread, localsBuilder)));
+                sideEffects.Add(
+                    _factory.Call(
+                        receiver: null,
+                        setCount,
+                        listTemp,
+                        GetKnownLengthExpression(elements, numberIncludingLastSpread, localsBuilder)
+                    )
+                );
 
                 // var span = CollectionsMarshal.AsSpan<ElementType(list);
-                BoundLocal spanTemp = _factory.StoreToTemp(_factory.Call(receiver: null, asSpan, listTemp), out assignmentToTemp, isKnownToReferToTempIfReferenceType: true);
+                BoundLocal spanTemp = _factory.StoreToTemp(
+                    _factory.Call(receiver: null, asSpan, listTemp),
+                    out assignmentToTemp,
+                    isKnownToReferToTempIfReferenceType: true
+                );
                 localsBuilder.Add(spanTemp);
                 sideEffects.Add(assignmentToTemp);
 
                 // Populate the span.
-                var spanGetItem = ((MethodSymbol)_factory.WellKnownMember(WellKnownMember.System_Span_T__get_Item)).AsMember((NamedTypeSymbol)spanTemp.Type);
+                var spanGetItem = (
+                    (MethodSymbol)_factory.WellKnownMember(WellKnownMember.System_Span_T__get_Item)
+                ).AsMember((NamedTypeSymbol)spanTemp.Type);
 
                 // int index = 0;
                 BoundLocal indexTemp = _factory.StoreToTemp(
                     _factory.Literal(0),
                     out assignmentToTemp,
-                    isKnownToReferToTempIfReferenceType: true);
+                    isKnownToReferToTempIfReferenceType: true
+                );
                 localsBuilder.Add(indexTemp);
                 sideEffects.Add(assignmentToTemp);
 
@@ -637,13 +955,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                     localsBuilder,
                     numberIncludingLastSpread,
                     sideEffects,
-                    (ArrayBuilder<BoundExpression> expressions, BoundExpression spanTemp, BoundExpression rewrittenValue) =>
+                    (
+                        ArrayBuilder<BoundExpression> expressions,
+                        BoundExpression spanTemp,
+                        BoundExpression rewrittenValue
+                    ) =>
                     {
                         Debug.Assert(spanTemp.Type is NamedTypeSymbol);
                         Debug.Assert(indexTemp.Type is { SpecialType: SpecialType.System_Int32 });
 
                         var expressionSyntax = rewrittenValue.Syntax;
-                        var elementType = ((NamedTypeSymbol)spanTemp.Type).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0].Type;
+                        var elementType = ((NamedTypeSymbol)spanTemp.Type)
+                            .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+                            .Type;
 
                         // span[index] = element;
                         expressions.Add(
@@ -652,32 +976,51 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 _factory.Call(spanTemp, spanGetItem, indexTemp),
                                 rewrittenValue,
                                 isRef: false,
-                                elementType));
+                                elementType
+                            )
+                        );
                         // index = index + 1;
                         expressions.Add(
                             new BoundAssignmentOperator(
                                 expressionSyntax,
                                 indexTemp,
-                                _factory.Binary(BinaryOperatorKind.Addition, indexTemp.Type, indexTemp, _factory.Literal(1)),
+                                _factory.Binary(
+                                    BinaryOperatorKind.Addition,
+                                    indexTemp.Type,
+                                    indexTemp,
+                                    _factory.Literal(1)
+                                ),
                                 isRef: false,
-                                indexTemp.Type));
-                    });
+                                indexTemp.Type
+                            )
+                        );
+                    }
+                );
             }
             else
             {
-                var addMethod = ((MethodSymbol)_factory.WellKnownMember(WellKnownMember.System_Collections_Generic_List_T__Add)).AsMember(collectionType);
+                var addMethod = (
+                    (MethodSymbol)
+                        _factory.WellKnownMember(
+                            WellKnownMember.System_Collections_Generic_List_T__Add
+                        )
+                ).AsMember(collectionType);
                 AddCollectionExpressionElements(
                     elements,
                     listTemp,
                     localsBuilder,
                     numberIncludingLastSpread,
                     sideEffects,
-                    (ArrayBuilder<BoundExpression> expressions, BoundExpression listTemp, BoundExpression rewrittenValue) =>
+                    (
+                        ArrayBuilder<BoundExpression> expressions,
+                        BoundExpression listTemp,
+                        BoundExpression rewrittenValue
+                    ) =>
                     {
                         // list.Add(element);
-                        expressions.Add(
-                            _factory.Call(listTemp, addMethod, rewrittenValue));
-                    });
+                        expressions.Add(_factory.Call(listTemp, addMethod, rewrittenValue));
+                    }
+                );
             }
 
             var locals = localsBuilder.SelectAsArray(l => l.LocalSymbol);
@@ -688,14 +1031,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 locals,
                 sideEffects.ToImmutableAndFree(),
                 listTemp,
-                collectionType);
+                collectionType
+            );
         }
 
         private BoundExpression RewriteCollectionExpressionElementExpression(BoundNode element)
         {
-            var expression = element is BoundCollectionExpressionSpreadElement spreadElement ?
-                spreadElement.Expression :
-                (BoundExpression)element;
+            var expression = element is BoundCollectionExpressionSpreadElement spreadElement
+                ? spreadElement.Expression
+                : (BoundExpression)element;
             return VisitExpression(expression);
         }
 
@@ -703,13 +1047,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundNode> elements,
             int numberIncludingLastSpread,
             ArrayBuilder<BoundLocal> locals,
-            ArrayBuilder<BoundExpression> sideEffects)
+            ArrayBuilder<BoundExpression> sideEffects
+        )
         {
             for (int i = 0; i < numberIncludingLastSpread; i++)
             {
                 var rewrittenExpression = RewriteCollectionExpressionElementExpression(elements[i]);
                 BoundAssignmentOperator assignmentToTemp;
-                BoundLocal temp = _factory.StoreToTemp(rewrittenExpression, out assignmentToTemp, isKnownToReferToTempIfReferenceType: true);
+                BoundLocal temp = _factory.StoreToTemp(
+                    rewrittenExpression,
+                    out assignmentToTemp,
+                    isKnownToReferToTempIfReferenceType: true
+                );
                 locals.Add(temp);
                 sideEffects.Add(assignmentToTemp);
             }
@@ -721,14 +1070,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundLocal> rewrittenExpressions,
             int numberIncludingLastSpread,
             ArrayBuilder<BoundExpression> sideEffects,
-            Action<ArrayBuilder<BoundExpression>, BoundExpression, BoundExpression> addElement)
+            Action<ArrayBuilder<BoundExpression>, BoundExpression, BoundExpression> addElement
+        )
         {
             for (int i = 0; i < elements.Length; i++)
             {
                 var element = elements[i];
-                var rewrittenExpression = i < numberIncludingLastSpread ?
-                    rewrittenExpressions[i] :
-                    RewriteCollectionExpressionElementExpression(element);
+                var rewrittenExpression =
+                    i < numberIncludingLastSpread
+                        ? rewrittenExpressions[i]
+                        : RewriteCollectionExpressionElementExpression(element);
 
                 if (element is BoundCollectionExpressionSpreadElement spreadElement)
                 {
@@ -737,16 +1088,25 @@ namespace Microsoft.CodeAnalysis.CSharp
                         rewrittenExpression,
                         iteratorBody =>
                         {
-                            var rewrittenValue = VisitExpression(((BoundExpressionStatement)iteratorBody).Expression);
+                            var rewrittenValue = VisitExpression(
+                                ((BoundExpressionStatement)iteratorBody).Expression
+                            );
                             var builder = ArrayBuilder<BoundExpression>.GetInstance();
                             addElement(builder, rewrittenReceiver, rewrittenValue);
-                            var statements = builder.SelectAsArray(expr => (BoundStatement)new BoundExpressionStatement(expr.Syntax, expr));
+                            var statements = builder.SelectAsArray(expr =>
+                                (BoundStatement)new BoundExpressionStatement(expr.Syntax, expr)
+                            );
                             builder.Free();
                             Debug.Assert(statements.Length > 0);
-                            return statements.Length == 1 ?
-                                statements[0] :
-                                new BoundBlock(iteratorBody.Syntax, locals: ImmutableArray<LocalSymbol>.Empty, statements);
-                        });
+                            return statements.Length == 1
+                                ? statements[0]
+                                : new BoundBlock(
+                                    iteratorBody.Syntax,
+                                    locals: ImmutableArray<LocalSymbol>.Empty,
+                                    statements
+                                );
+                        }
+                    );
                     sideEffects.Add(rewrittenElement);
                 }
                 else
@@ -756,7 +1116,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private BoundExpression GetKnownLengthExpression(ImmutableArray<BoundNode> elements, int numberIncludingLastSpread, ArrayBuilder<BoundLocal> rewrittenExpressions)
+        private BoundExpression GetKnownLengthExpression(
+            ImmutableArray<BoundNode> elements,
+            int numberIncludingLastSpread,
+            ArrayBuilder<BoundLocal> rewrittenExpressions
+        )
         {
             Debug.Assert(rewrittenExpressions.Count >= numberIncludingLastSpread);
 
@@ -790,9 +1154,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (initialLength > 0)
             {
                 var otherElements = _factory.Literal(initialLength);
-                sum = sum is null ?
-                    otherElements :
-                    add(otherElements, sum);
+                sum = sum is null ? otherElements : add(otherElements, sum);
             }
 
             Debug.Assert(sum is { });
@@ -800,16 +1162,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             BoundExpression add(BoundExpression? sum, BoundExpression value)
             {
-                return sum is null ?
-                    value :
-                    _factory.Binary(BinaryOperatorKind.Addition, sum.Type!, sum, value);
+                return sum is null
+                    ? value
+                    : _factory.Binary(BinaryOperatorKind.Addition, sum.Type!, sum, value);
             }
         }
 
         private BoundExpression MakeCollectionExpressionSpreadElement(
             BoundCollectionExpressionSpreadElement node,
             BoundExpression rewrittenExpression,
-            Func<BoundStatement, BoundStatement> rewriteBody)
+            Func<BoundStatement, BoundStatement> rewriteBody
+        )
         {
             var enumeratorInfo = node.EnumeratorInfoOpt;
             var convertedExpression = (BoundConversion?)node.Conversion;
@@ -825,7 +1188,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             AddPlaceholderReplacement(expressionPlaceholder, rewrittenExpression);
 
-            var iterationVariable = _factory.SynthesizedLocal(enumeratorInfo.ElementType, node.Syntax);
+            var iterationVariable = _factory.SynthesizedLocal(
+                enumeratorInfo.ElementType,
+                node.Syntax
+            );
             var iterationLocal = _factory.Local(iterationVariable);
 
             AddPlaceholderReplacement(elementPlaceholder, iterationLocal);
@@ -850,7 +1216,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         deconstruction: null,
                         breakLabel,
                         continueLabel,
-                        rewrittenBody);
+                        rewrittenBody
+                    );
                 }
                 else
                 {
@@ -863,7 +1230,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         deconstruction: null,
                         breakLabel,
                         continueLabel,
-                        rewrittenBody);
+                        rewrittenBody
+                    );
                 }
             }
             else
@@ -879,7 +1247,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     awaitableInfo: null,
                     breakLabel,
                     continueLabel,
-                    rewrittenBody);
+                    rewrittenBody
+                );
             }
 
             RemovePlaceholderReplacement(expressionPlaceholder);
@@ -888,7 +1257,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return _factory.SpillSequence(
                 ImmutableArray<LocalSymbol>.Empty,
                 ImmutableArray.Create(statement),
-                result: _factory.Literal(0)); // result is unused
+                result: _factory.Literal(0)
+            ); // result is unused
         }
     }
 }

@@ -6,8 +6,6 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
 {
     internal abstract class ParsedFrame
     {
-        public ParsedFrame()
-        {
-        }
+        public ParsedFrame() { }
     }
 }

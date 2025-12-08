@@ -13,7 +13,8 @@ namespace System.ComponentModel
     /// </summary>
     public class AttributeCollection : ICollection, IEnumerable
     {
-        internal const string FilterRequiresUnreferencedCodeMessage = "The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type.";
+        internal const string FilterRequiresUnreferencedCodeMessage =
+            "The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type.";
 
         /// <summary>
         /// An empty AttributeCollection that can used instead of creating a new one.
@@ -51,14 +52,16 @@ namespace System.ComponentModel
             }
         }
 
-        protected AttributeCollection() : this(Array.Empty<Attribute>())
-        {
-        }
+        protected AttributeCollection()
+            : this(Array.Empty<Attribute>()) { }
 
         /// <summary>
         /// Creates a new AttributeCollection from an existing AttributeCollection
         /// </summary>
-        public static AttributeCollection FromExisting(AttributeCollection existing, params Attribute[]? newAttributes)
+        public static AttributeCollection FromExisting(
+            AttributeCollection existing,
+            params Attribute[]? newAttributes
+        )
         {
             ArgumentNullException.ThrowIfNull(existing);
 
@@ -124,7 +127,13 @@ namespace System.ComponentModel
         /// <summary>
         /// Gets the attribute with the specified type.
         /// </summary>
-        public virtual Attribute? this[[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicFields)] Type attributeType]
+        public virtual Attribute? this[
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
+                Type attributeType
+        ]
         {
             get
             {
@@ -240,7 +249,13 @@ namespace System.ComponentModel
         /// Returns the default value for an attribute. This uses the following heuristic:
         /// 1. It looks for a public static field named "Default".
         /// </summary>
-        protected Attribute? GetDefaultAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicFields)] Type attributeType)
+        protected Attribute? GetDefaultAttribute(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
+                Type attributeType
+        )
         {
             ArgumentNullException.ThrowIfNull(attributeType);
 
@@ -258,7 +273,10 @@ namespace System.ComponentModel
 
                 // Not in the table, so do the legwork to discover the default value.
                 Type reflect = TypeDescriptor.GetReflectionType(attributeType);
-                FieldInfo? field = reflect.GetField("Default", BindingFlags.Public | BindingFlags.Static | BindingFlags.GetField);
+                FieldInfo? field = reflect.GetField(
+                    "Default",
+                    BindingFlags.Public | BindingFlags.Static | BindingFlags.GetField
+                );
 
                 if (field != null && field.IsStatic)
                 {
@@ -266,7 +284,9 @@ namespace System.ComponentModel
                 }
                 else
                 {
-                    ConstructorInfo? ci = reflect.UnderlyingSystemType.GetConstructor(Type.EmptyTypes);
+                    ConstructorInfo? ci = reflect.UnderlyingSystemType.GetConstructor(
+                        Type.EmptyTypes
+                    );
                     if (ci != null)
                     {
                         attr = (Attribute)ci.Invoke(Array.Empty<object>());
@@ -339,6 +359,7 @@ namespace System.ComponentModel
         /// <summary>
         /// Copies this collection to an array.
         /// </summary>
-        public void CopyTo(Array array, int index) => Array.Copy(Attributes, 0, array, index, Attributes.Length);
+        public void CopyTo(Array array, int index) =>
+            Array.Copy(Attributes, 0, array, index, Attributes.Length);
     }
 }

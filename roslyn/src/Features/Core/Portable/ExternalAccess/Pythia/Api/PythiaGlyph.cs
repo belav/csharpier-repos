@@ -6,6 +6,6 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
 {
     internal enum PythiaGlyph
     {
-        Keyword = Glyph.Keyword
+        Keyword = Glyph.Keyword,
     }
 }

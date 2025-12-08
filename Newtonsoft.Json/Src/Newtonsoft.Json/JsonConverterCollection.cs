@@ -25,15 +25,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Collections.ObjectModel;
+using System.Text;
 
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Represents a collection of <see cref="JsonConverter"/>.
     /// </summary>
-    public class JsonConverterCollection : Collection<JsonConverter>
-    {
-    }
+    public class JsonConverterCollection : Collection<JsonConverter> { }
 }

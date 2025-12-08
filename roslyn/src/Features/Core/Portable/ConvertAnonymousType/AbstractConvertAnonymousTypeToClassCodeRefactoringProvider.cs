@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
         TIdentifierNameSyntax,
         TObjectCreationExpressionSyntax,
         TAnonymousObjectCreationExpressionSyntax,
-        TNamespaceDeclarationSyntax>
+        TNamespaceDeclarationSyntax
+    >
         : AbstractConvertAnonymousTypeCodeRefactoringProvider<TAnonymousObjectCreationExpressionSyntax>
         where TExpressionSyntax : SyntaxNode
         where TNameSyntax : TExpressionSyntax
@@ -40,12 +41,20 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
         where TAnonymousObjectCreationExpressionSyntax : TExpressionSyntax
         where TNamespaceDeclarationSyntax : SyntaxNode
     {
-        protected abstract TObjectCreationExpressionSyntax CreateObjectCreationExpression(TNameSyntax nameNode, TAnonymousObjectCreationExpressionSyntax currentAnonymousObject);
+        protected abstract TObjectCreationExpressionSyntax CreateObjectCreationExpression(
+            TNameSyntax nameNode,
+            TAnonymousObjectCreationExpressionSyntax currentAnonymousObject
+        );
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
             var (document, textSpan, cancellationToken) = context;
-            var (anonymousObject, anonymousType) = await TryGetAnonymousObjectAsync(document, textSpan, cancellationToken).ConfigureAwait(false);
+            var (anonymousObject, anonymousType) = await TryGetAnonymousObjectAsync(
+                    document,
+                    textSpan,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (anonymousObject == null || anonymousType == null)
                 return;
@@ -53,9 +62,10 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
             // Check if the anonymous type actually references another anonymous type inside of it.
             // If it does, we can't convert this.  There is no way to describe this anonymous type
             // in the concrete type we create.
-            var containsAnonymousType = anonymousType.GetMembers()
-                                                     .OfType<IPropertySymbol>()
-                                                     .Any(p => p.Type.ContainsAnonymousType());
+            var containsAnonymousType = anonymousType
+                .GetMembers()
+                .OfType<IPropertySymbol>()
+                .Any(p => p.Type.ContainsAnonymousType());
             if (containsAnonymousType)
                 return;
 
@@ -66,34 +76,54 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
                     CodeAction.Create(
                         FeaturesResources.Convert_to_record,
                         c => ConvertAsync(document, textSpan, context.Options, isRecord: true, c),
-                        nameof(FeaturesResources.Convert_to_record)),
-                    anonymousObject.Span);
+                        nameof(FeaturesResources.Convert_to_record)
+                    ),
+                    anonymousObject.Span
+                );
             }
 
             context.RegisterRefactoring(
                 CodeAction.Create(
                     FeaturesResources.Convert_to_class,
                     c => ConvertAsync(document, textSpan, context.Options, isRecord: false, c),
-                    nameof(FeaturesResources.Convert_to_class)),
-                anonymousObject.Span);
+                    nameof(FeaturesResources.Convert_to_class)
+                ),
+                anonymousObject.Span
+            );
         }
 
-        private async Task<Document> ConvertAsync(Document document, TextSpan span, CodeActionOptionsProvider fallbackOptions, bool isRecord, CancellationToken cancellationToken)
+        private async Task<Document> ConvertAsync(
+            Document document,
+            TextSpan span,
+            CodeActionOptionsProvider fallbackOptions,
+            bool isRecord,
+            CancellationToken cancellationToken
+        )
         {
-            var (anonymousObject, anonymousType) = await TryGetAnonymousObjectAsync(document, span, cancellationToken).ConfigureAwait(false);
+            var (anonymousObject, anonymousType) = await TryGetAnonymousObjectAsync(
+                    document,
+                    span,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             Debug.Assert(anonymousObject != null);
             Debug.Assert(anonymousType != null);
 
             var position = span.Start;
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // Generate a unique name for the class we're creating.  We'll also add a rename
             // annotation so the user can pick the right name for the type afterwards.
             var className = NameGenerator.GenerateUniqueName(
                 isRecord ? "NewRecord" : "NewClass",
-                n => semanticModel.LookupSymbols(position, name: n).IsEmpty);
+                n => semanticModel.LookupSymbols(position, name: n).IsEmpty
+            );
 
             // First, create the set of properties this class will have based on the properties the
             // anonymous type has itself.  Also, get a mapping of the original anonymous type's
@@ -104,82 +134,135 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
             // Next, generate the full class that will be used to replace all instances of this
             // anonymous type.
             var namedTypeSymbol = await GenerateFinalNamedTypeAsync(
-                document, className, isRecord, properties, cancellationToken).ConfigureAwait(false);
+                    document,
+                    className,
+                    isRecord,
+                    properties,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var generator = SyntaxGenerator.GetGenerator(document);
             var editor = new SyntaxEditor(root, generator);
 
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var containingMember = anonymousObject.FirstAncestorOrSelf<SyntaxNode, ISyntaxFactsService>((node, syntaxFacts) => syntaxFacts.IsMethodLevelMember(node), syntaxFacts) ?? anonymousObject;
+            var containingMember =
+                anonymousObject.FirstAncestorOrSelf<SyntaxNode, ISyntaxFactsService>(
+                    (node, syntaxFacts) => syntaxFacts.IsMethodLevelMember(node),
+                    syntaxFacts
+                ) ?? anonymousObject;
 
             // Next, go and update any references to these anonymous type properties to match
             // the new PascalCased name we've picked for the new properties that will go in
             // the named type.
             await ReplacePropertyReferencesAsync(
-                document, editor, containingMember,
-                propertyMap, cancellationToken).ConfigureAwait(false);
+                    document,
+                    editor,
+                    containingMember,
+                    propertyMap,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // Next, go through and replace all matching anonymous types in this method with a call
-            // to construct the new named type we've generated.  
+            // to construct the new named type we've generated.
             await ReplaceMatchingAnonymousTypesAsync(
-                document, editor, namedTypeSymbol,
-                containingMember, anonymousObject,
-                anonymousType, cancellationToken).ConfigureAwait(false);
+                    document,
+                    editor,
+                    namedTypeSymbol,
+                    containingMember,
+                    anonymousObject,
+                    anonymousType,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var context = new CodeGenerationContext(
                 generateMembers: true,
                 sortMembers: false,
-                autoInsertionLocation: false);
+                autoInsertionLocation: false
+            );
 
-            var info = await document.GetCodeGenerationInfoAsync(context, fallbackOptions, cancellationToken).ConfigureAwait(false);
-            var formattingOptions = await document.GetSyntaxFormattingOptionsAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
+            var info = await document
+                .GetCodeGenerationInfoAsync(context, fallbackOptions, cancellationToken)
+                .ConfigureAwait(false);
+            var formattingOptions = await document
+                .GetSyntaxFormattingOptionsAsync(fallbackOptions, cancellationToken)
+                .ConfigureAwait(false);
 
             // Then, actually insert the new class in the appropriate container.
             var container = anonymousObject.GetAncestor<TNamespaceDeclarationSyntax>() ?? root;
-            editor.ReplaceNode(container, (currentContainer, _) =>
-                info.Service.AddNamedType(currentContainer, namedTypeSymbol, info, cancellationToken));
+            editor.ReplaceNode(
+                container,
+                (currentContainer, _) =>
+                    info.Service.AddNamedType(
+                        currentContainer,
+                        namedTypeSymbol,
+                        info,
+                        cancellationToken
+                    )
+            );
 
             var updatedDocument = document.WithSyntaxRoot(editor.GetChangedRoot());
 
             // Finally, format using the equals+getHashCode service so that our generated methods
             // follow any special formatting rules specific to them.
-            var equalsAndGetHashCodeService = document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
-            return await equalsAndGetHashCodeService.FormatDocumentAsync(
-                updatedDocument, formattingOptions, cancellationToken).ConfigureAwait(false);
+            var equalsAndGetHashCodeService =
+                document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
+            return await equalsAndGetHashCodeService
+                .FormatDocumentAsync(updatedDocument, formattingOptions, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         private static async Task ReplacePropertyReferencesAsync(
-            Document document, SyntaxEditor editor, SyntaxNode containingMember,
-            ImmutableDictionary<IPropertySymbol, string> propertyMap, CancellationToken cancellationToken)
+            Document document,
+            SyntaxEditor editor,
+            SyntaxNode containingMember,
+            ImmutableDictionary<IPropertySymbol, string> propertyMap,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var identifiers = containingMember.DescendantNodes().OfType<TIdentifierNameSyntax>();
 
             foreach (var identifier in identifiers)
             {
-                if (!syntaxFacts.IsNameOfSimpleMemberAccessExpression(identifier) &&
-                    !syntaxFacts.IsNameOfMemberBindingExpression(identifier))
+                if (
+                    !syntaxFacts.IsNameOfSimpleMemberAccessExpression(identifier)
+                    && !syntaxFacts.IsNameOfMemberBindingExpression(identifier)
+                )
                 {
                     continue;
                 }
 
-                if (semanticModel.GetSymbolInfo(identifier, cancellationToken).GetAnySymbol() is not IPropertySymbol symbol)
+                if (
+                    semanticModel.GetSymbolInfo(identifier, cancellationToken).GetAnySymbol()
+                    is not IPropertySymbol symbol
+                )
                     continue;
 
                 if (propertyMap.TryGetValue(symbol, out var newName))
                 {
                     editor.ReplaceNode(
                         identifier,
-                        (currentId, g) => g.IdentifierName(newName).WithTriviaFrom(currentId));
+                        (currentId, g) => g.IdentifierName(newName).WithTriviaFrom(currentId)
+                    );
                 }
             }
         }
 
         private async Task ReplaceMatchingAnonymousTypesAsync(
-            Document document, SyntaxEditor editor, INamedTypeSymbol classSymbol,
-            SyntaxNode containingMember, TAnonymousObjectCreationExpressionSyntax creationNode,
-            INamedTypeSymbol anonymousType, CancellationToken cancellationToken)
+            Document document,
+            SyntaxEditor editor,
+            INamedTypeSymbol classSymbol,
+            SyntaxNode containingMember,
+            TAnonymousObjectCreationExpressionSyntax creationNode,
+            INamedTypeSymbol anonymousType,
+            CancellationToken cancellationToken
+        )
         {
             // When invoked we want to fixup all creations of the "same" anonymous type within the
             // containing method.  We define same-ness as meaning "they have the type symbol".  this
@@ -193,17 +276,22 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
             // Note: we could consider expanding this in the future (potentially with another
             // lightbulb action).  Specifically, we could look in the containing type and replace
             // any matches in any methods.
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var childCreationNodes = containingMember.DescendantNodesAndSelf()
-                                                     .OfType<TAnonymousObjectCreationExpressionSyntax>();
+            var childCreationNodes = containingMember
+                .DescendantNodesAndSelf()
+                .OfType<TAnonymousObjectCreationExpressionSyntax>();
 
             foreach (var childCreation in childCreationNodes)
             {
                 var childType = semanticModel.GetTypeInfo(childCreation, cancellationToken).Type;
                 if (childType == null)
                 {
-                    Debug.Fail("We should always be able to get an anonymous type for any anonymous creation node.");
+                    Debug.Fail(
+                        "We should always be able to get an anonymous type for any anonymous creation node."
+                    );
                     continue;
                 }
 
@@ -213,9 +301,11 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
         }
 
         private void ReplaceWithObjectCreation(
-            SyntaxEditor editor, INamedTypeSymbol classSymbol,
+            SyntaxEditor editor,
+            INamedTypeSymbol classSymbol,
             TAnonymousObjectCreationExpressionSyntax startingCreationNode,
-            TAnonymousObjectCreationExpressionSyntax childCreation)
+            TAnonymousObjectCreationExpressionSyntax childCreation
+        )
         {
             // Use the callback form as anonymous types may be nested, and we want to
             // properly replace them even in that case.
@@ -223,40 +313,55 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
                 childCreation,
                 (currentNode, g) =>
                 {
-                    var currentAnonymousObject = (TAnonymousObjectCreationExpressionSyntax)currentNode;
+                    var currentAnonymousObject =
+                        (TAnonymousObjectCreationExpressionSyntax)currentNode;
 
                     // If we hit the node the user started on, then add the rename annotation here.
                     var className = classSymbol.Name;
-                    var classNameToken = startingCreationNode == childCreation
-                        ? g.Identifier(className).WithAdditionalAnnotations(RenameAnnotation.Create())
-                        : g.Identifier(className);
+                    var classNameToken =
+                        startingCreationNode == childCreation
+                            ? g.Identifier(className)
+                                .WithAdditionalAnnotations(RenameAnnotation.Create())
+                            : g.Identifier(className);
 
-                    var classNameNode = classSymbol.TypeParameters.Length == 0
-                        ? (TNameSyntax)g.IdentifierName(classNameToken)
-                        : (TNameSyntax)g.GenericName(classNameToken,
-                            classSymbol.TypeParameters.Select(tp => g.IdentifierName(tp.Name)));
+                    var classNameNode =
+                        classSymbol.TypeParameters.Length == 0
+                            ? (TNameSyntax)g.IdentifierName(classNameToken)
+                            : (TNameSyntax)
+                                g.GenericName(
+                                    classNameToken,
+                                    classSymbol.TypeParameters.Select(tp =>
+                                        g.IdentifierName(tp.Name)
+                                    )
+                                );
 
                     return CreateObjectCreationExpression(classNameNode, currentAnonymousObject)
                         .WithAdditionalAnnotations(Formatter.Annotation);
-                });
+                }
+            );
         }
 
         private static async Task<INamedTypeSymbol> GenerateFinalNamedTypeAsync(
-            Document document, string typeName, bool isRecord,
+            Document document,
+            string typeName,
+            bool isRecord,
             ImmutableArray<IPropertySymbol> properties,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var generator = SyntaxGenerator.GetGenerator(document);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // Next, see if any of the properties ended up using any type parameters from the
             // containing method/named-type.  If so, we'll need to generate a generic type so we can
             // properly pass these along.
-            var capturedTypeParameters =
-                properties.Select(p => p.Type)
-                          .SelectMany(t => t.GetReferencedTypeParameters())
-                          .Distinct()
-                          .ToImmutableArray();
+            var capturedTypeParameters = properties
+                .Select(p => p.Type)
+                .SelectMany(t => t.GetReferencedTypeParameters())
+                .Distinct()
+                .ToImmutableArray();
 
             using var _ = ArrayBuilder<ISymbol>.GetInstance(out var members);
 
@@ -269,8 +374,11 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
                     Accessibility.Public,
                     modifiers: default,
                     typeName,
-                    properties.SelectAsArray(prop => CodeGenerationSymbolFactory.CreateParameterSymbol(prop.Type, prop.Name)),
-                    isPrimaryConstructor: true);
+                    properties.SelectAsArray(prop =>
+                        CodeGenerationSymbolFactory.CreateParameterSymbol(prop.Type, prop.Name)
+                    ),
+                    isPrimaryConstructor: true
+                );
 
                 members.Add(constructor);
             }
@@ -282,48 +390,93 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
                 // passes. First, we create an empty version of the class.  This can then be used to
                 // help create members like Equals/GetHashCode.  Then, once we have all the members we
                 // create the final type.
-                var namedTypeWithoutMembers = CreateNamedType(typeName, isRecord: false, capturedTypeParameters, members: default);
+                var namedTypeWithoutMembers = CreateNamedType(
+                    typeName,
+                    isRecord: false,
+                    capturedTypeParameters,
+                    members: default
+                );
 
-                var constructor = CreateClassConstructor(semanticModel, typeName, properties, generator);
+                var constructor = CreateClassConstructor(
+                    semanticModel,
+                    typeName,
+                    properties,
+                    generator
+                );
 
                 // Generate Equals/GetHashCode.  Only readonly properties are suitable for these
                 // methods.  We can defer to our existing language service for this so that we
                 // generate the same Equals/GetHashCode that our other IDE features generate.
                 var readonlyProperties = ImmutableArray<ISymbol>.CastUp(
-                    properties.WhereAsArray(p => p.SetMethod == null));
+                    properties.WhereAsArray(p => p.SetMethod == null)
+                );
 
-                var equalsAndGetHashCodeService = document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
+                var equalsAndGetHashCodeService =
+                    document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
 
-                var equalsMethod = await equalsAndGetHashCodeService.GenerateEqualsMethodAsync(
-                    document, namedTypeWithoutMembers, readonlyProperties,
-                    localNameOpt: SyntaxGeneratorExtensions.OtherName, cancellationToken).ConfigureAwait(false);
-                var getHashCodeMethod = await equalsAndGetHashCodeService.GenerateGetHashCodeMethodAsync(
-                    document, namedTypeWithoutMembers,
-                    readonlyProperties, cancellationToken).ConfigureAwait(false);
+                var equalsMethod = await equalsAndGetHashCodeService
+                    .GenerateEqualsMethodAsync(
+                        document,
+                        namedTypeWithoutMembers,
+                        readonlyProperties,
+                        localNameOpt: SyntaxGeneratorExtensions.OtherName,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                var getHashCodeMethod = await equalsAndGetHashCodeService
+                    .GenerateGetHashCodeMethodAsync(
+                        document,
+                        namedTypeWithoutMembers,
+                        readonlyProperties,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 members.AddRange(properties);
                 members.Add(constructor);
                 members.Add(equalsMethod);
                 members.Add(getHashCodeMethod);
-
             }
 
-            return CreateNamedType(typeName, isRecord, capturedTypeParameters, members.ToImmutable());
+            return CreateNamedType(
+                typeName,
+                isRecord,
+                capturedTypeParameters,
+                members.ToImmutable()
+            );
         }
 
         private static INamedTypeSymbol CreateNamedType(
-            string className, bool isRecord, ImmutableArray<ITypeParameterSymbol> capturedTypeParameters, ImmutableArray<ISymbol> members)
+            string className,
+            bool isRecord,
+            ImmutableArray<ITypeParameterSymbol> capturedTypeParameters,
+            ImmutableArray<ISymbol> members
+        )
         {
             return CodeGenerationSymbolFactory.CreateNamedTypeSymbol(
-                attributes: default, Accessibility.Internal, modifiers: default,
-                isRecord, TypeKind.Class, className, capturedTypeParameters, members: members);
+                attributes: default,
+                Accessibility.Internal,
+                modifiers: default,
+                isRecord,
+                TypeKind.Class,
+                className,
+                capturedTypeParameters,
+                members: members
+            );
         }
 
-        private static (ImmutableArray<IPropertySymbol> properties, ImmutableDictionary<IPropertySymbol, string> propertyMap) GenerateProperties(
-            Document document, INamedTypeSymbol anonymousType)
+        private static (
+            ImmutableArray<IPropertySymbol> properties,
+            ImmutableDictionary<IPropertySymbol, string> propertyMap
+        ) GenerateProperties(Document document, INamedTypeSymbol anonymousType)
         {
-            var originalProperties = anonymousType.GetMembers().OfType<IPropertySymbol>().ToImmutableArray();
-            var newProperties = originalProperties.SelectAsArray(p => GenerateProperty(document, p));
+            var originalProperties = anonymousType
+                .GetMembers()
+                .OfType<IPropertySymbol>()
+                .ToImmutableArray();
+            var newProperties = originalProperties.SelectAsArray(p =>
+                GenerateProperty(document, p)
+            );
 
             // If we changed the names of any properties, record that name mapping.  We'll
             // use this to update reference to the old anonymous-type properties to the new
@@ -347,37 +500,55 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
             // think of themselves as having real accessors that will read/write into a real field
             // in the type.  Instead, we just want to generate auto-props. So we effectively clone
             // the property, just throwing aways anything we don't need for that purpose.
-            // 
+            //
             // We also want to follow general .NET naming.  So that means converting to pascal
             // case from camel-case.
 
-            var getMethod = prop.GetMethod != null ? CreateAccessorSymbol(prop, MethodKind.PropertyGet) : null;
-            var setMethod = prop.SetMethod != null ? CreateAccessorSymbol(prop, MethodKind.PropertySet) : null;
+            var getMethod =
+                prop.GetMethod != null ? CreateAccessorSymbol(prop, MethodKind.PropertyGet) : null;
+            var setMethod =
+                prop.SetMethod != null ? CreateAccessorSymbol(prop, MethodKind.PropertySet) : null;
 
             return CodeGenerationSymbolFactory.CreatePropertySymbol(
-                attributes: default, Accessibility.Public, modifiers: default,
-                prop.Type, refKind: default, explicitInterfaceImplementations: default,
+                attributes: default,
+                Accessibility.Public,
+                modifiers: default,
+                prop.Type,
+                refKind: default,
+                explicitInterfaceImplementations: default,
                 GetLegalName(prop.Name.ToPascalCase(trimLeadingTypePrefix: false), document),
-                parameters: default, getMethod: getMethod, setMethod: setMethod);
+                parameters: default,
+                getMethod: getMethod,
+                setMethod: setMethod
+            );
         }
 
         private static string GetLegalName(string name, Document document)
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            return syntaxFacts.IsLegalIdentifier(name)
-                ? name
-                : "Item"; // Just a dummy name for the property.  Does not need to be localized.
+            return syntaxFacts.IsLegalIdentifier(name) ? name : "Item"; // Just a dummy name for the property.  Does not need to be localized.
         }
 
-        private static IMethodSymbol CreateAccessorSymbol(IPropertySymbol prop, MethodKind kind)
-            => CodeGenerationSymbolFactory.CreateMethodSymbol(
-                   attributes: default, Accessibility.Public, DeclarationModifiers.Abstract,
-                   prop.Type, refKind: default, explicitInterfaceImplementations: default,
-                   name: "", typeParameters: default, parameters: default, methodKind: kind);
+        private static IMethodSymbol CreateAccessorSymbol(IPropertySymbol prop, MethodKind kind) =>
+            CodeGenerationSymbolFactory.CreateMethodSymbol(
+                attributes: default,
+                Accessibility.Public,
+                DeclarationModifiers.Abstract,
+                prop.Type,
+                refKind: default,
+                explicitInterfaceImplementations: default,
+                name: "",
+                typeParameters: default,
+                parameters: default,
+                methodKind: kind
+            );
 
         private static IMethodSymbol CreateClassConstructor(
-            SemanticModel semanticModel, string className,
-            ImmutableArray<IPropertySymbol> properties, SyntaxGenerator generator)
+            SemanticModel semanticModel,
+            string className,
+            ImmutableArray<IPropertySymbol> properties,
+            SyntaxGenerator generator
+        )
         {
             // For every property, create a corresponding parameter, as well as an assignment
             // statement from that parameter to the property.
@@ -385,7 +556,9 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
             var parameters = properties.SelectAsArray(prop =>
             {
                 var parameter = CodeGenerationSymbolFactory.CreateParameterSymbol(
-                    prop.Type, prop.Name.ToCamelCase(trimLeadingTypePrefix: false));
+                    prop.Type,
+                    prop.Name.ToCamelCase(trimLeadingTypePrefix: false)
+                );
 
                 parameterToPropMap[parameter.Name] = prop;
 
@@ -393,12 +566,22 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
             });
 
             var assignmentStatements = generator.CreateAssignmentStatements(
-                semanticModel, parameters, parameterToPropMap, ImmutableDictionary<string, string>.Empty,
-                addNullChecks: false, preferThrowExpression: false);
+                semanticModel,
+                parameters,
+                parameterToPropMap,
+                ImmutableDictionary<string, string>.Empty,
+                addNullChecks: false,
+                preferThrowExpression: false
+            );
 
             var constructor = CodeGenerationSymbolFactory.CreateConstructorSymbol(
-                attributes: default, Accessibility.Public, modifiers: default,
-                className, parameters, assignmentStatements);
+                attributes: default,
+                Accessibility.Public,
+                modifiers: default,
+                className,
+                parameters,
+                assignmentStatements
+            );
 
             return constructor;
         }

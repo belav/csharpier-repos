@@ -40,9 +40,18 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
         IGlobalOptionService globalOptions,
         [Import(AllowDefault = true)] IInlineHintKeyProcessor inlineHintKeyProcessor,
         [Import(AllowDefault = true)] ITextBufferVisibilityTracker? visibilityTracker,
-        IAsynchronousOperationListenerProvider listenerProvider) : AsynchronousViewTaggerProvider<InlineHintDataTag>(threadingContext, globalOptions, visibilityTracker, listenerProvider.GetListener(FeatureAttribute.InlineHints))
+        IAsynchronousOperationListenerProvider listenerProvider
+    )
+        : AsynchronousViewTaggerProvider<InlineHintDataTag>(
+            threadingContext,
+            globalOptions,
+            visibilityTracker,
+            listenerProvider.GetListener(FeatureAttribute.InlineHints)
+        )
     {
-        private readonly IAsynchronousOperationListener _listener = listenerProvider.GetListener(FeatureAttribute.InlineHints);
+        private readonly IAsynchronousOperationListener _listener = listenerProvider.GetListener(
+            FeatureAttribute.InlineHints
+        );
         private readonly IInlineHintKeyProcessor _inlineHintKeyProcessor = inlineHintKeyProcessor;
 
         protected override SpanTrackingMode SpanTrackingMode => SpanTrackingMode.EdgeInclusive;
@@ -53,31 +62,75 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
         /// is desirable is 'cut line'. If the tags aren't removed, then the line will be gone but the tags will remain
         /// at whatever points the tracking spans moved them to.
         /// </summary>
-        protected override TaggerTextChangeBehavior TextChangeBehavior => TaggerTextChangeBehavior.RemoveTagsThatIntersectEdits;
+        protected override TaggerTextChangeBehavior TextChangeBehavior =>
+            TaggerTextChangeBehavior.RemoveTagsThatIntersectEdits;
 
         protected override TaggerDelay EventChangeDelay => TaggerDelay.Short;
 
-        protected override ITaggerEventSource CreateEventSource(ITextView textView, ITextBuffer subjectBuffer)
+        protected override ITaggerEventSource CreateEventSource(
+            ITextView textView,
+            ITextBuffer subjectBuffer
+        )
         {
             return TaggerEventSources.Compose(
                 TaggerEventSources.OnViewSpanChanged(this.ThreadingContext, textView),
                 TaggerEventSources.OnWorkspaceChanged(subjectBuffer, _listener),
                 new InlineHintKeyProcessorEventSource(_inlineHintKeyProcessor),
-                TaggerEventSources.OnGlobalOptionChanged(GlobalOptions, InlineHintsOptionsStorage.EnabledForParameters),
-                TaggerEventSources.OnGlobalOptionChanged(GlobalOptions, InlineHintsOptionsStorage.ForLiteralParameters),
-                TaggerEventSources.OnGlobalOptionChanged(GlobalOptions, InlineHintsOptionsStorage.ForIndexerParameters),
-                TaggerEventSources.OnGlobalOptionChanged(GlobalOptions, InlineHintsOptionsStorage.ForObjectCreationParameters),
-                TaggerEventSources.OnGlobalOptionChanged(GlobalOptions, InlineHintsOptionsStorage.ForOtherParameters),
-                TaggerEventSources.OnGlobalOptionChanged(GlobalOptions, InlineHintsOptionsStorage.SuppressForParametersThatMatchMethodIntent),
-                TaggerEventSources.OnGlobalOptionChanged(GlobalOptions, InlineHintsOptionsStorage.SuppressForParametersThatDifferOnlyBySuffix),
-                TaggerEventSources.OnGlobalOptionChanged(GlobalOptions, InlineHintsOptionsStorage.SuppressForParametersThatMatchArgumentName),
-                TaggerEventSources.OnGlobalOptionChanged(GlobalOptions, InlineHintsOptionsStorage.EnabledForTypes),
-                TaggerEventSources.OnGlobalOptionChanged(GlobalOptions, InlineHintsOptionsStorage.ForImplicitVariableTypes),
-                TaggerEventSources.OnGlobalOptionChanged(GlobalOptions, InlineHintsOptionsStorage.ForLambdaParameterTypes),
-                TaggerEventSources.OnGlobalOptionChanged(GlobalOptions, InlineHintsOptionsStorage.ForImplicitObjectCreation));
+                TaggerEventSources.OnGlobalOptionChanged(
+                    GlobalOptions,
+                    InlineHintsOptionsStorage.EnabledForParameters
+                ),
+                TaggerEventSources.OnGlobalOptionChanged(
+                    GlobalOptions,
+                    InlineHintsOptionsStorage.ForLiteralParameters
+                ),
+                TaggerEventSources.OnGlobalOptionChanged(
+                    GlobalOptions,
+                    InlineHintsOptionsStorage.ForIndexerParameters
+                ),
+                TaggerEventSources.OnGlobalOptionChanged(
+                    GlobalOptions,
+                    InlineHintsOptionsStorage.ForObjectCreationParameters
+                ),
+                TaggerEventSources.OnGlobalOptionChanged(
+                    GlobalOptions,
+                    InlineHintsOptionsStorage.ForOtherParameters
+                ),
+                TaggerEventSources.OnGlobalOptionChanged(
+                    GlobalOptions,
+                    InlineHintsOptionsStorage.SuppressForParametersThatMatchMethodIntent
+                ),
+                TaggerEventSources.OnGlobalOptionChanged(
+                    GlobalOptions,
+                    InlineHintsOptionsStorage.SuppressForParametersThatDifferOnlyBySuffix
+                ),
+                TaggerEventSources.OnGlobalOptionChanged(
+                    GlobalOptions,
+                    InlineHintsOptionsStorage.SuppressForParametersThatMatchArgumentName
+                ),
+                TaggerEventSources.OnGlobalOptionChanged(
+                    GlobalOptions,
+                    InlineHintsOptionsStorage.EnabledForTypes
+                ),
+                TaggerEventSources.OnGlobalOptionChanged(
+                    GlobalOptions,
+                    InlineHintsOptionsStorage.ForImplicitVariableTypes
+                ),
+                TaggerEventSources.OnGlobalOptionChanged(
+                    GlobalOptions,
+                    InlineHintsOptionsStorage.ForLambdaParameterTypes
+                ),
+                TaggerEventSources.OnGlobalOptionChanged(
+                    GlobalOptions,
+                    InlineHintsOptionsStorage.ForImplicitObjectCreation
+                )
+            );
         }
 
-        protected override IEnumerable<SnapshotSpan> GetSpansToTag(ITextView? textView, ITextBuffer subjectBuffer)
+        protected override IEnumerable<SnapshotSpan> GetSpansToTag(
+            ITextView? textView,
+            ITextBuffer subjectBuffer
+        )
         {
             this.ThreadingContext.ThrowIfNotOnUIThread();
             Contract.ThrowIfNull(textView);
@@ -95,7 +148,11 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
         }
 
         protected override async Task ProduceTagsAsync(
-            TaggerContext<InlineHintDataTag> context, DocumentSnapshotSpan documentSnapshotSpan, int? caretPosition, CancellationToken cancellationToken)
+            TaggerContext<InlineHintDataTag> context,
+            DocumentSnapshotSpan documentSnapshotSpan,
+            int? caretPosition,
+            CancellationToken cancellationToken
+        )
         {
             var document = documentSnapshotSpan.Document;
             if (document == null)
@@ -108,10 +165,15 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             var options = GlobalOptions.GetInlineHintsOptions(document.Project.Language);
 
             var snapshotSpan = documentSnapshotSpan.SnapshotSpan;
-            var hints = await service.GetInlineHintsAsync(
-                document, snapshotSpan.Span.ToTextSpan(), options,
-                displayAllOverride: _inlineHintKeyProcessor?.State is true,
-                cancellationToken).ConfigureAwait(false);
+            var hints = await service
+                .GetInlineHintsAsync(
+                    document,
+                    snapshotSpan.Span.ToTextSpan(),
+                    options,
+                    displayAllOverride: _inlineHintKeyProcessor?.State is true,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             foreach (var hint in hints)
             {
@@ -119,13 +181,16 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 if (hint.DisplayParts.Sum(p => p.ToString().Length) == 0)
                     continue;
 
-                context.AddTag(new TagSpan<InlineHintDataTag>(
-                    hint.Span.ToSnapshotSpan(snapshotSpan.Snapshot),
-                    new InlineHintDataTag(this, snapshotSpan.Snapshot, hint)));
+                context.AddTag(
+                    new TagSpan<InlineHintDataTag>(
+                        hint.Span.ToSnapshotSpan(snapshotSpan.Snapshot),
+                        new InlineHintDataTag(this, snapshotSpan.Snapshot, hint)
+                    )
+                );
             }
         }
 
-        protected override bool TagEquals(InlineHintDataTag tag1, InlineHintDataTag tag2)
-            => tag1.Equals(tag2);
+        protected override bool TagEquals(InlineHintDataTag tag1, InlineHintDataTag tag2) =>
+            tag1.Equals(tag2);
     }
 }

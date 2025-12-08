@@ -4,13 +4,13 @@
 
 #nullable disable
 
+using System;
 using System.Composition;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.Structure;
 using Microsoft.CodeAnalysis.ExternalAccess.FSharp.Structure;
 using Microsoft.CodeAnalysis.Host.Mef;
-using System;
+using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Structure
 {
@@ -29,13 +29,29 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Structure
 
         public override string Language => LanguageNames.FSharp;
 
-        public override async Task<BlockStructure> GetBlockStructureAsync(Document document, BlockStructureOptions options, CancellationToken cancellationToken)
+        public override async Task<BlockStructure> GetBlockStructureAsync(
+            Document document,
+            BlockStructureOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            var blockStructure = await _service.GetBlockStructureAsync(document, cancellationToken).ConfigureAwait(false);
+            var blockStructure = await _service
+                .GetBlockStructureAsync(document, cancellationToken)
+                .ConfigureAwait(false);
             if (blockStructure != null)
             {
-                return new BlockStructure(blockStructure.Spans.SelectAsArray(
-                    x => new BlockSpan(x.Type, x.IsCollapsible, x.TextSpan, x.HintSpan, primarySpans: null, x.BannerText, x.AutoCollapse, x.IsDefaultCollapsed)));
+                return new BlockStructure(
+                    blockStructure.Spans.SelectAsArray(x => new BlockSpan(
+                        x.Type,
+                        x.IsCollapsible,
+                        x.TextSpan,
+                        x.HintSpan,
+                        primarySpans: null,
+                        x.BannerText,
+                        x.AutoCollapse,
+                        x.IsDefaultCollapsed
+                    ))
+                );
             }
             else
             {

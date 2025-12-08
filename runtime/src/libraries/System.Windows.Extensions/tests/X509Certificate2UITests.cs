@@ -10,22 +10,62 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void SelectFromCollection_InvalidInput()
         {
-            Assert.Throws<ArgumentNullException>("certificates", () => X509Certificate2UI.SelectFromCollection(null, string.Empty, string.Empty, X509SelectionFlag.SingleSelection));
-            Assert.Throws<ArgumentException>(() => X509Certificate2UI.SelectFromCollection(new X509Certificate2Collection(), string.Empty, string.Empty, (X509SelectionFlag)2));
+            Assert.Throws<ArgumentNullException>(
+                "certificates",
+                () =>
+                    X509Certificate2UI.SelectFromCollection(
+                        null,
+                        string.Empty,
+                        string.Empty,
+                        X509SelectionFlag.SingleSelection
+                    )
+            );
+            Assert.Throws<ArgumentException>(() =>
+                X509Certificate2UI.SelectFromCollection(
+                    new X509Certificate2Collection(),
+                    string.Empty,
+                    string.Empty,
+                    (X509SelectionFlag)2
+                )
+            );
         }
 
         [Fact]
         public static void SelectFromCollection_InvalidInput_WithHwnd()
         {
-            Assert.Throws<ArgumentNullException>("certificates", () => X509Certificate2UI.SelectFromCollection(null, string.Empty, string.Empty, X509SelectionFlag.SingleSelection, IntPtr.Zero));
-            Assert.Throws<ArgumentException>(() => X509Certificate2UI.SelectFromCollection(new X509Certificate2Collection(), string.Empty, string.Empty, (X509SelectionFlag)2, IntPtr.Zero));
+            Assert.Throws<ArgumentNullException>(
+                "certificates",
+                () =>
+                    X509Certificate2UI.SelectFromCollection(
+                        null,
+                        string.Empty,
+                        string.Empty,
+                        X509SelectionFlag.SingleSelection,
+                        IntPtr.Zero
+                    )
+            );
+            Assert.Throws<ArgumentException>(() =>
+                X509Certificate2UI.SelectFromCollection(
+                    new X509Certificate2Collection(),
+                    string.Empty,
+                    string.Empty,
+                    (X509SelectionFlag)2,
+                    IntPtr.Zero
+                )
+            );
         }
 
         [Fact]
         public static void DisplayCertificate_InvalidInput()
         {
-            Assert.Throws<ArgumentNullException>("certificate", () => X509Certificate2UI.DisplayCertificate(null));
-            Assert.Throws<ArgumentNullException>("certificate", () => X509Certificate2UI.DisplayCertificate(null, IntPtr.Zero));
+            Assert.Throws<ArgumentNullException>(
+                "certificate",
+                () => X509Certificate2UI.DisplayCertificate(null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "certificate",
+                () => X509Certificate2UI.DisplayCertificate(null, IntPtr.Zero)
+            );
         }
     }
 }

@@ -1,11 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
-using System.Threading;
 using System;
 using System.IO;
-
+using System.Threading;
 
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //
@@ -60,7 +58,6 @@ namespace LGen
             }
         }
 
-
         public bool runTest(int iRep, int iObj)
         {
             Cv_iRep = iRep;
@@ -76,8 +73,6 @@ namespace LGen
 
             return true;
         }
-
-
 
         public void ThreadStart()
         {
@@ -110,6 +105,7 @@ namespace LGen
     {
         internal int[] mem;
         public static int icFinal = 0;
+
         public LeakObject(int num)
         {
             mem = new int[1024 * 250]; //nearly 1MB memory, larger than this will get assert failure.

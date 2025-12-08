@@ -14,37 +14,37 @@ namespace System.Activities.Validation
         Activity source;
 
         public ValidationError(string message)
-            : this(message, false, string.Empty)
-        {
-        }
-        
+            : this(message, false, string.Empty) { }
+
         public ValidationError(string message, bool isWarning)
-            : this(message, isWarning, string.Empty)
-        {            
-        }
+            : this(message, isWarning, string.Empty) { }
 
         public ValidationError(string message, bool isWarning, string propertyName)
-            : this(message, isWarning, propertyName, null)
-        {
-        }
+            : this(message, isWarning, propertyName, null) { }
 
-        public ValidationError(string message, bool isWarning, string propertyName, object sourceDetail)
+        public ValidationError(
+            string message,
+            bool isWarning,
+            string propertyName,
+            object sourceDetail
+        )
             : this(message, isWarning, propertyName, null)
         {
             this.SourceDetail = sourceDetail;
         }
-        
+
         internal ValidationError(string message, Activity activity)
-            : this(message, false, string.Empty, activity)
-        {
-        }
+            : this(message, false, string.Empty, activity) { }
 
         internal ValidationError(string message, bool isWarning, Activity activity)
-            : this(message, isWarning, string.Empty, activity)
-        {
-        }
+            : this(message, isWarning, string.Empty, activity) { }
 
-        internal ValidationError(string message, bool isWarning, string propertyName, Activity activity)
+        internal ValidationError(
+            string message,
+            bool isWarning,
+            string propertyName,
+            Activity activity
+        )
         {
             this.Message = message;
             this.IsWarning = isWarning;
@@ -58,36 +58,17 @@ namespace System.Activities.Validation
             }
         }
 
-        public string Message
-        {
-            get;
-            internal set;
-        }
+        public string Message { get; internal set; }
 
-        public bool IsWarning
-        {
-            get;
-            private set;
-        }
-        
-        public string PropertyName
-        {
-            get;
-            private set;
-        }
-        
-        public string Id
-        {
-            get;
-            internal set;
-        }
+        public bool IsWarning { get; private set; }
+
+        public string PropertyName { get; private set; }
+
+        public string Id { get; internal set; }
 
         public Activity Source
         {
-            get
-            {
-                return this.source;
-            }
+            get { return this.source; }
             internal set
             {
                 this.source = value;
@@ -98,20 +79,18 @@ namespace System.Activities.Validation
             }
         }
 
-        public object SourceDetail
-        {
-            get;
-            internal set;
-        }
-        
+        public object SourceDetail { get; internal set; }
+
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture,
+            return string.Format(
+                CultureInfo.InvariantCulture,
                 "ValidationError {{ Message = {0}, Source = {1}, PropertyName = {2}, IsWarning = {3} }}",
                 this.Message,
-                this.Source,  
+                this.Source,
                 this.PropertyName,
-                this.IsWarning);
+                this.IsWarning
+            );
         }
     }
 }

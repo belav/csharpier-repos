@@ -16,13 +16,20 @@ internal class Program
     {
         for (int rank = 1; rank < 6; rank++)
         {
-            Array arrayObj = Array.CreateInstance(typeof(string), Enumerable.Repeat(1, rank).ToArray());
+            Array arrayObj = Array.CreateInstance(
+                typeof(string),
+                Enumerable.Repeat(1, rank).ToArray()
+            );
             arrayObj.SetValue("solitary value", Enumerable.Repeat(0, rank).ToArray());
             ConstantExpression array = Expression.Constant(arrayObj);
-            IEnumerable<DefaultExpression> indices = Enumerable.Repeat(Expression.Default(typeof(int)), rank);
+            IEnumerable<DefaultExpression> indices = Enumerable.Repeat(
+                Expression.Default(typeof(int)),
+                rank
+            );
             // This code path for the Compile call exercises the method being tested.
-            Func<string> func = Expression.Lambda<Func<string>>(
-                Expression.ArrayAccess(array, indices)).Compile(preferInterpretation: true);
+            Func<string> func = Expression
+                .Lambda<Func<string>>(Expression.ArrayAccess(array, indices))
+                .Compile(preferInterpretation: true);
 
             if (func() != "solitary value")
             {

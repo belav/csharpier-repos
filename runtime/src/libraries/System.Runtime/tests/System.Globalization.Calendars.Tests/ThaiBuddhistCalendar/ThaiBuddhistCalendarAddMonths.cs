@@ -8,7 +8,8 @@ namespace System.Globalization.Tests
 {
     public class ThaiBuddhistCalendarAddMonths
     {
-        private static readonly RandomDataGenerator s_randomDataGenerator = new RandomDataGenerator();
+        private static readonly RandomDataGenerator s_randomDataGenerator =
+            new RandomDataGenerator();
 
         public static IEnumerable<object[]> AddMonths_TestData()
         {
@@ -23,7 +24,10 @@ namespace System.Globalization.Tests
         [MemberData(nameof(AddMonths_TestData))]
         public void AddMonths(DateTime time, int months)
         {
-            Assert.Equal(time.AddMonths(months), new ThaiBuddhistCalendar().AddMonths(time, months));
+            Assert.Equal(
+                time.AddMonths(months),
+                new ThaiBuddhistCalendar().AddMonths(time, months)
+            );
         }
     }
 }

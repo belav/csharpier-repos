@@ -11,12 +11,16 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
 {
     internal partial class WhitespaceViewModel
     {
-        internal sealed class SettingsSnapshotFactory : SettingsSnapshotFactoryBase<Setting, SettingsEntriesSnapshot>
+        internal sealed class SettingsSnapshotFactory
+            : SettingsSnapshotFactoryBase<Setting, SettingsEntriesSnapshot>
         {
-            public SettingsSnapshotFactory(ISettingsProvider<Setting> data) : base(data) { }
+            public SettingsSnapshotFactory(ISettingsProvider<Setting> data)
+                : base(data) { }
 
-            protected override SettingsEntriesSnapshot CreateSnapshot(ImmutableArray<Setting> data, int currentVersionNumber)
-                => new(data, currentVersionNumber);
+            protected override SettingsEntriesSnapshot CreateSnapshot(
+                ImmutableArray<Setting> data,
+                int currentVersionNumber
+            ) => new(data, currentVersionNumber);
         }
     }
 }

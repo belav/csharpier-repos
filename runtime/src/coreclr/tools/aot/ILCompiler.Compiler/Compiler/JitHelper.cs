@@ -2,10 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
-using Internal.TypeSystem;
 using Internal.IL;
 using Internal.ReadyToRunConstants;
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {
@@ -15,7 +14,12 @@ namespace ILCompiler
         /// Returns JIT helper entrypoint. JIT helpers can be either implemented by entrypoint with given mangled name or
         /// by a method in class library.
         /// </summary>
-        public static void GetEntryPoint(TypeSystemContext context, ReadyToRunHelper id, out string mangledName, out MethodDesc methodDesc)
+        public static void GetEntryPoint(
+            TypeSystemContext context,
+            ReadyToRunHelper id,
+            out string mangledName,
+            out MethodDesc methodDesc
+        )
         {
             mangledName = null;
             methodDesc = null;
@@ -30,31 +34,55 @@ namespace ILCompiler
                     break;
 
                 case ReadyToRunHelper.Overflow:
-                    methodDesc = context.GetHelperEntryPoint("ThrowHelpers", "ThrowOverflowException");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "ThrowHelpers",
+                        "ThrowOverflowException"
+                    );
                     break;
                 case ReadyToRunHelper.RngChkFail:
-                    methodDesc = context.GetHelperEntryPoint("ThrowHelpers", "ThrowIndexOutOfRangeException");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "ThrowHelpers",
+                        "ThrowIndexOutOfRangeException"
+                    );
                     break;
                 case ReadyToRunHelper.FailFast:
                     mangledName = "RhpFallbackFailFast"; // TODO: Report stack buffer overrun
                     break;
                 case ReadyToRunHelper.ThrowNullRef:
-                    methodDesc = context.GetHelperEntryPoint("ThrowHelpers", "ThrowNullReferenceException");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "ThrowHelpers",
+                        "ThrowNullReferenceException"
+                    );
                     break;
                 case ReadyToRunHelper.ThrowDivZero:
-                    methodDesc = context.GetHelperEntryPoint("ThrowHelpers", "ThrowDivideByZeroException");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "ThrowHelpers",
+                        "ThrowDivideByZeroException"
+                    );
                     break;
                 case ReadyToRunHelper.ThrowArgumentOutOfRange:
-                    methodDesc = context.GetHelperEntryPoint("ThrowHelpers", "ThrowArgumentOutOfRangeException");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "ThrowHelpers",
+                        "ThrowArgumentOutOfRangeException"
+                    );
                     break;
                 case ReadyToRunHelper.ThrowArgument:
-                    methodDesc = context.GetHelperEntryPoint("ThrowHelpers", "ThrowArgumentException");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "ThrowHelpers",
+                        "ThrowArgumentException"
+                    );
                     break;
                 case ReadyToRunHelper.ThrowPlatformNotSupported:
-                    methodDesc = context.GetHelperEntryPoint("ThrowHelpers", "ThrowPlatformNotSupportedException");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "ThrowHelpers",
+                        "ThrowPlatformNotSupportedException"
+                    );
                     break;
                 case ReadyToRunHelper.ThrowNotImplemented:
-                    methodDesc = context.GetHelperEntryPoint("ThrowHelpers", "ThrowNotImplementedException");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "ThrowHelpers",
+                        "ThrowNotImplementedException"
+                    );
                     break;
 
                 case ReadyToRunHelper.DebugBreak:
@@ -62,13 +90,22 @@ namespace ILCompiler
                     break;
 
                 case ReadyToRunHelper.WriteBarrier:
-                    mangledName = context.Target.Architecture == TargetArchitecture.ARM64 ? "RhpAssignRefArm64" : "RhpAssignRef";
+                    mangledName =
+                        context.Target.Architecture == TargetArchitecture.ARM64
+                            ? "RhpAssignRefArm64"
+                            : "RhpAssignRef";
                     break;
                 case ReadyToRunHelper.CheckedWriteBarrier:
-                    mangledName = context.Target.Architecture == TargetArchitecture.ARM64 ? "RhpCheckedAssignRefArm64" : "RhpCheckedAssignRef";
+                    mangledName =
+                        context.Target.Architecture == TargetArchitecture.ARM64
+                            ? "RhpCheckedAssignRefArm64"
+                            : "RhpCheckedAssignRef";
                     break;
                 case ReadyToRunHelper.ByRefWriteBarrier:
-                    mangledName = context.Target.Architecture == TargetArchitecture.ARM64 ? "RhpByRefAssignRefArm64" : "RhpByRefAssignRef";
+                    mangledName =
+                        context.Target.Architecture == TargetArchitecture.ARM64
+                            ? "RhpByRefAssignRefArm64"
+                            : "RhpByRefAssignRef";
                     break;
                 case ReadyToRunHelper.WriteBarrier_EAX:
                     mangledName = "RhpAssignRefEAX";
@@ -123,16 +160,25 @@ namespace ILCompiler
                     break;
 
                 case ReadyToRunHelper.GetRuntimeTypeHandle:
-                    methodDesc = context.GetHelperEntryPoint("LdTokenHelpers", "GetRuntimeTypeHandle");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "LdTokenHelpers",
+                        "GetRuntimeTypeHandle"
+                    );
                     break;
                 case ReadyToRunHelper.GetRuntimeType:
                     methodDesc = context.GetHelperEntryPoint("LdTokenHelpers", "GetRuntimeType");
                     break;
                 case ReadyToRunHelper.GetRuntimeMethodHandle:
-                    methodDesc = context.GetHelperEntryPoint("LdTokenHelpers", "GetRuntimeMethodHandle");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "LdTokenHelpers",
+                        "GetRuntimeMethodHandle"
+                    );
                     break;
                 case ReadyToRunHelper.GetRuntimeFieldHandle:
-                    methodDesc = context.GetHelperEntryPoint("LdTokenHelpers", "GetRuntimeFieldHandle");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "LdTokenHelpers",
+                        "GetRuntimeFieldHandle"
+                    );
                     break;
 
                 case ReadyToRunHelper.Lng2Dbl:
@@ -268,34 +314,56 @@ namespace ILCompiler
                     break;
 
                 case ReadyToRunHelper.MonitorEnter:
-                    methodDesc = context.GetHelperEntryPoint("SynchronizedMethodHelpers", "MonitorEnter");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "SynchronizedMethodHelpers",
+                        "MonitorEnter"
+                    );
                     break;
                 case ReadyToRunHelper.MonitorExit:
-                    methodDesc = context.GetHelperEntryPoint("SynchronizedMethodHelpers", "MonitorExit");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "SynchronizedMethodHelpers",
+                        "MonitorExit"
+                    );
                     break;
                 case ReadyToRunHelper.MonitorEnterStatic:
-                    methodDesc = context.GetHelperEntryPoint("SynchronizedMethodHelpers", "MonitorEnterStatic");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "SynchronizedMethodHelpers",
+                        "MonitorEnterStatic"
+                    );
                     break;
                 case ReadyToRunHelper.MonitorExitStatic:
-                    methodDesc = context.GetHelperEntryPoint("SynchronizedMethodHelpers", "MonitorExitStatic");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "SynchronizedMethodHelpers",
+                        "MonitorExitStatic"
+                    );
                     break;
 
                 case ReadyToRunHelper.GVMLookupForSlot:
-                    methodDesc = context.SystemModule.GetKnownType("System.Runtime", "TypeLoaderExports").GetKnownMethod("GVMLookupForSlot", null);
+                    methodDesc = context
+                        .SystemModule.GetKnownType("System.Runtime", "TypeLoaderExports")
+                        .GetKnownMethod("GVMLookupForSlot", null);
                     break;
 
                 case ReadyToRunHelper.TypeHandleToRuntimeType:
-                    methodDesc = context.GetHelperEntryPoint("TypedReferenceHelpers", "TypeHandleToRuntimeTypeMaybeNull");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "TypedReferenceHelpers",
+                        "TypeHandleToRuntimeTypeMaybeNull"
+                    );
                     break;
                 case ReadyToRunHelper.GetRefAny:
                     methodDesc = context.GetHelperEntryPoint("TypedReferenceHelpers", "GetRefAny");
                     break;
                 case ReadyToRunHelper.TypeHandleToRuntimeTypeHandle:
-                    methodDesc = context.GetHelperEntryPoint("TypedReferenceHelpers", "TypeHandleToRuntimeTypeHandleMaybeNull");
+                    methodDesc = context.GetHelperEntryPoint(
+                        "TypedReferenceHelpers",
+                        "TypeHandleToRuntimeTypeHandleMaybeNull"
+                    );
                     break;
 
                 case ReadyToRunHelper.GetCurrentManagedThreadId:
-                    methodDesc = context.SystemModule.GetKnownType("System", "Environment").GetKnownMethod("get_CurrentManagedThreadId", null);
+                    methodDesc = context
+                        .SystemModule.GetKnownType("System", "Environment")
+                        .GetKnownMethod("get_CurrentManagedThreadId", null);
                     break;
 
                 default:

@@ -19,6 +19,6 @@ namespace System.ServiceModel
         /// <summary>
         /// Indicates using Mtom message encoder.
         /// </summary>
-        Mtom
+        Mtom,
     }
 }

@@ -31,7 +31,8 @@ namespace System.Linq.Parallel
     /// <typeparam name="TInputOutput"></typeparam>
     /// <typeparam name="THashKey"></typeparam>
     /// <typeparam name="TOrderKey"></typeparam>
-    internal abstract class HashRepartitionStream<TInputOutput, THashKey, TOrderKey> : PartitionedStream<Pair<TInputOutput, THashKey>, TOrderKey>
+    internal abstract class HashRepartitionStream<TInputOutput, THashKey, TOrderKey>
+        : PartitionedStream<Pair<TInputOutput, THashKey>, TOrderKey>
     {
         private readonly IEqualityComparer<THashKey>? _keyComparer; // The optional key comparison routine.
         private readonly IEqualityComparer<TInputOutput>? _elementComparer; // The optional element comparison routine.
@@ -42,8 +43,11 @@ namespace System.Linq.Parallel
         //
 
         internal HashRepartitionStream(
-            int partitionsCount, IComparer<TOrderKey> orderKeyComparer, IEqualityComparer<THashKey>? hashKeyComparer,
-            IEqualityComparer<TInputOutput>? elementComparer)
+            int partitionsCount,
+            IComparer<TOrderKey> orderKeyComparer,
+            IEqualityComparer<THashKey>? hashKeyComparer,
+            IEqualityComparer<TInputOutput>? elementComparer
+        )
             : base(partitionsCount, orderKeyComparer, OrdinalIndexState.Shuffled)
         {
             // elementComparer is used by operators that use elements themselves as the hash keys.
@@ -52,7 +56,9 @@ namespace System.Linq.Parallel
             _elementComparer = elementComparer;
 
             Debug.Assert(_keyComparer == null || _elementComparer == null);
-            Debug.Assert(_elementComparer == null || typeof(THashKey) == typeof(NoKeyMemoizationRequired));
+            Debug.Assert(
+                _elementComparer == null || typeof(THashKey) == typeof(NoKeyMemoizationRequired)
+            );
 
             // We use the following constant when distributing hash-codes into partition streams.
             // It's an (arbitrary) prime number to account for poor hashing functions, e.g. those
@@ -88,18 +94,26 @@ namespace System.Linq.Parallel
 
         internal int GetHashCode(TInputOutput element)
         {
-            return
-                (HashCodeMask &
-                    (element == null ? NULL_ELEMENT_HASH_CODE : (_elementComparer?.GetHashCode(element) ?? element.GetHashCode())))
-                % _distributionMod;
+            return (
+                    HashCodeMask
+                    & (
+                        element == null
+                            ? NULL_ELEMENT_HASH_CODE
+                            : (_elementComparer?.GetHashCode(element) ?? element.GetHashCode())
+                    )
+                ) % _distributionMod;
         }
 
         internal int GetHashCode(THashKey key)
         {
-            return
-                (HashCodeMask &
-                    (key == null ? NULL_ELEMENT_HASH_CODE : (_keyComparer?.GetHashCode(key) ?? key.GetHashCode())))
-                % _distributionMod;
+            return (
+                    HashCodeMask
+                    & (
+                        key == null
+                            ? NULL_ELEMENT_HASH_CODE
+                            : (_keyComparer?.GetHashCode(key) ?? key.GetHashCode())
+                    )
+                ) % _distributionMod;
         }
     }
 }

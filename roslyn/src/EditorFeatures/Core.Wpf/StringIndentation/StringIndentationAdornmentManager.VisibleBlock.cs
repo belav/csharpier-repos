@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.StringIndentation
         /// <summary>
         /// Represents the X position of the vertical line we're drawing, and the chunks of that vertical line if we
         /// need to break it up (for example if we need to jump past interpolation holes).
-        /// 
+        ///
         /// Forked from https://devdiv.visualstudio.com/DevDiv/_git/VS-Platform?path=/src/Editor/Text/Impl/Structure/VisibleBlock.cs
         /// </summary>
         private readonly struct VisibleBlock
@@ -32,7 +32,10 @@ namespace Microsoft.CodeAnalysis.Editor.StringIndentation
             }
 
             public static VisibleBlock? CreateVisibleBlock(
-                SnapshotSpan span, ImmutableArray<SnapshotSpan> orderedHoleSpans, IWpfTextView view)
+                SnapshotSpan span,
+                ImmutableArray<SnapshotSpan> orderedHoleSpans,
+                IWpfTextView view
+            )
             {
                 // This method assumes that we've already been mapped to the view's snapshot.
                 Debug.Assert(span.Snapshot == view.TextSnapshot);
@@ -46,7 +49,7 @@ namespace Microsoft.CodeAnalysis.Editor.StringIndentation
 
                 // We want to draw the line right before the quote character.  So -1 to get that character's position.
                 // Horizontally position the adornment in the center of the character.  This position could actually be
-                // 0 if the entire doc is deleted and we haven't recomputed the updated tags yet.  So be resilient for 
+                // 0 if the entire doc is deleted and we haven't recomputed the updated tags yet.  So be resilient for
                 // the position being out of bounds.
                 if (span.End == 0)
                     return null;
@@ -68,14 +71,16 @@ namespace Microsoft.CodeAnalysis.Editor.StringIndentation
                 var guideLineSpanStart = span.Start;
                 var guideLineSpanEnd = span.End;
 
-                if ((guideLineSpanStart > lastLine.End) ||
-                    (guideLineSpanEnd < firstLine.Start))
+                if ((guideLineSpanStart > lastLine.End) || (guideLineSpanEnd < firstLine.Start))
                 {
                     return null;
                 }
 
-                var guideLineTopLine = view.TextViewLines.GetTextViewLineContainingBufferPosition(guideLineSpanStart);
-                var guideLineBottomLine = view.TextViewLines.GetTextViewLineContainingBufferPosition(guideLineSpanEnd);
+                var guideLineTopLine = view.TextViewLines.GetTextViewLineContainingBufferPosition(
+                    guideLineSpanStart
+                );
+                var guideLineBottomLine =
+                    view.TextViewLines.GetTextViewLineContainingBufferPosition(guideLineSpanEnd);
 
                 // This is slightly subtle.  First, the line might start on a line that is above/below what the actual
                 // view is displaying.  In that case we want to draw up to the boundary of the view to make it look like
@@ -87,12 +92,23 @@ namespace Microsoft.CodeAnalysis.Editor.StringIndentation
                 // are visible, we draw at the interior border of them so that the vertical-line does not intrude into
                 // them.
                 var yTop = guideLineTopLine == null ? firstLine.Top : guideLineTopLine.Bottom;
-                var yBottom = guideLineBottomLine == null ? lastLine.Bottom : guideLineBottomLine.Top;
+                var yBottom =
+                    guideLineBottomLine == null ? lastLine.Bottom : guideLineBottomLine.Top;
 
                 // Now that we have the 'x' coordinate of hte vertical line, and the top/bottom points we want to draw
                 // it through, actually create line segments to draw.  We have segments in case there are gaps in the
                 // line we don't want to draw (for example, for a hole).
-                return new VisibleBlock(x, CreateVisibleSegments(view.TextViewLines, span, orderedHoleSpans, x, yTop, yBottom));
+                return new VisibleBlock(
+                    x,
+                    CreateVisibleSegments(
+                        view.TextViewLines,
+                        span,
+                        orderedHoleSpans,
+                        x,
+                        yTop,
+                        yBottom
+                    )
+                );
             }
 
             /// <summary>
@@ -106,9 +122,12 @@ namespace Microsoft.CodeAnalysis.Editor.StringIndentation
                 ImmutableArray<SnapshotSpan> orderedHoleSpans,
                 double x,
                 double yTop,
-                double yBottom)
+                double yBottom
+            )
             {
-                using var _ = ArrayBuilder<(double start, double end)>.GetInstance(out var segments);
+                using var _ = ArrayBuilder<(double start, double end)>.GetInstance(
+                    out var segments
+                );
 
                 // MinLineHeight must always be larger than ContinuationPadding so that no segments
                 // are created for vertical spans between lines.
@@ -117,7 +136,8 @@ namespace Microsoft.CodeAnalysis.Editor.StringIndentation
 
                 // Find the lines in Block's extent that are currently visible.
                 // TODO: can we eliminate or reuse the allocation for this list?
-                var visibleSpanTextViewLinesCollection = linesCollection.GetTextViewLinesIntersectingSpan(extent);
+                var visibleSpanTextViewLinesCollection =
+                    linesCollection.GetTextViewLinesIntersectingSpan(extent);
 
                 var currentSegmentTop = yTop;
                 var currentSegmentBottom = 0.0;
@@ -139,7 +159,10 @@ namespace Microsoft.CodeAnalysis.Editor.StringIndentation
                     //    so we continue the current segment.
                     //
                     // Also, if the line would go through an interpolation hole we want to skip it as well.
-                    if (IntersectsNonWhitespaceChar(intersectingCharSnapshotPoint) || IsInHole(orderedHoleSpans, line))
+                    if (
+                        IntersectsNonWhitespaceChar(intersectingCharSnapshotPoint)
+                        || IsInHole(orderedHoleSpans, line)
+                    )
                     {
                         currentSegmentBottom = line.Top;
 
@@ -166,14 +189,23 @@ namespace Microsoft.CodeAnalysis.Editor.StringIndentation
                 return segments.ToImmutable();
             }
 
-            private static bool IsInHole(ImmutableArray<SnapshotSpan> orderedHoleSpans, ITextViewLine line)
-                => orderedHoleSpans.BinarySearch(
+            private static bool IsInHole(
+                ImmutableArray<SnapshotSpan> orderedHoleSpans,
+                ITextViewLine line
+            ) =>
+                orderedHoleSpans.BinarySearch(
                     line.Start.Position,
-                    (ss, pos) => pos < ss.Start ? 1 : ss.Span.Contains(pos) ? 0 : -1) >= 0;
+                    (ss, pos) =>
+                        pos < ss.Start ? 1
+                        : ss.Span.Contains(pos) ? 0
+                        : -1
+                ) >= 0;
 
-            private static bool IntersectsNonWhitespaceChar(SnapshotPoint? intersectingCharSnapshotPoint)
-                => intersectingCharSnapshotPoint != null &&
-                   !char.IsWhiteSpace(intersectingCharSnapshotPoint.Value.GetChar());
+            private static bool IntersectsNonWhitespaceChar(
+                SnapshotPoint? intersectingCharSnapshotPoint
+            ) =>
+                intersectingCharSnapshotPoint != null
+                && !char.IsWhiteSpace(intersectingCharSnapshotPoint.Value.GetChar());
         }
     }
 }

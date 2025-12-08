@@ -3,7 +3,8 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class MappingQuerySqlServerTest : MappingQueryTestBase<MappingQuerySqlServerTest.MappingQuerySqlServerFixture>
+public class MappingQuerySqlServerTest
+    : MappingQueryTestBase<MappingQuerySqlServerTest.MappingQuerySqlServerFixture>
 {
     public override void All_customers()
     {
@@ -13,7 +14,8 @@ public class MappingQuerySqlServerTest : MappingQueryTestBase<MappingQuerySqlSer
             """
 SELECT [c].[CustomerID], [c].[CompanyName]
 FROM [dbo].[Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override void All_employees()
@@ -24,7 +26,8 @@ FROM [dbo].[Customers] AS [c]
             """
 SELECT [e].[EmployeeID], [e].[City]
 FROM [dbo].[Employees] AS [e]
-""");
+"""
+        );
     }
 
     public override void All_orders()
@@ -35,7 +38,8 @@ FROM [dbo].[Employees] AS [e]
             """
 SELECT [o].[OrderID], [o].[ShipVia]
 FROM [dbo].[Orders] AS [o]
-""");
+"""
+        );
     }
 
     public override void Project_nullable_enum()
@@ -46,7 +50,8 @@ FROM [dbo].[Orders] AS [o]
             """
 SELECT [o].[ShipVia]
 FROM [dbo].[Orders] AS [o]
-""");
+"""
+        );
     }
 
     public MappingQuerySqlServerTest(MappingQuerySqlServerFixture fixture)
@@ -55,13 +60,13 @@ FROM [dbo].[Orders] AS [o]
         Fixture.TestSqlLoggerFactory.Clear();
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
     public class MappingQuerySqlServerFixture : MappingQueryFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerNorthwindTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory =>
+            SqlServerNorthwindTestStoreFactory.Instance;
 
         protected override string DatabaseSchema { get; } = "dbo";
 
@@ -69,17 +74,14 @@ FROM [dbo].[Orders] AS [o]
         {
             base.OnModelCreating(modelBuilder, context);
 
-            modelBuilder.Entity<MappedCustomer>(
-                e =>
-                {
-                    e.Property(c => c.CompanyName2).Metadata.SetColumnName("CompanyName");
-                    e.Metadata.SetTableName("Customers");
-                    e.Metadata.SetSchema("dbo");
-                });
+            modelBuilder.Entity<MappedCustomer>(e =>
+            {
+                e.Property(c => c.CompanyName2).Metadata.SetColumnName("CompanyName");
+                e.Metadata.SetTableName("Customers");
+                e.Metadata.SetSchema("dbo");
+            });
 
-            modelBuilder.Entity<MappedEmployee>()
-                .Property(c => c.EmployeeID)
-                .HasColumnType("int");
+            modelBuilder.Entity<MappedEmployee>().Property(c => c.EmployeeID).HasColumnType("int");
         }
     }
 }

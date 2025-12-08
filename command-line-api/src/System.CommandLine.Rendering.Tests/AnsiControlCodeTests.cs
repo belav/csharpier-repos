@@ -23,13 +23,9 @@ namespace System.CommandLine.Rendering.Tests
             var one = new AnsiControlCode($"{Ansi.Esc}[s");
             var two = new AnsiControlCode($"{Ansi.Esc}[s");
 
-            one.Equals(two)
-               .Should()
-               .BeTrue();
+            one.Equals(two).Should().BeTrue();
 
-            one.Invoking(code => code.Equals(null))
-               .Should()
-               .NotThrow<NullReferenceException>();
+            one.Invoking(code => code.Equals(null)).Should().NotThrow<NullReferenceException>();
         }
 
         [Fact]
@@ -38,9 +34,7 @@ namespace System.CommandLine.Rendering.Tests
             var one = new AnsiControlCode($"{Ansi.Esc}[s");
             var two = new AnsiControlCode($"{Ansi.Esc}[u");
 
-            one.Equals(two)
-               .Should()
-               .BeFalse();
+            one.Equals(two).Should().BeFalse();
         }
 
         [Theory]
@@ -50,20 +44,19 @@ namespace System.CommandLine.Rendering.Tests
         {
             IFormattable code = new AnsiControlCode($"{Ansi.Esc}[s");
 
-            IFormatProvider provider = new ConsoleFormatInfo() { SupportsAnsiCodes = supportsAnsiCodes };
+            IFormatProvider provider = new ConsoleFormatInfo()
+            {
+                SupportsAnsiCodes = supportsAnsiCodes,
+            };
             string output = code.ToString(null, provider);
 
             if (supportsAnsiCodes)
             {
-                output
-                    .Should()
-                    .Contain(Ansi.Esc);
+                output.Should().Contain(Ansi.Esc);
             }
             else
             {
-                output
-                    .Should()
-                    .BeEmpty();
+                output.Should().BeEmpty();
             }
         }
     }

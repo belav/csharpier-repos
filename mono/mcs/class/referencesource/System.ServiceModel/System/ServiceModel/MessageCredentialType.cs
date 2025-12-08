@@ -9,18 +9,20 @@ namespace System.ServiceModel
         Windows,
         UserName,
         Certificate,
-        IssuedToken
+        IssuedToken,
     }
 
     static class MessageCredentialTypeHelper
     {
         internal static bool IsDefined(MessageCredentialType value)
         {
-            return (value == MessageCredentialType.None ||
-                value == MessageCredentialType.UserName ||
-                value == MessageCredentialType.Windows ||
-                value == MessageCredentialType.Certificate ||
-                value == MessageCredentialType.IssuedToken);
+            return (
+                value == MessageCredentialType.None
+                || value == MessageCredentialType.UserName
+                || value == MessageCredentialType.Windows
+                || value == MessageCredentialType.Certificate
+                || value == MessageCredentialType.IssuedToken
+            );
         }
     }
 }

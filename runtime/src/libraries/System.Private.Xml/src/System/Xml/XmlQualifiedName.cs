@@ -20,12 +20,14 @@ namespace System.Xml
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlQualifiedName() : this(string.Empty, string.Empty) { }
+        public XmlQualifiedName()
+            : this(string.Empty, string.Empty) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlQualifiedName(string? name) : this(name, string.Empty) { }
+        public XmlQualifiedName(string? name)
+            : this(name, string.Empty) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -40,10 +42,12 @@ namespace System.Xml
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public string Namespace { get; private set; }
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public string Name { get; private set; }
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -60,6 +64,7 @@ namespace System.Xml
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public bool IsEmpty => Name.Length == 0 && Namespace.Length == 0;
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -145,7 +150,11 @@ namespace System.Xml
             Namespace = nameTable.Add(Namespace);
         }
 
-        internal static XmlQualifiedName Parse(string s, IXmlNamespaceResolver nsmgr, out string prefix)
+        internal static XmlQualifiedName Parse(
+            string s,
+            IXmlNamespaceResolver nsmgr,
+            out string prefix
+        )
         {
             ValidateNames.ParseQNameThrow(s, out prefix, out string localName);
 

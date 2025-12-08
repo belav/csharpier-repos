@@ -21,28 +21,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.SimplifyTyp
     public partial class BatchFixerTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public BatchFixerTests(ITestOutputHelper logger)
-             : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new QualifyWithThisAnalyzer(), new QualifyWithThisFixer());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (new QualifyWithThisAnalyzer(), new QualifyWithThisFixer());
 
         [DiagnosticAnalyzer(LanguageNames.CSharp)]
         private class QualifyWithThisAnalyzer : DiagnosticAnalyzer
         {
-            public static readonly DiagnosticDescriptor Descriptor = DescriptorFactory.CreateSimpleDescriptor("QualifyWithThis");
+            public static readonly DiagnosticDescriptor Descriptor =
+                DescriptorFactory.CreateSimpleDescriptor("QualifyWithThis");
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
-                get
-                {
-                    return ImmutableArray.Create(Descriptor);
-                }
+                get { return ImmutableArray.Create(Descriptor); }
             }
 
-            public override void Initialize(AnalysisContext context)
-                => context.RegisterSyntaxNodeAction<SyntaxKind>(AnalyzeNode, SyntaxKind.IdentifierName);
+            public override void Initialize(AnalysisContext context) =>
+                context.RegisterSyntaxNodeAction<SyntaxKind>(
+                    AnalyzeNode,
+                    SyntaxKind.IdentifierName
+                );
 
             private static void AnalyzeNode(SyntaxNodeAnalysisContext context)
             {
@@ -62,22 +62,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.SimplifyTyp
         {
             public override ImmutableArray<string> FixableDiagnosticIds
             {
-                get
-                {
-                    return ImmutableArray.Create(QualifyWithThisAnalyzer.Descriptor.Id);
-                }
+                get { return ImmutableArray.Create(QualifyWithThisAnalyzer.Descriptor.Id); }
             }
 
             public override async Task RegisterCodeFixesAsync(CodeFixContext context)
             {
-                var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
-                if (root.FindNode(context.Span, getInnermostNodeForTie: true) is SimpleNameSyntax node)
+                var root = await context
+                    .Document.GetSyntaxRootAsync(context.CancellationToken)
+                    .ConfigureAwait(false);
+                if (
+                    root.FindNode(context.Span, getInnermostNodeForTie: true)
+                    is SimpleNameSyntax node
+                )
                 {
                     var leadingTrivia = node.GetLeadingTrivia();
-                    var newNode = SyntaxFactory.MemberAccessExpression(
-                        SyntaxKind.SimpleMemberAccessExpression,
-                        SyntaxFactory.ThisExpression(),
-                        node.WithoutLeadingTrivia())
+                    var newNode = SyntaxFactory
+                        .MemberAccessExpression(
+                            SyntaxKind.SimpleMemberAccessExpression,
+                            SyntaxFactory.ThisExpression(),
+                            node.WithoutLeadingTrivia()
+                        )
                         .WithLeadingTrivia(leadingTrivia);
 
                     var newRoot = root.ReplaceNode(node, newNode);
@@ -85,15 +89,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.SimplifyTyp
 
                     // Disable RS0005 as this is test code and we don't need telemetry for created code action.
 #pragma warning disable RS0005 // Do not use generic CodeAction.Create to create CodeAction
-                    var fix = CodeAction.Create("QualifyWithThisFix", _ => Task.FromResult(newDocument));
+                    var fix = CodeAction.Create(
+                        "QualifyWithThisFix",
+                        _ => Task.FromResult(newDocument)
+                    );
 #pragma warning restore RS0005 // Do not use generic CodeAction.Create to create CodeAction
 
                     context.RegisterCodeFix(fix, context.Diagnostics);
                 }
             }
 
-            public override FixAllProvider GetFixAllProvider()
-                => WellKnownFixAllProviders.BatchFixer;
+            public override FixAllProvider GetFixAllProvider() =>
+                WellKnownFixAllProviders.BatchFixer;
         }
 
         #region "Fix all occurrences tests"

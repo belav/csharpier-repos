@@ -23,7 +23,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 throw new ArgumentNullException("modelBinder");
             }
 
-            ValidateParameters(modelType, null /* modelBinderType */);
+            ValidateParameters(
+                modelType,
+                null /* modelBinderType */
+            );
 
             _modelType = modelType;
             _modelBinderFactory = _ => modelBinder;
@@ -50,7 +53,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
             _modelType = modelType;
             _modelBinderFactory = typeArguments =>
             {
-                Type closedModelBinderType = (modelBinderTypeIsOpenGeneric) ? modelBinderType.MakeGenericType(typeArguments) : modelBinderType;
+                Type closedModelBinderType =
+                    (modelBinderTypeIsOpenGeneric)
+                        ? modelBinderType.MakeGenericType(typeArguments)
+                        : modelBinderType;
                 try
                 {
                     return (IExtensibleModelBinder)Activator.CreateInstance(closedModelBinderType);
@@ -59,7 +65,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 {
                     // Ensure thrown exception contains the type name.  Might be down a few levels.
                     MissingMethodException replacementException =
-                        ModelBinderUtil.EnsureDebuggableException(exception, closedModelBinderType.FullName);
+                        ModelBinderUtil.EnsureDebuggableException(
+                            exception,
+                            closedModelBinderType.FullName
+                        );
                     if (replacementException != null)
                     {
                         throw replacementException;
@@ -70,7 +79,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
             };
         }
 
-        public GenericModelBinderProvider(Type modelType, Func<Type[], IExtensibleModelBinder> modelBinderFactory)
+        public GenericModelBinderProvider(
+            Type modelType,
+            Func<Type[], IExtensibleModelBinder> modelBinderFactory
+        )
         {
             if (modelType == null)
             {
@@ -81,7 +93,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 throw new ArgumentNullException("modelBinderFactory");
             }
 
-            ValidateParameters(modelType, null /* modelBinderType */);
+            ValidateParameters(
+                modelType,
+                null /* modelBinderType */
+            );
 
             _modelType = modelType;
             _modelBinderFactory = modelBinderFactory;
@@ -94,14 +109,20 @@ namespace Microsoft.Web.Mvc.ModelBinding
 
         public bool SuppressPrefixCheck { get; set; }
 
-        public override IExtensibleModelBinder GetBinder(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+        public override IExtensibleModelBinder GetBinder(
+            ControllerContext controllerContext,
+            ExtensibleModelBindingContext bindingContext
+        )
         {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
             Type[] typeArguments = null;
             if (ModelType.IsInterface)
             {
-                Type matchingClosedInterface = TypeHelpers.ExtractGenericInterface(bindingContext.ModelType, ModelType);
+                Type matchingClosedInterface = TypeHelpers.ExtractGenericInterface(
+                    bindingContext.ModelType,
+                    ModelType
+                );
                 if (matchingClosedInterface != null)
                 {
                     typeArguments = matchingClosedInterface.GetGenericArguments();
@@ -109,12 +130,18 @@ namespace Microsoft.Web.Mvc.ModelBinding
             }
             else
             {
-                typeArguments = TypeHelpers.GetTypeArgumentsIfMatch(bindingContext.ModelType, ModelType);
+                typeArguments = TypeHelpers.GetTypeArgumentsIfMatch(
+                    bindingContext.ModelType,
+                    ModelType
+                );
             }
 
             if (typeArguments != null)
             {
-                if (SuppressPrefixCheck || bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName))
+                if (
+                    SuppressPrefixCheck
+                    || bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName)
+                )
                 {
                     return _modelBinderFactory(typeArguments);
                 }
@@ -127,19 +154,32 @@ namespace Microsoft.Web.Mvc.ModelBinding
         {
             if (!modelType.IsGenericTypeDefinition)
             {
-                throw Error.GenericModelBinderProvider_ParameterMustSpecifyOpenGenericType(modelType, "modelType");
+                throw Error.GenericModelBinderProvider_ParameterMustSpecifyOpenGenericType(
+                    modelType,
+                    "modelType"
+                );
             }
             if (modelBinderType != null)
             {
                 if (!typeof(IExtensibleModelBinder).IsAssignableFrom(modelBinderType))
                 {
-                    throw Error.Common_TypeMustImplementInterface(modelBinderType, typeof(IExtensibleModelBinder), "modelBinderType");
+                    throw Error.Common_TypeMustImplementInterface(
+                        modelBinderType,
+                        typeof(IExtensibleModelBinder),
+                        "modelBinderType"
+                    );
                 }
                 if (modelBinderType.IsGenericTypeDefinition)
                 {
-                    if (modelType.GetGenericArguments().Length != modelBinderType.GetGenericArguments().Length)
+                    if (
+                        modelType.GetGenericArguments().Length
+                        != modelBinderType.GetGenericArguments().Length
+                    )
                     {
-                        throw Error.GenericModelBinderProvider_TypeArgumentCountMismatch(modelType, modelBinderType);
+                        throw Error.GenericModelBinderProvider_TypeArgumentCountMismatch(
+                            modelType,
+                            modelBinderType
+                        );
                     }
                 }
             }

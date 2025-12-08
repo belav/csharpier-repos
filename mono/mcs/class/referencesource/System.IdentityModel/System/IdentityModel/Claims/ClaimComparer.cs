@@ -125,7 +125,9 @@ namespace System.IdentityModel.Claims
             {
                 if (x500DistinguishedNameComparer == null)
                 {
-                    x500DistinguishedNameComparer = new ClaimComparer(new X500DistinguishedNameObjectComparer());
+                    x500DistinguishedNameComparer = new ClaimComparer(
+                        new X500DistinguishedNameObjectComparer()
+                    );
                 }
                 return x500DistinguishedNameComparer;
             }
@@ -151,8 +153,9 @@ namespace System.IdentityModel.Claims
             if (claim == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("claim");
 
-            return claim.ClaimType.GetHashCode() ^ claim.Right.GetHashCode()
-                ^ ( (claim.Resource == null) ? 0 : resourceComparer.GetHashCode(claim.Resource));
+            return claim.ClaimType.GetHashCode()
+                ^ claim.Right.GetHashCode()
+                ^ ((claim.Resource == null) ? 0 : resourceComparer.GetHashCode(claim.Resource));
         }
 
         class ObjectComparer : IEqualityComparer
@@ -229,8 +232,10 @@ namespace System.IdentityModel.Claims
                 RSAParameters parm1 = rsa1.ExportParameters(false);
                 RSAParameters parm2 = rsa2.ExportParameters(false);
 
-                if (parm1.Modulus.Length != parm2.Modulus.Length ||
-                    parm1.Exponent.Length != parm2.Exponent.Length)
+                if (
+                    parm1.Modulus.Length != parm2.Modulus.Length
+                    || parm1.Exponent.Length != parm2.Exponent.Length
+                )
                     return false;
 
                 for (int i = 0; i < parm1.Modulus.Length; ++i)
@@ -260,6 +265,7 @@ namespace System.IdentityModel.Claims
         class X500DistinguishedNameObjectComparer : IEqualityComparer
         {
             IEqualityComparer binaryComparer;
+
             public X500DistinguishedNameObjectComparer()
             {
                 binaryComparer = new BinaryObjectComparer();
@@ -279,8 +285,8 @@ namespace System.IdentityModel.Claims
                 if (StringComparer.Ordinal.Equals(dn1.Name, dn2.Name))
                     return true;
 
-                // 2) Raw byte compare.  Note: we assume the rawbyte is in the same order 
-                // (default = X500DistinguishedNameFlags.Reversed). 
+                // 2) Raw byte compare.  Note: we assume the rawbyte is in the same order
+                // (default = X500DistinguishedNameFlags.Reversed).
                 return binaryComparer.Equals(dn1.RawData, dn2.RawData);
             }
 
@@ -340,7 +346,7 @@ namespace System.IdentityModel.Claims
                     NTAccount acct = new NTAccount(upn);
                     sid = acct.Translate(typeof(SecurityIdentifier)) as SecurityIdentifier;
                 }
-                catch (IdentityNotMappedException e) 
+                catch (IdentityNotMappedException e)
                 {
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                 }

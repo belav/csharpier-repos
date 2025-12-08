@@ -21,16 +21,23 @@ namespace System.Data.Objects.ELinq
     internal static class TypeSystem
     {
         private static readonly MethodInfo s_getDefaultMethod = typeof(TypeSystem).GetMethod(
-            "GetDefault", BindingFlags.Static | BindingFlags.NonPublic);
-        private static T GetDefault<T>() { return default(T); }
+            "GetDefault",
+            BindingFlags.Static | BindingFlags.NonPublic
+        );
+
+        private static T GetDefault<T>()
+        {
+            return default(T);
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         internal static object GetDefaultValue(Type type)
         {
             // null is always the default for non value types and Nullable<>
-            if (!type.IsValueType ||
-                (type.IsGenericType &&
-                 typeof(Nullable<>) == type.GetGenericTypeDefinition()))
+            if (
+                !type.IsValueType
+                || (type.IsGenericType && typeof(Nullable<>) == type.GetGenericTypeDefinition())
+            )
             {
                 return null;
             }
@@ -63,23 +70,58 @@ namespace System.Data.Objects.ELinq
             Type delegateType;
             switch (argCount)
             {
-                case 0: delegateType = typeof(Func<>); break;
-                case 1: delegateType = typeof(Func<,>); break;
-                case 2: delegateType = typeof(Func<,,>); break;
-                case 3: delegateType = typeof(Func<,,,>); break;
-                case 4: delegateType = typeof(Func<,,,,>); break;
-                case 5: delegateType = typeof(Func<,,,,,>); break;
-                case 6: delegateType = typeof(Func<,,,,,,>); break;
-                case 7: delegateType = typeof(Func<,,,,,,,>); break;
-                case 8: delegateType = typeof(Func<,,,,,,,,>); break;
-                case 9: delegateType = typeof(Func<,,,,,,,,,>); break;
-                case 10: delegateType = typeof(Func<,,,,,,,,,,>); break;
-                case 11: delegateType = typeof(Func<,,,,,,,,,,,>); break;
-                case 12: delegateType = typeof(Func<,,,,,,,,,,,,>); break;
-                case 13: delegateType = typeof(Func<,,,,,,,,,,,,,>); break;
-                case 14: delegateType = typeof(Func<,,,,,,,,,,,,,,>); break;
-                case 15: delegateType = typeof(Func<,,,,,,,,,,,,,,,>); break;
-                default: Debug.Fail("unexpected argument count"); delegateType = null; break;
+                case 0:
+                    delegateType = typeof(Func<>);
+                    break;
+                case 1:
+                    delegateType = typeof(Func<,>);
+                    break;
+                case 2:
+                    delegateType = typeof(Func<,,>);
+                    break;
+                case 3:
+                    delegateType = typeof(Func<,,,>);
+                    break;
+                case 4:
+                    delegateType = typeof(Func<,,,,>);
+                    break;
+                case 5:
+                    delegateType = typeof(Func<,,,,,>);
+                    break;
+                case 6:
+                    delegateType = typeof(Func<,,,,,,>);
+                    break;
+                case 7:
+                    delegateType = typeof(Func<,,,,,,,>);
+                    break;
+                case 8:
+                    delegateType = typeof(Func<,,,,,,,,>);
+                    break;
+                case 9:
+                    delegateType = typeof(Func<,,,,,,,,,>);
+                    break;
+                case 10:
+                    delegateType = typeof(Func<,,,,,,,,,,>);
+                    break;
+                case 11:
+                    delegateType = typeof(Func<,,,,,,,,,,,>);
+                    break;
+                case 12:
+                    delegateType = typeof(Func<,,,,,,,,,,,,>);
+                    break;
+                case 13:
+                    delegateType = typeof(Func<,,,,,,,,,,,,,>);
+                    break;
+                case 14:
+                    delegateType = typeof(Func<,,,,,,,,,,,,,,>);
+                    break;
+                case 15:
+                    delegateType = typeof(Func<,,,,,,,,,,,,,,,>);
+                    break;
+                default:
+                    Debug.Fail("unexpected argument count");
+                    delegateType = null;
+                    break;
             }
             delegateType = delegateType.MakeGenericType(typeArgs);
 
@@ -104,7 +146,11 @@ namespace System.Data.Objects.ELinq
         /// <param name="name">Name of member.</param>
         /// <param name="type">Type of member.</param>
         /// <returns>Given member normalized as a property or field.</returns>
-        internal static MemberInfo PropertyOrField(MemberInfo member, out string name, out Type type)
+        internal static MemberInfo PropertyOrField(
+            MemberInfo member,
+            out string name,
+            out Type type
+        )
         {
             name = null;
             type = null;
@@ -122,7 +168,9 @@ namespace System.Data.Objects.ELinq
                 if (0 != property.GetIndexParameters().Length)
                 {
                     // don't support indexed properties
-                    throw EntityUtil.NotSupported(System.Data.Entity.Strings.ELinq_PropertyIndexNotSupported);
+                    throw EntityUtil.NotSupported(
+                        System.Data.Entity.Strings.ELinq_PropertyIndexNotSupported
+                    );
                 }
                 name = property.Name;
                 type = property.PropertyType;
@@ -135,8 +183,14 @@ namespace System.Data.Objects.ELinq
                 if (method.IsSpecialName) // property accessor methods must set IsSpecialName
                 {
                     // try to find a property with the given getter
-                    foreach (PropertyInfo property in method.DeclaringType.GetProperties(
-                        BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+                    foreach (
+                        PropertyInfo property in method.DeclaringType.GetProperties(
+                            BindingFlags.Static
+                                | BindingFlags.Instance
+                                | BindingFlags.Public
+                                | BindingFlags.NonPublic
+                        )
+                    )
                     {
                         if (property.CanRead && (property.GetGetMethod(true) == method))
                         {
@@ -145,9 +199,11 @@ namespace System.Data.Objects.ELinq
                     }
                 }
             }
-            throw EntityUtil.NotSupported(System.Data.Entity.Strings.ELinq_NotPropertyOrField(member.Name));
+            throw EntityUtil.NotSupported(
+                System.Data.Entity.Strings.ELinq_NotPropertyOrField(member.Name)
+            );
         }
-                
+
         private static Type FindIEnumerable(Type seqType)
         {
             // Ignores "terminal" primitive types in the EDM although they may implement IEnumerable<>
@@ -172,7 +228,8 @@ namespace System.Data.Objects.ELinq
                 foreach (Type iface in ifaces)
                 {
                     Type ienum = FindIEnumerable(iface);
-                    if (ienum != null) return ienum;
+                    if (ienum != null)
+                        return ienum;
                 }
             }
             if (seqType.BaseType != null && seqType.BaseType != typeof(object))
@@ -181,18 +238,22 @@ namespace System.Data.Objects.ELinq
             }
             return null;
         }
+
         internal static Type GetElementType(Type seqType)
         {
             Type ienum = FindIEnumerable(seqType);
-            if (ienum == null) return seqType;
+            if (ienum == null)
+                return seqType;
             return ienum.GetGenericArguments()[0];
         }
+
         internal static bool IsNullableType(Type type)
         {
             var nonNullableType = GetNonNullableType(type);
 
             return nonNullableType != null && nonNullableType != type;
         }
+
         internal static Type GetNonNullableType(Type type)
         {
             if (type != null)
@@ -203,18 +264,32 @@ namespace System.Data.Objects.ELinq
             return null;
         }
 
-        internal static bool IsImplementationOfGenericInterfaceMethod(this MethodInfo test, Type match, out Type[] genericTypeArguments)
+        internal static bool IsImplementationOfGenericInterfaceMethod(
+            this MethodInfo test,
+            Type match,
+            out Type[] genericTypeArguments
+        )
         {
             genericTypeArguments = null;
 
             // check requirements for a match
-            if (null == test || null == match || !match.IsInterface || !match.IsGenericTypeDefinition || null == test.DeclaringType)
+            if (
+                null == test
+                || null == match
+                || !match.IsInterface
+                || !match.IsGenericTypeDefinition
+                || null == test.DeclaringType
+            )
             {
                 return false;
             }
 
             // we might be looking at the interface implementation directly
-            if (test.DeclaringType.IsInterface && test.DeclaringType.IsGenericType && test.DeclaringType.GetGenericTypeDefinition() == match)
+            if (
+                test.DeclaringType.IsInterface
+                && test.DeclaringType.IsGenericType
+                && test.DeclaringType.GetGenericTypeDefinition() == match
+            )
             {
                 return true;
             }
@@ -222,7 +297,10 @@ namespace System.Data.Objects.ELinq
             // figure out if we implement the interface
             foreach (Type testInterface in test.DeclaringType.GetInterfaces())
             {
-                if (testInterface.IsGenericType && testInterface.GetGenericTypeDefinition() == match)
+                if (
+                    testInterface.IsGenericType
+                    && testInterface.GetGenericTypeDefinition() == match
+                )
                 {
                     // check if the method aligns
                     var map = test.DeclaringType.GetInterfaceMap(testInterface);
@@ -239,10 +317,16 @@ namespace System.Data.Objects.ELinq
 
         internal static bool IsImplementationOf(this PropertyInfo propertyInfo, Type interfaceType)
         {
-            Debug.Assert(interfaceType.IsInterface, "Ensure interfaceType is an interface before calling IsImplementationOf");
-            
+            Debug.Assert(
+                interfaceType.IsInterface,
+                "Ensure interfaceType is an interface before calling IsImplementationOf"
+            );
+
             // Find the property with the corresponding name on the interface, if present
-            PropertyInfo interfaceProp = interfaceType.GetProperty(propertyInfo.Name, BindingFlags.Public | BindingFlags.Instance);
+            PropertyInfo interfaceProp = interfaceType.GetProperty(
+                propertyInfo.Name,
+                BindingFlags.Public | BindingFlags.Instance
+            );
             if (null == interfaceProp)
             {
                 return false;
@@ -254,7 +338,10 @@ namespace System.Data.Objects.ELinq
                 return interfaceProp.Equals(propertyInfo);
             }
 
-            Debug.Assert(Enumerable.Contains(propertyInfo.DeclaringType.GetInterfaces(), interfaceType), "Ensure propertyInfo.DeclaringType implements interfaceType before calling IsImplementationOf");
+            Debug.Assert(
+                Enumerable.Contains(propertyInfo.DeclaringType.GetInterfaces(), interfaceType),
+                "Ensure propertyInfo.DeclaringType implements interfaceType before calling IsImplementationOf"
+            );
 
             bool result = false;
 
@@ -262,11 +349,13 @@ namespace System.Data.Objects.ELinq
             MethodInfo getInterfaceProp = interfaceProp.GetGetMethod();
 
             // Retrieve the interface mapping for the interface on the candidate property's declaring type.
-            InterfaceMapping interfaceMap = propertyInfo.DeclaringType.GetInterfaceMap(interfaceType);
-                        
+            InterfaceMapping interfaceMap = propertyInfo.DeclaringType.GetInterfaceMap(
+                interfaceType
+            );
+
             // Find the index of the interface's get_<Property> method in the interface methods of the interface map
             int propIndex = Array.IndexOf(interfaceMap.InterfaceMethods, getInterfaceProp);
-            
+
             // Find the method on the property's declaring type that is the target of the interface's get_<Property> method.
             // This method will be at the same index in the interface mapping's target methods as the get_<Property> interface method index.
             MethodInfo[] targetMethods = interfaceMap.TargetMethods;

@@ -8,10 +8,22 @@ namespace Microsoft.Extensions.Hosting
 {
     public static partial class SystemdHostBuilderExtensions
     {
-        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddSystemd(this Microsoft.Extensions.DependencyInjection.IServiceCollection services) { throw null; }
-        public static Microsoft.Extensions.Hosting.IHostBuilder UseSystemd(this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder) { throw null; }
+        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddSystemd(
+            this Microsoft.Extensions.DependencyInjection.IServiceCollection services
+        )
+        {
+            throw null;
+        }
+
+        public static Microsoft.Extensions.Hosting.IHostBuilder UseSystemd(
+            this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder
+        )
+        {
+            throw null;
+        }
     }
 }
+
 namespace Microsoft.Extensions.Hosting.Systemd
 {
     public partial interface ISystemdNotifier
@@ -19,36 +31,76 @@ namespace Microsoft.Extensions.Hosting.Systemd
         bool IsEnabled { get; }
         void Notify(Microsoft.Extensions.Hosting.Systemd.ServiceState state);
     }
+
     public partial struct ServiceState
     {
         private object _dummy;
         private int _dummyPrimitive;
         public static readonly Microsoft.Extensions.Hosting.Systemd.ServiceState Ready;
         public static readonly Microsoft.Extensions.Hosting.Systemd.ServiceState Stopping;
-        public ServiceState(string state) { throw null; }
-        public override string ToString() { throw null; }
+
+        public ServiceState(string state)
+        {
+            throw null;
+        }
+
+        public override string ToString()
+        {
+            throw null;
+        }
     }
+
     public static partial class SystemdHelpers
     {
-        public static bool IsSystemdService() { throw null; }
+        public static bool IsSystemdService()
+        {
+            throw null;
+        }
     }
+
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("maccatalyst")]
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
-    public partial class SystemdLifetime : Microsoft.Extensions.Hosting.IHostLifetime, System.IDisposable
+    public partial class SystemdLifetime
+        : Microsoft.Extensions.Hosting.IHostLifetime,
+            System.IDisposable
     {
-        public SystemdLifetime(Microsoft.Extensions.Hosting.IHostEnvironment environment, Microsoft.Extensions.Hosting.IHostApplicationLifetime applicationLifetime, Microsoft.Extensions.Hosting.Systemd.ISystemdNotifier systemdNotifier, Microsoft.Extensions.Logging.ILoggerFactory loggerFactory) { }
+        public SystemdLifetime(
+            Microsoft.Extensions.Hosting.IHostEnvironment environment,
+            Microsoft.Extensions.Hosting.IHostApplicationLifetime applicationLifetime,
+            Microsoft.Extensions.Hosting.Systemd.ISystemdNotifier systemdNotifier,
+            Microsoft.Extensions.Logging.ILoggerFactory loggerFactory
+        ) { }
+
         public void Dispose() { }
-        public System.Threading.Tasks.Task StopAsync(System.Threading.CancellationToken cancellationToken) { throw null; }
-        public System.Threading.Tasks.Task WaitForStartAsync(System.Threading.CancellationToken cancellationToken) { throw null; }
+
+        public System.Threading.Tasks.Task StopAsync(
+            System.Threading.CancellationToken cancellationToken
+        )
+        {
+            throw null;
+        }
+
+        public System.Threading.Tasks.Task WaitForStartAsync(
+            System.Threading.CancellationToken cancellationToken
+        )
+        {
+            throw null;
+        }
     }
+
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public partial class SystemdNotifier : Microsoft.Extensions.Hosting.Systemd.ISystemdNotifier
     {
         public SystemdNotifier() { }
-        public bool IsEnabled { get { throw null; } }
+
+        public bool IsEnabled
+        {
+            get { throw null; }
+        }
+
         public void Notify(Microsoft.Extensions.Hosting.Systemd.ServiceState state) { }
     }
 }

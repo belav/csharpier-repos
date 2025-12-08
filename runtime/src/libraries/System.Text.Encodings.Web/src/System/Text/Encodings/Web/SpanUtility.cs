@@ -94,7 +94,15 @@ namespace System.Text.Encodings.Web
         /// Parameters are intended to be constant values.
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryWriteBytes(Span<byte> span, byte a, byte b, byte c, byte d, byte e, byte f)
+        public static bool TryWriteBytes(
+            Span<byte> span,
+            byte a,
+            byte b,
+            byte c,
+            byte d,
+            byte e,
+            byte f
+        )
         {
             if (span.Length >= 6)
             {
@@ -142,7 +150,10 @@ namespace System.Text.Encodings.Web
                 {
                     abcd64 = ((ulong)a << 48) | ((ulong)b << 32) | ((ulong)c << 16) | d;
                 }
-                Unsafe.WriteUnaligned<ulong>(ref Unsafe.As<char, byte>(ref MemoryMarshal.GetReference(span)), abcd64);
+                Unsafe.WriteUnaligned<ulong>(
+                    ref Unsafe.As<char, byte>(ref MemoryMarshal.GetReference(span)),
+                    abcd64
+                );
                 return true;
             }
             else
@@ -191,7 +202,15 @@ namespace System.Text.Encodings.Web
         /// Parameters are intended to be constant values.
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryWriteChars(Span<char> span, char a, char b, char c, char d, char e, char f)
+        public static bool TryWriteChars(
+            Span<char> span,
+            char a,
+            char b,
+            char c,
+            char d,
+            char e,
+            char f
+        )
         {
             if (span.Length >= 6)
             {
@@ -209,7 +228,10 @@ namespace System.Text.Encodings.Web
                 }
                 ref byte rDest = ref Unsafe.As<char, byte>(ref MemoryMarshal.GetReference(span));
                 Unsafe.WriteUnaligned<ulong>(ref rDest, abcd64);
-                Unsafe.WriteUnaligned<uint>(ref Unsafe.AddByteOffset(ref rDest, (nint)sizeof(ulong)), ef32);
+                Unsafe.WriteUnaligned<uint>(
+                    ref Unsafe.AddByteOffset(ref rDest, (nint)sizeof(ulong)),
+                    ef32
+                );
                 return true;
             }
             else
@@ -231,7 +253,10 @@ namespace System.Text.Encodings.Web
                 {
                     value = BinaryPrimitives.ReverseEndianness(value);
                 }
-                Unsafe.WriteUnaligned<ulong>(ref Unsafe.Add(ref MemoryMarshal.GetReference(span), (nint)(uint)offset), value);
+                Unsafe.WriteUnaligned<ulong>(
+                    ref Unsafe.Add(ref MemoryMarshal.GetReference(span), (nint)(uint)offset),
+                    value
+                );
                 return true;
             }
             else
@@ -241,17 +266,33 @@ namespace System.Text.Encodings.Web
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool AreValidIndexAndLength(int spanRealLength, int requestedOffset, int requestedLength)
+        private static bool AreValidIndexAndLength(
+            int spanRealLength,
+            int requestedOffset,
+            int requestedLength
+        )
         {
             // Logic here is copied from Span<T>.Slice.
             if (IntPtr.Size == 4)
             {
-                if ((uint)requestedOffset > (uint)spanRealLength) { return false; }
-                if ((uint)requestedLength > (uint)(spanRealLength - requestedOffset)) { return false; }
+                if ((uint)requestedOffset > (uint)spanRealLength)
+                {
+                    return false;
+                }
+                if ((uint)requestedLength > (uint)(spanRealLength - requestedOffset))
+                {
+                    return false;
+                }
             }
             else
             {
-                if ((ulong)(uint)spanRealLength < (ulong)(uint)requestedOffset + (ulong)(uint)requestedLength) { return false; }
+                if (
+                    (ulong)(uint)spanRealLength
+                    < (ulong)(uint)requestedOffset + (ulong)(uint)requestedLength
+                )
+                {
+                    return false;
+                }
             }
             return true;
         }

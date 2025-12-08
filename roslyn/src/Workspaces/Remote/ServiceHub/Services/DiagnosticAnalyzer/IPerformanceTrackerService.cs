@@ -11,8 +11,15 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 {
     internal interface IPerformanceTrackerService : IWorkspaceService
     {
-        void AddSnapshot(IEnumerable<AnalyzerPerformanceInfo> snapshot, int unitCount, bool forSpanAnalysis);
-        void GenerateReport(List<AnalyzerInfoForPerformanceReporting> analyzerInfos, bool forSpanAnalysis);
+        void AddSnapshot(
+            IEnumerable<AnalyzerPerformanceInfo> snapshot,
+            int unitCount,
+            bool forSpanAnalysis
+        );
+        void GenerateReport(
+            List<AnalyzerInfoForPerformanceReporting> analyzerInfos,
+            bool forSpanAnalysis
+        );
 
         event EventHandler SnapshotAdded;
     }
@@ -25,7 +32,13 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
         public readonly double Average;
         public readonly double AdjustedStandardDeviation;
 
-        public AnalyzerInfoForPerformanceReporting(bool builtIn, string analyzerId, double average, double stddev) : this()
+        public AnalyzerInfoForPerformanceReporting(
+            bool builtIn,
+            string analyzerId,
+            double average,
+            double stddev
+        )
+            : this()
         {
             BuiltIn = builtIn;
             AnalyzerId = analyzerId;

@@ -36,12 +36,17 @@ namespace System.Web.WebPages.Razor
         private const string ApplicationStartFileName = "_AppStart";
         private const string PageStartFileName = "_PageStart";
 
-        internal static readonly string FallbackApplicationTypeName = typeof(HttpApplication).FullName;
+        internal static readonly string FallbackApplicationTypeName =
+            typeof(HttpApplication).FullName;
         internal static readonly string PageBaseClass = typeof(WebPage).FullName;
         internal static readonly string TemplateTypeName = typeof(HelperResult).FullName;
 
-        private static ConcurrentDictionary<string, object> _importedNamespaces = new ConcurrentDictionary<string, object>();
-        private readonly Dictionary<string, string> _specialFileBaseTypes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private static ConcurrentDictionary<string, object> _importedNamespaces =
+            new ConcurrentDictionary<string, object>();
+        private readonly Dictionary<string, string> _specialFileBaseTypes = new Dictionary<
+            string,
+            string
+        >(StringComparer.OrdinalIgnoreCase);
 
         private string _className;
         private RazorCodeLanguage _codeLanguage;
@@ -50,7 +55,11 @@ namespace System.Web.WebPages.Razor
         private string _physicalPath = null;
         private string _specialFileBaseClass;
 
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "The code path is safe, it is a property setter and not dependent on other state")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "The code path is safe, it is a property setter and not dependent on other state"
+        )]
         private WebPageRazorHost()
         {
             NamespaceImports.Add("System");
@@ -68,17 +77,19 @@ namespace System.Web.WebPages.Razor
             RegisterSpecialFile(ApplicationStartFileName, typeof(ApplicationStartPage));
             RegisterSpecialFile(PageStartFileName, typeof(StartPage));
             DefaultNamespace = WebDefaultNamespace;
-            GeneratedClassContext = new GeneratedClassContext(GeneratedClassContext.DefaultExecuteMethodName,
-                                                              GeneratedClassContext.DefaultWriteMethodName,
-                                                              GeneratedClassContext.DefaultWriteLiteralMethodName,
-                                                              WriteToMethodName,
-                                                              WriteLiteralToMethodName,
-                                                              TemplateTypeName,
-                                                              DefineSectionMethodName,
-                                                              BeginContextMethodName,
-                                                              EndContextMethodName)
+            GeneratedClassContext = new GeneratedClassContext(
+                GeneratedClassContext.DefaultExecuteMethodName,
+                GeneratedClassContext.DefaultWriteMethodName,
+                GeneratedClassContext.DefaultWriteLiteralMethodName,
+                WriteToMethodName,
+                WriteLiteralToMethodName,
+                TemplateTypeName,
+                DefineSectionMethodName,
+                BeginContextMethodName,
+                EndContextMethodName
+            )
             {
-                ResolveUrlMethodName = ResolveUrlMethodName
+                ResolveUrlMethodName = ResolveUrlMethodName,
             };
             DefaultPageBaseClass = PageBaseClass;
             DefaultDebugCompilation = true;
@@ -86,17 +97,26 @@ namespace System.Web.WebPages.Razor
         }
 
         public WebPageRazorHost(string virtualPath)
-            : this(virtualPath, null)
-        {
-        }
+            : this(virtualPath, null) { }
 
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "The code path is safe, it is a property setter and not dependent on other state")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "The code path is safe, it is a property setter and not dependent on other state"
+        )]
         public WebPageRazorHost(string virtualPath, string physicalPath)
             : this()
         {
             if (String.IsNullOrEmpty(virtualPath))
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, CommonResources.Argument_Cannot_Be_Null_Or_Empty, "virtualPath"), "virtualPath");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                        "virtualPath"
+                    ),
+                    "virtualPath"
+                );
             }
 
             VirtualPath = virtualPath;
@@ -159,7 +179,15 @@ namespace System.Web.WebPages.Razor
 
         internal string GlobalAsaxTypeName
         {
-            get { return _globalAsaxTypeName ?? (HostingEnvironment.IsHosted ? BuildManager.GetGlobalAsaxType().FullName : FallbackApplicationTypeName); }
+            get
+            {
+                return _globalAsaxTypeName
+                    ?? (
+                        HostingEnvironment.IsHosted
+                            ? BuildManager.GetGlobalAsaxType().FullName
+                            : FallbackApplicationTypeName
+                    );
+            }
             set { _globalAsaxTypeName = value; }
         }
 
@@ -212,7 +240,14 @@ namespace System.Web.WebPages.Razor
         {
             if (String.IsNullOrEmpty(ns))
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, CommonResources.Argument_Cannot_Be_Null_Or_Empty, "ns"), "ns");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                        "ns"
+                    ),
+                    "ns"
+                );
             }
 
             _importedNamespaces.TryAdd(ns, null);
@@ -266,10 +301,16 @@ namespace System.Web.WebPages.Razor
         {
             // Remove "~/" and run through our santizer
             // For example, for ~/Foo/Bar/Baz.cshtml, the class name is _Page_Foo_Bar_Baz_cshtml
-            return ParserHelpers.SanitizeClassName(PageClassNamePrefix + virtualPath.TrimStart('~', '/'));
+            return ParserHelpers.SanitizeClassName(
+                PageClassNamePrefix + virtualPath.TrimStart('~', '/')
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Method involves significant processing and should not be a property")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "Method involves significant processing and should not be a property"
+        )]
         protected virtual RazorCodeLanguage GetCodeLanguage()
         {
             RazorCodeLanguage language = DetermineCodeLanguage(VirtualPath);
@@ -280,13 +321,23 @@ namespace System.Web.WebPages.Razor
 
             if (language == null)
             {
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, RazorWebResources.BuildProvider_No_CodeLanguageService_For_Path, VirtualPath));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        RazorWebResources.BuildProvider_No_CodeLanguageService_For_Path,
+                        VirtualPath
+                    )
+                );
             }
 
             return language;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This method involves copying memory, so a property is not appropriate")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method involves copying memory, so a property is not appropriate"
+        )]
         public static IEnumerable<string> GetGlobalImports()
         {
             return _importedNamespaces.ToArray().Select(pair => pair.Key);
@@ -314,7 +365,9 @@ namespace System.Web.WebPages.Razor
             base.PostProcessGeneratedCode(context);
 
             // Add additional global imports
-            context.Namespace.Imports.AddRange(GetGlobalImports().Select(s => new CodeNamespaceImport(s)).ToArray());
+            context.Namespace.Imports.AddRange(
+                GetGlobalImports().Select(s => new CodeNamespaceImport(s)).ToArray()
+            );
 
             // Create ApplicationInstance property
             CodeMemberProperty prop = new CodeMemberProperty()
@@ -323,17 +376,19 @@ namespace System.Web.WebPages.Razor
                 Type = new CodeTypeReference(GlobalAsaxTypeName),
                 HasGet = true,
                 HasSet = false,
-                Attributes = MemberAttributes.Family | MemberAttributes.Final
+                Attributes = MemberAttributes.Family | MemberAttributes.Final,
             };
             prop.GetStatements.Add(
                 new CodeMethodReturnStatement(
                     new CodeCastExpression(
                         new CodeTypeReference(GlobalAsaxTypeName),
                         new CodePropertyReferenceExpression(
-                            new CodePropertyReferenceExpression(
-                                null,
-                                ContextPropertyName),
-                            ApplicationInstancePropertyName))));
+                            new CodePropertyReferenceExpression(null, ContextPropertyName),
+                            ApplicationInstancePropertyName
+                        )
+                    )
+                )
+            );
             context.GeneratedClass.Members.Insert(0, prop);
         }
 
@@ -350,11 +405,25 @@ namespace System.Web.WebPages.Razor
         {
             if (String.IsNullOrEmpty(fileName))
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, CommonResources.Argument_Cannot_Be_Null_Or_Empty, "fileName"), "fileName");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                        "fileName"
+                    ),
+                    "fileName"
+                );
             }
             if (String.IsNullOrEmpty(baseTypeName))
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, CommonResources.Argument_Cannot_Be_Null_Or_Empty, "baseTypeName"), "baseTypeName");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                        "baseTypeName"
+                    ),
+                    "baseTypeName"
+                );
             }
 
             _specialFileBaseTypes[fileName] = baseTypeName;

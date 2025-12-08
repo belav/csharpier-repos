@@ -14,8 +14,14 @@ public class IdValueGeneratorTest
         modelBuilder.Entity<Post>().HasKey(p => new { p.OtherId, p.Id });
 
         modelBuilder.Entity<IntClassEntity>().Property(e => e.Id).HasConversion(IntClass.Converter);
-        modelBuilder.Entity<IntStructEntity>().Property(e => e.Id).HasConversion(IntStruct.Converter);
-        modelBuilder.Entity<BytesStructEntity>().Property(e => e.Id).HasConversion(BytesStruct.Converter);
+        modelBuilder
+            .Entity<IntStructEntity>()
+            .Property(e => e.Id)
+            .HasConversion(IntStruct.Converter);
+        modelBuilder
+            .Entity<BytesStructEntity>()
+            .Property(e => e.Id)
+            .HasConversion(BytesStruct.Converter);
 
         var model = modelBuilder.FinalizeModel();
 
@@ -38,9 +44,13 @@ public class IdValueGeneratorTest
         Assert.Equal(ids.Count, new HashSet<string>(ids.Concat(ids)).Count);
 
         string Create<TEntity>(TEntity entity)
-            where TEntity : class, new()
-            => (string)CosmosTestHelpers.Instance.CreateInternalEntry(model, EntityState.Added, entity)
-                [model.FindEntityType(typeof(TEntity)).FindProperty(StoreKeyConvention.DefaultIdPropertyName)];
+            where TEntity : class, new() =>
+            (string)
+                CosmosTestHelpers.Instance.CreateInternalEntry(model, EntityState.Added, entity)[
+                    model
+                        .FindEntityType(typeof(TEntity))
+                        .FindProperty(StoreKeyConvention.DefaultIdPropertyName)
+                ];
     }
 
     private class Blog
@@ -62,24 +72,22 @@ public class IdValueGeneratorTest
 
     private class IntClass
     {
-        public static readonly ValueConverter<IntClass, int> Converter
-            = new(v => v.Value, v => new IntClass(v));
+        public static readonly ValueConverter<IntClass, int> Converter = new(
+            v => v.Value,
+            v => new IntClass(v)
+        );
 
         public IntClass(int value)
         {
             Value = value;
         }
 
-        private bool Equals(IntClass other)
-            => other != null && Value == other.Value;
+        private bool Equals(IntClass other) => other != null && Value == other.Value;
 
-        public override bool Equals(object obj)
-            => obj == this
-                || obj?.GetType() == GetType()
-                && Equals((IntClass)obj);
+        public override bool Equals(object obj) =>
+            obj == this || obj?.GetType() == GetType() && Equals((IntClass)obj);
 
-        public override int GetHashCode()
-            => Value;
+        public override int GetHashCode() => Value;
 
         public int Value { get; }
     }
@@ -91,8 +99,10 @@ public class IdValueGeneratorTest
 
     private struct IntStruct
     {
-        public static readonly ValueConverter<IntStruct, int> Converter
-            = new(v => v.Value, v => new IntStruct(v));
+        public static readonly ValueConverter<IntStruct, int> Converter = new(
+            v => v.Value,
+            v => new IntStruct(v)
+        );
 
         public IntStruct(int value)
         {
@@ -109,8 +119,10 @@ public class IdValueGeneratorTest
 
     private struct BytesStruct
     {
-        public static readonly ValueConverter<BytesStruct, byte[]> Converter
-            = new(v => v.Value, v => new BytesStruct(v));
+        public static readonly ValueConverter<BytesStruct, byte[]> Converter = new(
+            v => v.Value,
+            v => new BytesStruct(v)
+        );
 
         public BytesStruct(byte[] value)
         {
@@ -119,11 +131,9 @@ public class IdValueGeneratorTest
 
         public byte[] Value { get; }
 
-        public bool Equals(BytesStruct other)
-            => Value == null
-                    && other.Value == null
-                || other.Value != null
-                    && Value?.SequenceEqual(other.Value) == true;
+        public bool Equals(BytesStruct other) =>
+            Value == null && other.Value == null
+            || other.Value != null && Value?.SequenceEqual(other.Value) == true;
 
         public override int GetHashCode()
         {

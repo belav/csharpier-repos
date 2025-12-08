@@ -14,7 +14,6 @@ using Xunit;
 
 namespace System.Security.Cryptography.Xml.Tests
 {
-
     public class UnprotectedXmlDecryptionTransform : XmlDecryptionTransform
     {
         public bool UnprotectedIsTargetElement(XmlElement inputElement, string idValue)
@@ -61,7 +60,10 @@ namespace System.Security.Cryptography.Xml.Tests
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
 
-            Assert.Equal(expectedResult, transform.UnprotectedIsTargetElement(doc.DocumentElement, id));
+            Assert.Equal(
+                expectedResult,
+                transform.UnprotectedIsTargetElement(doc.DocumentElement, id)
+            );
         }
 
         [Fact]
@@ -125,7 +127,9 @@ namespace System.Security.Cryptography.Xml.Tests
         public void LoadInnerXml_XmlValidUriForExcept()
         {
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml(@"<dcrpt:Except URI=""#item1"" xmlns:dcrpt=""http://www.w3.org/2002/07/decrypt#""/>");
+            doc.LoadXml(
+                @"<dcrpt:Except URI=""#item1"" xmlns:dcrpt=""http://www.w3.org/2002/07/decrypt#""/>"
+            );
 
             transform.LoadInnerXml(doc.ChildNodes);
 
@@ -140,7 +144,9 @@ namespace System.Security.Cryptography.Xml.Tests
             doc.LoadXml(xml);
 
             using (MemoryStream memoryStream = new MemoryStream())
-            using (StreamWriter streamWriter = new StreamWriter(memoryStream, Text.Encoding.Unicode))
+            using (
+                StreamWriter streamWriter = new StreamWriter(memoryStream, Text.Encoding.Unicode)
+            )
             {
                 streamWriter.Write(xml);
                 streamWriter.Flush();
@@ -161,7 +167,10 @@ namespace System.Security.Cryptography.Xml.Tests
             doc.LoadXml(xml);
 
             transform.LoadInput(doc);
-            AssertExtensions.Throws<ArgumentException>("type", () => transform.GetOutput(typeof(string)));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => transform.GetOutput(typeof(string))
+            );
         }
 
         [Fact]
@@ -178,7 +187,6 @@ namespace System.Security.Cryptography.Xml.Tests
         }
 
         [Fact]
-
         public void GetOutput_XmlWithEncryptedData()
         {
             XmlDocument doc = new XmlDocument();
@@ -217,7 +225,12 @@ namespace System.Security.Cryptography.Xml.Tests
 
             XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(doc.NameTable);
             xmlNamespaceManager.AddNamespace("enc", EncryptedXml.XmlEncNamespaceUrl);
-            Assert.NotNull(transformedDocument.DocumentElement.SelectSingleNode("//enc:EncryptedData", xmlNamespaceManager));
+            Assert.NotNull(
+                transformedDocument.DocumentElement.SelectSingleNode(
+                    "//enc:EncryptedData",
+                    xmlNamespaceManager
+                )
+            );
             Assert.NotEqual(xml, transformedDocument.OuterXml);
         }
 
@@ -227,13 +240,18 @@ namespace System.Security.Cryptography.Xml.Tests
             {
                 var encryptedXml = new EncryptedXml();
                 encryptedXml.AddKeyNameMapping("aes", aesAlgo);
-                XmlElement elementToEncrypt = (XmlElement)doc.DocumentElement.SelectSingleNode(nodeToEncrypt);
+                XmlElement elementToEncrypt = (XmlElement)
+                    doc.DocumentElement.SelectSingleNode(nodeToEncrypt);
                 EncryptedData encryptedData = encryptedXml.Encrypt(elementToEncrypt, "aes");
                 EncryptedXml.ReplaceElement(elementToEncrypt, encryptedData, false);
 
                 XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(doc.NameTable);
                 xmlNamespaceManager.AddNamespace("enc", EncryptedXml.XmlEncNamespaceUrl);
-                XmlElement encryptedNode = (XmlElement)doc.DocumentElement.SelectSingleNode("//enc:EncryptedData", xmlNamespaceManager);
+                XmlElement encryptedNode = (XmlElement)
+                    doc.DocumentElement.SelectSingleNode(
+                        "//enc:EncryptedData",
+                        xmlNamespaceManager
+                    );
                 encryptedNode.SetAttribute("ID", "#_0");
 
                 transform.LoadInput(doc);

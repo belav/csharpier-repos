@@ -6,5 +6,5 @@ namespace Microsoft.WebAssembly.Diagnostics;
 public enum WasmHost
 {
     Chrome,
-    Firefox
+    Firefox,
 }

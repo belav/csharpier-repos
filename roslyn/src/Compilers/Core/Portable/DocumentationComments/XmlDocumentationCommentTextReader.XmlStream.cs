@@ -24,13 +24,13 @@ namespace Microsoft.CodeAnalysis
             private int _position;
 
             /// <summary>
-            /// We use <see cref="XmlReader"/> to validate XML doc comments. Unfortunately it cannot be reset and thus can't be pooled. 
-            /// Each time we need to validate a fragment of XML we "append" it to the underlying text reader, implemented by this class, 
-            /// and advance the reader. By the end of the fragment validation, we keep the reader open in a state 
+            /// We use <see cref="XmlReader"/> to validate XML doc comments. Unfortunately it cannot be reset and thus can't be pooled.
+            /// Each time we need to validate a fragment of XML we "append" it to the underlying text reader, implemented by this class,
+            /// and advance the reader. By the end of the fragment validation, we keep the reader open in a state
             /// that is ready for the next fragment validation unless the fragment was invalid, in which case we need to create a new XmlReader.
             /// That is why <see cref="Read(char[], int, int) "/> pretends that the stream has extra <see cref="maxReadsPastTheEnd"/> spaces
-            /// at the end. That should be sufficient for <see cref="XmlReader"/> to not reach the end of this reader before the next 
-            /// fragment is appended, unless the current fragment is malformed in one way or another. 
+            /// at the end. That should be sufficient for <see cref="XmlReader"/> to not reach the end of this reader before the next
+            /// fragment is appended, unless the current fragment is malformed in one way or another.
             /// </summary>
             private const int maxReadsPastTheEnd = 100;
             private int _readsPastTheEnd;
@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis
             // Base the root element name on a GUID to avoid accidental (or intentional) collisions. An underscore is
             // prefixed because element names must not start with a number.
             private static readonly string s_rootElementName = "_" + Guid.NewGuid().ToString("N");
-            private static readonly string s_currentElementName = "_" + Guid.NewGuid().ToString("N");
+            private static readonly string s_currentElementName =
+                "_" + Guid.NewGuid().ToString("N");
 
             // internal for testing
             internal static readonly string RootStart = "<" + s_rootElementName + ">";
@@ -57,7 +58,7 @@ namespace Microsoft.CodeAnalysis
                 _text = text;
                 _readsPastTheEnd = 0;
 
-                // The first read shall read the <root>, 
+                // The first read shall read the <root>,
                 // the subsequents reads shall start with <current> element
                 if (_position > 0)
                 {
@@ -80,10 +81,7 @@ namespace Microsoft.CodeAnalysis
 
             public bool Eof
             {
-                get
-                {
-                    return _readsPastTheEnd >= maxReadsPastTheEnd;
-                }
+                get { return _readsPastTheEnd >= maxReadsPastTheEnd; }
             }
 
             public override int Read(char[] buffer, int index, int count)
@@ -105,13 +103,31 @@ namespace Microsoft.CodeAnalysis
                 _position += EncodeAndAdvance(RootStart, _position, buffer, ref index, ref count);
 
                 // <current>
-                _position += EncodeAndAdvance(CurrentStart, _position - RootStart.Length, buffer, ref index, ref count);
+                _position += EncodeAndAdvance(
+                    CurrentStart,
+                    _position - RootStart.Length,
+                    buffer,
+                    ref index,
+                    ref count
+                );
 
                 // text
-                _position += EncodeAndAdvance(_text, _position - RootStart.Length - CurrentStart.Length, buffer, ref index, ref count);
+                _position += EncodeAndAdvance(
+                    _text,
+                    _position - RootStart.Length - CurrentStart.Length,
+                    buffer,
+                    ref index,
+                    ref count
+                );
 
                 // </current>
-                _position += EncodeAndAdvance(CurrentEnd, _position - RootStart.Length - CurrentStart.Length - _text.Length, buffer, ref index, ref count);
+                _position += EncodeAndAdvance(
+                    CurrentEnd,
+                    _position - RootStart.Length - CurrentStart.Length - _text.Length,
+                    buffer,
+                    ref index,
+                    ref count
+                );
 
                 // Pretend that the stream doesn't end right away
                 if (initialCount == count)
@@ -124,7 +140,13 @@ namespace Microsoft.CodeAnalysis
                 return initialCount - count;
             }
 
-            private static int EncodeAndAdvance(string src, int srcIndex, char[] dest, ref int destIndex, ref int destCount)
+            private static int EncodeAndAdvance(
+                string src,
+                int srcIndex,
+                char[] dest,
+                ref int destIndex,
+                ref int destCount
+            )
             {
                 if (destCount == 0 || srcIndex < 0 || srcIndex >= src.Length)
                 {

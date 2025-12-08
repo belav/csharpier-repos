@@ -37,27 +37,25 @@ namespace Internal.NativeFormat
             {
                 if (stream + 1 >= streamEnd)
                     ThrowBadImageFormatException();
-                value = (val >> 2) |
-                      (((uint)*(stream + 1)) << 6);
+                value = (val >> 2) | (((uint)*(stream + 1)) << 6);
                 stream += 2;
             }
             else if ((val & 4) == 0)
             {
                 if (stream + 2 >= streamEnd)
                     ThrowBadImageFormatException();
-                value = (val >> 3) |
-                      (((uint)*(stream + 1)) << 5) |
-                      (((uint)*(stream + 2)) << 13);
+                value = (val >> 3) | (((uint)*(stream + 1)) << 5) | (((uint)*(stream + 2)) << 13);
                 stream += 3;
             }
             else if ((val & 8) == 0)
             {
                 if (stream + 3 >= streamEnd)
                     ThrowBadImageFormatException();
-                value = (val >> 4) |
-                      (((uint)*(stream + 1)) << 4) |
-                      (((uint)*(stream + 2)) << 12) |
-                      (((uint)*(stream + 3)) << 20);
+                value =
+                    (val >> 4)
+                    | (((uint)*(stream + 1)) << 4)
+                    | (((uint)*(stream + 2)) << 12)
+                    | (((uint)*(stream + 3)) << 20);
                 stream += 4;
             }
             else if ((val & 16) == 0)
@@ -91,27 +89,26 @@ namespace Internal.NativeFormat
             {
                 if (stream + 1 >= streamEnd)
                     ThrowBadImageFormatException();
-                value = (val >> 2) |
-                      (((int)*(sbyte*)(stream + 1)) << 6);
+                value = (val >> 2) | (((int)*(sbyte*)(stream + 1)) << 6);
                 stream += 2;
             }
             else if ((val & 4) == 0)
             {
                 if (stream + 2 >= streamEnd)
                     ThrowBadImageFormatException();
-                value = (val >> 3) |
-                      (((int)*(stream + 1)) << 5) |
-                      (((int)*(sbyte*)(stream + 2)) << 13);
+                value =
+                    (val >> 3) | (((int)*(stream + 1)) << 5) | (((int)*(sbyte*)(stream + 2)) << 13);
                 stream += 3;
             }
             else if ((val & 8) == 0)
             {
                 if (stream + 3 >= streamEnd)
                     ThrowBadImageFormatException();
-                value = (val >> 4) |
-                      (((int)*(stream + 1)) << 4) |
-                      (((int)*(stream + 2)) << 12) |
-                      (((int)*(sbyte*)(stream + 3)) << 20);
+                value =
+                    (val >> 4)
+                    | (((int)*(stream + 1)) << 4)
+                    | (((int)*(stream + 2)) << 12)
+                    | (((int)*(sbyte*)(stream + 3)) << 20);
                 stream += 4;
             }
             else if ((val & 16) == 0)
@@ -233,10 +230,7 @@ namespace Internal.NativeFormat
 
         public uint Size
         {
-            get
-            {
-                return _size;
-            }
+            get { return _size; }
         }
 
         public uint AddressToOffset(IntPtr address)
@@ -367,26 +361,17 @@ namespace Internal.NativeFormat
 
         public bool IsNull
         {
-            get
-            {
-                return _reader == null;
-            }
+            get { return _reader == null; }
         }
 
         public NativeReader Reader
         {
-            get
-            {
-                return _reader;
-            }
+            get { return _reader; }
         }
 
         public uint Offset
         {
-            get
-            {
-                return _offset;
-            }
+            get { return _offset; }
             set
             {
                 Debug.Assert(value < _reader.Size);
@@ -478,7 +463,10 @@ namespace Internal.NativeFormat
             _entryIndexSize = entryIndexSize;
         }
 
-        public bool IsNull { get { return _reader == null; } }
+        public bool IsNull
+        {
+            get { return _reader == null; }
+        }
 
         //
         // The enumerator does not conform to the regular C# enumerator pattern to avoid paying
@@ -538,7 +526,7 @@ namespace Internal.NativeFormat
 
             public NativeParser GetNext()
             {
-                for (;;)
+                for (; ; )
                 {
                     while (_parser.Offset < _endOffset)
                     {
@@ -557,7 +545,8 @@ namespace Internal.NativeFormat
 
         private NativeParser GetParserForBucket(uint bucket, out uint endOffset)
         {
-            uint start, end;
+            uint start,
+                end;
 
             if (_entryIndexSize == 0)
             {

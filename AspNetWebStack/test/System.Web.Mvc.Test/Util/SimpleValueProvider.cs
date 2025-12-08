@@ -15,9 +15,7 @@ namespace Microsoft.Web.UnitTestUtil
         private readonly CultureInfo _culture;
 
         public SimpleValueProvider()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         public SimpleValueProvider(CultureInfo culture)
             : base(StringComparer.OrdinalIgnoreCase)
@@ -64,7 +62,11 @@ namespace Microsoft.Web.UnitTestUtil
             object rawValue;
             if (TryGetValue(key, out rawValue))
             {
-                return new ValueProviderResult(rawValue, Convert.ToString(rawValue, _culture), _culture);
+                return new ValueProviderResult(
+                    rawValue,
+                    Convert.ToString(rawValue, _culture),
+                    _culture
+                );
             }
             else
             {

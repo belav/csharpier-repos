@@ -25,10 +25,20 @@ namespace ILCompiler.Dataflow
         {
             var diagnosticContext = new DiagnosticContext(
                 Origin,
-                logger.ShouldSuppressAnalysisWarningsForRequires(Origin.MemberDefinition, DiagnosticUtilities.RequiresUnreferencedCodeAttribute),
-                logger.ShouldSuppressAnalysisWarningsForRequires(Origin.MemberDefinition, DiagnosticUtilities.RequiresDynamicCodeAttribute),
-                logger.ShouldSuppressAnalysisWarningsForRequires(Origin.MemberDefinition, DiagnosticUtilities.RequiresAssemblyFilesAttribute),
-                logger);
+                logger.ShouldSuppressAnalysisWarningsForRequires(
+                    Origin.MemberDefinition,
+                    DiagnosticUtilities.RequiresUnreferencedCodeAttribute
+                ),
+                logger.ShouldSuppressAnalysisWarningsForRequires(
+                    Origin.MemberDefinition,
+                    DiagnosticUtilities.RequiresDynamicCodeAttribute
+                ),
+                logger.ShouldSuppressAnalysisWarningsForRequires(
+                    Origin.MemberDefinition,
+                    DiagnosticUtilities.RequiresAssemblyFilesAttribute
+                ),
+                logger
+            );
 
             ReflectionMethodBodyScanner.CheckAndReportAllRequires(diagnosticContext, Field);
         }

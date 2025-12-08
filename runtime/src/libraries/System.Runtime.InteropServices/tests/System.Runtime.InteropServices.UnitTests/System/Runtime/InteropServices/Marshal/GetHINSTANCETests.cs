@@ -17,10 +17,16 @@ namespace System.Runtime.InteropServices.Tests
             Assert.Equal(ptr, Marshal.GetHINSTANCE(typeof(string).Module));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void GetHINSTANCE_ModuleBuilder_ReturnsSameInstance()
         {
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.Run);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.Run
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
 
             IntPtr ptr = Marshal.GetHINSTANCE(moduleBuilder);
@@ -42,9 +48,7 @@ namespace System.Runtime.InteropServices.Tests
 
         private class NonRuntimeModule : Module
         {
-            public NonRuntimeModule()
-            {
-            }
+            public NonRuntimeModule() { }
         }
     }
 }

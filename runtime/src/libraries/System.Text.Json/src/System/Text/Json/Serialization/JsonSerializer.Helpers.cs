@@ -10,8 +10,10 @@ namespace System.Text.Json
 {
     public static partial class JsonSerializer
     {
-        internal const string SerializationUnreferencedCodeMessage = "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved.";
-        internal const string SerializationRequiresDynamicCodeMessage = "JSON serialization and deserialization might require types that cannot be statically analyzed and might need runtime code generation. Use System.Text.Json source generation for native AOT applications.";
+        internal const string SerializationUnreferencedCodeMessage =
+            "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved.";
+        internal const string SerializationRequiresDynamicCodeMessage =
+            "JSON serialization and deserialization might require types that cannot be statically analyzed and might need runtime code generation. Use System.Text.Json source generation for native AOT applications.";
 
         /// <summary>
         /// Indicates whether unconfigured <see cref="JsonSerializerOptions"/> instances
@@ -24,8 +26,10 @@ namespace System.Text.Json
         public static bool IsReflectionEnabledByDefault { get; } =
             AppContext.TryGetSwitch(
                 switchName: "System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault",
-                isEnabled: out bool value)
-            ? value : true;
+                isEnabled: out bool value
+            )
+                ? value
+                : true;
 
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
@@ -46,8 +50,8 @@ namespace System.Text.Json
 
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        private static JsonTypeInfo<T> GetTypeInfo<T>(JsonSerializerOptions? options)
-            => (JsonTypeInfo<T>)GetTypeInfo(options, typeof(T));
+        private static JsonTypeInfo<T> GetTypeInfo<T>(JsonSerializerOptions? options) =>
+            (JsonTypeInfo<T>)GetTypeInfo(options, typeof(T));
 
         private static JsonTypeInfo GetTypeInfo(JsonSerializerContext context, Type inputType)
         {
@@ -82,18 +86,23 @@ namespace System.Text.Json
         }
 
         internal static bool IsValidNumberHandlingValue(JsonNumberHandling handling) =>
-            JsonHelpers.IsInRangeInclusive((int)handling, 0,
+            JsonHelpers.IsInRangeInclusive(
+                (int)handling,
+                0,
                 (int)(
-                JsonNumberHandling.Strict |
-                JsonNumberHandling.AllowReadingFromString |
-                JsonNumberHandling.WriteAsString |
-                JsonNumberHandling.AllowNamedFloatingPointLiterals));
+                    JsonNumberHandling.Strict
+                    | JsonNumberHandling.AllowReadingFromString
+                    | JsonNumberHandling.WriteAsString
+                    | JsonNumberHandling.AllowNamedFloatingPointLiterals
+                )
+            );
 
         internal static bool IsValidCreationHandlingValue(JsonObjectCreationHandling handling) =>
             handling is JsonObjectCreationHandling.Replace or JsonObjectCreationHandling.Populate;
 
-        internal static bool IsValidUnmappedMemberHandlingValue(JsonUnmappedMemberHandling handling) =>
-            handling is JsonUnmappedMemberHandling.Skip or JsonUnmappedMemberHandling.Disallow;
+        internal static bool IsValidUnmappedMemberHandlingValue(
+            JsonUnmappedMemberHandling handling
+        ) => handling is JsonUnmappedMemberHandling.Skip or JsonUnmappedMemberHandling.Disallow;
 
         [return: NotNullIfNotNull(nameof(value))]
         internal static T? UnboxOnRead<T>(object? value)
@@ -121,11 +130,16 @@ namespace System.Text.Json
             {
                 if (value is null)
                 {
-                    ThrowHelper.ThrowInvalidOperationException_DeserializeUnableToAssignNull(declaredType: typeof(T));
+                    ThrowHelper.ThrowInvalidOperationException_DeserializeUnableToAssignNull(
+                        declaredType: typeof(T)
+                    );
                 }
                 else
                 {
-                    ThrowHelper.ThrowInvalidCastException_DeserializeUnableToAssignValue(typeOfValue: value.GetType(), declaredType: typeof(T));
+                    ThrowHelper.ThrowInvalidCastException_DeserializeUnableToAssignValue(
+                        typeOfValue: value.GetType(),
+                        declaredType: typeof(T)
+                    );
                 }
             }
         }

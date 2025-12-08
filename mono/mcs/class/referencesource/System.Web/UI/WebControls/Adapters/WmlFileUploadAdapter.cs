@@ -6,15 +6,18 @@
 
 #if WMLSUPPORT
 
-namespace System.Web.UI.WebControls.Adapters {
+namespace System.Web.UI.WebControls.Adapters
+{
     using System.Web.UI.Adapters;
     using System.Web.UI.WebControls;
 
-    public class WmlFileUploadAdapter : FileUploadAdapter {
-
-        protected internal override void Render(HtmlTextWriter writer) {
+    public class WmlFileUploadAdapter : FileUploadAdapter
+    {
+        protected internal override void Render(HtmlTextWriter writer)
+        {
             String alternateText = Control.AlternateText;
-            if (!String.IsNullOrEmpty(alternateText)) {
+            if (!String.IsNullOrEmpty(alternateText))
+            {
                 writer.EnterStyle(Control.ControlStyle);
                 writer.Write(LiteralControlAdapterUtility.ProcessWmlLiteralText(alternateText));
                 writer.ExitStyle(Control.ControlStyle);
@@ -24,4 +27,3 @@ namespace System.Web.UI.WebControls.Adapters {
 }
 
 #endif
-

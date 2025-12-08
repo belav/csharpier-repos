@@ -1,11 +1,11 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using FluentAssertions;
 using System.CommandLine.Help;
 using System.CommandLine.Tests.Utility;
 using System.IO;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.Tests;
@@ -17,24 +17,21 @@ public class HelpOptionTests
     {
         CliCommand command = new CliRootCommand
         {
-            new CliCommand("command")
-            {
-                new CliCommand("subcommand")
-            }
+            new CliCommand("command") { new CliCommand("subcommand") },
         };
 
-        CliConfiguration config = new(command)
-        {
-            Output = new StringWriter()
-        };
+        CliConfiguration config = new(command) { Output = new StringWriter() };
 
         var result = command.Parse("command subcommand --help", config);
 
         await result.InvokeAsync();
 
-        config.Output.ToString().Should().Contain($"{CliRootCommand.ExecutableName} command subcommand [options]");
+        config
+            .Output.ToString()
+            .Should()
+            .Contain($"{CliRootCommand.ExecutableName} command subcommand [options]");
     }
-         
+
     [Fact]
     public async Task Help_option_interrupts_execution_of_the_specified_command()
     {
@@ -44,10 +41,7 @@ public class HelpOptionTests
         subcommand.SetAction(_ => wasCalled = true);
         command.Subcommands.Add(subcommand);
 
-        CliConfiguration config = new(command)
-        {
-            Output = new StringWriter()
-        };
+        CliConfiguration config = new(command) { Output = new StringWriter() };
 
         await command.Parse("command subcommand --help", config).InvokeAsync();
 
@@ -63,7 +57,7 @@ public class HelpOptionTests
     {
         CliConfiguration config = new(new CliCommand("command") { new HelpOption() })
         {
-            Output = new StringWriter()
+            Output = new StringWriter(),
         };
 
         StringWriter console = new();
@@ -80,10 +74,7 @@ public class HelpOptionTests
         var command = new CliCommand("command");
         command.Options.Add(new CliOption<bool>("-h"));
 
-        CliConfiguration config = new(command)
-        {
-            Output = new StringWriter()
-        };
+        CliConfiguration config = new(command) { Output = new StringWriter() };
 
         await command.Parse("command -h", config).InvokeAsync();
 
@@ -97,33 +88,23 @@ public class HelpOptionTests
 
         var result = rootCommand.Parse("-h");
 
-        result.Errors
-              .Should()
-              .BeEmpty();
+        result.Errors.Should().BeEmpty();
     }
-        
+
     [Fact]
     public void There_are_no_parse_errors_when_help_is_invoked_on_subcommand()
     {
-        var root = new CliRootCommand
-        {
-            new CliCommand("subcommand"),
-        };
+        var root = new CliRootCommand { new CliCommand("subcommand") };
 
         var result = root.Parse("subcommand -h");
 
-        result.Errors
-              .Should()
-              .BeEmpty();
+        result.Errors.Should().BeEmpty();
     }
 
     [Fact]
     public void There_are_no_parse_errors_when_help_is_invoked_on_a_command_with_subcommands()
     {
-        var root = new CliRootCommand
-        {
-            new CliCommand("subcommand"),
-        };
+        var root = new CliRootCommand { new CliCommand("subcommand") };
 
         var result = root.Parse("-h");
 
@@ -133,13 +114,7 @@ public class HelpOptionTests
     [Fact]
     public void There_are_no_parse_errors_when_help_is_invoked_on_a_command_with_required_options()
     {
-        var command = new CliRootCommand
-        {
-            new CliOption<string>("-x")
-            {
-                Required = true
-            },
-        };
+        var command = new CliRootCommand { new CliOption<string>("-x") { Required = true } };
 
         var result = command.Parse("-h");
 
@@ -151,14 +126,8 @@ public class HelpOptionTests
     [InlineData("--confused")]
     public async Task HelpOption_with_custom_aliases_uses_aliases(string helpAlias)
     {
-        CliRootCommand command = new()
-        {
-            new HelpOption("/lost", "--confused")
-        };
-        CliConfiguration config = new(command)
-        {
-            Output = new StringWriter()
-        };
+        CliRootCommand command = new() { new HelpOption("/lost", "--confused") };
+        CliConfiguration config = new(command) { Output = new StringWriter() };
 
         await config.InvokeAsync(helpAlias);
 
@@ -171,16 +140,15 @@ public class HelpOptionTests
     [InlineData("--help")]
     [InlineData("-?")]
     [InlineData("/?")]
-    public async Task Help_option_with_custom_aliases_does_not_recognize_default_aliases(string helpAlias)
+    public async Task Help_option_with_custom_aliases_does_not_recognize_default_aliases(
+        string helpAlias
+    )
     {
         CliRootCommand command = new();
         command.Options.Clear();
         command.Options.Add(new HelpOption("--confused"));
 
-        CliConfiguration config = new(command)
-        {
-            Output = new StringWriter(),
-        };
+        CliConfiguration config = new(command) { Output = new StringWriter() };
 
         await config.InvokeAsync(helpAlias);
 

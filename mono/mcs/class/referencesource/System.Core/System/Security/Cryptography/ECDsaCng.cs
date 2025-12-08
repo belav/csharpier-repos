@@ -1,93 +1,108 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Security;
 using System.Security.Permissions;
-using System.Diagnostics.Contracts;
 using Microsoft.Win32.SafeHandles;
 
-namespace System.Security.Cryptography {
+namespace System.Security.Cryptography
+{
     /// <summary>
     ///     Wrapper for NCrypt's implementation of elliptic curve DSA
     /// </summary>
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public sealed partial class ECDsaCng : ECDsa {
+    public sealed partial class ECDsaCng : ECDsa
+    {
 #if MONO
-        public ECDsaCng() : this(521) {
-        }
+        public ECDsaCng()
+            : this(521) { }
 
-        public ECDsaCng(int keySize) {
-            throw new NotImplementedException ();
+        public ECDsaCng(int keySize)
+        {
+            throw new NotImplementedException();
         }
 
         [SecuritySafeCritical]
-        public ECDsaCng(CngKey key) {
-            throw new NotImplementedException ();
+        public ECDsaCng(CngKey key)
+        {
+            throw new NotImplementedException();
         }
 
-        public ECDsaCng(ECCurve curve) {
-            throw new NotImplementedException ();
+        public ECDsaCng(ECCurve curve)
+        {
+            throw new NotImplementedException();
         }
 
         public CngAlgorithm HashAlgorithm { get; set; }
 
-        public CngKey Key {
-            get {
-                throw new NotImplementedException ();
-            }
-
-            private set {
-                throw new NotImplementedException ();
-            }
+        public CngKey Key
+        {
+            get { throw new NotImplementedException(); }
+            private set { throw new NotImplementedException(); }
         }
 
-        public override byte[] SignHash(byte[] hash) {
+        public override byte[] SignHash(byte[] hash)
+        {
             throw new NotImplementedException();
         }
 
-        public override bool VerifyHash(byte[] hash, byte[] signature) {
+        public override bool VerifyHash(byte[] hash, byte[] signature)
+        {
             throw new NotImplementedException();
         }
 
-        public void FromXmlString (string xml, ECKeyXmlFormat format) {
+        public void FromXmlString(string xml, ECKeyXmlFormat format)
+        {
             throw new NotImplementedException();
         }
 
-        public byte[] SignData (byte[] data) {
+        public byte[] SignData(byte[] data)
+        {
             throw new NotImplementedException();
         }
 
-        public byte[] SignData (System.IO.Stream data) {
+        public byte[] SignData(System.IO.Stream data)
+        {
             throw new NotImplementedException();
         }
 
-        public byte[] SignData (byte[] data, int offset, int count) {
+        public byte[] SignData(byte[] data, int offset, int count)
+        {
             throw new NotImplementedException();
         }
 
-        public string ToXmlString (ECKeyXmlFormat format) {
+        public string ToXmlString(ECKeyXmlFormat format)
+        {
             throw new NotImplementedException();
         }
 
-        public bool VerifyData (byte[] data, byte[] signature) {
+        public bool VerifyData(byte[] data, byte[] signature)
+        {
             throw new NotImplementedException();
         }
 
-        public bool VerifyData (System.IO.Stream data, byte[] signature) {
+        public bool VerifyData(System.IO.Stream data, byte[] signature)
+        {
             throw new NotImplementedException();
         }
 
-        public bool VerifyData (byte[] data, int offset, int count, byte[] signature) {
+        public bool VerifyData(byte[] data, int offset, int count, byte[] signature)
+        {
             throw new NotImplementedException();
         }
 #else
-        private static KeySizes[] s_legalKeySizes = new KeySizes[] { new KeySizes(256, 384, 128), new KeySizes(521, 521, 0) };
+        private static KeySizes[] s_legalKeySizes = new KeySizes[]
+        {
+            new KeySizes(256, 384, 128),
+            new KeySizes(521, 521, 0),
+        };
 
         private CngKey m_key;
         private CngAlgorithm m_hashAlgorithm = CngAlgorithm.Sha256;
@@ -96,40 +111,56 @@ namespace System.Security.Cryptography {
         // Constructors
         //
 
-        public ECDsaCng() : this(521) {
+        public ECDsaCng()
+            : this(521)
+        {
             Contract.Ensures(LegalKeySizesValue != null);
         }
 
-        public ECDsaCng(int keySize) {
+        public ECDsaCng(int keySize)
+        {
             Contract.Ensures(LegalKeySizesValue != null);
 
-            if (!NCryptNative.NCryptSupported) {
-                throw new PlatformNotSupportedException(SR.GetString(SR.Cryptography_PlatformNotSupported));
+            if (!NCryptNative.NCryptSupported)
+            {
+                throw new PlatformNotSupportedException(
+                    SR.GetString(SR.Cryptography_PlatformNotSupported)
+                );
             }
 
             LegalKeySizesValue = s_legalKeySizes;
             KeySize = keySize;
         }
 
-        public ECDsaCng(ECCurve curve) {
+        public ECDsaCng(ECCurve curve)
+        {
             // GenerateKey will already do all of the validation we need.
             GenerateKey(curve);
         }
 
         [SecuritySafeCritical]
-        public ECDsaCng(CngKey key) {
+        public ECDsaCng(CngKey key)
+        {
             Contract.Ensures(LegalKeySizesValue != null);
             Contract.Ensures(m_key != null && IsEccAlgorithmGroup(m_key.AlgorithmGroup));
 
-            if (key == null) {
+            if (key == null)
+            {
                 throw new ArgumentNullException("key");
             }
-            if (!IsEccAlgorithmGroup(key.AlgorithmGroup)) {
-                throw new ArgumentException(SR.GetString(SR.Cryptography_ArgECDsaRequiresECDsaKey), "key");
+            if (!IsEccAlgorithmGroup(key.AlgorithmGroup))
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.Cryptography_ArgECDsaRequiresECDsaKey),
+                    "key"
+                );
             }
 
-            if (!NCryptNative.NCryptSupported) {
-                throw new PlatformNotSupportedException(SR.GetString(SR.Cryptography_PlatformNotSupported));
+            if (!NCryptNative.NCryptSupported)
+            {
+                throw new PlatformNotSupportedException(
+                    SR.GetString(SR.Cryptography_PlatformNotSupported)
+                );
             }
 
             LegalKeySizesValue = s_legalKeySizes;
@@ -143,8 +174,14 @@ namespace System.Security.Cryptography {
             //
             // We also need to dispose of the key handle since CngKey.Handle returns a duplicate
             new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Assert();
-            using (SafeNCryptKeyHandle keyHandle = key.Handle) {
-                Key = CngKey.Open(keyHandle, key.IsEphemeral ? CngKeyHandleOpenOptions.EphemeralKey : CngKeyHandleOpenOptions.None);
+            using (SafeNCryptKeyHandle keyHandle = key.Handle)
+            {
+                Key = CngKey.Open(
+                    keyHandle,
+                    key.IsEphemeral
+                        ? CngKeyHandleOpenOptions.EphemeralKey
+                        : CngKeyHandleOpenOptions.None
+                );
             }
             CodeAccessPermission.RevertAssert();
 
@@ -168,16 +205,19 @@ namespace System.Security.Cryptography {
         /// <summary>
         ///     Hash algorithm to use when generating a signature over arbitrary data
         /// </summary>
-        public CngAlgorithm HashAlgorithm {
-            get {
+        public CngAlgorithm HashAlgorithm
+        {
+            get
+            {
                 Contract.Ensures(Contract.Result<CngAlgorithm>() != null);
                 return m_hashAlgorithm;
             }
-
-            set {
+            set
+            {
                 Contract.Ensures(m_hashAlgorithm != null);
 
-                if (value == null) {
+                if (value == null)
+                {
                     throw new ArgumentNullException("value");
                 }
 
@@ -188,23 +228,28 @@ namespace System.Security.Cryptography {
         /// <summary>
         ///     Key to use for signing
         /// </summary>
-        public CngKey Key {
-            get {
+        public CngKey Key
+        {
+            get
+            {
                 Contract.Ensures(Contract.Result<CngKey>() != null);
                 Contract.Ensures(IsEccAlgorithmGroup(Contract.Result<CngKey>().AlgorithmGroup));
                 Contract.Ensures(m_key != null && IsEccAlgorithmGroup(m_key.AlgorithmGroup));
 
                 // If the size of the key no longer matches our stored value, then we need to replace it with
                 // a new key of the correct size.
-                if (m_key != null && m_key.KeySize != KeySize) {
+                if (m_key != null && m_key.KeySize != KeySize)
+                {
                     m_key.Dispose();
                     m_key = null;
                 }
 
-                if (m_key == null) {
+                if (m_key == null)
+                {
                     // Map the current key size to a CNG algorithm name
                     CngAlgorithm algorithm = null;
-                    switch (KeySize) {
+                    switch (KeySize)
+                    {
                         case 256:
                             algorithm = CngAlgorithm.ECDsaP256;
                             break;
@@ -227,16 +272,20 @@ namespace System.Security.Cryptography {
 
                 return m_key;
             }
-
-            private set {
+            private set
+            {
                 Contract.Requires(value != null);
                 Contract.Ensures(m_key != null && IsEccAlgorithmGroup(m_key.AlgorithmGroup));
 
-                if (!IsEccAlgorithmGroup(value.AlgorithmGroup)) {
-                    throw new ArgumentException(SR.GetString(SR.Cryptography_ArgECDsaRequiresECDsaKey));
+                if (!IsEccAlgorithmGroup(value.AlgorithmGroup))
+                {
+                    throw new ArgumentException(
+                        SR.GetString(SR.Cryptography_ArgECDsaRequiresECDsaKey)
+                    );
                 }
 
-                if (m_key != null) {
+                if (m_key != null)
+                {
                     m_key.Dispose();
                 }
 
@@ -269,13 +318,17 @@ namespace System.Security.Cryptography {
         /// <summary>
         ///     Clean up the algorithm
         /// </summary>
-        protected override void Dispose(bool disposing) {
-            try {
-                if (m_key != null) {
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (m_key != null)
+                {
                     m_key.Dispose();
                 }
             }
-            finally {
+            finally
+            {
                 base.Dispose(disposing);
             }
         }
@@ -293,15 +346,21 @@ namespace System.Security.Cryptography {
         // the currently supported format.
         //
 
-        public override void FromXmlString(string xmlString) {
-            throw new NotImplementedException(SR.GetString(SR.Cryptography_ECXmlSerializationFormatRequired));
+        public override void FromXmlString(string xmlString)
+        {
+            throw new NotImplementedException(
+                SR.GetString(SR.Cryptography_ECXmlSerializationFormatRequired)
+            );
         }
 
-        public void FromXmlString(string xml, ECKeyXmlFormat format) {
-            if (xml == null) {
+        public void FromXmlString(string xml, ECKeyXmlFormat format)
+        {
+            if (xml == null)
+            {
                 throw new ArgumentNullException("xml");
             }
-            if (format != ECKeyXmlFormat.Rfc4050) {
+            if (format != ECKeyXmlFormat.Rfc4050)
+            {
                 throw new ArgumentOutOfRangeException("format");
             }
 
@@ -318,10 +377,12 @@ namespace System.Security.Cryptography {
         // Signature generation
         //
 
-        public byte[] SignData(byte[] data) {
+        public byte[] SignData(byte[] data)
+        {
             Contract.Ensures(Contract.Result<byte[]>() != null);
 
-            if (data == null) {
+            if (data == null)
+            {
                 throw new ArgumentNullException("data");
             }
 
@@ -329,20 +390,30 @@ namespace System.Security.Cryptography {
         }
 
         [SecuritySafeCritical]
-        public byte[] SignData(byte[] data, int offset, int count) {
+        public byte[] SignData(byte[] data, int offset, int count)
+        {
             Contract.Ensures(Contract.Result<byte[]>() != null);
 
-            if (data == null) {
+            if (data == null)
+            {
                 throw new ArgumentNullException("data");
             }
-            if (offset < 0 || offset > data.Length) {
+            if (offset < 0 || offset > data.Length)
+            {
                 throw new ArgumentOutOfRangeException("offset");
             }
-            if (count < 0 || count > data.Length - offset) {
+            if (count < 0 || count > data.Length - offset)
+            {
                 throw new ArgumentOutOfRangeException("count");
             }
 
-            using (BCryptHashAlgorithm hashAlgorithm = new BCryptHashAlgorithm(HashAlgorithm, BCryptNative.ProviderName.MicrosoftPrimitiveProvider)) {
+            using (
+                BCryptHashAlgorithm hashAlgorithm = new BCryptHashAlgorithm(
+                    HashAlgorithm,
+                    BCryptNative.ProviderName.MicrosoftPrimitiveProvider
+                )
+            )
+            {
                 hashAlgorithm.HashCore(data, offset, count);
                 byte[] hashValue = hashAlgorithm.HashFinal();
 
@@ -351,14 +422,22 @@ namespace System.Security.Cryptography {
         }
 
         [SecuritySafeCritical]
-        public byte[] SignData(Stream data) {
+        public byte[] SignData(Stream data)
+        {
             Contract.Ensures(Contract.Result<byte[]>() != null);
 
-            if (data == null) {
+            if (data == null)
+            {
                 throw new ArgumentNullException("data");
             }
 
-            using (BCryptHashAlgorithm hashAlgorithm = new BCryptHashAlgorithm(HashAlgorithm, BCryptNative.ProviderName.MicrosoftPrimitiveProvider)) {
+            using (
+                BCryptHashAlgorithm hashAlgorithm = new BCryptHashAlgorithm(
+                    HashAlgorithm,
+                    BCryptNative.ProviderName.MicrosoftPrimitiveProvider
+                )
+            )
+            {
                 hashAlgorithm.HashStream(data);
                 byte[] hashValue = hashAlgorithm.HashFinal();
 
@@ -367,14 +446,19 @@ namespace System.Security.Cryptography {
         }
 
         [SecuritySafeCritical]
-        public override byte[] SignHash(byte[] hash) {
-            if (hash == null) {
+        public override byte[] SignHash(byte[] hash)
+        {
+            if (hash == null)
+            {
                 throw new ArgumentNullException("hash");
             }
 
             // Make sure we're allowed to sign using this key
-            KeyContainerPermission permission = Key.BuildKeyContainerPermission(KeyContainerPermissionFlags.Sign);
-            if (permission != null) {
+            KeyContainerPermission permission = Key.BuildKeyContainerPermission(
+                KeyContainerPermissionFlags.Sign
+            );
+            if (permission != null)
+            {
                 permission.Demand();
             }
 
@@ -383,7 +467,8 @@ namespace System.Security.Cryptography {
             new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Assert();
 
             // This looks odd, but the key handle is actually a duplicate so we need to dispose it
-            using (SafeNCryptKeyHandle keyHandle = Key.Handle) {
+            using (SafeNCryptKeyHandle keyHandle = Key.Handle)
+            {
                 CodeAccessPermission.RevertAssert();
 
                 return NCryptNative.SignHash(keyHandle, hash);
@@ -393,19 +478,24 @@ namespace System.Security.Cryptography {
         //
         // XML Export
         //
-        // See  code:System.Security.Cryptography.ECDsaCng#ECCXMLFormat and 
+        // See  code:System.Security.Cryptography.ECDsaCng#ECCXMLFormat and
         // code:System.Security.Cryptography.Rfc4050KeyFormatter#RFC4050ECKeyFormat for information about
         // XML serialization of elliptic curve keys
         //
 
-        public override string ToXmlString(bool includePrivateParameters) {
-            throw new NotImplementedException(SR.GetString(SR.Cryptography_ECXmlSerializationFormatRequired));
+        public override string ToXmlString(bool includePrivateParameters)
+        {
+            throw new NotImplementedException(
+                SR.GetString(SR.Cryptography_ECXmlSerializationFormatRequired)
+            );
         }
 
-        public string ToXmlString(ECKeyXmlFormat format) {
+        public string ToXmlString(ECKeyXmlFormat format)
+        {
             Contract.Ensures(Contract.Result<string>() != null);
 
-            if (format != ECKeyXmlFormat.Rfc4050) {
+            if (format != ECKeyXmlFormat.Rfc4050)
+            {
                 throw new ArgumentOutOfRangeException("format");
             }
 
@@ -417,8 +507,10 @@ namespace System.Security.Cryptography {
         // Signature verification
         //
 
-        public bool VerifyData(byte[] data, byte[] signature) {
-            if (data == null) {
+        public bool VerifyData(byte[] data, byte[] signature)
+        {
+            if (data == null)
+            {
                 throw new ArgumentNullException("data");
             }
 
@@ -426,21 +518,32 @@ namespace System.Security.Cryptography {
         }
 
         [SecuritySafeCritical]
-        public bool VerifyData(byte[] data, int offset, int count, byte[] signature) {
-            if (data == null) {
+        public bool VerifyData(byte[] data, int offset, int count, byte[] signature)
+        {
+            if (data == null)
+            {
                 throw new ArgumentNullException("data");
             }
-            if (offset < 0 || offset > data.Length) {
+            if (offset < 0 || offset > data.Length)
+            {
                 throw new ArgumentOutOfRangeException("offset");
             }
-            if (count < 0 || count > data.Length - offset) {
+            if (count < 0 || count > data.Length - offset)
+            {
                 throw new ArgumentOutOfRangeException("count");
             }
-            if (signature == null) {
+            if (signature == null)
+            {
                 throw new ArgumentNullException("signature");
             }
 
-            using (BCryptHashAlgorithm hashAlgorithm = new BCryptHashAlgorithm(HashAlgorithm, BCryptNative.ProviderName.MicrosoftPrimitiveProvider)) {
+            using (
+                BCryptHashAlgorithm hashAlgorithm = new BCryptHashAlgorithm(
+                    HashAlgorithm,
+                    BCryptNative.ProviderName.MicrosoftPrimitiveProvider
+                )
+            )
+            {
                 hashAlgorithm.HashCore(data, offset, count);
                 byte[] hashValue = hashAlgorithm.HashFinal();
 
@@ -449,15 +552,24 @@ namespace System.Security.Cryptography {
         }
 
         [SecuritySafeCritical]
-        public bool VerifyData(Stream data, byte[] signature) {
-            if (data == null) {
+        public bool VerifyData(Stream data, byte[] signature)
+        {
+            if (data == null)
+            {
                 throw new ArgumentNullException("data");
             }
-            if (signature == null) {
+            if (signature == null)
+            {
                 throw new ArgumentNullException("signature");
             }
 
-            using (BCryptHashAlgorithm hashAlgorithm = new BCryptHashAlgorithm(HashAlgorithm, BCryptNative.ProviderName.MicrosoftPrimitiveProvider)) {
+            using (
+                BCryptHashAlgorithm hashAlgorithm = new BCryptHashAlgorithm(
+                    HashAlgorithm,
+                    BCryptNative.ProviderName.MicrosoftPrimitiveProvider
+                )
+            )
+            {
                 hashAlgorithm.HashStream(data);
                 byte[] hashValue = hashAlgorithm.HashFinal();
 
@@ -466,11 +578,14 @@ namespace System.Security.Cryptography {
         }
 
         [SecuritySafeCritical]
-        public override bool VerifyHash(byte[] hash, byte[] signature) {
-            if (hash == null) {
+        public override bool VerifyHash(byte[] hash, byte[] signature)
+        {
+            if (hash == null)
+            {
                 throw new ArgumentNullException("hash");
             }
-            if (signature == null) {
+            if (signature == null)
+            {
                 throw new ArgumentNullException("signature");
             }
 
@@ -479,17 +594,20 @@ namespace System.Security.Cryptography {
             new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Assert();
 
             // This looks odd, but Key.Handle is really a duplicate so we need to dispose it
-            using (SafeNCryptKeyHandle keyHandle = Key.Handle) {
+            using (SafeNCryptKeyHandle keyHandle = Key.Handle)
+            {
                 CodeAccessPermission.RevertAssert();
 
                 return NCryptNative.VerifySignature(keyHandle, hash, signature);
             }
         }
 
-        public override void GenerateKey(ECCurve curve) {
+        public override void GenerateKey(ECCurve curve)
+        {
             curve.Validate();
 
-            if (m_key != null) {
+            if (m_key != null)
+            {
                 m_key.Dispose();
                 m_key = null;
             }
@@ -502,30 +620,50 @@ namespace System.Security.Cryptography {
         /// <summary>
         ///     Helper property to get the NCrypt key handle
         /// </summary>
-        private SafeNCryptKeyHandle KeyHandle {
+        private SafeNCryptKeyHandle KeyHandle
+        {
             [SecuritySafeCritical]
             get { return Key.Handle; }
         }
 
-        protected override byte[] HashData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm) {
+        protected override byte[] HashData(
+            byte[] data,
+            int offset,
+            int count,
+            HashAlgorithmName hashAlgorithm
+        )
+        {
             // we're sealed and the base should have checked this before calling us
             Debug.Assert(data != null);
             Debug.Assert(offset >= 0 && offset <= data.Length);
             Debug.Assert(count >= 0 && count <= data.Length - offset);
             Debug.Assert(!String.IsNullOrEmpty(hashAlgorithm.Name));
 
-            using (BCryptHashAlgorithm hasher = new BCryptHashAlgorithm(new CngAlgorithm(hashAlgorithm.Name), BCryptNative.ProviderName.MicrosoftPrimitiveProvider)) {
+            using (
+                BCryptHashAlgorithm hasher = new BCryptHashAlgorithm(
+                    new CngAlgorithm(hashAlgorithm.Name),
+                    BCryptNative.ProviderName.MicrosoftPrimitiveProvider
+                )
+            )
+            {
                 hasher.HashCore(data, offset, count);
                 return hasher.HashFinal();
             }
         }
 
-        protected override byte[] HashData(Stream data, HashAlgorithmName hashAlgorithm) {
+        protected override byte[] HashData(Stream data, HashAlgorithmName hashAlgorithm)
+        {
             // we're sealed and the base should have checked this before calling us
             Debug.Assert(data != null);
             Debug.Assert(!String.IsNullOrEmpty(hashAlgorithm.Name));
 
-            using (BCryptHashAlgorithm hasher = new BCryptHashAlgorithm(new CngAlgorithm(hashAlgorithm.Name), BCryptNative.ProviderName.MicrosoftPrimitiveProvider)) {
+            using (
+                BCryptHashAlgorithm hasher = new BCryptHashAlgorithm(
+                    new CngAlgorithm(hashAlgorithm.Name),
+                    BCryptNative.ProviderName.MicrosoftPrimitiveProvider
+                )
+            )
+            {
                 hasher.HashStream(data);
                 return hasher.HashFinal();
             }
@@ -538,7 +676,8 @@ namespace System.Security.Cryptography {
             // so either value is acceptable for the ECDSA wrapper object.
             //
             // It is worth noting, however, that ECDSA-identified keys cannot be used for key exchange (ECDH) in CNG.
-            return algorithmGroup == CngAlgorithmGroup.ECDsa || algorithmGroup == CngAlgorithmGroup.ECDiffieHellman;
+            return algorithmGroup == CngAlgorithmGroup.ECDsa
+                || algorithmGroup == CngAlgorithmGroup.ECDiffieHellman;
         }
 #endif
     }

@@ -20,6 +20,7 @@ namespace System.Linq
         internal static string NoMethodOnTypeMatchingArguments(string name, object type) =>
             SR.Format(SR.NoMethodOnTypeMatchingArguments, name, type);
 
-        internal static string EnumeratingNullEnumerableExpression() => SR.EnumeratingNullEnumerableExpression;
+        internal static string EnumeratingNullEnumerableExpression() =>
+            SR.EnumeratingNullEnumerableExpression;
     }
 }

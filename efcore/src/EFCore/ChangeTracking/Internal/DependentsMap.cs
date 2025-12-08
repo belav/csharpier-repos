@@ -28,12 +28,15 @@ public class DependentsMap<TKey> : IDependentsMap
     public DependentsMap(
         IForeignKey foreignKey,
         IPrincipalKeyValueFactory<TKey> principalKeyValueFactory,
-        IDependentKeyValueFactory<TKey> dependentKeyValueFactory)
+        IDependentKeyValueFactory<TKey> dependentKeyValueFactory
+    )
     {
         _foreignKey = foreignKey;
         _principalKeyValueFactory = principalKeyValueFactory;
         _dependentKeyValueFactory = dependentKeyValueFactory;
-        _map = new Dictionary<TKey, HashSet<IUpdateEntry>>(principalKeyValueFactory.EqualityComparer);
+        _map = new Dictionary<TKey, HashSet<IUpdateEntry>>(
+            principalKeyValueFactory.EqualityComparer
+        );
     }
 
     /// <summary>
@@ -44,8 +47,10 @@ public class DependentsMap<TKey> : IDependentsMap
     /// </summary>
     public virtual void Add(IUpdateEntry entry)
     {
-        if (_foreignKey.DeclaringEntityType.IsAssignableFrom(entry.EntityType)
-            && TryCreateFromCurrentValues(entry, out var key))
+        if (
+            _foreignKey.DeclaringEntityType.IsAssignableFrom(entry.EntityType)
+            && TryCreateFromCurrentValues(entry, out var key)
+        )
         {
             if (!_map.TryGetValue(key, out var dependents))
             {
@@ -65,8 +70,10 @@ public class DependentsMap<TKey> : IDependentsMap
     /// </summary>
     public virtual void Remove(IUpdateEntry entry)
     {
-        if (_foreignKey.DeclaringEntityType.IsAssignableFrom(entry.EntityType)
-            && TryCreateFromCurrentValues(entry, out var key))
+        if (
+            _foreignKey.DeclaringEntityType.IsAssignableFrom(entry.EntityType)
+            && TryCreateFromCurrentValues(entry, out var key)
+        )
         {
             if (_map.TryGetValue(key, out var dependents))
             {
@@ -85,8 +92,10 @@ public class DependentsMap<TKey> : IDependentsMap
     {
         if (_foreignKey.DeclaringEntityType.IsAssignableFrom(entry.EntityType))
         {
-            if (_dependentKeyValueFactory.TryCreateFromRelationshipSnapshot(entry, out var key)
-                && _map.TryGetValue(key, out var dependents))
+            if (
+                _dependentKeyValueFactory.TryCreateFromRelationshipSnapshot(entry, out var key)
+                && _map.TryGetValue(key, out var dependents)
+            )
             {
                 dependents.Remove(entry);
             }
@@ -125,8 +134,11 @@ public class DependentsMap<TKey> : IDependentsMap
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<IUpdateEntry> GetDependents(IUpdateEntry principalEntry)
-        => _map.TryGetValue(_principalKeyValueFactory.CreateFromCurrentValues(principalEntry)!, out var dependents)
+    public virtual IEnumerable<IUpdateEntry> GetDependents(IUpdateEntry principalEntry) =>
+        _map.TryGetValue(
+            _principalKeyValueFactory.CreateFromCurrentValues(principalEntry)!,
+            out var dependents
+        )
             ? dependents
             : Enumerable.Empty<IUpdateEntry>();
 
@@ -136,8 +148,11 @@ public class DependentsMap<TKey> : IDependentsMap
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<IUpdateEntry> GetDependents(IReadOnlyList<object?> keyValues)
-        => _map.TryGetValue((TKey)_principalKeyValueFactory.CreateFromKeyValues(keyValues)!, out var dependents)
+    public virtual IEnumerable<IUpdateEntry> GetDependents(IReadOnlyList<object?> keyValues) =>
+        _map.TryGetValue(
+            (TKey)_principalKeyValueFactory.CreateFromKeyValues(keyValues)!,
+            out var dependents
+        )
             ? dependents
             : Enumerable.Empty<IUpdateEntry>();
 
@@ -147,8 +162,13 @@ public class DependentsMap<TKey> : IDependentsMap
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<IUpdateEntry> GetDependentsUsingRelationshipSnapshot(IUpdateEntry principalEntry)
-        => _map.TryGetValue(_principalKeyValueFactory.CreateFromRelationshipSnapshot(principalEntry), out var dependents)
+    public virtual IEnumerable<IUpdateEntry> GetDependentsUsingRelationshipSnapshot(
+        IUpdateEntry principalEntry
+    ) =>
+        _map.TryGetValue(
+            _principalKeyValueFactory.CreateFromRelationshipSnapshot(principalEntry),
+            out var dependents
+        )
             ? dependents
             : Enumerable.Empty<IUpdateEntry>();
 }

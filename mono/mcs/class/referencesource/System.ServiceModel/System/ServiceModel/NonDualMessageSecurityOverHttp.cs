@@ -19,14 +19,8 @@ namespace System.ServiceModel
 
         public bool EstablishSecurityContext
         {
-            get
-            {
-                return this.establishSecurityContext;
-            }
-            set
-            {
-                this.establishSecurityContext = value;
-            }
+            get { return this.establishSecurityContext; }
+            set { this.establishSecurityContext = value; }
         }
 
         protected override bool IsSecureConversationEnabled()

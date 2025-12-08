@@ -1,11 +1,11 @@
-
 /* foo */
 #define FOO
 
-/* bar */ // bar again
+/* bar */
+// bar again
 #define BAR
 
 public class C
 {
-    public static void Main () {}
+    public static void Main() { }
 }

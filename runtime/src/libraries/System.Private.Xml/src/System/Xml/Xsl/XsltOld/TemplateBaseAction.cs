@@ -15,8 +15,8 @@ namespace System.Xml.Xsl.XsltOld
 
     internal abstract class TemplateBaseAction : ContainerAction
     {
-        protected int variableCount;      // space to allocate on frame for variables
-        private int _variableFreeSlot;   // compile time counter responsiable for variable placement logic
+        protected int variableCount; // space to allocate on frame for variables
+        private int _variableFreeSlot; // compile time counter responsiable for variable placement logic
 
         public int AllocateVariableSlot()
         {

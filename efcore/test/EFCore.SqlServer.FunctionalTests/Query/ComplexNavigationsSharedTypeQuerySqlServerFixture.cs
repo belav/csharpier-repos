@@ -3,8 +3,8 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class ComplexNavigationsSharedTypeQuerySqlServerFixture : ComplexNavigationsSharedTypeQueryRelationalFixtureBase
+public class ComplexNavigationsSharedTypeQuerySqlServerFixture
+    : ComplexNavigationsSharedTypeQueryRelationalFixtureBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 }

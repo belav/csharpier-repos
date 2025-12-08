@@ -8,7 +8,7 @@ namespace Microsoft.CodeAnalysis.Navigation
     /// Navigation options.
     /// </summary>
     /// <param name="PreferProvisionalTab">
-    /// This option can be passed to the <see cref="IDocumentNavigationService"/> APIs to request that a provisional (or preview) tab 
+    /// This option can be passed to the <see cref="IDocumentNavigationService"/> APIs to request that a provisional (or preview) tab
     /// be used for any document that needs to be opened, if one is available.
     /// </param>
     /// <param name="ActivateTab">
@@ -17,12 +17,11 @@ namespace Microsoft.CodeAnalysis.Navigation
     /// </param>
     internal readonly record struct NavigationOptions(
         bool PreferProvisionalTab = false,
-        bool ActivateTab = true)
+        bool ActivateTab = true
+    )
     {
         public NavigationOptions()
-            : this(PreferProvisionalTab: false)
-        {
-        }
+            : this(PreferProvisionalTab: false) { }
 
         public static readonly NavigationOptions Default = new();
     }

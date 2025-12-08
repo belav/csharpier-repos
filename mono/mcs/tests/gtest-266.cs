@@ -1,14 +1,19 @@
 class Test<T>
 {
-        int priv;
-        private sealed class Inner<U>
+    int priv;
+
+    private sealed class Inner<U>
+    {
+        Test<U> test;
+
+        void Foo()
         {
-                Test<U> test;
-                void Foo ()
-                {
-                        test.priv = 0;
-                }
+            test.priv = 0;
         }
+    }
 }
 
-class Test { public static void Main () { } }
+class Test
+{
+    public static void Main() { }
+}

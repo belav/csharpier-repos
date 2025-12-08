@@ -38,7 +38,6 @@ namespace System.Security.AccessControl
         SystemAcl = 0x00000008,
     }
 
-
     public enum ResourceType
     {
         Unknown = 0x00,
@@ -64,7 +63,7 @@ namespace System.Security.AccessControl
         Access = 0x2,
         Owner = 0x4,
         Group = 0x8,
-        All = 0xF
+        All = 0xF,
     }
 
     [Flags]
@@ -72,6 +71,6 @@ namespace System.Security.AccessControl
     {
         None = 0,
         View = 1,
-        Change = 2
+        Change = 2,
     }
 }

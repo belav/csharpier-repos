@@ -11,12 +11,13 @@ namespace System.Linq.Tests
         [Fact]
         public void SelectProperty()
         {
-            var source = new []{
-                new { name="Prakash", custID=98088 },
-                new { name="Bob", custID=29099 },
-                new { name="Chris", custID=39033 },
-                new { name=(string)null, custID=30349 },
-                new { name="Prakash", custID=39030 }
+            var source = new[]
+            {
+                new { name = "Prakash", custID = 98088 },
+                new { name = "Bob", custID = 29099 },
+                new { name = "Chris", custID = 39033 },
+                new { name = (string)null, custID = 30349 },
+                new { name = "Prakash", custID = 39030 },
             };
             string[] expected = { "Prakash", "Bob", "Chris", null, "Prakash" };
             Assert.Equal(expected, source.AsQueryable().Select(e => e.name));
@@ -25,10 +26,11 @@ namespace System.Linq.Tests
         [Fact]
         public void SelectPropertyUsingIndex()
         {
-            var source = new[]{
-                new { name="Prakash", custID=98088 },
-                new { name="Bob", custID=29099 },
-                new { name="Chris", custID=39033 }
+            var source = new[]
+            {
+                new { name = "Prakash", custID = 98088 },
+                new { name = "Bob", custID = 29099 },
+                new { name = "Chris", custID = 39033 },
             };
             string[] expected = { "Prakash", null, null };
             Assert.Equal(expected, source.AsQueryable().Select((e, i) => i == 0 ? e.name : null));
@@ -38,7 +40,10 @@ namespace System.Linq.Tests
         public void Select_SourceIsNull_ArgumentNullExceptionThrown()
         {
             IQueryable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.Select(i => i + 1));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.Select(i => i + 1)
+            );
         }
 
         [Fact]
@@ -47,14 +52,20 @@ namespace System.Linq.Tests
             IQueryable<int> source = Enumerable.Range(1, 10).AsQueryable();
             Expression<Func<int, int, int>> selector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => source.Select(selector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => source.Select(selector)
+            );
         }
 
         [Fact]
         public void Select_SourceIsNull_ArgumentNullExceptionThrown_Indexed()
         {
             IQueryable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.Select((e, i) => i + 1));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.Select((e, i) => i + 1)
+            );
         }
 
         [Fact]
@@ -63,20 +74,29 @@ namespace System.Linq.Tests
             IQueryable<int> source = Enumerable.Range(1, 10).AsQueryable();
             Expression<Func<int, int>> selector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => source.Select(selector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => source.Select(selector)
+            );
         }
 
         [Fact]
         public void Select1()
         {
-            var count = new object[] { 0, 1, 2 }.AsQueryable().Select(o => (int)o).Count();
+            var count = new object[] { 0, 1, 2 }
+                .AsQueryable()
+                .Select(o => (int)o)
+                .Count();
             Assert.Equal(3, count);
         }
 
         [Fact]
         public void Select2()
         {
-            var count = new object[] { 0, 1, 2 }.AsQueryable().Select((o, i) => (int)o + i).Count();
+            var count = new object[] { 0, 1, 2 }
+                .AsQueryable()
+                .Select((o, i) => (int)o + i)
+                .Count();
             Assert.Equal(3, count);
         }
     }

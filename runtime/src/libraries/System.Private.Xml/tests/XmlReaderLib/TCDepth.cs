@@ -13,37 +13,64 @@ namespace System.Xml.Tests
         {
             // for function TestDepth1
             {
-                this.AddChild(new CVariation(TestDepth1) { Attribute = new Variation("XmlReader Depth at the Root") { Pri = 0 } });
+                this.AddChild(
+                    new CVariation(TestDepth1)
+                    {
+                        Attribute = new Variation("XmlReader Depth at the Root") { Pri = 0 },
+                    }
+                );
             }
-
 
             // for function TestDepth2
             {
-                this.AddChild(new CVariation(TestDepth2) { Attribute = new Variation("XmlReader Depth at Empty Tag") });
+                this.AddChild(
+                    new CVariation(TestDepth2)
+                    {
+                        Attribute = new Variation("XmlReader Depth at Empty Tag"),
+                    }
+                );
             }
-
 
             // for function TestDepth3
             {
-                this.AddChild(new CVariation(TestDepth3) { Attribute = new Variation("XmlReader Depth at Empty Tag with Attributes") });
+                this.AddChild(
+                    new CVariation(TestDepth3)
+                    {
+                        Attribute = new Variation("XmlReader Depth at Empty Tag with Attributes"),
+                    }
+                );
             }
-
 
             // for function TestDepth4
             {
-                this.AddChild(new CVariation(TestDepth4) { Attribute = new Variation("XmlReader Depth at Non Empty Tag with Text") });
+                this.AddChild(
+                    new CVariation(TestDepth4)
+                    {
+                        Attribute = new Variation("XmlReader Depth at Non Empty Tag with Text"),
+                    }
+                );
             }
-
 
             // for function TestDepth5
             {
-                this.AddChild(new CVariation(TestDepth5) { Attribute = new Variation("Depth on node from expanded entity") });
+                this.AddChild(
+                    new CVariation(TestDepth5)
+                    {
+                        Attribute = new Variation("Depth on node from expanded entity"),
+                    }
+                );
             }
-
 
             // for function TestDepth6
             {
-                this.AddChild(new CVariation(TestDepth6) { Attribute = new Variation("Depth on node from expanded entity EntityHandling = ExpandEntities") });
+                this.AddChild(
+                    new CVariation(TestDepth6)
+                    {
+                        Attribute = new Variation(
+                            "Depth on node from expanded entity EntityHandling = ExpandEntities"
+                        ),
+                    }
+                );
             }
         }
     }

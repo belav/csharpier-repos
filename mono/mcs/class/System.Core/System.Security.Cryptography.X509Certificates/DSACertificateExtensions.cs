@@ -28,37 +28,40 @@
 
 namespace System.Security.Cryptography.X509Certificates
 {
-	public static class DSACertificateExtensions
-	{
-		/// <summary>
-		/// Gets the <see cref="DSA" /> public key from the certificate or null if the certificate does not have a DSA public key.
-		/// </summary>
-		public static DSA GetDSAPublicKey(this X509Certificate2 certificate)
-		{
-			if (certificate == null)
-				throw new ArgumentNullException("certificate");
-			return certificate.PrivateKey as DSA;
-		}
+    public static class DSACertificateExtensions
+    {
+        /// <summary>
+        /// Gets the <see cref="DSA" /> public key from the certificate or null if the certificate does not have a DSA public key.
+        /// </summary>
+        public static DSA GetDSAPublicKey(this X509Certificate2 certificate)
+        {
+            if (certificate == null)
+                throw new ArgumentNullException("certificate");
+            return certificate.PrivateKey as DSA;
+        }
 
-		/// <summary>
-		/// Gets the <see cref="DSA" /> private key from the certificate or null if the certificate does not have a DSA private key.
-		/// </summary>
-		public static DSA GetDSAPrivateKey(this X509Certificate2 certificate)
-		{
-			if (certificate == null)
-				throw new ArgumentNullException("certificate");
-			return certificate.PublicKey.Key as DSA;
-		}
+        /// <summary>
+        /// Gets the <see cref="DSA" /> private key from the certificate or null if the certificate does not have a DSA private key.
+        /// </summary>
+        public static DSA GetDSAPrivateKey(this X509Certificate2 certificate)
+        {
+            if (certificate == null)
+                throw new ArgumentNullException("certificate");
+            return certificate.PublicKey.Key as DSA;
+        }
 
-		[MonoTODO]
-		public static X509Certificate2 CopyWithPrivateKey(this X509Certificate2 certificate, DSA privateKey)
-		{
-			if (certificate == null)
-				throw new ArgumentNullException(nameof(certificate));
-			if (privateKey == null)
-				throw new ArgumentNullException(nameof(privateKey));
+        [MonoTODO]
+        public static X509Certificate2 CopyWithPrivateKey(
+            this X509Certificate2 certificate,
+            DSA privateKey
+        )
+        {
+            if (certificate == null)
+                throw new ArgumentNullException(nameof(certificate));
+            if (privateKey == null)
+                throw new ArgumentNullException(nameof(privateKey));
 
-			throw new NotImplementedException ();
-		}
-	}
+            throw new NotImplementedException();
+        }
+    }
 }

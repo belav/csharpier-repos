@@ -10,38 +10,72 @@ namespace System.Data.Tests
         [Fact]
         public void AsEnumerable_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => TypedTableBaseExtensions.AsEnumerable<DataRow>(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => TypedTableBaseExtensions.AsEnumerable<DataRow>(null)
+            );
         }
 
         [Fact]
         public void OrderBy_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => TypedTableBaseExtensions.OrderBy<DataRow, string>(null, row => "abc"));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => TypedTableBaseExtensions.OrderBy<DataRow, string>(null, row => "abc", StringComparer.CurrentCulture));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => TypedTableBaseExtensions.OrderBy<DataRow, string>(null, row => "abc")
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () =>
+                    TypedTableBaseExtensions.OrderBy<DataRow, string>(
+                        null,
+                        row => "abc",
+                        StringComparer.CurrentCulture
+                    )
+            );
         }
 
         [Fact]
         public void OrderByDescending_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => TypedTableBaseExtensions.OrderByDescending<DataRow, string>(null, row => "abc"));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => TypedTableBaseExtensions.OrderByDescending<DataRow, string>(null, row => "abc", StringComparer.CurrentCulture));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () =>
+                    TypedTableBaseExtensions.OrderByDescending<DataRow, string>(null, row => "abc")
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () =>
+                    TypedTableBaseExtensions.OrderByDescending<DataRow, string>(
+                        null,
+                        row => "abc",
+                        StringComparer.CurrentCulture
+                    )
+            );
         }
 
         [Fact]
         public void Select_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => TypedTableBaseExtensions.Select<DataRow, string>(null, row => "abc"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => TypedTableBaseExtensions.Select<DataRow, string>(null, row => "abc")
+            );
         }
 
         [Fact]
         public void Where_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => TypedTableBaseExtensions.Where<DataRow>(null, row => true));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => TypedTableBaseExtensions.Where<DataRow>(null, row => true)
+            );
         }
 
-        public class TestTypedTable<T> : TypedTableBase<T> where T : DataRow
+        public class TestTypedTable<T> : TypedTableBase<T>
+            where T : DataRow
         {
-            public TestTypedTable() : base() { }
+            public TestTypedTable()
+                : base() { }
         }
 
         [Fact]

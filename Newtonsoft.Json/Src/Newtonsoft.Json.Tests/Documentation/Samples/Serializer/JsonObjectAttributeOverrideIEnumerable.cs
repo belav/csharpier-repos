@@ -24,9 +24,9 @@
 #endregion
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using System.Collections;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -72,11 +72,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             Directory directory = new Directory
             {
                 Name = "My Documents",
-                Files =
-                {
-                    "ImportantLegalDocuments.docx",
-                    "WiseFinancalAdvice.xlsx"
-                }
+                Files = { "ImportantLegalDocuments.docx", "WiseFinancalAdvice.xlsx" },
             };
 
             string json = JsonConvert.SerializeObject(directory, Formatting.Indented);
@@ -91,13 +87,16 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""My Documents"",
   ""Files"": [
     ""ImportantLegalDocuments.docx"",
     ""WiseFinancalAdvice.xlsx""
   ]
-}", json);
+}",
+                json
+            );
         }
     }
 }

@@ -7,44 +7,48 @@
 namespace System.Web.Configuration
 {
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.IO;
-    using System.Text;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Xml;
 
     public sealed class FullTrustAssembliesSection : ConfigurationSection
     {
         private static ConfigurationPropertyCollection _properties;
 
         private static readonly ConfigurationProperty _propFullTrustAssemblies =
-            new ConfigurationProperty(null, typeof(FullTrustAssemblyCollection), null, ConfigurationPropertyOptions.IsDefaultCollection);
+            new ConfigurationProperty(
+                null,
+                typeof(FullTrustAssemblyCollection),
+                null,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
 
-        static FullTrustAssembliesSection() {
+        static FullTrustAssembliesSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propFullTrustAssemblies);
         }
 
-        public FullTrustAssembliesSection() {
+        public FullTrustAssembliesSection() { }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        [ConfigurationProperty("", IsDefaultCollection = true)]
+        public FullTrustAssemblyCollection FullTrustAssemblies
+        {
+            get { return GetFullTrustAssembliesCollection(); }
         }
 
-        [ConfigurationProperty("", IsDefaultCollection=true)]
-        public FullTrustAssemblyCollection FullTrustAssemblies {
-            get {
-                return GetFullTrustAssembliesCollection();
-            }
-        }
-
-        private FullTrustAssemblyCollection GetFullTrustAssembliesCollection() {
+        private FullTrustAssemblyCollection GetFullTrustAssembliesCollection()
+        {
             return (FullTrustAssemblyCollection)base[_propFullTrustAssemblies];
         }
     }

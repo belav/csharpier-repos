@@ -46,11 +46,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         }
 
         public MutableNamingStyle()
-            : this(new NamingStyle(Guid.NewGuid()))
-        {
-        }
+            : this(new NamingStyle(Guid.NewGuid())) { }
 
-        internal MutableNamingStyle Clone()
-            => new(NamingStyle);
+        internal MutableNamingStyle Clone() => new(NamingStyle);
     }
 }

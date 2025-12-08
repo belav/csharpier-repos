@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -16,6 +17,7 @@ namespace Test
             (new AA[137])[101].Method1();
             throw new DivideByZeroException();
         }
+
         [Fact]
         public static int TestEntryPoint()
         {

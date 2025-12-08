@@ -7,34 +7,32 @@
 using System;
 using Xunit;
 
-public interface I1 
+public interface I1
 {
-	void meth1<T>(T x) where T : Class1;	
-
+    void meth1<T>(T x)
+        where T : Class1;
 }
 
 public class Class1 : I1
 {
-	void I1.meth1<T>(T x)	
-	{}
+    void I1.meth1<T>(T x) { }
 }
 
 public class Test_vsw536564
 {
-	[Fact]
-	public static int TestEntryPoint()
-	{
-		try
-		{
-			Class1 obj = new Class1();		
-			Console.WriteLine("PASS");
-			return 100;
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine("FAIL: Caught unexpected exception: " + e);
-			return 101;
-		}
-		
-	}
+    [Fact]
+    public static int TestEntryPoint()
+    {
+        try
+        {
+            Class1 obj = new Class1();
+            Console.WriteLine("PASS");
+            return 100;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("FAIL: Caught unexpected exception: " + e);
+            return 101;
+        }
+    }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,56 +28,58 @@
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
 
-
 using System;
-using System.Web.UI;
 using System.ComponentModel;
+using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	public sealed class MenuItemTemplateContainer: Control, IDataItemContainer, INamingContainer
-	{
-		object dataItem;
-		int index;
-		
-		public MenuItemTemplateContainer (int itemIndex, MenuItem dataItem)
-		{
-			this.index = itemIndex;
-			this.dataItem = dataItem;
-		}
-		
-		protected override bool OnBubbleEvent (object source, EventArgs e)
-		{
-			CommandEventArgs command = e as CommandEventArgs;
-			if (command == null)
-				return false;
+    public sealed class MenuItemTemplateContainer : Control, IDataItemContainer, INamingContainer
+    {
+        object dataItem;
+        int index;
 
-			MenuEventArgs menuArgs = new MenuEventArgs ((MenuItem) DataItem, source, command);
-			RaiseBubbleEvent (this, menuArgs);
-			return true;
-		}
-		
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			base.Render (writer);
-		}
-		
-		public object DataItem {
-			get { return dataItem; }
-			set { dataItem = value; }
-		}
-		
-		public int ItemIndex {
-			get { return index; }
-		}
-		
-		int IDataItemContainer.DataItemIndex {
-			get { return index; }
-		}
+        public MenuItemTemplateContainer(int itemIndex, MenuItem dataItem)
+        {
+            this.index = itemIndex;
+            this.dataItem = dataItem;
+        }
 
-		int IDataItemContainer.DisplayIndex {
-			get { return index; }
-		}
-	}
+        protected override bool OnBubbleEvent(object source, EventArgs e)
+        {
+            CommandEventArgs command = e as CommandEventArgs;
+            if (command == null)
+                return false;
+
+            MenuEventArgs menuArgs = new MenuEventArgs((MenuItem)DataItem, source, command);
+            RaiseBubbleEvent(this, menuArgs);
+            return true;
+        }
+
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            base.Render(writer);
+        }
+
+        public object DataItem
+        {
+            get { return dataItem; }
+            set { dataItem = value; }
+        }
+
+        public int ItemIndex
+        {
+            get { return index; }
+        }
+
+        int IDataItemContainer.DataItemIndex
+        {
+            get { return index; }
+        }
+
+        int IDataItemContainer.DisplayIndex
+        {
+            get { return index; }
+        }
+    }
 }
-

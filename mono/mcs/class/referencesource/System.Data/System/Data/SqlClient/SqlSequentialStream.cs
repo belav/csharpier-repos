@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace System.Data.SqlClient
 {
-    sealed internal class SqlSequentialStream : System.IO.Stream
+    internal sealed class SqlSequentialStream : System.IO.Stream
     {
-        private SqlDataReader _reader;  // The SqlDataReader that we are reading data from
-        private int _columnIndex;       // The index of out column in the table
-        private Task _currentTask;      // Holds the current task being processed
-        private int _readTimeout;       // Read timeout for this stream in ms (for Stream.ReadTimeout)
-        private CancellationTokenSource _disposalTokenSource;    // Used to indicate that a cancellation is requested due to disposal
+        private SqlDataReader _reader; // The SqlDataReader that we are reading data from
+        private int _columnIndex; // The index of out column in the table
+        private Task _currentTask; // Holds the current task being processed
+        private int _readTimeout; // Read timeout for this stream in ms (for Stream.ReadTimeout)
+        private CancellationTokenSource _disposalTokenSource; // Used to indicate that a cancellation is requested due to disposal
 
         internal SqlSequentialStream(SqlDataReader reader, int columnIndex)
         {
@@ -27,7 +27,8 @@ namespace System.Data.SqlClient
             // Safely safely convert the CommandTimeout from seconds to milliseconds
             if ((reader.Command != null) && (reader.Command.CommandTimeout != 0))
             {
-                _readTimeout = (int)Math.Min((long)reader.Command.CommandTimeout * 1000L, (long)Int32.MaxValue);
+                _readTimeout = (int)
+                    Math.Min((long)reader.Command.CommandTimeout * 1000L, (long)Int32.MaxValue);
             }
             else
             {
@@ -55,8 +56,7 @@ namespace System.Data.SqlClient
             get { return false; }
         }
 
-        public override void Flush()
-        { }
+        public override void Flush() { }
 
         public override long Length
         {
@@ -72,8 +72,8 @@ namespace System.Data.SqlClient
         public override int ReadTimeout
         {
             get { return _readTimeout; }
-            set 
-            { 
+            set
+            {
                 if ((value > 0) || (value == Timeout.Infinite))
                 {
                     _readTimeout = value;
@@ -104,7 +104,13 @@ namespace System.Data.SqlClient
 
             try
             {
-                return _reader.GetBytesInternalSequential(_columnIndex, buffer, offset, count, _readTimeout);
+                return _reader.GetBytesInternalSequential(
+                    _columnIndex,
+                    buffer,
+                    offset,
+                    count,
+                    _readTimeout
+                );
             }
             catch (SqlException ex)
             {
@@ -113,7 +119,13 @@ namespace System.Data.SqlClient
             }
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (!CanRead)
             {
@@ -150,7 +162,12 @@ namespace System.Data.SqlClient
             return readTask.Result;
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateReadParameters(buffer, offset, count);
 
@@ -163,16 +180,22 @@ namespace System.Data.SqlClient
             {
                 try
                 {
-                    Task original = Interlocked.CompareExchange<Task>(ref _currentTask, completion.Task, null);
+                    Task original = Interlocked.CompareExchange<Task>(
+                        ref _currentTask,
+                        completion.Task,
+                        null
+                    );
                     if (original != null)
                     {
-                        completion.SetException(ADP.ExceptionWithStackTrace(ADP.AsyncOperationPending()));
+                        completion.SetException(
+                            ADP.ExceptionWithStackTrace(ADP.AsyncOperationPending())
+                        );
                     }
                     else
                     {
                         // Set up a combined cancellation token for both the user's and our disposal tokens
                         CancellationTokenSource combinedTokenSource;
-                        if (!cancellationToken.CanBeCanceled) 
+                        if (!cancellationToken.CanBeCanceled)
                         {
                             // Users token is not cancellable - just use ours
                             combinedTokenSource = _disposalTokenSource;
@@ -180,18 +203,33 @@ namespace System.Data.SqlClient
                         else
                         {
                             // Setup registrations from user and disposal token to cancel the combined token
-                            combinedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _disposalTokenSource.Token);
+                            combinedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+                                cancellationToken,
+                                _disposalTokenSource.Token
+                            );
                         }
 
                         int bytesRead = 0;
                         Task<int> getBytesTask = null;
                         var reader = _reader;
-                        if ((reader != null) && (!cancellationToken.IsCancellationRequested) && (!_disposalTokenSource.Token.IsCancellationRequested))
+                        if (
+                            (reader != null)
+                            && (!cancellationToken.IsCancellationRequested)
+                            && (!_disposalTokenSource.Token.IsCancellationRequested)
+                        )
                         {
-                            getBytesTask = reader.GetBytesAsync(_columnIndex, buffer, offset, count, _readTimeout, combinedTokenSource.Token, out bytesRead);
+                            getBytesTask = reader.GetBytesAsync(
+                                _columnIndex,
+                                buffer,
+                                offset,
+                                count,
+                                _readTimeout,
+                                combinedTokenSource.Token,
+                                out bytesRead
+                            );
                         }
 
-                        if (getBytesTask == null) 
+                        if (getBytesTask == null)
                         {
                             _currentTask = null;
                             if (cancellationToken.IsCancellationRequested)
@@ -200,54 +238,67 @@ namespace System.Data.SqlClient
                             }
                             else if (!CanRead)
                             {
-                                completion.SetException(ADP.ExceptionWithStackTrace(ADP.ObjectDisposed(this)));
+                                completion.SetException(
+                                    ADP.ExceptionWithStackTrace(ADP.ObjectDisposed(this))
+                                );
                             }
                             else
                             {
                                 completion.SetResult(bytesRead);
                             }
 
-                            if (combinedTokenSource != _disposalTokenSource) 
+                            if (combinedTokenSource != _disposalTokenSource)
                             {
                                 combinedTokenSource.Dispose();
                             }
                         }
-                        else 
+                        else
                         {
-                            getBytesTask.ContinueWith((t) =>
-                            {
-                                _currentTask = null;
-                                // If we completed, but _reader is null (i.e. the stream is closed), then report cancellation
-                                if ((t.Status == TaskStatus.RanToCompletion) && (CanRead))
+                            getBytesTask.ContinueWith(
+                                (t) =>
                                 {
-                                    completion.SetResult((int)t.Result);
-                                }
-                                else if (t.Status == TaskStatus.Faulted)
-                                {
-                                    if (t.Exception.InnerException is SqlException)
+                                    _currentTask = null;
+                                    // If we completed, but _reader is null (i.e. the stream is closed), then report cancellation
+                                    if ((t.Status == TaskStatus.RanToCompletion) && (CanRead))
                                     {
-                                        // Stream.ReadAsync() can't throw a SqlException - so wrap it in an IOException
-                                        completion.SetException(ADP.ExceptionWithStackTrace(ADP.ErrorReadingFromStream(t.Exception.InnerException)));
+                                        completion.SetResult((int)t.Result);
+                                    }
+                                    else if (t.Status == TaskStatus.Faulted)
+                                    {
+                                        if (t.Exception.InnerException is SqlException)
+                                        {
+                                            // Stream.ReadAsync() can't throw a SqlException - so wrap it in an IOException
+                                            completion.SetException(
+                                                ADP.ExceptionWithStackTrace(
+                                                    ADP.ErrorReadingFromStream(
+                                                        t.Exception.InnerException
+                                                    )
+                                                )
+                                            );
+                                        }
+                                        else
+                                        {
+                                            completion.SetException(t.Exception.InnerException);
+                                        }
+                                    }
+                                    else if (!CanRead)
+                                    {
+                                        completion.SetException(
+                                            ADP.ExceptionWithStackTrace(ADP.ObjectDisposed(this))
+                                        );
                                     }
                                     else
                                     {
-                                        completion.SetException(t.Exception.InnerException);
+                                        completion.SetCanceled();
                                     }
-                                }
-                                else if (!CanRead)
-                                {
-                                    completion.SetException(ADP.ExceptionWithStackTrace(ADP.ObjectDisposed(this)));
-                                }
-                                else
-                                {
-                                    completion.SetCanceled();
-                                }
-                            
-                                if (combinedTokenSource != _disposalTokenSource) 
-                                {
-                                    combinedTokenSource.Dispose();
-                                }
-                            }, TaskScheduler.Default);
+
+                                    if (combinedTokenSource != _disposalTokenSource)
+                                    {
+                                        combinedTokenSource.Dispose();
+                                    }
+                                },
+                                TaskScheduler.Default
+                            );
                         }
                     }
                 }
@@ -289,7 +340,7 @@ namespace System.Data.SqlClient
 
             // Wait for pending task
             var currentTask = _currentTask;
-            if (currentTask != null) 
+            if (currentTask != null)
             {
                 ((IAsyncResult)currentTask).AsyncWaitHandle.WaitOne();
             }
@@ -298,7 +349,7 @@ namespace System.Data.SqlClient
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            { 
+            {
                 // Set the stream as closed
                 SetClosed();
             }
@@ -312,17 +363,17 @@ namespace System.Data.SqlClient
         /// <param name="buffer"></param>
         /// <param name="index"></param>
         /// <param name="count"></param>
-        internal static void ValidateReadParameters(byte[] buffer, int offset, int count) 
+        internal static void ValidateReadParameters(byte[] buffer, int offset, int count)
         {
             if (buffer == null)
             {
                 throw ADP.ArgumentNull(ADP.ParameterBuffer);
             }
-			if (offset < 0)
+            if (offset < 0)
             {
                 throw ADP.ArgumentOutOfRange(ADP.ParameterOffset);
             }
-			if (count < 0)
+            if (count < 0)
             {
                 throw ADP.ArgumentOutOfRange(ADP.ParameterCount);
             }

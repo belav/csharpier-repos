@@ -5,77 +5,78 @@
 using System;
 using System.IO;
 
-namespace Mono.Profiler.Log {
+namespace Mono.Profiler.Log
+{
+    public class LogStream : Stream
+    {
+        public Stream BaseStream { get; }
 
-	public class LogStream : Stream {
+        public virtual bool EndOfStream => BaseStream.Position == BaseStream.Length;
 
-		public Stream BaseStream { get; }
+        public override bool CanRead => true;
 
-		public virtual bool EndOfStream => BaseStream.Position == BaseStream.Length;
+        public override bool CanSeek => false;
 
-		public override bool CanRead => true;
+        public override bool CanWrite => false;
 
-		public override bool CanSeek => false;
+        public override long Length => throw new NotSupportedException();
 
-		public override bool CanWrite => false;
+        public override long Position
+        {
+            get => throw new NotSupportedException();
+            set => throw new NotSupportedException();
+        }
 
-		public override long Length => throw new NotSupportedException ();
+        readonly byte[] _byteBuffer = new byte[1];
 
-		public override long Position {
-			get => throw new NotSupportedException ();
-			set => throw new NotSupportedException ();
-		}
+        public LogStream(Stream baseStream)
+        {
+            if (baseStream == null)
+                throw new ArgumentNullException(nameof(baseStream));
 
-		readonly byte[] _byteBuffer = new byte [1];
+            if (!baseStream.CanRead)
+                throw new ArgumentException("Stream does not support reading.", nameof(baseStream));
 
-		public LogStream (Stream baseStream)
-		{
-			if (baseStream == null)
-				throw new ArgumentNullException (nameof (baseStream));
+            BaseStream = baseStream;
+        }
 
-			if (!baseStream.CanRead)
-				throw new ArgumentException ("Stream does not support reading.", nameof (baseStream));
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+                BaseStream.Dispose();
+        }
 
-			BaseStream = baseStream;
-		}
+        public override void Flush()
+        {
+            throw new NotSupportedException();
+        }
 
-		protected override void Dispose (bool disposing)
-		{
-			if (disposing)
-				BaseStream.Dispose ();
-		}
+        public override int ReadByte()
+        {
+            // The base method on Stream is extremely inefficient in that it
+            // allocates a 1-byte array for every call. Simply use a private
+            // buffer instead.
+            return Read(_byteBuffer, 0, sizeof(byte)) == 0 ? -1 : _byteBuffer[0];
+        }
 
-		public override void Flush ()
-		{
-			throw new NotSupportedException ();
-		}
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            return BaseStream.Read(buffer, offset, count);
+        }
 
-		public override int ReadByte ()
-		{
-			// The base method on Stream is extremely inefficient in that it
-			// allocates a 1-byte array for every call. Simply use a private
-			// buffer instead.
-			return Read (_byteBuffer, 0, sizeof (byte)) == 0 ? -1 : _byteBuffer [0];
-		}
+        public override long Seek(long offset, SeekOrigin origin)
+        {
+            throw new NotSupportedException();
+        }
 
-		public override int Read (byte[] buffer, int offset, int count)
-		{
-			return BaseStream.Read (buffer, offset, count);
-		}
+        public override void SetLength(long value)
+        {
+            throw new NotSupportedException();
+        }
 
-		public override long Seek (long offset, SeekOrigin origin)
-		{
-			throw new NotSupportedException ();
-		}
-
-		public override void SetLength (long value)
-		{
-			throw new NotSupportedException ();
-		}
-
-		public override void Write (byte[] buffer, int offset, int count)
-		{
-			throw new NotSupportedException ();
-		}
-	}
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+            throw new NotSupportedException();
+        }
+    }
 }

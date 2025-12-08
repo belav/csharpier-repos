@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 namespace System
@@ -12,12 +12,12 @@ namespace System
     internal static class AppContextSwitches
     {
 #if MOBILE
-		public static readonly bool ThrowExceptionIfDisposedCancellationTokenSource = false;
-		public static readonly bool SetActorAsReferenceWhenCopyingClaimsIdentity = false;
-		public static readonly bool NoAsyncCurrentCulture = false;
-		public static readonly bool EnforceJapaneseEraYearRanges = false;
-		public static readonly bool FormatJapaneseFirstYearAsANumber = false;
-		public static readonly bool EnforceLegacyJapaneseDateParsing = false;
+        public static readonly bool ThrowExceptionIfDisposedCancellationTokenSource = false;
+        public static readonly bool SetActorAsReferenceWhenCopyingClaimsIdentity = false;
+        public static readonly bool NoAsyncCurrentCulture = false;
+        public static readonly bool EnforceJapaneseEraYearRanges = false;
+        public static readonly bool FormatJapaneseFirstYearAsANumber = false;
+        public static readonly bool EnforceLegacyJapaneseDateParsing = false;
 #else
         private static int _noAsyncCurrentCulture;
         public static bool NoAsyncCurrentCulture
@@ -25,7 +25,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue(AppContextDefaultValues.SwitchNoAsyncCurrentCulture, ref _noAsyncCurrentCulture);
+                return GetCachedSwitchValue(
+                    AppContextDefaultValues.SwitchNoAsyncCurrentCulture,
+                    ref _noAsyncCurrentCulture
+                );
             }
         }
 
@@ -36,7 +39,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue(AppContextDefaultValues.SwitchEnforceJapaneseEraYearRanges, ref _enforceJapaneseEraYearRanges);
+                return GetCachedSwitchValue(
+                    AppContextDefaultValues.SwitchEnforceJapaneseEraYearRanges,
+                    ref _enforceJapaneseEraYearRanges
+                );
             }
         }
 
@@ -46,7 +52,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue(AppContextDefaultValues.SwitchFormatJapaneseFirstYearAsANumber, ref _formatJapaneseFirstYearAsANumber);
+                return GetCachedSwitchValue(
+                    AppContextDefaultValues.SwitchFormatJapaneseFirstYearAsANumber,
+                    ref _formatJapaneseFirstYearAsANumber
+                );
             }
         }
         private static int _enforceLegacyJapaneseDateParsing;
@@ -55,9 +64,12 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue(AppContextDefaultValues.SwitchEnforceLegacyJapaneseDateParsing, ref _enforceLegacyJapaneseDateParsing);
+                return GetCachedSwitchValue(
+                    AppContextDefaultValues.SwitchEnforceLegacyJapaneseDateParsing,
+                    ref _enforceLegacyJapaneseDateParsing
+                );
             }
-        }        
+        }
 
         private static int _throwExceptionIfDisposedCancellationTokenSource;
         public static bool ThrowExceptionIfDisposedCancellationTokenSource
@@ -65,7 +77,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue(AppContextDefaultValues.SwitchThrowExceptionIfDisposedCancellationTokenSource, ref _throwExceptionIfDisposedCancellationTokenSource);
+                return GetCachedSwitchValue(
+                    AppContextDefaultValues.SwitchThrowExceptionIfDisposedCancellationTokenSource,
+                    ref _throwExceptionIfDisposedCancellationTokenSource
+                );
             }
         }
 
@@ -75,7 +90,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue(AppContextDefaultValues.SwitchPreserveEventListnerObjectIdentity, ref _preserveEventListnerObjectIdentity);
+                return GetCachedSwitchValue(
+                    AppContextDefaultValues.SwitchPreserveEventListnerObjectIdentity,
+                    ref _preserveEventListnerObjectIdentity
+                );
             }
         }
 
@@ -89,7 +107,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue(AppContextDefaultValues.SwitchUseLegacyPathHandling, ref _useLegacyPathHandling);
+                return GetCachedSwitchValue(
+                    AppContextDefaultValues.SwitchUseLegacyPathHandling,
+                    ref _useLegacyPathHandling
+                );
             }
         }
 
@@ -103,7 +124,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue(AppContextDefaultValues.SwitchBlockLongPaths, ref _blockLongPaths);
+                return GetCachedSwitchValue(
+                    AppContextDefaultValues.SwitchBlockLongPaths,
+                    ref _blockLongPaths
+                );
             }
         }
 
@@ -117,7 +141,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue(AppContextDefaultValues.SwitchSetActorAsReferenceWhenCopyingClaimsIdentity, ref _cloneActor);
+                return GetCachedSwitchValue(
+                    AppContextDefaultValues.SwitchSetActorAsReferenceWhenCopyingClaimsIdentity,
+                    ref _cloneActor
+                );
             }
         }
 
@@ -127,7 +154,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue(AppContextDefaultValues.SwitchDoNotAddrOfCspParentWindowHandle, ref _doNotAddrOfCspParentWindowHandle);
+                return GetCachedSwitchValue(
+                    AppContextDefaultValues.SwitchDoNotAddrOfCspParentWindowHandle,
+                    ref _doNotAddrOfCspParentWindowHandle
+                );
             }
         }
 
@@ -140,7 +170,9 @@ namespace System
         static AppContextSwitches()
         {
             bool isEnabled;
-            if (AppContext.TryGetSwitch(@"TestSwitch.LocalAppContext.DisableCaching", out isEnabled))
+            if (
+                AppContext.TryGetSwitch(@"TestSwitch.LocalAppContext.DisableCaching", out isEnabled)
+            )
             {
                 DisableCaching = isEnabled;
             }
@@ -149,8 +181,10 @@ namespace System
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool GetCachedSwitchValue(string switchName, ref int switchValue)
         {
-            if (switchValue < 0) return false;
-            if (switchValue > 0) return true;
+            if (switchValue < 0)
+                return false;
+            if (switchValue > 0)
+                return true;
 
             return GetCachedSwitchValueInternal(switchName, ref switchValue);
         }
@@ -165,7 +199,10 @@ namespace System
                 return isSwitchEnabled;
             }
 
-            switchValue = isSwitchEnabled ? 1 /*true*/ : -1 /*false*/;
+            switchValue = isSwitchEnabled
+                ? 1 /*true*/
+                : -1 /*false*/
+            ;
             return isSwitchEnabled;
         }
 #endif

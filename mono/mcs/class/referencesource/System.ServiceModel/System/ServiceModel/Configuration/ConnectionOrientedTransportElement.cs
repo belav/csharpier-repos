@@ -12,11 +12,12 @@ namespace System.ServiceModel.Configuration
 
     public abstract partial class ConnectionOrientedTransportElement : TransportElement
     {
-        internal ConnectionOrientedTransportElement()
-        {
-        }
+        internal ConnectionOrientedTransportElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.ConnectionBufferSize, DefaultValue = ConnectionOrientedTransportDefaults.ConnectionBufferSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ConnectionBufferSize,
+            DefaultValue = ConnectionOrientedTransportDefaults.ConnectionBufferSize
+        )]
         [IntegerValidator(MinValue = 1)]
         public int ConnectionBufferSize
         {
@@ -24,15 +25,24 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.ConnectionBufferSize] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.HostNameComparisonMode, DefaultValue = ConnectionOrientedTransportDefaults.HostNameComparisonMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.HostNameComparisonMode,
+            DefaultValue = ConnectionOrientedTransportDefaults.HostNameComparisonMode
+        )]
         [ServiceModelEnumValidatorAttribute(typeof(HostNameComparisonModeHelper))]
         public HostNameComparisonMode HostNameComparisonMode
         {
-            get { return (HostNameComparisonMode)base[ConfigurationStrings.HostNameComparisonMode]; }
+            get
+            {
+                return (HostNameComparisonMode)base[ConfigurationStrings.HostNameComparisonMode];
+            }
             set { base[ConfigurationStrings.HostNameComparisonMode] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ChannelInitializationTimeout, DefaultValue = ConnectionOrientedTransportDefaults.ChannelInitializationTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ChannelInitializationTimeout,
+            DefaultValue = ConnectionOrientedTransportDefaults.ChannelInitializationTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanOneTick)]
         public TimeSpan ChannelInitializationTimeout
@@ -41,7 +51,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.ChannelInitializationTimeout] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxBufferSize, DefaultValue = TransportDefaults.MaxBufferSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxBufferSize,
+            DefaultValue = TransportDefaults.MaxBufferSize
+        )]
         [IntegerValidator(MinValue = 1)]
         public int MaxBufferSize
         {
@@ -49,7 +62,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxBufferSize] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxPendingConnections, DefaultValue = ConnectionOrientedTransportDefaults.MaxPendingConnectionsConst)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxPendingConnections,
+            DefaultValue = ConnectionOrientedTransportDefaults.MaxPendingConnectionsConst
+        )]
         [IntegerValidator(MinValue = 0)]
         public int MaxPendingConnections
         {
@@ -57,7 +73,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxPendingConnections] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxOutputDelay, DefaultValue = ConnectionOrientedTransportDefaults.MaxOutputDelayString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxOutputDelay,
+            DefaultValue = ConnectionOrientedTransportDefaults.MaxOutputDelayString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan MaxOutputDelay
@@ -66,7 +85,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxOutputDelay] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxPendingAccepts, DefaultValue = ConnectionOrientedTransportDefaults.MaxPendingAcceptsConst)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxPendingAccepts,
+            DefaultValue = ConnectionOrientedTransportDefaults.MaxPendingAcceptsConst
+        )]
         [IntegerValidator(MinValue = 0)]
         public int MaxPendingAccepts
         {
@@ -74,7 +96,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxPendingAccepts] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.TransferMode, DefaultValue = ConnectionOrientedTransportDefaults.TransferMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TransferMode,
+            DefaultValue = ConnectionOrientedTransportDefaults.TransferMode
+        )]
         [ServiceModelEnumValidator(typeof(TransferModeHelper))]
         public TransferMode TransferMode
         {
@@ -85,21 +110,30 @@ namespace System.ServiceModel.Configuration
         public override void ApplyConfiguration(BindingElement bindingElement)
         {
             base.ApplyConfiguration(bindingElement);
-            ConnectionOrientedTransportBindingElement binding = (ConnectionOrientedTransportBindingElement)bindingElement;
+            ConnectionOrientedTransportBindingElement binding =
+                (ConnectionOrientedTransportBindingElement)bindingElement;
             binding.ConnectionBufferSize = this.ConnectionBufferSize;
             binding.HostNameComparisonMode = this.HostNameComparisonMode;
             binding.ChannelInitializationTimeout = this.ChannelInitializationTimeout;
             PropertyInformationCollection propertyInfo = this.ElementInformation.Properties;
-            if (propertyInfo[ConfigurationStrings.MaxBufferSize].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                propertyInfo[ConfigurationStrings.MaxBufferSize].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 binding.MaxBufferSize = this.MaxBufferSize;
             }
-            if (this.MaxPendingConnections != ConnectionOrientedTransportDefaults.MaxPendingConnectionsConst)
+            if (
+                this.MaxPendingConnections
+                != ConnectionOrientedTransportDefaults.MaxPendingConnectionsConst
+            )
             {
                 binding.MaxPendingConnections = this.MaxPendingConnections;
             }
             binding.MaxOutputDelay = this.MaxOutputDelay;
-            if (this.MaxPendingAccepts != ConnectionOrientedTransportDefaults.MaxPendingAcceptsConst)
+            if (
+                this.MaxPendingAccepts != ConnectionOrientedTransportDefaults.MaxPendingAcceptsConst
+            )
             {
                 binding.MaxPendingAccepts = this.MaxPendingAccepts;
             }
@@ -125,26 +159,54 @@ namespace System.ServiceModel.Configuration
         protected internal override void InitializeFrom(BindingElement bindingElement)
         {
             base.InitializeFrom(bindingElement);
-            ConnectionOrientedTransportBindingElement binding = (ConnectionOrientedTransportBindingElement)bindingElement;
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ConnectionBufferSize, binding.ConnectionBufferSize);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.HostNameComparisonMode, binding.HostNameComparisonMode);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ChannelInitializationTimeout, binding.ChannelInitializationTimeout);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxBufferSize, binding.MaxBufferSize);
+            ConnectionOrientedTransportBindingElement binding =
+                (ConnectionOrientedTransportBindingElement)bindingElement;
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ConnectionBufferSize,
+                binding.ConnectionBufferSize
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.HostNameComparisonMode,
+                binding.HostNameComparisonMode
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ChannelInitializationTimeout,
+                binding.ChannelInitializationTimeout
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxBufferSize,
+                binding.MaxBufferSize
+            );
             if (binding.IsMaxPendingConnectionsSet)
             {
-                ConfigurationProperty maxPendingConnectionsProperty = this.Properties[ConfigurationStrings.MaxPendingConnections];
-                SetPropertyValue(maxPendingConnectionsProperty, binding.MaxPendingConnections, /*ignoreLocks = */ false);
+                ConfigurationProperty maxPendingConnectionsProperty = this.Properties[
+                    ConfigurationStrings.MaxPendingConnections
+                ];
+                SetPropertyValue(
+                    maxPendingConnectionsProperty,
+                    binding.MaxPendingConnections, /*ignoreLocks = */
+                    false
+                );
             }
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxOutputDelay, binding.MaxOutputDelay);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxOutputDelay,
+                binding.MaxOutputDelay
+            );
             if (binding.IsMaxPendingAcceptsSet)
             {
-                ConfigurationProperty maxPendingAcceptsProperty = this.Properties[ConfigurationStrings.MaxPendingAccepts];
-                SetPropertyValue(maxPendingAcceptsProperty, binding.MaxPendingAccepts, /*ignoreLocks = */ false);
+                ConfigurationProperty maxPendingAcceptsProperty = this.Properties[
+                    ConfigurationStrings.MaxPendingAccepts
+                ];
+                SetPropertyValue(
+                    maxPendingAcceptsProperty,
+                    binding.MaxPendingAccepts, /*ignoreLocks = */
+                    false
+                );
             }
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TransferMode, binding.TransferMode);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.TransferMode,
+                binding.TransferMode
+            );
         }
     }
 }
-
-
-

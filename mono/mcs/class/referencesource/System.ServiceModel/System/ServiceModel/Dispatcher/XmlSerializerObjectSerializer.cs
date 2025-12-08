@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.Xml;
-    using System.ServiceModel;
-    using System.Xml.Serialization;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
     using System.ServiceModel.Description;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     internal class XmlSerializerObjectSerializer : XmlObjectSerializer
     {
@@ -22,10 +22,21 @@ namespace System.ServiceModel.Dispatcher
 
         internal XmlSerializerObjectSerializer(Type type)
         {
-            Initialize(type, null /*rootName*/, null /*rootNamespace*/, null /*xmlSerializer*/);
+            Initialize(
+                type,
+                null /*rootName*/
+                ,
+                null /*rootNamespace*/
+                ,
+                null /*xmlSerializer*/
+            );
         }
 
-        internal XmlSerializerObjectSerializer(Type type, XmlQualifiedName qualifiedName, XmlSerializer xmlSerializer)
+        internal XmlSerializerObjectSerializer(
+            Type type,
+            XmlQualifiedName qualifiedName,
+            XmlSerializer xmlSerializer
+        )
         {
             if (qualifiedName == null)
             {
@@ -34,7 +45,12 @@ namespace System.ServiceModel.Dispatcher
             Initialize(type, qualifiedName.Name, qualifiedName.Namespace, xmlSerializer);
         }
 
-        void Initialize(Type type, string rootName, string rootNamespace, XmlSerializer xmlSerializer)
+        void Initialize(
+            Type type,
+            string rootName,
+            string rootNamespace,
+            XmlSerializer xmlSerializer
+        )
         {
             if (type == null)
             {
@@ -63,7 +79,9 @@ namespace System.ServiceModel.Dispatcher
             //try to get rootName and rootNamespace from type since root name not set explicitly
             if (this.rootName == null)
             {
-                XmlTypeMapping mapping = new XmlReflectionImporter().ImportTypeMapping(this.rootType);
+                XmlTypeMapping mapping = new XmlReflectionImporter().ImportTypeMapping(
+                    this.rootType
+                );
                 this.rootName = mapping.ElementName;
                 this.rootNamespace = mapping.Namespace;
             }
@@ -79,17 +97,23 @@ namespace System.ServiceModel.Dispatcher
 
         public override void WriteStartObject(XmlDictionaryWriter writer, object graph)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public override void WriteObjectContent(XmlDictionaryWriter writer, object graph)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public override void WriteEndObject(XmlDictionaryWriter writer)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public override object ReadObject(XmlDictionaryReader reader, bool verifyObjectName)
@@ -109,7 +133,9 @@ namespace System.ServiceModel.Dispatcher
         public override bool IsStartObject(XmlDictionaryReader reader)
         {
             if (reader == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("reader"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("reader")
+                );
 
             reader.MoveToElement();
 
@@ -124,4 +150,3 @@ namespace System.ServiceModel.Dispatcher
         }
     }
 }
-

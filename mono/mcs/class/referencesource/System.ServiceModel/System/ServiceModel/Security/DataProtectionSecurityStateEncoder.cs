@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.Text;
     using System.Security.Cryptography;
+    using System.Text;
 
     public class DataProtectionSecurityStateEncoder : SecurityStateEncoder
     {
@@ -19,10 +19,12 @@ namespace System.ServiceModel.Security
         }
 
         public DataProtectionSecurityStateEncoder(bool useCurrentUserProtectionScope)
-            : this(useCurrentUserProtectionScope, null)
-        { }
+            : this(useCurrentUserProtectionScope, null) { }
 
-        public DataProtectionSecurityStateEncoder(bool useCurrentUserProtectionScope, byte[] entropy)
+        public DataProtectionSecurityStateEncoder(
+            bool useCurrentUserProtectionScope,
+            byte[] entropy
+        )
         {
             this.useCurrentUserProtectionScope = useCurrentUserProtectionScope;
             if (entropy == null)
@@ -38,10 +40,7 @@ namespace System.ServiceModel.Security
 
         public bool UseCurrentUserProtectionScope
         {
-            get
-            {
-                return this.useCurrentUserProtectionScope;
-            }
+            get { return this.useCurrentUserProtectionScope; }
         }
 
         public byte[] GetEntropy()
@@ -59,33 +58,62 @@ namespace System.ServiceModel.Security
         {
             StringBuilder result = new StringBuilder();
             result.Append(this.GetType().ToString());
-            result.AppendFormat("{0}  UseCurrentUserProtectionScope={1}", Environment.NewLine, this.useCurrentUserProtectionScope);
-            result.AppendFormat("{0}  Entropy Length={1}", Environment.NewLine, (this.entropy == null) ? 0 : this.entropy.Length);
+            result.AppendFormat(
+                "{0}  UseCurrentUserProtectionScope={1}",
+                Environment.NewLine,
+                this.useCurrentUserProtectionScope
+            );
+            result.AppendFormat(
+                "{0}  Entropy Length={1}",
+                Environment.NewLine,
+                (this.entropy == null) ? 0 : this.entropy.Length
+            );
             return result.ToString();
         }
 
-        protected internal override byte[] DecodeSecurityState( byte[] data )
+        protected internal override byte[] DecodeSecurityState(byte[] data)
         {
             try
             {
-                return ProtectedData.Unprotect(data, this.entropy, (this.useCurrentUserProtectionScope) ? DataProtectionScope.CurrentUser : DataProtectionScope.LocalMachine);
+                return ProtectedData.Unprotect(
+                    data,
+                    this.entropy,
+                    (this.useCurrentUserProtectionScope)
+                        ? DataProtectionScope.CurrentUser
+                        : DataProtectionScope.LocalMachine
+                );
             }
             catch (CryptographicException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.SecurityStateEncoderDecodingFailure), exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CryptographicException(
+                        SR.GetString(SR.SecurityStateEncoderDecodingFailure),
+                        exception
+                    )
+                );
             }
-
         }
 
-        protected internal override byte[] EncodeSecurityState( byte[] data )
+        protected internal override byte[] EncodeSecurityState(byte[] data)
         {
             try
             {
-                return ProtectedData.Protect(data, this.entropy, (this.useCurrentUserProtectionScope) ? DataProtectionScope.CurrentUser : DataProtectionScope.LocalMachine);
+                return ProtectedData.Protect(
+                    data,
+                    this.entropy,
+                    (this.useCurrentUserProtectionScope)
+                        ? DataProtectionScope.CurrentUser
+                        : DataProtectionScope.LocalMachine
+                );
             }
             catch (CryptographicException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.SecurityStateEncoderEncodingFailure), exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CryptographicException(
+                        SR.GetString(SR.SecurityStateEncoderEncodingFailure),
+                        exception
+                    )
+                );
             }
         }
     }

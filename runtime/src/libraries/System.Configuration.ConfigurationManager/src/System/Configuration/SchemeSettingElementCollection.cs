@@ -3,11 +3,13 @@
 
 namespace System.Configuration
 {
-    [ConfigurationCollection(typeof(SchemeSettingElement),
+    [ConfigurationCollection(
+        typeof(SchemeSettingElement),
         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap,
         AddItemName = AddItemName,
         ClearItemsName = ClearItemsName,
-        RemoveItemName = RemoveItemName)]
+        RemoveItemName = RemoveItemName
+    )]
     public sealed class SchemeSettingElementCollection : ConfigurationElementCollection
     {
         internal const string AddItemName = "add";
@@ -51,5 +53,4 @@ namespace System.Configuration
             return ((SchemeSettingElement)element).Name;
         }
     }
-
 }

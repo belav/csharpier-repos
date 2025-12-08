@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
+    using System.Diagnostics;
     using System.IO;
     using System.ServiceModel;
-    using System.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
 
     class MaxMessageSizeStream : DelegatingStream
@@ -20,13 +20,25 @@ namespace System.ServiceModel.Channels
             this.maxMessageSize = maxMessageSize;
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             count = PrepareRead(count);
             return base.BeginRead(buffer, offset, count, callback, state);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             PrepareWrite(count);
             return base.BeginWrite(buffer, offset, count, callback, state);
@@ -94,7 +106,9 @@ namespace System.ServiceModel.Channels
         {
             if (totalBytesRead >= maxMessageSize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateMaxReceivedMessageSizeExceededException(maxMessageSize));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateMaxReceivedMessageSizeExceededException(maxMessageSize)
+                );
             }
 
             long bytesRemaining = maxMessageSize - totalBytesRead;
@@ -119,7 +133,9 @@ namespace System.ServiceModel.Channels
         {
             if (bytesWritten + bytesToWrite > maxMessageSize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateMaxSentMessageSizeExceededException(maxMessageSize));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateMaxSentMessageSizeExceededException(maxMessageSize)
+                );
             }
 
             bytesWritten += bytesToWrite;

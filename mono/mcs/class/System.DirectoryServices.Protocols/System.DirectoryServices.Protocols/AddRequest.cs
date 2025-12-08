@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,33 +33,31 @@ using System.Xml;
 
 namespace System.DirectoryServices.Protocols
 {
-	[MonoTODO]
-	public class AddRequest : DirectoryRequest
-	{
-		public AddRequest ()
-		{
-		}
+    [MonoTODO]
+    public class AddRequest : DirectoryRequest
+    {
+        public AddRequest() { }
 
-		public AddRequest (string distinguishedName, params DirectoryAttribute [] attributes)
-		{
-			DistinguishedName = distinguishedName;
-			Attributes = new DirectoryAttributeCollection (attributes);
-		}
+        public AddRequest(string distinguishedName, params DirectoryAttribute[] attributes)
+        {
+            DistinguishedName = distinguishedName;
+            Attributes = new DirectoryAttributeCollection(attributes);
+        }
 
-		public AddRequest (string distinguishedName, string objectClass)
-		{
-			DistinguishedName = distinguishedName;
-			Attributes = new DirectoryAttributeCollection (new DirectoryAttribute [0]);
+        public AddRequest(string distinguishedName, string objectClass)
+        {
+            DistinguishedName = distinguishedName;
+            Attributes = new DirectoryAttributeCollection(new DirectoryAttribute[0]);
 
-			throw new NotImplementedException ();
-		}
+            throw new NotImplementedException();
+        }
 
-		public DirectoryAttributeCollection Attributes { get; private set; }
-		public string DistinguishedName { get; set; }
+        public DirectoryAttributeCollection Attributes { get; private set; }
+        public string DistinguishedName { get; set; }
 
-		protected override XmlElement ToXmlNode (XmlDocument doc)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        protected override XmlElement ToXmlNode(XmlDocument doc)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

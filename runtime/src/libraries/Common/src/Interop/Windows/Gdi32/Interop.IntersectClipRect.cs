@@ -16,6 +16,11 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hDC, int x1, int y1, int x2, int y2);
+            HandleRef hDC,
+            int x1,
+            int y1,
+            int x2,
+            int y2
+        );
     }
 }

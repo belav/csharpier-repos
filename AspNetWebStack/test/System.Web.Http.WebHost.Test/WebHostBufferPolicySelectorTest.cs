@@ -27,16 +27,16 @@ namespace System.Web.Http.WebHost
                     // Known length HttpContents other than OC should not buffer
                     { new StringContent(testString), false },
                     { new ByteArrayContent(Encoding.UTF8.GetBytes(testString)), false },
-                    { new StreamContent(new MemoryStream(Encoding.UTF8.GetBytes(testString))), false },
-
+                    {
+                        new StreamContent(new MemoryStream(Encoding.UTF8.GetBytes(testString))),
+                        false
+                    },
                     // StreamContent (unknown length) should not buffer
                     { new StreamContent(mockStream.Object), false },
-
                     // PushStreamContent (unknown length) should not buffer
-                    { new PushStreamContent((stream, headers, context) => {}), false },
-
+                    { new PushStreamContent((stream, headers, context) => { }), false },
                     // ObjectContent (unknown length) should buffer
-                    { new ObjectContent<string>(testString, new XmlMediaTypeFormatter()), true }
+                    { new ObjectContent<string>(testString, new XmlMediaTypeFormatter()), true },
                 };
             }
         }
@@ -62,7 +62,9 @@ namespace System.Web.Http.WebHost
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>() { CallBase = true };
 
             // Act & Assert
-            Assert.True(new WebHostBufferPolicySelector().UseBufferedInputStream(mockContext.Object));
+            Assert.True(
+                new WebHostBufferPolicySelector().UseBufferedInputStream(mockContext.Object)
+            );
         }
 
         [Fact]
@@ -76,8 +78,11 @@ namespace System.Web.Http.WebHost
         void UseBufferedInputStream_Can_Be_Overridden()
         {
             // Arrange
-            Mock<WebHostBufferPolicySelector> mockSelector = new Mock<WebHostBufferPolicySelector>();
-            mockSelector.Setup((w) => w.UseBufferedInputStream(It.IsAny<HttpContextBase>())).Returns(false);
+            Mock<WebHostBufferPolicySelector> mockSelector =
+                new Mock<WebHostBufferPolicySelector>();
+            mockSelector
+                .Setup((w) => w.UseBufferedInputStream(It.IsAny<HttpContextBase>()))
+                .Returns(false);
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>() { CallBase = true };
 
             // Act & Assert
@@ -93,7 +98,10 @@ namespace System.Web.Http.WebHost
 
         [Theory]
         [PropertyData("OutputBufferingTestData")]
-        public void UseBufferedOutputStream_ReturnsCorrectValue(HttpContent content, bool expectedResult)
+        public void UseBufferedOutputStream_ReturnsCorrectValue(
+            HttpContent content,
+            bool expectedResult
+        )
         {
             // Arrange
             WebHostBufferPolicySelector selector = new WebHostBufferPolicySelector();
@@ -119,8 +127,13 @@ namespace System.Web.Http.WebHost
             selector.UseBufferedOutputStream(response);
 
             IEnumerable<string> contentLengthEnumerable;
-            bool isContentLengthInHeaders = content.Headers.TryGetValues("Content-Length", out contentLengthEnumerable);
-            string[] contentLengthStrings = isContentLengthInHeaders ? contentLengthEnumerable.ToArray() : new string[0];
+            bool isContentLengthInHeaders = content.Headers.TryGetValues(
+                "Content-Length",
+                out contentLengthEnumerable
+            );
+            string[] contentLengthStrings = isContentLengthInHeaders
+                ? contentLengthEnumerable.ToArray()
+                : new string[0];
             long? contentLength = content.Headers.ContentLength;
 
             // Assert

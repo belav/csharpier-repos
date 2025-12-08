@@ -16,8 +16,6 @@ using System.Runtime;
 using System.Text;
 #endif
 
-
-
 namespace Moq
 {
     /* Unmerged change from project 'Moq(netstandard2.0)'

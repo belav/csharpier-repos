@@ -1,20 +1,20 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>GPaperin</OWNER>
 // <OWNER>Microsoft</OWNER>
 
 using System;
-using System.Security;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Security;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
@@ -25,7 +25,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     // That's because they are invoked with special "this"! The "this" object
     // for all of these methods are not IReadOnlyListToIVectorViewAdapter objects. Rather, they are of type
     // IReadOnlyList<T>. No actual IReadOnlyListToIVectorViewAdapter object is ever instantiated. Thus, you will
-    // see a lot of expressions that cast "this" to "IReadOnlyList<T>". 
+    // see a lot of expressions that cast "this" to "IReadOnlyList<T>".
     [DebuggerDisplay("Size = {Size}")]
     internal sealed class IReadOnlyListToIVectorViewAdapter
     {
@@ -39,11 +39,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         internal T GetAt<T>(uint index)
         {
             IReadOnlyList<T> _this = JitHelpers.UnsafeCast<IReadOnlyList<T>>(this);
-            EnsureIndexInt32(index, _this.Count);        
+            EnsureIndexInt32(index, _this.Count);
 
             try
             {
-                return _this[(int) index];
+                return _this[(int)index];
             }
             catch (ArgumentOutOfRangeException ex)
             {
@@ -93,7 +93,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         {
             IReadOnlyList<T> _this = JitHelpers.UnsafeCast<IReadOnlyList<T>>(this);
 
-            // REX spec says "calling GetMany with startIndex equal to the length of the vector 
+            // REX spec says "calling GetMany with startIndex equal to the length of the vector
             // (last valid index + 1) and any specified capacity will succeed and return zero actual
             // elements".
             if (startIndex == _this.Count)
@@ -133,7 +133,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             // that Size > Int32.MaxValue:
             if (((uint)Int32.MaxValue) <= index || index >= (uint)listCapacity)
             {
-                Exception e = new ArgumentOutOfRangeException("index", Environment.GetResourceString("ArgumentOutOfRange_IndexLargerThanMaxValue"));
+                Exception e = new ArgumentOutOfRangeException(
+                    "index",
+                    Environment.GetResourceString("ArgumentOutOfRange_IndexLargerThanMaxValue")
+                );
                 e.SetErrorCode(__HResults.E_BOUNDS);
                 throw e;
             }

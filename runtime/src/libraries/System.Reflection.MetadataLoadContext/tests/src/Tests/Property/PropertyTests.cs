@@ -15,7 +15,9 @@ namespace System.Reflection.Tests
             Type bt = t.BaseType;
 
             {
-                PropertyInfo p = t.GetProperty(nameof(DerivedFromPropertyHolder1<int>.ReadOnlyProp));
+                PropertyInfo p = t.GetProperty(
+                    nameof(DerivedFromPropertyHolder1<int>.ReadOnlyProp)
+                );
                 Assert.Equal(nameof(DerivedFromPropertyHolder1<int>.ReadOnlyProp), p.Name);
                 Assert.Equal(bt, p.DeclaringType);
                 Assert.Equal(t, p.ReflectedType);
@@ -33,7 +35,9 @@ namespace System.Reflection.Tests
             }
 
             {
-                PropertyInfo p = t.GetProperty(nameof(DerivedFromPropertyHolder1<int>.ReadWriteProp));
+                PropertyInfo p = t.GetProperty(
+                    nameof(DerivedFromPropertyHolder1<int>.ReadWriteProp)
+                );
                 Type theT = t.GetGenericTypeParameters()[0];
 
                 Assert.Equal(nameof(DerivedFromPropertyHolder1<int>.ReadWriteProp), p.Name);
@@ -58,7 +62,9 @@ namespace System.Reflection.Tests
             }
 
             {
-                PropertyInfo p = bt.GetProperty(nameof(DerivedFromPropertyHolder1<int>.PublicPrivateProp));
+                PropertyInfo p = bt.GetProperty(
+                    nameof(DerivedFromPropertyHolder1<int>.PublicPrivateProp)
+                );
                 Type theT = t.GetGenericTypeDefinition().GetGenericTypeParameters()[0];
                 Assert.True(p.CanRead);
                 Assert.True(p.CanWrite);
@@ -88,11 +94,16 @@ namespace System.Reflection.Tests
 
                 Assert.Equal(0, p.GetIndexParameters().Length);
 
-                Assert.Equal(typeof(GenericClass1<>).Project().MakeGenericType(theT), p.PropertyType);
+                Assert.Equal(
+                    typeof(GenericClass1<>).Project().MakeGenericType(theT),
+                    p.PropertyType
+                );
             }
 
             {
-                PropertyInfo p = t.GetProperty(nameof(DerivedFromPropertyHolder1<int>.PublicPrivateProp));
+                PropertyInfo p = t.GetProperty(
+                    nameof(DerivedFromPropertyHolder1<int>.PublicPrivateProp)
+                );
                 Type theT = t.GetGenericTypeDefinition().GetGenericTypeParameters()[0];
                 Assert.True(p.CanRead);
                 Assert.False(p.CanWrite);
@@ -114,11 +125,16 @@ namespace System.Reflection.Tests
 
                 Assert.Equal(0, p.GetIndexParameters().Length);
 
-                Assert.Equal(typeof(GenericClass1<>).Project().MakeGenericType(theT), p.PropertyType);
+                Assert.Equal(
+                    typeof(GenericClass1<>).Project().MakeGenericType(theT),
+                    p.PropertyType
+                );
             }
 
             {
-                PropertyInfo p = t.GetProperty(nameof(DerivedFromPropertyHolder1<int>.PublicInternalProp));
+                PropertyInfo p = t.GetProperty(
+                    nameof(DerivedFromPropertyHolder1<int>.PublicInternalProp)
+                );
 
                 Assert.Equal(nameof(DerivedFromPropertyHolder1<int>.PublicInternalProp), p.Name);
                 Assert.Equal(bt, p.DeclaringType);
@@ -152,7 +168,9 @@ namespace System.Reflection.Tests
             }
 
             {
-                PropertyInfo p = t.GetProperty(nameof(DerivedFromPropertyHolder1<int>.PublicProtectedProp));
+                PropertyInfo p = t.GetProperty(
+                    nameof(DerivedFromPropertyHolder1<int>.PublicProtectedProp)
+                );
 
                 Assert.Equal(nameof(DerivedFromPropertyHolder1<int>.PublicProtectedProp), p.Name);
                 Assert.Equal(bt, p.DeclaringType);
@@ -162,12 +180,18 @@ namespace System.Reflection.Tests
                 Assert.True(p.CanWrite);
 
                 MethodInfo getter = p.GetMethod;
-                Assert.Equal("get_" + nameof(PropertyHolder1<int>.PublicProtectedProp), getter.Name);
+                Assert.Equal(
+                    "get_" + nameof(PropertyHolder1<int>.PublicProtectedProp),
+                    getter.Name
+                );
                 Assert.Equal(bt, getter.DeclaringType);
                 Assert.Equal(t, getter.ReflectedType);
 
                 MethodInfo setter = p.SetMethod;
-                Assert.Equal("set_" + nameof(PropertyHolder1<int>.PublicProtectedProp), setter.Name);
+                Assert.Equal(
+                    "set_" + nameof(PropertyHolder1<int>.PublicProtectedProp),
+                    setter.Name
+                );
                 Assert.Equal(bt, setter.DeclaringType);
                 Assert.Equal(t, setter.ReflectedType);
 
@@ -217,7 +241,12 @@ namespace System.Reflection.Tests
         [Fact]
         public static unsafe void TestCustomModifiers1()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new CoreMetadataAssemblyResolver(), "mscorlib"))
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new CoreMetadataAssemblyResolver(),
+                    "mscorlib"
+                )
+            )
             {
                 Assembly a = lc.LoadFromByteArray(TestData.s_CustomModifiersImage);
                 Type t = a.GetType("N", throwOnError: true);

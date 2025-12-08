@@ -2,29 +2,29 @@ using System;
 
 class MainClass
 {
-	public static int Main ()
-	{
-		DataFrame df1 = new DataFrame ();
-		DataFrame df2 = new DataFrame ();
+    public static int Main()
+    {
+        DataFrame df1 = new DataFrame();
+        DataFrame df2 = new DataFrame();
 
-		if (df1 != null) 
-		{
-			return 1;
-		}
+        if (df1 != null)
+        {
+            return 1;
+        }
 
-		return 0;
-	}
+        return 0;
+    }
 
-	public class DataFrame
-	{
-		public static bool operator ==(DataFrame df1, DataFrame df2)
-		{
-			return df1 is DataFrame;
-		}
+    public class DataFrame
+    {
+        public static bool operator ==(DataFrame df1, DataFrame df2)
+        {
+            return df1 is DataFrame;
+        }
 
-		public static bool operator !=(DataFrame df1, DataFrame df2)
-		{
-			return !(df1 == df2);
-		}
-	}
+        public static bool operator !=(DataFrame df1, DataFrame df2)
+        {
+            return !(df1 == df2);
+        }
+    }
 }

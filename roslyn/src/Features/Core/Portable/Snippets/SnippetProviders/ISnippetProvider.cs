@@ -22,11 +22,19 @@ namespace Microsoft.CodeAnalysis.Snippets.SnippetProviders
         /// <summary>
         /// Determines if a snippet can exist at a particular location.
         /// </summary>
-        Task<SnippetData?> GetSnippetDataAsync(Document document, int position, CancellationToken cancellationToken);
+        Task<SnippetData?> GetSnippetDataAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Gets the Snippet from the corresponding snippet provider.
         /// </summary>
-        Task<SnippetChange> GetSnippetAsync(Document document, int position, CancellationToken cancellationToken);
+        Task<SnippetChange> GetSnippetAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

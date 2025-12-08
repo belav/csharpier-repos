@@ -5,5 +5,8 @@ namespace System.Net.NetworkInformation
 {
     public delegate void NetworkAddressChangedEventHandler(object? sender, EventArgs e);
 
-    public delegate void NetworkAvailabilityChangedEventHandler(object? sender, NetworkAvailabilityEventArgs e);
+    public delegate void NetworkAvailabilityChangedEventHandler(
+        object? sender,
+        NetworkAvailabilityEventArgs e
+    );
 }

@@ -15,23 +15,79 @@ namespace System.Text.RegularExpressions.Tests
         public void CompileToAssembly_PNSE()
         {
             Assert.Throws<PlatformNotSupportedException>(() => Regex.CompileToAssembly(null, null));
-            Assert.Throws<PlatformNotSupportedException>(() => Regex.CompileToAssembly(null, null, null));
-            Assert.Throws<PlatformNotSupportedException>(() => Regex.CompileToAssembly(null, null, null, null));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Regex.CompileToAssembly(null, null, null)
+            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Regex.CompileToAssembly(null, null, null, null)
+            );
 
-            Assert.Throws<PlatformNotSupportedException>(() => Regex.CompileToAssembly(
-                new[] { new RegexCompilationInfo("abcd", RegexOptions.None, "abcd", "SomeNamespace", true) },
-                new AssemblyName("abcd")));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Regex.CompileToAssembly(
+                    new[]
+                    {
+                        new RegexCompilationInfo(
+                            "abcd",
+                            RegexOptions.None,
+                            "abcd",
+                            "SomeNamespace",
+                            true
+                        ),
+                    },
+                    new AssemblyName("abcd")
+                )
+            );
 
-            Assert.Throws<PlatformNotSupportedException>(() => Regex.CompileToAssembly(
-                new[] { new RegexCompilationInfo("abcd", RegexOptions.None, "abcd", "SomeNamespace", true) },
-                new AssemblyName("abcd"),
-                new[] { new CustomAttributeBuilder(typeof(AssemblyCompanyAttribute).GetConstructor(new[] { typeof(string) }), new[] { "TestCompany" }) }));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Regex.CompileToAssembly(
+                    new[]
+                    {
+                        new RegexCompilationInfo(
+                            "abcd",
+                            RegexOptions.None,
+                            "abcd",
+                            "SomeNamespace",
+                            true
+                        ),
+                    },
+                    new AssemblyName("abcd"),
+                    new[]
+                    {
+                        new CustomAttributeBuilder(
+                            typeof(AssemblyCompanyAttribute).GetConstructor(
+                                new[] { typeof(string) }
+                            ),
+                            new[] { "TestCompany" }
+                        ),
+                    }
+                )
+            );
 
-            Assert.Throws<PlatformNotSupportedException>(() => Regex.CompileToAssembly(
-                new[] { new RegexCompilationInfo("abcd", RegexOptions.None, "abcd", "SomeNamespace", true) },
-                new AssemblyName("abcd"),
-                new[] { new CustomAttributeBuilder(typeof(AssemblyCompanyAttribute).GetConstructor(new[] { typeof(string) }), new[] { "TestCompany" }) },
-                "resourceFile"));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Regex.CompileToAssembly(
+                    new[]
+                    {
+                        new RegexCompilationInfo(
+                            "abcd",
+                            RegexOptions.None,
+                            "abcd",
+                            "SomeNamespace",
+                            true
+                        ),
+                    },
+                    new AssemblyName("abcd"),
+                    new[]
+                    {
+                        new CustomAttributeBuilder(
+                            typeof(AssemblyCompanyAttribute).GetConstructor(
+                                new[] { typeof(string) }
+                            ),
+                            new[] { "TestCompany" }
+                        ),
+                    },
+                    "resourceFile"
+                )
+            );
         }
     }
 }

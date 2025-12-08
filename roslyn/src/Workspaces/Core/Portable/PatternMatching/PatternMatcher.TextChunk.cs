@@ -15,9 +15,9 @@ namespace Microsoft.CodeAnalysis.PatternMatching
     internal partial class PatternMatcher
     {
         /// <summary>
-        /// Information about a chunk of text from the pattern.  The chunk is a piece of text, with 
+        /// Information about a chunk of text from the pattern.  The chunk is a piece of text, with
         /// cached information about the character spans within in.  Character spans separate out
-        /// capitalized runs and lowercase runs.  i.e. if you have AAbb, then there will be two 
+        /// capitalized runs and lowercase runs.  i.e. if you have AAbb, then there will be two
         /// character spans, one for AA and one for BB.
         /// </summary>
         [NonCopyable]
@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.PatternMatching
 
             /// <summary>
             /// Character spans separate out
-            /// capitalized runs and lowercase runs.  i.e. if you have AAbb, then there will be two 
+            /// capitalized runs and lowercase runs.  i.e. if you have AAbb, then there will be two
             /// character spans, one for AA and one for BB.
             /// </summary>
             public TemporaryArray<TextSpan> PatternHumps;

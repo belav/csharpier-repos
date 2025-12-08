@@ -1,36 +1,37 @@
 //------------------------------------------------------------------------------
 // <copyright file="ServiceDescription.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Description {
-
-    using System.Xml.Serialization;
-    using System.Xml.Schema;
+namespace System.Web.Services.Description
+{
+    using System;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Specialized;
-    using System;
-    using System.Xml;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
     using System.Reflection;
-    using System.ComponentModel;
-    using System.CodeDom;
-    using System.Text;
-    using System.Web.Services.Configuration;
-    using System.Diagnostics;
-    using System.Threading;
-    using System.Globalization;
     using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Threading;
+    using System.Web.Services.Configuration;
     using System.Web.Services.Protocols;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription"]/*' />
     /// <devdoc>
-    /// 
+    ///
     /// </devdoc>
     [XmlRoot("definitions", Namespace = ServiceDescription.Namespace)]
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class ServiceDescription : NamedItem {
+    public sealed class ServiceDescription : NamedItem
+    {
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Namespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -58,8 +59,16 @@ namespace System.Web.Services.Description {
         static StringCollection warnings = new StringCollection();
         ServiceDescription next;
 
-        private static void InstanceValidation (object sender, ValidationEventArgs args) {
-            warnings.Add(Res.GetString(Res.WsdlInstanceValidationDetails, args.Message, args.Exception.LineNumber.ToString(CultureInfo.InvariantCulture), args.Exception.LinePosition.ToString(CultureInfo.InvariantCulture)));
+        private static void InstanceValidation(object sender, ValidationEventArgs args)
+        {
+            warnings.Add(
+                Res.GetString(
+                    Res.WsdlInstanceValidationDetails,
+                    args.Message,
+                    args.Exception.LineNumber.ToString(CultureInfo.InvariantCulture),
+                    args.Exception.LinePosition.ToString(CultureInfo.InvariantCulture)
+                )
+            );
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.RetrievalUrl"]/*' />
@@ -67,12 +76,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public string RetrievalUrl {
+        public string RetrievalUrl
+        {
             get { return retrievalUrl == null ? string.Empty : retrievalUrl; }
             set { retrievalUrl = value; }
         }
 
-        internal void SetParent(ServiceDescriptionCollection parent) {
+        internal void SetParent(ServiceDescriptionCollection parent)
+        {
             this.parent = parent;
         }
 
@@ -81,7 +92,8 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public ServiceDescriptionCollection ServiceDescriptions {
+        public ServiceDescriptionCollection ServiceDescriptions
+        {
             get { return parent; }
         }
 
@@ -90,8 +102,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Imports"]/*' />
@@ -99,8 +117,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("import")]
-        public ImportCollection Imports {
-            get { if (imports == null) imports = new ImportCollection(this); return imports; }
+        public ImportCollection Imports
+        {
+            get
+            {
+                if (imports == null)
+                    imports = new ImportCollection(this);
+                return imports;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Types"]/*' />
@@ -108,20 +132,35 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("types")]
-        public Types Types {
-            get { if (types == null) types = new Types(); return types; }
+        public Types Types
+        {
+            get
+            {
+                if (types == null)
+                    types = new Types();
+                return types;
+            }
             set { types = value; }
         }
 
-        private bool ShouldSerializeTypes() { return Types.HasItems(); }
+        private bool ShouldSerializeTypes()
+        {
+            return Types.HasItems();
+        }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Messages"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("message")]
-        public MessageCollection Messages {
-            get { if (messages == null) messages = new MessageCollection(this); return messages; }
+        public MessageCollection Messages
+        {
+            get
+            {
+                if (messages == null)
+                    messages = new MessageCollection(this);
+                return messages;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.PortTypes"]/*' />
@@ -129,8 +168,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("portType")]
-        public PortTypeCollection PortTypes {
-            get { if (portTypes == null) portTypes = new PortTypeCollection(this); return portTypes; }
+        public PortTypeCollection PortTypes
+        {
+            get
+            {
+                if (portTypes == null)
+                    portTypes = new PortTypeCollection(this);
+                return portTypes;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Bindings"]/*' />
@@ -138,8 +183,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("binding")]
-        public BindingCollection Bindings {
-            get { if (bindings == null) bindings = new BindingCollection(this); return bindings; }
+        public BindingCollection Bindings
+        {
+            get
+            {
+                if (bindings == null)
+                    bindings = new BindingCollection(this);
+                return bindings;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Services"]/*' />
@@ -147,8 +198,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("service")]
-        public ServiceCollection Services {
-            get { if (services == null) services = new ServiceCollection(this); return services; }
+        public ServiceCollection Services
+        {
+            get
+            {
+                if (services == null)
+                    services = new ServiceCollection(this);
+                return services;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.TargetNamespace"]/*' />
@@ -156,7 +213,8 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("targetNamespace")]
-        public string TargetNamespace {
+        public string TargetNamespace
+        {
             get { return targetNamespace; }
             set { targetNamespace = value; }
         }
@@ -165,19 +223,28 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static XmlSchema Schema {
-            get {
-                if (schema == null) {
+        public static XmlSchema Schema
+        {
+            get
+            {
+                if (schema == null)
+                {
                     schema = XmlSchema.Read(new StringReader(Schemas.Wsdl), null);
                 }
                 return schema;
             }
         }
 
-        internal static XmlSchema SoapEncodingSchema {
-            get {
-                if (soapEncodingSchema == null) {
-                    soapEncodingSchema = XmlSchema.Read(new StringReader(Schemas.SoapEncoding), null);
+        internal static XmlSchema SoapEncodingSchema
+        {
+            get
+            {
+                if (soapEncodingSchema == null)
+                {
+                    soapEncodingSchema = XmlSchema.Read(
+                        new StringReader(Schemas.SoapEncoding),
+                        null
+                    );
                 }
                 return soapEncodingSchema;
             }
@@ -188,22 +255,26 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public StringCollection ValidationWarnings {
-            get {
-                if (validationWarnings == null) {
+        public StringCollection ValidationWarnings
+        {
+            get
+            {
+                if (validationWarnings == null)
+                {
                     validationWarnings = new StringCollection();
                 }
                 return validationWarnings;
             }
         }
 
-        internal void SetWarnings(StringCollection warnings) {
+        internal void SetWarnings(StringCollection warnings)
+        {
             this.validationWarnings = warnings;
         }
 
         // This is a special serializer that hardwires to the generated
         // ServiceDescriptionSerializer. To regenerate the serializer
-        // Turn on KEEPTEMPFILES 
+        // Turn on KEEPTEMPFILES
         // Restart server
         // Run wsdl as follows
         //   wsdl <URL_FOR_VALID_ASMX_FILE>?wsdl
@@ -217,23 +288,39 @@ namespace System.Web.Services.Description {
         // change Serialize to call the new one)
         // Ensure the public Read method is Read126_definitions (If not
         // change Deserialize to call the new one)
-        internal class ServiceDescriptionSerializer : XmlSerializer {
-            protected override XmlSerializationReader CreateReader() {
+        internal class ServiceDescriptionSerializer : XmlSerializer
+        {
+            protected override XmlSerializationReader CreateReader()
+            {
                 return new ServiceDescriptionSerializationReader();
             }
-            protected override XmlSerializationWriter CreateWriter() {
+
+            protected override XmlSerializationWriter CreateWriter()
+            {
                 return new ServiceDescriptionSerializationWriter();
             }
-            public override bool CanDeserialize(System.Xml.XmlReader xmlReader) {
+
+            public override bool CanDeserialize(System.Xml.XmlReader xmlReader)
+            {
                 return xmlReader.IsStartElement("definitions", ServiceDescription.Namespace);
             }
-            protected override void Serialize(Object objectToSerialize, XmlSerializationWriter writer) {
-                ((ServiceDescriptionSerializationWriter)writer).Write125_definitions(objectToSerialize);
+
+            protected override void Serialize(
+                Object objectToSerialize,
+                XmlSerializationWriter writer
+            )
+            {
+                ((ServiceDescriptionSerializationWriter)writer).Write125_definitions(
+                    objectToSerialize
+                );
             }
-            protected override object Deserialize(XmlSerializationReader reader) {
+
+            protected override object Deserialize(XmlSerializationReader reader)
+            {
                 return ((ServiceDescriptionSerializationReader)reader).Read125_definitions();
             }
         }
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Serializer"]/*' />
         /// <devdoc>
         /// Returns the serializer for processing web service calls.  The serializer is customized according
@@ -242,36 +329,48 @@ namespace System.Web.Services.Description {
         /// <internalonly/>
         /// </devdoc>
         [XmlIgnore]
-        public static XmlSerializer Serializer {
-            get { 
-                if (serializer == null) {
+        public static XmlSerializer Serializer
+        {
+            get
+            {
+                if (serializer == null)
+                {
                     WebServicesSection config = WebServicesSection.Current;
                     XmlAttributeOverrides overrides = new XmlAttributeOverrides();
                     XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
                     ns.Add("s", XmlSchema.Namespace);
-                    WebServicesSection.LoadXmlFormatExtensions(config.GetAllFormatExtensionTypes(), overrides, ns);
+                    WebServicesSection.LoadXmlFormatExtensions(
+                        config.GetAllFormatExtensionTypes(),
+                        overrides,
+                        ns
+                    );
                     namespaces = ns;
                     if (config.ServiceDescriptionExtended)
                         serializer = new XmlSerializer(typeof(ServiceDescription), overrides);
                     else
                         serializer = new ServiceDescriptionSerializer();
-                    serializer.UnknownElement += new XmlElementEventHandler(RuntimeUtils.OnUnknownElement);
+                    serializer.UnknownElement += new XmlElementEventHandler(
+                        RuntimeUtils.OnUnknownElement
+                    );
                 }
                 return serializer;
             }
         }
 
-        internal string AppSettingBaseUrl {
+        internal string AppSettingBaseUrl
+        {
             get { return appSettingBaseUrl; }
             set { appSettingBaseUrl = value; }
         }
 
-        internal string AppSettingUrlKey {
+        internal string AppSettingUrlKey
+        {
             get { return appSettingUrlKey; }
             set { appSettingUrlKey = value; }
         }
 
-        internal ServiceDescription Next {
+        internal ServiceDescription Next
+        {
             get { return next; }
             set { next = value; }
         }
@@ -280,7 +379,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static ServiceDescription Read(TextReader textReader) {
+        public static ServiceDescription Read(TextReader textReader)
+        {
             return Read(textReader, false);
         }
 
@@ -288,7 +388,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static ServiceDescription Read(Stream stream) {
+        public static ServiceDescription Read(Stream stream)
+        {
             return Read(stream, false);
         }
 
@@ -296,7 +397,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static ServiceDescription Read(XmlReader reader) {
+        public static ServiceDescription Read(XmlReader reader)
+        {
             return Read(reader, false);
         }
 
@@ -304,7 +406,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static ServiceDescription Read(string fileName) {
+        public static ServiceDescription Read(string fileName)
+        {
             return Read(fileName, false);
         }
 
@@ -312,7 +415,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static ServiceDescription Read(TextReader textReader, bool validate) {
+        public static ServiceDescription Read(TextReader textReader, bool validate)
+        {
             XmlTextReader reader = new XmlTextReader(textReader);
             reader.WhitespaceHandling = WhitespaceHandling.Significant;
             reader.XmlResolver = null;
@@ -324,7 +428,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static ServiceDescription Read(Stream stream, bool validate) {
+        public static ServiceDescription Read(Stream stream, bool validate)
+        {
             XmlTextReader reader = new XmlTextReader(stream);
             reader.WhitespaceHandling = WhitespaceHandling.Significant;
             reader.XmlResolver = null;
@@ -336,12 +441,15 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static ServiceDescription Read(string fileName, bool validate) {
+        public static ServiceDescription Read(string fileName, bool validate)
+        {
             StreamReader reader = new StreamReader(fileName, Encoding.Default, true);
-            try {
+            try
+            {
                 return Read(reader, validate);
             }
-            finally {
+            finally
+            {
                 reader.Close();
             }
         }
@@ -350,27 +458,35 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static ServiceDescription Read(XmlReader reader, bool validate) {
-            if (validate) {
+        public static ServiceDescription Read(XmlReader reader, bool validate)
+        {
+            if (validate)
+            {
                 XmlReaderSettings readerSettings = new XmlReaderSettings();
 
                 readerSettings.ValidationType = ValidationType.Schema;
-                readerSettings.ValidationFlags = XmlSchemaValidationFlags.ProcessIdentityConstraints;
+                readerSettings.ValidationFlags =
+                    XmlSchemaValidationFlags.ProcessIdentityConstraints;
 
                 readerSettings.Schemas.Add(Schema);
                 readerSettings.Schemas.Add(SoapBinding.Schema);
-                readerSettings.ValidationEventHandler += new ValidationEventHandler(InstanceValidation);
+                readerSettings.ValidationEventHandler += new ValidationEventHandler(
+                    InstanceValidation
+                );
                 warnings.Clear();
                 XmlReader validatingReader = XmlReader.Create(reader, readerSettings);
-                if (reader.ReadState != ReadState.Initial) {
+                if (reader.ReadState != ReadState.Initial)
+                {
                     //underlying reader has moved, so move validatingreader as well
                     validatingReader.Read();
                 }
-                ServiceDescription sd = (ServiceDescription)Serializer.Deserialize(validatingReader);
+                ServiceDescription sd = (ServiceDescription)
+                    Serializer.Deserialize(validatingReader);
                 sd.SetWarnings(warnings);
                 return sd;
             }
-            else {
+            else
+            {
                 return (ServiceDescription)Serializer.Deserialize(reader);
             }
         }
@@ -379,7 +495,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static bool CanRead(XmlReader reader) {
+        public static bool CanRead(XmlReader reader)
+        {
             return Serializer.CanDeserialize(reader);
         }
 
@@ -387,12 +504,15 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Write(string fileName) {
+        public void Write(string fileName)
+        {
             StreamWriter writer = new StreamWriter(fileName);
-            try {
+            try
+            {
                 Write(writer);
             }
-            finally {
+            finally
+            {
                 writer.Close();
             }
         }
@@ -401,7 +521,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Write(TextWriter writer) {
+        public void Write(TextWriter writer)
+        {
             XmlTextWriter xmlWriter = new XmlTextWriter(writer);
             xmlWriter.Formatting = Formatting.Indented;
             xmlWriter.Indentation = 2;
@@ -412,58 +533,79 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Write(Stream stream) {
+        public void Write(Stream stream)
+        {
             TextWriter writer = new StreamWriter(stream);
             Write(writer);
             writer.Flush();
         }
 
-
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Write3"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Write(XmlWriter writer) {
+        public void Write(XmlWriter writer)
+        {
             XmlSerializer serializer = Serializer;
             XmlSerializerNamespaces ns;
-            if (Namespaces == null || Namespaces.Count == 0) {
+            if (Namespaces == null || Namespaces.Count == 0)
+            {
                 ns = new XmlSerializerNamespaces(namespaces);
                 ns.Add(ServiceDescription.Prefix, ServiceDescription.Namespace);
-                if (this.TargetNamespace != null && this.TargetNamespace.Length != 0) {
+                if (this.TargetNamespace != null && this.TargetNamespace.Length != 0)
+                {
                     ns.Add("tns", this.TargetNamespace);
                 }
-                for (int i = 0; i < Types.Schemas.Count; i++) {
+                for (int i = 0; i < Types.Schemas.Count; i++)
+                {
                     string tns = Types.Schemas[i].TargetNamespace;
-                    if (tns != null && tns.Length > 0 && tns != this.TargetNamespace && tns != ServiceDescription.Namespace) {
+                    if (
+                        tns != null
+                        && tns.Length > 0
+                        && tns != this.TargetNamespace
+                        && tns != ServiceDescription.Namespace
+                    )
+                    {
                         ns.Add("s" + i.ToString(CultureInfo.InvariantCulture), tns);
                     }
                 }
-                for (int i = 0; i < Imports.Count; i++) {
+                for (int i = 0; i < Imports.Count; i++)
+                {
                     Import import = Imports[i];
-                    if (import.Namespace.Length > 0) {
+                    if (import.Namespace.Length > 0)
+                    {
                         ns.Add("i" + i.ToString(CultureInfo.InvariantCulture), import.Namespace);
                     }
                 }
             }
-            else {
+            else
+            {
                 ns = Namespaces;
             }
             serializer.Serialize(writer, this, ns);
         }
 
-        internal static WsiProfiles GetConformanceClaims(XmlElement documentation) {
+        internal static WsiProfiles GetConformanceClaims(XmlElement documentation)
+        {
             if (documentation == null)
                 return WsiProfiles.None;
 
             WsiProfiles existingClaims = WsiProfiles.None;
 
             XmlNode child = documentation.FirstChild;
-            while (child != null) {
+            while (child != null)
+            {
                 XmlNode sibling = child.NextSibling;
-                if (child is XmlElement) {
+                if (child is XmlElement)
+                {
                     XmlElement element = (XmlElement)child;
-                    if (element.LocalName == Soap.Element.Claim && element.NamespaceURI == Soap.ConformanceClaim) {
-                        if (Soap.BasicProfile1_1 == element.GetAttribute(Soap.Attribute.ConformsTo)) {
+                    if (
+                        element.LocalName == Soap.Element.Claim
+                        && element.NamespaceURI == Soap.ConformanceClaim
+                    )
+                    {
+                        if (Soap.BasicProfile1_1 == element.GetAttribute(Soap.Attribute.ConformsTo))
+                        {
                             existingClaims |= WsiProfiles.BasicProfile1_1;
                         }
                     }
@@ -473,7 +615,8 @@ namespace System.Web.Services.Description {
             return existingClaims;
         }
 
-        internal static void AddConformanceClaims(XmlElement documentation, WsiProfiles claims) {
+        internal static void AddConformanceClaims(XmlElement documentation, WsiProfiles claims)
+        {
             //
             claims &= SupportedClaims;
             if (claims == WsiProfiles.None)
@@ -486,27 +629,33 @@ namespace System.Web.Services.Description {
                 return;
 
             XmlDocument d = documentation.OwnerDocument;
-            if ((claims & WsiProfiles.BasicProfile1_1) != 0) {
-                XmlElement claim = d.CreateElement(Soap.ClaimPrefix, Soap.Element.Claim, Soap.ConformanceClaim);
+            if ((claims & WsiProfiles.BasicProfile1_1) != 0)
+            {
+                XmlElement claim = d.CreateElement(
+                    Soap.ClaimPrefix,
+                    Soap.Element.Claim,
+                    Soap.ConformanceClaim
+                );
                 claim.SetAttribute(Soap.Attribute.ConformsTo, Soap.BasicProfile1_1);
                 documentation.InsertBefore(claim, null);
             }
         }
     }
 
-
     /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Import"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class Import : DocumentableItem {
+    public sealed class Import : DocumentableItem
+    {
         string ns;
         string location;
         ServiceDescription parent;
         ServiceDescriptionFormatExtensionCollection extensions;
 
-        internal void SetParent(ServiceDescription parent) {
+        internal void SetParent(ServiceDescription parent)
+        {
             this.parent = parent;
         }
 
@@ -515,15 +664,22 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Import.ServiceDescription"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ServiceDescription ServiceDescription {
+        public ServiceDescription ServiceDescription
+        {
             get { return parent; }
         }
 
@@ -532,7 +688,8 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("namespace")]
-        public string Namespace {
+        public string Namespace
+        {
             get { return ns == null ? string.Empty : ns; }
             set { ns = value; }
         }
@@ -542,42 +699,51 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("location")]
-        public string Location {
+        public string Location
+        {
             get { return location == null ? string.Empty : location; }
             set { location = value; }
         }
     }
 
-
     /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="DocumentableItem"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public abstract class DocumentableItem {
+    public abstract class DocumentableItem
+    {
         XmlDocument parent;
         string documentation;
         XmlElement documentationElement;
         XmlAttribute[] anyAttribute;
         XmlSerializerNamespaces namespaces;
- 
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="DocumentableItem.Documentation"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public string Documentation {
-            get {
+        public string Documentation
+        {
+            get
+            {
                 if (documentation != null)
                     return documentation;
                 if (documentationElement == null)
                     return string.Empty;
                 return documentationElement.InnerXml;
             }
-            set {
+            set
+            {
                 documentation = value;
                 StringWriter writer = new StringWriter(CultureInfo.InvariantCulture);
                 XmlTextWriter xmlWriter = new XmlTextWriter(writer);
-                xmlWriter.WriteElementString(ServiceDescription.Prefix, "documentation", ServiceDescription.Namespace, value);
+                xmlWriter.WriteElementString(
+                    ServiceDescription.Prefix,
+                    "documentation",
+                    ServiceDescription.Namespace,
+                    value
+                );
                 Parent.LoadXml(writer.ToString());
                 documentationElement = parent.DocumentElement;
                 xmlWriter.Close();
@@ -590,22 +756,21 @@ namespace System.Web.Services.Description {
         /// </devdoc>
         [XmlAnyElement("documentation", Namespace = ServiceDescription.Namespace)]
         [ComVisible(false)]
-        public XmlElement DocumentationElement {
+        public XmlElement DocumentationElement
+        {
             get { return documentationElement; }
-            set {
-                documentationElement = value; 
+            set
+            {
+                documentationElement = value;
                 documentation = null;
             }
         }
 
         [XmlAnyAttribute]
-        public System.Xml.XmlAttribute[] ExtensibleAttributes {
-            get {
-                return this.anyAttribute;
-            }
-            set {
-                this.anyAttribute = value;
-            }
+        public System.Xml.XmlAttribute[] ExtensibleAttributes
+        {
+            get { return this.anyAttribute; }
+            set { this.anyAttribute = value; }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="DocumentableItem.Namespaces"]/*' />
@@ -613,8 +778,10 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlNamespaceDeclarations]
-        public XmlSerializerNamespaces Namespaces {
-            get {
+        public XmlSerializerNamespaces Namespaces
+        {
+            get
+            {
                 if (this.namespaces == null)
                     this.namespaces = new XmlSerializerNamespaces();
                 return this.namespaces;
@@ -629,17 +796,25 @@ namespace System.Web.Services.Description {
         [XmlIgnore]
         public abstract ServiceDescriptionFormatExtensionCollection Extensions { get; }
 
-        internal XmlDocument Parent {
-            get { 
+        internal XmlDocument Parent
+        {
+            get
+            {
                 if (parent == null)
                     parent = new XmlDocument();
                 return parent;
             }
         }
 
-        internal XmlElement GetDocumentationElement() {
-            if (documentationElement == null) {
-                documentationElement = Parent.CreateElement(ServiceDescription.Prefix, "documentation", ServiceDescription.Namespace);
+        internal XmlElement GetDocumentationElement()
+        {
+            if (documentationElement == null)
+            {
+                documentationElement = Parent.CreateElement(
+                    ServiceDescription.Prefix,
+                    "documentation",
+                    ServiceDescription.Namespace
+                );
                 Parent.InsertBefore(documentationElement, null);
             }
             return documentationElement;
@@ -650,7 +825,8 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public abstract class NamedItem : DocumentableItem {
+    public abstract class NamedItem : DocumentableItem
+    {
         string name;
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="NamedItem.Name"]/*' />
@@ -658,7 +834,8 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("name")]
-        public string Name {
+        public string Name
+        {
             get { return name; }
             set { name = value; }
         }
@@ -669,12 +846,14 @@ namespace System.Web.Services.Description {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class Port : NamedItem {
+    public sealed class Port : NamedItem
+    {
         ServiceDescriptionFormatExtensionCollection extensions;
         XmlQualifiedName binding = XmlQualifiedName.Empty;
         Service parent;
 
-        internal void SetParent(Service parent) {
+        internal void SetParent(Service parent)
+        {
             this.parent = parent;
         }
 
@@ -682,7 +861,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Service Service {
+        public Service Service
+        {
             get { return parent; }
         }
 
@@ -691,8 +871,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Port.Binding"]/*' />
@@ -700,7 +886,8 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("binding")]
-        public XmlQualifiedName Binding {
+        public XmlQualifiedName Binding
+        {
             get { return binding; }
             set { binding = value; }
         }
@@ -711,12 +898,14 @@ namespace System.Web.Services.Description {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class Service : NamedItem {
+    public sealed class Service : NamedItem
+    {
         ServiceDescriptionFormatExtensionCollection extensions;
         PortCollection ports;
         ServiceDescription parent;
 
-        internal void SetParent(ServiceDescription parent) {
+        internal void SetParent(ServiceDescription parent)
+        {
             this.parent = parent;
         }
 
@@ -724,7 +913,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ServiceDescription ServiceDescription {
+        public ServiceDescription ServiceDescription
+        {
             get { return parent; }
         }
 
@@ -733,8 +923,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Service.Ports"]/*' />
@@ -742,8 +938,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("port")]
-        public PortCollection Ports {
-            get { if (ports == null) ports = new PortCollection(this); return ports; }
+        public PortCollection Ports
+        {
+            get
+            {
+                if (ports == null)
+                    ports = new PortCollection(this);
+                return ports;
+            }
         }
     }
 
@@ -752,7 +954,8 @@ namespace System.Web.Services.Description {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class FaultBinding : MessageBinding {
+    public sealed class FaultBinding : MessageBinding
+    {
         ServiceDescriptionFormatExtensionCollection extensions;
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBinding.Extensions"]/*' />
@@ -760,8 +963,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
     }
 
@@ -769,10 +978,12 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public abstract class MessageBinding : NamedItem {
+    public abstract class MessageBinding : NamedItem
+    {
         OperationBinding parent;
 
-        internal void SetParent(OperationBinding parent) {
+        internal void SetParent(OperationBinding parent)
+        {
             this.parent = parent;
         }
 
@@ -780,7 +991,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public OperationBinding OperationBinding {
+        public OperationBinding OperationBinding
+        {
             get { return parent; }
         }
     }
@@ -790,16 +1002,23 @@ namespace System.Web.Services.Description {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class InputBinding : MessageBinding {
-        ServiceDescriptionFormatExtensionCollection extensions; 
+    public sealed class InputBinding : MessageBinding
+    {
+        ServiceDescriptionFormatExtensionCollection extensions;
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="InputBinding.Extensions"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
     }
 
@@ -808,16 +1027,23 @@ namespace System.Web.Services.Description {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class OutputBinding : MessageBinding {
-        ServiceDescriptionFormatExtensionCollection extensions; 
+    public sealed class OutputBinding : MessageBinding
+    {
+        ServiceDescriptionFormatExtensionCollection extensions;
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OutputBinding.Extensions"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
     }
 
@@ -826,14 +1052,16 @@ namespace System.Web.Services.Description {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class OperationBinding : NamedItem {
-        ServiceDescriptionFormatExtensionCollection extensions; 
+    public sealed class OperationBinding : NamedItem
+    {
+        ServiceDescriptionFormatExtensionCollection extensions;
         FaultBindingCollection faults;
         InputBinding input;
         OutputBinding output;
         Binding parent;
 
-        internal void SetParent(Binding parent) {
+        internal void SetParent(Binding parent)
+        {
             this.parent = parent;
         }
 
@@ -841,7 +1069,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Binding Binding {
+        public Binding Binding
+        {
             get { return parent; }
         }
 
@@ -850,8 +1079,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBinding.Input"]/*' />
@@ -859,14 +1094,18 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("input")]
-        public InputBinding Input {
+        public InputBinding Input
+        {
             get { return input; }
-            set {
-                if (input != null) {
+            set
+            {
+                if (input != null)
+                {
                     input.SetParent(null);
                 }
                 input = value;
-                if (input != null) {
+                if (input != null)
+                {
                     input.SetParent(this);
                 }
             }
@@ -877,14 +1116,18 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("output")]
-        public OutputBinding Output {
+        public OutputBinding Output
+        {
             get { return output; }
-            set {
-                if (output != null) {
+            set
+            {
+                if (output != null)
+                {
                     output.SetParent(null);
                 }
                 output = value;
-                if (output != null) {
+                if (output != null)
+                {
                     output.SetParent(this);
                 }
             }
@@ -895,8 +1138,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("fault")]
-        public FaultBindingCollection Faults {
-            get { if (faults == null) faults = new FaultBindingCollection(this); return faults; }
+        public FaultBindingCollection Faults
+        {
+            get
+            {
+                if (faults == null)
+                    faults = new FaultBindingCollection(this);
+                return faults;
+            }
         }
     }
 
@@ -905,13 +1154,15 @@ namespace System.Web.Services.Description {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class Binding : NamedItem {
-        ServiceDescriptionFormatExtensionCollection extensions; 
-        OperationBindingCollection operations; 
+    public sealed class Binding : NamedItem
+    {
+        ServiceDescriptionFormatExtensionCollection extensions;
+        OperationBindingCollection operations;
         XmlQualifiedName type = XmlQualifiedName.Empty;
         ServiceDescription parent;
 
-        internal void SetParent(ServiceDescription parent) {
+        internal void SetParent(ServiceDescription parent)
+        {
             this.parent = parent;
         }
 
@@ -919,7 +1170,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ServiceDescription ServiceDescription {
+        public ServiceDescription ServiceDescription
+        {
             get { return parent; }
         }
 
@@ -928,8 +1180,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Binding.Operations"]/*' />
@@ -937,8 +1195,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("operation")]
-        public OperationBindingCollection Operations {
-            get { if (operations == null) operations = new OperationBindingCollection(this); return operations; }
+        public OperationBindingCollection Operations
+        {
+            get
+            {
+                if (operations == null)
+                    operations = new OperationBindingCollection(this);
+                return operations;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Binding.Type"]/*' />
@@ -946,10 +1210,13 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("type")]
-        public XmlQualifiedName Type {
-            get { 
-                if ((object)type == null) return XmlQualifiedName.Empty;
-                return type; 
+        public XmlQualifiedName Type
+        {
+            get
+            {
+                if ((object)type == null)
+                    return XmlQualifiedName.Empty;
+                return type;
             }
             set { type = value; }
         }
@@ -959,11 +1226,13 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public abstract class OperationMessage : NamedItem {
+    public abstract class OperationMessage : NamedItem
+    {
         XmlQualifiedName message = XmlQualifiedName.Empty;
         Operation parent;
 
-        internal void SetParent(Operation parent) {
+        internal void SetParent(Operation parent)
+        {
             this.parent = parent;
         }
 
@@ -971,7 +1240,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Operation Operation {
+        public Operation Operation
+        {
             get { return parent; }
         }
 
@@ -980,7 +1250,8 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("message")]
-        public XmlQualifiedName Message {
+        public XmlQualifiedName Message
+        {
             get { return message; }
             set { message = value; }
         }
@@ -991,7 +1262,8 @@ namespace System.Web.Services.Description {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class OperationFault : OperationMessage {
+    public sealed class OperationFault : OperationMessage
+    {
         ServiceDescriptionFormatExtensionCollection extensions;
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
@@ -999,8 +1271,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
     }
 
@@ -1009,7 +1287,8 @@ namespace System.Web.Services.Description {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class OperationInput : OperationMessage {
+    public sealed class OperationInput : OperationMessage
+    {
         ServiceDescriptionFormatExtensionCollection extensions;
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
@@ -1017,8 +1296,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
     }
 
@@ -1027,7 +1312,8 @@ namespace System.Web.Services.Description {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class OperationOutput : OperationMessage {
+    public sealed class OperationOutput : OperationMessage
+    {
         ServiceDescriptionFormatExtensionCollection extensions;
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
@@ -1035,8 +1321,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
     }
 
@@ -1045,14 +1337,16 @@ namespace System.Web.Services.Description {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class Operation : NamedItem {
+    public sealed class Operation : NamedItem
+    {
         string[] parameters;
         OperationMessageCollection messages;
         OperationFaultCollection faults;
         PortType parent;
         ServiceDescriptionFormatExtensionCollection extensions;
 
-        internal void SetParent(PortType parent) {
+        internal void SetParent(PortType parent)
+        {
             this.parent = parent;
         }
 
@@ -1061,34 +1355,47 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Operation.PortType"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public PortType PortType {
+        public PortType PortType
+        {
             get { return parent; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Operation.ParameterOrderString"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("parameterOrder"), DefaultValue("")]
-        public string ParameterOrderString {
-            get { 
-                if (parameters == null) return string.Empty;
+        public string ParameterOrderString
+        {
+            get
+            {
+                if (parameters == null)
+                    return string.Empty;
                 StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < parameters.Length; i++) {
-                    if (i > 0) builder.Append(' ');
+                for (int i = 0; i < parameters.Length; i++)
+                {
+                    if (i > 0)
+                        builder.Append(' ');
                     builder.Append(parameters[i]);
                 }
-                return builder.ToString(); 
+                return builder.ToString();
             }
-            set {
+            set
+            {
                 if (value == null)
                     parameters = null;
                 else
@@ -1101,20 +1408,28 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public string[] ParameterOrder {
+        public string[] ParameterOrder
+        {
             get { return parameters; }
             set { parameters = value; }
         }
-
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Operation.Messages"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [XmlElement("input", typeof(OperationInput)), 
-        XmlElement("output", typeof(OperationOutput))]
-        public OperationMessageCollection Messages {
-            get { if (messages == null) messages = new OperationMessageCollection(this); return messages; }
+        [
+            XmlElement("input", typeof(OperationInput)),
+            XmlElement("output", typeof(OperationOutput))
+        ]
+        public OperationMessageCollection Messages
+        {
+            get
+            {
+                if (messages == null)
+                    messages = new OperationMessageCollection(this);
+                return messages;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Operation.Faults"]/*' />
@@ -1122,59 +1437,83 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("fault")]
-        public OperationFaultCollection Faults {
-            get { if (faults == null) faults = new OperationFaultCollection(this); return faults; }
+        public OperationFaultCollection Faults
+        {
+            get
+            {
+                if (faults == null)
+                    faults = new OperationFaultCollection(this);
+                return faults;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Operation.IsBoundBy"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IsBoundBy(OperationBinding operationBinding) {
-            if (operationBinding.Name != Name) return false;
+        public bool IsBoundBy(OperationBinding operationBinding)
+        {
+            if (operationBinding.Name != Name)
+                return false;
             OperationMessage input = Messages.Input;
-            if (input != null) {
-                if (operationBinding.Input == null) return false;
+            if (input != null)
+            {
+                if (operationBinding.Input == null)
+                    return false;
 
                 string portTypeInputName = GetMessageName(Name, input.Name, true);
-                string bindingInputName = GetMessageName(operationBinding.Name, operationBinding.Input.Name, true);
-                if (bindingInputName != portTypeInputName) return false;
+                string bindingInputName = GetMessageName(
+                    operationBinding.Name,
+                    operationBinding.Input.Name,
+                    true
+                );
+                if (bindingInputName != portTypeInputName)
+                    return false;
             }
             else if (operationBinding.Input != null)
                 return false;
-                
+
             OperationMessage output = Messages.Output;
-            if (output != null) {
-                if (operationBinding.Output == null) return false;
+            if (output != null)
+            {
+                if (operationBinding.Output == null)
+                    return false;
 
                 string portTypeOutputName = GetMessageName(Name, output.Name, false);
-                string bindingOutputName = GetMessageName(operationBinding.Name, operationBinding.Output.Name, false);
-                if (bindingOutputName != portTypeOutputName) return false;
+                string bindingOutputName = GetMessageName(
+                    operationBinding.Name,
+                    operationBinding.Output.Name,
+                    false
+                );
+                if (bindingOutputName != portTypeOutputName)
+                    return false;
             }
             else if (operationBinding.Output != null)
                 return false;
             return true;
         }
 
-        private string GetMessageName(string operationName, string messageName, bool isInput) {
+        private string GetMessageName(string operationName, string messageName, bool isInput)
+        {
             if (messageName != null && messageName.Length > 0)
                 return messageName;
-            
-            switch (Messages.Flow) {
-            case OperationFlow.RequestResponse:
-                if (isInput)
-                    return operationName + "Request";
-                return operationName + "Response";
-            case OperationFlow.OneWay:
-                if (isInput)
-                    return operationName;
-                Debug.Assert(isInput == true, "Oneway flow cannot have an output message");
-                return null;
-            // Cases not supported
-            case OperationFlow.SolicitResponse:
-                return null;
-            case OperationFlow.Notification:
-                return null;
+
+            switch (Messages.Flow)
+            {
+                case OperationFlow.RequestResponse:
+                    if (isInput)
+                        return operationName + "Request";
+                    return operationName + "Response";
+                case OperationFlow.OneWay:
+                    if (isInput)
+                        return operationName;
+                    Debug.Assert(isInput == true, "Oneway flow cannot have an output message");
+                    return null;
+                // Cases not supported
+                case OperationFlow.SolicitResponse:
+                    return null;
+                case OperationFlow.Notification:
+                    return null;
             }
             Debug.Assert(false, "Unknown message flow");
             return null;
@@ -1186,12 +1525,14 @@ namespace System.Web.Services.Description {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class PortType : NamedItem {
+    public sealed class PortType : NamedItem
+    {
         OperationCollection operations;
         ServiceDescription parent;
         ServiceDescriptionFormatExtensionCollection extensions;
 
-        internal void SetParent(ServiceDescription parent) {
+        internal void SetParent(ServiceDescription parent)
+        {
             this.parent = parent;
         }
 
@@ -1200,15 +1541,22 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortType.ServiceDescription"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ServiceDescription ServiceDescription {
+        public ServiceDescription ServiceDescription
+        {
             get { return parent; }
         }
 
@@ -1217,8 +1565,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("operation")]
-        public OperationCollection Operations {
-            get { if (operations == null) operations = new OperationCollection(this); return operations; }
+        public OperationCollection Operations
+        {
+            get
+            {
+                if (operations == null)
+                    operations = new OperationCollection(this);
+                return operations;
+            }
         }
     }
 
@@ -1227,12 +1581,14 @@ namespace System.Web.Services.Description {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class Message : NamedItem {
+    public sealed class Message : NamedItem
+    {
         MessagePartCollection parts;
         ServiceDescription parent;
         ServiceDescriptionFormatExtensionCollection extensions;
 
-        internal void SetParent(ServiceDescription parent) {
+        internal void SetParent(ServiceDescription parent)
+        {
             this.parent = parent;
         }
 
@@ -1241,15 +1597,22 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Message.ServiceDescription"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ServiceDescription ServiceDescription {
+        public ServiceDescription ServiceDescription
+        {
             get { return parent; }
         }
 
@@ -1258,17 +1621,25 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("part")]
-        public MessagePartCollection Parts {
-            get { if (parts == null) parts = new MessagePartCollection(this); return parts; }
+        public MessagePartCollection Parts
+        {
+            get
+            {
+                if (parts == null)
+                    parts = new MessagePartCollection(this);
+                return parts;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Message.FindPartsByName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public MessagePart[] FindPartsByName(string[] partNames) {
+        public MessagePart[] FindPartsByName(string[] partNames)
+        {
             MessagePart[] partArray = new MessagePart[partNames.Length];
-            for (int i = 0; i < partNames.Length; i++) {
+            for (int i = 0; i < partNames.Length; i++)
+            {
                 partArray[i] = FindPartByName(partNames[i]);
             }
             return partArray;
@@ -1278,12 +1649,23 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public MessagePart FindPartByName(string partName) {
-            for (int i = 0; i < parts.Count; i++) {
+        public MessagePart FindPartByName(string partName)
+        {
+            for (int i = 0; i < parts.Count; i++)
+            {
                 MessagePart part = parts[i];
-                if (part.Name == partName) return part;
+                if (part.Name == partName)
+                    return part;
             }
-            throw new ArgumentException(Res.GetString(Res.MissingMessagePartForMessageFromNamespace3, partName, Name, ServiceDescription.TargetNamespace), "partName");
+            throw new ArgumentException(
+                Res.GetString(
+                    Res.MissingMessagePartForMessageFromNamespace3,
+                    partName,
+                    Name,
+                    ServiceDescription.TargetNamespace
+                ),
+                "partName"
+            );
         }
     }
 
@@ -1292,13 +1674,15 @@ namespace System.Web.Services.Description {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class MessagePart : NamedItem {
+    public sealed class MessagePart : NamedItem
+    {
         XmlQualifiedName type = XmlQualifiedName.Empty;
         XmlQualifiedName element = XmlQualifiedName.Empty;
         Message parent;
         ServiceDescriptionFormatExtensionCollection extensions;
 
-        internal void SetParent(Message parent) {
+        internal void SetParent(Message parent)
+        {
             this.parent = parent;
         }
 
@@ -1307,15 +1691,22 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePart.Message"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Message Message {
+        public Message Message
+        {
             get { return parent; }
         }
 
@@ -1324,7 +1715,8 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("element")]
-        public XmlQualifiedName Element {
+        public XmlQualifiedName Element
+        {
             get { return element; }
             set { element = value; }
         }
@@ -1334,10 +1726,13 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("type")]
-        public XmlQualifiedName Type {
-            get { 
-                if ((object)type == null) return XmlQualifiedName.Empty;
-                return type; 
+        public XmlQualifiedName Type
+        {
+            get
+            {
+                if ((object)type == null)
+                    return XmlQualifiedName.Empty;
+                return type;
             }
             set { type = value; }
         }
@@ -1348,13 +1743,15 @@ namespace System.Web.Services.Description {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlFormatExtensionPoint("Extensions")]
-    public sealed class Types : DocumentableItem {
+    public sealed class Types : DocumentableItem
+    {
         XmlSchemas schemas;
         ServiceDescriptionFormatExtensionCollection extensions;
 
-        internal bool HasItems() { 
-            return (schemas != null && schemas.Count > 0) ||
-                (extensions != null && extensions.Count > 0);
+        internal bool HasItems()
+        {
+            return (schemas != null && schemas.Count > 0)
+                || (extensions != null && extensions.Count > 0);
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Types.Extensions"]/*' />
@@ -1362,8 +1759,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions { 
-            get { if (extensions == null) extensions = new ServiceDescriptionFormatExtensionCollection(this); return extensions; }
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get
+            {
+                if (extensions == null)
+                    extensions = new ServiceDescriptionFormatExtensionCollection(this);
+                return extensions;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Types.Schemas"]/*' />
@@ -1371,8 +1774,14 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("schema", typeof(XmlSchema), Namespace = XmlSchema.Namespace)]
-        public XmlSchemas Schemas {
-            get { if (schemas == null) schemas = new XmlSchemas(); return schemas; }
+        public XmlSchemas Schemas
+        {
+            get
+            {
+                if (schemas == null)
+                    schemas = new XmlSchemas();
+                return schemas;
+            }
         }
     }
 
@@ -1380,69 +1789,79 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class ServiceDescriptionFormatExtensionCollection : ServiceDescriptionBaseCollection {
+    public sealed class ServiceDescriptionFormatExtensionCollection
+        : ServiceDescriptionBaseCollection
+    {
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.ServiceDescriptionFormatExtensionCollection"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ServiceDescriptionFormatExtensionCollection(object parent) : base(parent) { }
+        public ServiceDescriptionFormatExtensionCollection(object parent)
+            : base(parent) { }
 
         ArrayList handledElements;
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public object this[int index] {
+        public object this[int index]
+        {
             get { return (object)List[index]; }
             set { List[index] = value; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Add(object extension) {
+        public int Add(object extension)
+        {
             return List.Add(extension);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Insert(int index, object extension) {
+        public void Insert(int index, object extension)
+        {
             List.Insert(index, extension);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int IndexOf(object extension) {
+        public int IndexOf(object extension)
+        {
             return List.IndexOf(extension);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool Contains(object extension) {
+        public bool Contains(object extension)
+        {
             return List.Contains(extension);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Remove(object extension) {
+        public void Remove(object extension)
+        {
             List.Remove(extension);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void CopyTo(object[] array, int index) {
+        public void CopyTo(object[] array, int index)
+        {
             List.CopyTo(array, index);
         }
 
@@ -1450,10 +1869,13 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public object Find(Type type) {
-            for (int i = 0; i < List.Count; i++) {
+        public object Find(Type type)
+        {
+            for (int i = 0; i < List.Count; i++)
+            {
                 object item = List[i];
-                if (type.IsAssignableFrom(item.GetType())) {
+                if (type.IsAssignableFrom(item.GetType()))
+                {
                     ((ServiceDescriptionFormatExtension)item).Handled = true;
                     return item;
                 }
@@ -1465,11 +1887,14 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public object[] FindAll(Type type) {
+        public object[] FindAll(Type type)
+        {
             ArrayList list = new ArrayList();
-            for (int i = 0; i < List.Count; i++) {
+            for (int i = 0; i < List.Count; i++)
+            {
                 object item = List[i];
-                if (type.IsAssignableFrom(item.GetType())) {
+                if (type.IsAssignableFrom(item.GetType()))
+                {
                     ((ServiceDescriptionFormatExtension)item).Handled = true;
                     list.Add(item);
                 }
@@ -1481,10 +1906,13 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlElement Find(string name, string ns) {
-            for (int i = 0; i < List.Count; i++) {
+        public XmlElement Find(string name, string ns)
+        {
+            for (int i = 0; i < List.Count; i++)
+            {
                 XmlElement element = List[i] as XmlElement;
-                if (element != null && element.LocalName == name && element.NamespaceURI == ns) {
+                if (element != null && element.LocalName == name && element.NamespaceURI == ns)
+                {
                     SetHandled(element);
                     return element;
                 }
@@ -1496,11 +1924,14 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlElement[] FindAll(string name, string ns) {
+        public XmlElement[] FindAll(string name, string ns)
+        {
             ArrayList list = new ArrayList();
-            for (int i = 0; i < List.Count; i++) {
+            for (int i = 0; i < List.Count; i++)
+            {
                 XmlElement element = List[i] as XmlElement;
-                if (element != null && element.LocalName == name && element.NamespaceURI == ns) {
+                if (element != null && element.LocalName == name && element.NamespaceURI == ns)
+                {
                     SetHandled(element);
                     list.Add(element);
                 }
@@ -1508,8 +1939,9 @@ namespace System.Web.Services.Description {
             return (XmlElement[])list.ToArray(typeof(XmlElement));
         }
 
-        void SetHandled(XmlElement element) {
-            if (handledElements == null) 
+        void SetHandled(XmlElement element)
+        {
+            if (handledElements == null)
                 handledElements = new ArrayList();
             if (!handledElements.Contains(element))
                 handledElements.Add(element);
@@ -1519,7 +1951,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IsHandled(object item) {
+        public bool IsHandled(object item)
+        {
             if (item is XmlElement)
                 return IsHandled((XmlElement)item);
             else
@@ -1530,23 +1963,32 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IsRequired(object item) {
+        public bool IsRequired(object item)
+        {
             if (item is XmlElement)
                 return IsRequired((XmlElement)item);
             else
                 return ((ServiceDescriptionFormatExtension)item).Required;
         }
 
-        bool IsHandled(XmlElement element) {
-            if (handledElements == null) return false;
+        bool IsHandled(XmlElement element)
+        {
+            if (handledElements == null)
+                return false;
             return handledElements.Contains(element);
         }
 
-        bool IsRequired(XmlElement element) {
-            XmlAttribute requiredAttr = element.Attributes["required", ServiceDescription.Namespace];
-            if (requiredAttr == null || requiredAttr.Value == null) {
+        bool IsRequired(XmlElement element)
+        {
+            XmlAttribute requiredAttr = element.Attributes[
+                "required",
+                ServiceDescription.Namespace
+            ];
+            if (requiredAttr == null || requiredAttr.Value == null)
+            {
                 requiredAttr = element.Attributes["required"];
-                if (requiredAttr == null || requiredAttr.Value == null) return false; // not required, by default
+                if (requiredAttr == null || requiredAttr.Value == null)
+                    return false; // not required, by default
             }
             return XmlConvert.ToBoolean(requiredAttr.Value);
         }
@@ -1555,17 +1997,25 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void SetParent(object value, object parent) {
-            if (value is ServiceDescriptionFormatExtension) ((ServiceDescriptionFormatExtension)value).SetParent(parent);
+        protected override void SetParent(object value, object parent)
+        {
+            if (value is ServiceDescriptionFormatExtension)
+                ((ServiceDescriptionFormatExtension)value).SetParent(parent);
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.OnValidate"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void OnValidate(object value) {
-            if (!(value is XmlElement || value is ServiceDescriptionFormatExtension)) 
-                throw new ArgumentException(Res.GetString(Res.OnlyXmlElementsOrTypesDerivingFromServiceDescriptionFormatExtension0), "value");
+        protected override void OnValidate(object value)
+        {
+            if (!(value is XmlElement || value is ServiceDescriptionFormatExtension))
+                throw new ArgumentException(
+                    Res.GetString(
+                        Res.OnlyXmlElementsOrTypesDerivingFromServiceDescriptionFormatExtension0
+                    ),
+                    "value"
+                );
             base.OnValidate(value);
         }
     }
@@ -1574,12 +2024,14 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public abstract class ServiceDescriptionFormatExtension {
-        object parent; 
+    public abstract class ServiceDescriptionFormatExtension
+    {
+        object parent;
         bool required;
         bool handled;
 
-        internal void SetParent(object parent) {
+        internal void SetParent(object parent)
+        {
             this.parent = parent;
         }
 
@@ -1587,7 +2039,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public object Parent {
+        public object Parent
+        {
             get { return parent; }
         }
 
@@ -1596,7 +2049,8 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("required", Namespace = ServiceDescription.Namespace), DefaultValue(false)]
-        public bool Required {
+        public bool Required
+        {
             get { return required; }
             set { required = value; }
         }
@@ -1606,7 +2060,8 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public bool Handled {
+        public bool Handled
+        {
             get { return handled; }
             set { handled = value; }
         }
@@ -1616,27 +2071,32 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public enum OperationFlow {
+    public enum OperationFlow
+    {
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFlow.None"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         None,
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFlow.OneWay"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         OneWay,
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFlow.Notification"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         Notification,
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFlow.RequestResponse"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         RequestResponse,
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFlow.SolicitResponse"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -1648,63 +2108,72 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class OperationMessageCollection : ServiceDescriptionBaseCollection {
-        internal OperationMessageCollection(Operation operation) : base(operation) { }
+    public sealed class OperationMessageCollection : ServiceDescriptionBaseCollection
+    {
+        internal OperationMessageCollection(Operation operation)
+            : base(operation) { }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public OperationMessage this[int index] {
+        public OperationMessage this[int index]
+        {
             get { return (OperationMessage)List[index]; }
             set { List[index] = value; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Add(OperationMessage operationMessage) {
+        public int Add(OperationMessage operationMessage)
+        {
             return List.Add(operationMessage);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Insert(int index, OperationMessage operationMessage) {
+        public void Insert(int index, OperationMessage operationMessage)
+        {
             List.Insert(index, operationMessage);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int IndexOf(OperationMessage operationMessage) {
+        public int IndexOf(OperationMessage operationMessage)
+        {
             return List.IndexOf(operationMessage);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool Contains(OperationMessage operationMessage) {
+        public bool Contains(OperationMessage operationMessage)
+        {
             return List.Contains(operationMessage);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Remove(OperationMessage operationMessage) {
+        public void Remove(OperationMessage operationMessage)
+        {
             List.Remove(operationMessage);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void CopyTo(OperationMessage[] array, int index) {
+        public void CopyTo(OperationMessage[] array, int index)
+        {
             List.CopyTo(array, index);
         }
 
@@ -1712,11 +2181,15 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public OperationInput Input {
-            get { 
-                for (int i = 0; i < List.Count; i++) {
+        public OperationInput Input
+        {
+            get
+            {
+                for (int i = 0; i < List.Count; i++)
+                {
                     OperationInput input = List[i] as OperationInput;
-                    if (input != null) {
+                    if (input != null)
+                    {
                         return input;
                     }
                 }
@@ -1728,11 +2201,15 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public OperationOutput Output {
-            get {
-                for (int i = 0; i < List.Count; i++) {
+        public OperationOutput Output
+        {
+            get
+            {
+                for (int i = 0; i < List.Count; i++)
+                {
                     OperationOutput output = List[i] as OperationOutput;
-                    if (output != null) {
+                    if (output != null)
+                    {
                         return output;
                     }
                 }
@@ -1744,24 +2221,33 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public OperationFlow Flow {
-            get {
-                if (List.Count == 0) {
+        public OperationFlow Flow
+        {
+            get
+            {
+                if (List.Count == 0)
+                {
                     return OperationFlow.None;
                 }
-                else if (List.Count == 1) {
-                    if (List[0] is OperationInput) {
+                else if (List.Count == 1)
+                {
+                    if (List[0] is OperationInput)
+                    {
                         return OperationFlow.OneWay;
                     }
-                    else {
+                    else
+                    {
                         return OperationFlow.Notification;
                     }
                 }
-                else {
-                    if (List[0] is OperationInput) {
+                else
+                {
+                    if (List[0] is OperationInput)
+                    {
                         return OperationFlow.RequestResponse;
                     }
-                    else {
+                    else
+                    {
                         return OperationFlow.SolicitResponse;
                     }
                 }
@@ -1772,7 +2258,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void SetParent(object value, object parent) {
+        protected override void SetParent(object value, object parent)
+        {
             ((OperationMessage)value).SetParent((Operation)parent);
         }
 
@@ -1780,10 +2267,13 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void OnInsert(int index, object value) {
+        protected override void OnInsert(int index, object value)
+        {
             if (Count > 1 || (Count == 1 && value.GetType() == List[0].GetType()))
-                throw new InvalidOperationException(Res.GetString(Res.WebDescriptionTooManyMessages));
-            
+                throw new InvalidOperationException(
+                    Res.GetString(Res.WebDescriptionTooManyMessages)
+                );
+
             base.OnInsert(index, value);
         }
 
@@ -1791,8 +2281,12 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void OnSet(int index, object oldValue, object newValue) {
-            if (oldValue.GetType() != newValue.GetType()) throw new InvalidOperationException(Res.GetString(Res.WebDescriptionTooManyMessages));
+        protected override void OnSet(int index, object oldValue, object newValue)
+        {
+            if (oldValue.GetType() != newValue.GetType())
+                throw new InvalidOperationException(
+                    Res.GetString(Res.WebDescriptionTooManyMessages)
+                );
             base.OnSet(index, oldValue, newValue);
         }
 
@@ -1800,9 +2294,13 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void OnValidate(object value) {
+        protected override void OnValidate(object value)
+        {
             if (!(value is OperationInput || value is OperationOutput))
-                throw new ArgumentException(Res.GetString(Res.OnlyOperationInputOrOperationOutputTypes), "value");
+                throw new ArgumentException(
+                    Res.GetString(Res.OnlyOperationInputOrOperationOutputTypes),
+                    "value"
+                );
             base.OnValidate(value);
         }
     }
@@ -1811,63 +2309,72 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class ImportCollection : ServiceDescriptionBaseCollection {
-        internal ImportCollection(ServiceDescription serviceDescription) : base(serviceDescription) { }
-        
+    public sealed class ImportCollection : ServiceDescriptionBaseCollection
+    {
+        internal ImportCollection(ServiceDescription serviceDescription)
+            : base(serviceDescription) { }
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ImportCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Import this[int index] {
+        public Import this[int index]
+        {
             get { return (Import)List[index]; }
             set { List[index] = value; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ImportCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Add(Import import) {
+        public int Add(Import import)
+        {
             return List.Add(import);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ImportCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Insert(int index, Import import) {
+        public void Insert(int index, Import import)
+        {
             List.Insert(index, import);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ImportCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int IndexOf(Import import) {
+        public int IndexOf(Import import)
+        {
             return List.IndexOf(import);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ImportCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool Contains(Import import) {
+        public bool Contains(Import import)
+        {
             return List.Contains(import);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ImportCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Remove(Import import) {
+        public void Remove(Import import)
+        {
             List.Remove(import);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ImportCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void CopyTo(Import[] array, int index) {
+        public void CopyTo(Import[] array, int index)
+        {
             List.CopyTo(array, index);
         }
 
@@ -1875,7 +2382,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void SetParent(object value, object parent) {
+        protected override void SetParent(object value, object parent)
+        {
             ((Import)value).SetParent((ServiceDescription)parent);
         }
     }
@@ -1884,63 +2392,72 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class MessageCollection : ServiceDescriptionBaseCollection {
-        internal MessageCollection(ServiceDescription serviceDescription) : base(serviceDescription) { }
-        
+    public sealed class MessageCollection : ServiceDescriptionBaseCollection
+    {
+        internal MessageCollection(ServiceDescription serviceDescription)
+            : base(serviceDescription) { }
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessageCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Message this[int index] {
+        public Message this[int index]
+        {
             get { return (Message)List[index]; }
             set { List[index] = value; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessageCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Add(Message message) {
+        public int Add(Message message)
+        {
             return List.Add(message);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessageCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Insert(int index, Message message) {
+        public void Insert(int index, Message message)
+        {
             List.Insert(index, message);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessageCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int IndexOf(Message message) {
+        public int IndexOf(Message message)
+        {
             return List.IndexOf(message);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessageCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool Contains(Message message) {
+        public bool Contains(Message message)
+        {
             return List.Contains(message);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessageCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Remove(Message message) {
+        public void Remove(Message message)
+        {
             List.Remove(message);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessageCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void CopyTo(Message[] array, int index) {
+        public void CopyTo(Message[] array, int index)
+        {
             List.CopyTo(array, index);
         }
 
@@ -1948,15 +2465,17 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Message this[string name] {
+        public Message this[string name]
+        {
             get { return (Message)Table[name]; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessageCollection.GetKey"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override string GetKey(object value) {
+        protected override string GetKey(object value)
+        {
             return ((Message)value).Name;
         }
 
@@ -1964,7 +2483,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void SetParent(object value, object parent) {
+        protected override void SetParent(object value, object parent)
+        {
             ((Message)value).SetParent((ServiceDescription)parent);
         }
     }
@@ -1973,63 +2493,72 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class PortCollection : ServiceDescriptionBaseCollection {
-        internal PortCollection(Service service) : base(service) { }
+    public sealed class PortCollection : ServiceDescriptionBaseCollection
+    {
+        internal PortCollection(Service service)
+            : base(service) { }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Port this[int index] {
+        public Port this[int index]
+        {
             get { return (Port)List[index]; }
             set { List[index] = value; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Add(Port port) {
+        public int Add(Port port)
+        {
             return List.Add(port);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Insert(int index, Port port) {
+        public void Insert(int index, Port port)
+        {
             List.Insert(index, port);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int IndexOf(Port port) {
+        public int IndexOf(Port port)
+        {
             return List.IndexOf(port);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool Contains(Port port) {
+        public bool Contains(Port port)
+        {
             return List.Contains(port);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Remove(Port port) {
+        public void Remove(Port port)
+        {
             List.Remove(port);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void CopyTo(Port[] array, int index) {
+        public void CopyTo(Port[] array, int index)
+        {
             List.CopyTo(array, index);
         }
 
@@ -2037,7 +2566,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Port this[string name] {
+        public Port this[string name]
+        {
             get { return (Port)Table[name]; }
         }
 
@@ -2045,7 +2575,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override string GetKey(object value) {
+        protected override string GetKey(object value)
+        {
             return ((Port)value).Name;
         }
 
@@ -2053,7 +2584,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void SetParent(object value, object parent) {
+        protected override void SetParent(object value, object parent)
+        {
             ((Port)value).SetParent((Service)parent);
         }
     }
@@ -2062,63 +2594,72 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class PortTypeCollection : ServiceDescriptionBaseCollection {
-        internal PortTypeCollection(ServiceDescription serviceDescription) : base(serviceDescription) { }
-        
+    public sealed class PortTypeCollection : ServiceDescriptionBaseCollection
+    {
+        internal PortTypeCollection(ServiceDescription serviceDescription)
+            : base(serviceDescription) { }
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public PortType this[int index] {
+        public PortType this[int index]
+        {
             get { return (PortType)List[index]; }
             set { List[index] = value; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Add(PortType portType) {
+        public int Add(PortType portType)
+        {
             return List.Add(portType);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Insert(int index, PortType portType) {
+        public void Insert(int index, PortType portType)
+        {
             List.Insert(index, portType);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int IndexOf(PortType portType) {
+        public int IndexOf(PortType portType)
+        {
             return List.IndexOf(portType);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool Contains(PortType portType) {
+        public bool Contains(PortType portType)
+        {
             return List.Contains(portType);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Remove(PortType portType) {
+        public void Remove(PortType portType)
+        {
             List.Remove(portType);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void CopyTo(PortType[] array, int index) {
+        public void CopyTo(PortType[] array, int index)
+        {
             List.CopyTo(array, index);
         }
 
@@ -2126,15 +2667,17 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public PortType this[string name] {
+        public PortType this[string name]
+        {
             get { return (PortType)Table[name]; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.GetKey"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override string GetKey(object value) {
+        protected override string GetKey(object value)
+        {
             return ((PortType)value).Name;
         }
 
@@ -2142,7 +2685,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void SetParent(object value, object parent) {
+        protected override void SetParent(object value, object parent)
+        {
             ((PortType)value).SetParent((ServiceDescription)parent);
         }
     }
@@ -2151,63 +2695,72 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class BindingCollection : ServiceDescriptionBaseCollection {
-        internal BindingCollection(ServiceDescription serviceDescription) : base(serviceDescription) { }
-        
+    public sealed class BindingCollection : ServiceDescriptionBaseCollection
+    {
+        internal BindingCollection(ServiceDescription serviceDescription)
+            : base(serviceDescription) { }
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="BindingCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Binding this[int index] {
+        public Binding this[int index]
+        {
             get { return (Binding)List[index]; }
             set { List[index] = value; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="BindingCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Add(Binding binding) {
+        public int Add(Binding binding)
+        {
             return List.Add(binding);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="BindingCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Insert(int index, Binding binding) {
+        public void Insert(int index, Binding binding)
+        {
             List.Insert(index, binding);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="BindingCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int IndexOf(Binding binding) {
+        public int IndexOf(Binding binding)
+        {
             return List.IndexOf(binding);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="BindingCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool Contains(Binding binding) {
+        public bool Contains(Binding binding)
+        {
             return List.Contains(binding);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="BindingCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Remove(Binding binding) {
+        public void Remove(Binding binding)
+        {
             List.Remove(binding);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="BindingCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void CopyTo(Binding[] array, int index) {
+        public void CopyTo(Binding[] array, int index)
+        {
             List.CopyTo(array, index);
         }
 
@@ -2215,15 +2768,17 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Binding this[string name] {
+        public Binding this[string name]
+        {
             get { return (Binding)Table[name]; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="BindingCollection.GetKey"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override string GetKey(object value) {
+        protected override string GetKey(object value)
+        {
             return ((Binding)value).Name;
         }
 
@@ -2231,7 +2786,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void SetParent(object value, object parent) {
+        protected override void SetParent(object value, object parent)
+        {
             ((Binding)value).SetParent((ServiceDescription)parent);
         }
     }
@@ -2240,79 +2796,90 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class ServiceCollection : ServiceDescriptionBaseCollection {
-        internal ServiceCollection(ServiceDescription serviceDescription) : base(serviceDescription) { }
+    public sealed class ServiceCollection : ServiceDescriptionBaseCollection
+    {
+        internal ServiceCollection(ServiceDescription serviceDescription)
+            : base(serviceDescription) { }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Service this[int index] {
+        public Service this[int index]
+        {
             get { return (Service)List[index]; }
             set { List[index] = value; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Add(Service service) {
+        public int Add(Service service)
+        {
             return List.Add(service);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Insert(int index, Service service) {
+        public void Insert(int index, Service service)
+        {
             List.Insert(index, service);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int IndexOf(Service service) {
+        public int IndexOf(Service service)
+        {
             return List.IndexOf(service);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool Contains(Service service) {
+        public bool Contains(Service service)
+        {
             return List.Contains(service);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Remove(Service service) {
+        public void Remove(Service service)
+        {
             List.Remove(service);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void CopyTo(Service[] array, int index) {
+        public void CopyTo(Service[] array, int index)
+        {
             List.CopyTo(array, index);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceCollection.this1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Service this[string name] {
+        public Service this[string name]
+        {
             get { return (Service)Table[name]; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceCollection.GetKey"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override string GetKey(object value) {
+        protected override string GetKey(object value)
+        {
             return ((Service)value).Name;
         }
 
@@ -2320,7 +2887,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void SetParent(object value, object parent) {
+        protected override void SetParent(object value, object parent)
+        {
             ((Service)value).SetParent((ServiceDescription)parent);
         }
     }
@@ -2329,79 +2897,90 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class MessagePartCollection : ServiceDescriptionBaseCollection {
-        internal MessagePartCollection(Message message) : base(message) { }
-        
+    public sealed class MessagePartCollection : ServiceDescriptionBaseCollection
+    {
+        internal MessagePartCollection(Message message)
+            : base(message) { }
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public MessagePart this[int index] {
+        public MessagePart this[int index]
+        {
             get { return (MessagePart)List[index]; }
             set { List[index] = value; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Add(MessagePart messagePart) {
+        public int Add(MessagePart messagePart)
+        {
             return List.Add(messagePart);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Insert(int index, MessagePart messagePart) {
+        public void Insert(int index, MessagePart messagePart)
+        {
             List.Insert(index, messagePart);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int IndexOf(MessagePart messagePart) {
+        public int IndexOf(MessagePart messagePart)
+        {
             return List.IndexOf(messagePart);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool Contains(MessagePart messagePart) {
+        public bool Contains(MessagePart messagePart)
+        {
             return List.Contains(messagePart);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Remove(MessagePart messagePart) {
+        public void Remove(MessagePart messagePart)
+        {
             List.Remove(messagePart);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void CopyTo(MessagePart[] array, int index) {
+        public void CopyTo(MessagePart[] array, int index)
+        {
             List.CopyTo(array, index);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.this1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public MessagePart this[string name] {
+        public MessagePart this[string name]
+        {
             get { return (MessagePart)Table[name]; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.GetKey"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override string GetKey(object value) {
+        protected override string GetKey(object value)
+        {
             return ((MessagePart)value).Name;
         }
 
@@ -2409,7 +2988,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void SetParent(object value, object parent) {
+        protected override void SetParent(object value, object parent)
+        {
             ((MessagePart)value).SetParent((Message)parent);
         }
     }
@@ -2418,63 +2998,72 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class OperationBindingCollection : ServiceDescriptionBaseCollection {
-        internal OperationBindingCollection(Binding binding) : base(binding) { }
-        
+    public sealed class OperationBindingCollection : ServiceDescriptionBaseCollection
+    {
+        internal OperationBindingCollection(Binding binding)
+            : base(binding) { }
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public OperationBinding this[int index] {
+        public OperationBinding this[int index]
+        {
             get { return (OperationBinding)List[index]; }
             set { List[index] = value; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Add(OperationBinding bindingOperation) {
+        public int Add(OperationBinding bindingOperation)
+        {
             return List.Add(bindingOperation);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Insert(int index, OperationBinding bindingOperation) {
+        public void Insert(int index, OperationBinding bindingOperation)
+        {
             List.Insert(index, bindingOperation);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int IndexOf(OperationBinding bindingOperation) {
+        public int IndexOf(OperationBinding bindingOperation)
+        {
             return List.IndexOf(bindingOperation);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool Contains(OperationBinding bindingOperation) {
+        public bool Contains(OperationBinding bindingOperation)
+        {
             return List.Contains(bindingOperation);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Remove(OperationBinding bindingOperation) {
+        public void Remove(OperationBinding bindingOperation)
+        {
             List.Remove(bindingOperation);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void CopyTo(OperationBinding[] array, int index) {
+        public void CopyTo(OperationBinding[] array, int index)
+        {
             List.CopyTo(array, index);
         }
 
@@ -2482,7 +3071,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void SetParent(object value, object parent) {
+        protected override void SetParent(object value, object parent)
+        {
             ((OperationBinding)value).SetParent((Binding)parent);
         }
     }
@@ -2491,63 +3081,72 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class FaultBindingCollection : ServiceDescriptionBaseCollection {
-        internal FaultBindingCollection(OperationBinding operationBinding) : base(operationBinding) { }
-        
+    public sealed class FaultBindingCollection : ServiceDescriptionBaseCollection
+    {
+        internal FaultBindingCollection(OperationBinding operationBinding)
+            : base(operationBinding) { }
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public FaultBinding this[int index] {
+        public FaultBinding this[int index]
+        {
             get { return (FaultBinding)List[index]; }
             set { List[index] = value; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Add(FaultBinding bindingOperationFault) {
+        public int Add(FaultBinding bindingOperationFault)
+        {
             return List.Add(bindingOperationFault);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Insert(int index, FaultBinding bindingOperationFault) {
+        public void Insert(int index, FaultBinding bindingOperationFault)
+        {
             List.Insert(index, bindingOperationFault);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int IndexOf(FaultBinding bindingOperationFault) {
+        public int IndexOf(FaultBinding bindingOperationFault)
+        {
             return List.IndexOf(bindingOperationFault);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool Contains(FaultBinding bindingOperationFault) {
+        public bool Contains(FaultBinding bindingOperationFault)
+        {
             return List.Contains(bindingOperationFault);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Remove(FaultBinding bindingOperationFault) {
+        public void Remove(FaultBinding bindingOperationFault)
+        {
             List.Remove(bindingOperationFault);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void CopyTo(FaultBinding[] array, int index) {
+        public void CopyTo(FaultBinding[] array, int index)
+        {
             List.CopyTo(array, index);
         }
 
@@ -2555,15 +3154,17 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public FaultBinding this[string name] {
+        public FaultBinding this[string name]
+        {
             get { return (FaultBinding)Table[name]; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.GetKey"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override string GetKey(object value) {
+        protected override string GetKey(object value)
+        {
             return ((FaultBinding)value).Name;
         }
 
@@ -2571,7 +3172,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void SetParent(object value, object parent) {
+        protected override void SetParent(object value, object parent)
+        {
             ((FaultBinding)value).SetParent((OperationBinding)parent);
         }
     }
@@ -2580,63 +3182,72 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class OperationCollection : ServiceDescriptionBaseCollection {
-        internal OperationCollection(PortType portType) : base(portType) { }
-        
+    public sealed class OperationCollection : ServiceDescriptionBaseCollection
+    {
+        internal OperationCollection(PortType portType)
+            : base(portType) { }
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Operation this[int index] {
+        public Operation this[int index]
+        {
             get { return (Operation)List[index]; }
             set { List[index] = value; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Add(Operation operation) {
+        public int Add(Operation operation)
+        {
             return List.Add(operation);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Insert(int index, Operation operation) {
+        public void Insert(int index, Operation operation)
+        {
             List.Insert(index, operation);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int IndexOf(Operation operation) {
+        public int IndexOf(Operation operation)
+        {
             return List.IndexOf(operation);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool Contains(Operation operation) {
+        public bool Contains(Operation operation)
+        {
             return List.Contains(operation);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Remove(Operation operation) {
+        public void Remove(Operation operation)
+        {
             List.Remove(operation);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void CopyTo(Operation[] array, int index) {
+        public void CopyTo(Operation[] array, int index)
+        {
             List.CopyTo(array, index);
         }
 
@@ -2644,7 +3255,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void SetParent(object value, object parent) {
+        protected override void SetParent(object value, object parent)
+        {
             ((Operation)value).SetParent((PortType)parent);
         }
     }
@@ -2653,63 +3265,72 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class OperationFaultCollection : ServiceDescriptionBaseCollection {
-        internal OperationFaultCollection(Operation operation) : base(operation) { }
-        
+    public sealed class OperationFaultCollection : ServiceDescriptionBaseCollection
+    {
+        internal OperationFaultCollection(Operation operation)
+            : base(operation) { }
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public OperationFault this[int index] {
+        public OperationFault this[int index]
+        {
             get { return (OperationFault)List[index]; }
             set { List[index] = value; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Add(OperationFault operationFaultMessage) {
+        public int Add(OperationFault operationFaultMessage)
+        {
             return List.Add(operationFaultMessage);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Insert(int index, OperationFault operationFaultMessage) {
+        public void Insert(int index, OperationFault operationFaultMessage)
+        {
             List.Insert(index, operationFaultMessage);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int IndexOf(OperationFault operationFaultMessage) {
+        public int IndexOf(OperationFault operationFaultMessage)
+        {
             return List.IndexOf(operationFaultMessage);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool Contains(OperationFault operationFaultMessage) {
+        public bool Contains(OperationFault operationFaultMessage)
+        {
             return List.Contains(operationFaultMessage);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Remove(OperationFault operationFaultMessage) {
+        public void Remove(OperationFault operationFaultMessage)
+        {
             List.Remove(operationFaultMessage);
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void CopyTo(OperationFault[] array, int index) {
+        public void CopyTo(OperationFault[] array, int index)
+        {
             List.CopyTo(array, index);
         }
 
@@ -2717,15 +3338,17 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public OperationFault this[string name] {
+        public OperationFault this[string name]
+        {
             get { return (OperationFault)Table[name]; }
         }
-        
+
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.GetKey"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override string GetKey(object value) {
+        protected override string GetKey(object value)
+        {
             return ((OperationFault)value).Name;
         }
 
@@ -2733,7 +3356,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void SetParent(object value, object parent) {
+        protected override void SetParent(object value, object parent)
+        {
             ((OperationFault)value).SetParent((Operation)parent);
         }
     }
@@ -2742,11 +3366,13 @@ namespace System.Web.Services.Description {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public abstract class ServiceDescriptionBaseCollection : CollectionBase {
-        Hashtable table; // 
+    public abstract class ServiceDescriptionBaseCollection : CollectionBase
+    {
+        Hashtable table; //
         object parent;
 
-        internal ServiceDescriptionBaseCollection(object parent) {
+        internal ServiceDescriptionBaseCollection(object parent)
+        {
             this.parent = parent;
         }
 
@@ -2754,15 +3380,22 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected virtual IDictionary Table { 
-            get { if (table == null) table = new Hashtable(); return table; }
+        protected virtual IDictionary Table
+        {
+            get
+            {
+                if (table == null)
+                    table = new Hashtable();
+                return table;
+            }
         }
 
         /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionBaseCollection.GetKey"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected virtual string GetKey(object value) {
+        protected virtual string GetKey(object value)
+        {
             return null; // returning null means there is no key
         }
 
@@ -2770,7 +3403,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected virtual void SetParent(object value, object parent) {
+        protected virtual void SetParent(object value, object parent)
+        {
             // default is that the item has no parent
         }
 
@@ -2778,7 +3412,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void OnInsertComplete(int index, object value) {
+        protected override void OnInsertComplete(int index, object value)
+        {
             AddValue(value);
         }
 
@@ -2786,7 +3421,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void OnRemove(int index, object value) {
+        protected override void OnRemove(int index, object value)
+        {
             RemoveValue(value);
         }
 
@@ -2794,8 +3430,10 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void OnClear() {
-            for (int i = 0; i < List.Count; i++) {
+        protected override void OnClear()
+        {
+            for (int i = 0; i < List.Count; i++)
+            {
                 RemoveValue(List[i]);
             }
         }
@@ -2804,25 +3442,40 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void OnSet(int index, object oldValue, object newValue) {
+        protected override void OnSet(int index, object oldValue, object newValue)
+        {
             RemoveValue(oldValue);
             AddValue(newValue);
         }
-       
-        void AddValue(object value) {
+
+        void AddValue(object value)
+        {
             string key = GetKey(value);
-            if (key != null) {
-                try {
+            if (key != null)
+            {
+                try
+                {
                     Table.Add(key, value);
                 }
-                catch (Exception e) {
-                    if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException) {
+                catch (Exception e)
+                {
+                    if (
+                        e is ThreadAbortException
+                        || e is StackOverflowException
+                        || e is OutOfMemoryException
+                    )
+                    {
                         throw;
                     }
-                    if (Table[key] != null) {
-                        throw new ArgumentException(GetDuplicateMessage(value.GetType(), key), e.InnerException);
+                    if (Table[key] != null)
+                    {
+                        throw new ArgumentException(
+                            GetDuplicateMessage(value.GetType(), key),
+                            e.InnerException
+                        );
                     }
-                    else {
+                    else
+                    {
                         throw e;
                     }
                 }
@@ -2830,39 +3483,42 @@ namespace System.Web.Services.Description {
             SetParent(value, parent);
         }
 
-        void RemoveValue(object value) {
+        void RemoveValue(object value)
+        {
             string key = GetKey(value);
-            if (key != null) Table.Remove(key);
+            if (key != null)
+                Table.Remove(key);
             SetParent(value, null);
         }
 
-        static string GetDuplicateMessage(Type type, string elemName) {
+        static string GetDuplicateMessage(Type type, string elemName)
+        {
             string message = null;
-            if (type == typeof(ServiceDescriptionFormatExtension)) 
+            if (type == typeof(ServiceDescriptionFormatExtension))
                 message = Res.GetString(Res.WebDuplicateFormatExtension, elemName);
-            else if (type == typeof(OperationMessage)) 
+            else if (type == typeof(OperationMessage))
                 message = Res.GetString(Res.WebDuplicateOperationMessage, elemName);
-            else if (type == typeof(Import)) 
+            else if (type == typeof(Import))
                 message = Res.GetString(Res.WebDuplicateImport, elemName);
-            else if (type == typeof(Message)) 
+            else if (type == typeof(Message))
                 message = Res.GetString(Res.WebDuplicateMessage, elemName);
-            else if (type == typeof(Port)) 
+            else if (type == typeof(Port))
                 message = Res.GetString(Res.WebDuplicatePort, elemName);
-            else if (type == typeof(PortType)) 
+            else if (type == typeof(PortType))
                 message = Res.GetString(Res.WebDuplicatePortType, elemName);
-            else if (type == typeof(Binding)) 
+            else if (type == typeof(Binding))
                 message = Res.GetString(Res.WebDuplicateBinding, elemName);
-            else if (type == typeof(Service)) 
+            else if (type == typeof(Service))
                 message = Res.GetString(Res.WebDuplicateService, elemName);
-            else if (type == typeof(MessagePart)) 
+            else if (type == typeof(MessagePart))
                 message = Res.GetString(Res.WebDuplicateMessagePart, elemName);
-            else if (type == typeof(OperationBinding)) 
+            else if (type == typeof(OperationBinding))
                 message = Res.GetString(Res.WebDuplicateOperationBinding, elemName);
-            else if (type == typeof(FaultBinding)) 
+            else if (type == typeof(FaultBinding))
                 message = Res.GetString(Res.WebDuplicateFaultBinding, elemName);
-            else if (type == typeof(Operation)) 
+            else if (type == typeof(Operation))
                 message = Res.GetString(Res.WebDuplicateOperation, elemName);
-            else if (type == typeof(OperationFault)) 
+            else if (type == typeof(OperationFault))
                 message = Res.GetString(Res.WebDuplicateOperationFault, elemName);
             else
                 message = Res.GetString(Res.WebDuplicateUnknownElement, type, elemName);
@@ -2871,9 +3527,12 @@ namespace System.Web.Services.Description {
         }
     }
 
-    internal class Schemas {
+    internal class Schemas
+    {
         Schemas() { }
-        internal const string Wsdl = @"<?xml version='1.0' encoding='UTF-8' ?> 
+
+        internal const string Wsdl =
+            @"<?xml version='1.0' encoding='UTF-8' ?> 
 <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
            xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'
            targetNamespace='http://schemas.xmlsoap.org/wsdl/'
@@ -3185,7 +3844,8 @@ namespace System.Web.Services.Description {
 
 </xs:schema>";
 
-        internal const string Soap = @"<?xml version='1.0' encoding='UTF-8' ?> 
+        internal const string Soap =
+            @"<?xml version='1.0' encoding='UTF-8' ?> 
 <xs:schema xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/' xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/' targetNamespace='http://schemas.xmlsoap.org/wsdl/soap/' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
   <xs:import namespace='http://schemas.xmlsoap.org/wsdl/' />
   <xs:simpleType name='encodingStyle'>
@@ -3289,7 +3949,8 @@ namespace System.Web.Services.Description {
   </xs:complexType>
 </xs:schema>";
 
-        internal const string WebRef = @"<?xml version='1.0' encoding='UTF-8' ?>
+        internal const string WebRef =
+            @"<?xml version='1.0' encoding='UTF-8' ?>
 <xs:schema xmlns:tns='http://microsoft.com/webReference/' elementFormDefault='qualified' targetNamespace='http://microsoft.com/webReference/' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
   <xs:simpleType name='options'>
     <xs:list>
@@ -3357,7 +4018,8 @@ namespace System.Web.Services.Description {
   <xs:element name='wsdlParameters' type='tns:wsdlParameters' />
 </xs:schema>";
 
-        internal const string SoapEncoding = @"<?xml version='1.0' encoding='UTF-8' ?>
+        internal const string SoapEncoding =
+            @"<?xml version='1.0' encoding='UTF-8' ?>
 <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
            xmlns:tns='http://schemas.xmlsoap.org/soap/encoding/'
            targetNamespace='http://schemas.xmlsoap.org/soap/encoding/' >

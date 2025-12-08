@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,22 +23,26 @@
 //	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
+namespace System.Windows.Forms
+{
+    public class DataGridViewCellToolTipTextNeededEventArgs : DataGridViewCellEventArgs
+    {
+        private string toolTipText;
 
-namespace System.Windows.Forms {
+        internal DataGridViewCellToolTipTextNeededEventArgs(
+            string toolTipText,
+            int rowIndex,
+            int columnIndex
+        )
+            : base(columnIndex, rowIndex)
+        {
+            this.toolTipText = toolTipText;
+        }
 
-	public class DataGridViewCellToolTipTextNeededEventArgs : DataGridViewCellEventArgs {
-
-		private string toolTipText;
-
-		internal DataGridViewCellToolTipTextNeededEventArgs (string toolTipText, int rowIndex, int columnIndex) : base (columnIndex, rowIndex) {
-			this.toolTipText = toolTipText;
-		}
-
-		public string ToolTipText {
-			get { return toolTipText; }
-			set { toolTipText = value; }
-		}
-
-	}
-
+        public string ToolTipText
+        {
+            get { return toolTipText; }
+            set { toolTipText = value; }
+        }
+    }
 }

@@ -14,12 +14,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         private readonly ImmutableArray<ParameterSymbol> _parameters;
 
-        public SynthesizedDelegateConstructor(NamedTypeSymbol containingType, TypeSymbol objectType, TypeSymbol intPtrType)
+        public SynthesizedDelegateConstructor(
+            NamedTypeSymbol containingType,
+            TypeSymbol objectType,
+            TypeSymbol intPtrType
+        )
             : base(containingType)
         {
             _parameters = ImmutableArray.Create<ParameterSymbol>(
-               SynthesizedParameterSymbol.Create(this, TypeWithAnnotations.Create(objectType), 0, RefKind.None, "object"),
-               SynthesizedParameterSymbol.Create(this, TypeWithAnnotations.Create(intPtrType), 1, RefKind.None, "method"));
+                SynthesizedParameterSymbol.Create(
+                    this,
+                    TypeWithAnnotations.Create(objectType),
+                    0,
+                    RefKind.None,
+                    "object"
+                ),
+                SynthesizedParameterSymbol.Create(
+                    this,
+                    TypeWithAnnotations.Create(intPtrType),
+                    1,
+                    RefKind.None,
+                    "method"
+                )
+            );
         }
 
         public override ImmutableArray<ParameterSymbol> Parameters
@@ -32,7 +49,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         internal readonly struct ParameterDescription
         {
-            internal ParameterDescription(TypeWithAnnotations type, RefKind refKind, ScopedKind scope, ConstantValue? defaultValue, bool isParams, bool hasUnscopedRefAttribute)
+            internal ParameterDescription(
+                TypeWithAnnotations type,
+                RefKind refKind,
+                ScopedKind scope,
+                ConstantValue? defaultValue,
+                bool isParams,
+                bool hasUnscopedRefAttribute
+            )
             {
                 Type = type;
                 RefKind = refKind;
@@ -56,13 +80,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol containingType,
             ArrayBuilder<ParameterDescription> parameterDescriptions,
             TypeWithAnnotations returnType,
-            RefKind refKind)
+            RefKind refKind
+        )
         {
             _containingType = containingType;
 
-            Parameters = parameterDescriptions.SelectAsArrayWithIndex(static (p, i, a) =>
-                SynthesizedParameterSymbol.Create(a.Method, p.Type, i, p.RefKind, GeneratedNames.AnonymousDelegateParameterName(i, a.ParameterCount), p.Scope, p.DefaultValue, isParams: p.IsParams, hasUnscopedRefAttribute: p.HasUnscopedRefAttribute),
-                (Method: this, ParameterCount: parameterDescriptions.Count));
+            Parameters = parameterDescriptions.SelectAsArrayWithIndex(
+                static (p, i, a) =>
+                    SynthesizedParameterSymbol.Create(
+                        a.Method,
+                        p.Type,
+                        i,
+                        p.RefKind,
+                        GeneratedNames.AnonymousDelegateParameterName(i, a.ParameterCount),
+                        p.Scope,
+                        p.DefaultValue,
+                        isParams: p.IsParams,
+                        hasUnscopedRefAttribute: p.HasUnscopedRefAttribute
+                    ),
+                (Method: this, ParameterCount: parameterDescriptions.Count)
+            );
             ReturnTypeWithAnnotations = returnType;
             RefKind = refKind;
         }
@@ -84,10 +121,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool IsMetadataFinal
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override MethodKind MethodKind
@@ -164,9 +198,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override TypeWithAnnotations ReturnTypeWithAnnotations { get; }
 
-        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
-        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
 
         public override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotations
         {
@@ -224,7 +260,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                // Invoke method of a delegate used in a dynamic call-site must be public 
+                // Invoke method of a delegate used in a dynamic call-site must be public
                 // since the DLR looks only for public Invoke methods:
                 return Accessibility.Public;
             }
@@ -260,6 +296,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return false; }
         }
 
-        protected sealed override bool HasSetsRequiredMembersImpl => throw ExceptionUtilities.Unreachable();
+        protected sealed override bool HasSetsRequiredMembersImpl =>
+            throw ExceptionUtilities.Unreachable();
     }
 }

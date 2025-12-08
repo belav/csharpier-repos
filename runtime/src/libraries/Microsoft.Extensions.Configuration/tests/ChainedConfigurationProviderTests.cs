@@ -13,16 +13,19 @@ namespace Microsoft.Extensions.Configuration.Test
         [Fact]
         public void ChainedConfiguration_UsingMemoryConfigurationSource_ChainedCouldExposeProvider()
         {
-            var chainedConfigurationProvider = new ChainedConfigurationSource
+            var chainedConfigurationProvider =
+                new ChainedConfigurationSource
                 {
                     Configuration = new ConfigurationBuilder()
-                            .Add(new MemoryConfigurationSource {
-                                InitialData = new Dictionary<string, string>() { { "a:b", "c" } }
-                            })
-                            .Build(),
+                        .Add(
+                            new MemoryConfigurationSource
+                            {
+                                InitialData = new Dictionary<string, string>() { { "a:b", "c" } },
+                            }
+                        )
+                        .Build(),
                     ShouldDisposeConfiguration = false,
-                }
-                .Build(new ConfigurationBuilder()) as ChainedConfigurationProvider;
+                }.Build(new ConfigurationBuilder()) as ChainedConfigurationProvider;
 
             Assert.True(chainedConfigurationProvider.TryGet("a:b", out string? value));
             Assert.Equal("c", value);
@@ -37,8 +40,9 @@ namespace Microsoft.Extensions.Configuration.Test
         [Fact]
         public void ChainedConfiguration_ExposesProvider()
         {
-            var providers = new IConfigurationProvider[] {
-                new TestConfigurationProvider("foo", "foo-value")
+            var providers = new IConfigurationProvider[]
+            {
+                new TestConfigurationProvider("foo", "foo-value"),
             };
             var chainedConfigurationSource = new ChainedConfigurationSource
             {
@@ -46,8 +50,9 @@ namespace Microsoft.Extensions.Configuration.Test
                 ShouldDisposeConfiguration = false,
             };
 
-            var chainedConfigurationProvider = chainedConfigurationSource
-                .Build(new ConfigurationBuilder()) as ChainedConfigurationProvider;
+            var chainedConfigurationProvider =
+                chainedConfigurationSource.Build(new ConfigurationBuilder())
+                as ChainedConfigurationProvider;
 
             var configRoot = chainedConfigurationProvider.Configuration as IConfigurationRoot;
             Assert.NotNull(configRoot);
@@ -56,8 +61,7 @@ namespace Microsoft.Extensions.Configuration.Test
 
         private class TestConfigurationProvider : ConfigurationProvider
         {
-            public TestConfigurationProvider(string key, string value)
-                => Data.Add(key, value);
+            public TestConfigurationProvider(string key, string value) => Data.Add(key, value);
         }
     }
 }

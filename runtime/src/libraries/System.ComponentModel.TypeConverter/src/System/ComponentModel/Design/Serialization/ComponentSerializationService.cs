@@ -61,7 +61,11 @@ namespace System.ComponentModel.Design.Serialization
         /// serialized members within the serialization store. The member generally
         /// has to be a property or an event.
         /// </summary>
-        public abstract void SerializeMember(SerializationStore store, object owningObject, MemberDescriptor member);
+        public abstract void SerializeMember(
+            SerializationStore store,
+            object owningObject,
+            MemberDescriptor member
+        );
 
         /// <summary>
         /// This method serializes the given member on the given object,
@@ -73,7 +77,11 @@ namespace System.ComponentModel.Design.Serialization
         /// SerializeMemberAbsolute takes this into account and would clear the state of
         /// the property in this case.
         /// </summary>
-        public abstract void SerializeMemberAbsolute(SerializationStore store, object owningObject, MemberDescriptor member);
+        public abstract void SerializeMemberAbsolute(
+            SerializationStore store,
+            object owningObject,
+            MemberDescriptor member
+        );
 
         /// <summary>
         /// This method deserializes the given store to produce a collection of
@@ -103,14 +111,23 @@ namespace System.ComponentModel.Design.Serialization
         /// that the deserialization will only work if applied to an object of the
         /// same type.
         /// </summary>
-        public abstract void DeserializeTo(SerializationStore store, IContainer container, bool validateRecycledTypes, bool applyDefaults);
+        public abstract void DeserializeTo(
+            SerializationStore store,
+            IContainer container,
+            bool validateRecycledTypes,
+            bool applyDefaults
+        );
 
         public void DeserializeTo(SerializationStore store, IContainer container)
         {
             DeserializeTo(store, container, validateRecycledTypes: true, applyDefaults: true);
         }
 
-        public void DeserializeTo(SerializationStore store, IContainer container, bool validateRecycledTypes)
+        public void DeserializeTo(
+            SerializationStore store,
+            IContainer container,
+            bool validateRecycledTypes
+        )
         {
             DeserializeTo(store, container, validateRecycledTypes, applyDefaults: true);
         }

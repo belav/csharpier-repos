@@ -8,8 +8,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
-using System.Workflow.ComponentModel;
 using System.Workflow.Activities.Common;
+using System.Workflow.ComponentModel;
 
 namespace System.Workflow.Activities.Rules
 {
@@ -46,8 +46,7 @@ namespace System.Workflow.Activities.Rules
             }
 
             internal KeywordInfo(TokenID token)
-                : this(token, null)
-            { }
+                : this(token, null) { }
         }
 
         private static Dictionary<string, KeywordInfo> keywordMap = CreateKeywordMap();
@@ -109,7 +108,7 @@ namespace System.Workflow.Activities.Rules
             Unsigned = 0x04,
             Double = 0x08,
             Float = 0xc,
-            Decimal = 0x10
+            Decimal = 0x10,
         }
         #endregion
 
@@ -185,7 +184,7 @@ namespace System.Workflow.Activities.Rules
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         private Token NextToken()
         {
-            string message = null;  // for any error messages.
+            string message = null; // for any error messages.
 
             TokenID tokenID = TokenID.Unknown;
 
@@ -335,8 +334,16 @@ namespace System.Workflow.Activities.Rules
                         }
                         else
                         {
-                            message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_InvalidCharacter, ch);
-                            throw new RuleSyntaxException(ErrorNumbers.Error_InvalidCharacter, message, tokenStartPosition);
+                            message = string.Format(
+                                CultureInfo.CurrentCulture,
+                                Messages.Parser_InvalidCharacter,
+                                ch
+                            );
+                            throw new RuleSyntaxException(
+                                ErrorNumbers.Error_InvalidCharacter,
+                                message,
+                                tokenStartPosition
+                            );
                         }
                         NextChar();
                         break;
@@ -350,8 +357,16 @@ namespace System.Workflow.Activities.Rules
                         break;
                     default:
                         NextChar();
-                        message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_InvalidCharacter, ch);
-                        throw new RuleSyntaxException(ErrorNumbers.Error_InvalidCharacter, message, tokenStartPosition);
+                        message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            Messages.Parser_InvalidCharacter,
+                            ch
+                        );
+                        throw new RuleSyntaxException(
+                            ErrorNumbers.Error_InvalidCharacter,
+                            message,
+                            tokenStartPosition
+                        );
                 }
             }
 
@@ -369,10 +384,14 @@ namespace System.Workflow.Activities.Rules
 
             bool isEscaped = false;
             char ch = ScanCharacter(out isEscaped);
-            for (;;)
+            for (; ; )
             {
                 if (ch == '\0' && !isEscaped)
-                    throw new RuleSyntaxException(ErrorNumbers.Error_UnterminatedStringLiteral, Messages.Parser_UnterminatedStringLiteral, tokenStartPosition);
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_UnterminatedStringLiteral,
+                        Messages.Parser_UnterminatedStringLiteral,
+                        tokenStartPosition
+                    );
 
                 if (ch == '"' && !isEscaped)
                     break;
@@ -393,10 +412,14 @@ namespace System.Workflow.Activities.Rules
             StringBuilder sb = new StringBuilder();
 
             char ch = NextChar(); // eat the opening '"'
-            for (;;)
+            for (; ; )
             {
                 if (ch == '\0')
-                    throw new RuleSyntaxException(ErrorNumbers.Error_UnterminatedStringLiteral, Messages.Parser_UnterminatedStringLiteral, tokenStartPosition);
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_UnterminatedStringLiteral,
+                        Messages.Parser_UnterminatedStringLiteral,
+                        tokenStartPosition
+                    );
 
                 if (ch == '"')
                 {
@@ -478,8 +501,16 @@ namespace System.Workflow.Activities.Rules
                         break;
 
                     default:
-                        string message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_InvalidEscapeSequence, ch);
-                        throw new RuleSyntaxException(ErrorNumbers.Error_InvalidEscapeSequence, message, currentPosition - 1);
+                        string message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            Messages.Parser_InvalidEscapeSequence,
+                            ch
+                        );
+                        throw new RuleSyntaxException(
+                            ErrorNumbers.Error_InvalidEscapeSequence,
+                            message,
+                            currentPosition - 1
+                        );
                 }
             }
 
@@ -511,7 +542,11 @@ namespace System.Workflow.Activities.Rules
             tokenValue = ch;
 
             if (NextChar() != '\'')
-                throw new RuleSyntaxException(ErrorNumbers.Error_UnterminatedCharacterLiteral, Messages.Parser_UnterminatedCharacterLiteral, currentPosition);
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_UnterminatedCharacterLiteral,
+                    Messages.Parser_UnterminatedCharacterLiteral,
+                    currentPosition
+                );
 
             return TokenID.CharacterLiteral;
         }
@@ -595,12 +630,24 @@ namespace System.Workflow.Activities.Rules
                 token = TokenID.FloatLiteral;
                 try
                 {
-                    tokenValue = float.Parse(numberString, NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent, CultureInfo.InvariantCulture);
+                    tokenValue = float.Parse(
+                        numberString,
+                        NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent,
+                        CultureInfo.InvariantCulture
+                    );
                 }
                 catch (Exception exception)
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_InvalidFloatingPointConstant, exception.Message);
-                    throw new RuleSyntaxException(ErrorNumbers.Error_InvalidRealLiteral, message, tokenStartPosition);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.Parser_InvalidFloatingPointConstant,
+                        exception.Message
+                    );
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_InvalidRealLiteral,
+                        message,
+                        tokenStartPosition
+                    );
                 }
             }
             else if (numberKind == NumberKind.Double)
@@ -608,12 +655,24 @@ namespace System.Workflow.Activities.Rules
                 token = TokenID.FloatLiteral;
                 try
                 {
-                    tokenValue = double.Parse(numberString, NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent, CultureInfo.InvariantCulture);
+                    tokenValue = double.Parse(
+                        numberString,
+                        NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent,
+                        CultureInfo.InvariantCulture
+                    );
                 }
                 catch (Exception exception)
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_InvalidFloatingPointConstant, exception.Message);
-                    throw new RuleSyntaxException(ErrorNumbers.Error_InvalidRealLiteral, message, tokenStartPosition);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.Parser_InvalidFloatingPointConstant,
+                        exception.Message
+                    );
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_InvalidRealLiteral,
+                        message,
+                        tokenStartPosition
+                    );
                 }
             }
             else if (numberKind == NumberKind.Decimal)
@@ -621,12 +680,24 @@ namespace System.Workflow.Activities.Rules
                 token = TokenID.DecimalLiteral;
                 try
                 {
-                    tokenValue = decimal.Parse(numberString, NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent, CultureInfo.InvariantCulture);
+                    tokenValue = decimal.Parse(
+                        numberString,
+                        NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent,
+                        CultureInfo.InvariantCulture
+                    );
                 }
                 catch (Exception exception)
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_InvalidDecimalConstant, exception.Message);
-                    throw new RuleSyntaxException(ErrorNumbers.Error_InvalidRealLiteral, message, tokenStartPosition);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.Parser_InvalidDecimalConstant,
+                        exception.Message
+                    );
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_InvalidRealLiteral,
+                        message,
+                        tokenStartPosition
+                    );
                 }
             }
             else
@@ -640,10 +711,17 @@ namespace System.Workflow.Activities.Rules
                 }
                 catch (Exception exception)
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_InvalidIntegerConstant, exception.Message);
-                    throw new RuleSyntaxException(ErrorNumbers.Error_InvalidIntegerLiteral, message, tokenStartPosition);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.Parser_InvalidIntegerConstant,
+                        exception.Message
+                    );
+                    throw new RuleSyntaxException(
+                        ErrorNumbers.Error_InvalidIntegerLiteral,
+                        message,
+                        tokenStartPosition
+                    );
                 }
-
 
                 switch (numberKind)
                 {
@@ -731,8 +809,16 @@ namespace System.Workflow.Activities.Rules
 
             if (!char.IsDigit(ch))
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_InvalidExponentDigit, ch);
-                throw new RuleSyntaxException(ErrorNumbers.Error_InvalidExponentDigit, message, currentPosition);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.Parser_InvalidExponentDigit,
+                    ch
+                );
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_InvalidExponentDigit,
+                    message,
+                    currentPosition
+                );
             }
 
             do
@@ -808,15 +894,22 @@ namespace System.Workflow.Activities.Rules
             return numberKind;
         }
 
-
         private TokenID ScanHexNumber()
         {
             char ch = CurrentChar();
             int hValue = HexValue(ch);
             if (hValue < 0)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_InvalidHexDigit, ch);
-                throw new RuleSyntaxException(ErrorNumbers.Error_InvalidHexDigit, message, currentPosition);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.Parser_InvalidHexDigit,
+                    ch
+                );
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_InvalidHexDigit,
+                    message,
+                    currentPosition
+                );
             }
 
             int length = 1;
@@ -837,8 +930,16 @@ namespace System.Workflow.Activities.Rules
             if (length > sizeof(ulong) * 2)
             {
                 // We had overflow.
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.Parser_InvalidIntegerConstant, string.Empty);
-                throw new RuleSyntaxException(ErrorNumbers.Error_InvalidIntegerLiteral, message, tokenStartPosition);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.Parser_InvalidIntegerConstant,
+                    string.Empty
+                );
+                throw new RuleSyntaxException(
+                    ErrorNumbers.Error_InvalidIntegerLiteral,
+                    message,
+                    tokenStartPosition
+                );
             }
 
             TokenID token = TokenID.IntegerLiteral;

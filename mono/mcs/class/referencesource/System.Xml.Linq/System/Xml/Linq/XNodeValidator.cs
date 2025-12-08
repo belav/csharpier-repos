@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Versioning;
 using System.Xml;
 using System.Xml.Linq;
-using System.Runtime.Versioning;
 
 namespace System.Xml.Schema
 {
@@ -19,11 +19,12 @@ namespace System.Xml.Schema
         XmlSchemaValidator validator;
 
         Dictionary<XmlSchemaInfo, XmlSchemaInfo> schemaInfos;
-        ArrayList defaultAttributes;        
+        ArrayList defaultAttributes;
         XName xsiTypeName;
         XName xsiNilName;
 
-        public XNodeValidator(XmlSchemaSet schemas, ValidationEventHandler validationEventHandler) {
+        public XNodeValidator(XmlSchemaSet schemas, ValidationEventHandler validationEventHandler)
+        {
             this.schemas = schemas;
             this.validationEventHandler = validationEventHandler;
 
@@ -32,66 +33,107 @@ namespace System.Xml.Schema
             xsiNilName = xsi.GetName("nil");
         }
 
-        public void Validate(XObject source, XmlSchemaObject partialValidationType, bool addSchemaInfo) {
+        public void Validate(
+            XObject source,
+            XmlSchemaObject partialValidationType,
+            bool addSchemaInfo
+        )
+        {
             this.source = source;
             this.addSchemaInfo = addSchemaInfo;
             XmlSchemaValidationFlags validationFlags = XmlSchemaValidationFlags.AllowXmlAttributes;
             XmlNodeType nt = source.NodeType;
-            switch (nt) {
+            switch (nt)
+            {
                 case XmlNodeType.Document:
                     source = ((XDocument)source).Root;
-                    if (source == null) throw new InvalidOperationException(System.Xml.Linq.Res.GetString(System.Xml.Linq.Res.InvalidOperation_MissingRoot));
+                    if (source == null)
+                        throw new InvalidOperationException(
+                            System.Xml.Linq.Res.GetString(
+                                System.Xml.Linq.Res.InvalidOperation_MissingRoot
+                            )
+                        );
                     validationFlags |= XmlSchemaValidationFlags.ProcessIdentityConstraints;
                     break;
                 case XmlNodeType.Element:
                     break;
                 case XmlNodeType.Attribute:
-                    if (((XAttribute)source).IsNamespaceDeclaration) goto default;
-                    if (source.Parent == null) throw new InvalidOperationException(System.Xml.Linq.Res.GetString(System.Xml.Linq.Res.InvalidOperation_MissingParent));
+                    if (((XAttribute)source).IsNamespaceDeclaration)
+                        goto default;
+                    if (source.Parent == null)
+                        throw new InvalidOperationException(
+                            System.Xml.Linq.Res.GetString(
+                                System.Xml.Linq.Res.InvalidOperation_MissingParent
+                            )
+                        );
                     break;
                 default:
-                    throw new InvalidOperationException(System.Xml.Linq.Res.GetString(System.Xml.Linq.Res.InvalidOperation_BadNodeType, nt));
+                    throw new InvalidOperationException(
+                        System.Xml.Linq.Res.GetString(
+                            System.Xml.Linq.Res.InvalidOperation_BadNodeType,
+                            nt
+                        )
+                    );
             }
             namespaceManager = new XmlNamespaceManager(schemas.NameTable);
             PushAncestorsAndSelf(source.Parent);
-            validator = new XmlSchemaValidator(schemas.NameTable, schemas, namespaceManager, validationFlags); 
+            validator = new XmlSchemaValidator(
+                schemas.NameTable,
+                schemas,
+                namespaceManager,
+                validationFlags
+            );
             validator.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
             validator.XmlResolver = null;
-            if (partialValidationType != null) {
+            if (partialValidationType != null)
+            {
                 validator.Initialize(partialValidationType);
             }
-            else {
+            else
+            {
                 validator.Initialize();
             }
 
             IXmlLineInfo orginal = SaveLineInfo(source);
-            if (nt == XmlNodeType.Attribute) {
+            if (nt == XmlNodeType.Attribute)
+            {
                 ValidateAttribute((XAttribute)source);
             }
-            else {
+            else
+            {
                 ValidateElement((XElement)source);
             }
             validator.EndValidation();
             RestoreLineInfo(orginal);
         }
 
-        XmlSchemaInfo GetDefaultAttributeSchemaInfo(XmlSchemaAttribute sa) {
+        XmlSchemaInfo GetDefaultAttributeSchemaInfo(XmlSchemaAttribute sa)
+        {
             XmlSchemaInfo si = new XmlSchemaInfo();
             si.IsDefault = true;
             si.IsNil = false;
             si.SchemaAttribute = sa;
             XmlSchemaSimpleType st = sa.AttributeSchemaType;
             si.SchemaType = st;
-            if (st.Datatype.Variety == XmlSchemaDatatypeVariety.Union) {
+            if (st.Datatype.Variety == XmlSchemaDatatypeVariety.Union)
+            {
                 string value = GetDefaultValue(sa);
-                foreach (XmlSchemaSimpleType mt in ((XmlSchemaSimpleTypeUnion)st.Content).BaseMemberTypes) {
+                foreach (
+                    XmlSchemaSimpleType mt in ((XmlSchemaSimpleTypeUnion)st.Content).BaseMemberTypes
+                )
+                {
                     object typedValue = null;
-                    try {
-                        typedValue = mt.Datatype.ParseValue(value, schemas.NameTable, namespaceManager);
+                    try
+                    {
+                        typedValue = mt.Datatype.ParseValue(
+                            value,
+                            schemas.NameTable,
+                            namespaceManager
+                        );
                     }
-                    catch (XmlSchemaException) {
-                    }
-                    if (typedValue != null) {
+                    catch (XmlSchemaException) { }
+                    if (typedValue != null)
+                    {
                         si.MemberType = mt;
                         break;
                     }
@@ -101,58 +143,80 @@ namespace System.Xml.Schema
             return si;
         }
 
-        string GetDefaultValue(XmlSchemaAttribute sa) {
+        string GetDefaultValue(XmlSchemaAttribute sa)
+        {
             XmlQualifiedName name = sa.RefName;
-            if (!name.IsEmpty) {
+            if (!name.IsEmpty)
+            {
                 sa = schemas.GlobalAttributes[name] as XmlSchemaAttribute;
-                if (sa == null) return null;
+                if (sa == null)
+                    return null;
             }
             string s = sa.FixedValue;
-            if (s != null) return s;
+            if (s != null)
+                return s;
             return sa.DefaultValue;
         }
 
-        string GetDefaultValue(XmlSchemaElement se) {
+        string GetDefaultValue(XmlSchemaElement se)
+        {
             XmlQualifiedName name = se.RefName;
-            if (!name.IsEmpty) {
+            if (!name.IsEmpty)
+            {
                 se = schemas.GlobalElements[name] as XmlSchemaElement;
-                if (se == null) return null;
+                if (se == null)
+                    return null;
             }
             string s = se.FixedValue;
-            if (s != null) return s;
+            if (s != null)
+                return s;
             return se.DefaultValue;
         }
 
-        void ReplaceSchemaInfo(XObject o, XmlSchemaInfo schemaInfo) {
-            if (schemaInfos == null) {
-                schemaInfos = new Dictionary<XmlSchemaInfo, XmlSchemaInfo>(new XmlSchemaInfoEqualityComparer());
+        void ReplaceSchemaInfo(XObject o, XmlSchemaInfo schemaInfo)
+        {
+            if (schemaInfos == null)
+            {
+                schemaInfos = new Dictionary<XmlSchemaInfo, XmlSchemaInfo>(
+                    new XmlSchemaInfoEqualityComparer()
+                );
             }
             XmlSchemaInfo si = o.Annotation<XmlSchemaInfo>();
-            if (si != null) {
-                if (!schemaInfos.ContainsKey(si)) {
+            if (si != null)
+            {
+                if (!schemaInfos.ContainsKey(si))
+                {
                     schemaInfos.Add(si, si);
                 }
                 o.RemoveAnnotations<XmlSchemaInfo>();
             }
-            if (!schemaInfos.TryGetValue(schemaInfo, out si)) {
+            if (!schemaInfos.TryGetValue(schemaInfo, out si))
+            {
                 si = schemaInfo;
                 schemaInfos.Add(si, si);
             }
             o.AddAnnotation(si);
         }
 
-        void PushAncestorsAndSelf(XElement e) {
-            while (e != null) {
+        void PushAncestorsAndSelf(XElement e)
+        {
+            while (e != null)
+            {
                 XAttribute a = e.lastAttr;
-                if (a != null) {
-                    do {
+                if (a != null)
+                {
+                    do
+                    {
                         a = a.next;
-                        if (a.IsNamespaceDeclaration) { 
+                        if (a.IsNamespaceDeclaration)
+                        {
                             string localName = a.Name.LocalName;
-                            if (localName == "xmlns") {
+                            if (localName == "xmlns")
+                            {
                                 localName = string.Empty;
                             }
-                            if (!namespaceManager.HasNamespace(localName)) {
+                            if (!namespaceManager.HasNamespace(localName))
+                            {
                                 namespaceManager.AddNamespace(localName, a.Value);
                             }
                         }
@@ -162,25 +226,33 @@ namespace System.Xml.Schema
             }
         }
 
-        void PushElement(XElement e, ref string xsiType, ref string xsiNil) {
+        void PushElement(XElement e, ref string xsiType, ref string xsiNil)
+        {
             namespaceManager.PushScope();
             XAttribute a = e.lastAttr;
-            if (a != null) {
-                do {
+            if (a != null)
+            {
+                do
+                {
                     a = a.next;
-                    if (a.IsNamespaceDeclaration) {
+                    if (a.IsNamespaceDeclaration)
+                    {
                         string localName = a.Name.LocalName;
-                        if (localName == "xmlns") {
+                        if (localName == "xmlns")
+                        {
                             localName = string.Empty;
                         }
-                        namespaceManager.AddNamespace(localName, a.Value); 
+                        namespaceManager.AddNamespace(localName, a.Value);
                     }
-                    else {
+                    else
+                    {
                         XName name = a.Name;
-                        if (name == xsiTypeName) {
+                        if (name == xsiTypeName)
+                        {
                             xsiType = a.Value;
                         }
-                        else if (name == xsiNilName) {
+                        else if (name == xsiNilName)
+                        {
                             xsiNil = a.Value;
                         }
                     }
@@ -188,76 +260,101 @@ namespace System.Xml.Schema
             }
         }
 
-        IXmlLineInfo SaveLineInfo(XObject source) {
+        IXmlLineInfo SaveLineInfo(XObject source)
+        {
             IXmlLineInfo previousLineInfo = validator.LineInfoProvider;
             validator.LineInfoProvider = source as IXmlLineInfo;
             return previousLineInfo;
         }
 
-        void RestoreLineInfo(IXmlLineInfo originalLineInfo) {
+        void RestoreLineInfo(IXmlLineInfo originalLineInfo)
+        {
             validator.LineInfoProvider = originalLineInfo;
         }
 
-
-        void ValidateAttribute(XAttribute a) {
+        void ValidateAttribute(XAttribute a)
+        {
             IXmlLineInfo original = SaveLineInfo(a);
             XmlSchemaInfo si = addSchemaInfo ? new XmlSchemaInfo() : null;
             source = a;
             validator.ValidateAttribute(a.Name.LocalName, a.Name.NamespaceName, a.Value, si);
-            if (addSchemaInfo) {
+            if (addSchemaInfo)
+            {
                 ReplaceSchemaInfo(a, si);
             }
             RestoreLineInfo(original);
         }
 
-        void ValidateAttributes(XElement e) {
+        void ValidateAttributes(XElement e)
+        {
             XAttribute a = e.lastAttr;
             IXmlLineInfo orginal = SaveLineInfo(a);
-            if (a != null) {
-                do {
+            if (a != null)
+            {
+                do
+                {
                     a = a.next;
-                    if (!a.IsNamespaceDeclaration) { 
+                    if (!a.IsNamespaceDeclaration)
+                    {
                         ValidateAttribute(a);
                     }
                 } while (a != e.lastAttr);
                 source = e;
             }
-            if (addSchemaInfo) {
-                if (defaultAttributes == null) {
+            if (addSchemaInfo)
+            {
+                if (defaultAttributes == null)
+                {
                     defaultAttributes = new ArrayList();
                 }
-                else {
+                else
+                {
                     defaultAttributes.Clear();
                 }
                 validator.GetUnspecifiedDefaultAttributes(defaultAttributes);
-                foreach (XmlSchemaAttribute sa in defaultAttributes) {
-                    a = new XAttribute(XNamespace.Get(sa.QualifiedName.Namespace).GetName(sa.QualifiedName.Name), GetDefaultValue(sa));
+                foreach (XmlSchemaAttribute sa in defaultAttributes)
+                {
+                    a = new XAttribute(
+                        XNamespace.Get(sa.QualifiedName.Namespace).GetName(sa.QualifiedName.Name),
+                        GetDefaultValue(sa)
+                    );
                     ReplaceSchemaInfo(a, GetDefaultAttributeSchemaInfo(sa));
                     e.Add(a);
-                } 
+                }
             }
             RestoreLineInfo(orginal);
         }
 
-        // SxS: This method does not expose any resources to the caller and passes null as resource names to 
+        // SxS: This method does not expose any resources to the caller and passes null as resource names to
         // XmlSchemaValidator.ValidateElement (annotated with ResourceExposure(ResourceScope.None).
         // It's OK to suppress the SxS warning.
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.None)]
-        void ValidateElement(XElement e) {
+        void ValidateElement(XElement e)
+        {
             XmlSchemaInfo si = addSchemaInfo ? new XmlSchemaInfo() : null;
             string xsiType = null;
             string xsiNil = null;
             PushElement(e, ref xsiType, ref xsiNil);
             IXmlLineInfo original = SaveLineInfo(e);
             source = e;
-            validator.ValidateElement(e.Name.LocalName, e.Name.NamespaceName, si, xsiType, xsiNil, null, null);
+            validator.ValidateElement(
+                e.Name.LocalName,
+                e.Name.NamespaceName,
+                si,
+                xsiType,
+                xsiNil,
+                null,
+                null
+            );
             ValidateAttributes(e);
             validator.ValidateEndOfAttributes(si);
             ValidateNodes(e);
             validator.ValidateEndElement(si);
-            if (addSchemaInfo) {
-                if (si.Validity == XmlSchemaValidity.Valid && si.IsDefault) {
+            if (addSchemaInfo)
+            {
+                if (si.Validity == XmlSchemaValidity.Valid && si.IsDefault)
+                {
                     e.Value = GetDefaultValue(si.SchemaElement);
                 }
                 ReplaceSchemaInfo(e, si);
@@ -266,21 +363,28 @@ namespace System.Xml.Schema
             namespaceManager.PopScope();
         }
 
-        void ValidateNodes(XElement e) {
+        void ValidateNodes(XElement e)
+        {
             XNode n = e.content as XNode;
             IXmlLineInfo orginal = SaveLineInfo(n);
-            if (n != null) {
-                do {
+            if (n != null)
+            {
+                do
+                {
                     n = n.next;
                     XElement c = n as XElement;
-                    if (c != null) {
+                    if (c != null)
+                    {
                         ValidateElement(c);
                     }
-                    else {
+                    else
+                    {
                         XText t = n as XText;
-                        if (t != null) {
+                        if (t != null)
+                        {
                             string s = t.Value;
-                            if (s.Length > 0) {
+                            if (s.Length > 0)
+                            {
                                 validator.LineInfoProvider = t as IXmlLineInfo;
                                 validator.ValidateText(s);
                             }
@@ -289,63 +393,79 @@ namespace System.Xml.Schema
                 } while (n != e.content);
                 source = e;
             }
-            else {
+            else
+            {
                 string s = e.content as string;
-                if (s != null && s.Length > 0) {
+                if (s != null && s.Length > 0)
+                {
                     validator.ValidateText(s);
                 }
             }
             RestoreLineInfo(orginal);
         }
 
-        void ValidationCallback(object sender, ValidationEventArgs e) {
-            if (validationEventHandler != null) {
+        void ValidationCallback(object sender, ValidationEventArgs e)
+        {
+            if (validationEventHandler != null)
+            {
                 validationEventHandler(source, e);
             }
-            else if (e.Severity == XmlSeverityType.Error) {
+            else if (e.Severity == XmlSeverityType.Error)
+            {
                 throw e.Exception;
             }
         }
     }
 
-    internal class XmlSchemaInfoEqualityComparer : IEqualityComparer<XmlSchemaInfo> 
+    internal class XmlSchemaInfoEqualityComparer : IEqualityComparer<XmlSchemaInfo>
     {
-        public bool Equals(XmlSchemaInfo si1, XmlSchemaInfo si2) {
-            if (si1 == si2) return true;
-            if (si1 == null || si2 == null) return false;
-            return si1.ContentType == si2.ContentType &&
-                   si1.IsDefault == si2.IsDefault &&
-                   si1.IsNil == si2.IsNil &&
-                   (object)si1.MemberType == (object)si2.MemberType &&
-                   (object)si1.SchemaAttribute == (object)si2.SchemaAttribute &&
-                   (object)si1.SchemaElement == (object)si2.SchemaElement &&
-                   (object)si1.SchemaType == (object)si2.SchemaType &&
-                   si1.Validity == si2.Validity;
+        public bool Equals(XmlSchemaInfo si1, XmlSchemaInfo si2)
+        {
+            if (si1 == si2)
+                return true;
+            if (si1 == null || si2 == null)
+                return false;
+            return si1.ContentType == si2.ContentType
+                && si1.IsDefault == si2.IsDefault
+                && si1.IsNil == si2.IsNil
+                && (object)si1.MemberType == (object)si2.MemberType
+                && (object)si1.SchemaAttribute == (object)si2.SchemaAttribute
+                && (object)si1.SchemaElement == (object)si2.SchemaElement
+                && (object)si1.SchemaType == (object)si2.SchemaType
+                && si1.Validity == si2.Validity;
         }
 
-        public int GetHashCode(XmlSchemaInfo si) {
-            if (si == null) return 0;
+        public int GetHashCode(XmlSchemaInfo si)
+        {
+            if (si == null)
+                return 0;
             int h = (int)si.ContentType;
-            if (si.IsDefault) {
+            if (si.IsDefault)
+            {
                 h ^= 1;
             }
-            if (si.IsNil) {
+            if (si.IsNil)
+            {
                 h ^= 1;
             }
             XmlSchemaSimpleType memberType = si.MemberType;
-            if (memberType != null) {
-                h ^= memberType.GetHashCode(); 
+            if (memberType != null)
+            {
+                h ^= memberType.GetHashCode();
             }
             XmlSchemaAttribute schemaAttribute = si.SchemaAttribute;
-            if (schemaAttribute != null) {
+            if (schemaAttribute != null)
+            {
                 h ^= schemaAttribute.GetHashCode();
             }
             XmlSchemaElement schemaElement = si.SchemaElement;
-            if (schemaElement != null) {
-                h ^= schemaElement.GetHashCode(); 
+            if (schemaElement != null)
+            {
+                h ^= schemaElement.GetHashCode();
             }
             XmlSchemaType schemaType = si.SchemaType;
-            if (schemaType != null) {
+            if (schemaType != null)
+            {
                 h ^= schemaType.GetHashCode();
             }
             h ^= (int)si.Validity;
@@ -362,9 +482,15 @@ namespace System.Xml.Schema
         /// Gets the schema information that has been assigned to the <see cref="XElement"/> as a result of schema validation.
         /// </summary>
         /// <param name="source">Extension point</param>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Reviewed by the design group.")]
-        public static IXmlSchemaInfo GetSchemaInfo(this XElement source) {
-            if (source == null) throw new ArgumentNullException("source");
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "Reviewed by the design group."
+        )]
+        public static IXmlSchemaInfo GetSchemaInfo(this XElement source)
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
             return source.Annotation<IXmlSchemaInfo>();
         }
 
@@ -372,9 +498,15 @@ namespace System.Xml.Schema
         /// Gets the schema information that has been assigned to the <see cref="XAttribute"/> as a result of schema validation.
         /// </summary>
         /// <param name="source">Extension point</param>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Reviewed by the design group.")]
-        public static IXmlSchemaInfo GetSchemaInfo(this XAttribute source) {
-            if (source == null) throw new ArgumentNullException("source");
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "Reviewed by the design group."
+        )]
+        public static IXmlSchemaInfo GetSchemaInfo(this XAttribute source)
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
             return source.Annotation<IXmlSchemaInfo>();
         }
 
@@ -383,10 +515,15 @@ namespace System.Xml.Schema
         /// </summary>
         /// <param name="source">Extension point</param>
         /// <param name="schemas">The <see cref="XmlSchemaSet"/> used for validation</param>
-        /// <param name="validationEventHandler">The <see cref="ValidationEventHandler"/> 
-        /// that receives schema validation warnings and errors encountered during schema 
+        /// <param name="validationEventHandler">The <see cref="ValidationEventHandler"/>
+        /// that receives schema validation warnings and errors encountered during schema
         /// validation</param>
-        public static void Validate(this XDocument source, XmlSchemaSet schemas, ValidationEventHandler validationEventHandler) {
+        public static void Validate(
+            this XDocument source,
+            XmlSchemaSet schemas,
+            ValidationEventHandler validationEventHandler
+        )
+        {
             source.Validate(schemas, validationEventHandler, false);
         }
 
@@ -395,31 +532,53 @@ namespace System.Xml.Schema
         /// </summary>
         /// <param name="source">Extension point</param>
         /// <param name="schemas">The <see cref="XmlSchemaSet"/> used for validation</param>
-        /// <param name="validationEventHandler">The <see cref="ValidationEventHandler"/> 
-        /// that receives schema validation warnings and errors encountered during schema 
+        /// <param name="validationEventHandler">The <see cref="ValidationEventHandler"/>
+        /// that receives schema validation warnings and errors encountered during schema
         /// validation</param>
-        /// <param name="addSchemaInfo">If enabled the <see cref="XDocument"/> and the corresponding 
-        /// subtree is augmented with PSVI in the form of <see cref="IXmlSchemaInfo"/> annotations, 
+        /// <param name="addSchemaInfo">If enabled the <see cref="XDocument"/> and the corresponding
+        /// subtree is augmented with PSVI in the form of <see cref="IXmlSchemaInfo"/> annotations,
         /// default attributes and default element values</param>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Reviewed by the design group.")]
-        public static void Validate(this XDocument source, XmlSchemaSet schemas, ValidationEventHandler validationEventHandler, bool addSchemaInfo) {
-            if (source == null) throw new ArgumentNullException("source");
-            if (schemas == null) throw new ArgumentNullException("schemas");
-            new XNodeValidator(schemas, validationEventHandler).Validate(source, null, addSchemaInfo);
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "Reviewed by the design group."
+        )]
+        public static void Validate(
+            this XDocument source,
+            XmlSchemaSet schemas,
+            ValidationEventHandler validationEventHandler,
+            bool addSchemaInfo
+        )
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (schemas == null)
+                throw new ArgumentNullException("schemas");
+            new XNodeValidator(schemas, validationEventHandler).Validate(
+                source,
+                null,
+                addSchemaInfo
+            );
         }
 
         /// <summary>
         /// Validate a <see cref="XElement"/>
         /// </summary>
         /// <param name="source">Extension point</param>
-        /// <param name="partialValidationType">An <see cref="XmlSchemaElement"/> or 
-        /// <see cref="XmlSchemaType"/> object used to initialize the partial validation 
+        /// <param name="partialValidationType">An <see cref="XmlSchemaElement"/> or
+        /// <see cref="XmlSchemaType"/> object used to initialize the partial validation
         /// context</param>
         /// <param name="schemas">The <see cref="XmlSchemaSet"/> used for validation</param>
-        /// <param name="validationEventHandler">The <see cref="ValidationEventHandler"/> that 
-        /// receives schema validation warnings and errors encountered during schema 
+        /// <param name="validationEventHandler">The <see cref="ValidationEventHandler"/> that
+        /// receives schema validation warnings and errors encountered during schema
         /// validation</param>
-        public static void Validate(this XElement source, XmlSchemaObject partialValidationType, XmlSchemaSet schemas, ValidationEventHandler validationEventHandler) {
+        public static void Validate(
+            this XElement source,
+            XmlSchemaObject partialValidationType,
+            XmlSchemaSet schemas,
+            ValidationEventHandler validationEventHandler
+        )
+        {
             source.Validate(partialValidationType, schemas, validationEventHandler, false);
         }
 
@@ -427,36 +586,60 @@ namespace System.Xml.Schema
         /// Validate a <see cref="XElement"/>
         /// </summary>
         /// <param name="source">Extension point</param>
-        /// <param name="partialValidationType">An <see cref="XmlSchemaElement"/> or 
-        /// <see cref="XmlSchemaType"/> object used to initialize the partial validation 
+        /// <param name="partialValidationType">An <see cref="XmlSchemaElement"/> or
+        /// <see cref="XmlSchemaType"/> object used to initialize the partial validation
         /// context</param>
         /// <param name="schemas">The <see cref="XmlSchemaSet"/> used for validation</param>
-        /// <param name="validationEventHandler">The <see cref="ValidationEventHandler"/> that 
-        /// receives schema validation warnings and errors encountered during schema 
+        /// <param name="validationEventHandler">The <see cref="ValidationEventHandler"/> that
+        /// receives schema validation warnings and errors encountered during schema
         /// validation</param>
-        /// <param name="addSchemaInfo">If enabled the <see cref="XElement"/> and the corresponding 
-        /// subtree is augmented with PSVI in the form of <see cref="IXmlSchemaInfo"/> annotations, 
+        /// <param name="addSchemaInfo">If enabled the <see cref="XElement"/> and the corresponding
+        /// subtree is augmented with PSVI in the form of <see cref="IXmlSchemaInfo"/> annotations,
         /// default attributes and default element values</param>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Reviewed by the design group.")]
-        public static void Validate(this XElement source, XmlSchemaObject partialValidationType, XmlSchemaSet schemas, ValidationEventHandler validationEventHandler, bool addSchemaInfo) {
-            if (source == null) throw new ArgumentNullException("source");
-            if (partialValidationType == null) throw new ArgumentNullException("partialValidationType");
-            if (schemas == null) throw new ArgumentNullException("schemas");
-            new XNodeValidator(schemas, validationEventHandler).Validate(source, partialValidationType, addSchemaInfo);
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "Reviewed by the design group."
+        )]
+        public static void Validate(
+            this XElement source,
+            XmlSchemaObject partialValidationType,
+            XmlSchemaSet schemas,
+            ValidationEventHandler validationEventHandler,
+            bool addSchemaInfo
+        )
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (partialValidationType == null)
+                throw new ArgumentNullException("partialValidationType");
+            if (schemas == null)
+                throw new ArgumentNullException("schemas");
+            new XNodeValidator(schemas, validationEventHandler).Validate(
+                source,
+                partialValidationType,
+                addSchemaInfo
+            );
         }
 
         /// <summary>
         /// Validate a <see cref="XAttribute"/>
         /// </summary>
         /// <param name="source">Extension point</param>
-        /// <param name="partialValidationType">An <see cref="XmlSchemaAttribute"/> or 
-        /// <see cref="XmlSchemaType"/> object used to initialize the partial validation 
+        /// <param name="partialValidationType">An <see cref="XmlSchemaAttribute"/> or
+        /// <see cref="XmlSchemaType"/> object used to initialize the partial validation
         /// context</param>
         /// <param name="schemas">The <see cref="XmlSchemaSet"/> used for validation</param>
-        /// <param name="validationEventHandler">The <see cref="ValidationEventHandler"/> that 
-        /// receives schema validation warnings and errors encountered during schema 
+        /// <param name="validationEventHandler">The <see cref="ValidationEventHandler"/> that
+        /// receives schema validation warnings and errors encountered during schema
         /// validation</param>
-        public static void Validate(this XAttribute source, XmlSchemaObject partialValidationType, XmlSchemaSet schemas, ValidationEventHandler validationEventHandler) {
+        public static void Validate(
+            this XAttribute source,
+            XmlSchemaObject partialValidationType,
+            XmlSchemaSet schemas,
+            ValidationEventHandler validationEventHandler
+        )
+        {
             source.Validate(partialValidationType, schemas, validationEventHandler, false);
         }
 
@@ -464,22 +647,40 @@ namespace System.Xml.Schema
         /// Validate a <see cref="XAttribute"/>
         /// </summary>
         /// <param name="source">Extension point</param>
-        /// <param name="partialValidationType">An <see cref="XmlSchemaAttribute"/> or 
-        /// <see cref="XmlSchemaType"/> object used to initialize the partial validation 
+        /// <param name="partialValidationType">An <see cref="XmlSchemaAttribute"/> or
+        /// <see cref="XmlSchemaType"/> object used to initialize the partial validation
         /// context</param>
         /// <param name="schemas">The <see cref="XmlSchemaSet"/> used for validation</param>
-        /// <param name="validationEventHandler">The <see cref="ValidationEventHandler"/> that 
-        /// receives schema validation warnings and errors encountered during schema 
+        /// <param name="validationEventHandler">The <see cref="ValidationEventHandler"/> that
+        /// receives schema validation warnings and errors encountered during schema
         /// validation</param>
-        /// <param name="addSchemaInfo">If enabled the <see cref="XAttribute"/> is augmented with PSVI 
-        /// in the form of <see cref="IXmlSchemaInfo"/> annotations, default attributes and 
+        /// <param name="addSchemaInfo">If enabled the <see cref="XAttribute"/> is augmented with PSVI
+        /// in the form of <see cref="IXmlSchemaInfo"/> annotations, default attributes and
         /// default element values</param>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Reviewed by the design group.")]
-        public static void Validate(this XAttribute source, XmlSchemaObject partialValidationType, XmlSchemaSet schemas, ValidationEventHandler validationEventHandler, bool addSchemaInfo) {
-            if (source == null) throw new ArgumentNullException("source");
-            if (partialValidationType == null) throw new ArgumentNullException("partialValidationType");
-            if (schemas == null) throw new ArgumentNullException("schemas");
-            new XNodeValidator(schemas, validationEventHandler).Validate(source, partialValidationType, addSchemaInfo);
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "Reviewed by the design group."
+        )]
+        public static void Validate(
+            this XAttribute source,
+            XmlSchemaObject partialValidationType,
+            XmlSchemaSet schemas,
+            ValidationEventHandler validationEventHandler,
+            bool addSchemaInfo
+        )
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (partialValidationType == null)
+                throw new ArgumentNullException("partialValidationType");
+            if (schemas == null)
+                throw new ArgumentNullException("schemas");
+            new XNodeValidator(schemas, validationEventHandler).Validate(
+                source,
+                partialValidationType,
+                addSchemaInfo
+            );
         }
     }
 }

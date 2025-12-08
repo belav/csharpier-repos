@@ -16,20 +16,17 @@ namespace System.Web.Mvc.Test
             var collection = new ModelBinderProviderCollection();
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(
-                () => collection.GetBinder(null),
-                "modelType"
-                );
+            Assert.ThrowsArgumentNull(() => collection.GetBinder(null), "modelType");
         }
 
         [Fact]
         public void ModelBinderProviderCollectionCombinedItemsCaches()
         {
             // Arrange
-            var providers = new IModelBinderProvider[] 
+            var providers = new IModelBinderProvider[]
             {
-                new Mock<IModelBinderProvider>(MockBehavior.Strict).Object, 
-                new Mock<IModelBinderProvider>(MockBehavior.Strict).Object
+                new Mock<IModelBinderProvider>(MockBehavior.Strict).Object,
+                new Mock<IModelBinderProvider>(MockBehavior.Strict).Object,
             };
             var collection = new ModelBinderProviderCollection(providers);
 
@@ -51,7 +48,10 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void ModelBinderProviderCollectionCombinedItemsInsertResetsCache()
         {
-            TestCacheReset((collection) => collection.Insert(0, new Mock<IModelBinderProvider>(MockBehavior.Strict).Object));
+            TestCacheReset(
+                (collection) =>
+                    collection.Insert(0, new Mock<IModelBinderProvider>(MockBehavior.Strict).Object)
+            );
         }
 
         [Fact]
@@ -63,16 +63,19 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void ModelBinderProviderCollectionCombinedItemsSetResetsCache()
         {
-            TestCacheReset((collection) => collection[0] = new Mock<IModelBinderProvider>(MockBehavior.Strict).Object);
+            TestCacheReset(
+                (collection) =>
+                    collection[0] = new Mock<IModelBinderProvider>(MockBehavior.Strict).Object
+            );
         }
 
         private static void TestCacheReset(Action<ModelBinderProviderCollection> mutatingAction)
         {
             // Arrange
-            var providers = new List<IModelBinderProvider>() 
+            var providers = new List<IModelBinderProvider>()
             {
-                new Mock<IModelBinderProvider>(MockBehavior.Strict).Object, 
-                new Mock<IModelBinderProvider>(MockBehavior.Strict).Object
+                new Mock<IModelBinderProvider>(MockBehavior.Strict).Object,
+                new Mock<IModelBinderProvider>(MockBehavior.Strict).Object,
             };
             var collection = new ModelBinderProviderCollection(providers);
 
@@ -92,12 +95,23 @@ namespace System.Web.Mvc.Test
             var firstProvider = new Mock<IModelBinderProvider>();
             var secondProvider = new Mock<IModelBinderProvider>();
             var thirdProvider = new Mock<IModelBinderProvider>();
-            var dependencyProviders = new IModelBinderProvider[] { firstProvider.Object, secondProvider.Object };
+            var dependencyProviders = new IModelBinderProvider[]
+            {
+                firstProvider.Object,
+                secondProvider.Object,
+            };
             var collectionProviders = new IModelBinderProvider[] { thirdProvider.Object };
-            var expectedProviders = new IModelBinderProvider[] { firstProvider.Object, secondProvider.Object, thirdProvider.Object };
+            var expectedProviders = new IModelBinderProvider[]
+            {
+                firstProvider.Object,
+                secondProvider.Object,
+                thirdProvider.Object,
+            };
 
             var resolver = new Mock<IDependencyResolver>();
-            resolver.Setup(r => r.GetServices(typeof(IModelBinderProvider))).Returns(dependencyProviders);
+            resolver
+                .Setup(r => r.GetServices(typeof(IModelBinderProvider)))
+                .Returns(dependencyProviders);
 
             var providers = new ModelBinderProviderCollection(collectionProviders, resolver.Object);
 
@@ -144,7 +158,9 @@ namespace System.Web.Mvc.Test
             var provider3 = new Mock<IModelBinderProvider>(MockBehavior.Strict);
             provider3.Setup(p => p.GetBinder(testType)).Returns(secondMatchingBinder);
 
-            var collection = new ModelBinderProviderCollection(new[] { provider1.Object, provider2.Object, provider3.Object });
+            var collection = new ModelBinderProviderCollection(
+                new[] { provider1.Object, provider2.Object, provider3.Object }
+            );
 
             // Act
             IModelBinder returnedBinder = collection.GetBinder(testType);
@@ -166,7 +182,9 @@ namespace System.Web.Mvc.Test
             var provider2 = new Mock<IModelBinderProvider>(MockBehavior.Strict);
             provider2.Setup(p => p.GetBinder(testType)).Returns(nullModelBinder);
 
-            var collection = new ModelBinderProviderCollection(new[] { provider1.Object, provider2.Object });
+            var collection = new ModelBinderProviderCollection(
+                new[] { provider1.Object, provider2.Object }
+            );
 
             // Act
             IModelBinder returnedBinder = collection.GetBinder(testType);
@@ -183,18 +201,29 @@ namespace System.Web.Mvc.Test
             IModelBinder expectedBinder = new Mock<IModelBinder>().Object;
 
             Mock<IModelBinderProvider> locatedProvider = new Mock<IModelBinderProvider>();
-            locatedProvider.Setup(p => p.GetBinder(modelType))
-                .Returns(expectedBinder);
+            locatedProvider.Setup(p => p.GetBinder(modelType)).Returns(expectedBinder);
 
             Mock<IModelBinderProvider> secondProvider = new Mock<IModelBinderProvider>();
             Mock<IModelBinderProvider> thirdProvider = new Mock<IModelBinderProvider>();
-            IModelBinderProvider[] dependencyProviders = new IModelBinderProvider[] { locatedProvider.Object, secondProvider.Object };
-            IModelBinderProvider[] collectionProviders = new IModelBinderProvider[] { thirdProvider.Object };
+            IModelBinderProvider[] dependencyProviders = new IModelBinderProvider[]
+            {
+                locatedProvider.Object,
+                secondProvider.Object,
+            };
+            IModelBinderProvider[] collectionProviders = new IModelBinderProvider[]
+            {
+                thirdProvider.Object,
+            };
 
             Mock<IDependencyResolver> resolver = new Mock<IDependencyResolver>();
-            resolver.Setup(r => r.GetServices(typeof(IModelBinderProvider))).Returns(dependencyProviders);
+            resolver
+                .Setup(r => r.GetServices(typeof(IModelBinderProvider)))
+                .Returns(dependencyProviders);
 
-            ModelBinderProviderCollection providers = new ModelBinderProviderCollection(collectionProviders, resolver.Object);
+            ModelBinderProviderCollection providers = new ModelBinderProviderCollection(
+                collectionProviders,
+                resolver.Object
+            );
 
             // Act
             IModelBinder returnedBinder = providers.GetBinder(modelType);

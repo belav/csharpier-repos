@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Snippets
         public SnippetChange(
             ImmutableArray<TextChange> textChanges,
             int cursorPosition,
-            ImmutableArray<SnippetPlaceholder> placeholders)
+            ImmutableArray<SnippetPlaceholder> placeholders
+        )
         {
             if (textChanges.IsEmpty)
             {

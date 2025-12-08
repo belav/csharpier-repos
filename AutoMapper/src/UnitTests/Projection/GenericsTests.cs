@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class GenericsTests : AutoMapperSpecBase
 {
     private Dest<string>[] _dests;
@@ -13,20 +14,15 @@ public class GenericsTests : AutoMapperSpecBase
         public T Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap(typeof (Source<>), typeof (Dest<>));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap(typeof(Source<>), typeof(Dest<>));
+        });
 
     protected override void Because_of()
     {
-        var sources = new[]
-        {
-            new Source<string>
-            {
-                Value = "5"
-            }
-        }.AsQueryable();
+        var sources = new[] { new Source<string> { Value = "5" } }.AsQueryable();
 
         _dests = sources.ProjectTo<Dest<string>>(Configuration).ToArray();
     }

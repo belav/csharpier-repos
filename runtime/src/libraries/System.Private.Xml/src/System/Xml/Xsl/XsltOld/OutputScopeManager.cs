@@ -60,7 +60,14 @@ namespace System.Xml.Xsl.XsltOld
                 rootElementScope = new OutputScope();
                 _elementScopesStack.AddToTop(rootElementScope);
             }
-            rootElementScope.Init(string.Empty, string.Empty, string.Empty, /*space:*/XmlSpace.None, /*lang:*/string.Empty, /*mixed:*/false);
+            rootElementScope.Init(
+                string.Empty,
+                string.Empty,
+                string.Empty, /*space:*/
+                XmlSpace.None, /*lang:*/
+                string.Empty, /*mixed:*/
+                false
+            );
         }
 
         internal void PushNamespace(string prefix, string nspace)
@@ -90,7 +97,14 @@ namespace System.Xml.Xsl.XsltOld
             }
 
             Debug.Assert(elementScope != null);
-            elementScope.Init(name, nspace, prefix, parentScope.Space, parentScope.Lang, parentScope.Mixed);
+            elementScope.Init(
+                name,
+                nspace,
+                prefix,
+                parentScope.Space,
+                parentScope.Lang,
+                parentScope.Mixed
+            );
         }
 
         internal void PopScope()

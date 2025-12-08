@@ -8,7 +8,8 @@ namespace JitTest_ldsfld_mulovf_unsigned_cs
 {
     public class Test
     {
-        private static ulong s_op1,s_op2;
+        private static ulong s_op1,
+            s_op2;
 
         private static bool check(ulong product, bool overflow)
         {
@@ -57,7 +58,7 @@ namespace JitTest_ldsfld_mulovf_unsigned_cs
 
             Console.WriteLine("Test passed");
             return 100;
-        fail:
+            fail:
             Console.WriteLine("Test failed");
             return 1;
         }

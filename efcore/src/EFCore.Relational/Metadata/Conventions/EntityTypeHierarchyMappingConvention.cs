@@ -19,7 +19,8 @@ public class EntityTypeHierarchyMappingConvention : IModelFinalizingConvention
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public EntityTypeHierarchyMappingConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -38,7 +39,8 @@ public class EntityTypeHierarchyMappingConvention : IModelFinalizingConvention
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         var allRoots = new HashSet<IConventionEntityType>();
         var nonTphRoots = new HashSet<IConventionEntityType>();
@@ -56,8 +58,11 @@ public class EntityTypeHierarchyMappingConvention : IModelFinalizingConvention
             if (mappingStrategy == null)
             {
                 mappingStrategy = (string?)root[RelationalAnnotationNames.MappingStrategy];
-                if (mappingStrategy == null
-                    && root.GetDiscriminatorPropertyConfigurationSource() == ConfigurationSource.Explicit)
+                if (
+                    mappingStrategy == null
+                    && root.GetDiscriminatorPropertyConfigurationSource()
+                        == ConfigurationSource.Explicit
+                )
                 {
                     mappingStrategy = RelationalAnnotationNames.TphMappingStrategy;
                     root.Builder.UseMappingStrategy(RelationalAnnotationNames.TphMappingStrategy);
@@ -76,8 +81,10 @@ public class EntityTypeHierarchyMappingConvention : IModelFinalizingConvention
             {
                 if (mappingStrategy == null)
                 {
-                    if (tableName != entityType.BaseType.GetTableName()
-                        || entityType.GetSchema() != entityType.BaseType.GetSchema())
+                    if (
+                        tableName != entityType.BaseType.GetTableName()
+                        || entityType.GetSchema() != entityType.BaseType.GetSchema()
+                    )
                     {
                         mappingStrategy = RelationalAnnotationNames.TptMappingStrategy;
                         root.Builder.UseMappingStrategy(mappingStrategy);
@@ -87,24 +94,30 @@ public class EntityTypeHierarchyMappingConvention : IModelFinalizingConvention
                 if (mappingStrategy == RelationalAnnotationNames.TptMappingStrategy)
                 {
                     var pk = entityType.FindPrimaryKey();
-                    if (pk != null
-                        && !entityType.FindDeclaredForeignKeys(pk.Properties)
-                            .Any(
-                                fk => fk.PrincipalKey.IsPrimaryKey()
-                                    && fk.PrincipalEntityType.IsAssignableFrom(entityType)
-                                    && fk.PrincipalEntityType != entityType))
+                    if (
+                        pk != null
+                        && !entityType
+                            .FindDeclaredForeignKeys(pk.Properties)
+                            .Any(fk =>
+                                fk.PrincipalKey.IsPrimaryKey()
+                                && fk.PrincipalEntityType.IsAssignableFrom(entityType)
+                                && fk.PrincipalEntityType != entityType
+                            )
+                    )
                     {
                         var closestMappedType = entityType.BaseType;
-                        while (closestMappedType != null
-                               && closestMappedType.GetTableName() == null)
+                        while (
+                            closestMappedType != null && closestMappedType.GetTableName() == null
+                        )
                         {
                             closestMappedType = closestMappedType.BaseType;
                         }
 
                         if (closestMappedType != null)
                         {
-                            entityType.Builder.HasRelationship(closestMappedType, pk.Properties, pk)?
-                                .IsUnique(true);
+                            entityType
+                                .Builder.HasRelationship(closestMappedType, pk.Properties, pk)
+                                ?.IsUnique(true);
                         }
                     }
 
@@ -114,9 +127,13 @@ public class EntityTypeHierarchyMappingConvention : IModelFinalizingConvention
             }
 
             var viewName = entityType.GetViewName();
-            if (viewName != null
-                && (viewName != entityType.BaseType.GetViewName()
-                    || entityType.GetViewSchema() != entityType.BaseType.GetViewSchema()))
+            if (
+                viewName != null
+                && (
+                    viewName != entityType.BaseType.GetViewName()
+                    || entityType.GetViewSchema() != entityType.BaseType.GetViewSchema()
+                )
+            )
             {
                 nonTphRoots.Add(root);
             }

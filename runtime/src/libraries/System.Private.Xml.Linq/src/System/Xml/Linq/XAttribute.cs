@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-
 using CultureInfo = System.Globalization.CultureInfo;
 using SuppressMessageAttribute = System.Diagnostics.CodeAnalysis.SuppressMessageAttribute;
 
@@ -17,7 +16,9 @@ namespace System.Xml.Linq
     /// <remarks>
     /// An XML attribute is a name/value pair associated with an XML element.
     /// </remarks>
-    [System.ComponentModel.TypeDescriptionProvider("MS.Internal.Xml.Linq.ComponentModel.XTypeDescriptionProvider`1[[System.Xml.Linq.XAttribute, System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],System.ComponentModel.TypeConverter")]
+    [System.ComponentModel.TypeDescriptionProvider(
+        "MS.Internal.Xml.Linq.ComponentModel.XTypeDescriptionProvider`1[[System.Xml.Linq.XAttribute, System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],System.ComponentModel.TypeConverter"
+    )]
     public class XAttribute : XObject
     {
         /// <summary>
@@ -25,10 +26,7 @@ namespace System.Xml.Linq
         /// </summary>
         public static IEnumerable<XAttribute> EmptySequence
         {
-            get
-            {
-                return Array.Empty<XAttribute>();
-            }
+            get { return Array.Empty<XAttribute>(); }
         }
 
         internal XAttribute? next;
@@ -122,10 +120,7 @@ namespace System.Xml.Linq
         /// </remarks>
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return XmlNodeType.Attribute;
-            }
+            get { return XmlNodeType.Attribute; }
         }
 
         /// <summary>
@@ -139,7 +134,8 @@ namespace System.Xml.Linq
         {
             get
             {
-                if (parent == null) return null;
+                if (parent == null)
+                    return null;
                 XAttribute a = ((XElement)parent).lastAttr!;
                 while (a.next != this)
                 {
@@ -157,17 +153,15 @@ namespace System.Xml.Linq
         /// </exception>
         public string Value
         {
-            get
-            {
-                return value;
-            }
+            get { return value; }
             set
             {
                 ArgumentNullException.ThrowIfNull(value);
                 ValidateAttribute(name, value);
                 bool notify = NotifyChanging(this, XObjectChangeEventArgs.Value);
                 this.value = value;
-                if (notify) NotifyChanged(this, XObjectChangeEventArgs.Value);
+                if (notify)
+                    NotifyChanged(this, XObjectChangeEventArgs.Value);
             }
         }
 
@@ -179,7 +173,8 @@ namespace System.Xml.Linq
         /// </exception>
         public void Remove()
         {
-            if (parent == null) throw new InvalidOperationException(SR.InvalidOperation_MissingParent);
+            if (parent == null)
+                throw new InvalidOperationException(SR.InvalidOperation_MissingParent);
             ((XElement)parent).RemoveAttribute(this);
         }
 
@@ -215,7 +210,12 @@ namespace System.Xml.Linq
                 ws.ConformanceLevel = ConformanceLevel.Fragment;
                 using (XmlWriter w = XmlWriter.Create(sw, ws))
                 {
-                    w.WriteAttributeString(GetPrefixOfNamespace(name.Namespace), name.LocalName, name.NamespaceName, value);
+                    w.WriteAttributeString(
+                        GetPrefixOfNamespace(name.Namespace),
+                        name.LocalName,
+                        name.NamespaceName,
+                        value
+                    );
                 }
                 return sw.ToString().Trim();
             }
@@ -234,7 +234,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull(nameof(attribute))]
         public static explicit operator string?(XAttribute? attribute)
         {
-            if (attribute == null) return null;
+            if (attribute == null)
+                return null;
             return attribute.value;
         }
 
@@ -271,7 +272,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull(nameof(attribute))]
         public static explicit operator bool?(XAttribute? attribute)
         {
-            if (attribute == null) return null;
+            if (attribute == null)
+                return null;
             return XmlConvert.ToBoolean(attribute.value.ToLowerInvariant());
         }
 
@@ -308,7 +310,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull(nameof(attribute))]
         public static explicit operator int?(XAttribute? attribute)
         {
-            if (attribute == null) return null;
+            if (attribute == null)
+                return null;
             return XmlConvert.ToInt32(attribute.value);
         }
 
@@ -345,7 +348,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull(nameof(attribute))]
         public static explicit operator uint?(XAttribute? attribute)
         {
-            if (attribute == null) return null;
+            if (attribute == null)
+                return null;
             return XmlConvert.ToUInt32(attribute.value);
         }
 
@@ -382,7 +386,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull(nameof(attribute))]
         public static explicit operator long?(XAttribute? attribute)
         {
-            if (attribute == null) return null;
+            if (attribute == null)
+                return null;
             return XmlConvert.ToInt64(attribute.value);
         }
 
@@ -419,7 +424,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull(nameof(attribute))]
         public static explicit operator ulong?(XAttribute? attribute)
         {
-            if (attribute == null) return null;
+            if (attribute == null)
+                return null;
             return XmlConvert.ToUInt64(attribute.value);
         }
 
@@ -456,7 +462,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull(nameof(attribute))]
         public static explicit operator float?(XAttribute? attribute)
         {
-            if (attribute == null) return null;
+            if (attribute == null)
+                return null;
             return XmlConvert.ToSingle(attribute.value);
         }
 
@@ -493,7 +500,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull(nameof(attribute))]
         public static explicit operator double?(XAttribute? attribute)
         {
-            if (attribute == null) return null;
+            if (attribute == null)
+                return null;
             return XmlConvert.ToDouble(attribute.value);
         }
 
@@ -530,7 +538,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull(nameof(attribute))]
         public static explicit operator decimal?(XAttribute? attribute)
         {
-            if (attribute == null) return null;
+            if (attribute == null)
+                return null;
             return XmlConvert.ToDecimal(attribute.value);
         }
 
@@ -551,7 +560,11 @@ namespace System.Xml.Linq
         {
             ArgumentNullException.ThrowIfNull(attribute);
 
-            return DateTime.Parse(attribute.value, CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.RoundtripKind);
+            return DateTime.Parse(
+                attribute.value,
+                CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.RoundtripKind
+            );
         }
 
         /// <summary>
@@ -567,8 +580,13 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull(nameof(attribute))]
         public static explicit operator DateTime?(XAttribute? attribute)
         {
-            if (attribute == null) return null;
-            return DateTime.Parse(attribute.value, CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.RoundtripKind);
+            if (attribute == null)
+                return null;
+            return DateTime.Parse(
+                attribute.value,
+                CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.RoundtripKind
+            );
         }
 
         /// <summary>
@@ -604,7 +622,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull(nameof(attribute))]
         public static explicit operator DateTimeOffset?(XAttribute? attribute)
         {
-            if (attribute == null) return null;
+            if (attribute == null)
+                return null;
             return XmlConvert.ToDateTimeOffset(attribute.value);
         }
 
@@ -641,7 +660,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull(nameof(attribute))]
         public static explicit operator TimeSpan?(XAttribute? attribute)
         {
-            if (attribute == null) return null;
+            if (attribute == null)
+                return null;
             return XmlConvert.ToTimeSpan(attribute.value);
         }
 
@@ -678,7 +698,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull(nameof(attribute))]
         public static explicit operator Guid?(XAttribute? attribute)
         {
-            if (attribute == null) return null;
+            if (attribute == null)
+                return null;
             return XmlConvert.ToGuid(attribute.value);
         }
 
@@ -690,10 +711,14 @@ namespace System.Xml.Linq
         internal string? GetPrefixOfNamespace(XNamespace ns)
         {
             string namespaceName = ns.NamespaceName;
-            if (namespaceName.Length == 0) return string.Empty;
-            if (parent != null) return ((XElement)parent).GetPrefixOfNamespace(ns);
-            if ((object)namespaceName == (object)XNamespace.xmlPrefixNamespace) return "xml";
-            if ((object)namespaceName == (object)XNamespace.xmlnsPrefixNamespace) return "xmlns";
+            if (namespaceName.Length == 0)
+                return string.Empty;
+            if (parent != null)
+                return ((XElement)parent).GetPrefixOfNamespace(ns);
+            if ((object)namespaceName == (object)XNamespace.xmlPrefixNamespace)
+                return "xml";
+            if ((object)namespaceName == (object)XNamespace.xmlnsPrefixNamespace)
+                return "xmlns";
             return null;
         }
 
@@ -707,13 +732,16 @@ namespace System.Xml.Linq
                 {
                     // The empty namespace name can only be declared by
                     // the default namespace declaration
-                    throw new ArgumentException(SR.Format(SR.Argument_NamespaceDeclarationPrefixed, name.LocalName));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_NamespaceDeclarationPrefixed, name.LocalName)
+                    );
                 }
                 else if (value == XNamespace.xmlPrefixNamespace)
                 {
                     // 'http://www.w3.org/XML/1998/namespace' can only
                     // be declared by the 'xml' prefix namespace declaration.
-                    if (name.LocalName != "xml") throw new ArgumentException(SR.Argument_NamespaceDeclarationXml);
+                    if (name.LocalName != "xml")
+                        throw new ArgumentException(SR.Argument_NamespaceDeclarationXml);
                 }
                 else if (value == XNamespace.xmlnsPrefixNamespace)
                 {

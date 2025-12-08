@@ -1,5 +1,5 @@
 //
-// XmlChoiceIdentifierAttribute.cs: 
+// XmlChoiceIdentifierAttribute.cs:
 //
 // Author:
 //   John Donagher (john@webmeta.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,49 +33,60 @@ using System.Reflection;
 
 namespace System.Xml.Serialization
 {
-	/// <summary>
-	/// Summary description for XmlChoiceIdentifierAttribute.
-	/// </summary>
-	[AttributeUsageAttribute(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, AllowMultiple=false)]
-	public class XmlChoiceIdentifierAttribute : Attribute
-	{
-		private string memberName;
+    /// <summary>
+    /// Summary description for XmlChoiceIdentifierAttribute.
+    /// </summary>
+    [AttributeUsageAttribute(
+        AttributeTargets.Field
+            | AttributeTargets.Parameter
+            | AttributeTargets.Property
+            | AttributeTargets.ReturnValue,
+        AllowMultiple = false
+    )]
+    public class XmlChoiceIdentifierAttribute : Attribute
+    {
+        private string memberName;
 
-		public XmlChoiceIdentifierAttribute ()
-		{
-		}
-		public XmlChoiceIdentifierAttribute (string name)
-		{
-			memberName = name;
-		}
+        public XmlChoiceIdentifierAttribute() { }
 
-		public string MemberName {
-			get {
-				if (memberName == null) {
-					return string.Empty;
-				}
-				return memberName;
-			}
-			set { memberName = value; }
-		}
+        public XmlChoiceIdentifierAttribute(string name)
+        {
+            memberName = name;
+        }
+
+        public string MemberName
+        {
+            get
+            {
+                if (memberName == null)
+                {
+                    return string.Empty;
+                }
+                return memberName;
+            }
+            set { memberName = value; }
+        }
 
 #if MOBILE
-		MemberInfo member;
-		// It is used only in 2.1 S.X.Serialization.dll in MS SDK.
-		internal MemberInfo MemberInfo {
-			get { return member; }
-			set {
-				MemberName = value != null ? value.Name : null;
-				member = value;
-			}
-		}
+        MemberInfo member;
+
+        // It is used only in 2.1 S.X.Serialization.dll in MS SDK.
+        internal MemberInfo MemberInfo
+        {
+            get { return member; }
+            set
+            {
+                MemberName = value != null ? value.Name : null;
+                member = value;
+            }
+        }
 #endif
 
-		internal void AddKeyHash (System.Text.StringBuilder sb)
-		{
-			sb.Append ("XCA ");
-			KeyHelper.AddField (sb, 1, memberName);
-			sb.Append ('|');
-		}
-	}
+        internal void AddKeyHash(System.Text.StringBuilder sb)
+        {
+            sb.Append("XCA ");
+            KeyHelper.AddField(sb, 1, memberName);
+            sb.Append('|');
+        }
+    }
 }

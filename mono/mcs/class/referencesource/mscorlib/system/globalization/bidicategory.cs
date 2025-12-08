@@ -11,9 +11,11 @@
 **
 **
 ============================================================*/
-namespace System.Globalization {
+namespace System.Globalization
+{
     [Serializable]
-    internal enum BidiCategory {
+    internal enum BidiCategory
+    {
         LeftToRight = 0,
         LeftToRightEmbedding = 1,
         LeftToRightOverride = 2,
@@ -34,7 +36,7 @@ namespace System.Globalization {
         Whitespace = 17,
         OtherNeutrals = 18,
         LeftToRightIsolate = 19,
-        RightToLeftIsolate = 20, 
+        RightToLeftIsolate = 20,
         FirstStrongIsolate = 21,
         PopDirectionIsolate = 22,
     }

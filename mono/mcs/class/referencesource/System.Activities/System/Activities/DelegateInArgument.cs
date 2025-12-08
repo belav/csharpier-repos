@@ -16,9 +16,7 @@ namespace System.Activities
     public sealed class DelegateInArgument<T> : DelegateInArgument
     {
         public DelegateInArgument()
-            : base()
-        {
-        }
+            : base() { }
 
         public DelegateInArgument(string name)
             : base()
@@ -28,10 +26,7 @@ namespace System.Activities
 
         protected override Type TypeCore
         {
-            get
-            {
-                return typeof(T);
-            }
+            get { return typeof(T); }
         }
 
         // Soft-Link: This method is referenced through reflection by

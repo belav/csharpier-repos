@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,26 +31,50 @@ using System.Runtime.InteropServices;
 
 namespace System.EnterpriseServices.Internal
 {
-	[Guid("F6B6768F-F99E-4152-8ED2-0412F78517FB")]
-	public sealed class SoapServerTlb : ISoapServerTlb {
+    [Guid("F6B6768F-F99E-4152-8ED2-0412F78517FB")]
+    public sealed class SoapServerTlb : ISoapServerTlb
+    {
+        [MonoTODO]
+        public SoapServerTlb()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public SoapServerTlb ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void AddServerTlb(
+            string progId,
+            string classId,
+            string interfaceId,
+            string srcTlbPath,
+            string rootWebServer,
+            string inBaseUrl,
+            string inVirtualRoot,
+            string clientActivated,
+            string wellKnown,
+            string discoFile,
+            string operation,
+            out string strAssemblyName,
+            out string typeName
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public void AddServerTlb (string progId, string classId, string interfaceId, string srcTlbPath, string rootWebServer, string inBaseUrl, string inVirtualRoot, string clientActivated, string wellKnown, string discoFile, string operation, out string strAssemblyName, out string typeName)
-		{
-			throw new NotImplementedException ();
-		}
-
-		[MonoTODO]
-		public void DeleteServerTlb (string progId, string classId, string interfaceId, string srcTlbPath, string rootWebServer, string baseUrl, string virtualRoot, string operation, string assemblyName, string typeName)
-		{
-			throw new NotImplementedException ();
-		}
-
-	}
+        [MonoTODO]
+        public void DeleteServerTlb(
+            string progId,
+            string classId,
+            string interfaceId,
+            string srcTlbPath,
+            string rootWebServer,
+            string baseUrl,
+            string virtualRoot,
+            string operation,
+            string assemblyName,
+            string typeName
+        )
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

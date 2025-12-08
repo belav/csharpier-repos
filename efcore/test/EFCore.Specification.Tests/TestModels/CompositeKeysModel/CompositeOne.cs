@@ -34,12 +34,16 @@ public class CompositeOne
             return false;
         }
 
-        return ReferenceEquals(this, obj) ? true : obj.GetType() == GetType() && Equals((CompositeOne)obj);
+        return ReferenceEquals(this, obj)
+            ? true
+            : obj.GetType() == GetType() && Equals((CompositeOne)obj);
     }
 
-    private bool Equals(CompositeOne other)
-        => Id1 == other.Id1 && Equals(Id2, other.Id2) && string.Equals(Name, other.Name) && Date.Equals(other.Date);
+    private bool Equals(CompositeOne other) =>
+        Id1 == other.Id1
+        && Equals(Id2, other.Id2)
+        && string.Equals(Name, other.Name)
+        && Date.Equals(other.Date);
 
-    public override int GetHashCode()
-        => HashCode.Combine(Id1, Id2, Name, Date);
+    public override int GetHashCode() => HashCode.Combine(Id1, Id2, Name, Date);
 }

@@ -50,19 +50,58 @@ namespace System.Tests
         class ClassWithReadOnlyField
         {
             public readonly OneStruct Value;
+
             public ClassWithReadOnlyField(OneStruct value) => Value = value;
         }
 
         [Fact]
         public static void NegativeMakeTypedReference()
         {
-            OtherType data = new OtherType { oneStruct = new OneStruct { field = "field", b = 2343 } };
+            OtherType data = new OtherType
+            {
+                oneStruct = new OneStruct { field = "field", b = 2343 },
+            };
             Type dataType = data.GetType();
-            Assert.Throws<ArgumentNullException>(() => { TypedReference.MakeTypedReference(null, dataType.GetFields()); });
-            Assert.Throws<ArgumentNullException>(() => { TypedReference.MakeTypedReference(data, null); });
-            AssertExtensions.Throws<ArgumentException>("flds", null, () => { TypedReference.MakeTypedReference(data, Array.Empty<FieldInfo>()); });
-            AssertExtensions.Throws<ArgumentException>(null, () => { TypedReference.MakeTypedReference(data, new FieldInfo[] { dataType.GetField("oneStruct"), null }); });
-            AssertExtensions.Throws<ArgumentException>(null, () => { TypedReference.MakeTypedReference(data, new FieldInfo[] { dataType.GetField("oneStruct"), typeof(OneStruct).GetField("b") }); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                TypedReference.MakeTypedReference(null, dataType.GetFields());
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                TypedReference.MakeTypedReference(data, null);
+            });
+            AssertExtensions.Throws<ArgumentException>(
+                "flds",
+                null,
+                () =>
+                {
+                    TypedReference.MakeTypedReference(data, Array.Empty<FieldInfo>());
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    TypedReference.MakeTypedReference(
+                        data,
+                        new FieldInfo[] { dataType.GetField("oneStruct"), null }
+                    );
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    TypedReference.MakeTypedReference(
+                        data,
+                        new FieldInfo[]
+                        {
+                            dataType.GetField("oneStruct"),
+                            typeof(OneStruct).GetField("b"),
+                        }
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -71,10 +110,20 @@ namespace System.Tests
             OneStruct structObj = new OneStruct { field = "field", b = 2343 };
             OtherType data = new OtherType { oneStruct = structObj };
             Type dataType = data.GetType();
-            TypedReference reference = TypedReference.MakeTypedReference(data, new FieldInfo[] { dataType.GetField("oneStruct"), typeof(OneStruct).GetField("field") });
+            TypedReference reference = TypedReference.MakeTypedReference(
+                data,
+                new FieldInfo[]
+                {
+                    dataType.GetField("oneStruct"),
+                    typeof(OneStruct).GetField("field"),
+                }
+            );
             Assert.Equal("field", TypedReference.ToObject(reference));
 
-            reference = TypedReference.MakeTypedReference(data, new FieldInfo[] { dataType.GetField("oneStruct") });
+            reference = TypedReference.MakeTypedReference(
+                data,
+                new FieldInfo[] { dataType.GetField("oneStruct") }
+            );
             Assert.Equal(structObj, TypedReference.ToObject(reference));
         }
 
@@ -94,7 +143,8 @@ namespace System.Tests
         [Fact]
         public static unsafe void MakeTypedReference_ToObjectTests_WithFunctionPointer()
         {
-            delegate*<int, float, string> pointer = (delegate*<int, float, string>)(void*)(nuint)0x12345678;
+            delegate* <int, float, string> pointer = (delegate* <int, float, string>)
+                (void*)(nuint)0x12345678;
             TypedReference reference = __makeref(pointer);
             object obj = TypedReference.ToObject(reference);
 
@@ -109,7 +159,10 @@ namespace System.Tests
         {
             var os = new OneStruct() { b = 42, field = "data" };
             var c = new ClassWithReadOnlyField(os);
-            TypedReference tr = TypedReference.MakeTypedReference(c, new FieldInfo[] { c.GetType().GetField("Value") }); // doesn't throw
+            TypedReference tr = TypedReference.MakeTypedReference(
+                c,
+                new FieldInfo[] { c.GetType().GetField("Value") }
+            ); // doesn't throw
             Assert.Equal(os, TypedReference.ToObject(tr));
         }
 

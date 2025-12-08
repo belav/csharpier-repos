@@ -11,8 +11,14 @@ namespace System.Runtime.CompilerServices.Tests
         [Fact]
         public void Create_InvalidArguments_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>("format", () => FormattableStringFactory.Create(null));
-            AssertExtensions.Throws<ArgumentNullException>("arguments", () => FormattableStringFactory.Create("{0}", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "format",
+                () => FormattableStringFactory.Create(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "arguments",
+                () => FormattableStringFactory.Create("{0}", null)
+            );
         }
 
         [Theory]
@@ -48,7 +54,10 @@ namespace System.Runtime.CompilerServices.Tests
         [Fact]
         public void Create_ToString_MatchesExpected()
         {
-            Assert.Equal("hello, world", FormattableStringFactory.Create("hello{0} world", ',').ToString(null));
+            Assert.Equal(
+                "hello, world",
+                FormattableStringFactory.Create("hello{0} world", ',').ToString(null)
+            );
         }
     }
 }

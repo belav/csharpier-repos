@@ -86,7 +86,12 @@ namespace System.Runtime.InteropServices
             // sqrt(nuint.MaxValue)
             nuint multiplyNoOverflow = (nuint)1 << (4 * sizeof(nuint));
 
-            return ((elementSize >= multiplyNoOverflow) || (elementCount >= multiplyNoOverflow)) && (elementSize > 0) && ((nuint.MaxValue / elementSize) < elementCount) ? nuint.MaxValue : (elementCount * elementSize);
+            return
+                ((elementSize >= multiplyNoOverflow) || (elementCount >= multiplyNoOverflow))
+                && (elementSize > 0)
+                && ((nuint.MaxValue / elementSize) < elementCount)
+                ? nuint.MaxValue
+                : (elementCount * elementSize);
         }
     }
 }

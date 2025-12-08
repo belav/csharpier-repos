@@ -16,18 +16,44 @@ namespace Microsoft.CodeAnalysis.InlineHints
     internal abstract class AbstractInlineHintsService : IInlineHintsService
     {
         public async Task<ImmutableArray<InlineHint>> GetInlineHintsAsync(
-            Document document, TextSpan textSpan, InlineHintsOptions options, bool displayAllOverride, CancellationToken cancellationToken)
+            Document document,
+            TextSpan textSpan,
+            InlineHintsOptions options,
+            bool displayAllOverride,
+            CancellationToken cancellationToken
+        )
         {
-            var inlineParameterService = document.GetLanguageService<IInlineParameterNameHintsService>();
+            var inlineParameterService =
+                document.GetLanguageService<IInlineParameterNameHintsService>();
             var inlineTypeService = document.GetLanguageService<IInlineTypeHintsService>();
 
-            var parameters = inlineParameterService == null
-                ? ImmutableArray<InlineHint>.Empty
-                : await inlineParameterService.GetInlineHintsAsync(document, textSpan, options.ParameterOptions, options.DisplayOptions, displayAllOverride, cancellationToken).ConfigureAwait(false);
+            var parameters =
+                inlineParameterService == null
+                    ? ImmutableArray<InlineHint>.Empty
+                    : await inlineParameterService
+                        .GetInlineHintsAsync(
+                            document,
+                            textSpan,
+                            options.ParameterOptions,
+                            options.DisplayOptions,
+                            displayAllOverride,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
-            var types = inlineTypeService == null
-                ? ImmutableArray<InlineHint>.Empty
-                : await inlineTypeService.GetInlineHintsAsync(document, textSpan, options.TypeOptions, options.DisplayOptions, displayAllOverride, cancellationToken).ConfigureAwait(false);
+            var types =
+                inlineTypeService == null
+                    ? ImmutableArray<InlineHint>.Empty
+                    : await inlineTypeService
+                        .GetInlineHintsAsync(
+                            document,
+                            textSpan,
+                            options.TypeOptions,
+                            options.DisplayOptions,
+                            displayAllOverride,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
             return parameters.Concat(types);
         }

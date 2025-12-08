@@ -6,20 +6,22 @@ namespace System.ServiceModel.Discovery
 {
     using System.ServiceModel.Channels;
 
-    class DiscoveryClientOutputSessionChannel : DiscoveryClientOutputChannel<IOutputSessionChannel>, IOutputSessionChannel
+    class DiscoveryClientOutputSessionChannel
+        : DiscoveryClientOutputChannel<IOutputSessionChannel>,
+            IOutputSessionChannel
     {
         public DiscoveryClientOutputSessionChannel(
             ChannelManagerBase channelManagerBase,
             IChannelFactory<IOutputSessionChannel> innerChannelFactory,
             FindCriteria findCriteria,
-            DiscoveryEndpointProvider discoveryEndpointProvider)
+            DiscoveryEndpointProvider discoveryEndpointProvider
+        )
             : base(channelManagerBase, innerChannelFactory, findCriteria, discoveryEndpointProvider)
-        {
-        }
+        { }
 
         public IOutputSession Session
         {
-            get 
+            get
             {
                 if (this.InnerChannel == null)
                 {

@@ -155,7 +155,9 @@ namespace System.Drawing.PrimitivesTests
             // If PointF implements IEquatable<PointF> (e.g. in .NET Core), then classes that are implicitly
             // convertible to PointF can potentially be equal.
             // See https://github.com/dotnet/runtime/issues/16050.
-            bool expectsImplicitCastToPointF = typeof(IEquatable<PointF>).IsAssignableFrom(point.GetType());
+            bool expectsImplicitCastToPointF = typeof(IEquatable<PointF>).IsAssignableFrom(
+                point.GetType()
+            );
             Assert.Equal(expectsImplicitCastToPointF, point.Equals(new Point(0, 0)));
 
             Assert.False(point.Equals((object)new Point(0, 0))); // No implicit cast
@@ -176,7 +178,10 @@ namespace System.Drawing.PrimitivesTests
         public void ToStringTest(float x, float y)
         {
             PointF p = new PointF(x, y);
-            Assert.Equal(string.Format(CultureInfo.CurrentCulture, "{{X={0}, Y={1}}}", p.X, p.Y), p.ToString());
+            Assert.Equal(
+                string.Format(CultureInfo.CurrentCulture, "{{X={0}, Y={1}}}", p.X, p.Y),
+                p.ToString()
+            );
         }
     }
 }

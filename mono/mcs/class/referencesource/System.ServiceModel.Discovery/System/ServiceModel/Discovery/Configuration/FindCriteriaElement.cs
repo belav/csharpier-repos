@@ -17,37 +17,32 @@ namespace System.ServiceModel.Discovery.Configuration
     {
         ConfigurationPropertyCollection properties;
 
-        [ConfigurationProperty(ConfigurationStrings.Types)]        
+        [ConfigurationProperty(ConfigurationStrings.Types)]
         [SuppressMessage(
-            FxCop.Category.Configuration, 
-            FxCop.Rule.ConfigurationPropertyNameRule, 
-            Justification = "The configuration name for this element is 'types'.")]
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationPropertyNameRule,
+            Justification = "The configuration name for this element is 'types'."
+        )]
         public ContractTypeNameElementCollection ContractTypeNames
         {
-            get
-            {
-                return (ContractTypeNameElementCollection)base[ConfigurationStrings.Types];
-            }
+            get { return (ContractTypeNameElementCollection)base[ConfigurationStrings.Types]; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.Scopes)]
         public ScopeElementCollection Scopes
         {
-            get
-            {
-                return (ScopeElementCollection)base[ConfigurationStrings.Scopes];
-            }
+            get { return (ScopeElementCollection)base[ConfigurationStrings.Scopes]; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.ScopeMatchBy)]
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationValidatorAttributeRule, Justification = "No validation requiered.")]        
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationValidatorAttributeRule,
+            Justification = "No validation requiered."
+        )]
         public Uri ScopeMatchBy
         {
-            get
-            {
-                return (Uri)base[ConfigurationStrings.ScopeMatchBy];
-            }
-
+            get { return (Uri)base[ConfigurationStrings.ScopeMatchBy]; }
             set
             {
                 if (value == null)
@@ -62,40 +57,27 @@ namespace System.ServiceModel.Discovery.Configuration
         [ConfigurationProperty(ConfigurationStrings.Extensions)]
         public XmlElementElementCollection Extensions
         {
-            get
-            {
-                return (XmlElementElementCollection)base[ConfigurationStrings.Extensions];
-            }
+            get { return (XmlElementElementCollection)base[ConfigurationStrings.Extensions]; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Duration, DefaultValue = DiscoveryDefaults.DiscoveryOperationDurationString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Duration,
+            DefaultValue = DiscoveryDefaults.DiscoveryOperationDurationString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = "00:00:00.001")]
         public TimeSpan Duration
         {
-            get
-            {
-                return (TimeSpan)base[ConfigurationStrings.Duration];
-            }
-
-            set
-            {
-                base[ConfigurationStrings.Duration] = value;
-            }
+            get { return (TimeSpan)base[ConfigurationStrings.Duration]; }
+            set { base[ConfigurationStrings.Duration] = value; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.MaxResults, DefaultValue = int.MaxValue)]
         [IntegerValidator(MinValue = 1, MaxValue = int.MaxValue)]
         public int MaxResults
         {
-            get
-            {
-                return (int)base[ConfigurationStrings.MaxResults];
-            }
-            set
-            {
-                base[ConfigurationStrings.MaxResults] = value;
-            }
+            get { return (int)base[ConfigurationStrings.MaxResults]; }
+            set { base[ConfigurationStrings.MaxResults] = value; }
         }
 
         protected override ConfigurationPropertyCollection Properties
@@ -104,67 +86,83 @@ namespace System.ServiceModel.Discovery.Configuration
             {
                 if (this.properties == null)
                 {
-                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
+                    ConfigurationPropertyCollection properties =
+                        new ConfigurationPropertyCollection();
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.Types,
-                        typeof(ContractTypeNameElementCollection),
-                        null,
-                        null,
-                        null,
-                        ConfigurationPropertyOptions.None));
+                            ConfigurationStrings.Types,
+                            typeof(ContractTypeNameElementCollection),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.ScopeMatchBy,
-                        typeof(Uri),
-                        DiscoveryDefaults.ScopeMatchBy,
-                        null,
-                        null,
-                        ConfigurationPropertyOptions.None));
+                            ConfigurationStrings.ScopeMatchBy,
+                            typeof(Uri),
+                            DiscoveryDefaults.ScopeMatchBy,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.Scopes,
-                        typeof(ScopeElementCollection),
-                        null,
-                        null,
-                        null,
-                        ConfigurationPropertyOptions.None));
+                            ConfigurationStrings.Scopes,
+                            typeof(ScopeElementCollection),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.Extensions,
-                        typeof(XmlElementElementCollection),
-                        null,
-                        null,
-                        null,
-                        ConfigurationPropertyOptions.None));
+                            ConfigurationStrings.Extensions,
+                            typeof(XmlElementElementCollection),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.Duration,
-                        typeof(TimeSpan),
-                        TimeSpan.FromSeconds(20),
-                        new TimeSpanOrInfiniteConverter(),
-                        new TimeSpanOrInfiniteValidator(TimeSpan.FromMilliseconds(1), TimeSpan.MaxValue),
-                        ConfigurationPropertyOptions.None));
+                            ConfigurationStrings.Duration,
+                            typeof(TimeSpan),
+                            TimeSpan.FromSeconds(20),
+                            new TimeSpanOrInfiniteConverter(),
+                            new TimeSpanOrInfiniteValidator(
+                                TimeSpan.FromMilliseconds(1),
+                                TimeSpan.MaxValue
+                            ),
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     properties.Add(
                         new ConfigurationProperty(
-                        ConfigurationStrings.MaxResults,
-                        typeof(int),
-                        int.MaxValue,
-                        null,
-                        new IntegerValidator(1, int.MaxValue),
-                        ConfigurationPropertyOptions.None));
+                            ConfigurationStrings.MaxResults,
+                            typeof(int),
+                            int.MaxValue,
+                            null,
+                            new IntegerValidator(1, int.MaxValue),
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
 
                     this.properties = properties;
                 }
                 return this.properties;
             }
-        }        
+        }
 
         internal void ApplyConfiguration(FindCriteria findCriteria)
         {
@@ -172,8 +170,10 @@ namespace System.ServiceModel.Discovery.Configuration
             {
                 findCriteria.ContractTypeNames.Add(
                     new XmlQualifiedName(
-                    contractTypeNameElement.Name, 
-                    contractTypeNameElement.Namespace));
+                        contractTypeNameElement.Name,
+                        contractTypeNameElement.Namespace
+                    )
+                );
             }
 
             foreach (ScopeElement scopeElement in this.Scopes)

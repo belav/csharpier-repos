@@ -37,7 +37,11 @@ namespace System.Net.NetworkInformation
         }
 
         [UnmanagedCallersOnly]
-        private static unsafe void ProcessIpv4Address(void* pContext, byte* ifaceName, Interop.Sys.IpAddressInfo* ipAddr)
+        private static unsafe void ProcessIpv4Address(
+            void* pContext,
+            byte* ifaceName,
+            Interop.Sys.IpAddressInfo* ipAddr
+        )
         {
             Context* context = (Context*)pContext;
 
@@ -72,11 +76,7 @@ namespace System.Net.NetworkInformation
             context._numIPAddresses = 0;
             context._interfaceSet = new HashSet<string>();
 
-            Interop.Sys.EnumerateInterfaceAddresses(
-                &context,
-                &ProcessIpv4Address,
-                null,
-                null);
+            Interop.Sys.EnumerateInterfaceAddresses(&context, &ProcessIpv4Address, null, null);
 
             _numInterfaces = context._interfaceSet.Count;
             _numIPAddresses = context._numIPAddresses;
@@ -88,68 +88,149 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        public override int DefaultTtl { get { return _defaultTtl; } }
+        public override int DefaultTtl
+        {
+            get { return _defaultTtl; }
+        }
 
-        public override bool ForwardingEnabled { get { return _forwarding; } }
+        public override bool ForwardingEnabled
+        {
+            get { return _forwarding; }
+        }
 
-        public override int NumberOfInterfaces { get { return _numInterfaces; } }
+        public override int NumberOfInterfaces
+        {
+            get { return _numInterfaces; }
+        }
 
-        public override int NumberOfIPAddresses { get { return _numIPAddresses; } }
+        public override int NumberOfIPAddresses
+        {
+            get { return _numIPAddresses; }
+        }
 
-        public override long OutputPacketRequests { get { return _outboundPackets; } }
-
-        [UnsupportedOSPlatform("osx")]
-        [UnsupportedOSPlatform("ios")]
-        [UnsupportedOSPlatform("tvos")]
-        [UnsupportedOSPlatform("freebsd")]
-        public override long OutputPacketRoutingDiscards { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
-
-        [UnsupportedOSPlatform("osx")]
-        [UnsupportedOSPlatform("ios")]
-        [UnsupportedOSPlatform("tvos")]
-        [UnsupportedOSPlatform("freebsd")]
-        public override long OutputPacketsDiscarded { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
-
-        public override long OutputPacketsWithNoRoute { get { return _outputPacketsNoRoute; } }
-
-        [UnsupportedOSPlatform("osx")]
-        [UnsupportedOSPlatform("ios")]
-        [UnsupportedOSPlatform("tvos")]
-        [UnsupportedOSPlatform("freebsd")]
-        public override long PacketFragmentFailures { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override long OutputPacketRequests
+        {
+            get { return _outboundPackets; }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override long PacketReassembliesRequired { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
-
-        public override long PacketReassemblyFailures { get { return _cantFrags; } }
+        public override long OutputPacketRoutingDiscards
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override long PacketReassemblyTimeout { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override long OutputPacketsDiscarded
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override long PacketsFragmented { get { return _datagramsFragmented; } }
+        public override long OutputPacketsWithNoRoute
+        {
+            get { return _outputPacketsNoRoute; }
+        }
 
-        public override long PacketsReassembled { get { return _packetsReassembled; } }
+        [UnsupportedOSPlatform("osx")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("freebsd")]
+        public override long PacketFragmentFailures
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override long ReceivedPackets { get { return _totalPacketsReceived; } }
+        [UnsupportedOSPlatform("osx")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("freebsd")]
+        public override long PacketReassembliesRequired
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override long ReceivedPacketsDelivered { get { return _packetsDelivered; } }
+        public override long PacketReassemblyFailures
+        {
+            get { return _cantFrags; }
+        }
 
-        public override long ReceivedPacketsDiscarded { get { return _packetsDiscarded; } }
+        [UnsupportedOSPlatform("osx")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("freebsd")]
+        public override long PacketReassemblyTimeout
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override long ReceivedPacketsForwarded { get { return _packetsForwarded; } }
+        public override long PacketsFragmented
+        {
+            get { return _datagramsFragmented; }
+        }
 
-        public override long ReceivedPacketsWithAddressErrors { get { return _badAddress; } }
+        public override long PacketsReassembled
+        {
+            get { return _packetsReassembled; }
+        }
 
-        public override long ReceivedPacketsWithHeadersErrors { get { return _badHeader; } }
+        public override long ReceivedPackets
+        {
+            get { return _totalPacketsReceived; }
+        }
 
-        public override long ReceivedPacketsWithUnknownProtocol { get { return _unknownProtos; } }
+        public override long ReceivedPacketsDelivered
+        {
+            get { return _packetsDelivered; }
+        }
 
-        public override int NumberOfRoutes { get { return _numRoutes; } }
+        public override long ReceivedPacketsDiscarded
+        {
+            get { return _packetsDiscarded; }
+        }
+
+        public override long ReceivedPacketsForwarded
+        {
+            get { return _packetsForwarded; }
+        }
+
+        public override long ReceivedPacketsWithAddressErrors
+        {
+            get { return _badAddress; }
+        }
+
+        public override long ReceivedPacketsWithHeadersErrors
+        {
+            get { return _badHeader; }
+        }
+
+        public override long ReceivedPacketsWithUnknownProtocol
+        {
+            get { return _unknownProtos; }
+        }
+
+        public override int NumberOfRoutes
+        {
+            get { return _numRoutes; }
+        }
     }
 }

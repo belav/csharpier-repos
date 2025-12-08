@@ -51,12 +51,19 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             writer.PopSequence(tag);
         }
 
-        internal static KeyAgreeRecipientInfoAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static KeyAgreeRecipientInfoAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static KeyAgreeRecipientInfoAsn Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static KeyAgreeRecipientInfoAsn Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -72,12 +79,21 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out KeyAgreeRecipientInfoAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out KeyAgreeRecipientInfoAsn decoded
+        )
         {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out KeyAgreeRecipientInfoAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out KeyAgreeRecipientInfoAsn decoded
+        )
         {
             try
             {
@@ -89,7 +105,12 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out KeyAgreeRecipientInfoAsn decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out KeyAgreeRecipientInfoAsn decoded
+        )
         {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
@@ -99,25 +120,35 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             int offset;
             ReadOnlySpan<byte> tmpSpan;
 
-
             if (!sequenceReader.TryReadInt32(out decoded.Version))
             {
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-
             explicitReader = sequenceReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 0));
-            System.Security.Cryptography.Pkcs.Asn1.OriginatorIdentifierOrKeyAsn.Decode(ref explicitReader, rebind, out decoded.Originator);
+            System.Security.Cryptography.Pkcs.Asn1.OriginatorIdentifierOrKeyAsn.Decode(
+                ref explicitReader,
+                rebind,
+                out decoded.Originator
+            );
             explicitReader.ThrowIfNotEmpty();
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1)))
+            if (
+                sequenceReader.HasData
+                && sequenceReader
+                    .PeekTag()
+                    .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1))
+            )
             {
-                explicitReader = sequenceReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 1));
+                explicitReader = sequenceReader.ReadSequence(
+                    new Asn1Tag(TagClass.ContextSpecific, 1)
+                );
 
                 if (explicitReader.TryReadPrimitiveOctetString(out tmpSpan))
                 {
-                    decoded.Ukm = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                    decoded.Ukm = rebindSpan.Overlaps(tmpSpan, out offset)
+                        ? rebind.Slice(offset, tmpSpan.Length)
+                        : tmpSpan.ToArray();
                 }
                 else
                 {
@@ -127,23 +158,31 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 explicitReader.ThrowIfNotEmpty();
             }
 
-            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(ref sequenceReader, rebind, out decoded.KeyEncryptionAlgorithm);
+            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
+                ref sequenceReader,
+                rebind,
+                out decoded.KeyEncryptionAlgorithm
+            );
 
             // Decode SEQUENCE OF for RecipientEncryptedKeys
             {
                 collectionReader = sequenceReader.ReadSequence();
-                var tmpList = new List<System.Security.Cryptography.Pkcs.Asn1.RecipientEncryptedKeyAsn>();
+                var tmpList =
+                    new List<System.Security.Cryptography.Pkcs.Asn1.RecipientEncryptedKeyAsn>();
                 System.Security.Cryptography.Pkcs.Asn1.RecipientEncryptedKeyAsn tmpItem;
 
                 while (collectionReader.HasData)
                 {
-                    System.Security.Cryptography.Pkcs.Asn1.RecipientEncryptedKeyAsn.Decode(ref collectionReader, rebind, out tmpItem);
+                    System.Security.Cryptography.Pkcs.Asn1.RecipientEncryptedKeyAsn.Decode(
+                        ref collectionReader,
+                        rebind,
+                        out tmpItem
+                    );
                     tmpList.Add(tmpItem);
                 }
 
                 decoded.RecipientEncryptedKeys = tmpList.ToArray();
             }
-
 
             sequenceReader.ThrowIfNotEmpty();
         }

@@ -1,13 +1,9 @@
 namespace Example
 {
-	public class A : A.InnerInterface
-	{
-		public interface InnerInterface
-		{
-		}
+    public class A : A.InnerInterface
+    {
+        public interface InnerInterface { }
 
-		public static void Main ()
-		{
-		} 
-	}
+        public static void Main() { }
+    }
 }

@@ -13,12 +13,16 @@ internal class Color
     public Color(float r, float g, float b)
     {
         float[] temp = new float[Vector<float>.Count];
-        temp[0] = r; temp[1] = g; temp[2] = b;
+        temp[0] = r;
+        temp[1] = g;
+        temp[2] = b;
         _rgb = new Vector<float>(temp);
     }
 
     public Color(Vector<float> _rgb)
-    { this._rgb = _rgb; }
+    {
+        this._rgb = _rgb;
+    }
 
     public Color Change(float f)
     {
@@ -27,7 +31,10 @@ internal class Color
         return new Color(t * _rgb);
     }
 
-    public Vector<float> RGB { get { return _rgb; } }
+    public Vector<float> RGB
+    {
+        get { return _rgb; }
+    }
 }
 
 public partial class VectorTest

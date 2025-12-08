@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using Microsoft.Win32.SafeHandles;
 
 namespace System.Threading
@@ -43,8 +42,17 @@ namespace System.Threading
             IntPtr currentThreadHandle = Interop.Kernel32.GetCurrentThread();
             SafeWaitHandle threadHandle;
 
-            if (Interop.Kernel32.DuplicateHandle(currentProcHandle, currentThreadHandle, currentProcHandle,
-                out threadHandle, 0, false, Interop.Kernel32.DUPLICATE_SAME_ACCESS))
+            if (
+                Interop.Kernel32.DuplicateHandle(
+                    currentProcHandle,
+                    currentThreadHandle,
+                    currentProcHandle,
+                    out threadHandle,
+                    0,
+                    false,
+                    Interop.Kernel32.DUPLICATE_SAME_ACCESS
+                )
+            )
             {
                 return threadHandle;
             }
@@ -163,11 +171,15 @@ namespace System.Threading
 
                 if (millisecondsTimeout == 0)
                 {
-                    result = (int)Interop.Kernel32.WaitForSingleObject(waitHandle.DangerousGetHandle(), 0);
+                    result = (int)
+                        Interop.Kernel32.WaitForSingleObject(waitHandle.DangerousGetHandle(), 0);
                 }
                 else
                 {
-                    result = WaitHandle.WaitOneCore(waitHandle.DangerousGetHandle(), millisecondsTimeout);
+                    result = WaitHandle.WaitOneCore(
+                        waitHandle.DangerousGetHandle(),
+                        millisecondsTimeout
+                    );
                 }
 
                 return result == (int)Interop.Kernel32.WAIT_OBJECT_0;
@@ -180,7 +192,7 @@ namespace System.Threading
 
         private unsafe bool CreateThread(GCHandle thisThreadHandle)
         {
-            const int AllocationGranularity = 0x10000;  // 64 KiB
+            const int AllocationGranularity = 0x10000; // 64 KiB
 
             int stackSize = _startHelper._maxStackSize;
             if ((0 < stackSize) && (stackSize < AllocationGranularity))
@@ -199,10 +211,15 @@ namespace System.Threading
                 stackSize = AllocationGranularity;
             }
 
-            _osHandle = Interop.Kernel32.CreateThread(IntPtr.Zero, (IntPtr)stackSize,
-                &ThreadEntryPoint, (IntPtr)thisThreadHandle,
-                Interop.Kernel32.CREATE_SUSPENDED | Interop.Kernel32.STACK_SIZE_PARAM_IS_A_RESERVATION,
-                out _);
+            _osHandle = Interop.Kernel32.CreateThread(
+                IntPtr.Zero,
+                (IntPtr)stackSize,
+                &ThreadEntryPoint,
+                (IntPtr)thisThreadHandle,
+                Interop.Kernel32.CREATE_SUSPENDED
+                    | Interop.Kernel32.STACK_SIZE_PARAM_IS_A_RESERVATION,
+                out _
+            );
 
             if (_osHandle.IsInvalid)
             {
@@ -266,7 +283,6 @@ namespace System.Threading
             }
             else
             {
-
                 if ((t_comState & ComState.Locked) == 0)
                 {
                     if (state != ApartmentState.Unknown)
@@ -335,12 +351,17 @@ namespace System.Threading
 
 #if ENABLE_WINRT
             int hr = Interop.WinRT.RoInitialize(
-                (state == ApartmentState.STA) ? Interop.WinRT.RO_INIT_SINGLETHREADED
-                    : Interop.WinRT.RO_INIT_MULTITHREADED);
+                (state == ApartmentState.STA)
+                    ? Interop.WinRT.RO_INIT_SINGLETHREADED
+                    : Interop.WinRT.RO_INIT_MULTITHREADED
+            );
 #else
-            int hr = Interop.Ole32.CoInitializeEx(IntPtr.Zero,
-                (state == ApartmentState.STA) ? Interop.Ole32.COINIT_APARTMENTTHREADED
-                    : Interop.Ole32.COINIT_MULTITHREADED);
+            int hr = Interop.Ole32.CoInitializeEx(
+                IntPtr.Zero,
+                (state == ApartmentState.STA)
+                    ? Interop.Ole32.COINIT_APARTMENTTHREADED
+                    : Interop.Ole32.COINIT_MULTITHREADED
+            );
 #endif
             if (hr < 0)
             {
@@ -402,7 +423,10 @@ namespace System.Threading
             return InitializeExistingThreadPoolThread();
         }
 
-        public void Interrupt() { throw new PlatformNotSupportedException(); }
+        public void Interrupt()
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         //
         // Suppresses reentrant waits on the current thread, until a matching call to RestoreReentrantWaits.
@@ -489,7 +513,7 @@ namespace System.Threading
             Unknown = 0,
             None,
             STA,
-            MTA
+            MTA,
         }
 
         [Flags]

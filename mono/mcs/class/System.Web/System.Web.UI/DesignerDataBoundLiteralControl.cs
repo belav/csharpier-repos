@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,49 +32,56 @@ using System.Security.Permissions;
 
 namespace System.Web.UI
 {
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[ToolboxItem(false)]
-	[DataBindingHandler ("System.Web.UI.Design.TextDataBindingHandler, " + Consts.AssemblySystem_Design)]
-	public sealed class DesignerDataBoundLiteralControl : Control
-	{
-		string text = String.Empty;
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [ToolboxItem(false)]
+    [DataBindingHandler(
+        "System.Web.UI.Design.TextDataBindingHandler, " + Consts.AssemblySystem_Design
+    )]
+    public sealed class DesignerDataBoundLiteralControl : Control
+    {
+        string text = String.Empty;
 
-		public DesignerDataBoundLiteralControl ()
-		{
-			AutoID = false;
-		}
+        public DesignerDataBoundLiteralControl()
+        {
+            AutoID = false;
+        }
 
-		public string Text {
-			get { return text;}
-			set {
-				if (value == null)
-					text = string.Empty;
-				else
-					text = value;
-			}
-		}
+        public string Text
+        {
+            get { return text; }
+            set
+            {
+                if (value == null)
+                    text = string.Empty;
+                else
+                    text = value;
+            }
+        }
 
-		protected override ControlCollection CreateControlCollection ()
-		{
-			return new EmptyControlCollection (this);
-		}
+        protected override ControlCollection CreateControlCollection()
+        {
+            return new EmptyControlCollection(this);
+        }
 
-		protected override void LoadViewState (object savedState)
-		{
-			if (savedState != null)
-				text = (string) savedState;
-		}
+        protected override void LoadViewState(object savedState)
+        {
+            if (savedState != null)
+                text = (string)savedState;
+        }
 
-		protected internal override void Render (HtmlTextWriter output)
-		{
-			output.Write (text);
-		}
+        protected internal override void Render(HtmlTextWriter output)
+        {
+            output.Write(text);
+        }
 
-		protected override object SaveViewState ()
-		{
-			return text;
-		}
-	}
+        protected override object SaveViewState()
+        {
+            return text;
+        }
+    }
 }

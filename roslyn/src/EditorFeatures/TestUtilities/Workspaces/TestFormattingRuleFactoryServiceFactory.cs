@@ -14,14 +14,19 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 {
-    [ExportWorkspaceServiceFactory(typeof(IHostDependentFormattingRuleFactoryService), ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportWorkspaceServiceFactory(
+            typeof(IHostDependentFormattingRuleFactoryService),
+            ServiceLayer.Test
+        ),
+        Shared,
+        PartNotDiscoverable
+    ]
     internal sealed class TestFormattingRuleFactoryServiceFactory : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestFormattingRuleFactoryServiceFactory()
-        {
-        }
+        public TestFormattingRuleFactoryServiceFactory() { }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {
@@ -35,11 +40,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             public TextSpan TextSpan = default;
             public bool UseBaseIndentation = false;
 
-            public bool ShouldUseBaseIndentation(DocumentId documentId)
-                => UseBaseIndentation;
+            public bool ShouldUseBaseIndentation(DocumentId documentId) => UseBaseIndentation;
 
-            public bool ShouldNotFormatOrCommitOnPaste(DocumentId documentId)
-                => UseBaseIndentation;
+            public bool ShouldNotFormatOrCommitOnPaste(DocumentId documentId) => UseBaseIndentation;
 
             public AbstractFormattingRule CreateRule(ParsedDocument document, int position)
             {
@@ -48,11 +51,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     return NoOpFormattingRule.Instance;
                 }
 
-                return new BaseIndentationFormattingRule(document.Root, TextSpan, BaseIndentation + 4);
+                return new BaseIndentationFormattingRule(
+                    document.Root,
+                    TextSpan,
+                    BaseIndentation + 4
+                );
             }
 
-            public IEnumerable<TextChange> FilterFormattedChanges(DocumentId document, TextSpan span, IList<TextChange> changes)
-                => changes;
+            public IEnumerable<TextChange> FilterFormattedChanges(
+                DocumentId document,
+                TextSpan span,
+                IList<TextChange> changes
+            ) => changes;
         }
     }
 }

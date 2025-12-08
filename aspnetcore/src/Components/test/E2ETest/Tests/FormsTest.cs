@@ -456,39 +456,36 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Browser.True(() => FindColorInputs().All(i => !i.Selected));
 
         // Invalidates on submit
-        Browser.True(
-            () => FindCountryInputs().All(i => string.Equals("valid", i.GetAttribute("class")))
+        Browser.True(() =>
+            FindCountryInputs().All(i => string.Equals("valid", i.GetAttribute("class")))
         );
-        Browser.True(
-            () => FindColorInputs().All(i => string.Equals("valid", i.GetAttribute("class")))
+        Browser.True(() =>
+            FindColorInputs().All(i => string.Equals("valid", i.GetAttribute("class")))
         );
 
         submitButton.Click();
 
-        Browser.True(
-            () => FindCountryInputs().All(i => string.Equals("invalid", i.GetAttribute("class")))
+        Browser.True(() =>
+            FindCountryInputs().All(i => string.Equals("invalid", i.GetAttribute("class")))
         );
-        Browser.True(
-            () => FindColorInputs().All(i => string.Equals("invalid", i.GetAttribute("class")))
+        Browser.True(() =>
+            FindColorInputs().All(i => string.Equals("invalid", i.GetAttribute("class")))
         );
 
         // Validates on edit
         FindCountryInputs().First().Click();
 
-        Browser.True(
-            () =>
-                FindCountryInputs()
-                    .All(i => string.Equals("modified valid", i.GetAttribute("class")))
+        Browser.True(() =>
+            FindCountryInputs().All(i => string.Equals("modified valid", i.GetAttribute("class")))
         );
-        Browser.True(
-            () => FindColorInputs().All(i => string.Equals("invalid", i.GetAttribute("class")))
+        Browser.True(() =>
+            FindColorInputs().All(i => string.Equals("invalid", i.GetAttribute("class")))
         );
 
         FindColorInputs().First().Click();
 
-        Browser.True(
-            () =>
-                FindColorInputs().All(i => string.Equals("modified valid", i.GetAttribute("class")))
+        Browser.True(() =>
+            FindColorInputs().All(i => string.Equals("modified valid", i.GetAttribute("class")))
         );
 
         IReadOnlyCollection<IWebElement> FindCountryInputs() =>
@@ -1058,9 +1055,8 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
 
         // The bound value is expected and no inputs have a class attribute
         Browser.True(() => FindRadioInputs().All(input => !ElementHasAttribute(input, "class")));
-        Browser.True(
-            () =>
-                FindRadioInputs().First(input => input.GetAttribute("value") == "Unknown").Selected
+        Browser.True(() =>
+            FindRadioInputs().First(input => input.GetAttribute("value") == "Unknown").Selected
         );
         Browser.Equal("Unknown", () => selectedInputText.Text);
 
@@ -1068,11 +1064,8 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
 
         // Value binding continues to work without an edit context and class attributes are unchanged
         Browser.True(() => FindRadioInputs().All(input => !ElementHasAttribute(input, "class")));
-        Browser.True(
-            () =>
-                FindRadioInputs()
-                    .First(input => input.GetAttribute("value") == "BestAirline")
-                    .Selected
+        Browser.True(() =>
+            FindRadioInputs().First(input => input.GetAttribute("value") == "BestAirline").Selected
         );
         Browser.Equal("BestAirline", () => selectedInputText.Text);
 

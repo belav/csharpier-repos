@@ -21,20 +21,27 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
     [TestService]
     internal partial class PickMembersDialogInProcess
     {
-        private async Task<PickMembersDialog?> TryGetDialogAsync(CancellationToken cancellationToken)
+        private async Task<PickMembersDialog?> TryGetDialogAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
             return Application.Current.Windows.OfType<PickMembersDialog>().SingleOrDefault();
         }
 
-        private async Task ClickAsync(Func<PickMembersDialog, ButtonBase> buttonAccessor, CancellationToken cancellationToken)
+        private async Task ClickAsync(
+            Func<PickMembersDialog, ButtonBase> buttonAccessor,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var dialog = await TryGetDialogAsync(cancellationToken);
             AssertEx.NotNull(dialog);
 
-            Contract.ThrowIfFalse(await buttonAccessor(dialog).SimulateClickAsync(JoinableTaskFactory));
+            Contract.ThrowIfFalse(
+                await buttonAccessor(dialog).SimulateClickAsync(JoinableTaskFactory)
+            );
         }
 
         public async Task VerifyOpenAsync(CancellationToken cancellationToken)
@@ -79,13 +86,19 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
         public async Task ClickOKAsync(CancellationToken cancellationToken)
         {
             await ClickAsync(dialog => dialog.GetTestAccessor().OKButton, cancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.LightBulb,
+                cancellationToken
+            );
         }
 
         public async Task ClickCancelAsync(CancellationToken cancellationToken)
         {
             await ClickAsync(dialog => dialog.GetTestAccessor().CancelButton, cancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.LightBulb,
+                cancellationToken
+            );
         }
 
         public async Task ClickDownAsync(CancellationToken cancellationToken)

@@ -18,16 +18,25 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.SimplifyTypeNames
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.SimplifyNames), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.SimplifyNames
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.RemoveUnnecessaryCast)]
-    internal partial class SimplifyTypeNamesCodeFixProvider : AbstractSimplifyTypeNamesCodeFixProvider<SyntaxKind, CSharpSimplifierOptions>
+    internal partial class SimplifyTypeNamesCodeFixProvider
+        : AbstractSimplifyTypeNamesCodeFixProvider<SyntaxKind, CSharpSimplifierOptions>
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public SimplifyTypeNamesCodeFixProvider()
-            : base(new CSharpSimplifyTypeNamesDiagnosticAnalyzer())
-        {
-        }
+            : base(new CSharpSimplifyTypeNamesDiagnosticAnalyzer()) { }
 
         protected override string GetTitle(string diagnosticId, string nodeText)
         {
@@ -38,7 +47,10 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyTypeNames
                     return string.Format(CSharpFeaturesResources.Simplify_name_0, nodeText);
 
                 case IDEDiagnosticIds.SimplifyMemberAccessDiagnosticId:
-                    return string.Format(CSharpFeaturesResources.Simplify_member_access_0, nodeText);
+                    return string.Format(
+                        CSharpFeaturesResources.Simplify_member_access_0,
+                        nodeText
+                    );
 
                 default:
                     throw ExceptionUtilities.UnexpectedValue(diagnosticId);
@@ -52,12 +64,22 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyTypeNames
             // ever want the simplifier to produce 'var' in the 'Simplify type
             // names' fixer.  only the 'Use var' fixer should produce 'var'.
             var annotatedexpressionSyntax = expressionSyntax.WithAdditionalAnnotations(
-                Simplifier.Annotation, Formatter.Annotation, DoNotAllowVarAnnotation.Annotation);
+                Simplifier.Annotation,
+                Formatter.Annotation,
+                DoNotAllowVarAnnotation.Annotation
+            );
 
-            if (annotatedexpressionSyntax.Kind() is SyntaxKind.IsExpression or SyntaxKind.AsExpression)
+            if (
+                annotatedexpressionSyntax.Kind()
+                is SyntaxKind.IsExpression
+                    or SyntaxKind.AsExpression
+            )
             {
                 var right = ((BinaryExpressionSyntax)annotatedexpressionSyntax).Right;
-                annotatedexpressionSyntax = annotatedexpressionSyntax.ReplaceNode(right, right.WithAdditionalAnnotations(Simplifier.Annotation));
+                annotatedexpressionSyntax = annotatedexpressionSyntax.ReplaceNode(
+                    right,
+                    right.WithAdditionalAnnotations(Simplifier.Annotation)
+                );
             }
 
             return annotatedexpressionSyntax;

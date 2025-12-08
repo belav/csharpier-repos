@@ -14,7 +14,11 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
         /// Create a global undo transaction for the given workspace. if the host doesn't support undo transaction,
         /// useFallback flag can be used to indicate whether it should fallback to base implementation or not.
         /// </summary>
-        public static IWorkspaceGlobalUndoTransaction OpenGlobalUndoTransaction(this Workspace workspace, string description, bool useFallback = true)
+        public static IWorkspaceGlobalUndoTransaction OpenGlobalUndoTransaction(
+            this Workspace workspace,
+            string description,
+            bool useFallback = true
+        )
         {
             var undoService = workspace.Services.GetService<IGlobalUndoService>();
 
@@ -25,7 +29,7 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
             }
             catch (ArgumentException)
             {
-                // it looks like it is not supported. 
+                // it looks like it is not supported.
                 // check whether we should use fallback mechanism or not
                 if (useFallback)
                 {

@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -27,17 +28,13 @@ namespace Test
                     if (local3 < 0.0)
                         GC.Collect();
 
-                    m_dStatic2 = local4[2];		//fire IndexOutOfRangeException	
-
+                    m_dStatic2 = local4[2]; //fire IndexOutOfRangeException
                 } while (new AA().m_bField1);
 
                 while (m_bField1) { }
-
             } while (new AA().m_bField1);
 
-            do
-            {
-            } while (0.0 <= local4[100]);		//fire IndexOutOfRangeException	
+            do { } while (0.0 <= local4[100]); //fire IndexOutOfRangeException
 
             return 1;
         }

@@ -23,11 +23,11 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Linq.JsonPath;
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq.JsonPath;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -48,17 +48,20 @@ namespace Newtonsoft.Json.Tests.Issues
             f2.Version = new Version("3.0");
             (f2 as Fubar).Version = new Version("4.0");
 
-            var s = JsonConvert.SerializeObject(f2, new JsonSerializerSettings
-            {
-                Converters = { new VersionConverter() }
-            });
+            var s = JsonConvert.SerializeObject(
+                f2,
+                new JsonSerializerSettings { Converters = { new VersionConverter() } }
+            );
             Assert.AreEqual(@"{""Version"":""4.0""}", s);
 
-            var f3 = JsonConvert.DeserializeObject<Fubar2>(s, new JsonSerializerSettings
-            {
-                ObjectCreationHandling = ObjectCreationHandling.Replace,
-                Converters = { new VersionConverter() }
-            });
+            var f3 = JsonConvert.DeserializeObject<Fubar2>(
+                s,
+                new JsonSerializerSettings
+                {
+                    ObjectCreationHandling = ObjectCreationHandling.Replace,
+                    Converters = { new VersionConverter() },
+                }
+            );
 
             Assert.AreEqual(2, f3.Version.Major);
             Assert.AreEqual(4, (f3 as Fubar).Version.Major);

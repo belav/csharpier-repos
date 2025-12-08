@@ -23,7 +23,12 @@ namespace Microsoft.CodeAnalysis
             _signingTempPath = signingTempPath;
         }
 
-        internal virtual FileStream CreateFileStream(string filePath, FileMode fileMode, FileAccess fileAccess, FileShare fileShare)
+        internal virtual FileStream CreateFileStream(
+            string filePath,
+            FileMode fileMode,
+            FileAccess fileAccess,
+            FileShare fileShare
+        )
         {
             return new FileStream(filePath, fileMode, fileAccess, fileShare);
         }

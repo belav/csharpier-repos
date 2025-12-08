@@ -11,30 +11,24 @@ namespace System.Security.Cryptography
     public sealed class RSACng : RSA
     {
 #if MONO
-        public RSACng() : this(2048) { }
+        public RSACng()
+            : this(2048) { }
 
         public RSACng(int keySize)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         public RSACng(CngKey key)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         public CngKey Key
         {
             [SecuritySafeCritical]
-            get
-            {
-                throw new NotImplementedException ();
-            }
-
-            private set
-            {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
+            private set { throw new NotImplementedException(); }
         }
 
         public override RSAParameters ExportParameters(bool includePrivateParameters)
@@ -52,9 +46,15 @@ namespace System.Security.Cryptography
         private static KeySizes[] s_legalKeySizes = new KeySizes[] { new KeySizes(512, 16384, 64) };
 
         // CngKeyBlob formats for RSA key blobs
-        private static CngKeyBlobFormat s_rsaFullPrivateBlob = new CngKeyBlobFormat(BCryptNative.KeyBlobType.RsaFullPrivateBlob);
-        private static CngKeyBlobFormat s_rsaPrivateBlob = new CngKeyBlobFormat(BCryptNative.KeyBlobType.RsaPrivateBlob);
-        private static CngKeyBlobFormat s_rsaPublicBlob = new CngKeyBlobFormat(BCryptNative.KeyBlobType.RsaPublicBlob);
+        private static CngKeyBlobFormat s_rsaFullPrivateBlob = new CngKeyBlobFormat(
+            BCryptNative.KeyBlobType.RsaFullPrivateBlob
+        );
+        private static CngKeyBlobFormat s_rsaPrivateBlob = new CngKeyBlobFormat(
+            BCryptNative.KeyBlobType.RsaPrivateBlob
+        );
+        private static CngKeyBlobFormat s_rsaPublicBlob = new CngKeyBlobFormat(
+            BCryptNative.KeyBlobType.RsaPublicBlob
+        );
 
         // Key handle
         private CngKey _key;
@@ -62,7 +62,8 @@ namespace System.Security.Cryptography
         /// <summary>
         ///     Create an RSACng algorithm with a random 2048 bit key pair.
         /// </summary>
-        public RSACng() : this(2048) { }
+        public RSACng()
+            : this(2048) { }
 
         /// <summary>
         ///     Creates a new RSACng object that will use a randomly generated key of the specified size.
@@ -81,7 +82,7 @@ namespace System.Security.Cryptography
         ///     Creates a new RSACng object that will use the specified key. The key's
         ///     <see cref="CngKey.AlgorithmGroup" /> must be Rsa.
         ///     CngKey.Open creates a copy of the key. Even if someone disposes the key passed
-        ///     copy of this key object in RSA stays alive. 
+        ///     copy of this key object in RSA stays alive.
         /// </summary>
         /// <param name="key">Key to use for RSA operations</param>
         /// <exception cref="ArgumentException">if <paramref name="key" /> is not an RSA key</exception>
@@ -96,10 +97,18 @@ namespace System.Security.Cryptography
             }
             if (key.AlgorithmGroup != CngAlgorithmGroup.Rsa)
             {
-                throw new ArgumentException(SR.GetString(SR.Cryptography_ArgRSAaRequiresRSAKey), "key");
+                throw new ArgumentException(
+                    SR.GetString(SR.Cryptography_ArgRSAaRequiresRSAKey),
+                    "key"
+                );
             }
             LegalKeySizesValue = s_legalKeySizes;
-            Key = CngKey.Open(key.Handle, key.IsEphemeral ? CngKeyHandleOpenOptions.EphemeralKey : CngKeyHandleOpenOptions.None);
+            Key = CngKey.Open(
+                key.Handle,
+                key.IsEphemeral
+                    ? CngKeyHandleOpenOptions.EphemeralKey
+                    : CngKeyHandleOpenOptions.None
+            );
         }
 
         /// <summary>
@@ -134,22 +143,26 @@ namespace System.Security.Cryptography
                         ExportPolicy = CngExportPolicies.AllowPlaintextExport,
                     };
 
-                    CngProperty keySizeProperty = new CngProperty(NCryptNative.KeyPropertyName.Length,
-                                                                    BitConverter.GetBytes(KeySize),
-                                                                    CngPropertyOptions.None);
+                    CngProperty keySizeProperty = new CngProperty(
+                        NCryptNative.KeyPropertyName.Length,
+                        BitConverter.GetBytes(KeySize),
+                        CngPropertyOptions.None
+                    );
                     creationParameters.Parameters.Add(keySizeProperty);
                     _key = CngKey.Create(CngAlgorithm.Rsa, null, creationParameters);
                 }
 
                 return _key;
             }
-            
             private set
             {
                 Debug.Assert(value != null, "value != null");
                 if (value.AlgorithmGroup != CngAlgorithmGroup.Rsa)
                 {
-                    throw new ArgumentException(SR.GetString(SR.Cryptography_ArgRSAaRequiresRSAKey), "value");
+                    throw new ArgumentException(
+                        SR.GetString(SR.Cryptography_ArgRSAaRequiresRSAKey),
+                        "value"
+                    );
                 }
                 // If we already have a key, clear it out
                 if (_key != null)
@@ -195,7 +208,12 @@ namespace System.Security.Cryptography
             }
         }
 
-        protected override byte[] HashData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm)
+        protected override byte[] HashData(
+            byte[] data,
+            int offset,
+            int count,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             // we're sealed and the base should have checked this already
             Debug.Assert(data != null);
@@ -203,7 +221,12 @@ namespace System.Security.Cryptography
             Debug.Assert(count >= 0 && count <= data.Length);
             Debug.Assert(!String.IsNullOrEmpty(hashAlgorithm.Name));
 
-            using (BCryptHashAlgorithm hasher = new BCryptHashAlgorithm(new CngAlgorithm(hashAlgorithm.Name), BCryptNative.ProviderName.MicrosoftPrimitiveProvider))
+            using (
+                BCryptHashAlgorithm hasher = new BCryptHashAlgorithm(
+                    new CngAlgorithm(hashAlgorithm.Name),
+                    BCryptNative.ProviderName.MicrosoftPrimitiveProvider
+                )
+            )
             {
                 hasher.HashCore(data, offset, count);
                 return hasher.HashFinal();
@@ -216,14 +239,18 @@ namespace System.Security.Cryptography
             Debug.Assert(data != null);
             Debug.Assert(!String.IsNullOrEmpty(hashAlgorithm.Name));
 
-            using (BCryptHashAlgorithm hasher = new BCryptHashAlgorithm(new CngAlgorithm(hashAlgorithm.Name), BCryptNative.ProviderName.MicrosoftPrimitiveProvider))
+            using (
+                BCryptHashAlgorithm hasher = new BCryptHashAlgorithm(
+                    new CngAlgorithm(hashAlgorithm.Name),
+                    BCryptNative.ProviderName.MicrosoftPrimitiveProvider
+                )
+            )
             {
                 hasher.HashStream(data);
                 return hasher.HashFinal();
             }
         }
 
-       
         /// <summary>
         /// This function checks the magic value in the key blob header
         /// </summary>
@@ -235,18 +262,28 @@ namespace System.Security.Cryptography
                 if (magic != (int)BCryptNative.KeyBlobMagicNumber.RsaPublic)
                 {
                     //Check for Private key magic as public key can be derived from private key blob
-                    if (magic != (int)BCryptNative.KeyBlobMagicNumber.RsaPrivate && magic != (int)BCryptNative.KeyBlobMagicNumber.RsaFullPrivateMagic)
+                    if (
+                        magic != (int)BCryptNative.KeyBlobMagicNumber.RsaPrivate
+                        && magic != (int)BCryptNative.KeyBlobMagicNumber.RsaFullPrivateMagic
+                    )
                     {
-                        throw new CryptographicException(SR.GetString(SR.Cryptography_NotValidPublicOrPrivateKey));
+                        throw new CryptographicException(
+                            SR.GetString(SR.Cryptography_NotValidPublicOrPrivateKey)
+                        );
                     }
                 }
             }
             //If includePrivateParameters is true then certainly check for the private key magic
             else
             {
-                if (magic != (int)BCryptNative.KeyBlobMagicNumber.RsaPrivate && magic != (int)BCryptNative.KeyBlobMagicNumber.RsaFullPrivateMagic)
+                if (
+                    magic != (int)BCryptNative.KeyBlobMagicNumber.RsaPrivate
+                    && magic != (int)BCryptNative.KeyBlobMagicNumber.RsaFullPrivateMagic
+                )
                 {
-                    throw new CryptographicException(SR.GetString(SR.Cryptography_NotValidPrivateKey));
+                    throw new CryptographicException(
+                        SR.GetString(SR.Cryptography_NotValidPrivateKey)
+                    );
                 }
             }
         }
@@ -257,11 +294,13 @@ namespace System.Security.Cryptography
 
         /// <summary>
         ///     Exports the key used by the RSA object into an RSAParameters object.
-        /// </summary>        
+        /// </summary>
         [SecuritySafeCritical]
         public override RSAParameters ExportParameters(bool includePrivateParameters)
         {
-            byte[] rsaBlob = Key.Export(includePrivateParameters ? s_rsaFullPrivateBlob : s_rsaPublicBlob);
+            byte[] rsaBlob = Key.Export(
+                includePrivateParameters ? s_rsaFullPrivateBlob : s_rsaPublicBlob
+            );
             RSAParameters rsaParams = new RSAParameters();
 
             //
@@ -278,9 +317,12 @@ namespace System.Security.Cryptography
             //     byte[cbModulus]      privateExponent     - D
             //
             byte[] tempMagic = new byte[4];
-            tempMagic[0] = rsaBlob[0]; tempMagic[1] = rsaBlob[1]; tempMagic[2] = rsaBlob[2]; tempMagic[3] = rsaBlob[3];
+            tempMagic[0] = rsaBlob[0];
+            tempMagic[1] = rsaBlob[1];
+            tempMagic[2] = rsaBlob[2];
+            tempMagic[3] = rsaBlob[3];
             int magic = BitConverter.ToInt32(tempMagic, 0);
-            //Check the magic value in key blob header. If blob does not have required magic 
+            //Check the magic value in key blob header. If blob does not have required magic
             // then it trhows Cryptographic exception
             CheckMagicValueOfKey(magic, includePrivateParameters);
 
@@ -288,18 +330,31 @@ namespace System.Security.Cryptography
             {
                 fixed (byte* pRsaBlob = rsaBlob)
                 {
-                    BCryptNative.BCRYPT_RSAKEY_BLOB* pBcryptBlob = (BCryptNative.BCRYPT_RSAKEY_BLOB*)pRsaBlob;
+                    BCryptNative.BCRYPT_RSAKEY_BLOB* pBcryptBlob =
+                        (BCryptNative.BCRYPT_RSAKEY_BLOB*)pRsaBlob;
 
                     int offset = Marshal.SizeOf(typeof(BCryptNative.BCRYPT_RSAKEY_BLOB));
 
                     // Read out the exponent
                     rsaParams.Exponent = new byte[pBcryptBlob->cbPublicExp];
-                    Buffer.BlockCopy(rsaBlob, offset, rsaParams.Exponent, 0, rsaParams.Exponent.Length);
+                    Buffer.BlockCopy(
+                        rsaBlob,
+                        offset,
+                        rsaParams.Exponent,
+                        0,
+                        rsaParams.Exponent.Length
+                    );
                     offset += pBcryptBlob->cbPublicExp;
 
                     // Read out the modulus
                     rsaParams.Modulus = new byte[pBcryptBlob->cbModulus];
-                    Buffer.BlockCopy(rsaBlob, offset, rsaParams.Modulus, 0, rsaParams.Modulus.Length);
+                    Buffer.BlockCopy(
+                        rsaBlob,
+                        offset,
+                        rsaParams.Modulus,
+                        0,
+                        rsaParams.Modulus.Length
+                    );
                     offset += pBcryptBlob->cbModulus;
 
                     if (includePrivateParameters)
@@ -326,7 +381,13 @@ namespace System.Security.Cryptography
 
                         // Read out InverseQ
                         rsaParams.InverseQ = new byte[pBcryptBlob->cbPrime1];
-                        Buffer.BlockCopy(rsaBlob, offset, rsaParams.InverseQ, 0, rsaParams.InverseQ.Length);
+                        Buffer.BlockCopy(
+                            rsaBlob,
+                            offset,
+                            rsaParams.InverseQ,
+                            0,
+                            rsaParams.InverseQ.Length
+                        );
                         offset += pBcryptBlob->cbPrime1;
 
                         //  Read out D
@@ -346,7 +407,7 @@ namespace System.Security.Cryptography
         ///         new CngKey for the parameters structure. If the parameters structure contains only an
         ///         exponent and modulus, then only a public key will be imported. If the parameters also
         ///         contain P and Q values, then a full key pair will be imported.
-        ///     </para>        
+        ///     </para>
         /// </summary>
         /// <exception cref="ArgumentException">
         ///     if <paramref name="parameters" /> contains neither an exponent nor a modulus.
@@ -354,7 +415,7 @@ namespace System.Security.Cryptography
         /// <exception cref="CryptographicException">
         ///     if <paramref name="parameters" /> is not a valid RSA key or if <paramref name="parameters"
         ///     /> is a full key pair and the default KSP is used.
-        /// </exception>        
+        /// </exception>
         [SecuritySafeCritical]
         public override void ImportParameters(RSAParameters parameters)
         {
@@ -374,13 +435,13 @@ namespace System.Security.Cryptography
             //     byte[cbPrime2]       prime2              - Q
             //
 
-            int blobSize = Marshal.SizeOf(typeof(BCryptNative.BCRYPT_RSAKEY_BLOB)) +
-                           parameters.Exponent.Length +
-                           parameters.Modulus.Length;
+            int blobSize =
+                Marshal.SizeOf(typeof(BCryptNative.BCRYPT_RSAKEY_BLOB))
+                + parameters.Exponent.Length
+                + parameters.Modulus.Length;
             if (!publicOnly)
             {
-                blobSize += parameters.P.Length +
-                            parameters.Q.Length;
+                blobSize += parameters.P.Length + parameters.Q.Length;
             }
 
             byte[] rsaBlob = new byte[blobSize];
@@ -389,9 +450,11 @@ namespace System.Security.Cryptography
                 fixed (byte* pRsaBlob = rsaBlob)
                 {
                     // Build the header
-                    BCryptNative.BCRYPT_RSAKEY_BLOB* pBcryptBlob = (BCryptNative.BCRYPT_RSAKEY_BLOB*)pRsaBlob;
-                    pBcryptBlob->Magic = publicOnly ? BCryptNative.KeyBlobMagicNumber.RsaPublic :
-                                                      BCryptNative.KeyBlobMagicNumber.RsaPrivate;
+                    BCryptNative.BCRYPT_RSAKEY_BLOB* pBcryptBlob =
+                        (BCryptNative.BCRYPT_RSAKEY_BLOB*)pRsaBlob;
+                    pBcryptBlob->Magic = publicOnly
+                        ? BCryptNative.KeyBlobMagicNumber.RsaPublic
+                        : BCryptNative.KeyBlobMagicNumber.RsaPrivate;
 
                     pBcryptBlob->BitLength = parameters.Modulus.Length * 8;
 
@@ -407,11 +470,23 @@ namespace System.Security.Cryptography
                     int offset = Marshal.SizeOf(typeof(BCryptNative.BCRYPT_RSAKEY_BLOB));
 
                     // Copy the exponent
-                    Buffer.BlockCopy(parameters.Exponent, 0, rsaBlob, offset, parameters.Exponent.Length);
+                    Buffer.BlockCopy(
+                        parameters.Exponent,
+                        0,
+                        rsaBlob,
+                        offset,
+                        parameters.Exponent.Length
+                    );
                     offset += parameters.Exponent.Length;
 
                     // Copy the modulus
-                    Buffer.BlockCopy(parameters.Modulus, 0, rsaBlob, offset, parameters.Modulus.Length);
+                    Buffer.BlockCopy(
+                        parameters.Modulus,
+                        0,
+                        rsaBlob,
+                        offset,
+                        parameters.Modulus.Length
+                    );
                     offset += parameters.Modulus.Length;
 
                     if (!publicOnly)
@@ -453,12 +528,18 @@ namespace System.Security.Cryptography
             }
             else if (padding.Mode == RSAEncryptionPaddingMode.Oaep)
             {
-                return NCryptNative.DecryptDataOaep(keyHandle, data, padding.OaepHashAlgorithm.Name);
+                return NCryptNative.DecryptDataOaep(
+                    keyHandle,
+                    data,
+                    padding.OaepHashAlgorithm.Name
+                );
             }
             else
             {
                 // no other padding possibilities at present, but we might version independently from more being added.
-                throw new CryptographicException(SR.GetString(SR.Cryptography_UnsupportedPaddingMode));
+                throw new CryptographicException(
+                    SR.GetString(SR.Cryptography_UnsupportedPaddingMode)
+                );
             }
         }
 
@@ -480,15 +561,21 @@ namespace System.Security.Cryptography
             }
             else if (padding.Mode == RSAEncryptionPaddingMode.Oaep)
             {
-                 return NCryptNative.EncryptDataOaep(KeyHandle, data, padding.OaepHashAlgorithm.Name);
+                return NCryptNative.EncryptDataOaep(
+                    KeyHandle,
+                    data,
+                    padding.OaepHashAlgorithm.Name
+                );
             }
             else
             {
-                 // no other padding possibilities at present, but we might version independently from more being added.
-                 throw new CryptographicException(SR.GetString(SR.Cryptography_UnsupportedPaddingMode));
-            };
+                // no other padding possibilities at present, but we might version independently from more being added.
+                throw new CryptographicException(
+                    SR.GetString(SR.Cryptography_UnsupportedPaddingMode)
+                );
+            }
+            ;
         }
-
 
         //
         // Signature APIs
@@ -496,16 +583,23 @@ namespace System.Security.Cryptography
 
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
-        public override byte[] SignHash(byte[] hash, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding)
+        public override byte[] SignHash(
+            byte[] hash,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        )
         {
             if (hash == null)
             {
-               throw new ArgumentNullException("hash");
+                throw new ArgumentNullException("hash");
             }
             if (String.IsNullOrEmpty(hashAlgorithm.Name))
             {
-                throw new ArgumentException(SR.GetString(SR.Cryptography_HashAlgorithmNameNullOrEmpty), "hashAlgorithm");
-            } 
+                throw new ArgumentException(
+                    SR.GetString(SR.Cryptography_HashAlgorithmNameNullOrEmpty),
+                    "hashAlgorithm"
+                );
+            }
             if (padding == null)
             {
                 throw new ArgumentNullException("padding");
@@ -525,14 +619,20 @@ namespace System.Security.Cryptography
             }
             else
             {
-                 // no other padding possibilities at present, but we might version independently from more being added.
-                 throw new CryptographicException(SR.GetString(SR.Cryptography_UnsupportedPaddingMode));
-
+                // no other padding possibilities at present, but we might version independently from more being added.
+                throw new CryptographicException(
+                    SR.GetString(SR.Cryptography_UnsupportedPaddingMode)
+                );
             }
         }
 
         [SecuritySafeCritical]
-        public override bool VerifyHash(byte[] hash, byte[] signature, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding)
+        public override bool VerifyHash(
+            byte[] hash,
+            byte[] signature,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        )
         {
             if (hash == null)
             {
@@ -544,7 +644,10 @@ namespace System.Security.Cryptography
             }
             if (String.IsNullOrEmpty(hashAlgorithm.Name))
             {
-                throw new ArgumentException(SR.GetString(SR.Cryptography_HashAlgorithmNameNullOrEmpty), "hashAlgorithm");
+                throw new ArgumentException(
+                    SR.GetString(SR.Cryptography_HashAlgorithmNameNullOrEmpty),
+                    "hashAlgorithm"
+                );
             }
             if (padding == null)
             {
@@ -553,16 +656,29 @@ namespace System.Security.Cryptography
 
             if (padding == RSASignaturePadding.Pkcs1)
             {
-                return NCryptNative.VerifySignaturePkcs1(KeyHandle, hash, hashAlgorithm.Name, signature);
+                return NCryptNative.VerifySignaturePkcs1(
+                    KeyHandle,
+                    hash,
+                    hashAlgorithm.Name,
+                    signature
+                );
             }
             else if (padding == RSASignaturePadding.Pss)
             {
-                return NCryptNative.VerifySignaturePss(KeyHandle, hash, hashAlgorithm.Name, hash.Length, signature);
+                return NCryptNative.VerifySignaturePss(
+                    KeyHandle,
+                    hash,
+                    hashAlgorithm.Name,
+                    hash.Length,
+                    signature
+                );
             }
             else
             {
-                 // no other padding possibilities at present, but we might version independently from more being added.
-                 throw new CryptographicException(SR.GetString(SR.Cryptography_UnsupportedPaddingMode));
+                // no other padding possibilities at present, but we might version independently from more being added.
+                throw new CryptographicException(
+                    SR.GetString(SR.Cryptography_UnsupportedPaddingMode)
+                );
             }
         }
 
@@ -580,10 +696,24 @@ namespace System.Security.Cryptography
          * To keep servicing simple, we'll redefine the overrides here. Since this type is sealed it only affects reflection,
          * as there are no derived types to mis-target base.-invocations.
          */
-        public override byte[] DecryptValue(byte[] rgb) { throw new NotSupportedException(SR.NotSupported_Method); }
-        public override byte[] EncryptValue(byte[] rgb) { throw new NotSupportedException(SR.NotSupported_Method); }
-        public override string KeyExchangeAlgorithm { get { return "RSA"; } }
-        public override string SignatureAlgorithm { get { return "RSA"; } }
+        public override byte[] DecryptValue(byte[] rgb)
+        {
+            throw new NotSupportedException(SR.NotSupported_Method);
+        }
+
+        public override byte[] EncryptValue(byte[] rgb)
+        {
+            throw new NotSupportedException(SR.NotSupported_Method);
+        }
+
+        public override string KeyExchangeAlgorithm
+        {
+            get { return "RSA"; }
+        }
+        public override string SignatureAlgorithm
+        {
+            get { return "RSA"; }
+        }
 #endif
     }
 }

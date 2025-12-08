@@ -24,8 +24,7 @@ public class EntityEntryEventArgs : EventArgs
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public EntityEntryEventArgs(
-        InternalEntityEntry internalEntityEntry)
+    public EntityEntryEventArgs(InternalEntityEntry internalEntityEntry)
     {
         _internalEntityEntry = internalEntityEntry;
     }
@@ -33,6 +32,5 @@ public class EntityEntryEventArgs : EventArgs
     /// <summary>
     ///     The <see cref="EntityEntry" /> for the entity.
     /// </summary>
-    public virtual EntityEntry Entry
-        => _entry ??= new EntityEntry(_internalEntityEntry);
+    public virtual EntityEntry Entry => _entry ??= new EntityEntry(_internalEntityEntry);
 }

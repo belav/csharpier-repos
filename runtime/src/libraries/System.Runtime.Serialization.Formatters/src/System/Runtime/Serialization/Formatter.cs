@@ -9,7 +9,11 @@ using System.IO;
 namespace System.Runtime.Serialization
 {
     [CLSCompliant(false)]
-    [Obsolete(Obsoletions.BinaryFormatterMessage, DiagnosticId = Obsoletions.BinaryFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.BinaryFormatterMessage,
+        DiagnosticId = Obsoletions.BinaryFormatterDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     public abstract class Formatter : IFormatter
     {
         protected ObjectIDGenerator m_idGenerator;

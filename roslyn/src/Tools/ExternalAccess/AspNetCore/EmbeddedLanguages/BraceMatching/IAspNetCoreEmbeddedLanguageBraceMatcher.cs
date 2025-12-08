@@ -3,14 +3,19 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading;
-using Microsoft.CodeAnalysis.Editor;
 using Microsoft.CodeAnalysis.BraceMatching;
+using Microsoft.CodeAnalysis.Editor;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
 {
     internal interface IAspNetCoreEmbeddedLanguageBraceMatcher
     {
         /// <inheritdoc cref="IBraceMatcher.FindBracesAsync"/>
-        AspNetCoreBraceMatchingResult? FindBraces(SemanticModel semanticModel, SyntaxToken token, int position, CancellationToken cancellationToken);
+        AspNetCoreBraceMatchingResult? FindBraces(
+            SemanticModel semanticModel,
+            SyntaxToken token,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

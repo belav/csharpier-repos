@@ -20,10 +20,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private const string DefaultTypeName = "C";
         private const string DefaultMethodName = "M";
 
-        internal static BoundBlock ParseAndBindMethodBody(string program, string typeName = DefaultTypeName, string methodName = DefaultMethodName)
+        internal static BoundBlock ParseAndBindMethodBody(
+            string program,
+            string typeName = DefaultTypeName,
+            string methodName = DefaultMethodName
+        )
         {
             var compilation = CreateCompilation(program);
-            var method = (MethodSymbol)compilation.GlobalNamespace.GetTypeMembers(typeName).Single().GetMembers(methodName).Single();
+            var method = (MethodSymbol)
+                compilation
+                    .GlobalNamespace.GetTypeMembers(typeName)
+                    .Single()
+                    .GetMembers(methodName)
+                    .Single();
 
             // Provide an Emit.Module so that the lowering passes will be run
             var module = new PEAssemblyBuilder(
@@ -31,19 +40,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 emitOptions: EmitOptions.Default,
                 outputKind: OutputKind.ConsoleApplication,
                 serializationProperties: GetDefaultModulePropertiesForSerialization(),
-                manifestResources: Enumerable.Empty<ResourceDescription>());
+                manifestResources: Enumerable.Empty<ResourceDescription>()
+            );
 
-            TypeCompilationState compilationState = new TypeCompilationState(method.ContainingType, compilation, module);
+            TypeCompilationState compilationState = new TypeCompilationState(
+                method.ContainingType,
+                compilation,
+                module
+            );
 
-            var diagnostics = BindingDiagnosticBag.GetInstance(withDiagnostics: true, withDependencies: false);
-            var block = MethodCompiler.BindSynthesizedMethodBody(method, compilationState, diagnostics);
+            var diagnostics = BindingDiagnosticBag.GetInstance(
+                withDiagnostics: true,
+                withDependencies: false
+            );
+            var block = MethodCompiler.BindSynthesizedMethodBody(
+                method,
+                compilationState,
+                diagnostics
+            );
             diagnostics.Free();
             return block;
         }
 
         public const string LINQ =
-        #region the string LINQ defines a complete LINQ API called List1<T> (for instance method) and List2<T> (for extension methods)
- @"using System;
+            #region the string LINQ defines a complete LINQ API called List1<T> (for instance method) and List2<T> (for extension methods)
+            @"using System;
 using System.Text;
 
 public delegate R Func1<in T1, out R>(T1 arg1);
@@ -790,7 +811,7 @@ public class Group1<K, T> : List1<T>
 //
 //}
 "
-        #endregion the string LINQ
-;
+            #endregion the string LINQ
+        ;
     }
 }

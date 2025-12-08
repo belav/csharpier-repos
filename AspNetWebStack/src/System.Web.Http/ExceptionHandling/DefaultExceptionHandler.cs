@@ -20,14 +20,20 @@ namespace System.Web.Http.ExceptionHandling
     /// </remarks>
     internal class DefaultExceptionHandler : IExceptionHandler
     {
-        public Task HandleAsync(ExceptionHandlerContext context, CancellationToken cancellationToken)
+        public Task HandleAsync(
+            ExceptionHandlerContext context,
+            CancellationToken cancellationToken
+        )
         {
             Handle(context);
             return TaskHelpers.Completed();
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
-            Justification = "We already shipped this code; avoiding even minor breaking changes in error handling.")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "We already shipped this code; avoiding even minor breaking changes in error handling."
+        )]
         private static void Handle(ExceptionHandlerContext context)
         {
             if (context == null)
@@ -43,8 +49,14 @@ namespace System.Web.Http.ExceptionHandling
 
             if (request == null)
             {
-                throw new ArgumentException(Error.Format(SRResources.TypePropertyMustNotBeNull,
-                    typeof(ExceptionContext).Name, "Request"), "context");
+                throw new ArgumentException(
+                    Error.Format(
+                        SRResources.TypePropertyMustNotBeNull,
+                        typeof(ExceptionContext).Name,
+                        "Request"
+                    ),
+                    "context"
+                );
             }
 
             if (exceptionContext.CatchBlock == ExceptionCatchBlocks.IExceptionFilter)
@@ -54,8 +66,9 @@ namespace System.Web.Http.ExceptionHandling
                 return;
             }
 
-            context.Result = new ResponseMessageResult(request.CreateErrorResponse(HttpStatusCode.InternalServerError,
-                exception));
+            context.Result = new ResponseMessageResult(
+                request.CreateErrorResponse(HttpStatusCode.InternalServerError, exception)
+            );
         }
     }
 }

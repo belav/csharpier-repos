@@ -14,15 +14,16 @@ namespace System.SpanTests
     public static partial class SpanTests
     {
         // newline chars given by Unicode Standard, Sec. 5.8, Recommendation R4 and Table 5-2
-        public static IEnumerable<object[]> NewLineChars => new object[][]
-        {
-            new object[] { '\r' },
-            new object[] { '\n' },
-            new object[] { '\f' },
-            new object[] { '\u0085' },
-            new object[] { '\u2028' },
-            new object[] { '\u2029' },
-        };
+        public static IEnumerable<object[]> NewLineChars =>
+            new object[][]
+            {
+                new object[] { '\r' },
+                new object[] { '\n' },
+                new object[] { '\f' },
+                new object[] { '\u0085' },
+                new object[] { '\u2028' },
+                new object[] { '\u2029' },
+            };
 
         [Fact]
         public static void EnumerateLines_Empty()
@@ -50,7 +51,10 @@ namespace System.SpanTests
         [InlineData("a<CR><LF><LF>z", new[] { "..1", "3..3", "4.." })] // CR should swallow only a single LF which follows
         [InlineData("a<CR>b<LF>c", new[] { "..1", "2..3", "4.." })] // CR shouldn't swallow anything other than LF
         [InlineData("aa<CR>bb<LF><CR>cc", new[] { "..2", "3..5", "6..6", "7.." })] // LF shouldn't swallow CR which follows
-        [InlineData("a<CR>b<VT>c<LF>d<NEL>e<FF>f<PS>g<LS>h", new[] { "..1", "2..5", "6..7", "8..9", "10..11", "12..13", "14.." })] // VT not recognized as NLF
+        [InlineData(
+            "a<CR>b<VT>c<LF>d<NEL>e<FF>f<PS>g<LS>h",
+            new[] { "..1", "2..5", "6..7", "8..9", "10..11", "12..13", "14.." }
+        )] // VT not recognized as NLF
         [InlineData("xyz<NEL>", new[] { "..3", "^0.." })] // sequence at end produces empty string
         [InlineData("<NEL>xyz", new[] { "..0", "^3.." })] // sequence at beginning produces empty string
         [InlineData("abc<NAK>%def", new[] { ".." })] // we don't recognize EBCDIC encodings for LF (see Unicode Standard, Sec. 5.8, Table 5-1)
@@ -60,12 +64,16 @@ namespace System.SpanTests
             // as we want to ensure that the method under test points to very specific slices within the original input string.
 
             input = FixupSequences(input);
-            Range[] expectedRangesNormalized = expectedRanges.Select(element =>
-            {
-                Range parsed = ParseRange(element);
-                (int actualOffset, int actualLength) = parsed.GetOffsetAndLength(input?.Length ?? 0);
-                return actualOffset..(actualOffset + actualLength);
-            }).ToArray();
+            Range[] expectedRangesNormalized = expectedRanges
+                .Select(element =>
+                {
+                    Range parsed = ParseRange(element);
+                    (int actualOffset, int actualLength) = parsed.GetOffsetAndLength(
+                        input?.Length ?? 0
+                    );
+                    return actualOffset..(actualOffset + actualLength);
+                })
+                .ToArray();
 
             List<Range> actualRangesNormalized = new List<Range>();
             foreach (ReadOnlySpan<char> line in input.AsSpan().EnumerateLines())
@@ -75,7 +83,10 @@ namespace System.SpanTests
 
             Assert.Equal(expectedRangesNormalized, actualRangesNormalized);
 
-            static unsafe Range GetNormalizedRangeFromSubspan<T>(ReadOnlySpan<T> outer, ReadOnlySpan<T> inner)
+            static unsafe Range GetNormalizedRangeFromSubspan<T>(
+                ReadOnlySpan<T> outer,
+                ReadOnlySpan<T> inner
+            )
             {
                 // We can't use MemoryExtensions.Overlaps because it doesn't handle empty spans in the way we need.
 
@@ -88,8 +99,14 @@ namespace System.SpanTests
                     byte* pOuterEnd = pOuterStart + (uint)outer.Length * (nuint)Unsafe.SizeOf<T>();
                     byte* pInnerEnd = pInnerStart + (uint)inner.Length * (nuint)Unsafe.SizeOf<T>();
 
-                    Assert.True(pOuterStart <= pInnerStart && pInnerStart <= pOuterEnd, "Inner span begins outside outer span.");
-                    Assert.True(pOuterStart <= pInnerEnd && pInnerEnd <= pOuterEnd, "Inner span ends outside outer span.");
+                    Assert.True(
+                        pOuterStart <= pInnerStart && pInnerStart <= pOuterEnd,
+                        "Inner span begins outside outer span."
+                    );
+                    Assert.True(
+                        pOuterStart <= pInnerEnd && pInnerEnd <= pOuterEnd,
+                        "Inner span ends outside outer span."
+                    );
 
                     nuint byteOffset = (nuint)(pInnerStart - pOuterStart);
                     Assert.Equal((nuint)0, byteOffset % (nuint)Unsafe.SizeOf<T>()); // Unaligned elements; cannot compute offset
@@ -103,8 +120,12 @@ namespace System.SpanTests
                 // We use <XYZ> markers so that the original strings show up better in the xunit test runner
                 // <VT> is included as a negative test; we *do not* want ReplaceLineEndings to honor it
 
-                if (input is null) { return null; }
-                return input.Replace("<CR>", "\r")
+                if (input is null)
+                {
+                    return null;
+                }
+                return input
+                    .Replace("<CR>", "\r")
                     .Replace("<LF>", "\n")
                     .Replace("<VT>", "\v")
                     .Replace("<FF>", "\f")
@@ -117,7 +138,10 @@ namespace System.SpanTests
             static Range ParseRange(string input)
             {
                 var idxOfDots = input.IndexOf("..", StringComparison.Ordinal);
-                if (idxOfDots < 0) { throw new ArgumentException(); }
+                if (idxOfDots < 0)
+                {
+                    throw new ArgumentException();
+                }
 
                 ReadOnlySpan<char> begin = input.AsSpan(0, idxOfDots).Trim();
                 Index beginIdx = (begin.IsEmpty) ? Index.Start : ParseIndex(begin);
@@ -128,8 +152,15 @@ namespace System.SpanTests
                 static Index ParseIndex(ReadOnlySpan<char> input)
                 {
                     bool fromEnd = false;
-                    if (!input.IsEmpty && input[0] == '^') { fromEnd = true; input = input.Slice(1); }
-                    return new Index(int.Parse(input, NumberStyles.Integer, CultureInfo.InvariantCulture), fromEnd);
+                    if (!input.IsEmpty && input[0] == '^')
+                    {
+                        fromEnd = true;
+                        input = input.Slice(1);
+                    }
+                    return new Index(
+                        int.Parse(input, NumberStyles.Integer, CultureInfo.InvariantCulture),
+                        fromEnd
+                    );
                 }
             }
         }
@@ -155,7 +186,10 @@ namespace System.SpanTests
             span[512] = newlineChar;
             boundedMem.MakeReadonly();
 
-            span = MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(span), span.Length + 4096);
+            span = MemoryMarshal.CreateSpan(
+                ref MemoryMarshal.GetReference(span),
+                span.Length + 4096
+            );
 
             var enumerator = span.EnumerateLines().GetEnumerator();
             Assert.True(enumerator.MoveNext());

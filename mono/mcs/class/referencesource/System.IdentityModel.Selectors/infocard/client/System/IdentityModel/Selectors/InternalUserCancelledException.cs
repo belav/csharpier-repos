@@ -20,25 +20,15 @@ namespace Microsoft.InfoCards
         const int HRESULT = (int)EventCode.E_ICARD_USERCANCELLED;
 
         public UserCancelledException()
-            : base(HRESULT)
-        {
-        }
-        public UserCancelledException(string message)
-            : base(HRESULT, message)
-        {
-        }
+            : base(HRESULT) { }
 
+        public UserCancelledException(string message)
+            : base(HRESULT, message) { }
 
         public UserCancelledException(string message, Exception inner)
-            : base(HRESULT, message, inner)
-        {
-        }
+            : base(HRESULT, message, inner) { }
 
         protected UserCancelledException(SerializationInfo si, StreamingContext sc)
-            : base(HRESULT, si, sc)
-        {
-        }
-
-
+            : base(HRESULT, si, sc) { }
     }
 }

@@ -8,7 +8,8 @@ using Xunit;
 public class Program
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void Test<TException>() where TException : Exception
+    static void Test<TException>()
+        where TException : Exception
     {
         try
         {

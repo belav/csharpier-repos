@@ -7,7 +7,22 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeGeneration
 {
-    internal class CodeGenerationArrayTypeSymbol(ITypeSymbol elementType, int rank, NullableAnnotation nullableAnnotation) : CodeGenerationTypeSymbol(null, null, default, Accessibility.NotApplicable, default, string.Empty, SpecialType.None, nullableAnnotation), IArrayTypeSymbol
+    internal class CodeGenerationArrayTypeSymbol(
+        ITypeSymbol elementType,
+        int rank,
+        NullableAnnotation nullableAnnotation
+    )
+        : CodeGenerationTypeSymbol(
+            null,
+            null,
+            default,
+            Accessibility.NotApplicable,
+            default,
+            string.Empty,
+            SpecialType.None,
+            nullableAnnotation
+        ),
+            IArrayTypeSymbol
     {
         public ITypeSymbol ElementType { get; } = elementType;
 
@@ -15,56 +30,45 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public bool IsSZArray
         {
-            get
-            {
-                return Rank == 1;
-            }
+            get { return Rank == 1; }
         }
 
         public ImmutableArray<int> Sizes
         {
-            get
-            {
-                return ImmutableArray<int>.Empty;
-            }
+            get { return ImmutableArray<int>.Empty; }
         }
 
         public ImmutableArray<int> LowerBounds
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
-        protected override CodeGenerationTypeSymbol CloneWithNullableAnnotation(NullableAnnotation nullableAnnotation)
-            => new CodeGenerationArrayTypeSymbol(this.ElementType, this.Rank, nullableAnnotation);
+        protected override CodeGenerationTypeSymbol CloneWithNullableAnnotation(
+            NullableAnnotation nullableAnnotation
+        ) => new CodeGenerationArrayTypeSymbol(this.ElementType, this.Rank, nullableAnnotation);
 
         public override TypeKind TypeKind => TypeKind.Array;
 
         public override SymbolKind Kind => SymbolKind.ArrayType;
 
-        public override void Accept(SymbolVisitor visitor)
-            => visitor.VisitArrayType(this);
+        public override void Accept(SymbolVisitor visitor) => visitor.VisitArrayType(this);
 
         public override TResult? Accept<TResult>(SymbolVisitor<TResult> visitor)
-            where TResult : default
-            => visitor.VisitArrayType(this);
+            where TResult : default => visitor.VisitArrayType(this);
 
-        public override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
-            => visitor.VisitArrayType(this, argument);
+        public override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        ) => visitor.VisitArrayType(this, argument);
 
         public ImmutableArray<CustomModifier> CustomModifiers
         {
-            get
-            {
-                return ImmutableArray.Create<CustomModifier>();
-            }
+            get { return ImmutableArray.Create<CustomModifier>(); }
         }
 
         public NullableAnnotation ElementNullableAnnotation => ElementType.NullableAnnotation;
 
-        public bool Equals(IArrayTypeSymbol? other)
-            => SymbolEquivalenceComparer.Instance.Equals(this, other);
+        public bool Equals(IArrayTypeSymbol? other) =>
+            SymbolEquivalenceComparer.Instance.Equals(this, other);
     }
 }

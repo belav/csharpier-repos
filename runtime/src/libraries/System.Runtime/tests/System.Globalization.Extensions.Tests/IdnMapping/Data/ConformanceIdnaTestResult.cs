@@ -9,7 +9,7 @@ namespace System.Globalization.Tests
     public enum IdnaTestResultType
     {
         ToUnicode,
-        ToAscii
+        ToAscii,
     }
 
     public class ConformanceIdnaTestResult
@@ -31,23 +31,45 @@ namespace System.Globalization.Tests
 
         public string StatusValue { get; private set; }
 
-        public ConformanceIdnaTestResult(string entry, string fallbackValue, IdnaTestResultType resultType = IdnaTestResultType.ToAscii)
-            : this(entry, fallbackValue, null, null, useValueForStatus: true, resultType)
-        {
-        }
+        public ConformanceIdnaTestResult(
+            string entry,
+            string fallbackValue,
+            IdnaTestResultType resultType = IdnaTestResultType.ToAscii
+        )
+            : this(entry, fallbackValue, null, null, useValueForStatus: true, resultType) { }
 
-        public ConformanceIdnaTestResult(string entry, string fallbackValue, string statusValue, string statusFallbackValue, IdnaTestResultType resultType = IdnaTestResultType.ToAscii)
-            : this(entry, fallbackValue, statusValue, statusFallbackValue, useValueForStatus: false, resultType)
-        {
-        }
+        public ConformanceIdnaTestResult(
+            string entry,
+            string fallbackValue,
+            string statusValue,
+            string statusFallbackValue,
+            IdnaTestResultType resultType = IdnaTestResultType.ToAscii
+        )
+            : this(
+                entry,
+                fallbackValue,
+                statusValue,
+                statusFallbackValue,
+                useValueForStatus: false,
+                resultType
+            ) { }
 
-        private ConformanceIdnaTestResult(string entry, string fallbackValue, string statusValue, string statusFallbackValue, bool useValueForStatus, IdnaTestResultType resultType)
+        private ConformanceIdnaTestResult(
+            string entry,
+            string fallbackValue,
+            string statusValue,
+            string statusFallbackValue,
+            bool useValueForStatus,
+            IdnaTestResultType resultType
+        )
         {
             ResultType = resultType;
             SetValue(string.IsNullOrEmpty(entry.Trim()) ? fallbackValue : entry);
-            SetSuccess(useValueForStatus ?
-                            Value :
-                            string.IsNullOrEmpty(statusValue.Trim()) ? statusFallbackValue : statusValue);
+            SetSuccess(
+                useValueForStatus ? Value
+                : string.IsNullOrEmpty(statusValue.Trim()) ? statusFallbackValue
+                : statusValue
+            );
         }
 
         private void SetValue(string entry)
@@ -85,7 +107,8 @@ namespace System.Globalization.Tests
         {
             // We don't validate for BIDI rule so we can ignore BIDI codes
             // If we're validating ToAscii we ignore rule V2 (UIDNA_ERROR_HYPHEN_3_4) for compatibility with windows.
-            return statusCode.StartsWith('B') || (ResultType == IdnaTestResultType.ToAscii && statusCode == "V2");
+            return statusCode.StartsWith('B')
+                || (ResultType == IdnaTestResultType.ToAscii && statusCode == "V2");
         }
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,36 +30,46 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Web.Hosting;
-
+using NUnit.Framework;
 using StandAloneRunnerSupport;
 using StandAloneTests;
 
-using NUnit.Framework;
-
 namespace StandAloneTests.WebControlsMustUseIsEnabled_Bug571715
 {
-	[TestCase ("WebControlsMustUseIsEnabled_Bug571715", "WebControl descendants must use IsEnabled instead of Enabled (Bug #571715)")]
-	public sealed class Test_01 : ITestCase
-	{
-		public string PhysicalPath {
-			get { return Path.Combine (Consts.BasePhysicalDir, "WebControlsMustUseIsEnabled_Bug571715"); }
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase(
+        "WebControlsMustUseIsEnabled_Bug571715",
+        "WebControl descendants must use IsEnabled instead of Enabled (Bug #571715)"
+    )]
+    public sealed class Test_01 : ITestCase
+    {
+        public string PhysicalPath
+        {
+            get
+            {
+                return Path.Combine(
+                    Consts.BasePhysicalDir,
+                    "WebControlsMustUseIsEnabled_Bug571715"
+                );
+            }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("default.aspx", Default_Aspx));
-			
-			return true;
-		}
+        public string VirtualPath
+        {
+            get { return "/"; }
+        }
 
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<div>\r\n\t<table cellspacing=\"0\" rules=\"all\" border=\"1\" id=\"GridView1\" style=\"border-collapse:collapse;\">\r\n\t\t<tr>\r\n\t\t\t<th scope=\"col\">ID</th><th scope=\"col\">FULLNAME</th><th scope=\"col\">&nbsp;</th>\r\n\t\t</tr><tr>\r\n\t\t\t<td>1</td><td>Sheryl Hunter</td><td align=\"left\" style=\"width:60px;\"><input type=\"submit\" name=\"GridView1$ctl02$DeleteBtn\" value=\"Delete\" id=\"GridView1_DeleteBtn_0\" /></td>\r\n\t\t</tr><tr>\r\n\t\t\t<td>2</td><td>Dean Straight</td><td class=\"aspNetDisabled\" align=\"left\" style=\"width:60px;\"><input type=\"submit\" name=\"GridView1$ctl03$DeleteBtn\" value=\"Delete\" disabled=\"disabled\" id=\"GridView1_DeleteBtn_1\" /></td>\r\n\t\t</tr><tr>\r\n\t\t\t<td>3</td><td>Marjorie Green</td><td align=\"left\" style=\"width:60px;\"><input type=\"submit\" name=\"GridView1$ctl04$DeleteBtn\" value=\"Delete\" id=\"GridView1_DeleteBtn_2\" /></td>\r\n\t\t</tr>\r\n\t</table>\r\n</div>";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-	}
+        public bool SetUp(List<TestRunItem> runItems)
+        {
+            runItems.Add(new TestRunItem("default.aspx", Default_Aspx));
+
+            return true;
+        }
+
+        void Default_Aspx(string result, TestRunItem runItem)
+        {
+            string originalHtml =
+                "<div>\r\n\t<table cellspacing=\"0\" rules=\"all\" border=\"1\" id=\"GridView1\" style=\"border-collapse:collapse;\">\r\n\t\t<tr>\r\n\t\t\t<th scope=\"col\">ID</th><th scope=\"col\">FULLNAME</th><th scope=\"col\">&nbsp;</th>\r\n\t\t</tr><tr>\r\n\t\t\t<td>1</td><td>Sheryl Hunter</td><td align=\"left\" style=\"width:60px;\"><input type=\"submit\" name=\"GridView1$ctl02$DeleteBtn\" value=\"Delete\" id=\"GridView1_DeleteBtn_0\" /></td>\r\n\t\t</tr><tr>\r\n\t\t\t<td>2</td><td>Dean Straight</td><td class=\"aspNetDisabled\" align=\"left\" style=\"width:60px;\"><input type=\"submit\" name=\"GridView1$ctl03$DeleteBtn\" value=\"Delete\" disabled=\"disabled\" id=\"GridView1_DeleteBtn_1\" /></td>\r\n\t\t</tr><tr>\r\n\t\t\t<td>3</td><td>Marjorie Green</td><td align=\"left\" style=\"width:60px;\"><input type=\"submit\" name=\"GridView1$ctl04$DeleteBtn\" value=\"Delete\" id=\"GridView1_DeleteBtn_2\" /></td>\r\n\t\t</tr>\r\n\t</table>\r\n</div>";
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
+        }
+    }
 }

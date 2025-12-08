@@ -5,9 +5,7 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class TPCInheritanceQuerySqliteFixture : TPCInheritanceQueryFixture
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqliteTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
-    public override bool UseGeneratedKeys
-        => false;
+    public override bool UseGeneratedKeys => false;
 }

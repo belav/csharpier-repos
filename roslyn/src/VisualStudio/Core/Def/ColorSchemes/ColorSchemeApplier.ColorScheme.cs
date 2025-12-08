@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
     internal partial class ColorSchemeApplier
     {
         /// <summary>
-        /// A ColorSchemeName represents a style to be applied to VS themes in 
+        /// A ColorSchemeName represents a style to be applied to VS themes in
         /// order to emphasize some aspect of the source code. For instance
         /// C++ has an 'Enhanced (Globals vs. Members)' scheme to emphasize
         /// a distinction between where identifiers are declared.
@@ -21,8 +21,7 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
         {
             public ImmutableArray<ColorTheme> Themes { get; }
 
-            public ColorScheme(ImmutableArray<ColorTheme> themes)
-                => Themes = themes;
+            public ColorScheme(ImmutableArray<ColorTheme> themes) => Themes = themes;
         }
 
         /// <summary>
@@ -64,7 +63,13 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
             public __VSCOLORTYPE ForegroundType { get; }
             public uint? Foreground { get; }
 
-            public ColorItem(string name, __VSCOLORTYPE backgroundType, uint? background, __VSCOLORTYPE foregroundType, uint? foreground)
+            public ColorItem(
+                string name,
+                __VSCOLORTYPE backgroundType,
+                uint? background,
+                __VSCOLORTYPE foregroundType,
+                uint? foreground
+            )
             {
                 Name = name;
 

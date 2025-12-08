@@ -13,7 +13,8 @@ namespace ILCompiler.PettisHansenSort
         }
 
         public int Index { get; }
-        public Dictionary<CallGraphNode, long> OutgoingEdges { get; } = new Dictionary<CallGraphNode, long>();
+        public Dictionary<CallGraphNode, long> OutgoingEdges { get; } =
+            new Dictionary<CallGraphNode, long>();
 
         public void IncreaseEdge(CallGraphNode callee, long count)
         {

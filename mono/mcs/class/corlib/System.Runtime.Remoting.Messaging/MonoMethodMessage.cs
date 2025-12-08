@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,399 +37,431 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace System.Runtime.Remoting.Messaging {
-	
-	[Serializable]
-	[StructLayout (LayoutKind.Sequential)]
-	internal class MonoMethodMessage
+namespace System.Runtime.Remoting.Messaging
+{
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential)]
+    internal class MonoMethodMessage
 #if !DISABLE_REMOTING
-		: IMethodCallMessage, IMethodReturnMessage, IInternalMessage
+        : IMethodCallMessage, IMethodReturnMessage, IInternalMessage
 #endif
-	{
+    {
 #pragma warning disable 649
-		#region keep in sync with MonoMessage in object-internals.h
-		RuntimeMethodInfo method;
-		object []  args;
-		string []  names;
-		byte [] arg_types; /* 1 == IN; 2 == OUT; 3 == INOUT; 4 == COPY OUT */
-		public LogicalCallContext ctx;
-		public object rval;
-		public Exception exc;
-		AsyncResult asyncResult;
-		CallType call_type;
-		#endregion
+        #region keep in sync with MonoMessage in object-internals.h
+        RuntimeMethodInfo method;
+        object[] args;
+        string[] names;
+        byte[] arg_types; /* 1 == IN; 2 == OUT; 3 == INOUT; 4 == COPY OUT */
+        public LogicalCallContext ctx;
+        public object rval;
+        public Exception exc;
+        AsyncResult asyncResult;
+        CallType call_type;
+        #endregion
 #pragma warning restore 649
 
-		string uri;
+        string uri;
 
 #if !DISABLE_REMOTING
-		MCMDictionary properties;
-		Identity identity;
+        MCMDictionary properties;
+        Identity identity;
 #endif
 
-		Type[] methodSignature;
+        Type[] methodSignature;
 
-		internal void InitMessage (RuntimeMethodInfo method, object [] out_args)
-		{
-			this.method = method;
-			ParameterInfo[] paramInfo = method.GetParametersInternal ();
-			int param_count = paramInfo.Length;
-			args = new object[param_count];
-			arg_types = new byte[param_count];
-			asyncResult = null;
-			call_type = CallType.Sync;
-			names = new string[param_count];
-			for (int i = 0; i < param_count; i++) {
-				names[i] = paramInfo[i].Name;
-			}
-			bool hasOutArgs = out_args != null;
-			int j = 0;
-			for (int i = 0; i < param_count; i++) {
-				byte arg_type;
-				bool isOut = paramInfo[i].IsOut;
-				if (paramInfo[i].ParameterType.IsByRef) {
-					if (hasOutArgs)
-						args[i] = out_args[j++];
-					arg_type = 2; // OUT
-					if (!isOut)
-						arg_type |= 1; // INOUT
-				} else {
-					arg_type = 1; // IN
-					if (isOut)
-						arg_type |= 4; // IN, COPY OUT
-				}
-				arg_types[i] = arg_type;
-			}
-		}
+        internal void InitMessage(RuntimeMethodInfo method, object[] out_args)
+        {
+            this.method = method;
+            ParameterInfo[] paramInfo = method.GetParametersInternal();
+            int param_count = paramInfo.Length;
+            args = new object[param_count];
+            arg_types = new byte[param_count];
+            asyncResult = null;
+            call_type = CallType.Sync;
+            names = new string[param_count];
+            for (int i = 0; i < param_count; i++)
+            {
+                names[i] = paramInfo[i].Name;
+            }
+            bool hasOutArgs = out_args != null;
+            int j = 0;
+            for (int i = 0; i < param_count; i++)
+            {
+                byte arg_type;
+                bool isOut = paramInfo[i].IsOut;
+                if (paramInfo[i].ParameterType.IsByRef)
+                {
+                    if (hasOutArgs)
+                        args[i] = out_args[j++];
+                    arg_type = 2; // OUT
+                    if (!isOut)
+                        arg_type |= 1; // INOUT
+                }
+                else
+                {
+                    arg_type = 1; // IN
+                    if (isOut)
+                        arg_type |= 4; // IN, COPY OUT
+                }
+                arg_types[i] = arg_type;
+            }
+        }
 
-		public MonoMethodMessage (MethodBase method, object [] out_args)
-		{
-			if (method != null)
-				InitMessage ((RuntimeMethodInfo)method, out_args);
-			else
-				args = null;
-		}
+        public MonoMethodMessage(MethodBase method, object[] out_args)
+        {
+            if (method != null)
+                InitMessage((RuntimeMethodInfo)method, out_args);
+            else
+                args = null;
+        }
 
-		internal MonoMethodMessage (MethodInfo minfo, object [] in_args, object [] out_args)
-		{
-			InitMessage ((RuntimeMethodInfo)minfo, out_args);
+        internal MonoMethodMessage(MethodInfo minfo, object[] in_args, object[] out_args)
+        {
+            InitMessage((RuntimeMethodInfo)minfo, out_args);
 
-			int len = in_args.Length;
-			for (int i = 0; i < len; i++) {
-				args [i] = in_args [i];
-			}
-		}
+            int len = in_args.Length;
+            for (int i = 0; i < len; i++)
+            {
+                args[i] = in_args[i];
+            }
+        }
 
-		private static MethodInfo GetMethodInfo (Type type, string methodName)
-		{
-			// fixme: consider arg types
-			MethodInfo minfo = type.GetMethod(methodName);
-			if (minfo == null)
-				throw new ArgumentException (String.Format("Could not find '{0}' in {1}", methodName, type), "methodName");
-			return minfo;
-		}
-		
-		public MonoMethodMessage (Type type, string methodName, object [] in_args)
-			: this (GetMethodInfo (type, methodName), in_args, null)
-		{
-		}
+        private static MethodInfo GetMethodInfo(Type type, string methodName)
+        {
+            // fixme: consider arg types
+            MethodInfo minfo = type.GetMethod(methodName);
+            if (minfo == null)
+                throw new ArgumentException(
+                    String.Format("Could not find '{0}' in {1}", methodName, type),
+                    "methodName"
+                );
+            return minfo;
+        }
 
-		public IDictionary Properties {
-			get {
+        public MonoMethodMessage(Type type, string methodName, object[] in_args)
+            : this(GetMethodInfo(type, methodName), in_args, null) { }
+
+        public IDictionary Properties
+        {
+            get
+            {
 #if DISABLE_REMOTING
-				throw new PlatformNotSupportedException ();
+                throw new PlatformNotSupportedException();
 #else
-				if (properties == null) properties = new MCMDictionary (this);
-				return properties;
+                if (properties == null)
+                    properties = new MCMDictionary(this);
+                return properties;
 #endif
-			}
-		}
+            }
+        }
 
-		public int ArgCount {
-			get {
-				if (CallType == CallType.EndInvoke)
-					return -1;
-					
-				if (null == args)
-					return 0;
+        public int ArgCount
+        {
+            get
+            {
+                if (CallType == CallType.EndInvoke)
+                    return -1;
 
-				return args.Length;
-			}
-		}
-		
-		public object [] Args {
-			get {
-				return args;
-			}
-		}
-		
-		public bool HasVarArgs {
-			get {
-				return false;
-			}
-		}
+                if (null == args)
+                    return 0;
 
-		public LogicalCallContext LogicalCallContext {
-			get {
-				return ctx;
-			}
+                return args.Length;
+            }
+        }
 
-			set {
-				ctx = value;
-			}
-		}
+        public object[] Args
+        {
+            get { return args; }
+        }
 
-		public MethodBase MethodBase {
-			get {
-				return method;
-			}
-		}
+        public bool HasVarArgs
+        {
+            get { return false; }
+        }
 
-		public string MethodName {
-			get {
-				if (null == method)
-					return String.Empty;
+        public LogicalCallContext LogicalCallContext
+        {
+            get { return ctx; }
+            set { ctx = value; }
+        }
 
-				return method.Name;
-			}
-		}
+        public MethodBase MethodBase
+        {
+            get { return method; }
+        }
 
-		public object MethodSignature {
-			get {
-				if (methodSignature == null) {
-					ParameterInfo[] parameters = method.GetParameters();
-					methodSignature = new Type[parameters.Length];
-					for (int n=0; n<parameters.Length; n++)
-						methodSignature[n] = parameters[n].ParameterType;
-				}
-				return methodSignature;
-			}
-		}
+        public string MethodName
+        {
+            get
+            {
+                if (null == method)
+                    return String.Empty;
 
-		public string TypeName {
-			get {
-				if (null == method)
-					return String.Empty;
+                return method.Name;
+            }
+        }
 
-				return method.DeclaringType.AssemblyQualifiedName;
-			}
-		}
+        public object MethodSignature
+        {
+            get
+            {
+                if (methodSignature == null)
+                {
+                    ParameterInfo[] parameters = method.GetParameters();
+                    methodSignature = new Type[parameters.Length];
+                    for (int n = 0; n < parameters.Length; n++)
+                        methodSignature[n] = parameters[n].ParameterType;
+                }
+                return methodSignature;
+            }
+        }
 
-		public string Uri {
-			get {
-				return uri;
-			}
+        public string TypeName
+        {
+            get
+            {
+                if (null == method)
+                    return String.Empty;
 
-			set {
-				uri = value;
-			}
-		}
+                return method.DeclaringType.AssemblyQualifiedName;
+            }
+        }
 
-		public object GetArg (int arg_num)
-		{
-			if (null == args)
-				return null;
+        public string Uri
+        {
+            get { return uri; }
+            set { uri = value; }
+        }
 
-			return args [arg_num];
-		}
-		
-		public string GetArgName (int arg_num)
-		{
-			if (null == args)
-				return String.Empty;
+        public object GetArg(int arg_num)
+        {
+            if (null == args)
+                return null;
 
-			return names [arg_num];
-		}
+            return args[arg_num];
+        }
 
-		public int InArgCount {
-			get {
-				if (CallType == CallType.EndInvoke)
-					return -1;
+        public string GetArgName(int arg_num)
+        {
+            if (null == args)
+                return String.Empty;
 
-				if (null == args)
-					return 0;
+            return names[arg_num];
+        }
 
-				int count = 0;
+        public int InArgCount
+        {
+            get
+            {
+                if (CallType == CallType.EndInvoke)
+                    return -1;
 
-				foreach (byte t in arg_types) {
-					if ((t & 1) != 0) count++;
-						
-				}
-				return count;
-			}
-		}
-		
-		public object [] InArgs {
-			get {                
-				int i, j, count = InArgCount;
-				object [] inargs = new object [count];
+                if (null == args)
+                    return 0;
 
-				i = j = 0;
-				foreach (byte t in arg_types) {
-					if ((t & 1) != 0)
-						inargs [j++] = args [i];
-					i++;
-				}
-				
-				return inargs;
-			}
-		}
-		
-		public object GetInArg (int arg_num)
-		{
-			int i = 0, j = 0;
-			foreach (byte t in arg_types) {
-				if ((t & 1) != 0) {
-					if (j++ == arg_num)
-						return args [i]; 
-				}
-				i++;
-			}
-			return null;
-		}
-		
-		public string GetInArgName (int arg_num)
-		{
-			int i = 0, j = 0;
-			foreach (byte t in arg_types) {
-				if ((t & 1) != 0) {
-					if (j++ == arg_num)
-						return names [i]; 
-				}
-				i++;
-			}
-			return null;
-		}
+                int count = 0;
 
-		public Exception Exception {
-			get {
-				return exc;
-			}
-		}
-		
-		public int OutArgCount {
-			get {
-				if (null == args)
-					return 0;
-		                
-				int count = 0;
+                foreach (byte t in arg_types)
+                {
+                    if ((t & 1) != 0)
+                        count++;
+                }
+                return count;
+            }
+        }
 
-				foreach (byte t in arg_types) {
-					if ((t & 2) != 0) count++;
-						
-				}
-				return count;
-			}
-		}
-		
-		public object [] OutArgs {
-			get {
-				if (null == args)
-					return null;
+        public object[] InArgs
+        {
+            get
+            {
+                int i,
+                    j,
+                    count = InArgCount;
+                object[] inargs = new object[count];
 
-				int i, j, count = OutArgCount;
-				object [] outargs = new object [count];
+                i = j = 0;
+                foreach (byte t in arg_types)
+                {
+                    if ((t & 1) != 0)
+                        inargs[j++] = args[i];
+                    i++;
+                }
 
-				i = j = 0;
-				foreach (byte t in arg_types) {
-					if ((t & 2) != 0)
-						outargs [j++] = args [i];
-					i++;
-				}
-				
-				return outargs;
-			}
-		}
-		
-		public object ReturnValue {
-			get {
-				return rval;
-			}
-		}
+                return inargs;
+            }
+        }
 
-		public object GetOutArg (int arg_num)
-		{
-			int i = 0, j = 0;
-			foreach (byte t in arg_types) {
-				if ((t & 2) != 0) {
-					if (j++ == arg_num)
-						return args [i]; 
-				}
-				i++;
-			}
-			return null;
-		}
-		
-		public string GetOutArgName (int arg_num)
-		{
-			int i = 0, j = 0;
-			foreach (byte t in arg_types) {
-				if ((t & 2) != 0) {
-					if (j++ == arg_num)
-						return names [i]; 
-				}
-				i++;
-			}
-			return null;
-		}
+        public object GetInArg(int arg_num)
+        {
+            int i = 0,
+                j = 0;
+            foreach (byte t in arg_types)
+            {
+                if ((t & 1) != 0)
+                {
+                    if (j++ == arg_num)
+                        return args[i];
+                }
+                i++;
+            }
+            return null;
+        }
+
+        public string GetInArgName(int arg_num)
+        {
+            int i = 0,
+                j = 0;
+            foreach (byte t in arg_types)
+            {
+                if ((t & 1) != 0)
+                {
+                    if (j++ == arg_num)
+                        return names[i];
+                }
+                i++;
+            }
+            return null;
+        }
+
+        public Exception Exception
+        {
+            get { return exc; }
+        }
+
+        public int OutArgCount
+        {
+            get
+            {
+                if (null == args)
+                    return 0;
+
+                int count = 0;
+
+                foreach (byte t in arg_types)
+                {
+                    if ((t & 2) != 0)
+                        count++;
+                }
+                return count;
+            }
+        }
+
+        public object[] OutArgs
+        {
+            get
+            {
+                if (null == args)
+                    return null;
+
+                int i,
+                    j,
+                    count = OutArgCount;
+                object[] outargs = new object[count];
+
+                i = j = 0;
+                foreach (byte t in arg_types)
+                {
+                    if ((t & 2) != 0)
+                        outargs[j++] = args[i];
+                    i++;
+                }
+
+                return outargs;
+            }
+        }
+
+        public object ReturnValue
+        {
+            get { return rval; }
+        }
+
+        public object GetOutArg(int arg_num)
+        {
+            int i = 0,
+                j = 0;
+            foreach (byte t in arg_types)
+            {
+                if ((t & 2) != 0)
+                {
+                    if (j++ == arg_num)
+                        return args[i];
+                }
+                i++;
+            }
+            return null;
+        }
+
+        public string GetOutArgName(int arg_num)
+        {
+            int i = 0,
+                j = 0;
+            foreach (byte t in arg_types)
+            {
+                if ((t & 2) != 0)
+                {
+                    if (j++ == arg_num)
+                        return names[i];
+                }
+                i++;
+            }
+            return null;
+        }
 
 #if !DISABLE_REMOTING
-		Identity IInternalMessage.TargetIdentity
-		{
-			get { return identity; }
-			set { identity = value; }
-		}
+        Identity IInternalMessage.TargetIdentity
+        {
+            get { return identity; }
+            set { identity = value; }
+        }
 
-		bool IInternalMessage.HasProperties()
-		{
-			return properties != null;
-		}
+        bool IInternalMessage.HasProperties()
+        {
+            return properties != null;
+        }
 #endif
 
-		public bool IsAsync
-		{
-			get { return asyncResult != null; }
-		}
+        public bool IsAsync
+        {
+            get { return asyncResult != null; }
+        }
 
-		public AsyncResult AsyncResult
-		{
-			get { return asyncResult; }
-		}
+        public AsyncResult AsyncResult
+        {
+            get { return asyncResult; }
+        }
 
-		internal CallType CallType
-		{
-			get
-			{
-				// FIXME: ideally, the OneWay type would be set by the runtime
-				
+        internal CallType CallType
+        {
+            get {
+                // FIXME: ideally, the OneWay type would be set by the runtime
+
 #if !DISABLE_REMOTING
-				if (call_type == CallType.Sync && RemotingServices.IsOneWay (method))
-					call_type = CallType.OneWay;
+                if (call_type == CallType.Sync && RemotingServices.IsOneWay(method))
+                    call_type = CallType.OneWay;
 #endif
-				return call_type;
-			}
-		}
-		
-		public bool NeedsOutProcessing (out int outCount) {
-			bool res = false;
-			outCount = 0;
-			foreach (byte t in arg_types) {
-				if ((t & 2) != 0)
-					outCount++;
-				else if ((t & 4) != 0)
-					res = true;
-			}
-			return outCount > 0 || res;
-		}
-		
-	}
+                return call_type; }
+        }
 
-	internal enum CallType: int
-	{
-		Sync = 0,
-		BeginInvoke = 1,
-		EndInvoke = 2,
-		OneWay = 3
-	}
+        public bool NeedsOutProcessing(out int outCount)
+        {
+            bool res = false;
+            outCount = 0;
+            foreach (byte t in arg_types)
+            {
+                if ((t & 2) != 0)
+                    outCount++;
+                else if ((t & 4) != 0)
+                    res = true;
+            }
+            return outCount > 0 || res;
+        }
+    }
+
+    internal enum CallType : int
+    {
+        Sync = 0,
+        BeginInvoke = 1,
+        EndInvoke = 2,
+        OneWay = 3,
+    }
 }
-

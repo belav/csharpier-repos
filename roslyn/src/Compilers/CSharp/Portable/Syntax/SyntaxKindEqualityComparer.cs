@@ -28,6 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// PERF: The framework specializes EqualityComparer for enums, but only if the underlying type is System.Int32
         /// Since SyntaxKind's underlying type is System.UInt16, ObjectEqualityComparer will be chosen instead.
         /// </remarks>
-        public static IEqualityComparer<SyntaxKind> EqualityComparer { get; } = new SyntaxKindEqualityComparer();
+        public static IEqualityComparer<SyntaxKind> EqualityComparer { get; } =
+            new SyntaxKindEqualityComparer();
     }
 }

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="ObjectListField.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -9,11 +9,11 @@ using System.Collections;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Security.Permissions;
+using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
@@ -24,11 +24,14 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\ObjectListField.uex' path='docs/doc[@for="ObjectListField"]/*' />
-    [
-        PersistName("Field")
-    ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [PersistName("Field")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public sealed class ObjectListField : IStateManager
     {
         private StateBag _stateBag = new StateBag();
@@ -38,9 +41,7 @@ namespace System.Web.UI.MobileControls
         private bool _selfReference = false;
 
         /// <include file='doc\ObjectListField.uex' path='docs/doc[@for="ObjectListField.Name"]/*' />
-        [
-            DefaultValue("")
-        ]
+        [DefaultValue("")]
         public String Name
         {
             get
@@ -48,16 +49,11 @@ namespace System.Web.UI.MobileControls
                 String s = (String)ViewState["Name"];
                 return (s == null) ? String.Empty : s;
             }
-            set
-            {
-                ViewState["Name"] = value;
-            }
+            set { ViewState["Name"] = value; }
         }
 
         /// <include file='doc\ObjectListField.uex' path='docs/doc[@for="ObjectListField.DataField"]/*' />
-        [
-            DefaultValue("")
-        ]
+        [DefaultValue("")]
         public String DataField
         {
             get
@@ -73,9 +69,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\ObjectListField.uex' path='docs/doc[@for="ObjectListField.DataFormatString"]/*' />
-        [
-            DefaultValue("")
-        ]
+        [DefaultValue("")]
         public String DataFormatString
         {
             get
@@ -91,9 +85,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\ObjectListField.uex' path='docs/doc[@for="ObjectListField.Title"]/*' />
-        [
-            DefaultValue("")
-        ]
+        [DefaultValue("")]
         public String Title
         {
             get
@@ -101,16 +93,11 @@ namespace System.Web.UI.MobileControls
                 String s = (String)ViewState["Title"];
                 return (s == null) ? String.Empty : s;
             }
-            set
-            {
-                ViewState["Title"] = value;
-            }
+            set { ViewState["Title"] = value; }
         }
 
         /// <include file='doc\ObjectListField.uex' path='docs/doc[@for="ObjectListField.Visible"]/*' />
-        [
-            DefaultValue(true)
-        ]
+        [DefaultValue(true)]
         public bool Visible
         {
             get
@@ -118,22 +105,13 @@ namespace System.Web.UI.MobileControls
                 Object b = ViewState["Visible"];
                 return (b == null) ? true : (bool)b;
             }
-            set
-            {
-                ViewState["Visible"] = value;
-            }
+            set { ViewState["Visible"] = value; }
         }
 
         internal bool SelfReference
         {
-            get
-            {
-                return _selfReference;
-            }
-            set
-            {
-                _selfReference = value;
-            }
+            get { return _selfReference; }
+            set { _selfReference = value; }
         }
 
         internal String UniqueID
@@ -154,19 +132,17 @@ namespace System.Web.UI.MobileControls
             // Only called if databinding behavior of the field changes.
             if (_owner != null)
             {
-                _owner.OnFieldChanged(false);   // fieldAddedOrRemoved = false;
+                _owner.OnFieldChanged(false); // fieldAddedOrRemoved = false;
             }
         }
 
         private StateBag ViewState
         {
-            get
-            {
-                return _stateBag;
-            }
+            get { return _stateBag; }
         }
 
-        internal void SetOwner(ObjectList owner) {
+        internal void SetOwner(ObjectList owner)
+        {
             _owner = owner;
         }
 
@@ -178,7 +154,7 @@ namespace System.Web.UI.MobileControls
             {
                 return;
             }
-                
+
             if (!SelfReference)
             {
                 String dataField = DataField;
@@ -191,7 +167,8 @@ namespace System.Web.UI.MobileControls
                 if (_dataFieldDescriptor == null && !_owner.MobilePage.DesignMode)
                 {
                     throw new Exception(
-                        SR.GetString(SR.ObjectListField_DataFieldNotFound, dataField));
+                        SR.GetString(SR.ObjectListField_DataFieldNotFound, dataField)
+                    );
                 }
             }
 
@@ -239,10 +216,7 @@ namespace System.Web.UI.MobileControls
         /// <internalonly/>
         bool IStateManager.IsTrackingViewState
         {
-            get
-            {
-                return _marked;
-            }
+            get { return _marked; }
         }
 
         /// <include file='doc\ObjectListField.uex' path='docs/doc[@for="ObjectListField.IStateManager.TrackViewState"]/*' />
@@ -274,12 +248,12 @@ namespace System.Web.UI.MobileControls
         {
             // VSWHIDBEY 236464. The bag needs to be set dirty not individual items.
             _stateBag.SetDirty(true);
-/*
-            foreach (StateItem item in _stateBag.Values)
-            {
-                item.IsDirty = true;
-            }
-*/
+            /*
+                        foreach (StateItem item in _stateBag.Values)
+                        {
+                            item.IsDirty = true;
+                        }
+            */
         }
 
         internal void ClearViewState()
@@ -287,6 +261,4 @@ namespace System.Web.UI.MobileControls
             ViewState.Clear();
         }
     }
-
 }
-

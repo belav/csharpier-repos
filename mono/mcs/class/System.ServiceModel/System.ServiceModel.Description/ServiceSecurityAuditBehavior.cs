@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,53 +33,61 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-	public sealed class ServiceSecurityAuditBehavior : IServiceBehavior
-	{
-		AuditLogLocation audit_log_loc;
-		bool suppress_failure;
-		AuditLevel msg_audit_level, svc_audit_level;
+    public sealed class ServiceSecurityAuditBehavior : IServiceBehavior
+    {
+        AuditLogLocation audit_log_loc;
+        bool suppress_failure;
+        AuditLevel msg_audit_level,
+            svc_audit_level;
 
-		public AuditLogLocation AuditLogLocation {
-			get { return audit_log_loc; }
-			set { audit_log_loc = value; }
-		}
+        public AuditLogLocation AuditLogLocation
+        {
+            get { return audit_log_loc; }
+            set { audit_log_loc = value; }
+        }
 
-		public AuditLevel MessageAuthenticationAuditLevel {
-			get { return msg_audit_level; }
-			set { msg_audit_level = value; }
-		}
+        public AuditLevel MessageAuthenticationAuditLevel
+        {
+            get { return msg_audit_level; }
+            set { msg_audit_level = value; }
+        }
 
-		public AuditLevel ServiceAuthorizationAuditLevel {
-			get { return svc_audit_level; }
-			set { svc_audit_level = value; }
-		}
+        public AuditLevel ServiceAuthorizationAuditLevel
+        {
+            get { return svc_audit_level; }
+            set { svc_audit_level = value; }
+        }
 
-		public bool SuppressAuditFailure {
-			get { return suppress_failure; }
-			set { suppress_failure = value; }
-		}
+        public bool SuppressAuditFailure
+        {
+            get { return suppress_failure; }
+            set { suppress_failure = value; }
+        }
 
-		void IServiceBehavior.AddBindingParameters (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase,
-			Collection<ServiceEndpoint> endpoints,
-			BindingParameterCollection parameters)
-		{
-			throw new NotImplementedException ();
-		}
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		void IServiceBehavior.ApplyDispatchBehavior (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase)
-		{
-			throw new NotImplementedException ();
-		}
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		void IServiceBehavior.Validate (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

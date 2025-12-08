@@ -15,11 +15,14 @@ public sealed class SqlParameterExpression : SqlExpression
     /// <param name="type">The <see cref="Type" /> of the expression.</param>
     /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
     public SqlParameterExpression(string name, Type type, RelationalTypeMapping? typeMapping)
-        : this(name, type.UnwrapNullableType(), type.IsNullableType(), typeMapping)
-    {
-    }
+        : this(name, type.UnwrapNullableType(), type.IsNullableType(), typeMapping) { }
 
-    private SqlParameterExpression(string name, Type type, bool nullable, RelationalTypeMapping? typeMapping)
+    private SqlParameterExpression(
+        string name,
+        Type type,
+        bool nullable,
+        RelationalTypeMapping? typeMapping
+    )
         : base(type, typeMapping)
     {
         Name = name;
@@ -41,29 +44,28 @@ public sealed class SqlParameterExpression : SqlExpression
     /// </summary>
     /// <param name="typeMapping">A relational type mapping to apply.</param>
     /// <returns>A new expression which has supplied type mapping.</returns>
-    public SqlExpression ApplyTypeMapping(RelationalTypeMapping? typeMapping)
-        => new SqlParameterExpression(Name, Type, IsNullable, typeMapping);
+    public SqlExpression ApplyTypeMapping(RelationalTypeMapping? typeMapping) =>
+        new SqlParameterExpression(Name, Type, IsNullable, typeMapping);
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => this;
+    protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
     /// <inheritdoc />
-    protected override void Print(ExpressionPrinter expressionPrinter)
-        => expressionPrinter.Append("@" + Name);
+    protected override void Print(ExpressionPrinter expressionPrinter) =>
+        expressionPrinter.Append("@" + Name);
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is SqlParameterExpression sqlParameterExpression
-                && Equals(sqlParameterExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is SqlParameterExpression sqlParameterExpression
+                && Equals(sqlParameterExpression)
+        );
 
-    private bool Equals(SqlParameterExpression sqlParameterExpression)
-        => base.Equals(sqlParameterExpression)
-            && Name == sqlParameterExpression.Name;
+    private bool Equals(SqlParameterExpression sqlParameterExpression) =>
+        base.Equals(sqlParameterExpression) && Name == sqlParameterExpression.Name;
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Name);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Name);
 }

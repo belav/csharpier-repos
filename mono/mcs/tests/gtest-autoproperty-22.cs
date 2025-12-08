@@ -2,29 +2,29 @@ using System;
 
 class MainClass
 {
-	public static void Main()
-	{
-		Child test = new Child();
-	}
+    public static void Main()
+    {
+        Child test = new Child();
+    }
 }
 
-class Parent 
+class Parent
 {
-	protected virtual string Property { get; }
+    protected virtual string Property { get; }
 }
 
 class Child : Parent
 {
-	protected override string Property { get; }
+    protected override string Property { get; }
 
-	public Child () 
-	{
-		new AnotherClass{ field = Property = "success" };
-		Console.WriteLine(Property);
-	}
+    public Child()
+    {
+        new AnotherClass { field = Property = "success" };
+        Console.WriteLine(Property);
+    }
 }
 
-class AnotherClass 
+class AnotherClass
 {
-	public string field;
+    public string field;
 }

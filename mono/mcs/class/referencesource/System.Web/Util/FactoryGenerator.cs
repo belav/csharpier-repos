@@ -13,7 +13,8 @@ using System.Threading;
 using System.Security;
 using System.Security.Permissions;
 
-namespace System.Web.Util {
+namespace System.Web.Util
+{
     /*
      * Factory Generator class
      * A factory generator is useful for cases where a large number of late-bound
@@ -60,7 +61,8 @@ namespace System.Web.Util {
      * Copyright (c) 2003 Microsoft Corporation
      */
 
-    internal class FactoryGenerator {
+    internal class FactoryGenerator
+    {
         private Type _factoryInterface;
         private Type _returnedType;
         private MethodInfo _methodToOverride;
@@ -68,9 +70,11 @@ namespace System.Web.Util {
         private Type[] _emptyParameterList = new Type[] { };
         private Type[] _interfacesToImplement;
 
-        internal FactoryGenerator() : this(typeof(object), typeof(IWebObjectFactory)) {}
+        internal FactoryGenerator()
+            : this(typeof(object), typeof(IWebObjectFactory)) { }
 
-        private FactoryGenerator(Type returnedType, Type factoryInterface) {
+        private FactoryGenerator(Type returnedType, Type factoryInterface)
+        {
             _returnedType = returnedType;
             _factoryInterface = factoryInterface;
 
@@ -78,7 +82,8 @@ namespace System.Web.Util {
             // the correct signature.
 
             _methodToOverride = factoryInterface.GetMethod("CreateInstance", new Type[0]);
-            if (_methodToOverride.ReturnType != _returnedType) {
+            if (_methodToOverride.ReturnType != _returnedType)
+            {
                 throw new ArgumentException(SR.GetString(SR.FactoryInterface));
             }
 
@@ -89,35 +94,47 @@ namespace System.Web.Util {
 
         // A type must be public and have a parameterless constructor, in order for us to be able to
         // create a factory for the type.  Throws if either of these conditions are not true.
-        internal static void CheckPublicParameterlessConstructor(Type type) {
-            if (type == null) {
+        internal static void CheckPublicParameterlessConstructor(Type type)
+        {
+            if (type == null)
+            {
                 throw new ArgumentNullException("type");
             }
 
-            if (!(type.IsPublic || type.IsNestedPublic)) {
-                throw new InvalidOperationException(SR.GetString(SR.FactoryGenerator_TypeNotPublic, type.Name));
+            if (!(type.IsPublic || type.IsNestedPublic))
+            {
+                throw new InvalidOperationException(
+                    SR.GetString(SR.FactoryGenerator_TypeNotPublic, type.Name)
+                );
             }
 
             ConstructorInfo constructor = type.GetConstructor(Type.EmptyTypes);
-            if (constructor == null) {
-                throw new InvalidOperationException(SR.GetString(SR.FactoryGenerator_TypeHasNoParameterlessConstructor, type.Name));
+            if (constructor == null)
+            {
+                throw new InvalidOperationException(
+                    SR.GetString(SR.FactoryGenerator_TypeHasNoParameterlessConstructor, type.Name)
+                );
             }
         }
 
-        private static String GetUniqueCompilationName() {
+        private static String GetUniqueCompilationName()
+        {
             return Guid.NewGuid().ToString().Replace('-', '_');
         }
 
-        Type GetFactoryTypeWithAssert(Type type) {
+        Type GetFactoryTypeWithAssert(Type type)
+        {
             CheckPublicParameterlessConstructor(type);
 
             // Create the dynamic assembly if needed.
             Type factoryType;
 
-            if (_dynamicModule == null) {
-                lock (this) {
-                    if (_dynamicModule == null) {
-
+            if (_dynamicModule == null)
+            {
+                lock (this)
+                {
+                    if (_dynamicModule == null)
+                    {
                         // Use a unique name for each assembly.
                         String name = GetUniqueCompilationName();
 
@@ -125,13 +142,15 @@ namespace System.Web.Util {
                         assemblyName.Name = "A_" + name;
 
                         // Create a new assembly.
-                        AssemblyBuilder newAssembly =
-                           Thread.GetDomain().DefineDynamicAssembly(assemblyName,
-                                                                    AssemblyBuilderAccess.Run,
-                                                                    null, //directory to persist assembly
-                                                                    true, //isSynchronized
-                                                                    null  //assembly attributes
-                                                                    );
+                        AssemblyBuilder newAssembly = Thread
+                            .GetDomain()
+                            .DefineDynamicAssembly(
+                                assemblyName,
+                                AssemblyBuilderAccess.Run,
+                                null, //directory to persist assembly
+                                true, //isSynchronized
+                                null //assembly attributes
+                            );
 
                         // Create a single module in the assembly.
                         _dynamicModule = newAssembly.DefineDynamicModule("M_" + name);
@@ -142,18 +161,21 @@ namespace System.Web.Util {
             // Give the factory a unique name.
 
             String typeName = GetUniqueCompilationName();
-            TypeBuilder factoryTypeBuilder = _dynamicModule.DefineType("T_" + typeName,
-                                                                       TypeAttributes.Public,
-                                                                       typeof(Object),
-                                                                       _interfacesToImplement);
+            TypeBuilder factoryTypeBuilder = _dynamicModule.DefineType(
+                "T_" + typeName,
+                TypeAttributes.Public,
+                typeof(Object),
+                _interfacesToImplement
+            );
 
             // Define the CreateInstance method. It must be virtual to be an interface implementation.
 
-            MethodBuilder method = factoryTypeBuilder.DefineMethod("CreateInstance",
-                                                                   MethodAttributes.Public |
-                                                                        MethodAttributes.Virtual,
-                                                                   _returnedType,
-                                                                   null);
+            MethodBuilder method = factoryTypeBuilder.DefineMethod(
+                "CreateInstance",
+                MethodAttributes.Public | MethodAttributes.Virtual,
+                _returnedType,
+                null
+            );
 
             // Generate IL. The generated IL corresponds to "return new type()"
             //      newobj <type_constructor>
@@ -173,17 +195,17 @@ namespace System.Web.Util {
             return factoryType;
         }
 
-        internal IWebObjectFactory CreateFactory(Type type) {
+        internal IWebObjectFactory CreateFactory(Type type)
+        {
             Debug.Trace("FactoryGenerator", "Creating generator for type " + type.FullName);
 
             Type factoryType = GetFactoryTypeWithAssert(type);
 
             // Create the type. This is the only place where Activator.CreateInstance is used,
             // reducing the calls to it from 1 per instance to 1 per type.
-            return (IWebObjectFactory) Activator.CreateInstance(factoryType);
+            return (IWebObjectFactory)Activator.CreateInstance(factoryType);
         }
     }
-
 }
 
 #endif

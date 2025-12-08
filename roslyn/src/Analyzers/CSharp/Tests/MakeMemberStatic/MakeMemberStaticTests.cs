@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMemberStatic
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpMakeMemberStaticCodeFixProvider>;
+        CSharpMakeMemberStaticCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsMakeMemberStatic)]
     public class MakeMemberStaticTests
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMemberStatic
                 {
                     static int i;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/54202")]
@@ -54,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMemberStatic
                     // comment
                     static readonly int i;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -72,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMemberStatic
                 {
                     static void M() { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -90,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMemberStatic
                 {
                     static object P { get; set; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -108,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMemberStatic
                 {
                     static event System.Action E;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -141,7 +147,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMemberStatic
                         static event System.Action E;
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

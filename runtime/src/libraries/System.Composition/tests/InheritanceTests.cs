@@ -16,7 +16,10 @@ namespace System.Composition.Lightweight.UnitTests
         [Export]
         public class Base
         {
-            public Base() { Property = "foo"; }
+            public Base()
+            {
+                Property = "foo";
+            }
 
             [Export]
             public string Property { get; set; }
@@ -57,7 +60,8 @@ namespace System.Composition.Lightweight.UnitTests
         {
             public Exporter()
             {
-                A = "a"; B = "b";
+                A = "a";
+                B = "b";
             }
 
             [Export("a")]
@@ -86,7 +90,11 @@ namespace System.Composition.Lightweight.UnitTests
         [Fact]
         public void ImportsOnOverriddenPropertiesOverrideImportsOnTheBase()
         {
-            var c = CreateContainer(typeof(Exporter), typeof(OverridingImporter), typeof(NonOverridingImporter));
+            var c = CreateContainer(
+                typeof(Exporter),
+                typeof(OverridingImporter),
+                typeof(NonOverridingImporter)
+            );
             var bi = c.GetExport<NonOverridingImporter>();
             var di = c.GetExport<OverridingImporter>();
             Assert.Equal("a", bi.Imported);
@@ -157,7 +165,10 @@ namespace System.Composition.Lightweight.UnitTests
             public bool ImportsSatisfied { get; set; }
 
             [OnImportsSatisfied]
-            public void Done() { ImportsSatisfied = true; }
+            public void Done()
+            {
+                ImportsSatisfied = true;
+            }
         }
 
         [Export]
@@ -173,7 +184,10 @@ namespace System.Composition.Lightweight.UnitTests
 
         public interface IHandler { }
 
-        public class HandlerMetadata { public string HandledMessage { get; set; } }
+        public class HandlerMetadata
+        {
+            public string HandledMessage { get; set; }
+        }
 
         [Export(typeof(IHandler)), ExportMetadata("HandledMessage", "A")]
         public class AHandler : IHandler { }

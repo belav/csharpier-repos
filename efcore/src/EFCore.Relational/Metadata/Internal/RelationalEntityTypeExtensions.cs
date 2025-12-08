@@ -27,10 +27,13 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     public static IEnumerable<IForeignKey> FindDeclaredReferencingRowInternalForeignKeys(
         this IEntityType entityType,
-        StoreObjectIdentifier storeObject)
-        => entityType.IsMappedToJson()
+        StoreObjectIdentifier storeObject
+    ) =>
+        entityType.IsMappedToJson()
             ? Enumerable.Empty<IForeignKey>()
-            : entityType.GetDeclaredReferencingForeignKeys().Where(fk => fk.IsRowInternal(storeObject));
+            : entityType
+                .GetDeclaredReferencingForeignKeys()
+                .Where(fk => fk.IsRowInternal(storeObject));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -40,7 +43,8 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     public static bool IsMainFragment(
         this IReadOnlyTypeBase type,
-        StoreObjectIdentifier storeObject)
+        StoreObjectIdentifier storeObject
+    )
     {
         var storeObjectType = storeObject.StoreObjectType;
         var declaredStoreObject = StoreObjectIdentifier.Create(type, storeObjectType);
@@ -76,13 +80,24 @@ public static class RelationalEntityTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static ConfigurationSource? GetStoreObjectConfigurationSource(this IConventionEntityType entityType, StoreObjectType type)
-        => type switch
+    public static ConfigurationSource? GetStoreObjectConfigurationSource(
+        this IConventionEntityType entityType,
+        StoreObjectType type
+    ) =>
+        type switch
         {
-            StoreObjectType.Table => entityType.FindAnnotation(RelationalAnnotationNames.TableName)?.GetConfigurationSource(),
-            StoreObjectType.View => entityType.FindAnnotation(RelationalAnnotationNames.ViewName)?.GetConfigurationSource(),
-            StoreObjectType.SqlQuery => entityType.FindAnnotation(RelationalAnnotationNames.SqlQuery)?.GetConfigurationSource(),
-            StoreObjectType.Function => entityType.FindAnnotation(RelationalAnnotationNames.FunctionName)?.GetConfigurationSource(),
+            StoreObjectType.Table => entityType
+                .FindAnnotation(RelationalAnnotationNames.TableName)
+                ?.GetConfigurationSource(),
+            StoreObjectType.View => entityType
+                .FindAnnotation(RelationalAnnotationNames.ViewName)
+                ?.GetConfigurationSource(),
+            StoreObjectType.SqlQuery => entityType
+                .FindAnnotation(RelationalAnnotationNames.SqlQuery)
+                ?.GetConfigurationSource(),
+            StoreObjectType.Function => entityType
+                .FindAnnotation(RelationalAnnotationNames.FunctionName)
+                ?.GetConfigurationSource(),
             _ => StoredProcedure.GetStoredProcedureConfigurationSource(entityType, type),
         };
 
@@ -92,7 +107,10 @@ public static class RelationalEntityTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static List<IProperty> GetNonPrincipalSharedNonPkProperties(this IEntityType entityType, ITableBase table)
+    public static List<IProperty> GetNonPrincipalSharedNonPkProperties(
+        this IEntityType entityType,
+        ITableBase table
+    )
     {
         var principalEntityTypes = new HashSet<IEntityType>();
         PopulatePrincipalEntityTypes(table, entityType, principalEntityTypes);
@@ -111,8 +129,12 @@ public static class RelationalEntityTypeExtensions
             }
 
             var propertyMappings = column.PropertyMappings;
-            if (propertyMappings.Count() > 1
-                && propertyMappings.Any(pm => principalEntityTypes.Contains(pm.TableMapping.TypeBase)))
+            if (
+                propertyMappings.Count() > 1
+                && propertyMappings.Any(pm =>
+                    principalEntityTypes.Contains(pm.TableMapping.TypeBase)
+                )
+            )
             {
                 continue;
             }
@@ -122,7 +144,11 @@ public static class RelationalEntityTypeExtensions
 
         return properties;
 
-        static void PopulatePrincipalEntityTypes(ITableBase table, IEntityType entityType, HashSet<IEntityType> entityTypes)
+        static void PopulatePrincipalEntityTypes(
+            ITableBase table,
+            IEntityType entityType,
+            HashSet<IEntityType> entityTypes
+        )
         {
             foreach (var linkingFk in table.GetRowInternalForeignKeys(entityType))
             {

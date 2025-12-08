@@ -6,9 +6,19 @@ namespace System
     /// <summary>
     /// Marks program elements that are no longer in use.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum |
-        AttributeTargets.Interface | AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Event | AttributeTargets.Delegate,
-        Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Enum
+            | AttributeTargets.Interface
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Property
+            | AttributeTargets.Field
+            | AttributeTargets.Event
+            | AttributeTargets.Delegate,
+        Inherited = false
+    )]
 #if SYSTEM_PRIVATE_CORELIB
     public
 #else
@@ -16,9 +26,7 @@ namespace System
 #endif
     sealed class ObsoleteAttribute : Attribute
     {
-        public ObsoleteAttribute()
-        {
-        }
+        public ObsoleteAttribute() { }
 
         public ObsoleteAttribute(string? message)
         {

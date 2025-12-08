@@ -96,9 +96,18 @@ namespace System.Linq.Expressions
 
     internal sealed class SpanDebugInfoExpression : DebugInfoExpression
     {
-        private readonly int _startLine, _startColumn, _endLine, _endColumn;
+        private readonly int _startLine,
+            _startColumn,
+            _endLine,
+            _endColumn;
 
-        internal SpanDebugInfoExpression(SymbolDocumentInfo document, int startLine, int startColumn, int endLine, int endColumn)
+        internal SpanDebugInfoExpression(
+            SymbolDocumentInfo document,
+            int startLine,
+            int startColumn,
+            int endLine,
+            int endColumn
+        )
             : base(document)
         {
             _startLine = startLine;
@@ -126,9 +135,7 @@ namespace System.Linq.Expressions
     internal sealed class ClearDebugInfoExpression : DebugInfoExpression
     {
         internal ClearDebugInfoExpression(SymbolDocumentInfo document)
-            : base(document)
-        {
-        }
+            : base(document) { }
 
         public override bool IsClear => true;
 
@@ -153,7 +160,13 @@ namespace System.Linq.Expressions
         /// <param name="endLine">The end line of this <see cref="DebugInfoExpression"/>. Must be greater or equal than the start line.</param>
         /// <param name="endColumn">The end column of this <see cref="DebugInfoExpression"/>. If the end line is the same as the start line, it must be greater or equal than the start column. In any case, must be greater than 0.</param>
         /// <returns>An instance of <see cref="DebugInfoExpression"/>.</returns>
-        public static DebugInfoExpression DebugInfo(SymbolDocumentInfo document, int startLine, int startColumn, int endLine, int endColumn)
+        public static DebugInfoExpression DebugInfo(
+            SymbolDocumentInfo document,
+            int startLine,
+            int startColumn,
+            int endLine,
+            int endColumn
+        )
         {
             ArgumentNullException.ThrowIfNull(document);
             if (startLine == 0xfeefee && startColumn == 0 && endLine == 0xfeefee && endColumn == 0)
@@ -162,7 +175,13 @@ namespace System.Linq.Expressions
             }
 
             ValidateSpan(startLine, startColumn, endLine, endColumn);
-            return new SpanDebugInfoExpression(document, startLine, startColumn, endLine, endColumn);
+            return new SpanDebugInfoExpression(
+                document,
+                startLine,
+                startColumn,
+                endLine,
+                endColumn
+            );
         }
 
         /// <summary>

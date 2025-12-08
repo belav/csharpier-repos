@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 {
     internal static partial class TestExtensionsMethods
     {
-        internal static IDictionary<TKey, TValue> ToReadOnlyDictionary<TKey, TValue>(this IImmutableDictionary<TKey, TValue> dictionary)
+        internal static IDictionary<TKey, TValue> ToReadOnlyDictionary<TKey, TValue>(
+            this IImmutableDictionary<TKey, TValue> dictionary
+        )
         {
             if (dictionary is null)
                 throw new ArgumentNullException(nameof(dictionary));
@@ -26,7 +28,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             return (IDictionary<TKey, TValue>)dictionary;
         }
 
-        internal static IDictionary<TKey, TValue> ToBuilder<TKey, TValue>(this IImmutableDictionary<TKey, TValue> dictionary)
+        internal static IDictionary<TKey, TValue> ToBuilder<TKey, TValue>(
+            this IImmutableDictionary<TKey, TValue> dictionary
+        )
             where TKey : notnull
         {
             return dictionary switch
@@ -39,7 +43,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             };
         }
 
-        internal static IEqualityComparer<TKey> GetKeyComparer<TKey, TValue>(this IImmutableDictionary<TKey, TValue> dictionary)
+        internal static IEqualityComparer<TKey> GetKeyComparer<TKey, TValue>(
+            this IImmutableDictionary<TKey, TValue> dictionary
+        )
             where TKey : notnull
         {
             return dictionary switch

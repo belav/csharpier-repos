@@ -13,9 +13,7 @@ namespace System.Activities
         int lastId;
         IList<Activity> members;
 
-        public IdSpace()
-        {
-        }
+        public IdSpace() { }
 
         public IdSpace(IdSpace parent, int parentId)
         {
@@ -23,17 +21,9 @@ namespace System.Activities
             this.ParentId = parentId;
         }
 
-        public IdSpace Parent
-        {
-            get;
-            private set;
-        }
+        public IdSpace Parent { get; private set; }
 
-        public int ParentId
-        {
-            get;
-            private set;
-        }
+        public int ParentId { get; private set; }
 
         public int MemberCount
         {
@@ -92,15 +82,18 @@ namespace System.Activities
             }
 
             lastId++;
-            
+
             // ID info is cleared inside InternalId.
             element.InternalId = lastId;
             Fx.Assert(element.MemberOf == this, "We should have already set this.");
-            Fx.Assert(this.members.Count == element.InternalId - 1, "We should always be adding the next element");
+            Fx.Assert(
+                this.members.Count == element.InternalId - 1,
+                "We should always be adding the next element"
+            );
 
             this.members.Add(element);
         }
-        
+
         public void Dispose()
         {
             if (this.members != null)
@@ -114,5 +107,3 @@ namespace System.Activities
         }
     }
 }
-
-

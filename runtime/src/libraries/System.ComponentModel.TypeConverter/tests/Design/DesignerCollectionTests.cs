@@ -13,7 +13,10 @@ namespace System.ComponentModel.Design.Tests
         public static IEnumerable<object[]> Ctor_TestData()
         {
             yield return new object[] { null };
-            yield return new object[] { new IDesignerHost[] { new TestDesignerHost(), null, new TestDesignerHost() } };
+            yield return new object[]
+            {
+                new IDesignerHost[] { new TestDesignerHost(), null, new TestDesignerHost() },
+            };
         }
 
         [Theory]
@@ -22,7 +25,10 @@ namespace System.ComponentModel.Design.Tests
         {
             var collection = new DesignerCollection(designers);
             Assert.Equal(designers?.Length ?? 0, collection.Count);
-            Assert.Equal(designers ?? Enumerable.Empty<IDesignerHost>(), collection.Cast<IDesignerHost>());
+            Assert.Equal(
+                designers ?? Enumerable.Empty<IDesignerHost>(),
+                collection.Cast<IDesignerHost>()
+            );
         }
 
         [Theory]
@@ -31,7 +37,10 @@ namespace System.ComponentModel.Design.Tests
         {
             var collection = new DesignerCollection((IList)designers);
             Assert.Equal(designers?.Length ?? 0, collection.Count);
-            Assert.Equal(designers ?? Enumerable.Empty<IDesignerHost>(), collection.Cast<IDesignerHost>());
+            Assert.Equal(
+                designers ?? Enumerable.Empty<IDesignerHost>(),
+                collection.Cast<IDesignerHost>()
+            );
         }
 
         [Fact]
@@ -62,7 +71,10 @@ namespace System.ComponentModel.Design.Tests
             IDesignerHost[] destination = new IDesignerHost[4];
             collection.CopyTo(destination, 1);
 
-            Assert.Equal(new IDesignerHost[] { null, designers[0], designers[1], null }, destination);
+            Assert.Equal(
+                new IDesignerHost[] { null, designers[0], designers[1], null },
+                destination
+            );
         }
 
         [Fact]
@@ -71,7 +83,7 @@ namespace System.ComponentModel.Design.Tests
             ICollection collection = new DesignerCollection((IList)null);
             var array = new object[] { 1, 2, 3 };
             collection.CopyTo(array, 1);
-            Assert.Equal(new object[] { 1, 2, 3}, array);
+            Assert.Equal(new object[] { 1, 2, 3 }, array);
         }
     }
 }

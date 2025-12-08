@@ -8,12 +8,19 @@ namespace Microsoft.Interop
 {
     internal static class DefaultMarshallingInfoParser
     {
-        public static MarshallingInfoParser Create(StubEnvironment env, GeneratorDiagnosticsBag diagnostics, IMethodSymbol method, InteropAttributeCompilationData interopAttributeData, AttributeData unparsedAttributeData)
+        public static MarshallingInfoParser Create(
+            StubEnvironment env,
+            GeneratorDiagnosticsBag diagnostics,
+            IMethodSymbol method,
+            InteropAttributeCompilationData interopAttributeData,
+            AttributeData unparsedAttributeData
+        )
         {
-
             // Compute the current default string encoding value.
             CharEncoding defaultEncoding = CharEncoding.Undefined;
-            if (interopAttributeData.IsUserDefined.HasFlag(InteropAttributeMember.StringMarshalling))
+            if (
+                interopAttributeData.IsUserDefined.HasFlag(InteropAttributeMember.StringMarshalling)
+            )
             {
                 defaultEncoding = interopAttributeData.StringMarshalling switch
                 {
@@ -23,33 +30,58 @@ namespace Microsoft.Interop
                     _ => CharEncoding.Undefined, // [Compat] Do not assume a specific value
                 };
             }
-            else if (interopAttributeData.IsUserDefined.HasFlag(InteropAttributeMember.StringMarshallingCustomType))
+            else if (
+                interopAttributeData.IsUserDefined.HasFlag(
+                    InteropAttributeMember.StringMarshallingCustomType
+                )
+            )
             {
                 defaultEncoding = CharEncoding.Custom;
             }
 
-            var defaultInfo = new DefaultMarshallingInfo(defaultEncoding, interopAttributeData.StringMarshallingCustomType);
+            var defaultInfo = new DefaultMarshallingInfo(
+                defaultEncoding,
+                interopAttributeData.StringMarshallingCustomType
+            );
 
             var useSiteAttributeParsers = ImmutableArray.Create<IUseSiteAttributeParser>(
-                    new MarshalAsAttributeParser(diagnostics, defaultInfo),
-                    new MarshalUsingAttributeParser(env.Compilation, diagnostics));
+                new MarshalAsAttributeParser(diagnostics, defaultInfo),
+                new MarshalUsingAttributeParser(env.Compilation, diagnostics)
+            );
 
             return new MarshallingInfoParser(
                 diagnostics,
-                new MethodSignatureElementInfoProvider(env.Compilation, diagnostics, method, useSiteAttributeParsers),
+                new MethodSignatureElementInfoProvider(
+                    env.Compilation,
+                    diagnostics,
+                    method,
+                    useSiteAttributeParsers
+                ),
                 useSiteAttributeParsers,
                 ImmutableArray.Create<IMarshallingInfoAttributeParser>(
-                    new MarshalAsWithCustomMarshallersParser(env.Compilation, diagnostics, new MarshalAsAttributeParser(diagnostics, defaultInfo)),
+                    new MarshalAsWithCustomMarshallersParser(
+                        env.Compilation,
+                        diagnostics,
+                        new MarshalAsAttributeParser(diagnostics, defaultInfo)
+                    ),
                     new MarshalUsingAttributeParser(env.Compilation, diagnostics),
                     new NativeMarshallingAttributeParser(env.Compilation, diagnostics),
-                    new ComInterfaceMarshallingInfoProvider(env.Compilation)),
+                    new ComInterfaceMarshallingInfoProvider(env.Compilation)
+                ),
                 ImmutableArray.Create<ITypeBasedMarshallingInfoProvider>(
                     new SafeHandleMarshallingInfoProvider(env.Compilation, method.ContainingType),
                     new ArrayMarshallingInfoProvider(env.Compilation),
                     new CharMarshallingInfoProvider(defaultInfo),
-                    new StringMarshallingInfoProvider(env.Compilation, diagnostics, unparsedAttributeData, defaultInfo),
+                    new StringMarshallingInfoProvider(
+                        env.Compilation,
+                        diagnostics,
+                        unparsedAttributeData,
+                        defaultInfo
+                    ),
                     new BooleanMarshallingInfoProvider(),
-                    new BlittableTypeMarshallingInfoProvider(env.Compilation)));
+                    new BlittableTypeMarshallingInfoProvider(env.Compilation)
+                )
+            );
         }
     }
 }

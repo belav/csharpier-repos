@@ -10,7 +10,11 @@ namespace System.Runtime
 
     internal static class TaskExtensions
     {
-        public static IAsyncResult AsAsyncResult<T>(this Task<T> task, AsyncCallback callback, object state)
+        public static IAsyncResult AsAsyncResult<T>(
+            this Task<T> task,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (task == null)
             {
@@ -19,7 +23,9 @@ namespace System.Runtime
 
             if (task.Status == TaskStatus.Created)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(InternalSR.SFxTaskNotStarted));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(InternalSR.SFxTaskNotStarted)
+                );
             }
 
             var tcs = new TaskCompletionSource<T>(state);
@@ -46,13 +52,18 @@ namespace System.Runtime
                     {
                         callback(tcs.Task);
                     }
-                }, 
-                TaskContinuationOptions.ExecuteSynchronously);
+                },
+                TaskContinuationOptions.ExecuteSynchronously
+            );
 
             return tcs.Task;
         }
 
-        public static IAsyncResult AsAsyncResult(this Task task, AsyncCallback callback, object state)
+        public static IAsyncResult AsAsyncResult(
+            this Task task,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (task == null)
             {
@@ -61,7 +72,9 @@ namespace System.Runtime
 
             if (task.Status == TaskStatus.Created)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(InternalSR.SFxTaskNotStarted));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(InternalSR.SFxTaskNotStarted)
+                );
             }
 
             var tcs = new TaskCompletionSource<object>(state);
@@ -88,8 +101,9 @@ namespace System.Runtime
                     {
                         callback(tcs.Task);
                     }
-                }, 
-                TaskContinuationOptions.ExecuteSynchronously);
+                },
+                TaskContinuationOptions.ExecuteSynchronously
+            );
 
             return tcs.Task;
         }
@@ -157,7 +171,12 @@ namespace System.Runtime
             }
         }
 
-        public static void Wait(this Task task, TimeSpan timeout, Action<Exception, TimeSpan, string> exceptionConverter, string operationType)
+        public static void Wait(
+            this Task task,
+            TimeSpan timeout,
+            Action<Exception, TimeSpan, string> exceptionConverter,
+            string operationType
+        )
         {
             bool timedOut = false;
 
@@ -184,18 +203,22 @@ namespace System.Runtime
 
             if (timedOut)
             {
-                throw Fx.Exception.AsError(new TimeoutException(InternalSR.TaskTimedOutError(timeout)));
+                throw Fx.Exception.AsError(
+                    new TimeoutException(InternalSR.TaskTimedOutError(timeout))
+                );
             }
         }
 
-        public static Task<TBase> Upcast<TDerived, TBase>(this Task<TDerived> task) where TDerived : TBase
+        public static Task<TBase> Upcast<TDerived, TBase>(this Task<TDerived> task)
+            where TDerived : TBase
         {
-            return (task.Status == TaskStatus.RanToCompletion) ?
-                Task.FromResult((TBase)task.Result) :
-                UpcastPrivate<TDerived, TBase>(task);
+            return (task.Status == TaskStatus.RanToCompletion)
+                ? Task.FromResult((TBase)task.Result)
+                : UpcastPrivate<TDerived, TBase>(task);
         }
 
-        private static async Task<TBase> UpcastPrivate<TDerived, TBase>(this Task<TDerived> task) where TDerived : TBase
+        private static async Task<TBase> UpcastPrivate<TDerived, TBase>(this Task<TDerived> task)
+            where TDerived : TBase
         {
             return await task.ConfigureAwait(false);
         }

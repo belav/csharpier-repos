@@ -29,10 +29,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
     [Trait(Traits.Feature, Traits.Features.Classification)]
     public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
     {
-        protected override async Task<ImmutableArray<ClassifiedSpan>> GetClassificationSpansAsync(string code, ImmutableArray<TextSpan> spans, ParseOptions? options, TestHost testHost)
+        protected override async Task<ImmutableArray<ClassifiedSpan>> GetClassificationSpansAsync(
+            string code,
+            ImmutableArray<TextSpan> spans,
+            ParseOptions? options,
+            TestHost testHost
+        )
         {
             using var workspace = CreateWorkspace(code, options, testHost);
-            var document = workspace.CurrentSolution.GetRequiredDocument(workspace.Documents.First().Id);
+            var document = workspace.CurrentSolution.GetRequiredDocument(
+                workspace.Documents.First().Id
+            );
 
             return await GetSemanticClassificationsAsync(document, spans);
         }
@@ -45,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 methodName: "M",
                 @"new Class<int>();",
                 testHost,
-                Class("Class"));
+                Class("Class")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -54,19 +62,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
             await TestInMethodAsync(
                 @"int i = 0; ref var x = ref i;",
                 testHost,
-                Classifications(Keyword("var"), Local("i")));
+                Classifications(Keyword("var"), Local("i"))
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task UsingAlias1(TestHost testHost)
         {
             await TestAsync(
-@"using M = System.Math;",
+                @"using M = System.Math;",
                 testHost,
                 Class("M"),
                 Namespace("System"),
                 Class("Math"),
-                Static("Math"));
+                Static("Math")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -77,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 methodName: "M",
                 @"new Class<dynamic>();",
                 testHost,
-                Classifications(Class("Class"), Keyword("dynamic")));
+                Classifications(Class("Class"), Keyword("dynamic"))
+            );
         }
 
         [Theory, CombinatorialData]
@@ -88,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 class Test { void M() { Test a = new Test(); Alias b = new Alias(); } }
                 """;
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 code,
                 testHost,
                 Class("Alias"),
@@ -96,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("Test"),
                 Class("Test"),
                 Class("Alias"),
-                Class("Alias"));
+                Class("Alias")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -116,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Class("EventArgs"),
                 Class("dynamic"),
-                Class("dynamic"));
+                Class("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -135,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Delegate("dynamic"));
+                Delegate("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -153,7 +168,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Interface("dynamic"));
+                Interface("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -171,7 +187,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Enum("dynamic"));
+                Enum("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -189,7 +206,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Class("dynamic"));
+                Class("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -208,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                RecordClass("dynamic"));
+                RecordClass("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -225,7 +244,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Class("dynamic"));
+                Class("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -243,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Struct("dynamic"));
+                Struct("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -261,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Class("dynamic"));
+                Class("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -279,7 +301,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Keyword("dynamic"));
+                Keyword("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -297,7 +320,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Class("dynamic"));
+                Class("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -313,7 +337,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Namespace("dynamic"));
+                Namespace("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -329,8 +354,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 {
                     A d;
                 }
-                """, testHost,
-                Class("A"));
+                """,
+                testHost,
+                Class("A")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -346,7 +373,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                TypeParameter("T"));
+                TypeParameter("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -365,7 +393,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 TypeParameter("T"),
                 TypeParameter("T"),
-                TypeParameter("T"));
+                TypeParameter("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -382,7 +411,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                TypeParameter("T"));
+                TypeParameter("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -400,7 +430,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Class("C"));
+                Class("C")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -418,7 +449,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Class("C"));
+                Class("C")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -432,7 +464,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 TypeParameter("A"),
-                TypeParameter("B"));
+                TypeParameter("B")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -449,7 +482,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Class("C"));
+                Class("C")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -466,7 +500,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Interface("T"));
+                Interface("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -483,7 +518,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Interface("T"));
+                Interface("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -502,7 +538,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 Interface("T"),
-                Interface("T"));
+                Interface("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -518,7 +555,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Delegate("T"));
+                Delegate("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -536,7 +574,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Delegate("T"),
                 Delegate("T"),
-                Delegate("T"));
+                Delegate("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -550,7 +589,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Struct("T"));
+                Struct("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -570,7 +610,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Enum("T"));
+                Enum("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -584,7 +625,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                TypeParameter("dynamic"));
+                TypeParameter("dynamic")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -598,7 +640,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                TypeParameter("T"));
+                TypeParameter("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -625,7 +668,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Property("N"),
                 Local("n"),
                 Property("N"),
-                Property("N"));
+                Property("N")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -642,7 +686,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 Namespace("System"),
-                Class("Obsolete"));
+                Class("Obsolete")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -659,7 +704,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 Namespace("System"),
-                Class("Obsolete"));
+                Class("Obsolete")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -678,7 +724,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Namespace("System"),
                 Class("My"),
-                Class("Attribute"));
+                Class("Attribute")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -708,7 +755,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("Derived"),
                 Class("My"),
                 Class("Attribute"),
-                Class("Base"));
+                Class("Base")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -731,7 +779,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Class("C"),
                 Method("B"),
-                Parameter("C"));
+                Parameter("C")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -742,7 +791,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 methodName: "M",
                 @"Class<int",
                 testHost,
-                Class("Class"));
+                Class("Class")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -753,7 +803,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 methodName: "M",
                 @"Class<int, b",
                 testHost,
-                Class("Class"));
+                Class("Class")
+            );
         }
 
         // The "Color Color" problem is the C# IDE folklore for when
@@ -771,7 +822,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Class("Color"));
+                Class("Color")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -793,7 +845,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("T"),
                 Class("T"),
                 Field("T"),
-                Class("T"));
+                Class("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -817,7 +870,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("T"),
                 Class("T"),
                 Field("T"),
-                Method("M"));
+                Method("M")
+            );
         }
 
         /// <summary>
@@ -842,7 +896,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Class("T"),
                 Field("T"),
-                Field("T"));
+                Field("T")
+            );
         }
 
         /// <summary>
@@ -868,7 +923,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("T"),
                 Class("T"),
                 Field("T"),
-                Static("T"));
+                Static("T")
+            );
         }
 
         /// <summary>
@@ -894,7 +950,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("T"),
                 Class("T"),
                 Local("T"),
-                Field("field"));
+                Field("field")
+            );
         }
 
         /// <summary>
@@ -921,7 +978,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("T"),
                 Class("T"),
                 Field("field"),
-                Static("field"));
+                Static("field")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -947,7 +1005,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("T"),
                 Class("T"),
                 Method("M"),
-                Local("T"));
+                Local("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -969,7 +1028,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("T"),
                 Parameter("T"),
                 Class("T"),
-                Parameter("T"));
+                Parameter("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -991,7 +1051,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("var"),
                 Class("T"),
                 Local("T"),
-                Class("T"));
+                Class("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1011,7 +1072,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Keyword("var"),
                 Local("T"),
-                Class("T"));
+                Class("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1032,7 +1094,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("T"),
                 Class("T"),
                 Keyword("var"),
-                Class("T"));
+                Class("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1053,7 +1116,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("T"),
                 Class("T"),
                 Class("T"),
-                Class("T"));
+                Class("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1074,7 +1138,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("T"),
                 Class("T"),
                 Class("T"),
-                Local("T"));
+                Local("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1096,7 +1161,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Namespace("T"),
                 Class("T"),
-                Class("T"));
+                Class("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1120,7 +1186,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("T"),
                 Class("T"),
                 Namespace("T"),
-                Class("T"));
+                Class("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1140,7 +1207,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 TypeParameter("T"),
                 Method("M"),
-                TypeParameter("T"));
+                TypeParameter("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1166,7 +1234,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("G"),
                 Class("T"),
                 Class("G"),
-                Class("T"));
+                Class("T")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1193,7 +1262,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("H"),
                 Class("T"),
                 Field("f"),
-                Static("f"));
+                Static("f")
+            );
         }
 
         /// <summary>
@@ -1235,7 +1305,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Method("F"),
                 Method("G"),
                 Class("A"),
-                Class("B"));
+                Class("B")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1254,7 +1325,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Namespace("System"),
                 Keyword("var"),
-                Property("String"));
+                Property("String")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1281,7 +1353,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("yield"),
                 Class("yield"),
                 Class("yield"),
-                Local("yield"));
+                Local("yield")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1300,7 +1373,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 Class("C"),
-                Class("Nested"));
+                Class("Nested")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1318,7 +1392,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Namespace("System"),
                 Namespace("System"),
-                Class("String"));
+                Class("String")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1340,7 +1415,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     global::Str GlobalUsingAlias;
                 }
                 """;
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 code,
                 testHost,
                 Options.Regular,
@@ -1356,7 +1432,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("Nested"),
                 Class("C"),
                 Namespace("System"),
-                Class("String"));
+                Class("String")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1389,7 +1466,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("var"),
                 Struct("S"),
                 Keyword("var"),
-                Class("C"));
+                Class("C")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1453,7 +1531,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("Type"),
                 Class("Type"),
                 Class("Type"),
-                Class("Type"));
+                Class("Type")
+            );
         }
 
         /// <summary>
@@ -1463,14 +1542,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task NAQTypeNameCtor(TestHost testHost)
         {
             await TestInMethodAsync(
-@"System.IO.BufferedStream b = new global::System.IO.BufferedStream();",
+                @"System.IO.BufferedStream b = new global::System.IO.BufferedStream();",
                 testHost,
                 Namespace("System"),
                 Namespace("IO"),
                 Class("BufferedStream"),
                 Namespace("System"),
                 Namespace("IO"),
-                Class("BufferedStream"));
+                Class("BufferedStream")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1489,7 +1569,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Namespace("System"),
                 Namespace("IO"),
-                Enum("DriveType"));
+                Enum("DriveType")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1507,17 +1588,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 Namespace("System"),
-                Delegate("AssemblyLoadEventHandler"));
+                Delegate("AssemblyLoadEventHandler")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task NAQTypeNameMethodCall(TestHost testHost)
         {
-            await TestInMethodAsync(@"global::System.String.Clone("");",
+            await TestInMethodAsync(
+                @"global::System.String.Clone("");",
                 testHost,
                 Namespace("System"),
                 Class("String"),
-                Method("Clone"));
+                Method("Clone")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1535,7 +1619,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Static("CurrentDomain"),
                 Event("AssemblyLoad"),
                 Namespace("System"),
-                Class("AssemblyLoadEventArgs"));
+                Class("AssemblyLoadEventArgs")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1558,21 +1643,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Class("EventArgs"),
                 Namespace("System"),
-                Class("EventArgs"));
+                Class("EventArgs")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task NAQCtor(TestHost testHost)
         {
             await TestInMethodAsync(
-@"global::System.Collections.DictionaryEntry de = new global::System.Collections.DictionaryEntry();",
+                @"global::System.Collections.DictionaryEntry de = new global::System.Collections.DictionaryEntry();",
                 testHost,
                 Namespace("System"),
                 Namespace("Collections"),
                 Struct("DictionaryEntry"),
                 Namespace("System"),
                 Namespace("Collections"),
-                Struct("DictionaryEntry"));
+                Struct("DictionaryEntry")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1580,12 +1667,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             var code = @"class C { static void M() { global::C.M(); } }";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 ParseOptions(Options.Regular),
                 Class("C"),
                 Method("M"),
-                Static("M"));
+                Static("M")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1593,13 +1682,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             var code = @"class C { static void M() { global::Script.C.M(); } }";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 ParseOptions(Options.Script),
                 Class("Script"),
                 Class("C"),
                 Method("M"),
-                Static("M"));
+                Static("M")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1627,7 +1718,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("N"),
                 Class("C"),
                 Method("M"),
-                Static("M"));
+                Static("M")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1655,7 +1747,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("@global"),
                 Class("C"),
                 Method("M"),
-                Static("M"));
+                Static("M")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1683,7 +1776,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("global"),
                 Class("C"),
                 Method("M"),
-                Static("M"));
+                Static("M")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1711,7 +1805,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("goo"),
                 Class("C"),
                 Method("M"),
-                Static("M"));
+                Static("M")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1739,7 +1834,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("goo"),
                 Class("C"),
                 Method("M"),
-                Static("M"));
+                Static("M")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1770,7 +1866,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("B"),
                 Class("D"),
                 Namespace("A"),
-                Namespace("B"));
+                Namespace("B")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1801,7 +1898,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("B"),
                 Class("D"),
                 Namespace("A"),
-                Namespace("B"));
+                Namespace("B")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1824,7 +1922,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Namespace("IO"),
                 Namespace("IO"),
-                Class("BinaryReader"));
+                Class("BinaryReader")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1914,7 +2013,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Delegate("MyDelegate"),
                 Namespace("MyNameSpace"),
                 Namespace("OtherNamespace"),
-                Delegate("MyDelegate"));
+                Delegate("MyDelegate")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1943,7 +2043,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("A"),
                 Class("A"),
                 Local("a"),
-                Field("B"));
+                Field("B")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1974,7 +2075,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("Console"),
                 Static("Console"),
                 Method("WriteLine"),
-                Static("WriteLine"));
+                Static("WriteLine")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2004,7 +2106,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Namespace("System"),
                 Enum("ConsoleColor"),
-                Struct("Int32"));
+                Struct("Int32")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2021,8 +2124,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                         C = 0;
                     }
                 }
-                """, testHost,
-                Field("C"));
+                """,
+                testHost,
+                Field("C")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2071,7 +2176,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("Obsolete"),
                 Class("Attribute"),
                 Class("ObsoleteAttribute"),
-                Class("Attribute"));
+                Class("Attribute")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2089,7 +2195,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Namespace("Roslyn"),
                 Namespace("Compilers"),
-                Namespace("Internal"));
+                Namespace("Internal")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2112,11 +2219,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 Class("Program"),
-                Class("Program"));
+                Class("Program")
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task NestedTypeCantHaveSameNameAsParentTypeWithGlobalNamespaceAlias(TestHost testHost)
+        public async Task NestedTypeCantHaveSameNameAsParentTypeWithGlobalNamespaceAlias(
+            TestHost testHost
+        )
         {
             var code = """
                 class Program
@@ -2127,16 +2237,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """;
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 ParseOptions(Options.Regular),
                 Class("Program"),
                 Class("Program"),
-                Class("Program"));
+                Class("Program")
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task InteractiveNestedTypeCantHaveSameNameAsParentTypeWithGlobalNamespaceAlias(TestHost testHost)
+        public async Task InteractiveNestedTypeCantHaveSameNameAsParentTypeWithGlobalNamespaceAlias(
+            TestHost testHost
+        )
         {
             var code = """
                 class Program
@@ -2147,13 +2261,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """;
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 ParseOptions(Options.Script),
                 Class("Program"),
                 Class("Script"),
                 Class("Program"),
-                Class("Program"));
+                Class("Program")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2166,8 +2282,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     E,
                     F = E
                 }
-                """, testHost,
-                EnumMember("E"));
+                """,
+                testHost,
+                EnumMember("E")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541150")]
@@ -2192,7 +2310,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 Namespace("System"),
-                Keyword("var"));
+                Keyword("var")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541154")]
@@ -2221,7 +2340,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Namespace("System"),
                 Class("A"),
-                Keyword("var"));
+                Keyword("var")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541154")]
@@ -2239,7 +2359,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Keyword("var"));
+                Keyword("var")
+            );
         }
 
         [Theory, WorkItem(9513, "DevDiv_Projects/Roslyn")]
@@ -2279,7 +2400,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Enum("E"),
                 EnumMember("B"),
                 Enum("E"),
-                EnumMember("A"));
+                EnumMember("A")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542368")]
@@ -2304,14 +2426,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("A"),
                 TypeParameter("T"),
                 TypeParameter("T"),
-                Interface("I"));
+                Interface("I")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542368")]
         [CombinatorialData]
         public async Task RegressionFor9831(TestHost testHost)
         {
-            await TestAsync(@"F : A",
+            await TestAsync(
+                @"F : A",
                 """
                 public class B<T>
                 {
@@ -2328,7 +2452,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Class("A"));
+                Class("A")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542432")]
@@ -2361,7 +2486,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Method("GetVarT"),
                 Static("GetVarT"),
                 Keyword("var"),
-                Class("var"));
+                Class("var")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543123")]
@@ -2382,14 +2508,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 Keyword("var"),
-                Parameter("args"));
+                Parameter("args")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542778")]
         [CombinatorialData]
         public async Task TestDuplicateTypeParamWithConstraint(TestHost testHost)
         {
-            await TestAsync(@"where U : IEnumerable<S>",
+            await TestAsync(
+                @"where U : IEnumerable<S>",
                 """
                 using System.Collections.Generic;
 
@@ -2404,16 +2532,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 TypeParameter("U"),
-                Interface("IEnumerable"));
+                Interface("IEnumerable")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542685")]
         [CombinatorialData]
         public async Task OptimisticallyColorFromInDeclaration(TestHost testHost)
         {
-            await TestInExpressionAsync("from ",
-                testHost,
-                Keyword("from"));
+            await TestInExpressionAsync("from ", testHost, Keyword("from"));
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542685")]
@@ -2429,13 +2556,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Keyword("var"),
                 Local("q"),
-                Keyword("from"));
+                Keyword("from")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542685")]
         [CombinatorialData]
-        public async Task DoNotColorThingsOtherThanFromInDeclaration(TestHost testHost)
-            => await TestInExpressionAsync("fro ", testHost);
+        public async Task DoNotColorThingsOtherThanFromInDeclaration(TestHost testHost) =>
+            await TestInExpressionAsync("fro ", testHost);
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542685")]
         [CombinatorialData]
@@ -2449,7 +2577,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 Keyword("var"),
-                Local("q"));
+                Local("q")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542685")]
@@ -2464,7 +2593,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Keyword("var"),
                 Keyword("var"),
-                Local("from"));
+                Local("from")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542685")]
@@ -2482,7 +2612,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("var"),
                 Keyword("var"),
                 Local("q"),
-                Local("from"));
+                Local("from")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543404")]
@@ -2507,7 +2638,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Class("X"));
+                Class("X")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544179")]
@@ -2529,7 +2661,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Class("C1"));
+                Class("C1")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544179")]
@@ -2551,12 +2684,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Class("C1"));
+                Class("C1")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544302")]
         [CombinatorialData]
-        public async Task EnumTypeAssignedToNamedPropertyOfSameNameInAttributeCtor(TestHost testHost)
+        public async Task EnumTypeAssignedToNamedPropertyOfSameNameInAttributeCtor(
+            TestHost testHost
+        )
         {
             await TestAsync(
                 """
@@ -2576,7 +2712,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("InteropServices"),
                 Class("DllImport"),
                 Field("CallingConvention"),
-                Enum("CallingConvention"));
+                Enum("CallingConvention")
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531119")]
@@ -2595,7 +2732,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Struct("Type"));
+                Struct("Type")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2613,7 +2751,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 Keyword("var"),
-                Keyword("nameof"));
+                Keyword("nameof")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2632,7 +2771,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Keyword("var"),
                 Keyword("nameof"),
-                Class("C"));
+                Class("C")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2663,7 +2803,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Keyword("var"),
                 Keyword("nameof"),
-                Method("M"));
+                Method("M")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2686,7 +2827,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 Keyword("var"),
-                Method("nameof"));
+                Method("nameof")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2700,7 +2842,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                ParseOptions(TestOptions.Regular, Options.Script));
+                ParseOptions(TestOptions.Regular, Options.Script)
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2712,10 +2855,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Console.WriteLine($"({a.first}, {a.second})");
                 """;
 
-            await TestInMethodAsync(
-                source,
-                testHost,
-                Keyword("var"), Local("a"), Local("a"));
+            await TestInMethodAsync(source, testHost, Keyword("var"), Local("a"), Local("a"));
         }
 
         [Theory, CombinatorialData]
@@ -2735,12 +2875,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Class("MyClass"));
+                Class("MyClass")
+            );
         }
 
         [Theory, CombinatorialData]
         [WorkItem("https://github.com/dotnet/roslyn/issues/633")]
-        public async Task InXmlDocCref_WhenConstructorOnlyIsSpecified_NothingIsClassified(TestHost testHost)
+        public async Task InXmlDocCref_WhenConstructorOnlyIsSpecified_NothingIsClassified(
+            TestHost testHost
+        )
         {
             await TestAsync(
                 """
@@ -2753,13 +2896,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     {
                     }
                 }
-                """, testHost,
-                Class("MyClass"));
+                """,
+                testHost,
+                Class("MyClass")
+            );
         }
 
         [Theory, CombinatorialData]
         [WorkItem("https://github.com/dotnet/roslyn/issues/633")]
-        public async Task InXmlDocCref_WhenTypeAndConstructorSpecified_OnlyTypeIsClassified(TestHost testHost)
+        public async Task InXmlDocCref_WhenTypeAndConstructorSpecified_OnlyTypeIsClassified(
+            TestHost testHost
+        )
         {
             await TestAsync(
                 """
@@ -2775,7 +2922,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 Class("MyClass"),
-                Class("MyClass"));
+                Class("MyClass")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2810,7 +2958,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Method("Assert"),
                 Static("Assert"),
                 Parameter("args"),
-                Property("Length"));
+                Property("Length")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2842,20 +2991,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("AliasTest"),
                 Keyword("var"),
                 Namespace("Col"),
-                Class("List"));
+                Class("List")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestUnmanagedConstraint_InsideMethod(TestHost testHost)
         {
             // Asserts no Keyword("unmanaged") because it is an identifier.
-            await TestInMethodAsync("""
+            await TestInMethodAsync(
+                """
                 var unmanaged = 0;
                 unmanaged++;
                 """,
                 testHost,
                 Keyword("var"),
-                Local("unmanaged"));
+                Local("unmanaged")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2865,25 +3017,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 "class X<T> where T : unmanaged { }",
                 testHost,
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestUnmanagedConstraint_Type_ExistingInterface(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 interface unmanaged {}
                 class X<T> where T : unmanaged { }
                 """,
                 testHost,
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestUnmanagedConstraint_Type_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestUnmanagedConstraint_Type_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 namespace OtherScope
                 {
                     interface unmanaged {}
@@ -2893,13 +3051,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Namespace("OtherScope"),
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestUnmanagedConstraint_Method_Keyword(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void M<T>() where T : unmanaged { }
@@ -2907,13 +3067,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestUnmanagedConstraint_Method_ExistingInterface(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 interface unmanaged {}
                 class X
                 {
@@ -2922,13 +3084,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestUnmanagedConstraint_Method_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestUnmanagedConstraint_Method_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 namespace OtherScope
                 {
                     interface unmanaged {}
@@ -2941,7 +3107,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Namespace("OtherScope"),
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2951,25 +3118,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 "delegate void D<T>() where T : unmanaged;",
                 testHost,
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestUnmanagedConstraint_Delegate_ExistingInterface(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 interface unmanaged {}
                 delegate void D<T>() where T : unmanaged;
                 """,
                 testHost,
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestUnmanagedConstraint_Delegate_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestUnmanagedConstraint_Delegate_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 namespace OtherScope
                 {
                     interface unmanaged {}
@@ -2979,13 +3152,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Namespace("OtherScope"),
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestUnmanagedConstraint_LocalFunction_Keyword(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void N()
@@ -2996,13 +3171,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestUnmanagedConstraint_LocalFunction_ExistingInterface(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 interface unmanaged {}
                 class X
                 {
@@ -3014,13 +3191,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestUnmanagedConstraint_LocalFunction_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestUnmanagedConstraint_LocalFunction_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 namespace OtherScope
                 {
                     interface unmanaged {}
@@ -3036,32 +3217,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Namespace("OtherScope"),
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/29451")]
         [CombinatorialData]
-        public async Task TestDirectiveStringLiteral(TestHost testHost)
-            => await TestInMethodAsync("""
+        public async Task TestDirectiveStringLiteral(TestHost testHost) =>
+            await TestInMethodAsync(
+                """
                 #line 1 "a\b"
-                """, testHost);
+                """,
+                testHost
+            );
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/30378")]
         [CombinatorialData]
         public async Task TestFormatSpecifierInInterpolation(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $""goo{{1:0000}}bar"";",
+            await TestInMethodAsync(
+                @"var goo = $""goo{{1:0000}}bar"";",
                 testHost,
                 Keyword("var"),
                 Escape(@"{{"),
-                Escape(@"}}"));
+                Escape(@"}}")
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/29492")]
         [CombinatorialData]
         public async Task TestOverloadedOperator_BinaryExpression(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class C
                 {
                     void M()
@@ -3087,14 +3275,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("True"),
                 Class("True"),
                 Class("True"),
-                Class("True"));
+                Class("True")
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/29492")]
         [CombinatorialData]
         public async Task TestOverloadedOperator_PrefixUnaryExpression(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class C
                 {
                     void M()
@@ -3116,14 +3306,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("var"),
                 OverloadedOperators.Exclamation,
                 Class("True"),
-                Class("True"));
+                Class("True")
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/29492")]
         [CombinatorialData]
         public async Task TestOverloadedOperator_PostfixUnaryExpression(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class C
                 {
                     void M()
@@ -3151,14 +3343,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 OverloadedOperators.PlusPlus,
                 Class("True"),
                 Class("True"),
-                Class("True"));
+                Class("True")
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/29492")]
         [CombinatorialData]
         public async Task TestOverloadedOperator_ConditionalExpression(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class C
                 {
                     void M()
@@ -3182,13 +3376,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 OverloadedOperators.EqualsEquals,
                 Class("True"),
                 Class("True"),
-                Class("True"));
+                Class("True")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestCatchDeclarationVariable(TestHost testHost)
         {
-            await TestInMethodAsync("""
+            await TestInMethodAsync(
+                """
                 try
                 {
                 }
@@ -3198,20 +3394,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Local("ex"));
+                Local("ex")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestNotNullConstraint_InsideMethod(TestHost testHost)
         {
             // Asserts no Keyword("notnull") because it is an identifier.
-            await TestInMethodAsync("""
+            await TestInMethodAsync(
+                """
                 var notnull = 0;
                 notnull++;
                 """,
                 testHost,
                 Keyword("var"),
-                Local("notnull"));
+                Local("notnull")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3221,25 +3420,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 "class X<T> where T : notnull { }",
                 testHost,
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestNotNullConstraint_Type_ExistingInterface(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 interface notnull {}
                 class X<T> where T : notnull { }
                 """,
                 testHost,
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestNotNullConstraint_Type_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestNotNullConstraint_Type_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 namespace OtherScope
                 {
                     interface notnull {}
@@ -3249,13 +3454,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Namespace("OtherScope"),
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestNotNullConstraint_Method_Keyword(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void M<T>() where T : notnull { }
@@ -3263,13 +3470,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestNotNullConstraint_Method_ExistingInterface(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 interface notnull {}
                 class X
                 {
@@ -3278,13 +3487,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestNotNullConstraint_Method_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestNotNullConstraint_Method_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 namespace OtherScope
                 {
                     interface notnull {}
@@ -3297,7 +3510,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Namespace("OtherScope"),
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3307,25 +3521,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 "delegate void D<T>() where T : notnull;",
                 testHost,
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestNotNullConstraint_Delegate_ExistingInterface(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 interface notnull {}
                 delegate void D<T>() where T : notnull;
                 """,
                 testHost,
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestNotNullConstraint_Delegate_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestNotNullConstraint_Delegate_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 namespace OtherScope
                 {
                     interface notnull {}
@@ -3335,13 +3555,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Namespace("OtherScope"),
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestNotNullConstraint_LocalFunction_Keyword(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void N()
@@ -3352,13 +3574,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestNotNullConstraint_LocalFunction_ExistingInterface(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 interface notnull {}
                 class X
                 {
@@ -3370,13 +3594,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestNotNullConstraint_LocalFunction_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestNotNullConstraint_LocalFunction_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 namespace OtherScope
                 {
                     interface notnull {}
@@ -3392,13 +3620,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Namespace("OtherScope"),
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task NonDiscardVariableDeclaration(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void N()
@@ -3410,13 +3640,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Keyword("var"),
                 Method("Parse"),
-                Static("Parse"));
+                Static("Parse")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task NonDiscardVariableDeclarationMultipleDeclarators(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void N()
@@ -3425,13 +3657,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                         int _ = 2, j = 1;
                     }
                 }
-                """, testHost);
+                """,
+                testHost
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DiscardAssignment(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void N()
@@ -3443,13 +3678,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Keyword("_"),
                 Method("Parse"),
-                Static("Parse"));
+                Static("Parse")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DiscardInOutDeclaration(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void N()
@@ -3462,13 +3699,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Method("TryParse"),
                 Static("TryParse"),
                 Keyword("var"),
-                Keyword("_"));
+                Keyword("_")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DiscardInOutAssignment(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void N()
@@ -3480,13 +3719,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Method("TryParse"),
                 Static("TryParse"),
-                Keyword("_"));
+                Keyword("_")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DiscardInDeconstructionAssignment(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void N()
@@ -3496,13 +3737,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Keyword("_"));
+                Keyword("_")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DiscardInDeconstructionDeclaration(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void N()
@@ -3512,13 +3755,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                Keyword("_"));
+                Keyword("_")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DiscardInPatternMatch(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     bool N(object x)
@@ -3529,13 +3774,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 Parameter("x"),
-                Keyword("_"));
+                Keyword("_")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DiscardInSwitch(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     bool N(object x)
@@ -3552,13 +3799,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 Parameter("x"),
-                Keyword("_"));
+                Keyword("_")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DiscardInSwitchPatternMatch(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     bool N(object x)
@@ -3572,13 +3821,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 Parameter("x"),
-                Keyword("_"));
+                Keyword("_")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task UnusedUnderscoreParameterInLambda(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void N()
@@ -3589,13 +3840,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 """,
                 testHost,
                 Namespace("System"),
-                Delegate("Func"));
+                Delegate("Func")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task UsedUnderscoreParameterInLambda(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void N()
@@ -3607,13 +3860,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 testHost,
                 Namespace("System"),
                 Delegate("Func"),
-                Parameter("_"));
+                Parameter("_")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DiscardsInLambda(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void N()
@@ -3626,13 +3881,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Delegate("Func"),
                 Keyword("_"),
-                Keyword("_"));
+                Keyword("_")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task DiscardsInLambdaWithInferredType(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void N()
@@ -3645,7 +3902,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Delegate("Func"),
                 Keyword("_"),
-                Keyword("_"));
+                Keyword("_")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3654,7 +3912,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
             await TestInMethodAsync(
                 @"nint i = 0; nuint i2 = 0;",
                 testHost,
-                Classifications(Keyword("nint"), Keyword("nuint")));
+                Classifications(Keyword("nint"), Keyword("nuint"))
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3665,7 +3924,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 "M",
                 "nint i = 0;",
                 testHost,
-                Classifications(Class("nint")));
+                Classifications(Class("nint"))
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3676,7 +3936,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 "M",
                 "nuint i = 0;",
                 testHost,
-                Classifications(Class("nuint")));
+                Classifications(Class("nuint"))
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3696,7 +3957,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Delegate("Action"),
                 Method("Method"),
-                Static("Method"));
+                Static("Method")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3716,7 +3978,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("_"),
                 Keyword("nameof"),
                 Static("Method"),
-                Method("Method"));
+                Method("Method")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3745,7 +4008,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("_"),
                 Keyword("nameof"),
                 Static("Method"),
-                Method("Method"));
+                Method("Method")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3762,7 +4026,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                RecordClass("R"));
+                RecordClass("R")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3779,7 +4044,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                RecordClass("R"));
+                RecordClass("R")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3795,7 +4061,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                RecordClass("R"));
+                RecordClass("R")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3809,7 +4076,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-                RecordStruct("R"));
+                RecordStruct("R")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3822,7 +4090,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 class C { }
                 """,
                 testHost,
-                Namespace("NS"));
+                Namespace("NS")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3835,7 +4104,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     void M(string s!!) { }
                 }
                 """,
-                testHost);
+                testHost
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3861,7 +4131,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Method("m"),
                 Method("m"),
                 Method("m"),
-                Method("m"));
+                Method("m")
+            );
         }
 
         /// <seealso cref="SyntacticClassifierTests.LocalFunctionDeclaration"/>
@@ -3897,7 +4168,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Method("localFunction"),
                 Method("M"),
                 Method("staticLocalFunction"),
-                Static("staticLocalFunction"));
+                Static("staticLocalFunction")
+            );
         }
 
         [WpfFact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/744813")]
@@ -3905,15 +4177,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         {
             // don't crash
             using var workspace = TestWorkspace.CreateCSharp("");
-            var document = workspace.CurrentSolution.GetRequiredDocument(workspace.Documents.First().Id);
+            var document = workspace.CurrentSolution.GetRequiredDocument(
+                workspace.Documents.First().Id
+            );
 
-            var contentTypeService = document.GetRequiredLanguageService<IContentTypeLanguageService>();
+            var contentTypeService =
+                document.GetRequiredLanguageService<IContentTypeLanguageService>();
             var contentType = contentTypeService.GetDefaultContentType();
-            var extraBuffer = workspace.ExportProvider.GetExportedValue<ITextBufferFactoryService>().CreateTextBuffer("", contentType);
+            var extraBuffer = workspace
+                .ExportProvider.GetExportedValue<ITextBufferFactoryService>()
+                .CreateTextBuffer("", contentType);
 
-            WpfTestRunner.RequireWpfFact($"Creates an {nameof(IWpfTextView)} explicitly with an unrelated buffer");
-            using var disposableView = workspace.ExportProvider.GetExportedValue<ITextEditorFactoryService>().CreateDisposableTextView(extraBuffer);
-            var listenerProvider = workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+            WpfTestRunner.RequireWpfFact(
+                $"Creates an {nameof(IWpfTextView)} explicitly with an unrelated buffer"
+            );
+            using var disposableView = workspace
+                .ExportProvider.GetExportedValue<ITextEditorFactoryService>()
+                .CreateDisposableTextView(extraBuffer);
+            var listenerProvider =
+                workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
             var globalOptions = workspace.ExportProvider.GetExportedValue<IGlobalOptionService>();
 
             var provider = new SemanticClassificationViewTaggerProvider(
@@ -3921,7 +4203,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 workspace.GetService<ClassificationTypeMap>(),
                 globalOptions,
                 visibilityTracker: null,
-                listenerProvider);
+                listenerProvider
+            );
 
             using var tagger = provider.CreateTagger(disposableView.TextView, extraBuffer);
             using (var edit = extraBuffer.CreateEdit())

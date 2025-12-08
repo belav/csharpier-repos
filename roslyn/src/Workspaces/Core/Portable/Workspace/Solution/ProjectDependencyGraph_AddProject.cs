@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis
                 transitiveReferencesMap: _transitiveReferencesMap,
                 reverseTransitiveReferencesMap: _reverseTransitiveReferencesMap,
                 topologicallySortedProjects: newTopologicallySortedProjects,
-                dependencySets: newDependencySets);
+                dependencySets: newDependencySets
+            );
         }
     }
 }

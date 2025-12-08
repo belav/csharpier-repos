@@ -28,7 +28,6 @@ namespace System.ServiceModel.ComIntegration
 
         public void WriteXml(XmlWriter xmlWriter)
         {
-
             if (wsdl != null)
             {
                 using (MemoryStream ms = new MemoryStream())
@@ -44,29 +43,41 @@ namespace System.ServiceModel.ComIntegration
 
                     ms.Seek(0, SeekOrigin.Begin);
 
-                    XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(ms, null, quota, null);
+                    XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(
+                        ms,
+                        null,
+                        quota,
+                        null
+                    );
 
-                    if ((reader.MoveToContent() == XmlNodeType.Element) && (reader.Name == "wsdl:definitions"))
+                    if (
+                        (reader.MoveToContent() == XmlNodeType.Element)
+                        && (reader.Name == "wsdl:definitions")
+                    )
                     {
-
                         xmlWriter.WriteNode(reader, false);
                     }
 
                     reader.Close();
                 }
             }
-
         }
 
         public void ReadXml(XmlReader xmlReader)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
+
         public XmlSchema GetSchema()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
     }
+
     [DataContract(Name = "ComPlusServiceHost")]
     class ComPlusServiceHostSchema : TraceRecord
     {
@@ -82,7 +93,10 @@ namespace System.ServiceModel.ComIntegration
             this.clsid = clsid;
         }
 
-        internal override string EventId { get { return BuildEventId("ComPlusServiceHost"); } }
+        internal override string EventId
+        {
+            get { return BuildEventId("ComPlusServiceHost"); }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -91,7 +105,11 @@ namespace System.ServiceModel.ComIntegration
 
         public override string ToString()
         {
-            return SR.GetString(SR.ComPlusServiceSchema, this.appid.ToString(), this.clsid.ToString());
+            return SR.GetString(
+                SR.ComPlusServiceSchema,
+                this.appid.ToString(),
+                this.clsid.ToString()
+            );
         }
     }
 
@@ -107,15 +125,22 @@ namespace System.ServiceModel.ComIntegration
         [DataMember(Name = "Contract")]
         string contract;
 
-        public ComPlusServiceHostCreatedServiceContractSchema(Guid appid, Guid clsid,
-            XmlQualifiedName contractQname, string contract)
+        public ComPlusServiceHostCreatedServiceContractSchema(
+            Guid appid,
+            Guid clsid,
+            XmlQualifiedName contractQname,
+            string contract
+        )
             : base(appid, clsid)
         {
             this.contractQname = contractQname;
             this.contract = contract;
         }
 
-        internal override string EventId { get { return BuildEventId("ComPlusServiceHostCreatedServiceContract"); } }
+        internal override string EventId
+        {
+            get { return BuildEventId("ComPlusServiceHostCreatedServiceContract"); }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -129,13 +154,20 @@ namespace System.ServiceModel.ComIntegration
         [DataMember(Name = "ServiceDescription")]
         WsdlWrapper wsdlWrapper;
 
-        public ComPlusServiceHostStartedServiceDetailsSchema(Guid appid, Guid clsid, WsdlNS.ServiceDescription wsdl)
+        public ComPlusServiceHostStartedServiceDetailsSchema(
+            Guid appid,
+            Guid clsid,
+            WsdlNS.ServiceDescription wsdl
+        )
             : base(appid, clsid)
         {
             this.wsdlWrapper = new WsdlWrapper(wsdl);
         }
 
-        internal override string EventId { get { return BuildEventId("ComPlusServiceHostStartedServiceDetails"); } }
+        internal override string EventId
+        {
+            get { return BuildEventId("ComPlusServiceHostStartedServiceDetails"); }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -155,9 +187,13 @@ namespace System.ServiceModel.ComIntegration
         [DataMember(Name = "Binding")]
         string binding;
 
-
-        public ComPlusServiceHostCreatedServiceEndpointSchema(Guid appid, Guid clsid, string contract,
-            Uri address, string binding)
+        public ComPlusServiceHostCreatedServiceEndpointSchema(
+            Guid appid,
+            Guid clsid,
+            string contract,
+            Uri address,
+            string binding
+        )
             : base(appid, clsid)
         {
             this.contract = contract;
@@ -165,7 +201,10 @@ namespace System.ServiceModel.ComIntegration
             this.binding = binding;
         }
 
-        internal override string EventId { get { return BuildEventId("ComPlusServiceHostCreatedServiceEndpoint"); } }
+        internal override string EventId
+        {
+            get { return BuildEventId("ComPlusServiceHostCreatedServiceEndpoint"); }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -176,8 +215,12 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusDllHostInitializer")]
     class ComPlusDllHostInitializerSchema : TraceRecord
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusDllHostInitializer" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase + "ComPlusDllHostInitializer" + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -192,9 +235,7 @@ namespace System.ServiceModel.ComIntegration
         [DataMember(Name = "appid")]
         Guid appid;
 
-        public ComPlusDllHostInitializerSchema(
-            Guid appid
-            )
+        public ComPlusDllHostInitializerSchema(Guid appid)
         {
             this.appid = appid;
         }
@@ -203,8 +244,14 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusDllHostInitializerAddingHost")]
     class ComPlusDllHostInitializerAddingHostSchema : ComPlusDllHostInitializerSchema
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusDllHostInitializerAddingHost" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase
+            + "ComPlusDllHostInitializerAddingHost"
+            + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -249,7 +296,7 @@ namespace System.ServiceModel.ComIntegration
             string bindingNamespace,
             string bindingSectionName,
             string contractType
-            )
+        )
             : base(appid)
         {
             this.clsid = clsid;
@@ -267,8 +314,12 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusTLBImport")]
     class ComPlusTLBImportSchema : TraceRecord
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusTLBImport" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase + "ComPlusTLBImport" + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -277,7 +328,11 @@ namespace System.ServiceModel.ComIntegration
 
         public override string ToString()
         {
-            return SR.GetString(SR.ComPlusTLBImportSchema, this.iid.ToString(), this.typeLibraryID.ToString());
+            return SR.GetString(
+                SR.ComPlusTLBImportSchema,
+                this.iid.ToString(),
+                this.typeLibraryID.ToString()
+            );
         }
 
         [DataMember(Name = "InterfaceID")]
@@ -286,10 +341,7 @@ namespace System.ServiceModel.ComIntegration
         [DataMember(Name = "TypeLibraryID")]
         Guid typeLibraryID;
 
-        public ComPlusTLBImportSchema(
-            Guid iid,
-            Guid typeLibraryID
-            )
+        public ComPlusTLBImportSchema(Guid iid, Guid typeLibraryID)
         {
             this.iid = iid;
             this.typeLibraryID = typeLibraryID;
@@ -299,8 +351,12 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusTLBImportFromAssembly")]
     class ComPlusTLBImportFromAssemblySchema : ComPlusTLBImportSchema
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusTLBImportFromAssembly" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase + "ComPlusTLBImportFromAssembly" + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -310,11 +366,7 @@ namespace System.ServiceModel.ComIntegration
         [DataMember(Name = "Assembly")]
         string assembly;
 
-        public ComPlusTLBImportFromAssemblySchema(
-            Guid iid,
-            Guid typeLibraryID,
-            string assembly
-            )
+        public ComPlusTLBImportFromAssemblySchema(Guid iid, Guid typeLibraryID, string assembly)
             : base(iid, typeLibraryID)
         {
             this.assembly = assembly;
@@ -324,8 +376,14 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusTLBImportConverterEvent")]
     class ComPlusTLBImportConverterEventSchema : ComPlusTLBImportSchema
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusTLBImportConverterEvent" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase
+            + "ComPlusTLBImportConverterEvent"
+            + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -347,7 +405,7 @@ namespace System.ServiceModel.ComIntegration
             ImporterEventKind eventKind,
             int eventCode,
             string eventMessage
-            )
+        )
             : base(iid, typeLibraryID)
         {
             this.eventKind = eventKind;
@@ -359,8 +417,14 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusInstanceCreationRequest")]
     class ComPlusInstanceCreationRequestSchema : TraceRecord
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusInstanceCreationRequest" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase
+            + "ComPlusInstanceCreationRequest"
+            + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -369,12 +433,14 @@ namespace System.ServiceModel.ComIntegration
 
         public override string ToString()
         {
-            return SR.GetString(SR.ComPlusInstanceCreationRequestSchema,
+            return SR.GetString(
+                SR.ComPlusInstanceCreationRequestSchema,
                 this.from.ToString(),
                 this.appid.ToString(),
                 this.clsid.ToString(),
                 this.incomingTransactionID.ToString(),
-                this.requestingIdentity);
+                this.requestingIdentity
+            );
         }
 
         [DataMember(Name = "From")]
@@ -392,14 +458,13 @@ namespace System.ServiceModel.ComIntegration
         [DataMember(Name = "RequestingIdentity")]
         string requestingIdentity;
 
-
         public ComPlusInstanceCreationRequestSchema(
             Guid appid,
             Guid clsid,
             Uri from,
             Guid incomingTransactionID,
             string requestingIdentity
-            )
+        )
         {
             this.from = from;
             this.appid = appid;
@@ -407,14 +472,19 @@ namespace System.ServiceModel.ComIntegration
             this.incomingTransactionID = incomingTransactionID;
             this.requestingIdentity = requestingIdentity;
         }
-
     }
 
     [DataContract(Name = "ComPlusInstanceCreationSuccess")]
     class ComPlusInstanceCreationSuccessSchema : ComPlusInstanceCreationRequestSchema
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusInstanceCreationSuccess" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase
+            + "ComPlusInstanceCreationSuccess"
+            + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -424,7 +494,6 @@ namespace System.ServiceModel.ComIntegration
         [DataMember(Name = "InstanceID")]
         int instanceID;
 
-
         public ComPlusInstanceCreationSuccessSchema(
             Guid appid,
             Guid clsid,
@@ -432,7 +501,7 @@ namespace System.ServiceModel.ComIntegration
             Guid incomingTransactionID,
             string requestingIdentity,
             int instanceID
-            )
+        )
             : base(appid, clsid, from, incomingTransactionID, requestingIdentity)
         {
             this.instanceID = instanceID;
@@ -442,8 +511,12 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusInstanceReleased")]
     class ComPlusInstanceReleasedSchema : TraceRecord
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusInstanceReleased" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase + "ComPlusInstanceReleased" + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -459,12 +532,7 @@ namespace System.ServiceModel.ComIntegration
         [DataMember(Name = "InstanceID")]
         int instanceID;
 
-
-        public ComPlusInstanceReleasedSchema(
-            Guid appid,
-            Guid clsid,
-            int instanceID
-            )
+        public ComPlusInstanceReleasedSchema(Guid appid, Guid clsid, int instanceID)
         {
             this.appid = appid;
             this.clsid = clsid;
@@ -475,8 +543,12 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusActivity")]
     class ComPlusActivitySchema : TraceRecord
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusActivity" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase + "ComPlusActivity" + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -495,13 +567,12 @@ namespace System.ServiceModel.ComIntegration
         [DataMember(Name = "UnmanagedThreadID")]
         int unmanagedThreadID;
 
-
         public ComPlusActivitySchema(
             Guid activityID,
             Guid logicalThreadID,
             int managedThreadID,
             int unmanagedThreadID
-            )
+        )
         {
             this.activityID = activityID;
             this.logicalThreadID = logicalThreadID;
@@ -513,8 +584,12 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusMethodCall")]
     class ComPlusMethodCallSchema : TraceRecord
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusMethodCall" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase + "ComPlusMethodCall" + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -523,7 +598,8 @@ namespace System.ServiceModel.ComIntegration
 
         public override string ToString()
         {
-            return SR.GetString(SR.ComPlusMethodCallSchema,
+            return SR.GetString(
+                SR.ComPlusMethodCallSchema,
                 this.from.ToString(),
                 this.appid.ToString(),
                 this.clsid.ToString(),
@@ -532,7 +608,8 @@ namespace System.ServiceModel.ComIntegration
                 this.instanceID.ToString(CultureInfo.CurrentCulture),
                 this.managedThreadID.ToString(CultureInfo.CurrentCulture),
                 this.unmanagedThreadID.ToString(CultureInfo.CurrentCulture),
-                this.requestingIdentity);
+                this.requestingIdentity
+            );
         }
 
         [DataMember(Name = "From")]
@@ -572,7 +649,7 @@ namespace System.ServiceModel.ComIntegration
             int managedThreadID,
             int unmanagedThreadID,
             string requestingIdentity
-            )
+        )
         {
             this.from = from;
             this.appid = appid;
@@ -589,8 +666,12 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusMethodCallTxMismatch")]
     class ComPlusMethodCallTxMismatchSchema : ComPlusMethodCallSchema
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusMethodCallTxMismatch" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase + "ComPlusMethodCallTxMismatch" + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         [DataMember(Name = "IncomingTransactionID")]
         Guid incomingTransactionID;
@@ -609,8 +690,19 @@ namespace System.ServiceModel.ComIntegration
             int unmanagedThreadID,
             string requestingIdentity,
             Guid incomingTransactionID,
-            Guid currentTransactionID)
-            : base(from, appid, clsid, iid, action, instanceID, managedThreadID, unmanagedThreadID, requestingIdentity)
+            Guid currentTransactionID
+        )
+            : base(
+                from,
+                appid,
+                clsid,
+                iid,
+                action,
+                instanceID,
+                managedThreadID,
+                unmanagedThreadID,
+                requestingIdentity
+            )
         {
             this.incomingTransactionID = incomingTransactionID;
             this.currentTransactionID = currentTransactionID;
@@ -620,8 +712,12 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusMethodCallNewTx")]
     class ComPlusMethodCallNewTxSchema : ComPlusMethodCallSchema
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusMethodCallNewTx" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase + "ComPlusMethodCallNewTx" + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         [DataMember(Name = "NewTransactionID")]
         Guid newTransactionID;
@@ -636,8 +732,19 @@ namespace System.ServiceModel.ComIntegration
             int managedThreadID,
             int unmanagedThreadID,
             string requestingIdentity,
-            Guid newTransactionID)
-            : base(from, appid, clsid, iid, action, instanceID, managedThreadID, unmanagedThreadID, requestingIdentity)
+            Guid newTransactionID
+        )
+            : base(
+                from,
+                appid,
+                clsid,
+                iid,
+                action,
+                instanceID,
+                managedThreadID,
+                unmanagedThreadID,
+                requestingIdentity
+            )
         {
             this.newTransactionID = newTransactionID;
         }
@@ -646,8 +753,12 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusMethodCallContextTx")]
     class ComPlusMethodCallContextTxSchema : ComPlusMethodCallSchema
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusMethodCallContextTx" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase + "ComPlusMethodCallContextTx" + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         [DataMember(Name = "ContextTransactionID")]
         Guid contextTransactionID;
@@ -662,8 +773,19 @@ namespace System.ServiceModel.ComIntegration
             int managedThreadID,
             int unmanagedThreadID,
             string requestingIdentity,
-            Guid contextTransactionID)
-            : base(from, appid, clsid, iid, action, instanceID, managedThreadID, unmanagedThreadID, requestingIdentity)
+            Guid contextTransactionID
+        )
+            : base(
+                from,
+                appid,
+                clsid,
+                iid,
+                action,
+                instanceID,
+                managedThreadID,
+                unmanagedThreadID,
+                requestingIdentity
+            )
         {
             this.contextTransactionID = contextTransactionID;
         }
@@ -672,8 +794,12 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusServiceMoniker")]
     class ComPlusServiceMonikerSchema : TraceRecord
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusServiceMoniker" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase + "ComPlusServiceMoniker" + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -712,10 +838,13 @@ namespace System.ServiceModel.ComIntegration
 
         [DataMember(Name = "mexSpnIdentity")]
         string mexSpnIdentity;
+
         [DataMember(Name = "mexUpnIdentity")]
         string mexUpnIdentity;
+
         [DataMember(Name = "mexDnsIdentity")]
         string mexDnsIdentity;
+
         [DataMember(Name = "mexAddress")]
         string mexAddress;
 
@@ -724,7 +853,6 @@ namespace System.ServiceModel.ComIntegration
 
         [DataMember(Name = "mexBindingConfiguration")]
         string mexBindingConfiguration;
-
 
         public ComPlusServiceMonikerSchema(
             string address,
@@ -743,7 +871,7 @@ namespace System.ServiceModel.ComIntegration
             string mexSpnIdentity,
             string mexUpnIdentity,
             string mexDnsIdentity
-            )
+        )
         {
             this.address = address;
             this.contract = contract;
@@ -767,8 +895,12 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusWsdlChannelBuilder")]
     class ComPlusWsdlChannelBuilderSchema : TraceRecord
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusWsdlChannelBuilder" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase + "ComPlusWsdlChannelBuilder" + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -800,7 +932,7 @@ namespace System.ServiceModel.ComIntegration
             string importedContract,
             string importedBinding,
             XmlSchema schema
-            )
+        )
         {
             this.bindingQname = bindingQname;
             this.contractQname = contractQname;
@@ -809,9 +941,11 @@ namespace System.ServiceModel.ComIntegration
             this.importedBinding = importedBinding;
             this.schema = new XmlSchemaWrapper(schema);
         }
+
         class XmlSchemaWrapper : IXmlSerializable
         {
             XmlSchema schema;
+
             public XmlSchemaWrapper(XmlSchema schema)
             {
                 this.schema = schema;
@@ -835,11 +969,17 @@ namespace System.ServiceModel.ComIntegration
                 quota.MaxBytesPerRead = 4096;
                 quota.MaxNameTableCharCount = 16384;
 
-                XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(wsdlText, 0, wsdlText.GetLength(0), null, quota, null);
+                XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(
+                    wsdlText,
+                    0,
+                    wsdlText.GetLength(0),
+                    null,
+                    quota,
+                    null
+                );
 
                 if ((reader.MoveToContent() == XmlNodeType.Element) && (reader.Name == "xs:schema"))
                 {
-
                     xmlWriter.WriteNode(reader, false);
                 }
 
@@ -848,21 +988,29 @@ namespace System.ServiceModel.ComIntegration
 
             public void ReadXml(XmlReader xmlReader)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException()
+                );
             }
+
             public XmlSchema GetSchema()
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException()
+                );
             }
         }
-
     }
 
     [DataContract(Name = "ComPlusTypedChannelBuilder")]
     class ComPlusTypedChannelBuilderSchema : TraceRecord
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusTypedChannelBuilder" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase + "ComPlusTypedChannelBuilder" + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -875,10 +1023,7 @@ namespace System.ServiceModel.ComIntegration
         [DataMember(Name = "Binding")]
         string binding;
 
-        public ComPlusTypedChannelBuilderSchema(
-            string contract,
-            string binding
-            )
+        public ComPlusTypedChannelBuilderSchema(string contract, string binding)
         {
             this.contract = contract;
             this.binding = binding;
@@ -888,8 +1033,12 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusMexChannelBuilder")]
     class ComPlusMexChannelBuilderSchema : TraceRecord
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusMexChannelBuilder" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase + "ComPlusMexChannelBuilder" + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -917,8 +1066,7 @@ namespace System.ServiceModel.ComIntegration
             string binding,
             string bindingNamespace,
             string address
-
-            )
+        )
         {
             this.contract = contract;
             this.binding = binding;
@@ -928,19 +1076,22 @@ namespace System.ServiceModel.ComIntegration
         }
     }
 
-
     [DataContract(Name = "ComPlusMexBuilderMetadataRetrievedEndpoint")]
     class ComPlusMexBuilderMetadataRetrievedEndpoint : TraceRecord
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusMexBuilderMetadataRetrievedEndpoint" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase
+            + "ComPlusMexBuilderMetadataRetrievedEndpoint"
+            + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
             ComPlusTraceRecord.SerializeRecord(xmlWriter, this);
         }
-
-
 
         [DataMember(Name = "Binding")]
         string binding;
@@ -950,6 +1101,7 @@ namespace System.ServiceModel.ComIntegration
 
         [DataMember(Name = "Address")]
         string address;
+
         [DataMember(Name = "Contract")]
         string contract;
 
@@ -963,41 +1115,46 @@ namespace System.ServiceModel.ComIntegration
             this.address = endpoint.Address.ToString();
             this.contract = endpoint.Contract.Name;
             this.contractNamespace = endpoint.Contract.Namespace;
-
         }
     }
 
     [DataContract(Name = "ComPlusMexBuilderMetadataRetrieved")]
     class ComPlusMexBuilderMetadataRetrievedSchema : TraceRecord
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusMexBuilderMetadataRetrieved" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase
+            + "ComPlusMexBuilderMetadataRetrieved"
+            + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
             ComPlusTraceRecord.SerializeRecord(xmlWriter, this);
         }
 
-
-
         [DataMember(Name = "bindingNamespaces")]
         ComPlusMexBuilderMetadataRetrievedEndpoint[] endpoints;
 
-
         public ComPlusMexBuilderMetadataRetrievedSchema(
             ComPlusMexBuilderMetadataRetrievedEndpoint[] endpoints
-            )
+        )
         {
             this.endpoints = endpoints;
         }
     }
 
-
     [DataContract(Name = "ComPlusChannelCreated")]
     class ComPlusChannelCreatedSchema : TraceRecord
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusChannelCreated" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase + "ComPlusChannelCreated" + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -1010,10 +1167,7 @@ namespace System.ServiceModel.ComIntegration
         [DataMember(Name = "Contract")]
         string contract;
 
-        public ComPlusChannelCreatedSchema(
-            Uri address,
-            string contract
-            )
+        public ComPlusChannelCreatedSchema(Uri address, string contract)
         {
             this.address = address;
             this.contract = contract;
@@ -1023,8 +1177,12 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusDispatchMethodSchema")]
     class ComPlusDispatchMethodSchema : TraceRecord
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusDispatchMethod" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase + "ComPlusDispatchMethod" + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
@@ -1044,7 +1202,7 @@ namespace System.ServiceModel.ComIntegration
             string name,
             List<System.ServiceModel.ComIntegration.DispatchProxy.ParamInfo> paramList,
             System.ServiceModel.ComIntegration.DispatchProxy.ParamInfo returnValue
-            )
+        )
         {
             this.name = name;
             this.paramList = paramList;
@@ -1055,13 +1213,18 @@ namespace System.ServiceModel.ComIntegration
     [DataContract(Name = "ComPlusTxProxySchema")]
     class ComPlusTxProxySchema : TraceRecord
     {
-        const string schemaId = TraceRecord.EventIdBase + "ComPlusTxProxyTx" + TraceRecord.NamespaceSuffix;
-        internal override string EventId { get { return schemaId; } }
+        const string schemaId =
+            TraceRecord.EventIdBase + "ComPlusTxProxyTx" + TraceRecord.NamespaceSuffix;
+        internal override string EventId
+        {
+            get { return schemaId; }
+        }
 
         internal override void WriteTo(XmlWriter xmlWriter)
         {
             ComPlusTraceRecord.SerializeRecord(xmlWriter, this);
         }
+
         [DataMember(Name = "appid")]
         Guid appid;
 
@@ -1074,8 +1237,7 @@ namespace System.ServiceModel.ComIntegration
         [DataMember(Name = "InstanceID")]
         int instanceID;
 
-        public ComPlusTxProxySchema(Guid appid, Guid clsid,
-            Guid transactionID, int instanceID)
+        public ComPlusTxProxySchema(Guid appid, Guid clsid, Guid transactionID, int instanceID)
         {
             this.appid = appid;
             this.clsid = clsid;

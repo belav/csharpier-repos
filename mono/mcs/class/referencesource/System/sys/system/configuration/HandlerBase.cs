@@ -4,34 +4,42 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
-
+namespace System.Configuration
+{
     using System.Globalization;
     using System.Xml;
 
-    internal class HandlerBase {
-
-        private HandlerBase() {
-        }
+    internal class HandlerBase
+    {
+        private HandlerBase() { }
 
         //
         // XML Attribute Helpers
         //
 
-        private static XmlNode GetAndRemoveAttribute(XmlNode node, string attrib, bool fRequired) {
+        private static XmlNode GetAndRemoveAttribute(XmlNode node, string attrib, bool fRequired)
+        {
             XmlNode a = node.Attributes.RemoveNamedItem(attrib);
 
             // If the attribute is required and was not present, throw
-            if (fRequired && a == null) {
+            if (fRequired && a == null)
+            {
                 throw new ConfigurationErrorsException(
                     SR.GetString(SR.Config_missing_required_attribute, attrib, node.Name),
-                    node);
+                    node
+                );
             }
 
             return a;
         }
 
-        private static XmlNode GetAndRemoveStringAttributeInternal(XmlNode node, string attrib, bool fRequired, ref string val) {
+        private static XmlNode GetAndRemoveStringAttributeInternal(
+            XmlNode node,
+            string attrib,
+            bool fRequired,
+            ref string val
+        )
+        {
             XmlNode a = GetAndRemoveAttribute(node, attrib, fRequired);
             if (a != null)
                 val = a.Value;
@@ -39,83 +47,182 @@ namespace System.Configuration {
             return a;
         }
 
-        internal static XmlNode GetAndRemoveStringAttribute(XmlNode node, string attrib, ref string val) {
-            return GetAndRemoveStringAttributeInternal(node, attrib, false /*fRequired*/, ref val);
+        internal static XmlNode GetAndRemoveStringAttribute(
+            XmlNode node,
+            string attrib,
+            ref string val
+        )
+        {
+            return GetAndRemoveStringAttributeInternal(
+                node,
+                attrib,
+                false /*fRequired*/
+                ,
+                ref val
+            );
         }
 
 #if UNUSED_CODE
-        internal static XmlNode GetAndRemoveRequiredStringAttribute(XmlNode node, string attrib, ref string val) {
-            return GetAndRemoveStringAttributeInternal(node, attrib, true /*fRequired*/, ref val);
+        internal static XmlNode GetAndRemoveRequiredStringAttribute(
+            XmlNode node,
+            string attrib,
+            ref string val
+        )
+        {
+            return GetAndRemoveStringAttributeInternal(
+                node,
+                attrib,
+                true /*fRequired*/
+                ,
+                ref val
+            );
         }
 #endif
 
         // input.Xml cursor must be at a true/false XML attribute
-        private static XmlNode GetAndRemoveBooleanAttributeInternal(XmlNode node, string attrib, bool fRequired, ref bool val) {
+        private static XmlNode GetAndRemoveBooleanAttributeInternal(
+            XmlNode node,
+            string attrib,
+            bool fRequired,
+            ref bool val
+        )
+        {
             XmlNode a = GetAndRemoveAttribute(node, attrib, fRequired);
-            if (a != null) {
-                try {
+            if (a != null)
+            {
+                try
+                {
                     val = bool.Parse(a.Value);
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     throw new ConfigurationErrorsException(
-                            SR.GetString(SR.GetString(SR.Config_invalid_boolean_attribute, a.Name)),
-                            e, a);
+                        SR.GetString(SR.GetString(SR.Config_invalid_boolean_attribute, a.Name)),
+                        e,
+                        a
+                    );
                 }
             }
 
             return a;
         }
 
-        internal static XmlNode GetAndRemoveBooleanAttribute(XmlNode node, string attrib, ref bool val) {
-            return GetAndRemoveBooleanAttributeInternal(node, attrib, false /*fRequired*/, ref val);
+        internal static XmlNode GetAndRemoveBooleanAttribute(
+            XmlNode node,
+            string attrib,
+            ref bool val
+        )
+        {
+            return GetAndRemoveBooleanAttributeInternal(
+                node,
+                attrib,
+                false /*fRequired*/
+                ,
+                ref val
+            );
         }
 
 #if UNUSED_CODE
-        internal static XmlNode GetAndRemoveRequiredBooleanAttribute(XmlNode node, string attrib, ref bool val) {
-            return GetAndRemoveBooleanAttributeInternal(node, attrib, true /*fRequired*/, ref val);
+        internal static XmlNode GetAndRemoveRequiredBooleanAttribute(
+            XmlNode node,
+            string attrib,
+            ref bool val
+        )
+        {
+            return GetAndRemoveBooleanAttributeInternal(
+                node,
+                attrib,
+                true /*fRequired*/
+                ,
+                ref val
+            );
         }
 #endif
 
         // input.Xml cursor must be an integer XML attribute
-        private static XmlNode GetAndRemoveIntegerAttributeInternal(XmlNode node, string attrib, bool fRequired, ref int val) {
+        private static XmlNode GetAndRemoveIntegerAttributeInternal(
+            XmlNode node,
+            string attrib,
+            bool fRequired,
+            ref int val
+        )
+        {
             XmlNode a = GetAndRemoveAttribute(node, attrib, fRequired);
-            if (a != null) {
-                if (a.Value.Trim() != a.Value) {
-                    throw new ConfigurationErrorsException(
-                        SR.GetString(SR.Config_invalid_integer_attribute, a.Name), a);
-                }
-
-                try {
-                    val = int.Parse(a.Value, CultureInfo.InvariantCulture);
-                }
-                catch (Exception e) {
+            if (a != null)
+            {
+                if (a.Value.Trim() != a.Value)
+                {
                     throw new ConfigurationErrorsException(
                         SR.GetString(SR.Config_invalid_integer_attribute, a.Name),
-                        e, a);
+                        a
+                    );
+                }
+
+                try
+                {
+                    val = int.Parse(a.Value, CultureInfo.InvariantCulture);
+                }
+                catch (Exception e)
+                {
+                    throw new ConfigurationErrorsException(
+                        SR.GetString(SR.Config_invalid_integer_attribute, a.Name),
+                        e,
+                        a
+                    );
                 }
             }
 
             return a;
         }
 
-        internal static XmlNode GetAndRemoveIntegerAttribute(XmlNode node, string attrib, ref int val) {
-            return GetAndRemoveIntegerAttributeInternal(node, attrib, false /*fRequired*/, ref val);
+        internal static XmlNode GetAndRemoveIntegerAttribute(
+            XmlNode node,
+            string attrib,
+            ref int val
+        )
+        {
+            return GetAndRemoveIntegerAttributeInternal(
+                node,
+                attrib,
+                false /*fRequired*/
+                ,
+                ref val
+            );
         }
 
 #if UNUSED_CODE
-        internal static XmlNode GetAndRemoveRequiredIntegerAttribute(XmlNode node, string attrib, ref int val) {
-            return GetAndRemoveIntegerAttributeInternal(node, attrib, true /*fRequired*/, ref val);
+        internal static XmlNode GetAndRemoveRequiredIntegerAttribute(
+            XmlNode node,
+            string attrib,
+            ref int val
+        )
+        {
+            return GetAndRemoveIntegerAttributeInternal(
+                node,
+                attrib,
+                true /*fRequired*/
+                ,
+                ref val
+            );
         }
 #endif
 
 #if UNUSED_CODE
-        private static XmlNode GetAndRemovePositiveIntegerAttributeInternal(XmlNode node, string attrib, bool fRequired, ref int val) {
+        private static XmlNode GetAndRemovePositiveIntegerAttributeInternal(
+            XmlNode node,
+            string attrib,
+            bool fRequired,
+            ref int val
+        )
+        {
             XmlNode a = GetAndRemoveIntegerAttributeInternal(node, attrib, fRequired, ref val);
 
-            if (a != null && val < 0) {
+            if (a != null && val < 0)
+            {
                 throw new ConfigurationErrorsException(
                     SR.GetString(SR.Config_invalid_positive_integer_attribute, attrib),
-                    node);
+                    node
+                );
             }
 
             return a;
@@ -123,30 +230,65 @@ namespace System.Configuration {
 #endif
 
 #if UNUSED_CODE
-        internal static XmlNode GetAndRemovePositiveIntegerAttribute(XmlNode node, string attrib, ref int val) {
-            return GetAndRemovePositiveIntegerAttributeInternal(node, attrib, false /*fRequired*/, ref val);
+        internal static XmlNode GetAndRemovePositiveIntegerAttribute(
+            XmlNode node,
+            string attrib,
+            ref int val
+        )
+        {
+            return GetAndRemovePositiveIntegerAttributeInternal(
+                node,
+                attrib,
+                false /*fRequired*/
+                ,
+                ref val
+            );
         }
 #endif
 
 #if UNUSED_CODE
-        internal static XmlNode GetAndRemoveRequiredPositiveIntegerAttribute(XmlNode node, string attrib, ref int val) {
-            return GetAndRemovePositiveIntegerAttributeInternal(node, attrib, true /*fRequired*/, ref val);
+        internal static XmlNode GetAndRemoveRequiredPositiveIntegerAttribute(
+            XmlNode node,
+            string attrib,
+            ref int val
+        )
+        {
+            return GetAndRemovePositiveIntegerAttributeInternal(
+                node,
+                attrib,
+                true /*fRequired*/
+                ,
+                ref val
+            );
         }
 #endif
 
-
 #if UNUSED_CODE
-        private static XmlNode GetAndRemoveTypeAttributeInternal(XmlNode node, string attrib, bool fRequired, ref Type val) {
+        private static XmlNode GetAndRemoveTypeAttributeInternal(
+            XmlNode node,
+            string attrib,
+            bool fRequired,
+            ref Type val
+        )
+        {
             XmlNode a = GetAndRemoveAttribute(node, attrib, fRequired);
 
-            if (a != null) {
-                try {
-                    val = Type.GetType(a.Value, true /*throwOnError*/);
+            if (a != null)
+            {
+                try
+                {
+                    val = Type.GetType(
+                        a.Value,
+                        true /*throwOnError*/
+                    );
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     throw new ConfigurationErrorsException(
-                            e.Message, //SR.GetString(SR.Config_invalid_type_attribute, a.Name),
-                            e, a);
+                        e.Message, //SR.GetString(SR.Config_invalid_type_attribute, a.Name),
+                        e,
+                        a
+                    );
                 }
             }
 
@@ -155,22 +297,43 @@ namespace System.Configuration {
 #endif
 
 #if UNUSED_CODE
-        internal static XmlNode GetAndRemoveTypeAttribute(XmlNode node, string attrib, ref Type val) {
-            return GetAndRemoveTypeAttributeInternal(node, attrib, false /*fRequired*/, ref val);
+        internal static XmlNode GetAndRemoveTypeAttribute(XmlNode node, string attrib, ref Type val)
+        {
+            return GetAndRemoveTypeAttributeInternal(
+                node,
+                attrib,
+                false /*fRequired*/
+                ,
+                ref val
+            );
         }
 #endif
 
 #if UNUSED_CODE
-        internal static XmlNode GetAndRemoveRequiredTypeAttribute(XmlNode node, string attrib, ref Type val) {
-            return GetAndRemoveTypeAttributeInternal(node, attrib, true /*fRequired*/, ref val);
+        internal static XmlNode GetAndRemoveRequiredTypeAttribute(
+            XmlNode node,
+            string attrib,
+            ref Type val
+        )
+        {
+            return GetAndRemoveTypeAttributeInternal(
+                node,
+                attrib,
+                true /*fRequired*/
+                ,
+                ref val
+            );
         }
 #endif
 
-        internal static void CheckForUnrecognizedAttributes(XmlNode node) {
-            if (node.Attributes.Count != 0) {
+        internal static void CheckForUnrecognizedAttributes(XmlNode node)
+        {
+            if (node.Attributes.Count != 0)
+            {
                 throw new ConfigurationErrorsException(
-                                SR.GetString(SR.Config_base_unrecognized_attribute, node.Attributes[0].Name),
-                                node);
+                    SR.GetString(SR.Config_base_unrecognized_attribute, node.Attributes[0].Name),
+                    node
+                );
             }
         }
 
@@ -179,11 +342,12 @@ namespace System.Configuration {
         //
 
         // if attribute not found return null
-        internal static string RemoveAttribute(XmlNode node, string name) {
-
+        internal static string RemoveAttribute(XmlNode node, string name)
+        {
             XmlNode attribute = node.Attributes.RemoveNamedItem(name);
 
-            if (attribute != null) {
+            if (attribute != null)
+            {
                 return attribute.Value;
             }
 
@@ -191,45 +355,57 @@ namespace System.Configuration {
         }
 
         // if attr not found throw standard message - "attribute x required"
-        internal static string RemoveRequiredAttribute(XmlNode node, string name) {
-            return RemoveRequiredAttribute(node, name, false/*allowEmpty*/);
+        internal static string RemoveRequiredAttribute(XmlNode node, string name)
+        {
+            return RemoveRequiredAttribute(
+                node,
+                name,
+                false /*allowEmpty*/
+            );
         }
 
-        internal static string RemoveRequiredAttribute(XmlNode node, string name, bool allowEmpty) {
+        internal static string RemoveRequiredAttribute(XmlNode node, string name, bool allowEmpty)
+        {
             XmlNode attribute = node.Attributes.RemoveNamedItem(name);
 
-            if (attribute == null) {
+            if (attribute == null)
+            {
                 throw new ConfigurationErrorsException(
-                                SR.GetString(SR.Config_base_required_attribute_missing, name),
-                                node);
+                    SR.GetString(SR.Config_base_required_attribute_missing, name),
+                    node
+                );
             }
 
-            if (String.IsNullOrEmpty(attribute.Value) && allowEmpty == false) {
+            if (String.IsNullOrEmpty(attribute.Value) && allowEmpty == false)
+            {
                 throw new ConfigurationErrorsException(
-                                SR.GetString(SR.Config_base_required_attribute_empty, name),
-                                node);
+                    SR.GetString(SR.Config_base_required_attribute_empty, name),
+                    node
+                );
             }
 
             return attribute.Value;
         }
 
-
-
         //
         // XML Element Helpers
         //
 
-        internal static void CheckForNonElement(XmlNode node) {
-            if (node.NodeType != XmlNodeType.Element) {
+        internal static void CheckForNonElement(XmlNode node)
+        {
+            if (node.NodeType != XmlNodeType.Element)
+            {
                 throw new ConfigurationErrorsException(
-                                SR.GetString(SR.Config_base_elements_only),
-                                node);
+                    SR.GetString(SR.Config_base_elements_only),
+                    node
+                );
             }
         }
 
-
-        internal static bool IsIgnorableAlsoCheckForNonElement(XmlNode node) {
-            if (node.NodeType == XmlNodeType.Comment || node.NodeType == XmlNodeType.Whitespace) {
+        internal static bool IsIgnorableAlsoCheckForNonElement(XmlNode node)
+        {
+            if (node.NodeType == XmlNodeType.Comment || node.NodeType == XmlNodeType.Whitespace)
+            {
                 return true;
             }
 
@@ -238,27 +414,29 @@ namespace System.Configuration {
             return false;
         }
 
-
-        internal static void CheckForChildNodes(XmlNode node) {
-            if (node.HasChildNodes) {
+        internal static void CheckForChildNodes(XmlNode node)
+        {
+            if (node.HasChildNodes)
+            {
                 throw new ConfigurationErrorsException(
-                                SR.GetString(SR.Config_base_no_child_nodes),
-                                node.FirstChild);
+                    SR.GetString(SR.Config_base_no_child_nodes),
+                    node.FirstChild
+                );
             }
         }
 
-        internal static void ThrowUnrecognizedElement(XmlNode node) {
+        internal static void ThrowUnrecognizedElement(XmlNode node)
+        {
             throw new ConfigurationErrorsException(
-                            SR.GetString(SR.Config_base_unrecognized_element),
-                            node);
+                SR.GetString(SR.Config_base_unrecognized_element),
+                node
+            );
         }
 
         //
         // Parse Helpers
         //
 
-        // 
-
-
+        //
     }
 }

@@ -4,10 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Hosting {
+namespace System.Web.Hosting
+{
     using System;
 
-    internal interface ICustomLoaderHelperFunctions {
+    internal interface ICustomLoaderHelperFunctions
+    {
         string AppPhysicalPath { get; }
         bool? CustomLoaderIsEnabled { get; } // true = always enabled, false = always disabled, null = check trust level
 

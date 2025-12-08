@@ -6,34 +6,43 @@
 
 using System;
 using System.Collections;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Security.Permissions;
-using System.Xml;
-using System.Collections.Specialized;
-using System.Globalization;
-using System.ComponentModel;
 using System.Security;
+using System.Security.Permissions;
 using System.Text;
+using System.Xml;
 
-namespace System.Configuration {
-
-    public sealed class CommaDelimitedStringCollectionConverter : ConfigurationConverterBase {
-
-        public override object ConvertTo(ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type) {
-
+namespace System.Configuration
+{
+    public sealed class CommaDelimitedStringCollectionConverter : ConfigurationConverterBase
+    {
+        public override object ConvertTo(
+            ITypeDescriptorContext ctx,
+            CultureInfo ci,
+            object value,
+            Type type
+        )
+        {
             ValidateType(value, typeof(CommaDelimitedStringCollection));
             CommaDelimitedStringCollection internalValue = value as CommaDelimitedStringCollection;
-            if (internalValue != null) {
+            if (internalValue != null)
+            {
                 return internalValue.ToString();
             }
-            else {
+            else
+            {
                 return null;
             }
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data) {
-            CommaDelimitedStringCollection attributeCollection = new CommaDelimitedStringCollection();
+        public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)
+        {
+            CommaDelimitedStringCollection attributeCollection =
+                new CommaDelimitedStringCollection();
             attributeCollection.FromString((string)data);
             return attributeCollection;
         }

@@ -16,18 +16,30 @@ namespace System.Reflection.Metadata.Tests
                 {
                     if (a == b)
                     {
-                        Assert.True(StringUtils.IsEqualAscii(a, b, StringUtils.IgnoreCaseMask(true)));
-                        Assert.True(StringUtils.IsEqualAscii(a, b, StringUtils.IgnoreCaseMask(false)));
+                        Assert.True(
+                            StringUtils.IsEqualAscii(a, b, StringUtils.IgnoreCaseMask(true))
+                        );
+                        Assert.True(
+                            StringUtils.IsEqualAscii(a, b, StringUtils.IgnoreCaseMask(false))
+                        );
                     }
                     else if (char.ToLower(a) == char.ToLower(b))
                     {
-                        Assert.True(StringUtils.IsEqualAscii(a, b, StringUtils.IgnoreCaseMask(true)));
-                        Assert.False(StringUtils.IsEqualAscii(a, b, StringUtils.IgnoreCaseMask(false)));
+                        Assert.True(
+                            StringUtils.IsEqualAscii(a, b, StringUtils.IgnoreCaseMask(true))
+                        );
+                        Assert.False(
+                            StringUtils.IsEqualAscii(a, b, StringUtils.IgnoreCaseMask(false))
+                        );
                     }
                     else
                     {
-                        Assert.False(StringUtils.IsEqualAscii(a, b, StringUtils.IgnoreCaseMask(true)));
-                        Assert.False(StringUtils.IsEqualAscii(a, b, StringUtils.IgnoreCaseMask(false)));
+                        Assert.False(
+                            StringUtils.IsEqualAscii(a, b, StringUtils.IgnoreCaseMask(true))
+                        );
+                        Assert.False(
+                            StringUtils.IsEqualAscii(a, b, StringUtils.IgnoreCaseMask(false))
+                        );
                     }
                 }
             }

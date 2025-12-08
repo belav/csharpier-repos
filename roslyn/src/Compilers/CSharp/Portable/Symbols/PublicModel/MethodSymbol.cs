@@ -82,7 +82,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             {
                 if (_lazyReturnType is null)
                 {
-                    Interlocked.CompareExchange(ref _lazyReturnType, _underlying.ReturnTypeWithAnnotations.GetPublicSymbol(), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyReturnType,
+                        _underlying.ReturnTypeWithAnnotations.GetPublicSymbol(),
+                        null
+                    );
                 }
 
                 return _lazyReturnType;
@@ -91,10 +95,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         CodeAnalysis.NullableAnnotation IMethodSymbol.ReturnNullableAnnotation
         {
-            get
-            {
-                return _underlying.ReturnTypeWithAnnotations.ToPublicAnnotation();
-            }
+            get { return _underlying.ReturnTypeWithAnnotations.ToPublicAnnotation(); }
         }
 
         ImmutableArray<ITypeSymbol> IMethodSymbol.TypeArguments
@@ -104,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
                 return InterlockedOperations.Initialize(
                     ref _lazyTypeArguments,
                     static underlying => underlying.TypeArgumentsWithAnnotations.GetPublicSymbols(),
-                    _underlying);
+                    _underlying
+                );
             }
         }
 
@@ -113,10 +115,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ImmutableArray<ITypeParameterSymbol> IMethodSymbol.TypeParameters
         {
-            get
-            {
-                return _underlying.TypeParameters.GetPublicSymbols();
-            }
+            get { return _underlying.TypeParameters.GetPublicSymbols(); }
         }
 
         ImmutableArray<IParameterSymbol> IMethodSymbol.Parameters
@@ -126,48 +125,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
                 return InterlockedOperations.Initialize(
                     ref _lazyParameters,
                     static underlying => underlying.Parameters.GetPublicSymbols(),
-                    _underlying);
+                    _underlying
+                );
             }
         }
 
         IMethodSymbol IMethodSymbol.ConstructedFrom
         {
-            get
-            {
-                return _underlying.ConstructedFrom.GetPublicSymbol();
-            }
+            get { return _underlying.ConstructedFrom.GetPublicSymbol(); }
         }
 
         bool IMethodSymbol.IsReadOnly
         {
-            get
-            {
-                return _underlying.IsEffectivelyReadOnly;
-            }
+            get { return _underlying.IsEffectivelyReadOnly; }
         }
 
         bool IMethodSymbol.IsInitOnly
         {
-            get
-            {
-                return _underlying.IsInitOnly;
-            }
+            get { return _underlying.IsInitOnly; }
         }
 
         IMethodSymbol IMethodSymbol.OriginalDefinition
         {
-            get
-            {
-                return _underlying.OriginalDefinition.GetPublicSymbol();
-            }
+            get { return _underlying.OriginalDefinition.GetPublicSymbol(); }
         }
 
         IMethodSymbol IMethodSymbol.OverriddenMethod
         {
-            get
-            {
-                return _underlying.OverriddenMethod.GetPublicSymbol();
-            }
+            get { return _underlying.OverriddenMethod.GetPublicSymbol(); }
         }
 
         ITypeSymbol IMethodSymbol.ReceiverType
@@ -176,91 +161,83 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             {
                 if (_lazyReceiverType is null)
                 {
-                    Interlocked.CompareExchange(ref _lazyReceiverType, _underlying.ReceiverType?.GetITypeSymbol(_underlying.ReceiverNullableAnnotation), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyReceiverType,
+                        _underlying.ReceiverType?.GetITypeSymbol(
+                            _underlying.ReceiverNullableAnnotation
+                        ),
+                        null
+                    );
                 }
 
                 return _lazyReceiverType;
             }
         }
 
-        CodeAnalysis.NullableAnnotation IMethodSymbol.ReceiverNullableAnnotation => _underlying.ReceiverNullableAnnotation;
+        CodeAnalysis.NullableAnnotation IMethodSymbol.ReceiverNullableAnnotation =>
+            _underlying.ReceiverNullableAnnotation;
 
         IMethodSymbol IMethodSymbol.ReducedFrom
         {
-            get
-            {
-                return _underlying.ReducedFrom.GetPublicSymbol();
-            }
+            get { return _underlying.ReducedFrom.GetPublicSymbol(); }
         }
 
-        ITypeSymbol IMethodSymbol.GetTypeInferredDuringReduction(ITypeParameterSymbol reducedFromTypeParameter)
+        ITypeSymbol IMethodSymbol.GetTypeInferredDuringReduction(
+            ITypeParameterSymbol reducedFromTypeParameter
+        )
         {
-            return _underlying.GetTypeInferredDuringReduction(
-                reducedFromTypeParameter.EnsureCSharpSymbolOrNull(nameof(reducedFromTypeParameter))).
-                GetPublicSymbol();
+            return _underlying
+                .GetTypeInferredDuringReduction(
+                    reducedFromTypeParameter.EnsureCSharpSymbolOrNull(
+                        nameof(reducedFromTypeParameter)
+                    )
+                )
+                .GetPublicSymbol();
         }
 
         IMethodSymbol IMethodSymbol.ReduceExtensionMethod(ITypeSymbol receiverType)
         {
-            return _underlying.ReduceExtensionMethod(
-                receiverType.EnsureCSharpSymbolOrNull(nameof(receiverType)), compilation: null).
-                GetPublicSymbol();
+            return _underlying
+                .ReduceExtensionMethod(
+                    receiverType.EnsureCSharpSymbolOrNull(nameof(receiverType)),
+                    compilation: null
+                )
+                .GetPublicSymbol();
         }
 
         ImmutableArray<IMethodSymbol> IMethodSymbol.ExplicitInterfaceImplementations
         {
-            get
-            {
-                return _underlying.ExplicitInterfaceImplementations.GetPublicSymbols();
-            }
+            get { return _underlying.ExplicitInterfaceImplementations.GetPublicSymbols(); }
         }
 
         ISymbol IMethodSymbol.AssociatedSymbol
         {
-            get
-            {
-                return _underlying.AssociatedSymbol.GetPublicSymbol();
-            }
+            get { return _underlying.AssociatedSymbol.GetPublicSymbol(); }
         }
 
         bool IMethodSymbol.IsGenericMethod
         {
-            get
-            {
-                return _underlying.IsGenericMethod;
-            }
+            get { return _underlying.IsGenericMethod; }
         }
 
         bool IMethodSymbol.IsAsync
         {
-            get
-            {
-                return _underlying.IsAsync;
-            }
+            get { return _underlying.IsAsync; }
         }
 
         bool IMethodSymbol.HidesBaseMethodsByName
         {
-            get
-            {
-                return _underlying.HidesBaseMethodsByName;
-            }
+            get { return _underlying.HidesBaseMethodsByName; }
         }
 
         ImmutableArray<CustomModifier> IMethodSymbol.ReturnTypeCustomModifiers
         {
-            get
-            {
-                return _underlying.ReturnTypeWithAnnotations.CustomModifiers;
-            }
+            get { return _underlying.ReturnTypeWithAnnotations.CustomModifiers; }
         }
 
         ImmutableArray<CustomModifier> IMethodSymbol.RefCustomModifiers
         {
-            get
-            {
-                return _underlying.RefCustomModifiers;
-            }
+            get { return _underlying.RefCustomModifiers; }
         }
 
         ImmutableArray<AttributeData> IMethodSymbol.GetReturnTypeAttributes()
@@ -268,51 +245,50 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return _underlying.GetReturnTypeAttributes().Cast<CSharpAttributeData, AttributeData>();
         }
 
-        SignatureCallingConvention IMethodSymbol.CallingConvention => _underlying.CallingConvention.ToSignatureConvention();
+        SignatureCallingConvention IMethodSymbol.CallingConvention =>
+            _underlying.CallingConvention.ToSignatureConvention();
 
-        ImmutableArray<INamedTypeSymbol> IMethodSymbol.UnmanagedCallingConventionTypes => _underlying.UnmanagedCallingConventionTypes.SelectAsArray(t => t.GetPublicSymbol());
+        ImmutableArray<INamedTypeSymbol> IMethodSymbol.UnmanagedCallingConventionTypes =>
+            _underlying.UnmanagedCallingConventionTypes.SelectAsArray(t => t.GetPublicSymbol());
 
         IMethodSymbol IMethodSymbol.Construct(params ITypeSymbol[] typeArguments)
         {
             return _underlying.Construct(ConstructTypeArguments(typeArguments)).GetPublicSymbol();
         }
 
-        IMethodSymbol IMethodSymbol.Construct(ImmutableArray<ITypeSymbol> typeArguments, ImmutableArray<CodeAnalysis.NullableAnnotation> typeArgumentNullableAnnotations)
+        IMethodSymbol IMethodSymbol.Construct(
+            ImmutableArray<ITypeSymbol> typeArguments,
+            ImmutableArray<CodeAnalysis.NullableAnnotation> typeArgumentNullableAnnotations
+        )
         {
-            return _underlying.Construct(ConstructTypeArguments(typeArguments, typeArgumentNullableAnnotations)).GetPublicSymbol();
+            return _underlying
+                .Construct(ConstructTypeArguments(typeArguments, typeArgumentNullableAnnotations))
+                .GetPublicSymbol();
         }
 
         IMethodSymbol IMethodSymbol.PartialImplementationPart
         {
-            get
-            {
-                return _underlying.PartialImplementationPart.GetPublicSymbol();
-            }
+            get { return _underlying.PartialImplementationPart.GetPublicSymbol(); }
         }
 
         IMethodSymbol IMethodSymbol.PartialDefinitionPart
         {
-            get
-            {
-                return _underlying.PartialDefinitionPart.GetPublicSymbol();
-            }
+            get { return _underlying.PartialDefinitionPart.GetPublicSymbol(); }
         }
 
         bool IMethodSymbol.IsPartialDefinition => _underlying.IsPartialDefinition();
 
         INamedTypeSymbol IMethodSymbol.AssociatedAnonymousDelegate
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         int IMethodSymbol.Arity => _underlying.Arity;
 
         bool IMethodSymbol.IsExtensionMethod => _underlying.IsExtensionMethod;
 
-        System.Reflection.MethodImplAttributes IMethodSymbol.MethodImplementationFlags => _underlying.ImplementationAttributes;
+        System.Reflection.MethodImplAttributes IMethodSymbol.MethodImplementationFlags =>
+            _underlying.ImplementationAttributes;
 
         bool IMethodSymbol.IsVararg => _underlying.IsVararg;
 
@@ -342,7 +318,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return visitor.VisitMethod(this);
         }
 
-        protected override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        protected override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitMethod(this, argument);
         }

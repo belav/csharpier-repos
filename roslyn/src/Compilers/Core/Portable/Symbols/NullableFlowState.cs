@@ -14,14 +14,16 @@ namespace Microsoft.CodeAnalysis
         /// Syntax is not an expression, or was not analyzed.
         /// </summary>
         None = 0,
+
         /// <summary>
         /// Expression is not null.
         /// </summary>
         NotNull,
+
         /// <summary>
         /// Expression may be null.
         /// </summary>
-        MaybeNull
+        MaybeNull,
     }
 
     internal static class NullableFlowStateExtensions

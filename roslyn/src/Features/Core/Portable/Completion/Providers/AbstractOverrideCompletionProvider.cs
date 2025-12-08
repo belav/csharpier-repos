@@ -15,15 +15,31 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
-    internal abstract partial class AbstractOverrideCompletionProvider() : AbstractMemberInsertingCompletionProvider
+    internal abstract partial class AbstractOverrideCompletionProvider()
+        : AbstractMemberInsertingCompletionProvider
     {
-        public abstract SyntaxToken FindStartingToken(SyntaxTree tree, int position, CancellationToken cancellationToken);
-        public abstract ImmutableArray<ISymbol> FilterOverrides(ImmutableArray<ISymbol> members, ITypeSymbol? returnType);
-        public abstract bool TryDetermineModifiers(SyntaxToken startToken, SourceText text, int startLine, out Accessibility seenAccessibility, out DeclarationModifiers modifiers);
+        public abstract SyntaxToken FindStartingToken(
+            SyntaxTree tree,
+            int position,
+            CancellationToken cancellationToken
+        );
+        public abstract ImmutableArray<ISymbol> FilterOverrides(
+            ImmutableArray<ISymbol> members,
+            ITypeSymbol? returnType
+        );
+        public abstract bool TryDetermineModifiers(
+            SyntaxToken startToken,
+            SourceText text,
+            int startLine,
+            out Accessibility seenAccessibility,
+            out DeclarationModifiers modifiers
+        );
 
         public override async Task ProvideCompletionsAsync(CompletionContext context)
         {
-            var state = await ItemGetter.CreateAsync(this, context.Document, context.Position, context.CancellationToken).ConfigureAwait(false);
+            var state = await ItemGetter
+                .CreateAsync(this, context.Document, context.Position, context.CancellationToken)
+                .ConfigureAwait(false);
             var items = await state.GetItemsAsync().ConfigureAwait(false);
 
             if (!items.IsDefaultOrEmpty)
@@ -33,7 +49,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             }
         }
 
-        protected override Task<ISymbol> GenerateMemberAsync(ISymbol newOverriddenMember, INamedTypeSymbol newContainingType, Document newDocument, CompletionItem completionItem, CancellationToken cancellationToken)
+        protected override Task<ISymbol> GenerateMemberAsync(
+            ISymbol newOverriddenMember,
+            INamedTypeSymbol newContainingType,
+            Document newDocument,
+            CompletionItem completionItem,
+            CancellationToken cancellationToken
+        )
         {
             // Special case: if you are overriding object.ToString(), we will make the return value as non-nullable. The return was made nullable because
             // are implementations out there that will return null, but that's not something we really want new implementations doing. We may need to consider
@@ -42,21 +64,35 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             // https://github.com/dotnet/roslyn/issues/30317 for some additional conversation about this design decision.
             //
             // We don't check if methodSymbol.ContainingType is object, in case you're overriding something that is itself an override
-            if (newOverriddenMember is IMethodSymbol methodSymbol &&
-                methodSymbol.Name == "ToString" &&
-                methodSymbol.Parameters.Length == 0)
+            if (
+                newOverriddenMember is IMethodSymbol methodSymbol
+                && methodSymbol.Name == "ToString"
+                && methodSymbol.Parameters.Length == 0
+            )
             {
-                newOverriddenMember = CodeGenerationSymbolFactory.CreateMethodSymbol(methodSymbol, returnType: methodSymbol.ReturnType.WithNullableAnnotation(NullableAnnotation.NotAnnotated));
+                newOverriddenMember = CodeGenerationSymbolFactory.CreateMethodSymbol(
+                    methodSymbol,
+                    returnType: methodSymbol.ReturnType.WithNullableAnnotation(
+                        NullableAnnotation.NotAnnotated
+                    )
+                );
             }
 
             // Figure out what to insert, and do it. Throw if we've somehow managed to get this far and can't.
             var syntaxFactory = newDocument.GetRequiredLanguageService<SyntaxGenerator>();
 
             var itemModifiers = MemberInsertionCompletionItem.GetModifiers(completionItem);
-            var modifiers = itemModifiers.WithIsUnsafe(itemModifiers.IsUnsafe | newOverriddenMember.RequiresUnsafeModifier());
+            var modifiers = itemModifiers.WithIsUnsafe(
+                itemModifiers.IsUnsafe | newOverriddenMember.RequiresUnsafeModifier()
+            );
 
             return syntaxFactory.OverrideAsync(
-                newOverriddenMember, newContainingType, newDocument, modifiers, cancellationToken);
+                newOverriddenMember,
+                newContainingType,
+                newDocument,
+                modifiers,
+                cancellationToken
+            );
         }
 
         public abstract bool TryDetermineReturnType(
@@ -64,13 +100,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             SemanticModel semanticModel,
             CancellationToken cancellationToken,
             out ITypeSymbol? returnType,
-            out SyntaxToken nextToken);
+            out SyntaxToken nextToken
+        );
 
-        protected static bool IsOnStartLine(int position, SourceText text, int startLine)
-            => text.Lines.IndexOf(position) == startLine;
+        protected static bool IsOnStartLine(int position, SourceText text, int startLine) =>
+            text.Lines.IndexOf(position) == startLine;
 
-        protected static ITypeSymbol GetReturnType(ISymbol symbol)
-            => symbol.Kind switch
+        protected static ITypeSymbol GetReturnType(ISymbol symbol) =>
+            symbol.Kind switch
             {
                 SymbolKind.Event => ((IEventSymbol)symbol).Type,
                 SymbolKind.Method => ((IMethodSymbol)symbol).ReturnType,

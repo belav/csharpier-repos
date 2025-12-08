@@ -62,9 +62,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             return new StreamWriter(new MemoryStream());
         }
 
-        public static void WriteAllText(string path, string contents)
-        {
-        }
+        public static void WriteAllText(string path, string contents) { }
 
         public static string ReadAllText(string path)
         {
@@ -78,14 +76,16 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void LinqToJsonBasic()
         {
-            #region LinqToJsonBasic
-            JObject o = JObject.Parse(@"{
+#region LinqToJsonBasic
+            JObject o = JObject.Parse(
+                @"{
               'CPU': 'Intel',
               'Drives': [
                 'DVD read/writer',
                 '500 gigabyte hard drive'
               ]
-            }");
+            }"
+            );
 
             string cpu = (string)o["CPU"];
             // Intel
@@ -96,13 +96,13 @@ namespace Newtonsoft.Json.Tests.Documentation
             IList<string> allDrives = o["Drives"].Select(t => (string)t).ToList();
             // DVD read/writer
             // 500 gigabyte hard drive
-            #endregion
+#endregion
         }
 
         [Test]
         public void LinqToJsonCreateNormal()
         {
-            #region LinqToJsonCreateNormal
+#region LinqToJsonCreateNormal
             JArray array = new JArray();
             JValue text = new JValue("Manual text");
             JValue date = new JValue(new DateTime(2000, 5, 23));
@@ -115,7 +115,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             //   "Manual text",
             //   "2000-05-23T00:00:00"
             // ]
-            #endregion
+#endregion
         }
 
         public class Post
@@ -134,28 +134,35 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void LinqToJsonCreateDeclaratively()
         {
-            #region LinqToJsonCreateDeclaratively
+#region LinqToJsonCreateDeclaratively
             List<Post> posts = GetPosts();
 
-            JObject rss =
-                new JObject(
-                    new JProperty("channel",
-                        new JObject(
-                            new JProperty("title", "James Newton-King"),
-                            new JProperty("link", "http://james.newtonking.com"),
-                            new JProperty("description", "James Newton-King's blog."),
-                            new JProperty("item",
-                                new JArray(
-                                    from p in posts
-                                    orderby p.Title
-                                    select new JObject(
-                                        new JProperty("title", p.Title),
-                                        new JProperty("description", p.Description),
-                                        new JProperty("link", p.Link),
-                                        new JProperty("category",
-                                            new JArray(
-                                                from c in p.Categories
-                                                select new JValue(c)))))))));
+            JObject rss = new JObject(
+                new JProperty(
+                    "channel",
+                    new JObject(
+                        new JProperty("title", "James Newton-King"),
+                        new JProperty("link", "http://james.newtonking.com"),
+                        new JProperty("description", "James Newton-King's blog."),
+                        new JProperty(
+                            "item",
+                            new JArray(
+                                from p in posts
+                                orderby p.Title
+                                select new JObject(
+                                    new JProperty("title", p.Title),
+                                    new JProperty("description", p.Description),
+                                    new JProperty("link", p.Link),
+                                    new JProperty(
+                                        "category",
+                                        new JArray(from c in p.Categories select new JValue(c))
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
 
             Console.WriteLine(rss.ToString());
 
@@ -186,7 +193,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             //    ]
             //  }
             //}
-            #endregion
+#endregion
         }
 
         [Test]
@@ -194,34 +201,36 @@ namespace Newtonsoft.Json.Tests.Documentation
         {
             List<Post> posts = GetPosts();
 
-            #region LinqToJsonCreateFromObject
-            JObject o = JObject.FromObject(new
-            {
-                channel = new
+#region LinqToJsonCreateFromObject
+            JObject o = JObject.FromObject(
+                new
                 {
-                    title = "James Newton-King",
-                    link = "http://james.newtonking.com",
-                    description = "James Newton-King's blog.",
-                    item =
-                        from p in posts
+                    channel = new
+                    {
+                        title = "James Newton-King",
+                        link = "http://james.newtonking.com",
+                        description = "James Newton-King's blog.",
+                        item = from p in posts
                         orderby p.Title
                         select new
                         {
                             title = p.Title,
                             description = p.Description,
                             link = p.Link,
-                            category = p.Categories
-                        }
+                            category = p.Categories,
+                        },
+                    },
                 }
-            });
-            #endregion
+            );
+#endregion
         }
 
         [Test]
         public void LinqToJsonCreateParse()
         {
-            #region LinqToJsonCreateParse
-            string json = @"{
+#region LinqToJsonCreateParse
+            string json =
+                @"{
               CPU: 'Intel',
               Drives: [
                 'DVD read/writer',
@@ -230,40 +239,42 @@ namespace Newtonsoft.Json.Tests.Documentation
             }";
 
             JObject o = JObject.Parse(json);
-            #endregion
+#endregion
         }
 
         [Test]
         public void LinqToJsonCreateParseArray()
         {
-            #region LinqToJsonCreateParseArray
-            string json = @"[
+#region LinqToJsonCreateParseArray
+            string json =
+                @"[
               'Small',
               'Medium',
               'Large'
             ]";
 
             JArray a = JArray.Parse(json);
-            #endregion
+#endregion
         }
 
         [Test]
         public void LinqToJsonReadObject()
         {
-            #region LinqToJsonReadObject
+#region LinqToJsonReadObject
             using (StreamReader reader = File.OpenText(@"c:\person.json"))
             {
                 JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
                 // do stuff
             }
-            #endregion
+#endregion
         }
 
         [Test]
         public void LinqToJsonSimpleQuerying()
         {
-            #region LinqToJsonSimpleQuerying
-            string json = @"{
+#region LinqToJsonSimpleQuerying
+            string json =
+                @"{
               'channel': {
                 'title': 'James Newton-King',
                 'link': 'http://james.newtonking.com',
@@ -305,13 +316,14 @@ namespace Newtonsoft.Json.Tests.Documentation
             IList<string> categoriesText = categories.Select(c => (string)c).ToList();
             // Json.NET
             // CodePlex
-            #endregion
+#endregion
         }
 
         [Test]
         public void LinqToJsonQuerying()
         {
-            JObject rss = JObject.Parse(@"{
+            JObject rss = JObject.Parse(
+                @"{
               'channel': {
                 'title': 'James Newton-King',
                 'link': 'http://james.newtonking.com',
@@ -337,12 +349,11 @@ namespace Newtonsoft.Json.Tests.Documentation
                   }
                 ]
               }
-            }");
+            }"
+            );
 
-            #region LinqToJsonQuerying
-            var postTitles =
-                from p in rss["channel"]["item"]
-                select (string)p["title"];
+#region LinqToJsonQuerying
+            var postTitles = from p in rss["channel"]["item"] select (string)p["title"];
 
             foreach (var item in postTitles)
             {
@@ -354,8 +365,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             var categories =
                 from c in rss["channel"]["item"].SelectMany(i => i["categories"]).Values<string>()
-                group c by c
-                into g
+                group c by c into g
                 orderby g.Count() descending
                 select new { Category = g.Key, Count = g.Count() };
 
@@ -367,13 +377,13 @@ namespace Newtonsoft.Json.Tests.Documentation
             //Json.NET - Count: 2
             //LINQ - Count: 1
             //CodePlex - Count: 1
-            #endregion
+#endregion
 
             Assert.AreEqual(2, postTitles.Count());
             Assert.AreEqual(3, categories.Count());
         }
 
-        #region LinqToJsonDeserializeObject
+#region LinqToJsonDeserializeObject
         public class Shortie
         {
             public string Original { get; set; }
@@ -387,13 +397,14 @@ namespace Newtonsoft.Json.Tests.Documentation
             public int Code { get; set; }
             public string ErrorMessage { get; set; }
         }
-        #endregion
+#endregion
 
         [Test]
         public void LinqToJsonDeserializeExample()
         {
-            #region LinqToJsonDeserializeExample
-            string jsonText = @"{
+#region LinqToJsonDeserializeExample
+            string jsonText =
+                @"{
               'short': {
                 'original': 'http://www.foo.com/',
                 'short': 'krehqk',
@@ -413,8 +424,8 @@ namespace Newtonsoft.Json.Tests.Documentation
                 Error = new ShortieException
                 {
                     Code = (int)json["short"]["error"]["code"],
-                    ErrorMessage = (string)json["short"]["error"]["msg"]
-                }
+                    ErrorMessage = (string)json["short"]["error"]["msg"],
+                },
             };
 
             Console.WriteLine(shortie.Original);
@@ -422,7 +433,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             Console.WriteLine(shortie.Error.ErrorMessage);
             // No action taken
-            #endregion
+#endregion
 
             Assert.AreEqual("http://www.foo.com/", shortie.Original);
             Assert.AreEqual("No action taken", shortie.Error.ErrorMessage);
@@ -431,7 +442,8 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void SelectTokenSimple()
         {
-            JObject o = JObject.Parse(@"{
+            JObject o = JObject.Parse(
+                @"{
               'Stores': [
                 'Lambton Quay',
                 'Willis Street'
@@ -460,11 +472,12 @@ namespace Newtonsoft.Json.Tests.Documentation
                   ]
                 }
               ]
-            }");
+            }"
+            );
 
-            #region SelectTokenSimple
+#region SelectTokenSimple
             string name = (string)o.SelectToken("Manufacturers[0].Name");
-            #endregion
+#endregion
 
             Assert.AreEqual("Acme Co", name);
         }
@@ -472,8 +485,9 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void SelectTokenComplex()
         {
-            #region SelectTokenComplex
-            JObject o = JObject.Parse(@"{
+#region SelectTokenComplex
+            JObject o = JObject.Parse(
+                @"{
               'Stores': [
                 'Lambton Quay',
                 'Willis Street'
@@ -502,7 +516,8 @@ namespace Newtonsoft.Json.Tests.Documentation
                   ]
                 }
               ]
-            }");
+            }"
+            );
 
             string name = (string)o.SelectToken("Manufacturers[0].Name");
             // Acme Co
@@ -512,7 +527,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             string productName = (string)o.SelectToken("Manufacturers[1].Products[0].Name");
             // Elbow Grease
-            #endregion
+#endregion
 
             Assert.AreEqual("Acme Co", name);
             Assert.AreEqual(50m, productPrice);
@@ -522,7 +537,8 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void SelectTokenLinq()
         {
-            JObject o = JObject.Parse(@"{
+            JObject o = JObject.Parse(
+                @"{
               'Stores': [
                 'Lambton Quay',
                 'Willis Street'
@@ -551,20 +567,24 @@ namespace Newtonsoft.Json.Tests.Documentation
                   ]
                 }
               ]
-            }");
+            }"
+            );
 
-            #region SelectTokenLinq
+#region SelectTokenLinq
             IList<string> storeNames = o.SelectToken("Stores").Select(s => (string)s).ToList();
             // Lambton Quay
             // Willis Street
 
-            IList<string> firstProductNames = o["Manufacturers"].Select(m => (string)m.SelectToken("Products[1].Name")).ToList();
+            IList<string> firstProductNames = o["Manufacturers"]
+                .Select(m => (string)m.SelectToken("Products[1].Name"))
+                .ToList();
             // null
             // Headlight Fluid
 
-            decimal totalPrice = o["Manufacturers"].Sum(m => (decimal)m.SelectToken("Products[0].Price"));
+            decimal totalPrice = o["Manufacturers"]
+                .Sum(m => (decimal)m.SelectToken("Products[0].Price"));
             // 149.95
-            #endregion
+#endregion
 
             Assert.AreEqual(2, storeNames.Count);
             Assert.AreEqual(2, firstProductNames.Count);

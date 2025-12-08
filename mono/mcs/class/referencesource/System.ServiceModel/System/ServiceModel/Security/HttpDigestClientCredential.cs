@@ -10,7 +10,8 @@ namespace System.ServiceModel.Security
 
     public sealed class HttpDigestClientCredential
     {
-        TokenImpersonationLevel allowedImpersonationLevel = WindowsClientCredential.DefaultImpersonationLevel;
+        TokenImpersonationLevel allowedImpersonationLevel =
+            WindowsClientCredential.DefaultImpersonationLevel;
         NetworkCredential digestCredentials;
         bool isReadOnly;
 
@@ -22,16 +23,15 @@ namespace System.ServiceModel.Security
         internal HttpDigestClientCredential(HttpDigestClientCredential other)
         {
             this.allowedImpersonationLevel = other.allowedImpersonationLevel;
-            this.digestCredentials = SecurityUtils.GetNetworkCredentialsCopy(other.digestCredentials);
+            this.digestCredentials = SecurityUtils.GetNetworkCredentialsCopy(
+                other.digestCredentials
+            );
             this.isReadOnly = other.isReadOnly;
         }
 
         public TokenImpersonationLevel AllowedImpersonationLevel
         {
-            get
-            {
-                return this.allowedImpersonationLevel;
-            }
+            get { return this.allowedImpersonationLevel; }
             set
             {
                 ThrowIfImmutable();
@@ -41,10 +41,7 @@ namespace System.ServiceModel.Security
 
         public NetworkCredential ClientCredential
         {
-            get
-            {
-                return this.digestCredentials;
-            }
+            get { return this.digestCredentials; }
             set
             {
                 ThrowIfImmutable();
@@ -61,7 +58,9 @@ namespace System.ServiceModel.Security
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             }
         }
     }

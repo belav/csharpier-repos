@@ -13,20 +13,63 @@ namespace System.Globalization.Tests
 
         public static IEnumerable<object[]> GetMonthName_TestData()
         {
-            string[] englishMonthNames = new string[] { "", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "" };
+            string[] englishMonthNames = new string[]
+            {
+                "",
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+                "",
+            };
             yield return new object[] { DateTimeFormatInfo.InvariantInfo, englishMonthNames };
             yield return new object[] { new DateTimeFormatInfo(), englishMonthNames };
-            yield return new object[] { new CultureInfo("en-US").DateTimeFormat, englishMonthNames };
+            yield return new object[]
+            {
+                new CultureInfo("en-US").DateTimeFormat,
+                englishMonthNames,
+            };
 
             if (!PlatformDetection.IsUbuntu)
             {
-                yield return new object[] { new CultureInfo("fr-FR").DateTimeFormat, new string[] { "", "janvier", "f\u00E9vrier", "mars", "avril", "mai", "juin", "juillet", "ao\u00FBt", "septembre", "octobre", "novembre", "d\u00E9cembre", "" } };
+                yield return new object[]
+                {
+                    new CultureInfo("fr-FR").DateTimeFormat,
+                    new string[]
+                    {
+                        "",
+                        "janvier",
+                        "f\u00E9vrier",
+                        "mars",
+                        "avril",
+                        "mai",
+                        "juin",
+                        "juillet",
+                        "ao\u00FBt",
+                        "septembre",
+                        "octobre",
+                        "novembre",
+                        "d\u00E9cembre",
+                        "",
+                    },
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(GetMonthName_TestData))]
-        public void GetMonthName_Invoke_ReturnsExpected(DateTimeFormatInfo format, string[] expected)
+        public void GetMonthName_Invoke_ReturnsExpected(
+            DateTimeFormatInfo format,
+            string[] expected
+        )
         {
             for (int i = MinMonth; i <= MaxMonth; ++i)
             {
@@ -40,7 +83,10 @@ namespace System.Globalization.Tests
         public void GetMonthName_InvalidMonth_ThrowsArgumentOutOfRangeException(int month)
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("month", () => format.GetMonthName(month));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "month",
+                () => format.GetMonthName(month)
+            );
         }
     }
 }

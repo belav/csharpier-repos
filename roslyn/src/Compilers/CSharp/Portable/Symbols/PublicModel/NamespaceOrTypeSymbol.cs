@@ -30,7 +30,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return UnderlyingNamespaceOrTypeSymbol.GetTypeMembers(name).GetPublicSymbols();
         }
 
-        ImmutableArray<INamedTypeSymbol> INamespaceOrTypeSymbol.GetTypeMembers(string name, int arity)
+        ImmutableArray<INamedTypeSymbol> INamespaceOrTypeSymbol.GetTypeMembers(
+            string name,
+            int arity
+        )
         {
             return UnderlyingNamespaceOrTypeSymbol.GetTypeMembers(name, arity).GetPublicSymbols();
         }

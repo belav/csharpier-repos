@@ -21,7 +21,10 @@ namespace System.IO.FileSystem.Tests
         {
             using VirtualDriveHelper virtualDrive = new();
             char letter = virtualDrive.VirtualDriveLetter; // Trigger calling subst
-            DriveInfo drive = DriveInfo.GetDrives().Where(d => d.RootDirectory.FullName[0] == letter).FirstOrDefault();
+            DriveInfo drive = DriveInfo
+                .GetDrives()
+                .Where(d => d.RootDirectory.FullName[0] == letter)
+                .FirstOrDefault();
             Assert.NotNull(drive);
             Assert.Throws<IOException>(() => drive.VolumeLabel = "impossible");
         }

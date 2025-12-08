@@ -6,25 +6,20 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.Extensions.Options.Generators
 {
-    #pragma warning disable CA1052 // Static holder types should be Static or NotInheritable
+#pragma warning disable CA1052 // Static holder types should be Static or NotInheritable
     internal class DiagDescriptorsBase
-    #pragma warning restore CA1052
+#pragma warning restore CA1052
     {
         protected static DiagnosticDescriptor Make(
-                string id,
-                string title,
-                string messageFormat,
-                string category,
-                DiagnosticSeverity defaultSeverity = DiagnosticSeverity.Error,
-                bool isEnabledByDefault = true)
+            string id,
+            string title,
+            string messageFormat,
+            string category,
+            DiagnosticSeverity defaultSeverity = DiagnosticSeverity.Error,
+            bool isEnabledByDefault = true
+        )
         {
-            return new(
-                id,
-                title,
-                messageFormat,
-                category,
-                defaultSeverity,
-                isEnabledByDefault);
+            return new(id, title, messageFormat, category, defaultSeverity, isEnabledByDefault);
         }
     }
 }

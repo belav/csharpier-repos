@@ -7,7 +7,11 @@ using System.Web.Http.ModelBinding;
 
 namespace System.Web.Http.Controllers
 {
-    [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "ServicesContainer is disposed with the configuration")]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable",
+        Justification = "ServicesContainer is disposed with the configuration"
+    )]
     public sealed class HttpControllerSettings
     {
         private MediaTypeFormatterCollection _formatters;

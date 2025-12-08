@@ -21,9 +21,24 @@ namespace System.Web.Http.Dispatcher
                 return new TheoryDataSet<HttpError, Func<string>, string, string>
                 {
                     { httpError, () => httpError.Message, "Message", "Message_Value" },
-                    { httpError, () => httpError.MessageDetail, "MessageDetail", "MessageDetail_Value" },
-                    { httpError, () => httpError.ExceptionMessage, "ExceptionMessage", "ExceptionMessage_Value" },
-                    { httpError, () => httpError.ExceptionType, "ExceptionType", "ExceptionType_Value" },
+                    {
+                        httpError,
+                        () => httpError.MessageDetail,
+                        "MessageDetail",
+                        "MessageDetail_Value"
+                    },
+                    {
+                        httpError,
+                        () => httpError.ExceptionMessage,
+                        "ExceptionMessage",
+                        "ExceptionMessage_Value"
+                    },
+                    {
+                        httpError,
+                        () => httpError.ExceptionType,
+                        "ExceptionType",
+                        "ExceptionType_Value"
+                    },
                     { httpError, () => httpError.StackTrace, "StackTrace", "StackTrace_Value" },
                 };
             }
@@ -38,7 +53,16 @@ namespace System.Web.Http.Dispatcher
                     new HttpError(),
                     new HttpError("error"),
                     new HttpError(new NotImplementedException(), true),
-                    new HttpError(new ModelStateDictionary() { { "key", new ModelState() { Errors = { new ModelError("error") } } } }, true),
+                    new HttpError(
+                        new ModelStateDictionary()
+                        {
+                            {
+                                "key",
+                                new ModelState() { Errors = { new ModelError("error") } }
+                            },
+                        },
+                        true
+                    ),
                     new HttpError("error", "errordetail"),
                 };
             }
@@ -47,15 +71,15 @@ namespace System.Web.Http.Dispatcher
         [Fact]
         public void Constructor_GuardClauses()
         {
-            Assert.ThrowsArgumentNull(
-                () => new HttpError(message: null),
-                "message");
+            Assert.ThrowsArgumentNull(() => new HttpError(message: null), "message");
             Assert.ThrowsArgumentNull(
                 () => new HttpError(exception: null, includeErrorDetail: false),
-                "exception");
+                "exception"
+            );
             Assert.ThrowsArgumentNull(
                 () => new HttpError(modelState: null, includeErrorDetail: false),
-                "modelState");
+                "modelState"
+            );
         }
 
         [Fact]
@@ -63,7 +87,10 @@ namespace System.Web.Http.Dispatcher
         {
             HttpError error = new HttpError("something bad happened");
 
-            Assert.Contains(new KeyValuePair<string, object>("Message", "something bad happened"), error);
+            Assert.Contains(
+                new KeyValuePair<string, object>("Message", "something bad happened"),
+                error
+            );
         }
 
         [Fact]
@@ -71,9 +98,15 @@ namespace System.Web.Http.Dispatcher
         {
             HttpError error = new HttpError(new ArgumentException("error", new Exception()), true);
 
-            Assert.Contains(new KeyValuePair<string, object>("Message", "An error has occurred."), error);
+            Assert.Contains(
+                new KeyValuePair<string, object>("Message", "An error has occurred."),
+                error
+            );
             Assert.Contains(new KeyValuePair<string, object>("ExceptionMessage", "error"), error);
-            Assert.Contains(new KeyValuePair<string, object>("ExceptionType", "System.ArgumentException"), error);
+            Assert.Contains(
+                new KeyValuePair<string, object>("ExceptionType", "System.ArgumentException"),
+                error
+            );
             Assert.True(error.ContainsKey("StackTrace"));
             Assert.True(error.ContainsKey("InnerException"));
             Assert.IsType<HttpError>(error["InnerException"]);
@@ -91,7 +124,10 @@ namespace System.Web.Http.Dispatcher
             HttpError error = new HttpError(modelState, true);
             HttpError modelStateError = error["ModelState"] as HttpError;
 
-            Assert.Contains(new KeyValuePair<string, object>("Message", "The request is invalid."), error);
+            Assert.Contains(
+                new KeyValuePair<string, object>("Message", "The request is invalid."),
+                error
+            );
             Assert.Contains("error1", modelStateError["[0].Name"] as IEnumerable<string>);
             Assert.Contains("error2", modelStateError["[0].Name"] as IEnumerable<string>);
             Assert.Contains("error", modelStateError["[0].Address"] as IEnumerable<string>);
@@ -104,7 +140,10 @@ namespace System.Web.Http.Dispatcher
         {
             HttpError error = new HttpError(new ArgumentException("error", new Exception()), false);
 
-            Assert.Contains(new KeyValuePair<string, object>("Message", "An error has occurred."), error);
+            Assert.Contains(
+                new KeyValuePair<string, object>("Message", "An error has occurred."),
+                error
+            );
             Assert.False(error.ContainsKey("ExceptionMessage"));
             Assert.False(error.ContainsKey("ExceptionType"));
             Assert.False(error.ContainsKey("StackTrace"));
@@ -123,7 +162,10 @@ namespace System.Web.Http.Dispatcher
             HttpError error = new HttpError(modelState, false);
             HttpError modelStateError = error["ModelState"] as HttpError;
 
-            Assert.Contains(new KeyValuePair<string, object>("Message", "The request is invalid."), error);
+            Assert.Contains(
+                new KeyValuePair<string, object>("Message", "The request is invalid."),
+                error
+            );
             Assert.Contains("error1", modelStateError["[0].Name"] as IEnumerable<string>);
             Assert.Contains("error2", modelStateError["[0].Name"] as IEnumerable<string>);
             Assert.Contains("error", modelStateError["[0].Address"] as IEnumerable<string>);
@@ -134,13 +176,31 @@ namespace System.Web.Http.Dispatcher
         [Fact]
         public async Task HttpError_Roundtrips_WithJsonFormatter()
         {
-            HttpError error = new HttpError("error") { { "ErrorCode", 42 }, { "Data", new[] { "a", "b", "c" } } };
+            HttpError error = new HttpError("error")
+            {
+                { "ErrorCode", 42 },
+                { "Data", new[] { "a", "b", "c" } },
+            };
             MediaTypeFormatter formatter = new JsonMediaTypeFormatter();
             MemoryStream stream = new MemoryStream();
 
-            await formatter.WriteToStreamAsync(typeof(HttpError), error, stream, content: null, transportContext: null);
+            await formatter.WriteToStreamAsync(
+                typeof(HttpError),
+                error,
+                stream,
+                content: null,
+                transportContext: null
+            );
             stream.Position = 0;
-            HttpError roundtrippedError = (await formatter.ReadFromStreamAsync(typeof(HttpError), stream, content: null, formatterLogger: null)) as HttpError;
+            HttpError roundtrippedError =
+                (
+                    await formatter.ReadFromStreamAsync(
+                        typeof(HttpError),
+                        stream,
+                        content: null,
+                        formatterLogger: null
+                    )
+                ) as HttpError;
 
             Assert.NotNull(roundtrippedError);
             Assert.Equal("error", roundtrippedError.Message);
@@ -155,13 +215,31 @@ namespace System.Web.Http.Dispatcher
         [Fact]
         public async Task HttpError_Roundtrips_WithXmlFormatter()
         {
-            HttpError error = new HttpError("error") { { "ErrorCode", 42 }, { "Data", new[] { "a", "b", "c" } } };
+            HttpError error = new HttpError("error")
+            {
+                { "ErrorCode", 42 },
+                { "Data", new[] { "a", "b", "c" } },
+            };
             MediaTypeFormatter formatter = new XmlMediaTypeFormatter();
             MemoryStream stream = new MemoryStream();
 
-            await formatter.WriteToStreamAsync(typeof(HttpError), error, stream, content: null, transportContext: null);
+            await formatter.WriteToStreamAsync(
+                typeof(HttpError),
+                error,
+                stream,
+                content: null,
+                transportContext: null
+            );
             stream.Position = 0;
-            HttpError roundtrippedError = (await formatter.ReadFromStreamAsync(typeof(HttpError), stream, content: null, formatterLogger: null)) as HttpError;
+            HttpError roundtrippedError =
+                (
+                    await formatter.ReadFromStreamAsync(
+                        typeof(HttpError),
+                        stream,
+                        content: null,
+                        formatterLogger: null
+                    )
+                ) as HttpError;
 
             Assert.NotNull(roundtrippedError);
             Assert.Equal("error", roundtrippedError.Message);
@@ -177,9 +255,23 @@ namespace System.Web.Http.Dispatcher
             MediaTypeFormatter formatter = new XmlMediaTypeFormatter();
             MemoryStream stream = new MemoryStream();
 
-            await formatter.WriteToStreamAsync(typeof(HttpError), error, stream, content: null, transportContext: null);
+            await formatter.WriteToStreamAsync(
+                typeof(HttpError),
+                error,
+                stream,
+                content: null,
+                transportContext: null
+            );
             stream.Position = 0;
-            HttpError roundtrippedError = (await formatter.ReadFromStreamAsync(typeof(HttpError), stream, content: null, formatterLogger: null)) as HttpError;
+            HttpError roundtrippedError =
+                (
+                    await formatter.ReadFromStreamAsync(
+                        typeof(HttpError),
+                        stream,
+                        content: null,
+                        formatterLogger: null
+                    )
+                ) as HttpError;
 
             Assert.NotNull(roundtrippedError);
             Assert.Equal(message, roundtrippedError.Message);
@@ -188,13 +280,31 @@ namespace System.Web.Http.Dispatcher
         [Fact]
         public async Task HttpError_Roundtrips_WithXmlSerializer()
         {
-            HttpError error = new HttpError("error") { { "ErrorCode", 42 }, { "Data", new[] { "a", "b", "c" } } };
+            HttpError error = new HttpError("error")
+            {
+                { "ErrorCode", 42 },
+                { "Data", new[] { "a", "b", "c" } },
+            };
             MediaTypeFormatter formatter = new XmlMediaTypeFormatter() { UseXmlSerializer = true };
             MemoryStream stream = new MemoryStream();
 
-            await formatter.WriteToStreamAsync(typeof(HttpError), error, stream, content: null, transportContext: null);
+            await formatter.WriteToStreamAsync(
+                typeof(HttpError),
+                error,
+                stream,
+                content: null,
+                transportContext: null
+            );
             stream.Position = 0;
-            HttpError roundtrippedError = (await formatter.ReadFromStreamAsync(typeof(HttpError), stream, content: null, formatterLogger: null)) as HttpError;
+            HttpError roundtrippedError =
+                (
+                    await formatter.ReadFromStreamAsync(
+                        typeof(HttpError),
+                        stream,
+                        content: null,
+                        formatterLogger: null
+                    )
+                ) as HttpError;
 
             Assert.NotNull(roundtrippedError);
             Assert.Equal("error", roundtrippedError.Message);
@@ -205,18 +315,28 @@ namespace System.Web.Http.Dispatcher
         [Fact]
         public async Task HttpErrorForInnerException_Serializes_WithXmlSerializer()
         {
-            HttpError error = new HttpError(new ArgumentException("error", new Exception("innerError")), includeErrorDetail: true);
+            HttpError error = new HttpError(
+                new ArgumentException("error", new Exception("innerError")),
+                includeErrorDetail: true
+            );
             MediaTypeFormatter formatter = new XmlMediaTypeFormatter() { UseXmlSerializer = true };
             MemoryStream stream = new MemoryStream();
 
-            await formatter.WriteToStreamAsync(typeof(HttpError), error, stream, content: null, transportContext: null);
+            await formatter.WriteToStreamAsync(
+                typeof(HttpError),
+                error,
+                stream,
+                content: null,
+                transportContext: null
+            );
             stream.Position = 0;
             string serializedError = new StreamReader(stream).ReadToEnd();
 
             Assert.NotNull(serializedError);
             Assert.Equal(
                 "<Error><Message>An error has occurred.</Message><ExceptionMessage>error</ExceptionMessage><ExceptionType>System.ArgumentException</ExceptionType><StackTrace /><InnerException><Message>An error has occurred.</Message><ExceptionMessage>innerError</ExceptionMessage><ExceptionType>System.Exception</ExceptionType><StackTrace /></InnerException></Error>",
-                serializedError);
+                serializedError
+            );
         }
 
         [Fact]
@@ -228,7 +348,8 @@ namespace System.Web.Http.Dispatcher
                 e => e.Message,
                 expectedDefaultValue: message,
                 allowNull: true,
-                roundTripTestValue: "HelloAgain");
+                roundTripTestValue: "HelloAgain"
+            );
         }
 
         [Fact]
@@ -240,7 +361,8 @@ namespace System.Web.Http.Dispatcher
                 e => e.MessageDetail,
                 expectedDefaultValue: messageDetail,
                 allowNull: true,
-                roundTripTestValue: "HelloAgain");
+                roundTripTestValue: "HelloAgain"
+            );
         }
 
         [Fact]
@@ -253,7 +375,8 @@ namespace System.Web.Http.Dispatcher
                 e => e.ExceptionMessage,
                 expectedDefaultValue: exceptionMessage,
                 allowNull: true,
-                roundTripTestValue: "HelloAgain");
+                roundTripTestValue: "HelloAgain"
+            );
         }
 
         [Fact]
@@ -265,7 +388,8 @@ namespace System.Web.Http.Dispatcher
                 e => e.ExceptionType,
                 expectedDefaultValue: exception.GetType().FullName,
                 allowNull: true,
-                roundTripTestValue: "HelloAgain");
+                roundTripTestValue: "HelloAgain"
+            );
         }
 
         [Fact]
@@ -286,7 +410,8 @@ namespace System.Web.Http.Dispatcher
                 e => e.StackTrace,
                 expectedDefaultValue: exception.StackTrace,
                 allowNull: true,
-                roundTripTestValue: "HelloAgain");
+                roundTripTestValue: "HelloAgain"
+            );
         }
 
         [Fact]
@@ -320,7 +445,12 @@ namespace System.Web.Http.Dispatcher
 
         [Theory]
         [PropertyData("ErrorKeyValue")]
-        public void HttpErrorStringProperties_UseCorrectHttpErrorKey(HttpError httpError, Func<string> productUnderTest, string key, string actualValue)
+        public void HttpErrorStringProperties_UseCorrectHttpErrorKey(
+            HttpError httpError,
+            Func<string> productUnderTest,
+            string key,
+            string actualValue
+        )
         {
             // Arrange
             httpError[key] = actualValue;

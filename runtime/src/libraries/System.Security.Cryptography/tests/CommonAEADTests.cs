@@ -42,7 +42,11 @@ namespace System.Security.Cryptography.Tests
             return ((size - keySizes.MinSize) % keySizes.SkipSize) == 0;
         }
 
-        public static IEnumerable<object[]> GetValidSizes(KeySizes validSizes, int minValue = 0, int maxValue = 17)
+        public static IEnumerable<object[]> GetValidSizes(
+            KeySizes validSizes,
+            int minValue = 0,
+            int maxValue = 17
+        )
         {
             for (int i = minValue; i <= maxValue; i++)
             {
@@ -51,7 +55,11 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        public static IEnumerable<object[]> GetInvalidSizes(KeySizes validSizes, int minValue = 0, int maxValue = 17)
+        public static IEnumerable<object[]> GetInvalidSizes(
+            KeySizes validSizes,
+            int minValue = 0,
+            int maxValue = 17
+        )
         {
             for (int i = minValue; i <= maxValue; i++)
             {
@@ -80,9 +88,8 @@ namespace System.Security.Cryptography.Tests
 
             public override string ToString()
             {
-                return
-                    $"{Source} - {CaseId} ({BitLength(Key)}/{BitLength(Nonce)}/" +
-                    $"{BitLength(Plaintext)}/{BitLength(Tag)}/{BitLength(AssociatedData)})";
+                return $"{Source} - {CaseId} ({BitLength(Key)}/{BitLength(Nonce)}/"
+                    + $"{BitLength(Plaintext)}/{BitLength(Tag)}/{BitLength(AssociatedData)})";
             }
         }
     }

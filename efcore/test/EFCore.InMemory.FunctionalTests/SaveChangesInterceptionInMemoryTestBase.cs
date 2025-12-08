@@ -6,42 +6,40 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class SaveChangesInterceptionInMemoryTestBase : SaveChangesInterceptionTestBase
 {
     protected SaveChangesInterceptionInMemoryTestBase(InterceptionInMemoryFixtureBase fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    protected override bool SupportsOptimisticConcurrency
-        => false;
+    protected override bool SupportsOptimisticConcurrency => false;
 
     public abstract class InterceptionInMemoryFixtureBase : InterceptionFixtureBase
     {
-        protected override string StoreName
-            => "SaveChangesInterception";
+        protected override string StoreName => "SaveChangesInterception";
 
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
 
         protected override IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<IInterceptor> injectedInterceptors)
-            => base.InjectInterceptors(serviceCollection.AddEntityFrameworkInMemoryDatabase(), injectedInterceptors);
+            IEnumerable<IInterceptor> injectedInterceptors
+        ) =>
+            base.InjectInterceptors(
+                serviceCollection.AddEntityFrameworkInMemoryDatabase(),
+                injectedInterceptors
+            );
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).ConfigureWarnings(c => c.Ignore(InMemoryEventId.TransactionIgnoredWarning));
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
+                .ConfigureWarnings(c => c.Ignore(InMemoryEventId.TransactionIgnoredWarning));
     }
 
     public class SaveChangesInterceptionInMemoryTest
-        : SaveChangesInterceptionInMemoryTestBase, IClassFixture<SaveChangesInterceptionInMemoryTest.InterceptionInMemoryFixture>
+        : SaveChangesInterceptionInMemoryTestBase,
+            IClassFixture<SaveChangesInterceptionInMemoryTest.InterceptionInMemoryFixture>
     {
         public SaveChangesInterceptionInMemoryTest(InterceptionInMemoryFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class InterceptionInMemoryFixture : InterceptionInMemoryFixtureBase
         {
-            protected override bool ShouldSubscribeToDiagnosticListener
-                => false;
+            protected override bool ShouldSubscribeToDiagnosticListener => false;
         }
     }
 
@@ -49,15 +47,14 @@ public abstract class SaveChangesInterceptionInMemoryTestBase : SaveChangesInter
         : SaveChangesInterceptionInMemoryTestBase,
             IClassFixture<SaveChangesInterceptionWithDiagnosticsInMemoryTest.InterceptionInMemoryFixture>
     {
-        public SaveChangesInterceptionWithDiagnosticsInMemoryTest(InterceptionInMemoryFixture fixture)
-            : base(fixture)
-        {
-        }
+        public SaveChangesInterceptionWithDiagnosticsInMemoryTest(
+            InterceptionInMemoryFixture fixture
+        )
+            : base(fixture) { }
 
         public class InterceptionInMemoryFixture : InterceptionInMemoryFixtureBase
         {
-            protected override bool ShouldSubscribeToDiagnosticListener
-                => true;
+            protected override bool ShouldSubscribeToDiagnosticListener => true;
         }
     }
 }

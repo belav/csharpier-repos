@@ -13,11 +13,24 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 {
     internal static class RazorClassifierAccessor
     {
-        public static async Task<IEnumerable<ClassifiedSpan>> GetClassifiedSpansAsync(Document document, TextSpan textSpan, RazorClassificationOptionsWrapper options, CancellationToken cancellationToken)
+        public static async Task<IEnumerable<ClassifiedSpan>> GetClassifiedSpansAsync(
+            Document document,
+            TextSpan textSpan,
+            RazorClassificationOptionsWrapper options,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             return Classifier.GetClassifiedSpans(
-                document.Project.Solution.Services, document.Project, semanticModel, textSpan, options.UnderlyingObject, cancellationToken);
+                document.Project.Solution.Services,
+                document.Project,
+                semanticModel,
+                textSpan,
+                options.UnderlyingObject,
+                cancellationToken
+            );
         }
     }
 }

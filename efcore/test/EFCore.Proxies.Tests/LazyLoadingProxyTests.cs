@@ -14,8 +14,8 @@ public class LazyLoadingProxyTests
         using var context = new LazyContext<LazySealedEntity>();
         Assert.Equal(
             ProxiesStrings.ItsASeal(nameof(LazySealedEntity)),
-            Assert.Throws<InvalidOperationException>(
-                () => context.Model).Message);
+            Assert.Throws<InvalidOperationException>(() => context.Model).Message
+        );
     }
 
     [ConditionalFact]
@@ -23,9 +23,12 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContext<LazyNonVirtualNavEntity>();
         Assert.Equal(
-            ProxiesStrings.NonVirtualProperty(nameof(LazyNonVirtualNavEntity.SelfRef), nameof(LazyNonVirtualNavEntity)),
-            Assert.Throws<InvalidOperationException>(
-                () => context.Model).Message);
+            ProxiesStrings.NonVirtualProperty(
+                nameof(LazyNonVirtualNavEntity.SelfRef),
+                nameof(LazyNonVirtualNavEntity)
+            ),
+            Assert.Throws<InvalidOperationException>(() => context.Model).Message
+        );
     }
 
     [ConditionalFact]
@@ -33,7 +36,10 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContextIgnoreVirtuals<LazyNonVirtualNavEntity>();
         Assert.NotNull(
-            context.Model.FindEntityType(typeof(LazyNonVirtualNavEntity))!.FindNavigation(nameof(LazyNonVirtualNavEntity.SelfRef)));
+            context
+                .Model.FindEntityType(typeof(LazyNonVirtualNavEntity))!
+                .FindNavigation(nameof(LazyNonVirtualNavEntity.SelfRef))
+        );
     }
 
     [ConditionalFact]
@@ -41,7 +47,10 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContextAllowingFieldNavigation();
         Assert.NotNull(
-            context.Model.FindEntityType(typeof(LazyFieldNavEntity))!.FindNavigation(nameof(LazyFieldNavEntity.SelfRef)));
+            context
+                .Model.FindEntityType(typeof(LazyFieldNavEntity))!
+                .FindNavigation(nameof(LazyFieldNavEntity.SelfRef))
+        );
     }
 
     [ConditionalFact]
@@ -49,7 +58,10 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContextDisabledNavigation();
         Assert.NotNull(
-            context.Model.FindEntityType(typeof(LazyNonVirtualNavEntity))!.FindNavigation(nameof(LazyNonVirtualNavEntity.SelfRef)));
+            context
+                .Model.FindEntityType(typeof(LazyNonVirtualNavEntity))!
+                .FindNavigation(nameof(LazyNonVirtualNavEntity.SelfRef))
+        );
     }
 
     [ConditionalFact]
@@ -57,7 +69,10 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContextDisabledFieldNavigation();
         Assert.NotNull(
-            context.Model.FindEntityType(typeof(LazyFieldNavEntity))!.FindNavigation(nameof(LazyFieldNavEntity.SelfRef)));
+            context
+                .Model.FindEntityType(typeof(LazyFieldNavEntity))!
+                .FindNavigation(nameof(LazyFieldNavEntity.SelfRef))
+        );
     }
 
     [ConditionalFact]
@@ -65,8 +80,10 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContext<LazyNonVirtualOwnedNavEntity>();
         Assert.NotNull(
-            context.Model.FindEntityType(typeof(LazyNonVirtualOwnedNavEntity))!.FindNavigation(
-                nameof(LazyNonVirtualOwnedNavEntity.NavigationToOwned)));
+            context
+                .Model.FindEntityType(typeof(LazyNonVirtualOwnedNavEntity))!
+                .FindNavigation(nameof(LazyNonVirtualOwnedNavEntity.NavigationToOwned))
+        );
     }
 
     [ConditionalFact]
@@ -74,8 +91,10 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContextOwnedFieldNavigation();
         Assert.NotNull(
-            context.Model.FindEntityType(typeof(LazyFieldOwnedNavEntity))!.FindNavigation(
-                nameof(LazyFieldOwnedNavEntity.NavigationToOwned)));
+            context
+                .Model.FindEntityType(typeof(LazyFieldOwnedNavEntity))!
+                .FindNavigation(nameof(LazyFieldOwnedNavEntity.NavigationToOwned))
+        );
     }
 
     [ConditionalFact]
@@ -83,9 +102,12 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContext<LazyHiddenFieldEntity>();
         Assert.Equal(
-            CoreStrings.NoBackingFieldLazyLoading(nameof(LazyHiddenFieldEntity.SelfRef), nameof(LazyHiddenFieldEntity)),
-            Assert.Throws<InvalidOperationException>(
-                () => context.Model).Message);
+            CoreStrings.NoBackingFieldLazyLoading(
+                nameof(LazyHiddenFieldEntity.SelfRef),
+                nameof(LazyHiddenFieldEntity)
+            ),
+            Assert.Throws<InvalidOperationException>(() => context.Model).Message
+        );
     }
 
     [ConditionalFact]
@@ -98,7 +120,8 @@ public class LazyLoadingProxyTests
                 (p, b) =>
                     b.UseInMemoryDatabase("Jammie")
                         .UseInternalServiceProvider(p)
-                        .UseLazyLoadingProxies())
+                        .UseLazyLoadingProxies()
+            )
             .BuildServiceProvider(validateScopes: true);
 
         using (var scope = serviceProvider.CreateScope())
@@ -118,20 +141,25 @@ public class LazyLoadingProxyTests
         Assert.Equal(
             CoreStrings.WarningAsErrorTemplate(
                 CoreEventId.LazyLoadOnDisposedContextWarning.ToString(),
-                CoreResources.LogLazyLoadOnDisposedContext(new TestLogger<TestLoggingDefinitions>())
+                CoreResources
+                    .LogLazyLoadOnDisposedContext(new TestLogger<TestLoggingDefinitions>())
                     .GenerateMessage("PhoneProxy", "Texts"),
-                "CoreEventId.LazyLoadOnDisposedContextWarning"),
-            Assert.Throws<InvalidOperationException>(
-                () => phone.Texts).Message);
+                "CoreEventId.LazyLoadOnDisposedContextWarning"
+            ),
+            Assert.Throws<InvalidOperationException>(() => phone.Texts).Message
+        );
     }
 
     private class LazyContextIgnoreVirtuals<TEntity> : TestContext<TEntity>
         where TEntity : class
     {
         public LazyContextIgnoreVirtuals()
-            : base(dbName: "LazyLoadingContext", useLazyLoading: true, useChangeDetection: false, ignoreNonVirtualNavigations: true)
-        {
-        }
+            : base(
+                dbName: "LazyLoadingContext",
+                useLazyLoading: true,
+                useChangeDetection: false,
+                ignoreNonVirtualNavigations: true
+            ) { }
     }
 
     private class LazyContext<TEntity> : TestContext<TEntity>
@@ -139,31 +167,35 @@ public class LazyLoadingProxyTests
     {
         public LazyContext()
             : base(dbName: "LazyLoadingContext", useLazyLoading: true, useChangeDetection: false)
-        {
-        }
+        { }
     }
 
     private class LazyContextDisabledNavigation : TestContext<LazyNonVirtualNavEntity>
     {
         public LazyContextDisabledNavigation()
             : base(dbName: "LazyLoadingContext", useLazyLoading: true, useChangeDetection: false)
-        {
-        }
+        { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<LazyNonVirtualNavEntity>().Navigation(e => e.SelfRef).EnableLazyLoading(false);
+            modelBuilder
+                .Entity<LazyNonVirtualNavEntity>()
+                .Navigation(e => e.SelfRef)
+                .EnableLazyLoading(false);
         }
     }
 
     private class LazyContextAllowingFieldNavigation : TestContext<LazyFieldNavEntity>
     {
         public LazyContextAllowingFieldNavigation()
-            : base(dbName: "LazyLoadingContext", useLazyLoading: true, useChangeDetection: false, ignoreNonVirtualNavigations: true)
-        {
-        }
+            : base(
+                dbName: "LazyLoadingContext",
+                useLazyLoading: true,
+                useChangeDetection: false,
+                ignoreNonVirtualNavigations: true
+            ) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -177,15 +209,17 @@ public class LazyLoadingProxyTests
     {
         public LazyContextDisabledFieldNavigation()
             : base(dbName: "LazyLoadingContext", useLazyLoading: true, useChangeDetection: false)
-        {
-        }
+        { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<LazyFieldNavEntity>().HasOne(e => e.SelfRef).WithOne();
-            modelBuilder.Entity<LazyFieldNavEntity>().Navigation(e => e.SelfRef).EnableLazyLoading(false);
+            modelBuilder
+                .Entity<LazyFieldNavEntity>()
+                .Navigation(e => e.SelfRef)
+                .EnableLazyLoading(false);
         }
     }
 
@@ -193,14 +227,16 @@ public class LazyLoadingProxyTests
     {
         public LazyContextOwnedFieldNavigation()
             : base(dbName: "LazyLoadingContext", useLazyLoading: true, useChangeDetection: false)
-        {
-        }
+        { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<LazyFieldOwnedNavEntity>().OwnsOne(e => e.NavigationToOwned).WithOwner(e => e.Owner);
+            modelBuilder
+                .Entity<LazyFieldOwnedNavEntity>()
+                .OwnsOne(e => e.NavigationToOwned)
+                .WithOwner(e => e.Owner);
         }
     }
 
@@ -274,12 +310,10 @@ public class LazyLoadingProxyTests
     private class JammieDodgerContext : DbContext
     {
         public JammieDodgerContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Phone>();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Phone>();
     }
 
     public class Phone

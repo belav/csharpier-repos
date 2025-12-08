@@ -23,18 +23,54 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
         private readonly ChangeSignatureDialogViewModel _viewModel;
 
         // Expose localized strings for binding
-        public static string ChangeSignatureDialogTitle { get { return ServicesVSResources.Change_Signature; } }
-        public static string CurrentParameter { get { return ServicesVSResources.Current_parameter; } }
-        public static string Parameters { get { return ServicesVSResources.Parameters_colon2; } }
-        public static string PreviewMethodSignature { get { return ServicesVSResources.Preview_method_signature_colon; } }
-        public static string PreviewReferenceChanges { get { return ServicesVSResources.Preview_reference_changes; } }
-        public static string Remove { get { return ServicesVSResources.Re_move; } }
-        public static string Restore { get { return ServicesVSResources.Restore; } }
-        public static string Add { get { return ServicesVSResources.Add; } }
-        public static string OK { get { return ServicesVSResources.OK; } }
-        public static string Cancel { get { return ServicesVSResources.Cancel; } }
-        public static string WarningTypeDoesNotBind { get { return ServicesVSResources.Warning_colon_type_does_not_bind; } }
-        public static string WarningDuplicateParameterName { get { return ServicesVSResources.Warning_colon_duplicate_parameter_name; } }
+        public static string ChangeSignatureDialogTitle
+        {
+            get { return ServicesVSResources.Change_Signature; }
+        }
+        public static string CurrentParameter
+        {
+            get { return ServicesVSResources.Current_parameter; }
+        }
+        public static string Parameters
+        {
+            get { return ServicesVSResources.Parameters_colon2; }
+        }
+        public static string PreviewMethodSignature
+        {
+            get { return ServicesVSResources.Preview_method_signature_colon; }
+        }
+        public static string PreviewReferenceChanges
+        {
+            get { return ServicesVSResources.Preview_reference_changes; }
+        }
+        public static string Remove
+        {
+            get { return ServicesVSResources.Re_move; }
+        }
+        public static string Restore
+        {
+            get { return ServicesVSResources.Restore; }
+        }
+        public static string Add
+        {
+            get { return ServicesVSResources.Add; }
+        }
+        public static string OK
+        {
+            get { return ServicesVSResources.OK; }
+        }
+        public static string Cancel
+        {
+            get { return ServicesVSResources.Cancel; }
+        }
+        public static string WarningTypeDoesNotBind
+        {
+            get { return ServicesVSResources.Warning_colon_type_does_not_bind; }
+        }
+        public static string WarningDuplicateParameterName
+        {
+            get { return ServicesVSResources.Warning_colon_duplicate_parameter_name; }
+        }
 
         public Brush ParameterText { get; }
         public Brush RemovedParameterText { get; }
@@ -59,20 +95,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             callsiteHeader.Header = ServicesVSResources.Callsite;
             indexHeader.Header = ServicesVSResources.Index;
 
-            ParameterText = SystemParameters.HighContrast ? SystemColors.WindowTextBrush : new SolidColorBrush(Color.FromArgb(0xFF, 0x1E, 0x1E, 0x1E));
-            RemovedParameterText = SystemParameters.HighContrast ? SystemColors.WindowTextBrush : new SolidColorBrush(Colors.Gray);
-            DisabledParameterBackground = SystemParameters.HighContrast ? SystemColors.WindowBrush : new SolidColorBrush(Color.FromArgb(0xFF, 0xDF, 0xE7, 0xF3));
-            DisabledParameterForeground = SystemParameters.HighContrast ? SystemColors.GrayTextBrush : new SolidColorBrush(Color.FromArgb(0xFF, 0xA2, 0xA4, 0xA5));
-            Members.Background = SystemParameters.HighContrast ? SystemColors.WindowBrush : new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF));
-            StrikethroughBrush = SystemParameters.HighContrast ? SystemColors.WindowTextBrush : new SolidColorBrush(Colors.Red);
+            ParameterText = SystemParameters.HighContrast
+                ? SystemColors.WindowTextBrush
+                : new SolidColorBrush(Color.FromArgb(0xFF, 0x1E, 0x1E, 0x1E));
+            RemovedParameterText = SystemParameters.HighContrast
+                ? SystemColors.WindowTextBrush
+                : new SolidColorBrush(Colors.Gray);
+            DisabledParameterBackground = SystemParameters.HighContrast
+                ? SystemColors.WindowBrush
+                : new SolidColorBrush(Color.FromArgb(0xFF, 0xDF, 0xE7, 0xF3));
+            DisabledParameterForeground = SystemParameters.HighContrast
+                ? SystemColors.GrayTextBrush
+                : new SolidColorBrush(Color.FromArgb(0xFF, 0xA2, 0xA4, 0xA5));
+            Members.Background = SystemParameters.HighContrast
+                ? SystemColors.WindowBrush
+                : new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF));
+            StrikethroughBrush = SystemParameters.HighContrast
+                ? SystemColors.WindowTextBrush
+                : new SolidColorBrush(Colors.Red);
 
             DataContext = viewModel;
 
             Loaded += ChangeSignatureDialog_Loaded;
         }
 
-        private void ChangeSignatureDialog_Loaded(object sender, RoutedEventArgs e)
-            => Members.Focus();
+        private void ChangeSignatureDialog_Loaded(object sender, RoutedEventArgs e) =>
+            Members.Focus();
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
@@ -82,8 +130,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             }
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-            => DialogResult = false;
+        private void Cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
 
         private void MoveUp_Click(object sender, EventArgs e)
         {
@@ -170,10 +217,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                     addParameterViewModel.TypeName,
                     addParameterViewModel.ParameterName,
                     GetCallSiteKind(addParameterViewModel),
-                    addParameterViewModel.IsCallsiteRegularValue ? addParameterViewModel.CallSiteValue : string.Empty,
+                    addParameterViewModel.IsCallsiteRegularValue
+                        ? addParameterViewModel.CallSiteValue
+                        : string.Empty,
                     addParameterViewModel.IsRequired,
-                    addParameterViewModel.IsRequired ? string.Empty : addParameterViewModel.DefaultValue,
-                    addParameterViewModel.TypeBinds);
+                    addParameterViewModel.IsRequired
+                        ? string.Empty
+                        : addParameterViewModel.DefaultValue,
+                    addParameterViewModel.TypeBinds
+                );
 
                 _viewModel.AddParameter(addedParameter);
             }
@@ -181,7 +233,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             SetFocusToSelectedRow(false);
         }
 
-        private static CallSiteKind GetCallSiteKind(AddParameterDialogViewModel addParameterViewModel)
+        private static CallSiteKind GetCallSiteKind(
+            AddParameterDialogViewModel addParameterViewModel
+        )
         {
             if (addParameterViewModel.IsCallsiteInferred)
                 return CallSiteKind.Inferred;
@@ -203,10 +257,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
         {
             if (Members.SelectedIndex >= 0)
             {
-                if (Members.ItemContainerGenerator.ContainerFromIndex(Members.SelectedIndex) is not DataGridRow row)
+                if (
+                    Members.ItemContainerGenerator.ContainerFromIndex(Members.SelectedIndex)
+                    is not DataGridRow row
+                )
                 {
                     Members.ScrollIntoView(Members.SelectedItem);
-                    row = Members.ItemContainerGenerator.ContainerFromIndex(Members.SelectedIndex) as DataGridRow;
+                    row =
+                        Members.ItemContainerGenerator.ContainerFromIndex(Members.SelectedIndex)
+                        as DataGridRow;
                 }
 
                 if (row != null && focusRow)
@@ -231,7 +290,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             var oldSelectedIndex = Members.SelectedIndex;
             if (oldSelectedIndex > 0)
             {
-                var potentialNewSelectedParameter = Members.Items[oldSelectedIndex - 1] as ChangeSignatureDialogViewModel.ParameterViewModel;
+                var potentialNewSelectedParameter =
+                    Members.Items[oldSelectedIndex - 1]
+                    as ChangeSignatureDialogViewModel.ParameterViewModel;
                 if (!potentialNewSelectedParameter.IsDisabled)
                 {
                     Members.SelectedIndex = oldSelectedIndex - 1;
@@ -286,15 +347,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             SetFocusToSelectedRow(true);
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly ChangeSignatureDialog _dialog;
 
-            public TestAccessor(ChangeSignatureDialog dialog)
-                => _dialog = dialog;
+            public TestAccessor(ChangeSignatureDialog dialog) => _dialog = dialog;
 
             public ChangeSignatureDialogViewModel ViewModel => _dialog._viewModel;
 

@@ -31,10 +31,19 @@ namespace System.IO.Pipes
         TakeOwnership = 0x080000,
         Synchronize = 0x100000,
 
-        FullControl = ReadData | WriteData | ReadAttributes | ReadExtendedAttributes |
-                                       WriteAttributes | WriteExtendedAttributes | CreateNewInstance |
-                                       Delete | ReadPermissions | ChangePermissions | TakeOwnership |
-                                       Synchronize,
+        FullControl =
+            ReadData
+            | WriteData
+            | ReadAttributes
+            | ReadExtendedAttributes
+            | WriteAttributes
+            | WriteExtendedAttributes
+            | CreateNewInstance
+            | Delete
+            | ReadPermissions
+            | ChangePermissions
+            | TakeOwnership
+            | Synchronize,
 
         Read = ReadData | ReadAttributes | ReadExtendedAttributes | ReadPermissions,
         Write = WriteData | WriteAttributes | WriteExtendedAttributes, // | CreateNewInstance, For security, I really don't this CreateNewInstance belongs here.

@@ -8,15 +8,24 @@ using System.Web.Http.Controllers;
 
 namespace System.Web.Http.Filters
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = true
+    )]
     public abstract class AuthorizationFilterAttribute : FilterAttribute, IAuthorizationFilter
     {
-        public virtual void OnAuthorization(HttpActionContext actionContext)
-        {
-        }
+        public virtual void OnAuthorization(HttpActionContext actionContext) { }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "exception is flowed through the task")]
-        public virtual Task OnAuthorizationAsync(HttpActionContext actionContext, CancellationToken cancellationToken)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "exception is flowed through the task"
+        )]
+        public virtual Task OnAuthorizationAsync(
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -30,7 +39,11 @@ namespace System.Web.Http.Filters
             return TaskHelpers.Completed();
         }
 
-        Task<HttpResponseMessage> IAuthorizationFilter.ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
+        Task<HttpResponseMessage> IAuthorizationFilter.ExecuteAuthorizationFilterAsync(
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken,
+            Func<Task<HttpResponseMessage>> continuation
+        )
         {
             if (actionContext == null)
             {
@@ -41,10 +54,18 @@ namespace System.Web.Http.Filters
                 throw Error.ArgumentNull("continuation");
             }
 
-            return ExecuteAuthorizationFilterAsyncCore(actionContext, cancellationToken, continuation);
+            return ExecuteAuthorizationFilterAsyncCore(
+                actionContext,
+                cancellationToken,
+                continuation
+            );
         }
 
-        private async Task<HttpResponseMessage> ExecuteAuthorizationFilterAsyncCore(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
+        private async Task<HttpResponseMessage> ExecuteAuthorizationFilterAsyncCore(
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken,
+            Func<Task<HttpResponseMessage>> continuation
+        )
         {
             await OnAuthorizationAsync(actionContext, cancellationToken);
 

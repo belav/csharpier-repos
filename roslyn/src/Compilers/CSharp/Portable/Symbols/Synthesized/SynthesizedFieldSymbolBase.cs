@@ -6,8 +6,8 @@
 
 using System.Collections.Immutable;
 using System.Diagnostics;
-using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.CSharp.Emit;
+using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
@@ -26,24 +26,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             bool isPublic,
             bool isReadOnly,
-            bool isStatic)
+            bool isStatic
+        )
         {
             Debug.Assert((object)containingType != null);
             Debug.Assert(!string.IsNullOrEmpty(name));
 
             _containingType = containingType;
             _name = name;
-            _modifiers = (isPublic ? DeclarationModifiers.Public : DeclarationModifiers.Private) |
-                (isReadOnly ? DeclarationModifiers.ReadOnly : DeclarationModifiers.None) |
-                (isStatic ? DeclarationModifiers.Static : DeclarationModifiers.None);
+            _modifiers =
+                (isPublic ? DeclarationModifiers.Public : DeclarationModifiers.Private)
+                | (isReadOnly ? DeclarationModifiers.ReadOnly : DeclarationModifiers.None)
+                | (isStatic ? DeclarationModifiers.Static : DeclarationModifiers.None);
         }
 
-        internal abstract bool SuppressDynamicAttribute
-        {
-            get;
-        }
+        internal abstract bool SuppressDynamicAttribute { get; }
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
@@ -54,40 +56,75 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // do not emit CompilerGenerated attributes for fields inside compiler generated types:
             if (!_containingType.IsImplicitlyDeclared)
             {
-                AddSynthesizedAttribute(ref attributes, compilation.TrySynthesizeAttribute(WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    compilation.TrySynthesizeAttribute(
+                        WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
+                    )
+                );
             }
 
-            if (!this.SuppressDynamicAttribute &&
-                type.ContainsDynamic() &&
-                compilation.HasDynamicEmitAttributes(BindingDiagnosticBag.Discarded, Location.None) &&
-                compilation.CanEmitBoolean())
+            if (
+                !this.SuppressDynamicAttribute
+                && type.ContainsDynamic()
+                && compilation.HasDynamicEmitAttributes(
+                    BindingDiagnosticBag.Discarded,
+                    Location.None
+                )
+                && compilation.CanEmitBoolean()
+            )
             {
-                AddSynthesizedAttribute(ref attributes, compilation.SynthesizeDynamicAttribute(type, typeWithAnnotations.CustomModifiers.Length));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    compilation.SynthesizeDynamicAttribute(
+                        type,
+                        typeWithAnnotations.CustomModifiers.Length
+                    )
+                );
             }
 
             if (compilation.ShouldEmitNativeIntegerAttributes(type))
             {
-                AddSynthesizedAttribute(ref attributes, moduleBuilder.SynthesizeNativeIntegerAttribute(this, type));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    moduleBuilder.SynthesizeNativeIntegerAttribute(this, type)
+                );
             }
 
-            if (type.ContainsTupleNames() &&
-                compilation.HasTupleNamesAttributes(BindingDiagnosticBag.Discarded, Location.None) &&
-                compilation.CanEmitSpecialType(SpecialType.System_String))
+            if (
+                type.ContainsTupleNames()
+                && compilation.HasTupleNamesAttributes(
+                    BindingDiagnosticBag.Discarded,
+                    Location.None
+                )
+                && compilation.CanEmitSpecialType(SpecialType.System_String)
+            )
             {
-                AddSynthesizedAttribute(ref attributes,
-                    compilation.SynthesizeTupleNamesAttribute(Type));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    compilation.SynthesizeTupleNamesAttribute(Type)
+                );
             }
 
             if (compilation.ShouldEmitNullableAttributes(this))
             {
-                AddSynthesizedAttribute(ref attributes, moduleBuilder.SynthesizeNullableAttributeIfNecessary(this, ContainingType.GetNullableContextValue(), typeWithAnnotations));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    moduleBuilder.SynthesizeNullableAttributeIfNecessary(
+                        this,
+                        ContainingType.GetNullableContextValue(),
+                        typeWithAnnotations
+                    )
+                );
             }
         }
 
-        internal abstract override TypeWithAnnotations GetFieldType(ConsList<FieldSymbol> fieldsBeingBound);
+        internal abstract override TypeWithAnnotations GetFieldType(
+            ConsList<FieldSymbol> fieldsBeingBound
+        );
 
-        public override FlowAnalysisAnnotations FlowAnalysisAnnotations
-            => FlowAnalysisAnnotations.None;
+        public override FlowAnalysisAnnotations FlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
         public override string Name
         {
@@ -96,10 +133,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override Symbol AssociatedSymbol
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public override bool IsReadOnly
@@ -132,7 +166,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return null; }
         }
 
-        internal override ConstantValue GetConstantValue(ConstantFieldsInProgress inProgress, bool earlyDecodingWellKnownAttributes)
+        internal override ConstantValue GetConstantValue(
+            ConstantFieldsInProgress inProgress,
+            bool earlyDecodingWellKnownAttributes
+        )
         {
             return null;
         }
@@ -149,10 +186,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override NamedTypeSymbol ContainingType
         {
-            get
-            {
-                return _containingType;
-            }
+            get { return _containingType; }
         }
 
         public override ImmutableArray<Location> Locations
@@ -162,10 +196,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray<SyntaxReference>.Empty;
-            }
+            get { return ImmutableArray<SyntaxReference>.Empty; }
         }
 
         public override Accessibility DeclaredAccessibility

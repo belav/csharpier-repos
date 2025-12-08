@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,31 +30,30 @@
 using System;
 using System.Messaging;
 using System.Reflection;
-
 using Mono.Messaging;
 
-namespace MonoTests.Mono.Messaging.RabbitMQ {
-
-    public class TestUtils {
-    
-        public static Message CreateMessage (IMessage iMessage)
+namespace MonoTests.Mono.Messaging.RabbitMQ
+{
+    public class TestUtils
+    {
+        public static Message CreateMessage(IMessage iMessage)
         {
             if (iMessage == null)
-                throw new Exception ("Message is null");
-            
-            Type[] types = { 
-                typeof (IMessage), typeof (object), typeof (IMessageFormatter)
-            };
-                
-            ConstructorInfo ci = typeof (Message).GetConstructor (
-                BindingFlags.NonPublic | BindingFlags.Instance, 
-                Type.DefaultBinder, types, new ParameterModifier[0]);
-                
+                throw new Exception("Message is null");
+
+            Type[] types = { typeof(IMessage), typeof(object), typeof(IMessageFormatter) };
+
+            ConstructorInfo ci = typeof(Message).GetConstructor(
+                BindingFlags.NonPublic | BindingFlags.Instance,
+                Type.DefaultBinder,
+                types,
+                new ParameterModifier[0]
+            );
+
             if (ci == null)
-                throw new Exception ("ConstructorInfo is null");
-            
-            return (Message) ci.Invoke (new object[] { iMessage, null, null });
+                throw new Exception("ConstructorInfo is null");
+
+            return (Message)ci.Invoke(new object[] { iMessage, null, null });
         }
-    
     }
 }

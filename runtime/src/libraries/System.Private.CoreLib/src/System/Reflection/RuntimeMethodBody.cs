@@ -18,10 +18,14 @@ namespace System.Reflection
         private bool _initLocals;
 
         public override int LocalSignatureMetadataToken => _localSignatureMetadataToken;
-        public override IList<LocalVariableInfo> LocalVariables => Array.AsReadOnly(_localVariables);
+        public override IList<LocalVariableInfo> LocalVariables =>
+            Array.AsReadOnly(_localVariables);
         public override int MaxStackSize => _maxStackSize;
         public override bool InitLocals => _initLocals;
+
         public override byte[] GetILAsByteArray() => _IL;
-        public override IList<ExceptionHandlingClause> ExceptionHandlingClauses => Array.AsReadOnly(_exceptionHandlingClauses);
+
+        public override IList<ExceptionHandlingClause> ExceptionHandlingClauses =>
+            Array.AsReadOnly(_exceptionHandlingClauses);
     }
 }

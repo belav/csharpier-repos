@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification;
 
 internal sealed class FunctionPointerUnmanagedCallingConventionClassifier : AbstractSyntaxClassifier
 {
-    public override ImmutableArray<Type> SyntaxNodeTypes { get; } = ImmutableArray.Create(typeof(FunctionPointerUnmanagedCallingConventionSyntax));
+    public override ImmutableArray<Type> SyntaxNodeTypes { get; } =
+        ImmutableArray.Create(typeof(FunctionPointerUnmanagedCallingConventionSyntax));
 
     public override void AddClassifications(
         SyntaxNode syntax,
@@ -24,7 +25,8 @@ internal sealed class FunctionPointerUnmanagedCallingConventionClassifier : Abst
         SemanticModel semanticModel,
         ClassificationOptions options,
         SegmentedList<ClassifiedSpan> result,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var callingConvention = (FunctionPointerUnmanagedCallingConventionSyntax)syntax;
         var name = callingConvention.Name.ValueText;

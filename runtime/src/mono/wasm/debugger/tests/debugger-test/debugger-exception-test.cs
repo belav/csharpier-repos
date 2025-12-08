@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading.Tasks;
+
 namespace DebuggerTests
 {
     public class ExceptionTestsClass
@@ -38,7 +39,6 @@ namespace DebuggerTests
             TestUncaughtException g = new TestUncaughtException();
             g.run();
         }
-
     }
 
     public class CustomException : Exception
@@ -46,6 +46,7 @@ namespace DebuggerTests
         // Using this name to match with what js has.
         // helps with the tests
         public string message;
+
         public CustomException(string message)
             : base(message)
         {
@@ -86,6 +87,5 @@ namespace DebuggerTests
             TestUncaughtException g = new TestUncaughtException();
             g.run();
         }
-
     }
 }

@@ -80,8 +80,8 @@ public class ProblemDetailsServiceTest
         };
 
         // Act
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await service.WriteAsync(new() { HttpContext = context })
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await service.WriteAsync(new() { HttpContext = context })
         );
     }
 
@@ -99,8 +99,8 @@ public class ProblemDetailsServiceTest
         };
 
         // Act & Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await service.WriteAsync(new() { HttpContext = context })
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await service.WriteAsync(new() { HttpContext = context })
         );
     }
 

@@ -2,7 +2,6 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 
-
 namespace System.IdentityModel.Tokens
 {
     /// <summary>
@@ -20,11 +19,13 @@ namespace System.IdentityModel.Tokens
         /// Constructs the default token replay cache.
         /// </summary>
         public DefaultTokenReplayCache()
-            : this(DefaultTokenReplayCache.DefaultTokenReplayCacheCapacity, DefaultTokenReplayCache.DefaultTokenReplayCachePurgeInterval)
-        { }
+            : this(
+                DefaultTokenReplayCache.DefaultTokenReplayCacheCapacity,
+                DefaultTokenReplayCache.DefaultTokenReplayCachePurgeInterval
+            ) { }
 
         /// <summary>
-        /// Constructs the default token replay cache with the specified 
+        /// Constructs the default token replay cache with the specified
         /// capacity and purge interval.
         /// </summary>
         /// <param name="capacity">The capacity of the token cache</param>
@@ -32,7 +33,11 @@ namespace System.IdentityModel.Tokens
         public DefaultTokenReplayCache(int capacity, TimeSpan purgeInterval)
             : base()
         {
-            _internalCache = new BoundedCache<SecurityToken>(capacity, purgeInterval, StringComparer.Ordinal);
+            _internalCache = new BoundedCache<SecurityToken>(
+                capacity,
+                purgeInterval,
+                StringComparer.Ordinal
+            );
         }
 
         /// <summary>
@@ -46,7 +51,11 @@ namespace System.IdentityModel.Tokens
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange("value", value, SR.GetString(SR.ID0002));
+                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange(
+                        "value",
+                        value,
+                        SR.GetString(SR.ID0002)
+                    );
                 }
 
                 _internalCache.Capacity = value;
@@ -62,7 +71,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Increases the maximum number of SecurityTokens that this cache will hold. 
+        /// Increases the maximum number of SecurityTokens that this cache will hold.
         /// </summary>
         /// <param name="size">The capacity to increase.</param>
         /// <exception cref="ArgumentOutOfRangeException">The input parameter 'size' is less than or equal to zero.</exception>
@@ -72,7 +81,11 @@ namespace System.IdentityModel.Tokens
         {
             if (size <= 0)
             {
-                throw DiagnosticUtility.ThrowHelperArgumentOutOfRange("size", size, SR.GetString(SR.ID0002));
+                throw DiagnosticUtility.ThrowHelperArgumentOutOfRange(
+                    "size",
+                    size,
+                    SR.GetString(SR.ID0002)
+                );
             }
 
             return _internalCache.IncreaseCapacity(size);
@@ -89,7 +102,11 @@ namespace System.IdentityModel.Tokens
             {
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange("value", value, SR.GetString(SR.ID0016));
+                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange(
+                        "value",
+                        value,
+                        SR.GetString(SR.ID0016)
+                    );
                 }
 
                 _internalCache.PurgeInterval = value;
@@ -104,7 +121,11 @@ namespace System.IdentityModel.Tokens
         /// <param name="expirationTime">The expiration instant of the token being added.</param>
         /// <exception cref="System.IdentityModel.LimitExceededException">Thrown if an attempt is made to add a SecurityToken if cache is at capacity.</exception>
         /// <exception cref="InvalidOperationException">Thrown if the expiration time is infinite.</exception>
-        public override void AddOrUpdate(string key, SecurityToken securityToken, DateTime expirationTime)
+        public override void AddOrUpdate(
+            string key,
+            SecurityToken securityToken,
+            DateTime expirationTime
+        )
         {
             if (DateTime.Equals(expirationTime, DateTime.MaxValue))
             {

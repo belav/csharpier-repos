@@ -4,9 +4,9 @@ using System;
 
 public class Program
 {
-	public static int Main ()
-	{
-		1.Foo ();
-		return 0;
-	}
+    public static int Main()
+    {
+        1.Foo();
+        return 0;
+    }
 }

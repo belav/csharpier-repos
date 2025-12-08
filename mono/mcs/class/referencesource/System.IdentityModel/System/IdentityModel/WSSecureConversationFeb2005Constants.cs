@@ -13,7 +13,7 @@ namespace System.IdentityModel
     {
 #pragma warning disable 1591
         public const string Namespace = "http://schemas.xmlsoap.org/ws/2005/02/sc";
-        public static readonly Uri NamespaceUri = new Uri( Namespace );
+        public static readonly Uri NamespaceUri = new Uri(Namespace);
         public const string Prefix = "sc";
         public const string TokenTypeURI = "http://schemas.xmlsoap.org/ws/2005/02/sc/sct";
 
@@ -30,7 +30,7 @@ namespace System.IdentityModel
         {
             // Length isn't actually in SC-Feb2005, but it is in OASIS SC 1.3
             public const string Length = "Length";
-            public const string Nonce  = "Nonce";
+            public const string Nonce = "Nonce";
             public const string Instance = "Instance";
         }
 #pragma warning restore 1591

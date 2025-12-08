@@ -9,20 +9,17 @@ public class Runtime_87597
 {
     interface IFace
     {
-        static IFace() {}
+        static IFace() { }
+
         void Method();
     }
 
     class GenericType<T> : IFace
     {
-        static GenericType()
-        {
-        }
+        static GenericType() { }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Method()
-        {
-        }
+        public void Method() { }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]

@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis
             /// </summary>
             internal readonly struct CompilationPair
             {
-                public CompilationPair(Compilation withoutGeneratedDocuments, Compilation withGeneratedDocuments) : this()
+                public CompilationPair(
+                    Compilation withoutGeneratedDocuments,
+                    Compilation withGeneratedDocuments
+                )
+                    : this()
                 {
                     CompilationWithoutGeneratedDocuments = withoutGeneratedDocuments;
                     CompilationWithGeneratedDocuments = withGeneratedDocuments;
@@ -30,37 +34,71 @@ namespace Microsoft.CodeAnalysis
 
                 public CompilationPair ReplaceSyntaxTree(SyntaxTree oldTree, SyntaxTree newTree)
                 {
-                    return WithChange(static (compilation, trees) => compilation.ReplaceSyntaxTree(trees.oldTree, trees.newTree), (oldTree, newTree));
+                    return WithChange(
+                        static (compilation, trees) =>
+                            compilation.ReplaceSyntaxTree(trees.oldTree, trees.newTree),
+                        (oldTree, newTree)
+                    );
                 }
 
                 public CompilationPair AddSyntaxTree(SyntaxTree newTree)
                 {
-                    return WithChange(static (compilation, t) => compilation.AddSyntaxTrees(t), newTree);
+                    return WithChange(
+                        static (compilation, t) => compilation.AddSyntaxTrees(t),
+                        newTree
+                    );
                 }
 
-                public CompilationPair WithPreviousScriptCompilation(Compilation previousScriptCompilation)
+                public CompilationPair WithPreviousScriptCompilation(
+                    Compilation previousScriptCompilation
+                )
                 {
-                    return WithChange(static (compilation, priorCompilation) => compilation.WithScriptCompilationInfo(compilation.ScriptCompilationInfo!.WithPreviousScriptCompilation(priorCompilation)), previousScriptCompilation);
+                    return WithChange(
+                        static (compilation, priorCompilation) =>
+                            compilation.WithScriptCompilationInfo(
+                                compilation.ScriptCompilationInfo!.WithPreviousScriptCompilation(
+                                    priorCompilation
+                                )
+                            ),
+                        previousScriptCompilation
+                    );
                 }
 
-                public CompilationPair WithReferences(IReadOnlyCollection<MetadataReference> metadataReferences)
+                public CompilationPair WithReferences(
+                    IReadOnlyCollection<MetadataReference> metadataReferences
+                )
                 {
                     return WithChange(static (c, r) => c.WithReferences(r), metadataReferences);
                 }
 
-                private CompilationPair WithChange<TArg>(Func<Compilation, TArg, Compilation> change, TArg arg)
+                private CompilationPair WithChange<TArg>(
+                    Func<Compilation, TArg, Compilation> change,
+                    TArg arg
+                )
                 {
-                    var changedWithoutGeneratedDocuments = change(CompilationWithoutGeneratedDocuments, arg);
+                    var changedWithoutGeneratedDocuments = change(
+                        CompilationWithoutGeneratedDocuments,
+                        arg
+                    );
 
                     if (CompilationWithoutGeneratedDocuments == CompilationWithGeneratedDocuments)
                     {
                         // If we didn't have any generated files, then no reason to transform twice
-                        return new CompilationPair(changedWithoutGeneratedDocuments, changedWithoutGeneratedDocuments);
+                        return new CompilationPair(
+                            changedWithoutGeneratedDocuments,
+                            changedWithoutGeneratedDocuments
+                        );
                     }
 
-                    var changedWithGeneratedDocuments = change(CompilationWithGeneratedDocuments, arg);
+                    var changedWithGeneratedDocuments = change(
+                        CompilationWithGeneratedDocuments,
+                        arg
+                    );
 
-                    return new CompilationPair(changedWithoutGeneratedDocuments, changedWithGeneratedDocuments);
+                    return new CompilationPair(
+                        changedWithoutGeneratedDocuments,
+                        changedWithGeneratedDocuments
+                    );
                 }
             }
         }

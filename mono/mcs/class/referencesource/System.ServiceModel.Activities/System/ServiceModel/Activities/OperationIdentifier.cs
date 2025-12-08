@@ -12,7 +12,11 @@ namespace System.ServiceModel.Activities
         public string ContractNamespace;
         public string OperationName;
 
-        public OperationIdentifier(string contractName, string contractNamespace, string operationName)
+        public OperationIdentifier(
+            string contractName,
+            string contractNamespace,
+            string operationName
+        )
         {
             this.ContractName = contractName;
             this.ContractNamespace = contractNamespace;

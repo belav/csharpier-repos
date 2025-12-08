@@ -3,10 +3,12 @@
 //
 
 using Xunit;
+
 public class foo
 {
-
-    public static short a, b, c;
+    public static short a,
+        b,
+        c;
 
     [Fact]
     public static void TestEntryPoint()
@@ -19,8 +21,6 @@ public class foo
 
     internal static void div()
     {
-
         c = (short)(a / b);
     }
-
 }

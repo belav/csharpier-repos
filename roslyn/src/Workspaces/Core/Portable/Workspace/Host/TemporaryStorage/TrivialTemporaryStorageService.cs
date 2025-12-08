@@ -16,15 +16,12 @@ namespace Microsoft.CodeAnalysis
     {
         public static readonly TrivialTemporaryStorageService Instance = new();
 
-        private TrivialTemporaryStorageService()
-        {
-        }
+        private TrivialTemporaryStorageService() { }
 
-        public ITemporaryStreamStorageInternal CreateTemporaryStreamStorage()
-            => new StreamStorage();
+        public ITemporaryStreamStorageInternal CreateTemporaryStreamStorage() =>
+            new StreamStorage();
 
-        public ITemporaryTextStorageInternal CreateTemporaryTextStorage()
-            => new TextStorage();
+        public ITemporaryTextStorageInternal CreateTemporaryTextStorage() => new TextStorage();
 
         private sealed class StreamStorage : ITemporaryStreamStorageInternal
         {
@@ -57,7 +54,9 @@ namespace Microsoft.CodeAnalysis
                 var existingValue = Interlocked.CompareExchange(ref _stream, newStream, null);
                 if (existingValue is not null)
                 {
-                    throw new InvalidOperationException(WorkspacesResources.Temporary_storage_cannot_be_written_more_than_once);
+                    throw new InvalidOperationException(
+                        WorkspacesResources.Temporary_storage_cannot_be_written_more_than_once
+                    );
                 }
             }
 
@@ -72,7 +71,9 @@ namespace Microsoft.CodeAnalysis
                 var existingValue = Interlocked.CompareExchange(ref _stream, newStream, null);
                 if (existingValue is not null)
                 {
-                    throw new InvalidOperationException(WorkspacesResources.Temporary_storage_cannot_be_written_more_than_once);
+                    throw new InvalidOperationException(
+                        WorkspacesResources.Temporary_storage_cannot_be_written_more_than_once
+                    );
                 }
             }
         }
@@ -81,14 +82,13 @@ namespace Microsoft.CodeAnalysis
         {
             private SourceText? _sourceText;
 
-            public void Dispose()
-                => _sourceText = null;
+            public void Dispose() => _sourceText = null;
 
-            public SourceText ReadText(CancellationToken cancellationToken)
-                => _sourceText ?? throw new InvalidOperationException();
+            public SourceText ReadText(CancellationToken cancellationToken) =>
+                _sourceText ?? throw new InvalidOperationException();
 
-            public Task<SourceText> ReadTextAsync(CancellationToken cancellationToken)
-                => Task.FromResult(ReadText(cancellationToken));
+            public Task<SourceText> ReadTextAsync(CancellationToken cancellationToken) =>
+                Task.FromResult(ReadText(cancellationToken));
 
             public void WriteText(SourceText text, CancellationToken cancellationToken)
             {
@@ -98,11 +98,16 @@ namespace Microsoft.CodeAnalysis
                 var existingValue = Interlocked.CompareExchange(ref _sourceText, text, null);
                 if (existingValue is not null)
                 {
-                    throw new InvalidOperationException(WorkspacesResources.Temporary_storage_cannot_be_written_more_than_once);
+                    throw new InvalidOperationException(
+                        WorkspacesResources.Temporary_storage_cannot_be_written_more_than_once
+                    );
                 }
             }
 
-            public Task WriteTextAsync(SourceText text, CancellationToken cancellationToken = default)
+            public Task WriteTextAsync(
+                SourceText text,
+                CancellationToken cancellationToken = default
+            )
             {
                 WriteText(text, cancellationToken);
                 return Task.CompletedTask;

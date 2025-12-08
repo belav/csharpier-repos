@@ -1,27 +1,35 @@
 //------------------------------------------------------------------------------
 // <copyright file="ChtmlImageAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System.Globalization;
-using System.Web.UI.MobileControls.Adapters;
 using System.Security.Permissions;
+using System.Web.UI.MobileControls.Adapters;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
     /*
      * ChtmlImageAdapter class.
      */
     /// <include file='doc\ChtmlImageAdapter.uex' path='docs/doc[@for="ChtmlImageAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class ChtmlImageAdapter : HtmlImageAdapter
     {
         /// <include file='doc\ChtmlImageAdapter.uex' path='docs/doc[@for="ChtmlImageAdapter.RenderImage"]/*' />
@@ -29,14 +37,15 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             String source = Control.ImageUrl;
 
-            if (source.StartsWith(Constants.SymbolProtocol, StringComparison.Ordinal) &&
-                (Device.SupportsIModeSymbols || Device.SupportsJPhoneSymbols))
+            if (
+                source.StartsWith(Constants.SymbolProtocol, StringComparison.Ordinal)
+                && (Device.SupportsIModeSymbols || Device.SupportsJPhoneSymbols)
+            )
             {
                 if (Device.SupportsIModeSymbols)
                 {
                     writer.Write("&#");
-                    writer.Write(
-                        source.Substring(Constants.SymbolProtocol.Length));
+                    writer.Write(source.Substring(Constants.SymbolProtocol.Length));
                     writer.Write(";");
                 }
                 else
@@ -45,8 +54,7 @@ namespace System.Web.UI.MobileControls.Adapters
                     // where x is group picture character (either G, E or F),
                     // and yyy (length can vary) is the picture's character
                     // code (in decimal).
-                    String symbolChars = source.Substring(
-                                            Constants.SymbolProtocol.Length);
+                    String symbolChars = source.Substring(Constants.SymbolProtocol.Length);
                     char code = DecimalStringToChar(symbolChars.Substring(1));
 
                     writer.Write("\u001B$");
@@ -73,7 +81,7 @@ namespace System.Web.UI.MobileControls.Adapters
                 adj *= 10;
             }
 
-            return (char) codeValue;
+            return (char)codeValue;
         }
 
         // Convert decimal char 'x' to decimal integer value x
@@ -89,7 +97,8 @@ namespace System.Web.UI.MobileControls.Adapters
             {
                 throw new ArgumentException(
                     SR.GetString(SR.ChtmlImageAdapterDecimalCodeExpectedAfterGroupChar),
-                    "ImageUrl");
+                    "ImageUrl"
+                );
             }
 
             return i;

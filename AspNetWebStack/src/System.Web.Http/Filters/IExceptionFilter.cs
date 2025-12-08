@@ -8,6 +8,9 @@ namespace System.Web.Http.Filters
 {
     public interface IExceptionFilter : IFilter
     {
-        Task ExecuteExceptionFilterAsync(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken);
+        Task ExecuteExceptionFilterAsync(
+            HttpActionExecutedContext actionExecutedContext,
+            CancellationToken cancellationToken
+        );
     }
 }

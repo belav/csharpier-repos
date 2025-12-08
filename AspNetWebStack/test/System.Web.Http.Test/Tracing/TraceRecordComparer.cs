@@ -14,10 +14,12 @@ namespace System.Web.Http.Tracing
 
         public bool Equals(TraceRecord x, TraceRecord y)
         {
-            if (!String.Equals(x.Category, y.Category) ||
-                   x.Level != y.Level ||
-                   x.Kind != y.Kind ||
-                   !Object.ReferenceEquals(x.Request, y.Request))
+            if (
+                !String.Equals(x.Category, y.Category)
+                || x.Level != y.Level
+                || x.Kind != y.Kind
+                || !Object.ReferenceEquals(x.Request, y.Request)
+            )
             {
                 return false;
             }
@@ -27,7 +29,10 @@ namespace System.Web.Http.Tracing
             {
                 if (IgnoreExceptionReference)
                 {
-                    if (y.Exception == null || !String.Equals(x.Exception.Message, y.Exception.Message))
+                    if (
+                        y.Exception == null
+                        || !String.Equals(x.Exception.Message, y.Exception.Message)
+                    )
                     {
                         return false;
                     }

@@ -8,7 +8,6 @@ namespace System.Reflection.TypeLoading.Ecma
 {
     internal sealed partial class EcmaModule
     {
-
         /// <summary>
         /// Helper routine for the more general Module.GetType() family of apis. Also used in typeRef resolution.
         ///
@@ -17,9 +16,16 @@ namespace System.Reflection.TypeLoading.Ecma
         /// If a type is not contained or forwarded from the assembly, this method returns null (does not throw.)
         /// This supports the "throwOnError: false" behavior of Module.GetType(string, bool).
         /// </summary>
-        [UnconditionalSuppressMessage("SingleFile", "IL3002:RequiresAssemblyFiles on FullyQualifiedName",
-            Justification = "FullyQualifiedName is only used for exception message")]
-        protected sealed override RoDefinitionType? GetTypeCoreNoCache(ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name, out Exception? e)
+        [UnconditionalSuppressMessage(
+            "SingleFile",
+            "IL3002:RequiresAssemblyFiles on FullyQualifiedName",
+            Justification = "FullyQualifiedName is only used for exception message"
+        )]
+        protected sealed override RoDefinitionType? GetTypeCoreNoCache(
+            ReadOnlySpan<byte> ns,
+            ReadOnlySpan<byte> name,
+            out Exception? e
+        )
         {
             MetadataReader reader = Reader;
 
@@ -28,7 +34,7 @@ namespace System.Reflection.TypeLoading.Ecma
             {
                 TypeDefinition td = h.GetTypeDefinition(reader);
                 if (td.IsNested)
-                    continue;  // GetTypeCore() is never asked to look for nested types.
+                    continue; // GetTypeCore() is never asked to look for nested types.
                 if (!(td.Name.Equals(name, reader)))
                     continue;
                 if (!(td.Namespace.Equals(ns, reader)))
@@ -55,11 +61,20 @@ namespace System.Reflection.TypeLoading.Ecma
                 if (!(et.Namespace.Equals(ns, reader)))
                     continue;
 
-                RoAssembly? assembly = ((AssemblyReferenceHandle)implementation).TryResolveAssembly(this, out e);
+                RoAssembly? assembly = ((AssemblyReferenceHandle)implementation).TryResolveAssembly(
+                    this,
+                    out e
+                );
                 return assembly?.GetTypeCore(ns, name, ignoreCase: false, out e);
             }
 
-            e = new TypeLoadException(SR.Format(SR.TypeNotFound, ns.ToUtf16().AppendTypeName(name.ToUtf16()), FullyQualifiedName));
+            e = new TypeLoadException(
+                SR.Format(
+                    SR.TypeNotFound,
+                    ns.ToUtf16().AppendTypeName(name.ToUtf16()),
+                    FullyQualifiedName
+                )
+            );
             return null;
         }
     }

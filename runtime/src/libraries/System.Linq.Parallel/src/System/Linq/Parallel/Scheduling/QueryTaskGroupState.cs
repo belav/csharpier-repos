@@ -26,7 +26,6 @@ namespace System.Linq.Parallel
         private readonly CancellationState _cancellationState; // The cancellation state.
         private readonly int _queryId; // Id of this query execution.
 
-
         //-----------------------------------------------------------------------------------
         // Creates a new shared bit of state among tasks.
         //
@@ -111,14 +110,17 @@ namespace System.Linq.Parallel
                     bool allOCEsOnTrackedExternalCancellationToken = true;
                     for (int i = 0; i < flattenedAE.InnerExceptions.Count; i++)
                     {
-                        OperationCanceledException? oce = flattenedAE.InnerExceptions[i] as OperationCanceledException;
+                        OperationCanceledException? oce =
+                            flattenedAE.InnerExceptions[i] as OperationCanceledException;
 
                         // we only let it pass through iff:
                         // it is not null, not default, and matches the exact token we were given as being the external token
                         // and the external Token is actually canceled (i.e. not a spoof OCE(extCT) for a non-canceled extCT)
-                        if (oce == null ||
-                            !oce.CancellationToken.IsCancellationRequested ||
-                            oce.CancellationToken != _cancellationState.ExternalCancellationToken)
+                        if (
+                            oce == null
+                            || !oce.CancellationToken.IsCancellationRequested
+                            || oce.CancellationToken != _cancellationState.ExternalCancellationToken
+                        )
                         {
                             allOCEsOnTrackedExternalCancellationToken = false;
                             break;
@@ -127,8 +129,11 @@ namespace System.Linq.Parallel
 
                     // if all the exceptions were OCE(externalToken), then we will propagate only a single OCE(externalToken) below
                     // otherwise, we flatten the aggregate (because the WaitAll above already aggregated) and rethrow.
-                    if (!allOCEsOnTrackedExternalCancellationToken || flattenedAE.InnerExceptions.Count == 0)
-                        throw flattenedAE;  // Case #1
+                    if (
+                        !allOCEsOnTrackedExternalCancellationToken
+                        || flattenedAE.InnerExceptions.Count == 0
+                    )
+                        throw flattenedAE; // Case #1
                 }
                 finally
                 {
@@ -150,7 +155,9 @@ namespace System.Linq.Parallel
                     // If the query has already been disposed, we don't want to throw an OCE
                     if (!_cancellationState.TopLevelDisposedFlag.Value)
                     {
-                        CancellationState.ThrowWithStandardMessageIfCanceled(_cancellationState.ExternalCancellationToken); // Case #2
+                        CancellationState.ThrowWithStandardMessageIfCanceled(
+                            _cancellationState.ExternalCancellationToken
+                        ); // Case #2
                     }
 
                     //otherwise, given that there were no user-delegate exceptions (they would have been rethrown above),

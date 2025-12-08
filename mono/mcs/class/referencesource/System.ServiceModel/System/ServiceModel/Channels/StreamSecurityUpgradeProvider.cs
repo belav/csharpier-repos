@@ -6,18 +6,11 @@ namespace System.ServiceModel.Channels
     public abstract class StreamSecurityUpgradeProvider : StreamUpgradeProvider
     {
         protected StreamSecurityUpgradeProvider()
-            : base()
-        {
-        }
+            : base() { }
 
         protected StreamSecurityUpgradeProvider(IDefaultCommunicationTimeouts timeouts)
-            : base(timeouts)
-        {
-        }
+            : base(timeouts) { }
 
-        public abstract EndpointIdentity Identity
-        {
-            get;
-        }
+        public abstract EndpointIdentity Identity { get; }
     }
 }

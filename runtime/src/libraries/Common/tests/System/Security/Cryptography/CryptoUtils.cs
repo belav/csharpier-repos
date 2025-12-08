@@ -10,7 +10,11 @@ namespace Test.Cryptography
 {
     internal static class CryptoUtils
     {
-        internal static byte[] Encrypt(this SymmetricAlgorithm alg, byte[] plainText, int blockSizeMultiplier = 1)
+        internal static byte[] Encrypt(
+            this SymmetricAlgorithm alg,
+            byte[] plainText,
+            int blockSizeMultiplier = 1
+        )
         {
             using (ICryptoTransform encryptor = alg.CreateEncryptor())
             {
@@ -18,7 +22,11 @@ namespace Test.Cryptography
             }
         }
 
-        internal static byte[] Decrypt(this SymmetricAlgorithm alg, byte[] cipher, int blockSizeMultiplier = 1)
+        internal static byte[] Decrypt(
+            this SymmetricAlgorithm alg,
+            byte[] cipher,
+            int blockSizeMultiplier = 1
+        )
         {
             using (ICryptoTransform decryptor = alg.CreateDecryptor())
             {
@@ -26,7 +34,11 @@ namespace Test.Cryptography
             }
         }
 
-        internal static byte[] Transform(this ICryptoTransform transform, byte[] input, int blockSizeMultiplier = 1)
+        internal static byte[] Transform(
+            this ICryptoTransform transform,
+            byte[] input,
+            int blockSizeMultiplier = 1
+        )
         {
             List<byte> output = new List<byte>(input.Length);
             int blockSize = transform.InputBlockSize * blockSizeMultiplier;

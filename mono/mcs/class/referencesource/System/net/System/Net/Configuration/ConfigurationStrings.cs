@@ -13,53 +13,102 @@ namespace System.Net.Configuration
     {
         static string GetSectionPath(string sectionName)
         {
-            return string.Format(CultureInfo.InvariantCulture, @"{0}/{1}", ConfigurationStrings.SectionGroupName, sectionName);
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                @"{0}/{1}",
+                ConfigurationStrings.SectionGroupName,
+                sectionName
+            );
         }
 
         static string GetSectionPath(string sectionName, string subSectionName)
         {
-            return string.Format(CultureInfo.InvariantCulture, @"{0}/{1}/{2}", ConfigurationStrings.SectionGroupName, sectionName, subSectionName);
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                @"{0}/{1}/{2}",
+                ConfigurationStrings.SectionGroupName,
+                sectionName,
+                subSectionName
+            );
         }
 
-        static internal string AuthenticationModulesSectionPath
+        internal static string AuthenticationModulesSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.AuthenticationModulesSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(
+                    ConfigurationStrings.AuthenticationModulesSectionName
+                );
+            }
         }
 
-        static internal string ConnectionManagementSectionPath
+        internal static string ConnectionManagementSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.ConnectionManagementSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(
+                    ConfigurationStrings.ConnectionManagementSectionName
+                );
+            }
         }
 
-        static internal string DefaultProxySectionPath
+        internal static string DefaultProxySectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.DefaultProxySectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(
+                    ConfigurationStrings.DefaultProxySectionName
+                );
+            }
         }
 
-        static internal string SmtpSectionPath
+        internal static string SmtpSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.MailSettingsSectionName, ConfigurationStrings.SmtpSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(
+                    ConfigurationStrings.MailSettingsSectionName,
+                    ConfigurationStrings.SmtpSectionName
+                );
+            }
         }
 
-        static internal string RequestCachingSectionPath
+        internal static string RequestCachingSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.RequestCachingSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(
+                    ConfigurationStrings.RequestCachingSectionName
+                );
+            }
         }
 
-        static internal string SettingsSectionPath
+        internal static string SettingsSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.SettingsSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(
+                    ConfigurationStrings.SettingsSectionName
+                );
+            }
         }
 
-        static internal string WebRequestModulesSectionPath
+        internal static string WebRequestModulesSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.WebRequestModulesSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(
+                    ConfigurationStrings.WebRequestModulesSectionName
+                );
+            }
         }
 
         internal const string Address = "address";
         internal const string AutoDetect = "autoDetect";
-        internal const string AlwaysUseCompletionPortsForAccept = "alwaysUseCompletionPortsForAccept";
-        internal const string AlwaysUseCompletionPortsForConnect = "alwaysUseCompletionPortsForConnect";
+        internal const string AlwaysUseCompletionPortsForAccept =
+            "alwaysUseCompletionPortsForAccept";
+        internal const string AlwaysUseCompletionPortsForConnect =
+            "alwaysUseCompletionPortsForConnect";
         internal const string AuthenticationModulesSectionName = "authenticationModules";
         internal const string BypassList = "bypasslist";
         internal const string BypassOnLocal = "bypassonlocal";
@@ -133,7 +182,7 @@ namespace System.Net.Configuration
         internal const string WebProxyScript = "webProxyScript";
         internal const string WebRequestModulesSectionName = "webRequestModules";
         internal const string WebUtility = "webUtility";
-    	internal const string maximumUnauthorizedUploadLength = "maximumUnauthorizedUploadLength";
+        internal const string maximumUnauthorizedUploadLength = "maximumUnauthorizedUploadLength";
         internal const string UnescapeRequestUrl = "unescapeRequestUrl";
         internal const string Timeouts = "timeouts";
         internal const string EntityBody = "entityBody";
@@ -144,6 +193,7 @@ namespace System.Net.Configuration
         internal const string MinSendBytesPerSecond = "minSendBytesPerSecond";
     }
 }
+
 namespace System.Configuration
 {
     using System;

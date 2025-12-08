@@ -37,9 +37,16 @@ namespace Microsoft.CodeAnalysis.ValueTracking
             }
         }
 
-        internal async Task<bool> TryReportAsync(Solution solution, Location location, ISymbol symbol, CancellationToken cancellationToken = default)
+        internal async Task<bool> TryReportAsync(
+            Solution solution,
+            Location location,
+            ISymbol symbol,
+            CancellationToken cancellationToken = default
+        )
         {
-            var item = await ValueTrackedItem.TryCreateAsync(solution, location, symbol, Parent, cancellationToken).ConfigureAwait(false);
+            var item = await ValueTrackedItem
+                .TryCreateAsync(solution, location, symbol, Parent, cancellationToken)
+                .ConfigureAwait(false);
             if (item is not null)
             {
                 Report(item);

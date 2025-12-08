@@ -28,14 +28,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 {
     internal partial class SuggestedActionsSourceProvider
     {
-        private sealed partial class SuggestedActionsSource : ForegroundThreadAffinitizedObject, ISuggestedActionsSource3
+        private sealed partial class SuggestedActionsSource
+            : ForegroundThreadAffinitizedObject,
+                ISuggestedActionsSource3
         {
             private readonly ISuggestedActionCategoryRegistryService _suggestedActionCategoryRegistry;
 
             private readonly ReferenceCountedDisposable<State> _state;
             private readonly IAsynchronousOperationListener _listener;
 
-            public event EventHandler<EventArgs>? SuggestedActionsChanged { add { } remove { } }
+            public event EventHandler<EventArgs>? SuggestedActionsChanged
+            {
+                add { }
+                remove { }
+            }
 
             public readonly IGlobalOptionService GlobalOptions;
 
@@ -46,13 +52,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 ITextView textView,
                 ITextBuffer textBuffer,
                 ISuggestedActionCategoryRegistryService suggestedActionCategoryRegistry,
-                IAsynchronousOperationListener listener)
+                IAsynchronousOperationListener listener
+            )
                 : base(threadingContext)
             {
                 GlobalOptions = globalOptions;
 
                 _suggestedActionCategoryRegistry = suggestedActionCategoryRegistry;
-                _state = new ReferenceCountedDisposable<State>(new State(this, owner, textView, textBuffer));
+                _state = new ReferenceCountedDisposable<State>(
+                    new State(this, owner, textView, textBuffer)
+                );
 
                 _state.Target.TextView.Closed += OnTextViewClosed;
                 _listener = listener;
@@ -81,7 +90,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     return false;
                 }
 
-                var documentId = workspace.GetDocumentIdInCurrentContext(state.Target.SubjectBuffer.AsTextContainer());
+                var documentId = workspace.GetDocumentIdInCurrentContext(
+                    state.Target.SubjectBuffer.AsTextContainer()
+                );
                 if (documentId == null)
                 {
                     return false;
@@ -112,14 +123,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             public IEnumerable<SuggestedActionSet>? GetSuggestedActions(
                 ISuggestedActionCategorySet requestedActionCategories,
                 SnapshotSpan range,
-                CancellationToken cancellationToken)
-                => null;
+                CancellationToken cancellationToken
+            ) => null;
 
             public IEnumerable<SuggestedActionSet>? GetSuggestedActions(
                 ISuggestedActionCategorySet requestedActionCategories,
                 SnapshotSpan range,
-                IUIThreadOperationContext operationContext)
-                => null;
+                IUIThreadOperationContext operationContext
+            ) => null;
 
             private static string GetFixCategory(DiagnosticSeverity severity)
             {
@@ -139,13 +150,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             public Task<bool> HasSuggestedActionsAsync(
                 ISuggestedActionCategorySet requestedActionCategories,
                 SnapshotSpan range,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 // We implement GetSuggestedActionCategoriesAsync so this should not be called
-                throw new NotImplementedException($"We implement {nameof(GetSuggestedActionCategoriesAsync)}. This should not be called.");
+                throw new NotImplementedException(
+                    $"We implement {nameof(GetSuggestedActionCategoriesAsync)}. This should not be called."
+                );
             }
 
-            private async Task<TextSpan?> GetSpanAsync(ReferenceCountedDisposable<State> state, SnapshotSpan range, CancellationToken cancellationToken)
+            private async Task<TextSpan?> GetSpanAsync(
+                ReferenceCountedDisposable<State> state,
+                SnapshotSpan range,
+                CancellationToken cancellationToken
+            )
             {
                 // First, ensure that the snapshot we're being asked about is for an actual
                 // roslyn document.  This can fail, for example, in projection scenarios where
@@ -160,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 // Also make sure the range is from the same buffer that this source was created for
                 Contract.ThrowIfFalse(
                     range.Snapshot.TextBuffer.Equals(state.Target.SubjectBuffer),
-                    $"Invalid text buffer passed to {nameof(HasSuggestedActionsAsync)}");
+                    $"Invalid text buffer passed to {nameof(HasSuggestedActionsAsync)}"
+                );
 
                 // Next, before we do any async work, acquire the user's selection, directly grabbing
                 // it from the UI thread if that's what we're on. That way we don't have any reentrancy
@@ -193,15 +212,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 }
                 else
                 {
-                    await InvokeBelowInputPriorityAsync(() =>
-                    {
-                        // Make sure we were not disposed between kicking off this work and getting to this point.
-                        using var state = _state.TryAddReference();
-                        if (state is null)
-                            return;
+                    await InvokeBelowInputPriorityAsync(
+                            () =>
+                            {
+                                // Make sure we were not disposed between kicking off this work and getting to this point.
+                                using var state = _state.TryAddReference();
+                                if (state is null)
+                                    return;
 
-                        selection = TryGetCodeRefactoringSelection(state, range);
-                    }, cancellationToken).ConfigureAwait(false);
+                                selection = TryGetCodeRefactoringSelection(state, range);
+                            },
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
 
                 return selection;
@@ -212,7 +235,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 TextDocument document,
                 SnapshotSpan range,
                 CodeActionOptionsProvider fallbackOptions,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var lowPriorityAnalyzers = new ConcurrentSet<DiagnosticAnalyzer>();
 
@@ -220,7 +244,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 {
                     var priority = TryGetPriority(order);
                     Contract.ThrowIfNull(priority);
-                    var priorityProvider = new SuggestedActionPriorityProvider(priority.Value, lowPriorityAnalyzers);
+                    var priorityProvider = new SuggestedActionPriorityProvider(
+                        priority.Value,
+                        lowPriorityAnalyzers
+                    );
 
                     var result = await GetFixLevelAsync(priorityProvider).ConfigureAwait(false);
                     if (result != null)
@@ -229,18 +256,31 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
                 return null;
 
-                async Task<string?> GetFixLevelAsync(ICodeActionRequestPriorityProvider priorityProvider)
+                async Task<string?> GetFixLevelAsync(
+                    ICodeActionRequestPriorityProvider priorityProvider
+                )
                 {
-                    if (state.Target.Owner._codeFixService != null &&
-                        state.Target.SubjectBuffer.SupportsCodeFixes())
+                    if (
+                        state.Target.Owner._codeFixService != null
+                        && state.Target.SubjectBuffer.SupportsCodeFixes()
+                    )
                     {
-                        var result = await state.Target.Owner._codeFixService.GetMostSevereFixAsync(
-                            document, range.Span.ToTextSpan(), priorityProvider, fallbackOptions, cancellationToken).ConfigureAwait(false);
+                        var result = await state
+                            .Target.Owner._codeFixService.GetMostSevereFixAsync(
+                                document,
+                                range.Span.ToTextSpan(),
+                                priorityProvider,
+                                fallbackOptions,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
 
                         if (result.HasFix)
                         {
                             Logger.Log(FunctionId.SuggestedActions_HasSuggestedActionsAsync);
-                            return GetFixCategory(result.CodeFixCollection.FirstDiagnostic.Severity);
+                            return GetFixCategory(
+                                result.CodeFixCollection.FirstDiagnostic.Severity
+                            );
                         }
 
                         if (!result.UpToDate)
@@ -255,7 +295,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 TextDocument document,
                 TextSpan? selection,
                 CodeActionOptionsProvider fallbackOptions,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 using var state = _state.TryAddReference();
                 if (state is null)
@@ -268,12 +309,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     return null;
                 }
 
-                if (GlobalOptions.GetOption(EditorComponentOnOffOptions.CodeRefactorings) &&
-                    state.Target.Owner._codeRefactoringService != null &&
-                    state.Target.SubjectBuffer.SupportsRefactorings())
+                if (
+                    GlobalOptions.GetOption(EditorComponentOnOffOptions.CodeRefactorings)
+                    && state.Target.Owner._codeRefactoringService != null
+                    && state.Target.SubjectBuffer.SupportsRefactorings()
+                )
                 {
-                    if (await state.Target.Owner._codeRefactoringService.HasRefactoringsAsync(
-                            document, selection.Value, fallbackOptions, cancellationToken).ConfigureAwait(false))
+                    if (
+                        await state
+                            .Target.Owner._codeRefactoringService.HasRefactoringsAsync(
+                                document,
+                                selection.Value,
+                                fallbackOptions,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false)
+                    )
                     {
                         return PredefinedSuggestedActionCategoryNames.Refactoring;
                     }
@@ -282,12 +333,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 return null;
             }
 
-            private TextSpan? TryGetCodeRefactoringSelection(ReferenceCountedDisposable<State> state, SnapshotSpan range)
+            private TextSpan? TryGetCodeRefactoringSelection(
+                ReferenceCountedDisposable<State> state,
+                SnapshotSpan range
+            )
             {
                 this.AssertIsForeground();
 
-                var selectedSpans = state.Target.TextView.Selection.SelectedSpans
-                    .SelectMany(ss => state.Target.TextView.BufferGraph.MapDownToBuffer(ss, SpanTrackingMode.EdgeExclusive, state.Target.SubjectBuffer))
+                var selectedSpans = state
+                    .Target.TextView.Selection.SelectedSpans.SelectMany(ss =>
+                        state.Target.TextView.BufferGraph.MapDownToBuffer(
+                            ss,
+                            SpanTrackingMode.EdgeExclusive,
+                            state.Target.SubjectBuffer
+                        )
+                    )
                     .Where(ss => !state.Target.TextView.IsReadOnlyOnSurfaceBuffer(ss))
                     .ToList();
 
@@ -297,7 +357,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     return null;
                 }
 
-                var translatedSpan = selectedSpans[0].TranslateTo(range.Snapshot, SpanTrackingMode.EdgeInclusive);
+                var translatedSpan = selectedSpans[0]
+                    .TranslateTo(range.Snapshot, SpanTrackingMode.EdgeInclusive);
 
                 // We only support refactorings when selected span intersects with the span that the light bulb is asking for.
                 if (!translatedSpan.IntersectsWith(range))
@@ -308,10 +369,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 return translatedSpan.Span.ToTextSpan();
             }
 
-            private void OnTextViewClosed(object sender, EventArgs e)
-                => Dispose();
+            private void OnTextViewClosed(object sender, EventArgs e) => Dispose();
 
-            public async Task<ISuggestedActionCategorySet?> GetSuggestedActionCategoriesAsync(ISuggestedActionCategorySet requestedActionCategories, SnapshotSpan range, CancellationToken cancellationToken)
+            public async Task<ISuggestedActionCategorySet?> GetSuggestedActionCategoriesAsync(
+                ISuggestedActionCategorySet requestedActionCategories,
+                SnapshotSpan range,
+                CancellationToken cancellationToken
+            )
             {
                 using var state = _state.TryAddReference();
                 if (state is null)
@@ -322,22 +386,34 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     return null;
 
                 // never show light bulb if solution is not fully loaded yet
-                if (!await workspace.Services.GetRequiredService<IWorkspaceStatusService>().IsFullyLoadedAsync(cancellationToken).ConfigureAwait(false))
+                if (
+                    !await workspace
+                        .Services.GetRequiredService<IWorkspaceStatusService>()
+                        .IsFullyLoadedAsync(cancellationToken)
+                        .ConfigureAwait(false)
+                )
                     return null;
 
                 cancellationToken.ThrowIfCancellationRequested();
 
-                using var asyncToken = state.Target.Owner.OperationListener.BeginAsyncOperation(nameof(GetSuggestedActionCategoriesAsync));
+                using var asyncToken = state.Target.Owner.OperationListener.BeginAsyncOperation(
+                    nameof(GetSuggestedActionCategoriesAsync)
+                );
                 var document = range.Snapshot.GetOpenTextDocumentInCurrentContextWithChanges();
                 if (document == null)
                     return null;
 
                 var fallbackOptions = GlobalOptions.GetCodeActionOptionsProvider();
 
-                using var linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+                using var linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+                    cancellationToken
+                );
                 var linkedToken = linkedTokenSource.Token;
 
-                var errorTask = Task.Run(() => GetFixLevelAsync(state, document, range, fallbackOptions, linkedToken), linkedToken);
+                var errorTask = Task.Run(
+                    () => GetFixLevelAsync(state, document, range, fallbackOptions, linkedToken),
+                    linkedToken
+                );
 
                 var selection = await GetSpanAsync(state, range, linkedToken).ConfigureAwait(false);
 
@@ -345,12 +421,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 if (selection != null)
                 {
                     refactoringTask = Task.Run(
-                        () => TryGetRefactoringSuggestedActionCategoryAsync(document, selection, fallbackOptions, linkedToken), linkedToken);
+                        () =>
+                            TryGetRefactoringSuggestedActionCategoryAsync(
+                                document,
+                                selection,
+                                fallbackOptions,
+                                linkedToken
+                            ),
+                        linkedToken
+                    );
                 }
 
                 // If we happen to get the result of the error task before the refactoring task,
                 // and that result is non-null, we can just cancel the refactoring task.
-                var result = await errorTask.ConfigureAwait(false) ?? await refactoringTask.ConfigureAwait(false);
+                var result =
+                    await errorTask.ConfigureAwait(false)
+                    ?? await refactoringTask.ConfigureAwait(false);
                 linkedTokenSource.Cancel();
 
                 return result == null

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="WmlPageAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -10,45 +10,51 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
 using System.Text;
 using System.Web.Mobile;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
-using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
-
     /*
      * WmlPageAdapter base class contains wml specific methods.
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\WmlPageAdapter.uex' path='docs/doc[@for="WmlPageAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class WmlPageAdapter : WmlControlAdapter, IPageAdapter
     {
         private IList _renderableForms;
         private static readonly String _headerBegin = "<?xml version='1.0'";
         private static readonly String _headerEncoding = " encoding ='{0}'";
-        private static readonly String _headerEnd
-            = "?>\r\n"
+        private static readonly String _headerEnd =
+            "?>\r\n"
             + "<!DOCTYPE wml PUBLIC '-//WAPFORUM//DTD WML 1.1//EN' 'http://www.wapforum.org/DTD/wml_1.1.xml'>";
-        private static readonly String _cacheExpiry
-            = "<head>\r\n"
+        private static readonly String _cacheExpiry =
+            "<head>\r\n"
             + "<meta http-equiv=\"Cache-Control\" content=\"max-age=0\" />\r\n"
             + "</head>\r\n";
         private static readonly String _contentType = "text/vnd.wap.wml";
 
         private IDictionary _cookielessDataDictionary = null;
-
 
         ///////////////////////////////////////////////////////////////////////////
         //  Static method used for determining if device should use
@@ -60,8 +66,9 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             MobileCapabilities capabilities = ((MobileCapabilities)context.Request.Browser);
             String type = capabilities.PreferredRenderingType;
-            bool qualifies = (type == MobileCapabilities.PreferredRenderingTypeWml11) ||
-                             (type == MobileCapabilities.PreferredRenderingTypeWml12);
+            bool qualifies =
+                (type == MobileCapabilities.PreferredRenderingTypeWml11)
+                || (type == MobileCapabilities.PreferredRenderingTypeWml12);
 
             return qualifies;
         }
@@ -71,32 +78,19 @@ namespace System.Web.UI.MobileControls.Adapters
         ///////////////////////////////////////////////////////////////////////////
 
         private MobilePage _page;
-        
+
         /// <include file='doc\WmlPageAdapter.uex' path='docs/doc[@for="WmlPageAdapter.Page"]/*' />
         public override MobilePage Page
         {
-            get
-            {
-                return _page;
-            }
-            set
-            {
-                _page = value;
-            }
+            get { return _page; }
+            set { _page = value; }
         }
 
         /// <include file='doc\WmlPageAdapter.uex' path='docs/doc[@for="WmlPageAdapter.CookielessDataDictionary"]/*' />
         public IDictionary CookielessDataDictionary
         {
-            get
-            {
-                return _cookielessDataDictionary;
-            }
-
-            set
-            {
-                _cookielessDataDictionary = value;
-            }
+            get { return _cookielessDataDictionary; }
+            set { _cookielessDataDictionary = value; }
         }
 
         private bool _persistCookielessData = false;
@@ -104,15 +98,8 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\WmlPageAdapter.uex' path='docs/doc[@for="WmlPageAdapter.PersistCookielessData"]/*' />
         public bool PersistCookielessData
         {
-            get
-            {
-                return _persistCookielessData;
-            }
-            
-            set
-            {
-                _persistCookielessData = value;
-            }
+            get { return _persistCookielessData; }
+            set { _persistCookielessData = value; }
         }
 
         private int _optimumPageWeight = 0;
@@ -142,7 +129,8 @@ namespace System.Web.UI.MobileControls.Adapters
             HttpRequest request,
             String postEventSourceID,
             String postEventArgumentID,
-            NameValueCollection baseCollection)
+            NameValueCollection baseCollection
+        )
         {
             NameValueCollection collection = baseCollection;
 
@@ -152,8 +140,7 @@ namespace System.Web.UI.MobileControls.Adapters
                 {
                     // Reverse the special character replacement done when
                     // writing out the viewstate value.
-                    String speciallyEncodedState =
-                                    baseCollection[MobilePage.ViewStateID];
+                    String speciallyEncodedState = baseCollection[MobilePage.ViewStateID];
 
                     if (speciallyEncodedState != null)
                     {
@@ -189,10 +176,7 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\WmlPageAdapter.uex' path='docs/doc[@for="WmlPageAdapter.CacheVaryByHeaders"]/*' />
         public virtual IList CacheVaryByHeaders
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         /// <include file='doc\WmlPageAdapter.uex' path='docs/doc[@for="WmlPageAdapter.HandleError"]/*' />
@@ -206,8 +190,10 @@ namespace System.Web.UI.MobileControls.Adapters
             Page.Response.ContentType = _contentType;
 
             Exception ex;
-            if ((e is HttpException && e.InnerException != null) || 
-                (e is System.Reflection.TargetInvocationException && e.InnerException != null))
+            if (
+                (e is HttpException && e.InnerException != null)
+                || (e is System.Reflection.TargetInvocationException && e.InnerException != null)
+            )
             {
                 ex = e.InnerException;
             }
@@ -244,8 +230,9 @@ namespace System.Web.UI.MobileControls.Adapters
             writer.WriteFullBeginTag("p");
             writer.WriteFullBeginTag("big");
             writer.WriteFullBeginTag("b");
-            wmlWriter.WriteEncodedText(SR.GetString(SR.WmlPageAdapterServerError,
-                                       HttpRuntime.AppDomainAppVirtualPath));
+            wmlWriter.WriteEncodedText(
+                SR.GetString(SR.WmlPageAdapterServerError, HttpRuntime.AppDomainAppVirtualPath)
+            );
             writer.WriteEndTag("b");
             writer.WriteEndTag("big");
             writer.WriteEndTag("p");
@@ -265,7 +252,8 @@ namespace System.Web.UI.MobileControls.Adapters
             wmlWriter.WriteEncodedText(ex.Message);
             writer.Write("<br />");
             wmlWriter.WriteEncodedText(SR.GetString(SR.WmlPageAdapterMethod));
-            if (ex.TargetSite != null) {
+            if (ex.TargetSite != null)
+            {
                 wmlWriter.WriteEncodedText(ex.TargetSite.Name);
             }
             writer.Write("<br />");
@@ -286,7 +274,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
 
             String stackTrace = ex.StackTrace;
-            if (stackTrace != null) {
+            if (stackTrace != null)
+            {
                 int maximumStackTrace = OptimumPageWeight / 2;
                 if (stackTrace.Length > maximumStackTrace)
                 {
@@ -299,7 +288,7 @@ namespace System.Web.UI.MobileControls.Adapters
                     wmlWriter.WriteEncodedText(SR.GetString(SR.WmlPageAdapterPartialStackTrace));
                     writer.Write("<br />");
                 }
-            
+
                 int lineBegin = 0;
                 int lineEnd;
                 while (lineBegin < stackTrace.Length)
@@ -309,18 +298,20 @@ namespace System.Web.UI.MobileControls.Adapters
                     {
                         lineEnd = stackTrace.Length;
                     }
-            
-                    wmlWriter.WriteEncodedText(stackTrace.Substring(lineBegin, lineEnd - lineBegin));
+
+                    wmlWriter.WriteEncodedText(
+                        stackTrace.Substring(lineBegin, lineEnd - lineBegin)
+                    );
                     writer.Write("<br />");
-            
+
                     lineBegin = lineEnd + 2;
                 }
             }
-            
+
             writer.WriteEndTag("p");
             writer.WriteEndTag("card");
             writer.WriteEndTag("wml");
-            
+
             wmlWriter.EndFile();
             wmlWriter.EndResponse();
             return true;
@@ -402,8 +393,11 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             writer.Write(_headerBegin);
             String charset = Page.Response.Charset;
-            if (charset != null && charset.Length > 0 && 
-                String.Compare(charset, "utf-8", StringComparison.OrdinalIgnoreCase) != 0)
+            if (
+                charset != null
+                && charset.Length > 0
+                && String.Compare(charset, "utf-8", StringComparison.OrdinalIgnoreCase) != 0
+            )
             {
                 writer.Write(String.Format(CultureInfo.InvariantCulture, _headerEncoding, charset));
             }
@@ -421,10 +415,70 @@ namespace System.Web.UI.MobileControls.Adapters
         // '/' <-> '*'
         private static readonly char[] _specialEncodingChars = new char[64]
         {
-            '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0',
-            '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0',
-            '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0',  '/',  '-', '\0',  '+',  '=',  '*',
-            '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0',  '.', '\0', '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '/',
+            '-',
+            '\0',
+            '+',
+            '=',
+            '*',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '\0',
+            '.',
+            '\0',
+            '\0',
         };
 
         internal String EncodeSpecialViewState(String pageState)
@@ -467,7 +521,10 @@ namespace System.Web.UI.MobileControls.Adapters
                 }
                 else
                 {
-                    _requiresUTF8ContentEncoding = Convert.ToBoolean(RequiresUTF8ContentEncodingString, CultureInfo.InvariantCulture);
+                    _requiresUTF8ContentEncoding = Convert.ToBoolean(
+                        RequiresUTF8ContentEncodingString,
+                        CultureInfo.InvariantCulture
+                    );
                 }
                 _haveRequiresUTF8ContentEncoding = true;
             }
@@ -481,7 +538,9 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             if (!_haveRequiresValueAttributeInInputTag)
             {
-                String RequiresValueAttributeInInputTagString = Device["requiresValueAttributeInInputTag"];
+                String RequiresValueAttributeInInputTagString = Device[
+                    "requiresValueAttributeInInputTag"
+                ];
                 if (RequiresValueAttributeInInputTagString == null)
                 {
                     if (IsKDDIPhone())
@@ -491,7 +550,10 @@ namespace System.Web.UI.MobileControls.Adapters
                 }
                 else
                 {
-                    _requiresValueAttributeInInputTag = Convert.ToBoolean(RequiresValueAttributeInInputTagString, CultureInfo.InvariantCulture);
+                    _requiresValueAttributeInInputTag = Convert.ToBoolean(
+                        RequiresValueAttributeInInputTagString,
+                        CultureInfo.InvariantCulture
+                    );
                 }
                 _haveRequiresValueAttributeInInputTag = true;
             }
@@ -505,14 +567,19 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             if (!_haveIsKDDIPhone)
             {
-                if (Device.Browser == "Phone.com" &&
-                    Device.MajorVersion == 3 &&
-                    Device.MinorVersion < 0.3)
+                if (
+                    Device.Browser == "Phone.com"
+                    && Device.MajorVersion == 3
+                    && Device.MinorVersion < 0.3
+                )
                 {
                     String charset = Page.Request.Headers["x-up-devcap-charset"];
 
-                    if (charset != null &&
-                        String.Compare(charset, "Shift_JIS", StringComparison.OrdinalIgnoreCase) == 0)
+                    if (
+                        charset != null
+                        && String.Compare(charset, "Shift_JIS", StringComparison.OrdinalIgnoreCase)
+                            == 0
+                    )
                     {
                         _isKDDIPhone = true;
                     }
@@ -522,23 +589,4 @@ namespace System.Web.UI.MobileControls.Adapters
             return _isKDDIPhone;
         }
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

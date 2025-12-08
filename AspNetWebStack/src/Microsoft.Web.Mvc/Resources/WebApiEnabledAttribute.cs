@@ -18,8 +18,16 @@ namespace Microsoft.Web.Mvc.Resources
     /// Attribute indicating that the controller supports multiple formats (HTML, XML, JSON etc), HTTP method based dispatch
     /// and HTTP error handling.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This class is designed to be overridden")]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = false
+    )]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "This class is designed to be overridden"
+    )]
     public class WebApiEnabledAttribute : ActionFilterAttribute, IExceptionFilter
     {
         public WebApiEnabledAttribute()
@@ -36,25 +44,32 @@ namespace Microsoft.Web.Mvc.Resources
         public static bool IsDefined(ControllerBase controller)
         {
             Type controllerType = controller.GetType();
-            WebApiEnabledAttribute[] rea = controllerType.GetCustomAttributes(typeof(WebApiEnabledAttribute), true) as WebApiEnabledAttribute[];
+            WebApiEnabledAttribute[] rea =
+                controllerType.GetCustomAttributes(typeof(WebApiEnabledAttribute), true)
+                as WebApiEnabledAttribute[];
             return rea != null && rea.Length > 0;
         }
 
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            MultiFormatActionResult multiFormatResult = filterContext.Result as MultiFormatActionResult;
+            MultiFormatActionResult multiFormatResult =
+                filterContext.Result as MultiFormatActionResult;
             if (multiFormatResult == null)
             {
                 ViewResultBase viewResult = filterContext.Result as ViewResultBase;
                 if (viewResult != null && viewResult.ViewData != null)
                 {
                     bool handled = false;
-                    foreach (ContentType responseFormat in filterContext.RequestContext.GetResponseFormats())
+                    foreach (
+                        ContentType responseFormat in filterContext.RequestContext.GetResponseFormats()
+                    )
                     {
                         // CONSIDER: making this lookup optional if perf is an issue
                         for (int i = 0; i < FormatManager.Current.ResponseFormatHandlers.Count; ++i)
                         {
-                            IResponseFormatHandler handler = FormatManager.Current.ResponseFormatHandlers[i];
+                            IResponseFormatHandler handler = FormatManager
+                                .Current
+                                .ResponseFormatHandlers[i];
                             if (handler.CanSerialize(responseFormat))
                             {
                                 // we can't use the full ContentType's name (EG: "text/xml")
@@ -69,7 +84,11 @@ namespace Microsoft.Web.Mvc.Resources
                                 viewName = viewName + "." + friendlyName;
                                 // CONSIDER: ViewEngineCollection queries view engines in registration order and returns 1st match,
                                 // would it make sense to let the client provide a hint in case
-                                ViewEngineResult result = viewResult.ViewEngineCollection.FindView(filterContext, viewName, null);
+                                ViewEngineResult result = viewResult.ViewEngineCollection.FindView(
+                                    filterContext,
+                                    viewName,
+                                    null
+                                );
                                 // ignore errors and fallback to default behavior
                                 if (result != null && result.View != null)
                                 {
@@ -82,16 +101,25 @@ namespace Microsoft.Web.Mvc.Resources
                                         }
                                         catch (ArgumentException)
                                         {
-                                            throw new HttpException((int)HttpStatusCode.NotAcceptable, String.Format(CultureInfo.CurrentCulture, MvcResources.Resources_UnsupportedFormat, responseFormat));
+                                            throw new HttpException(
+                                                (int)HttpStatusCode.NotAcceptable,
+                                                String.Format(
+                                                    CultureInfo.CurrentCulture,
+                                                    MvcResources.Resources_UnsupportedFormat,
+                                                    responseFormat
+                                                )
+                                            );
                                         }
                                     }
                                     responseFormat.CharSet = encoding.HeaderName;
-                                    filterContext.HttpContext.Response.ContentType = responseFormat.ToString();
+                                    filterContext.HttpContext.Response.ContentType =
+                                        responseFormat.ToString();
                                     filterContext.HttpContext.Response.ContentEncoding = encoding;
                                     // we have set the Response.ContentType but know that the webforms view engine will override it
                                     // a different ViewPage base class that sets this can be used to workaround this
                                     // so we make the computed responseFormat available in ViewData
-                                    viewResult.ViewData[DefaultFormatHelper.ResponseFormatKey] = responseFormat;
+                                    viewResult.ViewData[DefaultFormatHelper.ResponseFormatKey] =
+                                        responseFormat;
                                     viewResult.View = result.View;
                                     viewResult.ViewName = viewName;
                                     handled = true;
@@ -117,7 +145,10 @@ namespace Microsoft.Web.Mvc.Resources
                     {
                         // if enumeration doesn't yield a handler the request is not acceptable
                         // CONSIDER: returning all formats considered in the exception messages
-                        throw new HttpException((int)HttpStatusCode.NotAcceptable, "None of the formats specified by the accept header is supported.");
+                        throw new HttpException(
+                            (int)HttpStatusCode.NotAcceptable,
+                            "None of the formats specified by the accept header is supported."
+                        );
                     }
                 }
             }
@@ -150,11 +181,18 @@ namespace Microsoft.Web.Mvc.Resources
                 }
                 // if enumeration doesn't yield a handler the request is not acceptable
                 // CONSIDER: returning all formats considered in the exception messages
-                throw new HttpException((int)HttpStatusCode.NotAcceptable, "None of the formats specified by the accept header is supported.");
+                throw new HttpException(
+                    (int)HttpStatusCode.NotAcceptable,
+                    "None of the formats specified by the accept header is supported."
+                );
             }
         }
 
-        public virtual bool TryGetErrorResult(HttpException exception, ContentType responseFormat, out ResourceErrorActionResult actionResult)
+        public virtual bool TryGetErrorResult(
+            HttpException exception,
+            ContentType responseFormat,
+            out ResourceErrorActionResult actionResult
+        )
         {
             if (FormatManager.Current.CanSerialize(responseFormat))
             {
@@ -175,15 +213,25 @@ namespace Microsoft.Web.Mvc.Resources
             }
         }
 
-        public virtual bool TryGetResult(ViewResultBase viewResult, ContentType responseFormat, out MultiFormatActionResult actionResult)
+        public virtual bool TryGetResult(
+            ViewResultBase viewResult,
+            ContentType responseFormat,
+            out MultiFormatActionResult actionResult
+        )
         {
             if (FormatManager.Current.CanSerialize(responseFormat))
             {
                 if (viewResult.ViewData.Model == null)
                 {
-                    throw new HttpException((int)this.StatusOnNullModel, this.StatusOnNullModel.ToString());
+                    throw new HttpException(
+                        (int)this.StatusOnNullModel,
+                        this.StatusOnNullModel.ToString()
+                    );
                 }
-                actionResult = new MultiFormatActionResult(viewResult.ViewData.Model, responseFormat);
+                actionResult = new MultiFormatActionResult(
+                    viewResult.ViewData.Model,
+                    responseFormat
+                );
                 return true;
             }
 
@@ -201,7 +249,11 @@ namespace Microsoft.Web.Mvc.Resources
             }
         }
 
-        internal static bool TryGetErrorResult2(RequestContext requestContext, HttpException he, out ResourceErrorActionResult actionResult)
+        internal static bool TryGetErrorResult2(
+            RequestContext requestContext,
+            HttpException he,
+            out ResourceErrorActionResult actionResult
+        )
         {
             foreach (ContentType responseFormat in requestContext.GetResponseFormats())
             {

@@ -7,6 +7,7 @@ namespace System.Text.Json.Serialization
     {
         public override ReferenceResolver CreateResolver() => throw new InvalidOperationException();
 
-        internal override ReferenceResolver CreateResolver(bool writing) => new PreserveReferenceResolver(writing);
+        internal override ReferenceResolver CreateResolver(bool writing) =>
+            new PreserveReferenceResolver(writing);
     }
 }

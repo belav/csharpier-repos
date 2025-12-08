@@ -4,27 +4,31 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Composition;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.VisualStudio.Text.Operations;
 using Microsoft.VisualStudio.Text;
-using System;
+using Microsoft.VisualStudio.Text.Operations;
 
 namespace Microsoft.CodeAnalysis.Editor.Undo
 {
     [ExportWorkspaceService(typeof(ISourceTextUndoService), ServiceLayer.Editor), Shared]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed class EditorSourceTextUndoService(ITextUndoHistoryRegistry undoHistoryRegistry) : ISourceTextUndoService
+    internal sealed class EditorSourceTextUndoService(ITextUndoHistoryRegistry undoHistoryRegistry)
+        : ISourceTextUndoService
     {
         private readonly Dictionary<SourceText, SourceTextUndoTransaction> _transactions = new();
 
         private readonly ITextUndoHistoryRegistry _undoHistoryRegistry = undoHistoryRegistry;
 
-        public ISourceTextUndoTransaction RegisterUndoTransaction(SourceText sourceText, string description)
+        public ISourceTextUndoTransaction RegisterUndoTransaction(
+            SourceText sourceText,
+            string description
+        )
         {
             if (sourceText != null && !string.IsNullOrWhiteSpace(description))
             {
@@ -62,7 +66,11 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
             return false;
         }
 
-        private sealed class SourceTextUndoTransaction(ISourceTextUndoService service, SourceText sourceText, string description) : ISourceTextUndoTransaction
+        private sealed class SourceTextUndoTransaction(
+            ISourceTextUndoService service,
+            SourceText sourceText,
+            string description
+        ) : ISourceTextUndoTransaction
         {
             private readonly ISourceTextUndoService _service = service;
             public SourceText SourceText { get; } = sourceText;
@@ -74,7 +82,9 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
             {
                 if (undoHistory != null)
                 {
-                    _transaction = new HACK_TextUndoTransactionThatRollsBackProperly(undoHistory.CreateTransaction(Description));
+                    _transaction = new HACK_TextUndoTransactionThatRollsBackProperly(
+                        undoHistory.CreateTransaction(Description)
+                    );
                     return true;
                 }
 

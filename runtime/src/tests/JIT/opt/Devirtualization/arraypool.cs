@@ -13,9 +13,13 @@ public class X
     static int K;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void S() { J = N / 2; K = J; }
+    static void S()
+    {
+        J = N / 2;
+        K = J;
+    }
 
-    // We expect calls to Rent and Return to be 
+    // We expect calls to Rent and Return to be
     // devirtualized.
     [Fact]
     public static int TestEntryPoint()
@@ -24,10 +28,11 @@ public class X
         byte[] buffer = ArrayPool<byte>.Shared.Rent(N);
         int r = -1;
 
-        try {
+        try
+        {
             S();
             buffer[J] = 100;
-            r = (int) buffer[K];
+            r = (int)buffer[K];
         }
         finally
         {

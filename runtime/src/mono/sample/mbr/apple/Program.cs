@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Runtime.InteropServices;
 
 public static class Program
 {
@@ -13,10 +13,12 @@ public static class Program
     private static extern void ios_set_text(string value);
 
     [DllImport("__Internal")]
-    unsafe private static extern void ios_register_button_click(delegate* unmanaged<void> callback);
+    private static extern unsafe void ios_register_button_click(delegate* unmanaged<void> callback);
 
     [DllImport("__Internal")]
-    unsafe private static extern void ios_register_applyupdate_click(delegate* unmanaged<void> callback);
+    private static extern unsafe void ios_register_applyupdate_click(
+        delegate* unmanaged<void> callback
+    );
 
     private static int counter = 0;
 
@@ -24,20 +26,21 @@ public static class Program
     [UnmanagedCallersOnly]
     private static void OnButtonClick()
     {
-        ios_set_text("OnButtonClick! #" + ChangeablePart.UpdateCounter (ref counter));
+        ios_set_text("OnButtonClick! #" + ChangeablePart.UpdateCounter(ref counter));
     }
 
     [UnmanagedCallersOnly]
     private static void OnApplyUpdateClick()
     {
-        deltaHelper.Update (typeof(ChangeablePart).Assembly);
+        deltaHelper.Update(typeof(ChangeablePart).Assembly);
     }
 
     static MonoDelta.DeltaHelper deltaHelper;
 
     public static async Task Main(string[] args)
     {
-        unsafe {
+        unsafe
+        {
             // Register a managed callback (will be called by UIButton, see main.m)
             delegate* unmanaged<void> unmanagedPtr = &OnButtonClick;
             ios_register_button_click(unmanagedPtr);

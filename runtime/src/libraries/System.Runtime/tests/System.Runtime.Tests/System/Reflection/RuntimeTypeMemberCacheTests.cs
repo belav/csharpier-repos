@@ -30,25 +30,42 @@ namespace System.Reflection.Tests
     public class Test : TestBase
     {
         public int field1;
+
         public void Method1() { }
+
         public void Method2() { }
+
         public delegate void Delegate1();
         public int field2;
         public event EventHandler Event1;
         public int field3;
         public int field4;
+
         public void Method3() { }
+
         public void Method3(string a) { }
+
         public Test(int value) { }
+
         public Test() { }
+
         public Test(string value) { }
+
         public void Method3(int i) { }
+
         public string Property1 => string.Empty;
         public event EventHandler Event2;
-        public void Method4() { decimal a = fInterface2; }
+
+        public void Method4()
+        {
+            decimal a = fInterface2;
+        }
+
         public delegate void Delegate2(int i);
         public delegate void EventHandler(object sender, EventArgs e);
+
         public void Method5() { }
+
         public string Property2 { get; set; }
         public delegate void Delegate3(int i, int j);
         public event EventHandler Event3;
@@ -170,200 +187,391 @@ namespace System.Reflection.Tests
     public class BigTestType : TestBase
     {
         public void Method0() { }
+
         public void Method1() { }
+
         public void Method2(int a) { }
+
         public int Method3() => 1;
+
         public string Method4() => string.Empty;
+
         public Test Method5() => null;
+
         public int Method6(int a) => a;
+
         public int Method7(string b) => b.Length;
+
         public int Method8() => 1;
+
         public int Method9(int a) => a;
+
         public int Method10() => 1;
+
         public int Method11() => 1;
+
         public int Method12(int a) => a;
+
         public int Method13(int a) => a;
+
         public int Method14(int a) => a;
+
         public int Method15(int a) => a;
+
         public int Method16() => 1;
+
         public int Method17() => 1;
+
         public int Method18() => 1;
+
         public int Method19() => 1;
+
         public int Method20() => 1;
+
         public BigTestType(int value) { }
+
         public BigTestType() { }
+
         public BigTestType(string value) { }
+
         public void Method21() { }
+
         public void Method22(int a) { }
+
         public int Method23() => 1;
+
         public string Method24() => string.Empty;
+
         public Test Method25() => null;
+
         public int Method26(int a) => a;
+
         public int Method27(string b) => b.Length;
+
         public int Method28() => 1;
 
         public BigTestType(long value) { }
+
         public BigTestType(double value) { }
+
         public BigTestType(short value) { }
+
         public BigTestType(bool value) { }
+
         public BigTestType(decimal value) { }
+
         public int Method29(int a) => a;
+
         public int Method30() => 1;
+
         public int Method31() => 1;
+
         public int Method32(int a) => a;
+
         public int Method33(int a) => a;
+
         public int Method34(int a) => a;
+
         public int Method35(int a) => a;
+
         public int Method36() => 1;
+
         public int Method37() => 1;
+
         public int Method38() => 1;
+
         public int Method39() => 1;
+
         public int Method40() => 1;
+
         public BigTestType(Test value) { }
+
         public BigTestType(byte value) { }
+
         public int Method41() => 1;
+
         public int Method42(int a) => a;
+
         public int Method43(int a) => a;
+
         public int Method44(int a) => a;
+
         public int Method45(int a) => a;
+
         public int Method46() => 1;
+
         public int Method47() => 1;
+
         public int Method48() => 1;
+
         public int Method49() => 1;
+
         public int Method50() => 1;
+
         public BigTestType(ulong value) { }
+
         public void Method51() { }
+
         public void Method52(int a) { }
+
         public int Method53() => 1;
+
         public string Method54() => string.Empty;
+
         public Test Method55() => null;
+
         public int Method56(int a) => a;
+
         public int Method57(string b) => b.Length;
+
         public int Method58() => 1;
+
         public int Method59(int a) => a;
+
         public int Method60() => 1;
+
         public int Method61() => 1;
+
         public int Method62(int a) => a;
+
         public int Method63(int a) => a;
+
         public int Method64(int a) => a;
+
         public int Method65(int a) => a;
+
         public int Method66() => field1;
+
         public int Method67() => 1;
+
         public int Method68() => 1;
+
         public int Method69() => 1;
+
         public int Method70() => 1;
+
         public int field1;
         public int field2;
         public int field3;
+
         public void Method71() { }
+
         public void Method72(int a) { }
+
         public int Method73() => 1;
+
         public string Method74() => string.Empty;
+
         public Test Method75() => null;
+
         public int Method76(int a) => a;
+
         public void Method77(string b) { }
+
         public void Method78() { }
+
         public void Method79(int a) { }
+
         public int Method80() => 1;
+
         public void Method81() { }
+
         public void Method82(int a) { }
+
         public int Method83() => 1;
+
         public string Method84() => string.Empty;
+
         public Test Method85() => null;
+
         public int Method86(int a) => a;
+
         public void Method87(string b) { }
+
         public void Method88() { }
+
         public void Method89(int a) { }
+
         public int Method90() => 1;
+
         public void Method91() { }
+
         public void Method92(int a) { }
+
         public int Method93() => 1;
+
         public string Method94() => string.Empty;
+
         public Test Method95() => null;
+
         public int Method96(int a) => a;
+
         public void Method97(string b) { }
+
         public void Method98() { }
+
         public void Method99(int a) { }
+
         public int Method100() => 1;
+
         public void Method101() { }
+
         public void Method102(int a) { }
+
         public int Method103() => 1;
+
         public string Method104() => string.Empty;
+
         public Test Method105() => null;
+
         public int Method106(int a) => a;
+
         public void Method107(string b) { }
+
         public void Method108() { }
+
         public void Method109(int a) { }
+
         public int Method110() => 1;
+
         public void Method111() { }
+
         public void Method112(int a) { }
+
         public int Method113() => 1;
+
         public string Method114() => string.Empty;
+
         public Test Method115() => null;
+
         public int Method116(int a) => a;
+
         public void Method117(string b) { }
+
         public void Method118() { }
+
         public void Method119(int a) { }
+
         public int Method120() => 1;
+
         public void Method121() { }
+
         public void Method122(int a) { }
+
         public int Method123() => 1;
+
         public string Method124() => string.Empty;
+
         public Test Method125() => null;
+
         public int Method126(int a) => a;
+
         public void Method127(string b) { }
+
         public void Method128() { }
+
         public void Method129(int a) { }
+
         public int Method130() => 1;
+
         public void Method131() { }
+
         public void Method132(int a) { }
+
         public int Method133() => 1;
+
         public string Method134() => string.Empty;
+
         public Test Method135() => null;
+
         public int Method136(int a) => a;
+
         public void Method137(string b) { }
+
         public void Method138() { }
+
         public void Method139(int a) { }
+
         public int Method140() => 1;
+
         public void Method141() { }
+
         public void Method142(int a) { }
+
         public int Method143() => 1;
+
         public string Method144() => string.Empty;
+
         public Test Method145() => null;
+
         public int Method146(int a) => a;
+
         public void Method147(string b) { }
+
         public void Method148() { }
+
         public void Method149(int a) { }
+
         public int Method150() => 1;
+
         public void Method151() { }
+
         public void Method152(int a) { }
+
         public int Method153() => 1;
+
         public string Method154() => string.Empty;
+
         public Test Method155() => null;
+
         public int Method156(int a) => a;
+
         public void Method157(string b) { }
+
         public void Method158() { }
+
         public void Method159(int a) { }
+
         public int Method160() => 1;
+
         public void Method161() { }
+
         public void Method162(int a) { }
+
         public int Method163() => 1;
+
         public string Method164() => string.Empty;
+
         public Test Method165() => null;
+
         public int Method166(int a) => a;
+
         public void Method167(string b) { }
+
         public void Method168() { }
+
         public void Method169(int a) { }
+
         public int Method170() => 1;
+
         public void Method171() { }
+
         public void Method172(int a) { }
+
         public int Method173() => 1;
+
         public string Method174() => string.Empty;
+
         public Test Method175() => null;
+
         public int Method176(int a) => a;
+
         public void Method177(string b) { }
+
         public void Method178() { }
+
         public void Method179(int a) { }
+
         public int Method180() => 1;
     }
 }

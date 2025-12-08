@@ -160,7 +160,9 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(System.Configuration.Internal.IConfigurationManagerHelper))]
 [assembly: TypeForwardedTo(typeof(System.Configuration.Internal.IConfigurationManagerInternal))]
 [assembly: TypeForwardedTo(typeof(System.Configuration.Internal.IInternalConfigClientHost))]
-[assembly: TypeForwardedTo(typeof(System.Configuration.Internal.IInternalConfigConfigurationFactory))]
+[assembly: TypeForwardedTo(
+    typeof(System.Configuration.Internal.IInternalConfigConfigurationFactory)
+)]
 [assembly: TypeForwardedTo(typeof(System.Configuration.Internal.IInternalConfigHost))]
 [assembly: TypeForwardedTo(typeof(System.Configuration.Internal.IInternalConfigRecord))]
 [assembly: TypeForwardedTo(typeof(System.Configuration.Internal.IInternalConfigRoot))]

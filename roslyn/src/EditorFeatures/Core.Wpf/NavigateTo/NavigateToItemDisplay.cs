@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
             IThreadingContext threadingContext,
             IUIThreadOperationExecutor threadOperationExecutor,
             IAsynchronousOperationListener asyncListener,
-            INavigateToSearchResult searchResult)
+            INavigateToSearchResult searchResult
+        )
         {
             _threadingContext = threadingContext;
             _threadOperationExecutor = threadOperationExecutor;
@@ -65,28 +66,52 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
             }
 
             var items = new List<DescriptionItem>
-                    {
-                        new DescriptionItem(
-                            new ReadOnlyCollection<DescriptionRun>(
-                                new[] { new DescriptionRun("Project:", bold: true) }),
-                            new ReadOnlyCollection<DescriptionRun>(
-                                new[] { new DescriptionRun(document.Project.Name) })),
-                        new DescriptionItem(
-                            new ReadOnlyCollection<DescriptionRun>(
-                                new[] { new DescriptionRun("File:", bold: true) }),
-                            new ReadOnlyCollection<DescriptionRun>(
-                                new[] { new DescriptionRun(document.FilePath ?? document.Name) })),
-                    };
-
-            if (document.TryGetTextSynchronously(document.Workspace.CurrentSolution, CancellationToken.None) is { } sourceText)
             {
-                var span = NavigateToUtilities.GetBoundedSpan(_searchResult.NavigableItem, sourceText);
+                new DescriptionItem(
+                    new ReadOnlyCollection<DescriptionRun>(
+                        new[] { new DescriptionRun("Project:", bold: true) }
+                    ),
+                    new ReadOnlyCollection<DescriptionRun>(
+                        new[] { new DescriptionRun(document.Project.Name) }
+                    )
+                ),
+                new DescriptionItem(
+                    new ReadOnlyCollection<DescriptionRun>(
+                        new[] { new DescriptionRun("File:", bold: true) }
+                    ),
+                    new ReadOnlyCollection<DescriptionRun>(
+                        new[] { new DescriptionRun(document.FilePath ?? document.Name) }
+                    )
+                ),
+            };
+
+            if (
+                document.TryGetTextSynchronously(
+                    document.Workspace.CurrentSolution,
+                    CancellationToken.None
+                ) is
+                { } sourceText
+            )
+            {
+                var span = NavigateToUtilities.GetBoundedSpan(
+                    _searchResult.NavigableItem,
+                    sourceText
+                );
                 items.Add(
                     new DescriptionItem(
                         new ReadOnlyCollection<DescriptionRun>(
-                            new[] { new DescriptionRun("Line:", bold: true) }),
+                            new[] { new DescriptionRun("Line:", bold: true) }
+                        ),
                         new ReadOnlyCollection<DescriptionRun>(
-                            new[] { new DescriptionRun((sourceText.Lines.IndexOf(span.Start) + 1).ToString()) })));
+                            new[]
+                            {
+                                new DescriptionRun(
+                                    (sourceText.Lines.IndexOf(span.Start) + 1).ToString()
+                                ),
+                            }
+                        )
+                    )
+                );
             }
 
             var summary = _searchResult.Summary;
@@ -95,9 +120,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                 items.Add(
                     new DescriptionItem(
                         new ReadOnlyCollection<DescriptionRun>(
-                            new[] { new DescriptionRun("Summary:", bold: true) }),
+                            new[] { new DescriptionRun("Summary:", bold: true) }
+                        ),
                         new ReadOnlyCollection<DescriptionRun>(
-                            new[] { new DescriptionRun(summary) })));
+                            new[] { new DescriptionRun(summary) }
+                        )
+                    )
+                );
             }
 
             return items.AsReadOnly();
@@ -107,8 +136,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
 
         public string Name => _searchResult.NavigableItem.DisplayTaggedParts.JoinText();
 
-        public void NavigateTo()
-            => NavigateToHelpers.NavigateTo(_searchResult, _threadingContext, _threadOperationExecutor, _asyncListener);
+        public void NavigateTo() =>
+            NavigateToHelpers.NavigateTo(
+                _searchResult,
+                _threadingContext,
+                _threadOperationExecutor,
+                _asyncListener
+            );
 
         public int GetProvisionalViewingStatus()
         {
@@ -140,10 +174,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
 
         public ImageMoniker GlyphMoniker => _searchResult.NavigableItem.Glyph.GetImageMoniker();
 
-        public IReadOnlyList<Span> GetNameMatchRuns(string searchValue)
-            => _searchResult.NameMatchSpans.NullToEmpty().SelectAsArray(ts => ts.ToSpan());
+        public IReadOnlyList<Span> GetNameMatchRuns(string searchValue) =>
+            _searchResult.NameMatchSpans.NullToEmpty().SelectAsArray(ts => ts.ToSpan());
 
-        public IReadOnlyList<Span> GetAdditionalInformationMatchRuns(string searchValue)
-            => SpecializedCollections.EmptyReadOnlyList<Span>();
+        public IReadOnlyList<Span> GetAdditionalInformationMatchRuns(string searchValue) =>
+            SpecializedCollections.EmptyReadOnlyList<Span>();
     }
 }

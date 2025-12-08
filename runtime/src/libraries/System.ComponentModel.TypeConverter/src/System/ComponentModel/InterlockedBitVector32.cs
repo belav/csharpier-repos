@@ -44,7 +44,8 @@ namespace System.ComponentModel
             return previous == 0 ? 1 : previous << 1;
         }
 
-        public override bool Equals([NotNullWhen(true)] object? o) => o is InterlockedBitVector32 other && Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? o) =>
+            o is InterlockedBitVector32 other && Equals(other);
 
         public bool Equals(InterlockedBitVector32 other) => _data == other._data;
 

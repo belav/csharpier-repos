@@ -18,12 +18,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VsMetadataServiceFactory()
-        {
-        }
+        public VsMetadataServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new Service(workspaceServices);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new Service(workspaceServices);
 
         private sealed class Service : IMetadataService
         {
@@ -34,12 +32,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 // We will defer creation of this reference manager until we have to to avoid it being constructed too
                 // early and potentially causing deadlocks. We do initialize it on the UI thread in the
                 // VisualStudioWorkspaceImpl.DeferredState constructor to ensure it gets created there.
-                _manager = new Lazy<VisualStudioMetadataReferenceManager>(
-                    () => workspaceServices.GetRequiredService<VisualStudioMetadataReferenceManager>());
+                _manager = new Lazy<VisualStudioMetadataReferenceManager>(() =>
+                    workspaceServices.GetRequiredService<VisualStudioMetadataReferenceManager>()
+                );
             }
 
-            public PortableExecutableReference GetReference(string resolvedPath, MetadataReferenceProperties properties)
-                => _manager.Value.CreateMetadataReferenceSnapshot(resolvedPath, properties);
+            public PortableExecutableReference GetReference(
+                string resolvedPath,
+                MetadataReferenceProperties properties
+            ) => _manager.Value.CreateMetadataReferenceSnapshot(resolvedPath, properties);
         }
     }
 }

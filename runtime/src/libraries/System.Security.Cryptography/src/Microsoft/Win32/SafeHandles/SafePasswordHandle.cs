@@ -39,7 +39,6 @@ namespace Microsoft.Win32.SafeHandles
             if (password != default)
             {
                 int spanLen;
-
                 checked
                 {
                     spanLen = password.Length + 1;
@@ -103,12 +102,11 @@ namespace Microsoft.Win32.SafeHandles
         }
 
         public static SafePasswordHandle InvalidHandle =>
-            SafeHandleCache<SafePasswordHandle>.GetInvalidHandle(
-                () =>
-                {
-                    var handle = new SafePasswordHandle((string?)null, false);
-                    handle.handle = (IntPtr)(-1);
-                    return handle;
-                });
+            SafeHandleCache<SafePasswordHandle>.GetInvalidHandle(() =>
+            {
+                var handle = new SafePasswordHandle((string?)null, false);
+                handle.handle = (IntPtr)(-1);
+                return handle;
+            });
     }
 }

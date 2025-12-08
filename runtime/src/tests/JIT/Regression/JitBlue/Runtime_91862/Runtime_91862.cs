@@ -40,7 +40,5 @@ public class Runtime_91862
         return 0;
     }
 
-    private static void Baz(float x)
-    {
-    }
+    private static void Baz(float x) { }
 }

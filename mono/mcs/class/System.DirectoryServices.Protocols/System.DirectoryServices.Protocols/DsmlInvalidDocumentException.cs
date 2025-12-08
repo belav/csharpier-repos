@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,27 +33,19 @@ using System.Runtime.Serialization;
 
 namespace System.DirectoryServices.Protocols
 {
-	[Serializable]
-	public class DsmlInvalidDocumentException : DirectoryException
-	{
-		public DsmlInvalidDocumentException()
-			: this ("invalid DSML document error")
-		{
-		}
+    [Serializable]
+    public class DsmlInvalidDocumentException : DirectoryException
+    {
+        public DsmlInvalidDocumentException()
+            : this("invalid DSML document error") { }
 
-		public DsmlInvalidDocumentException (string message)
-			: base (message)
-		{
-		}
+        public DsmlInvalidDocumentException(string message)
+            : base(message) { }
 
-		public DsmlInvalidDocumentException (string message, Exception inner)
-			: base (message, inner)
-		{
-		}
+        public DsmlInvalidDocumentException(string message, Exception inner)
+            : base(message, inner) { }
 
-		protected DsmlInvalidDocumentException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
-	}
+        protected DsmlInvalidDocumentException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
+    }
 }

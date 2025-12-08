@@ -9,7 +9,13 @@ using Xunit;
 
 namespace System.Transactions.Tests
 {
-    public enum CloneType { Normal, BlockingDependent, RollbackDependent };
+    public enum CloneType
+    {
+        Normal,
+        BlockingDependent,
+        RollbackDependent,
+    };
+
     public class CloneTxTests : IDisposable
     {
         public CloneTxTests()
@@ -24,20 +30,80 @@ namespace System.Transactions.Tests
         }
 
         [Theory]
-        [InlineData(CloneType.Normal, IsolationLevel.Serializable, false, TransactionStatus.Committed)]
-        [InlineData(CloneType.Normal, IsolationLevel.RepeatableRead, false, TransactionStatus.Committed)]
-        [InlineData(CloneType.Normal, IsolationLevel.ReadCommitted, false, TransactionStatus.Committed)]
-        [InlineData(CloneType.Normal, IsolationLevel.ReadUncommitted, false, TransactionStatus.Committed)]
+        [InlineData(
+            CloneType.Normal,
+            IsolationLevel.Serializable,
+            false,
+            TransactionStatus.Committed
+        )]
+        [InlineData(
+            CloneType.Normal,
+            IsolationLevel.RepeatableRead,
+            false,
+            TransactionStatus.Committed
+        )]
+        [InlineData(
+            CloneType.Normal,
+            IsolationLevel.ReadCommitted,
+            false,
+            TransactionStatus.Committed
+        )]
+        [InlineData(
+            CloneType.Normal,
+            IsolationLevel.ReadUncommitted,
+            false,
+            TransactionStatus.Committed
+        )]
         [InlineData(CloneType.Normal, IsolationLevel.Snapshot, false, TransactionStatus.Committed)]
         [InlineData(CloneType.Normal, IsolationLevel.Chaos, false, TransactionStatus.Committed)]
-        [InlineData(CloneType.Normal, IsolationLevel.Unspecified, false, TransactionStatus.Committed)]
-        [InlineData(CloneType.RollbackDependent, IsolationLevel.Serializable, false, TransactionStatus.Aborted)]
-        [InlineData(CloneType.RollbackDependent, IsolationLevel.RepeatableRead, false, TransactionStatus.Aborted)]
-        [InlineData(CloneType.RollbackDependent, IsolationLevel.ReadCommitted, false, TransactionStatus.Aborted)]
-        [InlineData(CloneType.RollbackDependent, IsolationLevel.ReadUncommitted, false, TransactionStatus.Aborted)]
-        [InlineData(CloneType.RollbackDependent, IsolationLevel.Snapshot, false, TransactionStatus.Aborted)]
-        [InlineData(CloneType.RollbackDependent, IsolationLevel.Chaos, false, TransactionStatus.Aborted)]
-        [InlineData(CloneType.RollbackDependent, IsolationLevel.Unspecified, false, TransactionStatus.Aborted)]
+        [InlineData(
+            CloneType.Normal,
+            IsolationLevel.Unspecified,
+            false,
+            TransactionStatus.Committed
+        )]
+        [InlineData(
+            CloneType.RollbackDependent,
+            IsolationLevel.Serializable,
+            false,
+            TransactionStatus.Aborted
+        )]
+        [InlineData(
+            CloneType.RollbackDependent,
+            IsolationLevel.RepeatableRead,
+            false,
+            TransactionStatus.Aborted
+        )]
+        [InlineData(
+            CloneType.RollbackDependent,
+            IsolationLevel.ReadCommitted,
+            false,
+            TransactionStatus.Aborted
+        )]
+        [InlineData(
+            CloneType.RollbackDependent,
+            IsolationLevel.ReadUncommitted,
+            false,
+            TransactionStatus.Aborted
+        )]
+        [InlineData(
+            CloneType.RollbackDependent,
+            IsolationLevel.Snapshot,
+            false,
+            TransactionStatus.Aborted
+        )]
+        [InlineData(
+            CloneType.RollbackDependent,
+            IsolationLevel.Chaos,
+            false,
+            TransactionStatus.Aborted
+        )]
+        [InlineData(
+            CloneType.RollbackDependent,
+            IsolationLevel.Unspecified,
+            false,
+            TransactionStatus.Aborted
+        )]
         // These variations need to be added once we have promotion support.
         /*
         [InlineData(CloneType.Normal, true, TransactionStatus.Committed)]
@@ -63,13 +129,18 @@ namespace System.Transactions.Tests
         [InlineData(CloneType.RollbackDependent, IsolationLevel.Chaos, true, TransactionStatus.Committed)]
         [InlineData(CloneType.RollbackDependent, IsolationLevel.Unspecified, true, TransactionStatus.Committed)]
         */
-        public void Run(CloneType cloneType, IsolationLevel isoLevel, bool forcePromote, TransactionStatus expectedStatus )
+        public void Run(
+            CloneType cloneType,
+            IsolationLevel isoLevel,
+            bool forcePromote,
+            TransactionStatus expectedStatus
+        )
         {
             TransactionOptions options = new TransactionOptions
             {
                 IsolationLevel = isoLevel,
                 // Shorten the delay before a timeout for blocking clones.
-                Timeout = TimeSpan.FromSeconds(1)
+                Timeout = TimeSpan.FromSeconds(1),
             };
 
             // If we are dealing with a "normal" clone, we fully expect the transaction to commit successfully.
@@ -86,24 +157,24 @@ namespace System.Transactions.Tests
             switch (cloneType)
             {
                 case CloneType.Normal:
-                    {
-                        clone = tx.Clone();
-                        break;
-                    }
+                {
+                    clone = tx.Clone();
+                    break;
+                }
                 case CloneType.BlockingDependent:
-                    {
-                        clone = tx.DependentClone(DependentCloneOption.BlockCommitUntilComplete);
-                        break;
-                    }
+                {
+                    clone = tx.DependentClone(DependentCloneOption.BlockCommitUntilComplete);
+                    break;
+                }
                 case CloneType.RollbackDependent:
-                    {
-                        clone = tx.DependentClone(DependentCloneOption.RollbackIfNotComplete);
-                        break;
-                    }
+                {
+                    clone = tx.DependentClone(DependentCloneOption.RollbackIfNotComplete);
+                    break;
+                }
                 default:
-                    {
-                        throw new Exception("Unexpected CloneType - " + cloneType.ToString());
-                    }
+                {
+                    throw new Exception("Unexpected CloneType - " + cloneType.ToString());
+                }
             }
 
             if (forcePromote)
@@ -113,8 +184,14 @@ namespace System.Transactions.Tests
 
             Assert.Equal(tx.IsolationLevel, clone.IsolationLevel);
             Assert.Equal(tx.TransactionInformation.Status, clone.TransactionInformation.Status);
-            Assert.Equal(tx.TransactionInformation.LocalIdentifier, clone.TransactionInformation.LocalIdentifier);
-            Assert.Equal(tx.TransactionInformation.DistributedIdentifier, clone.TransactionInformation.DistributedIdentifier);
+            Assert.Equal(
+                tx.TransactionInformation.LocalIdentifier,
+                clone.TransactionInformation.LocalIdentifier
+            );
+            Assert.Equal(
+                tx.TransactionInformation.DistributedIdentifier,
+                clone.TransactionInformation.DistributedIdentifier
+            );
 
             CommittableTransaction cloneCommittable = clone as CommittableTransaction;
             Assert.Null(cloneCommittable);
@@ -129,27 +206,30 @@ namespace System.Transactions.Tests
                 switch (cloneType)
                 {
                     case CloneType.Normal:
-                        {
-                            // We shouldn't be getting TransactionAbortedException for "normal" clones,
-                            // so we have these two Asserts to possibly help determine what went wrong.
-                            Assert.Null(ex.InnerException);
-                            Assert.Equal("There shouldn't be any exception with this Message property", ex.Message);
-                            break;
-                        }
+                    {
+                        // We shouldn't be getting TransactionAbortedException for "normal" clones,
+                        // so we have these two Asserts to possibly help determine what went wrong.
+                        Assert.Null(ex.InnerException);
+                        Assert.Equal(
+                            "There shouldn't be any exception with this Message property",
+                            ex.Message
+                        );
+                        break;
+                    }
                     case CloneType.BlockingDependent:
-                        {
-                            Assert.IsType<TimeoutException>(ex.InnerException);
-                            break;
-                        }
+                    {
+                        Assert.IsType<TimeoutException>(ex.InnerException);
+                        break;
+                    }
                     case CloneType.RollbackDependent:
-                        {
-                            Assert.Null(ex.InnerException);
-                            break;
-                        }
+                    {
+                        Assert.Null(ex.InnerException);
+                        break;
+                    }
                     default:
-                        {
-                            throw new Exception("Unexpected CloneType - " + cloneType.ToString());
-                        }
+                    {
+                        throw new Exception("Unexpected CloneType - " + cloneType.ToString());
+                    }
                 }
             }
 
@@ -157,15 +237,58 @@ namespace System.Transactions.Tests
         }
 
         [OuterLoop] // transaction timeout of 1.5 seconds per InlineData invocation.
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [InlineData(CloneType.BlockingDependent, IsolationLevel.Serializable, false, TransactionStatus.Aborted)]
-        [InlineData(CloneType.BlockingDependent, IsolationLevel.RepeatableRead, false, TransactionStatus.Aborted)]
-        [InlineData(CloneType.BlockingDependent, IsolationLevel.ReadCommitted, false, TransactionStatus.Aborted)]
-        [InlineData(CloneType.BlockingDependent, IsolationLevel.ReadUncommitted, false, TransactionStatus.Aborted)]
-        [InlineData(CloneType.BlockingDependent, IsolationLevel.Snapshot, false, TransactionStatus.Aborted)]
-        [InlineData(CloneType.BlockingDependent, IsolationLevel.Chaos, false, TransactionStatus.Aborted)]
-        [InlineData(CloneType.BlockingDependent, IsolationLevel.Unspecified, false, TransactionStatus.Aborted)]
-        public void RunOuterLoop(CloneType cloneType, IsolationLevel isoLevel, bool forcePromote, TransactionStatus expectedStatus)
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
+        [InlineData(
+            CloneType.BlockingDependent,
+            IsolationLevel.Serializable,
+            false,
+            TransactionStatus.Aborted
+        )]
+        [InlineData(
+            CloneType.BlockingDependent,
+            IsolationLevel.RepeatableRead,
+            false,
+            TransactionStatus.Aborted
+        )]
+        [InlineData(
+            CloneType.BlockingDependent,
+            IsolationLevel.ReadCommitted,
+            false,
+            TransactionStatus.Aborted
+        )]
+        [InlineData(
+            CloneType.BlockingDependent,
+            IsolationLevel.ReadUncommitted,
+            false,
+            TransactionStatus.Aborted
+        )]
+        [InlineData(
+            CloneType.BlockingDependent,
+            IsolationLevel.Snapshot,
+            false,
+            TransactionStatus.Aborted
+        )]
+        [InlineData(
+            CloneType.BlockingDependent,
+            IsolationLevel.Chaos,
+            false,
+            TransactionStatus.Aborted
+        )]
+        [InlineData(
+            CloneType.BlockingDependent,
+            IsolationLevel.Unspecified,
+            false,
+            TransactionStatus.Aborted
+        )]
+        public void RunOuterLoop(
+            CloneType cloneType,
+            IsolationLevel isoLevel,
+            bool forcePromote,
+            TransactionStatus expectedStatus
+        )
         {
             Run(cloneType, isoLevel, forcePromote, expectedStatus);
         }

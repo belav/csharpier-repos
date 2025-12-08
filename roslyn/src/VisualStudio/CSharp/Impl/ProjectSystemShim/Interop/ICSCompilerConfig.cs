@@ -22,19 +22,23 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         /// <summary>
         /// Return info about the given option.
         /// </summary>
-        void GetOptionInfoAt(int index,
-                             out CompilerOptions optionID,
-                             [MarshalAs(UnmanagedType.LPWStr)] out string switchName,
-                             [MarshalAs(UnmanagedType.LPWStr)] out string switchDescription,
-                             out uint flags);
+        void GetOptionInfoAt(
+            int index,
+            out CompilerOptions optionID,
+            [MarshalAs(UnmanagedType.LPWStr)] out string switchName,
+            [MarshalAs(UnmanagedType.LPWStr)] out string switchDescription,
+            out uint flags
+        );
 
-        void GetOptionInfoAtEx(int index,
-                               out CompilerOptions optionID,
-                               [MarshalAs(UnmanagedType.LPWStr)] out string shortSwitchName,
-                               [MarshalAs(UnmanagedType.LPWStr)] out string longSwitchName,
-                               [MarshalAs(UnmanagedType.LPWStr)] out string descriptiveSwitchName,
-                               out string switchDescription,
-                               out uint flags);
+        void GetOptionInfoAtEx(
+            int index,
+            out CompilerOptions optionID,
+            [MarshalAs(UnmanagedType.LPWStr)] out string shortSwitchName,
+            [MarshalAs(UnmanagedType.LPWStr)] out string longSwitchName,
+            [MarshalAs(UnmanagedType.LPWStr)] out string descriptiveSwitchName,
+            out string switchDescription,
+            out uint flags
+        );
 
         void ResetAllOptions();
 

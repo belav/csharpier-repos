@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         public static ParameterListSyntax GenerateParameterList(
             ImmutableArray<IParameterSymbol> parameterDefinitions,
             bool isExplicit,
-            CSharpCodeGenerationContextInfo info)
+            CSharpCodeGenerationContextInfo info
+        )
         {
             var parameters = GetParameters(parameterDefinitions, isExplicit, info);
 
@@ -29,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         public static BracketedParameterListSyntax GenerateBracketedParameterList(
             ImmutableArray<IParameterSymbol> parameterDefinitions,
             bool isExplicit,
-            CSharpCodeGenerationContextInfo info)
+            CSharpCodeGenerationContextInfo info
+        )
         {
             // Bracketed parameter lists come from indexers.  Those don't have type parameters, so we
             // could never have a typeParameterMapping.
@@ -41,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         internal static ImmutableArray<ParameterSyntax> GetParameters(
             ImmutableArray<IParameterSymbol> parameterDefinitions,
             bool isExplicit,
-            CSharpCodeGenerationContextInfo info)
+            CSharpCodeGenerationContextInfo info
+        )
         {
             using var _ = ArrayBuilder<ParameterSyntax>.GetInstance(out var result);
             var seenOptional = false;
@@ -58,27 +61,40 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             return result.ToImmutable();
         }
 
-        internal static ParameterSyntax GetParameter(IParameterSymbol parameter, CSharpCodeGenerationContextInfo info, bool isExplicit, bool isFirstParam, bool seenOptional)
+        internal static ParameterSyntax GetParameter(
+            IParameterSymbol parameter,
+            CSharpCodeGenerationContextInfo info,
+            bool isExplicit,
+            bool isFirstParam,
+            bool seenOptional
+        )
         {
             var reusableSyntax = GetReuseableSyntaxNodeForSymbol<ParameterSyntax>(parameter, info);
             if (reusableSyntax != null)
                 return reusableSyntax;
 
-            return SyntaxFactory.Parameter(parameter.Name.ToIdentifierToken())
+            return SyntaxFactory
+                .Parameter(parameter.Name.ToIdentifierToken())
                 .WithAttributeLists(GenerateAttributes(parameter, isExplicit, info))
                 .WithModifiers(GenerateModifiers(parameter, isFirstParam))
                 .WithType(parameter.Type.GenerateTypeSyntax())
-                .WithDefault(GenerateEqualsValueClause(info.Generator, parameter, isExplicit, seenOptional));
+                .WithDefault(
+                    GenerateEqualsValueClause(info.Generator, parameter, isExplicit, seenOptional)
+                );
         }
 
         private static SyntaxTokenList GenerateModifiers(
-            IParameterSymbol parameter, bool isFirstParam)
+            IParameterSymbol parameter,
+            bool isFirstParam
+        )
         {
             var list = CSharpSyntaxGeneratorInternal.GetParameterModifiers(parameter.RefKind);
 
-            if (isFirstParam &&
-                parameter.ContainingSymbol is IMethodSymbol methodSymbol &&
-                methodSymbol.IsExtensionMethod)
+            if (
+                isFirstParam
+                && parameter.ContainingSymbol is IMethodSymbol methodSymbol
+                && methodSymbol.IsExtensionMethod
+            )
             {
                 list = list.Add(SyntaxFactory.Token(SyntaxKind.ThisKeyword));
             }
@@ -95,29 +111,45 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxGenerator generator,
             IParameterSymbol parameter,
             bool isExplicit,
-            bool seenOptional)
+            bool seenOptional
+        )
         {
             if (!parameter.IsParams && !isExplicit && !parameter.IsRefOrOut())
             {
                 if (parameter.HasExplicitDefaultValue || seenOptional)
                 {
-                    var defaultValue = parameter.HasExplicitDefaultValue ? parameter.ExplicitDefaultValue : null;
+                    var defaultValue = parameter.HasExplicitDefaultValue
+                        ? parameter.ExplicitDefaultValue
+                        : null;
                     if (defaultValue is DateTime)
                         return null;
 
                     return SyntaxFactory.EqualsValueClause(
-                        GenerateEqualsValueClauseWorker(generator, parameter, defaultValue));
+                        GenerateEqualsValueClauseWorker(generator, parameter, defaultValue)
+                    );
                 }
             }
 
             return null;
         }
 
-        private static ExpressionSyntax GenerateEqualsValueClauseWorker(SyntaxGenerator generator, IParameterSymbol parameter, object? value)
-            => ExpressionGenerator.GenerateExpression(generator, parameter.Type, value, canUseFieldReference: true);
+        private static ExpressionSyntax GenerateEqualsValueClauseWorker(
+            SyntaxGenerator generator,
+            IParameterSymbol parameter,
+            object? value
+        ) =>
+            ExpressionGenerator.GenerateExpression(
+                generator,
+                parameter.Type,
+                value,
+                canUseFieldReference: true
+            );
 
         private static SyntaxList<AttributeListSyntax> GenerateAttributes(
-            IParameterSymbol parameter, bool isExplicit, CSharpCodeGenerationContextInfo info)
+            IParameterSymbol parameter,
+            bool isExplicit,
+            CSharpCodeGenerationContextInfo info
+        )
         {
             if (isExplicit)
             {

@@ -5,16 +5,13 @@ using System;
 public class Test
 {
     [STAThread]
-    public static void Main (string[] args)
+    public static void Main(string[] args)
     {
         IShape shape;
 
         object[] cargs = new object[1] { "Circle" };
-        shape = Factory<IShape>.CreateInstance (cargs);    
+        shape = Factory<IShape>.CreateInstance(cargs);
     }
 
-    interface IShape
-    {
-    }
+    interface IShape { }
 }
-

@@ -15,19 +15,23 @@ namespace Microsoft.CodeAnalysis.Internal.Log
     {
         public static readonly EmptyLogger Instance = new();
 
-        public bool IsEnabled(FunctionId functionId)
-            => false;
+        public bool IsEnabled(FunctionId functionId) => false;
 
-        public void Log(FunctionId functionId, LogMessage logMessage)
-        {
-        }
+        public void Log(FunctionId functionId, LogMessage logMessage) { }
 
-        public void LogBlockStart(FunctionId functionId, LogMessage logMessage, int uniquePairId, CancellationToken cancellationToken)
-        {
-        }
+        public void LogBlockStart(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int uniquePairId,
+            CancellationToken cancellationToken
+        ) { }
 
-        public void LogBlockEnd(FunctionId functionId, LogMessage logMessage, int uniquePairId, int delta, CancellationToken cancellationToken)
-        {
-        }
+        public void LogBlockEnd(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int uniquePairId,
+            int delta,
+            CancellationToken cancellationToken
+        ) { }
     }
 }

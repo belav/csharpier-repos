@@ -6,56 +6,73 @@
 
 /************************************************************************************************************/
 
-namespace System.Web.Administration {
-
+namespace System.Web.Administration
+{
     using System;
     using System.Collections.Specialized;
     using System.Configuration;
     using System.Configuration.Provider;
     using System.Reflection;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.Hosting;
     using System.Web.Management;
     using System.Web.Security;
-    using System.Web.Util;
     using System.Web.UI;
-    using System.Security.Permissions;
+    using System.Web.Util;
 
     [Serializable]
-    internal sealed class WebAdminConfigurationHelper : MarshalByRefObject, IRegisteredObject {
-
-        public WebAdminConfigurationHelper() {
+    internal sealed class WebAdminConfigurationHelper : MarshalByRefObject, IRegisteredObject
+    {
+        public WebAdminConfigurationHelper()
+        {
             HostingEnvironment.RegisterObject(this);
         }
 
-        public override Object InitializeLifetimeService() {
+        public override Object InitializeLifetimeService()
+        {
             return null; // never expire lease
         }
 
-        public VirtualDirectory GetVirtualDirectory(string path) {
-
-            if (HttpRuntime.NamedPermissionSet != null) {
+        public VirtualDirectory GetVirtualDirectory(string path)
+        {
+            if (HttpRuntime.NamedPermissionSet != null)
+            {
                 HttpRuntime.NamedPermissionSet.PermitOnly();
             }
 
             return HostingEnvironment.VirtualPathProvider.GetDirectory(path);
         }
 
-        public object CallMembershipProviderMethod (string methodName, object[] parameters, Type[] paramTypes) {
+        public object CallMembershipProviderMethod(
+            string methodName,
+            object[] parameters,
+            Type[] paramTypes
+        )
+        {
             Type tempType = typeof(HttpContext).Assembly.GetType("System.Web.Security.Membership");
 
             object returnObject = null;
-            BindingFlags allBindingFlags = BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+            BindingFlags allBindingFlags =
+                BindingFlags.Static
+                | BindingFlags.Instance
+                | BindingFlags.Public
+                | BindingFlags.NonPublic;
 
             MethodInfo method = null;
-            if (paramTypes != null) {
+            if (paramTypes != null)
+            {
                 method = tempType.GetMethod(methodName, allBindingFlags, null, paramTypes, null);
-            } else {
+            }
+            else
+            {
                 method = tempType.GetMethod(methodName, allBindingFlags);
             }
 
-            if (method != null) {
-                if (HttpRuntime.NamedPermissionSet != null) {
+            if (method != null)
+            {
+                if (HttpRuntime.NamedPermissionSet != null)
+                {
                     HttpRuntime.NamedPermissionSet.PermitOnly();
                 }
 
@@ -65,45 +82,73 @@ namespace System.Web.Administration {
             object[] newValues = new object[parameters.Length + 1];
             newValues[0] = returnObject;
             int j = 1;
-            for (int i = 0; i < (parameters.Length); i++) {
+            for (int i = 0; i < (parameters.Length); i++)
+            {
                 newValues[j++] = parameters[i];
             }
 
-            returnObject = (object) newValues;
+            returnObject = (object)newValues;
             return returnObject;
         }
 
-        public object GetMembershipProviderProperty(string propertyName) {
+        public object GetMembershipProviderProperty(string propertyName)
+        {
             Type tempType = typeof(HttpContext).Assembly.GetType("System.Web.Security.Membership");
 
             object returnObject = null;
 
-            BindingFlags allBindingFlags = BindingFlags.GetProperty | BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+            BindingFlags allBindingFlags =
+                BindingFlags.GetProperty
+                | BindingFlags.Static
+                | BindingFlags.Instance
+                | BindingFlags.Public
+                | BindingFlags.NonPublic;
 
-            if (HttpRuntime.NamedPermissionSet != null) {
+            if (HttpRuntime.NamedPermissionSet != null)
+            {
                 HttpRuntime.NamedPermissionSet.PermitOnly();
             }
 
-            returnObject = tempType.InvokeMember(propertyName, allBindingFlags, null, null, null, System.Globalization.CultureInfo.InvariantCulture);
+            returnObject = tempType.InvokeMember(
+                propertyName,
+                allBindingFlags,
+                null,
+                null,
+                null,
+                System.Globalization.CultureInfo.InvariantCulture
+            );
             return returnObject;
         }
 
-        public object CallRoleProviderMethod (string methodName, object[] parameters, Type[] paramTypes) {
-
+        public object CallRoleProviderMethod(
+            string methodName,
+            object[] parameters,
+            Type[] paramTypes
+        )
+        {
             Type tempType = typeof(HttpContext).Assembly.GetType("System.Web.Security.Roles");
 
             object returnObject = null;
-            BindingFlags allBindingFlags = BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+            BindingFlags allBindingFlags =
+                BindingFlags.Static
+                | BindingFlags.Instance
+                | BindingFlags.Public
+                | BindingFlags.NonPublic;
 
             MethodInfo method = null;
-            if (paramTypes != null) {
+            if (paramTypes != null)
+            {
                 method = tempType.GetMethod(methodName, allBindingFlags, null, paramTypes, null);
-            } else {
+            }
+            else
+            {
                 method = tempType.GetMethod(methodName, allBindingFlags);
             }
 
-            if (method != null) {
-                if (HttpRuntime.NamedPermissionSet != null) {
+            if (method != null)
+            {
+                if (HttpRuntime.NamedPermissionSet != null)
+                {
                     HttpRuntime.NamedPermissionSet.PermitOnly();
                 }
 
@@ -113,16 +158,17 @@ namespace System.Web.Administration {
             object[] newValues = new object[parameters.Length + 1];
             newValues[0] = returnObject;
             int j = 1;
-            for (int i = 0; i < (parameters.Length); i++) {
+            for (int i = 0; i < (parameters.Length); i++)
+            {
                 newValues[j++] = parameters[i];
             }
 
-            returnObject = (object) newValues;
+            returnObject = (object)newValues;
             return returnObject;
         }
 
-
-        void IRegisteredObject.Stop(bool immediate) {
+        void IRegisteredObject.Stop(bool immediate)
+        {
             HostingEnvironment.UnregisterObject(this);
         }
     }

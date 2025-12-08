@@ -8,7 +8,8 @@ namespace JitTest_ldfld_mulovf_unsigned_cs
 {
     public class Test
     {
-        private ulong _op1,_op2;
+        private ulong _op1,
+            _op2;
 
         private bool check(ulong product, bool overflow)
         {
@@ -58,7 +59,7 @@ namespace JitTest_ldfld_mulovf_unsigned_cs
 
             Console.WriteLine("Test passed");
             return 100;
-        fail:
+            fail:
             Console.WriteLine("Test failed");
             return 1;
         }

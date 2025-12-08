@@ -21,7 +21,8 @@ internal static partial class Interop
             byte* bytes,
             int numBytesToWrite,
             IntPtr numBytesWritten_mustBeZero,
-            NativeOverlapped* lpOverlapped);
+            NativeOverlapped* lpOverlapped
+        );
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         internal static unsafe partial int WriteFile(
@@ -29,6 +30,7 @@ internal static partial class Interop
             byte* bytes,
             int numBytesToWrite,
             out int numBytesWritten,
-            NativeOverlapped* lpOverlapped);
+            NativeOverlapped* lpOverlapped
+        );
     }
 }

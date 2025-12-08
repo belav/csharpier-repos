@@ -21,7 +21,10 @@ namespace System.Linq.Expressions.Tests
         public void NonVoidTargetContinueHasNoValueTypeExplicit(Type type)
         {
             LabelTarget target = Expression.Label(type);
-            AssertExtensions.Throws<ArgumentException>("target", () => Expression.Continue(target, type));
+            AssertExtensions.Throws<ArgumentException>(
+                "target",
+                () => Expression.Continue(target, type)
+            );
         }
 
         [Theory]
@@ -33,7 +36,7 @@ namespace System.Linq.Expressions.Tests
                 Expression.Continue(target),
                 Expression.Throw(Expression.Constant(new InvalidOperationException())),
                 Expression.Label(target)
-                );
+            );
             Expression.Lambda<Action>(block).Compile(useInterpreter)();
         }
 
@@ -46,7 +49,7 @@ namespace System.Linq.Expressions.Tests
                 Expression.Continue(target, typeof(void)),
                 Expression.Throw(Expression.Constant(new InvalidOperationException())),
                 Expression.Label(target)
-                );
+            );
             Expression.Lambda<Action>(block).Compile(useInterpreter)();
         }
 
@@ -54,45 +57,77 @@ namespace System.Linq.Expressions.Tests
         [MemberData(nameof(TypesData))]
         public void NullValueOnNonVoidContinue(Type type)
         {
-            AssertExtensions.Throws<ArgumentException>("target", () => Expression.Continue(Expression.Label(type)));
+            AssertExtensions.Throws<ArgumentException>(
+                "target",
+                () => Expression.Continue(Expression.Label(type))
+            );
         }
 
         [Theory]
         [MemberData(nameof(ConstantValueData))]
         public void ExplicitNullTypeWithValue(object value)
         {
-            AssertExtensions.Throws<ArgumentException>("target", () => Expression.Continue(Expression.Label(value.GetType()), default(Type)));
+            AssertExtensions.Throws<ArgumentException>(
+                "target",
+                () => Expression.Continue(Expression.Label(value.GetType()), default(Type))
+            );
         }
 
         [Fact]
         public void OpenGenericType()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Continue(Expression.Label(typeof(void)), typeof(List<>)));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Continue(Expression.Label(typeof(void)), typeof(List<>))
+            );
         }
 
         [Fact]
         public static void TypeContainsGenericParameters()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Continue(Expression.Label(typeof(void)), typeof(List<>.Enumerator)));
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Continue(Expression.Label(typeof(void)), typeof(List<>).MakeGenericType(typeof(List<>))));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Continue(Expression.Label(typeof(void)), typeof(List<>.Enumerator))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () =>
+                    Expression.Continue(
+                        Expression.Label(typeof(void)),
+                        typeof(List<>).MakeGenericType(typeof(List<>))
+                    )
+            );
         }
 
         [Fact]
         public void PointerType()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Continue(Expression.Label(typeof(void)), typeof(int).MakePointerType()));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () =>
+                    Expression.Continue(
+                        Expression.Label(typeof(void)),
+                        typeof(int).MakePointerType()
+                    )
+            );
         }
 
         [Fact]
         public void ByRefType()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Continue(Expression.Label(typeof(void)), typeof(int).MakeByRefType()));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () =>
+                    Expression.Continue(Expression.Label(typeof(void)), typeof(int).MakeByRefType())
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public void UndefinedLabel(bool useInterpreter)
         {
-            Expression<Action> continueNowhere = Expression.Lambda<Action>(Expression.Continue(Expression.Label()));
+            Expression<Action> continueNowhere = Expression.Lambda<Action>(
+                Expression.Continue(Expression.Label())
+            );
             Assert.Throws<InvalidOperationException>(() => continueNowhere.Compile(useInterpreter));
         }
 
@@ -105,8 +140,8 @@ namespace System.Linq.Expressions.Tests
                     Expression.Continue(target),
                     Expression.Block(Expression.Label(target)),
                     Expression.Block(Expression.Label(target))
-                    )
-                );
+                )
+            );
             Assert.Throws<InvalidOperationException>(() => exp.Compile(useInterpreter));
         }
 
@@ -114,22 +149,24 @@ namespace System.Linq.Expressions.Tests
         public void MultipleDefinitionsInSeparateBlocks(bool useInterpreter)
         {
             LabelTarget target = Expression.Label();
-            Func<int> add = Expression.Lambda<Func<int>>(
-                Expression.Add(
-                    Expression.Block(
-                        Expression.Continue(target),
-                        Expression.Throw(Expression.Constant(new Exception())),
-                        Expression.Label(target),
-                        Expression.Constant(10)
-                    ),
-                    Expression.Block(
-                        Expression.Continue(target),
-                        Expression.Throw(Expression.Constant(new Exception())),
-                        Expression.Label(target),
-                        Expression.Constant(5)
+            Func<int> add = Expression
+                .Lambda<Func<int>>(
+                    Expression.Add(
+                        Expression.Block(
+                            Expression.Continue(target),
+                            Expression.Throw(Expression.Constant(new Exception())),
+                            Expression.Label(target),
+                            Expression.Constant(10)
+                        ),
+                        Expression.Block(
+                            Expression.Continue(target),
+                            Expression.Throw(Expression.Constant(new Exception())),
+                            Expression.Label(target),
+                            Expression.Constant(5)
+                        )
                     )
                 )
-            ).Compile(useInterpreter);
+                .Compile(useInterpreter);
             Assert.Equal(15, add());
         }
 

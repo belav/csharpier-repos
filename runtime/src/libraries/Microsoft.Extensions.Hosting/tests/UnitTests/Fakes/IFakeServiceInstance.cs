@@ -3,7 +3,5 @@
 
 namespace Microsoft.Extensions.Hosting.Fakes
 {
-    interface IFakeServiceInstance : IFakeService
-    {
-    }
+    interface IFakeServiceInstance : IFakeService { }
 }

@@ -8,9 +8,7 @@ namespace System.Threading
         public static long TickCount64 => Environment.TickCount64;
 
 #pragma warning disable IDE0060
-        private TimerQueue(int id)
-        {
-        }
+        private TimerQueue(int id) { }
 #pragma warning restore IDE0060
 
         private bool SetTimer(uint actualDuration) => SetTimerPortable(actualDuration);

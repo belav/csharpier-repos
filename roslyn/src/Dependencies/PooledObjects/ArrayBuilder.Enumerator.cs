@@ -22,10 +22,7 @@ namespace Microsoft.CodeAnalysis.PooledObjects
 
             public readonly T Current
             {
-                get
-                {
-                    return _builder[_index];
-                }
+                get { return _builder[_index]; }
             }
 
             public bool MoveNext()

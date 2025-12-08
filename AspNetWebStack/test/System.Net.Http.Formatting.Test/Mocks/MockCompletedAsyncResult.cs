@@ -7,9 +7,7 @@ namespace System.Net.Http.Formatting.Mocks
 {
     public class MockCompletedAsyncResult
     {
-        private MockCompletedAsyncResult()
-        {
-        }
+        private MockCompletedAsyncResult() { }
 
         public static IAsyncResult Create(bool completedSynchronously, object userState)
         {

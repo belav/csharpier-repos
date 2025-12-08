@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Configuration;
 using System.DirectoryServices;
 using System.Reflection;
 using System.Web;
+using Xunit;
 
 namespace System.Security.Permissions.Tests
 {
@@ -84,7 +84,10 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void EnvironmentPermissionCallMethods()
         {
-            EnvironmentPermission ep = new EnvironmentPermission(new Permissions.EnvironmentPermissionAccess(), "testpath");
+            EnvironmentPermission ep = new EnvironmentPermission(
+                new Permissions.EnvironmentPermissionAccess(),
+                "testpath"
+            );
             ep.AddPathList(new Permissions.EnvironmentPermissionAccess(), "testpath");
             string path = ep.GetPathList(new Permissions.EnvironmentPermissionAccess());
             bool isunrestricted = ep.IsUnrestricted();
@@ -97,14 +100,18 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void EnvironmentPermissionsAttributeCallMethods()
         {
-            EnvironmentPermissionAttribute epa = new EnvironmentPermissionAttribute(new Permissions.SecurityAction());
+            EnvironmentPermissionAttribute epa = new EnvironmentPermissionAttribute(
+                new Permissions.SecurityAction()
+            );
             IPermission ip = epa.CreatePermission();
         }
 
         [Fact]
         public static void FileDialogPermissionCallMethods()
         {
-            FileDialogPermission fdp = new FileDialogPermission(new Permissions.FileDialogPermissionAccess());
+            FileDialogPermission fdp = new FileDialogPermission(
+                new Permissions.FileDialogPermissionAccess()
+            );
             IPermission ip = fdp.Copy();
             IPermission ip2 = fdp.Intersect(ip);
             bool issubset = fdp.IsSubsetOf(ip);
@@ -118,7 +125,9 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void FileDialogPermissionAttributeCallMethods()
         {
-            FileDialogPermissionAttribute fspa = new FileDialogPermissionAttribute(new Permissions.SecurityAction());
+            FileDialogPermissionAttribute fspa = new FileDialogPermissionAttribute(
+                new Permissions.SecurityAction()
+            );
             IPermission ip = fspa.CreatePermission();
         }
 
@@ -161,7 +170,9 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void GacIdentityPermissionAttributeCallMethods()
         {
-            GacIdentityPermissionAttribute gipa = new GacIdentityPermissionAttribute(new Permissions.SecurityAction());
+            GacIdentityPermissionAttribute gipa = new GacIdentityPermissionAttribute(
+                new Permissions.SecurityAction()
+            );
             IPermission ip = gipa.CreatePermission();
         }
 
@@ -172,9 +183,11 @@ namespace System.Security.Permissions.Tests
             MediaPermission mp2 = new MediaPermission(MediaPermissionAudio.AllAudio);
             MediaPermission mp3 = new MediaPermission(MediaPermissionVideo.AllVideo);
             MediaPermission mp4 = new MediaPermission(MediaPermissionImage.AllImage);
-            MediaPermission mp5 = new MediaPermission(MediaPermissionAudio.AllAudio,
-                                                     MediaPermissionVideo.AllVideo,
-                                                     MediaPermissionImage.AllImage);
+            MediaPermission mp5 = new MediaPermission(
+                MediaPermissionAudio.AllAudio,
+                MediaPermissionVideo.AllVideo,
+                MediaPermissionImage.AllImage
+            );
             bool testbool = mp.IsUnrestricted();
             IPermission ip = mp.Copy();
             IPermission ip2 = mp.Intersect(ip);
@@ -188,7 +201,9 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void MediaPermissionAttributeCallMethods()
         {
-            MediaPermissionAttribute mpa = new MediaPermissionAttribute(new Permissions.SecurityAction());
+            MediaPermissionAttribute mpa = new MediaPermissionAttribute(
+                new Permissions.SecurityAction()
+            );
             IPermission ip = mpa.CreatePermission();
         }
 
@@ -210,11 +225,20 @@ namespace System.Security.Permissions.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser, "System.Security.Cryptography.X509Certificates is not supported on this platform.")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "System.Security.Cryptography.X509Certificates is not supported on this platform."
+        )]
         public static void PublisherIdentityPermissionCallMethods()
         {
-            PublisherIdentityPermission pip = new PublisherIdentityPermission(new System.Security.Cryptography.X509Certificates.X509Certificate2(stackalloc byte[0]));
-            PublisherIdentityPermission pip2 = new PublisherIdentityPermission(new Permissions.PermissionState());
+            PublisherIdentityPermission pip = new PublisherIdentityPermission(
+                new System.Security.Cryptography.X509Certificates.X509Certificate2(
+                    stackalloc byte[0]
+                )
+            );
+            PublisherIdentityPermission pip2 = new PublisherIdentityPermission(
+                new Permissions.PermissionState()
+            );
             IPermission ip = pip.Copy();
             IPermission ip2 = pip.Intersect(ip);
             bool testbool = pip.IsSubsetOf(ip);
@@ -227,7 +251,9 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void PublisherIdentityPermissionAttributeCallMethods()
         {
-            PublisherIdentityPermissionAttribute pipa = new PublisherIdentityPermissionAttribute(new Permissions.SecurityAction());
+            PublisherIdentityPermissionAttribute pipa = new PublisherIdentityPermissionAttribute(
+                new Permissions.SecurityAction()
+            );
             IPermission ip = pipa.CreatePermission();
         }
 
@@ -235,7 +261,9 @@ namespace System.Security.Permissions.Tests
         public static void ReflectionPermissionCallMethods()
         {
             ReflectionPermission rp = new ReflectionPermission(new Permissions.PermissionState());
-            ReflectionPermission rp2 = new ReflectionPermission(new Permissions.ReflectionPermissionFlag());
+            ReflectionPermission rp2 = new ReflectionPermission(
+                new Permissions.ReflectionPermissionFlag()
+            );
             IPermission ip = rp.Copy();
             IPermission ip2 = rp.Intersect(ip);
             bool testbool = rp.IsSubsetOf(ip);
@@ -249,7 +277,9 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void ReflectionPermissionAttributeCallMethods()
         {
-            ReflectionPermissionAttribute rpa = new ReflectionPermissionAttribute(new Permissions.SecurityAction());
+            ReflectionPermissionAttribute rpa = new ReflectionPermissionAttribute(
+                new Permissions.SecurityAction()
+            );
             IPermission ip = rpa.CreatePermission();
         }
 
@@ -258,7 +288,11 @@ namespace System.Security.Permissions.Tests
         {
             Permissions.RegistryPermissionAccess rpa = new Permissions.RegistryPermissionAccess();
             RegistryPermission rp = new RegistryPermission(new Permissions.PermissionState());
-            RegistryPermission rp2 = new RegistryPermission(rpa, new System.Security.AccessControl.AccessControlActions(), "testpath");
+            RegistryPermission rp2 = new RegistryPermission(
+                rpa,
+                new System.Security.AccessControl.AccessControlActions(),
+                "testpath"
+            );
             RegistryPermission rp3 = new RegistryPermission(rpa, "testpath");
             rp.AddPathList(rpa, "testpath");
             IPermission ip = rp.Copy();
@@ -276,7 +310,9 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void RegistryPermissionAttributeCallMethods()
         {
-            RegistryPermissionAttribute rpa = new RegistryPermissionAttribute(new Permissions.SecurityAction());
+            RegistryPermissionAttribute rpa = new RegistryPermissionAttribute(
+                new Permissions.SecurityAction()
+            );
             IPermission ip = rpa.CreatePermission();
         }
 
@@ -284,7 +320,9 @@ namespace System.Security.Permissions.Tests
         public static void SecurityPermissionCallMethods()
         {
             SecurityPermission sp = new SecurityPermission(new Permissions.PermissionState());
-            SecurityPermission sp2 = new SecurityPermission(new Permissions.SecurityPermissionFlag());
+            SecurityPermission sp2 = new SecurityPermission(
+                new Permissions.SecurityPermissionFlag()
+            );
             IPermission ip = sp.Copy();
             IPermission ip2 = sp.Intersect(ip);
             bool testbool = sp.IsSubsetOf(ip);
@@ -298,14 +336,18 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void SecurityPermissionAttributeCallMethods()
         {
-            SecurityPermissionAttribute spa = new SecurityPermissionAttribute(new Permissions.SecurityAction());
+            SecurityPermissionAttribute spa = new SecurityPermissionAttribute(
+                new Permissions.SecurityAction()
+            );
             IPermission ip = spa.CreatePermission();
         }
 
         [Fact]
         public static void SiteIdentityPermissionCallMethods()
         {
-            SiteIdentityPermission sip = new SiteIdentityPermission(new Permissions.PermissionState());
+            SiteIdentityPermission sip = new SiteIdentityPermission(
+                new Permissions.PermissionState()
+            );
             SiteIdentityPermission sip2 = new SiteIdentityPermission("testsite");
             IPermission ip = sip.Copy();
             IPermission ip2 = sip.Intersect(ip);
@@ -319,15 +361,23 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void SiteIdentityPermissionAttributeCallMethods()
         {
-            SiteIdentityPermissionAttribute sipa = new SiteIdentityPermissionAttribute(new Permissions.SecurityAction());
+            SiteIdentityPermissionAttribute sipa = new SiteIdentityPermissionAttribute(
+                new Permissions.SecurityAction()
+            );
             IPermission ip = sipa.CreatePermission();
         }
 
         [Fact]
         public static void StrongNameIdentityPermissionCallMethods()
         {
-            StrongNameIdentityPermission snip = new StrongNameIdentityPermission(new Permissions.PermissionState());
-            StrongNameIdentityPermission snip2 = new StrongNameIdentityPermission(new Permissions.StrongNamePublicKeyBlob(new byte[1]), "test", new Version(1, 2));
+            StrongNameIdentityPermission snip = new StrongNameIdentityPermission(
+                new Permissions.PermissionState()
+            );
+            StrongNameIdentityPermission snip2 = new StrongNameIdentityPermission(
+                new Permissions.StrongNamePublicKeyBlob(new byte[1]),
+                "test",
+                new Version(1, 2)
+            );
             IPermission ip = snip.Copy();
             IPermission ip2 = snip.Intersect(ip);
             bool testbool = snip.IsSubsetOf(ip);
@@ -340,7 +390,9 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void StrongNameIdentityPermissionAttributeCallMethods()
         {
-            StrongNameIdentityPermissionAttribute snipa = new StrongNameIdentityPermissionAttribute(new Permissions.SecurityAction());
+            StrongNameIdentityPermissionAttribute snipa = new StrongNameIdentityPermissionAttribute(
+                new Permissions.SecurityAction()
+            );
             IPermission ip = snipa.CreatePermission();
         }
 
@@ -357,7 +409,9 @@ namespace System.Security.Permissions.Tests
         public static void TypeDescriptorPermissionCallMethods()
         {
             TypeDescriptorPermission tdp = new TypeDescriptorPermission(new PermissionState());
-            TypeDescriptorPermission tdp2 = new TypeDescriptorPermission(new TypeDescriptorPermissionFlags());
+            TypeDescriptorPermission tdp2 = new TypeDescriptorPermission(
+                new TypeDescriptorPermissionFlags()
+            );
             IPermission ip = tdp.Copy();
             IPermission ip2 = tdp.Intersect(ip);
             bool testbool = tdp.IsSubsetOf(ip);
@@ -374,7 +428,10 @@ namespace System.Security.Permissions.Tests
             UIPermission uip = new UIPermission(new PermissionState());
             UIPermission uip2 = new UIPermission(new UIPermissionClipboard());
             UIPermission uip3 = new UIPermission(new UIPermissionWindow());
-            UIPermission uip4 = new UIPermission(new UIPermissionWindow(), new UIPermissionClipboard());
+            UIPermission uip4 = new UIPermission(
+                new UIPermissionWindow(),
+                new UIPermissionClipboard()
+            );
             IPermission ip = uip.Copy();
             IPermission ip2 = uip.Intersect(ip);
             bool testbool = uip.IsSubsetOf(ip);
@@ -388,7 +445,9 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void UIPermissionAttributeCallMethods()
         {
-            UIPermissionAttribute uipa = new UIPermissionAttribute(new Permissions.SecurityAction());
+            UIPermissionAttribute uipa = new UIPermissionAttribute(
+                new Permissions.SecurityAction()
+            );
             IPermission ip = uipa.CreatePermission();
         }
 
@@ -409,7 +468,9 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void UrlIdentityPermissionAttributeCallMethods()
         {
-            UrlIdentityPermissionAttribute uipa = new UrlIdentityPermissionAttribute(new Permissions.SecurityAction());
+            UrlIdentityPermissionAttribute uipa = new UrlIdentityPermissionAttribute(
+                new Permissions.SecurityAction()
+            );
             IPermission ip = uipa.CreatePermission();
         }
 
@@ -418,11 +479,13 @@ namespace System.Security.Permissions.Tests
         {
             WebBrowserPermission wp = new WebBrowserPermission();
             WebBrowserPermission wp2 = new WebBrowserPermission(PermissionState.Unrestricted);
-            WebBrowserPermission wp3 = new WebBrowserPermission(WebBrowserPermissionLevel.Unrestricted);
+            WebBrowserPermission wp3 = new WebBrowserPermission(
+                WebBrowserPermissionLevel.Unrestricted
+            );
             bool testbool = wp.IsUnrestricted();
             IPermission ip = wp.Copy();
             IPermission ip2 = wp.Intersect(ip);
-            IPermission ip3= wp.Union(ip);
+            IPermission ip3 = wp.Union(ip);
             testbool = wp.IsSubsetOf(ip);
             SecurityElement se = new SecurityElement("");
             wp.FromXml(se);
@@ -432,7 +495,9 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void WebBrowserPermissionAttributeCallMethods()
         {
-            WebBrowserPermissionAttribute wpa = new WebBrowserPermissionAttribute(new Permissions.SecurityAction());
+            WebBrowserPermissionAttribute wpa = new WebBrowserPermissionAttribute(
+                new Permissions.SecurityAction()
+            );
             IPermission ip = wpa.CreatePermission();
         }
 
@@ -452,7 +517,9 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void ZoneIdentityPermissionAttributeCallMethods()
         {
-            ZoneIdentityPermissionAttribute zipa = new ZoneIdentityPermissionAttribute(new Permissions.SecurityAction());
+            ZoneIdentityPermissionAttribute zipa = new ZoneIdentityPermissionAttribute(
+                new Permissions.SecurityAction()
+            );
             IPermission ip = zipa.CreatePermission();
         }
     }

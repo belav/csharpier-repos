@@ -31,9 +31,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
         [JsonProperty]
         public string IDontWork { get; private set; }
 
-        protected PrivateSetterBase()
-        {
-        }
+        protected PrivateSetterBase() { }
 
         internal PrivateSetterBase(string dontWork)
         {

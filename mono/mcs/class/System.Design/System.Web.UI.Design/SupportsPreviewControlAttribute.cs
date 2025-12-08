@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,47 +28,45 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 namespace System.Web.UI.Design
 {
-	[AttributeUsage (AttributeTargets.Class)]
-	public sealed class SupportsPreviewControlAttribute : Attribute
-	{
-		bool is_default, supports_preview;
+    [AttributeUsage(AttributeTargets.Class)]
+    public sealed class SupportsPreviewControlAttribute : Attribute
+    {
+        bool is_default,
+            supports_preview;
 
-		public SupportsPreviewControlAttribute (bool supportsPreviewControl)
-			: this (supportsPreviewControl,false)
-		{
-		}
+        public SupportsPreviewControlAttribute(bool supportsPreviewControl)
+            : this(supportsPreviewControl, false) { }
 
-		SupportsPreviewControlAttribute (bool supportsPreviewControl, bool isDefault)
-		{
-			this.supports_preview = supportsPreviewControl;
-			this.is_default = isDefault;
-		}
+        SupportsPreviewControlAttribute(bool supportsPreviewControl, bool isDefault)
+        {
+            this.supports_preview = supportsPreviewControl;
+            this.is_default = isDefault;
+        }
 
-		public static readonly SupportsPreviewControlAttribute Default =
-			new SupportsPreviewControlAttribute (false, true);
+        public static readonly SupportsPreviewControlAttribute Default =
+            new SupportsPreviewControlAttribute(false, true);
 
-		public bool SupportsPreviewControl {
-			get { return supports_preview; }
-		}
+        public bool SupportsPreviewControl
+        {
+            get { return supports_preview; }
+        }
 
-		public override bool Equals (object obj)
-		{
-			SupportsPreviewControlAttribute a = obj as SupportsPreviewControlAttribute;
-			return a != null && a.supports_preview == supports_preview;
-		}
+        public override bool Equals(object obj)
+        {
+            SupportsPreviewControlAttribute a = obj as SupportsPreviewControlAttribute;
+            return a != null && a.supports_preview == supports_preview;
+        }
 
-		public override int GetHashCode ()
-		{
-			return supports_preview ? 1 : 0;
-		}
+        public override int GetHashCode()
+        {
+            return supports_preview ? 1 : 0;
+        }
 
-		public override bool IsDefaultAttribute ()
-		{
-			return is_default;
-		}
-	}
+        public override bool IsDefaultAttribute()
+        {
+            return is_default;
+        }
+    }
 }
-

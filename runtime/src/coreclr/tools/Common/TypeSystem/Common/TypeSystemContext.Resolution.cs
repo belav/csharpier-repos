@@ -5,18 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
-
 using Internal.NativeFormat;
 
 namespace Internal.TypeSystem
 {
     public abstract partial class TypeSystemContext : IModuleResolver
     {
-        public ModuleDesc SystemModule
-        {
-            get;
-            private set;
-        }
+        public ModuleDesc SystemModule { get; private set; }
 
         protected void InitializeSystemModule(ModuleDesc systemModule)
         {
@@ -31,14 +26,22 @@ namespace Internal.TypeSystem
             return null;
         }
 
-        internal virtual ModuleDesc ResolveModule(IAssemblyDesc referencingModule, string fileName, bool throwIfNotFound = true)
+        internal virtual ModuleDesc ResolveModule(
+            IAssemblyDesc referencingModule,
+            string fileName,
+            bool throwIfNotFound = true
+        )
         {
             if (throwIfNotFound)
                 throw new NotSupportedException();
             return null;
         }
 
-        ModuleDesc IModuleResolver.ResolveModule(IAssemblyDesc referencingModule, string fileName, bool throwIfNotFound)
+        ModuleDesc IModuleResolver.ResolveModule(
+            IAssemblyDesc referencingModule,
+            string fileName,
+            bool throwIfNotFound
+        )
         {
             return ResolveModule(referencingModule, fileName, throwIfNotFound);
         }

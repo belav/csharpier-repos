@@ -16,7 +16,10 @@ namespace System.Web.Mvc.Async.Test
             Exception innerException = new Exception();
 
             // Act
-            SynchronousOperationException ex = new SynchronousOperationException("the message", innerException);
+            SynchronousOperationException ex = new SynchronousOperationException(
+                "the message",
+                innerException
+            );
 
             // Assert
             Assert.Equal("the message", ex.Message);
@@ -38,7 +41,11 @@ namespace System.Web.Mvc.Async.Test
         {
             // Act & assert
             Assert.Throws<SynchronousOperationException>(
-                delegate { throw new SynchronousOperationException(); });
+                delegate
+                {
+                    throw new SynchronousOperationException();
+                }
+            );
         }
 
         [Fact]
@@ -47,12 +54,16 @@ namespace System.Web.Mvc.Async.Test
             // Arrange
             MemoryStream ms = new MemoryStream();
             BinaryFormatter formatter = new BinaryFormatter();
-            SynchronousOperationException ex = new SynchronousOperationException("the message", new Exception("inner exception"));
+            SynchronousOperationException ex = new SynchronousOperationException(
+                "the message",
+                new Exception("inner exception")
+            );
 
             // Act
             formatter.Serialize(ms, ex);
             ms.Position = 0;
-            SynchronousOperationException deserialized = formatter.Deserialize(ms) as SynchronousOperationException;
+            SynchronousOperationException deserialized =
+                formatter.Deserialize(ms) as SynchronousOperationException;
 
             // Assert
             Assert.NotNull(deserialized);

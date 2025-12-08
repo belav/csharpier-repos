@@ -16,12 +16,11 @@ namespace DbLinq.Util
     interface IThreadSafeDictionary<TKey, TValue> : IDictionary<TKey, TValue>
     {
         /// <summary>
-        /// Merge is similar to the SQL merge or upsert statement.  
+        /// Merge is similar to the SQL merge or upsert statement.
         /// </summary>
         /// <param name="key">Key to lookup</param>
         /// <param name="newValue">New Value</param>
         void MergeSafe(TKey key, TValue newValue);
-
 
         /// <summary>
         /// This is a blind remove. Prevents the need to check for existence first.

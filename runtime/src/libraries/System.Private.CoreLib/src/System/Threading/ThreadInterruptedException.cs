@@ -11,14 +11,17 @@ namespace System.Threading
     /// An exception class to indicate that the thread was interrupted from a waiting state.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class ThreadInterruptedException : SystemException
     {
-        public ThreadInterruptedException() : base(
+        public ThreadInterruptedException()
+            : base(
 #if CORECLR
-            GetMessageFromNativeResources(ExceptionMessageKind.ThreadInterrupted)
+                GetMessageFromNativeResources(ExceptionMessageKind.ThreadInterrupted)
 #else
-            SR.Threading_ThreadInterrupted
+                SR.Threading_ThreadInterrupted
 #endif
             )
         {
@@ -37,10 +40,13 @@ namespace System.Threading
             HResult = HResults.COR_E_THREADINTERRUPTED;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected ThreadInterruptedException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected ThreadInterruptedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

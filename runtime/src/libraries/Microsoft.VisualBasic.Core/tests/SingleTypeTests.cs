@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.VisualBasic.Tests;
 using System;
 using System.Collections.Generic;
+using Microsoft.VisualBasic.Tests;
 using Xunit;
 
 namespace Microsoft.VisualBasic.CompilerServices.Tests
@@ -13,12 +13,22 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [Theory]
         [MemberData(nameof(FromObject_TestData))]
         [MemberData(nameof(FromString_TestData))]
-        public void FromObject(object value, float expected, System.Globalization.NumberFormatInfo numberFormat = null)
+        public void FromObject(
+            object value,
+            float expected,
+            System.Globalization.NumberFormatInfo numberFormat = null
+        )
         {
             if (numberFormat is null)
             {
                 Assert.Equal(expected, SingleType.FromObject(value));
-                Assert.Equal(expected, SingleType.FromObject(value, System.Globalization.NumberFormatInfo.InvariantInfo));
+                Assert.Equal(
+                    expected,
+                    SingleType.FromObject(
+                        value,
+                        System.Globalization.NumberFormatInfo.InvariantInfo
+                    )
+                );
             }
             else
             {
@@ -57,12 +67,22 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(FromString_TestData))]
-        public void FromString(string value, float expected, System.Globalization.NumberFormatInfo numberFormat = null)
+        public void FromString(
+            string value,
+            float expected,
+            System.Globalization.NumberFormatInfo numberFormat = null
+        )
         {
             if (numberFormat is null)
             {
                 Assert.Equal(expected, SingleType.FromString(value));
-                Assert.Equal(expected, SingleType.FromString(value, System.Globalization.NumberFormatInfo.InvariantInfo));
+                Assert.Equal(
+                    expected,
+                    SingleType.FromString(
+                        value,
+                        System.Globalization.NumberFormatInfo.InvariantInfo
+                    )
+                );
             }
             else
             {
@@ -188,7 +208,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
             // ushort.
             yield return new object[] { ushort.MinValue };
-            yield return new object[] { (ushort)1, };
+            yield return new object[] { (ushort)1 };
             yield return new object[] { ushort.MaxValue };
             yield return new object[] { (UShortEnum)ushort.MinValue };
             yield return new object[] { (UShortEnum)1 };
@@ -242,14 +262,32 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { " &o5", (float)5 };
             yield return new object[] { "&o0", (float)0 };
             yield return new object[] { "18446744073709551616", 18446744073709551616.0f };
-            yield return new object[] { double.NaN.ToString(), float.NaN, System.Globalization.NumberFormatInfo.CurrentInfo };
-            yield return new object[] { "NaN", float.NaN, System.Globalization.NumberFormatInfo.InvariantInfo };
+            yield return new object[]
+            {
+                double.NaN.ToString(),
+                float.NaN,
+                System.Globalization.NumberFormatInfo.CurrentInfo,
+            };
+            yield return new object[]
+            {
+                "NaN",
+                float.NaN,
+                System.Globalization.NumberFormatInfo.InvariantInfo,
+            };
         }
 
         public static IEnumerable<object[]> FromString_Other_TestData()
         {
-            yield return new object[] { double.PositiveInfinity.ToString(), float.PositiveInfinity };
-            yield return new object[] { double.NegativeInfinity.ToString(), float.NegativeInfinity };
+            yield return new object[]
+            {
+                double.PositiveInfinity.ToString(),
+                float.PositiveInfinity,
+            };
+            yield return new object[]
+            {
+                double.NegativeInfinity.ToString(),
+                float.NegativeInfinity,
+            };
         }
 
         public static IEnumerable<object[]> FromString_Invalid_TestData()

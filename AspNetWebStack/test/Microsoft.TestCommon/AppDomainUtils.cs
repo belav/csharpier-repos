@@ -19,7 +19,8 @@ namespace System.Web.WebPages.TestUtils
 
         public static void RunInSeparateAppDomain(AppDomainSetup setup, Action action)
         {
-            var dir = Path.GetDirectoryName(typeof(AppDomainUtils).Assembly.CodeBase).Replace("file:\\", "");
+            var dir = Path.GetDirectoryName(typeof(AppDomainUtils).Assembly.CodeBase)
+                .Replace("file:\\", "");
             setup.PrivateBinPath = dir;
             setup.ApplicationBase = dir;
             setup.ApplicationName = Guid.NewGuid().ToString();
@@ -31,7 +32,11 @@ namespace System.Web.WebPages.TestUtils
             try
             {
                 appDomain = AppDomain.CreateDomain(setup.ApplicationName, null, setup);
-                AppDomainHelper helper = appDomain.CreateInstanceAndUnwrap(typeof(AppDomainUtils).Assembly.FullName, typeof(AppDomainHelper).FullName) as AppDomainHelper;
+                AppDomainHelper helper =
+                    appDomain.CreateInstanceAndUnwrap(
+                        typeof(AppDomainUtils).Assembly.FullName,
+                        typeof(AppDomainHelper).FullName
+                    ) as AppDomainHelper;
                 helper.Run(action);
             }
             finally
@@ -53,8 +58,16 @@ namespace System.Web.WebPages.TestUtils
 
         public static void SetPreAppStartStage()
         {
-            var stage = typeof(BuildManager).GetProperty("PreStartInitStage", BindingFlags.Static | BindingFlags.NonPublic);
-            var value = ((FieldInfo)typeof(BuildManager).Assembly.GetType("System.Web.Compilation.PreStartInitStage").GetMember("DuringPreStartInit")[0]).GetValue(null);
+            var stage = typeof(BuildManager).GetProperty(
+                "PreStartInitStage",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
+            var value = (
+                (FieldInfo)
+                    typeof(BuildManager)
+                        .Assembly.GetType("System.Web.Compilation.PreStartInitStage")
+                        .GetMember("DuringPreStartInit")[0]
+            ).GetValue(null);
             stage.SetValue(null, value, new object[] { });
             SetAppData();
             var env = new HostingEnvironment();

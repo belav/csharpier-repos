@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -22,8 +22,9 @@ namespace System.Linq.Parallel
     /// </summary>
     /// <typeparam name="TInputOutput"></typeparam>
     /// <typeparam name="TSortKey"></typeparam>
-    internal sealed class SortQueryOperator<TInputOutput, TSortKey> :
-        UnaryQueryOperator<TInputOutput, TInputOutput>, IOrderedEnumerable<TInputOutput>
+    internal sealed class SortQueryOperator<TInputOutput, TSortKey>
+        : UnaryQueryOperator<TInputOutput, TInputOutput>,
+            IOrderedEnumerable<TInputOutput>
     {
         private readonly Func<TInputOutput, TSortKey> m_keySelector; // Key selector used when sorting.
         private readonly IComparer<TSortKey> m_comparer; // Key comparison logic to use during sorting.
@@ -32,8 +33,12 @@ namespace System.Linq.Parallel
         // Instantiates a new sort operator.
         //
 
-        internal SortQueryOperator(IEnumerable<TInputOutput> source, Func<TInputOutput, TSortKey> keySelector,
-                                   IComparer<TSortKey> comparer, bool descending)
+        internal SortQueryOperator(
+            IEnumerable<TInputOutput> source,
+            Func<TInputOutput, TSortKey> keySelector,
+            IComparer<TSortKey> comparer,
+            bool descending
+        )
             : base(source, true)
         {
             Contract.Assert(keySelector != null, "key selector must not be null");
@@ -63,7 +68,10 @@ namespace System.Linq.Parallel
         //
 
         IOrderedEnumerable<TInputOutput> IOrderedEnumerable<TInputOutput>.CreateOrderedEnumerable<TKey2>(
-            Func<TInputOutput, TKey2> key2Selector, IComparer<TKey2> key2Comparer, bool descending)
+            Func<TInputOutput, TKey2> key2Selector,
+            IComparer<TKey2> key2Comparer,
+            bool descending
+        )
         {
             key2Comparer = key2Comparer ?? Util.GetDefaultComparer<TKey2>();
 
@@ -72,11 +80,19 @@ namespace System.Linq.Parallel
                 key2Comparer = new ReverseComparer<TKey2>(key2Comparer);
             }
 
-            IComparer<Pair<TSortKey, TKey2>> pairComparer = new PairComparer<TSortKey, TKey2>(m_comparer, key2Comparer);
-            Func<TInputOutput, Pair<TSortKey, TKey2>> pairKeySelector =
-                (TInputOutput elem) => new Pair<TSortKey, TKey2>(m_keySelector(elem), key2Selector(elem));
+            IComparer<Pair<TSortKey, TKey2>> pairComparer = new PairComparer<TSortKey, TKey2>(
+                m_comparer,
+                key2Comparer
+            );
+            Func<TInputOutput, Pair<TSortKey, TKey2>> pairKeySelector = (TInputOutput elem) =>
+                new Pair<TSortKey, TKey2>(m_keySelector(elem), key2Selector(elem));
 
-            return new SortQueryOperator<TInputOutput, Pair<TSortKey, TKey2>>(Child, pairKeySelector, pairComparer, false);
+            return new SortQueryOperator<TInputOutput, Pair<TSortKey, TKey2>>(
+                Child,
+                pairKeySelector,
+                pairComparer,
+                false
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -102,23 +118,39 @@ namespace System.Linq.Parallel
         // the results, sorting them, and then returning an enumerator that walks the result.
         //
 
-        internal override QueryResults<TInputOutput> Open(QuerySettings settings, bool preferStriping)
+        internal override QueryResults<TInputOutput> Open(
+            QuerySettings settings,
+            bool preferStriping
+        )
         {
             QueryResults<TInputOutput> childQueryResults = Child.Open(settings, false);
-            return new SortQueryOperatorResults<TInputOutput, TSortKey>(childQueryResults, this, settings, preferStriping);
+            return new SortQueryOperatorResults<TInputOutput, TSortKey>(
+                childQueryResults,
+                this,
+                settings,
+                preferStriping
+            );
         }
 
-
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TInputOutput, TKey> inputStream, IPartitionedStreamRecipient<TInputOutput> recipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TInputOutput, TKey> inputStream,
+            IPartitionedStreamRecipient<TInputOutput> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
-            PartitionedStream<TInputOutput, TSortKey> outputStream =
-                new PartitionedStream<TInputOutput, TSortKey>(inputStream.PartitionCount, this.m_comparer, OrdinalIndexState);
+            PartitionedStream<TInputOutput, TSortKey> outputStream = new PartitionedStream<
+                TInputOutput,
+                TSortKey
+            >(inputStream.PartitionCount, this.m_comparer, OrdinalIndexState);
 
             for (int i = 0; i < outputStream.PartitionCount; i++)
             {
                 outputStream[i] = new SortQueryOperatorEnumerator<TInputOutput, TKey, TSortKey>(
-                    inputStream[i], m_keySelector, m_comparer);
+                    inputStream[i],
+                    m_keySelector,
+                    m_comparer
+                );
             }
 
             recipient.Receive<TSortKey>(outputStream);
@@ -130,7 +162,10 @@ namespace System.Linq.Parallel
 
         internal override IEnumerable<TInputOutput> AsSequentialQuery(CancellationToken token)
         {
-            IEnumerable<TInputOutput> wrappedChild = CancellableEnumerable.Wrap(Child.AsSequentialQuery(token), token);
+            IEnumerable<TInputOutput> wrappedChild = CancellableEnumerable.Wrap(
+                Child.AsSequentialQuery(token),
+                token
+            );
             return wrappedChild.OrderBy(m_keySelector, m_comparer);
         }
 
@@ -155,8 +190,11 @@ namespace System.Linq.Parallel
 #endif
 
         internal SortQueryOperatorResults(
-            QueryResults<TInputOutput> childQueryResults, SortQueryOperator<TInputOutput, TSortKey> op,
-            QuerySettings settings, bool preferStriping)
+            QueryResults<TInputOutput> childQueryResults,
+            SortQueryOperator<TInputOutput, TSortKey> op,
+            QuerySettings settings,
+            bool preferStriping
+        )
         {
             m_childQueryResults = childQueryResults;
             m_op = op;
@@ -171,9 +209,13 @@ namespace System.Linq.Parallel
             get { return false; }
         }
 
-        internal override void GivePartitionedStream(IPartitionedStreamRecipient<TInputOutput> recipient)
+        internal override void GivePartitionedStream(
+            IPartitionedStreamRecipient<TInputOutput> recipient
+        )
         {
-            m_childQueryResults.GivePartitionedStream(new ChildResultsRecipient(recipient, m_op, m_settings));
+            m_childQueryResults.GivePartitionedStream(
+                new ChildResultsRecipient(recipient, m_op, m_settings)
+            );
         }
 
         private class ChildResultsRecipient : IPartitionedStreamRecipient<TInputOutput>
@@ -182,7 +224,11 @@ namespace System.Linq.Parallel
             SortQueryOperator<TInputOutput, TSortKey> m_op;
             QuerySettings m_settings;
 
-            internal ChildResultsRecipient(IPartitionedStreamRecipient<TInputOutput> outputRecipient, SortQueryOperator<TInputOutput, TSortKey> op, QuerySettings settings)
+            internal ChildResultsRecipient(
+                IPartitionedStreamRecipient<TInputOutput> outputRecipient,
+                SortQueryOperator<TInputOutput, TSortKey> op,
+                QuerySettings settings
+            )
             {
                 m_outputRecipient = outputRecipient;
                 m_op = op;
@@ -191,7 +237,12 @@ namespace System.Linq.Parallel
 
             public void Receive<TKey>(PartitionedStream<TInputOutput, TKey> childPartitionedStream)
             {
-                m_op.WrapPartitionedStream(childPartitionedStream, m_outputRecipient, false, m_settings);
+                m_op.WrapPartitionedStream(
+                    childPartitionedStream,
+                    m_outputRecipient,
+                    false,
+                    m_settings
+                );
             }
         }
     }
@@ -200,7 +251,8 @@ namespace System.Linq.Parallel
     // This enumerator performs sorting based on a key selection and comparison routine.
     //
 
-    internal class SortQueryOperatorEnumerator<TInputOutput, TKey, TSortKey> : QueryOperatorEnumerator<TInputOutput, TSortKey>
+    internal class SortQueryOperatorEnumerator<TInputOutput, TKey, TSortKey>
+        : QueryOperatorEnumerator<TInputOutput, TSortKey>
     {
         private readonly QueryOperatorEnumerator<TInputOutput, TKey> m_source; // Data source to sort.
         private readonly Func<TInputOutput, TSortKey> m_keySelector; // Key selector used when sorting.
@@ -210,8 +262,11 @@ namespace System.Linq.Parallel
         // Instantiates a new sort operator enumerator.
         //
 
-        internal SortQueryOperatorEnumerator(QueryOperatorEnumerator<TInputOutput, TKey> source,
-            Func<TInputOutput, TSortKey> keySelector, IComparer<TSortKey> keyComparer)
+        internal SortQueryOperatorEnumerator(
+            QueryOperatorEnumerator<TInputOutput, TKey> source,
+            Func<TInputOutput, TSortKey> keySelector,
+            IComparer<TSortKey> keyComparer
+        )
         {
             Contract.Assert(source != null);
             Contract.Assert(keySelector != null, "need a key comparer");
@@ -221,6 +276,7 @@ namespace System.Linq.Parallel
             m_keySelector = keySelector;
             m_keyComparer = keyComparer;
         }
+
         //---------------------------------------------------------------------------------------
         // Accessor for the key comparison routine.
         //

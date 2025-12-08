@@ -26,10 +26,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         }
 
-        public static async Task<ImmutableArray<T>> ToImmutableArrayAsync<T>(this IAsyncEnumerable<T> values, CancellationToken cancellationToken)
+        public static async Task<ImmutableArray<T>> ToImmutableArrayAsync<T>(
+            this IAsyncEnumerable<T> values,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<T>.GetInstance(out var result);
-            await foreach (var value in values.WithCancellation(cancellationToken).ConfigureAwait(false))
+            await foreach (
+                var value in values.WithCancellation(cancellationToken).ConfigureAwait(false)
+            )
                 result.Add(value);
 
             return result.ToImmutable();
@@ -43,7 +48,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// </summary>
         /// <remarks>This helper is useful when doign parallel processing of work where each job returns an <see
         /// cref="IAsyncEnumerable{T}"/>, but one final stream is desired as the result.</remarks>
-        public static IAsyncEnumerable<T> MergeAsync<T>(this ImmutableArray<IAsyncEnumerable<T>> streams, CancellationToken cancellationToken)
+        public static IAsyncEnumerable<T> MergeAsync<T>(
+            this ImmutableArray<IAsyncEnumerable<T>> streams,
+            CancellationToken cancellationToken
+        )
         {
             // Code provided by Stephen Toub, but heavily modified after that.
 
@@ -64,7 +72,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             return channel.Reader.ReadAllAsync(cancellationToken);
 
-            static async Task ProcessAsync(IAsyncEnumerable<T> stream, ChannelWriter<T> writer, CancellationToken cancellationToken)
+            static async Task ProcessAsync(
+                IAsyncEnumerable<T> stream,
+                ChannelWriter<T> writer,
+                CancellationToken cancellationToken
+            )
             {
                 await foreach (var value in stream)
                     await writer.WriteAsync(value, cancellationToken).ConfigureAwait(false);
@@ -72,7 +84,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         public static async IAsyncEnumerable<T> ReadAllAsync<T>(
-            this ChannelReader<T> reader, [EnumeratorCancellation] CancellationToken cancellationToken)
+            this ChannelReader<T> reader,
+            [EnumeratorCancellation] CancellationToken cancellationToken
+        )
         {
             while (await reader.WaitToReadAsync(cancellationToken).ConfigureAwait(false))
             {
@@ -91,7 +105,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // faulting. it is null otherwise.
             task.ContinueWith(
                 static (task, channel) => ((Channel<T>)channel!).Writer.Complete(task.Exception),
-                channel, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
+                channel,
+                CancellationToken.None,
+                TaskContinuationOptions.None,
+                TaskScheduler.Default
+            );
         }
     }
 }

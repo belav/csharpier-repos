@@ -11,12 +11,11 @@ namespace System.IdentityModel
     using System.Diagnostics;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
+    using System.Runtime;
     using System.Security.Claims;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
-
     using Claim = System.Security.Claims.Claim;
-    using System.Runtime;
 
     internal static class X509Util
     {
@@ -28,7 +27,9 @@ namespace System.IdentityModel
             if (!certificate.HasPrivateKey)
             {
 #pragma warning suppress 56526 // no validation necessary for value.Thumbprint
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.ID1001, certificate.Thumbprint)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.ID1001, certificate.Thumbprint))
+                );
             }
 
             // Check for accessibility of private key
@@ -46,34 +47,60 @@ namespace System.IdentityModel
             }
             catch (CryptographicException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.ID1039, certificate.Thumbprint), e));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.ID1039, certificate.Thumbprint), e)
+                );
             }
 
             if (rsa == null)
             {
 #pragma warning suppress 56526 // no validation necessary for value.Thumbprint
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.ID1002, certificate.Thumbprint)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.ID1002, certificate.Thumbprint))
+                );
             }
 
             return rsa;
         }
 
-        internal static X509Certificate2 ResolveCertificate(StoreName storeName, StoreLocation storeLocation, X509FindType findType, object findValue)
+        internal static X509Certificate2 ResolveCertificate(
+            StoreName storeName,
+            StoreLocation storeLocation,
+            X509FindType findType,
+            object findValue
+        )
         {
             X509Certificate2 certificate = null;
 
-            // Throwing InvalidOperationException here, following WCF precedent. 
+            // Throwing InvalidOperationException here, following WCF precedent.
             // Might be worth introducing a more specific exception here.
-            if (!TryResolveCertificate(storeName, storeLocation, findType, findValue, out certificate))
+            if (
+                !TryResolveCertificate(
+                    storeName,
+                    storeLocation,
+                    findType,
+                    findValue,
+                    out certificate
+                )
+            )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ID1025, storeName, storeLocation, findType, findValue)));
+                    new InvalidOperationException(
+                        SR.GetString(SR.ID1025, storeName, storeLocation, findType, findValue)
+                    )
+                );
             }
 
             return certificate;
         }
 
-        internal static bool TryResolveCertificate(StoreName storeName, StoreLocation storeLocation, X509FindType findType, object findValue, out X509Certificate2 certificate)
+        internal static bool TryResolveCertificate(
+            StoreName storeName,
+            StoreLocation storeLocation,
+            X509FindType findType,
+            object findValue,
+            out X509Certificate2 certificate
+        )
         {
             X509Store store = new X509Store(storeName, storeLocation);
             store.Open(OpenFlags.ReadOnly);
@@ -86,7 +113,7 @@ namespace System.IdentityModel
                 certs = store.Certificates;
                 matches = certs.Find(findType, findValue, false);
 
-                // Throwing InvalidOperationException here, following WCF precedent. 
+                // Throwing InvalidOperationException here, following WCF precedent.
                 // Might be worth introducing a more specific exception here.
                 if (matches.Count == 1)
                 {
@@ -120,7 +147,10 @@ namespace System.IdentityModel
             return certificateId;
         }
 
-        internal static string GetCertificateIssuerName(X509Certificate2 certificate, IssuerNameRegistry issuerNameRegistry)
+        internal static string GetCertificateIssuerName(
+            X509Certificate2 certificate,
+            IssuerNameRegistry issuerNameRegistry
+        )
         {
             if (certificate == null)
             {
@@ -129,7 +159,9 @@ namespace System.IdentityModel
 
             if (issuerNameRegistry == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("issuerNameRegistry");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "issuerNameRegistry"
+                );
             }
 
             X509Chain chain = new X509Chain();
@@ -174,13 +206,20 @@ namespace System.IdentityModel
         internal static X509CertificateValidator CreateCertificateValidator(
             System.ServiceModel.Security.X509CertificateValidationMode certificateValidationMode,
             X509RevocationMode revocationMode,
-            StoreLocation trustedStoreLocation)
+            StoreLocation trustedStoreLocation
+        )
         {
-            return new X509CertificateValidatorEx(certificateValidationMode, revocationMode, trustedStoreLocation);
+            return new X509CertificateValidatorEx(
+                certificateValidationMode,
+                revocationMode,
+                trustedStoreLocation
+            );
         }
 
-
-        public static IEnumerable<Claim> GetClaimsFromCertificate(X509Certificate2 certificate, string issuer)
+        public static IEnumerable<Claim> GetClaimsFromCertificate(
+            X509Certificate2 certificate,
+            string issuer
+        )
         {
             if (certificate == null)
             {
@@ -190,42 +229,61 @@ namespace System.IdentityModel
             ICollection<Claim> claimsCollection = new Collection<Claim>();
 
             string thumbprint = Convert.ToBase64String(certificate.GetCertHash());
-            claimsCollection.Add(new Claim(ClaimTypes.Thumbprint, thumbprint, ClaimValueTypes.Base64Binary, issuer));
+            claimsCollection.Add(
+                new Claim(ClaimTypes.Thumbprint, thumbprint, ClaimValueTypes.Base64Binary, issuer)
+            );
 
             string value = certificate.SubjectName.Name;
             if (!string.IsNullOrEmpty(value))
             {
-                claimsCollection.Add(new Claim(ClaimTypes.X500DistinguishedName, value, ClaimValueTypes.String, issuer));
+                claimsCollection.Add(
+                    new Claim(
+                        ClaimTypes.X500DistinguishedName,
+                        value,
+                        ClaimValueTypes.String,
+                        issuer
+                    )
+                );
             }
 
             value = certificate.GetNameInfo(X509NameType.DnsName, false);
             if (!string.IsNullOrEmpty(value))
             {
-                claimsCollection.Add(new Claim(ClaimTypes.Dns, value, ClaimValueTypes.String, issuer));
+                claimsCollection.Add(
+                    new Claim(ClaimTypes.Dns, value, ClaimValueTypes.String, issuer)
+                );
             }
 
             value = certificate.GetNameInfo(X509NameType.SimpleName, false);
             if (!string.IsNullOrEmpty(value))
             {
-                claimsCollection.Add(new Claim(ClaimTypes.Name, value, ClaimValueTypes.String, issuer));
+                claimsCollection.Add(
+                    new Claim(ClaimTypes.Name, value, ClaimValueTypes.String, issuer)
+                );
             }
 
             value = certificate.GetNameInfo(X509NameType.EmailName, false);
             if (!string.IsNullOrEmpty(value))
             {
-                claimsCollection.Add(new Claim(ClaimTypes.Email, value, ClaimValueTypes.String, issuer));
+                claimsCollection.Add(
+                    new Claim(ClaimTypes.Email, value, ClaimValueTypes.String, issuer)
+                );
             }
 
             value = certificate.GetNameInfo(X509NameType.UpnName, false);
             if (!string.IsNullOrEmpty(value))
             {
-                claimsCollection.Add(new Claim(ClaimTypes.Upn, value, ClaimValueTypes.String, issuer));
+                claimsCollection.Add(
+                    new Claim(ClaimTypes.Upn, value, ClaimValueTypes.String, issuer)
+                );
             }
 
             value = certificate.GetNameInfo(X509NameType.UrlName, false);
             if (!string.IsNullOrEmpty(value))
             {
-                claimsCollection.Add(new Claim(ClaimTypes.Uri, value, ClaimValueTypes.String, issuer));
+                claimsCollection.Add(
+                    new Claim(ClaimTypes.Uri, value, ClaimValueTypes.String, issuer)
+                );
             }
 
             RSA rsa;
@@ -239,7 +297,14 @@ namespace System.IdentityModel
             }
             if (rsa != null)
             {
-                claimsCollection.Add(new Claim(ClaimTypes.Rsa, rsa.ToXmlString(false), ClaimValueTypes.RsaKeyValue, issuer));
+                claimsCollection.Add(
+                    new Claim(
+                        ClaimTypes.Rsa,
+                        rsa.ToXmlString(false),
+                        ClaimValueTypes.RsaKeyValue,
+                        issuer
+                    )
+                );
             }
 
             DSA dsa;
@@ -253,13 +318,22 @@ namespace System.IdentityModel
             }
             if (dsa != null)
             {
-                claimsCollection.Add(new Claim(ClaimTypes.Dsa, dsa.ToXmlString(false), ClaimValueTypes.DsaKeyValue, issuer));
+                claimsCollection.Add(
+                    new Claim(
+                        ClaimTypes.Dsa,
+                        dsa.ToXmlString(false),
+                        ClaimValueTypes.DsaKeyValue,
+                        issuer
+                    )
+                );
             }
 
             value = certificate.SerialNumber;
             if (!string.IsNullOrEmpty(value))
             {
-                claimsCollection.Add(new Claim(ClaimTypes.SerialNumber, value, ClaimValueTypes.String, issuer));
+                claimsCollection.Add(
+                    new Claim(ClaimTypes.SerialNumber, value, ClaimValueTypes.String, issuer)
+                );
             }
 
             return claimsCollection;

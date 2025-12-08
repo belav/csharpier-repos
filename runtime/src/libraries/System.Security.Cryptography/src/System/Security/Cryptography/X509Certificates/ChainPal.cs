@@ -21,6 +21,7 @@ namespace System.Security.Cryptography.X509Certificates
             X509ChainTrustMode trustMode,
             DateTime verificationTime,
             TimeSpan timeout,
-            bool disableAia);
+            bool disableAia
+        );
     }
 }

@@ -33,13 +33,20 @@ namespace System.Web.Mvc
 
         protected internal ModelMetadata Metadata { get; private set; }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This method may perform non-trivial work.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method may perform non-trivial work."
+        )]
         public virtual IEnumerable<ModelClientValidationRule> GetClientValidationRules()
         {
             return Enumerable.Empty<ModelClientValidationRule>();
         }
 
-        public static ModelValidator GetModelValidator(ModelMetadata metadata, ControllerContext context)
+        public static ModelValidator GetModelValidator(
+            ModelMetadata metadata,
+            ControllerContext context
+        )
         {
             return new CompositeModelValidator(metadata, context);
         }
@@ -48,17 +55,24 @@ namespace System.Web.Mvc
 
         private class CompositeModelValidator : ModelValidator
         {
-            public CompositeModelValidator(ModelMetadata metadata, ControllerContext controllerContext)
-                : base(metadata, controllerContext)
-            {
-            }
+            public CompositeModelValidator(
+                ModelMetadata metadata,
+                ControllerContext controllerContext
+            )
+                : base(metadata, controllerContext) { }
 
-            private static ModelValidationResult CreateSubPropertyResult(ModelMetadata propertyMetadata, ModelValidationResult propertyResult)
+            private static ModelValidationResult CreateSubPropertyResult(
+                ModelMetadata propertyMetadata,
+                ModelValidationResult propertyResult
+            )
             {
                 return new ModelValidationResult
                 {
-                    MemberName = DefaultModelBinder.CreateSubPropertyName(propertyMetadata.PropertyName, propertyResult.MemberName),
-                    Message = propertyResult.Message
+                    MemberName = DefaultModelBinder.CreateSubPropertyName(
+                        propertyMetadata.PropertyName,
+                        propertyResult.MemberName
+                    ),
+                    Message = propertyResult.Message,
                 };
             }
 
@@ -72,9 +86,17 @@ namespace System.Web.Mvc
                 for (int propertyIndex = 0; propertyIndex < properties.Length; propertyIndex++)
                 {
                     ModelMetadata propertyMetadata = properties[propertyIndex];
-                    foreach (ModelValidator propertyValidator in propertyMetadata.GetValidators(ControllerContext))
+                    foreach (
+                        ModelValidator propertyValidator in propertyMetadata.GetValidators(
+                            ControllerContext
+                        )
+                    )
                     {
-                        foreach (ModelValidationResult propertyResult in propertyValidator.Validate(Metadata.Model))
+                        foreach (
+                            ModelValidationResult propertyResult in propertyValidator.Validate(
+                                Metadata.Model
+                            )
+                        )
                         {
                             propertiesValid = false;
                             yield return CreateSubPropertyResult(propertyMetadata, propertyResult);
@@ -84,9 +106,13 @@ namespace System.Web.Mvc
 
                 if (propertiesValid)
                 {
-                    foreach (ModelValidator typeValidator in Metadata.GetValidators(ControllerContext))
+                    foreach (
+                        ModelValidator typeValidator in Metadata.GetValidators(ControllerContext)
+                    )
                     {
-                        foreach (ModelValidationResult typeResult in typeValidator.Validate(container))
+                        foreach (
+                            ModelValidationResult typeResult in typeValidator.Validate(container)
+                        )
                         {
                             yield return typeResult;
                         }

@@ -8,24 +8,26 @@ namespace System.ServiceModel.Discovery
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    class DiscoveryClientOutputChannel<TChannel> : DiscoveryClientChannelBase<TChannel>, IOutputChannel
+    class DiscoveryClientOutputChannel<TChannel>
+        : DiscoveryClientChannelBase<TChannel>,
+            IOutputChannel
         where TChannel : class, IOutputChannel
     {
         public DiscoveryClientOutputChannel(
             ChannelManagerBase channelManagerBase,
             IChannelFactory<TChannel> innerChannelFactory,
             FindCriteria findCriteria,
-            DiscoveryEndpointProvider discoveryEndpointProvider)
+            DiscoveryEndpointProvider discoveryEndpointProvider
+        )
             : base(channelManagerBase, innerChannelFactory, findCriteria, discoveryEndpointProvider)
-        {
-        }
+        { }
 
         public EndpointAddress RemoteAddress
         {
-            get 
+            get
             {
                 if (this.InnerChannel == null)
-                {                    
+                {
                     return DiscoveryClientBindingElement.DiscoveryEndpointAddress;
                 }
 
@@ -46,7 +48,12 @@ namespace System.ServiceModel.Discovery
             }
         }
 
-        public virtual IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public virtual IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.InnerChannel.BeginSend(message, timeout, callback, state);
         }
@@ -69,6 +76,6 @@ namespace System.ServiceModel.Discovery
         public void Send(Message message)
         {
             this.Send(message, this.DefaultSendTimeout);
-        }        
+        }
     }
 }

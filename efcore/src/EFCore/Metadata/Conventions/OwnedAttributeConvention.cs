@@ -11,25 +11,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class OwnedAttributeConvention : TypeAttributeConventionBase<OwnedAttribute>,
-    IComplexPropertyAddedConvention
+public class OwnedAttributeConvention
+    : TypeAttributeConventionBase<OwnedAttribute>,
+        IComplexPropertyAddedConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="OwnedAttributeConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public OwnedAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <inheritdoc />
     protected override void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
         OwnedAttribute attribute,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
-        entityTypeBuilder.ModelBuilder.Owned(entityTypeBuilder.Metadata.ClrType, fromDataAnnotation: true);
+        entityTypeBuilder.ModelBuilder.Owned(
+            entityTypeBuilder.Metadata.ClrType,
+            fromDataAnnotation: true
+        );
         if (!entityTypeBuilder.Metadata.IsInModel)
         {
             context.StopProcessing();
@@ -40,7 +43,8 @@ public class OwnedAttributeConvention : TypeAttributeConventionBase<OwnedAttribu
     protected override void ProcessComplexTypeAdded(
         IConventionComplexTypeBuilder complexTypeBuilder,
         OwnedAttribute attribute,
-        IConventionContext context)
+        IConventionContext context
+    )
     {
         var complexProperty = complexTypeBuilder.Metadata.ComplexProperty;
         var entityTypeBuilder = ReplaceWithEntityType(complexTypeBuilder, shouldBeOwned: true);
@@ -52,11 +56,16 @@ public class OwnedAttributeConvention : TypeAttributeConventionBase<OwnedAttribu
         context.StopProcessing();
 
         var memberInfo = complexProperty.GetIdentifyingMemberInfo();
-        if (memberInfo != null
-            && complexProperty.Builder is IConventionEntityTypeBuilder conventionEntityTypeBuilder)
+        if (
+            memberInfo != null
+            && complexProperty.Builder is IConventionEntityTypeBuilder conventionEntityTypeBuilder
+        )
         {
             conventionEntityTypeBuilder.HasOwnership(
-                entityTypeBuilder.Metadata, memberInfo, fromDataAnnotation: true);
+                entityTypeBuilder.Metadata,
+                memberInfo,
+                fromDataAnnotation: true
+            );
         }
     }
 }

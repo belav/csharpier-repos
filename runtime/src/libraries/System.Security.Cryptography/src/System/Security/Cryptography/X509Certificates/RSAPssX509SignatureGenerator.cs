@@ -55,7 +55,8 @@ namespace System.Security.Cryptography.X509Certificates
                 throw new ArgumentOutOfRangeException(
                     nameof(hashAlgorithm),
                     hashAlgorithm,
-                    SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name));
+                    SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name)
+                );
             }
 
             // RFC 5754 says that the NULL for SHA2 (256/384/512) MUST be omitted

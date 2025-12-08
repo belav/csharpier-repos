@@ -24,8 +24,12 @@ internal partial class MigrationsRemoveCommand
     private static void ReportJsonResults(IDictionary result)
     {
         Reporter.WriteData("{");
-        Reporter.WriteData("  \"migrationFile\": " + Json.Literal(result["MigrationFile"] as string) + ",");
-        Reporter.WriteData("  \"metadataFile\": " + Json.Literal(result["MetadataFile"] as string) + ",");
+        Reporter.WriteData(
+            "  \"migrationFile\": " + Json.Literal(result["MigrationFile"] as string) + ","
+        );
+        Reporter.WriteData(
+            "  \"metadataFile\": " + Json.Literal(result["MetadataFile"] as string) + ","
+        );
         Reporter.WriteData("  \"snapshotFile\": " + Json.Literal(result["SnapshotFile"] as string));
         Reporter.WriteData("}");
     }

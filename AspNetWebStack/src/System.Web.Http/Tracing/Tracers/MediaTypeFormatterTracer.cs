@@ -18,15 +18,23 @@ namespace System.Web.Http.Tracing.Tracers
     /// <summary>
     /// Tracer to monitor <see cref="MediaTypeFormatter"/> instances.
     /// </summary>
-    internal class MediaTypeFormatterTracer : MediaTypeFormatter, IFormatterTracer, IDecorator<MediaTypeFormatter>
+    internal class MediaTypeFormatterTracer
+        : MediaTypeFormatter,
+            IFormatterTracer,
+            IDecorator<MediaTypeFormatter>
     {
         private const string ReadFromStreamAsyncMethodName = "ReadFromStreamAsync";
         private const string WriteToStreamAsyncMethodName = "WriteToStreamAsync";
-        private const string GetPerRequestFormatterInstanceMethodName = "GetPerRequestFormatterInstance";
+        private const string GetPerRequestFormatterInstanceMethodName =
+            "GetPerRequestFormatterInstance";
 
         private readonly MediaTypeFormatter _inner;
 
-        public MediaTypeFormatterTracer(MediaTypeFormatter innerFormatter, ITraceWriter traceWriter, HttpRequestMessage request)
+        public MediaTypeFormatterTracer(
+            MediaTypeFormatter innerFormatter,
+            ITraceWriter traceWriter,
+            HttpRequestMessage request
+        )
             : base(innerFormatter)
         {
             Contract.Assert(innerFormatter != null);
@@ -51,14 +59,8 @@ namespace System.Web.Http.Tracing.Tracers
 
         public override IRequiredMemberSelector RequiredMemberSelector
         {
-            get
-            {
-                return InnerFormatter.RequiredMemberSelector;
-            }
-            set
-            {
-                InnerFormatter.RequiredMemberSelector = value;
-            }
+            get { return InnerFormatter.RequiredMemberSelector; }
+            set { InnerFormatter.RequiredMemberSelector = value; }
         }
 
         public static MediaTypeFormatter ActualMediaTypeFormatter(MediaTypeFormatter formatter)
@@ -67,7 +69,11 @@ namespace System.Web.Http.Tracing.Tracers
             return tracer == null ? formatter : tracer.InnerFormatter;
         }
 
-        public static MediaTypeFormatter CreateTracer(MediaTypeFormatter formatter, ITraceWriter traceWriter, HttpRequestMessage request)
+        public static MediaTypeFormatter CreateTracer(
+            MediaTypeFormatter formatter,
+            ITraceWriter traceWriter,
+            HttpRequestMessage request
+        )
         {
             // If we have been asked to wrap a tracer around a formatter, it could be
             // already wrapped, and there is nothing to do.  But if we see it is a tracer
@@ -89,7 +95,8 @@ namespace System.Web.Http.Tracing.Tracers
 
             XmlMediaTypeFormatter xmlFormatter = formatter as XmlMediaTypeFormatter;
             JsonMediaTypeFormatter jsonFormatter = formatter as JsonMediaTypeFormatter;
-            FormUrlEncodedMediaTypeFormatter formUrlFormatter = formatter as FormUrlEncodedMediaTypeFormatter;
+            FormUrlEncodedMediaTypeFormatter formUrlFormatter =
+                formatter as FormUrlEncodedMediaTypeFormatter;
             BufferedMediaTypeFormatter bufferedFormatter = formatter as BufferedMediaTypeFormatter;
 
             // We special-case Xml, Json and FormUrlEncoded formatters because we expect to be able
@@ -104,11 +111,19 @@ namespace System.Web.Http.Tracing.Tracers
             }
             else if (formUrlFormatter != null)
             {
-                tracer = new FormUrlEncodedMediaTypeFormatterTracer(formUrlFormatter, traceWriter, request);
+                tracer = new FormUrlEncodedMediaTypeFormatterTracer(
+                    formUrlFormatter,
+                    traceWriter,
+                    request
+                );
             }
             else if (bufferedFormatter != null)
             {
-                tracer = new BufferedMediaTypeFormatterTracer(bufferedFormatter, traceWriter, request);
+                tracer = new BufferedMediaTypeFormatterTracer(
+                    bufferedFormatter,
+                    traceWriter,
+                    request
+                );
             }
             else
             {
@@ -118,7 +133,11 @@ namespace System.Web.Http.Tracing.Tracers
             return tracer;
         }
 
-        public override MediaTypeFormatter GetPerRequestFormatterInstance(Type type, HttpRequestMessage request, MediaTypeHeaderValue mediaType)
+        public override MediaTypeFormatter GetPerRequestFormatterInstance(
+            Type type,
+            HttpRequestMessage request,
+            MediaTypeHeaderValue mediaType
+        )
         {
             MediaTypeFormatter formatter = null;
 
@@ -134,9 +153,17 @@ namespace System.Web.Http.Tracing.Tracers
                         SRResources.TraceGetPerRequestFormatterMessage,
                         InnerFormatter.GetType().Name,
                         type.Name,
-                        mediaType);
+                        mediaType
+                    );
                 },
-                execute: () => { formatter = InnerFormatter.GetPerRequestFormatterInstance(type, request, mediaType); },
+                execute: () =>
+                {
+                    formatter = InnerFormatter.GetPerRequestFormatterInstance(
+                        type,
+                        request,
+                        mediaType
+                    );
+                },
                 endTrace: (tr) =>
                 {
                     if (formatter == null)
@@ -145,16 +172,18 @@ namespace System.Web.Http.Tracing.Tracers
                     }
                     else
                     {
-                        string formatMessage =
-                            Object.ReferenceEquals(MediaTypeFormatterTracer.ActualMediaTypeFormatter(formatter),
-                                                   InnerFormatter)
-                                ? SRResources.TraceGetPerRequestFormatterEndMessage
-                                : SRResources.TraceGetPerRequestFormatterEndMessageNew;
+                        string formatMessage = Object.ReferenceEquals(
+                            MediaTypeFormatterTracer.ActualMediaTypeFormatter(formatter),
+                            InnerFormatter
+                        )
+                            ? SRResources.TraceGetPerRequestFormatterEndMessage
+                            : SRResources.TraceGetPerRequestFormatterEndMessageNew;
 
                         tr.Message = Error.Format(formatMessage, formatter.GetType().Name);
                     }
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
 
             if (formatter != null && !(formatter is IFormatterTracer))
             {
@@ -184,7 +213,11 @@ namespace System.Web.Http.Tracing.Tracers
             return InnerFormatter.GetHashCode();
         }
 
-        public override void SetDefaultContentHeaders(Type type, HttpContentHeaders headers, MediaTypeHeaderValue mediaType)
+        public override void SetDefaultContentHeaders(
+            Type type,
+            HttpContentHeaders headers,
+            MediaTypeHeaderValue mediaType
+        )
         {
             InnerFormatter.SetDefaultContentHeaders(type, headers, mediaType);
         }
@@ -194,30 +227,61 @@ namespace System.Web.Http.Tracing.Tracers
             return InnerFormatter.ToString();
         }
 
-        public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content,
-            IFormatterLogger formatterLogger)
+        public override Task<object> ReadFromStreamAsync(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger
+        )
         {
-            return ReadFromStreamAsyncCore(type, readStream, content, formatterLogger, cancellationToken: null);
+            return ReadFromStreamAsyncCore(
+                type,
+                readStream,
+                content,
+                formatterLogger,
+                cancellationToken: null
+            );
         }
 
-        public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content,
-            IFormatterLogger formatterLogger, CancellationToken cancellationToken)
+        public override Task<object> ReadFromStreamAsync(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger,
+            CancellationToken cancellationToken
+        )
         {
-            return ReadFromStreamAsyncCore(type, readStream, content, formatterLogger, cancellationToken);
+            return ReadFromStreamAsyncCore(
+                type,
+                readStream,
+                content,
+                formatterLogger,
+                cancellationToken
+            );
         }
 
-        private Task<object> ReadFromStreamAsyncCore(Type type, Stream readStream, HttpContent content,
-            IFormatterLogger formatterLogger, CancellationToken? cancellationToken)
+        private Task<object> ReadFromStreamAsyncCore(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger,
+            CancellationToken? cancellationToken
+        )
         {
             HttpContentHeaders contentHeaders = content == null ? null : content.Headers;
-            MediaTypeHeaderValue contentType = contentHeaders == null ? null : contentHeaders.ContentType;
+            MediaTypeHeaderValue contentType =
+                contentHeaders == null ? null : contentHeaders.ContentType;
 
             IFormatterLogger formatterLoggerTraceWrapper =
-                (formatterLogger == null) ? null : new FormatterLoggerTraceWrapper(formatterLogger,
-                                                                                   TraceWriter,
-                                                                                   Request,
-                                                                                   InnerFormatter.GetType().Name,
-                                                                                   ReadFromStreamAsyncMethodName);
+                (formatterLogger == null)
+                    ? null
+                    : new FormatterLoggerTraceWrapper(
+                        formatterLogger,
+                        TraceWriter,
+                        Request,
+                        InnerFormatter.GetType().Name,
+                        ReadFromStreamAsyncMethodName
+                    );
 
             return TraceWriter.TraceBeginEndAsync<object>(
                 Request,
@@ -228,51 +292,88 @@ namespace System.Web.Http.Tracing.Tracers
                 beginTrace: (tr) =>
                 {
                     tr.Message = Error.Format(
-                                        SRResources.TraceReadFromStreamMessage,
-                                        type.Name,
-                                        contentType == null ? SRResources.TraceNoneObjectMessage : contentType.ToString());
+                        SRResources.TraceReadFromStreamMessage,
+                        type.Name,
+                        contentType == null
+                            ? SRResources.TraceNoneObjectMessage
+                            : contentType.ToString()
+                    );
                 },
-
                 execute: () =>
                 {
                     if (cancellationToken.HasValue)
                     {
-                        return InnerFormatter.ReadFromStreamAsync(type, readStream, content, formatterLoggerTraceWrapper, cancellationToken.Value);
+                        return InnerFormatter.ReadFromStreamAsync(
+                            type,
+                            readStream,
+                            content,
+                            formatterLoggerTraceWrapper,
+                            cancellationToken.Value
+                        );
                     }
                     else
                     {
-                        return InnerFormatter.ReadFromStreamAsync(type, readStream, content, formatterLoggerTraceWrapper);
+                        return InnerFormatter.ReadFromStreamAsync(
+                            type,
+                            readStream,
+                            content,
+                            formatterLoggerTraceWrapper
+                        );
                     }
                 },
                 endTrace: (tr, value) =>
                 {
                     tr.Message = Error.Format(
-                                        SRResources.TraceReadFromStreamValueMessage,
-                                        FormattingUtilities.ValueToString(value, CultureInfo.CurrentCulture));
+                        SRResources.TraceReadFromStreamValueMessage,
+                        FormattingUtilities.ValueToString(value, CultureInfo.CurrentCulture)
+                    );
                 },
-
-                errorTrace: null);
+                errorTrace: null
+            );
         }
 
-        public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content,
-            TransportContext transportContext)
+        public override Task WriteToStreamAsync(
+            Type type,
+            object value,
+            Stream writeStream,
+            HttpContent content,
+            TransportContext transportContext
+        )
         {
             return WriteToStreamAsyncCore(type, value, writeStream, content, transportContext);
         }
 
-        public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content,
-            TransportContext transportContext, CancellationToken cancellationToken)
+        public override Task WriteToStreamAsync(
+            Type type,
+            object value,
+            Stream writeStream,
+            HttpContent content,
+            TransportContext transportContext,
+            CancellationToken cancellationToken
+        )
         {
-            return WriteToStreamAsyncCore(type, value, writeStream, content, transportContext, cancellationToken);
+            return WriteToStreamAsyncCore(
+                type,
+                value,
+                writeStream,
+                content,
+                transportContext,
+                cancellationToken
+            );
         }
 
-        private Task WriteToStreamAsyncCore(Type type, object value, Stream writeStream, HttpContent content,
-            TransportContext transportContext, CancellationToken? cancellationToken = null)
+        private Task WriteToStreamAsyncCore(
+            Type type,
+            object value,
+            Stream writeStream,
+            HttpContent content,
+            TransportContext transportContext,
+            CancellationToken? cancellationToken = null
+        )
         {
             HttpContentHeaders contentHeaders = content == null ? null : content.Headers;
-            MediaTypeHeaderValue contentType = contentHeaders == null
-                                       ? null
-                                       : contentHeaders.ContentType;
+            MediaTypeHeaderValue contentType =
+                contentHeaders == null ? null : contentHeaders.ContentType;
 
             return TraceWriter.TraceBeginEndAsync(
                 Request,
@@ -283,24 +384,41 @@ namespace System.Web.Http.Tracing.Tracers
                 beginTrace: (tr) =>
                 {
                     tr.Message = Error.Format(
-                                        SRResources.TraceWriteToStreamMessage,
-                                        FormattingUtilities.ValueToString(value, CultureInfo.CurrentCulture),
-                                        type.Name,
-                                        contentType == null ? SRResources.TraceNoneObjectMessage : contentType.ToString());
+                        SRResources.TraceWriteToStreamMessage,
+                        FormattingUtilities.ValueToString(value, CultureInfo.CurrentCulture),
+                        type.Name,
+                        contentType == null
+                            ? SRResources.TraceNoneObjectMessage
+                            : contentType.ToString()
+                    );
                 },
                 execute: () =>
                 {
                     if (cancellationToken.HasValue)
                     {
-                        return InnerFormatter.WriteToStreamAsync(type, value, writeStream, content, transportContext, cancellationToken.Value);
+                        return InnerFormatter.WriteToStreamAsync(
+                            type,
+                            value,
+                            writeStream,
+                            content,
+                            transportContext,
+                            cancellationToken.Value
+                        );
                     }
                     else
                     {
-                        return InnerFormatter.WriteToStreamAsync(type, value, writeStream, content, transportContext);
+                        return InnerFormatter.WriteToStreamAsync(
+                            type,
+                            value,
+                            writeStream,
+                            content,
+                            transportContext
+                        );
                     }
                 },
                 endTrace: null,
-                errorTrace: null);
+                errorTrace: null
+            );
         }
     }
 }

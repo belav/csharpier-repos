@@ -24,7 +24,7 @@ namespace System.CommandLine.Generator
 
             StringBuilder builder = new();
             builder.Append(
-$@"// Copyright (c) .NET Foundation and contributors. All rights reserved.
+                $@"// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.ComponentModel;
@@ -41,7 +41,8 @@ namespace System.CommandLine
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     internal static class GeneratedCommandHandlers
     {{
-");
+"
+            );
             int handlerCount = 1;
 
             foreach (var invocation in rx.Invocations)
@@ -55,122 +56,178 @@ namespace System.CommandLine
                 GenerateHandlerClass(builder, invocation, methodParameters, handlerCount);
 
                 //TODO: fully qualify type names
-                
+
                 handlerCount++;
             }
 
-            builder.Append(@"
+            builder.Append(
+                @"
     }
 }
-");
+"
+            );
 
-            context.AddSource("CommandHandlerGeneratorExtensions_Generated.g.cs", builder.ToString());
+            context.AddSource(
+                "CommandHandlerGeneratorExtensions_Generated.g.cs",
+                builder.ToString()
+            );
         }
 
         private static void GenerateHandlerClass(
             StringBuilder builder,
             DelegateInvocation invocation,
             (string Type, string Name)[] methodParameters,
-            int handlerCount)
+            int handlerCount
+        )
         {
-            builder.Append($@"
+            builder.Append(
+                $@"
         private class GeneratedHandler_{handlerCount} : {CliActionType}
         {{
             public GeneratedHandler_{handlerCount}(
-                {invocation.DelegateType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} method");
+                {invocation.DelegateType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} method"
+            );
 
             if (methodParameters.Length > 0)
             {
                 builder.Append(",");
-                builder.Append(string.Join($", ", methodParameters.Select(x => $@"
-                {x.Type} {x.Name}")) + ")");
+                builder.Append(
+                    string.Join(
+                        $", ",
+                        methodParameters.Select(x =>
+                            $@"
+                {x.Type} {x.Name}"
+                        )
+                    ) + ")"
+                );
             }
             else
             {
                 builder.Append(")");
             }
 
-            builder.Append($@"
+            builder.Append(
+                $@"
             {{
-                Method = method;");
-            foreach (var propertyAssignment in invocation.Parameters
-                                                         .Select(x => x.GetPropertyAssignment())
-                                                         .Where(x => !string.IsNullOrWhiteSpace(x)))
+                Method = method;"
+            );
+            foreach (
+                var propertyAssignment in invocation
+                    .Parameters.Select(x => x.GetPropertyAssignment())
+                    .Where(x => !string.IsNullOrWhiteSpace(x))
+            )
             {
-                builder.Append($@"
-                {propertyAssignment}");
+                builder.Append(
+                    $@"
+                {propertyAssignment}"
+                );
             }
 
-            builder.AppendLine($@"
+            builder.AppendLine(
+                $@"
             }}
                 
-            public {invocation.DelegateType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} Method {{ get; }}");
+            public {invocation.DelegateType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} Method {{ get; }}"
+            );
 
-            foreach (var propertyDeclaration in invocation.Parameters
-                                                          .Select(x => x.GetPropertyDeclaration())
-                                                          .Where(x => !string.IsNullOrWhiteSpace(x)))
+            foreach (
+                var propertyDeclaration in invocation
+                    .Parameters.Select(x => x.GetPropertyDeclaration())
+                    .Where(x => !string.IsNullOrWhiteSpace(x))
+            )
             {
-                builder.Append($@"
-            {propertyDeclaration}");
+                builder.Append(
+                    $@"
+            {propertyDeclaration}"
+                );
             }
 
-            builder.Append($@"
-            public override int Invoke(global::System.CommandLine.ParseResult context) => InvokeAsync(context, global::System.Threading.CancellationToken.None).GetAwaiter().GetResult();");
+            builder.Append(
+                $@"
+            public override int Invoke(global::System.CommandLine.ParseResult context) => InvokeAsync(context, global::System.Threading.CancellationToken.None).GetAwaiter().GetResult();"
+            );
 
-            builder.Append($@"
+            builder.Append(
+                $@"
             public override async global::System.Threading.Tasks.Task<int> InvokeAsync(global::System.CommandLine.ParseResult context, global::System.Threading.CancellationToken cancellationToken)
-            {{");
-            builder.Append($@"
-                {invocation.InvokeContents()}");
-            builder.Append($@"
+            {{"
+            );
+            builder.Append(
+                $@"
+                {invocation.InvokeContents()}"
+            );
+            builder.Append(
+                $@"
             }}
-        }}");
+        }}"
+            );
         }
 
-        private static (string Type, string Name)[] GetMethodParameters(DelegateInvocation invocation)
+        private static (string Type, string Name)[] GetMethodParameters(
+            DelegateInvocation invocation
+        )
         {
-            return invocation.Parameters
-                    .Select(x => x.GetMethodParameter())
-                    .Where(x => !string.IsNullOrWhiteSpace(x.Name))
-                    .ToArray();
+            return invocation
+                .Parameters.Select(x => x.GetMethodParameter())
+                .Where(x => !string.IsNullOrWhiteSpace(x.Name))
+                .ToArray();
         }
 
         private static void GenerateSetHandler(
-            StringBuilder builder, 
+            StringBuilder builder,
             DelegateInvocation invocation,
             (string Type, string Name)[] methodParameters,
             int handlerCount,
-            bool isGeneric)
+            bool isGeneric
+        )
         {
             builder.Append(
                 @$"
-        public static void SetHandler");
+        public static void SetHandler"
+            );
 
             if (isGeneric)
             {
-                builder.Append($"<{string.Join(", ", Enumerable.Range(1, invocation.NumberOfGenerericParameters).Select(x => $@"T{x}"))}>");
+                builder.Append(
+                    $"<{string.Join(", ", Enumerable.Range(1, invocation.NumberOfGenerericParameters).Select(x => $@"T{x}"))}>"
+                );
             }
-            builder.Append(@$"(
-            this global::System.CommandLine.CliCommand command,");
+            builder.Append(
+                @$"(
+            this global::System.CommandLine.CliCommand command,"
+            );
 
-            builder.Append($@"
-            {invocation.DelegateType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} method");
+            builder.Append(
+                $@"
+            {invocation.DelegateType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} method"
+            );
 
             if (methodParameters.Length > 0)
             {
                 builder.Append(",");
-                builder.AppendLine(string.Join(", ", methodParameters.Select(x => $@"
-            {x.Type} {x.Name}")) + ")");
+                builder.AppendLine(
+                    string.Join(
+                        ", ",
+                        methodParameters.Select(x =>
+                            $@"
+            {x.Type} {x.Name}"
+                        )
+                    ) + ")"
+                );
             }
             else
             {
                 builder.Append(")");
             }
 
-            builder.Append(@"
-        {");
-            builder.Append($@"
-            command.Action = new GeneratedHandler_{handlerCount}(method");
+            builder.Append(
+                @"
+        {"
+            );
+            builder.Append(
+                $@"
+            command.Action = new GeneratedHandler_{handlerCount}(method"
+            );
 
             if (methodParameters.Length > 0)
             {
@@ -180,8 +237,10 @@ namespace System.CommandLine
 
             builder.Append(");");
 
-            builder.AppendLine(@"
-        }");
+            builder.AppendLine(
+                @"
+        }"
+            );
         }
 
         public void Initialize(GeneratorInitializationContext context)

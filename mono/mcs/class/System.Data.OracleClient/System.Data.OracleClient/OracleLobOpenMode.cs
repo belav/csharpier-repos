@@ -1,5 +1,5 @@
 //
-// OracleLobOpenMode.cs 
+// OracleLobOpenMode.cs
 //
 // Part of the Mono class libraries at
 // mcs/class/System.Data.OracleClient/System.Data.OracleClient
@@ -16,10 +16,11 @@
 
 using System;
 
-namespace System.Data.OracleClient {
-	public enum OracleLobOpenMode
-	{
-		ReadOnly = 0x01,
-		ReadWrite = 0x02
-	}
+namespace System.Data.OracleClient
+{
+    public enum OracleLobOpenMode
+    {
+        ReadOnly = 0x01,
+        ReadWrite = 0x02,
+    }
 }

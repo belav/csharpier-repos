@@ -19,9 +19,14 @@ namespace Microsoft.CodeAnalysis
 
             switch (Kind)
             {
-                case WorkspaceDiagnosticKind.Failure: kindText = WorkspacesResources.Failure; break;
-                case WorkspaceDiagnosticKind.Warning: kindText = WorkspacesResources.Warning; break;
-                default: throw ExceptionUtilities.UnexpectedValue(Kind);
+                case WorkspaceDiagnosticKind.Failure:
+                    kindText = WorkspacesResources.Failure;
+                    break;
+                case WorkspaceDiagnosticKind.Warning:
+                    kindText = WorkspacesResources.Warning;
+                    break;
+                default:
+                    throw ExceptionUtilities.UnexpectedValue(Kind);
             }
 
             return $"[{kindText}] {Message}";

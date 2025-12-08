@@ -50,7 +50,8 @@ else
 
 ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
 {
-    builder.AddSimpleConsole(options =>
+    builder
+        .AddSimpleConsole(options =>
         {
             options.SingleLine = true;
             options.TimestampFormat = "[HH:mm:ss] ";
@@ -72,4 +73,7 @@ while (true)
 
 return 0;
 
-static void ShowUsage() => Console.WriteLine($"Usage: symbolicator <path/to/dotnet.native.js.symbols> [</path/to/patterns-file>] [-|<file-with-traces>]");
+static void ShowUsage() =>
+    Console.WriteLine(
+        $"Usage: symbolicator <path/to/dotnet.native.js.symbols> [</path/to/patterns-file>] [-|<file-with-traces>]"
+    );

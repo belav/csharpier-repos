@@ -8,13 +8,9 @@ namespace System.Web.Http.ApiExplorer
         // The actions GetItem and Get and potentially be ambiguous under
         // route "api/{controller}" because they're both GET api/AmbiguousAction
 
-        public void GetItem()
-        {
-        }
+        public void GetItem() { }
 
-        public void Get()
-        {
-        }
+        public void Get() { }
 
         public bool Post(int id)
         {

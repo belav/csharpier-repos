@@ -17,29 +17,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     using VerifyCS = CSharpCodeFixVerifier<
         UseExpressionBodyDiagnosticAnalyzer,
-        UseExpressionBodyCodeFixProvider>;
+        UseExpressionBodyCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
     public class UseExpressionBodyForMethodsAnalyzerTests
     {
-        private static async Task TestWithUseExpressionBody(string code, string fixedCode, LanguageVersion version = LanguageVersion.CSharp8)
+        private static async Task TestWithUseExpressionBody(
+            string code,
+            string fixedCode,
+            LanguageVersion version = LanguageVersion.CSharp8
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = code,
                 FixedCode = fixedCode,
                 LanguageVersion = version,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedMethods, ExpressionBodyPreference.WhenPossible } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                        ExpressionBodyPreference.WhenPossible
+                    },
+                },
             }.RunAsync();
         }
 
-        private static async Task TestWithUseBlockBody(string code, string fixedCode, ReferenceAssemblies? referenceAssemblies = null)
+        private static async Task TestWithUseBlockBody(
+            string code,
+            string fixedCode,
+            ReferenceAssemblies? referenceAssemblies = null
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedMethods, ExpressionBodyPreference.Never } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                        ExpressionBodyPreference.Never
+                    },
+                },
                 ReferenceAssemblies = referenceAssemblies ?? ReferenceAssemblies.Default,
             }.RunAsync();
         }
@@ -47,37 +68,70 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         [Fact]
         public void TestOptionEditorConfig1()
         {
-            var option = CSharpCodeStyleOptions.ParseExpressionBodyPreference("true", CSharpCodeStyleOptions.NeverWithSilentEnforcement);
+            var option = CSharpCodeStyleOptions.ParseExpressionBodyPreference(
+                "true",
+                CSharpCodeStyleOptions.NeverWithSilentEnforcement
+            );
             Assert.Equal(ExpressionBodyPreference.WhenPossible, option.Value);
             Assert.Equal(NotificationOption2.Silent, option.Notification);
 
-            option = CSharpCodeStyleOptions.ParseExpressionBodyPreference("false", CSharpCodeStyleOptions.NeverWithSilentEnforcement);
+            option = CSharpCodeStyleOptions.ParseExpressionBodyPreference(
+                "false",
+                CSharpCodeStyleOptions.NeverWithSilentEnforcement
+            );
             Assert.Equal(ExpressionBodyPreference.Never, option.Value);
             Assert.Equal(NotificationOption2.Silent, option.Notification);
 
-            option = CSharpCodeStyleOptions.ParseExpressionBodyPreference("when_on_single_line", CSharpCodeStyleOptions.NeverWithSilentEnforcement);
+            option = CSharpCodeStyleOptions.ParseExpressionBodyPreference(
+                "when_on_single_line",
+                CSharpCodeStyleOptions.NeverWithSilentEnforcement
+            );
             Assert.Equal(ExpressionBodyPreference.WhenOnSingleLine, option.Value);
             Assert.Equal(NotificationOption2.Silent, option.Notification);
 
-            option = CSharpCodeStyleOptions.ParseExpressionBodyPreference("true:blah", CSharpCodeStyleOptions.NeverWithSilentEnforcement);
+            option = CSharpCodeStyleOptions.ParseExpressionBodyPreference(
+                "true:blah",
+                CSharpCodeStyleOptions.NeverWithSilentEnforcement
+            );
             Assert.Equal(ExpressionBodyPreference.Never, option.Value);
             Assert.Equal(NotificationOption2.Silent, option.Notification);
 
-            option = CSharpCodeStyleOptions.ParseExpressionBodyPreference("when_blah:error", CSharpCodeStyleOptions.NeverWithSilentEnforcement);
+            option = CSharpCodeStyleOptions.ParseExpressionBodyPreference(
+                "when_blah:error",
+                CSharpCodeStyleOptions.NeverWithSilentEnforcement
+            );
             Assert.Equal(ExpressionBodyPreference.Never, option.Value);
             Assert.Equal(NotificationOption2.Silent, option.Notification);
 
-            option = CSharpCodeStyleOptions.ParseExpressionBodyPreference("false:error", CSharpCodeStyleOptions.NeverWithSilentEnforcement);
+            option = CSharpCodeStyleOptions.ParseExpressionBodyPreference(
+                "false:error",
+                CSharpCodeStyleOptions.NeverWithSilentEnforcement
+            );
             Assert.Equal(ExpressionBodyPreference.Never, option.Value);
-            Assert.Equal(NotificationOption2.Error.WithIsExplicitlySpecified(true), option.Notification);
+            Assert.Equal(
+                NotificationOption2.Error.WithIsExplicitlySpecified(true),
+                option.Notification
+            );
 
-            option = CSharpCodeStyleOptions.ParseExpressionBodyPreference("true:warning", CSharpCodeStyleOptions.NeverWithSilentEnforcement);
+            option = CSharpCodeStyleOptions.ParseExpressionBodyPreference(
+                "true:warning",
+                CSharpCodeStyleOptions.NeverWithSilentEnforcement
+            );
             Assert.Equal(ExpressionBodyPreference.WhenPossible, option.Value);
-            Assert.Equal(NotificationOption2.Warning.WithIsExplicitlySpecified(true), option.Notification);
+            Assert.Equal(
+                NotificationOption2.Warning.WithIsExplicitlySpecified(true),
+                option.Notification
+            );
 
-            option = CSharpCodeStyleOptions.ParseExpressionBodyPreference("when_on_single_line:suggestion", CSharpCodeStyleOptions.NeverWithSilentEnforcement);
+            option = CSharpCodeStyleOptions.ParseExpressionBodyPreference(
+                "when_on_single_line:suggestion",
+                CSharpCodeStyleOptions.NeverWithSilentEnforcement
+            );
             Assert.Equal(ExpressionBodyPreference.WhenOnSingleLine, option.Value);
-            Assert.Equal(NotificationOption2.Suggestion.WithIsExplicitlySpecified(true), option.Notification);
+            Assert.Equal(
+                NotificationOption2.Suggestion.WithIsExplicitlySpecified(true),
+                option.Notification
+            );
         }
 
         [Fact]
@@ -1054,7 +1108,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     Task Bar() { return Task.CompletedTask; }
                 }
                 """;
-            await TestWithUseBlockBody(code, fixedCode, ReferenceAssemblies.NetStandard.NetStandard21);
+            await TestWithUseBlockBody(
+                code,
+                fixedCode,
+                ReferenceAssemblies.NetStandard.NetStandard21
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25202")]

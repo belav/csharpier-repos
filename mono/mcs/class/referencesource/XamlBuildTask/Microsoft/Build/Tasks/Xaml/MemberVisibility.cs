@@ -11,6 +11,6 @@ namespace Microsoft.Build.Tasks.Xaml
         Family,
         Assembly,
         FamilyOrAssembly,
-        FamilyAndAssembly
+        FamilyAndAssembly,
     }
 }

@@ -1,17 +1,18 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 //
 // SafeX509Handles.cs
 //
 
-namespace System.Security.Cryptography.X509Certificates {
-    using System.Runtime.InteropServices;
+namespace System.Security.Cryptography.X509Certificates
+{
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using Microsoft.Win32.SafeHandles;
 
@@ -19,21 +20,28 @@ namespace System.Security.Cryptography.X509Certificates {
     // context, the handle used in this class is actually a pointer
     // to a CERT_CTX unmanaged structure defined in COMX509Certificate.h
 
-    [System.Security.SecurityCritical]  // auto-generated
-    internal sealed class SafeCertContextHandle : SafeHandleZeroOrMinusOneIsInvalid {
-        private SafeCertContextHandle() : base (true) {}
+    [System.Security.SecurityCritical] // auto-generated
+    internal sealed class SafeCertContextHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
+        private SafeCertContextHandle()
+            : base(true) { }
 
         // 0 is an Invalid Handle
-        internal SafeCertContextHandle(IntPtr handle) : base (true) {
+        internal SafeCertContextHandle(IntPtr handle)
+            : base(true)
+        {
             SetHandle(handle);
         }
 
-        internal static SafeCertContextHandle InvalidHandle {
+        internal static SafeCertContextHandle InvalidHandle
+        {
             get { return new SafeCertContextHandle(IntPtr.Zero); }
         }
 
-        internal IntPtr pCertContext {
-            get {
+        internal IntPtr pCertContext
+        {
+            get
+            {
                 if (handle == IntPtr.Zero)
                     return IntPtr.Zero;
 
@@ -48,23 +56,28 @@ namespace System.Security.Cryptography.X509Certificates {
         private static extern void _FreePCertContext(IntPtr pCert);
 
         [System.Security.SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             _FreePCertContext(handle);
             return true;
         }
     }
 
-    [System.Security.SecurityCritical]  // auto-generated
-    internal sealed class SafeCertStoreHandle : SafeHandleZeroOrMinusOneIsInvalid {
-        private SafeCertStoreHandle() : base (true) {}
+    [System.Security.SecurityCritical] // auto-generated
+    internal sealed class SafeCertStoreHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
+        private SafeCertStoreHandle()
+            : base(true) { }
 
         // 0 is an Invalid Handle
-        internal SafeCertStoreHandle(IntPtr handle) : base (true) {
+        internal SafeCertStoreHandle(IntPtr handle)
+            : base(true)
+        {
             SetHandle(handle);
         }
 
-        internal static SafeCertStoreHandle InvalidHandle {
+        internal static SafeCertStoreHandle InvalidHandle
+        {
             get { return new SafeCertStoreHandle(IntPtr.Zero); }
         }
 
@@ -75,7 +88,7 @@ namespace System.Security.Cryptography.X509Certificates {
         private static extern void _FreeCertStoreContext(IntPtr hCertStore);
 
         [System.Security.SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             _FreeCertStoreContext(handle);
             return true;

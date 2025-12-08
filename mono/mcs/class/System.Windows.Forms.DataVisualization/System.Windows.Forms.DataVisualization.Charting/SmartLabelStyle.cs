@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,20 +26,20 @@ using System.Drawing;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public class SmartLabelStyle
-	{
-		public virtual LabelOutsidePlotAreaStyle AllowOutsidePlotArea { get; set; }
-		public virtual Color CalloutBackColor { get; set; }
-		public virtual LineAnchorCapStyle CalloutLineAnchorCapStyle { get; set; }
-		public virtual Color CalloutLineColor { get; set; }
-		public virtual ChartDashStyle CalloutLineDashStyle { get; set; }
-		public virtual int CalloutLineWidth { get; set; }
-		public virtual LabelCalloutStyle CalloutStyle { get; set; }
-		public virtual bool Enabled { get; set; }
-		public virtual bool IsMarkerOverlappingAllowed { get; set; }
-		public virtual bool IsOverlappedHidden { get; set; }
-		public virtual double MaxMovingDistance { get; set; }
-		public virtual double MinMovingDistance { get; set; }
-		public virtual LabelAlignmentStyles MovingDirection { get; set; }
-	}
+    public class SmartLabelStyle
+    {
+        public virtual LabelOutsidePlotAreaStyle AllowOutsidePlotArea { get; set; }
+        public virtual Color CalloutBackColor { get; set; }
+        public virtual LineAnchorCapStyle CalloutLineAnchorCapStyle { get; set; }
+        public virtual Color CalloutLineColor { get; set; }
+        public virtual ChartDashStyle CalloutLineDashStyle { get; set; }
+        public virtual int CalloutLineWidth { get; set; }
+        public virtual LabelCalloutStyle CalloutStyle { get; set; }
+        public virtual bool Enabled { get; set; }
+        public virtual bool IsMarkerOverlappingAllowed { get; set; }
+        public virtual bool IsOverlappedHidden { get; set; }
+        public virtual double MaxMovingDistance { get; set; }
+        public virtual double MinMovingDistance { get; set; }
+        public virtual LabelAlignmentStyles MovingDirection { get; set; }
+    }
 }

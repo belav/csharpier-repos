@@ -4,10 +4,10 @@
 
 #nullable disable
 
+using System;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
-using System;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
@@ -30,8 +30,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var node1 = SyntaxFactory.ReturnStatement();
             var node2 = SyntaxFactory.ReturnStatement();
 
-            EqualityTesting.AssertEqual(default(ChildSyntaxList.Reversed), default(ChildSyntaxList.Reversed));
-            EqualityTesting.AssertEqual(new ChildSyntaxList(node1).Reverse(), new ChildSyntaxList(node1).Reverse());
+            EqualityTesting.AssertEqual(
+                default(ChildSyntaxList.Reversed),
+                default(ChildSyntaxList.Reversed)
+            );
+            EqualityTesting.AssertEqual(
+                new ChildSyntaxList(node1).Reverse(),
+                new ChildSyntaxList(node1).Reverse()
+            );
         }
     }
 }
