@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 await solution
                     .GetDocumentAsync(documentId, includeSourceGenerated, cancellationToken)
                     .ConfigureAwait(false)
-            ) ?? throw CreateDocumentNotFoundException();
+            )
+            ?? throw CreateDocumentNotFoundException();
 
         public static async ValueTask<TextDocument> GetRequiredTextDocumentAsync(
             this Solution solution,
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 await solution
                     .GetTextDocumentAsync(documentId, cancellationToken)
                     .ConfigureAwait(false)
-            ) ?? throw CreateDocumentNotFoundException();
+            )
+            ?? throw CreateDocumentNotFoundException();
 #endif
 
         public static TextDocument GetRequiredAdditionalDocument(

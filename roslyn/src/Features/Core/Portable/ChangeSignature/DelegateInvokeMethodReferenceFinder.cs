@@ -114,7 +114,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                                 state.Solution,
                                 cancellationToken
                             )
-                            .ConfigureAwait(false) ?? convertedType;
+                            .ConfigureAwait(false)
+                        ?? convertedType;
                 }
 
                 if (convertedType == methodSymbol.ContainingType)

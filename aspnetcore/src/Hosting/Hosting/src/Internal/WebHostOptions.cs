@@ -110,7 +110,8 @@ internal sealed class WebHostOptions
         return value?.Split(
                 ';',
                 StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries
-            ) ?? Array.Empty<string>();
+            )
+            ?? Array.Empty<string>();
     }
 
     private static IReadOnlyList<string> Split(string applicationName, string? environment)

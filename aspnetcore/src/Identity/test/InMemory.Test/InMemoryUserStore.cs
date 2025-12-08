@@ -620,7 +620,8 @@ public class InMemoryUserStore<TUser>
                 AuthenticatorStoreLoginProvider,
                 RecoveryCodeTokenName,
                 cancellationToken
-            ) ?? "";
+            )
+            ?? "";
         var splitCodes = mergedCodes.Split(';');
         if (splitCodes.Contains(code))
         {
@@ -639,7 +640,8 @@ public class InMemoryUserStore<TUser>
                 AuthenticatorStoreLoginProvider,
                 RecoveryCodeTokenName,
                 cancellationToken
-            ) ?? "";
+            )
+            ?? "";
         if (mergedCodes.Length > 0)
         {
             return mergedCodes.Split(';').Length;

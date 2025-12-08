@@ -603,7 +603,8 @@ namespace ILLink.RoslynAnalyzer.Tests
                 .Select(expected =>
                     expected
                         .MessageArguments?.Select(argument => argument?.ToString() ?? string.Empty)
-                        .ToImmutableArray() ?? ImmutableArray<string>.Empty
+                        .ToImmutableArray()
+                    ?? ImmutableArray<string>.Empty
                 )
                 .ToImmutableArray();
 
@@ -1044,7 +1045,8 @@ namespace ILLink.RoslynAnalyzer.Tests
                             "Arguments",
                             BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
                         )
-                        ?.GetValue(diagnostic) ?? Array.Empty<object>();
+                        ?.GetValue(diagnostic)
+                ?? Array.Empty<object>();
         }
     }
 

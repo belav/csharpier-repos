@@ -721,7 +721,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         declaringSymbol,
                         declarationSyntax,
                         basesBeingResolved
-                    ).UsingAliasesMap ?? ImmutableDictionary<string, AliasAndUsingDirective>.Empty;
+                    ).UsingAliasesMap
+                    ?? ImmutableDictionary<string, AliasAndUsingDirective>.Empty;
             }
 
             internal ImmutableDictionary<string, AliasAndUsingDirective> GetGlobalUsingAliasesMap(
@@ -737,7 +738,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             (CSharpSyntaxNode)declarationSyntax.GetSyntax(),
                             basesBeingResolved
                         )
-                    ).UsingAliasesMap ?? ImmutableDictionary<string, AliasAndUsingDirective>.Empty;
+                    ).UsingAliasesMap
+                    ?? ImmutableDictionary<string, AliasAndUsingDirective>.Empty;
             }
 
             internal ImmutableArray<NamespaceOrTypeAndUsingDirective> GetUsingNamespacesOrTypes(

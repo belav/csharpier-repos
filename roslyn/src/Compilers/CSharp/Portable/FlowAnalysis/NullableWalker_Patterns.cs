@@ -1196,7 +1196,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             out _
                         )
                         : null
-                ) ?? node.Type?.SetUnknownNullabilityForReferenceTypes();
+                )
+                ?? node.Type?.SetUnknownNullabilityForReferenceTypes();
 
             var inferredTypeWithAnnotations = TypeWithAnnotations.Create(inferredType);
             NullableFlowState inferredState;

@@ -1349,7 +1349,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     fromImplements,
                     syntaxNodeOpt,
                     diagnostics
-                ) ?? namedTypeSymbol.GetCciAdapter();
+                )
+                ?? namedTypeSymbol.GetCciAdapter();
         }
 
         private object GetCciAdapter(Symbol symbol)
@@ -1503,7 +1504,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     fieldSymbol.GetCciAdapter(),
                     syntaxNodeOpt,
                     diagnostics
-                ) ?? fieldSymbol.GetCciAdapter();
+                )
+                ?? fieldSymbol.GetCciAdapter();
         }
 
         internal sealed override Cci.IMethodReference Translate(

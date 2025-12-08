@@ -18,7 +18,8 @@ namespace System.ComponentModel.Tests
             return (obj as DescriptorTestAttribute)?.TestString.Equals(
                     TestString,
                     StringComparison.Ordinal
-                ) ?? false;
+                )
+                ?? false;
         }
 
         public override int GetHashCode() => TestString.GetHashCode();

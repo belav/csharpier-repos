@@ -303,7 +303,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                                 document.Project.Solution,
                                 _cancellationToken
                             )
-                            .ConfigureAwait(false) ?? symbol;
+                            .ConfigureAwait(false)
+                        ?? symbol;
 
                     if (!sourceSymbol.IsFromSource())
                     {
@@ -328,7 +329,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                             document.Project.Solution,
                             _cancellationToken
                         )
-                        .ConfigureAwait(false) ?? symbol;
+                        .ConfigureAwait(false)
+                    ?? symbol;
 
                 if (
                     sourceSymbol.Kind == SymbolKind.Field

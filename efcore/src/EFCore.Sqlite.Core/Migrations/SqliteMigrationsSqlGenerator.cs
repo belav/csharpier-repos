@@ -493,7 +493,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                                     defaultValue.GetType(),
                                     column.StoreType
                                 )
-                        ) ?? Dependencies.TypeMappingSource.GetMappingForValue(defaultValue);
+                        )
+                        ?? Dependencies.TypeMappingSource.GetMappingForValue(defaultValue);
 
                     selectBuilder
                         .Append(", ")

@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.OrganizeImports
                         options.PlaceSystemNamespaceFirst,
                         cancellationToken
                     )
-                    .ConfigureAwait(false) ?? document;
+                    .ConfigureAwait(false)
+                ?? document;
         }
 
         public string SortImportsDisplayStringWithAccelerator

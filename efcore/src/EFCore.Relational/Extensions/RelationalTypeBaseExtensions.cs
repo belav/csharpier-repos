@@ -198,7 +198,8 @@ public static class RelationalTypeBaseExtensions
         (IEnumerable<IStoredProcedureMapping>?)
             typeBase.FindRuntimeAnnotationValue(
                 RelationalAnnotationNames.InsertStoredProcedureMappings
-            ) ?? Enumerable.Empty<IStoredProcedureMapping>();
+            )
+        ?? Enumerable.Empty<IStoredProcedureMapping>();
 
     /// <summary>
     ///     Returns the delete stored procedures to which the type is mapped.
@@ -211,7 +212,8 @@ public static class RelationalTypeBaseExtensions
         (IEnumerable<IStoredProcedureMapping>?)
             typeBase.FindRuntimeAnnotationValue(
                 RelationalAnnotationNames.DeleteStoredProcedureMappings
-            ) ?? Enumerable.Empty<IStoredProcedureMapping>();
+            )
+        ?? Enumerable.Empty<IStoredProcedureMapping>();
 
     /// <summary>
     ///     Returns the update stored procedures to which the type is mapped.
@@ -224,7 +226,8 @@ public static class RelationalTypeBaseExtensions
         (IEnumerable<IStoredProcedureMapping>?)
             typeBase.FindRuntimeAnnotationValue(
                 RelationalAnnotationNames.UpdateStoredProcedureMappings
-            ) ?? Enumerable.Empty<IStoredProcedureMapping>();
+            )
+        ?? Enumerable.Empty<IStoredProcedureMapping>();
 
     #endregion
 

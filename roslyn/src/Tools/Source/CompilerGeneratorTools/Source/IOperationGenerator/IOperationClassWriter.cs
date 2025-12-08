@@ -1305,7 +1305,8 @@ namespace IOperationGenerator
         private static List<string> GetPropertyOrder(Node node) =>
             node.ChildrenOrder?.Split(",", StringSplitOptions.RemoveEmptyEntries)
                 .Select(s => s.Trim())
-                .ToList() ?? new List<string>();
+                .ToList()
+            ?? new List<string>();
 
         private enum ClassType
         {

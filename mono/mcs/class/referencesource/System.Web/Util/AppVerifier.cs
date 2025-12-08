@@ -167,7 +167,8 @@
                         valueName: "RuntimeVerificationBehavior",
                         defaultValue: null
                     ) as int?
-                ) ?? 0;
+                )
+                ?? 0;
 
             // REG_QWORD used as a mask to disable individual asserts. No key means all asserts are enabled
             AppVerifierErrorCodeEnableAssertMask =
@@ -177,7 +178,8 @@
                         valueName: "AppVerifierErrorCodeEnableAssertMask",
                         defaultValue: (long)(-1)
                     ) as long?
-                ) ?? (long)(-1);
+                )
+                ?? (long)(-1);
 
             // REG_QWORD used as a mask to control call stack collection on individual asserts (useful if we event log only). No key means all asserts will collect stack traces
             AppVerifierErrorCodeCollectCallStackMask =
@@ -187,7 +189,8 @@
                         valueName: "AppVerifierErrorCodeCollectCallstackMask",
                         defaultValue: (long)(-1)
                     ) as long?
-                ) ?? (long)(-1);
+                )
+                ?? (long)(-1);
 
             // REG_DWORD mask to disable call stack collection on begin* / end* methods. No key means all call stacks are collected
             AppVerifierCollectCallStackMask = (CallStackCollectionBitMasks)(
@@ -197,7 +200,8 @@
                         valueName: "AppVerifierCollectCallStackMask",
                         defaultValue: (int)(-1)
                     ) as int?
-                ) ?? (int)(-1)
+                )
+                ?? (int)(-1)
             );
 
             switch (valueFromRegistry)

@@ -21,5 +21,6 @@ public static class RelationalTypeBaseExtensions
         (IEnumerable<ITableMappingBase>?)(
             typeBase.FindRuntimeAnnotationValue(RelationalAnnotationNames.ViewMappings)
             ?? typeBase.FindRuntimeAnnotationValue(RelationalAnnotationNames.TableMappings)
-        ) ?? Enumerable.Empty<ITableMappingBase>();
+        )
+        ?? Enumerable.Empty<ITableMappingBase>();
 }

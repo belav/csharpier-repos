@@ -2190,7 +2190,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                             editKind == EditKind.Delete
                                 ? globalStatements.LastOrDefault()
                                 : globalStatements.FirstOrDefault()
-                        ) ?? unit.ChildNodes().FirstOrDefault();
+                        )
+                        ?? unit.ChildNodes().FirstOrDefault();
 
                     if (globalNode == null)
                     {

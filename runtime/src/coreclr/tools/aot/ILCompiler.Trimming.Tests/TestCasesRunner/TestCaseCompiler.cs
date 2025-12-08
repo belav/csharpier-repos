@@ -138,7 +138,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 .Concat(
                     setupCompileInfo.References?.Select(p =>
                         MakeSupportingAssemblyReferencePathAbsolute(outputDirectory, p)
-                    ) ?? Array.Empty<NPath>()
+                    )
+                        ?? Array.Empty<NPath>()
                 )
                 .ToArray();
             string[]? additionalArguments = setupCompileInfo.AdditionalArguments;

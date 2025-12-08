@@ -672,7 +672,8 @@ public static class RelationalPropertyExtensions
         (IEnumerable<IStoredProcedureResultColumnMapping>?)
             property.FindRuntimeAnnotationValue(
                 RelationalAnnotationNames.InsertStoredProcedureResultColumnMappings
-            ) ?? Enumerable.Empty<IStoredProcedureResultColumnMapping>();
+            )
+        ?? Enumerable.Empty<IStoredProcedureResultColumnMapping>();
 
     /// <summary>
     ///     Returns the insert stored procedure parameters to which the property is mapped.
@@ -685,7 +686,8 @@ public static class RelationalPropertyExtensions
         (IEnumerable<IStoredProcedureParameterMapping>?)
             property.FindRuntimeAnnotationValue(
                 RelationalAnnotationNames.InsertStoredProcedureParameterMappings
-            ) ?? Enumerable.Empty<IStoredProcedureParameterMapping>();
+            )
+        ?? Enumerable.Empty<IStoredProcedureParameterMapping>();
 
     /// <summary>
     ///     Returns the delete stored procedure parameters to which the property is mapped.
@@ -698,7 +700,8 @@ public static class RelationalPropertyExtensions
         (IEnumerable<IStoredProcedureParameterMapping>?)
             property.FindRuntimeAnnotationValue(
                 RelationalAnnotationNames.DeleteStoredProcedureParameterMappings
-            ) ?? Enumerable.Empty<IStoredProcedureParameterMapping>();
+            )
+        ?? Enumerable.Empty<IStoredProcedureParameterMapping>();
 
     /// <summary>
     ///     Returns the update stored procedure result columns to which the property is mapped.
@@ -711,7 +714,8 @@ public static class RelationalPropertyExtensions
         (IEnumerable<IStoredProcedureResultColumnMapping>?)
             property.FindRuntimeAnnotationValue(
                 RelationalAnnotationNames.UpdateStoredProcedureResultColumnMappings
-            ) ?? Enumerable.Empty<IStoredProcedureResultColumnMapping>();
+            )
+        ?? Enumerable.Empty<IStoredProcedureResultColumnMapping>();
 
     /// <summary>
     ///     Returns the update stored procedure parameters to which the property is mapped.
@@ -724,7 +728,8 @@ public static class RelationalPropertyExtensions
         (IEnumerable<IStoredProcedureParameterMapping>?)
             property.FindRuntimeAnnotationValue(
                 RelationalAnnotationNames.UpdateStoredProcedureParameterMappings
-            ) ?? Enumerable.Empty<IStoredProcedureParameterMapping>();
+            )
+        ?? Enumerable.Empty<IStoredProcedureParameterMapping>();
 
     /// <summary>
     ///     Returns the column corresponding to this property if it's mapped to the given table-like store object.

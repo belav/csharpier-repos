@@ -2777,10 +2777,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
         {
             var jsonColumnName = entityType.GetContainerColumnName()!;
             var jsonColumnTypeMapping = (
-                entityType.GetViewOrTableMappings().SingleOrDefault()?.Table ?? entityType
-                    .GetDefaultMappings()
-                    .Single()
-                    .Table
+                entityType.GetViewOrTableMappings().SingleOrDefault()?.Table
+                ?? entityType.GetDefaultMappings().Single().Table
             )
                 .FindColumn(jsonColumnName)!
                 .StoreTypeMapping;

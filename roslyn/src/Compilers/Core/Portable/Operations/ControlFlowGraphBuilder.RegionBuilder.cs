@@ -401,7 +401,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     Locals,
                     LocalFunctions?.SelectAsArray(
                         ((IMethodSymbol, ILocalFunctionOperation) tuple) => tuple.Item1
-                    ) ?? default,
+                    )
+                        ?? default,
                     CaptureIds?.ToImmutable() ?? default,
                     ExceptionType,
                     enclosing

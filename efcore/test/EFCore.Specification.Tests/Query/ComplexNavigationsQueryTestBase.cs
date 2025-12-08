@@ -1912,7 +1912,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 from l1 in ss.Set<Level1>()
                 from l3 in l1.OneToOne_Required_FK1.OneToMany_Optional2.DefaultIfEmpty()
-                ?? new List<Level3>()
+                    ?? new List<Level3>()
                 where l3 != null
                 select l1
         );
@@ -1986,7 +1986,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     .SelectMany(l4 =>
                         l4.OneToOne_Required_FK_Inverse4
                             .OneToOne_Optional_FK_Inverse3
-                            .OneToMany_Required_Self2 ?? new List<Level2>()
+                            .OneToMany_Required_Self2
+                        ?? new List<Level2>()
                     )
                     on l1.Id equals l2.Level1_Optional_Id
                 select new { l1, l2 },
@@ -3318,7 +3319,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                 {
                     l1.Id,
                     Count = l1.OneToOne_Optional_FK1.OneToMany_Optional2.MaybeScalar(x => x.Count)
-                    ?? 0,
+                        ?? 0,
                 },
             elementSorter: e => e.Id
         );

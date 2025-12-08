@@ -123,7 +123,8 @@ public class OpenIdConnectPostConfigureOptions : IPostConfigureOptions<OpenIdCon
                         options.MetadataAddress?.StartsWith(
                             "https://",
                             StringComparison.OrdinalIgnoreCase
-                        ) ?? false
+                        )
+                        ?? false
                     )
                 )
                 {

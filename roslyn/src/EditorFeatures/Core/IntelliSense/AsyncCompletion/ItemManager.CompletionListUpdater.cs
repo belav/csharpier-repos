@@ -112,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     _completionRules =
                         _completionService?.GetRules(
                             globalOptions.GetCompletionOptions(_document.Project.Language)
-                        ) ?? CompletionRules.Default;
+                        )
+                        ?? CompletionRules.Default;
 
                     // Let us make the completion Helper used for non-Roslyn items case-sensitive.
                     // We can change this if get requests from partner teams.

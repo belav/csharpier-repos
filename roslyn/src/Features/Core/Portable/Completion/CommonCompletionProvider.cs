@@ -143,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Completion
                             ch: '\t',
                             cancellationToken: cancellationToken
                         )
-                        .ConfigureAwait(false) ?? new TextChange(item.Span, item.DisplayText);
+                        .ConfigureAwait(false)
+                    ?? new TextChange(item.Span, item.DisplayText);
                 var insertionText = change.NewText;
 
                 if (
@@ -192,7 +193,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 (
                     await GetTextChangeAsync(document, item, commitKey, cancellationToken)
                         .ConfigureAwait(false)
-                ) ?? new TextChange(item.Span, item.DisplayText);
+                )
+                ?? new TextChange(item.Span, item.DisplayText);
             return CompletionChange.Create(change);
         }
 

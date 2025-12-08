@@ -3368,15 +3368,18 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 case SyntaxKind.AnonymousMethodExpression:
                     return (
                             ((AnonymousMethodExpressionSyntax)declaration).Body as BlockSyntax
-                        )?.Statements ?? s_EmptyList;
+                        )?.Statements
+                        ?? s_EmptyList;
                 case SyntaxKind.ParenthesizedLambdaExpression:
                     return (
                             ((ParenthesizedLambdaExpressionSyntax)declaration).Body as BlockSyntax
-                        )?.Statements ?? s_EmptyList;
+                        )?.Statements
+                        ?? s_EmptyList;
                 case SyntaxKind.SimpleLambdaExpression:
                     return (
                             ((SimpleLambdaExpressionSyntax)declaration).Body as BlockSyntax
-                        )?.Statements ?? s_EmptyList;
+                        )?.Statements
+                        ?? s_EmptyList;
                 case SyntaxKind.GetAccessorDeclaration:
                 case SyntaxKind.SetAccessorDeclaration:
                 case SyntaxKind.AddAccessorDeclaration:

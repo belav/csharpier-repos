@@ -944,7 +944,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                         memberExpression.Type,
                         _queryCompilationContext.Logger
                     )
-            ) ?? QueryCompilationContext.NotTranslatedExpression;
+            )
+                ?? QueryCompilationContext.NotTranslatedExpression;
     }
 
     /// <inheritdoc />

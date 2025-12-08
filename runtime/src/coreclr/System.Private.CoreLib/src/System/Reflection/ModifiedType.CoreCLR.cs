@@ -21,14 +21,16 @@ namespace System.Reflection
                         _typeSignature._signature?.GetTypeParameterOffset(
                             _typeSignature._offset,
                             index
-                        ) ?? 0,
+                        )
+                        ?? 0,
                 }
             );
 
         internal SignatureCallingConvention GetCallingConventionFromFunctionPointer() =>
             _typeSignature._signature?.GetCallingConventionFromFunctionPointerAtOffset(
                 _typeSignature._offset
-            ) ?? default;
+            )
+            ?? default;
 
         internal static Type Create(
             Type unmodifiedType,

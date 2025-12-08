@@ -168,7 +168,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             symbol =
                 await SymbolFinder
                     .FindSourceDefinitionAsync(symbol, document.Project.Solution, cancellationToken)
-                    .ConfigureAwait(false) ?? symbol;
+                    .ConfigureAwait(false)
+                ?? symbol;
 
             if (symbol == null)
             {

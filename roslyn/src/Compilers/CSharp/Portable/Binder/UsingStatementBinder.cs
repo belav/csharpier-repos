@@ -354,7 +354,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // If this is a using statement, then we want to use the whole `using (expr) { }` as the argument location. These arguments
                             // will be represented in the IOperation tree and the "correct" node for them, given that they are an implicit invocation
                             // at the end of the using statement, is on the whole using statement, not on the current expression.
-                            usingBinderOpt?._syntax ?? syntax,
+                            usingBinderOpt?._syntax
+                                ?? syntax,
                             disposeMethod.Parameters,
                             argumentsBuilder,
                             argumentRefKindsBuilder: null,

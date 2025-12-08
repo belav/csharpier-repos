@@ -161,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                 _ignoredSpans?.HasIntervalThatOverlapsWith(
                     node.FullSpan.Start,
                     node.FullSpan.Length
-                ) ?? false
+                )
+                ?? false
             )
             {
                 return;
@@ -183,7 +184,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                 _ignoredSpans?.HasIntervalThatOverlapsWith(
                     node.FullSpan.Start,
                     node.FullSpan.Length
-                ) ?? false
+                )
+                ?? false
             )
             {
                 return;
@@ -205,7 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                 _ignoredSpans?.HasIntervalThatOverlapsWith(
                     node.FullSpan.Start,
                     node.FullSpan.Length
-                ) ?? false
+                )
+                ?? false
             )
             {
                 return;
@@ -227,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                 _ignoredSpans?.HasIntervalThatOverlapsWith(
                     node.FullSpan.Start,
                     node.FullSpan.Length
-                ) ?? false
+                )
+                ?? false
             )
             {
                 return;
@@ -274,7 +278,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                 _ignoredSpans?.HasIntervalThatOverlapsWith(
                     node.FullSpan.Start,
                     node.FullSpan.Length
-                ) ?? false
+                )
+                ?? false
             )
             {
                 return;
@@ -296,7 +301,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                 _ignoredSpans?.HasIntervalThatOverlapsWith(
                     node.FullSpan.Start,
                     node.FullSpan.Length
-                ) ?? false
+                )
+                ?? false
             )
             {
                 return;

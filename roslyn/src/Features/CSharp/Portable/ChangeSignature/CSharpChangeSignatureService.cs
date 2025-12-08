@@ -1180,7 +1180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                                 document.Project.Solution,
                                 cancellationToken
                             )
-                            .ConfigureAwait(false) ?? convertedType;
+                            .ConfigureAwait(false)
+                        ?? convertedType;
                 }
 
                 if (Equals(convertedType, symbol.ContainingType))

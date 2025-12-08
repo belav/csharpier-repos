@@ -29,7 +29,8 @@ internal class AbstractNavigableItemsService : INavigableItemsService
         symbol =
             await SymbolFinder
                 .FindSourceDefinitionAsync(symbol, solution, cancellationToken)
-                .ConfigureAwait(false) ?? symbol;
+                .ConfigureAwait(false)
+            ?? symbol;
         symbol = await GoToDefinitionFeatureHelpers
             .TryGetPreferredSymbolAsync(solution, symbol, cancellationToken)
             .ConfigureAwait(false);

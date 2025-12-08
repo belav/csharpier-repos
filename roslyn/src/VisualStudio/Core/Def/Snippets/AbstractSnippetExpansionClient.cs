@@ -964,7 +964,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                 (
                     e.NewModel.SelectedItem
                     as AbstractSignatureHelpProvider.SymbolKeySignatureHelpItem
-                )?.SymbolKey ?? default;
+                )?.SymbolKey
+                ?? default;
             var newSymbol = newSymbolKey
                 .Resolve(compilation, cancellationToken: CancellationToken.None)
                 .GetAnySymbol();

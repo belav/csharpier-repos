@@ -297,7 +297,8 @@ public class InternalSkipNavigationBuilder
                 inverse =
                     inverseBuilder
                         .Attach(targetEntityType.Builder, entityTypeBuilder.Metadata)
-                        ?.Metadata ?? inverse;
+                        ?.Metadata
+                    ?? inverse;
             }
 
             if (inverse != null)

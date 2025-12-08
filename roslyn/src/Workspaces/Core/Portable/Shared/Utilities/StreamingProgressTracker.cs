@@ -35,6 +35,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 Volatile.Read(ref _completedItems),
                 Volatile.Read(ref _totalItems),
                 cancellationToken
-            ) ?? default;
+            )
+            ?? default;
     }
 }
