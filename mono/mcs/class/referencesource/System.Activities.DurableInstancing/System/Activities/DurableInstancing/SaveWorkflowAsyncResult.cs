@@ -354,8 +354,7 @@ namespace System.Activities.DurableInstancing
                     parameterSize == -1
                         ? SaveWorkflowAsyncResult.GenerateByteArray(source)
                         : source.Array
-                )
-                ?? (object)DBNull.Value;
+                ) ?? (object)DBNull.Value;
             parameters.Add(
                 new SqlParameter
                 {

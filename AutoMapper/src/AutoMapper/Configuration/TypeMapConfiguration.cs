@@ -195,8 +195,7 @@ public abstract class TypeMapConfiguration
         _memberConfigurations?.Where(m =>
             m.SourceExpression != null
             && m.SourceExpression.Body == m.SourceExpression.Parameters[0]
-        )
-        ?? Array.Empty<IPropertyMapConfiguration>();
+        ) ?? Array.Empty<IPropertyMapConfiguration>();
 
     private void ReverseIncludedMembers(TypeMap typeMap)
     {

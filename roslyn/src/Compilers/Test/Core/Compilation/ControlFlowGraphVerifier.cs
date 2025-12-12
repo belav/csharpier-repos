@@ -1171,8 +1171,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     else if (
                         block.EnclosingRegion.EnclosingRegion?.EnclosingRegion.CaptureIds.Contains(
                             id
-                        )
-                        ?? false
+                        ) ?? false
                     )
                     {
                         AssertTrueWithGraph(

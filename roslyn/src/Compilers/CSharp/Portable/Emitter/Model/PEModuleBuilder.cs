@@ -1349,8 +1349,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     fromImplements,
                     syntaxNodeOpt,
                     diagnostics
-                )
-                ?? namedTypeSymbol.GetCciAdapter();
+                ) ?? namedTypeSymbol.GetCciAdapter();
         }
 
         private object GetCciAdapter(Symbol symbol)

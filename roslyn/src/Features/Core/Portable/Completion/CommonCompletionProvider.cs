@@ -193,8 +193,7 @@ namespace Microsoft.CodeAnalysis.Completion
                 (
                     await GetTextChangeAsync(document, item, commitKey, cancellationToken)
                         .ConfigureAwait(false)
-                )
-                ?? new TextChange(item.Span, item.DisplayText);
+                ) ?? new TextChange(item.Span, item.DisplayText);
             return CompletionChange.Create(change);
         }
 

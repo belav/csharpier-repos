@@ -350,8 +350,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                             expandIncludes: true,
                             expandInheritdoc: true,
                             cancellationToken: cancellationToken
-                        )
-                        ?? DocumentationComment.Empty;
+                        ) ?? DocumentationComment.Empty;
                 default:
                     return method.GetDocumentationComment(
                         compilation,

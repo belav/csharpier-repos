@@ -354,8 +354,7 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                         sfi!.FilePath?.Equals(
                             navigateDocument.FilePath,
                             StringComparison.OrdinalIgnoreCase
-                        )
-                        ?? false
+                        ) ?? false
                     )
                     ?.SourceDescription
                 ?? FeaturesResources.from_metadata;

@@ -16434,8 +16434,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     symbol.ContainingSymbol is MethodSymbol containingMethod
                         ? _variables.GetVariablesForMethodScope(containingMethod)
                         : null
-                )
-                ?? _variables.GetRootScope();
+                ) ?? _variables.GetRootScope();
             return new LocalFunctionState(LocalState.UnreachableState(variables));
         }
 

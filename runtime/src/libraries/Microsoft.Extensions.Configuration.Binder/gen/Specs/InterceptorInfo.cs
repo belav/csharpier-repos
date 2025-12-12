@@ -235,8 +235,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 return sourceReferenceResolver?.NormalizePath(
                         operationSyntaxTree.FilePath,
                         baseFilePath: null
-                    )
-                    ?? operationSyntaxTree.FilePath;
+                    ) ?? operationSyntaxTree.FilePath;
             }
         }
 

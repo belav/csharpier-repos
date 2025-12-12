@@ -631,8 +631,7 @@ public ref struct TypeMapPlanBuilder
                 customSource,
                 _destination,
                 destValueExpr
-            )
-            ?? destValueExpr;
+            ) ?? destValueExpr;
         if (memberMap.NullSubstitute != null)
         {
             valueResolverFunc = memberMap.NullSubstitute(valueResolverFunc);

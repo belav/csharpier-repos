@@ -103,8 +103,7 @@ public class SqlExpressionFactory : ISqlExpressionFactory
                         likeExpression.Pattern,
                         likeExpression.EscapeChar
                     )
-            )
-            ?? _typeMappingSource.FindMapping(likeExpression.Match.Type, Dependencies.Model);
+            ) ?? _typeMappingSource.FindMapping(likeExpression.Match.Type, Dependencies.Model);
 
         return new LikeExpression(
             ApplyTypeMapping(likeExpression.Match, inferredTypeMapping),

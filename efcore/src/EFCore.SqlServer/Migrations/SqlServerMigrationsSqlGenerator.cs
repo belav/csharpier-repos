@@ -431,8 +431,7 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
                                 columnType
                             )
                             : null
-                    )
-                    ?? Dependencies.TypeMappingSource.GetMappingForValue(operation.DefaultValue);
+                    ) ?? Dependencies.TypeMappingSource.GetMappingForValue(operation.DefaultValue);
 
                 defaultValueSql = typeMapping.GenerateSqlLiteral(operation.DefaultValue);
             }

@@ -1253,8 +1253,7 @@ namespace Microsoft.Extensions.DependencyInjection
                                     parameter1.HasDefaultValue,
                                     parameter1.ServiceKey
                                 )
-                        )
-                            ?? parameter1.DefaultValue
+                        ) ?? parameter1.DefaultValue
                     );
                 case 2:
                 {
@@ -1272,8 +1271,7 @@ namespace Microsoft.Extensions.DependencyInjection
                                     parameter1.HasDefaultValue,
                                     parameter1.ServiceKey
                                 )
-                        )
-                            ?? parameter1.DefaultValue,
+                        ) ?? parameter1.DefaultValue,
                         (
                             (parameter2.ArgumentIndex != -1)
                                 // Throws a NullReferenceException if arguments is null. Consistent with expression-based factory.
@@ -1285,8 +1283,7 @@ namespace Microsoft.Extensions.DependencyInjection
                                     parameter2.HasDefaultValue,
                                     parameter2.ServiceKey
                                 )
-                        )
-                            ?? parameter2.DefaultValue
+                        ) ?? parameter2.DefaultValue
                     );
                 }
                 case 3:
@@ -1306,8 +1303,7 @@ namespace Microsoft.Extensions.DependencyInjection
                                     parameter1.HasDefaultValue,
                                     parameter1.ServiceKey
                                 )
-                        )
-                            ?? parameter1.DefaultValue,
+                        ) ?? parameter1.DefaultValue,
                         (
                             (parameter2.ArgumentIndex != -1)
                                 // Throws a NullReferenceException if arguments is null. Consistent with expression-based factory.
@@ -1319,8 +1315,7 @@ namespace Microsoft.Extensions.DependencyInjection
                                     parameter2.HasDefaultValue,
                                     parameter2.ServiceKey
                                 )
-                        )
-                            ?? parameter2.DefaultValue,
+                        ) ?? parameter2.DefaultValue,
                         (
                             (parameter3.ArgumentIndex != -1)
                                 // Throws a NullReferenceException if arguments is null. Consistent with expression-based factory.
@@ -1332,8 +1327,7 @@ namespace Microsoft.Extensions.DependencyInjection
                                     parameter3.HasDefaultValue,
                                     parameter3.ServiceKey
                                 )
-                        )
-                            ?? parameter3.DefaultValue
+                        ) ?? parameter3.DefaultValue
                     );
                 }
                 case 4:
@@ -1354,8 +1348,7 @@ namespace Microsoft.Extensions.DependencyInjection
                                     parameter1.HasDefaultValue,
                                     parameter1.ServiceKey
                                 )
-                        )
-                            ?? parameter1.DefaultValue,
+                        ) ?? parameter1.DefaultValue,
                         (
                             (parameter2.ArgumentIndex != -1)
                                 // Throws a NullReferenceException if arguments is null. Consistent with expression-based factory.
@@ -1367,8 +1360,7 @@ namespace Microsoft.Extensions.DependencyInjection
                                     parameter2.HasDefaultValue,
                                     parameter2.ServiceKey
                                 )
-                        )
-                            ?? parameter2.DefaultValue,
+                        ) ?? parameter2.DefaultValue,
                         (
                             (parameter3.ArgumentIndex != -1)
                                 // Throws a NullReferenceException if arguments is null. Consistent with expression-based factory.
@@ -1380,8 +1372,7 @@ namespace Microsoft.Extensions.DependencyInjection
                                     parameter3.HasDefaultValue,
                                     parameter3.ServiceKey
                                 )
-                        )
-                            ?? parameter3.DefaultValue,
+                        ) ?? parameter3.DefaultValue,
                         (
                             (parameter4.ArgumentIndex != -1)
                                 // Throws a NullReferenceException if arguments is null. Consistent with expression-based factory.
@@ -1393,8 +1384,7 @@ namespace Microsoft.Extensions.DependencyInjection
                                     parameter4.HasDefaultValue,
                                     parameter4.ServiceKey
                                 )
-                        )
-                            ?? parameter4.DefaultValue
+                        ) ?? parameter4.DefaultValue
                     );
                 }
             }
@@ -1429,8 +1419,7 @@ namespace Microsoft.Extensions.DependencyInjection
                                 parameter.HasDefaultValue,
                                 parameter.ServiceKey
                             )
-                    )
-                    ?? parameter.DefaultValue;
+                    ) ?? parameter.DefaultValue;
             }
 
             return invoker.Invoke(constructorArguments.AsSpan());
@@ -1487,8 +1476,7 @@ namespace Microsoft.Extensions.DependencyInjection
                                 parameter.HasDefaultValue,
                                 parameter.ServiceKey
                             )
-                    )
-                    ?? parameter.DefaultValue;
+                    ) ?? parameter.DefaultValue;
             }
 
             return constructor.Invoke(

@@ -25,8 +25,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     editorOptions.GetOptionValue(
                         DefaultOptions.RawCodingConventionsSnapshotOptionName
                     ) as IDictionary<string, object>
-                )
-                ?? SpecializedCollections.EmptyDictionary<string, object>();
+                ) ?? SpecializedCollections.EmptyDictionary<string, object>();
         }
 
         public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value)

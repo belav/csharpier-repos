@@ -1723,8 +1723,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
                             columnType
                         )
                         : null
-                )
-                ?? Dependencies.TypeMappingSource.GetMappingForValue(defaultValue);
+                ) ?? Dependencies.TypeMappingSource.GetMappingForValue(defaultValue);
 
             builder.Append(" DEFAULT ").Append(typeMapping.GenerateSqlLiteral(defaultValue));
         }

@@ -101,8 +101,7 @@ public class RelationalCommand : IRelationalCommand
                         connection.ConnectionId,
                         startTime,
                         parameterObject.CommandSource
-                    )
-                    ?? default;
+                    ) ?? default;
 
                 var nonQueryResult = interceptionResult.HasResult
                     ? interceptionResult.Result
@@ -118,8 +117,7 @@ public class RelationalCommand : IRelationalCommand
                         startTime,
                         stopwatch.Elapsed,
                         parameterObject.CommandSource
-                    )
-                    ?? nonQueryResult;
+                    ) ?? nonQueryResult;
             }
             else
             {
@@ -340,8 +338,7 @@ public class RelationalCommand : IRelationalCommand
                         connection.ConnectionId,
                         startTime,
                         parameterObject.CommandSource
-                    )
-                    ?? default;
+                    ) ?? default;
 
                 var result = interceptionResult.HasResult
                     ? interceptionResult.Result
@@ -357,8 +354,7 @@ public class RelationalCommand : IRelationalCommand
                         startTime,
                         stopwatch.Elapsed,
                         parameterObject.CommandSource
-                    )
-                    ?? result;
+                    ) ?? result;
             }
             else
             {

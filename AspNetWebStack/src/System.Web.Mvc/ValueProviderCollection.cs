@@ -61,7 +61,8 @@ namespace System.Web.Mvc
                     let result = GetKeysFromPrefixFromProvider(provider, prefix)
                     where result != null && result.Any()
                     select result
-                ).FirstOrDefault() ?? new Dictionary<string, string>();
+                ).FirstOrDefault()
+                ?? new Dictionary<string, string>();
         }
 
         internal static ValueProviderResult GetValueFromProvider(

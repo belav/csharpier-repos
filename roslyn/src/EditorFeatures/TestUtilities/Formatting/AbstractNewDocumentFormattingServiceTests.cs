@@ -45,8 +45,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.Formatting
                     languageServices,
                     allowImportsInHiddenRegions: false,
                     fallbackOptions: null
-                )
-                ?? CodeCleanupOptions.GetDefault(languageServices);
+                ) ?? CodeCleanupOptions.GetDefault(languageServices);
 
             var formattingService =
                 document.GetRequiredLanguageService<INewDocumentFormattingService>();
