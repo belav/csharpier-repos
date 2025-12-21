@@ -3,8 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -83,7 +82,10 @@
       </Docs>
     </Member>
     <Member MemberName="Qualifiers">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator Qualifiers { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator Qualifiers { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>

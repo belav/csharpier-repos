@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
@@ -10,5 +9,4 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ApplicationManifest Condition="'$(RegFreeCom)' == 'true'">App.manifest</ApplicationManifest>
   </PropertyGroup>
-
 </Project>

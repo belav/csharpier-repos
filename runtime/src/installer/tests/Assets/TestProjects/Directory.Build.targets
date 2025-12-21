@@ -5,8 +5,7 @@
     Some known framework references are downstream of dotnet/runtime and don't exist with the build's
     versions. Remove them before the SDK tries to download them.
   -->
-  <Target Name="RemoveUpstackKnownFrameworkReferences"
-          BeforeTargets="ProcessFrameworkReferences">
+  <Target Name="RemoveUpstackKnownFrameworkReferences" BeforeTargets="ProcessFrameworkReferences">
     <ItemGroup>
       <KnownFrameworkReference Remove="Microsoft.AspNetCore.App" />
       <KnownFrameworkReference Remove="Microsoft.WindowsDesktop.App" />
@@ -14,5 +13,4 @@
       <KnownFrameworkReference Remove="Microsoft.WindowsDesktop.App.WindowsForms" />
     </ItemGroup>
   </Target>
-
 </Project>

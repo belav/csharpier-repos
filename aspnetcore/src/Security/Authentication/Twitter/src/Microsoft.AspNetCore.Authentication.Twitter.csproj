@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core middleware that enables an application to support Twitter's OAuth 1.0 authentication workflow.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -11,5 +10,4 @@
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Authentication.OAuth" />
   </ItemGroup>
-
 </Project>

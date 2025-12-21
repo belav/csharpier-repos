@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <IsPartialFacadeAssembly>true</IsPartialFacadeAssembly>
@@ -8,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="$(CoreLibSharedDir)System\Reflection\Emit\MethodBuilderInstantiation.cs" Link="System\Reflection\Emit\MethodBuilderInstantiation.cs" />
-    <Compile Include="$(CoreLibSharedDir)System\Reflection\Emit\TypeNameBuilder.cs" Link="System\Reflection\Emit\TypeNameBuilder.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Reflection\Emit\MethodBuilderInstantiation.cs"
+      Link="System\Reflection\Emit\MethodBuilderInstantiation.cs"
+    />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Reflection\Emit\TypeNameBuilder.cs"
+      Link="System\Reflection\Emit\TypeNameBuilder.cs"
+    />
     <Compile Include="System\Reflection\Emit\ConstructorBuilderImpl.cs" />
     <Compile Include="System\Reflection\Emit\CustomAttributeWrapper.cs" />
     <Compile Include="System\Reflection\Emit\AssemblyBuilderImpl.cs" />
@@ -33,5 +38,4 @@
     <ProjectReference Include="$(LibrariesProjectRoot)\System.Reflection.Metadata\src\System.Reflection.Metadata.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)\System.Runtime\src\System.Runtime.csproj" />
   </ItemGroup>
-
 </Project>

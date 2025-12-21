@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <RootNamespace>Microsoft.CodeAnalysis.ExternalAccess.Razor</RootNamespace>
     <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
@@ -21,17 +20,32 @@
       ⚠ ONLY RAZOR ASSEMBLIES MAY BE ADDED HERE ⚠
     -->
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Razor.LanguageServer" Key="$(RazorKey)" />
-    <InternalsVisibleTo Include="Microsoft.AspNetCore.Razor.LanguageServer.Test" Key="$(RazorKey)" />
-    <InternalsVisibleTo Include="Microsoft.AspNetCore.Razor.LanguageServer.Test.Common" Key="$(RazorKey)" />
+    <InternalsVisibleTo
+      Include="Microsoft.AspNetCore.Razor.LanguageServer.Test"
+      Key="$(RazorKey)"
+    />
+    <InternalsVisibleTo
+      Include="Microsoft.AspNetCore.Razor.LanguageServer.Test.Common"
+      Key="$(RazorKey)"
+    />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Razor.Microbenchmarks" Key="$(RazorKey)" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Razor.Workspaces" Key="$(RazorKey)" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Razor.Workspaces.Test" Key="$(RazorKey)" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Remote.Razor" Key="$(RazorKey)" />
     <InternalsVisibleTo Include="Microsoft.VisualStudio.Editor.Razor" Key="$(RazorKey)" />
     <InternalsVisibleTo Include="Microsoft.VisualStudio.LanguageServices.Razor" Key="$(RazorKey)" />
-    <InternalsVisibleTo Include="Microsoft.VisualStudio.LanguageServerClient.Razor" Key="$(RazorKey)" />
-    <InternalsVisibleTo Include="Microsoft.VisualStudio.LanguageServerClient.Razor.Test" Key="$(RazorKey)" />
-    <InternalsVisibleTo Include="Microsoft.VisualStudio.Mac.LanguageServices.Razor" Key="$(RazorKey)" />
+    <InternalsVisibleTo
+      Include="Microsoft.VisualStudio.LanguageServerClient.Razor"
+      Key="$(RazorKey)"
+    />
+    <InternalsVisibleTo
+      Include="Microsoft.VisualStudio.LanguageServerClient.Razor.Test"
+      Key="$(RazorKey)"
+    />
+    <InternalsVisibleTo
+      Include="Microsoft.VisualStudio.Mac.LanguageServices.Razor"
+      Key="$(RazorKey)"
+    />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.ExternalAccess.Razor.UnitTests" />
   </ItemGroup>
 
@@ -49,5 +63,4 @@
     <PublicAPI Include="InternalAPI.Shipped.txt" />
     <PublicAPI Include="InternalAPI.Unshipped.txt" />
   </ItemGroup>
-
 </Project>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(TestInfraTargetFramework)</TargetFramework>
 
@@ -19,15 +18,17 @@
     Ensure the packaging projects build first. Don't do this in VS: the build takes too long and
     isn't incremental.
   -->
-  <Target Name="EnsureOrder"
-          Condition="
+  <Target
+    Name="EnsureOrder"
+    Condition="
             '$(SkipBuildingSharedFrameworkTestDependencies)' != 'true' and
             '$(BuildingInsideVisualStudio)' != 'true'"
-          BeforeTargets="Build">
+    BeforeTargets="Build"
+  >
     <MSBuild
       Projects="@(OrderProjectReference)"
       Targets="Build"
-      BuildInParallel="$(BuildInParallel)" />
+      BuildInParallel="$(BuildInParallel)"
+    />
   </Target>
-
 </Project>

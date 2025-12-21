@@ -15,7 +15,10 @@
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
 
-  <Import Project="$(RepositoryEngineeringDir)coredistools.targets" Condition="'$(DotNetBuildFromSource)' != 'true'" />
+  <Import
+    Project="$(RepositoryEngineeringDir)coredistools.targets"
+    Condition="'$(DotNetBuildFromSource)' != 'true'"
+  />
   <Import Project="$(RepositoryEngineeringDir)DiaSymReaderNative.targets" />
 
   <ItemGroup>

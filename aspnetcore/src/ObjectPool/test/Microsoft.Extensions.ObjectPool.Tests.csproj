@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(DefaultNetCoreTargetFramework);$(DefaultNetFxTargetFramework)</TargetFrameworks>
     <Nullable>enable</Nullable>
@@ -8,5 +7,4 @@
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.ObjectPool" />
   </ItemGroup>
-
 </Project>

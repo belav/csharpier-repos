@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
   </PropertyGroup>
@@ -16,5 +15,4 @@
     <ForwardedType Include="System.ServiceProcess.SessionChangeReason" />
     <ForwardedType Include="System.ServiceProcess.TimeoutException" />
   </ItemGroup>
-
 </Project>

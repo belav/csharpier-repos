@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core contains middleware to support Google's OpenId and OAuth 2.0 authentication workflows.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -11,5 +10,4 @@
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Authentication.OAuth" />
   </ItemGroup>
-
 </Project>

@@ -19,7 +19,10 @@
       </Docs>
     </Member>
     <Member MemberName="CreateGenerator">
-      <MemberSignature Language="C#" Value="public virtual Commons.Xml.Nvdl.NvdlValidatorGenerator CreateGenerator (Commons.Xml.Nvdl.NvdlValidate validate, string schemaType, Commons.Xml.Nvdl.NvdlConfig config);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Commons.Xml.Nvdl.NvdlValidatorGenerator CreateGenerator (Commons.Xml.Nvdl.NvdlValidate validate, string schemaType, Commons.Xml.Nvdl.NvdlConfig config);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Nvdl.NvdlValidatorGenerator</ReturnType>
@@ -39,7 +42,10 @@
       </Docs>
     </Member>
     <Member MemberName="CreateGenerator">
-      <MemberSignature Language="C#" Value="public virtual Commons.Xml.Nvdl.NvdlValidatorGenerator CreateGenerator (System.Xml.XmlReader schema, Commons.Xml.Nvdl.NvdlConfig config);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Commons.Xml.Nvdl.NvdlValidatorGenerator CreateGenerator (System.Xml.XmlReader schema, Commons.Xml.Nvdl.NvdlConfig config);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Nvdl.NvdlValidatorGenerator</ReturnType>
@@ -57,7 +63,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetSchemaUri">
-      <MemberSignature Language="C#" Value="public string GetSchemaUri (Commons.Xml.Nvdl.NvdlValidate validate);" />
+      <MemberSignature
+        Language="C#"
+        Value="public string GetSchemaUri (Commons.Xml.Nvdl.NvdlValidate validate);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>

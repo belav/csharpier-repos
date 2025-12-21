@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <!-- Needed for CMakeProjectReference -->
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
@@ -10,5 +9,4 @@
     <Compile Include="Program.cs" />
     <CMakeProjectReference Include="CMakeLists.txt" />
   </ItemGroup>
-
 </Project>

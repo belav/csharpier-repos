@@ -15,7 +15,9 @@
     <DebugType>Portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
 
-    <OutputPath Condition="$(MSBuildProjectName.StartsWith('System.Private.'))">$(RuntimeBinDir)/aotsdk/</OutputPath>
+    <OutputPath Condition="$(MSBuildProjectName.StartsWith('System.Private.'))"
+      >$(RuntimeBinDir)/aotsdk/</OutputPath
+    >
     <Configurations>Debug;Release;Checked</Configurations>
     <Platforms>x64;x86;arm;arm64</Platforms>
 
@@ -25,9 +27,13 @@
     <!-- This prevents the default MsBuild targets from referencing System.Core.dll -->
     <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
     <RuntimeMetadataVersion>v4.0.30319</RuntimeMetadataVersion>
-     <!-- Override InformationalVersion during servicing as it's returned via public api. --> 
-    <InformationalVersion Condition="'$(PreReleaseVersionLabel)' == 'servicing'">$(ProductVersion)</InformationalVersion> 
-    <InformationalVersion Condition="'$(StabilizePackageVersion)' == 'true'">$(ProductVersion)</InformationalVersion> 
+    <!-- Override InformationalVersion during servicing as it's returned via public api. -->
+    <InformationalVersion Condition="'$(PreReleaseVersionLabel)' == 'servicing'"
+      >$(ProductVersion)</InformationalVersion
+    >
+    <InformationalVersion Condition="'$(StabilizePackageVersion)' == 'true'"
+      >$(ProductVersion)</InformationalVersion
+    >
     <NoWarn>$(NoWarn),0419,0649,CA2249,CA1830</NoWarn>
 
     <!-- Disable nullability-related warnings -->
@@ -55,26 +61,36 @@
     <FeatureCominterop Condition="'$(TargetsWindows)' == 'true'">true</FeatureCominterop>
   </PropertyGroup>
   <PropertyGroup>
-    <DefineConstants Condition="'$(FeatureCominterop)' == 'true'">FEATURE_COMINTEROP;$(DefineConstants)</DefineConstants>
+    <DefineConstants Condition="'$(FeatureCominterop)' == 'true'"
+      >FEATURE_COMINTEROP;$(DefineConstants)</DefineConstants
+    >
   </PropertyGroup>
   <PropertyGroup>
     <FeatureComWrappers>true</FeatureComWrappers>
-    <DefineConstants Condition="'$(FeatureComWrappers)' == 'true'">FEATURE_COMWRAPPERS;$(DefineConstants)</DefineConstants>
+    <DefineConstants Condition="'$(FeatureComWrappers)' == 'true'"
+      >FEATURE_COMWRAPPERS;$(DefineConstants)</DefineConstants
+    >
   </PropertyGroup>
   <PropertyGroup>
     <FeatureObjCMarshal>false</FeatureObjCMarshal>
-    <FeatureObjCMarshal Condition="'$(TargetsOSX)' == 'true' or '$(TargetsMacCatalyst)' == 'true' or '$(TargetsiOS)' == 'true'or '$(TargetstvOS)' == 'true'">true</FeatureObjCMarshal>
+    <FeatureObjCMarshal
+      Condition="'$(TargetsOSX)' == 'true' or '$(TargetsMacCatalyst)' == 'true' or '$(TargetsiOS)' == 'true'or '$(TargetstvOS)' == 'true'"
+      >true</FeatureObjCMarshal
+    >
   </PropertyGroup>
   <PropertyGroup>
-    <DefineConstants Condition="'$(FeatureObjCMarshal)' == 'true'">FEATURE_OBJCMARSHAL;$(DefineConstants)</DefineConstants>
+    <DefineConstants Condition="'$(FeatureObjCMarshal)' == 'true'"
+      >FEATURE_OBJCMARSHAL;$(DefineConstants)</DefineConstants
+    >
   </PropertyGroup>
   <PropertyGroup>
     <FeaturePerfTracing>true</FeaturePerfTracing>
   </PropertyGroup>
   <PropertyGroup>
-    <DefineConstants Condition="'$(FeaturePerfTracing)' == 'true'">FEATURE_PERFTRACING;$(DefineConstants)</DefineConstants>
+    <DefineConstants Condition="'$(FeaturePerfTracing)' == 'true'"
+      >FEATURE_PERFTRACING;$(DefineConstants)</DefineConstants
+    >
   </PropertyGroup>
-
 
   <!-- Platform specific properties -->
   <PropertyGroup Condition="'$(Platform)' == 'x64'">
@@ -96,8 +112,12 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <DefineConstants Condition="'$(TargetsWindows)'=='true'">TARGET_WINDOWS;$(DefineConstants)</DefineConstants>
-    <DefineConstants Condition="'$(TargetsUnix)'=='true'">TARGET_UNIX;$(DefineConstants)</DefineConstants>
+    <DefineConstants Condition="'$(TargetsWindows)'=='true'"
+      >TARGET_WINDOWS;$(DefineConstants)</DefineConstants
+    >
+    <DefineConstants Condition="'$(TargetsUnix)'=='true'"
+      >TARGET_UNIX;$(DefineConstants)</DefineConstants
+    >
   </PropertyGroup>
 
   <!-- Configuration specific properties -->
@@ -130,5 +150,8 @@
     <CompilerCommonPath>$(MSBuildThisFileDirectory)..\tools\Common\</CompilerCommonPath>
   </PropertyGroup>
 
-  <Import Condition="'$(MSBuildProjectName)' != 'System.Private.CoreLib'" Project="$(RepositoryEngineeringDir)versioning.targets" />
+  <Import
+    Condition="'$(MSBuildProjectName)' != 'System.Private.CoreLib'"
+    Project="$(RepositoryEngineeringDir)versioning.targets"
+  />
 </Project>

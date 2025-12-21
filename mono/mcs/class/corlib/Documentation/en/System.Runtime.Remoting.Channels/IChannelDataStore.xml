@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IChannelDataStore" FullName="System.Runtime.Remoting.Channels.IChannelDataStore">
   <TypeSignature Maintainer="auto" Language="C#" Value="public interface IChannelDataStore" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IChannelDataStore" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IChannelDataStore"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>

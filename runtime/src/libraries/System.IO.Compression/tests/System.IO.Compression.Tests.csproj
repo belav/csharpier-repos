@@ -28,20 +28,59 @@
     <Compile Include="ZipArchive\zip_ReadTests.cs" />
     <Compile Include="ZipArchive\zip_UpdateTests.cs" />
     <Compile Include="ZipArchive\zip_UpdateTests.Comments.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\PathFeatures.cs" Link="Common\System\IO\PathFeatures.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\Compression\CRC.cs" Link="Common\System\IO\Compression\CRC.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\Compression\CompressionStreamTestBase.cs" Link="Common\System\IO\Compression\CompressionStreamTestBase.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\Compression\CompressionStreamUnitTestBase.cs" Link="Common\System\IO\Compression\CompressionStreamUnitTestBase.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\Compression\FileData.cs" Link="Common\System\IO\Compression\FileData.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\Compression\LocalMemoryStream.cs" Link="Common\System\IO\Compression\LocalMemoryStream.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\Compression\StreamHelpers.cs" Link="Common\System\IO\Compression\StreamHelpers.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\IO\PathFeatures.cs"
+      Link="Common\System\IO\PathFeatures.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\IO\Compression\CRC.cs"
+      Link="Common\System\IO\Compression\CRC.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\IO\Compression\CompressionStreamTestBase.cs"
+      Link="Common\System\IO\Compression\CompressionStreamTestBase.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\IO\Compression\CompressionStreamUnitTestBase.cs"
+      Link="Common\System\IO\Compression\CompressionStreamUnitTestBase.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\IO\Compression\FileData.cs"
+      Link="Common\System\IO\Compression\FileData.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\IO\Compression\LocalMemoryStream.cs"
+      Link="Common\System\IO\Compression\LocalMemoryStream.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\IO\Compression\StreamHelpers.cs"
+      Link="Common\System\IO\Compression\StreamHelpers.cs"
+    />
     <Compile Include="$(CommonTestPath)System\IO\TempFile.cs" Link="Common\System\IO\TempFile.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\WrappedStream.cs" Link="Common\System\IO\WrappedStream.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\Compression\ZipTestHelper.cs" Link="Common\System\IO\Compression\ZipTestHelper.cs" />
-    <Compile Include="$(CommonTestPath)TestUtilities\System\DisableParallelization.cs" Link="Common\TestUtilities\System\DisableParallelization.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\ConnectedStreams.cs" Link="Common\System\IO\ConnectedStreams.cs" />
-    <Compile Include="$(CommonPath)System\Net\MultiArrayBuffer.cs" Link="ProductionCode\Common\System\Net\MultiArrayBuffer.cs" />
-    <Compile Include="$(CommonPath)System\Net\StreamBuffer.cs" Link="ProductionCode\Common\System\Net\StreamBuffer.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\IO\WrappedStream.cs"
+      Link="Common\System\IO\WrappedStream.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\IO\Compression\ZipTestHelper.cs"
+      Link="Common\System\IO\Compression\ZipTestHelper.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)TestUtilities\System\DisableParallelization.cs"
+      Link="Common\TestUtilities\System\DisableParallelization.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\IO\ConnectedStreams.cs"
+      Link="Common\System\IO\ConnectedStreams.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\MultiArrayBuffer.cs"
+      Link="ProductionCode\Common\System\Net\MultiArrayBuffer.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\StreamBuffer.cs"
+      Link="ProductionCode\Common\System\Net\StreamBuffer.cs"
+    />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'unix' or '$(TargetPlatformIdentifier)' == 'browser'">
     <Compile Include="ZipArchive\zip_CreateTests.Unix.cs" />
@@ -51,6 +90,9 @@
     <ProjectReference Include="$(CommonTestPath)StreamConformanceTests\StreamConformanceTests.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.IO.Compression.TestData" Version="$(SystemIOCompressionTestDataVersion)" />
+    <PackageReference
+      Include="System.IO.Compression.TestData"
+      Version="$(SystemIOCompressionTestDataVersion)"
+    />
   </ItemGroup>
 </Project>

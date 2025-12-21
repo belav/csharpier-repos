@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <Import Project="$(RepoRoot)src\Servers\IIS\build\testsite.props" />
 
   <PropertyGroup>
@@ -12,5 +11,4 @@
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore" />
   </ItemGroup>
-
 </Project>

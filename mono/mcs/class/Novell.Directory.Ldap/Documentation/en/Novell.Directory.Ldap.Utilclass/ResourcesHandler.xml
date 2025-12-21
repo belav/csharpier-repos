@@ -3,8 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -47,7 +46,10 @@
   <Interfaces />
   <Members>
     <Member MemberName="getMessage">
-      <MemberSignature Language="C#" Value="public static string getMessage(string messageOrKey, object[] arguments)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string getMessage(string messageOrKey, object[] arguments)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -65,7 +67,10 @@
       </Docs>
     </Member>
     <Member MemberName="getMessage">
-      <MemberSignature Language="C#" Value="public static string getMessage(string messageOrKey, object[] arguments, System.Globalization.CultureInfo locale)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string getMessage(string messageOrKey, object[] arguments, System.Globalization.CultureInfo locale)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -101,7 +106,10 @@
       </Docs>
     </Member>
     <Member MemberName="getResultString">
-      <MemberSignature Language="C#" Value="public static string getResultString(int code, System.Globalization.CultureInfo locale)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string getResultString(int code, System.Globalization.CultureInfo locale)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>

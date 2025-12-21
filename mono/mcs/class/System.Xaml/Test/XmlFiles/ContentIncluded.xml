@@ -1,1 +1,3 @@
-<ContentIncludedClass xmlns="clr-namespace:MonoTests.System.Xaml;assembly=System.Xaml_test_net_4_0">foo</ContentIncludedClass>
+<ContentIncludedClass xmlns="clr-namespace:MonoTests.System.Xaml;assembly=System.Xaml_test_net_4_0"
+  >foo</ContentIncludedClass
+>

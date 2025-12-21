@@ -9,10 +9,12 @@
     <Compile Include="DefaultLoadContextTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../System.Runtime.Loader.Noop.Assembly/System.Runtime.Loader.Noop.Assembly.csproj"
-                      ReferenceOutputAssembly="false"
-                      OutputItemType="ContentWithTargetPath"
-                      CopyToOutputDirectory="PreserveNewest"
-                      TargetPath="System.Runtime.Loader.Noop.Assembly_test.dll" />
+    <ProjectReference
+      Include="../System.Runtime.Loader.Noop.Assembly/System.Runtime.Loader.Noop.Assembly.csproj"
+      ReferenceOutputAssembly="false"
+      OutputItemType="ContentWithTargetPath"
+      CopyToOutputDirectory="PreserveNewest"
+      TargetPath="System.Runtime.Loader.Noop.Assembly_test.dll"
+    />
   </ItemGroup>
 </Project>

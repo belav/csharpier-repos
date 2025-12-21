@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <OutputType>Exe</OutputType>
@@ -8,5 +7,4 @@
   <ItemGroup>
     <Compile Include="GenerateHWIntrinsicTests_General.cs" />
   </ItemGroup>
-
 </Project>

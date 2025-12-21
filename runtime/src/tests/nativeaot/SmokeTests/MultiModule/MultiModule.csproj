@@ -5,7 +5,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
     <!-- This test always runs as multimodule. It's not supported if we don't have framework object files. -->
-    <CLRTestTargetUnsupported Condition="'$(BuildNativeAotFrameworkObjects)' != 'true'">true</CLRTestTargetUnsupported>
+    <CLRTestTargetUnsupported Condition="'$(BuildNativeAotFrameworkObjects)' != 'true'"
+      >true</CLRTestTargetUnsupported
+    >
     <IlcMultiModule>true</IlcMultiModule>
   </PropertyGroup>
   <ItemGroup>
@@ -23,10 +25,16 @@
   -->
   <Target Name="RemoveObjFiles" AfterTargets="ResolveProjectReferences">
     <ItemGroup>
-        <ObjFiles Include="@(_ResolvedProjectReferencePaths)" Condition="'%(Extension)' == '.obj' or '%(Extension)' == '.bc'" />
-        <LinkerArg Include="@(_ResolvedProjectReferencePaths)" Condition="'%(Extension)' == '.obj'" />
-        <IlcReference Include="@(_ResolvedProjectReferencePaths)" Condition="'%(Extension)' == '.dll'" />
-        <_ResolvedProjectReferencePaths Remove="@(ObjFiles)" />
+      <ObjFiles
+        Include="@(_ResolvedProjectReferencePaths)"
+        Condition="'%(Extension)' == '.obj' or '%(Extension)' == '.bc'"
+      />
+      <LinkerArg Include="@(_ResolvedProjectReferencePaths)" Condition="'%(Extension)' == '.obj'" />
+      <IlcReference
+        Include="@(_ResolvedProjectReferencePaths)"
+        Condition="'%(Extension)' == '.dll'"
+      />
+      <_ResolvedProjectReferencePaths Remove="@(ObjFiles)" />
     </ItemGroup>
   </Target>
 </Project>

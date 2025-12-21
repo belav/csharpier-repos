@@ -2,6 +2,5 @@
   <Import Project="../../Directory.Build.props" />
 
   <!-- Properties for all ObjectiveC managed test assets -->
-  <PropertyGroup>
-  </PropertyGroup>
+  <PropertyGroup></PropertyGroup>
 </Project>

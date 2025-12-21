@@ -1,5 +1,8 @@
 <Type Name="NvdlModeBase" FullName="Commons.Xml.Nvdl.NvdlModeBase">
-  <TypeSignature Language="C#" Value="public abstract class NvdlModeBase : Commons.Xml.Nvdl.NvdlAttributable" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class NvdlModeBase : Commons.Xml.Nvdl.NvdlAttributable"
+  />
   <AssemblyInfo>
     <AssemblyName>Commons.Xml.Relaxng</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -19,7 +22,10 @@
       </Docs>
     </Member>
     <Member MemberName="IncludedModes">
-      <MemberSignature Language="C#" Value="public Commons.Xml.Nvdl.NvdlModeList IncludedModes { get; };" />
+      <MemberSignature
+        Language="C#"
+        Value="public Commons.Xml.Nvdl.NvdlModeList IncludedModes { get; };"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Nvdl.NvdlModeList</ReturnType>

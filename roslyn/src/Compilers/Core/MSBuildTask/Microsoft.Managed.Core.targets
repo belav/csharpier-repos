@@ -4,13 +4,18 @@
   <!--
     Common targets for managed compilers.
   -->
-  <UsingTask TaskName="Microsoft.CodeAnalysis.BuildTasks.MapSourceRoots" AssemblyFile="$(MSBuildThisFileDirectory)Microsoft.Build.Tasks.CodeAnalysis.dll" />
+  <UsingTask
+    TaskName="Microsoft.CodeAnalysis.BuildTasks.MapSourceRoots"
+    AssemblyFile="$(MSBuildThisFileDirectory)Microsoft.Build.Tasks.CodeAnalysis.dll"
+  />
 
   <Import Project="Microsoft.Managed.Core.CurrentVersions.targets" />
 
-  <Target Name="ShimReferencePathsWhenCommonTargetsDoesNotUnderstandReferenceAssemblies"
-          BeforeTargets="CoreCompile"
-          Condition="'@(ReferencePathWithRefAssemblies)' == ''">
+  <Target
+    Name="ShimReferencePathsWhenCommonTargetsDoesNotUnderstandReferenceAssemblies"
+    BeforeTargets="CoreCompile"
+    Condition="'@(ReferencePathWithRefAssemblies)' == ''"
+  >
     <!-- 
       FindReferenceAssembliesForReferences target in Common targets populate this item 
       since dev15.3. The compiler targets may be used (via NuGet package) on earlier MSBuilds. 
@@ -26,9 +31,10 @@
     </ItemGroup>
   </Target>
 
-  <Target Name="_BeforeVBCSCoreCompile"
-          DependsOnTargets="ShimReferencePathsWhenCommonTargetsDoesNotUnderstandReferenceAssemblies">
-
+  <Target
+    Name="_BeforeVBCSCoreCompile"
+    DependsOnTargets="ShimReferencePathsWhenCommonTargetsDoesNotUnderstandReferenceAssemblies"
+  >
     <ItemGroup Condition="'$(TargetingClr2Framework)' == 'true'">
       <ReferencePathWithRefAssemblies>
         <EmbedInteropTypes />
@@ -58,7 +64,10 @@
     ========================
     
     -->
-  <UsingTask TaskName="Microsoft.CodeAnalysis.BuildTasks.ShowMessageForImplicitlySkipAnalyzers" AssemblyFile="$(MSBuildThisFileDirectory)Microsoft.Build.Tasks.CodeAnalysis.dll" />
+  <UsingTask
+    TaskName="Microsoft.CodeAnalysis.BuildTasks.ShowMessageForImplicitlySkipAnalyzers"
+    AssemblyFile="$(MSBuildThisFileDirectory)Microsoft.Build.Tasks.CodeAnalysis.dll"
+  />
 
   <Target Name="_ComputeSkipAnalyzers" BeforeTargets="CoreCompile">
     <!-- First, force clear non-user facing properties '_SkipAnalyzers' and '_ImplicitlySkipAnalyzers'. -->
@@ -77,8 +86,10 @@
         continue running analyzers in the background in Visual Studio while typing (i.e. intellisense),
         while disabling analyzer execution on explicitly invoked non-design time builds.
       -->
-    <PropertyGroup Condition="'$(RunAnalyzers)' == 'false' or
-                              ('$(RunAnalyzers)' == '' and '$(RunAnalyzersDuringBuild)' == 'false')">
+    <PropertyGroup
+      Condition="'$(RunAnalyzers)' == 'false' or
+                              ('$(RunAnalyzers)' == '' and '$(RunAnalyzersDuringBuild)' == 'false')"
+    >
       <_SkipAnalyzers>true</_SkipAnalyzers>
     </PropertyGroup>
 
@@ -89,18 +100,20 @@
 			         'OptimizeImplicitlyTriggeredBuild' to 'true'.
                NOTE: This feature is currently supported only for SDK-style projects, i.e. UsingMicrosoftNETSdk = true.
     -->
-    <PropertyGroup Condition="'$(_SkipAnalyzers)' == '' and
+    <PropertyGroup
+      Condition="'$(_SkipAnalyzers)' == '' and
                               '$(IsImplicitlyTriggeredBuild)' == 'true' and
                               '$(UsingMicrosoftNETSdk)' == 'true' and
                               '$(OptimizeImplicitlyTriggeredBuild)' != 'false' and
-                              ('$(TreatWarningsAsErrors)' != 'true' or '$(OptimizeImplicitlyTriggeredBuild)' == 'true')">
+                              ('$(TreatWarningsAsErrors)' != 'true' or '$(OptimizeImplicitlyTriggeredBuild)' == 'true')"
+    >
       <_ImplicitlySkipAnalyzers>true</_ImplicitlySkipAnalyzers>
       <_SkipAnalyzers>true</_SkipAnalyzers>
       <Features>run-nullable-analysis=never;$(Features)</Features>
     </PropertyGroup>
 
     <!-- Display a message to inform the users about us implicitly skipping analyzers for speeding up indirect builds. -->
-    <ShowMessageForImplicitlySkipAnalyzers Condition="'$(_ImplicitlySkipAnalyzers)' == 'true'"/>
+    <ShowMessageForImplicitlySkipAnalyzers Condition="'$(_ImplicitlySkipAnalyzers)' == 'true'" />
 
     <!-- Semaphore file to indicate the time stamp for last build with skipAnalyzers flag. -->
     <PropertyGroup>
@@ -112,14 +125,18 @@
 		     See https://github.com/dotnet/project-system/issues/7290 for details.
 	  -->
     <ItemGroup Condition="Exists('$(_LastBuildWithSkipAnalyzers)') and '$(_SkipAnalyzers)' != 'true'">
-      <CustomAdditionalCompileInputs Include="$(_LastBuildWithSkipAnalyzers)"/>
-      <UpToDateCheckInput Include="$(_LastBuildWithSkipAnalyzers)" Kind="ImplicitBuild"/>
+      <CustomAdditionalCompileInputs Include="$(_LastBuildWithSkipAnalyzers)" />
+      <UpToDateCheckInput Include="$(_LastBuildWithSkipAnalyzers)" Kind="ImplicitBuild" />
     </ItemGroup>
   </Target>
 
   <!-- We touch and create a semaphore file after build to indicate the time stamp for last build with skipAnalyzers flag. -->
-  <Target Name="_TouchLastBuildWithSkipAnalyzers" Condition="'$(_SkipAnalyzers)' == 'true'" AfterTargets="CoreCompile">
-    <Touch AlwaysCreate="true" Files="$(_LastBuildWithSkipAnalyzers)"/>
+  <Target
+    Name="_TouchLastBuildWithSkipAnalyzers"
+    Condition="'$(_SkipAnalyzers)' == 'true'"
+    AfterTargets="CoreCompile"
+  >
+    <Touch AlwaysCreate="true" Files="$(_LastBuildWithSkipAnalyzers)" />
   </Target>
 
   <!--
@@ -129,14 +146,29 @@
     
     -->
   <ItemGroup>
-    <_AllDirectoriesAbove Include="@(Compile->GetPathsOfAllDirectoriesAbove())" Condition="'$(DiscoverEditorConfigFiles)' != 'false' or '$(DiscoverGlobalAnalyzerConfigFiles)' != 'false'" />
+    <_AllDirectoriesAbove
+      Include="@(Compile->GetPathsOfAllDirectoriesAbove())"
+      Condition="'$(DiscoverEditorConfigFiles)' != 'false' or '$(DiscoverGlobalAnalyzerConfigFiles)' != 'false'"
+    />
     <!-- Work around a GetPathsOfAllDirectoriesAbove() bug where it can return multiple equivalent paths when the 
          compilation includes linked files with relative paths - https://github.com/microsoft/msbuild/issues/4392 -->
-    <PotentialEditorConfigFiles Include="@(_AllDirectoriesAbove->'%(FullPath)'->Distinct()->Combine('.editorconfig'))" Condition="'$(DiscoverEditorConfigFiles)' != 'false'" />
-    <EditorConfigFiles Include="@(PotentialEditorConfigFiles->Exists())" Condition="'$(DiscoverEditorConfigFiles)' != 'false'" />
-    
-    <GlobalAnalyzerConfigFiles Include="@(_AllDirectoriesAbove->'%(FullPath)'->Distinct()->Combine('.globalconfig'))" Condition="'$(DiscoverGlobalAnalyzerConfigFiles)' != 'false'" />
-    <EditorConfigFiles Include="@(GlobalAnalyzerConfigFiles->Exists())" Condition="'$(DiscoverGlobalAnalyzerConfigFiles)' != 'false'" />
+    <PotentialEditorConfigFiles
+      Include="@(_AllDirectoriesAbove->'%(FullPath)'->Distinct()->Combine('.editorconfig'))"
+      Condition="'$(DiscoverEditorConfigFiles)' != 'false'"
+    />
+    <EditorConfigFiles
+      Include="@(PotentialEditorConfigFiles->Exists())"
+      Condition="'$(DiscoverEditorConfigFiles)' != 'false'"
+    />
+
+    <GlobalAnalyzerConfigFiles
+      Include="@(_AllDirectoriesAbove->'%(FullPath)'->Distinct()->Combine('.globalconfig'))"
+      Condition="'$(DiscoverGlobalAnalyzerConfigFiles)' != 'false'"
+    />
+    <EditorConfigFiles
+      Include="@(GlobalAnalyzerConfigFiles->Exists())"
+      Condition="'$(DiscoverGlobalAnalyzerConfigFiles)' != 'false'"
+    />
   </ItemGroup>
 
   <!--
@@ -151,25 +183,40 @@
       <CompilerVisibleProperty Include="PropertyNameToEval" />
       <CompilerVisibleItemMetadata Include="ItemType" MetadataName="MetadataToRetrieve" />
     -->
-  <UsingTask TaskName="Microsoft.CodeAnalysis.BuildTasks.GenerateMSBuildEditorConfig" AssemblyFile="$(MSBuildThisFileDirectory)Microsoft.Build.Tasks.CodeAnalysis.dll" />
+  <UsingTask
+    TaskName="Microsoft.CodeAnalysis.BuildTasks.GenerateMSBuildEditorConfig"
+    AssemblyFile="$(MSBuildThisFileDirectory)Microsoft.Build.Tasks.CodeAnalysis.dll"
+  />
 
-  <Target Name="GenerateMSBuildEditorConfigFile"
-          BeforeTargets="BeforeCompile;CoreCompile"
-          DependsOnTargets="PrepareForBuild;GenerateMSBuildEditorConfigFileShouldRun;GenerateMSBuildEditorConfigFileCore" />
+  <Target
+    Name="GenerateMSBuildEditorConfigFile"
+    BeforeTargets="BeforeCompile;CoreCompile"
+    DependsOnTargets="PrepareForBuild;GenerateMSBuildEditorConfigFileShouldRun;GenerateMSBuildEditorConfigFileCore"
+  />
 
   <Target Name="GenerateMSBuildEditorConfigFileShouldRun">
     <PropertyGroup>
-      <GeneratedMSBuildEditorConfigFile Condition="'$(GeneratedMSBuildEditorConfigFile)' == ''">$(IntermediateOutputPath)$(MSBuildProjectName).GeneratedMSBuildEditorConfig.editorconfig</GeneratedMSBuildEditorConfigFile>
-      <GenerateMSBuildEditorConfigFile Condition="'$(GenerateMSBuildEditorConfigFile)' == ''">true</GenerateMSBuildEditorConfigFile>
-      <_GeneratedEditorConfigHasItems Condition="'@(CompilerVisibleItemMetadata->Count())' != '0'">true</_GeneratedEditorConfigHasItems>
-      <_GeneratedEditorConfigShouldRun Condition="'$(GenerateMSBuildEditorConfigFile)' == 'true' and ('$(_GeneratedEditorConfigHasItems)' == 'true' or '@(CompilerVisibleProperty->Count())' != '0')">true</_GeneratedEditorConfigShouldRun>
+      <GeneratedMSBuildEditorConfigFile Condition="'$(GeneratedMSBuildEditorConfigFile)' == ''"
+        >$(IntermediateOutputPath)$(MSBuildProjectName).GeneratedMSBuildEditorConfig.editorconfig</GeneratedMSBuildEditorConfigFile
+      >
+      <GenerateMSBuildEditorConfigFile Condition="'$(GenerateMSBuildEditorConfigFile)' == ''"
+        >true</GenerateMSBuildEditorConfigFile
+      >
+      <_GeneratedEditorConfigHasItems Condition="'@(CompilerVisibleItemMetadata->Count())' != '0'"
+        >true</_GeneratedEditorConfigHasItems
+      >
+      <_GeneratedEditorConfigShouldRun
+        Condition="'$(GenerateMSBuildEditorConfigFile)' == 'true' and ('$(_GeneratedEditorConfigHasItems)' == 'true' or '@(CompilerVisibleProperty->Count())' != '0')"
+        >true</_GeneratedEditorConfigShouldRun
+      >
     </PropertyGroup>
   </Target>
 
-  <Target Name="GenerateMSBuildEditorConfigFileCore"
-          Condition="'$(_GeneratedEditorConfigShouldRun)' == 'true'"
-          Outputs="$(GeneratedMSBuildEditorConfigFile)">
-
+  <Target
+    Name="GenerateMSBuildEditorConfigFileCore"
+    Condition="'$(_GeneratedEditorConfigShouldRun)' == 'true'"
+    Outputs="$(GeneratedMSBuildEditorConfigFile)"
+  >
     <ItemGroup>
       <!-- Collect requested properties, and eval their value -->
       <_GeneratedEditorConfigProperty Include="@(CompilerVisibleProperty)">
@@ -177,7 +224,10 @@
       </_GeneratedEditorConfigProperty>
 
       <!-- Collect the requested items and remember which metadata is wanted -->
-      <_GeneratedEditorConfigMetadata Include="@(%(CompilerVisibleItemMetadata.Identity))" Condition="'$(_GeneratedEditorConfigHasItems)' == 'true'">
+      <_GeneratedEditorConfigMetadata
+        Include="@(%(CompilerVisibleItemMetadata.Identity))"
+        Condition="'$(_GeneratedEditorConfigHasItems)' == 'true'"
+      >
         <ItemType>%(Identity)</ItemType>
         <MetadataName>%(CompilerVisibleItemMetadata.MetadataName)</MetadataName>
       </_GeneratedEditorConfigMetadata>
@@ -191,9 +241,8 @@
     <GenerateMSBuildEditorConfig
       PropertyItems="@(_GeneratedEditorConfigProperty)"
       MetadataItems="@(_GeneratedEditorConfigMetadata)"
-      FileName="$(GeneratedMSBuildEditorConfigFile)">
-    </GenerateMSBuildEditorConfig>
-
+      FileName="$(GeneratedMSBuildEditorConfigFile)"
+    ></GenerateMSBuildEditorConfig>
   </Target>
 
   <!--
@@ -205,7 +254,10 @@
     In order for the debugger to find source files when debugging a locally built binary the PDB must contain original, unmapped local paths.
   -->
   <PropertyGroup>
-    <DeterministicSourcePaths Condition="'$(DeterministicSourcePaths)' == '' and '$(Deterministic)' == 'true' and '$(ContinuousIntegrationBuild)' == 'true'">true</DeterministicSourcePaths>
+    <DeterministicSourcePaths
+      Condition="'$(DeterministicSourcePaths)' == '' and '$(Deterministic)' == 'true' and '$(ContinuousIntegrationBuild)' == 'true'"
+      >true</DeterministicSourcePaths
+    >
   </PropertyGroup>
 
   <!--
@@ -226,15 +278,19 @@
     A consumer of SourceRoot.MappedPath metadata, such as Source Link generator, shall depend on this target. 
   -->
 
-  <Target Name="InitializeSourceRootMappedPaths"
-          DependsOnTargets="_InitializeSourceRootMappedPathsFromSourceControl"
-          Returns="@(SourceRoot)">
-
+  <Target
+    Name="InitializeSourceRootMappedPaths"
+    DependsOnTargets="_InitializeSourceRootMappedPathsFromSourceControl"
+    Returns="@(SourceRoot)"
+  >
     <ItemGroup Condition="'@(_MappedSourceRoot)' != ''">
       <_MappedSourceRoot Remove="@(_MappedSourceRoot)" />
     </ItemGroup>
 
-    <Microsoft.CodeAnalysis.BuildTasks.MapSourceRoots SourceRoots="@(SourceRoot)" Deterministic="$(DeterministicSourcePaths)">
+    <Microsoft.CodeAnalysis.BuildTasks.MapSourceRoots
+      SourceRoots="@(SourceRoot)"
+      Deterministic="$(DeterministicSourcePaths)"
+    >
       <Output TaskParameter="MappedSourceRoots" ItemName="_MappedSourceRoot" />
     </Microsoft.CodeAnalysis.BuildTasks.MapSourceRoots>
 
@@ -255,9 +311,11 @@
     If InitializeSourceControlInformation target isn't supported, we just continue without invoking that synchronization target. 
     We'll proceed with SourceRoot (and other source control properties) provided by the user (or blank).
   -->
-  <Target Name="_InitializeSourceRootMappedPathsFromSourceControl"
-          DependsOnTargets="InitializeSourceControlInformation"
-          Condition="'$(SourceControlInformationFeatureSupported)' == 'true'" />
+  <Target
+    Name="_InitializeSourceRootMappedPathsFromSourceControl"
+    DependsOnTargets="InitializeSourceControlInformation"
+    Condition="'$(SourceControlInformationFeatureSupported)' == 'true'"
+  />
 
   <!-- 
     =======
@@ -270,11 +328,12 @@
     If SourceRoot doesn't contain any top-level roots an error is reported.
   -->
 
-  <Target Name="_SetPathMapFromSourceRoots"
-          DependsOnTargets="InitializeSourceRootMappedPaths"
-          BeforeTargets="CoreCompile"
-          Condition="'$(DeterministicSourcePaths)' == 'true'">
-
+  <Target
+    Name="_SetPathMapFromSourceRoots"
+    DependsOnTargets="InitializeSourceRootMappedPaths"
+    BeforeTargets="CoreCompile"
+    Condition="'$(DeterministicSourcePaths)' == 'true'"
+  >
     <ItemGroup>
       <_TopLevelSourceRoot Include="@(SourceRoot)" Condition="'%(SourceRoot.NestedRoot)' == ''">
         <EscapedKey>$([MSBuild]::ValueOrDefault('%(Identity)', '').Replace(',', ',,').Replace('=', '=='))</EscapedKey>
@@ -303,10 +362,12 @@
     we add them to the @(None) group to ensure they will be copied.
  -->
 
-  <Target Name="CopyAdditionalFiles"
-          BeforeTargets="AssignTargetPaths">
+  <Target Name="CopyAdditionalFiles" BeforeTargets="AssignTargetPaths">
     <ItemGroup>
-      <None Include="@(AdditionalFiles)" Condition="'%(AdditionalFiles.CopyToOutputDirectory)' != ''" />
+      <None
+        Include="@(AdditionalFiles)"
+        Condition="'%(AdditionalFiles.CopyToOutputDirectory)' != ''"
+      />
     </ItemGroup>
   </Target>
 
@@ -324,20 +385,32 @@
     We will create CompilerGeneratedFilesOutputPath if it does not exist.
     -->
   <PropertyGroup>
-    <EmitCompilerGeneratedFiles Condition="'$(EmitCompilerGeneratedFiles)' == ''">false</EmitCompilerGeneratedFiles>
-    <CompilerGeneratedFilesOutputPath Condition="'$(EmitCompilerGeneratedFiles)' != 'true'"></CompilerGeneratedFilesOutputPath>
-    <CompilerGeneratedFilesOutputPath Condition="'$(EmitCompilerGeneratedFiles)' == 'true' and '$(CompilerGeneratedFilesOutputPath)' == '' and '$(IntermediateOutputPath)' != ''">$(IntermediateOutputPath)/generated</CompilerGeneratedFilesOutputPath>
+    <EmitCompilerGeneratedFiles Condition="'$(EmitCompilerGeneratedFiles)' == ''"
+      >false</EmitCompilerGeneratedFiles
+    >
+    <CompilerGeneratedFilesOutputPath
+      Condition="'$(EmitCompilerGeneratedFiles)' != 'true'"
+    ></CompilerGeneratedFilesOutputPath>
+    <CompilerGeneratedFilesOutputPath
+      Condition="'$(EmitCompilerGeneratedFiles)' == 'true' and '$(CompilerGeneratedFilesOutputPath)' == '' and '$(IntermediateOutputPath)' != ''"
+      >$(IntermediateOutputPath)/generated</CompilerGeneratedFilesOutputPath
+    >
   </PropertyGroup>
 
-  <Target Name="CreateCompilerGeneratedFilesOutputPath"
-        BeforeTargets="CoreCompile"
-        Condition="'$(EmitCompilerGeneratedFiles)' == 'true' and !('$(DesignTimeBuild)' == 'true' OR '$(BuildingProject)' != 'true')">
+  <Target
+    Name="CreateCompilerGeneratedFilesOutputPath"
+    BeforeTargets="CoreCompile"
+    Condition="'$(EmitCompilerGeneratedFiles)' == 'true' and !('$(DesignTimeBuild)' == 'true' OR '$(BuildingProject)' != 'true')"
+  >
+    <Warning
+      Condition="'$(CompilerGeneratedFilesOutputPath)' == ''"
+      Text="EmitCompilerGeneratedFiles was true, but no CompilerGeneratedFilesOutputPath was provided. CompilerGeneratedFilesOutputPath must be set in order to emit generated files."
+    />
 
-    <Warning Condition="'$(CompilerGeneratedFilesOutputPath)' == ''"
-             Text="EmitCompilerGeneratedFiles was true, but no CompilerGeneratedFilesOutputPath was provided. CompilerGeneratedFilesOutputPath must be set in order to emit generated files." />
-    
-    <MakeDir Condition="'$(CompilerGeneratedFilesOutputPath)' != ''" 
-             Directories="$(CompilerGeneratedFilesOutputPath)"  />
+    <MakeDir
+      Condition="'$(CompilerGeneratedFilesOutputPath)' != ''"
+      Directories="$(CompilerGeneratedFilesOutputPath)"
+    />
   </Target>
 
   <!--
@@ -348,7 +421,6 @@
     Add the specified VS capability if a user indicates this project supports component debugging
     -->
   <ItemGroup>
-    <ProjectCapability Include="RoslynComponent" Condition="'$(IsRoslynComponent)' == 'true'"/>
+    <ProjectCapability Include="RoslynComponent" Condition="'$(IsRoslynComponent)' == 'true'" />
   </ItemGroup>
-
 </Project>

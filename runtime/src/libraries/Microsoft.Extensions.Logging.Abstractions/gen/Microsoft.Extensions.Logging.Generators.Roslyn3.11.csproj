@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <AnalyzerRoslynVersion>3.11</AnalyzerRoslynVersion>
     <RoslynApiVersion>$(MicrosoftCodeAnalysisVersion_3_11)</RoslynApiVersion>
@@ -10,5 +9,4 @@
   <ItemGroup>
     <Compile Remove="LoggerMessageGenerator.Roslyn4.0.cs" />
   </ItemGroup>
-
 </Project>

@@ -8,10 +8,16 @@
     -->
     <Features>$(Features.Replace('strict', '')</Features>
 
-    <DebuggerSupport Condition="'$(DebuggerSupport)' == '' and ('$(TargetOS)' == 'browser' or '$(TargetOS)' == 'wasi')">true</DebuggerSupport>
+    <DebuggerSupport
+      Condition="'$(DebuggerSupport)' == '' and ('$(TargetOS)' == 'browser' or '$(TargetOS)' == 'wasi')"
+      >true</DebuggerSupport
+    >
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(CoreLibSharedDir)System\Runtime\CompilerServices\IsExternalInit.cs" Link="Common\System\Runtime\CompilerServices\IsExternalInit.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Runtime\CompilerServices\IsExternalInit.cs"
+      Link="Common\System\Runtime\CompilerServices\IsExternalInit.cs"
+    />
     <Compile Include="AccessTests.cs" />
     <Compile Include="ArrayHandling.cs" />
     <Compile Include="AssignmentTests.cs" />

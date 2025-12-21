@@ -1,5 +1,8 @@
 <Type Name="MiniParser+IMutableAttrList" FullName="Mono.Xml.MiniParser+IMutableAttrList">
-  <TypeSignature Language="C#" Value="public interface MiniParser.IMutableAttrList : Mono.Xml.MiniParser.IAttrList" />
+  <TypeSignature
+    Language="C#"
+    Value="public interface MiniParser.IMutableAttrList : Mono.Xml.MiniParser.IAttrList"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Security</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -53,7 +56,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CopyFrom">
-      <MemberSignature Language="C#" Value="public void CopyFrom (Mono.Xml.MiniParser.IAttrList attrs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CopyFrom (Mono.Xml.MiniParser.IAttrList attrs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

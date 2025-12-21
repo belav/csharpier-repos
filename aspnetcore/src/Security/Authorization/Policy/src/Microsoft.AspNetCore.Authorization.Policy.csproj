@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core authorization policy helper classes.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -12,7 +11,10 @@
 
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)SecurityHelper\**\*.cs" />
-    <Compile Include="..\..\..\..\Http\Routing\src\DataSourceDependentCache.cs" Link="DataSourceDependentCache.cs" />
+    <Compile
+      Include="..\..\..\..\Http\Routing\src\DataSourceDependentCache.cs"
+      Link="DataSourceDependentCache.cs"
+    />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,5 +23,4 @@
     <Reference Include="Microsoft.AspNetCore.Http.Abstractions" />
     <Reference Include="Microsoft.AspNetCore.Routing" />
   </ItemGroup>
-
 </Project>

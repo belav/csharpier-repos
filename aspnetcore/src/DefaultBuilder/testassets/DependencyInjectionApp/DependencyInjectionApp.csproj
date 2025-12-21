@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -8,5 +7,4 @@
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore" />
   </ItemGroup>
-
 </Project>

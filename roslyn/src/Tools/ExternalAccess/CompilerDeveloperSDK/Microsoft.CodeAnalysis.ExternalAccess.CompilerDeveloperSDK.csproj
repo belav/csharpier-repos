@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>net7.0</TargetFrameworks>
 
@@ -10,16 +9,22 @@
       https://github.com/333fred/compiler-developer-sdk
     </PackageDescription>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <!--
       ⚠ ONLY COMPILERDEVELOPERSDK ASSEMBLIES MAY BE ADDED HERE ⚠
     -->
-    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CompilerDeveloperSDK" Key="$(MicrosoftCodeAnalysisCompilerDeveloperSDKKey)" />
+    <InternalsVisibleTo
+      Include="Microsoft.CodeAnalysis.CompilerDeveloperSDK"
+      Key="$(MicrosoftCodeAnalysisCompilerDeveloperSDKKey)"
+    />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Features\LanguageServer\Microsoft.CodeAnalysis.LanguageServer\Microsoft.CodeAnalysis.LanguageServer.csproj" PrivateAssets="all" />
+    <ProjectReference
+      Include="..\..\..\Features\LanguageServer\Microsoft.CodeAnalysis.LanguageServer\Microsoft.CodeAnalysis.LanguageServer.csproj"
+      PrivateAssets="all"
+    />
     <ProjectReference Include="..\..\..\Features\LanguageServer\Microsoft.CommonLanguageServerProtocol.Framework\Microsoft.CommonLanguageServerProtocol.Framework.csproj" />
   </ItemGroup>
 
@@ -29,5 +34,4 @@
     <PublicAPI Include="InternalAPI.Shipped.txt" />
     <PublicAPI Include="InternalAPI.Unshipped.txt" />
   </ItemGroup>
-
 </Project>

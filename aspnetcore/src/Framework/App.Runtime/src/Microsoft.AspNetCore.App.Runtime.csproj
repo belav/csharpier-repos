@@ -42,12 +42,20 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     <AllowedOutputExtensionsInSymbolsPackageBuildOutputFolder>$(AllowedOutputExtensionsInSymbolsPackageBuildOutputFolder);.r2rmap</AllowedOutputExtensionsInSymbolsPackageBuildOutputFolder>
 
     <!-- Optimize the framework using the crossgen2 tool. Crossgen2 is not currently supported on s390x or ppc64le or armv6 or loongarch64. -->
-    <CrossgenOutput Condition=" '$(TargetArchitecture)' == 's390x' OR '$(TargetArchitecture)' == 'armv6' OR '$(TargetArchitecture)' == 'ppc64le' OR '$(TargetArchitecture)' == 'loongarch64' ">false</CrossgenOutput>
-    <CrossgenOutput Condition=" '$(CrossgenOutput)' == '' AND '$(Configuration)' != 'Debug' ">true</CrossgenOutput>
+    <CrossgenOutput
+      Condition=" '$(TargetArchitecture)' == 's390x' OR '$(TargetArchitecture)' == 'armv6' OR '$(TargetArchitecture)' == 'ppc64le' OR '$(TargetArchitecture)' == 'loongarch64' "
+      >false</CrossgenOutput
+    >
+    <CrossgenOutput Condition=" '$(CrossgenOutput)' == '' AND '$(Configuration)' != 'Debug' "
+      >true</CrossgenOutput
+    >
 
     <!-- Produce crossgen2 profiling symbols (.ni.pdb or .r2rmap files). -->
     <GenerateCrossgenProfilingSymbols>true</GenerateCrossgenProfilingSymbols>
-    <GenerateCrossgenProfilingSymbols Condition=" '$(CrossgenOutput)' != 'true' OR '$(TargetOsName)' == 'osx' ">false</GenerateCrossgenProfilingSymbols>
+    <GenerateCrossgenProfilingSymbols
+      Condition=" '$(CrossgenOutput)' != 'true' OR '$(TargetOsName)' == 'osx' "
+      >false</GenerateCrossgenProfilingSymbols
+    >
 
     <!-- Always generated, even though output type == Library -->
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
@@ -92,7 +100,9 @@ This package is an internal implementation of the .NET Core SDK and is not meant
 
     <!-- crossgen2 executable name -->
     <Crossgen2ToolFileName>crossgen2</Crossgen2ToolFileName>
-    <Crossgen2ToolFileName Condition=" '$(TargetOsName)' == 'win' ">$(Crossgen2ToolFileName).exe</Crossgen2ToolFileName>
+    <Crossgen2ToolFileName Condition=" '$(TargetOsName)' == 'win' "
+      >$(Crossgen2ToolFileName).exe</Crossgen2ToolFileName
+    >
 
     <!-- E.g. "PkgMicrosoft_NETCore_App_Runtime_win-x64" (set in obj/Microsoft.AspNetCore.App.Runtime.csproj.nuget.g.props). -->
     <RuntimePackageRootVariableName>PkgMicrosoft_NETCore_App_Runtime_$(RuntimeIdentifier.Replace('.', '_'))</RuntimePackageRootVariableName>
@@ -103,10 +113,18 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       Special case the crossgen2 package reference on Windows to avoid the x86 package when building in Visual Studio.
     -->
     <BuildOsName>$(TargetOsName)</BuildOsName>
-    <BuildOsName Condition="'$(TargetOsName)' == 'linux-musl' and '$(TargetArchitecture)' != 'x64'">linux</BuildOsName>
-    <BuildOsName Condition=" '$(PortableBuild)' == 'false' ">$(TargetRuntimeIdentifier.Substring(0,$(TargetRuntimeIdentifier.IndexOf('-'))))</BuildOsName>
-    <Crossgen2BuildArchitecture Condition=" '$(BuildOsName)' == 'win' ">x64</Crossgen2BuildArchitecture>
-    <Crossgen2BuildArchitecture Condition=" '$(Crossgen2BuildArchitecture)' == '' ">$(BuildArchitecture)</Crossgen2BuildArchitecture>
+    <BuildOsName Condition="'$(TargetOsName)' == 'linux-musl' and '$(TargetArchitecture)' != 'x64'"
+      >linux</BuildOsName
+    >
+    <BuildOsName Condition=" '$(PortableBuild)' == 'false' "
+      >$(TargetRuntimeIdentifier.Substring(0,$(TargetRuntimeIdentifier.IndexOf('-'))))</BuildOsName
+    >
+    <Crossgen2BuildArchitecture Condition=" '$(BuildOsName)' == 'win' "
+      >x64</Crossgen2BuildArchitecture
+    >
+    <Crossgen2BuildArchitecture Condition=" '$(Crossgen2BuildArchitecture)' == '' "
+      >$(BuildArchitecture)</Crossgen2BuildArchitecture
+    >
     <Crossgen2PackageRootVariableName>PkgMicrosoft_NETCore_App_Crossgen2_$(BuildOsName.Replace('.', '_'))-$(Crossgen2BuildArchitecture)</Crossgen2PackageRootVariableName>
 
     <AssetTargetFallback>$(AssetTargetFallback);native,Version=0.0</AssetTargetFallback>
@@ -127,24 +145,30 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       <IncludeAssets>Runtime;Native</IncludeAssets>
     </Reference>
 
-    <Reference Condition="'$(CrossgenOutput)' == 'true'"
-        Include="Microsoft.NETCore.App.Runtime.$(RuntimeIdentifier)"
-        ExcludeAssets="All"
-        PrivateAssets="All"
-        GeneratePathProperty="true" />
+    <Reference
+      Condition="'$(CrossgenOutput)' == 'true'"
+      Include="Microsoft.NETCore.App.Runtime.$(RuntimeIdentifier)"
+      ExcludeAssets="All"
+      PrivateAssets="All"
+      GeneratePathProperty="true"
+    />
 
     <!--
       This package contains the crossgen2 tool. Unfortunately, it doesn't make the tool easy to use.
       $(GeneratePathProperty) and hacks in the _ExpandRuntimePackageRoot target work around the gaps.
     -->
-    <Reference Condition="'$(CrossgenOutput)' == 'true'"
-        Include="Microsoft.NETCore.App.Crossgen2.$(BuildOsName)-$(Crossgen2BuildArchitecture)"
-        ExcludeAssets="All"
-        PrivateAssets="All"
-        GeneratePathProperty="true" />
+    <Reference
+      Condition="'$(CrossgenOutput)' == 'true'"
+      Include="Microsoft.NETCore.App.Crossgen2.$(BuildOsName)-$(Crossgen2BuildArchitecture)"
+      ExcludeAssets="All"
+      PrivateAssets="All"
+      GeneratePathProperty="true"
+    />
 
-    <ProjectReference Condition=" '$(UseIisNativeAssets)' == 'true' AND $(BuildNative) "
-        Include="$(RepoRoot)src\Servers\IIS\AspNetCoreModuleV2\InProcessRequestHandler\InProcessRequestHandler.vcxproj">
+    <ProjectReference
+      Condition=" '$(UseIisNativeAssets)' == 'true' AND $(BuildNative) "
+      Include="$(RepoRoot)src\Servers\IIS\AspNetCoreModuleV2\InProcessRequestHandler\InProcessRequestHandler.vcxproj"
+    >
       <SetPlatform>Platform=$(NativePlatform)</SetPlatform>
       <!-- Custom attribute used to distinguish managed from native references. -->
       <IsNativeImage>true</IsNativeImage>
@@ -154,8 +178,10 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       <Targets>Build;GetTargetPath</Targets>
     </ProjectReference>
 
-    <_ResolvedNativeProjectReferencePaths Condition=" '$(UseIisNativeAssets)' == 'true' AND !$(BuildNative) "
-        Include="$(ArtifactsBinDir)InProcessRequestHandler\$(NativePlatform)\$(Configuration)\aspnetcorev2_inprocess.dll">
+    <_ResolvedNativeProjectReferencePaths
+      Condition=" '$(UseIisNativeAssets)' == 'true' AND !$(BuildNative) "
+      Include="$(ArtifactsBinDir)InProcessRequestHandler\$(NativePlatform)\$(Configuration)\aspnetcorev2_inprocess.dll"
+    >
       <IsNativeImage>true</IsNativeImage>
     </_ResolvedNativeProjectReferencePaths>
   </ItemGroup>
@@ -209,14 +235,17 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       _CreateRedistCompositeArchive;
     </CoreBuildDependsOn>
     <!-- If Build won't run in the GenerateNuspec context, need to update Content, None and _PackageFiles. -->
-    <GenerateNuspecDependsOn Condition=" '$(NoBuild)' == 'true' AND '$(GeneratePackageOnBuild)' != 'true' ">
+    <GenerateNuspecDependsOn
+      Condition=" '$(NoBuild)' == 'true' AND '$(GeneratePackageOnBuild)' != 'true' "
+    >
       _ResolveNativePackContent;
       _IncludeVersionFile;
       $(GenerateNuspecDependsOn);
       _ResolveInitialSharedFrameworkContent;
       _ResolveRuntimePackContent;
       _ResolveSharedFrameworkContent;
-    </GenerateNuspecDependsOn>
+    </GenerateNuspecDependsOn
+    >
     <CrossGenDependsOn>
       ResolveReferences;
     </CrossGenDependsOn>
@@ -224,7 +253,8 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       $(CrossGenDependsOn);
       _BatchCrossGenAssemblies;
       _GenerateComposites;
-    </CrossGenDependsOn>
+    </CrossGenDependsOn
+    >
     <!-- _GetBuildOutputFilesWithTfm executes in a separate context from Build, GenerateNuspec, and so on. -->
     <TargetsForTfmSpecificBuildOutput>
       $(TargetsForTfmSpecificBuildOutput);
@@ -246,11 +276,13 @@ This package is an internal implementation of the .NET Core SDK and is not meant
   <!-- This project doesn't compile anything. -->
   <Target Name="CoreCompile" />
 
-  <Target Name="FilterUnwantedContent"
-          DependsOnTargets="_ExpandRuntimePackageRoot">
+  <Target Name="FilterUnwantedContent" DependsOnTargets="_ExpandRuntimePackageRoot">
     <ItemGroup>
       <!-- These files end up in this item group as a result of setting CopyLocalLockFileAssemblies, but shouldn't be. -->
-      <ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" Condition="'%(FileName)' == 'apphost' OR '%(FileName)' == '$(LibPrefix)hostfxr' OR '%(FileName)' == '$(LibPrefix)hostpolicy' "/>
+      <ReferenceCopyLocalPaths
+        Remove="@(ReferenceCopyLocalPaths)"
+        Condition="'%(FileName)' == 'apphost' OR '%(FileName)' == '$(LibPrefix)hostfxr' OR '%(FileName)' == '$(LibPrefix)hostpolicy' "
+      />
     </ItemGroup>
 
     <ItemGroup>
@@ -260,20 +292,28 @@ This package is an internal implementation of the .NET Core SDK and is not meant
         Most of the time there is no overlap, but in certain rare corner cases there can be.
         See https://github.com/dotnet/aspnetcore/issues/45033 for more detail.
       -->
-      <ReferenceCopyLocalPaths Remove="@(RuntimePackageFiles)" MatchOnMetadata="FileName"/>
+      <ReferenceCopyLocalPaths Remove="@(RuntimePackageFiles)" MatchOnMetadata="FileName" />
     </ItemGroup>
   </Target>
 
-  <Target Name="_RemoveUnwantedRuntimeConfigItems" BeforeTargets="GenerateBuildRuntimeConfigurationFiles">
+  <Target
+    Name="_RemoveUnwantedRuntimeConfigItems"
+    BeforeTargets="GenerateBuildRuntimeConfigurationFiles"
+  >
     <ItemGroup>
-      <RuntimeHostConfigurationOption Remove="@(RuntimeHostConfigurationOption)" Condition="'%(Identity)' != 'System.Reflection.Metadata.MetadataUpdater.IsSupported' " />
+      <RuntimeHostConfigurationOption
+        Remove="@(RuntimeHostConfigurationOption)"
+        Condition="'%(Identity)' != 'System.Reflection.Metadata.MetadataUpdater.IsSupported' "
+      />
     </ItemGroup>
   </Target>
 
-  <Target Name="_WarnAboutUnbuiltNativeDependencies"
-          BeforeTargets="Build"
-          Condition=" '$(UseIisNativeAssets)' == 'true' AND !$(BuildNative) AND
-              !EXISTS('$(ArtifactsBinDir)InProcessRequestHandler\$(NativePlatform)\$(Configuration)\aspnetcorev2_inprocess.dll') ">
+  <Target
+    Name="_WarnAboutUnbuiltNativeDependencies"
+    BeforeTargets="Build"
+    Condition=" '$(UseIisNativeAssets)' == 'true' AND !$(BuildNative) AND
+              !EXISTS('$(ArtifactsBinDir)InProcessRequestHandler\$(NativePlatform)\$(Configuration)\aspnetcorev2_inprocess.dll') "
+  >
     <Warning Text="This project has native dependencies which were not built. Without this, tests may not function correctly. Run `build.cmd -BuildNative -BuildManaged` to build both C# and C++." />
   </Target>
 
@@ -286,7 +326,10 @@ This package is an internal implementation of the .NET Core SDK and is not meant
 
   <Target Name="GenerateSharedFxDepsFile" DependsOnTargets="ResolveReferences">
     <ItemGroup>
-      <_RuntimeReference Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.Extension)' != '.pdb' AND '%(ReferenceCopyLocalPaths.Extension)' != '.r2rmap'" />
+      <_RuntimeReference
+        Include="@(ReferenceCopyLocalPaths)"
+        Condition="'%(ReferenceCopyLocalPaths.Extension)' != '.pdb' AND '%(ReferenceCopyLocalPaths.Extension)' != '.r2rmap'"
+      />
     </ItemGroup>
 
     <RepoTasks.GenerateSharedFrameworkDepsFile
@@ -297,18 +340,23 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       References="@(_RuntimeReference)"
       RuntimeIdentifier="$(RuntimeIdentifier)"
       RuntimePackageName="$(PackageId)"
-      PlatformManifestOutputPath="$(PlatformManifestOutputPath)" />
+      PlatformManifestOutputPath="$(PlatformManifestOutputPath)"
+    />
   </Target>
 
   <!--
     Generate the .version, aspnetcore_base_runtime.version and Microsoft.AspNetCore.App.versions.txt files in the
     shared framework.
   -->
-  <Target Name="GenerateSharedFxVersionsFiles" DependsOnTargets="InitializeSourceControlInformation">
+  <Target
+    Name="GenerateSharedFxVersionsFiles"
+    DependsOnTargets="InitializeSourceControlInformation"
+  >
     <WriteLinesToFile
       File="$(BaseRuntimeVersionFileOutputPath)"
       Lines="$(MicrosoftNETCoreAppRuntimeVersion)"
-      Overwrite="true" />
+      Overwrite="true"
+    />
 
     <ItemGroup>
       <VersionLines Include="$(SourceRevisionId)" />
@@ -318,23 +366,31 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     <WriteLinesToFile
       File="$(VersionTxtFileIntermediateOutputPath)"
       Lines="@(VersionLines)"
-      Overwrite="true" />
+      Overwrite="true"
+    />
 
     <WriteLinesToFile
       File="$(DotVersionFileIntermediateOutputPath)"
       Lines="@(VersionLines)"
-      Overwrite="true" />
+      Overwrite="true"
+    />
   </Target>
 
   <!-- This target resolves files into the BuiltProjectOutputGroupOutput which NuGet uses to generate the package files. -->
   <Target Name="_ResolveRuntimePackBuildOutput" DependsOnTargets="ResolveReferences">
     <ItemGroup>
       <BuildOutputFiles Include="$(ProjectDepsFilePath)" />
-      <BuildOutputFiles Include="@(ReferenceCopyLocalPaths)" Condition=" '%(ReferenceCopyLocalPaths.IsNativeImage)' != 'true' " />
+      <BuildOutputFiles
+        Include="@(ReferenceCopyLocalPaths)"
+        Condition=" '%(ReferenceCopyLocalPaths.IsNativeImage)' != 'true' "
+      />
       <!-- Include all .pdbs in build output. Some .pdb files are part of ReferenceCopyLocalPaths, but this can change when running /t:Pack /p:NoBuild=true. -->
       <BuildOutputFiles Include="$(TargetDir)*.pdb" Exclude="@(ReferenceCopyLocalPaths)" />
       <!-- crossgen2 symbols for Linux include a GUID in the file name which cannot be predicted. -->
-      <BuildOutputFiles Include="$(TargetDir)*.r2rmap" Condition="'$(CrossGenSymbolsType)' == 'PerfMap'" />
+      <BuildOutputFiles
+        Include="$(TargetDir)*.r2rmap"
+        Condition="'$(CrossGenSymbolsType)' == 'PerfMap'"
+      />
 
       <!-- Strip duplicate Files by checking for distinct %(FileName)%(Extension) -->
       <OutputFileNames Include="%(BuildOutputFiles.FileName)%(BuildOutputFiles.Extension)">
@@ -351,14 +407,20 @@ This package is an internal implementation of the .NET Core SDK and is not meant
   <Target Name="_ResolveNativePackContent" DependsOnTargets="ResolveReferences">
     <ItemGroup>
       <!-- Native files are included in _PackageFile instead because they belong in a separate package folder. -->
-      <Content Include="@(ReferenceCopyLocalPaths)" PackagePath="$(NativeAssetsPackagePath)"
-          Condition=" '%(ReferenceCopyLocalPaths.IsNativeImage)' == 'true' AND '%(ReferenceCopyLocalPaths.Extension)' != '.pdb' " />
+      <Content
+        Include="@(ReferenceCopyLocalPaths)"
+        PackagePath="$(NativeAssetsPackagePath)"
+        Condition=" '%(ReferenceCopyLocalPaths.IsNativeImage)' == 'true' AND '%(ReferenceCopyLocalPaths.Extension)' != '.pdb' "
+      />
     </ItemGroup>
   </Target>
 
   <Target Name="_ResolveRuntimePackContent">
     <ItemGroup>
-      <RuntimePackContent Include="$(PlatformManifestOutputPath)" PackagePath="$(ManifestsPackagePath)" />
+      <RuntimePackContent
+        Include="$(PlatformManifestOutputPath)"
+        PackagePath="$(ManifestsPackagePath)"
+      />
     </ItemGroup>
   </Target>
 
@@ -397,28 +459,40 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     </PropertyGroup>
   </Target>
 
-  <Target Name="PrepareForCrossGen"
-          Condition="'$(CrossgenOutput)' == 'true'"
-          DependsOnTargets="FilterUnwantedContent">
+  <Target
+    Name="PrepareForCrossGen"
+    Condition="'$(CrossgenOutput)' == 'true'"
+    DependsOnTargets="FilterUnwantedContent"
+  >
     <!-- The output directories of assemblies built in this repo contain a mix of ref and impl assemblies. Copy impl assemblies to a separate directory. -->
     <RemoveDir Directories="$(CrossgenPlatformAssembliesDir)" />
-    <Copy SourceFiles="@(ReferenceCopyLocalPaths)" DestinationFolder="$(CrossgenPlatformAssembliesDir)" Condition="'%(ReferenceCopyLocalPaths.ProjectPath)' != ''"/>
+    <Copy
+      SourceFiles="@(ReferenceCopyLocalPaths)"
+      DestinationFolder="$(CrossgenPlatformAssembliesDir)"
+      Condition="'%(ReferenceCopyLocalPaths.ProjectPath)' != ''"
+    />
 
     <!-- Resolve list of assemblies to crossgen2 -->
     <ItemGroup>
-      <IntermediateCrossgenAssembly Include="@(ReferenceCopyLocalPaths)" Condition=" '%(ReferenceCopyLocalPaths.IsNativeImage)' != 'true' AND '%(ReferenceCopyLocalPaths.Extension)' != '.pdb'" />
+      <IntermediateCrossgenAssembly
+        Include="@(ReferenceCopyLocalPaths)"
+        Condition=" '%(ReferenceCopyLocalPaths.IsNativeImage)' != 'true' AND '%(ReferenceCopyLocalPaths.Extension)' != '.pdb'"
+      />
 
       <!-- These are the paths used by crossgen2 to find assemblies that are expected to exist at runtime in the shared frameworks. -->
       <_PlatformAssemblyPaths Include="$(CrossgenToolDir)" />
       <!-- Include the directories of the assemblies not built in this repo. These contain only implementation assemblies. -->
-      <_PlatformAssemblyPaths Include="@(ReferenceCopyLocalPaths->'%(RootDir)%(Directory)')" Condition="'%(ReferenceCopyLocalPaths.ProjectPath)' == ''"/>
+      <_PlatformAssemblyPaths
+        Include="@(ReferenceCopyLocalPaths->'%(RootDir)%(Directory)')"
+        Condition="'%(ReferenceCopyLocalPaths.ProjectPath)' == ''"
+      />
       <!-- The output directories of assemblies built in this repo contain a mix of ref and impl assemblies. Use the directory with only impl assemblies. -->
-      <_PlatformAssemblyPaths Include="$(CrossgenPlatformAssembliesDir)"/>
+      <_PlatformAssemblyPaths Include="$(CrossgenPlatformAssembliesDir)" />
 
       <ReferenceCopyLocalPaths Remove="@(IntermediateCrossgenAssembly)" />
       <ReferenceCopyLocalPaths Include="@(IntermediateCrossgenAssembly->'$(TargetDir)%(FileName)%(Extension)')" />
 
-      <_DistinctPlatformAssemblyPaths Include="@(_PlatformAssemblyPaths->Distinct())"/>
+      <_DistinctPlatformAssemblyPaths Include="@(_PlatformAssemblyPaths->Distinct())" />
       <_DistinctPlatformAssemblyPaths>
         <CommandLineOption>-r:%(Identity)*.dll</CommandLineOption>
       </_DistinctPlatformAssemblyPaths>
@@ -429,30 +503,43 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     <PropertyGroup>
       <CrossgenToolPath>$([System.IO.Path]::Combine('$(Crossgen2PackageRoot)', 'tools', '$(Crossgen2ToolFileName)'))</CrossgenToolPath>
       <CrossgenSymbolsTargetDir>$(TargetDir)</CrossgenSymbolsTargetDir>
-      <CrossgenOptimizationData Condition="'$(RuntimePackageRoot)' != ''">$(RuntimePackageRoot)tools\StandardOptimizationData.mibc</CrossgenOptimizationData>
-      <CrossgenOptimizationData Condition="!Exists('$(CrossgenOptimizationData)')"></CrossgenOptimizationData>
+      <CrossgenOptimizationData Condition="'$(RuntimePackageRoot)' != ''"
+        >$(RuntimePackageRoot)tools\StandardOptimizationData.mibc</CrossgenOptimizationData
+      >
+      <CrossgenOptimizationData
+        Condition="!Exists('$(CrossgenOptimizationData)')"
+      ></CrossgenOptimizationData>
 
       <!-- Escaping (double backslash at end) required due to the way batch processes backslashes. -->
-      <CrossgenSymbolsTargetDir Condition="HasTrailingSlash($(CrossgenSymbolsTargetDir)) AND '$(OS)' == 'Windows_NT'">$(TargetDir)\</CrossgenSymbolsTargetDir>
+      <CrossgenSymbolsTargetDir
+        Condition="HasTrailingSlash($(CrossgenSymbolsTargetDir)) AND '$(OS)' == 'Windows_NT'"
+        >$(TargetDir)\</CrossgenSymbolsTargetDir
+      >
     </PropertyGroup>
 
     <RemoveDir Directories="$(CrossgenToolDir)" />
     <WriteLinesToFile
-        Lines="@(Crossgen2PlatformAssemblyPaths)"
-        File="$(CrossgenToolDir)PlatformAssembliesPathsCrossgen2.rsp"
-        Overwrite="true" />
+      Lines="@(Crossgen2PlatformAssemblyPaths)"
+      File="$(CrossgenToolDir)PlatformAssembliesPathsCrossgen2.rsp"
+      Overwrite="true"
+    />
 
-    <Error Text="Could not find crossgen2 $(CrossgenToolPath)" Condition=" ! Exists($(CrossgenToolPath))" />
+    <Error
+      Text="Could not find crossgen2 $(CrossgenToolPath)"
+      Condition=" ! Exists($(CrossgenToolPath))"
+    />
 
     <!-- Create tool directory with runtime assemblies -->
-    <Copy SourceFiles="@(RuntimePackageFiles)" DestinationFolder="$(CrossGenToolDir)"/>
+    <Copy SourceFiles="@(RuntimePackageFiles)" DestinationFolder="$(CrossGenToolDir)" />
   </Target>
 
   <!-- Target executes once per @(IntermediateCrossgenAssembly) item. -->
-  <Target Name="_BatchCrossGenAssemblies"
+  <Target
+    Name="_BatchCrossGenAssemblies"
     DependsOnTargets="_ExpandRuntimePackageRoot"
     Inputs="@(IntermediateCrossgenAssembly)"
-    Outputs="@(IntermediateCrossgenAssembly->'$(TargetDir)%(FileName)%(Extension)')">
+    Outputs="@(IntermediateCrossgenAssembly->'$(TargetDir)%(FileName)%(Extension)')"
+  >
     <PropertyGroup>
       <!--
         Handle different names for the target OS on the crossgen2 command line. This often matches neither
@@ -467,25 +554,34 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       <Crossgen2Args>$(Crossgen2Args) --targetos:$(Crossgen2TargetOs)</Crossgen2Args>
       <Crossgen2Args>$(Crossgen2Args) -O</Crossgen2Args>
       <Crossgen2Args>$(Crossgen2Args) @&quot;$(CrossgenToolDir)PlatformAssembliesPathsCrossgen2.rsp&quot;</Crossgen2Args>
-      <Crossgen2Args Condition="'$(CrossgenOptimizationData)' != ''">$(Crossgen2Args) &quot;-m:$(CrossgenOptimizationData)&quot;</Crossgen2Args>
-      <Crossgen2Args Condition="'$(GenerateCrossgenProfilingSymbols)' == 'true' and '$(TargetOsName)' == 'win'">$(Crossgen2Args) --pdb --pdb-path:&quot;$(CrossgenSymbolsTargetDir)&quot;</Crossgen2Args>
-      <Crossgen2Args Condition="'$(GenerateCrossgenProfilingSymbols)' == 'true' and '$(TargetOsName)' != 'win'">$(Crossgen2Args) --perfmap --perfmap-format-version:1 --perfmap-path:&quot;$(CrossgenSymbolsTargetDir)&quot;</Crossgen2Args>
+      <Crossgen2Args Condition="'$(CrossgenOptimizationData)' != ''"
+        >$(Crossgen2Args) &quot;-m:$(CrossgenOptimizationData)&quot;</Crossgen2Args
+      >
+      <Crossgen2Args
+        Condition="'$(GenerateCrossgenProfilingSymbols)' == 'true' and '$(TargetOsName)' == 'win'"
+        >$(Crossgen2Args) --pdb --pdb-path:&quot;$(CrossgenSymbolsTargetDir)&quot;</Crossgen2Args
+      >
+      <Crossgen2Args
+        Condition="'$(GenerateCrossgenProfilingSymbols)' == 'true' and '$(TargetOsName)' != 'win'"
+        >$(Crossgen2Args) --perfmap --perfmap-format-version:1 --perfmap-path:&quot;$(CrossgenSymbolsTargetDir)&quot;</Crossgen2Args
+      >
     </PropertyGroup>
 
-    <Message Text="Running crossgen with $(CrossgenToolPath)"
-        Importance="High" />
+    <Message Text="Running crossgen with $(CrossgenToolPath)" Importance="High" />
     <!-- All metadata in batched task comes from current @(IntermediateCrossgenAssembly) item. -->
-    <Exec Command="&quot;$(CrossgenToolPath)&quot; $(Crossgen2Args) -o:&quot;$(TargetDir)%(FileName)%(Extension)&quot; &quot;%(IntermediateCrossgenAssembly.Identity)&quot;"
-          IgnoreStandardErrorWarningFormat="true"
-          StandardOutputImportance="High" />
-    <Message Text="Finished crossgen"
-        Importance="High" />
+    <Exec
+      Command="&quot;$(CrossgenToolPath)&quot; $(Crossgen2Args) -o:&quot;$(TargetDir)%(FileName)%(Extension)&quot; &quot;%(IntermediateCrossgenAssembly.Identity)&quot;"
+      IgnoreStandardErrorWarningFormat="true"
+      StandardOutputImportance="High"
+    />
+    <Message Text="Finished crossgen" Importance="High" />
   </Target>
 
-  <Target Name="_GenerateComposites"
-          Condition="'$(TargetOsName)' == 'linux' or '$(TargetOsName)' == 'linux-musl'"
-          DependsOnTargets="_ExpandRuntimePackageRoot">
-
+  <Target
+    Name="_GenerateComposites"
+    Condition="'$(TargetOsName)' == 'linux' or '$(TargetOsName)' == 'linux-musl'"
+    DependsOnTargets="_ExpandRuntimePackageRoot"
+  >
     <PropertyGroup>
       <CompositeTargetDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsObjDir)', 'Composite', '$(Configuration)'))</CompositeTargetDir>
       <CompositeFileName>full-composite.r2r</CompositeFileName>
@@ -494,7 +590,10 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       <ManagedAssetsFullPath>$(RuntimePackageRoot)$(ManagedAssetsPackagePath)</ManagedAssetsFullPath>
       <NativeAssetsFullPath>$(RuntimePackageRoot)$(NativeAssetsPackagePath)</NativeAssetsFullPath>
       <PartialCompositeAssemblyListPath>$(MSBuildThisFileDirectory)\PartialCompositeAssemblyList.txt</PartialCompositeAssemblyListPath>
-      <InstructionSetSupport Condition="'$(TargetArchitecture)' == 'x64' or '$(TargetArchitecture)' == 'x86'">+x86-x64-v3</InstructionSetSupport>
+      <InstructionSetSupport
+        Condition="'$(TargetArchitecture)' == 'x64' or '$(TargetArchitecture)' == 'x86'"
+        >+x86-x64-v3</InstructionSetSupport
+      >
     </PropertyGroup>
 
     <RemoveDir Directories="$(CompositeTargetDir)" />
@@ -525,7 +624,10 @@ This package is an internal implementation of the .NET Core SDK and is not meant
 
       <PartialCompositeAssemblyPaths Include="$(ManagedAssetsFullPath)\%(PartialCompositeAssemblyNames.Identity).dll" />
       <PartialCompositeAssemblyPaths Include="$(TargetDir)\%(PartialCompositeAssemblyNames.Identity).dll" />
-      <PartialCompositeAssemblyPaths Remove="%(PartialCompositeAssemblyPaths.Identity)" Condition="!Exists('%(Identity)')" />
+      <PartialCompositeAssemblyPaths
+        Remove="%(PartialCompositeAssemblyPaths.Identity)"
+        Condition="!Exists('%(Identity)')"
+      />
       <PartialCompositeAssemblyPaths Remove="@(ExcludeAssemblies)" />
 
       <UnrootedAssemblyPaths Include="@(BaseAssemblies)" />
@@ -534,14 +636,49 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     </ItemGroup>
 
     <WriteLinesToFile File="$(CompositeResponseFile)" Lines="--composite" Overwrite="true" />
-    <WriteLinesToFile File="$(CompositeResponseFile)" Lines="--targetarch:$(TargetArchitecture)" Overwrite="false" />
-    <WriteLinesToFile File="$(CompositeResponseFile)" Lines="--targetos:$(Crossgen2TargetOs)" Overwrite="false" />
-    <WriteLinesToFile File="$(CompositeResponseFile)" Lines="-u:&quot;%(UnrootedAssemblyPaths.Identity)&quot;" Overwrite="false" />
-    <WriteLinesToFile File="$(CompositeResponseFile)" Lines="&quot;%(PartialCompositeAssemblyPaths.Identity)&quot;" Overwrite="false" />
-    <WriteLinesToFile File="$(CompositeResponseFile)" Lines="-r:&quot;%(ExcludeAssemblies.Identity)&quot;" Overwrite="false" Condition="'@(ExcludeAssemblies)' != ''" />
-    <WriteLinesToFile File="$(CompositeResponseFile)" Lines="--out:&quot;$(CompositeTargetDir)$(CompositeFileName).dll&quot;" Overwrite="false" />
-    <WriteLinesToFile File="$(CompositeResponseFile)" Lines="--instruction-set:$(InstructionSetSupport)" Overwrite="false" Condition="'$(InstructionSetSupport)' != ''" />
-    <WriteLinesToFile File="$(CompositeResponseFile)" Lines="-m:&quot;$(CrossgenOptimizationData)&quot;" Overwrite="false" Condition="'$(CrossgenOptimizationData)' != ''" />
+    <WriteLinesToFile
+      File="$(CompositeResponseFile)"
+      Lines="--targetarch:$(TargetArchitecture)"
+      Overwrite="false"
+    />
+    <WriteLinesToFile
+      File="$(CompositeResponseFile)"
+      Lines="--targetos:$(Crossgen2TargetOs)"
+      Overwrite="false"
+    />
+    <WriteLinesToFile
+      File="$(CompositeResponseFile)"
+      Lines="-u:&quot;%(UnrootedAssemblyPaths.Identity)&quot;"
+      Overwrite="false"
+    />
+    <WriteLinesToFile
+      File="$(CompositeResponseFile)"
+      Lines="&quot;%(PartialCompositeAssemblyPaths.Identity)&quot;"
+      Overwrite="false"
+    />
+    <WriteLinesToFile
+      File="$(CompositeResponseFile)"
+      Lines="-r:&quot;%(ExcludeAssemblies.Identity)&quot;"
+      Overwrite="false"
+      Condition="'@(ExcludeAssemblies)' != ''"
+    />
+    <WriteLinesToFile
+      File="$(CompositeResponseFile)"
+      Lines="--out:&quot;$(CompositeTargetDir)$(CompositeFileName).dll&quot;"
+      Overwrite="false"
+    />
+    <WriteLinesToFile
+      File="$(CompositeResponseFile)"
+      Lines="--instruction-set:$(InstructionSetSupport)"
+      Overwrite="false"
+      Condition="'$(InstructionSetSupport)' != ''"
+    />
+    <WriteLinesToFile
+      File="$(CompositeResponseFile)"
+      Lines="-m:&quot;$(CrossgenOptimizationData)&quot;"
+      Overwrite="false"
+      Condition="'$(CrossgenOptimizationData)' != ''"
+    />
 
     <ItemGroup>
       <NativeSharedObjects Include="$(NativeAssetsFullPath)\*.so" />
@@ -562,27 +699,35 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     <ItemGroup>
       <UrisToDownload Include="https://dotnetcli.azureedge.net/dotnet/$(DotNetRuntimeDownloadPath)" />
       <UrisToDownload Include="https://dotnetbuilds.azureedge.net/public/$(DotNetRuntimeDownloadPath)" />
-      <UrisToDownload Include="https://dotnetbuilds.azureedge.net/internal/$(DotNetRuntimeDownloadPath)"
-          Condition=" '$(DotnetRuntimeSourceFeedKey)' != '' ">
+      <UrisToDownload
+        Include="https://dotnetbuilds.azureedge.net/internal/$(DotNetRuntimeDownloadPath)"
+        Condition=" '$(DotnetRuntimeSourceFeedKey)' != '' "
+      >
         <token>$(DotnetRuntimeSourceFeedKey)</token>
       </UrisToDownload>
     </ItemGroup>
 
-    <DownloadFile Condition=" !Exists('$(DotNetRuntimeArchive)') "
-                  Uris="@(UrisToDownload)"
-                  DestinationPath="$(DotNetRuntimeArchive)" />
+    <DownloadFile
+      Condition=" !Exists('$(DotNetRuntimeArchive)') "
+      Uris="@(UrisToDownload)"
+      DestinationPath="$(DotNetRuntimeArchive)"
+    />
 
     <RemoveDir Directories="$(RedistSharedFrameworkLayoutRoot)" />
     <MakeDir Directories="$(RedistSharedFrameworkLayoutRoot)" />
 
     <!-- Extract the dotnet-runtime archive -->
-    <Exec Condition="'$(ArchiveExtension)' == '.tar.gz'"
-      Command="tar -xzf $(DotNetRuntimeArchive) -C $(RedistSharedFrameworkLayoutRoot)" />
+    <Exec
+      Condition="'$(ArchiveExtension)' == '.tar.gz'"
+      Command="tar -xzf $(DotNetRuntimeArchive) -C $(RedistSharedFrameworkLayoutRoot)"
+    />
 
-    <Unzip Condition="'$(ArchiveExtension)' == '.zip'"
+    <Unzip
+      Condition="'$(ArchiveExtension)' == '.zip'"
       SourceFiles="$(DotNetRuntimeArchive)"
       DestinationFolder="$(RedistSharedFrameworkLayoutRoot)"
-      OverwriteReadOnlyFiles="true" />
+      OverwriteReadOnlyFiles="true"
+    />
   </Target>
 
   <Target Name="_ResolveInitialSharedFrameworkContent" DependsOnTargets="ResolveReferences">
@@ -590,13 +735,20 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       <_InitialSharedFxContent Include="$(DotVersionFileIntermediateOutputPath)" />
       <_InitialSharedFxContent Include="$(ProjectDepsFilePath)" />
       <_InitialSharedFxContent Include="$(ProjectRuntimeConfigFilePath)" />
-      <_InitialSharedFxContent Include="@(ReferenceCopyLocalPaths)" Condition="'%(Extension)' != '.pdb'" />
+      <_InitialSharedFxContent
+        Include="@(ReferenceCopyLocalPaths)"
+        Condition="'%(Extension)' != '.pdb'"
+      />
       <_InitialSharedFxContent Include="$(RepoRoot)THIRD-PARTY-NOTICES.txt" />
     </ItemGroup>
     <ItemGroup>
       <_InitialSharedFxContent Condition="'%(_InitialSharedFxContent.Extension)' == '.dll'">
-        <PackagePath Condition="'%(_InitialSharedFxContent.IsNativeImage)' == 'true'">$(NativeAssetsPackagePath)</PackagePath>
-        <PackagePath Condition="'%(_InitialSharedFxContent.IsNativeImage)' != 'true'">$(ManagedAssetsPackagePath)</PackagePath>
+        <PackagePath Condition="'%(_InitialSharedFxContent.IsNativeImage)' == 'true'"
+          >$(NativeAssetsPackagePath)</PackagePath
+        >
+        <PackagePath Condition="'%(_InitialSharedFxContent.IsNativeImage)' != 'true'"
+          >$(ManagedAssetsPackagePath)</PackagePath
+        >
       </_InitialSharedFxContent>
     </ItemGroup>
   </Target>
@@ -617,42 +769,54 @@ This package is an internal implementation of the .NET Core SDK and is not meant
   -->
   <Target Name="_CleanLayout" BeforeTargets="_BatchCopyToSharedFrameworkLayout">
     <ItemGroup>
-      <_ExtraLayoutFiles Include="$(SharedFxLayoutTargetDir)**\*.*"
-          Exclude="@(RefPackContent->'$(SharedFxLayoutTargetDir)%(FileName)%(Extension)')" />
+      <_ExtraLayoutFiles
+        Include="$(SharedFxLayoutTargetDir)**\*.*"
+        Exclude="@(RefPackContent->'$(SharedFxLayoutTargetDir)%(FileName)%(Extension)')"
+      />
     </ItemGroup>
     <Delete Files="@(_ExtraLayoutFiles)" />
   </Target>
 
-  <Target Name="_BatchCopyToSharedFrameworkLayout"
-          Inputs="@(SharedFxContent)"
-          Outputs="@(SharedFxContent->'$(SharedFxLayoutTargetDir)%(FileName)%(Extension)')">
-
-    <Copy SourceFiles="@(SharedFxContent)"
-          DestinationFiles="@(SharedFxContent->'$(SharedFxLayoutTargetDir)%(FileName)%(Extension)')"
-          UseHardlinksIfPossible="true" />
+  <Target
+    Name="_BatchCopyToSharedFrameworkLayout"
+    Inputs="@(SharedFxContent)"
+    Outputs="@(SharedFxContent->'$(SharedFxLayoutTargetDir)%(FileName)%(Extension)')"
+  >
+    <Copy
+      SourceFiles="@(SharedFxContent)"
+      DestinationFiles="@(SharedFxContent->'$(SharedFxLayoutTargetDir)%(FileName)%(Extension)')"
+      UseHardlinksIfPossible="true"
+    />
     <Message Importance="High" Text="$(MSbuildProjectFile) -> $(SharedFxLayoutTargetDir)" />
   </Target>
 
   <Target Name="_CleanRedist" BeforeTargets="_BatchCopyToRedistLayout">
     <ItemGroup>
-      <_ExtraRedistFiles Include="$(RedistLayoutTargetDir)**\*.*"
-          Exclude="@(RefPackContent->'$(RedistLayoutTargetDir)%(FileName)%(Extension)')" />
+      <_ExtraRedistFiles
+        Include="$(RedistLayoutTargetDir)**\*.*"
+        Exclude="@(RefPackContent->'$(RedistLayoutTargetDir)%(FileName)%(Extension)')"
+      />
     </ItemGroup>
     <Delete Files="@(_ExtraRedistFiles)" />
   </Target>
 
-  <Target Name="_BatchCopyToRedistLayout"
-          Inputs="@(SharedFxContent)"
-          Outputs="@(SharedFxContent->'$(RedistLayoutTargetDir)%(FileName)%(Extension)')">
-
-    <Copy SourceFiles="@(SharedFxContent)"
-          DestinationFiles="@(SharedFxContent->'$(RedistLayoutTargetDir)%(FileName)%(Extension)')"
-          UseHardlinksIfPossible="true" />
+  <Target
+    Name="_BatchCopyToRedistLayout"
+    Inputs="@(SharedFxContent)"
+    Outputs="@(SharedFxContent->'$(RedistLayoutTargetDir)%(FileName)%(Extension)')"
+  >
+    <Copy
+      SourceFiles="@(SharedFxContent)"
+      DestinationFiles="@(SharedFxContent->'$(RedistLayoutTargetDir)%(FileName)%(Extension)')"
+      UseHardlinksIfPossible="true"
+    />
     <Message Importance="High" Text="$(MSbuildProjectFile) -> $(RedistLayoutTargetDir)" />
   </Target>
 
-  <Target Name="_BatchCopyToCompositeLayout"
-          Condition="'$(TargetOsName)' == 'linux' or '$(TargetOsName)' == 'linux-musl'">
+  <Target
+    Name="_BatchCopyToCompositeLayout"
+    Condition="'$(TargetOsName)' == 'linux' or '$(TargetOsName)' == 'linux-musl'"
+  >
     <PropertyGroup>
       <CompositeFrameworkLayoutRoot>$([MSBuild]::NormalizeDirectory('$(ArtifactsObjDir)', CompositeFx.Layout, '$(Configuration)', '$(TargetRuntimeIdentifier)'))</CompositeFrameworkLayoutRoot>
       <LayoutAspnetPath>$(CompositeFrameworkLayoutRoot)\shared\$(SharedFxName)\$(SharedFxVersion)\</LayoutAspnetPath>
@@ -665,27 +829,39 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     </ItemGroup>
 
     <RemoveDir Directories="$(CompositeFrameworkLayoutRoot)" />
-    <Copy SourceFiles="@(RedistLayoutFiles)" DestinationFolder="$(CompositeFrameworkLayoutRoot)%(RecursiveDir)" />
+    <Copy
+      SourceFiles="@(RedistLayoutFiles)"
+      DestinationFolder="$(CompositeFrameworkLayoutRoot)%(RecursiveDir)"
+    />
 
     <ItemGroup>
       <AspnetFiles Include="$(LayoutAspnetPath)**\*.*" />
       <AspnetFilesByName Include="@(AspnetFiles->'%(Filename)%(Extension)')" />
       <CompositeFilesByName Include="@(CompositeFiles->'%(Filename)%(Extension)')" />
       <FrameworkCompositesByName Include="@(CompositeFilesByName)" Exclude="@(AspnetFilesByName)" />
-      <AspnetCompositesByName Include="@(CompositeFilesByName)" Exclude="@(FrameworkCompositesByName)" />
+      <AspnetCompositesByName
+        Include="@(CompositeFilesByName)"
+        Exclude="@(FrameworkCompositesByName)"
+      />
     </ItemGroup>
 
-    <Copy SourceFiles="@(FrameworkCompositesByName->'$(CompositeTargetDir)%(Filename)%(Extension)')"
-          DestinationFolder="$(LayoutNetcorePath)" />
+    <Copy
+      SourceFiles="@(FrameworkCompositesByName->'$(CompositeTargetDir)%(Filename)%(Extension)')"
+      DestinationFolder="$(LayoutNetcorePath)"
+    />
 
-    <Copy SourceFiles="@(AspnetCompositesByName->'$(CompositeTargetDir)%(Filename)%(Extension)')"
-          DestinationFolder="$(LayoutAspnetPath)" />
+    <Copy
+      SourceFiles="@(AspnetCompositesByName->'$(CompositeTargetDir)%(Filename)%(Extension)')"
+      DestinationFolder="$(LayoutAspnetPath)"
+    />
   </Target>
 
   <Target Name="_CleanLocalDotNet" BeforeTargets="_InstallFrameworkIntoLocalDotNet">
     <ItemGroup>
-      <_ExtraDotNetFiles Include="$(LocalInstallationOutputPath)**\*.*"
-          Exclude="@(RefPackContent->'$(LocalInstallationOutputPath)%(FileName)%(Extension)')" />
+      <_ExtraDotNetFiles
+        Include="$(LocalInstallationOutputPath)**\*.*"
+        Exclude="@(RefPackContent->'$(LocalInstallationOutputPath)%(FileName)%(Extension)')"
+      />
     </ItemGroup>
     <Delete Files="@(_ExtraDotNetFiles)" />
   </Target>
@@ -695,48 +871,59 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     into the $reporoot/.dotnet folder so tests can run against the shared framework. This workaround is not
     needed in source build.
   -->
-  <Target Name="_InstallFrameworkIntoLocalDotNet"
-          Condition="'$(DotNetBuildFromSource)' != 'true'"
-          Inputs="@(SharedFxContent)"
-          Outputs="@(SharedFxContent->'$(LocalInstallationOutputPath)%(FileName)%(Extension)')">
-
-    <Copy SourceFiles="@(SharedFxContent)"
-          DestinationFiles="@(SharedFxContent->'$(LocalInstallationOutputPath)%(FileName)%(Extension)')"
-          UseHardlinksIfPossible="true" />
+  <Target
+    Name="_InstallFrameworkIntoLocalDotNet"
+    Condition="'$(DotNetBuildFromSource)' != 'true'"
+    Inputs="@(SharedFxContent)"
+    Outputs="@(SharedFxContent->'$(LocalInstallationOutputPath)%(FileName)%(Extension)')"
+  >
+    <Copy
+      SourceFiles="@(SharedFxContent)"
+      DestinationFiles="@(SharedFxContent->'$(LocalInstallationOutputPath)%(FileName)%(Extension)')"
+      UseHardlinksIfPossible="true"
+    />
     <Message Importance="High" Text="$(MSbuildProjectFile) -> $(LocalInstallationOutputPath)" />
   </Target>
 
-  <Target Name="_CreateRedistCompositeArchive"
-          Condition="'$(TargetOsName)' == 'linux' or '$(TargetOsName)' == 'linux-musl'"
-          Inputs="$(CompositeTargetDir)"
-          Outputs="$(CompositeArchiveOutputPath)">
+  <Target
+    Name="_CreateRedistCompositeArchive"
+    Condition="'$(TargetOsName)' == 'linux' or '$(TargetOsName)' == 'linux-musl'"
+    Inputs="$(CompositeTargetDir)"
+    Outputs="$(CompositeArchiveOutputPath)"
+  >
     <Message Importance="High" Text="$(MSbuildProjectFile) -> $(CompositeArchiveOutputPath)" />
     <Exec
       Command="tar -czf $(CompositeArchiveOutputPath) ."
-      WorkingDirectory="$(CompositeFrameworkLayoutRoot)" />
+      WorkingDirectory="$(CompositeFrameworkLayoutRoot)"
+    />
   </Target>
 
-  <Target Name="_CreateRedistSharedFxArchive"
-          Inputs="@(SharedFxContent)"
-          Outputs="$(RedistArchiveOutputPath)">
+  <Target
+    Name="_CreateRedistSharedFxArchive"
+    Inputs="@(SharedFxContent)"
+    Outputs="$(RedistArchiveOutputPath)"
+  >
     <Message Importance="High" Text="$(MSbuildProjectFile) -> $(RedistArchiveOutputPath)" />
 
     <ZipDirectory
       SourceDirectory="$(RedistSharedFrameworkLayoutRoot)"
       DestinationFile="$(RedistArchiveOutputPath)"
       Overwrite="true"
-      Condition="'$(ArchiveExtension)' == '.zip'" />
+      Condition="'$(ArchiveExtension)' == '.zip'"
+    />
     <Exec
       Command="tar -czf $(RedistArchiveOutputPath) ."
       WorkingDirectory="$(RedistSharedFrameworkLayoutRoot)"
-      Condition="'$(ArchiveExtension)' == '.tar.gz'" />
+      Condition="'$(ArchiveExtension)' == '.tar.gz'"
+    />
   </Target>
 
   <Target Name="_GenerateRuntimeListFile">
     <RepoTasks.CreateFrameworkListFile
       Files="@(_InitialSharedFxContent)"
       TargetFile="$(RuntimeListOutputPath)"
-      RootAttributes="@(FrameworkListRootAttributes)" />
+      RootAttributes="@(FrameworkListRootAttributes)"
+    />
   </Target>
 
   <Target Name="_IncludeVersionFile">

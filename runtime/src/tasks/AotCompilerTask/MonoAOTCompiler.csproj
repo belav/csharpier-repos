@@ -13,8 +13,14 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Build" Version="$(MicrosoftBuildVersion)" />
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="$(MicrosoftBuildTasksCoreVersion)" />
-    <PackageReference Include="System.Reflection.Metadata" Version="$(SystemReflectionMetadataVersion)" />
+    <PackageReference
+      Include="Microsoft.Build.Tasks.Core"
+      Version="$(MicrosoftBuildTasksCoreVersion)"
+    />
+    <PackageReference
+      Include="System.Reflection.Metadata"
+      Version="$(SystemReflectionMetadataVersion)"
+    />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MonoAOTCompiler.cs" />
@@ -23,7 +29,10 @@
     <Compile Include="..\Common\FileCache.cs" />
     <Compile Include="..\Common\Utils.cs" />
     <Compile Include="..\Common\LogAsErrorException.cs" />
-    <Compile Include="$(RepoRoot)src\libraries\System.Private.CoreLib\src\System\Diagnostics\CodeAnalysis\NullableAttributes.cs" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" />
+    <Compile
+      Include="$(RepoRoot)src\libraries\System.Private.CoreLib\src\System\Diagnostics\CodeAnalysis\NullableAttributes.cs"
+      Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
+    />
   </ItemGroup>
   <ItemGroup>
     <Content Include="MonoAOTCompiler.props">
@@ -37,12 +46,20 @@
       <_PublishFramework Remove="@(_PublishFramework)" />
       <_PublishFramework Include="$(TargetFrameworks)" />
 
-      <FilesToPackage Include="$(OutputPath)%(_PublishFramework.Identity)\$(AssemblyName).dll" TargetPath="tasks\%(_PublishFramework.Identity)" />
-      <FilesToPackage Include="$(OutputPath)%(_PublishFramework.Identity)\$(AssemblyName).pdb" TargetPath="tasks\%(_PublishFramework.Identity)" />
+      <FilesToPackage
+        Include="$(OutputPath)%(_PublishFramework.Identity)\$(AssemblyName).dll"
+        TargetPath="tasks\%(_PublishFramework.Identity)"
+      />
+      <FilesToPackage
+        Include="$(OutputPath)%(_PublishFramework.Identity)\$(AssemblyName).pdb"
+        TargetPath="tasks\%(_PublishFramework.Identity)"
+      />
 
       <!-- for net472 we need all the dependent assemblies too, so copy from the publish folder -->
-      <FilesToPackage Include="$(OutputPath)$(TargetFrameworkForNETFrameworkTasks)\*.dll*"
-                      TargetPath="tasks\$(TargetFrameworkForNETFrameworkTasks)" />
+      <FilesToPackage
+        Include="$(OutputPath)$(TargetFrameworkForNETFrameworkTasks)\*.dll*"
+        TargetPath="tasks\$(TargetFrameworkForNETFrameworkTasks)"
+      />
     </ItemGroup>
   </Target>
 </Project>

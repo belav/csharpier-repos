@@ -5,8 +5,8 @@
 
   <Target
     Name="_CalculateEmbeddedFilesManifestInputs"
-    Condition="'$(GenerateEmbeddedFilesManifest)' == 'true'">
-
+    Condition="'$(GenerateEmbeddedFilesManifest)' == 'true'"
+  >
     <PropertyGroup>
       <_GeneratedManifestFile>$(IntermediateOutputPath)$(EmbeddedFilesManifestFileName)</_GeneratedManifestFile>
     </PropertyGroup>
@@ -18,16 +18,21 @@
 
     <Warning
       Text="GenerateEmbeddedFilesManifest was set, but no EmbeddedResource items were found that could be added to the manifest."
-      Condition="'@(_FilesForManifest->Count())' == '0'" />
+      Condition="'@(_FilesForManifest->Count())' == '0'"
+    />
 
     <ItemGroup Condition="'@(_FilesForManifest->Count())' != '0'">
       <EmbeddedResource
         Include="$(_GeneratedManifestFile)"
-        LogicalName="$(EmbeddedFilesManifestFileName)" />
+        LogicalName="$(EmbeddedFilesManifestFileName)"
+      />
     </ItemGroup>
   </Target>
 
-  <Target Name="_CreateGeneratedManifestInfoInputsCacheFile" DependsOnTargets="_CalculateEmbeddedFilesManifestInputs">
+  <Target
+    Name="_CreateGeneratedManifestInfoInputsCacheFile"
+    DependsOnTargets="_CalculateEmbeddedFilesManifestInputs"
+  >
     <PropertyGroup>
       <_GeneratedManifestInfoInputsCacheFile>$(IntermediateOutputPath)$(MSBuildProjectName).EmbeddedFilesManifest.cache</_GeneratedManifestInfoInputsCacheFile>
     </PropertyGroup>
@@ -40,7 +45,8 @@
       Lines="$(_EmbeddedGeneratedManifestHash)"
       File="$(_GeneratedManifestInfoInputsCacheFile)"
       Overwrite="True"
-      WriteOnlyWhenDifferent="True" />
+      WriteOnlyWhenDifferent="True"
+    />
 
     <ItemGroup>
       <FileWrites Include="$(_GeneratedManifestInfoInputsCacheFile)" />
@@ -53,8 +59,8 @@
     AfterTargets="PrepareResourceNames"
     Condition="'$(GenerateEmbeddedFilesManifest)' == 'true' AND '@(_FilesForManifest->Count())' != '0'"
     Inputs="$(_GeneratedManifestInfoInputsCacheFile)"
-    Outputs="$(_GeneratedManifestFile)">
-
+    Outputs="$(_GeneratedManifestFile)"
+  >
     <ItemGroup>
       <!-- Rebuild _FilesForManifest since PrepareResourceNames would have updated EmbeddedResource. -->
       <_FilesForManifest Remove="@(_FilesForManifest)" />
@@ -64,6 +70,7 @@
 
     <GenerateEmbeddedResourcesManifest
       EmbeddedFiles="@(_FilesForManifest)"
-      ManifestFile="$(_GeneratedManifestFile)" />
+      ManifestFile="$(_GeneratedManifestFile)"
+    />
   </Target>
 </Project>
